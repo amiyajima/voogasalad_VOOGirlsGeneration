@@ -1,4 +1,4 @@
-package authoring.main;
+package authoring;
 
 public class Main {
 
