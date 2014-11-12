@@ -2,6 +2,7 @@ package authoring.concretefeatures;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -64,6 +65,14 @@ public class UnitCreator extends CreatorPane{
 		addRemoveMods.getChildren().addAll(addModule, removeModule);
 		
 		Button goButton = new Button("Create new unit template");
+		goButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent click) {
+				System.out.println(unitName.getText());
+			}
+			
+		});
 		getChildren().addAll(names, loadImage, modsLabel, mods, addRemoveMods, addedModsLabel, addedMods, goButton);
 	}
 }
