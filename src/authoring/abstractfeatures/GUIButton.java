@@ -1,4 +1,4 @@
-package authoring.AbstractFeatures;
+package authoring.abstractfeatures;
 
 public class GUIButton extends GUIFeature{
 

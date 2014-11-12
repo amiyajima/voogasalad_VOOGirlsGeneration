@@ -1,4 +1,4 @@
-package authoring.AbstractFeatures;
+package authoring.abstractfeatures;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
