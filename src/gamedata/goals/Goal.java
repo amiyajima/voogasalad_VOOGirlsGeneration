@@ -6,5 +6,5 @@ public abstract class Goal {
 
 	}
 
-	public abstract boolean isWin();
+	abstract int checkGameState(Level l);
 }
