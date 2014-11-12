@@ -1,5 +1,11 @@
 package gameengine.player;
 
-public abstract class Player {
+public class Player {
+	public Player() {
+
+	}
+
+	public void play() {
+	}
 
 }
