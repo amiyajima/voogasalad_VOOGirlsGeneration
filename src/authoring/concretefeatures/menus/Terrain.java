@@ -10,13 +10,14 @@ import javafx.scene.control.MenuItem;
 
 public class Terrain extends Menu{
 	
-	private static final String NAME = "Terrain Creator";
+	private static final String NAME = "Terrain";
+	private static final String ITEM1 = "New Terrain";
 	private static final int WINDOW_HEIGHT = 500;
 	private static final int WINDOW_WIDTH = 500;
 
 	public Terrain(){
-		super("Terrain");
-		MenuItem creator = new MenuItem(NAME);
+		super(NAME);
+		MenuItem creator = new MenuItem(ITEM1);
 		
 		setAction(creator);
 		getItems().addAll(creator);
@@ -27,7 +28,7 @@ public class Terrain extends Menu{
 			
 			@Override
 			public void handle(ActionEvent t){
-				PopupWindow p = new PopupWindow(WINDOW_HEIGHT, WINDOW_WIDTH, NAME, new CreatorPane());
+				PopupWindow p = new PopupWindow(WINDOW_HEIGHT, WINDOW_WIDTH, ITEM1, new CreatorPane());
 				p.show();
 			}
 		});

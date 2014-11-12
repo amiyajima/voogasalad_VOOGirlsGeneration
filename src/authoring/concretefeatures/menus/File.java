@@ -5,8 +5,10 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.FileChooser;
 
 public class File extends Menu{
+	private static final String NAME = "File";
+	
 	public File(){
-		super("File");
+		super(NAME);
 		MenuItem newProject = new MenuItem("New Project");
 		MenuItem open = new MenuItem("Open Project...");
 		MenuItem save = new MenuItem("Save Project...");

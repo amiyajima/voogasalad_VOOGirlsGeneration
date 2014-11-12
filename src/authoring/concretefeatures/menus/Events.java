@@ -10,13 +10,14 @@ import javafx.scene.control.MenuItem;
 
 public class Events extends Menu{
 	
-	private static final String NAME = "Events Creator";
+	private static final String NAME = "Events";
+	private static final String ITEM1 = "New Event";
 	private static final int WINDOW_HEIGHT = 500;
 	private static final int WINDOW_WIDTH = 500;
 
 	public Events(){
-		super("Events");
-		MenuItem eventsCreator = new MenuItem(NAME);
+		super(NAME);
+		MenuItem eventsCreator = new MenuItem(ITEM1);
 		
 		setAction(eventsCreator);
 		getItems().addAll(eventsCreator);
@@ -27,7 +28,7 @@ public class Events extends Menu{
 			
 			@Override
 			public void handle(ActionEvent t){
-				PopupWindow p = new PopupWindow(WINDOW_HEIGHT, WINDOW_WIDTH, NAME, new CreatorPane());
+				PopupWindow p = new PopupWindow(WINDOW_HEIGHT, WINDOW_WIDTH, ITEM1, new CreatorPane());
 				p.show();
 			}
 		});
