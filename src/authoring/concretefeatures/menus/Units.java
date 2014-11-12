@@ -7,13 +7,10 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 
-
 public class Units extends Menu{
 	
 	private static final String NAME = "Units";
 	private static final String ITEM1 = "New Unit";
-	private static final int WINDOW_HEIGHT = 500;
-	private static final int WINDOW_WIDTH = 500;
 
 	public Units(){
 		super(NAME);
@@ -28,7 +25,7 @@ public class Units extends Menu{
 			
 			@Override
 			public void handle(ActionEvent t){
-				PopupWindow p = new PopupWindow(WINDOW_HEIGHT, WINDOW_WIDTH, ITEM1, new UnitCreator());
+				PopupWindow p = new UnitCreator();
 				p.show();
 			}
 		});

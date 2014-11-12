@@ -4,20 +4,34 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.CreatorPane;
+import authoring.abstractfeatures.PopupWindow;
 
-public class UnitCreator extends CreatorPane{
+public class UnitCreator extends PopupWindow{
+	
+	public static final int HEIGHT = 800;
+	public static final int WIDTH = 600;
+	public static final String NAME = "Create new unit template";
+	
 	public UnitCreator(){
+		setHeight(HEIGHT);
+		setWidth(WIDTH);
+		setTitle(NAME);
 		initialize();
 	}
 	
-	private void initialize(){
+	@Override
+	protected void initialize(){
+		VBox box = new VBox();
+		
 		HBox names = new HBox();
 		HBox images = new HBox();
 		
@@ -29,40 +43,7 @@ public class UnitCreator extends CreatorPane{
 		Button loadImage = new Button("Load image");
 		images.getChildren().addAll(loadLabel, loadImage);
 		
-		Label modsLabel = new Label("Available modules");
-		ObservableList<String> availableModules = FXCollections.observableArrayList(
-				"Test1", "Test2", "Test3", "Test4", "Test5", "Test6");
-		ListView<String> mods = new ListView<String>(availableModules);
-		
-		
-		Label addedModsLabel = new Label("Added modules");
-		ObservableList<String> addedModules = FXCollections.observableArrayList("TestA", "TestB");
-		ListView<String> addedMods = new ListView<String>(addedModules);
-		
-
-		HBox addRemoveMods = new HBox(100);
-		Button addModule = new Button("Add Module >>");
-		addModule.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-			@Override
-			public void handle(MouseEvent click) {
-				String s = availableModules.get(0);
-				availableModules.remove(0);
-				addedModules.add(s);
-			}
-		});
-		
-		Button removeModule = new Button("<< Remove Module");
-		removeModule.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-			@Override
-			public void handle(MouseEvent click) {
-				String s = addedModules.get(0);
-				addedModules.remove(0);
-				availableModules.add(s);
-			}
-		});
-		addRemoveMods.getChildren().addAll(addModule, removeModule);
+		VBox modList = new ModulesList();
 		
 		Button goButton = new Button("Create new unit template");
 		goButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -73,6 +54,8 @@ public class UnitCreator extends CreatorPane{
 			}
 			
 		});
-		getChildren().addAll(names, loadImage, modsLabel, mods, addRemoveMods, addedModsLabel, addedMods, goButton);
+		box.getChildren().addAll(names, loadImage, modList, goButton);
+	
+		setScene(new Scene(box));
 	}
 }
