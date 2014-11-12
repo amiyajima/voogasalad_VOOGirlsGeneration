@@ -2,9 +2,9 @@ package gamedata.goals;
 
 public abstract class Goal {
 
-	public Goal() {
+    public Goal () {
 
-	}
+    }
 
-	public abstract boolean isWin();
+    public abstract boolean isWin ();
 }
