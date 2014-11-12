@@ -1,5 +1,8 @@
 package gamedata.patch;
 
-public class Patch {
+public abstract class Patch {
+	public Patch() {
+
+	}
 
 }

@@ -1,5 +1,9 @@
 package gamedata.grid;
 
-public class Grid {
+public abstract class Grid {
+
+	public Grid() {
+
+	}
 
 }
