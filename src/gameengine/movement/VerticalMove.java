@@ -2,8 +2,9 @@ package gameengine.movement;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.geometry.Point2D;
-import gamedata.piece.Piece;
+import gamedata.gamecomponents.Piece;
 
 public class VerticalMove implements Movement {
     private double myIncrement;

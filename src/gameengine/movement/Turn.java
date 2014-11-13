@@ -1,6 +1,6 @@
 package gameengine.movement;
 
-import gamedata.piece.Piece;
+import gamedata.gamecomponents.Piece;
 
 public class Turn extends Movement {
     private double myDegree;

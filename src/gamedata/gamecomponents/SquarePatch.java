@@ -1,4 +1,5 @@
-package gamedata.patch;
+package gamedata.gamecomponents;
+
 
 public class SquarePatch extends Patch {
 

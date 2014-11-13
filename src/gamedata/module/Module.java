@@ -1,7 +1,7 @@
 package gamedata.module;
 
-import gamedata.Game;
-import gamedata.piece.Piece;
+import gamedata.gamecomponents.Game;
+import gamedata.gamecomponents.Piece;
 import gamedata.rules.Rule;
 
 /**

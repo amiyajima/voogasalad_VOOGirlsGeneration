@@ -1,6 +1,6 @@
 package gamedata.goals;
 
-import gamedata.grid.Level;
+import gamedata.gamecomponents.Level;
 
 public abstract class Goal {
 

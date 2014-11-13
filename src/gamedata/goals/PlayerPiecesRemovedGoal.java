@@ -1,6 +1,6 @@
 package gamedata.goals;
 
-import gamedata.grid.Level;
+import gamedata.gamecomponents.Level;
 import gameengine.player.Player;
 
 public class PlayerPiecesRemovedGoal extends Goal {

@@ -1,4 +1,4 @@
-package gamedata.piece;
+package gamedata.gamecomponents;
 
 import gameengine.movement.Movement;
 import java.util.List;

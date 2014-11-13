@@ -1,9 +1,10 @@
-package gamedata;
+package gamedata.gamecomponents;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import gameengine.player.*;
-import gamedata.grid.*;
+import gamedata.gamecomponents.*;
 
 
 public class Game {
