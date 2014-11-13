@@ -1,6 +1,8 @@
 package gamedata.module;
 
 import gamedata.Game;
+import gamedata.piece.Piece;
+import gamedata.rules.Rule;
 
 /**
  * Interface of a game component that performs
@@ -13,6 +15,6 @@ public interface Module {
 	 * Executes an action on a component of
 	 * the game (i.e. a piece, patch, or other module)
 	 */
-	public void doBehavior(Game game);
+	public void doBehavior(Rule r,Piece...args);
 
 }
