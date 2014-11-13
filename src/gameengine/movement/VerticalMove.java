@@ -5,7 +5,7 @@ import java.util.List;
 import javafx.geometry.Point2D;
 import gamedata.piece.Piece;
 
-public class VerticalMove implements Movement {
+public class VerticalMove extends Movement {
     private double myIncrement;
     
     public VerticalMove(double amount) {
