@@ -90,4 +90,8 @@ public abstract class Grid {
     public int getRow () {
         return myRow;
     }
+    
+    public void draw(){
+        
+    }
 }
