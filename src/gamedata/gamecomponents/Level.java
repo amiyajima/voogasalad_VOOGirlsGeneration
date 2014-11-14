@@ -38,4 +38,8 @@ public class Level {
 			}
 		}
 	}
+
+	public Grid getGrid() {
+		return myGrid;
+	}
 }
