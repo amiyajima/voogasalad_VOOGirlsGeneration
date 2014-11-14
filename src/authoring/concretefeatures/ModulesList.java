@@ -12,11 +12,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * GUI element that holds lists of available/added modules for a given Unit/Terrain. Used
+ * to select modules when creating new templates of those units/terrain.
+ * @author Mike Zhu
+ *
+ */
 public class ModulesList extends VBox{
+	public static final int BUTTON_SPACING = 150;
+	
 	public ModulesList(){
 		Label modsLabel = new Label("Available modules");
 		ObservableList<String> availableModules = FXCollections.observableArrayList(
-				"Attack", "Movement", "Build", "Swim", "Fly", "Capture");
+				"Attack", "Move", "Build", "Swim", "Fly", "Capture");
 		ListView<String> mods = new ListView<String>(availableModules);
 		
 		Collections.sort(availableModules);
@@ -26,15 +34,17 @@ public class ModulesList extends VBox{
 		ListView<String> addedMods = new ListView<String>(addedModules);
 		
 
-		HBox addRemoveMods = new HBox(100);
+		HBox addRemoveMods = new HBox(BUTTON_SPACING);
 		Button addModule = new Button("Add Module >>");
 		addModule.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
 			@Override
 			public void handle(MouseEvent click) {
 				String s = mods.getSelectionModel().getSelectedItem();
-				availableModules.remove(s);
-				addedModules.add(s);
+				if(availableModules.contains(s)){
+					availableModules.remove(s);
+					addedModules.add(s);
+				}
 				Collections.sort(addedModules);
 			}
 		});
@@ -45,8 +55,10 @@ public class ModulesList extends VBox{
 			@Override
 			public void handle(MouseEvent click) {
 				String s = addedMods.getSelectionModel().getSelectedItem();
-				addedModules.remove(s);
-				availableModules.add(s);
+				if(addedModules.contains(s)){
+					addedModules.remove(s);
+					availableModules.add(s);
+				}
 				Collections.sort(availableModules);
 			}
 		});

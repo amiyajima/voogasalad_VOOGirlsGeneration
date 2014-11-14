@@ -1,26 +1,23 @@
 package authoring.concretefeatures.menus;
 
-import authoring.abstractfeatures.CreatorPane;
 import authoring.abstractfeatures.PopupWindow;
+import authoring.concretefeatures.TerrainCreator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 
-
 public class Terrain extends Menu{
 	
 	private static final String NAME = "Terrain";
 	private static final String ITEM1 = "New Terrain";
-	private static final int WINDOW_HEIGHT = 500;
-	private static final int WINDOW_WIDTH = 500;
 
 	public Terrain(){
 		super(NAME);
-		MenuItem creator = new MenuItem(ITEM1);
+		MenuItem eventsCreator = new MenuItem(ITEM1);
 		
-		setAction(creator);
-		getItems().addAll(creator);
+		setAction(eventsCreator);
+		getItems().addAll(eventsCreator);
 	}
 	
 	private void setAction(MenuItem item){
@@ -28,9 +25,11 @@ public class Terrain extends Menu{
 			
 			@Override
 			public void handle(ActionEvent t){
-				PopupWindow p = new PopupWindow(WINDOW_HEIGHT, WINDOW_WIDTH, ITEM1, new CreatorPane());
+				PopupWindow p = new TerrainCreator();
 				p.show();
 			}
 		});
 	}
+	
+	
 }

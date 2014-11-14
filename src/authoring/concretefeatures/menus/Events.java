@@ -1,7 +1,7 @@
 package authoring.concretefeatures.menus;
 
-import authoring.abstractfeatures.CreatorPane;
 import authoring.abstractfeatures.PopupWindow;
+import authoring.concretefeatures.EventsWindow;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
@@ -11,9 +11,7 @@ import javafx.scene.control.MenuItem;
 public class Events extends Menu{
 	
 	private static final String NAME = "Events";
-	private static final String ITEM1 = "New Event";
-	private static final int WINDOW_HEIGHT = 500;
-	private static final int WINDOW_WIDTH = 500;
+	private static final String ITEM1 = "Edit Events";
 
 	public Events(){
 		super(NAME);
@@ -28,7 +26,7 @@ public class Events extends Menu{
 			
 			@Override
 			public void handle(ActionEvent t){
-				PopupWindow p = new PopupWindow(WINDOW_HEIGHT, WINDOW_WIDTH, ITEM1, new CreatorPane());
+				PopupWindow p = new EventsWindow();
 				p.show();
 			}
 		});
