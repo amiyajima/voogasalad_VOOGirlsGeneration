@@ -12,6 +12,7 @@ public class AuthoringMain extends Application{
 		VoogaView root=new VoogaView();
 		Scene scene=new Scene(root, 1000, 600);
 		primaryStage.setScene(scene);
+		primaryStage.setTitle("Girls GenerEditor");
 		primaryStage.show();
 	}
 	

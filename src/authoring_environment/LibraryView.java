@@ -6,7 +6,7 @@ import javafx.scene.text.Text;
 public class LibraryView extends ScrollPane{
 	public LibraryView(){
 		this.setPrefSize(300, 580);
-		Text text=new Text("Libarary");
+		Text text=new Text("Library");
 		this.setContent(text);
 	}
 
