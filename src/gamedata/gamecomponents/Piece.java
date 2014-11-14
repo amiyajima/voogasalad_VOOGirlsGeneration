@@ -4,15 +4,22 @@ import gameengine.movement.Movement;
 import java.util.List;
 import javafx.scene.image.ImageView;
 
+
 public class Piece {
     private ImageView myImageView;
-    private List<Movement> myPath;
-    
-    public Piece(ImageView i, List<Movement> m) {
+    private Movement myMovement;
+    private Attack myAttack;
+    private List<Piece> myItems;
+
+    public Piece (ImageView i) {
         myImageView = i;
     }
-    
-    public ImageView getImageView() {
+
+    public ImageView getImageView () {
         return myImageView;
+    }
+
+    public void move () {
+
     }
 }
