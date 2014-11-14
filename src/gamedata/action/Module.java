@@ -1,4 +1,4 @@
-package gamedata.module;
+package gamedata.action;
 
 import gamedata.gamecomponents.Piece;
 import gamedata.rules.Rule;
