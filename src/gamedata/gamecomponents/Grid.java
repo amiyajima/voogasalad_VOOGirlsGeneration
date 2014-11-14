@@ -1,4 +1,4 @@
-package gamedata.grid;
+package gamedata.gamecomponents;
 
 public abstract class Grid {
 

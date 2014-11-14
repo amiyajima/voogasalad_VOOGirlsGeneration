@@ -1,8 +1,8 @@
 package gamedata.goals;
 
-import gamedata.grid.Level;
-import gamedata.patch.Patch;
-import gamedata.piece.Piece;
+import gamedata.gamecomponents.Level;
+import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Piece;
 
 public class PieceOnPatchGoal extends Goal {
 

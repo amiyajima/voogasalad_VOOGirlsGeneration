@@ -1,6 +1,5 @@
-package gamedata.grid;
+package gamedata.gamecomponents;
 
-import gamedata.patch.Patch;
 
 public class SquareGrid extends Grid {
 	private Patch[][] myGrid;

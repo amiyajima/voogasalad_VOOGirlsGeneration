@@ -1,4 +1,4 @@
-package gamedata.grid;
+package gamedata.gamecomponents;
 
 import java.util.List;
 import gamedata.goals.*;
