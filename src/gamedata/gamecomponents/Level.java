@@ -6,15 +6,14 @@ import gamedata.rules.*;
 
 public class Level {
 
-	// rules for the level and any global events (ie. fire kills half of the
-	// scren)
-	// goals AKA win/lose conditions for the level
+	private Game myGame;
 	private Grid myGrid;
 	private List<Goal> myGoals;
 	private List<Rule> myRules;
 
-	public Level() {
-
+	public Level(Game ga, Grid gr) {
+		myGame = ga;
+		myGrid = gr;
 	}
 
 	/**
@@ -22,12 +21,21 @@ public class Level {
 	 * 
 	 * @return
 	 */
-	public boolean isLevelWon() {
-		boolean b = false;
+	public void checkLevelStatus() {
 		for (Goal g : myGoals) {
-			b = g.checkGameState(this);
+			if (g.checkGameState(this) == 1) {
+				myGame.nextLevel();
+			} else if (g.checkGameState(this) == -1) {
+				myGame.restartLevel();
+			}
 		}
-		return b;
 	}
 
+	public void checkTurn() {
+		for (Rule r : myRules) {
+			if (r.isTriggered()) {
+				myGame.nextPlayer();
+			}
+		}
+	}
 }
