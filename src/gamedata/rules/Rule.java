@@ -1,5 +1,7 @@
 package gamedata.rules;
 
-public class Rule {
+public abstract class Rule {
 
+	public abstract boolean isTriggered();
+	
 }
