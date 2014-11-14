@@ -11,19 +11,23 @@ public class Game {
 	private List<Player> myPlayers;
 	private List<Level> myLevels;
 	private Level currentLevel;
+	private Player currentPlayer;
 
 	public Game() {
 		myPlayers = new ArrayList<Player>();
 		myLevels = new ArrayList<Level>();
 	}
 
-	/**
-	 * Method called every iteration of the game loop
-	 */
-	public void playRound() {
-		for (Player p : myPlayers) {
-			p.play();
+	public void nextPlayer() {
+		if (myPlayers.indexOf(currentPlayer) == myPlayers.size() - 1) {
+			resetPlayer();
+		} else {
+			currentPlayer = myPlayers.get(myPlayers.indexOf(currentPlayer) + 1);
 		}
+	}
+
+	public void resetPlayer() {
+		currentPlayer = myPlayers.get(0);
 	}
 
 	/**
@@ -33,6 +37,14 @@ public class Game {
 		if (!isWin()) {
 			currentLevel = myLevels.get(myLevels.indexOf(currentLevel) + 1);
 		}
+	}
+
+	/**
+	 * Restarts the Level
+	 */
+
+	public void restartLevel() {
+		currentLevel = myLevels.get(myLevels.indexOf(currentLevel));
 	}
 
 	/**
