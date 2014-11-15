@@ -1,7 +1,5 @@
 package authoring.abstractfeatures;
 
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -11,13 +9,7 @@ import javafx.stage.Stage;
  * @author Mike Zhu
  *
  */
-public class PopupWindow extends Stage{
-
-	public PopupWindow(double h, double w, String name, Parent pane){
-		setHeight(h);
-		setWidth(w);
-		setTitle(name);
-		//TODO: add x and y location for the window
-		setScene(new Scene(pane));
-	}
+public abstract class PopupWindow extends Stage{
+	
+	protected abstract void initialize();
 }
