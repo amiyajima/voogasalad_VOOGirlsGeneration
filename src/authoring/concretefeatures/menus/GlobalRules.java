@@ -28,8 +28,8 @@ public class GlobalRules extends Menu{
 			
 			@Override
 			public void handle(ActionEvent t){
-				PopupWindow p = new PopupWindow(WINDOW_HEIGHT, WINDOW_WIDTH, ITEM1, new CreatorPane());
-				p.show();
+//				PopupWindow p = new PopupWindow(WINDOW_HEIGHT, WINDOW_WIDTH, ITEM1, new CreatorPane());
+//				p.show();
 			}
 		});
 	}
