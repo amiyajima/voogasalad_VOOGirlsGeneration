@@ -10,12 +10,14 @@ public abstract class Grid extends ViewComponent{
     private int myNumRow;
     private int myNumCol;
     
-    public Grid (GameModel model, Stage stage) {
+    public Grid (GameModel model, Stage stage, int row, int col) {
         super(model, stage);
-        // TODO Auto-generated constructor stub
+        
+        myNumRow = row;
+        myNumCol = col;
     }
-
-
-    
+ 
     public abstract void showPossibleMoves(Actor actor);
+    
+   // public setActiveActor()
 }

@@ -10,8 +10,8 @@ public class SquareGrid extends Grid{
     
 
 
-    public SquareGrid (GameModel model, Stage stage) {
-        super(model, stage);
+    public SquareGrid (GameModel model, Stage stage, int row, int col) {
+        super(model, stage, row, col);
         // TODO Auto-generated constructor stub
     }
 

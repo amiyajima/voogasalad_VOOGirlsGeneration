@@ -1,17 +1,14 @@
 package gamePlayer;
 
-import java.awt.Paint;
-import javafx.scene.Node;
-import javafx.scene.Parent;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.SceneBuilder;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.BorderPaneBuilder;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import GameEngine.GameModel;
-import javafx.application.Application;
-import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 
 public class GameView{
     
@@ -35,13 +32,18 @@ public class GameView{
     
 
     private Scene initialScene() {
+
         
-        Pane startPane = new Pane();
+        BorderPane startPane = new BorderPane();
+        startPane.getStyleClass().add("borderPane");
+        startPane.setPrefSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         VBox vb = new VBox();
         vb.getChildren().addAll(new NewGameButton(myModel, myStage).setUpDisplay(),
                                        new LoadGameButton(myModel, myStage).setUpDisplay(),
                                        new SettingButton(myModel,myStage).setUpDisplay());
-        startPane.getChildren().add(vb);
+
+        vb.getStyleClass().add("vbox");
+        startPane.setCenter(vb);
         Scene scene = new Scene(startPane, SCREEN_WIDTH, SCREEN_HEIGHT);
         scene.getStylesheets().add(STYLESHEET_LOCATION);
         
