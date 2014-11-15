@@ -9,14 +9,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
+import authoring_environment.LibraryView;
 
 public class TerrainCreator extends PopupWindow{
 	
 	public static final int HEIGHT = 800;
 	public static final int WIDTH = 600;
 	public static final String NAME = "Terrain Creator";
+	private LibraryView myLibrary;
 	
-	public TerrainCreator(){
+	public TerrainCreator(LibraryView library){
+		myLibrary = library;
 		setHeight(HEIGHT);
 		setWidth(WIDTH);
 		setTitle(NAME);
@@ -45,7 +48,7 @@ public class TerrainCreator extends PopupWindow{
 
 			@Override
 			public void handle(ActionEvent click) {
-				System.out.println(terrainName.getText());
+				myLibrary.addToLibrary(terrainName.getText(), 1);
 			}
 			
 		});
