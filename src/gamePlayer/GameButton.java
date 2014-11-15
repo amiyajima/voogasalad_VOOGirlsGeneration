@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 public abstract class GameButton extends ViewComponent{
     
-    public static final int BUTTON_PADDING = 13;
+   // public static final int BUTTON_PADDING = 13;
     
     private String myButtonText;
     
@@ -20,7 +20,7 @@ public abstract class GameButton extends ViewComponent{
     @Override
     protected Node setUpDisplay(){
         Button button = new Button(myButtonText);
-        button.setPadding(new Insets(BUTTON_PADDING));
+        //button.setPadding(new Insets(BUTTON_PADDING));
         button.setOnAction(event-> onClickAction());
         return button;
     }

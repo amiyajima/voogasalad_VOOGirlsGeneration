@@ -29,6 +29,7 @@ public class GameView{
        stage.setScene(initialScene());
        stage.show();
        
+       
    
     }
     
@@ -47,6 +48,8 @@ public class GameView{
         return scene;
         
     }
+    
+    
     
     
     

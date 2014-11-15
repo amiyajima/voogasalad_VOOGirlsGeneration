@@ -35,6 +35,9 @@ public abstract class ViewComponent extends Observable implements Observer{
     
     protected abstract Node setUpDisplay();
     
+    public Node getNode(){
+        return myNode;
+    }
     
 
 }

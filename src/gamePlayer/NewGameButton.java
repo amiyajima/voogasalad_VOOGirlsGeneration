@@ -2,16 +2,11 @@ package gamePlayer;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
+import java.util.Observable;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 import GameEngine.GameModel;
 import javafx.scene.control.Button;
@@ -29,14 +24,16 @@ public class NewGameButton extends GameButton{
     private Pane myPane;
     private VBox myVBox;
     private List<String> myOptions;
+    private Stage myStage;
+    private Scene myScene;
     
     public NewGameButton (GameModel model, Stage stage) {
         super(model, stage, NEW_GAME_BUTTON);
         myPane = new BorderPane();
         myVBox = new VBox();
         myOptions = getModel().getCurrentGames();
-        //System.out.println(getModel().getCurrentGames());
         
+        myStage = new Stage();
         setUpContent();
     }
     
@@ -54,20 +51,30 @@ public class NewGameButton extends GameButton{
 
         myVBox.getChildren().addAll(labelList);
         myPane.getChildren().add(myVBox);
-        
+        myScene = new Scene(myPane, POP_UP_WIDTH, POP_UP_HEIGHT);
+        myScene.getStylesheets().add(GameView.STYLESHEET_LOCATION);
     }
 
     @Override
     protected void onClickAction () {
        
-        Stage gameChoice = new Stage();
-        gameChoice.setTitle(POP_UP_TITLE);
-        gameChoice.initModality(Modality.WINDOW_MODAL);
-        gameChoice.initOwner(getStage());
-        Scene scene = new Scene(myPane, POP_UP_WIDTH, POP_UP_HEIGHT);
-        scene.getStylesheets().add(GameView.STYLESHEET_LOCATION);
-        gameChoice.setScene(scene);
-        gameChoice.showAndWait();
+        
+        myStage.setTitle(POP_UP_TITLE);
+
+        myStage.setScene(myScene);
+        myStage.show();
+        
+    }
+    
+    @Override
+    public void update(Observable o, Object obj){
+        if (o instanceof GameModel){
+            myStage.close();
+            enterGame();
+        }
+    }
+    
+    private void enterGame(){
         
     }
     
