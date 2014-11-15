@@ -19,7 +19,6 @@ public class LibraryView extends TabPane{
 		
 		for(int i = 0; i < tabElements.length; i++){
 			Tab libraryTab = new Tab(tabElements[i]);
-			
 			libraryTab.setClosable(false);
 			ScrollPane tabContent = new ScrollPane();
 			libraryContents[i] = new VBox();

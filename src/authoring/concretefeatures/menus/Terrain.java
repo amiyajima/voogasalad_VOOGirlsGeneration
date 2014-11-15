@@ -33,6 +33,4 @@ public class Terrain extends Menu{
 			}
 		});
 	}
-	
-	
 }
