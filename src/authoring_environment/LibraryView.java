@@ -1,6 +1,6 @@
 package authoring_environment;
 
-import javafx.scene.control.Label;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -28,7 +28,7 @@ public class LibraryView extends TabPane{
 		}
 	}
 	
-	public void addToLibrary(String content, int i){
-		libraryContents[i].getChildren().add(new Label(content));
+	public void addToLibrary(Hyperlink content, int i){
+		libraryContents[i].getChildren().add(content);
 	}
 }
