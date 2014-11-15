@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -48,7 +49,8 @@ public class TerrainCreator extends PopupWindow{
 
 			@Override
 			public void handle(ActionEvent click) {
-				myLibrary.addToLibrary(terrainName.getText(), 1);
+				Hyperlink link = new Hyperlink(terrainName.getText());
+				myLibrary.addToLibrary(link, 1);
 			}
 			
 		});
