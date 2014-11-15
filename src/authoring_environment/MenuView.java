@@ -1,17 +1,13 @@
 package authoring_environment;
 
-import javafx.scene.control.Menu;
+import authoring.concretefeatures.menus.*;
 import javafx.scene.control.MenuBar;
 
 public class MenuView extends MenuBar {
 	public MenuView(){
 		this.setPrefSize(1000, 20);
-		createFileMenu();
+		
+		getMenus().addAll(new File(), new GlobalRules(), new Events(), new Units(), 
+						  new Terrain());
 	}
-
-	private void createFileMenu() {
-		Menu file=new Menu("File");
-		this.getMenus().add(file);
-	}
-	
 }
