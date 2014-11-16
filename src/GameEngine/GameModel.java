@@ -72,8 +72,14 @@ public class GameModel extends Observable implements Observer{
     }
    
     public void save() {
+        System.out.println("Saving");
     }
     
     public void load() {
+        System.out.println("Loading");
+    }
+    
+    public void restart() {
+        System.out.println("Restarting");
     }
 }

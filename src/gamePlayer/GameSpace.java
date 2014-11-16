@@ -44,6 +44,9 @@ public class GameSpace extends ViewComponent{
         
         addMenuBar();
         myPane.setTop(myMenuBar);
+        
+        TabArea ta = new TabArea();
+        myPane.setRight(ta.setUpTabArea());
         return myPane;
     }
     
@@ -58,7 +61,8 @@ public class GameSpace extends ViewComponent{
         myMenuBar = new HBox();
         
         myMenuBar.getChildren().addAll(new SaveButton(getModel(), getStage(), null).setUpDisplay(),
-                                    new LoadGameButton(getModel(), getStage()).setUpDisplay());
+                                    new LoadGameButton(getModel(), getStage()).setUpDisplay(),
+                                    new RestartButton(getModel(), getStage(), null).setUpDisplay());
     }
     
     private GridPane tempararyGrid(){
