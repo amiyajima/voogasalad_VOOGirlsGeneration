@@ -3,9 +3,14 @@ package gamedata.gamecomponents;
 import java.util.ArrayList;
 import java.util.List;
 import gameengine.player.*;
-import gamedata.gamecomponents.*;
 
 
+/**
+ * A game that contains a list of players and the levels that players can play
+ * 
+ * The play method in this class is called in every iteration of the game loop.
+ *
+ */
 public class Game {
 
     private List<Player> myPlayers;
@@ -13,7 +18,9 @@ public class Game {
     private Level myCurrentLevel;
     private Player myCurrentPlayer;
 
-    // rules such as "each player gets 3 moves"
+    public Game(){
+        this(null,null);
+    }
 
     /**
      * Instantiate a new Game given a list of players and levels that exist.
@@ -21,7 +28,7 @@ public class Game {
      * @param players
      * @param levels
      */
-    public Game (ArrayList<Player> players, ArrayList<Level> levels) {
+    public Game (List<Player> players, List<Level> levels) {
         myPlayers = players;
         myLevels = levels;
         myCurrentLevel = levels.get(0);
@@ -31,24 +38,25 @@ public class Game {
     /**
      * Method called every iteration of the game loop.
      * For each player that exists, play the current level.
+     * If the level's goals are met, go to the next level.
+     * If the player's turn is over, end the method so the loop can call it again.
      */
-    public void playRound () {
-
-        myCurrentPlayer.play(myCurrentLevel);
-        if (isWin()) {
-                
+    public void play () {
+        if(myCurrentPlayer.levelWon(myCurrentLevel)){
+            nextLevel();
         }
-        else {
-            nextPlayer();
-        }
+        nextPlayer();
     }
 
     /**
      * Iterates the Current Level to the Next Level
      */
-    public void nextLevel () {
+    private void nextLevel () {
         if (!isWin()) {
             myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel) + 1);
+        }
+        else{
+            System.out.println("GAME HAS BEEN WON");
         }
     }
 
@@ -57,12 +65,12 @@ public class Game {
      * 
      * @return True is game has been won. False otherwise
      */
-    public boolean isWin () {
+    private boolean isWin () {
         if (myLevels.indexOf(myCurrentLevel) == myLevels.size() - 1) { return true; }
         return false;
     }
 
-    public void nextPlayer () {
+    private void nextPlayer () {
         if (myPlayers.indexOf(myCurrentPlayer) == myPlayers.size() - 1) {
             resetPlayer();
         }
@@ -71,7 +79,7 @@ public class Game {
         }
     }
 
-    public void resetPlayer () {
+    private void resetPlayer () {
         myCurrentPlayer = myPlayers.get(0);
     }
 
@@ -79,7 +87,7 @@ public class Game {
      * Restarts the Level
      */
 
-    public void restartLevel () {
+    private void restartLevel () {
         myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel));
     }
 

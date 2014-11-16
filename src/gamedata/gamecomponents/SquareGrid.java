@@ -3,6 +3,10 @@ package gamedata.gamecomponents;
 public class SquareGrid extends Grid {
     private Patch[][] myGrid;
 
+    public SquareGrid(){
+        super();
+    }
+    
     public SquareGrid (int x, int y) {
         super(x, y);
         myGrid = new Patch[x][y];

@@ -6,40 +6,50 @@ import gamedata.rules.*;
 import gameengine.player.Player;
 
 
+/**
+ * Rules define how a player's turn ends
+ * Goals define whether or not the level has been won
+ *
+ */
 public class Level {
 
-    private Game myGame;
     private Grid myGrid;
     private List<Goal> myGoals;
     private List<Rule> myRules;
 
-    public Level (Game ga, Grid gr) {
-        myGame = ga;
+    public Level () {
+        this(null, null);
+    }
+
+    public Level (Grid gr, List<Rule> rules) {
         myGrid = gr;
+        myRules = rules;
     }
 
     /**
-     * Checks to see if the level goals have been met.
+     * Check if the level has been won after every move the player makes
+     * Returns true if the level has been won, false if it has not.
      * 
      * @return
      */
-    public void checkLevelStatus () {
+    public boolean levelCompleted () {
         for (Goal g : myGoals) {
-            if (g.checkGameState(this) == 1) {
-                myGame.nextLevel();
-            }
-            else if (g.checkGameState(this) == -1) {
-                myGame.restartLevel();
-            }
+            if (g.checkGameState(this) == 1) { return true; }
         }
+        return false;
     }
 
-    public void checkTurn () {
+    /**
+     * Check rules to see if a player's turn is over.
+     * Returns true if the turn is over, false if the turn continues.
+     * 
+     * @return
+     */
+    public boolean checkTurnEnd (int numTurnsPlayed) {
         for (Rule r : myRules) {
-            if (r.isTriggered()) {
-                myGame.nextPlayer();
-            }
+            if (r.conditionsMet(numTurnsPlayed)) { return true; }
         }
+        return false;
     }
 
     public Grid getGrid () {

@@ -15,6 +15,10 @@ public abstract class Grid {
     private static final int DEFAULT_PATCH_ID = 1;
     private static final String DEFAULT_PATCH_IMAGE_LOCATION = "";
 
+    public Grid () {
+        this(1, 1);
+    }
+
     public Grid (int row, int column) {
         row = myRow;
         column = myColumn;

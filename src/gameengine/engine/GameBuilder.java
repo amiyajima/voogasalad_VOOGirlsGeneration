@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class GameBuilder {
-    private Parser myParser;
+    //private Parser myParser;
     private List<Player> myPlayers;
     private List<Level> myLevels;
     private List<Patch> myPatches;
