@@ -33,7 +33,7 @@ public class NewGameButton extends GameButton{
         myPane = new BorderPane();
         myVBox = new VBox();
         myOptions = getModel().getCurrentGames();
-
+        
         myStage = new Stage();
         setUpContent();
     }

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.beans.property.DoubleProperty;
+import javafx.geometry.Point2D;
 
 public class GameModel extends Observable implements Observer{
     
@@ -56,13 +57,23 @@ public class GameModel extends Observable implements Observer{
         return players;
     }
 
-
+    
     @Override
     public void update (Observable o, Object arg) {
         
-        
     }
-
-
-
+    
+    //Assuming that we get these methods...
+    public List<Integer> getPossibleMoves() {
+        List<Integer> tempIndices = new ArrayList<Integer>();
+        tempIndices.add(1);
+        tempIndices.add(2);
+        return tempIndices;
+    }
+   
+    public void save() {
+    }
+    
+    public void load() {
+    }
 }
