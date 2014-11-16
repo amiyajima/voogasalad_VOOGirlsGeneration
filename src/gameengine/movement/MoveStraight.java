@@ -6,7 +6,7 @@ import java.util.List;
 import javafx.geometry.Point2D;
 import gamedata.gamecomponents.Piece;
 
-public class MoveStraight extends Movement {
+public class MoveStraight{
     private double myXIncrement;
     private double myYIncrement;
 

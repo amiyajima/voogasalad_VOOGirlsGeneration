@@ -2,11 +2,17 @@ package gamedata.goals;
 
 import gamedata.gamecomponents.Level;
 
+
 public abstract class Goal {
 
-	public Goal() {
+    public Goal () {
 
-	}
+    }
 
-	public abstract int checkGameState(Level l);
+    /**
+     * 
+     * @param l
+     * @return
+     */
+    public abstract boolean checkGameState (Level l);
 }

@@ -2,6 +2,7 @@ package gameengine.movement;
 
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
+import gamedata.rules.Rule;
 import java.util.List;
 
 
