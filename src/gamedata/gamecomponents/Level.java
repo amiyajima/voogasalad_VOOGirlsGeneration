@@ -8,24 +8,14 @@ import gameengine.player.Player;
 
 public class Level {
 
+    private Game myGame;
     private Grid myGrid;
     private List<Goal> myGoals;
-    private Rule myEndTurnRule;
+    private List<Rule> myRules;
 
-    /**
-     * Information for grid and goals comes from the JSON
-     */
-    public Level (Grid grid, List<Goal> goals) {
-        myGrid = grid;
-        myGoals = goals;
-    }
-
-    public void playLevel (Player p) {
-        // as long as there are turns left
-        while (!myEndTurnRule.isTriggered()) {
-            
-            //need to increment something that would lead to endturnrule returning true
-        }
+    public Level (Game ga, Grid gr) {
+        myGame = ga;
+        myGrid = gr;
     }
 
     /**
@@ -33,12 +23,26 @@ public class Level {
      * 
      * @return
      */
-    public boolean isLevelWon () {
-        boolean b = false;
+    public void checkLevelStatus () {
         for (Goal g : myGoals) {
-            b = (boolean) g.checkGameState(this);
+            if (g.checkGameState(this) == 1) {
+                myGame.nextLevel();
+            }
+            else if (g.checkGameState(this) == -1) {
+                myGame.restartLevel();
+            }
         }
-        return b;
     }
 
+    public void checkTurn () {
+        for (Rule r : myRules) {
+            if (r.isTriggered()) {
+                myGame.nextPlayer();
+            }
+        }
+    }
+
+    public Grid getGrid () {
+        return myGrid;
+    }
 }

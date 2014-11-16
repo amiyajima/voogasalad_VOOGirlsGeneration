@@ -11,7 +11,7 @@ public class Game {
     private List<Player> myPlayers;
     private List<Level> myLevels;
     private Level myCurrentLevel;
-    private Player myMainPlayer;
+    private Player myCurrentPlayer;
 
     // rules such as "each player gets 3 moves"
 
@@ -25,7 +25,7 @@ public class Game {
         myPlayers = players;
         myLevels = levels;
         myCurrentLevel = levels.get(0);
-        myMainPlayer = players.get(0);
+        myCurrentPlayer = players.get(0);
     }
 
     /**
@@ -33,8 +33,13 @@ public class Game {
      * For each player that exists, play the current level.
      */
     public void playRound () {
-        for (Player p : myPlayers) {
-            myCurrentLevel.playLevel(p);
+
+        myCurrentPlayer.play(myCurrentLevel);
+        if (isWin()) {
+                
+        }
+        else {
+            nextPlayer();
         }
     }
 
@@ -55,6 +60,27 @@ public class Game {
     public boolean isWin () {
         if (myLevels.indexOf(myCurrentLevel) == myLevels.size() - 1) { return true; }
         return false;
+    }
+
+    public void nextPlayer () {
+        if (myPlayers.indexOf(myCurrentPlayer) == myPlayers.size() - 1) {
+            resetPlayer();
+        }
+        else {
+            myCurrentPlayer = myPlayers.get(myPlayers.indexOf(myCurrentPlayer) + 1);
+        }
+    }
+
+    public void resetPlayer () {
+        myCurrentPlayer = myPlayers.get(0);
+    }
+
+    /**
+     * Restarts the Level
+     */
+
+    public void restartLevel () {
+        myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel));
     }
 
 }

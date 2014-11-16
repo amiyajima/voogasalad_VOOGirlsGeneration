@@ -14,5 +14,5 @@ public abstract class Goal {
      * @param l
      * @return
      */
-    public abstract boolean checkGameState (Level l);
+    public abstract int checkGameState (Level l);
 }
