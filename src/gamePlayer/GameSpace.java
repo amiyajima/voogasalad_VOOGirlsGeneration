@@ -33,8 +33,6 @@ public class GameSpace extends ViewComponent{
        myGameScene.getStylesheets().add(GameView.STYLESHEET_LOCATION);
         getStage().setScene(myGameScene);
         
-        myGameModel = model;
-        myStage = stage;
         addUserControl();
     }
 
@@ -58,10 +56,9 @@ public class GameSpace extends ViewComponent{
     
     private void addMenuBar() {
         myMenuBar = new HBox();
-        myMenuBar.getChildren().add(new Button("this")); 
         
-        SaveButton sb = new SaveButton(myGameModel, myStage, null);
-        myMenuBar.getChildren().add(sb.setUpDisplay());
+        myMenuBar.getChildren().addAll(new SaveButton(getModel(), getStage(), null).setUpDisplay(),
+                                    new LoadGameButton(getModel(), getStage()).setUpDisplay());
     }
     
     private GridPane tempararyGrid(){
