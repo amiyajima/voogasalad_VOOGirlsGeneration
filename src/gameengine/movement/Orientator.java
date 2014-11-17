@@ -22,19 +22,15 @@ public class Orientator {
      */
 	public void calculateTurn(double currentFacing, Point2D from, Point2D to) {
 		if (from.getX() != to.getX() && from.getX() > to.getX()) {
-		    myTurn = 90 - currentFacing;
-		}
-		else if (from.getX() != to.getX() && from.getX() < to.getX()) {
-		    myTurn = 270 - currentFacing;
-		}
-		else if (from.getY() != to.getY() && from.getY() < to.getY()) {
-		    myTurn = 0 - currentFacing;
-		}
-		else if (from.getY() != to.getY() && from.getY() > to.getY()) {
-		    myTurn = 180 - currentFacing;
-		}
-		else {
-		    myTurn = 0;
+			myTurn = 90 - currentFacing;
+		} else if (from.getX() != to.getX() && from.getX() < to.getX()) {
+			myTurn = 270 - currentFacing;
+		} else if (from.getY() != to.getY() && from.getY() < to.getY()) {
+			myTurn = 0 - currentFacing;
+		} else if (from.getY() != to.getY() && from.getY() > to.getY()) {
+			myTurn = 180 - currentFacing;
+		} else {
+			myTurn = 0;
 		}
 	}
 	
@@ -43,7 +39,7 @@ public class Orientator {
 	 * @param the piece
 	 */
 	public void turn(Piece p) {
-	    p.getImageView().setRotate(myTurn);
+		p.getImageView().setRotate(myTurn);
 	}
 
 	/**

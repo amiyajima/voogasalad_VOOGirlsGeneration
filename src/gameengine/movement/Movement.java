@@ -15,21 +15,21 @@ import com.sun.javafx.geom.Point2D;
  */
 public class Movement {
 	// movement should contain relative paths
-	private List<Patch> myPath;
+	// Path is currently unimplemented. Please ignore
+	private List<Point2D> myPath;
 
 	/**
 	 * Contains respective locations of possible movement
 	 */
 	private List<Point2D> myMoves;
 
-	public Movement(List<Point2D> move, List<Patch> path) {
+	public Movement(List<Point2D> move) {
 		myMoves = move;
-		myPath = path;
 	}
 
 	/**
-	 * Return possible x,y coordinates of movement based on current location x,
-	 * y
+	 * Return absolute possible x,y coordinates of movement based on current
+	 * location x,y
 	 * 
 	 * @param x
 	 * @param y
@@ -43,29 +43,18 @@ public class Movement {
 		return p;
 	}
 
-	public void showPath() {
-		// show path to user in GUI
-	}
-
 	/**
 	 * 
 	 * @param piece
 	 */
 	public void movePiece(Piece piece, int x, int y) {
-		if (checkPathClear()) {
 
-		}
 	}
 
-	/**
-	 * check if there are collisions in your path. if the whole path is clear,
-	 * return true. else return false.
-	 */
-	private boolean checkPathClear() {
-		for (Patch p : myPath) {
+	private void checkPathCollision(List<Point2D> path) {
+		for (Point2D p : path) {
 			// need to check if your piece can move onto that patch
 		}
-		return true;
 	}
 
 	/**

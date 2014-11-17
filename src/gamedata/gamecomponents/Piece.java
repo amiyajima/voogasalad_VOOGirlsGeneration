@@ -2,6 +2,7 @@ package gamedata.gamecomponents;
 
 import java.util.List;
 
+import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import gamedata.action.Action;
 import gamedata.stats.Stats;
@@ -11,7 +12,9 @@ public class Piece {
 
 	private int myTypeID;
 	private int myUniqueID;
+	private int myPlayerID;
 	private Stats myStats;
+	private Point2D myLoc;
 	private ImageView myImageView;
 	private List<Movement> myPath;
 	/**
@@ -19,11 +22,14 @@ public class Piece {
 	 */
 	private List<Action> myActions;
 
-	public Piece(ImageView i, List<Movement> m, List<Action> a) {
+	public Piece(ImageView i, List<Movement> m, List<Action> a, Stats stats,
+			Point2D p, int pid) {
 		myImageView = i;
 		myPath = m;
 		myActions = a;
-		myStats = new Stats();
+		myStats = stats;
+		myLoc = p;
+		myPlayerID = pid;
 	}
 
 	public ImageView getImageView() {
@@ -41,7 +47,15 @@ public class Piece {
 	public List<Action> getActions() {
 		return myActions;
 	}
-	
+
+	public void setLoc(Point2D p) {
+		myLoc = p;
+	}
+
+	public Point2D getLoc() {
+		return myLoc;
+	}
+
 	public Stats getStats() {
 		return myStats;
 	}
