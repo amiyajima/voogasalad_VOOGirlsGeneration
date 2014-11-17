@@ -1,5 +1,6 @@
 package gamedata.gamecomponents;
 
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -7,14 +8,16 @@ public abstract class Patch {
 
 	private int myState;
 	private int myID;
+	private Point2D myLoc;
 	private ImageView myImage;
 
-	public Patch(int state, int id, String imageLocation) {
+	public Patch(int state, int id, String imageLocation, Point2D p) {
 		myState = state;
 		myID = id;
 		// imageLocation in some form like "images/myImage.jpg"
 		myImage = new ImageView(new Image(getClass().getResourceAsStream(
 				imageLocation)));
+		myLoc = p;
 	}
 
 	// put image on the patch?
