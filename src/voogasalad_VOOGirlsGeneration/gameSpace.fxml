@@ -77,17 +77,7 @@
       </MenuButton>
    </top>
    <center>
-<<<<<<< HEAD
-      
-=======
-      <AnchorPane fx:id="gameSpace" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <effect>
-            <InnerShadow color="#030d2f" />
-         </effect>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </AnchorPane>
->>>>>>> 02431d1d8922257f6df6c13eac79677b76d72da3
+   
+
    </center>
 </fx:root>

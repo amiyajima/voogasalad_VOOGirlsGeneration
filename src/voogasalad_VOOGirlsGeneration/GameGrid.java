@@ -4,8 +4,8 @@ import javafx.scene.layout.GridPane;
 
 public abstract class GameGrid extends GridPane{
 
-    private int r;
-    private int c;
+    protected int r;
+    protected int c;
     //private Map<Point2D, Piece> pieceMap;
 
 
