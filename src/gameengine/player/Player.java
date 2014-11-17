@@ -11,9 +11,11 @@ import gamedata.gamecomponents.Level;
 public class Player {
 
 	private int myNumMovesPlayed;
+	private int myID;
 
-	public Player() {
+	public Player(int id) {
 		myNumMovesPlayed = 0;
+		myID = id;
 	}
 
 	/**
@@ -37,5 +39,9 @@ public class Player {
 
 	public void resetMovesPlayed() {
 		myNumMovesPlayed = 0;
+	}
+
+	public int getID() {
+		return myID;
 	}
 }

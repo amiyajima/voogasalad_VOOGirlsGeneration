@@ -48,6 +48,10 @@ public class Piece {
 		return myActions;
 	}
 
+	public int getPlayerID() {
+		return myPlayerID;
+	}
+
 	public void setLoc(Point2D p) {
 		myLoc = p;
 	}

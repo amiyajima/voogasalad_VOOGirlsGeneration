@@ -1,6 +1,8 @@
 package gamedata.gamecomponents;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javafx.geometry.Point2D;
@@ -111,4 +113,13 @@ public abstract class Grid {
 		}
 		return null;
 	}
+
+	public List<Piece> getAllPieces() {
+		List<Piece> all = new ArrayList<Piece>();
+		for (Map.Entry<Point2D, Piece> entry : myPieces.entrySet()) {
+			all.add(entry.getValue());
+		}
+		return all;
+	}
+
 }
