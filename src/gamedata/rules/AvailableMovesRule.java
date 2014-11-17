@@ -1,15 +1,12 @@
 package gamedata.rules;
 
 /**
- * Checks if the player's pieces has any available moves on the current grid.
- * LOCATION BASED
- *
+ * Checks to see if a player no longer has any turns on their units
+ * 
  */
 public class AvailableMovesRule extends Rule {
 
-	/**
-	 * 
-	 */
+
 	public AvailableMovesRule() {
 
 	}
