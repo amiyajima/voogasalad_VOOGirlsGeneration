@@ -30,41 +30,69 @@ public class Stats {
 		myStats.remove(stat);
 	}
 
-	public void remove(String statName) {
+	public SingleStat getStat(String statName) {
 		for (SingleStat stat : myStats) {
 			if (stat.getName().equals(statName)) {
-				myStats.remove(stat);
-				return;
+				return stat;
 			}
 		}
+		// Throw error instead
+		return null;
 	}
 
-	public void clear() {
-		myStats.clear();
-	}
-
-	public List<String> getStatNames() {
-		List<String> statNames = new ArrayList<String>();
-		for (SingleStat stat : myStats) {
-			statNames.add(stat.getName());
+	public double getStatValue(String statName) {
+		SingleStat stat = getStat(statName);
+		if (stat == null) {
+			return 0;
+		} else {
+			return stat.getValue();
 		}
-		return statNames;
 	}
 
-	public List<Double> getStatValues() {
-		List<Double> statValues = new ArrayList<Double>();
-		for (SingleStat stat : myStats) {
-			statValues.add(stat.getValue());
+	public void setStatValue(String statName, double value) {
+		SingleStat stat = getStat(statName);
+		if (stat != null) {
+			stat.setValue(value);
 		}
-		return statValues;
 	}
 
-	public List<ImageView> getStatImages() {
-		List<ImageView> statImages = new ArrayList<ImageView>();
-		for (SingleStat stat : myStats) {
-			statImages.add(stat.getImageView());
+
+
+public void remove(String statName) {
+	for (SingleStat stat : myStats) {
+		if (stat.getName().equals(statName)) {
+			myStats.remove(stat);
+			return;
 		}
-		return statImages;
 	}
+}
+
+public void clear() {
+	myStats.clear();
+}
+
+public List<String> getStatNames() {
+	List<String> statNames = new ArrayList<String>();
+	for (SingleStat stat : myStats) {
+		statNames.add(stat.getName());
+	}
+	return statNames;
+}
+
+public List<Double> getStatValues() {
+	List<Double> statValues = new ArrayList<Double>();
+	for (SingleStat stat : myStats) {
+		statValues.add(stat.getValue());
+	}
+	return statValues;
+}
+
+public List<ImageView> getStatImages() {
+	List<ImageView> statImages = new ArrayList<ImageView>();
+	for (SingleStat stat : myStats) {
+		statImages.add(stat.getImageView());
+	}
+	return statImages;
+}
 
 }

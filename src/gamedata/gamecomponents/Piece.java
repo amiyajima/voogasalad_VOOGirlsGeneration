@@ -4,12 +4,14 @@ import java.util.List;
 
 import javafx.scene.image.ImageView;
 import gamedata.action.Action;
+import gamedata.stats.Stats;
 import gameengine.movement.*;
 
 public class Piece {
 
 	private int myTypeID;
 	private int myUniqueID;
+	private Stats myStats;
 	private ImageView myImageView;
 	private List<Movement> myPath;
 	/**
@@ -21,6 +23,7 @@ public class Piece {
 		myImageView = i;
 		myPath = m;
 		myActions = a;
+		myStats = new Stats();
 	}
 
 	public ImageView getImageView() {
@@ -37,6 +40,10 @@ public class Piece {
 
 	public List<Action> getActions() {
 		return myActions;
+	}
+	
+	public Stats getStats() {
+		return myStats;
 	}
 
 	public void addAction(Action a) {
