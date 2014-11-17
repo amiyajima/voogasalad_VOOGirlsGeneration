@@ -12,6 +12,7 @@ public class Piece {
 
 	private int myTypeID;
 	private int myUniqueID;
+	private int myPlayerID;
 	private Stats myStats;
 	private Point2D myLoc;
 	private ImageView myImageView;
@@ -22,13 +23,13 @@ public class Piece {
 	private List<Action> myActions;
 
 	public Piece(ImageView i, List<Movement> m, List<Action> a, Stats stats,
-			Point2D p) {
+			Point2D p, int pid) {
 		myImageView = i;
 		myPath = m;
 		myActions = a;
 		myStats = stats;
 		myLoc = p;
-
+		myPlayerID = pid;
 	}
 
 	public ImageView getImageView() {
@@ -45,6 +46,10 @@ public class Piece {
 
 	public List<Action> getActions() {
 		return myActions;
+	}
+
+	public int getPlayerID() {
+		return myPlayerID;
 	}
 
 	public void setLoc(Point2D p) {
