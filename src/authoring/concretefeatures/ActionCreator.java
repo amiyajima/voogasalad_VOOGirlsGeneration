@@ -2,7 +2,6 @@ package authoring.concretefeatures;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -13,11 +12,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
+import authoring_environment.UIspecs;
 
 public class ActionCreator extends PopupWindow{
 
-	public static final int HEIGHT = 800;
-	public static final int WIDTH = 600;
+	public static final int HEIGHT = 400;
+	public static final int WIDTH = 400;
 	public static final String NAME = "Action Creator";
 	
 	private List<SingleMultiplierBox> operationsList;
@@ -34,8 +34,11 @@ public class ActionCreator extends PopupWindow{
 		operationsList = new ArrayList<>();
 		
 		VBox box = new VBox();
-		
+                box.setPadding(UIspecs.allPadding);
+                box.setSpacing(5);
+                
 		VBox name = new VBox();
+                name.setPadding(UIspecs.topRightPadding);		
 		VBox target = new VBox();
 		VBox operations = new VBox();
 		VBox conclusion = new VBox();

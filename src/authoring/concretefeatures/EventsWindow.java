@@ -9,11 +9,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
+import authoring_environment.UIspecs;
 
 public class EventsWindow extends PopupWindow{
 
-	public static final int HEIGHT = 800;
-	public static final int WIDTH = 600;
+	public static final int HEIGHT = 400;
+	public static final int WIDTH = 400;
 	public static final String NAME = "Events";
 	public static final int BUTTON_SPACING = 20;
 	
@@ -30,8 +31,11 @@ public class EventsWindow extends PopupWindow{
 	@Override
 	protected void initialize() {
 		VBox box = new VBox();
+                box.setPadding(UIspecs.allPadding);
+                box.setSpacing(5);		
 		
 		Label eventsLabel = new Label("Events");
+                eventsLabel.setPadding(UIspecs.topRightPadding);		
 		events = FXCollections.observableArrayList("woo");
 		eventsView = new ListView<String>(events);
 				
