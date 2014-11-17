@@ -103,4 +103,12 @@ public abstract class Grid {
 	public void draw() {
 
 	}
+
+	public Piece getPiece(int id) {
+		for (Map.Entry<Point2D, Piece> entry : myPieces.entrySet()) {
+			if (entry.getValue().getUniqueID() == id)
+				return entry.getValue();
+		}
+		return null;
+	}
 }

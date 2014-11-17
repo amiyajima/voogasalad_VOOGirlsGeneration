@@ -36,6 +36,10 @@ public abstract class Patch {
 		return myID;
 	}
 
+	public Point2D getLoc() {
+		return myLoc;
+	}
+
 	public void setMyID(int myID) {
 		this.myID = myID;
 	}
