@@ -18,6 +18,8 @@ public abstract class Patch {
     }
 
     // put image on the patch?
+
+    // put image on the patch?
     public void draw () {
     }
 

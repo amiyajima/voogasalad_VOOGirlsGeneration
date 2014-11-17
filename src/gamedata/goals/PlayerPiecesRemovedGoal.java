@@ -8,7 +8,7 @@ public class PlayerPiecesRemovedGoal extends Goal {
 	private int myID;
 
 	public PlayerPiecesRemovedGoal(Player p) {
-		//myID = p.getID();
+		// myID = p.getID();
 	}
 
 	@Override

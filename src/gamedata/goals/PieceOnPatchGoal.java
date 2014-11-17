@@ -18,7 +18,6 @@ public class PieceOnPatchGoal extends Goal {
 	@Override
 	public int checkGameState(Level l) {
 		Grid g = l.getGrid();
-		
 		// If piece is on patch
 		return 0;
 	}
