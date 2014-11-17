@@ -5,16 +5,10 @@ import gamedata.gamecomponents.Level;
 
 public class Player {
 
-    private int myNumMoves;
     private int myNumMovesPlayed;
 
     public Player () {
-        this(0);
-    }
-
-    public Player (int num) {
         myNumMovesPlayed = 0;
-        myNumMoves = num;
     }
 
     /**
