@@ -9,6 +9,7 @@ public class VoogaView extends BorderPane {
 	
 	public VoogaView(){
 //		setVisible(true);
+
 		myLibraryView=new LibraryView();
 		mySettingsView=new MenuView(myLibraryView);
 		myGridView=new GridView();

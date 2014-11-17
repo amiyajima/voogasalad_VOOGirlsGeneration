@@ -1,7 +1,7 @@
 package authoring.concretefeatures;
 
 import java.util.Collections;
-
+import authoring_environment.UIspecs;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -18,26 +18,28 @@ import javafx.scene.layout.VBox;
  * @author Mike Zhu
  *
  */
-public class ModulesList extends VBox{
+public class ModulesList extends HBox{
 	public static final int BUTTON_SPACING = 150;
+	public static final String AVAILABLE_MODULES_LABEL = "Available Modules";
+	public static final String ADDED_MODULES_LABEL = "Added Modules";
+	public static final String ADD_MODULES_BUTTON = "Add Module >>";
+	public static final String REMOVE_MODULES_BUTTON = "<< Remove Module";
 	
 	public ModulesList(){
-		Label modsLabel = new Label("Available modules");
+            VBox availableModulesVBox = new VBox();
+            VBox addedModulesVBox = new VBox();
+
+		Label availableModsLabel = new Label(AVAILABLE_MODULES_LABEL);
 		ObservableList<String> availableModules = FXCollections.observableArrayList(
 				"Attack", "Move", "Build", "Swim", "Fly", "Capture");
 		ListView<String> mods = new ListView<String>(availableModules);
-		
 		Collections.sort(availableModules);
-		
-		Label addedModsLabel = new Label("Added modules");
+
+		Label addedModsLabel = new Label(ADDED_MODULES_LABEL);
 		ObservableList<String> addedModules = FXCollections.observableArrayList();
 		ListView<String> addedMods = new ListView<String>(addedModules);
-		
-
-		HBox addRemoveMods = new HBox(BUTTON_SPACING);
-		Button addModule = new Button("Add Module >>");
+		Button addModule = new Button(ADD_MODULES_BUTTON);
 		addModule.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
 			@Override
 			public void handle(MouseEvent click) {
 				String s = mods.getSelectionModel().getSelectedItem();
@@ -49,9 +51,8 @@ public class ModulesList extends VBox{
 			}
 		});
 		
-		Button removeModule = new Button("<< Remove Module");
+		Button removeModule = new Button(REMOVE_MODULES_BUTTON);
 		removeModule.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
 			@Override
 			public void handle(MouseEvent click) {
 				String s = addedMods.getSelectionModel().getSelectedItem();
@@ -61,9 +62,13 @@ public class ModulesList extends VBox{
 				}
 				Collections.sort(availableModules);
 			}
-		});
-		addRemoveMods.getChildren().addAll(addModule, removeModule);
+		});		
 		
-		getChildren().addAll(modsLabel, mods, addRemoveMods, addedModsLabel, addedMods);
+                availableModulesVBox.getChildren().addAll(availableModsLabel, mods, addModule);
+                availableModulesVBox.setSpacing(5);
+                addedModulesVBox.getChildren().addAll(addedModsLabel, addedMods, removeModule);
+                addedModulesVBox.setSpacing(5);
+                setSpacing(5);
+		getChildren().addAll(availableModulesVBox, addedModulesVBox);
 	}
 }

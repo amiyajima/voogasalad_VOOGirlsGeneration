@@ -11,12 +11,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.LibraryView;
+import authoring_environment.UIspecs;
 
 public class UnitCreator extends PopupWindow{
 	
-	public static final int HEIGHT = 800;
-	public static final int WIDTH = 600;
+	public static final int HEIGHT = 400;
+	public static final int WIDTH = 400;
 	public static final String NAME = "Unit Creator";
+	public static final String UNIT_NAME_LABEL = "Name";
 	private LibraryView myLibrary;
 	
 	public UnitCreator(LibraryView library){
@@ -30,11 +32,15 @@ public class UnitCreator extends PopupWindow{
 	@Override
 	protected void initialize(){
 		VBox box = new VBox();
+	        box.setPadding(UIspecs.allPadding);
+		box.setSpacing(5);
+
 		
 		HBox names = new HBox();
 		HBox images = new HBox();
 		
-		Label nameLabel = new Label("Name");
+		Label nameLabel = new Label(UNIT_NAME_LABEL);
+		nameLabel.setPadding(UIspecs.topRightPadding);
 		TextField unitName = new TextField();
 		names.getChildren().addAll(nameLabel, unitName);
 		
@@ -42,7 +48,7 @@ public class UnitCreator extends PopupWindow{
 		Button loadImage = new Button("Load image");
 		images.getChildren().addAll(loadLabel, loadImage);
 		
-		VBox modList = new ModulesList();
+		HBox modList = new ModulesList();
 		
 		Button goButton = new Button("Create new unit template");
 		goButton.setOnAction(new EventHandler<ActionEvent>() {
