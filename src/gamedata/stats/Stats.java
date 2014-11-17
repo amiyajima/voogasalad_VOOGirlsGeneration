@@ -57,42 +57,43 @@ public class Stats {
 	}
 
 
-
-public void remove(String statName) {
-	for (SingleStat stat : myStats) {
-		if (stat.getName().equals(statName)) {
-			myStats.remove(stat);
-			return;
+	public void remove(String statName) {
+		for (SingleStat stat : myStats) {
+			if (stat.getName().equals(statName)) {
+				myStats.remove(stat);
+				return;
+			}
 		}
 	}
-}
 
-public void clear() {
-	myStats.clear();
-}
-
-public List<String> getStatNames() {
-	List<String> statNames = new ArrayList<String>();
-	for (SingleStat stat : myStats) {
-		statNames.add(stat.getName());
+	public void clear() {
+		myStats.clear();
 	}
-	return statNames;
-}
-
-public List<Double> getStatValues() {
-	List<Double> statValues = new ArrayList<Double>();
-	for (SingleStat stat : myStats) {
-		statValues.add(stat.getValue());
+	
+	// DO SOMETHING ABOUT DUPLICATED LOOPS
+	// LAMBDAS PROBABLY
+	public List<String> getStatNames() {
+		List<String> statNames = new ArrayList<String>();
+		for (SingleStat stat : myStats) {
+			statNames.add(stat.getName());
+		}
+		return statNames;
 	}
-	return statValues;
-}
 
-public List<ImageView> getStatImages() {
-	List<ImageView> statImages = new ArrayList<ImageView>();
-	for (SingleStat stat : myStats) {
-		statImages.add(stat.getImageView());
+	public List<Double> getStatValues() {
+		List<Double> statValues = new ArrayList<Double>();
+		for (SingleStat stat : myStats) {
+			statValues.add(stat.getValue());
+		}
+		return statValues;
 	}
-	return statImages;
-}
+
+	public List<ImageView> getStatImages() {
+		List<ImageView> statImages = new ArrayList<ImageView>();
+		for (SingleStat stat : myStats) {
+			statImages.add(stat.getImageView());
+		}
+		return statImages;
+	}
 
 }
