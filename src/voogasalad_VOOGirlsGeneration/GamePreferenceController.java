@@ -1,5 +1,9 @@
 package voogasalad_VOOGirlsGeneration;
 
+//manage the creation of game objects from their respective model objects in the Game Engine.
+//have a list of game objects from the data? 
+//call setPlayers(), initializeUnits(), initializeTiles() methods which the Game Engine class implements
+
 public class GamePreferenceController {
 
     public void setPreferences(File properties){
