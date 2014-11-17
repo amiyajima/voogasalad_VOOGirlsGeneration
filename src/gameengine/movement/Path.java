@@ -6,12 +6,7 @@ import java.util.List;
 import com.sun.javafx.geom.Point2D;
 
 /**
-<<<<<<< HEAD
- * Not using
- * @author Anna, Jesse, Rica
-=======
  * Not Currently Implemented.....
->>>>>>> 2e43b5636c69078155264901cb7f1d3d62bff565
  *
  */
 public class Path {
