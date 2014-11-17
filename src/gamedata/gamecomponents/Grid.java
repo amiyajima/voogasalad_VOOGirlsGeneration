@@ -2,14 +2,16 @@ package gamedata.gamecomponents;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javafx.geometry.Point2D;
+import javafx.scene.image.ImageView;
 
 public abstract class Grid {
 	private int myRow;
 	private int myColumn;
 
-	private Map<Point2D, Patch> myPatches;
-	private Map<Point2D, Piece> myPieces;
+	protected Map<Point2D, Patch> myPatches;
+	protected Map<Point2D, Piece> myPieces;
 	private static final int DEFAULT_PATCH_STATE = 1;
 	private static final int DEFAULT_PATCH_ID = 1;
 	private static final String DEFAULT_PATCH_IMAGE_LOCATION = "";
@@ -21,7 +23,6 @@ public abstract class Grid {
 	public Grid(int row, int column) {
 		row = myRow;
 		column = myColumn;
-
 		myPatches = new HashMap<Point2D, Patch>();
 		myPieces = new HashMap<Point2D, Piece>();
 
