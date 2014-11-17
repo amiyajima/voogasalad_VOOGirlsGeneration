@@ -14,11 +14,12 @@ import javafx.geometry.Point2D;
  */
 public class Movement {
         // possible paths for this movement
-        private List<Point2D> myMoves;
+        private List<List<Point2D>> myMoves;
 	private Grid myGrid;
+	private List<Point2D> myPaths;
 
 	public Movement(Level lvl, List<Point2D>... endPoints) {
-		for (List<Point2D> p: paths) {
+		for (List<Point2D> p: endPoints) {
 		    myMoves.add(p);
 		}
 		myGrid = lvl.getGrid();
@@ -34,7 +35,7 @@ public class Movement {
 	 */
 	public List<Point2D> getPossibleLocs(int x, int y) {
 		List<Point2D> p = new ArrayList<Point2D>();
-		for (Point2D a : myPath) {
+		for (Point2D a : myPaths) {
 			p.add(new Point2D(a.getX() + x, a.getY() + y));
 		}
 		return p;
@@ -46,7 +47,7 @@ public class Movement {
 	 * @return true or false
 	 */
         private boolean checkPathCollision() {
-            for (Point2D p : myPath) {
+            for (Point2D p : myPaths) {
                 if (myGrid.getPiece(p) != null) {
                     // check if these pieces can collide
                     return false;
