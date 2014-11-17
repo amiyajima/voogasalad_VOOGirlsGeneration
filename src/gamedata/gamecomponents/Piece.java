@@ -19,11 +19,11 @@ public class Piece {
 	 */
 	private List<Action> myActions;
 
-	public Piece(ImageView i, List<Movement> m, List<Action> a) {
+	public Piece(ImageView i, List<Movement> m, List<Action> a, Stats stats) {
 		myImageView = i;
 		myPath = m;
 		myActions = a;
-		myStats = new Stats();
+		myStats = stats;
 	}
 
 	public ImageView getImageView() {
