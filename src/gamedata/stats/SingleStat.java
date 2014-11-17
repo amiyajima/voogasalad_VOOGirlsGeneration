@@ -20,6 +20,10 @@ public class SingleStat {
 	public double getValue() {
 		return myValue;
 	}
+	
+	public void setValue(double value) {
+		myValue = value;
+	}
 
 	public ImageView getImageView() {
 		return myImgView;
