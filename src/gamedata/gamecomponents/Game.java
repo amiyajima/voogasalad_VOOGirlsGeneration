@@ -57,9 +57,7 @@ public class Game {
 		if (myCurrentPlayer.levelWon(myCurrentLevel)) {
 			nextLevel();
 		}
-		if (myCurrentPlayer.endTurn(myCurrentLevel)) {
-			nextPlayer();
-		}
+		nextPlayer();
 	}
 
 	/**

@@ -3,46 +3,48 @@ package gamedata.gamecomponents;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+
 public abstract class Patch {
 
-	private int myState;
-	private int myID;
-	private ImageView myImage;
+    private int myState;
+    private int myID;
+    private ImageView myImageView;
 
-	public Patch(int state, int id, String imageLocation) {
-		myState = state;
-		myID = id;
-		// imageLocation in some form like "images/myImage.jpg"
-		myImage = new ImageView(new Image(getClass().getResourceAsStream(
-				imageLocation)));
-	}
+    public Patch (int state, int id, String imageLocation) {
+        myState = state;
+        myID = id;
+        // imageLocation in some form like "images/myImage.jpg"
+        myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+    }
 
-	// put image on the patch?
-	public void draw() {
-	}
+    // put image on the patch?
 
-	public int getMyState() {
-		return myState;
-	}
+    // put image on the patch?
+    public void draw () {
+    }
 
-	public void setMyState(int myState) {
-		this.myState = myState;
-	}
+    public int getMyState () {
+        return myState;
+    }
 
-	public int getMyID() {
-		return myID;
-	}
+    public void setMyState (int myState) {
+        this.myState = myState;
+    }
 
-	public void setMyID(int myID) {
-		this.myID = myID;
-	}
+    public int getMyID () {
+        return myID;
+    }
 
-	public ImageView getMyImage() {
-		return myImage;
-	}
+    public void setMyID (int myID) {
+        this.myID = myID;
+    }
 
-	public void setMyImage(ImageView myImage) {
-		this.myImage = myImage;
-	}
+    public ImageView getMyImage () {
+        return myImageView;
+    }
+
+    public void setMyImage (ImageView myImage) {
+        this.myImageView = myImage;
+    }
 
 }
