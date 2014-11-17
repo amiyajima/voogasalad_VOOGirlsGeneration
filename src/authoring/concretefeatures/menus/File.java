@@ -2,20 +2,16 @@ package authoring.concretefeatures.menus;
 
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.stage.FileChooser;
 
 public class File extends Menu{
-	private static final String NAME = "File";
 	
 	public File(){
-		super(NAME);
-		MenuItem newProject = new MenuItem("New Project");
-		MenuItem open = new MenuItem("Open Project...");
-		MenuItem save = new MenuItem("Save Project...");
-		MenuItem export = new MenuItem("Export Project as Game...");
+		super("File");
+		MenuItem newGame = new MenuItem("New game");
+		MenuItem open = new MenuItem("Open");
+		MenuItem save = new MenuItem("Save");
 		MenuItem exit = new MenuItem("Exit");
 		
-		getItems().addAll(newProject, open, save, export, exit);
+		getItems().addAll(newGame, open, save, exit);
 	}
-	
 }

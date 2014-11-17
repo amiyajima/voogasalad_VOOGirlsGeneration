@@ -1,7 +1,7 @@
 package authoring.abstractfeatures;
 
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.BorderPane;
 
-public class CreatorPane extends VBox{
-
+public class CreatorPane extends BorderPane{
+	
 }

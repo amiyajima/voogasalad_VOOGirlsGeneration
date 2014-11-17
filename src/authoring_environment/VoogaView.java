@@ -9,12 +9,13 @@ public class VoogaView extends BorderPane {
 	
 	public VoogaView(){
 //		setVisible(true);
-		mySettingsView=new MenuView();
 		myLibraryView=new LibraryView();
+		mySettingsView=new MenuView(myLibraryView);
 		myGridView=new GridView();
+		
 		setTop(mySettingsView);
 		setLeft(myLibraryView);
-		this.setRight(myGridView);
+		setRight(myGridView);
 	}
 	
 }

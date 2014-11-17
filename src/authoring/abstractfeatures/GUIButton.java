@@ -1,18 +1,17 @@
 package authoring.abstractfeatures;
 
-import javafx.scene.Node;
-import javafx.scene.control.Button;
+public class GUIButton extends GUIFeature{
 
-public abstract class GUIButton extends GUIFeature{
-
-	private String myName;
-	
 	@Override
-	public Node makeTool() {
-		Button b = new Button(myName);
+	public void action() {
+		// TODO Auto-generated method stub
 		
-		b.setOnMouseClicked(event -> action());
-		return b;
+	}
+
+	@Override
+	public void makeTool() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
