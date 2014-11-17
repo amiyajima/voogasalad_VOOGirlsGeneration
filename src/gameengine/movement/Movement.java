@@ -18,7 +18,8 @@ public class Movement {
 	 */
 	private List<Point2D> myMoves;
 
-	public Movement(List<Patch> path) {
+	public Movement(List<Point2D> move, List<Patch> path) {
+		myMoves = move;
 		myPath = path;
 	}
 
@@ -46,7 +47,7 @@ public class Movement {
 	 * 
 	 * @param piece
 	 */
-	public void movePiece(Piece piece) {
+	public void movePiece(Piece piece, int x, int y) {
 		if (checkPathClear()) {
 
 		}
