@@ -1,5 +1,6 @@
 package gamedata.goals;
 
+import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
@@ -16,6 +17,7 @@ public class PieceOnPatchGoal extends Goal {
 
 	@Override
 	public int checkGameState(Level l) {
+		Grid g = l.getGrid();
 		// If piece is on patch
 		return 0;
 	}

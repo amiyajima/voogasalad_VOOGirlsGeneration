@@ -2,18 +2,21 @@ package gameengine.movement;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.geometry.Point2D;
 import gamedata.gamecomponents.Piece;
 
-public class VerticalMove implements Movement {
+/**
+ * Depreciated for now
+ *
+ */
+public class VerticalMove {
     private double myIncrement;
-    
-    public VerticalMove(double amount) {
+
+    public VerticalMove (double amount) {
         myIncrement = amount;
     }
-    
-    public List<Point2D> getPath(Piece p) {
+
+    public List<Point2D> getPath (Piece p) {
         List<Point2D> myPath = new ArrayList<Point2D>();
         double yLoc = p.getImageView().getY();
         for (int i = 0; i < myIncrement; i++) {
@@ -21,8 +24,8 @@ public class VerticalMove implements Movement {
         }
         return myPath;
     }
-    
-    public void move(Piece p) {
+
+    public void move (Piece p) {
         p.getImageView().setY(p.getImageView().getY() + myIncrement);
-    }    
+    }
 }

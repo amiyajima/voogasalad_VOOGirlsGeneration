@@ -3,31 +3,66 @@ package gamedata.gamecomponents;
 import java.util.List;
 import gamedata.goals.*;
 import gamedata.rules.*;
+import gameengine.player.Player;
 
+/**
+ * Rules define how a player's turn ends Goals define whether or not the level
+ * has been won
+ *
+ */
 public class Level {
 
-	// rules for the level and any global events (ie. fire kills half of the
-	// scren)
-	// goals AKA win/lose conditions for the level
 	private Grid myGrid;
+	/**
+	 * Goals defining how to win the level
+	 */
 	private List<Goal> myGoals;
+	/**
+	 * Rules defining how the players turn ends
+	 */
 	private List<Rule> myRules;
 
 	public Level() {
+		this(null, null, null);
+	}
 
+	public Level(Grid gr, List<Goal> goals, List<Rule> rules) {
+		myGrid = gr;
+		myGoals = goals;
+		myRules = rules;
 	}
 
 	/**
-	 * Checks to see if the level goals have been met.
+	 * Check if the level has been won after every move the player makes Returns
+	 * true if the level has been won, false if it has not.
 	 * 
 	 * @return
 	 */
-	public boolean isLevelWon() {
-		boolean b = false;
+	public boolean levelCompleted() {
 		for (Goal g : myGoals) {
-			b = g.checkGameState(this);
+			if (g.checkGameState(this) == 1) {
+				return true;
+			}
 		}
-		return b;
+		return false;
 	}
 
+	/**
+	 * Check rules to see if a player's turn is over. Returns true if the turn
+	 * is over, false if the turn continues.
+	 * 
+	 * @return
+	 */
+	public boolean checkTurnEnd(int numTurnsPlayed) {
+		for (Rule r : myRules) {
+			if (r.conditionsMet(numTurnsPlayed)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public Grid getGrid() {
+		return myGrid;
+	}
 }
