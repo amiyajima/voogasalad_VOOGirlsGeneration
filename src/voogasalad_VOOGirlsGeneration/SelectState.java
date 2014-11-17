@@ -2,8 +2,9 @@ package voogasalad_VOOGirlsGeneration;
 
 public class SelectState implements GridState{
 
+
     @Override
-    public void onCLick () {
+    public void onClick () {
         // TODO Auto-generated method stub
         
     }

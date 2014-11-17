@@ -9,7 +9,7 @@ public abstract class GameGrid extends GridPane{
     //private Map<Point2D, Piece> pieceMap;
 
 
-    // public GameGrid(int row, int c, Map <Point2D, Patch> patchMap, Map <Point2D,Piece> pieceMap){
+   // public GameGrid(int row, int c, Map <Point2D, Patch> patchMap, Map <Point2D,Piece> pieceMap){
 
     public GameGrid(int row, int column){
         super();

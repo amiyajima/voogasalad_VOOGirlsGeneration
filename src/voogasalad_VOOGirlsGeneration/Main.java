@@ -9,9 +9,8 @@ public class Main extends Application{
     @Override
     public void start (Stage arg0) throws Exception {
         
-        ViewController vc = new ViewController(arg0);
-       // arg0.setScene(new Scene(vc));
-        arg0.show();
+       new InitialSceneController(arg0);
+       // arg0.show();
  
     }
     

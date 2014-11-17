@@ -16,23 +16,24 @@ import javafx.scene.text.Text;
 
 
 public class ViewController extends BorderPane{
+    
+    public static final String GAMESPACE_FXML = "gameSpace.fxml";
+    
 
     private Stage myStage;
-    private GameModel myModel;
+    private Game myModel;
     private GameGrid myGrid;
     
-//    @FXML
-//    private GridPane squareGrid;
-//    
+   
     @FXML
     private VBox statsPane;
     private GridState gridState;
 
     public ViewController(Stage s){
         myStage = s;
-        myModel = new GameModel();
+        myModel = new Game("VOOGASALAD!!");
         myGrid = new SquareGameGrid(5,5);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gameSpace.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(GAMESPACE_FXML));
         fxmlLoader.setController(this);
         fxmlLoader.setRoot(this);
 
@@ -44,45 +45,46 @@ public class ViewController extends BorderPane{
         }
         this.setCenter(myGrid);
         s.setScene(new Scene(this));
+       
     }
 
     @FXML
     protected void loadGame () {
         FileChooser fc = new FileChooser();
-       fc.getExtensionFilters().add(new ExtensionFilter("JSON", "*.json"));
+        fc.getExtensionFilters().add(new ExtensionFilter("JSON", "*.json"));
         File f = fc.showOpenDialog(myStage);
 
     }
     @FXML
     protected void restartGame () {
-//        myFileChooser.getExtensionFilters().add(new ExtensionFilter("JSON", "*.json"));
-//        File f = myFileChooser.showOpenDialog(myStage);
-        System.out.println("restarging game");
+
+        System.out.println("restarting game");
 
     }
     @FXML
     protected void exitGame () {
+        
+        myStage.close();
 
 
     }
     
     @FXML
     protected void saveGame () {
-        
-       
+        FileChooser fileChooser = new FileChooser();
+        File f = fileChooser.showSaveDialog(myStage);
+        myModel.store(f);
 
     }
     
     
     private void updateStats(){
+        statsPane.getChildren().clear();
         statsPane.getChildren().add(new Text(myModel.getStats()));
     }
     
     private void clickOnGrid(){
         gridState.onClick();
     }
-    
-
-
 
 }

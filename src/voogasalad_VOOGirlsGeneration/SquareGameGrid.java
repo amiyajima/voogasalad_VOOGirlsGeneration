@@ -1,5 +1,6 @@
 package voogasalad_VOOGirlsGeneration;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
@@ -8,6 +9,7 @@ public class SquareGameGrid extends GameGrid{
     
     public SquareGameGrid(int rwo, int col){
         super(rwo, col);
+        this.getStylesheets().add("stylesheet.css");
         
     }
 
@@ -17,14 +19,19 @@ public class SquareGameGrid extends GameGrid{
     protected void populateGrid () {
         for(int i=0; i<r; i++){
             for(int j=0; j<c; j++){
-                this.add(new Rectangle(500/r,500/c),i,j);
+                Rectangle r = new Rectangle(500/this.r,500/c);
+                r.getStyleClass().add("rectangle");
+                this.add(r, i, j);
+                r.setOnMouseEntered(event->onHover(r));
+                r.setOnMouseExited(event->r.setFill(Color.BLACK));
             }
-            this.setGridLinesVisible(true);
+          
         }
-  //      this.add(new Circle(20), 3, 3);
+
+    }
+    private void onHover(Rectangle rec){
+        rec.setFill(Color.BURLYWOOD);
         
-  //      this.add(new Circle(20), 2, 2);
-  //      this.setGridLinesVisible(true);
     }
 
 }
