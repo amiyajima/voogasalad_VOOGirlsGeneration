@@ -18,7 +18,7 @@ public class StatsModifyingAction implements Action {
 	 * 
 	 */
 	@Override
-	public void doBehavior(Piece actor, Piece receiver) {
+	public void doBehavior(Piece actor, Piece... receivers) {
 		// need method from pieces to get stats
 		Stats actorStats = actor.getStats();
 		Stats receiverStats = receiver.getStats();
