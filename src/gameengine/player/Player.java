@@ -24,22 +24,12 @@ public class Player {
 	 * @param level
 	 */
 	public boolean levelWon(Level level) {
-		if (level.levelCompleted()) {
-			return true;
+		while (!level.checkTurnEnd(myNumMovesPlayed)) {
+			if (level.levelCompleted()) {
+				return true;
+			}
+			myNumMovesPlayed++;
 		}
 		return false;
 	}
-
-	/**
-	 * Checks to see if the player's turn has ended
-	 * 
-	 * @param level
-	 * @return
-	 */
-	public boolean endTurn(Level level) {
-		myNumMovesPlayed++;
-		return level.checkTurnEnd(myNumMovesPlayed);
-
-	}
-
 }
