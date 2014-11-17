@@ -21,12 +21,14 @@ public class Piece {
 	 */
 	private List<Action> myActions;
 
-	public Piece(ImageView i, List<Movement> m, List<Action> a, Point2D p) {
+	public Piece(ImageView i, List<Movement> m, List<Action> a, Stats stats,
+			Point2D p) {
 		myImageView = i;
 		myPath = m;
 		myActions = a;
-		myStats = new Stats();
+		myStats = stats;
 		myLoc = p;
+
 	}
 
 	public ImageView getImageView() {

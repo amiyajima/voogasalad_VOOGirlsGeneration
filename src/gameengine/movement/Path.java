@@ -11,8 +11,22 @@ public class Path {
 	 */
 	private List<Point2D> myCoords;
 	
-	public Path(){
-		
+	public Path() {
+	    
+	}
+	
+	public Path(List<Point2D> myPath){
+	    myCoords = myPath;
+	}
+	
+	public void addPointsToPath(Point2D... args) {
+	    for (Point2D p : args) {
+	        myCoords.add(p);
+	    }
+	}
+	
+	public void removePointsFromPath(int index) {
+	    myCoords.remove(index);
 	}
 	
 	public List<Point2D> getPath(int x, int y){

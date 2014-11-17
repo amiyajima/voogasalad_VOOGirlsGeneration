@@ -2,6 +2,12 @@ package gameengine.player;
 
 import gamedata.gamecomponents.Level;
 
+/**
+ * A player object that contains the logic for playing each level. This object
+ * requires no parameters for initialization.
+ *
+ */
+
 public class Player {
 
 	private int myNumMovesPlayed;
