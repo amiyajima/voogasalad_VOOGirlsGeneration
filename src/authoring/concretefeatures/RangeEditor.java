@@ -15,17 +15,19 @@ import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.GridView;
 
 public class RangeEditor extends PopupWindow{
+	private static final int MIN_TILE_SIZE=50;
 
-	public static final int HEIGHT = 800;
-	public static final int WIDTH = 600;
-	public static final String NAME = "Range Editor";
+	private static final int RANGE_EDITOR_HEIGHT = 800;
+	private static final int RANGE_EDITOR_WIDTH = 600;
+	private static final String NAME = "Range Editor";
 	
 	private int myGridSizeNumber;
-	private int myGridWidth=WIDTH-100;
+	private int myGridWidth=RANGE_EDITOR_WIDTH-30;
 	private int myTileSize=40;
+	
 	public RangeEditor(){
-		setHeight(HEIGHT);
-		setWidth(WIDTH);
+		setHeight(RANGE_EDITOR_HEIGHT);
+		setWidth(RANGE_EDITOR_WIDTH);
 		setTitle(NAME);
 		initialize();
 	}
@@ -47,7 +49,7 @@ public class RangeEditor extends PopupWindow{
 		selection.getChildren().addAll(targetLabel,targetChoice);
 		
 		//generate default grid
-		GridView grid=new GridView(myGridWidth, myGridWidth, myTileSize);
+//		GridView grid=new GridView(myGridWidth, myGridWidth, myTileSize);
 
 		//Choose the Size
 		Label nameLabel = new Label("Radius");
@@ -59,19 +61,21 @@ public class RangeEditor extends PopupWindow{
 			@Override
 			public void handle(ActionEvent event) {
 				myGridSizeNumber=Integer.parseInt(radius.getText())*2+1;
-				myTileSize=myGridWidth/myGridSizeNumber;
+				int calculatedTileSize=myGridWidth/myGridSizeNumber;
+				
+				myTileSize=(calculatedTileSize<MIN_TILE_SIZE)? MIN_TILE_SIZE:calculatedTileSize;
+				
 				box.getChildren().clear();
-				GridView grid=new GridView(myGridWidth, myGridWidth, myTileSize);
+				GridView grid=new GridView(myGridWidth,myGridWidth,myTileSize);
+				grid.update(myGridSizeNumber, myGridSizeNumber,myTileSize);
 				box.getChildren().addAll(selection,sizeChooser,grid);
-
-			}
-			
+			}	
 		});
 		sizeChooser.getChildren().addAll(nameLabel,radius,enter);
 		
 
 		
-		box.getChildren().addAll(selection,sizeChooser,grid);
+		box.getChildren().addAll(selection,sizeChooser);
 		setScene(new Scene(box));
 		
 		
