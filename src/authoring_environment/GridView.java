@@ -9,17 +9,26 @@ import javafx.scene.shape.Rectangle;
 
 public class GridView extends Pane{
 
-	private static final int GRID_VIEW_HEIGHT = 580;
-	private static final int GRID_VIEW_WIDTH = 700;
-	private static final int TILE_SIDE_LENGTH = 40;
+	private int widthGridNumber;
+	private int heightGridNumber;
+	private int myWidth;
+	private int myHeight;
+	private int myTileSize;
 
-
-	public GridView(){
-		this.setPrefSize(GRID_VIEW_WIDTH, GRID_VIEW_HEIGHT);
-		this.setMaxSize(GRID_VIEW_WIDTH, GRID_VIEW_HEIGHT);
-		this.setMinSize(GRID_VIEW_WIDTH, GRID_VIEW_HEIGHT);
+	public GridView(int width, int height, int tilesize){
+		myWidth=width;
+		myHeight=height;
+		myTileSize=tilesize;
+		this.setPrefSize(myWidth, myHeight);
+		this.setMaxSize(myWidth, myHeight);
+		this.setMinSize(myWidth, myHeight);
 //		setStyle("-fx-background-color:blue;");
-		
+		if (myTileSize!=0){
+			widthGridNumber=myWidth/myTileSize;
+			heightGridNumber=myHeight/myTileSize;
+		}
+
+
 		initiateGrids();
 		initiateGridLines();
 		
@@ -27,14 +36,14 @@ public class GridView extends Pane{
 
 // Need to fix the duplicated code later.
 	private void initiateGridLines() {
-		for (int i=0;i<=GRID_VIEW_WIDTH;i+=TILE_SIDE_LENGTH){
-			Line gridLine=new Line(i,0,i,GRID_VIEW_HEIGHT);
+		for (int i=0;i<=myWidth;i+=myTileSize){
+			Line gridLine=new Line(i,0,i,myHeight);
 			gridLine.setStroke(Color.WHITE);
 			gridLine.setStrokeWidth(1.5);
 			this.getChildren().add(gridLine);
 		}
-		for (int i=0;i<=GRID_VIEW_HEIGHT;i+=TILE_SIDE_LENGTH){
-			Line gridLine=new Line(0,i,GRID_VIEW_WIDTH,i);
+		for (int i=0;i<=myHeight;i+=myTileSize){
+			Line gridLine=new Line(0,i,myWidth,i);
 			gridLine.setStroke(Color.WHITE);
 			gridLine.setStrokeWidth(1.5);
 			this.getChildren().add(gridLine);
@@ -43,11 +52,20 @@ public class GridView extends Pane{
 
 
 	private void initiateGrids() {
-		for (int i=0;i<GRID_VIEW_WIDTH/TILE_SIDE_LENGTH;i++){
-			for (int j=0;j<GRID_VIEW_HEIGHT/TILE_SIDE_LENGTH;j++){
-				this.getChildren().add(new Tile(i,j));
+		for (int i=0;i<widthGridNumber;i++){
+			for (int j=0;j<heightGridNumber;j++){
+				this.getChildren().add(new Tile(i,j,myTileSize));
 			
 			}
 		}
 	}
+	
+	public int getWidthGrid(){
+		return widthGridNumber;
+	}
+	
+	public int getHeightGrid(){
+		return heightGridNumber;
+	}
+	
 }

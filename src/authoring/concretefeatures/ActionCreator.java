@@ -49,6 +49,18 @@ public class ActionCreator extends PopupWindow{
 		
 		name.getChildren().addAll(nameLabel, nameField);
 		
+		//Set the Range
+		Button setRange=new Button("Set Range...");
+		setRange.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event) {
+				PopupWindow rangeEditor = new RangeEditor();
+				rangeEditor.show();
+			}
+			
+		});
+		
 		//Target of the action
 		Label targetLabel = new Label("Action target");
 		ChoiceBox<String> targetChoice = new ChoiceBox<>();
@@ -78,7 +90,7 @@ public class ActionCreator extends PopupWindow{
 		
 		Button create = new Button("Create new action");
 		
-		box.getChildren().addAll(name, target, moddedStat, operations, conclusion, create);
+		box.getChildren().addAll(name, setRange, target, moddedStat, operations, conclusion, create);
 
 		setScene(new Scene(box));
 	}
