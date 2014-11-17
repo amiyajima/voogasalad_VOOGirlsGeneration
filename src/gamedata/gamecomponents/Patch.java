@@ -8,13 +8,13 @@ public abstract class Patch {
 
     private int myState;
     private int myID;
-    private ImageView myImage;
+    private ImageView myImageView;
 
     public Patch (int state, int id, String imageLocation) {
         myState = state;
         myID = id;
         // imageLocation in some form like "images/myImage.jpg"
-        myImage = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+        myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
     }
 
     // put image on the patch?
@@ -38,11 +38,11 @@ public abstract class Patch {
     }
 
     public ImageView getMyImage () {
-        return myImage;
+        return myImageView;
     }
 
     public void setMyImage (ImageView myImage) {
-        this.myImage = myImage;
+        this.myImageView = myImage;
     }
 
 }
