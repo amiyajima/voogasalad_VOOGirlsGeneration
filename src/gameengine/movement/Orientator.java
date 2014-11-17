@@ -30,6 +30,10 @@ public class Orientator {
 		    myTurn = 0;
 		}
 	}
+	
+	public void turn(Piece p) {
+	    p.getImageView().setRotate(myTurn);
+	}
 
 	public double getTurn() {
 		return myTurn;
