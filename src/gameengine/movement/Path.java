@@ -5,6 +5,11 @@ import java.util.List;
 
 import com.sun.javafx.geom.Point2D;
 
+/**
+ * Not using
+ * @author Anna, Jesse, Rica
+ *
+ */
 public class Path {
 	/**
 	 * Contains respective positions for possible path.

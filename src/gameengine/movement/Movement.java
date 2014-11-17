@@ -2,13 +2,17 @@ package gameengine.movement;
 
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
-import gamedata.rules.Rule;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.sun.javafx.geom.Point2D;
 
+/**
+ * 
+ * @author Jesse, Anna , Rica
+ *
+ */
 public class Movement {
 	// movement should contain relative paths
 	private List<Patch> myPath;
