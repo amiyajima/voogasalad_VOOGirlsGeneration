@@ -2,7 +2,9 @@ package voogasalad_VOOGirlsGeneration;
 
 import gamePlayer.Patch;
 import gamedata.gamecomponents.Piece;
+
 import java.util.Map;
+
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;

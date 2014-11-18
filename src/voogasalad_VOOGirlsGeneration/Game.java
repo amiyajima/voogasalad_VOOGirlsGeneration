@@ -1,5 +1,8 @@
 package voogasalad_VOOGirlsGeneration;
 
+import gamedata.gamecomponents.Grid;
+import gamedata.gamecomponents.SquareGrid;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,9 @@ public class Game {
     }
     public void initializeGame(String s){
         
+    }
+    public Grid getCurrentLevel(){
+        return new SquareGrid();
     }
     public void store(File f){
         

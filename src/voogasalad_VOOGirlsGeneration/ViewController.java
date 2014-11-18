@@ -1,14 +1,22 @@
 package voogasalad_VOOGirlsGeneration;
 
+import gamedata.action.Action;
+import gamedata.gamecomponents.Piece;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Map;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -16,17 +24,21 @@ import javafx.scene.text.Text;
 
 
 public class ViewController extends BorderPane{
-    
+
     public static final String GAMESPACE_FXML = "gameSpace.fxml";
-    
+
 
     private Stage myStage;
     private Game myModel;
     private GameGrid myGrid;
-    
-   
+    private Map<String, Double> myStats;
+    private Piece activePiece;
+    private Action activeAction;
+
     @FXML
     private VBox statsPane;
+    @FXML
+    private VBox 
     private GridState gridState;
 
     public ViewController(Stage s){
@@ -46,7 +58,7 @@ public class ViewController extends BorderPane{
         this.setCenter(myGrid);
         myGrid.setAlignment(Pos.CENTER);
         s.setScene(new Scene(this));
-       
+
     }
 
     @FXML
@@ -64,12 +76,12 @@ public class ViewController extends BorderPane{
     }
     @FXML
     protected void exitGame () {
-        
+
         myStage.close();
 
 
     }
-    
+
     @FXML
     protected void saveGame () {
         FileChooser fileChooser = new FileChooser();
@@ -77,23 +89,71 @@ public class ViewController extends BorderPane{
         myModel.store(f);
 
     }
+protected void setGridState(GridState state){
+    gridState = state;
+}
+
+    protected void updateStats(Piece piece){
+//        statsPane.getChildren().clear();
+//        statsPane.getChildren().add(new Text(myModel.getStats()));
+    statsPane.getChildren().clear();
+    ArrayList<Text> stats = new ArrayList<Text>();
+    myStats.keySet().forEach(key->stats.add(new Text(key+ ":  "+ myStats.get(key))));
+    statsPane.getChildren().addAll(stats);
     
-    
-    private void updateStats(){
-        statsPane.getChildren().clear();
-        statsPane.getChildren().add(new Text(myModel.getStats()));
+    }
+    protected void updateActions (Piece piece){
+       //TODO: update control panel according to piece
+    }
+
+
+
+
+    private void setOnClick(){
+        myGrid.setOnMouseClicked(event->{performAction(event.getX(), event.getY());});
+    }
+
+    private void performAction (double x, double y) {
+        gridState.onClick(getPiece(findPosition(x,y)));
+
+    }
+    private Point2D findPosition(double x, double y){
+        double patchHeight = (double) myGrid.getHeight()/(double) myGrid.getCol();
+        double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
+        int xCor = (int) (x/patchWidth);
+        int yCor = (int) (y/patchHeight);
+        return new Point2D(xCor,yCor);
     }
     
-    private void clickOnGrid(){
-        gridState.onClick();
+    private Piece getPiece(Point2D loc){
+        return myModel.getCurrentLevel().getGrid().getPiece(loc);
+        
     }
-    
     protected GameGrid getGrid(){
         return myGrid;
     }
-    
+
     protected Game getGame(){
         return myModel;
+    }
+    protected void setActivePiece(Piece piece){
+        activePiece = piece;
+    }
+    protected Piece getActivePiece(){
+        return activePiece;
+    }
+    
+    protected void setActiveAction(Action action){
+        activeAction = action;
+    }
+    protected Action getActiveAction(){
+        return activeAction;
+    }
+    private void highLightActionRange(){
+        //TODO:ratratrat
+    }
+    private void highLightEffectRange(){
+       //TODO: ratratrat
     }
 
 }
