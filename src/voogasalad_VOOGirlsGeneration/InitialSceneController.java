@@ -57,7 +57,7 @@ public class InitialSceneController extends VBox{
     });
         Scene s = new Scene(rt, 400, 300);
         stage.setScene(s);
-        s.getStylesheets().add("stylesheet.css");
+       // s.getStylesheets().add("stylesheet.css");
         stage.show();
        
     }

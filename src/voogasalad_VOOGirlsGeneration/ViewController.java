@@ -2,9 +2,9 @@ package voogasalad_VOOGirlsGeneration;
 
 import java.io.File;
 import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -32,7 +32,7 @@ public class ViewController extends BorderPane{
     public ViewController(Stage s){
         myStage = s;
         myModel = new Game("VOOGASALAD!!");
-        myGrid = new SquareGameGrid(5,5);
+      //  myGrid = new SquareGameGrid(5,5);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(GAMESPACE_FXML));
         fxmlLoader.setController(this);
         fxmlLoader.setRoot(this);
@@ -44,6 +44,7 @@ public class ViewController extends BorderPane{
             throw new RuntimeException(exception);
         }
         this.setCenter(myGrid);
+        myGrid.setAlignment(Pos.CENTER);
         s.setScene(new Scene(this));
        
     }
@@ -85,6 +86,14 @@ public class ViewController extends BorderPane{
     
     private void clickOnGrid(){
         gridState.onClick();
+    }
+    
+    protected GameGrid getGrid(){
+        return myGrid;
+    }
+    
+    protected Game getGame(){
+        return myModel;
     }
 
 }

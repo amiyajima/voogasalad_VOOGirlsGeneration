@@ -1,5 +1,8 @@
 package voogasalad_VOOGirlsGeneration;
 
+import gamePlayer.Patch;
+import java.util.Map;
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -7,9 +10,9 @@ import javafx.scene.shape.Rectangle;
 public class SquareGameGrid extends GameGrid{
     
     
-    public SquareGameGrid(int rwo, int col){
-        super(rwo, col);
-        this.getStylesheets().add("stylesheet.css");
+    public SquareGameGrid(int rwo, int col, Map <Point2D, Patch> patchMap, Map <Point2D,Piece> pieceMap){
+        super(rwo, col, patchMap, pieceMap);
+
         
     }
 
@@ -24,6 +27,9 @@ public class SquareGameGrid extends GameGrid{
                 this.add(r, i, j);
                 r.setOnMouseEntered(event->onHover(r));
                 r.setOnMouseExited(event->r.setFill(Color.BLACK));
+                
+                //todo populate map!!
+                
             }
           
         }
