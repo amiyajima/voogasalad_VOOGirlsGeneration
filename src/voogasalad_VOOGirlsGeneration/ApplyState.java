@@ -12,7 +12,10 @@ public class ApplyState implements GridState{
 
     @Override
     public void onClick(Piece piece) {
-        GameGrid grid = myController.getGrid();
+        Piece actor = myController.getActivePiece();
+        myController.getActiveAction().doBehavior(actor, piece);
+            myController.setGridState(new SelectState(myController));
+     
        
     }
     

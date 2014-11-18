@@ -1,5 +1,6 @@
 package voogasalad_VOOGirlsGeneration;
 
+import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
 
 import java.io.File;
@@ -32,6 +33,7 @@ public class ViewController extends BorderPane{
     private GameGrid myGrid;
     private Map<String, Double> myStats;
     private Piece activePiece;
+    private Action activeAction;
 
     @FXML
     private VBox statsPane;
@@ -87,7 +89,9 @@ public class ViewController extends BorderPane{
         myModel.store(f);
 
     }
-
+protected void setGridState(GridState state){
+    gridState = state;
+}
 
     protected void updateStats(Piece piece){
 //        statsPane.getChildren().clear();
@@ -99,7 +103,7 @@ public class ViewController extends BorderPane{
     
     }
     protected void updateActions (Piece piece){
-        
+       //TODO: update control panel according to piece
     }
 
 
@@ -134,6 +138,22 @@ public class ViewController extends BorderPane{
     }
     protected void setActivePiece(Piece piece){
         activePiece = piece;
+    }
+    protected Piece getActivePiece(){
+        return activePiece;
+    }
+    
+    protected void setActiveAction(Action action){
+        activeAction = action;
+    }
+    protected Action getActiveAction(){
+        return activeAction;
+    }
+    private void highLightActionRange(){
+        //TODO:ratratrat
+    }
+    private void highLightEffectRange(){
+       //TODO: ratratrat
     }
 
 }
