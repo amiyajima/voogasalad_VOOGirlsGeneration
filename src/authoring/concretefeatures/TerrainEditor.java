@@ -17,6 +17,6 @@ public class TerrainEditor extends PopupWindow {
 	
 	@Override
 	protected void initialize() {
-		
+		// TO DO: Make terrain editor window.
 	}
 }

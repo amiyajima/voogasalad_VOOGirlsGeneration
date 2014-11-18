@@ -17,6 +17,6 @@ public class UnitEditor extends PopupWindow {
 	
 	@Override
 	protected void initialize() {
-		
+		// TO DO: Make unit editor window.
 	}
 }

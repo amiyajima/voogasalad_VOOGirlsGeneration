@@ -90,9 +90,9 @@ public class UnitCreator extends PopupWindow {
 				copy.setStyle("-fx-cursor: hand");
 				copy.setOnMouseClicked(new EventHandler<MouseEvent>(){
 					@Override
+					@SuppressWarnings("static-access")
 					public void handle(MouseEvent m){
-						System.out.println("Yep, this works.");
-						// TO DO: Make it so that you can add this unit to the grid.
+						myLibrary.currentlySelectedImage = copy;
 					}
 				});
 				Hyperlink link = new Hyperlink(unitName.getText());

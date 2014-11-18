@@ -3,14 +3,16 @@ package authoring_environment;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class LibraryView extends TabPane{
 	
-	private static final int HEIGHT = 300;
-	private static final int WIDTH = 580;
+	private final int HEIGHT = 300;
+	private final int WIDTH = 580;
 	private VBox[] libraryContents;
+	public static ImageView currentlySelectedImage;
 	
 	public LibraryView(){
 		this.setPrefSize(HEIGHT, WIDTH);
