@@ -25,6 +25,8 @@ public class SquareGameGrid extends GameGrid{
                 Rectangle r = new Rectangle(500/this.r,500/c);
                 r.getStyleClass().add("rectangle");
                 this.add(r, i, j);
+                
+                
                 r.setOnMouseEntered(event->onHover(r));
                 r.setOnMouseExited(event->r.setFill(Color.BLACK));
                 
