@@ -1,5 +1,7 @@
 package voogasalad_VOOGirlsGeneration;
 
+import gamedata.gamecomponents.Piece;
+
 public class ApplyState implements GridState{
 
     private ViewController myController;
@@ -9,14 +11,11 @@ public class ApplyState implements GridState{
     }
 
     @Override
-    public void onClick() {
+    public void onClick(Piece piece) {
         GameGrid grid = myController.getGrid();
-        grid.getChildren().forEach(node-> node.setOnMouseClicked(event->onMouseClick()));
-        
+       
     }
     
-    private void onMouseClick(){
-        
-    }
+
 
 }
