@@ -1,31 +1,33 @@
 package gameengine.movement;
 
-import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Grid;
+import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
-import gamedata.rules.Rule;
-
 import java.util.ArrayList;
 import java.util.List;
+import javafx.geometry.Point2D;
 
-import com.sun.javafx.geom.Point2D;
-
+/**
+ * 
+ * @author Jesse, Anna , Rica
+ *
+ */
 public class Movement {
-	// movement should contain relative paths
-	private List<Patch> myPath;
+        // possible paths for this movement
+        private List<List<Point2D>> myMoves;
+	private Grid myGrid;
+	private List<Point2D> myPaths;
 
-	/**
-	 * Contains respective locations of possible movement
-	 */
-	private List<Point2D> myMoves;
-
-	public Movement(List<Point2D> move, List<Patch> path) {
-		myMoves = move;
-		myPath = path;
+	public Movement(Level lvl, List<Point2D>... endPoints) {
+		for (List<Point2D> p: endPoints) {
+		    myMoves.add(p);
+		}
+		myGrid = lvl.getGrid();
 	}
 
 	/**
-	 * Return possible x,y coordinates of movement based on current location x,
-	 * y
+	 * Return absolute possible x,y coordinates of movement based on current
+	 * location x,y
 	 * 
 	 * @param x
 	 * @param y
@@ -33,45 +35,28 @@ public class Movement {
 	 */
 	public List<Point2D> getPossibleLocs(int x, int y) {
 		List<Point2D> p = new ArrayList<Point2D>();
-		for (Point2D a : myMoves) {
-			p.add(new Point2D(a.x + x, a.y + y));
+		for (Point2D a : myPaths) {
+			p.add(new Point2D(a.getX() + x, a.getY() + y));
 		}
 		return p;
 	}
-
-	public void showPath() {
-		// show path to user in GUI
-	}
-
+	
 	/**
-	 * 
-	 * @param piece
+	 * Checks the collisions in the currently defined path. Checks with piece and patch
+	 * collisions.
+	 * @return true or false
 	 */
-	public void movePiece(Piece piece, int x, int y) {
-		if (checkPathClear()) {
-
-		}
-	}
-
-	/**
-	 * check if there are collisions in your path. if the whole path is clear,
-	 * return true. else return false.
-	 */
-	private boolean checkPathClear() {
-		for (Patch p : myPath) {
-			// need to check if your piece can move onto that patch
-		}
-		return true;
-	}
-
-	/**
-	 * 
-	 * 
-	 * @param x
-	 * @param y
-	 */
-	private void moveToPosition(int x, int y) {
-
-	}
-
+        private boolean checkPathCollision() {
+            for (Point2D p : myPaths) {
+                if (myGrid.getPiece(p) != null) {
+                    // check if these pieces can collide
+                    return false;
+                }
+                if (myGrid.getPatch(p) != null) {
+                    // check if these pieces can collide
+                    return false;
+                }
+            }
+            return true;
+        }	
 }

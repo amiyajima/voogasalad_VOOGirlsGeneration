@@ -17,8 +17,14 @@ public class PiecesRemovedGoal extends Goal {
 
 	@Override
 	public int checkGameState(Level l) {
-		// TODO Auto-generated method stub
-		// Check to see if all pieces are removed
+		for (Piece p : myPieces) {
+			if (l.getGrid().getPiece(p.getUniqueID()) == null) {
+				myPieces.remove(p);
+			}
+		}
+		if (myPieces.size() == 0) {
+			return 1;
+		}
 		return 0;
 	}
 

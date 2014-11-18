@@ -18,8 +18,11 @@ public class PieceOnPatchGoal extends Goal {
 	@Override
 	public int checkGameState(Level l) {
 		Grid g = l.getGrid();
-		// If piece is on patch
+		Piece p = g.getPiece(myPiece.getUniqueID());
+		if ((p.getLoc().getX() == myPatch.getLoc().getX())
+				&& (p.getLoc().getY() == myPatch.getLoc().getY())) {
+			return 1;
+		}
 		return 0;
 	}
-
 }

@@ -1,76 +1,55 @@
 package gamedata.gamecomponents;
 
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-
 public abstract class Patch {
 
-    private int myState;
-    private int myID;
-    private ImageView myImageView;
+	private int myState;
+	private int myID;
+	private Point2D myLoc;
+	private ImageView myImage;
 
-    /**
-     * constructor of patch
-     * @param state of the patch
-     * @param id of the patch
-     * @param imageLocation path of image that is to be used
-     */
-    public Patch (int state, int id, String imageLocation) {
-        myState = state;
-        myID = id;
-        // imageLocation in some form like "images/myImage.jpg"
-        myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
-    }
+	public Patch(int state, int id, String imageLocation, Point2D p) {
+		myState = state;
+		myID = id;
+		// imageLocation in some form like "images/myImage.jpg"
+		myImage = new ImageView(new Image(getClass().getResourceAsStream(
+				imageLocation)));
+		myLoc = p;
+	}
 
+	// put image on the patch?
+	public void draw() {
+	}
 
-    // put image on the patch?
-    public void draw () {
-    }
+	public int getMyState() {
+		return myState;
+	}
 
-    /**
-     * @return state of the patch
-     */
-    public int getMyState () {
-        return myState;
-    }
+	public void setMyState(int myState) {
+		this.myState = myState;
+	}
 
-    /**
-     * sets the state for a certain patch
-     * @param myState
-     */
-    public void setMyState (int myState) {
-        this.myState = myState;
-    }
+	public int getMyID() {
+		return myID;
+	}
 
-    /**
-     * @return ID of the patch
-     */
-    public int getMyID () {
-        return myID;
-    }
+	public Point2D getLoc() {
+		return myLoc;
+	}
 
-    /**
-     * sets the ID for a certain patch
-     * @param myID
-     */
-    public void setMyID (int myID) {
-        this.myID = myID;
-    }
+	public void setMyID(int myID) {
+		this.myID = myID;
+	}
 
-    /**
-     * @return image of the patch
-     */
-    public ImageView getMyImage () {
-        return myImageView;
-    }
+	public ImageView getMyImage() {
+		return myImage;
+	}
 
-    /**
-     * sets the image of a certain patch
-     * @param myImage
-     */
-    public void setMyImage (ImageView myImage) {
-        this.myImageView = myImage;
-    }
+	public void setMyImage(ImageView myImage) {
+		this.myImage = myImage;
+	}
 
 }

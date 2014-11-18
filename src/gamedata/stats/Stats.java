@@ -1,98 +1,91 @@
 package gamedata.stats;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-
-import javafx.scene.image.ImageView;
-
+import java.util.Map;
+/**
+ * Numerical stats class.
+ * Stats are contained in every piece.
+ * Stats map a stat name to a double value.
+ * 
+ * @author jujs100
+ *
+ */
 public class Stats {
-	private Set<SingleStat> myStats;
+	private Map<String, Double> myStats;
 
 	/**
-	 * Stats class constructor
-	 * initializes an empty stats set
+	 * Stats constructor for initializing empty stats map
 	 */
 	public Stats() {
-		myStats = new HashSet<SingleStat>();
+		myStats = new HashMap<String, Double>();
+	}
+	
+	/**
+	 * Stats constructor for initializing with already
+	 * created map of names to doubles
+	 * @param stats - map of stat names to doubles
+	 */
+	public Stats(Map<String, Double> stats) {
+		myStats = stats;
+	}
+	
+	/**
+	 * Adds a new stat to the stats map
+	 */
+	public void add(String name, double value) {
+		myStats.put(name, value);
 	}
 
 	/**
-	 * Adds a stat to the list of stats
-	 * @param stat - the stat to be added
+	 * Removes a stat from the stats map by name
 	 */
-	public void add(SingleStat stat) {
-		myStats.add(stat);
+	public void remove(String name) {
+		myStats.remove(name);
 	}
 
-	public void remove(SingleStat stat) {
-		myStats.remove(stat);
+	/**
+	 * Gets the value of the stat indicated by name
+	 */
+	public double getValue(String name) {
+		return myStats.get(name);
 	}
 
-	public SingleStat getStat(String statName) {
-		for (SingleStat stat : myStats) {
-			if (stat.getName().equals(statName)) {
-				return stat;
-			}
+	/**
+	 * Sets the value of the stat with the 
+	 * indicated name to the value specified
+	 */
+	public void setValue(String name, double value) {
+		myStats.replace(name, value);
+	}
+
+	/**
+	 * Clears the stats map
+	 */
+	public void clear() {
+		myStats.clear();
+	}
+	
+	/**
+	 * Returns a list of all the stat names 
+	 */
+	public List<String> getStatNames() {
+		return new ArrayList<String>(myStats.keySet());
+	}
+
+	/**
+	 * Returns a list of all the values with indices
+	 * corresponding to names returned in getStatNames()
+	 */
+	public List<Double> getStatValues() {
+		List<String> statNames = getStatNames();
+		List<Double> values = new ArrayList<Double>();
+		for (String name : statNames) {
+			values.add(myStats.get(name));
 		}
-		// Throw error instead
-		return null;
+		return values;
 	}
 
-	public double getStatValue(String statName) {
-		SingleStat stat = getStat(statName);
-		if (stat == null) {
-			return 0;
-		} else {
-			return stat.getValue();
-		}
-	}
-
-	public void setStatValue(String statName, double value) {
-		SingleStat stat = getStat(statName);
-		if (stat != null) {
-			stat.setValue(value);
-		}
-	}
-
-
-
-public void remove(String statName) {
-	for (SingleStat stat : myStats) {
-		if (stat.getName().equals(statName)) {
-			myStats.remove(stat);
-			return;
-		}
-	}
-}
-
-public void clear() {
-	myStats.clear();
-}
-
-public List<String> getStatNames() {
-	List<String> statNames = new ArrayList<String>();
-	for (SingleStat stat : myStats) {
-		statNames.add(stat.getName());
-	}
-	return statNames;
-}
-
-public List<Double> getStatValues() {
-	List<Double> statValues = new ArrayList<Double>();
-	for (SingleStat stat : myStats) {
-		statValues.add(stat.getValue());
-	}
-	return statValues;
-}
-
-public List<ImageView> getStatImages() {
-	List<ImageView> statImages = new ArrayList<ImageView>();
-	for (SingleStat stat : myStats) {
-		statImages.add(stat.getImageView());
-	}
-	return statImages;
-}
 
 }
