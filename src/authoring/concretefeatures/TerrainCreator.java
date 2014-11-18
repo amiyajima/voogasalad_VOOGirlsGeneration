@@ -1,5 +1,7 @@
 package authoring.concretefeatures;
 
+import java.io.File;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -7,8 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
@@ -49,31 +56,59 @@ public class TerrainCreator extends PopupWindow{
 		TextField terrainName = new TextField();
 		names.getChildren().addAll(nameLabel, terrainName);
 		
+		ImageView icon = new ImageView();
 		Label loadLabel = new Label(IMAGE_LABEL);
 		Button loadImage = new Button(LOAD_IMAGE_LABEL);
-		// TO DO: Support loading and saving terrain images.
+		loadImage.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent click) {
+				FileChooser fileChoice = new FileChooser();
+				fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png"));
+				File selectedFile = fileChoice.showOpenDialog(null);
+				if(selectedFile != null){
+					Image image = new Image(selectedFile.toURI().toString());
+					icon.setImage(image);
+					icon.setFitHeight(40);
+					icon.setFitWidth(40);
+				}
+			}
+		});
 		
-		images.getChildren().addAll(loadLabel, loadImage);
+		images.getChildren().addAll(loadLabel, loadImage, icon);
 		
 		HBox modList = new ModulesList();
 		
 		Button goButton = new Button(TEMPLATE_LABEL);
 		goButton.setOnAction(new EventHandler<ActionEvent>() {
-
 			@Override
 			public void handle(ActionEvent click) {
-				Hyperlink link = new Hyperlink(terrainName.getText());
-				link.setOnAction(new EventHandler<ActionEvent>(){
-					
+				ImageView copy = new ImageView();
+				copy.setImage(icon.getImage());
+				copy.setFitHeight(40);
+				copy.setFitWidth(40);
+				copy.setStyle("-fx-cursor: hand");
+				copy.setOnMouseClicked(new EventHandler<MouseEvent>(){
 					@Override
-					public void handle(ActionEvent e){
-						System.out.println("Fear not, this works!");
+					public void handle(MouseEvent m){
+						System.out.println("Yep, this works.");
+						// TO DO: Make it so that you can add this terrain to the grid.
 					}
 				});
-				myLibrary.addToLibrary(link, 1);
+				Hyperlink link = new Hyperlink(terrainName.getText());
+				link.setTranslateY(10);;
+				link.setOnAction(new EventHandler<ActionEvent>(){
+					@Override
+					public void handle(ActionEvent e){
+						PopupWindow p = new UnitEditor();
+						p.show();
+					}
+				});
+				HBox entry = new HBox(copy, link);
+				myLibrary.addToLibrary(entry, 1);
 			}
 		});
-		box.getChildren().addAll(names, loadImage, modList, goButton);
+		box.getChildren().addAll(names, images, modList, goButton);
 	
 		setScene(new Scene(box));
 	}

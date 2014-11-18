@@ -1,9 +1,9 @@
 package authoring_environment;
 
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class LibraryView extends TabPane{
@@ -28,7 +28,7 @@ public class LibraryView extends TabPane{
 		}
 	}
 	
-	public void addToLibrary(Hyperlink content, int i){
+	public void addToLibrary(HBox content, int i){
 		libraryContents[i].getChildren().add(content);
 	}
 }
