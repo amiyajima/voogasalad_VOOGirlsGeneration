@@ -32,7 +32,7 @@ public class ViewController extends BorderPane{
     public ViewController(Stage s){
         myStage = s;
         myModel = new Game("VOOGASALAD!!");
-      //  myGrid = new SquareGameGrid(5,5);
+        myGrid = new SquareGameGrid(5,5, null, null);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(GAMESPACE_FXML));
         fxmlLoader.setController(this);
         fxmlLoader.setRoot(this);
