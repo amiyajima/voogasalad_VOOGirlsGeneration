@@ -31,7 +31,7 @@ public class Inventory {
 	 * Adds the indicated pieces to the inventory
 	 * @param items - pieces to be added
 	 */
-	public void addToInventory (Piece item) {
+	public void addItem (Piece item) {
 		myInventory.add(item);    	
 	}
 

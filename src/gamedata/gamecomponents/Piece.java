@@ -26,7 +26,7 @@ public class Piece {
 
 
 	public Piece(ImageView i, List<Movement> m, List<Action> a, Stats stats,
-			Point2D p, int pid) {
+			Point2D p, int pid, Inventory inventory) {
 		myImageView = i;
 		myPath = m;
 		myActions = a;
@@ -34,6 +34,7 @@ public class Piece {
 		myLoc = p;
 		myPlayerID = pid;
 		myShouldRemove = false;
+		myInventory = inventory;
 	}
 
 	public ImageView getImageView() {
@@ -114,9 +115,23 @@ public class Piece {
 	 */
 	public boolean addToInventory(Piece item) {
 		if (myInventory != null && item != this) {
-			myInventory.addToInventory(item);
+			myInventory.addItem(item);
 			return true;
 		}
 		return false;
 	}
+	
+	/**
+	 * Removes an item form the inventory as long as
+	 * there is an inventory and the item added
+	 * is not the piece holding the inventory.
+	 * 
+	 * @param item - piece to be removed from the inventory
+	 */
+	public void removeFromInventory(Piece item) {
+		if (myInventory != null && item != this) {
+			myInventory.removeItem(item);
+		}
+	}
+	
 }
