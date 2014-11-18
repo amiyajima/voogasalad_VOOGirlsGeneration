@@ -15,9 +15,16 @@ import authoring_environment.UIspecs;
 
 public class TerrainCreator extends PopupWindow{
 	
-	public static final int HEIGHT = 400;
-	public static final int WIDTH = 400;
-	public static final String NAME = "Terrain Creator";
+	// TO DO: These numbers and strings should be stored in an external file.
+	// TO DO: UnitCreator and TerrainCreator should inherit a Creator superclass.
+	
+	private final int HEIGHT = 400;
+	private final int WIDTH = 400;
+	private final String NAME = "Terrain Creator";
+	private final String TERRAIN_NAME_LABEL = "Name";
+	private final String IMAGE_LABEL = "Terrain image";
+	private final String LOAD_IMAGE_LABEL = "Load image";
+	private final String TEMPLATE_LABEL = "Create new terrain template";
 	private LibraryView myLibrary;
 	
 	public TerrainCreator(LibraryView library){
@@ -31,32 +38,40 @@ public class TerrainCreator extends PopupWindow{
 	@Override
 	protected void initialize(){
 		VBox box = new VBox();
-	        box.setPadding(UIspecs.allPadding);
-	        box.setSpacing(5);
+	    box.setPadding(UIspecs.allPadding);
+	    box.setSpacing(5);
 		
 		HBox names = new HBox();
 		HBox images = new HBox();
 		
-		Label nameLabel = new Label("Name");
-	        nameLabel.setPadding(UIspecs.topRightPadding);
+		Label nameLabel = new Label(TERRAIN_NAME_LABEL);
+	    nameLabel.setPadding(UIspecs.topRightPadding);
 		TextField terrainName = new TextField();
 		names.getChildren().addAll(nameLabel, terrainName);
 		
-		Label loadLabel = new Label("Terrain image");
-		Button loadImage = new Button("Load image");
+		Label loadLabel = new Label(IMAGE_LABEL);
+		Button loadImage = new Button(LOAD_IMAGE_LABEL);
+		// TO DO: Support loading and saving terrain images.
+		
 		images.getChildren().addAll(loadLabel, loadImage);
 		
 		HBox modList = new ModulesList();
 		
-		Button goButton = new Button("Create new terrain template");
+		Button goButton = new Button(TEMPLATE_LABEL);
 		goButton.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent click) {
 				Hyperlink link = new Hyperlink(terrainName.getText());
+				link.setOnAction(new EventHandler<ActionEvent>(){
+					
+					@Override
+					public void handle(ActionEvent e){
+						System.out.println("Fear not, this works!");
+					}
+				});
 				myLibrary.addToLibrary(link, 1);
 			}
-			
 		});
 		box.getChildren().addAll(names, loadImage, modList, goButton);
 	

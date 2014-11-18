@@ -1,9 +1,6 @@
 package authoring_environment;
 
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
-
-
 
 public class VoogaView extends BorderPane {
 	private static final int GRID_VIEW_WIDTH = 700;
@@ -25,5 +22,4 @@ public class VoogaView extends BorderPane {
 		setLeft(myLibraryView);
 		setRight(myGridView);
 	}
-	
 }
