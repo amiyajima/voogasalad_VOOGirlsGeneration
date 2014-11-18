@@ -2,8 +2,8 @@ package gameengine.player;
 
 import java.util.HashMap;
 import java.util.Map;
-import com.sun.javafx.scene.accessibility.Action;
 import javafx.scene.input.KeyCode;
+import gamedata.action.Action;
 import gamedata.gamecomponents.Level;
 
 
@@ -19,6 +19,13 @@ public class Player {
     private int myID;
     private Map<KeyCode, Action> myKeyMap;
 
+    /**
+     * Default constructor
+     */
+    public Player(){
+        this(0);
+    }
+    
     public Player (int id) {
         myNumMovesPlayed = 0;
         myID = id;
