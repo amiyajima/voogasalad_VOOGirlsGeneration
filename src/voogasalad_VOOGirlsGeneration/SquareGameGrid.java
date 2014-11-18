@@ -35,11 +35,13 @@ public class SquareGameGrid extends GameGrid{
             for(int j=0; j<c; j++){
                 StackPane sp = new StackPane();
                 sp.setAlignment(Pos.CENTER);
-                sp.setPrefHeight(500/c-20);
-                sp.setPrefWidth(500/this.r-20);
-                Rectangle r = new Rectangle(500/this.r-20,500/c-20);
+                sp.setPrefHeight(500/c);
+                sp.setPrefWidth(500/this.r);
+                Rectangle r = new Rectangle(500/this.r-10,500/c-10);
+                r.setFill(Color.BLACK);
+                
               //  r.getStyleClass().add("rectangle");
-                this.add(r, i, j);
+                //sp.getChildren().add(r);
                
 //                Image im= new Image("turtle.png");
 //                ImageView iv = new ImageView();

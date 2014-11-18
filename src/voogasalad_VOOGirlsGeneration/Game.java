@@ -36,17 +36,17 @@ public class Game {
     public void store(File f){
         
     }
-    public List<Integer> getEffectRanges(){
-        ArrayList<Integer> posList = new ArrayList<Integer>();
-        posList.add(new Integer(1));
-        posList.add(new Integer(3));
+    public List<Point2D> getEffectRanges(){
+        ArrayList<Point2D> posList = new ArrayList<Point2D>();
+        posList.add(new Point2D(1,0));
+        posList.add(new Point2D(1,1));
         return posList;
     }
     
     public List<Point2D> getActionRange(){
         ArrayList<Point2D> posList = new ArrayList<Point2D>();
         posList.add(new Point2D(2,3));
-      //  posList.add(new Point2D(4,5));
+        posList.add(new Point2D(1,2));
         return posList;
     }
 

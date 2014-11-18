@@ -44,6 +44,7 @@ public class ViewController extends BorderPane{
     // Temparary stub!! for testing purposes;;;
     private List<Action> myActions;
     private Map<String, Double> myStats;
+    
     private Piece activePiece;
     private Action activeAction;
 
@@ -186,14 +187,10 @@ public class ViewController extends BorderPane{
 
 
         //temparary stub for testing highlight;
-        myModel.getActionRange().forEach(point->{DropShadow ds = new DropShadow(); Node n = get((int)point.getX(), (int)point.getY());
-        System.out.println((int)point.getX()+"  "+ (int)point.getY());
-        ds.setRadius(10.0);
-        ds.setOffsetX(3.0);
-        ds.setOffsetY(3.0);
-        ds.setColor(Color.YELLOW);
-        n.setEffect(ds); 
-        n.setOnMouseEntered(event->highLightEffectRange(n));
+        myModel.getActionRange().forEach(point->{ Node n = get((int)point.getX(), (int)point.getY());
+        addDropShadow(n, Color.YELLOW);
+        n.setOnMouseEntered(event->highLightEffectRange(n, Color.RED));
+        n.setOnMouseExited(event->highLightEffectRange(n, Color.TRANSPARENT));
 
         });
         
@@ -202,9 +199,22 @@ public class ViewController extends BorderPane{
 
 
     }
-    private void highLightEffectRange(Node n){
+    
+    private void addDropShadow(Node n, Color c){
+        DropShadow ds = new DropShadow(); 
+        ds.setRadius(10.0);
+        ds.setOffsetX(3.0);
+        ds.setOffsetY(3.0);
+        ds.setColor(c);
+        n.setEffect(ds); 
+    }
+    
+    
+    private void highLightEffectRange(Node n, Color c){
       //  activeAction.getEffectRange();
-        myModel.getEffectRanges().forEach(integer->{});
+        myModel.getEffectRanges().forEach(point->{Node node = get(myGrid.getRowIndex(n)+ (int)point.getX(), myGrid.getColumnIndex(n)+ (int)point.getY());
+           addDropShadow(node, c);
+           });
     }
 
 
