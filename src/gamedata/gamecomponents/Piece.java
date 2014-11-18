@@ -1,26 +1,29 @@
 package gamedata.gamecomponents;
 
+import gamedata.action.Action;
+import gamedata.stats.Stats;
+import gameengine.movement.Movement;
+
+import java.util.LinkedList;
 import java.util.List;
 
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
-import gamedata.action.Action;
-import gamedata.stats.Stats;
-import gameengine.movement.*;
 
 public class Piece {
 
 	private int myTypeID;
 	private int myUniqueID;
 	private int myPlayerID;
-	private Stats myStats;
-	private Point2D myLoc;
 	private ImageView myImageView;
-	private List<Movement> myPath;
-	/**
-	 * List containing the actions that a piece has available to it
-	 */
+
+	private Point2D myLoc;
+	private Stats myStats;
 	private List<Action> myActions;
+	private List<Movement> myPath;
+	private boolean myShouldRemove;
+	private Inventory myInventory;
+
 
 	public Piece(ImageView i, List<Movement> m, List<Action> a, Stats stats,
 			Point2D p, int pid) {
@@ -30,6 +33,7 @@ public class Piece {
 		myStats = stats;
 		myLoc = p;
 		myPlayerID = pid;
+		myShouldRemove = false;
 	}
 
 	public ImageView getImageView() {
@@ -42,10 +46,6 @@ public class Piece {
 
 	public int getUniqueID() {
 		return myUniqueID;
-	}
-
-	public List<Action> getActions() {
-		return myActions;
 	}
 
 	public int getPlayerID() {
@@ -70,5 +70,53 @@ public class Piece {
 
 	public void removeAction(Action a) {
 		myActions.remove(a);
+	}
+
+	/**
+	 * Returns the list of the piece's
+	 * available actions.
+	 * Takes into account inventory if relevant
+	 * @return List of available actions
+	 */
+	public List<Action> getActions() {
+		List<Action> actions = new LinkedList<Action>(myActions);
+		if (myInventory != null) {
+			actions.addAll(myInventory.getItemActions());
+		}
+		return actions;
+	}
+
+	/**
+	 * Marks the myShouldRemove boolean to true
+	 * to flag for piece removal from board
+	 */
+	public void markForRemoval() {
+		myShouldRemove = true;
+	}
+
+	/**
+	 * Checks if the piece should be removed
+	 * 
+	 * @return boolean for whether or not the
+	 * piece should be removed
+	 */
+	public boolean shouldRemove() {
+		return myShouldRemove;
+	}
+
+	/**
+	 * Adds an item to the inventory as long as
+	 * there is an inventory and the item added
+	 * is not the piece holding the inventory.
+	 * 
+	 * @param item - piece to be added to inventory
+	 * @return boolean stating whether item was added
+	 */
+	public boolean addToInventory(Piece item) {
+		if (myInventory != null && item != this) {
+			myInventory.addToInventory(item);
+			return true;
+		}
+		return false;
 	}
 }

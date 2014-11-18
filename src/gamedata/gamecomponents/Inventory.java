@@ -1,74 +1,78 @@
 package gamedata.gamecomponents;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import gamedata.action.Action;
+
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
+// MIGHT WANT TO ADD MAX CAPACITY OR SOMETHING
 
+/**
+ * Inventory to be contained by a piece
+ * if the user chooses to add an inventory to
+ * a piece.
+ * Inventory contains a list of pieces.
+ * 
+ * @authors Sandy Lee, Jennie Ju
+ *
+ */
 public class Inventory {
-    private Map<Piece, Integer> myNumberPieces;
-    // list of pieces in my inventory
-    private List<Piece> myInventory;
+	private List<Piece> myInventory;
 
-    /**
-     * instructor for inventory
-     */
-    public Inventory () {
-        myNumberPieces = new HashMap<Piece, Integer>();
-        myInventory = new ArrayList<Piece>();
+	/**
+	 * Constructor for inventory,
+	 * initializes an empty inventory
+	 */
+	public Inventory () {
+		myInventory = new LinkedList<Piece>();
+	}
 
-    }
-    
-    public void addPieceToInv (Piece piece) {
-        if (myInventory.add(piece)) {
-            myNumberPieces.put(piece, 1);
-        }
-        else {
-            myNumberPieces.put(piece, myNumberPieces.get(piece) + 1);
-        }
-    }
+	/**
+	 * Adds the indicated pieces to the inventory
+	 * @param items - pieces to be added
+	 */
+	public void addToInventory (Piece item) {
+		myInventory.add(item);    	
+	}
 
-    public void removeItem (Piece piece) {
-        int num = myNumberPieces.get(piece);
-        if (num > 1) {
-            myNumberPieces.put(piece, num - 1);
-        }
-        else {
-            // remove from inventory and from the map that keeps the num of such piece
-            myNumberPieces.remove(piece);
-            for (Piece p : myInventory) {
-                if (piece.equals(p)) {
-                    myInventory.remove(piece);
-                }
-            }
-        }
-    }
+	/**
+	 * Removes the indicated pieces from the inventory
+	 * @param items - pieces to be removed
+	 */
+	public void removeItem (Piece item) {
+		myInventory.remove(item);
+	}
 
-    public void setInventory (List<Piece> pieces) {
-        myInventory = pieces;
-    }
+	/**
+	 * Set the inventory to an already filled list
+	 * of pieces
+	 * @param items - pieces in the inventory given
+	 * as a list of pieces
+	 */
+	public void setInventory (List<Piece> items) {
+		myInventory = new LinkedList<Piece>(items);
+	}
 
-    public int getNumPiece (Piece piece) {
-        return myNumberPieces.get(piece);
-    }
+	/**
+	 * Checks whether inventory is empty or not
+	 * @return
+	 */
+	public boolean isEmpty () {
+		return myInventory.isEmpty();
+	}
 
+	/**
+	 * Returns the actions contained in all the items
+	 * as a list of Actions
+	 * @return list of Actions contained in the items
+	 */
+	public List<Action> getItemActions() {
+		List<Action> itemActions = new LinkedList<Action>();
+		for (Piece item : myInventory) {
+			itemActions.addAll(item.getActions());
+		}
+		return itemActions;
 
-    public Piece getPiece (Piece piece) {
-        if (myInventory.isEmpty()) { return null; }
-        for (Piece p : myInventory) {
-            if (p.equals(piece)) { return p; }
-        }
-        return null;
-    }
-
-    public boolean isEmpty () {
-        return myInventory.isEmpty();
-    }
-    
-    public List<Piece> getInventory () {
-        return myInventory;
-    }
-
+	}
 
 }
