@@ -21,7 +21,7 @@ public class GridView extends ScrollPane{
 		myTileSize=tileSize;
 		this.setPrefSize(myWidth, myHeight);
 		this.setMaxSize(myWidth, myHeight);
-		this.setMinSize(myWidth, myHeight);
+//		this.setMinSize(myWidth, myHeight);
 		this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 //		setStyle("-fx-background-color:blue;");
 		

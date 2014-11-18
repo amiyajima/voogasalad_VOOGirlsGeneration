@@ -15,14 +15,15 @@ import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.GridView;
 
 public class RangeEditor extends PopupWindow{
-	private static final int MIN_TILE_SIZE=50;
+	private static final int MIN_TILE_SIZE=30;
 
 	private static final int RANGE_EDITOR_HEIGHT = 800;
 	private static final int RANGE_EDITOR_WIDTH = 600;
 	private static final String NAME = "Range Editor";
 	
-	private int myGridSizeNumber;
-	private int myGridWidth=RANGE_EDITOR_WIDTH-30;
+	private int myGridWidthNumber;
+	private int myGridHeightNumber;
+	private int myGridLength=RANGE_EDITOR_WIDTH-100;
 	private int myTileSize=40;
 	
 	public RangeEditor(){
@@ -37,7 +38,7 @@ public class RangeEditor extends PopupWindow{
 		
 		VBox selection=new VBox();
 		selection.setMinHeight(50);
-		VBox sizeChooser=new VBox();
+		HBox sizeChooser=new HBox();
 		sizeChooser.setMinHeight(50);
 
 
@@ -48,34 +49,51 @@ public class RangeEditor extends PopupWindow{
 										"Radius","Custom");
 		selection.getChildren().addAll(targetLabel,targetChoice);
 		
+		//Select Button
+		Button select=new Button("Select");
+
 		//generate default grid
 //		GridView grid=new GridView(myGridWidth, myGridWidth, myTileSize);
 
 		//Choose the Size
-		Label nameLabel = new Label("Radius");
-		TextField radius = new TextField();
-		radius.setMaxWidth(50);
+		VBox horizontal=new VBox();
+		VBox times=new VBox();
+		VBox vertical=new VBox();
+		Label HRadiusLabel = new Label("Horizontal Radius     ");
+		Label multiply= new Label("     X     ");
+		Label VRadiusLabel = new Label("Vertical Radius");
+		TextField HRadius = new TextField();
+		TextField VRadius = new TextField();
+		HRadius.setMaxWidth(120);
+		VRadius.setMaxWidth(120);
+		VRadius.setLayoutX(100);
+		
+		horizontal.getChildren().addAll(HRadiusLabel,HRadius);
+		times.getChildren().add(multiply);
+		vertical.getChildren().addAll(VRadiusLabel,VRadius);
+
 		Button enter=new Button("Enter");
 		enter.setOnAction(new EventHandler<ActionEvent>(){
-
 			@Override
 			public void handle(ActionEvent event) {
-				myGridSizeNumber=Integer.parseInt(radius.getText())*2+1;
-				int calculatedTileSize=myGridWidth/myGridSizeNumber;
+				myGridWidthNumber=Integer.parseInt(HRadius.getText())*2+1;
+				myGridHeightNumber=Integer.parseInt(VRadius.getText())*2+1;
+				int calculatedTileSize=Math.max(myGridLength/myGridWidthNumber, 
+												myGridLength/myGridHeightNumber);
 				
 				myTileSize=(calculatedTileSize<MIN_TILE_SIZE)? MIN_TILE_SIZE:calculatedTileSize;
 				
 				box.getChildren().clear();
-				GridView grid=new GridView(myGridWidth,myGridWidth,myTileSize);
-				grid.update(myGridSizeNumber, myGridSizeNumber,myTileSize);
-				box.getChildren().addAll(selection,sizeChooser,grid);
+				GridView sampleGridView=new GridView(myGridLength,myGridLength,myTileSize);
+				sampleGridView.update(myGridWidthNumber, myGridHeightNumber,myTileSize);
+				box.getChildren().addAll(selection,sizeChooser,enter,sampleGridView,select);
 			}	
 		});
-		sizeChooser.getChildren().addAll(nameLabel,radius,enter);
+		enter.setLayoutX(500);
+		sizeChooser.getChildren().addAll(horizontal,times,vertical);
 		
-
 		
-		box.getChildren().addAll(selection,sizeChooser);
+		box.getChildren().addAll(selection,sizeChooser,enter,select);
 		setScene(new Scene(box));
 		
 		
