@@ -18,16 +18,17 @@ public abstract class GameGrid extends GridPane{
     private int v;
 
 
-    public GameGrid(int r, int c, int h, int v, Map <Point2D, Patch> patchMap, Map <Point2D,Piece> pieceMap){
+    public GameGrid(int r, int c, int h, int w, Map <Point2D, Patch> patchMap, Map <Point2D,Piece> pieceMap){
 
   //  public GameGrid(int row, int column){
         super();
         this.r = r;
         this.c = c;
-        this.h = h;
-        this.v = v;
+        this.setPrefHeight(h);
+        this.setPrefWidth(w);
         myPieces = pieceMap;
         myPatches = patchMap;
+        
         
         populateGrid();
     }
@@ -37,12 +38,7 @@ public abstract class GameGrid extends GridPane{
     public int getCol(){
         return c;
     }
-    public int getHeight(){
-    return v;
-    }
-    public int getWidth(){
-        return h;
-    }
+
    
 
 

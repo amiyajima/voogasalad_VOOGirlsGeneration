@@ -34,7 +34,6 @@ public class InitialSceneController extends VBox{
         myStage = s;
         myGame= new Game("VOOGASALAD!!");
         myGames = new ArrayList<File>();
-     //   newGameButton.showingProperty().addListener(event->newGame());
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(INITIALSCENE_FXML));
         fxmlLoader.setController(this);
         fxmlLoader.setRoot(this);
@@ -47,7 +46,6 @@ public class InitialSceneController extends VBox{
         }
         myStage.setScene(new Scene(this));
         newGame();
-        
 
         myStage.show();
 
@@ -88,20 +86,14 @@ public class InitialSceneController extends VBox{
     private void getGames(){
         
         File files = new File(System.getProperty("user.dir")+GAME_LOCATION);
-  //      if (files.listFiles()!=null){
-//            System.out.println("no gamas available");
-//            return;
-//        }
-     //   else{
-        System.out.println(files.listFiles().length);
+
             for (File f: files.listFiles()){
 
                 if(f.getName().endsWith(".json")){
-                    System.out.println(f.getName());
+                    
                     myGames.add(f);
                 }
             }
-      //  }
     }
 
 

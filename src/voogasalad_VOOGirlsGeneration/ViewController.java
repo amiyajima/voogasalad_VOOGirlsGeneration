@@ -2,26 +2,36 @@ package voogasalad_VOOGirlsGeneration;
 
 import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+//TODO: pupulate Grid by actual pieces and patches;
+
+//TODO: currently, the "testAction" button is set on action to show highlightActionRange, 
+//      still needs to add highlighting effect to follow the hover;
+//      and to make dropshadow effect more obvious!!!
 
 public class ViewController extends BorderPane{
 
@@ -31,6 +41,8 @@ public class ViewController extends BorderPane{
     private Stage myStage;
     private Game myModel;
     private GameGrid myGrid;
+    // Temparary stub!! for testing purposes;;;
+    private List<Action> myActions;
     private Map<String, Double> myStats;
     private Piece activePiece;
     private Action activeAction;
@@ -38,7 +50,8 @@ public class ViewController extends BorderPane{
     @FXML
     private VBox statsPane;
     @FXML
-    private VBox 
+    private VBox controlPane;
+
     private GridState gridState;
 
     public ViewController(Stage s){
@@ -89,21 +102,37 @@ public class ViewController extends BorderPane{
         myModel.store(f);
 
     }
-protected void setGridState(GridState state){
-    gridState = state;
-}
+    protected void setGridState(GridState state){
+        gridState = state;
+    }
 
     protected void updateStats(Piece piece){
-//        statsPane.getChildren().clear();
-//        statsPane.getChildren().add(new Text(myModel.getStats()));
-    statsPane.getChildren().clear();
-    ArrayList<Text> stats = new ArrayList<Text>();
-    myStats.keySet().forEach(key->stats.add(new Text(key+ ":  "+ myStats.get(key))));
-    statsPane.getChildren().addAll(stats);
-    
+        myStats = new HashMap<String, Double>();
+        statsPane.getChildren().clear();
+        ArrayList<Text> stats = new ArrayList<Text>();
+        myStats.keySet().forEach(key->stats.add(new Text(key+ ":  "+ myStats.get(key))));
+        statsPane.getChildren().addAll(stats);
+
     }
+
+    //TODO: replace myActions with Game.get.get...
     protected void updateActions (Piece piece){
-       //TODO: update control panel according to piece
+        myActions = new ArrayList<Action>();
+        controlPane.getChildren().clear();
+        ArrayList<Label> actions = new ArrayList<Label>();
+        myActions.forEach(action->{Label l = new Label(action.toString()); 
+        l.setOnMouseClicked(event->bindAction(action));
+        actions.add(l);});
+
+        controlPane.getChildren().addAll(actions);
+
+    }
+
+    private void bindAction(Action action){
+        setActiveAction(action);
+        highLightActionRange();
+       // highLightEffectRange();
+        setGridState(new ApplyState(this));
     }
 
 
@@ -114,7 +143,7 @@ protected void setGridState(GridState state){
     }
 
     private void performAction (double x, double y) {
-        gridState.onClick(getPiece(findPosition(x,y)));
+        // gridState.onClick(getPiece(findPosition(x,y)));
 
     }
     private Point2D findPosition(double x, double y){
@@ -124,11 +153,11 @@ protected void setGridState(GridState state){
         int yCor = (int) (y/patchHeight);
         return new Point2D(xCor,yCor);
     }
-    
-    private Piece getPiece(Point2D loc){
-        return myModel.getCurrentLevel().getGrid().getPiece(loc);
-        
-    }
+
+    //    private Piece getPiece(Point2D loc){
+    //       // return myModel.getCurrentLevel().getGrid().getPiece(loc);
+    //        
+    //    }
     protected GameGrid getGrid(){
         return myGrid;
     }
@@ -142,18 +171,54 @@ protected void setGridState(GridState state){
     protected Piece getActivePiece(){
         return activePiece;
     }
-    
+
     protected void setActiveAction(Action action){
         activeAction = action;
     }
     protected Action getActiveAction(){
         return activeAction;
     }
+    
+    @FXML
     private void highLightActionRange(){
-        //TODO:ratratrat
+        //TODO: getActionRange()shouldn't need a location. action is contained in piece, which knows its own location.
+      //  activeAction.getActionRange(activePiece.getLoc());
+
+
+        //temparary stub for testing highlight;
+        myModel.getActionRange().forEach(point->{DropShadow ds = new DropShadow(); Node n = get((int)point.getX(), (int)point.getY());
+        System.out.println((int)point.getX()+"  "+ (int)point.getY());
+        ds.setRadius(10.0);
+        ds.setOffsetX(3.0);
+        ds.setOffsetY(3.0);
+        ds.setColor(Color.YELLOW);
+        n.setEffect(ds); 
+        n.setOnMouseEntered(event->highLightEffectRange(n));
+
+        });
+        
+
+
+
+
     }
-    private void highLightEffectRange(){
-       //TODO: ratratrat
+    private void highLightEffectRange(Node n){
+      //  activeAction.getEffectRange();
+        myModel.getEffectRanges().forEach(integer->{});
+    }
+
+
+    private Node get(int row, int col){
+        Node result = null;
+        ObservableList<Node> childrens = myGrid.getChildren();
+        for(Node node : childrens) {
+          // System.out.println("myGrid has a node at:" + myGrid.getRowIndex(node));
+            if(myGrid.getRowIndex(node) == row && myGrid.getColumnIndex(node) == col) {
+                result = node;
+                break;
+            }
+        }
+        return result;
     }
 
 }

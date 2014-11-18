@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="871.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="871.0" styleClass="root" stylesheets="@stylesheet.css" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <right>
       <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="250.0" BorderPane.alignment="CENTER">
          <items>
@@ -18,10 +18,10 @@
                   <content>
                     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="500.0" prefHeight="472.0" prefWidth="500.0">
                            <children>
-                              <VBox fx:id="controlPane" layoutX="26.0" layoutY="24.0" prefHeight="448.0" prefWidth="158.0" styleClass="vbox">
+                              <VBox fx:id="controlPane" layoutX="26.0" layoutY="24.0" prefHeight="448.0" prefWidth="158.0">
                                  <children>
                                     <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="183.0" text="Action5" />
-                                    <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="183.0" text="Test Action" />
+                                    <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="183.0" onAction="#highLightActionRange" text="Test Action" />
                                  </children>
                               </VBox>
                            </children>

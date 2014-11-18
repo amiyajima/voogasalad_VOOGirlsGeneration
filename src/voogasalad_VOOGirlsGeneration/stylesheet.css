@@ -27,11 +27,15 @@
 
 .gridpane{
 	-fx-grid-lines-visible: true;
+	-fx-alignment: center;
 	-fx-background-color: #D1DBBD;
 }
 .rectangle{
 	-fx-background-color: #fff9f9;
 	-fx-effect: innershadow(gaussian, #D1DBBD, 5, 0, 2,2)
+}
+.circle{
+	-fx-alignment: center;
 }
 .rectangle:hover{
 	-fx-background-color: linear-gradient(#2A5058, #61a2b1);
