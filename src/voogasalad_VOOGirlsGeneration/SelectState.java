@@ -2,6 +2,11 @@ package voogasalad_VOOGirlsGeneration;
 
 import gamedata.gamecomponents.Piece;
 
+/**
+ * The class representing the state of the grid before any piece on
+ * the grid is selected
+ *
+ */
 public class SelectState implements GridState {
     private ViewController myController;
 
