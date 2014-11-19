@@ -9,16 +9,22 @@ import gamedata.gamecomponents.SquareGrid;
 import gamedata.goals.Goal;
 import gamedata.rules.MoveCountRule;
 import gamedata.rules.Rule;
+import gameengine.engine.GameBuilder;
 import gameengine.player.Player;
 import org.junit.Test;
 import com.google.gson.Gson;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 
 public class GameBuilderTester {
 
-    @Test
-    public void testGsonRead () {
+    private Game myGame;
+    private GameBuilder myGameBuilder;
+    private List<Player> myPlayers;
+    
+    @Before
+    public void setUp () {
         List<Player> myPlayers = new ArrayList<Player>();
         Player myPlayer1 = new Player();
         Player myPlayer2 = new Player();
@@ -35,16 +41,28 @@ public class GameBuilderTester {
         Level level2 = new Level(grid1, myGoals, myRules);
         myLevels.add(level1);
         myLevels.add(level2);
+        myGame = new Game(myPlayers, myLevels);
+        myGameBuilder = new GameBuilder();
+        System.out.println(myGame);
+    }
 
-        Game myGame = new Game(myPlayers, myLevels);
-
+    @Test
+    public void testGsonRead () {
         Gson gson = new Gson();
         String json = gson.toJson(myGame);
         System.out.println(json);
-        
-        
         Game obj2 = gson.fromJson(json, Game.class);
-        assertTrue(myGame.equals(obj2));
+        assertNotNull(obj2);
+    }
+
+    @Test
+    public void testWriteToJson () {
+        myGameBuilder.writePlayersToJSONFile(myPlayers);
+    }
+
+    @Test
+    public void testReadFromJsonFile () {
+
     }
 
 }
