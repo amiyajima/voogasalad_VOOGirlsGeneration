@@ -1,100 +1,176 @@
 package authoring.concretefeatures;
 
+import gamedata.action.ActionConclusion;
+import gamedata.action.ConcreteAction;
+import gamedata.action.StatsSingleMultiplier;
+import gamedata.action.StatsTotalLogic;
+
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
-import authoring_environment.UIspecs;
+import authoring.data.ActionData;
 
 public class ActionCreator extends PopupWindow{
 
 	public static final int HEIGHT = 400;
-	public static final int WIDTH = 400;
+	public static final int WIDTH = 420;
 	public static final String NAME = "Action Creator";
-	
+	private static final String STYLESHEET = "/resources/stylesheets/actioncreator_layout.css";
+
 	private List<SingleMultiplierBox> operationsList;
-	
-	public ActionCreator(){
+	private ActionData myActionData;
+
+	private String myName;
+	private List<Point2D> myAttackRange;
+	private List<Point2D> myEffectRange;
+	private List<StatsTotalLogic> myStatsLogics;
+	private ActionConclusion myConclusion;
+
+	public ActionCreator(ActionData actionData){
+		operationsList = new ArrayList<>();
+		myActionData = actionData;
+
+		myName = "";
+		myAttackRange = new LinkedList<Point2D>();
+		myEffectRange = new LinkedList<Point2D>();
+		myStatsLogics = new LinkedList<StatsTotalLogic>();
+		myConclusion = null; // should set to empty conclusion (not null)
+
 		setHeight(HEIGHT);
 		setWidth(WIDTH);
 		setTitle(NAME);
 		initialize();
 	}
-	
+
 	@Override
 	protected void initialize() {
-		operationsList = new ArrayList<>();
-		
-		VBox box = new VBox();
-                box.setPadding(UIspecs.allPadding);
-                box.setSpacing(5);
-                
-		VBox name = new VBox();
-                name.setPadding(UIspecs.topRightPadding);		
-		VBox target = new VBox();
-		VBox operations = new VBox();
-		VBox conclusion = new VBox();
-		
-		HBox targetAndStat = new HBox();
-		
-		//Action name
-		Label nameLabel = new Label("Action name");
-		TextField nameField = new TextField();
-		nameField.setPromptText("Enter action name");
-		
-		name.getChildren().addAll(nameLabel, nameField);
-		
-		//Set the Range
-		Button setRange=new Button("Set Range...");
-		setRange.setOnAction(new EventHandler<ActionEvent>(){
+		ScrollPane root = new ScrollPane();
+		Scene scene = new Scene(root, WIDTH, HEIGHT);
+		scene.getStylesheets().add(STYLESHEET);
 
+		VBox mainVBox = new VBox();
+		mainVBox.getStyleClass().add("vbox");
+		mainVBox.setId("vbox-main");
+		VBox nameVBox = new VBox();
+		VBox rangeVBox = new VBox();
+		rangeVBox.getStyleClass().add("vbox");
+		VBox targetVBox = new VBox();
+		VBox operationsVBox = new VBox();
+		VBox conclusionVBox = new VBox();
+
+		//Action name
+		TextField nameField = new TextField();
+		initNameField(nameVBox, nameField);
+		//Set the Action Range
+		initSetRangeButton(rangeVBox, "Action Range:", myAttackRange);
+		//Set the Effect Range
+		initSetRangeButton(rangeVBox, "Effect Range (Splashzone):", myEffectRange);
+		//Target stat to be modified
+		ChoiceBox<String> targetChoice = new ChoiceBox<String>();
+		TextField moddedStat = new TextField();
+		initStatsModifier(targetVBox, targetChoice, moddedStat);
+		//Operations
+		initOperationsBox(operationsVBox);
+
+		Button create = new Button("Create new action");
+		create.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent click) {
+				myName = nameField.getText();
+				myStatsLogics = getStatsLogics(targetChoice, moddedStat);
+				myActionData.addAction(new ConcreteAction(myName, myAttackRange, 
+						myEffectRange, myStatsLogics, myConclusion));
+				hide(); // close window once action is made
+			}
+		});
+
+		mainVBox.getChildren().addAll(nameVBox, rangeVBox, 
+				new Separator(), targetVBox, operationsVBox,
+				new Separator(), conclusionVBox,
+				new Separator(), create);
+		root.setContent(mainVBox);
+		setScene(scene);
+	}
+
+	//TODO: really need to take in multiple stats
+	private List<StatsTotalLogic> getStatsLogics(ChoiceBox<String> targetChoice, TextField moddedStat) {
+		String target = targetChoice.getValue();
+		String stat = moddedStat.getText();
+		
+		List<StatsTotalLogic> stlList = new LinkedList<StatsTotalLogic>();
+		List<StatsSingleMultiplier> multiplierLogic = getSingleMultipliers(operationsList);
+		stlList.add(new StatsTotalLogic(target, stat, multiplierLogic));
+		return stlList;
+	}
+
+	private List<StatsSingleMultiplier> getSingleMultipliers(List<SingleMultiplierBox> smbList) {
+		List<StatsSingleMultiplier> ssmList = new LinkedList<StatsSingleMultiplier>();
+		for (SingleMultiplierBox smb : smbList) {
+			ssmList.add(smb.getSingleMultipler());
+		}
+		return ssmList;
+	}
+
+	private void initNameField(VBox nameBox, TextField nameField) {
+		Label nameLabel = new Label("Action name");
+		nameField.setPromptText("Enter action name");
+		nameBox.getChildren().addAll(nameLabel, nameField);
+	}
+
+	private void initSetRangeButton(VBox rangeBox, String label, List<Point2D> myRange) {
+		Label rangeLabel = new Label(label);
+		Button setRange = new Button("Set Range...");
+		setRange.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent event) {
-				PopupWindow rangeEditor = new RangeEditor();
-				rangeEditor.show();
+				PopupWindow actionRangeEditor = new RangeEditor();
+				actionRangeEditor.show();
+				//TODO: set myRange in here somewhere (within RangeEditor?)
 			}
-			
 		});
-		
-		//Target of the action
+		rangeBox.getChildren().addAll(rangeLabel, setRange);
+	}
+
+	private void initStatsModifier(VBox targetVBox, ChoiceBox<String> targetChoice, TextField moddedStat) {
+		//TODO: Need to make it so that we can take in multiple target stats
+		//Target whose stat will be modified
 		Label targetLabel = new Label("Action target");
-		ChoiceBox<String> targetChoice = new ChoiceBox<>();
-		targetChoice.getItems().addAll("Self", "Other");
-		
+		targetChoice.getItems().addAll("Actor", "Receiver");
+
 		//Particular statistic modified
-		TextField moddedStat = new TextField();
 		moddedStat.setPromptText("Stat to be modified");
-		
-		targetAndStat.getChildren().addAll(targetChoice, moddedStat);
-		
-		target.getChildren().addAll(targetLabel, targetAndStat);
-		
-		//Operations
+		HBox targetAndStatHBox = new HBox();
+		targetAndStatHBox.getChildren().addAll(targetChoice, moddedStat);
+		targetVBox.getChildren().addAll(targetLabel, targetAndStatHBox);
+	}
+
+	private void initOperationsBox(VBox operationsBox) {
 		Label operationsLabel = new Label("Operations to be performed");
 		Button newOperation = new Button("New operation");
-		operations.getChildren().addAll(operationsLabel, newOperation);
-		
+		operationsBox.getChildren().addAll(operationsLabel, newOperation);
+
 		newOperation.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent click) {
 				SingleMultiplierBox operation = new SingleMultiplierBox();
 				operationsList.add(operation);
-				operations.getChildren().add(operation);			
+				operationsBox.getChildren().add(operation);			
 			}	
 		});
-		
-		Button create = new Button("Create new action");
-		
-		box.getChildren().addAll(name, setRange, target, moddedStat, operations, conclusion, create);
-
-		setScene(new Scene(box));
 	}
+
 }
