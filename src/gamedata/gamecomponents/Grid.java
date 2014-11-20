@@ -12,8 +12,8 @@ public abstract class Grid {
 	private int myRow;
 	private int myColumn;
 
-	protected Map<Point2D, Patch> myPatches;
-	protected Map<Point2D, Piece> myPieces;
+	protected transient Map<Point2D, Patch> myPatches;
+	protected transient Map<Point2D, Piece> myPieces;
 	private static final int DEFAULT_PATCH_STATE = 1;
 	private static final int DEFAULT_PATCH_ID = 1;
 	private static final String DEFAULT_PATCH_IMAGE_LOCATION = "";

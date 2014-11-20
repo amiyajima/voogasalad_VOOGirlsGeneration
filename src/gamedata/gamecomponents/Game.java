@@ -1,6 +1,5 @@
 package gamedata.gamecomponents;
 
-import java.util.ArrayList;
 import java.util.List;
 import gameengine.player.*;
 
