@@ -1,5 +1,8 @@
 package authoring_environment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -83,6 +86,14 @@ public class Grid extends Pane {
 	}
 
 	public List<Tile> getSelected() {
-
+		List<Tile> titles = new ArrayList<Tile>();
+		for(int i=0; i<myWidth; i++){
+			for(int j=0; i<myHeight;j++){
+				if(getTile(i,j).getSelected()){
+					titles.add(getTile(i,j));
+				}
+			}
+		}
+		return titles;
 	}
 }
