@@ -44,7 +44,7 @@ public class VoogaMain {
         Game myGame = new Game(myPlayers, myLevels);
         System.out.println(myGame);
         GameBuilder builder = new GameBuilder();
-        builder.writeLevelToJSONFile(level1);
-        builder.writePlayerToJSONFile(myPlayer1);
+        //builder.writeLevelToJSONFile(level1);
+        builder.writeGameToJSONFile(myGame);
     }
 }

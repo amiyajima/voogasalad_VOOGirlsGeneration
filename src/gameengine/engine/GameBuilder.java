@@ -38,7 +38,7 @@ public class GameBuilder {
     private List<Patch> myPatches;
     private List<Piece> myPieces;
     private File mySampleJson;
-    
+
     final static String DEFAULT_JSON_DIRECTORY = "./src/resources";
     final static String SAMPLE_JSON_SOURCE = "./src/json";
 
@@ -64,18 +64,18 @@ public class GameBuilder {
      * 
      * @param game
      */
-    public void writePlayerToJSONFile (Player p) {
+    public void writeGameToJSONFile (Game g) {
         Gson gson = new Gson();
         System.out.println("gson created");
         // gson.fromjson deserializes a json object and creates a object of
 
         // convert java object to JSON format,
         // and returned as JSON formatted string
-        String json = gson.toJson(p);
+        String json = gson.toJson(g);
         System.out.println("game converted to json");
         try {
             // write converted json data to a file named "CountryGSON.json"
-            FileWriter writer = new FileWriter(DEFAULT_JSON_DIRECTORY + "/sample.json", true);
+            FileWriter writer = new FileWriter(DEFAULT_JSON_DIRECTORY + "/sample.json");
             writer.write(json);
             writer.close();
         }
@@ -110,7 +110,7 @@ public class GameBuilder {
         }
         System.out.println(json);
     }
-    
+
     /**
      * Given a filePath, read in a JSON file and construct maps with the given information
      * 

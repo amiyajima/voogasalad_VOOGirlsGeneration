@@ -19,8 +19,8 @@ public class Game {
 	 * Contains ordered list of levels that compose the game
 	 */
 	private List<Level> myLevels;
-	private Level myCurrentLevel;
-	private Player myCurrentPlayer;
+	private transient Level myCurrentLevel;
+	private transient Player myCurrentPlayer;
 
 	/**
 	 * Default Constructor
