@@ -1,5 +1,6 @@
 package gamedata.gamecomponents;
 
+import java.util.ArrayList;
 import java.util.List;
 import gamedata.goals.*;
 import gamedata.rules.*;
@@ -24,7 +25,7 @@ public class Level {
     private List<Rule> myRules;
 
     public Level () {
-        this(null, null, null);
+        this(new SquareGrid(), new ArrayList<Goal>(), new ArrayList<Rule>());
     }
 
     public Level (Grid gr, List<Goal> goals, List<Rule> rules) {
@@ -66,5 +67,14 @@ public class Level {
      */
     public Grid getGrid () {
         return myGrid;
+    }
+
+    /**
+     * toString method used to test JSON read/write
+     */
+    public String toString () {
+        // return "Level's tostring method called";
+        return "grid:" + myGrid.toString() + " myGoals" + myGoals.toString() + " myRules" +
+               myRules.toString();
     }
 }

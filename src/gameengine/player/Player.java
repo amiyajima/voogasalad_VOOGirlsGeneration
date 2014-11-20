@@ -75,4 +75,8 @@ public class Player {
     public void setKeyMap (Map<KeyCode, Action> myKeyMap) {
         myKeyMap = new HashMap<KeyCode, Action>();
     }
+    
+    public String toString(){
+        return "ID:" + myID + " NumMovesPlayed:" + myNumMovesPlayed + " key map:" + myKeyMap;
+    }
 }

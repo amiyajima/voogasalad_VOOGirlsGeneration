@@ -11,6 +11,10 @@ public abstract class Patch {
 	private Point2D myLoc;
 	private ImageView myImage;
 
+	public Patch(){
+	    this(1,1,null,null);
+	}
+	
 	public Patch(int state, int id, String imageLocation, Point2D p) {
 		myState = state;
 		myID = id;
