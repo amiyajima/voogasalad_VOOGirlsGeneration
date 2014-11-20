@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class StatsTotalLogic {
 	private String myTarget;
-	private String myValue;
+	private String myValue; // probably shouldn't call this a value, think of better name
 	private List<StatsSingleMultiplier> myLogic;
 	
 	public StatsTotalLogic(String target, String value, List<StatsSingleMultiplier> logic) {

@@ -14,7 +14,7 @@ package gamedata.action;
 public class StatsSingleMultiplier {
 	private double myModifier;
 	private String myTarget;
-	private String myValue;
+	private String myValue; // probably shouldn't call this a value, think of better name
 	
 	public StatsSingleMultiplier(double modifier, String target, String value) {
 		myModifier = modifier;
