@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
 package gamePlayer;
-=======
-package gameplayer;
->>>>>>> Stashed changes
 
 import java.io.File;
 import java.io.IOException;

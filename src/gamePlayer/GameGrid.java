@@ -1,9 +1,4 @@
-<<<<<<< Updated upstream
 package gamePlayer;
-=======
-package gameplayer;
->>>>>>> Stashed changes
-
 
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
