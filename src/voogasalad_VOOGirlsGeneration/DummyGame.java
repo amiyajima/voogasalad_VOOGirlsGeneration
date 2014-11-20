@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.geometry.Point2D;
 
-public class Game {
+public class DummyGame {
     
-    public Game(File json){
+    public DummyGame(File json){
         
         
     }
     
-    public Game(String s){
+    public DummyGame(String s){
         
     }
     

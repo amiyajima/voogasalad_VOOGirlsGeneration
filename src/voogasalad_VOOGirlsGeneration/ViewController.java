@@ -39,7 +39,7 @@ public class ViewController extends BorderPane{
 
 
     private Stage myStage;
-    private Game myModel;
+    private DummyGame myModel;
     private GameGrid myGrid;
     // Temparary stub!! for testing purposes;;;
     private List<Action> myActions;
@@ -58,7 +58,7 @@ public class ViewController extends BorderPane{
     public ViewController(Stage s){
         myStage = s;
         myStage.setFullScreen(true);
-        myModel = new Game("VOOGASALAD!!");
+        myModel = new DummyGame("VOOGASALAD!!");
         myGrid = new SquareGameGrid(8,8, null, null);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(GAMESPACE_FXML));
         fxmlLoader.setController(this);
@@ -196,7 +196,7 @@ public class ViewController extends BorderPane{
         return myGrid;
     }
 
-    protected Game getGame(){
+    protected DummyGame getGame(){
         return myModel;
     }
     protected void setActivePiece(Piece piece){

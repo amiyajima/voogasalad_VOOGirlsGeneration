@@ -46,11 +46,11 @@ public class SquareGameGrid extends GameGrid{
 //                Image im= new Image("turtle.png");
 //                ImageView iv = new ImageView();
 //                iv.setImage(im);
-                Circle c = new Circle(10);
-                
-                c.setFill(Color.BLUE);
+//                Circle c = new Circle(10);
+//                
+//                c.setFill(Color.BLUE);
                 sp.getChildren().add(r);
-                sp.getChildren().add(c);
+              //  sp.getChildren().add(c);
                 this.add(sp, i, j);
                 r.setOnMouseEntered(event->onHover(r));
                 r.setOnMouseExited(event->r.setFill(Color.BLACK));

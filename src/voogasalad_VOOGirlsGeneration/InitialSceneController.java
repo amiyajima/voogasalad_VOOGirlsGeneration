@@ -22,7 +22,7 @@ public class InitialSceneController extends VBox{
     public static final String GAME_LOCATION = "/src/resources";
 
     private Stage myStage;
-    private Game myGame;
+    private DummyGame myGame;
 
     @FXML
     private MenuButton newGameButton;
@@ -32,7 +32,7 @@ public class InitialSceneController extends VBox{
     public InitialSceneController(Stage s){
 
         myStage = s;
-        myGame= new Game("VOOGASALAD!!");
+        myGame= new DummyGame("VOOGASALAD!!");
         myGames = new ArrayList<File>();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(INITIALSCENE_FXML));
         fxmlLoader.setController(this);
@@ -75,7 +75,7 @@ public class InitialSceneController extends VBox{
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(new ExtensionFilter("JSON", "*.json"));
         File f = fc.showOpenDialog(myStage);
-        myGame = new Game(f);
+        myGame = new DummyGame(f);
 
     }
     @FXML

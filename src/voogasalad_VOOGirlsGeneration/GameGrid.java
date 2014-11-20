@@ -2,13 +2,12 @@ package voogasalad_VOOGirlsGeneration;
 
 import gamePlayer.Patch;
 import gamedata.gamecomponents.Piece;
-
 import java.util.Map;
-
+import java.util.Observer;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.GridPane;
 
-public abstract class GameGrid extends GridPane{
+public abstract class GameGrid extends GridPane implements Observer{
 
     protected int r;
     protected int c;
