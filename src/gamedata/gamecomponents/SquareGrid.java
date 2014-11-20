@@ -1,6 +1,7 @@
 package gamedata.gamecomponents;
 
 import javafx.geometry.Point2D;
+import javafx.scene.image.ImageView;
 
 /**
  * creates square grid
@@ -9,7 +10,7 @@ import javafx.geometry.Point2D;
 public class SquareGrid extends Grid {
 	private static final int DEFAULT_PATCH_STATE = 1;
 	private static final int DEFAULT_PATCH_ID = 1;
-	private static final String DEFAULT_PATCH_IMAGE_LOCATION = "";
+	private static final ImageView DEFAULT_PATCH_IMAGE = null;
 
 	/**
 	 * Default constructor for square grid
@@ -37,7 +38,7 @@ public class SquareGrid extends Grid {
 		for (int x = 0; x < super.getColumn(); x++) {
 			for (int y = 0; y < super.getRow(); y++) {
 				Patch patch = new SquarePatch(DEFAULT_PATCH_STATE,
-						DEFAULT_PATCH_ID, DEFAULT_PATCH_IMAGE_LOCATION,
+						DEFAULT_PATCH_ID, DEFAULT_PATCH_IMAGE,
 						new Point2D(x, y));
 				super.myPatches.put(new Point2D(x, y), patch);
 			}
@@ -135,7 +136,8 @@ public class SquareGrid extends Grid {
 		Patch patch = myPatches.get(coord);
 		myPatches.remove(coord, patch);
 	}
-	
-
 
 }
+
+
+

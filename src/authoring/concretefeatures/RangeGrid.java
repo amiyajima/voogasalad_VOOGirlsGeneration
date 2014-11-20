@@ -10,6 +10,7 @@ import authoring_environment.LibraryView;
 import authoring_environment.Tile;
 
 public class RangeGrid extends GridView{
+	
 	private static final String DEFAULT_CENTRAL_IMAGE="/PowerStar.png";
 	private Grid sampleGrid;
 	private List<Integer[]> selectedList=new ArrayList<Integer[]>();
@@ -21,7 +22,6 @@ public class RangeGrid extends GridView{
 		sampleGrid.sampleSelected();
 		addCenterImage(new Image(DEFAULT_CENTRAL_IMAGE));
 		this.setContent(sampleGrid);	
-		
 	}
 
 	public void update(int widthGridNumber,int heightGridNumber,int myTileSize){
@@ -34,9 +34,6 @@ public class RangeGrid extends GridView{
 		Tile central=sampleGrid.getTile(sampleGrid.getGridWidth()/2, 
 				sampleGrid.getGridHeight()/2);
 		central.addSurfaceImage(image);
-		central.surfaceImage.setVisible(true);
-		
+		central.surfaceImage.setVisible(true);	
 	}
-
-
 }

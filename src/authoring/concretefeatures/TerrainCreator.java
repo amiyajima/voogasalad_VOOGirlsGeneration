@@ -1,9 +1,13 @@
 package authoring.concretefeatures;
 
+import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.SquarePatch;
+
 import java.io.File;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -19,10 +23,7 @@ import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
-public class TerrainCreator extends PopupWindow{
-	
-	// TO DO: These numbers and strings should be stored in an external file.
-	// TO DO: UnitCreator and TerrainCreator should inherit a Creator superclass.
+public class TerrainCreator extends PopupWindow {
 	
 	private final int HEIGHT = 400;
 	private final int WIDTH = 400;
@@ -87,16 +88,17 @@ public class TerrainCreator extends PopupWindow{
 				copy.setImage(icon.getImage());
 				copy.setFitHeight(40);
 				copy.setFitWidth(40);
+				Patch terrain = new SquarePatch(0, 0, copy, new Point2D(0, 0));
 				Hyperlink link = new Hyperlink(terrainName.getText());
 				link.setTranslateY(10);;
 				link.setOnAction(new EventHandler<ActionEvent>(){
 					@Override
 					public void handle(ActionEvent e){
-						PopupWindow p = new UnitEditor();
+						PopupWindow p = new TerrainEditor(terrain);
 						p.show();
 					}
 				});
-				HBox entry = new LibraryEntry(copy, link, false);
+				HBox entry = new TerrainEntry(copy, link, terrain);
 				myLibrary.addToLibrary(entry, TERRAIN);
 			}
 		});

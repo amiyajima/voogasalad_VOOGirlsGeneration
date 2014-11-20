@@ -74,7 +74,7 @@ public class SquareGameGrid extends GameGrid{
     @Override
     protected void populateGrid (Map<Point2D, Patch> patches, Map<Point2D, Piece> pieces) {
         this.getChildren().forEach(node->{((StackPane)node).getChildren().clear();});
-        patches.keySet().forEach(point->{this.add(patches.get(point).getMyImage(), (int)point.getX(), (int)point.getY());});
+        patches.keySet().forEach(point->{this.add(patches.get(point).getImageView(), (int)point.getX(), (int)point.getY());});
         pieces.keySet().forEach(point->{this.add(pieces.get(point).getImageView(), (int)point.getX(), (int)point.getY());});
         
     }

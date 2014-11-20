@@ -1,5 +1,8 @@
 package authoring_environment;
 
+import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Piece;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +24,8 @@ public class LibraryView extends TabPane{
 	private final String TERRAIN = "Terrain";
 	private final String DELETE = "Delete";
 	private Map<String, VBox> myLibraryMap;
-	public static ImageView currentlySelectedImage;
+	public static Piece currentlySelectedUnit;
+	public static Patch currentlySelectedTerrain;
 	public static boolean unitSelected;
 	public static boolean reset;
 	
