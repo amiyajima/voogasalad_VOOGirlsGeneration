@@ -39,9 +39,9 @@ public class Tile extends Pane{
 		unit.setVisible(false);
 		this.setLayoutX(x*mySize);
 		this.setLayoutY(y*mySize);
-		this.getChildren().addAll(terrain, unit,selected,surfaceImage);
+		this.getChildren().addAll(terrain, unit,surfaceImage,selected);
 		setActionEvent();
-//		switchSelected();
+
 	}
 	
 	private void setActionEvent() {
@@ -85,7 +85,12 @@ public class Tile extends Pane{
 		else selected.setVisible(true);				
 	}
 	
+	
 	public void addSurfaceImage(Image image){
 		surfaceImage.setFill(new ImagePattern(image));
+//		this.getChildren().add(surfaceImage);
+		surfaceImage.setVisible(true);
+		System.out.print("center image added");
+
 	}
 }
