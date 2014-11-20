@@ -49,7 +49,7 @@ public class ViewController extends BorderPane{
     private Action activeAction;
 
     @FXML
-    private VBox statsPane;
+    protected VBox statsPane;
     @FXML
     private VBox controlPane;
 
