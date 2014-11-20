@@ -1,4 +1,4 @@
-package voogasalad_VOOGirlsGeneration;
+package gamePlayer;
 
 import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;

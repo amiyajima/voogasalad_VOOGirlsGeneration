@@ -1,4 +1,4 @@
-package voogasalad_VOOGirlsGeneration;
+package gamePlayer;
 
 import java.io.File;
 import java.io.IOException;

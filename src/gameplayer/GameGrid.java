@@ -1,6 +1,7 @@
-package voogasalad_VOOGirlsGeneration;
+package gamePlayer;
 
-import gamePlayer.Patch;
+
+import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import java.util.Map;
 import java.util.Observer;

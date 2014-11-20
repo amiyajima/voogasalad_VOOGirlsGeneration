@@ -1,8 +1,10 @@
-package voogasalad_VOOGirlsGeneration;
+package gamePlayer;
 
-import gamePlayer.Patch;
+
+import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import java.util.Map;
+import java.util.Observable;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
@@ -64,6 +66,14 @@ public class SquareGameGrid extends GameGrid{
     }
     private void onHover(Rectangle rec){
         rec.setFill(Color.BURLYWOOD);
+        
+    }
+
+
+
+    @Override
+    public void update (Observable o, Object arg) {
+        // TODO Auto-generated method stub
         
     }
 
