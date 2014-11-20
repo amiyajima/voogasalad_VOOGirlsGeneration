@@ -2,12 +2,9 @@ package gameengine.player;
 
 public class SimpleAIPlayer extends Player {
 
-    public SimpleAIPlayer(){
-        
-    }
-    
-    public SimpleAIPlayer(int ID){
-        super(ID);
-    }
-    
+	public SimpleAIPlayer(int id) {
+		super(id);
+		// TODO Auto-generated constructor stub
+	}
+
 }
