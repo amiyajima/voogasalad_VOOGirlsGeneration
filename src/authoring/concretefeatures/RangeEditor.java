@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
+import authoring_environment.Grid;
 import authoring_environment.GridView;
 
 public class RangeEditor extends PopupWindow{
@@ -23,6 +24,7 @@ public class RangeEditor extends PopupWindow{
 	
 	private int myGridWidthNumber;
 	private int myGridHeightNumber;
+	private RangeGrid mySampleGridView;
 	private int myGridLength=RANGE_EDITOR_WIDTH-100;
 	private int myTileSize=40;
 	
@@ -84,18 +86,17 @@ public class RangeEditor extends PopupWindow{
 				myTileSize=(calculatedTileSize<MIN_TILE_SIZE)? MIN_TILE_SIZE:calculatedTileSize;
 				
 				box.getChildren().clear();
-				GridView sampleGridView=new GridView(myGridLength,myGridLength,myTileSize);
-				sampleGridView.update(myGridWidthNumber, myGridHeightNumber,myTileSize);
-				box.getChildren().addAll(selection,sizeChooser,enter,sampleGridView,select);
+				mySampleGridView=new RangeGrid(myGridLength,myGridLength,myTileSize);
+				mySampleGridView.update(myGridWidthNumber, myGridHeightNumber,myTileSize);
+				box.getChildren().addAll(selection,sizeChooser,enter,mySampleGridView,select);
 			}	
 		});
 		enter.setLayoutX(500);
 		sizeChooser.getChildren().addAll(horizontal,times,vertical);
 		
-		
+	
 		box.getChildren().addAll(selection,sizeChooser,enter,select);
 		setScene(new Scene(box));
-		
 		
 		
 

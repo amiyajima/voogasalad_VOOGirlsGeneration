@@ -11,26 +11,38 @@ import javafx.scene.shape.Rectangle;
 public class Tile extends Pane{
 	private int mySize;
 	private Color myDefault;
-
+	private Rectangle terrain;
+	private Rectangle unit;
+	private Rectangle selected;
+	public Rectangle surfaceImage;
+	
 	public Tile(int x,int y,int size){
 		mySize=size;
-		Rectangle terrain=new Rectangle(mySize,mySize);
-		Rectangle unit=new Rectangle(mySize,mySize);
+		terrain=new Rectangle(mySize,mySize);
+		unit=new Rectangle(mySize,mySize);
+		surfaceImage=new Rectangle(mySize,mySize);
+		surfaceImage.setVisible(false);
+		selected=new Rectangle(mySize,mySize);
+		selected.setFill(Color.web("#0000FF",0.3));
+		selected.setVisible(false);
+		
 		if(((x%2==0) && (y%2==0)) || ((x%2==1) && (y%2==1))){
-			myDefault = Color.RED;
+			myDefault = Color.WHITE;
 		}
 		else{
-			myDefault = Color.BLACK;
+			myDefault = Color.WHITESMOKE;
 		}
+		
 		terrain.setFill(myDefault);
 		unit.setVisible(false);
 		this.setLayoutX(x*mySize);
 		this.setLayoutY(y*mySize);
-		this.getChildren().addAll(terrain, unit);
-		setActionEvent(terrain, unit);
+		this.getChildren().addAll(terrain, unit,selected,surfaceImage);
+		setActionEvent();
+//		switchSelected();
 	}
 	
-	private void setActionEvent(Rectangle terrain, Rectangle unit) {
+	private void setActionEvent() {
 		this.setStyle("-fx-cursor: hand");
 		this.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
@@ -64,5 +76,14 @@ public class Tile extends Pane{
 	
 	public void setSize(int newSize){
 		mySize=newSize;
+	}
+
+	public void switchSelected(){
+		if (selected.isVisible()) selected.setVisible(false);
+		else selected.setVisible(true);				
+	}
+	
+	public void addSurfaceImage(Image image){
+		surfaceImage.setFill(new ImagePattern(image));
 	}
 }

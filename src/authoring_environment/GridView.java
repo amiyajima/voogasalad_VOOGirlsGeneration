@@ -31,10 +31,13 @@ public class GridView extends ScrollPane{
 		
 	}
 	
-	public void update(int widthGridNumber,int heightGridNumber,int myTileSize){
-		myGrid=new Grid(widthGridNumber,heightGridNumber,myTileSize);
-		this.setContent(myGrid);
+	
+	
+	public Grid getGrid(){
+		return myGrid;
 	}
+	
+	
 
 	
 }
