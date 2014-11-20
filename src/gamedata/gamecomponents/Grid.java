@@ -16,7 +16,7 @@ public abstract class Grid {
 	protected Map<Point2D, Piece> myPieces;
 	private static final int DEFAULT_PATCH_STATE = 1;
 	private static final int DEFAULT_PATCH_ID = 1;
-	private static final String DEFAULT_PATCH_IMAGE_LOCATION = "";
+	private static final ImageView DEFAULT_PATCH_IMAGE = null;
 
 	public Grid() {
 		this(1, 1);
@@ -37,7 +37,7 @@ public abstract class Grid {
 		for (int x = 0; x < myColumn; x++) {
 			for (int y = 0; y < myRow; y++) {
 				Patch patch = new SquarePatch(DEFAULT_PATCH_STATE,
-						DEFAULT_PATCH_ID, DEFAULT_PATCH_IMAGE_LOCATION,
+						DEFAULT_PATCH_ID, DEFAULT_PATCH_IMAGE,
 						new Point2D(x, y));
 				myPatches.put(new Point2D(x, y), patch);
 			}
@@ -121,5 +121,4 @@ public abstract class Grid {
 		}
 		return all;
 	}
-
 }
