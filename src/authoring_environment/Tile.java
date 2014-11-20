@@ -23,9 +23,11 @@ public class Tile extends Pane{
 	public Rectangle surfaceImage;
 	private ImageView terrainImage;
 	private ImageView unitImage;
+	private boolean mySelected;
 	
 	public Tile(int x,int y,int size){
 		mySize = size;
+		mySelected = false;
 		myDefault = new Rectangle(mySize, mySize);
 		surfaceImage = new Rectangle(mySize, mySize);
 		surfaceImage.setVisible(false);
@@ -96,8 +98,18 @@ public class Tile extends Pane{
 	}
 
 	public void switchSelected(){
-		if (selected.isVisible()) selected.setVisible(false);
-		else selected.setVisible(true);				
+		if (selected.isVisible()){
+			selected.setVisible(false);
+			mySelected = false;
+		}
+		else { 
+			selected.setVisible(true);				
+			mySelected = true;
+		}
+	}
+	
+	public boolean getSelected(){
+		return mySelected;
 	}
 	
 	public void addSurfaceImage(Image image){
