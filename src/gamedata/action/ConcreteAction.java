@@ -15,10 +15,11 @@ import javafx.geometry.Point2D;
  * 
  * See Action interface for descriptions of public methods
  * 
- * @author jujs100
+ * @author Jennie Ju
  *
  */
 public class ConcreteAction implements Action {
+	private String myName;
 	private List<Point2D> myAttackRange;
 	private List<Point2D> myEffectRange;
 	private List<StatsTotalLogic> myStatsLogics;
@@ -29,13 +30,19 @@ public class ConcreteAction implements Action {
 	 * Called when a new Action is made and
 	 * its behavior is already defined
 	 */
-	public ConcreteAction(List<Point2D> attackRange, 
+	public ConcreteAction(String name, List<Point2D> attackRange, 
 			List<Point2D> effectRange, List<StatsTotalLogic> statsLogics,
 			ActionConclusion conclusion) {
+		myName = name;
 		myAttackRange = attackRange;
 		myEffectRange = effectRange;
 		myStatsLogics = statsLogics;
 		myConclusion  = conclusion;
+	}
+	
+	@Override
+	public String toString() {
+		return myName;
 	}
 
 	@Override

@@ -9,8 +9,16 @@ import gamedata.gamecomponents.Piece;
  * Interface of a game component that performs
  * an action on another component in the game.
  * Pieces will contain a list of modules.
+ * 
+ * @author Jennie Ju
  */
 public interface Action {
+	
+	/**
+	 * Returns the name of the Action for display
+	 * @return name of Action
+	 */
+	public String toString();
 	
 	/**
 	 * Gives back a list of Point2D of absolute
