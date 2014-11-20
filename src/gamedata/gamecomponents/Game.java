@@ -107,5 +107,9 @@ public class Game {
 	private void restartLevel() {
 		myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel));
 	}
+	
+	public Level getCurrentLevel(){
+	    return myCurrentLevel;
+	}
 
 }

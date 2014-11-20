@@ -3,8 +3,11 @@ package gameengine.movement;
 import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
+import gamedata.rules.Rule;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.geometry.Point2D;
 
 /**
@@ -13,16 +16,15 @@ import javafx.geometry.Point2D;
  *
  */
 public class Movement {
-        // possible paths for this movement
-        private List<List<Point2D>> myMoves;
-	private Grid myGrid;
+    // possible paths for this movement
+    private List<List<Point2D>> myMoves;
 	private List<Point2D> myPaths;
+	private List<Rule> myRules;
 
-	public Movement(Level lvl, List<Point2D>... endPoints) {
+	public Movement(List<Point2D>... endPoints) {
 		for (List<Point2D> p: endPoints) {
 		    myMoves.add(p);
 		}
-		myGrid = lvl.getGrid();
 	}
 
 	/**
@@ -39,24 +41,23 @@ public class Movement {
 			p.add(new Point2D(a.getX() + x, a.getY() + y));
 		}
 		return p;
-	}
-	
+	}	
 	/**
 	 * Checks the collisions in the currently defined path. Checks with piece and patch
 	 * collisions.
 	 * @return true or false
 	 */
-        private boolean checkPathCollision() {
+        private boolean checkPathCollision(Grid myGrid) {
+        	boolean b = true;
             for (Point2D p : myPaths) {
                 if (myGrid.getPiece(p) != null) {
-                    // check if these pieces can collide
-                    return false;
+                    b = false;
                 }
                 if (myGrid.getPatch(p) != null) {
-                    // check if these pieces can collide
+                    // check if these pieces can collide with terrain
                     return false;
                 }
             }
-            return true;
+            return b;
         }	
 }

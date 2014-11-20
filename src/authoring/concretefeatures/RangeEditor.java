@@ -91,6 +91,16 @@ public class RangeEditor extends PopupWindow{
 				box.getChildren().addAll(selection,sizeChooser,enter,mySampleGridView,select);
 			}	
 		});
+		
+		select.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent event){
+				//Get Selected Tiles
+				//Calculate appropriate respective locations
+				//Add range to action
+			}
+		});
+		
 		enter.setLayoutX(500);
 		sizeChooser.getChildren().addAll(horizontal,times,vertical);
 		
@@ -98,8 +108,6 @@ public class RangeEditor extends PopupWindow{
 		box.getChildren().addAll(selection,sizeChooser,enter,select);
 		setScene(new Scene(box));
 		
-		
-
 	}
 	
 

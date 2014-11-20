@@ -2,6 +2,7 @@ package gameengine.player;
 
 import java.util.HashMap;
 import java.util.Map;
+import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Level;
@@ -17,7 +18,10 @@ public class Player {
 
     private int myNumMovesPlayed;
     private int myID;
-    private Map<KeyCode, Action> myKeyMap;
+    private Map<KeyCode, Action> myActionKeyMap;
+    //for keypressed, when keys don't trigger actions. ex) arrow keys
+    private Map<KeyCode, Point2D> myMovementKeyMap;
+
 
     /**
      * Default constructor
@@ -29,8 +33,11 @@ public class Player {
     public Player (int id) {
         myNumMovesPlayed = 0;
         myID = id;
-        setKeyMap(myKeyMap);
+        setActionKeyMap(myActionKeyMap);
+        setMovementKeyMap(myMovementKeyMap);
+
     }
+    
 
     /**
      * Until you run out of moves, play the level. Return true if the level was
@@ -63,8 +70,8 @@ public class Player {
      * 
      * @return myKeyMap which maps actions to pre-defined keycodes
      */
-    public Map<KeyCode, Action> getKeyMap () {
-        return myKeyMap;
+    public Map<KeyCode, Action> getActionKeyMap () {
+        return myActionKeyMap;
     }
 
     /**
@@ -72,7 +79,15 @@ public class Player {
      * 
      * @param myKeyMap
      */
-    public void setKeyMap (Map<KeyCode, Action> myKeyMap) {
-        myKeyMap = new HashMap<KeyCode, Action>();
+    public void setActionKeyMap (Map<KeyCode, Action> myActionKeyMap) {
+        myActionKeyMap = new HashMap<KeyCode, Action>();
+    }
+    
+    public Map<KeyCode, Point2D> getMovementKeyMap () {
+        return myMovementKeyMap;
+    }
+    
+    public void setMovementKeyMap (Map<KeyCode, Point2D> myMovementKeyMap2) {
+        myMovementKeyMap2 = new HashMap<KeyCode, Point2D>();
     }
 }
