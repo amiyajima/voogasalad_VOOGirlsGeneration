@@ -9,9 +9,10 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class Tile extends Pane{
+	
 	private int mySize;
 	private Color myDefault;
-
+	
 	public Tile(int x,int y,int size){
 		mySize=size;
 		Rectangle terrain=new Rectangle(mySize,mySize);
