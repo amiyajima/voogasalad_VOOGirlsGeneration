@@ -106,6 +106,12 @@ public abstract class Grid {
 
 	}
 
+	/**
+	 * Returns a Piece of a given ID
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Piece getPiece(int id) {
 		for (Map.Entry<Point2D, Piece> entry : myPieces.entrySet()) {
 			if (entry.getValue().getUniqueID() == id)
@@ -114,9 +120,27 @@ public abstract class Grid {
 		return null;
 	}
 
+	/**
+	 * Returns a list of all pieces
+	 * 
+	 * @return
+	 */
 	public List<Piece> getAllPieces() {
 		List<Piece> all = new ArrayList<Piece>();
 		for (Map.Entry<Point2D, Piece> entry : myPieces.entrySet()) {
+			all.add(entry.getValue());
+		}
+		return all;
+	}
+
+	/**
+	 * Returns a list of all patches
+	 * 
+	 * @return
+	 */
+	public List<Patch> getAllPatches() {
+		List<Patch> all = new ArrayList<Patch>();
+		for (Map.Entry<Point2D, Patch> entry : myPatches.entrySet()) {
 			all.add(entry.getValue());
 		}
 		return all;
