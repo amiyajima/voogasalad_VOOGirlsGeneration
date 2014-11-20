@@ -1,7 +1,11 @@
+<<<<<<< Updated upstream
 package gamePlayer;
 
 
 import gamedata.gamecomponents.Patch;
+=======
+package gameplayer;
+>>>>>>> Stashed changes
 import gamedata.gamecomponents.Piece;
 import java.util.Map;
 import java.util.Observable;

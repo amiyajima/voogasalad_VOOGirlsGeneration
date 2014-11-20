@@ -1,5 +1,9 @@
+<<<<<<< Updated upstream
 package gamePlayer;
 
+=======
+package gameplayer;
+>>>>>>> Stashed changes
 import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
 import java.io.File;
