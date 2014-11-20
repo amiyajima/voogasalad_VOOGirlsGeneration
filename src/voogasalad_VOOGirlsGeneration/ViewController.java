@@ -57,8 +57,9 @@ public class ViewController extends BorderPane{
 
     public ViewController(Stage s){
         myStage = s;
+        myStage.setFullScreen(true);
         myModel = new Game("VOOGASALAD!!");
-        myGrid = new SquareGameGrid(5,5, null, null);
+        myGrid = new SquareGameGrid(8,8, null, null);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(GAMESPACE_FXML));
         fxmlLoader.setController(this);
         fxmlLoader.setRoot(this);
@@ -71,7 +72,7 @@ public class ViewController extends BorderPane{
         }
         this.setCenter(myGrid);
         myGrid.setAlignment(Pos.CENTER);
-        s.setScene(new Scene(this));
+        myStage.setScene(new Scene(this));
 
     }
 
@@ -211,9 +212,16 @@ public class ViewController extends BorderPane{
     
     
     private void highLightEffectRange(Node n, Color c){
+       
       //  activeAction.getEffectRange();
         myModel.getEffectRanges().forEach(point->{Node node = get(myGrid.getRowIndex(n)+ (int)point.getX(), myGrid.getColumnIndex(n)+ (int)point.getY());
-           addDropShadow(node, c);
+           
+           if(c ==Color.TRANSPARENT && node.getEffect()!=null){
+               node.setEffect(null);
+           }
+           else{
+               addDropShadow(node, c);
+           }
            });
     }
 
