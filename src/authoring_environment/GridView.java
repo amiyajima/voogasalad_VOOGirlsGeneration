@@ -32,7 +32,6 @@ public class GridView extends ScrollPane{
 	}
 	
 	
-	
 	public Grid getGrid(){
 		return myGrid;
 	}

@@ -9,12 +9,14 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class Tile extends Pane{
+	
 	private int mySize;
 	private Color myDefault;
 	private Rectangle terrain;
 	private Rectangle unit;
 	private Rectangle selected;
 	public Rectangle surfaceImage;
+
 	
 	public Tile(int x,int y,int size){
 		mySize=size;
