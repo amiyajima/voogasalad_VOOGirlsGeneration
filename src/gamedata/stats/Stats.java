@@ -1,8 +1,6 @@
 package gamedata.stats;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 /**
  * Numerical stats class.
@@ -21,7 +19,7 @@ public class Stats {
 	public Stats() {
 		myStats = new HashMap<String, Double>();
 	}
-	
+
 	/**
 	 * Stats constructor for initializing with already
 	 * created map of names to doubles
@@ -30,7 +28,7 @@ public class Stats {
 	public Stats(Map<String, Double> stats) {
 		myStats = stats;
 	}
-	
+
 	/**
 	 * Adds a new stat to the stats map
 	 */
@@ -66,25 +64,14 @@ public class Stats {
 	public void clear() {
 		myStats.clear();
 	}
-	
-	/**
-	 * Returns a list of all the stat names 
-	 */
-	public List<String> getStatNames() {
-		return new ArrayList<String>(myStats.keySet());
-	}
 
 	/**
-	 * Returns a list of all the values with indices
-	 * corresponding to names returned in getStatNames()
+	 * Returns a map of all the stats 
 	 */
-	public List<Double> getStatValues() {
-		List<String> statNames = getStatNames();
-		List<Double> values = new ArrayList<Double>();
-		for (String name : statNames) {
-			values.add(myStats.get(name));
-		}
-		return values;
+	public Map<String, Double> getStatsMap() {
+		// if this is only for display, should maybe
+		// take in node instead of giving out myStats
+		return myStats;
 	}
 
 
