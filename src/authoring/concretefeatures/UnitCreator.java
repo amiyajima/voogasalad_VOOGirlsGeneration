@@ -1,9 +1,17 @@
 package authoring.concretefeatures;
 
+import gamedata.action.Action;
+import gamedata.gamecomponents.Inventory;
+import gamedata.gamecomponents.Piece;
+import gamedata.stats.Stats;
+import gameengine.movement.Movement;
+
 import java.io.File;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -20,9 +28,6 @@ import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
 public class UnitCreator extends PopupWindow {
-	
-	// TO DO: These numbers and strings should be stored in an external file.
-	// TO DO: UnitCreator and TerrainCreator should inherit a Creator superclass.
 	
 	private final int HEIGHT = 400;
 	private final int WIDTH = 400;
@@ -87,16 +92,18 @@ public class UnitCreator extends PopupWindow {
 				copy.setImage(icon.getImage());
 				copy.setFitHeight(40);
 				copy.setFitWidth(40);
+				Piece unit = new Piece(copy, new ArrayList<Movement>(), new ArrayList<Action>(),
+						new Stats(), new Point2D(0, 0), 0, new Inventory());
 				Hyperlink link = new Hyperlink(unitName.getText());
 				link.setTranslateY(10);;
 				link.setOnAction(new EventHandler<ActionEvent>(){
 					@Override
 					public void handle(ActionEvent e){
-						PopupWindow p = new UnitEditor();
+						PopupWindow p = new UnitEditor(unit);
 						p.show();
 					}
 				});
-				HBox entry = new LibraryEntry(copy, link, true);
+				HBox entry = new UnitEntry(copy, link, unit);
 				myLibrary.addToLibrary(entry, UNITS);
 			}
 		});
