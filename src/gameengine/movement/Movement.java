@@ -41,8 +41,7 @@ public class Movement {
 			p.add(new Point2D(a.getX() + x, a.getY() + y));
 		}
 		return p;
-	}
-	
+	}	
 	/**
 	 * Checks the collisions in the currently defined path. Checks with piece and patch
 	 * collisions.

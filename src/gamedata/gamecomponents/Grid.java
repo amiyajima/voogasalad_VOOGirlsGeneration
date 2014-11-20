@@ -145,5 +145,22 @@ public abstract class Grid {
 		}
 		return all;
 	}
+	
+	public Map<Point2D, Patch> getPatches(){
+	    return myPatches;
+	}
+        
+	
+	
+	public Map<Point2D, Piece> getPieces(){
+	    return myPieces;
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

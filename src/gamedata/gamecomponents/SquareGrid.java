@@ -136,4 +136,8 @@ public class SquareGrid extends Grid {
 		Patch patch = myPatches.get(coord);
 		myPatches.remove(coord, patch);
 	}
+
 }
+
+
+
