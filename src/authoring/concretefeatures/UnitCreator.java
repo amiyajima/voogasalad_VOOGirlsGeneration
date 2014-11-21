@@ -27,6 +27,13 @@ import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
+/**
+ * @author VOOGirls Generation
+ * 
+ * The GUI components for creating units in the authoring environment are coded here.
+ * After a unit is created, it is added to the library, and from the library, its stats
+ * can be edited.
+ */
 public class UnitCreator extends PopupWindow {
 	
 	private final int HEIGHT = 400;
@@ -39,6 +46,12 @@ public class UnitCreator extends PopupWindow {
 	private final String TEMPLATE_LABEL = "Create new unit template";
 	private LibraryView myLibrary;
 	
+	/**
+	 * Constructor that sets the dimensions of the UnitCreator GUI component
+	 * and initializes it.
+	 * 
+	 * @param library : Library to which units will be added.
+	 */
 	public UnitCreator(LibraryView library){
 		myLibrary = library;
 		setHeight(HEIGHT);

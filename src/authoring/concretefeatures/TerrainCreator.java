@@ -23,6 +23,13 @@ import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
+/**
+ * @author VOOGirls Generation
+ * 
+ * The GUI components for creating terrain in the authoring environment are coded here.
+ * After a patch is created, it is added to the library, and from the library, its
+ * properties can be edited.
+ */
 public class TerrainCreator extends PopupWindow {
 	
 	private final int HEIGHT = 400;
@@ -35,6 +42,12 @@ public class TerrainCreator extends PopupWindow {
 	private final String TEMPLATE_LABEL = "Create new terrain template";
 	private LibraryView myLibrary;
 	
+	/**
+	 * Constructor that sets the dimensions of the TerrainCreator GUI component
+	 * and initializes it.
+	 * 
+	 * @param library : Library to which terrain will be added.
+	 */
 	public TerrainCreator(LibraryView library){
 		myLibrary = library;
 		setHeight(HEIGHT);
