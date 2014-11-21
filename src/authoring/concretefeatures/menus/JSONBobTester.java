@@ -54,6 +54,9 @@ public class JSONBobTester {
         Level level2 = new Level(grid1, myGoals, myRules);
         myLevels.add(level1);
         myLevels.add(level2);
+        
+        Player myPlayer3 = new Player();
+        myPlayers.add(myPlayer3);
 
         Game myGame = new Game(myPlayers, myLevels);
         return myGame;
