@@ -24,6 +24,12 @@ import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
 import authoring.data.ActionData;
 
+/**
+ * Opens a dialog for creating new Actions in
+ * the authoring environment
+ * @author Mike Zhu, Rica Zhang, Jennie Ju
+ *
+ */
 public class ActionCreator extends PopupWindow{
 
 	public static final int HEIGHT = 400;
@@ -40,6 +46,10 @@ public class ActionCreator extends PopupWindow{
 	private List<StatsTotalLogic> myStatsLogics;
 	private ActionConclusion myConclusion;
 
+	/**
+	 * Constructor for an ActionCreator popup window
+	 * @param actionData - class where user-created Actions are stored
+	 */
 	public ActionCreator(ActionData actionData){
 		operationsList = new ArrayList<>();
 		myActionData = actionData;
