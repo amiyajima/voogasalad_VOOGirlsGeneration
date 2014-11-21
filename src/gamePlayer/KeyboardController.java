@@ -14,6 +14,15 @@ public class KeyboardController {
     Point2D myCurrentLocation;
     //starting action with the keyboard
     
+    /**
+     * 
+     * Action map (which maps Actions to KeyCodes) is passed by the game engine.
+     * This method creates key event handlers so that when such a keycode is
+     * pressed, its corresponding action is implemented.
+     * 
+     * @param actionKeyMap maps actions to keycodes
+     * @param gameScene is the scene for GUI
+     */
     public void setActionKeyControl(Map<KeyCode, Action> actionKeyMap, Scene gameScene) {
         gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             Set<KeyCode> actionKeyList = actionKeyMap.keySet();
@@ -30,6 +39,16 @@ public class KeyboardController {
         }
 
     //"moving the cursor" with the keyboard
+    /**
+     * 
+     * Movement map (which maps movements to keycodes) is passed by the game engine.
+     * This method creates key event handlers so that when such a keycode is
+     * pressed, its corresponding movement is implemented. Movement is "moving the
+     * cursor" with the keyboard.
+     * 
+     * @param movementKeyMap
+     * @param gameScene
+     */
     public void setMovementKeyControl(Map<KeyCode, Point2D> movementKeyMap, Scene gameScene) {
         gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             Set<KeyCode> movementKeyList = movementKeyMap.keySet();
