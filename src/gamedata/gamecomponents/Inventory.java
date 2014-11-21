@@ -55,7 +55,6 @@ public class Inventory {
 
 	/**
 	 * Checks whether inventory is empty or not
-	 * @return
 	 */
 	public boolean isEmpty () {
 		return myInventory.isEmpty();
