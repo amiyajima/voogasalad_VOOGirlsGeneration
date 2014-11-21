@@ -1,7 +1,10 @@
 package authoring_environment;
 
+import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Piece;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -10,38 +13,52 @@ import javafx.scene.shape.Rectangle;
 
 public class Tile extends Pane{
 	
+	private static final Image HIDDEN_DEFAULT_IMAGE = new Image("authoring/concretefeatures/images/images.jpeg");
+	
 	private int mySize;
-	private Color myDefault;
-	private Rectangle terrain;
-	private Rectangle unit;
+	private Rectangle myDefault;
+	private Patch myTerrain;
+	private Piece myUnit;
 	private Rectangle selected;
 	public Rectangle surfaceImage;
-
+	private ImageView terrainImage;
+	private ImageView unitImage;
+	private boolean mySelected;
+	private int myX;
+	private int myY;
 	
 	public Tile(int x,int y,int size){
-		mySize=size;
-		terrain=new Rectangle(mySize,mySize);
-		unit=new Rectangle(mySize,mySize);
-		surfaceImage=new Rectangle(mySize,mySize);
+
+		mySize = size;
+		mySelected = false;
+		myDefault = new Rectangle(mySize, mySize);
+		surfaceImage = new Rectangle(mySize, mySize);
 		surfaceImage.setVisible(false);
-		selected=new Rectangle(mySize,mySize);
+		selected = new Rectangle(mySize, mySize);
 		selected.setFill(Color.web("#0000FF",0.3));
 		selected.setVisible(false);
 		
+		unitImage = new ImageView(HIDDEN_DEFAULT_IMAGE);
+		terrainImage = new ImageView(HIDDEN_DEFAULT_IMAGE);
+		unitImage.setFitHeight(mySize);
+		unitImage.setFitWidth(mySize);
+		terrainImage.setFitHeight(mySize);
+		terrainImage.setFitWidth(mySize);
+		unitImage.setVisible(false);
+		terrainImage.setVisible(false);
+		
 		if(((x%2==0) && (y%2==0)) || ((x%2==1) && (y%2==1))){
-			myDefault = Color.WHITE;
+			myDefault.setFill(Color.WHITE);
 		}
 		else{
-			myDefault = Color.WHITESMOKE;
+			myDefault.setFill(Color.WHITESMOKE);
 		}
 		
-		terrain.setFill(myDefault);
-		unit.setVisible(false);
 		this.setLayoutX(x*mySize);
 		this.setLayoutY(y*mySize);
-		this.getChildren().addAll(terrain, unit,selected,surfaceImage);
+		this.getChildren().addAll(myDefault, terrainImage, unitImage,surfaceImage, selected);
 		setActionEvent();
-//		switchSelected();
+
 	}
 	
 	private void setActionEvent() {
@@ -51,21 +68,24 @@ public class Tile extends Pane{
 			public void handle(MouseEvent m){
 				if(LibraryView.reset){
 					if(LibraryView.unitSelected){
-						unit.setFill(myDefault);
-						unit.setVisible(false);
+						myUnit = null;
+						unitImage.setVisible(false);;
 					}
 					else{
-						terrain.setFill(myDefault);
+						myTerrain = null;
+						terrainImage.setVisible(false);;
 					}
 				}
 				else{
-					Image image = LibraryView.currentlySelectedImage.getImage();
 					if(LibraryView.unitSelected){
-						unit.setFill(new ImagePattern(image));
-						unit.setVisible(true);
+						myUnit = LibraryView.currentlySelectedUnit;
+						unitImage.setImage(myUnit.getImageView().getImage());
+						unitImage.setVisible(true);
 					}
 					else{
-						terrain.setFill(new ImagePattern(image));
+						myTerrain = LibraryView.currentlySelectedTerrain;
+						terrainImage.setImage(myTerrain.getImageView().getImage());
+						terrainImage.setVisible(true);
 					}
 				}
 			}
@@ -81,11 +101,25 @@ public class Tile extends Pane{
 	}
 
 	public void switchSelected(){
-		if (selected.isVisible()) selected.setVisible(false);
-		else selected.setVisible(true);				
+		if (selected.isVisible()){
+			selected.setVisible(false);
+			mySelected = false;
+		}
+		else { 
+			selected.setVisible(true);				
+			mySelected = true;
+		}
 	}
+	
+	public boolean getSelected(){
+		return mySelected;
+	}
+	
 	
 	public void addSurfaceImage(Image image){
 		surfaceImage.setFill(new ImagePattern(image));
+//		this.getChildren().add(surfaceImage);
+		surfaceImage.setVisible(true);
+
 	}
 }

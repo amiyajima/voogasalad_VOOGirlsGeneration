@@ -115,4 +115,13 @@ public class Game {
         return "game with " + myPlayers.size() + " players and " + myLevels.size() + " levels";
     }
 
+    /**
+     * Getter for the Current Level
+     * 
+     * @return Returns the Current Level
+     */
+    public Level getCurrentLevel () {
+        return myCurrentLevel;
+    }
+
 }

@@ -2,6 +2,8 @@ package gamedata.gamecomponents;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import gamedata.goals.*;
 import gamedata.rules.*;
 import gameengine.player.Player;
@@ -12,7 +14,7 @@ import gameengine.player.Player;
  * has been won
  *
  */
-public class Level {
+public class Level extends Observable {
 
     private Grid myGrid;
     /**
@@ -41,6 +43,8 @@ public class Level {
      * @return
      */
     public boolean levelCompleted () {
+        setChanged();
+        notifyObservers();
         for (Goal g : myGoals) {
             if (g.checkGameState(this) == 1) { return true; }
         }
@@ -77,4 +81,9 @@ public class Level {
         return "grid:" + myGrid.toString() + " myGoals" + myGoals.toString() + " myRules" +
                myRules.toString();
     }
+
+    public void addObserverTo (Observer o) {
+        addObserver(o);
+    }
+
 }
