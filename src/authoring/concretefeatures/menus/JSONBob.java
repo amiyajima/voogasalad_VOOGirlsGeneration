@@ -10,6 +10,11 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import authoring_environment.LibraryView;
 import java.io.File;
 
+/**
+ * Menu selection to save game to JSON or read game from JSON
+ * @author Rica
+ *
+ */
 public class JSONBob extends Menu {
     private LibraryView myLibrary;
     private static final String NAME = "JSON";
@@ -17,7 +22,10 @@ public class JSONBob extends Menu {
     private static final String ITEM_2 = "Load game";
     public static final String SAVE_PREFIX = "Save as file: ";
 
-    
+    /**
+     * Constructs menu items
+     * @param library
+     */
     public JSONBob(LibraryView library) {
         super(NAME);
         myLibrary = library;
@@ -27,10 +35,17 @@ public class JSONBob extends Menu {
         getItems().addAll(JSONCreator, JSONLoader);
     }
 
+    /**
+     * When you click on the JSON creator menu item, this sends it to the handler
+     * @param jSONCreator
+     */
     private void setAction (MenuItem jSONCreator) {
         jSONCreator.setOnAction(event -> handle());
     }
 
+    /**
+     * Creates a file chooser and uses that file path to save a JSON file to 
+     */
     private void handle () {
         Stage myStage = new Stage();
         FileChooser fileChooser = new FileChooser();

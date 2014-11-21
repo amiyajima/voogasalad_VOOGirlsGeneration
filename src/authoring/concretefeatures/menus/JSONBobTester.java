@@ -13,11 +13,20 @@ import gameengine.player.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Tester for JSON file writer
+ * @author Rica
+ *
+ */
 public class JSONBobTester {
     public JSONBobTester() {
         createNewGame();
     }
 
+    /**
+     * Create a new game to test
+     * @return
+     */
     public Game createNewGame () {
         System.out.println("JSONBobTester is running");
 
