@@ -33,8 +33,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 
-//TODO: need valid grid and Game constructor from back end. 
-
 
 public class ViewController{
 
@@ -52,24 +50,27 @@ public class ViewController{
    
     private Piece activePiece;
     private Action activeAction;
-    private List<File> myGames;
 
-    @FXML 
-    private VBox statsPane;
+    @FXML
+    protected VBox statsPane;
+
     @FXML
     private VBox controlPane;
     @FXML
     private MenuButton newGameButton;
 
-    private GridState gridState;
+    private IGridState gridState;
 
     public ViewController(Stage s){
         myStage = s;
        myInitialScene = new VBox();
        myGameSpace = new BorderPane();
-        myModel = new Game();
-        myGames = new ArrayList<File>();
-       // myGrid = new SquareGameGrid(8,8);
+      //  myModel = new Game();
+       //TODO:
+       //uses JSON reader that takes in the file chosen by user and instantiate 
+       // a new Game object. 
+        
+        myGrid = new SquareGameGrid(8,8);
         FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource(GAMESPACE_FXML));
         fxmlLoaderGame.setController(this);
         fxmlLoaderGame.setRoot(myGameSpace);
@@ -95,10 +96,15 @@ public class ViewController{
     }
 
 
-    private void newGame () {
-        getGames();
-        System.out.println(myGames.size());
-        myGames.forEach(file->{ MenuItem l = new MenuItem();
+    /**
+     * generates drop down menu that allow user to choose a new Game to play 
+     * The Games are generated from the directory that stores all json files defined 
+     * from authoring environment
+     */
+    protected void newGame () {
+        List<File> games = getGames();
+       
+        games.forEach(file->{ MenuItem l = new MenuItem();
         l.setText(file.getName());
         l.setOnAction(event->{
            // myModel.initializeGame(file.getName());
@@ -113,12 +119,19 @@ public class ViewController{
         
     }
 
+    /**
+     * the method allows user to load the previously saved json representation
+     * of the game and uses JSON reader from Game Data to generate an instance
+     * of Game.
+     */
 
     @FXML
     protected void loadGame () {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(new ExtensionFilter("JSON", "*.json"));
         File f = fc.showOpenDialog(myStage);
+        
+        // uses JSON reader to generate an instance of the game
 
     }
     
@@ -127,7 +140,14 @@ public class ViewController{
 
     }
     
-    private void getGames(){
+    
+    /**
+     * The method to get all json files from the resources directory that 
+     * stores all the games user has defined from the authoring environment
+     */
+    private List<File> getGames(){
+        
+       List<File> gameList =  new ArrayList<File>();
         
         File files = new File(System.getProperty("user.dir")+GAME_LOCATION);
 
@@ -135,15 +155,23 @@ public class ViewController{
 
                 if(f.getName().endsWith(".json")){
                     
-                    myGames.add(f);
+                    gameList.add(f);
                 }
             }
+            return gameList;
     }
-    
+    /**
+     * the method to restart the game; it asks the use whether to save the current game
+     * 
+     */
+    // TODO: IMPLEMENT POP-UP.
     @FXML
     protected void restartGame () {
 
-        System.out.println("restarting game");
+        //System.out.println("restarting game");
+       // myModel=new Game();
+        
+        // Generate a new Game Object.
 
     }
     @FXML
@@ -152,6 +180,9 @@ public class ViewController{
 
     }
 
+    /**
+     * to save the current game (state and settings) to a json file which could be later loaded in
+     */
     @FXML
     protected void saveGame () {
         FileChooser fileChooser = new FileChooser();
@@ -163,9 +194,9 @@ public class ViewController{
      * Method to switch the state of the game grid between select mode 
      * and apply mode
      * 
-     * @param state
+     * @param state the current state of the Grid, select/ apply action Mode
      */
-    protected void setGridState(GridState state){
+    protected void setGridState(IGridState state){
         gridState = state;
     }
 
@@ -299,7 +330,7 @@ public class ViewController{
 
 
     /**
-     * Highlight the effect range of an action applied at a given position
+     * Highlight the effect range of an action if to be applied at a given position
      * @param n
      * @param c
      */

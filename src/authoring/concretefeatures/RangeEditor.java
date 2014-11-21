@@ -95,6 +95,8 @@ public class RangeEditor extends PopupWindow{
 		select.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent event){
+				mySampleGridView.getSelectedList();
+
 				//Get Selected Tiles
 				//Calculate appropriate respective locations
 				//Add range to action

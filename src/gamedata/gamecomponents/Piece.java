@@ -8,6 +8,7 @@ import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -23,8 +24,9 @@ public class Piece {
 	private int myTypeID;
 	private int myUniqueID;
 	private int myPlayerID;
-	private ImageView myImageView;
+	private String myImageLocation;
 
+	private ImageView myImageView;
 	private Point2D myLoc;
 	private Stats myStats;
 	private List<Action> myActions;
@@ -35,7 +37,7 @@ public class Piece {
 	/**
 	 * Piece constructor
 	 * 
-	 * @param i - ImageView containing image of the piece
+	 * @param imageLocation - url of the piece's image location
 	 * @param m - List of Movement defining how/where the
 	 * piece moves relative to its current position
 	 * @param a - List of Actions defining what actions are available
@@ -48,9 +50,11 @@ public class Piece {
 	 * this piece belongs to
 	 * @param inventory - Piece's inventory if the user chooses to use an inventory
 	 */
-	public Piece(ImageView i, List<Movement> m, List<Action> a, Stats stats,
+
+	public Piece(String imageLocation, List<Movement> m, List<Action> a, Stats stats,
 			Point2D p, int tid, int uid, int pid, Inventory inventory) {
-		myImageView = i;
+		myImageLocation = imageLocation;
+		myImageView = new ImageView(new Image(imageLocation));
 		myPath = m;
 		myActions = a;
 		myStats = stats;
@@ -62,6 +66,14 @@ public class Piece {
 		myInventory = inventory;
 	}
 
+	/**
+	 * Returns the image location url (for data saving)
+	 */
+	public String getImageLocation() {
+		return myImageLocation;
+	}
+	
+	
 	/**
 	 * Returns the ImageView of the piece for display
 	 */
@@ -110,6 +122,13 @@ public class Piece {
 	 */
 	public Stats getStats() {
 		return myStats;
+	}
+	
+	public double getStat(String s){
+		if(myStats.getStatsMap().containsKey(s)){
+			return myStats.getStatsMap().get(s);
+		}
+		return 0;
 	}
 
 	/**

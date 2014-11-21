@@ -3,11 +3,11 @@ package authoring.concretefeatures;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.SquarePatch;
 
+import java.awt.geom.Point2D;
 import java.io.File;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -23,6 +23,12 @@ import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
+/**
+ * GUI element used to create new Patch objects and add them to the library. Allows users
+ * to specify the name and image of the patch. 
+ * 
+ * @author Mike Zhu
+ */
 public class TerrainCreator extends PopupWindow {
 	
 	private final int HEIGHT = 400;
@@ -35,6 +41,12 @@ public class TerrainCreator extends PopupWindow {
 	private final String TEMPLATE_LABEL = "Create new terrain template";
 	private LibraryView myLibrary;
 	
+	/**
+	 * Constructor that sets the dimensions of the TerrainCreator GUI component
+	 * and initializes it.
+	 * 
+	 * @param library : Library to which terrain will be added.
+	 */
 	public TerrainCreator(LibraryView library){
 		myLibrary = library;
 		setHeight(HEIGHT);
@@ -57,6 +69,7 @@ public class TerrainCreator extends PopupWindow {
 		TextField terrainName = new TextField();
 		names.getChildren().addAll(nameLabel, terrainName);
 		
+		String[] imageLocation = new String[1];
 		ImageView icon = new ImageView();
 		Label loadLabel = new Label(IMAGE_LABEL);
 		Button loadImage = new Button(LOAD_IMAGE_LABEL);
@@ -68,7 +81,8 @@ public class TerrainCreator extends PopupWindow {
 				fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png"));
 				File selectedFile = fileChoice.showOpenDialog(null);
 				if(selectedFile != null){
-					Image image = new Image(selectedFile.toURI().toString());
+					imageLocation[0] = selectedFile.toURI().toString();
+					Image image = new Image(imageLocation[0]);
 					icon.setImage(image);
 					icon.setFitHeight(40);
 					icon.setFitWidth(40);
@@ -84,11 +98,12 @@ public class TerrainCreator extends PopupWindow {
 		goButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent click) {
-				ImageView copy = new ImageView();
-				copy.setImage(icon.getImage());
-				copy.setFitHeight(40);
-				copy.setFitWidth(40);
-				Patch terrain = new SquarePatch(0, 0, copy, new Point2D(0, 0));
+				String locationCopy = imageLocation[0];
+				ImageView imageCopy = new ImageView();
+				imageCopy.setImage(icon.getImage());
+				imageCopy.setFitHeight(40);
+				imageCopy.setFitWidth(40);
+				Patch terrain = new SquarePatch(0, 0, locationCopy, new Point2D.Double(0, 0));
 				Hyperlink link = new Hyperlink(terrainName.getText());
 				link.setTranslateY(10);;
 				link.setOnAction(new EventHandler<ActionEvent>(){
@@ -98,7 +113,7 @@ public class TerrainCreator extends PopupWindow {
 						p.show();
 					}
 				});
-				HBox entry = new TerrainEntry(copy, link, terrain);
+				HBox entry = new TerrainEntry(imageCopy, link, terrain);
 				myLibrary.addToLibrary(entry, TERRAIN);
 			}
 		});

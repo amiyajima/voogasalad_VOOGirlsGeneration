@@ -5,11 +5,25 @@ import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 
+/**
+ * Defines a win situation to be when a specified piece is on a specified patch
+ * 
+ * @author Jesse
+ *
+ */
 public class PieceOnPatchGoal extends Goal {
 
 	private Piece myPiece;
 	private Patch myPatch;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param pie
+	 *            Target Piece
+	 * @param pat
+	 *            Target Patch
+	 */
 	public PieceOnPatchGoal(Piece pie, Patch pat) {
 		myPiece = pie;
 		myPatch = pat;
