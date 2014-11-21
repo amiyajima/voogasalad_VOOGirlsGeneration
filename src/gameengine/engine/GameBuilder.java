@@ -74,19 +74,22 @@ public class GameBuilder {
      * @param filePath
      * @throws FileNotFoundException
      */
-    public Game readFromJSONFile (String path) throws FileNotFoundException {
+    public Player readFromJSONFile (String path) throws FileNotFoundException {
         System.out.println("read method called");
         Gson gson = new Gson();
         BufferedReader br = new BufferedReader(
                                                new FileReader(path));
         
-        //LEVEL WORKS
+        
         //Level l = gson.fromJson(br, Level.class);
         //System.out.println(l);
         
+        Player p = gson.fromJson(br, Player.class);
+        System.out.println(p);
+        
         Game g = gson.fromJson(br, Game.class);
-        System.out.println(g);
-        return g;
+        
+        return p;
     }
 
 }

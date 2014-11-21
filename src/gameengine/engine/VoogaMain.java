@@ -59,16 +59,17 @@ public class VoogaMain {
         Game myGame = new Game(myPlayers, myLevels);
         GameBuilder builder = new GameBuilder();
 
-        GameDataWrapper w = new GameDataWrapper(myGame);
-        //builder.writeToJSON(w, "test");
+        //GameDataWrapper w = new GameDataWrapper(myGame);
+        //builder.writeToJSON(myGame, "test");
 
         Player myPlayer3 = new Player();
         myPlayers.add(myPlayer3);
+        
         Game returnedGame = new Game(myPlayers, myLevels);
         //System.out.println(returnedGame);
         
         try {
-            returnedGame = builder.readFromJSONFile("./src/resources/test.json");
+            myPlayer3 = builder.readFromJSONFile("./src/resources/test.json");
         }
         catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
