@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<!--
+The MIT License (MIT)
+
+Copyright (c) <2014> <VOOGirlsGeneration>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+</head>
+<body>
+  <u><b>VOOGirlsGeneration - Game Authoring Environment</b></u><br>
+
+  <b>Package Summary:</b> <br>
+  This packages provides the classes and interfaces required to instantiate and run a Game containing all components created in the Authoring Environment as contained within the JSON. <br>
+
+  <b>Package Contents:</b><br>
+  <i>public interface AuthoringData<T></i> - Interface for data stored in the authoring environment to allow for ease of saving into JSON<br>
+  <i>public class ActionCreator</i> - Opens a dialog for creating new Actions in the authoring environment <br>
+  <i>public class PatchCreator</i> - GUI element used to create new Patch objects and add them to the library. Allows users to specify the name and image of the patch. <br>
+  <i>public class VoogaView</i> - The GUI contains all the parts in authoring environment. It sets the size and the position of the parts in the GUI. <br>
+  <i>public class GridView</i> -  The GUI components for the grid displayed on the right side of the game authoring environment. It displays all the unit/terrain which are chose to put on it. It also demonstrates currently selected tile. It scrolls when the size of the grid exceeds a certain size. <br>
+  <i>public class LibraryView</i> - GUI components for the library displayed on the left side of the game authoring environment, which contains all instantiated units and terrain. From here, the user can open the Unit/TerrainEditors to edit the units and terrain, as well as select them for placement on the grid. <br>
+  <i>public class PieceEntry</i> - An HBox containing data for a unit piece. PieceEntries are added to the LibraryView in the game authoring environment.<br>
+  <i>public class PatchEntry</i> - An HBox containing data for a terrain patch. PatchEntries are added to the LibraryView in the game authoring environment. <br>
+
+  <b>Related Documentation</b> <br>
+  	For additional API details please refer to the <a href="../../VOOGA_DesignDocument.pdf">Design Document</a> or full <a href="../../VOOGA_API.pdf">API Document</a>.<br>
+  	The following Java Packages are used: <br>
+  	<ul>
+  	<li><a href="https://docs.oracle.com/javase/7/docs/api/java/util/package-summary.html">Java util</a></li> <br>
+  	<li><a href="https://docs.oracle.com/javase/7/docs/api/java/awt/package-summary.html">Java awt</a></li><br>
+  	<li><a href="https://docs.oracle.com/javase/8/javase-clienttechnologies.htm">JavaFX</a></li> <br>
+  	</ul> 
+	
+</body>
+</html>
