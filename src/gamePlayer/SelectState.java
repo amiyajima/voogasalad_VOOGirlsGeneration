@@ -7,7 +7,7 @@ import gamedata.gamecomponents.Piece;
  * the grid is selected
  *
  */
-public class SelectState implements GridState {
+public class SelectState implements IGridState {
     private ViewController myController;
 
     public SelectState (ViewController controller) {

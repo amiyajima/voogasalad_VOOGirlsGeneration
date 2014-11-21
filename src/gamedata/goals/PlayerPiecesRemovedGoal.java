@@ -6,10 +6,23 @@ import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
 
+/**
+ * Defines a win condition where a specific Players pieces have been removed
+ * from the board
+ * 
+ * @author Jesse
+ *
+ */
 public class PlayerPiecesRemovedGoal extends Goal {
 
 	private int myID;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param p
+	 *            Target Player
+	 */
 	public PlayerPiecesRemovedGoal(Player p) {
 		myID = p.getID();
 	}

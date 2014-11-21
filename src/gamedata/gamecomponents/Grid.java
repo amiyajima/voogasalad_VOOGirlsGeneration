@@ -1,13 +1,17 @@
 package gamedata.gamecomponents;
 
-import java.util.ArrayList;
+import java.awt.geom.Point2D;
+import java.util.ArrayList; 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 
+/**
+ * Contains the Grid defined for a level. Contains the pieces and patches
+ * 
+ */
 public abstract class Grid {
 	private int myRow;
 	private int myColumn;
@@ -38,8 +42,8 @@ public abstract class Grid {
 			for (int y = 0; y < myRow; y++) {
 				Patch patch = new SquarePatch(DEFAULT_PATCH_STATE,
 						DEFAULT_PATCH_ID, DEFAULT_PATCH_IMAGE,
-						new Point2D(x, y));
-				myPatches.put(new Point2D(x, y), patch);
+						new Point2D.Double(x, y));
+				myPatches.put(new Point2D.Double(x, y), patch);
 			}
 		}
 	}

@@ -1,18 +1,20 @@
 package gamePlayer;
 
-import gamedata.action.Action;
+import gamedata.action.Action; 
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
+
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -52,14 +54,16 @@ public class ViewController{
     private Action activeAction;
     private List<File> myGames;
 
-    @FXML 
-    private VBox statsPane;
+
+    @FXML
+    protected VBox statsPane;
+
     @FXML
     private VBox controlPane;
     @FXML
     private MenuButton newGameButton;
 
-    private GridState gridState;
+    private IGridState gridState;
 
     public ViewController(Stage s){
         myStage = s;
@@ -163,7 +167,7 @@ public class ViewController{
      * 
      * @param state
      */
-    protected void setGridState(GridState state){
+    protected void setGridState(IGridState state){
         gridState = state;
     }
 
@@ -234,7 +238,7 @@ public class ViewController{
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
         int yCor = (int) (y/patchHeight);
-        return new Point2D(xCor,yCor);
+        return new Point2D.Double(xCor,yCor);
     }
 
         private Piece getPiece(Point2D loc){
