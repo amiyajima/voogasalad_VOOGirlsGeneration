@@ -1,4 +1,4 @@
-package gameengine.engine;
+package gamedata;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -57,7 +57,7 @@ public class VoogaMain {
         myLevels.add(level2);
 
         Game myGame = new Game(myPlayers, myLevels);
-        GameBuilder builder = new GameBuilder();
+        JSONMaster builder = new JSONMaster();
 
         //GameDataWrapper w = new GameDataWrapper(myGame);
         //builder.writeToJSON(myGame, "test");

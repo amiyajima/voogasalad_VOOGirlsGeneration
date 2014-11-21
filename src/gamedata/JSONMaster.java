@@ -1,4 +1,4 @@
-package gameengine.engine;
+package gamedata;
 
 import gamedata.gamecomponents.Game;
 import gameengine.player.Player;
@@ -18,7 +18,7 @@ import com.google.gson.Gson;
  *
  * @author annamiyajima
  */
-public class GameBuilder {
+public class JSONMaster {
     final static String DEFAULT_JSON_DIRECTORY = "./src/resources/";
     final static String SAMPLE_JSON = "./src/resources/test.json";
 
@@ -27,11 +27,7 @@ public class GameBuilder {
      * The same game builder should load information for the gamePlayer to play and then save
      * information for the authoring environment to modify
      */
-    public GameBuilder () {
-    }
-
-    public String getFilePath () {
-        return SAMPLE_JSON;
+    public JSONMaster () {
     }
 
     /**
@@ -64,12 +60,10 @@ public class GameBuilder {
      * @param filePath
      * @throws FileNotFoundException
      */
-    public Player readFromJSONFile (String path) throws FileNotFoundException {
+    public Player readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("read method called");
         Gson gson = new Gson();
-        BufferedReader br = new BufferedReader(
-                                               new FileReader(path));
-        
+        BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
         
         //Level l = gson.fromJson(br, Level.class);
         //System.out.println(l);

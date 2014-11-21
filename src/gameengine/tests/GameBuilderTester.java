@@ -2,6 +2,7 @@ package gameengine.tests;
 
 import java.util.ArrayList;
 import java.util.List;
+import gamedata.JSONMaster;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
@@ -9,7 +10,6 @@ import gamedata.gamecomponents.SquareGrid;
 import gamedata.goals.Goal;
 import gamedata.rules.MoveCountRule;
 import gamedata.rules.Rule;
-import gameengine.engine.GameBuilder;
 import gameengine.player.Player;
 import org.junit.Test;
 import com.google.gson.Gson;

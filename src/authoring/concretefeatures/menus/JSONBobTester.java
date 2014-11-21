@@ -1,5 +1,6 @@
 package authoring.concretefeatures.menus;
 
+import gamedata.JSONMaster;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
@@ -8,7 +9,6 @@ import gamedata.goals.Goal;
 import gamedata.goals.PlayerPiecesRemovedGoal;
 import gamedata.rules.MoveCountRule;
 import gamedata.rules.Rule;
-import gameengine.engine.GameBuilder;
 import gameengine.player.Player;
 import java.util.ArrayList;
 import java.util.List;

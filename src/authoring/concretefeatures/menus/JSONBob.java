@@ -1,7 +1,7 @@
 package authoring.concretefeatures.menus;
 
+import gamedata.JSONMaster;
 import gamedata.gamecomponents.Game;
-import gameengine.engine.GameBuilder;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.FileChooser;
@@ -51,7 +51,7 @@ public class JSONBob extends Menu {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new ExtensionFilter("JSON Files", "*.json"));
         File file = fileChooser.showSaveDialog(myStage);
-        GameBuilder myGameBuilder = new GameBuilder();
+        JSONMaster myGameBuilder = new JSONMaster();
         JSONBobTester jb = new JSONBobTester();
         myGameBuilder.writeToJSON(jb.createNewGame(), file.getAbsolutePath());
     }
