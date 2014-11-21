@@ -102,7 +102,7 @@ public class ActionCreator extends PopupWindow{
 			public void handle(ActionEvent click) {
 				myName = nameField.getText();
 				myStatsLogics = getStatsLogics(targetChoice, moddedStat);
-				myActionData.addAction(new ConcreteAction(myName, myAttackRange, 
+				myActionData.add(new ConcreteAction(myName, myAttackRange, 
 						myEffectRange, myStatsLogics, myConclusion));
 				hide(); // close window once action is made
 			}
