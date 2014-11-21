@@ -11,6 +11,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * 
+ * @author huangmengen
+ *
+ */
 public class Tile extends Pane{
 	
 	private static final Image HIDDEN_DEFAULT_IMAGE = new Image("authoring/concretefeatures/images/images.jpeg");
@@ -20,7 +25,7 @@ public class Tile extends Pane{
 	private Patch myTerrain;
 	private Piece myUnit;
 	private Rectangle selected;
-	public Rectangle surfaceImage;
+	private Rectangle surfaceImage;
 	private ImageView terrainImage;
 	private ImageView unitImage;
 	private boolean mySelected;

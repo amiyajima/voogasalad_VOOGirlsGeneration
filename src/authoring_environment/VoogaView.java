@@ -2,6 +2,12 @@ package authoring_environment;
 
 import javafx.scene.layout.BorderPane;
 
+/**
+ * The GUI contains all the parts in authoring environment. It sets the size 
+ * and the position of the parts in the GUI. 
+ * @author huangmengen
+ *
+ */
 public class VoogaView extends BorderPane {
 	private static final int GRID_VIEW_WIDTH = 700;
 	private static final int GRID_VIEW_HEIGHT = 580;

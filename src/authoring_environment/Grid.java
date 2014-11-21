@@ -9,12 +9,17 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
+/**
+ * The grid which contains all the tiles and draws the tiles and grid lines.
+ * @author huangmengen
+ *
+ */
 public class Grid extends Pane {
 
 	private int myWidth;
 	private int myHeight;
 	private int myTileSize;
-	public Tile[][] grid;
+	private Tile[][] grid;
 
 	public Grid(int width, int height, int tilesize) {
 		myWidth = width;
@@ -58,42 +63,37 @@ public class Grid extends Pane {
 
 	}
 
+	/**
+	 * Get the number of tiles in a row.
+	 * @return The number of tiles in a horizontal line of the grid.
+	 */
 	public int getGridWidth() {
 		return myWidth;
 	}
 
+	/**
+	 * Get the number of tiles in a column.
+	 * @return The number of tiles in a vertical line of the grid.
+	 */
 	public int getGridHeight() {
 		return myHeight;
 	}
 
-	public void sampleSelected() {
-		for (Tile[] line : grid) {
-			for (Tile tile : line) {
-				tile.setOnMouseClicked(new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent event) {
-						tile.switchSelected();
-					}
 
-				});
-
-			}
-		}
-	}
-
+	/**
+	 * Get a specific tile in the grid according to its position.
+	 * @param x: The X coordination of the tile
+	 * 			from the left smallest to the right largest.
+	 * @param y: The Y coordination of the tile
+	 * 			from the bottom smallest to the top largest.
+	 * @return The tile at the specified position.
+	 */
 	public Tile getTile(int x, int y) {
 		return grid[x][y];
 	}
-
-	public List<Tile> getSelected() {
-		List<Tile> titles = new ArrayList<Tile>();
-		for(int i=0; i<myWidth; i++){
-			for(int j=0; i<myHeight;j++){
-				if(getTile(i,j).getSelected()){
-					titles.add(getTile(i,j));
-				}
-			}
-		}
-		return titles;
+	
+	public Tile[][] getGridTiles(){
+		return grid;
 	}
+
 }
