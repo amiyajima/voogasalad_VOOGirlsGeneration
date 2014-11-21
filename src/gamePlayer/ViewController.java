@@ -1,18 +1,20 @@
 package gamePlayer;
 
-import gamedata.action.Action;
+import gamedata.action.Action; 
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
+
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -234,7 +236,7 @@ public class ViewController{
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
         int yCor = (int) (y/patchHeight);
-        return new Point2D(xCor,yCor);
+        return new Point2D.Double(xCor,yCor);
     }
 
         private Piece getPiece(Point2D loc){
