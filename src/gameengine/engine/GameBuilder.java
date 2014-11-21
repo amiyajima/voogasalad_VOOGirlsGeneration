@@ -1,24 +1,13 @@
 package gameengine.engine;
 
 import gamedata.gamecomponents.Game;
-import gamedata.gamecomponents.Level;
-import gamedata.gamecomponents.Patch;
-import gamedata.gamecomponents.Piece;
-import gamedata.goals.Goal;
 import gameengine.player.Player;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 
 
 /**
@@ -58,7 +47,8 @@ public class GameBuilder {
         System.out.println("game converted to json");
         try {
             // write converted json data to a file named "CountryGSON.json"
-            FileWriter writer = new FileWriter(DEFAULT_JSON_DIRECTORY + fileName + ".json");
+            //FileWriter writer = new FileWriter(DEFAULT_JSON_DIRECTORY + fileName);
+            FileWriter writer = new FileWriter(fileName);
             writer.write(json);
             writer.close();
         }

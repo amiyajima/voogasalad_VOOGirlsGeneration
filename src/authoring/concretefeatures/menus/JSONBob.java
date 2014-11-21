@@ -37,6 +37,7 @@ public class JSONBob extends Menu {
         fileChooser.getExtensionFilters().add(new ExtensionFilter("JSON Files", "*.json"));
         File file = fileChooser.showSaveDialog(myStage);
         GameBuilder myGameBuilder = new GameBuilder();
-        myGameBuilder.writeToJSON(new Game(), file.getAbsolutePath());
+        JSONBobTester jb = new JSONBobTester();
+        myGameBuilder.writeToJSON(jb.createNewGame(), file.getAbsolutePath());
     }
 }
