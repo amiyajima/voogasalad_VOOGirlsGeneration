@@ -1,10 +1,15 @@
 package gamePlayer;
 
+import gamedata.gamecomponents.Level; 
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
+
+import java.awt.geom.Point2D;
 import java.util.Map;
 import java.util.Observer;
-import javafx.geometry.Point2D;
+
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
 public abstract class GameGrid extends GridPane implements Observer{
@@ -15,33 +20,46 @@ public abstract class GameGrid extends GridPane implements Observer{
     private Map<Point2D, Patch> myPatches;
     private int h;
     private int v;
+    public static final int DEFAULT_HEIGHT = 600;
+    public static final int DEFAULT_WIDTH = 800;
 
+    public GameGrid(int r, int c){
 
-    public GameGrid(int r, int c, int h, int w, Map <Point2D, Patch> patchMap, Map <Point2D,Piece> pieceMap){
-
-  //  public GameGrid(int row, int column){
         super();
         this.r = r;
         this.c = c;
-        this.setPrefHeight(h);
-        this.setPrefWidth(w);
-        myPieces = pieceMap;
-        myPatches = patchMap;
-        
-        
-        populateGrid();
+
+      //  populateGrid();
+        initializeGrid();
+
     }
+
     public int getRow(){
         return r;
     }
+
     public int getCol(){
         return c;
     }
+    
+    
+    protected Node get(int row, int col){
+        Node result = null;
+        ObservableList<Node> childrens = this.getChildren();
+        for(Node node : childrens) {
+          // System.out.println("myGrid has a node at:" + myGrid.getRowIndex(node));
+            if(this.getRowIndex(node) == row && this.getColumnIndex(node) == col) {
+                result = node;
+                break;
+            }
+        }
+        return result;
+    }
 
-   
 
+    protected abstract void initializeGrid();
 
-protected abstract void populateGrid();
+    protected abstract void populateGrid(Map<Point2D, Patch> patches, Map<Point2D, Piece>pieces);
 
 
 

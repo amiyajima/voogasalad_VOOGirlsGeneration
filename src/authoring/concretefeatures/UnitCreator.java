@@ -6,12 +6,12 @@ import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
 
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -27,6 +27,13 @@ import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
+/**
+ * GUI element that allows users to create new Piece templates and add them to the 
+ * Library. User defines unit name, image, and actions. Actions define a units behavior
+ * and ultimately make the unit what it is.
+ * 
+ * @author Mike Zhu
+ */
 public class UnitCreator extends PopupWindow {
 	
 	private final int HEIGHT = 400;
@@ -39,6 +46,12 @@ public class UnitCreator extends PopupWindow {
 	private final String TEMPLATE_LABEL = "Create new unit template";
 	private LibraryView myLibrary;
 	
+	/**
+	 * Constructor that sets the dimensions of the UnitCreator GUI component
+	 * and initializes it.
+	 * 
+	 * @param library : Library to which units will be added.
+	 */
 	public UnitCreator(LibraryView library){
 		myLibrary = library;
 		setHeight(HEIGHT);
@@ -93,7 +106,7 @@ public class UnitCreator extends PopupWindow {
 				copy.setFitHeight(40);
 				copy.setFitWidth(40);
 				Piece unit = new Piece(copy, new ArrayList<Movement>(), new ArrayList<Action>(),
-						new Stats(), new Point2D(0, 0), 0, new Inventory());
+						new Stats(), new Point2D.Double(0, 0), 0, new Inventory());
 				Hyperlink link = new Hyperlink(unitName.getText());
 				link.setTranslateY(10);;
 				link.setOnAction(new EventHandler<ActionEvent>(){

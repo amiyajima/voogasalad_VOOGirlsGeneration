@@ -1,13 +1,13 @@
 package gamedata.gamecomponents;
 
-import gamedata.action.Action;
+import gamedata.action.Action; 
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
 
+import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
 
-import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 
 public class Piece {
@@ -63,6 +63,13 @@ public class Piece {
 
 	public Stats getStats() {
 		return myStats;
+	}
+	
+	public double getStat(String s){
+		if(myStats.getStatsMap().containsKey(s)){
+			return myStats.getStatsMap().get(s);
+		}
+		return 0;
 	}
 
 	public void addAction(Action a) {

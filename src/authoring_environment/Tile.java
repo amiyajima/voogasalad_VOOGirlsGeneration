@@ -13,7 +13,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Tile extends Pane{
 	
-	private static final Image HIDDEN_DEFAULT_IMAGE = new Image("/PowerStar.png");
+	private static final Image HIDDEN_DEFAULT_IMAGE = new Image("authoring/concretefeatures/images/images.jpeg");
 	
 	private int mySize;
 	private Rectangle myDefault;
@@ -24,8 +24,11 @@ public class Tile extends Pane{
 	private ImageView terrainImage;
 	private ImageView unitImage;
 	private boolean mySelected;
+	private int myX;
+	private int myY;
 	
 	public Tile(int x,int y,int size){
+
 		mySize = size;
 		mySelected = false;
 		myDefault = new Rectangle(mySize, mySize);
@@ -53,9 +56,9 @@ public class Tile extends Pane{
 		
 		this.setLayoutX(x*mySize);
 		this.setLayoutY(y*mySize);
-		this.getChildren().addAll(myDefault, terrainImage, unitImage, selected);
+		this.getChildren().addAll(myDefault, terrainImage, unitImage,surfaceImage, selected);
 		setActionEvent();
-//		switchSelected();
+
 	}
 	
 	private void setActionEvent() {
@@ -112,7 +115,11 @@ public class Tile extends Pane{
 		return mySelected;
 	}
 	
+	
 	public void addSurfaceImage(Image image){
 		surfaceImage.setFill(new ImagePattern(image));
+//		this.getChildren().add(surfaceImage);
+		surfaceImage.setVisible(true);
+
 	}
 }

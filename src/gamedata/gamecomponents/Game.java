@@ -96,6 +96,9 @@ public class Game {
 		}
 	}
 
+	/**
+	 * Resets the active player to be the first player who has played
+	 */
 	private void resetPlayer() {
 		myCurrentPlayer = myPlayers.get(0);
 	}
@@ -103,9 +106,17 @@ public class Game {
 	/**
 	 * Restarts the Level Note: This doesn't actually work. Need deep cloning
 	 */
-
 	private void restartLevel() {
 		myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel));
+	}
+
+	/**
+	 * Getter for the Current Level
+	 * 
+	 * @return Returns the Current Level
+	 */
+	public Level getCurrentLevel() {
+		return myCurrentLevel;
 	}
 
 }

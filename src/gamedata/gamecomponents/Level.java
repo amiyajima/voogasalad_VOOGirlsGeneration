@@ -42,8 +42,8 @@ public class Level extends Observable {
 	 * @return
 	 */
 	public boolean levelCompleted() {
-		setChanged();
-		notifyObservers();
+    		setChanged();
+    		notifyObservers();
 		for (Goal g : myGoals) {
 			if (g.checkGameState(this) == 1) {
 				return true;

@@ -1,17 +1,20 @@
 package gamePlayer;
 
-import gamedata.action.Action;
+import gamedata.action.Action; 
+import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
+
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -19,6 +22,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -27,91 +32,163 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-//TODO: pupulate Grid by actual pieces and patches;
 
-//TODO: currently, the "testAction" button is set on action to show highlightActionRange, 
-//      still needs to add highlighting effect to follow the hover;
-//      and to make dropshadow effect more obvious!!!
+//TODO: need valid grid and Game constructor from back end. 
 
-public class ViewController extends BorderPane{
+
+public class ViewController{
 
     public static final String GAMESPACE_FXML = "gameSpace.fxml";
+    public static final String INITIALSCENE_FXML = "initialScene.fxml";
+    public static final String INITIALSCENE_TITLE = "VOOGASALAD!";
+    public static final String GAME_LOCATION = "/src/resources";
 
 
     private Stage myStage;
-    private DummyGame myModel;
+    private Game myModel;
     private GameGrid myGrid;
-    // Temparary stub!! for testing purposes;;;
-    private List<Action> myActions;
-    private Map<String, Double> myStats;
-    
+    private VBox myInitialScene;
+    private BorderPane myGameSpace;
+   
     private Piece activePiece;
     private Action activeAction;
+    private List<File> myGames;
+
 
     @FXML
-    private VBox statsPane;
+    protected VBox statsPane;
+
     @FXML
     private VBox controlPane;
+    @FXML
+    private MenuButton newGameButton;
 
-    private GridState gridState;
+    private IGridState gridState;
 
     public ViewController(Stage s){
         myStage = s;
-        myStage.setFullScreen(true);
-        myModel = new DummyGame("VOOGASALAD!!");
-        myGrid = new SquareGameGrid(8,8, null, null);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(GAMESPACE_FXML));
-        fxmlLoader.setController(this);
-        fxmlLoader.setRoot(this);
+       myInitialScene = new VBox();
+       myGameSpace = new BorderPane();
+        myModel = new Game();
+        myGames = new ArrayList<File>();
+       // myGrid = new SquareGameGrid(8,8);
+        FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource(GAMESPACE_FXML));
+        fxmlLoaderGame.setController(this);
+        fxmlLoaderGame.setRoot(myGameSpace);
+        
+        FXMLLoader fxmlLoaderInit = new FXMLLoader(getClass().getResource(INITIALSCENE_FXML));
+        fxmlLoaderInit.setController(this);
+        fxmlLoaderInit.setRoot(myInitialScene);
+        
 
         try{
-            fxmlLoader.load();
+            fxmlLoaderGame.load();
+            fxmlLoaderInit.load();
         }
         catch(IOException exception) {
             throw new RuntimeException(exception);
         }
-        this.setCenter(myGrid);
+        myGameSpace.setCenter(myGrid);
         myGrid.setAlignment(Pos.CENTER);
-        myStage.setScene(new Scene(this));
+        myStage.setScene(new Scene(myInitialScene));
+        newGame();
+        myStage.show();
 
     }
 
-   
+
+    private void newGame () {
+        getGames();
+        System.out.println(myGames.size());
+        myGames.forEach(file->{ MenuItem l = new MenuItem();
+        l.setText(file.getName());
+        l.setOnAction(event->{
+           // myModel.initializeGame(file.getName());
+            myStage.setScene(new Scene(myGameSpace));
+
+        });
+        l.getStyleClass().add("button");
+            newGameButton.getItems().add(l);
+
+        });
+        
+        
+    }
+
+    /**
+     * the method allows user to load the previously saved json representation
+     * of the game and uses JSON reader from Game Data to generate an instance
+     * of Game.
+     */
+
     @FXML
     protected void loadGame () {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(new ExtensionFilter("JSON", "*.json"));
         File f = fc.showOpenDialog(myStage);
+        
+        // uses JSON reader to generate an instance of the game
 
     }
+    
+    @FXML
+    private void doSettings(){
+
+    }
+    
+    
+    /**
+     * The method to get all json files from the resources directory that 
+     * stores all the games user has defined from the authoring environment
+     */
+    private void getGames(){
+        
+        File files = new File(System.getProperty("user.dir")+GAME_LOCATION);
+
+            for (File f: files.listFiles()){
+
+                if(f.getName().endsWith(".json")){
+                    
+                    myGames.add(f);
+                }
+            }
+    }
+    /**
+     * 
+     * 
+     */
     @FXML
     protected void restartGame () {
 
-        System.out.println("restarting game");
+        //System.out.println("restarting game");
+       // myModel=new Game();
+        
+        // Generate a new Game Object.
 
     }
     @FXML
     protected void exitGame () {
-
         myStage.close();
-
 
     }
 
+    /**
+     * to save the current game (state and settings) to a json file which could be later loaded in
+     */
     @FXML
     protected void saveGame () {
         FileChooser fileChooser = new FileChooser();
         File f = fileChooser.showSaveDialog(myStage);
-        myModel.store(f);
+        // JSONWriter.write(f);
 
     }
     /**
      * Method to switch the state of the game grid between select mode 
      * and apply mode
      * 
-     * @param state
+     * @param state the current state of the Grid, select/ apply action Mode
      */
-    protected void setGridState(GridState state){
+    protected void setGridState(IGridState state){
         gridState = state;
     }
 
@@ -120,24 +197,25 @@ public class ViewController extends BorderPane{
      * @param piece
      */
     protected void updateStats(Piece piece){
-        myStats = new HashMap<String, Double>();
+  
         statsPane.getChildren().clear();
         ArrayList<Text> stats = new ArrayList<Text>();
-        myStats.keySet().forEach(key->stats.add(new Text(key+ ":  "+ myStats.get(key))));
+        piece.getStats().getStatsMap().keySet().forEach(key->stats.
+                                                        add(new Text(key+ ":  "+ piece.getStats().
+                                                         getStatsMap().get(key))));
         statsPane.getChildren().addAll(stats);
 
     }
 
-    //TODO: replace myActions with Game.get.get...
     /**
      * Update the action panel with actions from the selected piece
      * @param piece
      */
     protected void updateActions (Piece piece){
-        myActions = new ArrayList<Action>();
+        
         controlPane.getChildren().clear();
         ArrayList<Label> actions = new ArrayList<Label>();
-        myActions.forEach(action->{Label l = new Label(action.toString()); 
+        piece.getActions().forEach(action->{Label l = new Label(action.toString()); 
         l.setOnMouseClicked(event->bindAction(action));
         actions.add(l);});
 
@@ -152,14 +230,10 @@ public class ViewController extends BorderPane{
     private void bindAction(Action action){
         setActiveAction(action);
         highLightActionRange();
-       // highLightEffectRange();
+
         setGridState(new ApplyState(this));
     }
 
-
-
-
-  
     private void setOnClick(){
         myGrid.setOnMouseClicked(event->{performAction(event.getX(), event.getY());});
     }
@@ -170,10 +244,10 @@ public class ViewController extends BorderPane{
      * @param y
      */
     private void performAction (double x, double y) {
-        // gridState.onClick(getPiece(findPosition(x,y)));
+         gridState.onClick(getPiece(findPosition(x,y)));
 
     }
-    
+
     /**
      * Method to convert pixel coordinates into tile coordinates
      * @param x
@@ -185,18 +259,18 @@ public class ViewController extends BorderPane{
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
         int yCor = (int) (y/patchHeight);
-        return new Point2D(xCor,yCor);
+        return new Point2D.Double(xCor,yCor);
     }
 
-    //    private Piece getPiece(Point2D loc){
-    //       // return myModel.getCurrentLevel().getGrid().getPiece(loc);
-    //        
-    //    }
+        private Piece getPiece(Point2D loc){
+            return myModel.getCurrentLevel().getGrid().getPiece(loc);
+            
+        }
     protected GameGrid getGrid(){
         return myGrid;
     }
 
-    protected DummyGame getGame(){
+    protected Game getGame(){
         return myModel;
     }
     protected void setActivePiece(Piece piece){
@@ -212,7 +286,7 @@ public class ViewController extends BorderPane{
     protected Action getActiveAction(){
         return activeAction;
     }
-    
+
     /**
      * Highlight the tiles that represent the possible range of the action
      * selected
@@ -220,23 +294,23 @@ public class ViewController extends BorderPane{
     @FXML
     private void highLightActionRange(){
         //TODO: getActionRange()shouldn't need a location. action is contained in piece, which knows its own location.
-      //  activeAction.getActionRange(activePiece.getLoc());
+        //  activeAction.getActionRange(activePiece.getLoc());
 
 
         //temparary stub for testing highlight;
-        myModel.getActionRange().forEach(point->{ Node n = get((int)point.getX(), (int)point.getY());
+        activeAction.getActionRange(activePiece.getLoc()).forEach(point->{ Node n = myGrid.get((int)point.getX(), (int)point.getY());
         addDropShadow(n, Color.YELLOW);
         n.setOnMouseEntered(event->highLightEffectRange(n, Color.RED));
         n.setOnMouseExited(event->highLightEffectRange(n, Color.TRANSPARENT));
 
         });
-        
+
 
 
 
 
     }
-    
+
     private void addDropShadow(Node n, Color c){
         DropShadow ds = new DropShadow(); 
         ds.setRadius(10.0);
@@ -245,39 +319,28 @@ public class ViewController extends BorderPane{
         ds.setColor(c);
         n.setEffect(ds); 
     }
-    
-    
+
+
     /**
-     * Highlight the effect range of an action applied at a given position
+     * Highlight the effect range of an action if to be applied at a given position
      * @param n
      * @param c
      */
     private void highLightEffectRange(Node n, Color c){
-       
-      //  activeAction.getEffectRange();
-        myModel.getEffectRanges().forEach(point->{Node node = get(myGrid.getRowIndex(n)+ (int)point.getX(), myGrid.getColumnIndex(n)+ (int)point.getY());
-           
-           if(c ==Color.TRANSPARENT && node.getEffect()!=null){
-               node.setEffect(null);
-           }
-           else{
-               addDropShadow(node, c);
-           }
-           });
-    }
 
+        //  activeAction.getEffectRange();
+        activeAction.getEffectRange().forEach(point->{Node node = myGrid.get(myGrid.getRowIndex(n)+ (int)point.getX(), myGrid.getColumnIndex(n)+ (int)point.getY());
 
-    private Node get(int row, int col){
-        Node result = null;
-        ObservableList<Node> childrens = myGrid.getChildren();
-        for(Node node : childrens) {
-          // System.out.println("myGrid has a node at:" + myGrid.getRowIndex(node));
-            if(myGrid.getRowIndex(node) == row && myGrid.getColumnIndex(node) == col) {
-                result = node;
-                break;
-            }
+        if(c ==Color.TRANSPARENT && node.getEffect()!=null){
+            node.setEffect(null);
         }
-        return result;
+        else{
+            addDropShadow(node, c);
+        }
+
+
+        });
     }
+
 
 }

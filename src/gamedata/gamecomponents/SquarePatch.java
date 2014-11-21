@@ -1,6 +1,7 @@
 package gamedata.gamecomponents;
+ 
+import java.awt.geom.Point2D;
 
-import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 
 public class SquarePatch extends Patch {
