@@ -1,4 +1,6 @@
 package gamePlayer;
+import gamedata.action.Action;
+import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import java.util.Map;
@@ -8,6 +10,7 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -66,13 +69,17 @@ public class SquareGameGrid extends GameGrid{
         rec.setFill(Color.BURLYWOOD);
         
     }
-
-
+    
+    public void addKeyboardControl (Game game) {
+        Map<KeyCode,Action> actionKeyMap = game.
+        
+//        KeyboardController keyboardController = new KeyboardController();
+//        keyboardController.setActionKeyControl(actionKeyMap, gameScene);
+//        keyboardController.setMovementKeyControl(movementKeyMap, gameScene);
+    }
 
     @Override
     public void update (Observable o, Object arg) {
         // TODO Auto-generated method stub
-        
     }
-
 }
