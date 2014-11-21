@@ -1,9 +1,11 @@
 package gamePlayer;
-import gamedata.action.Action;
+import gamedata.action.Action;  
 import gameengine.player.Player;
+
+import java.awt.geom.Point2D;
 import java.util.Map;
+
 import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;

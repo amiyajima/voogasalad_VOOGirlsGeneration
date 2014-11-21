@@ -2,10 +2,13 @@ package gamePlayer;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
@@ -15,7 +18,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-public class InitialSceneController extends VBox{
+public class InitialSceneController{
 
     public static final String INITIALSCENE_FXML = "initialScene.fxml";
     public static final String INITIALSCENE_TITLE = "VOOGASALAD!";
@@ -23,6 +26,7 @@ public class InitialSceneController extends VBox{
 
     private Stage myStage;
     private DummyGame myGame;
+    private VBox myRoot;
 
     @FXML
     private MenuButton newGameButton;
@@ -32,11 +36,13 @@ public class InitialSceneController extends VBox{
     public InitialSceneController(Stage s){
 
         myStage = s;
+        myRoot = new VBox();
+      //  myRoot = FXMLLoader.load(getClass().getResource(INITIALSCENE_FXML));
         myGame= new DummyGame("VOOGASALAD!!");
         myGames = new ArrayList<File>();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(INITIALSCENE_FXML));
         fxmlLoader.setController(this);
-        fxmlLoader.setRoot(this);
+        fxmlLoader.setRoot(myRoot);
         
         try{
             fxmlLoader.load();
@@ -44,7 +50,8 @@ public class InitialSceneController extends VBox{
         catch(IOException exception) {
             throw new RuntimeException(exception);
         }
-        myStage.setScene(new Scene(this));
+        
+        myStage.setScene(new Scene(myRoot));
         newGame();
 
         myStage.show();
@@ -95,6 +102,7 @@ public class InitialSceneController extends VBox{
                 }
             }
     }
+
 
 
 

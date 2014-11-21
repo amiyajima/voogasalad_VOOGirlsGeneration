@@ -1,16 +1,16 @@
 package gamePlayer;
-import gamedata.gamecomponents.Level;
+import gamedata.gamecomponents.Level; 
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import java.util.Map;
 import java.util.Observable;
 import javafx.collections.ObservableList;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import java.awt.geom.Point2D;
 
 //TODO: fix stackpane size to make drop shadow effect more obvious!
 

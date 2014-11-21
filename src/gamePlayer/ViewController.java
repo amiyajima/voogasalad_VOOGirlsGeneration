@@ -1,18 +1,20 @@
 package gamePlayer;
 
-import gamedata.action.Action;
+import gamedata.action.Action; 
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
+
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -20,6 +22,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -29,47 +33,86 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 
-//TODO: currently, the "testAction" button is set on action to show highlightActionRange, 
-// need to fix the bug!!
+//TODO: need valid grid and Game constructor from back end. 
 
-public class ViewController extends BorderPane{
+
+public class ViewController{
 
     public static final String GAMESPACE_FXML = "gameSpace.fxml";
+    public static final String INITIALSCENE_FXML = "initialScene.fxml";
+    public static final String INITIALSCENE_TITLE = "VOOGASALAD!";
+    public static final String GAME_LOCATION = "/src/resources";
 
 
     private Stage myStage;
     private Game myModel;
     private GameGrid myGrid;
+    private VBox myInitialScene;
+    private BorderPane myGameSpace;
    
     private Piece activePiece;
     private Action activeAction;
+    private List<File> myGames;
+
 
     @FXML
     protected VBox statsPane;
+
     @FXML
     private VBox controlPane;
+    @FXML
+    private MenuButton newGameButton;
 
     private GridState gridState;
 
     public ViewController(Stage s){
         myStage = s;
-        myStage.setFullScreen(true);
+       myInitialScene = new VBox();
+       myGameSpace = new BorderPane();
         myModel = new Game();
-        myGrid = new SquareGameGrid(8,8);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(GAMESPACE_FXML));
-        fxmlLoader.setController(this);
-        fxmlLoader.setRoot(this);
+        myGames = new ArrayList<File>();
+       // myGrid = new SquareGameGrid(8,8);
+        FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource(GAMESPACE_FXML));
+        fxmlLoaderGame.setController(this);
+        fxmlLoaderGame.setRoot(myGameSpace);
+        
+        FXMLLoader fxmlLoaderInit = new FXMLLoader(getClass().getResource(INITIALSCENE_FXML));
+        fxmlLoaderInit.setController(this);
+        fxmlLoaderInit.setRoot(myInitialScene);
+        
 
         try{
-            fxmlLoader.load();
+            fxmlLoaderGame.load();
+            fxmlLoaderInit.load();
         }
         catch(IOException exception) {
             throw new RuntimeException(exception);
         }
-        this.setCenter(myGrid);
+        myGameSpace.setCenter(myGrid);
         myGrid.setAlignment(Pos.CENTER);
-        myStage.setScene(new Scene(this));
+        myStage.setScene(new Scene(myInitialScene));
+        newGame();
+        myStage.show();
 
+    }
+
+
+    private void newGame () {
+        getGames();
+        System.out.println(myGames.size());
+        myGames.forEach(file->{ MenuItem l = new MenuItem();
+        l.setText(file.getName());
+        l.setOnAction(event->{
+           // myModel.initializeGame(file.getName());
+            myStage.setScene(new Scene(myGameSpace));
+
+        });
+        l.getStyleClass().add("button");
+            newGameButton.getItems().add(l);
+
+        });
+        
+        
     }
 
 
@@ -80,6 +123,25 @@ public class ViewController extends BorderPane{
         File f = fc.showOpenDialog(myStage);
 
     }
+    
+    @FXML
+    private void doSettings(){
+
+    }
+    
+    private void getGames(){
+        
+        File files = new File(System.getProperty("user.dir")+GAME_LOCATION);
+
+            for (File f: files.listFiles()){
+
+                if(f.getName().endsWith(".json")){
+                    
+                    myGames.add(f);
+                }
+            }
+    }
+    
     @FXML
     protected void restartGame () {
 
@@ -88,9 +150,7 @@ public class ViewController extends BorderPane{
     }
     @FXML
     protected void exitGame () {
-
         myStage.close();
-
 
     }
 
@@ -116,8 +176,7 @@ public class ViewController extends BorderPane{
      * @param piece
      */
     protected void updateStats(Piece piece){
-        // myStats = new HashMap<String, Double>();
-
+  
         statsPane.getChildren().clear();
         ArrayList<Text> stats = new ArrayList<Text>();
         piece.getStats().getStatsMap().keySet().forEach(key->stats.
@@ -179,7 +238,7 @@ public class ViewController extends BorderPane{
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
         int yCor = (int) (y/patchHeight);
-        return new Point2D(xCor,yCor);
+        return new Point2D.Double(xCor,yCor);
     }
 
         private Piece getPiece(Point2D loc){
