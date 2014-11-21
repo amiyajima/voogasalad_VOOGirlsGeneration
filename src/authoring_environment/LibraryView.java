@@ -12,11 +12,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class LibraryView extends TabPane{
+/**
+ * @author VOOGirls Generation
+ * 
+ * GUI components for the library displayed on the left side of the
+ * game authoring environment, which contains all instantiated units
+ * and terrain. From here, the user can open the Unit/TerrainEditors
+ * to edit the units and terrain, as well as select them for
+ * placement on the grid.
+ */
+public class LibraryView extends TabPane {
 	
 	private final int HEIGHT = 300;
 	private final int WIDTH = 580;
@@ -29,6 +37,12 @@ public class LibraryView extends TabPane{
 	public static boolean unitSelected;
 	public static boolean reset;
 	
+	/**
+	 * LibraryView constructor. Initializes two tabs - one for units,
+	 * one for terrain. Units and terrain are added dynamically to
+	 * their respective tabs as they are created in the UnitCreator
+	 * and TerrainCreator.
+	 */
 	public LibraryView(){
 		this.setPrefSize(HEIGHT, WIDTH);
 		unitSelected = false;
@@ -72,6 +86,14 @@ public class LibraryView extends TabPane{
 		myLibraryMap.put(TERRAIN, terrainLibrary);
 	}
 	
+	/**
+	 * Method to add units and terrain to their respective tabs in
+	 * the LibraryView.
+	 * 
+	 * @param content : The LibraryEntry to be added to the library.
+	 * @param library : Specifies whether to add the content to the
+	 * "Unit Library" or the "Terrain Library".
+	 */
 	public void addToLibrary(HBox content, String library){
 		myLibraryMap.get(library).getChildren().add(content);
 	}

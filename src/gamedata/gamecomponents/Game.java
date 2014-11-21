@@ -1,8 +1,8 @@
 package gamedata.gamecomponents;
 
-import java.util.ArrayList;
+import gameengine.player.Player;
+
 import java.util.List;
-import gameengine.player.*;
 
 /**
  * A game that contains a list of players and the levels that players can play
@@ -117,6 +117,9 @@ public class Game {
 	 */
 	public Level getCurrentLevel() {
 		return myCurrentLevel;
+	}
+	public List<Player> getPlayers(){
+	    return myPlayers;
 	}
 
 }
