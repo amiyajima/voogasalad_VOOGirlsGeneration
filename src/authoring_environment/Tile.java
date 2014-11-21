@@ -24,8 +24,11 @@ public class Tile extends Pane{
 	private ImageView terrainImage;
 	private ImageView unitImage;
 	private boolean mySelected;
+	private int myX;
+	private int myY;
 	
 	public Tile(int x,int y,int size){
+
 		mySize = size;
 		mySelected = false;
 		myDefault = new Rectangle(mySize, mySize);
@@ -117,7 +120,6 @@ public class Tile extends Pane{
 		surfaceImage.setFill(new ImagePattern(image));
 //		this.getChildren().add(surfaceImage);
 		surfaceImage.setVisible(true);
-		System.out.print("center image added");
 
 	}
 }
