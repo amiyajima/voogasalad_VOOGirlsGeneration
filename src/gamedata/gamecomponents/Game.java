@@ -118,5 +118,8 @@ public class Game {
 	public Level getCurrentLevel() {
 		return myCurrentLevel;
 	}
+	public List<Player> getPlayers(){
+	    return myPlayers;
+	}
 
 }

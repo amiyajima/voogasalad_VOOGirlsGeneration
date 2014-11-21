@@ -51,6 +51,7 @@
       <HBox fx:id="console" prefHeight="54.0" prefWidth="536.0" BorderPane.alignment="CENTER" />
    </bottom>
    <top>
+   	<HBox>
       <MenuButton mnemonicParsing="false" styleClass="menuButton" stylesheets="@stylesheet.css" text="Game Menu" BorderPane.alignment="CENTER_LEFT">
         <items>
             <MenuItem fx:id="restartMenu" mnemonicParsing="false" onAction="#restartGame" text="restart" />
@@ -59,6 +60,9 @@
             <MenuItem fx:id="exitMenu" mnemonicParsing="false" onAction="#exitGame" text="Exit" />
         </items>
       </MenuButton>
+      <Button fx:id="showScoreButton" mnemonicParsing="false" styleClass="button" stylesheets="@stylesheet.css" text="Score Board" onAction="#showScore">
+      </Button> 
+      </HBox>
    </top>
    <center>
    
