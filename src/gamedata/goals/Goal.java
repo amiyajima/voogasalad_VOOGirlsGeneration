@@ -5,6 +5,7 @@ import gamedata.gamecomponents.Level;
 
 /**
  * A goal defines the win conditions for each level.
+ * @Author Jesse, Anna
  *
  */
 public abstract class Goal {

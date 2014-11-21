@@ -16,9 +16,13 @@ import com.google.gson.Gson;
 import static org.junit.Assert.*;
 import org.junit.Before;
 
-
+/**
+ * Currently using VoogaMain class in gameengine to test instead
+ * @author annamiyajima
+ *
+ */
 public class GameBuilderTester {
-
+/*
     private Game myGame;
     private GameBuilder myGameBuilder;
     private List<Player> myPlayers;
@@ -60,5 +64,5 @@ public class GameBuilderTester {
     public void testReadFromJsonFile () {
 
     }
-
+*/
 }

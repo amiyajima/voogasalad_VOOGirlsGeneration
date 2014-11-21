@@ -1,6 +1,7 @@
 package authoring_environment;
 
 import authoring.concretefeatures.menus.*;
+import authoring.data.ActionData;
 import javafx.scene.control.MenuBar;
 
 public class MenuView extends MenuBar {
@@ -9,6 +10,6 @@ public class MenuView extends MenuBar {
 		this.setPrefSize(1000, 20);
 		
 		getMenus().addAll(new File(), new GlobalRules(), new Events(), new Units(library), 
-						  new Terrain(library), new Actions(library), new JSONBob(library));
+						  new Terrain(library), new Actions(library, new ActionData()), new JSONBob(library));
 	}
 }

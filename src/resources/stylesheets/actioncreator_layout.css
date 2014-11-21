@@ -1,0 +1,19 @@
+.root {
+	-fx-hbar-policy: never;
+	-fx-vbar-policy: as-needed;
+	-fx-text-color: #FFFFFF;
+	-fx-base: #343434;
+	-fx-background-color: #343434;
+}
+
+.vbox { 
+	-fx-spacing: 5;
+}
+
+#vbox-main {
+	-fx-padding: 10;
+}
+
+.button {
+	-fx-padding: 5;
+}
