@@ -27,6 +27,15 @@ import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
+/** 
+ * GUI element that allows users to create new Piece templates and add them to the 
+ * Library. User defines unit name, image, and actions. Actions define a units behavior
+ * and ultimately make the unit what it is.
+ * 
+ * @author Mike Zhu
+ *
+ */
+
 public class UnitCreator extends PopupWindow {
 	
 	private final int HEIGHT = 400;

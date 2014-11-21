@@ -23,6 +23,13 @@ import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
+/**
+ * GUI element used to create new Patch objects and add them to the library. Allows users
+ * to specify the name and image of the patch. 
+ * 
+ * @author Mike Zhu
+ *
+ */
 public class TerrainCreator extends PopupWindow {
 	
 	private final int HEIGHT = 400;
