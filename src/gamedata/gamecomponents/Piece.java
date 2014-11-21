@@ -64,6 +64,13 @@ public class Piece {
 	public Stats getStats() {
 		return myStats;
 	}
+	
+	public double getStat(String s){
+		if(myStats.getStatsMap().containsKey(s)){
+			return myStats.getStatsMap().get(s);
+		}
+		return 0;
+	}
 
 	public void addAction(Action a) {
 		myActions.add(a);
