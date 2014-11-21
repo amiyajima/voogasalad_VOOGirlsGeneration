@@ -55,7 +55,7 @@ public class ViewController{
     protected VBox statsPane;
 
     @FXML
-    private VBox controlPane;
+    protected VBox controlPane;
     @FXML
     private MenuButton newGameButton;
 
@@ -262,7 +262,7 @@ public class ViewController{
      * @param y
      * @return a Point2D representing tile coordinates
      */
-    private Point2D findPosition(double x, double y){
+    protected Point2D findPosition(double x, double y){
         double patchHeight = (double) myGrid.getHeight()/(double) myGrid.getCol();
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
