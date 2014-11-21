@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<!--
+The MIT License (MIT)
+
+Copyright (c) <2014> <VOOGirlsGeneration>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+</head>
+<body>
+  <u><b>VOOGirlsGeneration - Game Data</b></u><br>
+
+  <b>Package Summary:</b> <br>
+  This packages provides the classes and interfaces that define the structure of a game. Provides the required class that define each component of the game that can be instantiated and combined to create a functional game. Also contains JSON components capable of writing a Game to JSON and reading a Game from JSON.<br>
+
+  <b>Package Contents:</b><br>
+  <i>public class Game</i> - Represents a Game <br>
+  <i>public abstract class Grid</i> - Contains the Grid defined for a level. Contains the pieces and patches <br>
+  <i>public abstract class Patch</i> - Defines a specific patch/tile in the Grid <br>
+  <i>public class Piece</i> - Class for pieces. Pieces are the primary unit for game play. They have movement and can carry out various actions during the game. <br>
+  <i>public class Goal</i> - A goal defines the win conditions for each level. <br>
+  <i>public class Rule</i> - A rule defines when a user's turn is over. <br>
+  <i>public interface Action</i> -  Interface of a game component that performs an action on another component in the game. Pieces will contain a list of actions. <br>
+  <i>public interface ActionConclusion</i> - Conclusion that runs at the end of each action. Could be piece removal, more modifying of stats, etc. Will be pre-coded in code and chosen by the user. <br>
+  <i>public class Stats</i> - Stats constructor for initializing empty stats map <br>
+  <i>public class Inventory</i> - Inventory to be contained by a piece if the user chooses to add an inventory to a piece. <br>
+  <i>public class Movement</i> - Defines the movement of a piece. Responsible for maintaining the behavior properties of a piece and executing allowed movements. <br>
+  <i>public class Orientator</i> -  At every point on the piece's movement path, this calculates which direction the piece should be facing. Also if you want to turn the piece to face an enemy or something like that, you simply enter the location of the piece and the location of the enemy. <br> 
+  <i>public class JSONMaster</i> - Builds the state of a game from the games JSON file <br>
+  <i></i>
+
+  <b>Related Documentation</b> <br>
+  	For additional API details please refer to the <a href="../../VOOGA_DesignDocument.pdf">Design Document</a> or full <a href="../../VOOGA_API.pdf">API Document</a>.<br>
+  	The following Java Packages are used: <br>
+  	<ul>
+  	<li><a href="https://docs.oracle.com/javase/7/docs/api/java/util/package-summary.html">Java util</a></li> <br>
+  	<li><a href="https://docs.oracle.com/javase/7/docs/api/java/awt/package-summary.html">Java awt</a></li><br>
+  	<li><a href="https://docs.oracle.com/javase/8/javase-clienttechnologies.htm">JavaFX</a></li> <br>
+  	</ul> 
+	
+</body>
+</html>

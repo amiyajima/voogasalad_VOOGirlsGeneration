@@ -11,27 +11,25 @@ package gamedata.action;
  *
  */
 
-public class StatsSingleMultiplier {
+public class StatsSingleMultiplier extends StatsModifier {
 	private double myModifier;
-	private String myTarget;
-	private String myValue; // probably shouldn't call this a value, think of better name
 	
-	public StatsSingleMultiplier(double modifier, String target, String value) {
-		myModifier = modifier;
-		myTarget = target;
-		myValue = value;
+	/**
+	 * Constructor for StatsSingleMultiplier
+	 * @param modifier - double containing scale factor of stat
+	 * @param target
+	 * @param stat
+	 */
+	public StatsSingleMultiplier(double modifier, String target, String stat) {
+		super(target,stat);
+		super.myStat = stat;
 	}
 	
-	public double getModifier() {
+	/**
+	 * Returns the double that will scale the stat
+	 */
+	protected double getModifier() {
 		return myModifier;
-	}
-	
-	public boolean checkTarget(String targetToCheck) {
-		return targetToCheck.equals(myTarget);
-	}
-	
-	public String getValue() {
-		return myValue;
 	}
 	
 }
