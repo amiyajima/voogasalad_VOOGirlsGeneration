@@ -1,6 +1,6 @@
 package authoring.concretefeatures;
 
-import gamedata.action.Action; 
+import gamedata.action.Action;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
@@ -28,11 +28,11 @@ import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
 /**
- * @author VOOGirls Generation
+ * GUI element that allows users to create new Piece templates and add them to the 
+ * Library. User defines unit name, image, and actions. Actions define a units behavior
+ * and ultimately make the unit what it is.
  * 
- * The GUI components for creating units in the authoring environment are coded here.
- * After a unit is created, it is added to the library, and from the library, its stats
- * can be edited.
+ * @author Mike Zhu
  */
 public class UnitCreator extends PopupWindow {
 	

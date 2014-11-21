@@ -1,6 +1,6 @@
 package authoring.concretefeatures;
 
-import gamedata.gamecomponents.Patch; 
+import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.SquarePatch;
 
 import java.awt.geom.Point2D;
@@ -24,11 +24,10 @@ import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
 /**
- * @author VOOGirls Generation
+ * GUI element used to create new Patch objects and add them to the library. Allows users
+ * to specify the name and image of the patch. 
  * 
- * The GUI components for creating terrain in the authoring environment are coded here.
- * After a patch is created, it is added to the library, and from the library, its
- * properties can be edited.
+ * @author Mike Zhu
  */
 public class TerrainCreator extends PopupWindow {
 	

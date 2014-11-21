@@ -54,14 +54,16 @@ public class ViewController{
     private Action activeAction;
     private List<File> myGames;
 
-    @FXML 
-    private VBox statsPane;
+
+    @FXML
+    protected VBox statsPane;
+
     @FXML
     private VBox controlPane;
     @FXML
     private MenuButton newGameButton;
 
-    private GridState gridState;
+    private IGridState gridState;
 
     public ViewController(Stage s){
         myStage = s;
@@ -165,7 +167,7 @@ public class ViewController{
      * 
      * @param state
      */
-    protected void setGridState(GridState state){
+    protected void setGridState(IGridState state){
         gridState = state;
     }
 
