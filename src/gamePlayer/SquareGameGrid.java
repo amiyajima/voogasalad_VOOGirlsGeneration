@@ -12,8 +12,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import java.awt.geom.Point2D;
 
-//TODO: fix stackpane size to make drop shadow effect more obvious!
 
+
+/**
+ * The View of square game grid. It observes the (Level in) Game
+ * and updates (re-populate the grid and update scores of players)
+ * upon notified. 
+ *
+ */
+// TODO: maybe observing Game instead of Level.? (need access to player scores.)
 
 public class SquareGameGrid extends GameGrid{
     
@@ -43,8 +50,12 @@ public class SquareGameGrid extends GameGrid{
         
     }
 
-
-
+    
+    /**
+     * The method to initialize the Grid. it populates the grid with
+     * stackpanes that allows for adding pieces and patches images.
+     * 
+     */
     @Override
     protected void initializeGrid () {
         for(int i=0; i<r; i++){
@@ -70,6 +81,10 @@ public class SquareGameGrid extends GameGrid{
     }
 
 
+    /**
+     * populates the grid according to the given the patch and piece maps. 
+     * 
+     */
 
     @Override
     protected void populateGrid (Map<Point2D, Patch> patches, Map<Point2D, Piece> pieces) {

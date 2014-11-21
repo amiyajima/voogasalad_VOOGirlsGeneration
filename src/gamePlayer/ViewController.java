@@ -115,12 +115,19 @@ public class ViewController{
         
     }
 
+    /**
+     * the method allows user to load the previously saved json representation
+     * of the game and uses JSON reader from Game Data to generate an instance
+     * of Game.
+     */
 
     @FXML
     protected void loadGame () {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(new ExtensionFilter("JSON", "*.json"));
         File f = fc.showOpenDialog(myStage);
+        
+        // uses JSON reader to generate an instance of the game
 
     }
     
@@ -129,6 +136,11 @@ public class ViewController{
 
     }
     
+    
+    /**
+     * The method to get all json files from the resources directory that 
+     * stores all the games user has defined from the authoring environment
+     */
     private void getGames(){
         
         File files = new File(System.getProperty("user.dir")+GAME_LOCATION);
@@ -141,11 +153,17 @@ public class ViewController{
                 }
             }
     }
-    
+    /**
+     * 
+     * 
+     */
     @FXML
     protected void restartGame () {
 
-        System.out.println("restarting game");
+        //System.out.println("restarting game");
+       // myModel=new Game();
+        
+        // Generate a new Game Object.
 
     }
     @FXML
@@ -154,6 +172,9 @@ public class ViewController{
 
     }
 
+    /**
+     * to save the current game (state and settings) to a json file which could be later loaded in
+     */
     @FXML
     protected void saveGame () {
         FileChooser fileChooser = new FileChooser();
@@ -165,7 +186,7 @@ public class ViewController{
      * Method to switch the state of the game grid between select mode 
      * and apply mode
      * 
-     * @param state
+     * @param state the current state of the Grid, select/ apply action Mode
      */
     protected void setGridState(IGridState state){
         gridState = state;
@@ -301,7 +322,7 @@ public class ViewController{
 
 
     /**
-     * Highlight the effect range of an action applied at a given position
+     * Highlight the effect range of an action if to be applied at a given position
      * @param n
      * @param c
      */
