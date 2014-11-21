@@ -69,6 +69,7 @@ public class TerrainCreator extends PopupWindow {
 		TextField terrainName = new TextField();
 		names.getChildren().addAll(nameLabel, terrainName);
 		
+		String[] imageLocation = new String[1];
 		ImageView icon = new ImageView();
 		Label loadLabel = new Label(IMAGE_LABEL);
 		Button loadImage = new Button(LOAD_IMAGE_LABEL);
@@ -80,7 +81,8 @@ public class TerrainCreator extends PopupWindow {
 				fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png"));
 				File selectedFile = fileChoice.showOpenDialog(null);
 				if(selectedFile != null){
-					Image image = new Image(selectedFile.toURI().toString());
+					imageLocation[0] = selectedFile.toURI().toString();
+					Image image = new Image(imageLocation[0]);
 					icon.setImage(image);
 					icon.setFitHeight(40);
 					icon.setFitWidth(40);
@@ -96,11 +98,12 @@ public class TerrainCreator extends PopupWindow {
 		goButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent click) {
-				ImageView copy = new ImageView();
-				copy.setImage(icon.getImage());
-				copy.setFitHeight(40);
-				copy.setFitWidth(40);
-				Patch terrain = new SquarePatch(0, 0, copy, new Point2D.Double(0, 0));
+				String locationCopy = imageLocation[0];
+				ImageView imageCopy = new ImageView();
+				imageCopy.setImage(icon.getImage());
+				imageCopy.setFitHeight(40);
+				imageCopy.setFitWidth(40);
+				Patch terrain = new SquarePatch(0, 0, locationCopy, new Point2D.Double(0, 0));
 				Hyperlink link = new Hyperlink(terrainName.getText());
 				link.setTranslateY(10);;
 				link.setOnAction(new EventHandler<ActionEvent>(){
@@ -110,7 +113,7 @@ public class TerrainCreator extends PopupWindow {
 						p.show();
 					}
 				});
-				HBox entry = new TerrainEntry(copy, link, terrain);
+				HBox entry = new TerrainEntry(imageCopy, link, terrain);
 				myLibrary.addToLibrary(entry, TERRAIN);
 			}
 		});
