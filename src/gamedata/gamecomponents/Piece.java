@@ -8,6 +8,7 @@ import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Piece {
@@ -15,7 +16,7 @@ public class Piece {
 	private int myTypeID;
 	private int myUniqueID;
 	private int myPlayerID;
-	private ImageView myImageView;
+	private String myImageLocation;
 
 	private Point2D myLoc;
 	private Stats myStats;
@@ -25,9 +26,9 @@ public class Piece {
 	private Inventory myInventory;
 
 
-	public Piece(ImageView i, List<Movement> m, List<Action> a, Stats stats,
+	public Piece(String imageLocation, List<Movement> m, List<Action> a, Stats stats,
 			Point2D p, int pid, Inventory inventory) {
-		myImageView = i;
+		myImageLocation = imageLocation;
 		myPath = m;
 		myActions = a;
 		myStats = stats;
@@ -38,7 +39,7 @@ public class Piece {
 	}
 
 	public ImageView getImageView() {
-		return myImageView;
+		return new ImageView(new Image(myImageLocation));
 	}
 
 	public int getTypeID() {
