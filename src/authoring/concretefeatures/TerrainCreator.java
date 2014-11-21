@@ -1,13 +1,13 @@
 package authoring.concretefeatures;
 
-import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Patch; 
 import gamedata.gamecomponents.SquarePatch;
 
+import java.awt.geom.Point2D;
 import java.io.File;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -88,7 +88,7 @@ public class TerrainCreator extends PopupWindow {
 				copy.setImage(icon.getImage());
 				copy.setFitHeight(40);
 				copy.setFitWidth(40);
-				Patch terrain = new SquarePatch(0, 0, copy, new Point2D(0, 0));
+				Patch terrain = new SquarePatch(0, 0, copy, new Point2D.Double(0, 0));
 				Hyperlink link = new Hyperlink(terrainName.getText());
 				link.setTranslateY(10);;
 				link.setOnAction(new EventHandler<ActionEvent>(){
