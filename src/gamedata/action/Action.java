@@ -8,7 +8,7 @@ import gamedata.gamecomponents.Piece;
 /**
  * Interface of a game component that performs
  * an action on another component in the game.
- * Pieces will contain a list of modules.
+ * Pieces will contain a list of actions.
  * 
  * @author Jennie Ju
  */
