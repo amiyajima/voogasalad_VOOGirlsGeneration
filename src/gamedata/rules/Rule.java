@@ -6,6 +6,8 @@ package gamedata.rules;
  *
  *ie. player has no more turns left
  *ie. player has no available moves left
+ *
+ *@Author Jesse
  */
 public abstract class Rule {
     /**
