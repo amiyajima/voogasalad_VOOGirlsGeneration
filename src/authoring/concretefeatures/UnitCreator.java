@@ -74,6 +74,7 @@ public class UnitCreator extends PopupWindow {
 		TextField unitName = new TextField();
 		names.getChildren().addAll(nameLabel, unitName);
 		
+		String[] imageLocation = new String[1];
 		ImageView icon = new ImageView();
 		Label loadLabel = new Label(IMAGE_LABEL);
 		Button loadImage = new Button(LOAD_IMAGE_LABEL);
@@ -85,7 +86,8 @@ public class UnitCreator extends PopupWindow {
 				fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png"));
 				File selectedFile = fileChoice.showOpenDialog(null);
 				if(selectedFile != null){
-					Image image = new Image(selectedFile.toURI().toString());
+					imageLocation[0] = selectedFile.toURI().toString();
+					Image image = new Image(imageLocation[0]);
 					icon.setImage(image);
 					icon.setFitHeight(40);
 					icon.setFitWidth(40);
@@ -101,11 +103,12 @@ public class UnitCreator extends PopupWindow {
 		goButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent click) {
-				ImageView copy = new ImageView();
-				copy.setImage(icon.getImage());
-				copy.setFitHeight(40);
-				copy.setFitWidth(40);
-				Piece unit = new Piece(copy, new ArrayList<Movement>(), new ArrayList<Action>(),
+				String locationCopy = imageLocation[0];
+				ImageView imageCopy = new ImageView();
+				imageCopy.setImage(icon.getImage());
+				imageCopy.setFitHeight(40);
+				imageCopy.setFitWidth(40);
+				Piece unit = new Piece(locationCopy, new ArrayList<Movement>(), new ArrayList<Action>(),
 						new Stats(), new Point2D.Double(0, 0), 0, new Inventory());
 				Hyperlink link = new Hyperlink(unitName.getText());
 				link.setTranslateY(10);;
@@ -116,7 +119,7 @@ public class UnitCreator extends PopupWindow {
 						p.show();
 					}
 				});
-				HBox entry = new UnitEntry(copy, link, unit);
+				HBox entry = new UnitEntry(imageCopy, link, unit);
 				myLibrary.addToLibrary(entry, UNITS);
 			}
 		});
