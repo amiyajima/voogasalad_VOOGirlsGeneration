@@ -1,8 +1,8 @@
 package gamedata.gamecomponents;
 
+import gameengine.player.Player;
 import java.util.ArrayList;
 import java.util.List;
-import gameengine.player.*;
 
 
 /**

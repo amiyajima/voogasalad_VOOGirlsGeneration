@@ -93,9 +93,9 @@ public class ConcreteAction implements Action {
 			double result = evaluateMultiplierLogic(actorStats, receiverStats,
 					multiplierLogic);
 			if (stl.checkTarget("actor")) {
-				actorStats.setValue(stl.getValue(), result);
+				actorStats.setValue(stl.getStatName(), result);
 			} else if (stl.checkTarget("receiver")) {
-				receiverStats.setValue(stl.getValue(), result);
+				receiverStats.setValue(stl.getStatName(), result);
 			} 
 		}
 	}
@@ -105,7 +105,7 @@ public class ConcreteAction implements Action {
 		double result = 0;
 		for (StatsSingleMultiplier ssm : multiplierLogic) {
 			double doubleValue = 0;
-			String multiplierValue = ssm.getValue();
+			String multiplierValue = ssm.getStatName();
 			if (ssm.checkTarget("actor")) {
 				doubleValue = actorStats.getValue(multiplierValue);
 			} else if (ssm.checkTarget("receiver")) {

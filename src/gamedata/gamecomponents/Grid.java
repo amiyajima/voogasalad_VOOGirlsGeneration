@@ -64,9 +64,9 @@ public abstract class Grid {
      * places a patch on the grid
      * 
      * @param patch
-     *            to be put on grid
+     *        to be put on grid
      * @param coord
-     *            of patch
+     *        of patch
      */
     public void setPatch (Patch patch, Point2D coord) {
         for (Point2D coordinate : myPieces.keySet()) {
@@ -80,7 +80,7 @@ public abstract class Grid {
      * gets the patch on the given coordinate
      * 
      * @param coord
-     *            of patch
+     *        of patch
      * @return patch
      */
     public Patch getPatch (Point2D coord) {
@@ -97,7 +97,7 @@ public abstract class Grid {
      * gets the piece on the given coordinate
      * 
      * @param coord
-     *            of piece
+     *        of piece
      * @return piece
      */
     public Piece getPiece (Point2D coord) {
@@ -114,7 +114,7 @@ public abstract class Grid {
      * removes the piece on the given coordinate
      * 
      * @param coord
-     *            of piece
+     *        of piece
      */
     public void removePiece (Point2D coord) {
         Piece piece = myPieces.get(coord);
@@ -125,7 +125,7 @@ public abstract class Grid {
      * removes the patch on the given coordinate
      * 
      * @param coord
-     *            of remove
+     *        of remove
      */
     public void removePatch (Point2D coord) {
         Patch patch = myPatches.get(coord);
@@ -139,7 +139,6 @@ public abstract class Grid {
     public int getRow () {
         return myRow;
     }
-
 
     /**
      * Returns a Piece of a given ID
@@ -185,7 +184,7 @@ public abstract class Grid {
      * gets the patch on the given coordinate
      * 
      * @param coord
-     *            of patch
+     *        of patch
      * @return patch
      */
     public Map<Point2D, Patch> getPatches () {
@@ -196,7 +195,7 @@ public abstract class Grid {
      * gets the piece on the given coordinate
      * 
      * @param coord
-     *            of piece
+     *        of piece
      * @return piece
      */
     public Map<Point2D, Piece> getPieces () {
