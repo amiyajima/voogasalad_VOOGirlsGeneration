@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import authoring_environment.Grid;
 import authoring_environment.GridView;
-import authoring_environment.LibraryView;
 import authoring_environment.Tile;
 
 /**

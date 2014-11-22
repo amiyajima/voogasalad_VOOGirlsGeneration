@@ -2,10 +2,8 @@ package authoring_environment;
 
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
-import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -22,15 +20,13 @@ public class Tile extends Pane{
 	
 	private int mySize;
 	private Rectangle myDefault;
-	private Patch myTerrain;
-	private Piece myUnit;
+	protected Patch myTerrain;
+	protected Piece myUnit;
 	private Rectangle selected;
-	private Rectangle surfaceImage;
-	private ImageView terrainImage;
-	private ImageView unitImage;
+	public Rectangle surfaceImage;
+	protected ImageView unitImage;
+	protected ImageView terrainImage;
 	private boolean mySelected;
-	private int myX;
-	private int myY;
 	
 	public Tile(int x,int y,int size){
 
@@ -62,39 +58,6 @@ public class Tile extends Pane{
 		this.setLayoutX(x*mySize);
 		this.setLayoutY(y*mySize);
 		this.getChildren().addAll(myDefault, terrainImage, unitImage,surfaceImage, selected);
-		setActionEvent();
-
-	}
-	
-	private void setActionEvent() {
-		this.setStyle("-fx-cursor: hand");
-		this.setOnMouseClicked(new EventHandler<MouseEvent>(){
-			@Override
-			public void handle(MouseEvent m){
-				if(LibraryView.reset){
-					if(LibraryView.unitSelected){
-						myUnit = null;
-						unitImage.setVisible(false);;
-					}
-					else{
-						myTerrain = null;
-						terrainImage.setVisible(false);;
-					}
-				}
-				else{
-					if(LibraryView.unitSelected){
-						myUnit = LibraryView.currentlySelectedUnit;
-						unitImage.setImage(myUnit.getImageView().getImage());
-						unitImage.setVisible(true);
-					}
-					else{
-						myTerrain = LibraryView.currentlySelectedTerrain;
-						terrainImage.setImage(myTerrain.getImageView().getImage());
-						terrainImage.setVisible(true);
-					}
-				}
-			}
-		});
 	}
 	
 	public int getSize(){

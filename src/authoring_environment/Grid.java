@@ -57,12 +57,12 @@ public class Grid extends Pane {
 			for (int j = 0; j < myHeight; j++) {
 				grid[i][j] = new Tile(i, j, myTileSize);
 				this.getChildren().add(grid[i][j]);
-
+				setClickEvent(grid[i][j]);
 			}
 		}
-
+		this.setDragEvent();
 	}
-
+	
 	/**
 	 * Get the number of tiles in a row.
 	 * @return The number of tiles in a horizontal line of the grid.
@@ -78,7 +78,19 @@ public class Grid extends Pane {
 	public int getGridHeight() {
 		return myHeight;
 	}
-
+	
+	public void sampleSelected() {
+		for (Tile[] line : grid) {
+			for (Tile tile : line) {
+				tile.setOnMouseClicked(new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent event) {
+						tile.switchSelected();
+					}
+				});
+			}
+		}
+	}
 
 	/**
 	 * Get a specific tile in the grid according to its position.
@@ -91,9 +103,67 @@ public class Grid extends Pane {
 	public Tile getTile(int x, int y) {
 		return grid[x][y];
 	}
+
+	public List<Tile> getSelected() {
+		List<Tile> tiles = new ArrayList<Tile>();
+		for(int i=0; i<myWidth; i++){
+			for(int j=0; i<myHeight;j++){
+				if(getTile(i,j).getSelected()){
+					tiles.add(getTile(i,j));
+				}
+			}
+		}
+		return tiles;
+	}
+	
+	private void setDragEvent() {
+		this.setOnMouseDragged(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent event) {
+				int x = (int)event.getX() / myTileSize;
+				int y = (int)event.getY() / myTileSize;
+				Tile tile = getTile(x, y);
+				setContents(tile);
+			}
+		});
+	}
+	
+	private void setClickEvent(Tile tile) {
+		tile.setStyle("-fx-cursor: hand");
+		tile.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent m){
+				setContents(tile);
+			}
+		});
+	}
+	
+	protected void setContents(Tile tile) {
+		if(LibraryView.reset){
+			if(LibraryView.unitSelected){
+				tile.myUnit = null;
+				tile.unitImage.setVisible(false);;
+			}
+			else{
+				tile.myTerrain = null;
+				tile.terrainImage.setVisible(false);;
+			}
+		}
+		else{
+			if(LibraryView.unitSelected){
+				tile.myUnit = LibraryView.currentlySelectedUnit;
+				tile.unitImage.setImage(tile.myUnit.getImageView().getImage());
+				tile.unitImage.setVisible(true);
+			}
+			else{
+				tile.myTerrain = LibraryView.currentlySelectedTerrain;
+				tile.terrainImage.setImage(tile.myTerrain.getImageView().getImage());
+				tile.terrainImage.setVisible(true);
+			}
+		}
+	}
 	
 	public Tile[][] getGridTiles(){
 		return grid;
 	}
-
 }

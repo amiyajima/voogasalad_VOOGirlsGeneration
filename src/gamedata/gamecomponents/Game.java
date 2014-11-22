@@ -1,7 +1,7 @@
 package gamedata.gamecomponents;
 
 import gameengine.player.Player;
-
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -56,18 +56,18 @@ public class Game {
 	 * call it again.
 	 */
 	public void play() {
-		while(!myGameWon){
+		while (!myGameWon) {
 			if (myCurrentPlayer.levelWon(myCurrentLevel)) {
 				nextLevel();
 			}
 			nextPlayer();
 		}
-		//Call DisplayWin Method Here :) Yatta
+		// Call DisplayWin Method Here :) Yatta
 	}
 
 	/**
-	 * Iterates the Current Level to the Next Level
-	 * If no more levels, game is won.
+	 * Iterates the Current Level to the Next Level If no more levels, game is
+	 * won.
 	 */
 	private void nextLevel() {
 		if (!isWin()) {
@@ -137,5 +137,4 @@ public class Game {
 	public List<Player> getPlayers() {
 		return myPlayers;
 	}
-
 }
