@@ -1,8 +1,8 @@
 package gamedata.gamecomponents;
 
+import gameengine.player.Player;
 import java.util.ArrayList;
 import java.util.List;
-import gameengine.player.*;
 
 /**
  * A game that contains a list of players and the levels that players can play
@@ -22,6 +22,7 @@ public class Game {
 	private List<Level> myLevels;
 	private Level myCurrentLevel;
 	private Player myCurrentPlayer;
+	private boolean myGameWon;
 
 	/**
 	 * Default Constructor
@@ -39,6 +40,7 @@ public class Game {
 	 *            List of levels that compose the game
 	 */
 	public Game(List<Player> players, List<Level> levels) {
+		myGameWon = false;
 		myPlayers = players;
 		myLevels = levels;
 		if (levels.size() > 0 && players.size() > 0) {
@@ -54,20 +56,24 @@ public class Game {
 	 * call it again.
 	 */
 	public void play() {
-		if (myCurrentPlayer.levelWon(myCurrentLevel)) {
-			nextLevel();
+		while (!myGameWon) {
+			if (myCurrentPlayer.levelWon(myCurrentLevel)) {
+				nextLevel();
+			}
+			nextPlayer();
 		}
-		nextPlayer();
+		// Call DisplayWin Method Here :) Yatta
 	}
 
 	/**
-	 * Iterates the Current Level to the Next Level
+	 * Iterates the Current Level to the Next Level If no more levels, game is
+	 * won.
 	 */
 	private void nextLevel() {
 		if (!isWin()) {
 			myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel) + 1);
 		} else {
-			System.out.println("GAME HAS BEEN WON");
+			myGameWon = true;
 		}
 	}
 
@@ -109,6 +115,10 @@ public class Game {
 	private void restartLevel() {
 		myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel));
 	}
+	
+	public String toString(){
+	    return "game with " + myPlayers.size() + " players and " + myLevels.size() + " levels";
+	}
 
 	/**
 	 * Getter for the Current Level
@@ -119,4 +129,16 @@ public class Game {
 		return myCurrentLevel;
 	}
 
+	/**
+	 * Getter for the Current Player
+	 * 
+	 * @return Returns the Current Player
+	 */
+	public Player getCurrentPlayer() {
+		return myCurrentPlayer;
+	}
+
+	public List<Player> getPlayers() {
+		return myPlayers;
+	}
 }

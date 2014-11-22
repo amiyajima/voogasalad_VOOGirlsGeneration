@@ -29,7 +29,7 @@ public class ViewControllerTest {
         map.put("HP", 100.0);
         map.put("MP", 50.0);
         Stats stats = new Stats(map);
-        Piece piece = new Piece(null, null, null, stats, null, 0, null);
+        Piece piece = new Piece(null, null, null, stats, null, 0, 0, 0, null);
         controller.updateStats(piece);
         assertEquals("HP:  100.0",((Text) controller.statsPane.getChildren().get(0)).getText());
         assertEquals("MP:  50.0",((Text) controller.statsPane.getChildren().get(1)).getText());

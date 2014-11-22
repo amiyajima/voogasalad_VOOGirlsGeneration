@@ -1,20 +1,20 @@
 package gamePlayer;
 
-import gamedata.action.Action; 
+import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
-
-import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javafx.collections.ObservableList;
+import java.util.Set;
+import authoring.concretefeatures.menus.JSONBobTester;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import java.awt.geom.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -25,19 +25,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-
-
 
 public class ViewController{
 
     public static final String GAMESPACE_FXML = "gameSpace.fxml";
     public static final String INITIALSCENE_FXML = "initialScene.fxml";
+    public static final String SCOREBOARD_FXML = "scoreBoard.fxml";
     public static final String INITIALSCENE_TITLE = "VOOGASALAD!";
     public static final String GAME_LOCATION = "/src/resources";
 
@@ -47,6 +46,7 @@ public class ViewController{
     private GameGrid myGrid;
     private VBox myInitialScene;
     private BorderPane myGameSpace;
+    private BorderPane myScoreBoard;
    
     private Piece activePiece;
     private Action activeAction;
@@ -58,6 +58,10 @@ public class ViewController{
     protected VBox controlPane;
     @FXML
     private MenuButton newGameButton;
+    @FXML
+    private Text gameName;
+    @FXML
+    private VBox scores;
 
     private IGridState gridState;
 
@@ -65,37 +69,36 @@ public class ViewController{
         myStage = s;
        myInitialScene = new VBox();
        myGameSpace = new BorderPane();
-      //  myModel = new Game();
+       myScoreBoard = new BorderPane();
+       
+//       myModel = new Game();
        //TODO:
        //uses JSON reader that takes in the file chosen by user and instantiate 
        // a new Game object. 
         
         myGrid = new SquareGameGrid(8,8);
-        FXMLLoader fxmlLoaderGame = new FXMLLoader(getClass().getResource(GAMESPACE_FXML));
-        fxmlLoaderGame.setController(this);
-        fxmlLoaderGame.setRoot(myGameSpace);
         
-        FXMLLoader fxmlLoaderInit = new FXMLLoader(getClass().getResource(INITIALSCENE_FXML));
-        fxmlLoaderInit.setController(this);
-        fxmlLoaderInit.setRoot(myInitialScene);
         
-
-        try{
-            fxmlLoaderGame.load();
-            fxmlLoaderInit.load();
-        }
-        catch(IOException exception) {
-            throw new RuntimeException(exception);
-        }
+        loadFXML(GAMESPACE_FXML, myGameSpace);
+        loadFXML(INITIALSCENE_FXML, myInitialScene);
+   //     loadFXML(SCOREBOARD_FXML, myScoreBoard);
+        
         myGameSpace.setCenter(myGrid);
         myGrid.setAlignment(Pos.CENTER);
         myStage.setScene(new Scene(myInitialScene));
+       
         newGame();
+        
         myStage.show();
 
     }
 
-
+//    protected void JSONBobTest.java(){
+//        
+//    }
+    
+    
+    
     /**
      * generates drop down menu that allow user to choose a new Game to play 
      * The Games are generated from the directory that stores all json files defined 
@@ -118,6 +121,19 @@ public class ViewController{
         
         
     }
+    
+    private void loadFXML(String url, Node n){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(url));
+        fxmlLoader.setController(this);
+        fxmlLoader.setRoot(n);
+        try{
+            fxmlLoader.load();
+        }
+        catch(IOException exception) {
+            throw new RuntimeException(exception);
+        }
+        
+    }
 
     /**
      * the method allows user to load the previously saved json representation
@@ -138,6 +154,29 @@ public class ViewController{
     @FXML
     private void doSettings(){
 
+    }
+    
+    /**
+     * loads the players and their scores of the current game;
+     * display the Highest score in the high score display at the bottom
+     */
+    @FXML
+    protected void showScore(){
+        Stage stage = new Stage();
+        stage.setScene(new Scene(myScoreBoard));
+        loadScores();
+        stage.show();
+        
+    }
+    
+    protected void loadScores(){
+        gameName.setText(myModel.toString());
+        
+        //TODO: add in scores
+        myModel.getPlayers().forEach(player-> scores.getChildren().
+                                     add(new Text(player.getID()+": ")));
+        
+        
     }
     
     
@@ -172,7 +211,8 @@ public class ViewController{
        // myModel=new Game();
         
         // Generate a new Game Object.
-
+        JSONBobTester jbtester = new JSONBobTester();
+        myModel = jbtester.createNewGame();
     }
     @FXML
     protected void exitGame () {
@@ -348,7 +388,5 @@ public class ViewController{
 
 
         });
-    }
-
-
+    }    
 }

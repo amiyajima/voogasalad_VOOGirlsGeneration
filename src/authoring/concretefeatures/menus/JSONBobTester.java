@@ -1,24 +1,35 @@
-package gameengine.tests;
+package authoring.concretefeatures.menus;
 
-import java.util.ArrayList;
-import java.util.List;
+import gamedata.JSONManager;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.SquareGrid;
 import gamedata.goals.Goal;
+import gamedata.goals.PlayerPiecesRemovedGoal;
 import gamedata.rules.MoveCountRule;
 import gamedata.rules.Rule;
 import gameengine.player.Player;
-import org.junit.Test;
-import com.google.gson.Gson;
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Tester for JSON file writer
+ * @author Rica
+ *
+ */
+public class JSONBobTester {
+    public JSONBobTester() {
+        createNewGame();
+    }
 
-public class GameBuilderTester {
+    /**
+     * Create a new game to test
+     * @return
+     */
+    public Game createNewGame () {
+        System.out.println("JSONBobTester is running");
 
-    @Test
-    public void testGsonRead () {
         List<Player> myPlayers = new ArrayList<Player>();
         Player myPlayer1 = new Player();
         Player myPlayer2 = new Player();
@@ -30,21 +41,26 @@ public class GameBuilderTester {
         List<Level> myLevels = new ArrayList<Level>();
         List<Rule> myRules = new ArrayList<Rule>();
         List<Goal> myGoals = new ArrayList<Goal>();
+
+        // testing if subclasses of goal abstract class is initialized properly
+        Goal goal1 = new PlayerPiecesRemovedGoal(myPlayer2);
+        myGoals.add(goal1);
+
+        Goal goal2 = new PlayerPiecesRemovedGoal(myPlayer1);
+        myGoals.add(goal2);
+
         myRules.add(rule1);
         Level level1 = new Level(grid1, myGoals, myRules);
         Level level2 = new Level(grid1, myGoals, myRules);
         myLevels.add(level1);
         myLevels.add(level2);
+        
+        Player myPlayer3 = new Player();
+        myPlayers.add(myPlayer3);
 
         Game myGame = new Game(myPlayers, myLevels);
+        return myGame;
 
-        Gson gson = new Gson();
-        String json = gson.toJson(myGame);
-        System.out.println(json);
-        
-        
-        Game obj2 = gson.fromJson(json, Game.class);
-        assertTrue(myGame.equals(obj2));
     }
 
 }
