@@ -42,7 +42,8 @@ public class ViewControllerTest {
         assertEquals(123,point.getY(),0.001);
         
     }
-    @Test void updateActionsTest () {
+    @Test 
+    void updateActionsTest () {
         ViewController controller = new ViewController(new Stage());
         Action move = new ConcreteAction("move", null, null, null, null);
         Action attack = new ConcreteAction("attack", null, null, null, null);
@@ -56,6 +57,6 @@ public class ViewControllerTest {
         assertEquals ("build", ((Text) controller.controlPane.getChildren().get(2)).getText());
         
     }
-    
+ 
 
 }
