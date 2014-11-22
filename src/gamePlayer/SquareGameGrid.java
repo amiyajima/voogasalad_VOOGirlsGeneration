@@ -63,8 +63,9 @@ public class SquareGameGrid extends GameGrid{
      */
     @Override
     protected void initializeGrid () {
+
         myCurrentLocation = new Point2D.Double();
-        
+
         for(int i=0; i<r; i++){
             for(int j=0; j<c; j++){
                 StackPane sp = new StackPane();
