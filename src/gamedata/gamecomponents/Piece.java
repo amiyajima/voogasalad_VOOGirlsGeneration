@@ -53,7 +53,7 @@ public class Piece {
     public Piece (String imageLocation, List<Movement> m, List<Action> a, Stats stats,
                   Point2D p, int tid, int uid, int pid, Inventory inventory) {
         myImageLocation = imageLocation;
-        myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+        myImageView = new ImageView(new Image(imageLocation));
         myPath = m;
         myActions = a;
         myStats = stats;

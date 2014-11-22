@@ -39,6 +39,7 @@ public class TerrainCreator extends PopupWindow {
 	private final String IMAGE_LABEL = "Terrain image";
 	private final String LOAD_IMAGE_LABEL = "Load image";
 	private final String TEMPLATE_LABEL = "Create new terrain template";
+	private final String DELETE = "Delete";
 	private LibraryView myLibrary;
 	
 	/**
@@ -113,12 +114,20 @@ public class TerrainCreator extends PopupWindow {
 						p.show();
 					}
 				});
-				HBox entry = new TerrainEntry(imageCopy, link, terrain);
+				Button delButton = new Button(DELETE);
+				delButton.setLayoutY(5);
+				HBox entry = new TerrainEntry(delButton, imageCopy, link, terrain);
+				delButton.setOnAction(new EventHandler<ActionEvent>(){
+        			@Override
+        			public void handle(ActionEvent event) {
+        				myLibrary.removeFromLibrary(entry, TERRAIN);
+        			}
+        		});
 				myLibrary.addToLibrary(entry, TERRAIN);
+				close();
 			}
 		});
 		box.getChildren().addAll(names, images, modList, goButton);
-	
 		setScene(new Scene(box));
 	}
 }

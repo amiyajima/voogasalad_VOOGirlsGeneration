@@ -5,9 +5,11 @@ import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
+
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -24,7 +26,6 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
-
 
 /**
  * GUI element that allows users to create new Piece templates and add them to the
@@ -43,6 +44,7 @@ public class UnitCreator extends PopupWindow {
     private final String IMAGE_LABEL = "Unit image";
     private final String LOAD_IMAGE_LABEL = "Load image";
     private final String TEMPLATE_LABEL = "Create new unit template";
+    private final String DELETE = "Delete";
     private LibraryView myLibrary;
 
     /**
@@ -107,12 +109,10 @@ public class UnitCreator extends PopupWindow {
                 imageCopy.setImage(icon.getImage());
                 imageCopy.setFitHeight(40);
                 imageCopy.setFitWidth(40);
-                Piece unit =
-                        new Piece(locationCopy, new ArrayList<Movement>(), new ArrayList<Action>(),
+                Piece unit = new Piece(locationCopy, new ArrayList<Movement>(), new ArrayList<Action>(),
                                   new Stats(), new Point2D.Double(0, 0), 0, 0, 0, new Inventory());
                 Hyperlink link = new Hyperlink(unitName.getText());
                 link.setTranslateY(10);
-                ;
                 link.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle (ActionEvent e) {
@@ -120,12 +120,20 @@ public class UnitCreator extends PopupWindow {
                         p.show();
                     }
                 });
-                HBox entry = new UnitEntry(imageCopy, link, unit);
+                Button delButton = new Button(DELETE);
+                delButton.setLayoutY(5);
+                HBox entry = new UnitEntry(delButton, imageCopy, link, unit);
+        		delButton.setOnAction(new EventHandler<ActionEvent>(){
+        			@Override
+        			public void handle(ActionEvent event) {
+        				myLibrary.removeFromLibrary(entry, UNITS);
+        			}
+        		});
                 myLibrary.addToLibrary(entry, UNITS);
+                close();
             }
         });
         box.getChildren().addAll(names, images, modList, goButton);
-
         setScene(new Scene(box));
     }
 }
