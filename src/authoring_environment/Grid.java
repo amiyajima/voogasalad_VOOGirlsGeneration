@@ -57,11 +57,12 @@ public class Grid extends Pane {
 			for (int j = 0; j < myHeight; j++) {
 				grid[i][j] = new Tile(i, j, myTileSize);
 				this.getChildren().add(grid[i][j]);
+				setClickEvent(grid[i][j]);
 			}
 		}
-		setActionEvent();
+		this.setDragEvent();
 	}
-
+	
 	/**
 	 * Get the number of tiles in a row.
 	 * @return The number of tiles in a horizontal line of the grid.
@@ -114,20 +115,29 @@ public class Grid extends Pane {
 		}
 		return tiles;
 	}
-
-	private void setActionEvent() {
-		this.setStyle("-fx-cursor: hand");
-		this.setOnMouseClicked(new EventHandler<MouseEvent>(){
+	
+	private void setDragEvent() {
+		this.setOnMouseDragged(new EventHandler<MouseEvent>(){
 			@Override
-			public void handle(MouseEvent m){
-				int x = (int)m.getX() / myTileSize;
-				int y = (int)m.getY() / myTileSize;
+			public void handle(MouseEvent event) {
+				int x = (int)event.getX() / myTileSize;
+				int y = (int)event.getY() / myTileSize;
 				Tile tile = getTile(x, y);
 				setContents(tile);
 			}
 		});
 	}
-
+	
+	private void setClickEvent(Tile tile) {
+		tile.setStyle("-fx-cursor: hand");
+		tile.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent m){
+				setContents(tile);
+			}
+		});
+	}
+	
 	protected void setContents(Tile tile) {
 		if(LibraryView.reset){
 			if(LibraryView.unitSelected){
@@ -156,5 +166,4 @@ public class Grid extends Pane {
 	public Tile[][] getGridTiles(){
 		return grid;
 	}
-
 }
