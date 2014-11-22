@@ -4,7 +4,7 @@ import gamedata.gamecomponents.Patch;
 import authoring.abstractfeatures.PopupWindow;
 
 /**
- * @author VOOGirls Generation
+ * @author Martin Tamayo
  * 
  * GUI component for editing the properties of a given terrain.
  * This can be accessed by clicking on the hyperlink of the
