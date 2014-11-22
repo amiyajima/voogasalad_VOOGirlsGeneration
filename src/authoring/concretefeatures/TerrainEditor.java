@@ -30,7 +30,7 @@ import authoring_environment.UIspecs;
  */
 public class TerrainEditor extends PopupWindow {
 
-    private final int HEIGHT = 400;
+    private final int HEIGHT = 150;
     private final int WIDTH = 400;
     private final String NAME = "Terrain Editor";
     private Patch myTerrain;

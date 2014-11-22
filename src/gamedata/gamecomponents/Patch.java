@@ -10,7 +10,7 @@ import javafx.scene.image.ImageView;
  */
 public abstract class Patch {
 
-	private int myState;
+	private int myTypeID;
 	private Point2D myLoc;
 	private String myImageLocation;
 	private ImageView myImageView;
@@ -23,8 +23,8 @@ public abstract class Patch {
 	 * @param p coordinate of patch
 	 */
 
-	public Patch(int state, int id, String imageLocation, Point2D p) {
-		myState = state;
+	public Patch(int typeID, String imageLocation, Point2D p) {
+		myTypeID = typeID;
 		myImageLocation = imageLocation;
 		myImageView = new ImageView(new Image(imageLocation));
 		myLoc = p;
@@ -35,16 +35,16 @@ public abstract class Patch {
 	 * Getter for state
 	 * @return patch's state
 	 */
-	public int getMyState() {
-		return myState;
+	public int getTypeID() {
+		return myTypeID;
 	}
 
 	/**
 	 * Sets patch's state
 	 * @param myState of patch
 	 */
-	public void setMyState(int myState) {
-		this.myState = myState;
+	public void setMyType(int type) {
+		this.myTypeID = type;
 	}
 
 
