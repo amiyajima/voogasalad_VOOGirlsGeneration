@@ -28,12 +28,8 @@ public class MovableRule extends Rule {
     }
     
     public boolean conditionsMet (int pieceState, int patchState){
-        for(int i:myPossiblePatches.get(pieceState)){
-            if(i == patchState){
-                return true;
-            }
-        }
-        return false;
+        return (myPossiblePatches.get(pieceState).contains(patchState));
+        
     }
 
 }
