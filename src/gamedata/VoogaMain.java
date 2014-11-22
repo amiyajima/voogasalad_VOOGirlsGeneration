@@ -40,7 +40,15 @@ import gameengine.player.Player;
 public class VoogaMain {
     public static void main (String[] args) {
         System.out.println("main is running");
-
+        JSONManager jsonManager = new JSONManager();
+        try {
+            jsonManager.readFromJSONFile("");
+        }
+        catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        /*
         List<Player> myPlayers = new ArrayList<Player>();
         Player myPlayer1 = new Player();
         Player myPlayer2 = new Player();
@@ -122,6 +130,8 @@ public class VoogaMain {
         JSONManager builder = new JSONManager();
 
         builder.writeToJSON(myGame, "test");
+        */
+       
         /*
          * Player myPlayer3 = new Player();
          * myPlayers.add(myPlayer3);

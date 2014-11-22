@@ -53,6 +53,7 @@ public class JSONBob extends Menu {
         File file = fileChooser.showSaveDialog(myStage);
         JSONManager myGameBuilder = new JSONManager();
         JSONBobTester jb = new JSONBobTester();
+        //myGameBuilder.writeToJSON(jb.createNewGame(), file.getAbsolutePath());
         myGameBuilder.writeToJSON(jb.createNewGame(), file.getAbsolutePath());
     }
 }
