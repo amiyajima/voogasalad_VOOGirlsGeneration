@@ -1,11 +1,11 @@
 package gameengine.player;
 
-import java.awt.geom.Point2D;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.input.KeyCode;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Level;
+import javafx.geometry.Point2D;
 
 
 /**

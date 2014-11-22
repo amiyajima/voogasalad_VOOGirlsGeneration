@@ -1,10 +1,10 @@
 package gamedata.gamecomponents;
 
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javafx.geometry.Point2D;
 
 
 /**
@@ -96,14 +96,14 @@ public abstract class Grid {
     /**
      * gets the piece on the given coordinate
      * 
-     * @param coord
+     * @param loc
      *        of piece
      * @return piece
      */
-    public Piece getPiece (Point2D coord) {
+    public Piece getPiece (Point2D loc) {
         for (Point2D coordinate : myPieces.keySet()) {
             {
-                if (coordinate.equals(coord)) { return myPieces.get(coord); }
+                if (coordinate.equals(loc)) { return myPieces.get(loc); }
             }
         }
         // no piece exists on such coord

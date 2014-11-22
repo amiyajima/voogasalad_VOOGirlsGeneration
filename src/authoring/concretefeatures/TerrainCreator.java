@@ -59,14 +59,14 @@ public class TerrainCreator extends PopupWindow {
 	@Override
 	protected void initialize(){
 		VBox box = new VBox();
-	    box.setPadding(UIspecs.allPadding);
-	    box.setSpacing(5);
+	        box.setPadding(UIspecs.allPadding);
+	        box.setSpacing(5);
 		
 		HBox names = new HBox();
 		HBox images = new HBox();
 		
 		Label nameLabel = new Label(TERRAIN_NAME_LABEL);
-	    nameLabel.setPadding(UIspecs.topRightPadding);
+	        nameLabel.setPadding(UIspecs.topRightPadding);
 		TextField terrainName = new TextField();
 		names.getChildren().addAll(nameLabel, terrainName);
 		

@@ -6,11 +6,11 @@ import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import java.util.Map;
 import java.util.Observable;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import java.awt.geom.Point2D;
 
 /**
  * The View of square game grid. It observes the (Level in) Game
@@ -34,7 +34,6 @@ public class SquareGameGrid extends GameGrid{
 
     private void onHover(Rectangle rec){
         rec.setFill(Color.BURLYWOOD);
-        
     }
 
 
@@ -79,13 +78,6 @@ public class SquareGameGrid extends GameGrid{
     }
     // TODO: implement the logic in View Controller class.
     
-    public void addKeyboardControl (Game game) {
-       // Map<KeyCode,Action> actionKeyMap = game.
-        
-//        KeyboardController keyboardController = new KeyboardController();
-//        keyboardController.setActionKeyControl(actionKeyMap, gameScene);
-//        keyboardController.setMovementKeyControl(movementKeyMap, gameScene);
-    }
 
     /**
      * populates the grid according to the given the patch and piece maps. 
