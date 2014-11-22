@@ -1,4 +1,4 @@
-package authoring.concretefeatures.menus;
+package tests;
 
 import java.awt.geom.Point2D;
 import java.io.FileNotFoundException;

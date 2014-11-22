@@ -1,26 +1,15 @@
 package gamedata;
 
-import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
-import gamedata.gamecomponents.Grid;
-import gamedata.gamecomponents.Patch;
-import gamedata.gamecomponents.Piece;
-import gameengine.movement.Movement;
+import gamedata.gamecomponents.Level;
 import gameengine.player.Player;
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
-import com.sun.xml.internal.ws.api.message.Message;
-
 
 /**
  * Interprets and parses the JSON then builds the game components.
@@ -54,8 +43,6 @@ public class JSONManager {
         String json = gson.toJson(g);
         System.out.println("game converted to json");
         try {
-            // write converted json data to a file named "CountryGSON.json"
-            //FileWriter writer = new FileWriter(DEFAULT_JSON_DIRECTORY + fileName);
             FileWriter writer = new FileWriter(fileName);
             writer.write(json);
             writer.close();
@@ -74,60 +61,22 @@ public class JSONManager {
      */
     public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("read method called");
-        jsonFileLocation = "C:\\Users\\Rica\\Desktop\\sample.json";
-        InputStream in = new FileInputStream(jsonFileLocation);
-        
+        jsonFileLocation = "C:\\Users\\Rica\\Desktop\\GAME.json";        
         Gson gson = new Gson();
-        /*
-        JsonReader reader = new JsonReader(new InputStreamReader(in));
-        reader.beginArray();
-        while (reader.hasNext()) {
-            System.out.println(readMessage(reader));
-        }
-        */
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
-        Player player = gson.fromJson(br, Player.class);
-        System.out.println(player.getID());
+        
+        PlayerData myPlayers = gson.fromJson(br, PlayerData.class);
+        System.out.println(myPlayers.getPlayers().get(0).getID());
+        
+        LevelData myLevels = gson.fromJson(br, LevelData.class);
+        System.out.println(myLevels.getLevels().size());
+        //System.out.println(myLevels.getLevels().get(0).getGrid().toString());
+        //Level level = gson.fromJson(br, Level.class);
+        //System.out.println(level.toString());
+        /*
         Game game = gson.fromJson(br, Game.class);
         System.out.println(game.getPlayers().get(0));
-        return game;
-    }
-    /*
-    public List<Message> readMessagesArray(JsonReader reader) throws IOException {
-        List<Message> messages = new ArrayList<Message>();
-
-        reader.beginArray();
-        while (reader.hasNext()) {
-          messages.add(readMessage(reader));
-        }
-        reader.endArray();
-        return messages;
-      }
-    
-    public Message readMessage(JsonReader reader) throws IOException {
-        long id = -1;
-        String text = null;
-        User user = null;
-        List<Double> geo = null;
-
-        reader.beginObject();
-        while (reader.hasNext()) {
-          String name = reader.nextName();
-          if (name.equals("id")) {
-            id = reader.nextLong();
-          } else if (name.equals("text")) {
-            text = reader.nextString();
-          } else if (name.equals("geo") && reader.peek() != JsonToken.NULL) {
-            geo = readDoublesArray(reader);
-          } else if (name.equals("user")) {
-            user = readUser(reader);
-          } else {
-            reader.skipValue();
-          }
-        }
-        reader.endObject();
-        return new Message(id, text, user, geo);
-      }
-*/
-    
+        */
+        return null;
+    }    
 }

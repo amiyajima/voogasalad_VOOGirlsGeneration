@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 import authoring_environment.LibraryView;
 import java.io.File;
+import tests.JSONBobTester;
 
 /**
  * Menu selection to save game to JSON or read game from JSON
