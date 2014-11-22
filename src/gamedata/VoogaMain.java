@@ -1,9 +1,9 @@
 package gamedata;
 
-import java.awt.geom.Point2D;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.geometry.Point2D;
 import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
 import gamedata.action.ActorRemovalConclusion;
@@ -70,9 +70,9 @@ public class VoogaMain {
         myLevels.add(level2);
 
         // random point2ds to use
-        Point2D p1 = new Point2D.Double(1, 1);
-        Point2D p2 = new Point2D.Double(2, 2);
-        Point2D p3 = new Point2D.Double(3, 3);
+        Point2D p1 = new Point2D(1, 1);
+        Point2D p2 = new Point2D(2, 2);
+        Point2D p3 = new Point2D(3, 3);
 
         List<Point2D> pl1 = new ArrayList<Point2D>();
         pl1.add(p1);
