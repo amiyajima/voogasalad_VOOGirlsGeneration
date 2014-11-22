@@ -5,7 +5,7 @@ import gamedata.stats.Stats;
 import gameengine.movement.Movement;
 import java.util.LinkedList;
 import java.util.List;
-import javafx.geometry.Point2D;
+import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 

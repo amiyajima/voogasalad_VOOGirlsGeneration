@@ -10,10 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import authoring.concretefeatures.menus.JSONBobTester;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
+import java.awt.geom.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -92,7 +93,12 @@ public class ViewController{
 
     }
 
-
+//    protected void JSONBobTest.java(){
+//        
+//    }
+    
+    
+    
     /**
      * generates drop down menu that allow user to choose a new Game to play 
      * The Games are generated from the directory that stores all json files defined 
@@ -205,7 +211,8 @@ public class ViewController{
        // myModel=new Game();
         
         // Generate a new Game Object.
-
+        JSONBobTester jbtester = new JSONBobTester();
+        myModel = jbtester.createNewGame();
     }
     @FXML
     protected void exitGame () {
@@ -300,7 +307,7 @@ public class ViewController{
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
         int yCor = (int) (y/patchHeight);
-        return new Point2D(xCor,yCor);
+        return new Point2D.Double(xCor,yCor);
     }
 
         private Piece getPiece(Point2D loc){

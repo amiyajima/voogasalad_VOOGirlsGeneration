@@ -5,7 +5,7 @@ import gamedata.gamecomponents.SquarePatch;
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
+import java.awt.geom.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -18,7 +18,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import authoring.abstractfeatures.PopupWindow;
-import authoring.data.PatchData;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
@@ -30,7 +29,7 @@ import authoring_environment.UIspecs;
  */
 public class TerrainCreator extends PopupWindow {
 	
-	private final int HEIGHT = 400;
+	private final int HEIGHT = 150;
 	private final int WIDTH = 400;
 	private final String TERRAIN = "Terrain";
 	private final String NAME = "Terrain Creator";
@@ -41,11 +40,10 @@ public class TerrainCreator extends PopupWindow {
 	private final String DELETE = "Delete";
 	private LibraryView myLibrary;
 	
-	private PatchData myPatchData;
-    private int myState;
-    private int myID;
-    private Point2D myLoc;
-    private String myImageLocation;
+
+        private int myState;
+        private Point2D myLoc;
+        private String myImageLocation;
         
 	/**
 	 * Constructor that sets the dimensions of the TerrainCreator GUI component
@@ -53,13 +51,12 @@ public class TerrainCreator extends PopupWindow {
 	 * 
 	 * @param library : Library to which terrain will be added.
 	 */
-	public TerrainCreator(LibraryView library, PatchData patchData){
+
+	public TerrainCreator(LibraryView library){
 		myLibrary = library;
 		
-		myPatchData = patchData;
 		myState = 0;
-		myID = 0;
-		myLoc = new Point2D(0,0);
+		myLoc = new Point2D.Double(0,0);
 		myImageLocation = "";
 		
 		setHeight(HEIGHT);
@@ -92,7 +89,7 @@ public class TerrainCreator extends PopupWindow {
 				fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png"));
 				File selectedFile = fileChoice.showOpenDialog(null);
 				if(selectedFile != null){
-					myImageLocation = selectedFile.toURI().toString();
+				myImageLocation = selectedFile.toURI().toString();
 					Image image = new Image(myImageLocation);
 					icon.setImage(image);
 					icon.setFitHeight(40);
@@ -101,14 +98,13 @@ public class TerrainCreator extends PopupWindow {
 			}
 		});
 		images.getChildren().addAll(loadLabel, loadImage, icon);
-		
-		HBox modList = new ModulesList();
-		
+				
 		Button create = new Button(TEMPLATE_LABEL);
 		create.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent click) {
-				Patch terrain = new SquarePatch(myState, myID, myImageLocation, myLoc);
+
+				Patch terrain = new SquarePatch(myState, myImageLocation, myLoc);
 				Hyperlink link = new Hyperlink(terrainName.getText());
 				link.setTranslateY(10);;
 				link.setOnAction(new EventHandler<ActionEvent>(){
@@ -120,7 +116,9 @@ public class TerrainCreator extends PopupWindow {
 				});
 				Button delButton = new Button(DELETE);
 				delButton.setLayoutY(5);
+
 				HBox entry = new TerrainEntry(delButton, icon, link, terrain);
+ 
 				delButton.setOnAction(new EventHandler<ActionEvent>(){
         			@Override
         			public void handle(ActionEvent event) {
@@ -131,7 +129,7 @@ public class TerrainCreator extends PopupWindow {
 				close();
 			}
 		});
-		box.getChildren().addAll(names, images, modList, create);
+		box.getChildren().addAll(names, images, create);
 		setScene(new Scene(box));
 	}
 }

@@ -4,7 +4,7 @@ import gamedata.gamecomponents.Grid;
 import gamedata.rules.Rule;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.geometry.Point2D;
+import java.awt.geom.Point2D;
 
 /**
  * Defines the movement of a piece. Responsible for maintaining the behavior
@@ -23,6 +23,7 @@ public class Movement {
 	 * Constructor
 	 * @param endPoints Point2Ds representing all possible relative locations of movement
 	 */
+	@SafeVarargs
 	public Movement(List<Point2D>... endPoints) {
 	    myMoves = new ArrayList<List<Point2D>>();
 	    myPaths = new ArrayList<Point2D>();
@@ -43,7 +44,7 @@ public class Movement {
 	public List<Point2D> getPossibleLocs(int x, int y) {
 		List<Point2D> p = new ArrayList<Point2D>();
 		for (Point2D a : myPaths) {
-			p.add(new Point2D(a.getX() + x, a.getY() + y));
+			p.add(new Point2D.Double(a.getX() + x, a.getY() + y));
 		}
 		return p;
 	}

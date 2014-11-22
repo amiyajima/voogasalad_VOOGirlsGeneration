@@ -1,8 +1,8 @@
 package authoring.concretefeatures;
 
 import gamedata.gamecomponents.Patch;
-
 import authoring.abstractfeatures.LibraryEntry;
+import authoring.data.PatchData;
 import authoring_environment.LibraryView;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -19,6 +19,9 @@ import javafx.scene.input.MouseEvent;
 public class TerrainEntry extends LibraryEntry {
 	
 	private Patch myTerrain;
+	private PatchData myPatchData;
+
+
 	
 	/**
 	 * Constructs the TerrainEntry, which is displayed as an HBox in the
@@ -37,6 +40,7 @@ public class TerrainEntry extends LibraryEntry {
 		this.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent m){
+			        System.out.println("certain type patch to be created selected");
 				LibraryView.currentlySelectedTerrain = myTerrain;
 				LibraryView.unitSelected = false;
 				LibraryView.reset = false;

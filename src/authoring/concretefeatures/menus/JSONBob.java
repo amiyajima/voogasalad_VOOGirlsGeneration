@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 import authoring_environment.LibraryView;
 import java.io.File;
+import tests.JSONBobTester;
 
 /**
  * Menu selection to save game to JSON or read game from JSON
@@ -53,6 +54,7 @@ public class JSONBob extends Menu {
         File file = fileChooser.showSaveDialog(myStage);
         JSONManager myGameBuilder = new JSONManager();
         JSONBobTester jb = new JSONBobTester();
+        //myGameBuilder.writeToJSON(jb.createNewGame(), file.getAbsolutePath());
         myGameBuilder.writeToJSON(jb.createNewGame(), file.getAbsolutePath());
     }
 }

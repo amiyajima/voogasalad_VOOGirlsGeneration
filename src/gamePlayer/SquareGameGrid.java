@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
 import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
+import java.awt.geom.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -33,9 +33,9 @@ public class SquareGameGrid extends GameGrid {
 
     public static final String TEST_IMAGE = "/src/voogasalad_VOOGirlsGeneration/turtle.png";
 
-    public SquareGameGrid (int rwo, int col) {
+    public SquareGameGrid (int row, int col) {
         // will handle different size, stubbing it for now.
-        super(rwo, col);
+        super(row, col);
 
     }
 
@@ -59,7 +59,8 @@ public class SquareGameGrid extends GameGrid {
      */
     @Override
     protected void initializeGrid () {
-        myCurrentLocation = new Point2D(0, 0);
+
+        myCurrentLocation = new Point2D.Double(0, 0);
 
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
@@ -74,7 +75,6 @@ public class SquareGameGrid extends GameGrid {
                 // Rectangle testr = new Rectangle(20,20);
                 // testr.setFill(Color.RED);
                 // sp.getChildren().add(testr);
-
                 this.add(sp, i, j);
                 r.setOnMouseEntered(event -> onHover(r));
                 r.setOnMouseExited(event -> r.setFill(Color.BLACK));
@@ -92,10 +92,11 @@ public class SquareGameGrid extends GameGrid {
         r.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle (MouseEvent event) {
-                myCurrentLocation = new Point2D(r.getX(), r.getY());
+                myCurrentLocation = new Point2D.Double(r.getX(), r.getY());
                 System.out.println(myCurrentLocation);
             }
         });
+
     }
 
     private void addTestKeyboardControl (Rectangle r) {
@@ -103,8 +104,8 @@ public class SquareGameGrid extends GameGrid {
             @Override
             public void handle (KeyEvent key) {
                 if (key.getCode() == KeyCode.M) {
-                    myCurrentLocation = new Point2D(myCurrentLocation.getX() + 1,
-                                                    myCurrentLocation.getY() + 0);
+                    myCurrentLocation = new Point2D.Double(myCurrentLocation.getX() + 1,
+                                                           myCurrentLocation.getY() + 0);
                     System.out.println(myCurrentLocation);
                     System.out.println("-----");
                 }
@@ -121,7 +122,7 @@ public class SquareGameGrid extends GameGrid {
     }
 
     private void highlightCurrentLocation (Rectangle r) {
-        myCurrentLocation = new Point2D(100, 100);
+        myCurrentLocation = new Point2D.Double(100, 100);
         if (r.getX() == myCurrentLocation.getX() & r.getY() == myCurrentLocation.getY()) {
             System.out.println(myCurrentLocation.getX());
             r.setFill(Color.RED);

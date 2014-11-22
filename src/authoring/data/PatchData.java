@@ -36,4 +36,8 @@ public class PatchData implements AuthoringData<Patch> {
     public void clear () {
         myPatches.clear();
     }
+    
+    public List<Patch> getPatches(){
+        return myPatches;
+    }
 }

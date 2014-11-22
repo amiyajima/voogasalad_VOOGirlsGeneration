@@ -1,13 +1,16 @@
 package gamedata.gamecomponents;
  
-import javafx.geometry.Point2D;
+import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * @author Sandy Lee
+ *
+ */
 public abstract class Patch {
 
-	private int myState;
-	private int myID;
+	private int myTypeID;
 	private Point2D myLoc;
 	private String myImageLocation;
 	private ImageView myImageView;
@@ -19,9 +22,9 @@ public abstract class Patch {
 	 * @param imageLocation of patch(form like "images/myImage.jpg")
 	 * @param p coordinate of patch
 	 */
-	public Patch(int state, int id, String imageLocation, Point2D p) {
-		myState = state;
-		myID = id;
+
+	public Patch(int typeID, String imageLocation, Point2D p) {
+		myTypeID = typeID;
 		myImageLocation = imageLocation;
 		myImageView = new ImageView(new Image(imageLocation));
 		myLoc = p;
@@ -32,25 +35,18 @@ public abstract class Patch {
 	 * Getter for state
 	 * @return patch's state
 	 */
-	public int getMyState() {
-		return myState;
+	public int getTypeID() {
+		return myTypeID;
 	}
 
 	/**
 	 * Sets patch's state
 	 * @param myState of patch
 	 */
-	public void setMyState(int myState) {
-		this.myState = myState;
+	public void setMyType(int type) {
+		this.myTypeID = type;
 	}
 
-	/**
-	 * Getter for ID
-	 * @return ID of patch
-	 */
-	public int getMyID() {
-		return myID;
-	}
 
 	/**
 	 * Getter for patch's coordinate location
@@ -59,14 +55,17 @@ public abstract class Patch {
 	public Point2D getLoc() {
 		return myLoc;
 	}
-
+	
 	/**
-	 * Sets patch's ID
-	 * @param myID of patch
-	 */
-	public void setMyID(int myID) {
-		this.myID = myID;
-	}
+         * sets patch's coordinate location
+         * @param coord
+         * 
+         */
+        public void setLoc(Point2D coord) {
+                myLoc = coord;
+        }
+
+
 
 	/**
 	 * Getter for patch's image

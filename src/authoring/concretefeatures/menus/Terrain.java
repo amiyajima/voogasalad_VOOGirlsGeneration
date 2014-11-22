@@ -20,16 +20,16 @@ public class Terrain extends Menu{
 		myLibrary = library;
 		MenuItem eventsCreator = new MenuItem(ITEM1);
 		
-		setAction(eventsCreator, patchData);
+		setAction(eventsCreator);
 		getItems().addAll(eventsCreator);
 	}
 	
-	private void setAction(MenuItem item, PatchData patchData){
+	private void setAction(MenuItem item){
 		item.setOnAction(new EventHandler<ActionEvent>(){
 			
 			@Override
 			public void handle(ActionEvent t){
-				PopupWindow p = new TerrainCreator(myLibrary, patchData);
+				PopupWindow p = new TerrainCreator(myLibrary);
 				p.show();
 			}
 		});
