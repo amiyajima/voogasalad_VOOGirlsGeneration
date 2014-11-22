@@ -1,7 +1,7 @@
 package authoring.concretefeatures;
 
 import java.util.Collections;
-import authoring_environment.UIspecs;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;

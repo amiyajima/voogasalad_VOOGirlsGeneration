@@ -6,7 +6,6 @@ import java.util.Observable;
 import java.util.Observer;
 import gamedata.goals.*;
 import gamedata.rules.*;
-import gameengine.player.Player;
 
 
 /**

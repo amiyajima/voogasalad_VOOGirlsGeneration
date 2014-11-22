@@ -37,16 +37,13 @@ public class SquareGrid extends Grid {
      * set up grid by initializing patches on it
      */
     public void setGrid () {
-        System.out.println("setgridcaledinsquaregrid");
         for (int x = 0; x < super.getColumn(); x++) {
             for (int y = 0; y < super.getRow(); y++) {
                 Patch patch = new SquarePatch(DEFAULT_PATCH_STATE,
                                               DEFAULT_PATCH_ID, DEFAULT_PATCH_IMAGE_LOCATION,
                                               new Point2D.Double(x, y));
                 super.myPatches.put(new Point2D.Double(x, y), patch);
-                System.out.println("patch added");
             }
         }
     }
-
 }

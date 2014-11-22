@@ -1,6 +1,5 @@
 package gamePlayer;
 
-import gamedata.gamecomponents.Level; 
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 
