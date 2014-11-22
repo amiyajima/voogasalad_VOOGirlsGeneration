@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 public class SquareGrid extends Grid {
     private static final int DEFAULT_PATCH_STATE = 1;
     private static final int DEFAULT_PATCH_ID = 1;
-    private static final ImageView DEFAULT_PATCH_IMAGE_VIEW = new ImageView();
+    private static final String DEFAULT_PATCH_IMAGE_LOCATION = "";
 
     /**
      * Default constructor for square grid
@@ -40,7 +40,7 @@ public class SquareGrid extends Grid {
         for (int x = 0; x < super.getColumn(); x++) {
             for (int y = 0; y < super.getRow(); y++) {
                 Patch patch = new SquarePatch(DEFAULT_PATCH_STATE,
-                                              DEFAULT_PATCH_ID, DEFAULT_PATCH_IMAGE_VIEW,
+                                              DEFAULT_PATCH_ID, DEFAULT_PATCH_IMAGE_LOCATION,
                                               new Point2D(x, y));
                 super.myPatches.put(new Point2D(x, y), patch);
             }
