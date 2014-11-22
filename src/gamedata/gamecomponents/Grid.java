@@ -14,6 +14,10 @@ import javafx.scene.image.ImageView;
  * Contains the Grid defined for a level. Contains the pieces and patches
  * 
  */
+/**
+ * @author Sandy Lee
+ *
+ */
 public abstract class Grid {
 
     private int myRow;

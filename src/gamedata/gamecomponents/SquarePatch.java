@@ -4,10 +4,14 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 
 
+/**
+ * @author seungwonlee
+ *
+ */
 public class SquarePatch extends Patch {
 
-    public SquarePatch (int state, int id, ImageView image, Point2D p) {
-        super(state, id, image, p);
+    public SquarePatch (int state, ImageView image, Point2D p) {
+        super(state, image, p);
     }
 
 }

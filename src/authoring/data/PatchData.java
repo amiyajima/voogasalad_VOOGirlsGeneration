@@ -23,13 +23,13 @@ public class PatchData implements AuthoringData<Patch> {
     }
 
     @Override
-    public void add (Patch action) {
-        myPatches.add(action);
+    public void add (Patch patch) {
+        myPatches.add(patch);
     }
 
     @Override
-    public void remove (Patch action) {
-        myPatches.remove(action);
+    public void remove (Patch patch) {
+        myPatches.remove(patch);
     }
 
     @Override

@@ -18,7 +18,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import authoring.abstractfeatures.PopupWindow;
-import authoring.data.PatchData;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
@@ -41,9 +40,7 @@ public class TerrainCreator extends PopupWindow {
 	private final String DELETE = "Delete";
 	private LibraryView myLibrary;
 	
-	private PatchData myPatchData;
         private int myState;
-        private int myID;
         private Point2D myLoc;
         private ImageView myImage;
         
@@ -53,14 +50,11 @@ public class TerrainCreator extends PopupWindow {
 	 * 
 	 * @param library : Library to which terrain will be added.
 	 */
-	public TerrainCreator(LibraryView library, PatchData patchData){
-	    //maybe get rid of library?
+	public TerrainCreator(LibraryView library){
 		myLibrary = library;
 		
 		//set to some default values
-		myPatchData = patchData;
 		myState = 0;
-		myID = 0;
 		myLoc = new Point2D(0,0);
 		myImage = new ImageView();
 		
@@ -98,7 +92,7 @@ public class TerrainCreator extends PopupWindow {
 				fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png"));
 				File selectedFile = fileChoice.showOpenDialog(null);
 				if(selectedFile != null){
-//					imageLocation[0] = selectedFile.toURI().toString();
+					imageLocation[0] = selectedFile.toURI().toString();
 					Image image = new Image(imageLocation[0]);
 					icon.setImage(image);
 					icon.setFitHeight(40);
@@ -121,8 +115,10 @@ public class TerrainCreator extends PopupWindow {
 				imageCopy.setImage(icon.getImage());
 				imageCopy.setFitHeight(40);
 				imageCopy.setFitWidth(40);
+				
+				myState = terrainName.getText().hashCode();
 			
-				Patch terrain = new SquarePatch(myState, myID, myImage, myLoc);
+				Patch terrain = new SquarePatch(myState, myImage, myLoc);
 				Hyperlink link = new Hyperlink(terrainName.getText());
 				link.setTranslateY(10);;
 				link.setOnAction(new EventHandler<ActionEvent>(){
@@ -134,7 +130,7 @@ public class TerrainCreator extends PopupWindow {
 				});
 				Button delButton = new Button(DELETE);
 				delButton.setLayoutY(5);
-				HBox entry = new TerrainEntry(delButton, imageCopy, link, terrain);
+				HBox entry = new TerrainEntry(delButton, imageCopy, link, terrain, null);
 				delButton.setOnAction(new EventHandler<ActionEvent>(){
         			@Override
         			public void handle(ActionEvent event) {
