@@ -1,6 +1,6 @@
 package authoring.data;
 
-import gamedata.action.Patch;
+import gamedata.gamecomponents.Patch;
 import java.util.LinkedList;
 import java.util.List;
 

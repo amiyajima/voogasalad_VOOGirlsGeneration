@@ -1,10 +1,12 @@
 package gamedata.gamecomponents;
 
-import java.awt.geom.Point2D;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javafx.geometry.Point2D;
+import javafx.scene.image.ImageView;
 
 
 /**
@@ -20,7 +22,7 @@ public abstract class Grid {
     protected Map<Point2D, Piece> myPieces;
     private static final int DEFAULT_PATCH_STATE = 1;
     private static final int DEFAULT_PATCH_ID = 1;
-    private static final String DEFAULT_PATCH_IMAGE_LOCATION = "";
+    private static final ImageView DEFAULT_PATCH_IMAGE_VIEW = new ImageView();
 
     /**
      * Default constructor for square grid
