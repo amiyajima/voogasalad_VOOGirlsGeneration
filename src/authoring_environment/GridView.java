@@ -1,12 +1,6 @@
 package authoring_environment;
 
-import javafx.scene.Group;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 
 /**
  * The GUI components for the grid displayed on the right side of the game authoring

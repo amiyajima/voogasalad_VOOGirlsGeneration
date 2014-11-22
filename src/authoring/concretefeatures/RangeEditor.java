@@ -16,8 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
-import authoring_environment.Grid;
-import authoring_environment.GridView;
 
 /**
  * Popup GUI element that allows the user to specify the size of the grid, selects the

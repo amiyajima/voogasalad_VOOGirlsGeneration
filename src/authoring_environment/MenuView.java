@@ -5,6 +5,7 @@ import authoring.data.ActionData;
 import authoring.data.PatchData;
 import javafx.scene.control.MenuBar;
 
+
 public class MenuView extends MenuBar {
 	
 	public MenuView(LibraryView library){
@@ -14,4 +15,5 @@ public class MenuView extends MenuBar {
 						  new Terrain(library, new PatchData()), new Actions(library, new ActionData()));
 		// TODO: ACTION DATA NEEDS TO GO SOMEWHERE ELSE
 	}
+
 }

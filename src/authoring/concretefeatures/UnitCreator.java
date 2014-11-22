@@ -5,11 +5,11 @@ import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
-import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -109,7 +109,7 @@ public class UnitCreator extends PopupWindow {
                 imageCopy.setFitWidth(40);
                 Piece unit =
                         new Piece(locationCopy, new ArrayList<Movement>(), new ArrayList<Action>(),
-                                  new Stats(), new Point2D.Double(0, 0), 0, 0, 0, new Inventory());
+                                  new Stats(), new Point2D(0, 0), 0, 0, 0, new Inventory());
                 Hyperlink link = new Hyperlink(unitName.getText());
                 link.setTranslateY(10);
                 ;
