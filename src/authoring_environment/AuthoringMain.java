@@ -1,5 +1,6 @@
 package authoring_environment;
 
+import authoring.concretefeatures.menus.File;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

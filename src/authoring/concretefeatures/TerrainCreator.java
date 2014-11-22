@@ -29,7 +29,7 @@ import authoring_environment.UIspecs;
  */
 public class TerrainCreator extends PopupWindow {
 	
-	private final int HEIGHT = 400;
+	private final int HEIGHT = 150;
 	private final int WIDTH = 400;
 	private final String TERRAIN = "Terrain";
 	private final String NAME = "Terrain Creator";
@@ -42,7 +42,6 @@ public class TerrainCreator extends PopupWindow {
 	
 
         private int myState;
-        private int myID;
         private Point2D myLoc;
         private String myImageLocation;
         
@@ -99,15 +98,13 @@ public class TerrainCreator extends PopupWindow {
 			}
 		});
 		images.getChildren().addAll(loadLabel, loadImage, icon);
-		
-		HBox modList = new ModulesList();
-		
+				
 		Button create = new Button(TEMPLATE_LABEL);
 		create.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent click) {
 
-				Patch terrain = new SquarePatch(myState, myID, myImageLocation, myLoc);
+				Patch terrain = new SquarePatch(myState, myImageLocation, myLoc);
 				Hyperlink link = new Hyperlink(terrainName.getText());
 				link.setTranslateY(10);;
 				link.setOnAction(new EventHandler<ActionEvent>(){
@@ -132,7 +129,7 @@ public class TerrainCreator extends PopupWindow {
 				close();
 			}
 		});
-		box.getChildren().addAll(names, images, modList, create);
+		box.getChildren().addAll(names, images, create);
 		setScene(new Scene(box));
 	}
 }
