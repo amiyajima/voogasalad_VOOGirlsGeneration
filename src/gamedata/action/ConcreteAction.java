@@ -2,10 +2,9 @@ package gamedata.action;
 
 import gamedata.gamecomponents.Piece; 
 import gamedata.stats.Stats;
-
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.geometry.Point2D;
 
 /**
  * A concrete instance of an Action.
@@ -50,7 +49,7 @@ public class ConcreteAction implements Action {
 		for (Point2D relativeLoc : myAttackRange) {
 			double absX = pieceLoc.getX() + relativeLoc.getX();
 			double absY = pieceLoc.getY() + relativeLoc.getY();
-			absoluteRange.add(new Point2D.Double(absX, absY));
+			absoluteRange.add(new Point2D(absX, absY));
 		}
 		return absoluteRange;
 	}

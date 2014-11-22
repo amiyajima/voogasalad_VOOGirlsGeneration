@@ -115,6 +115,10 @@ public class Game {
 	private void restartLevel() {
 		myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel));
 	}
+	
+	public String toString(){
+	    return "game with " + myPlayers.size() + " players and " + myLevels.size() + " levels";
+	}
 
 	/**
 	 * Getter for the Current Level

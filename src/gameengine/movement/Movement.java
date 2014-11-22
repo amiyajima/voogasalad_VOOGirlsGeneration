@@ -1,13 +1,10 @@
 package gameengine.movement;
 
 import gamedata.gamecomponents.Grid;
-import gamedata.gamecomponents.Level;
-import gamedata.gamecomponents.Piece;
 import gamedata.rules.Rule;
-
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.geometry.Point2D;
 
 /**
  * Defines the movement of a piece. Responsible for maintaining the behavior
@@ -46,7 +43,7 @@ public class Movement {
 	public List<Point2D> getPossibleLocs(int x, int y) {
 		List<Point2D> p = new ArrayList<Point2D>();
 		for (Point2D a : myPaths) {
-			p.add(new Point2D.Double(a.getX() + x, a.getY() + y));
+			p.add(new Point2D(a.getX() + x, a.getY() + y));
 		}
 		return p;
 	}

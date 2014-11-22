@@ -4,14 +4,12 @@ import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
 import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
-
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -107,7 +105,7 @@ public class ActionCreator extends PopupWindow {
 				myStatsLogics = getStatsLogics(targetChoice, moddedStat);
 				myActionData.add(new ConcreteAction(myName, myAttackRange,
 						myEffectRange, myStatsLogics, myConclusion));
-				hide(); // close window once action is made
+				close(); // close window once action is made
 			}
 		});
 

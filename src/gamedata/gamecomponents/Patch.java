@@ -1,7 +1,6 @@
 package gamedata.gamecomponents;
  
-import java.awt.geom.Point2D;
-
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -11,6 +10,7 @@ public abstract class Patch {
 	private int myID;
 	private Point2D myLoc;
 	private String myImageLocation;
+	private ImageView myImageView;
 
 	/**
 	 * Constructor for patch
@@ -23,6 +23,7 @@ public abstract class Patch {
 		myState = state;
 		myID = id;
 		myImageLocation = imageLocation;
+		myImageView = new ImageView(new Image(imageLocation));
 		myLoc = p;
 	}
 
@@ -71,8 +72,12 @@ public abstract class Patch {
 	 * Getter for patch's image
 	 * @return image of the patch
 	 */
-	public ImageView getImageView() {
-		return new ImageView(new Image(myImageLocation));
+	public ImageView getImageView(){
+		return myImageView;
+	}
+	
+	public String getImageLocation(){
+		return myImageLocation;
 	}
 
 	/**
@@ -80,7 +85,7 @@ public abstract class Patch {
 	 * @param imageLocation image file's location
 	 */
 	public void setMyImage(String imageLocation) {
-		this.myImageLocation = imageLocation;
+		myImageLocation = imageLocation;
 	}
 
 }

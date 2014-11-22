@@ -1,10 +1,13 @@
 package gamedata.gamecomponents;
 
-import java.awt.geom.Point2D; 
+
+import java.awt.geom.Point2D;  
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javafx.scene.image.ImageView;
+
 
 
 /**
@@ -21,7 +24,7 @@ public abstract class Grid {
     protected Map<Point2D, Piece> myPieces;
     private static final int DEFAULT_PATCH_STATE = 1;
     private static final int DEFAULT_PATCH_ID = 1;
-    private static final String DEFAULT_PATCH_IMAGE_LOCATION = "";
+    private static final ImageView DEFAULT_PATCH_IMAGE_VIEW = new ImageView();
 
     /**
      * Default constructor for square grid
@@ -97,14 +100,14 @@ public abstract class Grid {
     /**
      * gets the piece on the given coordinate
      * 
-     * @param coord
+     * @param loc
      *        of piece
      * @return piece
      */
-    public Piece getPiece (Point2D coord) {
+    public Piece getPiece (Point2D loc) {
         for (Point2D coordinate : myPieces.keySet()) {
             {
-                if (coordinate.equals(coord)) { return myPieces.get(coord); }
+                if (coordinate.equals(loc)) { return myPieces.get(loc); }
             }
         }
         // no piece exists on such coord
