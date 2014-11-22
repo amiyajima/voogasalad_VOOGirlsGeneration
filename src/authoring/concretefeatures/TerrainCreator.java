@@ -42,10 +42,10 @@ public class TerrainCreator extends PopupWindow {
 	private LibraryView myLibrary;
 	
 	private PatchData myPatchData;
-        private int myState;
-        private int myID;
-        private Point2D myLoc;
-        private ImageView myImage;
+    private int myState;
+    private int myID;
+    private Point2D myLoc;
+    private ImageView myImage;
         
 	/**
 	 * Constructor that sets the dimensions of the TerrainCreator GUI component
@@ -54,7 +54,6 @@ public class TerrainCreator extends PopupWindow {
 	 * @param library : Library to which terrain will be added.
 	 */
 	public TerrainCreator(LibraryView library, PatchData patchData){
-	    //maybe get rid of library?
 		myLibrary = library;
 		
 		//set to some default values
@@ -70,19 +69,17 @@ public class TerrainCreator extends PopupWindow {
 		initialize();
 	}
 	
-
-	
 	@Override
 	protected void initialize(){
 		VBox box = new VBox();
-	        box.setPadding(UIspecs.allPadding);
-	        box.setSpacing(5);
+	    box.setPadding(UIspecs.allPadding);
+	    box.setSpacing(5);
 		
 		HBox names = new HBox();
 		HBox images = new HBox();
 		
 		Label nameLabel = new Label(TERRAIN_NAME_LABEL);
-	        nameLabel.setPadding(UIspecs.topRightPadding);
+	    nameLabel.setPadding(UIspecs.topRightPadding);
 		TextField terrainName = new TextField();
 		names.getChildren().addAll(nameLabel, terrainName);
 		
