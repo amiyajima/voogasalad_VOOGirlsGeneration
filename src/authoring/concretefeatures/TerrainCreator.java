@@ -45,7 +45,7 @@ public class TerrainCreator extends PopupWindow {
     private int myState;
     private int myID;
     private Point2D myLoc;
-    private ImageView myImage;
+    private String myImageLocation;
         
 	/**
 	 * Constructor that sets the dimensions of the TerrainCreator GUI component
@@ -56,12 +56,11 @@ public class TerrainCreator extends PopupWindow {
 	public TerrainCreator(LibraryView library, PatchData patchData){
 		myLibrary = library;
 		
-		//set to some default values
 		myPatchData = patchData;
 		myState = 0;
 		myID = 0;
 		myLoc = new Point2D(0,0);
-		myImage = new ImageView();
+		myImageLocation = "";
 		
 		setHeight(HEIGHT);
 		setWidth(WIDTH);
@@ -83,27 +82,24 @@ public class TerrainCreator extends PopupWindow {
 		TextField terrainName = new TextField();
 		names.getChildren().addAll(nameLabel, terrainName);
 		
-		String[] imageLocation = new String[1];
 		ImageView icon = new ImageView();
 		Label loadLabel = new Label(IMAGE_LABEL);
 		Button loadImage = new Button(LOAD_IMAGE_LABEL);
 		loadImage.setOnAction(new EventHandler<ActionEvent>() {
-
 			@Override
 			public void handle(ActionEvent click) {
 				FileChooser fileChoice = new FileChooser();
 				fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png"));
 				File selectedFile = fileChoice.showOpenDialog(null);
 				if(selectedFile != null){
-//					imageLocation[0] = selectedFile.toURI().toString();
-					Image image = new Image(imageLocation[0]);
+					myImageLocation = selectedFile.toURI().toString();
+					Image image = new Image(myImageLocation);
 					icon.setImage(image);
 					icon.setFitHeight(40);
 					icon.setFitWidth(40);
 				}
 			}
 		});
-		
 		images.getChildren().addAll(loadLabel, loadImage, icon);
 		
 		HBox modList = new ModulesList();
@@ -112,14 +108,7 @@ public class TerrainCreator extends PopupWindow {
 		create.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent click) {
-				
-				ImageView imageCopy = new ImageView();
-				myImage = imageCopy;
-				imageCopy.setImage(icon.getImage());
-				imageCopy.setFitHeight(40);
-				imageCopy.setFitWidth(40);
-			
-				Patch terrain = new SquarePatch(myState, myID, myImage, myLoc);
+				Patch terrain = new SquarePatch(myState, myID, myImageLocation, myLoc);
 				Hyperlink link = new Hyperlink(terrainName.getText());
 				link.setTranslateY(10);;
 				link.setOnAction(new EventHandler<ActionEvent>(){
@@ -131,7 +120,7 @@ public class TerrainCreator extends PopupWindow {
 				});
 				Button delButton = new Button(DELETE);
 				delButton.setLayoutY(5);
-				HBox entry = new TerrainEntry(delButton, imageCopy, link, terrain);
+				HBox entry = new TerrainEntry(delButton, icon, link, terrain);
 				delButton.setOnAction(new EventHandler<ActionEvent>(){
         			@Override
         			public void handle(ActionEvent event) {
@@ -143,7 +132,6 @@ public class TerrainCreator extends PopupWindow {
 			}
 		});
 		box.getChildren().addAll(names, images, modList, create);
-	
 		setScene(new Scene(box));
 	}
 }

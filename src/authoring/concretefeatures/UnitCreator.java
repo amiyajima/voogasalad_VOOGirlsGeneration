@@ -120,11 +120,10 @@ public class UnitCreator extends PopupWindow {
                 }
             }
         });
-
         images.getChildren().addAll(loadLabel, loadImage, icon);
-
+        
         HBox modList = new ModulesList();
-
+        
         Button goButton = new Button(TEMPLATE_LABEL);
         goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
