@@ -1,4 +1,4 @@
-package gameengine.engine;
+package gamedata;
 
 import java.awt.geom.Point2D;
 import java.io.FileNotFoundException;
@@ -119,7 +119,7 @@ public class VoogaMain {
         grid1.setPiece(piece2, p2);
 
         Game myGame = new Game(myPlayers, myLevels);
-        GameBuilder builder = new GameBuilder();
+        JSONManager builder = new JSONManager();
 
         builder.writeToJSON(myGame, "test");
         /*

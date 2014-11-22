@@ -1,5 +1,6 @@
 package authoring.concretefeatures.menus;
 
+import gamedata.JSONManager;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
@@ -8,7 +9,6 @@ import gamedata.goals.Goal;
 import gamedata.goals.PlayerPiecesRemovedGoal;
 import gamedata.rules.MoveCountRule;
 import gamedata.rules.Rule;
-import gameengine.engine.GameBuilder;
 import gameengine.player.Player;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +54,9 @@ public class JSONBobTester {
         Level level2 = new Level(grid1, myGoals, myRules);
         myLevels.add(level1);
         myLevels.add(level2);
+        
+        Player myPlayer3 = new Player();
+        myPlayers.add(myPlayer3);
 
         Game myGame = new Game(myPlayers, myLevels);
         return myGame;
