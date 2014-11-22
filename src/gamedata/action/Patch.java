@@ -12,7 +12,7 @@ import gamedata.gamecomponents.Piece;
  * 
  * @author Jennie Ju
  */
-public interface Action {
+public interface Patch {
 	
 	/**
 	 * Returns the name of the Action for display

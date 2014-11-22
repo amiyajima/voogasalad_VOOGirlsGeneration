@@ -2,15 +2,18 @@ package authoring_environment;
 
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
-import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * 
+ * @author huangmengen
+ *
+ */
 public class Tile extends Pane{
 	
 	private static final Image HIDDEN_DEFAULT_IMAGE = new Image("authoring/concretefeatures/images/images.jpeg");
@@ -24,8 +27,6 @@ public class Tile extends Pane{
 	protected ImageView unitImage;
 	protected ImageView terrainImage;
 	private boolean mySelected;
-	private int myX;
-	private int myY;
 	
 	public Tile(int x,int y,int size){
 

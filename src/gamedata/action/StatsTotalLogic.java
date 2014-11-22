@@ -9,26 +9,25 @@ import java.util.List;
  * @author jujs100
  *
  */
-public class StatsTotalLogic {
-	private String myTarget;
-	private String myValue; // probably shouldn't call this a value, think of better name
+public class StatsTotalLogic extends StatsModifier{
 	private List<StatsSingleMultiplier> myLogic;
 	
-	public StatsTotalLogic(String target, String value, List<StatsSingleMultiplier> logic) {
-		myTarget = target;
-		myValue = value;
+	/**
+	 * Constructor for StatsTotalLogic
+	 * @param target - One of 2 string choices indicating whether the stat to be
+	 * affected is that from the actor or the receiver. String choices: [actor, receiver]
+	 * @param stat - String name of stat to be modified
+	 * @param logic - List of StatsSingleMultipliers to edit the stat
+	 */
+	public StatsTotalLogic(String target, String stat, List<StatsSingleMultiplier> logic) {
+		super(target,stat);
 		myLogic = logic;
 	}
-	
-	public boolean checkTarget(String targetToCheck) {
-		return targetToCheck.equals(myTarget);
-	}
-	
-	public String getValue() {
-		return myValue;
-	}
-	
-	public List<StatsSingleMultiplier> getMultiplierLogic() {
+
+	/**
+	 * Returns the list of multiplier logics 
+	 */
+	protected List<StatsSingleMultiplier> getMultiplierLogic() {
 		return myLogic;
 	}
 }

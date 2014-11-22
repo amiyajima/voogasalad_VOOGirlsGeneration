@@ -1,21 +1,25 @@
 package authoring_environment;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import javafx.event.EventHandler;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
+/**
+ * The grid which contains all the tiles and draws the tiles and grid lines.
+ * @author huangmengen
+ *
+ */
 public class Grid extends Pane {
 
 	private int myWidth;
 	private int myHeight;
 	private int myTileSize;
-	public Tile[][] grid;
+	private Tile[][] grid;
 
 	public Grid(int width, int height, int tilesize) {
 		myWidth = width;
@@ -58,14 +62,22 @@ public class Grid extends Pane {
 		setActionEvent();
 	}
 
+	/**
+	 * Get the number of tiles in a row.
+	 * @return The number of tiles in a horizontal line of the grid.
+	 */
 	public int getGridWidth() {
 		return myWidth;
 	}
 
+	/**
+	 * Get the number of tiles in a column.
+	 * @return The number of tiles in a vertical line of the grid.
+	 */
 	public int getGridHeight() {
 		return myHeight;
 	}
-
+	
 	public void sampleSelected() {
 		for (Tile[] line : grid) {
 			for (Tile tile : line) {
@@ -79,6 +91,14 @@ public class Grid extends Pane {
 		}
 	}
 
+	/**
+	 * Get a specific tile in the grid according to its position.
+	 * @param x: The X coordination of the tile
+	 * 			from the left smallest to the right largest.
+	 * @param y: The Y coordination of the tile
+	 * 			from the bottom smallest to the top largest.
+	 * @return The tile at the specified position.
+	 */
 	public Tile getTile(int x, int y) {
 		return grid[x][y];
 	}
@@ -132,4 +152,9 @@ public class Grid extends Pane {
 			}
 		}
 	}
+	
+	public Tile[][] getGridTiles(){
+		return grid;
+	}
+
 }
