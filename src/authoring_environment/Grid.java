@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.event.EventHandler;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -52,10 +53,9 @@ public class Grid extends Pane {
 			for (int j = 0; j < myHeight; j++) {
 				grid[i][j] = new Tile(i, j, myTileSize);
 				this.getChildren().add(grid[i][j]);
-
 			}
 		}
-
+		setActionEvent();
 	}
 
 	public int getGridWidth() {
@@ -74,9 +74,7 @@ public class Grid extends Pane {
 					public void handle(MouseEvent event) {
 						tile.switchSelected();
 					}
-
 				});
-
 			}
 		}
 	}
@@ -86,14 +84,52 @@ public class Grid extends Pane {
 	}
 
 	public List<Tile> getSelected() {
-		List<Tile> titles = new ArrayList<Tile>();
+		List<Tile> tiles = new ArrayList<Tile>();
 		for(int i=0; i<myWidth; i++){
 			for(int j=0; i<myHeight;j++){
 				if(getTile(i,j).getSelected()){
-					titles.add(getTile(i,j));
+					tiles.add(getTile(i,j));
 				}
 			}
 		}
-		return titles;
+		return tiles;
+	}
+
+	private void setActionEvent() {
+		this.setStyle("-fx-cursor: hand");
+		this.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent m){
+				int x = (int)m.getX() / myTileSize;
+				int y = (int)m.getY() / myTileSize;
+				Tile tile = getTile(x, y);
+				setContents(tile);
+			}
+		});
+	}
+
+	protected void setContents(Tile tile) {
+		if(LibraryView.reset){
+			if(LibraryView.unitSelected){
+				tile.myUnit = null;
+				tile.unitImage.setVisible(false);;
+			}
+			else{
+				tile.myTerrain = null;
+				tile.terrainImage.setVisible(false);;
+			}
+		}
+		else{
+			if(LibraryView.unitSelected){
+				tile.myUnit = LibraryView.currentlySelectedUnit;
+				tile.unitImage.setImage(tile.myUnit.getImageView().getImage());
+				tile.unitImage.setVisible(true);
+			}
+			else{
+				tile.myTerrain = LibraryView.currentlySelectedTerrain;
+				tile.terrainImage.setImage(tile.myTerrain.getImageView().getImage());
+				tile.terrainImage.setVisible(true);
+			}
+		}
 	}
 }
