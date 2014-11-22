@@ -2,8 +2,6 @@ package gamedata.gamecomponents;
  
 import java.awt.geom.Point2D;
 
-import javafx.scene.image.ImageView;
-
 /**
  * creates square grid
  *
@@ -46,8 +44,4 @@ public class SquareGrid extends Grid {
 			}
 		}
 	}
-
 }
-
-
-

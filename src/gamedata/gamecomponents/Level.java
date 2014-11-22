@@ -6,7 +6,6 @@ import java.util.Observer;
 
 import gamedata.goals.*;
 import gamedata.rules.*;
-import gameengine.player.Player;
 
 /**
  * Rules define how a player's turn ends Goals define whether or not the level

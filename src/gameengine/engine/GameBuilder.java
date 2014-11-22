@@ -1,6 +1,5 @@
 package gameengine.engine;
 
-import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
@@ -8,7 +7,6 @@ import gameengine.player.Player;
 import java.util.List;
 import java.util.Map;
 import com.google.gson.Gson;
-
 
 /**
  * Interprets and parses the JSON then builds the game components.

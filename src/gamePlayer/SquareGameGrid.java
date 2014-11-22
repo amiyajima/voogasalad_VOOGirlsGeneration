@@ -1,24 +1,16 @@
 package gamePlayer;
-import gamedata.action.Action;
+
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level; 
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import java.util.Map;
 import java.util.Observable;
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.GridPane;
-import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import java.awt.geom.Point2D;
-
-
 
 /**
  * The View of square game grid. It observes the (Level in) Game
