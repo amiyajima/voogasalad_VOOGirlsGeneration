@@ -79,13 +79,6 @@ public class SquareGameGrid extends GameGrid{
     }
     // TODO: implement the logic in View Controller class.
     
-    public void addKeyboardControl (Game game) {
-       // Map<KeyCode,Action> actionKeyMap = game.
-        
-//        KeyboardController keyboardController = new KeyboardController();
-//        keyboardController.setActionKeyControl(actionKeyMap, gameScene);
-//        keyboardController.setMovementKeyControl(movementKeyMap, gameScene);
-    }
 
     /**
      * populates the grid according to the given the patch and piece maps. 

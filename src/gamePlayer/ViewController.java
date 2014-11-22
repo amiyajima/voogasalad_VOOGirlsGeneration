@@ -63,7 +63,8 @@ public class ViewController{
        myInitialScene = new VBox();
        myGameSpace = new BorderPane();
        myScoreBoard = new BorderPane();
-      //  myModel = new Game();
+       
+//       myModel = new Game();
        //TODO:
        //uses JSON reader that takes in the file chosen by user and instantiate 
        // a new Game object. 
@@ -80,6 +81,8 @@ public class ViewController{
         myStage.setScene(new Scene(myInitialScene));
        
         newGame();
+//        addKeyboardControl();
+        
         myStage.show();
 
     }
@@ -375,5 +378,10 @@ public class ViewController{
         });
     }
 
-
+    public void addKeyboardControl () {
+        KeyboardController keyboardController = new KeyboardController();
+        keyboardController.setActionKeyControl(getGrid().getScene(), getGame());
+        keyboardController.setMovementKeyControl(getGrid().getScene(), getGame());
+    }
+    
 }

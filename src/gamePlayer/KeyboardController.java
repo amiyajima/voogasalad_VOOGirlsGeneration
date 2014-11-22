@@ -1,5 +1,6 @@
 package gamePlayer;
 import gamedata.action.Action;  
+import gamedata.gamecomponents.Game;
 import gameengine.player.Player;
 import java.util.Map;
 import java.util.Set;
@@ -8,9 +9,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-
-
-
 
 public class KeyboardController {
     Player myCurrentPlayer;
@@ -26,7 +24,13 @@ public class KeyboardController {
      * @param actionKeyMap maps actions to keycodes
      * @param gameScene is the scene for GUI
      */
-    public void setActionKeyControl(Map<KeyCode, Action> actionKeyMap, Scene gameScene) {
+   
+    public void setActionKeyControl(Scene gameScene, Game game) {
+//        myCurrentPlayer = game.getCurrentPlayer(); //this method will exist in Game later.
+        //for testing: 
+        myCurrentPlayer = getCurrentPlayer(game);
+        
+        Map<KeyCode, Action> actionKeyMap = myCurrentPlayer.getActionKeyMap();
         gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             Set<KeyCode> actionKeyList = actionKeyMap.keySet();
             @Override
@@ -52,7 +56,11 @@ public class KeyboardController {
      * @param movementKeyMap
      * @param gameScene
      */
-    public void setMovementKeyControl(Map<KeyCode, Point2D> movementKeyMap, Scene gameScene) {
+    public void setMovementKeyControl(Scene gameScene, Game game) {
+//        myCurrentPlayer = game.getCurrentPlayer(); // this method will exist in Game later
+      //for testing: 
+      myCurrentPlayer = getCurrentPlayer(game);
+        Map<KeyCode, Point2D> movementKeyMap = myCurrentPlayer.getMovementKeyMap();
         gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             Set<KeyCode> movementKeyList = movementKeyMap.keySet();
             @Override
@@ -61,13 +69,17 @@ public class KeyboardController {
                    if (key.getCode() == kc) {
 //                       getting something like {0,1}, {-1,1}, etc
                        myCurrentLocation = new Point2D(myCurrentLocation.getX() + movementKeyMap.get(kc).getX(),
-                                                       myCurrentLocation.getY() + movementKeyMap.get(kc).getY());
-                       System.out.println("key pressed");
+                                                       myCurrentLocation.getY() + movementKeyMap.get(kc).getY()); 
                    }
                }
             }
         });
-        
+    }
+    
+    // this is just for testing... will delete later.
+    public Player getCurrentPlayer(Game game){
+        Player testPlayer = new Player();
+        return testPlayer;
     }
 }
 
