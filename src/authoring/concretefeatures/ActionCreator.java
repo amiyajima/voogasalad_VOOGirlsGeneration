@@ -102,7 +102,7 @@ public class ActionCreator extends PopupWindow{
 				myStatsLogics = getStatsLogics(targetChoice, moddedStat);
 				myActionData.add(new ConcreteAction(myName, myAttackRange, 
 						myEffectRange, myStatsLogics, myConclusion));
-				hide(); // close window once action is made
+				close(); // close window once action is made
 			}
 		});
 
