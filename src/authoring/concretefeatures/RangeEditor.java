@@ -23,7 +23,7 @@ import authoring.abstractfeatures.PopupWindow;
  * selects the tiles and returns the list of relative coordination of selected
  * tiles.
  * 
- * @author huangmengen, Jesse Ling
+ * @author Meng'en Huang, Jesse Ling, Jennie Ju
  *
  */
 public class RangeEditor extends PopupWindow {
@@ -42,24 +42,26 @@ public class RangeEditor extends PopupWindow {
 	private static final int MIN_TILE_SIZE = 30;
 	private static final int RANGE_EDITOR_HEIGHT = 800;
 	private static final int RANGE_EDITOR_WIDTH = 600;
+	private static final int DEFAULT_TILE_SIZE = 40;
+	
 	private int myGridLength = RANGE_EDITOR_WIDTH - 100;
-	private int myTileSize = 40;
-
+	private int myTileSize = DEFAULT_TILE_SIZE;
 	private int myGridWidthNumber;
 	private int myGridHeightNumber;
 	private RangeGrid mySampleGridView;
-	private List<Point2D> selectedList;
-	private ActionCreator myActionCreator;
 	private String myRangeType;
+	private List<Point2D> myRange;
 
-	public RangeEditor(ActionCreator ac, String type) {
-		myActionCreator = ac;
-		myRangeType = type;
+	public RangeEditor(List<Point2D> range, String type) {
 		setHeight(RANGE_EDITOR_HEIGHT);
 		setWidth(RANGE_EDITOR_WIDTH);
 		setTitle(NAME);
-		selectedList = new ArrayList<Point2D>();
+		
+		myRange = range;
+		// RangeType should really be the window title
+		myRangeType = type; // shows that it's for actions or movements?
 		initialize();
+		
 		mySampleGridView = new RangeGrid(myGridLength, myGridLength, myTileSize);
 	}
 
@@ -85,7 +87,7 @@ public class RangeEditor extends PopupWindow {
 							String oldValue, String newValue) {
 						switch (newValue) {
 						case COLUMN:
-							selectedList = mySampleGridView.getCenterColumn();
+							myRange = mySampleGridView.getCenterColumn();
 							// case INIT_TYPE_PROPORTION:
 							// initProportionalCells(parser);
 							// break;
@@ -167,13 +169,8 @@ public class RangeEditor extends PopupWindow {
 
 		@Override
 		public void handle(ActionEvent event) {
-			List<Point2D> l = mySampleGridView.getSelectedList();
-			if(myRangeType.equals("Action Range:")){
-				myActionCreator.setAttackRange(l);
-			}
-			else if(myRangeType.equals("Effect Range (Splashzone):")){
-				myActionCreator.setEffectRange(l);
-			}
+			List<Point2D> range = mySampleGridView.getSelectedList();
+			myRange = range;
 			current.close();
 		}
 	}

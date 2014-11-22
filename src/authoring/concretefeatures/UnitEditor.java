@@ -1,6 +1,9 @@
 package authoring.concretefeatures;
 
+import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import gamedata.gamecomponents.Piece;
+import gamedata.stats.Stats;
 import authoring.abstractfeatures.PopupWindow;
 
 /**
@@ -18,22 +21,30 @@ public class UnitEditor extends PopupWindow {
 	private final String NAME = "Unit Editor";
 	private Piece myUnit;
 	
+	private Stats myStats;
+	
 	/**
 	 * Constructor that sets the dimensions of the UnitEditor
 	 * GUI component and initializes it.
 	 * 
-	 * @param terrain : Piece class of the unit to edit.
+	 * @param unit : Piece class of the unit to edit.
 	 */
 	public UnitEditor(Piece unit){
 		setHeight(HEIGHT);
 		setWidth(WIDTH);
 		setTitle(NAME);
 		myUnit = unit;
+		
+		myStats = myUnit.getStats();
+		
 		initialize();
 	}
 	
 	@Override
 	protected void initialize() {
-		// TO DO: Make unit editor window.
+		ScrollPane root = new ScrollPane();
+		Scene scene = new Scene(root, WIDTH, HEIGHT);
+		
+		
 	}
 }

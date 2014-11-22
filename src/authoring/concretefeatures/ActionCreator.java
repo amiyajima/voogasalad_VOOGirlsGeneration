@@ -88,10 +88,10 @@ public class ActionCreator extends PopupWindow {
 		TextField nameField = new TextField();
 		initNameField(nameVBox, nameField);
 		// Set the Action Range
-		initSetRangeButton(rangeVBox, "Action Range:", myAttackRange, this);
+		initSetRangeButton(rangeVBox, "Action Range:", myAttackRange);
 		// Set the Effect Range
 		initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",
-				myEffectRange, this);
+				myEffectRange);
 		// Target stat to be modified
 		ChoiceBox<String> targetChoice = new ChoiceBox<String>();
 		TextField moddedStat = new TextField();
@@ -99,8 +99,8 @@ public class ActionCreator extends PopupWindow {
 		// Operations
 		initOperationsBox(operationsVBox);
 
-		Button create = new Button("Create new action");
-		create.setOnAction(new EventHandler<ActionEvent>() {
+		Button createBtn = new Button("Create new action");
+		createBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent click) {
 				myName = nameField.getText();
@@ -113,7 +113,7 @@ public class ActionCreator extends PopupWindow {
 
 		mainVBox.getChildren().addAll(nameVBox, rangeVBox, new Separator(),
 				targetVBox, operationsVBox, new Separator(), conclusionVBox,
-				new Separator(), create);
+				new Separator(), createBtn);
 		root.setContent(mainVBox);
 		setScene(scene);
 	}
@@ -146,13 +146,13 @@ public class ActionCreator extends PopupWindow {
 	}
 
 	private void initSetRangeButton(VBox rangeBox, String label,
-			List<Point2D> myRange, ActionCreator ac) {
+			List<Point2D> range) {
 		Label rangeLabel = new Label(label);
 		Button setRange = new Button("Set Range...");
 		setRange.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				PopupWindow actionRangeEditor = new RangeEditor(ac,label);
+				PopupWindow actionRangeEditor = new RangeEditor(range,label);
 				actionRangeEditor.show();
 				// TODO: set myRange in here somewhere (within RangeEditor?)
 			}
@@ -189,12 +189,12 @@ public class ActionCreator extends PopupWindow {
 		});
 	}
 
-	public void setAttackRange(List<Point2D> l) {
-		myAttackRange = l;
+	protected void setAttackRange(List<Point2D> attackRange) {
+		myAttackRange = attackRange;
 	}
 
-	public void setEffectRange(List<Point2D> l) {
-		myEffectRange = l;
+	protected void setEffectRange(List<Point2D> effectRange) {
+		myEffectRange = effectRange;
 	}
 
 }
