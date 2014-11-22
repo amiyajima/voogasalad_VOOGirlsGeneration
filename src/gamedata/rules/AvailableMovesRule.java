@@ -1,20 +1,24 @@
 package gamedata.rules;
 
 /**
- * Checks to see if a player no longer has any turns on their units NEEDS TO BE
- * IMPLEMENTED
+ * A rule that checks if a player has more than the minimum requirement
  * 
  */
 public class AvailableMovesRule extends Rule {
+    
+    private int myMinNumUnit;
 
-	public AvailableMovesRule() {
+    /**
+     * Constructor
+     * @param numUnits The minimum number of Units that each player 
+     */
+    public AvailableMovesRule (int numUnits) {
+        myMinNumUnit = numUnits;
+    }
 
-	}
-
-	@Override
-	public boolean conditionsMet(int x) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean conditionsMet (int currNumUnits) {
+        return (currNumUnits > myMinNumUnit);
+    }
 
 }

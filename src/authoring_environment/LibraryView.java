@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
@@ -32,6 +33,8 @@ public class LibraryView extends TabPane {
 	private final String TERRAIN = "Terrain";
 	private final String DELETE = "Delete";
 	private Map<String, VBox> myLibraryMap;
+	private Map<String, Tab> myTabMap;
+	private SingleSelectionModel<Tab> mySelection;
 	public static Piece currentlySelectedUnit;
 	public static Patch currentlySelectedTerrain;
 	public static boolean unitSelected;
@@ -44,6 +47,7 @@ public class LibraryView extends TabPane {
 	 * and TerrainCreator.
 	 */
 	public LibraryView(){
+		mySelection = this.getSelectionModel();
 		this.setPrefSize(HEIGHT, WIDTH);
 		unitSelected = false;
 		reset = true;
@@ -84,6 +88,9 @@ public class LibraryView extends TabPane {
 		myLibraryMap = new HashMap<String, VBox>();
 		myLibraryMap.put(UNITS, unitLibrary);
 		myLibraryMap.put(TERRAIN, terrainLibrary);
+		myTabMap = new HashMap<String, Tab>();
+		myTabMap.put(UNITS, unitTab);
+		myTabMap.put(TERRAIN, terrainTab);
 	}
 	
 	/**
@@ -95,6 +102,11 @@ public class LibraryView extends TabPane {
 	 * "Unit Library" or the "Terrain Library".
 	 */
 	public void addToLibrary(HBox content, String library){
+		mySelection.select(myTabMap.get(library));
 		myLibraryMap.get(library).getChildren().add(content);
+	}
+	
+	public void removeFromLibrary(HBox content, String library){
+		myLibraryMap.get(library).getChildren().remove(content);
 	}
 }

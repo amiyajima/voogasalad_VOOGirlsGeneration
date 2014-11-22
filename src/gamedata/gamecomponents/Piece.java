@@ -3,9 +3,9 @@ package gamedata.gamecomponents;
 import gamedata.action.Action;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
-import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
+import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -42,7 +42,7 @@ public class Piece {
      * @param a - List of Actions defining what actions are available
      *        for each piece to perform
      * @param stats - the Piece's stats, already defined
-     * @param p - Point2D containing the piece's current coordinates
+     * @param p2 - Point2D containing the piece's current coordinates
      * @param tid - Piece's type ID, serves as a reference to this type of piece
      * @param uid - Piece's unique ID, serves as a reference to this specific instance of piece
      * @param pid - Piece's player ID, serves as a reference to which player
@@ -51,13 +51,13 @@ public class Piece {
      */
 
     public Piece (String imageLocation, List<Movement> m, List<Action> a, Stats stats,
-                  Point2D p, int tid, int uid, int pid, Inventory inventory) {
+                   Point2D p2, int tid, int uid, int pid, Inventory inventory) {
         myImageLocation = imageLocation;
-        myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+        myImageView = new ImageView(new Image(imageLocation));
         myPath = m;
         myActions = a;
         myStats = stats;
-        myLoc = p;
+        myLoc = p2;
         myTypeID = tid;
         myUniqueID = uid;
         myPlayerID = pid;
@@ -123,10 +123,10 @@ public class Piece {
         return myStats;
     }
 
-    public double getStat (String s) {
-        if (myStats.getStatsMap().containsKey(s)) { return myStats.getStatsMap().get(s); }
-        return 0;
-    }
+//    public double getStat (String s) {
+//        if (myStats.getStatsMap().containsKey(s)) { return myStats.getStatsMap().get(s); }
+//        return 0;
+//    }
 
     /**
      * Adds an Action to the piece's list of Actions

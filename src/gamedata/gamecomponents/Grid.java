@@ -9,7 +9,6 @@ import gamedata.action.StatsTotalLogic;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
 import java.awt.geom.Point2D;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,9 +17,15 @@ import java.util.Map;
 
 /**
  * Contains the Grid defined for a level. Contains the pieces and patches
+ * @Author Jesse Ling, Sandy Lee
  * 
  */
-public abstract class Grid implements Serializable {
+
+/**
+ * @author Sandy Lee
+ *
+ */
+public abstract class Grid {
 
     private int myRow;
     private int myColumn;
@@ -156,14 +161,14 @@ public abstract class Grid implements Serializable {
     /**
      * gets the piece on the given coordinate
      * 
-     * @param coord
+     * @param loc
      *        of piece
      * @return piece
      */
-    public Piece getPiece (Point2D coord) {
+    public Piece getPiece (Point2D loc) {
         for (Point2D coordinate : myPieces.keySet()) {
             {
-                if (coordinate.equals(coord)) { return myPieces.get(coord); }
+                if (coordinate.equals(loc)) { return myPieces.get(loc); }
             }
         }
         // no piece exists on such coord

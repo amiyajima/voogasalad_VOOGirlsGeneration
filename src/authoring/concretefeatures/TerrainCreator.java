@@ -2,12 +2,10 @@ package authoring.concretefeatures;
 
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.SquarePatch;
-
-import java.awt.geom.Point2D;
 import java.io.File;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import java.awt.geom.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -39,16 +37,29 @@ public class TerrainCreator extends PopupWindow {
 	private final String IMAGE_LABEL = "Terrain image";
 	private final String LOAD_IMAGE_LABEL = "Load image";
 	private final String TEMPLATE_LABEL = "Create new terrain template";
+	private final String DELETE = "Delete";
 	private LibraryView myLibrary;
 	
+
+        private int myState;
+        private int myID;
+        private Point2D myLoc;
+        private String myImageLocation;
+        
 	/**
 	 * Constructor that sets the dimensions of the TerrainCreator GUI component
 	 * and initializes it.
 	 * 
 	 * @param library : Library to which terrain will be added.
 	 */
+
 	public TerrainCreator(LibraryView library){
 		myLibrary = library;
+		
+		myState = 0;
+		myLoc = new Point2D.Double(0,0);
+		myImageLocation = "";
+		
 		setHeight(HEIGHT);
 		setWidth(WIDTH);
 		setTitle(NAME);
@@ -69,41 +80,34 @@ public class TerrainCreator extends PopupWindow {
 		TextField terrainName = new TextField();
 		names.getChildren().addAll(nameLabel, terrainName);
 		
-		String[] imageLocation = new String[1];
 		ImageView icon = new ImageView();
 		Label loadLabel = new Label(IMAGE_LABEL);
 		Button loadImage = new Button(LOAD_IMAGE_LABEL);
 		loadImage.setOnAction(new EventHandler<ActionEvent>() {
-
 			@Override
 			public void handle(ActionEvent click) {
 				FileChooser fileChoice = new FileChooser();
 				fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png"));
 				File selectedFile = fileChoice.showOpenDialog(null);
 				if(selectedFile != null){
-					imageLocation[0] = selectedFile.toURI().toString();
-					Image image = new Image(imageLocation[0]);
+				myImageLocation = selectedFile.toURI().toString();
+					Image image = new Image(myImageLocation);
 					icon.setImage(image);
 					icon.setFitHeight(40);
 					icon.setFitWidth(40);
 				}
 			}
 		});
-		
 		images.getChildren().addAll(loadLabel, loadImage, icon);
 		
 		HBox modList = new ModulesList();
 		
-		Button goButton = new Button(TEMPLATE_LABEL);
-		goButton.setOnAction(new EventHandler<ActionEvent>() {
+		Button create = new Button(TEMPLATE_LABEL);
+		create.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent click) {
-				String locationCopy = imageLocation[0];
-				ImageView imageCopy = new ImageView();
-				imageCopy.setImage(icon.getImage());
-				imageCopy.setFitHeight(40);
-				imageCopy.setFitWidth(40);
-				Patch terrain = new SquarePatch(0, 0, locationCopy, new Point2D.Double(0, 0));
+
+				Patch terrain = new SquarePatch(myState, myID, myImageLocation, myLoc);
 				Hyperlink link = new Hyperlink(terrainName.getText());
 				link.setTranslateY(10);;
 				link.setOnAction(new EventHandler<ActionEvent>(){
@@ -113,12 +117,22 @@ public class TerrainCreator extends PopupWindow {
 						p.show();
 					}
 				});
-				HBox entry = new TerrainEntry(imageCopy, link, terrain);
+				Button delButton = new Button(DELETE);
+				delButton.setLayoutY(5);
+
+				HBox entry = new TerrainEntry(delButton, icon, link, terrain);
+ 
+				delButton.setOnAction(new EventHandler<ActionEvent>(){
+        			@Override
+        			public void handle(ActionEvent event) {
+        				myLibrary.removeFromLibrary(entry, TERRAIN);
+        			}
+        		});
 				myLibrary.addToLibrary(entry, TERRAIN);
+				close();
 			}
 		});
-		box.getChildren().addAll(names, images, modList, goButton);
-	
+		box.getChildren().addAll(names, images, modList, create);
 		setScene(new Scene(box));
 	}
 }

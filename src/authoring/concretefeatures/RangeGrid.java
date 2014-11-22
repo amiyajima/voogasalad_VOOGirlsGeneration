@@ -1,12 +1,12 @@
 package authoring.concretefeatures;
 
-import java.util.ArrayList;
+import java.awt.geom.Point2D;
+import java.util.ArrayList; 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import authoring_environment.Grid;
@@ -74,8 +74,7 @@ public class RangeGrid extends GridView{
 		for (int i=0;i<sampleGrid.getGridWidth();i++) {
 			for (int j=0;j<sampleGrid.getGridHeight();j++) {
 				if(sampleGrid.getGridTiles()[i][j].getSelected()){
-					selectedList.add(new Point2D(i-centerX,centerY-j));
-					System.out.println((i-centerX)+","+(centerY-j));
+					selectedList.add(new Point2D.Double(i-centerX,centerY-j));
 				}
 			}
 		}
@@ -86,7 +85,7 @@ public class RangeGrid extends GridView{
 		List<Point2D> selectedList=new ArrayList<Point2D>();
 
 		for (int i=0;i<sampleGrid.getGridHeight();i++) {
-			selectedList.add(new Point2D(0,i-centerY));
+			selectedList.add(new Point2D.Double(0,i-centerY));
 			System.out.println("0,"+(i-centerY));
 
 		}
@@ -97,7 +96,7 @@ public class RangeGrid extends GridView{
 		List<Point2D> selectedList=new ArrayList<Point2D>();
 
 		for (int i=0;i<sampleGrid.getGridWidth();i++) {
-			selectedList.add(new Point2D(i-centerX,0));
+			selectedList.add(new Point2D.Double(i-centerX,0));
 			System.out.println((i-centerX)+",0");
 		}
 		return selectedList;

@@ -3,13 +3,18 @@ package gamePlayer;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
-import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import authoring.concretefeatures.menus.JSONBobTester;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import java.awt.geom.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -20,6 +25,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -63,7 +70,8 @@ public class ViewController{
        myInitialScene = new VBox();
        myGameSpace = new BorderPane();
        myScoreBoard = new BorderPane();
-      //  myModel = new Game();
+       
+//       myModel = new Game();
        //TODO:
        //uses JSON reader that takes in the file chosen by user and instantiate 
        // a new Game object. 
@@ -80,11 +88,17 @@ public class ViewController{
         myStage.setScene(new Scene(myInitialScene));
        
         newGame();
+        
         myStage.show();
 
     }
 
-
+//    protected void JSONBobTest.java(){
+//        
+//    }
+    
+    
+    
     /**
      * generates drop down menu that allow user to choose a new Game to play 
      * The Games are generated from the directory that stores all json files defined 
@@ -197,7 +211,8 @@ public class ViewController{
        // myModel=new Game();
         
         // Generate a new Game Object.
-
+        JSONBobTester jbtester = new JSONBobTester();
+        myModel = jbtester.createNewGame();
     }
     @FXML
     protected void exitGame () {
@@ -373,7 +388,5 @@ public class ViewController{
 
 
         });
-    }
-
-
+    }    
 }

@@ -10,6 +10,7 @@ import gamedata.gamecomponents.SquareGrid;
 import gamedata.goals.Goal;
 import gamedata.rules.MoveCountRule;
 import gamedata.rules.Rule;
+import gameengine.engine.GameBuilder;
 import gameengine.player.Player;
 import org.junit.Test;
 import com.google.gson.Gson;
@@ -22,7 +23,9 @@ import org.junit.Before;
  *
  */
 public class GameBuilderTester {
+
 /*
+>>>>>>> 4c3c9cba372ef06197d2b75eecdc25e825d6bbf3:src/tests/GameBuilderTester.java
     private Game myGame;
     private GameBuilder myGameBuilder;
     private List<Player> myPlayers;
@@ -52,12 +55,28 @@ public class GameBuilderTester {
 
     @Test
     public void testGsonRead () {
+<<<<<<< HEAD:src/gameengine/tests/GameBuilderTester.java
+        Gson gson = new Gson();
+        String json = gson.toJson(myGame);
+        System.out.println(json);
+        Game obj2 = gson.fromJson(json, Game.class);
+        assertNotNull(obj2);
+=======
         readFromJsonFile();
+>>>>>>> 4c3c9cba372ef06197d2b75eecdc25e825d6bbf3:src/tests/GameBuilderTester.java
     }
 
     @Test
     public void testWriteToJson () {
         myGameBuilder.writePlayersToJSONFile(myPlayers);
+<<<<<<< HEAD:src/gameengine/tests/GameBuilderTester.java
+    }
+
+    @Test
+    public void testReadFromJsonFile () {
+
+=======
+>>>>>>> 4c3c9cba372ef06197d2b75eecdc25e825d6bbf3:src/tests/GameBuilderTester.java
     }
 
     @Test

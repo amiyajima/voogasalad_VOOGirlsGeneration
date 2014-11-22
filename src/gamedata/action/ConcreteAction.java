@@ -2,10 +2,9 @@ package gamedata.action;
 
 import gamedata.gamecomponents.Piece; 
 import gamedata.stats.Stats;
-
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.geom.Point2D;
 
 /**
  * A concrete instance of an Action.

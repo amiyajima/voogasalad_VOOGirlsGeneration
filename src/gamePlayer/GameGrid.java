@@ -2,12 +2,10 @@ package gamePlayer;
 
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
-
-import java.awt.geom.Point2D;
 import java.util.Map;
 import java.util.Observer;
-
 import javafx.collections.ObservableList;
+import java.awt.geom.Point2D;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
