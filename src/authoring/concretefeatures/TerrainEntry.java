@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 /**
- * @author VOOGirls Generation
+ * @author Martin Tamayo
  * 
  * An HBox containing data for a terrain patch. TerrainEntries are
  * added to the LibraryView in the game authoring environment.

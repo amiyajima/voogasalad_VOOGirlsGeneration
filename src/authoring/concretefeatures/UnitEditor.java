@@ -4,7 +4,7 @@ import gamedata.gamecomponents.Piece;
 import authoring.abstractfeatures.PopupWindow;
 
 /**
- * @author VOOGirls Generation
+ * @author Martin Tamayo
  * 
  * GUI component for editing the stats of a given unit.
  * This can be accessed by clicking on the hyperlink of

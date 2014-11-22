@@ -1,6 +1,7 @@
 package gamedata.gamecomponents;
  
 import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -11,7 +12,8 @@ public abstract class Patch {
 
 	private int myState;
 	private Point2D myLoc;
-	private ImageView myImage;
+	private String myImageLocation;
+	private ImageView myImageView;
 
 	/**
 	 * Constructor for patch
@@ -20,9 +22,11 @@ public abstract class Patch {
 	 * @param imageLocation of patch(form like "images/myImage.jpg")
 	 * @param p coordinate of patch
 	 */
-	public Patch(int state, ImageView image, Point2D p) {
+
+	public Patch(int state, int id, String imageLocation, Point2D p) {
 		myState = state;
-		myImage = image;
+		myImageLocation = imageLocation;
+		myImageView = new ImageView(new Image(imageLocation));
 		myLoc = p;
 	}
 
@@ -67,16 +71,20 @@ public abstract class Patch {
 	 * Getter for patch's image
 	 * @return image of the patch
 	 */
-	public ImageView getImageView() {
-		return myImage;
+	public ImageView getImageView(){
+		return myImageView;
+	}
+	
+	public String getImageLocation(){
+		return myImageLocation;
 	}
 
 	/**
 	 * Sets chosen image to patch's location
 	 * @param imageLocation image file's location
 	 */
-	public void setMyImage(ImageView image) {
-		this.myImage = image;
+	public void setMyImage(String imageLocation) {
+		myImageLocation = imageLocation;
 	}
 
 }

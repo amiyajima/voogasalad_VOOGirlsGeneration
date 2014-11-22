@@ -1,9 +1,9 @@
 package authoring.data;
 
 import gamedata.gamecomponents.Patch;
+
 import java.util.LinkedList;
 import java.util.List;
-
 
 /**
  * Class for storing the patches created by the user
@@ -36,5 +36,4 @@ public class PatchData implements AuthoringData<Patch> {
     public void clear () {
         myPatches.clear();
     }
-
 }

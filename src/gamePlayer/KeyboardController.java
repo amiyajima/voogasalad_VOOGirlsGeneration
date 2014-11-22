@@ -1,11 +1,14 @@
 package gamePlayer;
+
 import gamedata.action.Action;  
 import gamedata.gamecomponents.Game;
 import gameengine.player.Player;
+
+import java.awt.geom.Point2D;
 import java.util.Map;
 import java.util.Set;
+
 import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -25,13 +28,14 @@ public class KeyboardController {
      * @param gameScene is the scene for GUI
      */
    
-    public void setActionKeyControl(Scene gameScene, Game game) {
-//        myCurrentPlayer = game.getCurrentPlayer(); //this method will exist in Game later.
-        //for testing: 
-        myCurrentPlayer = getCurrentPlayer(game);
+    public void setActionKeyControl(SquareGameGrid grid, Game game) {
         
+//        //for testing: 
+//        myCurrentPlayer = getCurrentPlayer(game);
+        
+        myCurrentPlayer = game.getCurrentPlayer(); //this method will exist in Game later.
         Map<KeyCode, Action> actionKeyMap = myCurrentPlayer.getActionKeyMap();
-        gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        grid.setOnKeyPressed(new EventHandler<KeyEvent>() {
             Set<KeyCode> actionKeyList = actionKeyMap.keySet();
             @Override
             public void handle (KeyEvent key) {
@@ -56,18 +60,20 @@ public class KeyboardController {
      * @param movementKeyMap
      * @param gameScene
      */
-    public void setMovementKeyControl(Scene gameScene, Game game) {
-//        myCurrentPlayer = game.getCurrentPlayer(); // this method will exist in Game later
-      //for testing: 
-      myCurrentPlayer = getCurrentPlayer(game);
+    public void setMovementKeyControl(SquareGameGrid grid, Game game) {
+//      //for testing: 
+//      myCurrentPlayer = getCurrentPlayer(game);
+        
+      myCurrentPlayer = game.getCurrentPlayer(); // this method will exist in Game later
         Map<KeyCode, Point2D> movementKeyMap = myCurrentPlayer.getMovementKeyMap();
-        gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        grid.setOnKeyPressed(new EventHandler<KeyEvent>() {
             Set<KeyCode> movementKeyList = movementKeyMap.keySet();
             @Override
             public void handle (KeyEvent key) {
                for (KeyCode kc: movementKeyList){
                    if (key.getCode() == kc) {
 //                       getting something like {0,1}, {-1,1}, etc
+
                        myCurrentLocation = new Point2D(myCurrentLocation.getX() + movementKeyMap.get(kc).getX(),
                                                        myCurrentLocation.getY() + movementKeyMap.get(kc).getY()); 
                    }
@@ -76,10 +82,10 @@ public class KeyboardController {
         });
     }
     
-    // this is just for testing... will delete later.
-    public Player getCurrentPlayer(Game game){
-        Player testPlayer = new Player();
-        return testPlayer;
-    }
+//    // this is just for testing... will delete later.
+//    public Player getCurrentPlayer(Game game){
+//        Player testPlayer = new Player();
+//        return testPlayer;
+//    }
 }
 

@@ -123,10 +123,10 @@ public class Piece {
         return myStats;
     }
 
-    public double getStat (String s) {
-        if (myStats.getStatsMap().containsKey(s)) { return myStats.getStatsMap().get(s); }
-        return 0;
-    }
+//    public double getStat (String s) {
+//        if (myStats.getStatsMap().containsKey(s)) { return myStats.getStatsMap().get(s); }
+//        return 0;
+//    }
 
     /**
      * Adds an Action to the piece's list of Actions

@@ -6,9 +6,9 @@ import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
 
-
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import authoring.abstractfeatures.PopupWindow;
+import authoring.data.PieceData;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
@@ -47,6 +48,18 @@ public class UnitCreator extends PopupWindow {
     private final String TEMPLATE_LABEL = "Create new unit template";
     private final String DELETE = "Delete";
     private LibraryView myLibrary;
+    
+    private PieceData myPieceData;
+    private int myTypeID;
+    private int myUniqueID;
+    private int myPlayerID;
+    private String myImageLocation;
+
+    private Point2D myLoc;
+    private Stats myStats;
+    private List<Action> myActions;
+    private List<Movement> myPath;
+    private Inventory myInventory;
 
     /**
      * Constructor that sets the dimensions of the UnitCreator GUI component
@@ -54,8 +67,20 @@ public class UnitCreator extends PopupWindow {
      * 
      * @param library : Library to which units will be added.
      */
-    public UnitCreator (LibraryView library) {
+    public UnitCreator (LibraryView library, PieceData pieceData) {
         myLibrary = library;
+        
+        myPieceData = pieceData;
+        myImageLocation = "";
+        myPath = new ArrayList<Movement>();
+        myActions = new ArrayList<Action>();
+        myStats = new Stats();
+        myLoc = new Point2D(0, 0);
+        myTypeID = 0;
+        myUniqueID = 0;
+        myPlayerID = 0;
+        myInventory = new Inventory();
+        
         setHeight(HEIGHT);
         setWidth(WIDTH);
         setTitle(NAME);
@@ -75,8 +100,7 @@ public class UnitCreator extends PopupWindow {
         nameLabel.setPadding(UIspecs.topRightPadding);
         TextField unitName = new TextField();
         names.getChildren().addAll(nameLabel, unitName);
-
-        String[] imageLocation = new String[1];
+        
         ImageView icon = new ImageView();
         Label loadLabel = new Label(IMAGE_LABEL);
         Button loadImage = new Button(LOAD_IMAGE_LABEL);
@@ -88,31 +112,24 @@ public class UnitCreator extends PopupWindow {
                 fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png"));
                 File selectedFile = fileChoice.showOpenDialog(null);
                 if (selectedFile != null) {
-                    imageLocation[0] = selectedFile.toURI().toString();
-                    Image image = new Image(imageLocation[0]);
+                    myImageLocation = selectedFile.toURI().toString();
+                    Image image = new Image(myImageLocation);
                     icon.setImage(image);
                     icon.setFitHeight(40);
                     icon.setFitWidth(40);
                 }
             }
         });
-
         images.getChildren().addAll(loadLabel, loadImage, icon);
-
+        
         HBox modList = new ModulesList();
-
+        
         Button goButton = new Button(TEMPLATE_LABEL);
         goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
-                String locationCopy = imageLocation[0];
-                ImageView imageCopy = new ImageView();
-                imageCopy.setImage(icon.getImage());
-                imageCopy.setFitHeight(40);
-                imageCopy.setFitWidth(40);
-                Piece unit =
-                        new Piece(locationCopy, new ArrayList<Movement>(), new ArrayList<Action>(),
-                                  new Stats(), new Point2D(0, 0), 0, 0, 0, new Inventory());
+                Piece unit = new Piece(myImageLocation, myPath, myActions, myStats,
+                                  myLoc, myTypeID, myUniqueID, myPlayerID, myInventory);
 
                 Hyperlink link = new Hyperlink(unitName.getText());
                 link.setTranslateY(10);
@@ -125,7 +142,7 @@ public class UnitCreator extends PopupWindow {
                 });
                 Button delButton = new Button(DELETE);
                 delButton.setLayoutY(5);
-                HBox entry = new UnitEntry(delButton, imageCopy, link, unit);
+                HBox entry = new UnitEntry(delButton, icon, link, unit);
         		delButton.setOnAction(new EventHandler<ActionEvent>(){
         			@Override
         			public void handle(ActionEvent event) {
