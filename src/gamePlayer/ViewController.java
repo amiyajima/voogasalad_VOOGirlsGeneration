@@ -3,13 +3,17 @@ package gamePlayer;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
-import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -20,6 +24,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -40,6 +46,7 @@ public class ViewController{
     private VBox myInitialScene;
     private BorderPane myGameSpace;
     private BorderPane myScoreBoard;
+    private Point2D myCurrentLocation;
    
     private Piece activePiece;
     private Action activeAction;
@@ -81,6 +88,8 @@ public class ViewController{
         myStage.setScene(new Scene(myInitialScene));
        
         newGame();
+        
+        addTestKeyboardControl();
 //        addKeyboardControl();
         
         myStage.show();
@@ -295,7 +304,7 @@ public class ViewController{
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
         int yCor = (int) (y/patchHeight);
-        return new Point2D.Double(xCor,yCor);
+        return new Point2D(xCor,yCor);
     }
 
         private Piece getPiece(Point2D loc){
@@ -377,6 +386,31 @@ public class ViewController{
 
         });
     }
+    
+    private void addTestKeyboardControl(){
+        Map<KeyCode, Point2D> movementKeyMap = new HashMap<KeyCode, Point2D>();
+        movementKeyMap.put(KeyCode.A, new Point2D(-1,0));
+        movementKeyMap.put(KeyCode.D, new Point2D(1,0));
+        
+        myGameSpace.setOnKeyPressed(new EventHandler<KeyEvent>() {
+             Set<KeyCode> movementKeyList = movementKeyMap.keySet();
+             @Override
+             public void handle (KeyEvent key) {
+                for (KeyCode kc: movementKeyList){
+                    if (key.getCode() == kc) {
+                        myCurrentLocation = new Point2D(myCurrentLocation.getX() + movementKeyMap.get(kc).getX(),
+                                                        myCurrentLocation.getY() + movementKeyMap.get(kc).getY()); 
+                    }
+                }
+             }
+         });
+    highlightCurrentLocation();
+    }
+    
+    private void highlightCurrentLocation(){
+        
+        }
+    
 
     public void addKeyboardControl () {
         KeyboardController keyboardController = new KeyboardController();
