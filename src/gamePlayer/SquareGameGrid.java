@@ -33,9 +33,9 @@ public class SquareGameGrid extends GameGrid{
     public static final String TEST_IMAGE= "/src/voogasalad_VOOGirlsGeneration/turtle.png";
     
     
-    public SquareGameGrid(int rwo, int col){
+    public SquareGameGrid(int row, int col){
        // will handle different size, stubbing it for now.
-        super(rwo, col);
+        super(row, col);
         
     }
 
@@ -74,11 +74,7 @@ public class SquareGameGrid extends GameGrid{
                 Rectangle r = new Rectangle(500/this.r-10,500/c-10);
                 r.setFill(Color.BLACK);
                 sp.getChildren().add(r);
-                
-//                Rectangle testr = new Rectangle(20,20);
-//                testr.setFill(Color.RED);
-//                sp.getChildren().add(testr);
-
+                          
                 this.add(sp, i, j);
                 r.setOnMouseEntered(event->onHover(r));
                 r.setOnMouseExited(event->r.setFill(Color.BLACK));
@@ -86,9 +82,10 @@ public class SquareGameGrid extends GameGrid{
                 addTestKeyboardControl(r);
 //                addKeyboardController(r);
                 addLocationSelector(r);
-            }
-          
+            } 
         }
+        
+        
         
     }
     

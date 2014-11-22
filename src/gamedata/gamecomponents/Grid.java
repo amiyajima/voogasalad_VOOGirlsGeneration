@@ -1,17 +1,18 @@
 package gamedata.gamecomponents;
 
 
+import java.awt.geom.Point2D;  
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 
 
 
 /**
  * Contains the Grid defined for a level. Contains the pieces and patches
+ * @Author Jesse Ling, Sandy Lee
  * 
  */
 public abstract class Grid {
