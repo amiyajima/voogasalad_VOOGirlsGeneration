@@ -63,7 +63,7 @@ public class SquareGameGrid extends GameGrid{
      */
     @Override
     protected void initializeGrid () {
-        myCurrentLocation = new Point2D(0,0);
+        myCurrentLocation = new Point2D.Double(0,0);
         
         for(int i=0; i<r; i++){
             for(int j=0; j<c; j++){
@@ -115,7 +115,7 @@ public class SquareGameGrid extends GameGrid{
     }
     
     private void addKeyboardController(){
-//        Game game = new Game();
+        Game game = new Game();
         KeyboardController KBControl = new KeyboardController();
         KBControl.setActionKeyControl(this,game);
         KBControl.setMovementKeyControl(this, game);

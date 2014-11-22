@@ -1,5 +1,6 @@
 package authoring_environment;
 
+import gamedata.gamecomponents.Patch;
 import java.util.ArrayList;
 import java.util.List;
 import authoring.data.PatchData;
@@ -30,8 +31,8 @@ public class Grid extends Pane {
         myHeight = height;
         myTileSize = tilesize;
         grid = new Tile[myWidth][myHeight];
-        
-        //will be adding patch to patchdata whenever a new patch is put onto the grid
+
+        // will be adding patch to patchdata whenever a new patch is put onto the grid
         myPatchData = new PatchData();
 
         // setStyle("-fx-background-color:blue;");
@@ -164,6 +165,8 @@ public class Grid extends Pane {
             else {
                 tile.myTerrain = null;
                 tile.terrainImage.setVisible(false);
+                System.out.println("patch deleted");
+                myPatchData.remove(tile.myTerrain);
                 ;
             }
         }
@@ -175,12 +178,24 @@ public class Grid extends Pane {
             }
             else {
                 tile.myTerrain = LibraryView.currentlySelectedTerrain;
+               
                 tile.myTerrain.setLoc(new Point2D.Double(xCoord, yCoord));
                 tile.terrainImage.setImage(tile.myTerrain.getImageView().getImage());
                 tile.terrainImage.setVisible(true);
                 myPatchData.add(tile.myTerrain);
-                System.out.println(tile.myTerrain.getLoc().getX());
-                System.out.println(tile.myTerrain.getMyState());
+                System.out.println("patch added");
+                
+                
+                // allows overwriting patches on the same coordinate
+                List<Patch> myPatches = myPatchData.getPatches();
+                for (int i = 0; i < myPatches.size(); i++) {
+                    if ((myPatches.get(i).getLoc().getX()) == xCoord &&
+                        (myPatches.get(i).getLoc().getY()) == yCoord) {
+                        myPatchData.remove(myPatches.get(i));
+                    }            
+                }
+                
+                
             }
         }
     }
