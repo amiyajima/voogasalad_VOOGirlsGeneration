@@ -1,13 +1,16 @@
 package authoring.concretefeatures;
 
+import java.util.List;
+
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import authoring.abstractfeatures.PopupWindow;
 
 /**
- * @author Martin Tamayo
+ * @author Martin Tamayo, Jennie Ju
  * 
  * GUI component for editing the stats of a given unit.
  * This can be accessed by clicking on the hyperlink of
@@ -21,7 +24,9 @@ public class UnitEditor extends PopupWindow {
 	private final String NAME = "Unit Editor";
 	private Piece myUnit;
 	
+	private int myPlayerID;
 	private Stats myStats;
+	private List<Action> myActions;
 	
 	/**
 	 * Constructor that sets the dimensions of the UnitEditor
@@ -35,7 +40,9 @@ public class UnitEditor extends PopupWindow {
 		setTitle(NAME);
 		myUnit = unit;
 		
+		myPlayerID = myUnit.getPlayerID();
 		myStats = myUnit.getStats();
+		myActions = myUnit.getActions();
 		
 		initialize();
 	}
