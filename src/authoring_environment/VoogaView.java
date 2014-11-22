@@ -28,4 +28,9 @@ public class VoogaView extends BorderPane {
 		setLeft(myLibraryView);
 		setRight(myGridView);
 	}
+	
+	public void setGrid(int width, int height){
+	    //tile length should be adjusted
+	   myGridView = new GridView(width, height, TILE_SIDE_LENGTH);
+	}
 }
