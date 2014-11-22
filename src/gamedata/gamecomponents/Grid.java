@@ -26,7 +26,7 @@ public abstract class Grid {
      * Default constructor for square grid
      */
     public Grid () {
-        this(1, 1);
+        this(5, 5);
     }
 
     /**
