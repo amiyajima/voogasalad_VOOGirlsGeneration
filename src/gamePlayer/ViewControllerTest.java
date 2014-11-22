@@ -50,7 +50,7 @@ public class ViewControllerTest {
         Action build = new ConcreteAction("build", null, null, null, null);
         List<Action> actionList = new ArrayList<Action>();
         actionList.add(move);actionList.add(attack);actionList.add(build);
-        Piece piece = new Piece(null, null, actionList, null, null, 0, null);
+        Piece piece = new Piece(null, null, actionList, null, null, 0, 0, 0, null);
         controller.updateActions(piece);
         assertEquals ("move", ((Text) controller.controlPane.getChildren().get(0)).getText());
         assertEquals ("attack", ((Text) controller.controlPane.getChildren().get(1)).getText());
