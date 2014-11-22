@@ -32,7 +32,7 @@ public class TerrainEntry extends LibraryEntry {
 	 * @param link : Name of terrain. Links to TerrainEditor.
 	 * @param terrain : Actual Patch class for the terrain.
 	 */
-	public TerrainEntry(Button delButton, ImageView image, Hyperlink link, Patch terrain, PatchData patchData){
+	public TerrainEntry(Button delButton, ImageView image, Hyperlink link, Patch terrain){
 		this.getChildren().addAll(delButton, image, link);
 		myTerrain = terrain;
 		
