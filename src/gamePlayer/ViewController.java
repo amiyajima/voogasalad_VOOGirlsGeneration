@@ -3,18 +3,23 @@ package gamePlayer;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Set;
+
 import authoring.concretefeatures.menus.JSONBobTester;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import java.awt.geom.Point2D;
+
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -39,8 +44,11 @@ public class ViewController{
     public static final String SCOREBOARD_FXML = "scoreBoard.fxml";
     public static final String INITIALSCENE_TITLE = "VOOGASALAD!";
     public static final String GAME_LOCATION = "/src/resources";
+    public static final String ENGLISH = "English";
+    public static final String Chinese = "Chinese";
+    
 
-
+    private ResourceBundle myLanguages;
     private Stage myStage;
     private Game myModel;
     private GameGrid myGrid;
