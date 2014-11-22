@@ -21,7 +21,7 @@ import authoring_environment.UIspecs;
 
 
 /**
- * @author Martin Tamayo
+ * @author Martin Tamayo, Sandy Lee
  * 
  *         GUI component for editing the properties of a given terrain.
  *         This can be accessed by clicking on the hyperlink of the
@@ -30,7 +30,7 @@ import authoring_environment.UIspecs;
  */
 public class TerrainEditor extends PopupWindow {
 
-    private final int HEIGHT = 400;
+    private final int HEIGHT = 150;
     private final int WIDTH = 400;
     private final String NAME = "Terrain Editor";
     private Patch myTerrain;
