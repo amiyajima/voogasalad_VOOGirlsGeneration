@@ -46,7 +46,6 @@ public class ViewController{
     private VBox myInitialScene;
     private BorderPane myGameSpace;
     private BorderPane myScoreBoard;
-    private Point2D myCurrentLocation;
    
     private Piece activePiece;
     private Action activeAction;
@@ -88,9 +87,6 @@ public class ViewController{
         myStage.setScene(new Scene(myInitialScene));
        
         newGame();
-        
-        addTestKeyboardControl();
-//        addKeyboardControl();
         
         myStage.show();
 
@@ -385,37 +381,5 @@ public class ViewController{
 
 
         });
-    }
-    
-    private void addTestKeyboardControl(){
-        Map<KeyCode, Point2D> movementKeyMap = new HashMap<KeyCode, Point2D>();
-        movementKeyMap.put(KeyCode.A, new Point2D(-1,0));
-        movementKeyMap.put(KeyCode.D, new Point2D(1,0));
-        
-        myGameSpace.setOnKeyPressed(new EventHandler<KeyEvent>() {
-             Set<KeyCode> movementKeyList = movementKeyMap.keySet();
-             @Override
-             public void handle (KeyEvent key) {
-                for (KeyCode kc: movementKeyList){
-                    if (key.getCode() == kc) {
-                        myCurrentLocation = new Point2D(myCurrentLocation.getX() + movementKeyMap.get(kc).getX(),
-                                                        myCurrentLocation.getY() + movementKeyMap.get(kc).getY()); 
-                    }
-                }
-             }
-         });
-    highlightCurrentLocation();
-    }
-    
-    private void highlightCurrentLocation(){
-        
-        }
-    
-
-    public void addKeyboardControl () {
-        KeyboardController keyboardController = new KeyboardController();
-        keyboardController.setActionKeyControl(getGrid().getScene(), getGame());
-        keyboardController.setMovementKeyControl(getGrid().getScene(), getGame());
-    }
-    
+    }    
 }
