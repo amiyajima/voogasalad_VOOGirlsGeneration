@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import authoring.data.PatchData;
 import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
+import java.awt.geom.Point2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -175,7 +175,7 @@ public class Grid extends Pane {
             }
             else {
                 tile.myTerrain = LibraryView.currentlySelectedTerrain;
-                tile.myTerrain.setLoc(new Point2D(xCoord, yCoord));
+                tile.myTerrain.setLoc(new Point2D.Double(xCoord, yCoord));
                 tile.terrainImage.setImage(tile.myTerrain.getImageView().getImage());
                 tile.terrainImage.setVisible(true);
                 myPatchData.add(tile.myTerrain);

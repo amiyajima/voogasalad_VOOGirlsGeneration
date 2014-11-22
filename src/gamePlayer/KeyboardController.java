@@ -74,7 +74,7 @@ public class KeyboardController {
                    if (key.getCode() == kc) {
 //                       getting something like {0,1}, {-1,1}, etc
 
-                       myCurrentLocation = new Point2D(myCurrentLocation.getX() + movementKeyMap.get(kc).getX(),
+                       myCurrentLocation = new Point2D.Double(myCurrentLocation.getX() + movementKeyMap.get(kc).getX(),
                                                        myCurrentLocation.getY() + movementKeyMap.get(kc).getY()); 
                    }
                }

@@ -1,6 +1,6 @@
 package gamedata.gamecomponents;
 
-import javafx.geometry.Point2D;
+import java.awt.geom.Point2D;
 import javafx.scene.image.ImageView;
 
 
@@ -47,8 +47,8 @@ public class SquareGrid extends Grid {
                 Patch patch = new SquarePatch(DEFAULT_PATCH_STATE,
 
                                               DEFAULT_PATCH_ID, DEFAULT_PATCH_IMAGE_LOCATION,
-                                              new Point2D(x, y));
-                super.myPatches.put(new Point2D(x, y), patch);
+                                              new Point2D.Double(x, y));
+                super.myPatches.put(new Point2D.Double(x, y), patch);
             }
         }
     }

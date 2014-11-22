@@ -14,7 +14,7 @@ import authoring.concretefeatures.menus.JSONBobTester;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
+import java.awt.geom.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -307,7 +307,7 @@ public class ViewController{
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
         int yCor = (int) (y/patchHeight);
-        return new Point2D(xCor,yCor);
+        return new Point2D.Double(xCor,yCor);
     }
 
         private Piece getPiece(Point2D loc){

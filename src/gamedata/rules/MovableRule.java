@@ -20,6 +20,8 @@ public class MovableRule extends Rule {
 
     @Override
     public boolean conditionsMet (int patchState) {
+    	//TODO: SET THIS TO THE CORRECT LOGIC
+		return false;
         
     }
 

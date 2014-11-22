@@ -1,7 +1,7 @@
 package gamedata.action;
 
 import java.util.List; 
-import javafx.geometry.Point2D;
+import java.awt.geom.Point2D;
 import gamedata.gamecomponents.Piece;
 
 /**

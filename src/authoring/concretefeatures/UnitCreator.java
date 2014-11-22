@@ -12,7 +12,7 @@ import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
+import java.awt.geom.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -75,7 +75,7 @@ public class UnitCreator extends PopupWindow {
         myPath = new ArrayList<Movement>();
         myActions = new ArrayList<Action>();
         myStats = new Stats();
-        myLoc = new Point2D(0, 0);
+        myLoc = new Point2D.Double(0, 0);
         myTypeID = 0;
         myUniqueID = 0;
         myPlayerID = 0;
