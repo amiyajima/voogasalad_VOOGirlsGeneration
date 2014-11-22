@@ -14,7 +14,5 @@ public class MenuView extends MenuBar {
 		
 		getMenus().addAll(new File(), new GlobalRules(), new Events(), new Units(library, new PieceData()), 
 						  new Terrain(library, new PatchData()), new Actions(library, new ActionData()));
-		// TODO: ACTION DATA NEEDS TO GO SOMEWHERE ELSE
 	}
-
 }
