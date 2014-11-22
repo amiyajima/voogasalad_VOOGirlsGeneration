@@ -7,22 +7,33 @@ import java.util.List;
 /**
  * Class for storing the actions created by the user
  * Stored in the authoring environment
- * @author jujs100
- *
+ * 
+ * @author Jennie Ju
  */
-public class ActionData {
+public class ActionData implements AuthoringData<Action> {
 	private List<Action> myActions;
 	
+	/**
+	 * Constructor for new ActionData,
+	 * initializes empty list of Actions
+	 */
 	public ActionData() {
 		myActions = new LinkedList<Action>();
 	}
 	
-	public void addAction(Action action) {
+	@Override
+	public void add(Action action) {
 		myActions.add(action);
 	}
 	
-	public void removeAction(Action action) {
+	@Override
+	public void remove(Action action) {
 		myActions.remove(action);
+	}
+	
+	@Override
+	public void clear() {
+		myActions.clear();
 	}
 	
 }

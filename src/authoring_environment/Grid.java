@@ -1,6 +1,6 @@
 package authoring_environment;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import javafx.event.EventHandler;
@@ -9,12 +9,17 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
+/**
+ * The grid which contains all the tiles and draws the tiles and grid lines.
+ * @author huangmengen
+ *
+ */
 public class Grid extends Pane {
 
 	private int myWidth;
 	private int myHeight;
 	private int myTileSize;
-	public Tile[][] grid;
+	private Tile[][] grid;
 
 	public Grid(int width, int height, int tilesize) {
 		myWidth = width;
@@ -52,20 +57,28 @@ public class Grid extends Pane {
 			for (int j = 0; j < myHeight; j++) {
 				grid[i][j] = new Tile(i, j, myTileSize);
 				this.getChildren().add(grid[i][j]);
-
+				setClickEvent(grid[i][j]);
 			}
 		}
-
+		this.setDragEvent();
 	}
-
+	
+	/**
+	 * Get the number of tiles in a row.
+	 * @return The number of tiles in a horizontal line of the grid.
+	 */
 	public int getGridWidth() {
 		return myWidth;
 	}
 
+	/**
+	 * Get the number of tiles in a column.
+	 * @return The number of tiles in a vertical line of the grid.
+	 */
 	public int getGridHeight() {
 		return myHeight;
 	}
-
+	
 	public void sampleSelected() {
 		for (Tile[] line : grid) {
 			for (Tile tile : line) {
@@ -74,26 +87,83 @@ public class Grid extends Pane {
 					public void handle(MouseEvent event) {
 						tile.switchSelected();
 					}
-
 				});
-
 			}
 		}
 	}
 
+	/**
+	 * Get a specific tile in the grid according to its position.
+	 * @param x: The X coordination of the tile
+	 * 			from the left smallest to the right largest.
+	 * @param y: The Y coordination of the tile
+	 * 			from the bottom smallest to the top largest.
+	 * @return The tile at the specified position.
+	 */
 	public Tile getTile(int x, int y) {
 		return grid[x][y];
 	}
 
 	public List<Tile> getSelected() {
-		List<Tile> titles = new ArrayList<Tile>();
+		List<Tile> tiles = new ArrayList<Tile>();
 		for(int i=0; i<myWidth; i++){
 			for(int j=0; i<myHeight;j++){
 				if(getTile(i,j).getSelected()){
-					titles.add(getTile(i,j));
+					tiles.add(getTile(i,j));
 				}
 			}
 		}
-		return titles;
+		return tiles;
+	}
+	
+	private void setDragEvent() {
+		this.setOnMouseDragged(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent event) {
+				int x = (int)event.getX() / myTileSize;
+				int y = (int)event.getY() / myTileSize;
+				Tile tile = getTile(x, y);
+				setContents(tile);
+			}
+		});
+	}
+	
+	private void setClickEvent(Tile tile) {
+		tile.setStyle("-fx-cursor: hand");
+		tile.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent m){
+				setContents(tile);
+			}
+		});
+	}
+	
+	protected void setContents(Tile tile) {
+		if(LibraryView.reset){
+			if(LibraryView.unitSelected){
+				tile.myUnit = null;
+				tile.unitImage.setVisible(false);;
+			}
+			else{
+				tile.myTerrain = null;
+				tile.terrainImage.setVisible(false);;
+			}
+		}
+		else{
+			if(LibraryView.unitSelected){
+				tile.myUnit = LibraryView.currentlySelectedUnit;
+				tile.unitImage.setImage(tile.myUnit.getImageView().getImage());
+				tile.unitImage.setVisible(true);
+			}
+			else{
+				tile.myTerrain = LibraryView.currentlySelectedTerrain;
+				tile.terrainImage.setImage(tile.myTerrain.getImageView().getImage());
+				tile.terrainImage.setVisible(true);
+			}
+		}
+	}
+	
+	public Tile[][] getGridTiles(){
+		return grid;
 	}
 }

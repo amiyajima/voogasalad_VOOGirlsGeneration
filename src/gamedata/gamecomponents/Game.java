@@ -12,7 +12,6 @@ import java.util.List;
  *
  */
 public class Game {
-
     /**
      * Contains player in order of their turns
      */
@@ -21,14 +20,14 @@ public class Game {
      * Contains ordered list of levels that compose the game
      */
     private List<Level> myLevels;
-    private transient Level myCurrentLevel;
-    private transient Player myCurrentPlayer;
+    private Level myCurrentLevel;
+    private Player myCurrentPlayer;
 
     /**
      * Default Constructor
      */
     public Game () {
-        this(new ArrayList<Player>(), new ArrayList<Level>());
+        this(null, null);
     }
 
     /**
@@ -42,12 +41,10 @@ public class Game {
     public Game (List<Player> players, List<Level> levels) {
         myPlayers = players;
         myLevels = levels;
-
         if (levels.size() > 0 && players.size() > 0) {
             myCurrentLevel = levels.get(0);
             myCurrentPlayer = players.get(0);
         }
-
     }
 
     /**
@@ -99,6 +96,9 @@ public class Game {
         }
     }
 
+    /**
+     * Resets the active player to be the first player who has played
+     */
     private void resetPlayer () {
         myCurrentPlayer = myPlayers.get(0);
     }
@@ -106,13 +106,8 @@ public class Game {
     /**
      * Restarts the Level Note: This doesn't actually work. Need deep cloning
      */
-
     private void restartLevel () {
         myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel));
-    }
-
-    public String toString () {
-        return "game with " + myPlayers.size() + " players and " + myLevels.size() + " levels";
     }
 
     /**
@@ -124,4 +119,7 @@ public class Game {
         return myCurrentLevel;
     }
 
+    public List<Player> getPlayers () {
+        return myPlayers;
+    }
 }
