@@ -23,6 +23,7 @@ public class Movement {
 	 * Constructor
 	 * @param endPoints Point2Ds representing all possible relative locations of movement
 	 */
+	@SafeVarargs
 	public Movement(List<Point2D>... endPoints) {
 	    myMoves = new ArrayList<List<Point2D>>();
 	    myPaths = new ArrayList<Point2D>();

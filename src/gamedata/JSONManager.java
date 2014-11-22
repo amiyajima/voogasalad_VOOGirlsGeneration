@@ -1,14 +1,15 @@
 package gamedata;
 
 import gamedata.gamecomponents.Game;
+import gamedata.gamecomponents.Level;
 import gameengine.player.Player;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import com.google.gson.Gson;
-
 
 /**
  * Interprets and parses the JSON then builds the game components.
@@ -42,8 +43,6 @@ public class JSONManager {
         String json = gson.toJson(g);
         System.out.println("game converted to json");
         try {
-            // write converted json data to a file named "CountryGSON.json"
-            //FileWriter writer = new FileWriter(DEFAULT_JSON_DIRECTORY + fileName);
             FileWriter writer = new FileWriter(fileName);
             writer.write(json);
             writer.close();
@@ -60,20 +59,24 @@ public class JSONManager {
      * @param filePath
      * @throws FileNotFoundException
      */
-    public Player readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
+    public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("read method called");
+        jsonFileLocation = "C:\\Users\\Rica\\Desktop\\GAME.json";        
         Gson gson = new Gson();
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
         
-        //Level l = gson.fromJson(br, Level.class);
-        //System.out.println(l);
+        PlayerData myPlayers = gson.fromJson(br, PlayerData.class);
+        System.out.println(myPlayers.getPlayers().get(0).getID());
         
-        Player p = gson.fromJson(br, Player.class);
-        System.out.println(p);
-        
-        Game g = gson.fromJson(br, Game.class);
-        
-        return p;
-    }
-
+        LevelData myLevels = gson.fromJson(br, LevelData.class);
+        System.out.println(myLevels.getLevels().size());
+        //System.out.println(myLevels.getLevels().get(0).getGrid().toString());
+        //Level level = gson.fromJson(br, Level.class);
+        //System.out.println(level.toString());
+        /*
+        Game game = gson.fromJson(br, Game.class);
+        System.out.println(game.getPlayers().get(0));
+        */
+        return null;
+    }    
 }
