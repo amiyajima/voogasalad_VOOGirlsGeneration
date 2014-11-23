@@ -3,6 +3,11 @@ package gamedata.wrappers;
 import java.awt.geom.Point2D;
 import java.util.List;
 
+/**
+ * Wrapper for individual pieces in PieceData in GridData
+ * @author Rica
+ *
+ */
 public class PieceDataIndividual {
     private int myTypeID;
     private int myUniqueID;

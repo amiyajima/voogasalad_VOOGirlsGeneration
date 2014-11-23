@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.Map;
 
 /**
- * Wrapper for the grid
+ * Wrapper for the Grid in LevelsData
  * @author Rica
  *
  */

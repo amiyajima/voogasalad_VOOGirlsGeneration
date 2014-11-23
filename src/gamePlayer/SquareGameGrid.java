@@ -11,6 +11,7 @@ import java.util.Set;
 import javafx.event.EventHandler;
 import java.awt.geom.Point2D;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -29,7 +30,6 @@ import javafx.scene.shape.Rectangle;
 // TODO: maybe observing Game instead of Level.? (need access to player scores.)
 
 public class SquareGameGrid extends GameGrid {
-    private Point2D myCurrentLocation;
 
     public static final String TEST_IMAGE = "/src/voogasalad_VOOGirlsGeneration/turtle.png";
 
@@ -60,7 +60,6 @@ public class SquareGameGrid extends GameGrid {
     @Override
     protected void initializeGrid () {
 
-        myCurrentLocation = new Point2D.Double(0,0);
         
         for(int i=0; i<r; i++){
             for(int j=0; j<c; j++){
@@ -68,25 +67,22 @@ public class SquareGameGrid extends GameGrid {
                 sp.setAlignment(Pos.CENTER);
                 sp.setPrefHeight(500 / c);
                 sp.setPrefWidth(500 / this.r);
-//                sp.requestFocus();
                 Rectangle r = new Rectangle(500 / this.r - 10, 500 / c - 10);
                 r.setFill(Color.BLACK);
+                
                 sp.getChildren().add(r);
                 
                 this.add(sp, i, j);
                 r.setOnMouseEntered(event -> onHover(r));
                 r.setOnMouseExited(event -> r.setFill(Color.BLACK));
-
-
-//                addTestKeyboardControl(r);
-//                // addKeyboardController(r);
-//                addLocationSelector(r);
+                
+                
 
             }
 
         }
-
     }
+    
     
     
 //  private void highlightCurrentLocation (Rectangle r) {
@@ -109,8 +105,12 @@ public class SquareGameGrid extends GameGrid {
         this.getChildren().forEach(node -> {
             ((StackPane) node).getChildren().clear();
         });
+        initializeGrid();
         patches.keySet().forEach(point -> {
-            this.add(patches.get(point).getImageView(), (int) point.getX(), (int) point.getY());
+           // this.add(patches.get(point).getImageView(), (int) point.getX(), (int) point.getY());
+            Node n = get((int)point.getX(), (int)point.getY());
+            ((StackPane)n).getChildren().add(patches.get(point).getImageView());
+        
         });
         pieces.keySet().forEach(point -> {
             this.add(pieces.get(point).getImageView(), (int) point.getX(), (int) point.getY());

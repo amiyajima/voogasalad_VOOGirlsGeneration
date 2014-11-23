@@ -73,8 +73,10 @@ public class GridPieceWrapper {
 	 * for this instance of a piece
 	 * @param playerID - the ID of the player controlling this piece
 	 * @param rotate - double degrees of rotation of this piece's image
-	 * @param hflip - boolean
-	 * @param vflip -
+	 * @param hflip - boolean stating whether the image should be flipped
+	 * horizontally
+	 * @param vflip - boolean stating whether the image should be flipped
+	 * vertically
 	 */
 	public void rewriteParameters(int playerID, double rotate,
 			boolean hflip, boolean vflip) {

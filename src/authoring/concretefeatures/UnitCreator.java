@@ -37,57 +37,59 @@ import authoring_environment.UIspecs;
  */
 public class UnitCreator extends PopupWindow {
 
-    private final int HEIGHT = 400;
-    private final int WIDTH = 400;
-    private final String UNITS = "Units";
-    private final String NAME = "Unit Creator";
-    private final String UNIT_NAME_LABEL = "Name";
-    private final String IMAGE_LABEL = "Unit image";
-    private final String LOAD_IMAGE_LABEL = "Load image";
-    private final String TEMPLATE_LABEL = "Create new unit template";
-    private final String DELETE = "Delete";
-    private LibraryView myLibrary;
 
-    private PieceData myPieceData;
-    private int myTypeID;
-    private int myUniqueID;
-    private int myPlayerID;
-    private String myImageLocation;
+	private final int HEIGHT = 400;
+	private final int WIDTH = 400;
+	private final String UNITS = "Units";
+	private final String NAME = "Unit Creator";
+	private final String UNIT_NAME_LABEL = "Name";
+	private final String IMAGE_LABEL = "Unit image";
+	private final String LOAD_IMAGE_LABEL = "Load image";
+	private final String TEMPLATE_LABEL = "Create new unit template";
+	private final String DELETE = "Delete All Instances";
+	private final String EDIT = "Edit";
+	private LibraryView myLibrary;
 
-    private Point2D myLoc;
-    private Stats myStats;
-    private List<Action> myActions;
-    private List<Movement> myPath;
-    private Inventory myInventory;
+	private PieceData myPieceData;
+	private int myTypeID;
+	private int myUniqueID;
+	private int myPlayerID;
+	private String myImageLocation;
 
-    /**
-     * Constructor that sets the dimensions of the UnitCreator GUI component and
-     * initializes it.
-     * 
-     * @param library
-     *        : Library to which units will be added.
-     */
-    public UnitCreator (LibraryView library, PieceData pieceData) {
-        myLibrary = library;
+	private Point2D myLoc;
+	private Stats myStats;
+	private List<Action> myActions;
+	private List<Movement> myPath;
+	private Inventory myInventory;
 
-        myPieceData = pieceData;
-        myImageLocation = "";
-        myPath = new ArrayList<Movement>();
-        myActions = new ArrayList<Action>();
-        myStats = new Stats();
-        myLoc = new Point2D.Double(0, 0);
-        myTypeID = 0;
-        myUniqueID = 0;
-        myPlayerID = 0;
-        myInventory = new Inventory();
+	/**
+	 * Constructor that sets the dimensions of the UnitCreator GUI component and
+	 * initializes it.
+	 * 
+	 * @param library
+	 *            : Library to which units will be added.
+	 */
+	public UnitCreator(LibraryView library, PieceData pieceData) {
+		myLibrary = library;
 
-        setHeight(HEIGHT);
-        setWidth(WIDTH);
-        setTitle(NAME);
-        initialize();
-    }
+		myPieceData = pieceData;
+		myImageLocation = "";
+		myPath = new ArrayList<Movement>();
+		myActions = new ArrayList<Action>();
+		myStats = new Stats();
+		myLoc = new Point2D.Double(0, 0);
+		myTypeID = 0;
+		myUniqueID = 0;
+		myPlayerID = 0;
+		myInventory = new Inventory();
 
-    @Override
+		setHeight(HEIGHT);
+		setWidth(WIDTH);
+		setTitle(NAME);
+		initialize();
+	}
+
+	@Override
     protected void initialize () {
         VBox box = new VBox();
         box.setPadding(UIspecs.allPadding);
@@ -133,9 +135,10 @@ public class UnitCreator extends PopupWindow {
                 Piece unit = new Piece(myImageLocation, myPath, myActions, myStats,
                                        myLoc, myTypeID, myUniqueID, myPlayerID, myInventory);
 
-                Hyperlink link = new Hyperlink(unitName.getText());
-                link.setTranslateY(10);
-                link.setOnAction(new EventHandler<ActionEvent>() {
+                Label link = new Label(unitName.getText());
+                //link.setTranslateY(10);
+                Button editButton = new Button(EDIT);
+                editButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle (ActionEvent e) {
                         PopupWindow p = new UnitEditor(unit);
@@ -144,13 +147,15 @@ public class UnitCreator extends PopupWindow {
                 });
                 Button delButton = new Button(DELETE);
                 delButton.setLayoutY(5);
-                HBox entry = new UnitEntry(delButton, icon, link, unit);
-                delButton.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle (ActionEvent event) {
-                        myLibrary.removeFromLibrary(entry, UNITS);
-                    }
-                });
+
+                HBox entry = new UnitEntry(unit, icon, link, editButton, delButton);
+        		delButton.setOnAction(new EventHandler<ActionEvent>(){
+        			@Override
+        			public void handle(ActionEvent event) {
+        				myLibrary.removeFromLibrary(entry, UNITS);
+        			}
+        		});
+
                 myLibrary.addToLibrary(entry, UNITS);
                 close();
             }
@@ -159,18 +164,19 @@ public class UnitCreator extends PopupWindow {
         setScene(new Scene(box));
     }
 
-    private void initSetRangeButton (VBox rangeBox, String label,
-                                     List<Point2D> range) {
-        Label rangeLabel = new Label(label);
-        Button setRange = new Button("Set Range...");
-        setRange.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                PopupWindow actionRangeEditor = new RangeEditor(range);
-                actionRangeEditor.show();
-                // TODO: set myRange in here somewhere (within RangeEditor?)
-            }
-        });
-        rangeBox.getChildren().addAll(rangeLabel, setRange);
-    }
+
+	private void initSetRangeButton(VBox rangeBox, String label,
+			List<Point2D> range) {
+		Label rangeLabel = new Label(label);
+		Button setRange = new Button("Set Range...");
+		setRange.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				//PopupWindow actionRangeEditor = new RangeEditor(range, label);
+				//actionRangeEditor.show();
+				// TODO: set myRange in here somewhere (within RangeEditor?)
+			}
+		});
+		rangeBox.getChildren().addAll(rangeLabel, setRange);
+	}
 }

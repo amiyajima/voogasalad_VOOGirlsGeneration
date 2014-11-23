@@ -4,7 +4,7 @@ import gamedata.gamecomponents.Level;
 import java.util.List;
 
 /**
- * Wrapper for Level data in JSON for parsing
+ * Wrapper for LevelData in JSON for parsing
  * @author Rica
  *
  */
