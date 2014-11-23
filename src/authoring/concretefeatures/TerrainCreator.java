@@ -30,7 +30,8 @@ import authoring_environment.UIspecs;
  * @author Mike Zhu
  */
 public class TerrainCreator extends PopupWindow {
-
+	
+	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
     private final int HEIGHT = 140;
     private final int WIDTH = 400;
     private final String NAME = "Terrain Creator";
@@ -69,9 +70,11 @@ public class TerrainCreator extends PopupWindow {
     @Override
     protected void initialize () {
         VBox box = new VBox();
+        box.getStylesheets().add(STYLESHEET);
+        box.getStyleClass().add("vbox");
         box.setPadding(UIspecs.allPadding);
         box.setSpacing(5);
-
+        
         HBox names = new HBox();
         HBox images = new HBox();
 

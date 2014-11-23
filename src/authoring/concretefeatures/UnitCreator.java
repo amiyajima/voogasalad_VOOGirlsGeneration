@@ -5,12 +5,16 @@ import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+
 import java.awt.geom.Point2D;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -33,8 +37,8 @@ import authoring_environment.UIspecs;
  * @author Mike Zhu
  */
 public class UnitCreator extends PopupWindow {
-
-
+	
+	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 	private final int HEIGHT = 400;
 	private final int WIDTH = 400;
 	private final String NAME = "Unit Creator";
@@ -86,9 +90,11 @@ public class UnitCreator extends PopupWindow {
 	@Override
     protected void initialize () {
         VBox box = new VBox();
+        box.getStylesheets().add(STYLESHEET);
+        box.getStyleClass().add("vbox");
         box.setPadding(UIspecs.allPadding);
         box.setSpacing(5);
-
+        
         HBox names = new HBox();
         HBox images = new HBox();
 
