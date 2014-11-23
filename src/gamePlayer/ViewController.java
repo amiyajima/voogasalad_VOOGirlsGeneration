@@ -3,9 +3,8 @@ package gamePlayer;
 import gamedata.action.Action; 
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
-
+import gamedata.gamecomponents.SquareGrid;
 import java.awt.geom.Point2D;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -107,7 +106,7 @@ private AudioClip myAudio;
        // a new Game object. 
        //initialize audio
         
-        myGrid = new SquareGameGrid(8,8);
+       // myGrid = new SquareGameGrid(8,8);
         
         
         loadFXML(GAMESPACE_FXML, myGameSpace);
@@ -120,8 +119,8 @@ private AudioClip myAudio;
        // myPopup = FXMLLoader.load(getClass().getResource(POPUP_FXML));
 
         
-        myGameSpace.setCenter(myGrid);
-        myGrid.setAlignment(Pos.CENTER);
+      //  myGameSpace.setCenter(myGrid);
+     //   myGrid.setAlignment(Pos.CENTER);
         myStage.setScene(new Scene(myInitialScene));
 
             try {
@@ -202,12 +201,15 @@ private AudioClip myAudio;
     private void testGame() {
         JSONBobTester JSBTester = new JSONBobTester();
         myModel = JSBTester.createNewGame();
+        myGrid= new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel.getCurrentLevel().getGrid().getColumn());
+        myGameSpace.setCenter(myGrid);
         myStage.setScene(new Scene(myGameSpace));
+        setGridState(new SelectState(this));
         
-        myGrid.requestFocus();
-        addTestKeyboardControl();
-        addLocationSelector();
-        
+      //  myGrid.requestFocus();
+//        addTestKeyboardControl();
+//        addLocationSelector();
+//        
     }
     
     @FXML
@@ -272,7 +274,6 @@ private AudioClip myAudio;
      * the method to restart the game; it asks the use whether to save the current game
      * 
      */
-    // TODO: IMPLEMENT POP-UP.
     @FXML
     protected void restartGame () {
 
