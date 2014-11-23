@@ -31,7 +31,7 @@ public class VoogaMain {
 
     public static void main (String[] args) {
         System.out.println("main is running");
-        //testJSONload();
-         testJSONwrite();
+        testJSONload();
+        // testJSONwrite();
     }
 }
