@@ -6,6 +6,10 @@ import gamedata.gamecomponents.Piece;
 import java.util.HashMap;
 import java.util.Map;
 
+import authoring.concretefeatures.TerrainEntry;
+import authoring.concretefeatures.UnitEntry;
+import authoring.data.PatchData;
+import authoring.data.PieceData;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -37,11 +41,17 @@ public class LibraryView extends TabPane {
 	private final String TERRAIN = "Terrain";
 	private final String DELETE = "Delete";
 	private final String EDIT = "Edit";
+	private final String GLOBAL = "Global Commands";
+	private final String PIECES = "Piece Templates";
+	private final String PATCHES = "Patch Templates";
+	private PieceData myPieceData;
+	private PatchData myPatchData;
 	private Map<String, VBox> myLibraryMap;
 	private Map<String, Tab> myTabMap;
 	private SingleSelectionModel<Tab> mySelection;
 	public static Piece currentlySelectedUnit;
 	public static Patch currentlySelectedTerrain;
+	public static boolean doNothing;
 	public static boolean unitSelected;
 	public static boolean reset;
 	
@@ -51,9 +61,12 @@ public class LibraryView extends TabPane {
 	 * their respective tabs as they are created in the UnitCreator
 	 * and TerrainCreator.
 	 */
-	public LibraryView(){
+	public LibraryView(PieceData pieceData, PatchData patchData){
 		mySelection = this.getSelectionModel();
 		this.setPrefSize(HEIGHT, WIDTH);
+		myPieceData = pieceData;
+		myPatchData = patchData;
+		doNothing = true;
 		unitSelected = false;
 		reset = true;
 		
@@ -77,16 +90,8 @@ public class LibraryView extends TabPane {
 				//TODO: Implement Editing 
 			}
 		});
-		this.setOnKeyPressed(new EventHandler<KeyEvent>(){
-			@Override
-			public void handle(KeyEvent e){
-				if(e.getCode() == KeyCode.ESCAPE){
-					unitSelected = false;
-				}
-			}
-		});
-		unitLibrary.getChildren().addAll(new Label("Global Commands"),new HBox(unitEdit,unitDelete),new Separator()
-		,new Label("Piece Templates"));
+		unitLibrary.getChildren().addAll(new Label(GLOBAL),
+				new HBox(unitEdit, unitDelete), new Separator(), new Label(PIECES));
 		unitContent.setContent(unitLibrary);
 		unitTab.setContent(unitContent);
 		
@@ -94,7 +99,9 @@ public class LibraryView extends TabPane {
 		terrainTab.setClosable(false);
 		ScrollPane terrainContent = new ScrollPane();
 		VBox terrainLibrary = new VBox();
+		terrainLibrary.setSpacing(3);
 		Button terrainDelete = new Button(DELETE);
+		Button terrainEdit = new Button(EDIT);
 		terrainDelete.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent e){
@@ -102,11 +109,27 @@ public class LibraryView extends TabPane {
 				reset = true;
 			}
 		});
-		terrainLibrary.getChildren().add(terrainDelete);
+		terrainEdit.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent e){
+				//TODO: Implement Editing 
+			}
+		});
+		terrainLibrary.getChildren().addAll(new Label(GLOBAL),
+				new HBox(terrainEdit, terrainDelete), new Separator(), new Label(PATCHES));
 		terrainContent.setContent(terrainLibrary);
 		terrainTab.setContent(terrainContent);
 		
 		this.getTabs().addAll(unitTab, terrainTab);
+		this.setOnKeyPressed(new EventHandler<KeyEvent>(){
+			@Override
+			public void handle(KeyEvent e){
+				if(e.getCode() == KeyCode.ESCAPE){
+					doNothing = true;
+				}
+			}
+		});
+		
 		myLibraryMap = new HashMap<String, VBox>();
 		myLibraryMap.put(UNITS, unitLibrary);
 		myLibraryMap.put(TERRAIN, terrainLibrary);
@@ -115,20 +138,25 @@ public class LibraryView extends TabPane {
 		myTabMap.put(TERRAIN, terrainTab);
 	}
 	
-	/**
-	 * Method to add units and terrain to their respective tabs in
-	 * the LibraryView.
-	 * 
-	 * @param content : The LibraryEntry to be added to the library.
-	 * @param library : Specifies whether to add the content to the
-	 * "Unit Library" or the "Terrain Library".
-	 */
-	public void addToLibrary(HBox content, String library){
-		mySelection.select(myTabMap.get(library));
-		myLibraryMap.get(library).getChildren().add(content);
+	public void addPiece(UnitEntry content){
+		mySelection.select(myTabMap.get(UNITS));
+		myLibraryMap.get(UNITS).getChildren().add(content);
+		myPieceData.add(content.getUnit());
 	}
 	
-	public void removeFromLibrary(HBox content, String library){
-		myLibraryMap.get(library).getChildren().remove(content);
+	public void addPatch(TerrainEntry content){
+		mySelection.select(myTabMap.get(TERRAIN));
+		myLibraryMap.get(TERRAIN).getChildren().add(content);
+		myPatchData.add(content.getTerrain());
+	}
+	
+	public void removePiece(UnitEntry content){
+		myLibraryMap.get(UNITS).getChildren().remove(content);
+		myPieceData.remove(content.getUnit());
+	}
+	
+	public void removePatch(TerrainEntry content){
+		myLibraryMap.get(TERRAIN).getChildren().remove(content);
+		myPatchData.remove(content.getTerrain());
 	}
 }

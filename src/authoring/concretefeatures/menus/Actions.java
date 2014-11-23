@@ -13,14 +13,14 @@ import javafx.scene.control.MenuItem;
 public class Actions extends Menu{
 	
 	private static final String NAME = "Actions";
-	private static final String ITEM1 = "Edit Actions";
-	LibraryView myLibrary; // should this be private?
+	private static final String EDIT = "Edit Actions";
+	private LibraryView myLibrary;
 	
 	//TODO: figure out what to put in action constructor
 	public Actions(LibraryView library, ActionData actionData){
 		super(NAME);
 		myLibrary = library;
-		MenuItem eventsCreator = new MenuItem(ITEM1);
+		MenuItem eventsCreator = new MenuItem(EDIT);
 		
 		setAction(eventsCreator, actionData);
 		getItems().addAll(eventsCreator);

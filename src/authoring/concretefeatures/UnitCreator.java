@@ -13,7 +13,6 @@ import javafx.event.EventHandler;
 import java.awt.geom.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -23,10 +22,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import authoring.abstractfeatures.PopupWindow;
-import authoring.data.PieceData;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
-
 
 /**
  * GUI element that allows users to create new Piece templates and add them to
@@ -40,17 +37,15 @@ public class UnitCreator extends PopupWindow {
 
 	private final int HEIGHT = 400;
 	private final int WIDTH = 400;
-	private final String UNITS = "Units";
 	private final String NAME = "Unit Creator";
 	private final String UNIT_NAME_LABEL = "Name";
 	private final String IMAGE_LABEL = "Unit image";
 	private final String LOAD_IMAGE_LABEL = "Load image";
 	private final String TEMPLATE_LABEL = "Create new unit template";
-	private final String DELETE = "Delete All Instances";
+	private final String DELETE = "Delete";
 	private final String EDIT = "Edit";
 	private LibraryView myLibrary;
-
-	private PieceData myPieceData;
+	
 	private int myTypeID;
 	private int myUniqueID;
 	private int myPlayerID;
@@ -69,10 +64,9 @@ public class UnitCreator extends PopupWindow {
 	 * @param library
 	 *            : Library to which units will be added.
 	 */
-	public UnitCreator(LibraryView library, PieceData pieceData) {
+	public UnitCreator(LibraryView library) {
 		myLibrary = library;
-
-		myPieceData = pieceData;
+		
 		myImageLocation = "";
 		myPath = new ArrayList<Movement>();
 		myActions = new ArrayList<Action>();
@@ -107,8 +101,9 @@ public class UnitCreator extends PopupWindow {
         Label loadLabel = new Label(IMAGE_LABEL);
         Button loadImage = new Button(LOAD_IMAGE_LABEL);
         loadImage.setOnAction(new EventHandler<ActionEvent>() {
-            // initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
-            // @Jesse Finish this
+        	// initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
+        	// @Jesse Finish this
+        	// From Martin: You sure this code goes here, and not below Line 133?
 
             @Override
             public void handle (ActionEvent click) {
@@ -135,8 +130,8 @@ public class UnitCreator extends PopupWindow {
                 Piece unit = new Piece(myImageLocation, myPath, myActions, myStats,
                                        myLoc, myTypeID, myUniqueID, myPlayerID, myInventory);
 
-                Label link = new Label(unitName.getText());
-                //link.setTranslateY(10);
+                Label name = new Label(unitName.getText());
+                name.setTranslateY(10);
                 Button editButton = new Button(EDIT);
                 editButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -146,17 +141,16 @@ public class UnitCreator extends PopupWindow {
                     }
                 });
                 Button delButton = new Button(DELETE);
-                delButton.setLayoutY(5);
 
-                HBox entry = new UnitEntry(unit, icon, link, editButton, delButton);
+                UnitEntry entry = new UnitEntry(unit, icon, name, editButton, delButton);
         		delButton.setOnAction(new EventHandler<ActionEvent>(){
         			@Override
         			public void handle(ActionEvent event) {
-        				myLibrary.removeFromLibrary(entry, UNITS);
+        				myLibrary.removePiece(entry);
         			}
         		});
 
-                myLibrary.addToLibrary(entry, UNITS);
+                myLibrary.addPiece(entry);
                 close();
             }
         });
@@ -164,9 +158,7 @@ public class UnitCreator extends PopupWindow {
         setScene(new Scene(box));
     }
 
-
-	private void initSetRangeButton(VBox rangeBox, String label,
-			List<Point2D> range) {
+	protected void initSetRangeButton(VBox rangeBox, String label, List<Point2D> range) {
 		Label rangeLabel = new Label(label);
 		Button setRange = new Button("Set Range...");
 		setRange.setOnAction(new EventHandler<ActionEvent>() {

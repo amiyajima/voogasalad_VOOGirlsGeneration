@@ -97,4 +97,5 @@ public class SquareGameGrid extends GameGrid {
             ((StackPane)n).getChildren().add(pieces.get(point).getImageView());
         });
     }
+    
 }

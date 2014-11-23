@@ -20,11 +20,9 @@ public class VoogaView extends BorderPane {
 	private GridView myGridView;
 	
 	public VoogaView(){
-//		setVisible(true);
-
-		myLibraryView=new LibraryView();
-		mySettingsView=new MenuView(myLibraryView);
-		myGridView=new GridView(GRID_VIEW_WIDTH,GRID_VIEW_HEIGHT,TILE_SIDE_LENGTH);
+		myLibraryView = new LibraryView(new PieceData(), new PatchData());
+		mySettingsView = new MenuView(myLibraryView);
+		myGridView = new GridView(GRID_VIEW_WIDTH,GRID_VIEW_HEIGHT,TILE_SIDE_LENGTH);
 		
 		setTop(mySettingsView);
 		setLeft(myLibraryView);
