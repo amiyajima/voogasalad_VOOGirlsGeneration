@@ -6,16 +6,16 @@ import gamedata.goals.Goal;
 import gamedata.rules.Rule;
 
 /**
- * Individual level data wrapper
+ * LevelData wrapper for individual levels in LevelData
  * @author Rica
  *
  */
-public class IndividualLevelData {
+public class LevelDataIndividual {
     private GridData myGrid;
     private List<GoalData> myGoals;
     private List<RuleData> myRules;
     
-    public IndividualLevelData(GridData grid, List<GoalData> goals, List<RuleData> rules) {
+    public LevelDataIndividual(GridData grid, List<GoalData> goals, List<RuleData> rules) {
         myGrid = grid;
         myGoals = goals;
         myRules = rules;

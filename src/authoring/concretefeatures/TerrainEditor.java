@@ -1,6 +1,6 @@
 package authoring.concretefeatures;
 
-import java.io.File;
+import java.io.File; 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -15,7 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import gamedata.gamecomponents.Patch;
-import gamedata.gamecomponents.SquarePatch;
 import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.UIspecs;
 

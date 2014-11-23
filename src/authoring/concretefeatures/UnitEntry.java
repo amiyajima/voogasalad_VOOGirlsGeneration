@@ -1,14 +1,15 @@
 package authoring.concretefeatures;
 
 import gamedata.gamecomponents.Piece;
-
 import authoring.abstractfeatures.LibraryEntry;
 import authoring_environment.LibraryView;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 
 /**
  * @author Martin Tamayo
@@ -29,8 +30,8 @@ public class UnitEntry extends LibraryEntry {
 	 * @param link : Name of unit. Links to UnitEditor.
 	 * @param unit : Actual Piece class for the unit.
 	 */
-	public UnitEntry(Button delButton, ImageView image, Hyperlink link, Piece unit){
-		this.getChildren().addAll(delButton, image, link);
+	public UnitEntry(Piece unit,ImageView image, Label link, Button editButton, Button delButton){
+		this.getChildren().addAll(new HBox(image, link, editButton, delButton));
 		myUnit = unit;
 		
 		this.setStyle("-fx-cursor: hand");

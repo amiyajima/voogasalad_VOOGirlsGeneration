@@ -5,16 +5,12 @@ import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-
 import java.awt.geom.Point2D;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -31,6 +27,7 @@ import authoring.data.PieceData;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
+
 /**
  * GUI element that allows users to create new Piece templates and add them to
  * the Library. User defines unit name, image, and actions. Actions define a
@@ -40,6 +37,7 @@ import authoring_environment.UIspecs;
  */
 public class UnitCreator extends PopupWindow {
 
+
 	private final int HEIGHT = 400;
 	private final int WIDTH = 400;
 	private final String UNITS = "Units";
@@ -48,7 +46,8 @@ public class UnitCreator extends PopupWindow {
 	private final String IMAGE_LABEL = "Unit image";
 	private final String LOAD_IMAGE_LABEL = "Load image";
 	private final String TEMPLATE_LABEL = "Create new unit template";
-	private final String DELETE = "Delete";
+	private final String DELETE = "Delete All Instances";
+	private final String EDIT = "Edit";
 	private LibraryView myLibrary;
 
 	private PieceData myPieceData;
@@ -103,13 +102,13 @@ public class UnitCreator extends PopupWindow {
         nameLabel.setPadding(UIspecs.topRightPadding);
         TextField unitName = new TextField();
         names.getChildren().addAll(nameLabel, unitName);
-        
+
         ImageView icon = new ImageView();
         Label loadLabel = new Label(IMAGE_LABEL);
         Button loadImage = new Button(LOAD_IMAGE_LABEL);
         loadImage.setOnAction(new EventHandler<ActionEvent>() {
-        //initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
-        //@Jesse Finish this 
+            // initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
+            // @Jesse Finish this
 
             @Override
             public void handle (ActionEvent click) {
@@ -126,19 +125,20 @@ public class UnitCreator extends PopupWindow {
             }
         });
         images.getChildren().addAll(loadLabel, loadImage, icon);
-        
+
         HBox modList = new ModulesList();
-        
+
         Button goButton = new Button(TEMPLATE_LABEL);
         goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
                 Piece unit = new Piece(myImageLocation, myPath, myActions, myStats,
-                                  myLoc, myTypeID, myUniqueID, myPlayerID, myInventory);
+                                       myLoc, myTypeID, myUniqueID, myPlayerID, myInventory);
 
-                Hyperlink link = new Hyperlink(unitName.getText());
-                link.setTranslateY(10);
-                link.setOnAction(new EventHandler<ActionEvent>() {
+                Label link = new Label(unitName.getText());
+                //link.setTranslateY(10);
+                Button editButton = new Button(EDIT);
+                editButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle (ActionEvent e) {
                         PopupWindow p = new UnitEditor(unit);
@@ -147,13 +147,15 @@ public class UnitCreator extends PopupWindow {
                 });
                 Button delButton = new Button(DELETE);
                 delButton.setLayoutY(5);
-                HBox entry = new UnitEntry(delButton, icon, link, unit);
+
+                HBox entry = new UnitEntry(unit, icon, link, editButton, delButton);
         		delButton.setOnAction(new EventHandler<ActionEvent>(){
         			@Override
         			public void handle(ActionEvent event) {
         				myLibrary.removeFromLibrary(entry, UNITS);
         			}
         		});
+
                 myLibrary.addToLibrary(entry, UNITS);
                 close();
             }
@@ -162,6 +164,7 @@ public class UnitCreator extends PopupWindow {
         setScene(new Scene(box));
     }
 
+
 	private void initSetRangeButton(VBox rangeBox, String label,
 			List<Point2D> range) {
 		Label rangeLabel = new Label(label);
@@ -169,8 +172,8 @@ public class UnitCreator extends PopupWindow {
 		setRange.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				PopupWindow actionRangeEditor = new RangeEditor(range);
-				actionRangeEditor.show();
+				//PopupWindow actionRangeEditor = new RangeEditor(range, label);
+				//actionRangeEditor.show();
 				// TODO: set myRange in here somewhere (within RangeEditor?)
 			}
 		});
