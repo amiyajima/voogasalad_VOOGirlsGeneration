@@ -2,6 +2,11 @@ package gamedata.wrappers;
 
 import java.util.Map;
 
+/**
+ * Wrapper for StatsData in ActionData
+ * @author Rica
+ *
+ */
 public class StatsData {
     private Map<String, Double> myStats;
     

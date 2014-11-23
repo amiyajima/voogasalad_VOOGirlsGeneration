@@ -4,15 +4,20 @@ import gamedata.action.ActionConclusion;
 import java.awt.geom.Point2D;
 import java.util.List;
 
+/**
+ * Wrapper for individual actions in ActionData
+ * @author Rica
+ *
+ */
 public class ActionDataIndividual {
     private String myName;
     private List<Point2D> myAttackRange;
     private List<Point2D> myEffectRange;
-    private List<StatsSingleMultiplierData> myStatsLogic;
+    private List<StatsTotalLogicData> myStatsLogic;
     private ActionConclusion myConclusion;
     
     public ActionDataIndividual(String name, List<Point2D> attackRange, 
-                                List<Point2D> effectRange, List<StatsSingleMultiplierData> statsLogic, 
+                                List<Point2D> effectRange, List<StatsTotalLogicData> statsLogic, 
                                 ActionConclusion conclusion) {
         myName = name;
         myAttackRange = attackRange;
@@ -33,7 +38,7 @@ public class ActionDataIndividual {
         return myEffectRange;
     }
     
-    public List<StatsSingleMultiplierData> getActions() {
+    public List<StatsTotalLogicData> getActions() {
         return myStatsLogic;
     }
     
