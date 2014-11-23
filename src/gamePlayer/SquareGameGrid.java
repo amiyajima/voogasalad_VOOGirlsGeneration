@@ -68,6 +68,7 @@ public class SquareGameGrid extends GameGrid {
                 sp.setPrefWidth(500 / this.r);
                 Rectangle r = new Rectangle(500 / this.r - 10, 500 / c - 10);
                 r.setFill(Color.BLACK);
+                
                 sp.getChildren().add(r);
                 
                 this.add(sp, i, j);
@@ -103,6 +104,7 @@ public class SquareGameGrid extends GameGrid {
         this.getChildren().forEach(node -> {
             ((StackPane) node).getChildren().clear();
         });
+        initializeGrid();
         patches.keySet().forEach(point -> {
             this.add(patches.get(point).getImageView(), (int) point.getX(), (int) point.getY());
         });

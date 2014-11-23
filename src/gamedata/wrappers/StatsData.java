@@ -1,16 +1,20 @@
 package gamedata.wrappers;
 
-import gamedata.stats.Stats;
-import java.util.List;
+import java.util.Map;
 
+/**
+ * Wrapper for StatsData in ActionData
+ * @author Rica
+ *
+ */
 public class StatsData {
-    private List<Stats> myStats;
+    private Map<String, Double> myStats;
     
-    public StatsData(List<Stats> stats){
+    public StatsData(Map<String, Double> stats){
         myStats = stats;
     }
     
-    public List<Stats> getStats() {
+    public Map<String, Double> getStats() {
         return myStats;
     }
 }
