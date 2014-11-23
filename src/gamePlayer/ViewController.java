@@ -3,24 +3,16 @@ package gamePlayer;
 import gamedata.action.Action; 
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
-
+import gamedata.gamecomponents.SquareGrid;
 import java.awt.geom.Point2D;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import java.awt.geom.Point2D;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import tests.JSONBobTester;
@@ -38,12 +30,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 
@@ -75,7 +64,7 @@ public class ViewController{
     private Scene scoreScene;
     private Scene myPopupScene;
     
-    
+    private Point2D myCurrentLocation;
     private Piece activePiece;
     private Action activeAction;
  //   private Audio backGroundMusic;
@@ -107,7 +96,7 @@ private AudioClip myAudio;
        // a new Game object. 
        //initialize audio
         
-        myGrid = new SquareGameGrid(8,8);
+       // myGrid = new SquareGameGrid(8,8);
         
         
         loadFXML(GAMESPACE_FXML, myGameSpace);
@@ -120,8 +109,8 @@ private AudioClip myAudio;
        // myPopup = FXMLLoader.load(getClass().getResource(POPUP_FXML));
 
         
-        myGameSpace.setCenter(myGrid);
-        myGrid.setAlignment(Pos.CENTER);
+      //  myGameSpace.setCenter(myGrid);
+     //   myGrid.setAlignment(Pos.CENTER);
         myStage.setScene(new Scene(myInitialScene));
 
             try {
@@ -197,18 +186,22 @@ private AudioClip myAudio;
         // uses JSON reader to generate an instance of the game
 
     }
-    
+
     @FXML
     private void testGame() {
         JSONBobTester JSBTester = new JSONBobTester();
         myModel = JSBTester.createNewGame();
+        myGrid= new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel.getCurrentLevel().getGrid().getColumn());
+        myGameSpace.setCenter(myGrid);
         myStage.setScene(new Scene(myGameSpace));
+        setGridState(new SelectState(this));
         
-        myGrid.requestFocus();
-        addTestKeyboardControl();
-        addLocationSelector();
-        
+      //  myGrid.requestFocus();
+//        addTestKeyboardControl();
+//        addLocationSelector();
+//        
     }
+
     
     @FXML
     private void doSettings(){
@@ -272,7 +265,6 @@ private AudioClip myAudio;
      * the method to restart the game; it asks the use whether to save the current game
      * 
      */
-    // TODO: IMPLEMENT POP-UP.
     @FXML
     protected void restartGame () {
 
@@ -468,6 +460,20 @@ private AudioClip myAudio;
 
         });
     }
+//    
+//    @FXML
+//    private void testGame() {
+//        JSONBobTester JSBTester = new JSONBobTester();
+//        myModel = JSBTester.createNewGame();
+//        myStage.setScene(new Scene(myGameSpace));
+//        
+//        myGrid.requestFocus();
+//        
+//        myCurrentLocation = new Point2D.Double(0.0,0.0);
+//        addKeyboardController();
+//        addLocationSelector();
+//        
+//    }
     
     private void addLocationSelector () {
         myGrid.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -479,22 +485,10 @@ private AudioClip myAudio;
         });
     }
 
-    private void addTestKeyboardControl () {
-        myGrid.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle (KeyEvent key) {
-                if (key.getCode() == KeyCode.M) {
-                    System.out.println("key works!");
-                }
-            }
-        });
-//        highlightCurrentLocation(r);
-    }
     
     private void addKeyboardController(){
         KeyboardController KBControl = new KeyboardController();
-        KBControl.setActionKeyControl(myGrid, myModel);
-        KBControl.setMovementKeyControl(myGrid, myModel);
+//        KBControl.setActionKeyControl(myGrid, myModel);
+        KBControl.setMovementKeyControl(myGrid, myModel, myCurrentLocation);
     }
-
 }
