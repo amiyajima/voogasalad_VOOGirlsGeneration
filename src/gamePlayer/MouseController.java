@@ -31,11 +31,15 @@ public class MouseController {
               myPreviousLocation = new Point2D.Double(GridPane.getRowIndex(myPreviousNode),GridPane.getColumnIndex(myPreviousNode));
               myCurrentLocation = new Point2D.Double(GridPane.getRowIndex(myCurrentNode), GridPane.getColumnIndex(myCurrentNode));
               
-              vc.highlightCurrentLocation(Color.RED, myPreviousLocation, myCurrentLocation);
+              vc.highlightCurrentLocation(Color.GREEN, myPreviousLocation, myCurrentLocation);
           }
       });
         }
     }
+    
+    
+    
+    
 }
     
     

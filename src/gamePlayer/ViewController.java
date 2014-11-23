@@ -4,23 +4,17 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
 import gamedata.gamecomponents.SquareGrid;
-
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
 import java.util.ResourceBundle;
-
 import javafx.event.EventHandler;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 import tests.JSONBobTester;
 import javafx.geometry.Pos;
 import javafx.scene.ImageCursor;
@@ -38,6 +32,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
@@ -451,7 +446,6 @@ public class ViewController{
                 n.setOnMouseExited(event->highLightEffectRange(n, Color.TRANSPARENT));}
 
         });
-
     }
 
     protected void changeCursor(String string){
@@ -459,7 +453,6 @@ public class ViewController{
         myScene.setCursor(new ImageCursor(image, image.getWidth()/4,image.getWidth()/4));
     }
     private void addDropShadow(Node n, Color c){
-
         if(n != null){
             DropShadow ds = new DropShadow(); 
             ds.setRadius(30.0);
@@ -478,7 +471,6 @@ public class ViewController{
      * @param c
      */
     private void highLightEffectRange(Node n, Color c){
-
         System.out.println("effect Range: "+ activeAction.getEffectRange());
         // System.out.println(myGrid.getRowIndex(n)+" , "+ myGrid.getColumnIndex(n));
         activeAction.getEffectRange().forEach(point->{Node node = myGrid.get(myGrid.getRowIndex(n)+ (int)point.getX(), myGrid.getColumnIndex(n)+ (int)point.getY());
@@ -493,9 +485,6 @@ public class ViewController{
 
         });
     }
-
-
-
     private void addKeyboardController(){
         KeyboardController KBControl = new KeyboardController();
         //        KBControl.setActionKeyControl(myGrid, myModel);
@@ -518,6 +507,4 @@ public class ViewController{
         //        oldNode.setEffect(null);
         addDropShadow(newNode,c);
     }
-
-
 }
