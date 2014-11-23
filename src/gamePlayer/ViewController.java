@@ -42,6 +42,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.layout.StackPane;
 
 
 
@@ -58,7 +59,7 @@ public class ViewController{
     public static final String Chinese = "Chinese";
     
     public static final String AUDIO_TEST = "/src/gamePlayer/audioTest.mp3";
-    public static final String CURSOR_ATTACK_TEST = "/src/gamePlayer/Cursor_attack.png";
+    public static final String CURSOR_ATTACK_TEST = "/gamePlayer/Cursor_attack.png";
     public static final String CURSOR_GLOVE_TEST = "/gamePlayer/pointer-glove.png";
 
     private ResourceBundle myLanguages;
@@ -204,7 +205,12 @@ private AudioClip myAudio;
         myGrid= new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel.getCurrentLevel().getGrid().getColumn());
         myGameSpace.setCenter(myGrid);
         myGrid.populateGrid(myModel.getCurrentLevel().getGrid().getPatches(), myModel.getCurrentLevel().getGrid().getPieces());
-
+        myGrid.getChildren().forEach(node->{
+            node.setOnMouseClicked(event->
+            {   Piece piece = getPiece(findPosition(event.getX(), event.getY()));
+                updateActions(piece);
+                updateStats(piece);});});
+        
         myScene = new Scene(myGameSpace);
         myStage.setScene(myScene);
 
@@ -213,6 +219,8 @@ private AudioClip myAudio;
         getGrid().setOnMouseExited(event->{changeCursor(CURSOR_GLOVE_TEST);});
         myGrid.requestFocus();
         addKeyboardController();
+        addMouseController();
+        
 //        addLocationSelector();
 //        
     }
@@ -329,9 +337,10 @@ private AudioClip myAudio;
   
         statsPane.getChildren().clear();
         ArrayList<Text> stats = new ArrayList<Text>();
-        piece.getStats().getStatsMap().keySet().forEach(key->stats.
-                                                        add(new Text(key+ ":  "+ piece.getStats().
-                                                         getStatsMap().get(key))));
+
+        piece.getStats().getStatNames().forEach(key->stats.
+                                                        add(new Text(key+ ":  "+ piece.getStats().getValue(key))));
+
         statsPane.getChildren().addAll(stats);
 
     }
@@ -341,10 +350,12 @@ private AudioClip myAudio;
      * @param piece
      */
     protected void updateActions (Piece piece){
+        setActivePiece(piece);
         
         controlPane.getChildren().clear();
         ArrayList<Label> actions = new ArrayList<Label>();
-        piece.getActions().forEach(action->{Label l = new Label(action.toString()); 
+        piece.getActions().forEach(action->{Label l = new Label(action.toString());
+        l.getStyleClass().add("label");
         l.setOnMouseClicked(event->bindAction(action));
         actions.add(l);});
 
@@ -358,6 +369,7 @@ private AudioClip myAudio;
      */
     private void bindAction(Action action){
         setActiveAction(action);
+       
         highLightActionRange();
 
         setGridState(new ApplyState(this));
@@ -402,11 +414,7 @@ private AudioClip myAudio;
     protected Game getGame(){
         return myModel;
     }
-    
-//    protected BorderPane getGameSpae(){
-//        return myGameSpace;
-//    }
-    
+       
     protected void setActivePiece(Piece piece){
         activePiece = piece;
     }
@@ -434,14 +442,10 @@ private AudioClip myAudio;
         //temparary stub for testing highlight;
         activeAction.getActionRange(activePiece.getLoc()).forEach(point->{ Node n = myGrid.get((int)point.getX(), (int)point.getY());
         addDropShadow(n, Color.YELLOW);
-        n.setOnMouseEntered(event->highLightEffectRange(n, Color.RED));
+        ((StackPane)n).getChildren().forEach(node->node.setOnMouseEntered(event->highLightEffectRange(n, Color.RED)));
         n.setOnMouseExited(event->highLightEffectRange(n, Color.TRANSPARENT));
 
         });
-
-
-
-
 
     }
 
@@ -451,9 +455,9 @@ private AudioClip myAudio;
     }
     private void addDropShadow(Node n, Color c){
         DropShadow ds = new DropShadow(); 
-        ds.setRadius(10.0);
-        ds.setOffsetX(1.0);
-        ds.setOffsetY(1.0);
+        ds.setRadius(30.0);
+        ds.setOffsetX(0.0);
+        ds.setOffsetY(0.0);
         ds.setColor(c);
         n.setEffect(ds); 
         System.out.println("drop shadow");
@@ -468,21 +472,19 @@ private AudioClip myAudio;
     private void highLightEffectRange(Node n, Color c){
 
         //  activeAction.getEffectRange();
+        System.out.println("effect range");
         activeAction.getEffectRange().forEach(point->{Node node = myGrid.get(myGrid.getRowIndex(n)+ (int)point.getX(), myGrid.getColumnIndex(n)+ (int)point.getY());
 
-        if(c ==Color.TRANSPARENT && node.getEffect()!=null){
-            node.setEffect(null);
-        }
-        else{
+//        if(c ==Color.TRANSPARENT && node.getEffect()!=null){
+//            node.setEffect(null);
+//        }
+//        else{
             addDropShadow(node, c);
-        }
+       // }
 
 
         });
     }
-
-    
-
     
 //    private void addLocationSelector () {
 //        myGrid.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -498,6 +500,11 @@ private AudioClip myAudio;
         KeyboardController KBControl = new KeyboardController();
 //        KBControl.setActionKeyControl(myGrid, myModel);
         KBControl.setMovementKeyControl(this, myGrid, myModel);
+    }
+    
+    private void addMouseController(){
+        MouseController MouseControl = new MouseController();
+        MouseControl.selectCurrentLocation(this, myGrid);
     }
     
     public void highlightCurrentLocation(Color c, Point2D oldLocation, Point2D newLocation){

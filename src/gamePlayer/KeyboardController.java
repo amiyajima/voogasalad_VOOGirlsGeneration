@@ -73,13 +73,17 @@ public class KeyboardController {
             public void handle (KeyEvent key) {
                for (KeyCode kc: movementKeyList){
                    if (key.getCode() == kc) {
-//                       getting something like {0,1}, {-1,1}, etc
+                       Point2D newCurrentLocation = new Point2D.Double(myCurrentLocation.getX() - movementKeyMap.get(kc).getY(),
+                                                       myCurrentLocation.getY() + movementKeyMap.get(kc).getX()); 
                        
-                       Point2D newCurrentLocation = new Point2D.Double(myCurrentLocation.getX() + movementKeyMap.get(kc).getX(),
-                                                       myCurrentLocation.getY() + movementKeyMap.get(kc).getY()); 
-                       System.out.println("wtf");
-                       vc.highlightCurrentLocation(Color.BLUE, myCurrentLocation, newCurrentLocation);
-//                       myCurrentLocation = newCurrentLocation;
+                       if ((newCurrentLocation.getX()>grid.r-1) |(newCurrentLocation.getY()>grid.c-1)
+                               | (newCurrentLocation.getX()<0) | (newCurrentLocation.getY()<0)){
+                           newCurrentLocation.setLocation(myCurrentLocation.getX(), myCurrentLocation.getY());
+                       }
+                       
+                       System.out.println(newCurrentLocation);
+                       vc.highlightCurrentLocation(Color.RED, myCurrentLocation, newCurrentLocation);
+                       myCurrentLocation = newCurrentLocation;
                    }
                }
             }

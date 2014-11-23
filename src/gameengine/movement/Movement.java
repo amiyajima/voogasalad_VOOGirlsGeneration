@@ -10,7 +10,7 @@ import java.awt.geom.Point2D;
  * Defines the movement of a piece. Responsible for maintaining the behavior
  * properties of a piece and executing allowed movements
  * 
- * @author Jesse, Anna, Rica
+ * @author Jesse, Rica
  *
  */
 public class Movement {
@@ -18,22 +18,26 @@ public class Movement {
 	private List<Point2D> myMoves;
 	private List<List<Point2D>> myPaths;
 	private List<Rule> myRules;
+	private List<Point2D> myAbsoluteMoves;
 
 	/**
 	 * Constructor
-	 * @param endPoints Point2Ds representing all possible relative locations of movement
+	 * 
+	 * @param endPoints
+	 *            Point2Ds representing all possible relative locations of
+	 *            movement
 	 */
 	@SafeVarargs
-	public Movement(List<Point2D>... endPoints) {
+	public Movement(List<Rule> rules, List<Point2D>... endPoints) {
 		boolean first = true;
-	    myPaths = new ArrayList<List<Point2D>>();
-	    myRules = new ArrayList<Rule>();
+		// myRules = rules;
+		myPaths = new ArrayList<List<Point2D>>();
+		myRules = new ArrayList<Rule>();
 		for (List<Point2D> p : endPoints) {
-			if(first){
+			if (first) {
 				myMoves = p;
 				first = false;
-			}
-			else{
+			} else {
 				myPaths.add(p);
 			}
 		}
@@ -48,13 +52,30 @@ public class Movement {
 	 * @return List of Point2D corresponding to absolute locations of movement
 	 */
 	public List<Point2D> getPossibleLocs(int x, int y) {
-		List<Point2D> p = new ArrayList<Point2D>();
+		myAbsoluteMoves = new ArrayList<Point2D>();
 		for (Point2D a : myMoves) {
-			p.add(new Point2D.Double(a.getX() + x, a.getY() + y));
+			myAbsoluteMoves.add(new Point2D.Double(a.getX() + x, a.getY() + y));
 		}
-		return p;
+		return myAbsoluteMoves;
 	}
 
+	
+	/**
+	 * Checks to see if an absolute location (x,y) is valid 
+	 * @param x 
+	 * @param y
+	 * @return
+	 */
+	public boolean isValidLocation(int x, int y){
+		for(Point2D p:myAbsoluteMoves){
+			if(p.getX()==x && p.getY()==y){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
 	/**
 	 * Checks the collisions in the currently defined path. Checks with piece
 	 * and patch collisions.
@@ -63,19 +84,15 @@ public class Movement {
 	 */
 	private boolean checkPathCollision(Grid myGrid) {
 		List<Point2D> path;
-		
 		boolean b = true;
-		//Needs to find path with correct endpoint. Then check collision at each point2D of the path
-		
-		/*for (Point2D p : myPaths) {
-			if (myGrid.getPiece(p) != null) {
-				b = false;
-			}
-			if (myGrid.getPatch(p) != null) {
-				// check if these pieces can collide with terrain
-				return false;
-			}
-		}*/
+		// Needs to find path with correct endpoint. Then check collision at
+		// each point2D of the path
+
+		/*
+		 * for (Point2D p : myPaths) { if (myGrid.getPiece(p) != null) { b =
+		 * false; } if (myGrid.getPatch(p) != null) { // check if these pieces
+		 * can collide with terrain return false; } }
+		 */
 		return b;
 	}
 }
