@@ -109,6 +109,7 @@ public class SquareGameGrid extends GameGrid {
         this.getChildren().forEach(node -> {
             ((StackPane) node).getChildren().clear();
         });
+        initializeGrid();
         patches.keySet().forEach(point -> {
             this.add(patches.get(point).getImageView(), (int) point.getX(), (int) point.getY());
         });

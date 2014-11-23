@@ -169,8 +169,8 @@ public class UnitCreator extends PopupWindow {
 		setRange.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				PopupWindow actionRangeEditor = new RangeEditor(range);
-				actionRangeEditor.show();
+				//PopupWindow actionRangeEditor = new RangeEditor(range, label);
+				//actionRangeEditor.show();
 				// TODO: set myRange in here somewhere (within RangeEditor?)
 			}
 		});
