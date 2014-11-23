@@ -15,20 +15,27 @@ import java.awt.geom.Point2D;
  */
 public class Movement {
 	// possible paths for this movement
-	private List<List<Point2D>> myMoves;
-	private List<Point2D> myPaths;
+	private List<Point2D> myMoves;
+	private List<List<Point2D>> myPaths;
 	private List<Rule> myRules;
 
 	/**
 	 * Constructor
 	 * @param endPoints Point2Ds representing all possible relative locations of movement
 	 */
+	@SafeVarargs
 	public Movement(List<Point2D>... endPoints) {
-	    myMoves = new ArrayList<List<Point2D>>();
-	    myPaths = new ArrayList<Point2D>();
+		boolean first = true;
+	    myPaths = new ArrayList<List<Point2D>>();
 	    myRules = new ArrayList<Rule>();
 		for (List<Point2D> p : endPoints) {
-			myMoves.add(p);
+			if(first){
+				myMoves = p;
+				first = false;
+			}
+			else{
+				myPaths.add(p);
+			}
 		}
 	}
 
@@ -42,7 +49,7 @@ public class Movement {
 	 */
 	public List<Point2D> getPossibleLocs(int x, int y) {
 		List<Point2D> p = new ArrayList<Point2D>();
-		for (Point2D a : myPaths) {
+		for (Point2D a : myMoves) {
 			p.add(new Point2D.Double(a.getX() + x, a.getY() + y));
 		}
 		return p;
@@ -55,8 +62,12 @@ public class Movement {
 	 * @return true or false
 	 */
 	private boolean checkPathCollision(Grid myGrid) {
+		List<Point2D> path;
+		
 		boolean b = true;
-		for (Point2D p : myPaths) {
+		//Needs to find path with correct endpoint. Then check collision at each point2D of the path
+		
+		/*for (Point2D p : myPaths) {
 			if (myGrid.getPiece(p) != null) {
 				b = false;
 			}
@@ -64,7 +75,7 @@ public class Movement {
 				// check if these pieces can collide with terrain
 				return false;
 			}
-		}
+		}*/
 		return b;
 	}
 }

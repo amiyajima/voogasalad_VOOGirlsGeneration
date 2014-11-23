@@ -15,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import authoring.abstractfeatures.PopupWindow;
 
 /**
@@ -23,7 +22,7 @@ import authoring.abstractfeatures.PopupWindow;
  * selects the tiles and returns the list of relative coordination of selected
  * tiles.
  * 
- * @author huangmengen, Jesse Ling
+ * @author Meng'en Huang, Jesse Ling, Jennie Ju
  *
  */
 public class RangeEditor extends PopupWindow {
@@ -42,25 +41,22 @@ public class RangeEditor extends PopupWindow {
 	private static final int MIN_TILE_SIZE = 30;
 	private static final int RANGE_EDITOR_HEIGHT = 800;
 	private static final int RANGE_EDITOR_WIDTH = 600;
+	private static final int DEFAULT_TILE_SIZE = 40;
+	
 	private int myGridLength = RANGE_EDITOR_WIDTH - 100;
-	private int myTileSize = 40;
-
+	private int myTileSize = DEFAULT_TILE_SIZE;
 	private int myGridWidthNumber;
 	private int myGridHeightNumber;
 	private RangeGrid mySampleGridView;
-	private List<Point2D> selectedList;
-	private ActionCreator myActionCreator;
-	private String myRangeType;
+//	private String myRangeType;
+	private List<Point2D> myRange;
 
-	public RangeEditor(ActionCreator ac, String type) {
-		myActionCreator = ac;
-		myRangeType = type;
+	public RangeEditor(List<Point2D> range, String type) {
 		setHeight(RANGE_EDITOR_HEIGHT);
 		setWidth(RANGE_EDITOR_WIDTH);
 		setTitle(NAME);
-		selectedList = new ArrayList<Point2D>();
+		myRange = range;
 		initialize();
-		mySampleGridView = new RangeGrid(myGridLength, myGridLength, myTileSize);
 	}
 
 	@Override
@@ -85,19 +81,25 @@ public class RangeEditor extends PopupWindow {
 							String oldValue, String newValue) {
 						switch (newValue) {
 						case COLUMN:
-							selectedList = mySampleGridView.getCenterColumn();
-							// case INIT_TYPE_PROPORTION:
-							// initProportionalCells(parser);
-							// break;
-							// case INIT_TYPE_SPECIFIED:
-							// initSpecificCells(parser, gridWidth, gridHeight);
-							// break;
+							myRange = mySampleGridView.getCenterColumn();
+							for (Point2D p: myRange){
+								System.out.println(p.getX()+","+p.getY());
+							}
+						case ROW:
+							myRange = mySampleGridView.getCenterRow();
+						case COLUMN_ROW_CROSS:
+							myRange = mySampleGridView.getCenterRowColumnCross();
+						case CUSTOM:
+							myRange = mySampleGridView.getSelectedList();
 						default:
-							// selectedList=mySampleGridView.getCenterColumn();
+							myRange = mySampleGridView.getSelectedList();
 						}
 					}
 
 				});
+		for (Point2D p: myRange){
+			System.out.println(p.getX()+","+p.getY());
+		}
 		selection.getChildren().addAll(targetLabel, targetChoice);
 
 		// Select Button
@@ -111,7 +113,7 @@ public class RangeEditor extends PopupWindow {
 		VBox times = new VBox();
 		VBox vertical = new VBox();
 		Label HRadiusLabel = new Label("Horizontal Radius     ");
-		Label multiply = new Label("     X     ");
+		Label multiply = new Label("    X     ");
 		Label VRadiusLabel = new Label("Vertical Radius");
 		TextField HRadius = new TextField();
 		TextField VRadius = new TextField();
@@ -124,6 +126,7 @@ public class RangeEditor extends PopupWindow {
 		vertical.getChildren().addAll(VRadiusLabel, VRadius);
 
 		Button enter = new Button("Enter");
+//		enter.setLayoutX(500);
 		enter.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -145,14 +148,14 @@ public class RangeEditor extends PopupWindow {
 			}
 		});
 
+		
+
 		select.setOnAction(new SelectHandler(this));
 
-		enter.setLayoutX(500);
 		sizeChooser.getChildren().addAll(horizontal, times, vertical);
 
 		box.getChildren().addAll(selection, sizeChooser, enter, select);
 		setScene(new Scene(box));
-
 	}
 
 	/**
@@ -167,12 +170,10 @@ public class RangeEditor extends PopupWindow {
 
 		@Override
 		public void handle(ActionEvent event) {
-			List<Point2D> l = mySampleGridView.getSelectedList();
-			if(myRangeType.equals("Action Range:")){
-				myActionCreator.setAttackRange(l);
-			}
-			else if(myRangeType.equals("Effect Range (Splashzone):")){
-				myActionCreator.setEffectRange(l);
+//			List<Point2D> range = mySampleGridView.getSelectedList();
+//			myRange = range;
+			for (Point2D p:myRange){
+				System.out.println(p.getX()+","+p.getY());
 			}
 			current.close();
 		}

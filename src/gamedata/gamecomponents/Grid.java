@@ -1,20 +1,27 @@
 package gamedata.gamecomponents;
 
-
-import java.awt.geom.Point2D;  
+import gamedata.action.Action;
+import gamedata.action.ActionConclusion;
+import gamedata.action.ConcreteAction;
+import gamedata.action.ReceiverToInventoryConclusion;
+import gamedata.action.StatsSingleMultiplier;
+import gamedata.action.StatsTotalLogic;
+import gamedata.stats.Stats;
+import gameengine.movement.Movement;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javafx.scene.image.ImageView;
-
 
 
 /**
  * Contains the Grid defined for a level. Contains the pieces and patches
+ * 
  * @Author Jesse Ling, Sandy Lee
  * 
  */
+
 /**
  * @author Sandy Lee
  *
@@ -26,46 +33,98 @@ public abstract class Grid {
 
     protected Map<Point2D, Patch> myPatches;
     protected Map<Point2D, Piece> myPieces;
+
     private static final int DEFAULT_PATCH_STATE = 1;
     private static final int DEFAULT_PATCH_ID = 1;
-    private static final ImageView DEFAULT_PATCH_IMAGE_VIEW = new ImageView();
+    private static final String DEFAULT_PATCH_IMAGE_LOCATION = "/resources/images/rcd.png";
 
     /**
      * Default constructor for square grid
      */
     public Grid () {
-        this(5, 5);
     }
 
     /**
      * constructor of grid
      * 
-     * @param x
-     *        number of rows
-     * @param y
-     *        number of columns
+     * @param x number of rows
+     * @param y number of columns
      */
     public Grid (int row, int column) {
-        row = myRow;
-        column = myColumn;
+        //Default constructor
+        System.out.println("Grid: " + row + " " + column);
+        System.out.println("Grid: Grid constructor called");
+        myRow = row;
+        myColumn = column;
+        System.out.println("Grid: Rows and columns set: " + myRow +", "+ myColumn);
         myPatches = new HashMap<Point2D, Patch>();
         myPieces = new HashMap<Point2D, Piece>();
 
-        setGrid();
-
-    }
-
-    /**
-     * set up grid by initializing patches on it
-     */
-    public abstract void setGrid ();
-
-    public void setPiece (Piece piece, Point2D coord) {
-        for (Point2D coordinate : myPieces.keySet()) {
-            if (coordinate.equals(coord)) {
-                myPieces.put(coord, piece);
+        for (int x = 0; x < myColumn; x++) {
+            for (int y = 0; y < myRow; y++) {
+                Patch patch = new SquarePatch(DEFAULT_PATCH_STATE,
+                                              DEFAULT_PATCH_IMAGE_LOCATION,
+                                              new Point2D.Double(x, y));
+                myPatches.put(new Point2D.Double(x, y), patch);
             }
         }
+        System.out.println("Grid: Patches filled: " + myPatches.size());
+
+        Point2D p1 = new Point2D.Double(1, 1);
+        Point2D p2 = new Point2D.Double(2, 2);
+        Point2D p3 = new Point2D.Double(3, 3);
+
+        List<Point2D> pl1 = new ArrayList<Point2D>();
+        pl1.add(p1);
+        pl1.add(p2);
+
+        List<Point2D> pl2 = new ArrayList<Point2D>();
+        pl1.add(p1);
+        pl1.add(p3);
+
+        List<Point2D> pl3 = new ArrayList<Point2D>();
+        pl1.add(p2);
+        pl1.add(p3);
+
+        List<Movement> movements = new ArrayList<Movement>();
+        Movement m1 = new Movement(pl1, pl2);
+        Movement m2 = new Movement(pl2, pl3);
+        movements.add(m1);
+        movements.add(m2);
+
+        StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor", "health");
+        List<StatsSingleMultiplier> ssmList = new ArrayList<StatsSingleMultiplier>();
+        ssmList.add(ssm1);
+
+        List<StatsTotalLogic> stlList = new ArrayList<StatsTotalLogic>();
+        StatsTotalLogic s1 = new StatsTotalLogic("actor", "health", ssmList);
+        stlList.add(s1);
+
+        ActionConclusion ac = new ReceiverToInventoryConclusion();
+
+        List<Action> actions = new ArrayList<Action>();
+        Action a1 = new ConcreteAction("kill", pl3, pl2, stlList, ac);
+        actions.add(a1);
+
+        Stats s = new Stats();
+        Inventory i = new Inventory();
+
+        for (int x = 0; x < myColumn; x++) {
+            for (int y = 0; y < myRow; y++) {
+                Piece piece;
+                if (x == y) {
+                    piece = new Piece("/resources/images/rcd.png",
+                                      movements, actions, s, p3, 5, 6, 7, i);
+                }
+                else {
+                    piece = new Piece("/resources/images/bbybunny.jpeg",
+                                      movements, actions, s, p2, 1, 1, 1, i);
+                }
+                myPieces.put(piece.getLoc(), piece);
+            }
+        }
+
+        System.out.println("Grid: Pieces filled: " + myPieces.size());
     }
 
     /**

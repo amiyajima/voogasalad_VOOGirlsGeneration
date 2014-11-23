@@ -11,21 +11,17 @@ import com.google.gson.Gson;
 
 
 /**
- * Interprets and parses the JSON then builds the game components.
- * Calls factories to initialize each component.
+ * Creates JSON file from Authoring Environment data. Loads and parses JSON file
+ * to create a Game for Game Engine/Game Player.
  *
- * Creates a list of levels and a list of players to be used in initializing the game
- *
- * @author annamiyajima
+ * @author annamiyajima, Rica Zhang
  */
 public class JSONManager {
     final static String DEFAULT_JSON_DIRECTORY = "./src/resources/";
     final static String SAMPLE_JSON = "./src/resources/test.json";
 
     /**
-     * A game builder should be created for every time the entire program runs.
-     * The same game builder should load information for the gamePlayer to play and then save
-     * information for the authoring environment to modify
+     * Constructor
      */
     public JSONManager () {
     }
@@ -42,8 +38,6 @@ public class JSONManager {
         String json = gson.toJson(g);
         System.out.println("game converted to json");
         try {
-            // write converted json data to a file named "CountryGSON.json"
-            //FileWriter writer = new FileWriter(DEFAULT_JSON_DIRECTORY + fileName);
             FileWriter writer = new FileWriter(fileName);
             writer.write(json);
             writer.close();
@@ -57,23 +51,26 @@ public class JSONManager {
     /**
      * Given a filePath, read in a JSON file and construct a game with that data
      * 
-     * @param filePath
+     * @param JSON file location
      * @throws FileNotFoundException
      */
-    public Player readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
+    public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("read method called");
         Gson gson = new Gson();
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
+
+        PlayerData myPlayers = gson.fromJson(br, PlayerData.class);
+        System.out.println(myPlayers.getPlayers().get(0).getID());
+        System.out.println(myPlayers.getPlayers().get(1).getID());
         
-        //Level l = gson.fromJson(br, Level.class);
-        //System.out.println(l);
+        Player player = gson.fromJson(br, Player.class);
+        System.out.println(player.toString());
         
-        Player p = gson.fromJson(br, Player.class);
-        System.out.println(p);
-        
-        Game g = gson.fromJson(br, Game.class);
-        
-        return p;
+
+        LevelData myLevels = gson.fromJson(br, LevelData.class);
+        System.out.println(myLevels.getLevels().size());
+
+        return null;
     }
 
 }

@@ -2,15 +2,22 @@ package gamePlayer;
 
 import static org.junit.Assert.*;
 
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javafx.stage.Stage;
+import gamedata.action.Action;
+import gamedata.action.ConcreteAction;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import javafx.scene.text.Text;
 
 import org.junit.Test;
+
+
 
 public class ViewControllerTest {
 
@@ -24,8 +31,32 @@ public class ViewControllerTest {
         Stats stats = new Stats(map);
         Piece piece = new Piece(null, null, null, stats, null, 0, 0, 0, null);
         controller.updateStats(piece);
-        assertTrue(((Text) controller.statsPane.getChildren().get(0)).getText().equals("HP:  100.0"));
-        assertTrue(((Text) controller.statsPane.getChildren().get(1)).getText().equals("MP:  50.0"));
+        assertEquals("HP:  100.0",((Text) controller.statsPane.getChildren().get(0)).getText());
+        assertEquals("MP:  50.0",((Text) controller.statsPane.getChildren().get(1)).getText());
     }
+    @Test
+    public void findPositionTest () {
+        ViewController controller = new ViewController(new Stage());
+        Point2D point = controller.findPosition (350.0,100.0);
+        assertEquals(123,point.getX(),0.001);
+        assertEquals(123,point.getY(),0.001);
+        
+    }
+    @Test 
+    void updateActionsTest () {
+        ViewController controller = new ViewController(new Stage());
+        Action move = new ConcreteAction("move", null, null, null, null);
+        Action attack = new ConcreteAction("attack", null, null, null, null);
+        Action build = new ConcreteAction("build", null, null, null, null);
+        List<Action> actionList = new ArrayList<Action>();
+        actionList.add(move);actionList.add(attack);actionList.add(build);
+        Piece piece = new Piece(null, null, actionList, null, null, 0, 0, 0, null);
+        controller.updateActions(piece);
+        assertEquals ("move", ((Text) controller.controlPane.getChildren().get(0)).getText());
+        assertEquals ("attack", ((Text) controller.controlPane.getChildren().get(1)).getText());
+        assertEquals ("build", ((Text) controller.controlPane.getChildren().get(2)).getText());
+        
+    }
+ 
 
 }

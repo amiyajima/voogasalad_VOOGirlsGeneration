@@ -1,0 +1,42 @@
+<<<<<<< HEAD:src/json/sample.json
+{
+   "game":{
+      "level":[
+         {
+            "grid":{
+               "piece":[
+
+               ],
+               "patch":[
+
+               ]
+            },
+            "rule":[
+
+            ],
+            "goal":[
+
+            ]
+         },
+         {
+            "grid":{
+               "piece":[
+
+               ],
+               "patch":[
+
+               ]
+            },
+            "rule":[
+
+            ],
+            "goal":[
+
+            ]
+         }
+      ]
+   }
+}
+=======
+{"myPlayers":[{"myNumMovesPlayed":0,"myID":0},{"myNumMovesPlayed":0,"myID":0}],"myLevels":[{"myGrid":{"myRow":0,"myColumn":0},"myGoals":[{"myID":0},{"myID":0}],"myRules":[{"myNumMoves":3}]},{"myGrid":{"myRow":0,"myColumn":0},"myGoals":[{"myID":0},{"myID":0}],"myRules":[{"myNumMoves":3}]}]}
+>>>>>>> 4c3c9cba372ef06197d2b75eecdc25e825d6bbf3:src/resources/sample.json
