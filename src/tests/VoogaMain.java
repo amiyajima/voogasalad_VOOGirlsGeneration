@@ -1,6 +1,6 @@
 package tests;
 
-import gamedata.JSONManager;
+import gamedata.JSON.JSONManager;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,7 +17,7 @@ import authoring.concretefeatures.menus.JSONBob;
  */
 public class VoogaMain {
     public static void testJSONwrite() {
-        String saveTo = "src/resources/json/FINALSAMPLE.json";
+        String saveTo = "src/resources/json/AnnaSample.json";
         JSONManager myJSONmanager = new JSONManager();
         JSONBobTester jb = new JSONBobTester();
         myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
@@ -26,7 +26,7 @@ public class VoogaMain {
     public static void testJSONload() {
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("C:\\Users\\Rica\\Desktop\\GAME.json");
+            jsonManager.readFromJSONFile("src/resources/json/AnnaSample.json");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -34,7 +34,7 @@ public class VoogaMain {
     }
     public static void main (String[] args) {
         System.out.println("main is running");
-        //testJSONload();
-        testJSONwrite();
+        testJSONload();
+        //testJSONwrite();
     }
 }

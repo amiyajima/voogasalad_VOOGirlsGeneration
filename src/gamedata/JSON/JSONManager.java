@@ -1,9 +1,13 @@
-package gamedata;
+package gamedata.JSON;
 
+import gamedata.LevelData;
+import gamedata.PlayerData;
+import gamedata.RuleData;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
+import gamedata.rules.Rule;
 import gameengine.player.Player;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -11,6 +15,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 /**
@@ -59,9 +64,16 @@ public class JSONManager {
      */
     public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
-        Gson gson = new Gson();
+        //Gson gson = new Gson();
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Rule.class, new AbstractDeserializer());
+        Gson gson = builder.create();
+        
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
+        RuleData r = gson.fromJson(br, RuleData.class);
+        System.out.println(r.toString());
+        
         PlayerData myPlayers = gson.fromJson(br, PlayerData.class);
         System.out.println(myPlayers.getPlayers().get(0).getID());
         System.out.println(myPlayers.getPlayers().get(1).getID());
@@ -69,7 +81,6 @@ public class JSONManager {
         Player player = gson.fromJson(br, Player.class);
         System.out.println(player.toString());
         
-
         LevelData myLevels = gson.fromJson(br, LevelData.class);
         System.out.println(myLevels.getLevels().size());
 
