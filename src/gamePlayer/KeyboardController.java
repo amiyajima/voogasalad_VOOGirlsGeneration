@@ -75,10 +75,10 @@ public class KeyboardController {
                    if (key.getCode() == kc) {
 //                       getting something like {0,1}, {-1,1}, etc
                        
-                       Point2D newCurrentLocation = new Point2D.Double(myCurrentLocation.getX() + movementKeyMap.get(kc).getX(),
-                                                       myCurrentLocation.getY() + movementKeyMap.get(kc).getY()); 
+                       Point2D newCurrentLocation = new Point2D.Double(myCurrentLocation.getX() - movementKeyMap.get(kc).getY(),
+                                                       myCurrentLocation.getY() + movementKeyMap.get(kc).getX()); 
                        System.out.println(newCurrentLocation);
-                       vc.highlightCurrentLocation(Color.BLUE, myCurrentLocation, newCurrentLocation);
+                       vc.highlightCurrentLocation(Color.RED, myCurrentLocation, newCurrentLocation);
                        myCurrentLocation = newCurrentLocation;
                    }
                }

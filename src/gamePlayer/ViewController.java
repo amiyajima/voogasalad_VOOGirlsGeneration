@@ -447,9 +447,9 @@ private AudioClip myAudio;
     }
     private void addDropShadow(Node n, Color c){
         DropShadow ds = new DropShadow(); 
-        ds.setRadius(10.0);
-        ds.setOffsetX(3.0);
-        ds.setOffsetY(3.0);
+        ds.setRadius(30.0);
+        ds.setOffsetX(0.0);
+        ds.setOffsetY(0.0);
         ds.setColor(c);
         n.setEffect(ds); 
         System.out.println("drop shadow");

@@ -23,7 +23,7 @@ public abstract class Grid {
      * Default constructor makes 5x5 grid
      */
     public Grid () {
-       this(5, 5);
+       this(2, 2);
     }
 
     /**

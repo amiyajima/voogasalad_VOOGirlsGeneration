@@ -5,14 +5,21 @@ import gamedata.rules.Rule;
 import java.lang.reflect.Type;
 
 /**
- * Abstract deserializer that allows the JSON Manager to deserialize an abstract object.
- * 
- * currently works for ruledata
+ * Custom deserializer that deserializes the Rule class
  * @author annamiyajima
  *
  */
-public class AbstractDeserializer implements JsonDeserializer<Rule> {
-
+public class RuleAdapter implements JsonSerializer<Rule>,JsonDeserializer<Rule> {
+    @Override
+    public JsonElement serialize(Rule src, Type typeOfSrc, JsonSerializationContext context) {
+        JsonObject result = new JsonObject();
+        //result.add("type", new JsonPrimitive(src.getClass().getSimpleName()));
+        //result.add("properties", context.serialize(src, src.getClass())); 
+        
+        
+        return result;
+    }
+    
     @Override
     public Rule deserialize (JsonElement json,
                                         Type typeOfT,
