@@ -3,11 +3,7 @@ package gamePlayer;
 import gamedata.action.Action; 
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
-<<<<<<< HEAD
-
-=======
 import java.awt.geom.Point2D;
->>>>>>> d545d27dc65180be981f63332dcdf926bb4e2100
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -76,7 +72,8 @@ public class ViewController{
     private BorderPane myPopup;
     private Scene scoreScene;
     private Scene myPopupScene;
-   
+    
+    
     private Piece activePiece;
     private Action activeAction;
  //   private Audio backGroundMusic;
@@ -197,6 +194,14 @@ private AudioClip myAudio;
         
         // uses JSON reader to generate an instance of the game
 
+    }
+    
+    @FXML
+    private void testGame() {
+        JSONBobTester JSBTester = new JSONBobTester();
+        myModel = JSBTester.createNewGame();
+        myStage.setScene(new Scene(myGameSpace));
+        
     }
     
     @FXML
