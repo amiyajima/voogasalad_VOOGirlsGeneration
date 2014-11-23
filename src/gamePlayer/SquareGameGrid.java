@@ -76,11 +76,19 @@ public class SquareGameGrid extends GameGrid {
                 this.add(sp, i, j);
                 r.setOnMouseEntered(event -> onHover(r));
                 r.setOnMouseExited(event -> r.setFill(Color.BLACK));
+
+
+//                addTestKeyboardControl(r);
+//                // addKeyboardController(r);
+//                addLocationSelector(r);
+
             }
 
         }
 
     }
+    
+    
 //  private void highlightCurrentLocation (Rectangle r) {
 //  myCurrentLocation = new Point2D.Double(100, 100);
 //  if (r.getX() == myCurrentLocation.getX() & r.getY() == myCurrentLocation.getY()) {

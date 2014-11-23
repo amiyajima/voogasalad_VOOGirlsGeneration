@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -26,7 +27,7 @@ import authoring.abstractfeatures.PopupWindow;
  *
  */
 public class RangeEditor extends PopupWindow {
-	private static final String CUSTOM = "Custom";
+	private static final String CUSTOM = "Custom(default)";
 
 	private static final String RADIUS = "Radius";
 
@@ -48,21 +49,22 @@ public class RangeEditor extends PopupWindow {
 	private int myGridWidthNumber;
 	private int myGridHeightNumber;
 	private RangeGrid mySampleGridView;
-//	private String myRangeType;
-	private List<Point2D> myRange;
 
-	public RangeEditor(List<Point2D> range, String type) {
+
+	public RangeEditor(List<Point2D> range) {
 		setHeight(RANGE_EDITOR_HEIGHT);
 		setWidth(RANGE_EDITOR_WIDTH);
 		setTitle(NAME);
-		myRange = range;
+		mySampleGridView = new RangeGrid(myGridLength, myGridLength,
+				myTileSize);
+		mySampleGridView.setRange(range);
 		initialize();
 	}
 
 	@Override
 	protected void initialize() {
 		VBox box = new VBox();
-
+//		HBox specifedSelection=new HBox();
 		VBox selection = new VBox();
 		selection.setMinHeight(50);
 		HBox sizeChooser = new HBox();
@@ -70,8 +72,8 @@ public class RangeEditor extends PopupWindow {
 
 		// Range Selections
 		Label targetLabel = new Label("Select Range");
-		ChoiceBox<String> targetChoice = new ChoiceBox<>();
-		targetChoice.getItems().addAll(COLUMN, ROW, COLUMN_ROW_CROSS, RADIUS,
+		ComboBox<String> targetChoice = new ComboBox<>();
+		targetChoice.getItems().addAll(COLUMN, ROW, RADIUS,
 				CUSTOM);
 		targetChoice.getSelectionModel().selectedItemProperty()
 				.addListener(new ChangeListener<String>() {
@@ -79,41 +81,39 @@ public class RangeEditor extends PopupWindow {
 					public void changed(
 							ObservableValue<? extends String> observable,
 							String oldValue, String newValue) {
+						
 						switch (newValue) {
 						case COLUMN:
-							myRange = mySampleGridView.getCenterColumn();
-							for (Point2D p: myRange){
-								System.out.println(p.getX()+","+p.getY());
-							}
+							mySampleGridView.rangeCenterColumn();
+							break;
 						case ROW:
-							myRange = mySampleGridView.getCenterRow();
-						case COLUMN_ROW_CROSS:
-							myRange = mySampleGridView.getCenterRowColumnCross();
+							mySampleGridView.rangeCenterRow();
+							break;
+						case RADIUS:
+							mySampleGridView.rangeRadius(1);
+							break;
 						case CUSTOM:
-							myRange = mySampleGridView.getSelectedList();
-						default:
-							myRange = mySampleGridView.getSelectedList();
+							mySampleGridView.rangeSelectedList();
+							break;
+//						default:
+//							mySampleGridView.rangeCenterColumn();
 						}
+						
 					}
 
 				});
-		for (Point2D p: myRange){
-			System.out.println(p.getX()+","+p.getY());
-		}
+		
 		selection.getChildren().addAll(targetLabel, targetChoice);
 
 		// Select Button
 		Button select = new Button("Select");
 
-		// generate default grid
-		// GridView grid=new GridView(myGridWidth, myGridWidth, myTileSize);
-
 		// Choose the Size
 		VBox horizontal = new VBox();
 		VBox times = new VBox();
 		VBox vertical = new VBox();
-		Label HRadiusLabel = new Label("Horizontal Radius     ");
-		Label multiply = new Label("    X     ");
+		Label HRadiusLabel = new Label("Horizontal Radius");
+		Label multiply = new Label("    X      ");
 		Label VRadiusLabel = new Label("Vertical Radius");
 		TextField HRadius = new TextField();
 		TextField VRadius = new TextField();
@@ -126,7 +126,7 @@ public class RangeEditor extends PopupWindow {
 		vertical.getChildren().addAll(VRadiusLabel, VRadius);
 
 		Button enter = new Button("Enter");
-//		enter.setLayoutX(500);
+		enter.setLayoutX(300);
 		enter.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -139,22 +139,20 @@ public class RangeEditor extends PopupWindow {
 						: calculatedTileSize;
 
 				box.getChildren().clear();
-				mySampleGridView = new RangeGrid(myGridLength, myGridLength,
-						myTileSize);
+//				mySampleGridView = new RangeGrid(myGridLength, myGridLength,
+//						myTileSize);
 				mySampleGridView.update(myGridWidthNumber, myGridHeightNumber,
 						myTileSize);
-				box.getChildren().addAll(selection, sizeChooser, enter,
-						mySampleGridView, select);
+				box.getChildren().addAll(sizeChooser, enter,
+						mySampleGridView, selection,select);
 			}
 		});
-
-		
 
 		select.setOnAction(new SelectHandler(this));
 
 		sizeChooser.getChildren().addAll(horizontal, times, vertical);
 
-		box.getChildren().addAll(selection, sizeChooser, enter, select);
+		box.getChildren().addAll(sizeChooser, enter);
 		setScene(new Scene(box));
 	}
 
@@ -170,13 +168,27 @@ public class RangeEditor extends PopupWindow {
 
 		@Override
 		public void handle(ActionEvent event) {
-//			List<Point2D> range = mySampleGridView.getSelectedList();
+			List<Point2D> range = mySampleGridView.getRange();
 //			myRange = range;
-			for (Point2D p:myRange){
+			range.addAll(mySampleGridView.rangeSelectedList());
+
+			for (Point2D p:range){
 				System.out.println(p.getX()+","+p.getY());
 			}
+
 			current.close();
 		}
+	}
+	
+	//Can't use this function to create all the vbox containing one label and
+	// a textfiled because it makes impossible to get the content of the textfield.
+	//Should think of other way to do similar things to avoid duplicated code.
+	private VBox makeTextField(String label){
+		VBox vbox=new VBox();
+		Label labelText = new Label(label);
+		TextField textField = new TextField();
+		vbox.getChildren().addAll(labelText,textField);
+		return vbox;
 	}
 
 }
