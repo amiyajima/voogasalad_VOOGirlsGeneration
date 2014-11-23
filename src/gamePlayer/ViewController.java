@@ -187,8 +187,8 @@ public class ViewController{
 
     @FXML
     private void testGame() {
-        JSONBobTester JSBTester = new JSONBobTester();
-        myModel = JSBTester.createNewGame();
+//        JSONBobTester JSBTester = new JSONBobTester();
+//        myModel = JSBTester.createNewGame();
 
         myScene = new Scene(myGameSpace);
         myStage.setScene(myScene);
@@ -198,6 +198,9 @@ public class ViewController{
     }
 
     private void initializeGrid(){
+        JSONBobTester JSBTester = new JSONBobTester();
+        myModel = JSBTester.createNewGame();
+
         myGrid= new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel.getCurrentLevel().getGrid().getColumn());
         myGameSpace.setCenter(myGrid);
         myGrid.setAlignment(Pos.CENTER);
@@ -377,6 +380,8 @@ public class ViewController{
      * @param y
      */
     private void performAction (double x, double y) {
+        System.out.println("where error happens");
+        System.out.println("current mouse location:"+x +", "+y);
         gridState.onClick(getPiece(findPosition(x,y)));
 
     }
@@ -392,6 +397,7 @@ public class ViewController{
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
         int yCor = (int) (y/patchHeight);
+        myGrid.clearEffect();
         addDropShadow(myGrid.get(yCor, xCor), Color.PURPLE);
         return new Point2D.Double(yCor,xCor);
     }
@@ -431,9 +437,10 @@ public class ViewController{
      */
     @FXML
     private void highLightActionRange(){
-        System.out.println(activePiece.getLoc());
-        System.out.println(activeAction.getActionRange(activePiece.getLoc()));
+        System.out.println("activePiece at "+activePiece.getLoc());
+        System.out.println("action range: "+ activeAction.getActionRange(activePiece.getLoc()));
         myGrid.clearEffect();
+      
         activeAction.getActionRange(activePiece.getLoc()).forEach(point->{
 
             if(point.getX()<myGrid.getRow() && point.getY()<myGrid.getCol() && point.getX()>0 && point.getY()>0){
@@ -472,7 +479,7 @@ public class ViewController{
      */
     private void highLightEffectRange(Node n, Color c){
 
-        System.out.println(activeAction.getEffectRange());
+        System.out.println("effect Range: "+ activeAction.getEffectRange());
         // System.out.println(myGrid.getRowIndex(n)+" , "+ myGrid.getColumnIndex(n));
         activeAction.getEffectRange().forEach(point->{Node node = myGrid.get(myGrid.getRowIndex(n)+ (int)point.getX(), myGrid.getColumnIndex(n)+ (int)point.getY());
 
