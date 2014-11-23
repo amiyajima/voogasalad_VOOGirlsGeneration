@@ -37,11 +37,15 @@ public class LibraryView extends TabPane {
 	private final String TERRAIN = "Terrain";
 	private final String DELETE = "Delete";
 	private final String EDIT = "Edit";
+	private final String GLOBAL = "Global Commands";
+	private final String PIECES = "Piece Templates";
+	private final String PATCHES = "Patch Templates";
 	private Map<String, VBox> myLibraryMap;
 	private Map<String, Tab> myTabMap;
 	private SingleSelectionModel<Tab> mySelection;
 	public static Piece currentlySelectedUnit;
 	public static Patch currentlySelectedTerrain;
+	public static boolean doNothing;
 	public static boolean unitSelected;
 	public static boolean reset;
 	
@@ -54,6 +58,7 @@ public class LibraryView extends TabPane {
 	public LibraryView(){
 		mySelection = this.getSelectionModel();
 		this.setPrefSize(HEIGHT, WIDTH);
+		doNothing = true;
 		unitSelected = false;
 		reset = true;
 		
@@ -77,16 +82,8 @@ public class LibraryView extends TabPane {
 				//TODO: Implement Editing 
 			}
 		});
-		this.setOnKeyPressed(new EventHandler<KeyEvent>(){
-			@Override
-			public void handle(KeyEvent e){
-				if(e.getCode() == KeyCode.ESCAPE){
-					unitSelected = false;
-				}
-			}
-		});
-		unitLibrary.getChildren().addAll(new Label("Global Commands"),new HBox(unitEdit,unitDelete),new Separator()
-		,new Label("Piece Templates"));
+		unitLibrary.getChildren().addAll(new Label(GLOBAL),
+				new HBox(unitEdit, unitDelete), new Separator(), new Label(PIECES));
 		unitContent.setContent(unitLibrary);
 		unitTab.setContent(unitContent);
 		
@@ -94,7 +91,9 @@ public class LibraryView extends TabPane {
 		terrainTab.setClosable(false);
 		ScrollPane terrainContent = new ScrollPane();
 		VBox terrainLibrary = new VBox();
+		terrainLibrary.setSpacing(3);
 		Button terrainDelete = new Button(DELETE);
+		Button terrainEdit = new Button(EDIT);
 		terrainDelete.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent e){
@@ -102,11 +101,27 @@ public class LibraryView extends TabPane {
 				reset = true;
 			}
 		});
-		terrainLibrary.getChildren().add(terrainDelete);
+		terrainEdit.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent e){
+				//TODO: Implement Editing 
+			}
+		});
+		terrainLibrary.getChildren().addAll(new Label(GLOBAL),
+				new HBox(terrainEdit, terrainDelete), new Separator(), new Label(PATCHES));
 		terrainContent.setContent(terrainLibrary);
 		terrainTab.setContent(terrainContent);
 		
 		this.getTabs().addAll(unitTab, terrainTab);
+		this.setOnKeyPressed(new EventHandler<KeyEvent>(){
+			@Override
+			public void handle(KeyEvent e){
+				if(e.getCode() == KeyCode.ESCAPE){
+					doNothing = true;
+				}
+			}
+		});
+		
 		myLibraryMap = new HashMap<String, VBox>();
 		myLibraryMap.put(UNITS, unitLibrary);
 		myLibraryMap.put(TERRAIN, terrainLibrary);

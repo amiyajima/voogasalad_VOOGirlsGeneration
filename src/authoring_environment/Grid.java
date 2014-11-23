@@ -163,32 +163,31 @@ public class Grid extends Pane {
 	}
 
 	protected void setContents(Tile tile, int xCoord, int yCoord) {
+		if(LibraryView.doNothing){
+			return;
+		}
 		if (LibraryView.reset) {
 			if (LibraryView.unitSelected) {
 				tile.myUnit = null;
 				tile.unitImage.setVisible(false);
-				;
 			} else {
 				tile.myTerrain = null;
 				tile.terrainImage.setVisible(false);
-				System.out.println("patch deleted");
 				myPatchData.remove(tile.myTerrain);
-				;
 			}
-		} else {
+		}
+		else {
 			if (LibraryView.unitSelected) {
 				tile.myUnit = LibraryView.currentlySelectedUnit;
 				tile.unitImage.setImage(tile.myUnit.getImageView().getImage());
 				tile.unitImage.setVisible(true);
-			} else {
+			}
+			else {
 				tile.myTerrain = LibraryView.currentlySelectedTerrain;
-
 				tile.myTerrain.setLoc(new Point2D.Double(xCoord, yCoord));
-				tile.terrainImage.setImage(tile.myTerrain.getImageView()
-						.getImage());
+				tile.terrainImage.setImage(tile.myTerrain.getImageView().getImage());
 				tile.terrainImage.setVisible(true);
 				myPatchData.add(tile.myTerrain);
-				System.out.println("patch added");
 
 				// allows overwriting patches on the same coordinate
 				List<Patch> myPatches = myPatchData.getPatches();

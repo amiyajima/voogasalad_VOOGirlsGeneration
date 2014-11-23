@@ -46,7 +46,7 @@ public class UnitCreator extends PopupWindow {
 	private final String IMAGE_LABEL = "Unit image";
 	private final String LOAD_IMAGE_LABEL = "Load image";
 	private final String TEMPLATE_LABEL = "Create new unit template";
-	private final String DELETE = "Delete All Instances";
+	private final String DELETE = "Delete";
 	private final String EDIT = "Edit";
 	private LibraryView myLibrary;
 
@@ -107,8 +107,9 @@ public class UnitCreator extends PopupWindow {
         Label loadLabel = new Label(IMAGE_LABEL);
         Button loadImage = new Button(LOAD_IMAGE_LABEL);
         loadImage.setOnAction(new EventHandler<ActionEvent>() {
-            // initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
-            // @Jesse Finish this
+        	// initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
+        	// @Jesse Finish this
+        	// From Martin: You sure this code goes here, and not below Line 133?
 
             @Override
             public void handle (ActionEvent click) {
@@ -135,8 +136,8 @@ public class UnitCreator extends PopupWindow {
                 Piece unit = new Piece(myImageLocation, myPath, myActions, myStats,
                                        myLoc, myTypeID, myUniqueID, myPlayerID, myInventory);
 
-                Label link = new Label(unitName.getText());
-                //link.setTranslateY(10);
+                Label name = new Label(unitName.getText());
+                name.setTranslateY(10);
                 Button editButton = new Button(EDIT);
                 editButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -146,9 +147,8 @@ public class UnitCreator extends PopupWindow {
                     }
                 });
                 Button delButton = new Button(DELETE);
-                delButton.setLayoutY(5);
 
-                HBox entry = new UnitEntry(unit, icon, link, editButton, delButton);
+                HBox entry = new UnitEntry(unit, icon, name, editButton, delButton);
         		delButton.setOnAction(new EventHandler<ActionEvent>(){
         			@Override
         			public void handle(ActionEvent event) {
