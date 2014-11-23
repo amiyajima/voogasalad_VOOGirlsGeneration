@@ -44,6 +44,7 @@ public class LibraryView extends TabPane {
 	private final String GLOBAL = "Global Commands";
 	private final String PIECES = "Piece Templates";
 	private final String PATCHES = "Patch Templates";
+	private SandyGrid myGrid;
 	private PieceData myPieceData;
 	private PatchData myPatchData;
 	private Map<String, VBox> myLibraryMap;
@@ -61,11 +62,12 @@ public class LibraryView extends TabPane {
 	 * their respective tabs as they are created in the UnitCreator
 	 * and TerrainCreator.
 	 */
-	public LibraryView(PieceData pieceData, PatchData patchData){
+	public LibraryView(PieceData pieceData, PatchData patchData, SandyGrid grid){
 		mySelection = this.getSelectionModel();
 		this.setPrefSize(HEIGHT, WIDTH);
 		myPieceData = pieceData;
 		myPatchData = patchData;
+		myGrid = grid;
 		doNothing = true;
 		unitSelected = false;
 		reset = true;
