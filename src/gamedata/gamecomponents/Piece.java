@@ -53,7 +53,12 @@ public class Piece {
     public Piece (String imageLocation, List<Movement> m, List<Action> a, Stats stats,
                    Point2D p2, int tid, int uid, int pid, Inventory inventory) {
         myImageLocation = imageLocation;
-        myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+        if(myImageLocation.startsWith("/")){
+        	myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+        }
+        else{
+        	myImageView = new ImageView(new Image(imageLocation));
+        }
         myPath = m;
         myActions = a;
         myStats = stats;
