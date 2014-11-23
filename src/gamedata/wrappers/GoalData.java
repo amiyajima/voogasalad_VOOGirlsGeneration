@@ -21,4 +21,7 @@ public class GoalData {
         return myGoals;
     }
 
+    public String toString(){
+        return "GoalData: num goals = " + myGoals.size();
+    }
 }
