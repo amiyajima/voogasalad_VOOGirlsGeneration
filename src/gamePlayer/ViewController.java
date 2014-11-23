@@ -20,6 +20,9 @@ import javafx.fxml.FXMLLoader;
 
 import java.awt.geom.Point2D;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -34,11 +37,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class ViewController{
-
+    
     public static final String GAMESPACE_FXML = "gameSpace.fxml";
     public static final String INITIALSCENE_FXML = "initialScene.fxml";
     public static final String SCOREBOARD_FXML = "scoreBoard.fxml";
@@ -46,6 +50,8 @@ public class ViewController{
     public static final String GAME_LOCATION = "/src/resources";
     public static final String ENGLISH = "English";
     public static final String Chinese = "Chinese";
+    
+    public static final String AUDIO_TEST = "voogasalad_VOOGirlsGeneration/src/gamePlayer/audioTest.mp3";
     
 
     private ResourceBundle myLanguages;
@@ -58,7 +64,8 @@ public class ViewController{
    
     private Piece activePiece;
     private Action activeAction;
-
+    private Audio backGroundMusic;
+private AudioClip myClip;
     @FXML
     protected VBox statsPane;
 
@@ -70,6 +77,7 @@ public class ViewController{
     private Text gameName;
     @FXML
     private VBox scores;
+    
 
     private IGridState gridState;
 
@@ -83,6 +91,7 @@ public class ViewController{
        //TODO:
        //uses JSON reader that takes in the file chosen by user and instantiate 
        // a new Game object. 
+       //initialize audio
         
         myGrid = new SquareGameGrid(8,8);
         
@@ -95,7 +104,18 @@ public class ViewController{
         myGrid.setAlignment(Pos.CENTER);
         myStage.setScene(new Scene(myInitialScene));
        
-        newGame();
+        try {
+            newGame();
+        } catch (UnsupportedAudioFileException e) {
+            // TODO Auto-generated catch block
+           // e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+           // e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            // TODO Auto-generated catch block
+            //e.printStackTrace();
+        }
         
         myStage.show();
 
@@ -111,8 +131,11 @@ public class ViewController{
      * generates drop down menu that allow user to choose a new Game to play 
      * The Games are generated from the directory that stores all json files defined 
      * from authoring environment
+     * @throws LineUnavailableException 
+     * @throws IOException 
+     * @throws UnsupportedAudioFileException 
      */
-    protected void newGame () {
+    protected void newGame () throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         List<File> games = getGames();
        
         games.forEach(file->{ MenuItem l = new MenuItem();
@@ -126,8 +149,10 @@ public class ViewController{
             newGameButton.getItems().add(l);
 
         });
-        
-        
+      myClip = new AudioClip(AUDIO_TEST);
+      myClip.play();
+        //  backGroundMusic = new Audio(AUDIO_TEST);
+      //  backGroundMusic.play();
     }
     
     private void loadFXML(String url, Node n){
