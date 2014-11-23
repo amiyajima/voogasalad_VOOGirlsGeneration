@@ -1,5 +1,7 @@
 package authoring_environment;
 
+import authoring.data.PatchData;
+import authoring.data.PieceData;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -29,8 +31,8 @@ public class VoogaView extends BorderPane {
 		setRight(myGridView);
 	}
 	
-	public void setGrid(int width, int height){
-	    //tile length should be adjusted
-	   myGridView = new GridView(width, height, TILE_SIDE_LENGTH);
-	}
+//	public void setGrid(int width, int height){
+//	    //tile length should be adjusted
+//	   myGridView = new GridView(width, height, TILE_SIDE_LENGTH);
+//	}
 }

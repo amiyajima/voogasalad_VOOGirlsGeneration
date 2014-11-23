@@ -77,7 +77,7 @@ public class GameCreator extends PopupWindow {
                 
                 int width = Integer.parseInt(gridWidth.getText());
                 int height = Integer.parseInt(gridHeight.getText());
-                myVooga.setGrid(width, height);
+//                myVooga.setGrid(width, height);
 
 
                 close();

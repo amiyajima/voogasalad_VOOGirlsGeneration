@@ -85,15 +85,19 @@ public class Tile extends Pane {
 
     public void switchSelected () {
         if (getSelected()) {
-        	selecteTile(false);
+        	deselecteTile();
         }
         else {
-        	selecteTile(true);
+        	selecteTile();
         }
     }
 
-    public void selecteTile(boolean select){
-    	setSelected(select);
+    public void selecteTile(){
+    	setSelected(true);
+    }
+    
+    public void deselecteTile(){
+    	setSelected(false);
     }
     
     public void setSelected(boolean state){

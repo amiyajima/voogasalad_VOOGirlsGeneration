@@ -12,6 +12,15 @@ import javafx.scene.layout.VBox;
 import gamedata.stats.Stats;
 import authoring.abstractfeatures.PopupWindow;
 
+/**
+ * Popup window for editing the stats for a
+ * type of piece. Allows for full editing of
+ * the names and default values for a type of
+ * piece.
+ * 
+ * @author Jennie Ju
+ *
+ */
 public class StatsTotalEditor extends PopupWindow {
 	private static final int WINDOW_HEIGHT = 400;
 	private static final int WINDOW_WIDTH = 420;
