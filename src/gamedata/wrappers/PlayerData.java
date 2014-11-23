@@ -4,7 +4,7 @@ import gameengine.player.Player;
 import java.util.List;
 
 /**
- * Wrapper for Player data in JSON for parsing
+ * Wrapper for Player data in Players for JSON parsing
  * @author Rica
  *
  */

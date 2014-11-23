@@ -6,7 +6,7 @@ import gamedata.goals.Goal;
 import gamedata.rules.Rule;
 
 /**
- * Individual level data wrapper
+ * LevelData wrapper for individual levels in LevelData
  * @author Rica
  *
  */
