@@ -13,6 +13,7 @@ public class ApplyState implements IGridState{
     
     public ApplyState(ViewController controller){
         myController = controller;
+        myController.getGrid().setOnMouseEntered(event->{myController.changeCursor(myController.CURSOR_ATTACK_TEST);});
     }
 
     @Override

@@ -64,7 +64,7 @@ public class RangeEditor extends PopupWindow {
 	@Override
 	protected void initialize() {
 		VBox box = new VBox();
-
+//		HBox specifedSelection=new HBox();
 		VBox selection = new VBox();
 		selection.setMinHeight(50);
 		HBox sizeChooser = new HBox();
@@ -89,17 +89,15 @@ public class RangeEditor extends PopupWindow {
 						case ROW:
 							mySampleGridView.rangeCenterRow();
 							break;
+						case RADIUS:
+							mySampleGridView.rangeRadius(1);
+							break;
 						case CUSTOM:
 							mySampleGridView.rangeSelectedList();
 							break;
 //						default:
 //							mySampleGridView.rangeCenterColumn();
 						}
-//						System.out.println("asd");
-//						for (Point2D p: myRange){
-//							System.out.println("kkk");
-//							System.out.println(p.getX()+","+p.getY());
-//						}
 						
 					}
 
@@ -109,9 +107,6 @@ public class RangeEditor extends PopupWindow {
 
 		// Select Button
 		Button select = new Button("Select");
-
-		// generate default grid
-		// GridView grid=new GridView(myGridWidth, myGridWidth, myTileSize);
 
 		// Choose the Size
 		VBox horizontal = new VBox();

@@ -4,7 +4,7 @@ import gamedata.rules.Rule;
 import java.util.List;
 
 /**
- * Rule wrapper
+ * Rule wrapper for Rules in GridData
  * @author Rica
  *
  */
