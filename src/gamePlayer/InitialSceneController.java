@@ -1,9 +1,11 @@
 package gamePlayer;
 
+import gamedata.gamecomponents.Game;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import tests.JSONBobTester;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,6 +25,7 @@ public class InitialSceneController{
     private Stage myStage;
     private DummyGame myGame;
     private VBox myRoot;
+    private Game myTestGame;
 
     @FXML
     private MenuButton newGameButton;
@@ -54,7 +57,8 @@ public class InitialSceneController{
 
 
     }
-
+    
+    
     
     private void newGame(){
 
@@ -85,6 +89,12 @@ public class InitialSceneController{
     private void doSettings(){
 
     }
+    
+    @FXML
+    private void testGame() {
+//        JSONBobTester JSBTester = new JSONBobTester();
+//        myTestGame = JSBTester.createNewGame();
+    }
 
     private void getGames(){
         
@@ -98,5 +108,7 @@ public class InitialSceneController{
                 }
             }
     }
+    
+    
 
 }
