@@ -54,6 +54,14 @@ public class Movement {
 		}
 		return p;
 	}
+	
+	/**
+	 * Add rule to this movement
+	 * @param r
+	 */
+	public void addRule(Rule r) {
+	    myRules.add(r);
+	}
 
 	/**
 	 * Checks the collisions in the currently defined path. Checks with piece
