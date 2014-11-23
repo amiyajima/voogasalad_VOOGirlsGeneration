@@ -3,6 +3,11 @@ package gamedata;
 import gamedata.gamecomponents.Level;
 import java.util.List;
 
+/**
+ * Wrapper for Level data in JSON for parsing
+ * @author Rica
+ *
+ */
 public class LevelData {
     private List<Level> myLevels;
     

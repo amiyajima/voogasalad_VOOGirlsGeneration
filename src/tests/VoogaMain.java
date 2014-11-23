@@ -1,13 +1,12 @@
-package gamedata;
+package tests;
 
+import gamedata.JSONManager;
 import java.io.FileNotFoundException;
 
-
 /**
- * Main method used to test Game/Player/Level/Rule/Grid etc. interaction on the
- * back end
+ * Used to test JSON reader in back-end
  * 
- * @author annamiyajima
+ * @author annamiyajima, Rica Zhang
  *
  */
 public class VoogaMain {
