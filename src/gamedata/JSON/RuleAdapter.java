@@ -13,8 +13,8 @@ public class RuleAdapter implements JsonSerializer<Rule>,JsonDeserializer<Rule> 
     @Override
     public JsonElement serialize(Rule src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject result = new JsonObject();
-        //result.add("type", new JsonPrimitive(src.getClass().getSimpleName()));
-        //result.add("properties", context.serialize(src, src.getClass())); 
+        result.add("type", new JsonPrimitive(src.getClass().getCanonicalName()));
+        result.add("properties", context.serialize(src, src.getClass())); 
         
         
         return result;

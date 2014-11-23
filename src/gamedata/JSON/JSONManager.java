@@ -37,15 +37,14 @@ public class JSONManager {
      * 
      * @param game
      */
-    public void writeToJSON (Game g, String fileName) {
+    public void writeToJSON (Rule r, String fileName) {
         // Gson gson = new Gson();
 
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Rule.class, new RuleAdapter());
-        builder.registerTypeAdapter(Goal.class, new GoalDeserializer());
+        // builder.registerTypeAdapter(Goal.class, new GoalDeserializer());
         Gson gson = builder.create();
-
-        String json = gson.toJson(g);
+        String json = gson.toJson(r);
         System.out.println("JSONManager: game converted to json!");
         try {
             FileWriter writer = new FileWriter(fileName);
@@ -67,18 +66,21 @@ public class JSONManager {
         System.out.println("JSONManager: read method called");
         // Gson gson = new Gson();
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Rule.class, new RuleAdapter());
+        // builder.registerTypeAdapter(Rule.class, new RuleAdapter());
         builder.registerTypeAdapter(Goal.class, new GoalDeserializer());
-        Gson gson = builder.create();
+
+        Gson gson = builder.registerTypeAdapter(Rule.class, new RuleAdapter())
+                .enableComplexMapKeySerialization()
+                .create();
 
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
-        
-        RuleData r = gson.fromJson(br, RuleData.class);
+
+        Rule r = gson.fromJson(br, Rule.class);
         System.out.println(r.toString());
 
         GoalData g = gson.fromJson(br, GoalData.class);
         System.out.println(g.toString());
-        System.out.println(r.getRules());
+        // System.out.println(r.getRules());
 
         PlayerData myPlayers = gson.fromJson(br, PlayerData.class);
         System.out.println(myPlayers.getPlayers().get(0).getID());
