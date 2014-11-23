@@ -29,13 +29,13 @@ public class SandyGrid extends Pane {
 	private List<List<SandyTile>> myGrid;
 	
 	public SandyGrid(int cols, int rows, int tileSize,
-			PieceData pieceDat, PatchData patchDat) {
+			PieceData pieceData, PatchData patchData) {
 		myRows = rows;
 		myCols = cols;
 		myTileSize = tileSize;
 		
-		myPieceData = pieceDat;
-		myPatchData = patchDat;
+		myPieceData = pieceData;
+		myPatchData = patchData;
 		
 		initGridTiles(myGrid);
 	}

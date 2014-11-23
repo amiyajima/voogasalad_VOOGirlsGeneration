@@ -7,16 +7,14 @@ import authoring.data.PieceData;
 public class SandyGridView extends ScrollPane {
 	private SandyGrid myGrid;
 	
-	
-	public SandyGridView(int width, int height, int tileSize, 
-			PieceData pieceDat, PatchData patchDat) {
+	public SandyGridView(int tilesAcross, int tilesDown, int viewWidth, int viewHeight, int tileSize, 
+			PieceData pieceData, PatchData patchData) {
 
-		this.setPrefSize(width, height);
-		this.setMaxSize(width, height);
-		myGrid = new SandyGrid(width/tileSize, height/tileSize,
-				tileSize, pieceDat, patchDat);
-		
+		this.setPrefSize(viewWidth, viewHeight);
+		this.setMaxSize(viewWidth, viewHeight);
+		this.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		myGrid = new SandyGrid(tilesAcross, tilesDown, tileSize, pieceData, patchData);
 		super.setContent(myGrid);
-		
 	}
 }
