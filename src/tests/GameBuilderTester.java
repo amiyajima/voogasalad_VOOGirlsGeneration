@@ -2,7 +2,7 @@ package tests;
 
 import java.util.ArrayList;
 import java.util.List;
-import gamedata.JSONManager;
+import gamedata.JSON.JSONManager;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;

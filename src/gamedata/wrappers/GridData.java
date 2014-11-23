@@ -1,6 +1,7 @@
 package gamedata.wrappers;
 
-import java.util.List;
+import java.awt.geom.Point2D;
+import java.util.Map;
 
 /**
  * Wrapper for the grid
@@ -10,10 +11,10 @@ import java.util.List;
 public class GridData {
     private int myRow;
     private int myColumn;
-    private List<PatchData> myPatches;
-    private List<PieceData> myPieces;
+    private Map<Point2D, PatchData> myPatches;
+    private Map<Point2D, PieceData> myPieces;
     
-    public GridData(int row, int column, List<PatchData> patches, List<PieceData> pieces) {
+    public GridData(int row, int column, Map<Point2D, PatchData> patches, Map<Point2D, PieceData> pieces) {
         myRow = row;
         myColumn = column;
         myPatches = patches;
@@ -28,11 +29,11 @@ public class GridData {
         return myColumn;
     }
     
-    public List<PatchData> getPatches() {
+    public Map<Point2D, PatchData> getPatches() {
         return myPatches;
     }
     
-    public List<PieceData> getPieces() {
+    public Map<Point2D, PieceData> getPieces() {
         return myPieces;
     }
 }

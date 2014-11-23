@@ -120,6 +120,7 @@ public class JSONBobTester {
         actions.add(createNewAction(pl2, pl3));
         
         Stats s = new Stats();
+        s.add("Health", 20);
         Inventory i = new Inventory();
         
         Random r = new Random();
