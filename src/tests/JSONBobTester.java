@@ -134,7 +134,7 @@ public class JSONBobTester {
 
     public Patch createNewPatch (Point2D p) {
         Random r = new Random();
-        Patch patch = new SquarePatch(r.nextInt(50)+100, DEFAULT_DUVALL, p);
+        Patch patch = new SquarePatch(r.nextInt(50)+100, DEFAULT_BUNNY, p);
         return patch;
     }
 
