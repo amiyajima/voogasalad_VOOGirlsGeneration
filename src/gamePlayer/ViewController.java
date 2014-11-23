@@ -4,19 +4,26 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
 import gamedata.gamecomponents.SquareGrid;
+
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import java.util.ResourceBundle;
+
 import javafx.event.EventHandler;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
 import tests.JSONBobTester;
 import javafx.geometry.Pos;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
@@ -26,6 +33,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -51,7 +59,7 @@ public class ViewController{
     
     public static final String AUDIO_TEST = "/src/gamePlayer/audioTest.mp3";
     public static final String CURSOR_ATTACK_TEST = "/src/gamePlayer/Cursor_attack.png";
-    public static final String CURSOR_GLOVE_TEST = "/src/gamePlayer/pointer-glove.png";
+    public static final String CURSOR_GLOVE_TEST = "/gamePlayer/pointer-glove.png";
 
     private ResourceBundle myLanguages;
     private Stage myStage;
@@ -63,6 +71,7 @@ public class ViewController{
     private BorderPane myPopup;
     private Scene scoreScene;
     private Scene myPopupScene;
+    private Scene myScene;
     
     private Point2D myCurrentLocation;
     private Piece activePiece;
@@ -139,7 +148,9 @@ private AudioClip myAudio;
         l.setText(file.getName().substring(0, file.getName().length()-5));
         l.setOnAction(event->{
            // myModel.initializeGame(file.getName());
-            myStage.setScene(new Scene(myGameSpace));
+            
+           
+           
             myAudio = new AudioClip(new File(System.getProperty("user.dir")+AUDIO_TEST).toURI().toString());
             myAudio.play();
 //              try {
@@ -193,9 +204,12 @@ private AudioClip myAudio;
         myModel = JSBTester.createNewGame();
         myGrid= new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel.getCurrentLevel().getGrid().getColumn());
         myGameSpace.setCenter(myGrid);
-        myStage.setScene(new Scene(myGameSpace));
+        myScene = new Scene(myGameSpace);
+        myStage.setScene(myScene);
+      //  myStage.setScene(new Scene(myGameSpace));
         setGridState(new SelectState(this));
-        
+        changeCursor(CURSOR_GLOVE_TEST);
+        getGrid().setOnMouseExited(event->{changeCursor(CURSOR_GLOVE_TEST);});
       //  myGrid.requestFocus();
 //        addTestKeyboardControl();
 //        addLocationSelector();
@@ -430,6 +444,10 @@ private AudioClip myAudio;
 
     }
 
+    protected void changeCursor(String string){
+        Image image = new Image(string);
+        myScene.setCursor(new ImageCursor(image, image.getWidth()/4,image.getWidth()/4));
+    }
     private void addDropShadow(Node n, Color c){
         DropShadow ds = new DropShadow(); 
         ds.setRadius(10.0);
