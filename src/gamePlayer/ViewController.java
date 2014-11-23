@@ -3,6 +3,7 @@ package gamePlayer;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,18 +12,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import java.awt.geom.Point2D;
 
+import java.awt.geom.Point2D;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-
 import tests.JSONBobTester;
-
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -47,11 +47,11 @@ public class ViewController{
     public static final String INITIALSCENE_FXML = "initialScene.fxml";
     public static final String SCOREBOARD_FXML = "scoreBoard.fxml";
     public static final String INITIALSCENE_TITLE = "VOOGASALAD!";
-    public static final String GAME_LOCATION = "/src/resources";
+    public static final String GAME_LOCATION = "/src/resources/json";
     public static final String ENGLISH = "English";
     public static final String Chinese = "Chinese";
     
-    public static final String AUDIO_TEST = "voogasalad_VOOGirlsGeneration/src/gamePlayer/audioTest.mp3";
+    public static final String AUDIO_TEST = "/src/gamePlayer/audioTest.mp3";
     
 
     private ResourceBundle myLanguages;
@@ -64,8 +64,8 @@ public class ViewController{
    
     private Piece activePiece;
     private Action activeAction;
-    private Audio backGroundMusic;
-private AudioClip myClip;
+ //   private Audio backGroundMusic;
+private AudioClip myAudio;
     @FXML
     protected VBox statsPane;
 
@@ -98,7 +98,7 @@ private AudioClip myClip;
         
         loadFXML(GAMESPACE_FXML, myGameSpace);
         loadFXML(INITIALSCENE_FXML, myInitialScene);
-   //     loadFXML(SCOREBOARD_FXML, myScoreBoard);
+        loadFXML(SCOREBOARD_FXML, myScoreBoard);
         
         myGameSpace.setCenter(myGrid);
         myGrid.setAlignment(Pos.CENTER);
@@ -143,16 +143,22 @@ private AudioClip myClip;
         l.setOnAction(event->{
            // myModel.initializeGame(file.getName());
             myStage.setScene(new Scene(myGameSpace));
-
+            myAudio = new AudioClip(new File(System.getProperty("user.dir")+AUDIO_TEST).toURI().toString());
+            myAudio.play();
+//              try {
+//                backGroundMusic = new Audio (System.getProperty("user.dir")+AUDIO_TEST);
+//            } catch (Exception e) {
+//                // TODO Auto-generated catch block
+//                //e.printStackTrace();
+//            }
+//              backGroundMusic.play();
         });
         l.getStyleClass().add("button");
             newGameButton.getItems().add(l);
 
         });
-      myClip = new AudioClip(AUDIO_TEST);
-      myClip.play();
-        //  backGroundMusic = new Audio(AUDIO_TEST);
-      //  backGroundMusic.play();
+   
+      
     }
     
     private void loadFXML(String url, Node n){
