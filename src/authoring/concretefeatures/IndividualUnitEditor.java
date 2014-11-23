@@ -1,6 +1,12 @@
 package authoring.concretefeatures;
 
+import java.awt.geom.Point2D;
+import java.util.List;
+import gamedata.action.Action;
+import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
+import gamedata.stats.Stats;
+import gameengine.movement.Movement;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -93,9 +99,8 @@ public class IndividualUnitEditor extends PopupWindow {
             @Override
             public void handle (ActionEvent e) {
                 // TODO: pops up stats editor screen
-                // PopupWindow p = new StatesEditor();
-                PopupWindow p = new GameCreator();
-                p.show();
+//                PopupWindow p = new StatsIndividualEditor(pe);
+//                p.show();
             }
         });
 
