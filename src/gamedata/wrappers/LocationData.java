@@ -1,4 +1,4 @@
-package gamedata;
+package gamedata.wrappers;
 
 import java.util.List;
 import javafx.geometry.Point2D;

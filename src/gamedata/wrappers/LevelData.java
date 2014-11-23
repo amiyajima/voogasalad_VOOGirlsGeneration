@@ -1,4 +1,4 @@
-package gamedata;
+package gamedata.wrappers;
 
 import gamedata.gamecomponents.Level;
 import java.util.List;
