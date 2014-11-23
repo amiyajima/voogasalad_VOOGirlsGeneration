@@ -113,13 +113,9 @@ public class JSONBobTester {
         pl3.add(p3);
 
         List<Movement> movements = new ArrayList<Movement>();
-<<<<<<< HEAD
+        
 //        movements.add(createNewMovement(pl1, pl2));
 //        movements.add(createNewMovement(pl2, pl3));
-=======
-
-
->>>>>>> c2c9b04a1730b06c944eb152b067ae789fd49669
 
         List<Action> actions = new ArrayList<Action>();
         actions.add(createNewAction(pl1, pl2));
