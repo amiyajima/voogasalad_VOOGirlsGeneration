@@ -5,14 +5,11 @@ import gamedata.gamecomponents.Level;
 
 /**
  * A goal defines the win conditions for each level.
+ * 
  * @Author Jesse, Anna
  *
  */
 public abstract class Goal {
-
-    public Goal () {
-
-    }
 
     /**
      * Checked after every move that the player makes.
