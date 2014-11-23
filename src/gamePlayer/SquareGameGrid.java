@@ -71,7 +71,6 @@ public class SquareGameGrid extends GameGrid {
                 r.setFill(Color.BLACK);
                 
                 sp.getChildren().add(r);
-                
                 this.add(sp, i, j);
                 r.setOnMouseEntered(event -> onHover(r));
                 r.setOnMouseExited(event -> r.setFill(Color.BLACK));
@@ -83,15 +82,6 @@ public class SquareGameGrid extends GameGrid {
         }
     }
     
-    
-    
-//  private void highlightCurrentLocation (Rectangle r) {
-//  myCurrentLocation = new Point2D.Double(100, 100);
-//  if (r.getX() == myCurrentLocation.getX() & r.getY() == myCurrentLocation.getY()) {
-//      System.out.println(myCurrentLocation.getX());
-//      r.setFill(Color.RED);
-//  }
-//}
     
     // TODO: implement the logic in View Controller class.
 
@@ -113,8 +103,9 @@ public class SquareGameGrid extends GameGrid {
         
         });
         pieces.keySet().forEach(point -> {
-            this.add(pieces.get(point).getImageView(), (int) point.getX(), (int) point.getY());
+//            this.add(pieces.get(point).getImageView(), (int) point.getX(), (int) point.getY());
+            Node n = get((int)point.getX(), (int)point.getY());
+            ((StackPane)n).getChildren().add(pieces.get(point).getImageView());
         });
-
     }
 }

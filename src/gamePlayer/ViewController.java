@@ -402,11 +402,7 @@ private AudioClip myAudio;
     protected Game getGame(){
         return myModel;
     }
-    
-//    protected BorderPane getGameSpae(){
-//        return myGameSpace;
-//    }
-    
+       
     protected void setActivePiece(Piece piece){
         activePiece = piece;
     }
@@ -452,8 +448,8 @@ private AudioClip myAudio;
     private void addDropShadow(Node n, Color c){
         DropShadow ds = new DropShadow(); 
         ds.setRadius(10.0);
-        ds.setOffsetX(1.0);
-        ds.setOffsetY(1.0);
+        ds.setOffsetX(3.0);
+        ds.setOffsetY(3.0);
         ds.setColor(c);
         n.setEffect(ds); 
         System.out.println("drop shadow");
@@ -480,9 +476,6 @@ private AudioClip myAudio;
 
         });
     }
-
-    
-
     
 //    private void addLocationSelector () {
 //        myGrid.setOnMousePressed(new EventHandler<MouseEvent>() {
