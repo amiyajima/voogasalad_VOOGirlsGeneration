@@ -68,69 +68,27 @@ public class SquareGameGrid extends GameGrid {
                 sp.setAlignment(Pos.CENTER);
                 sp.setPrefHeight(500 / c);
                 sp.setPrefWidth(500 / this.r);
+//                sp.requestFocus();
                 Rectangle r = new Rectangle(500 / this.r - 10, 500 / c - 10);
                 r.setFill(Color.BLACK);
                 sp.getChildren().add(r);
-
-                // Rectangle testr = new Rectangle(20,20);
-                // testr.setFill(Color.RED);
-                // sp.getChildren().add(testr);
+                
                 this.add(sp, i, j);
                 r.setOnMouseEntered(event -> onHover(r));
                 r.setOnMouseExited(event -> r.setFill(Color.BLACK));
-
-                addTestKeyboardControl(r);
-                // addKeyboardController(r);
-                addLocationSelector(r);
             }
 
         }
 
     }
-
-    private void addLocationSelector (Rectangle r) {
-        r.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle (MouseEvent event) {
-                myCurrentLocation = new Point2D.Double(r.getX(), r.getY());
-                System.out.println(myCurrentLocation);
-            }
-        });
-
-    }
-
-    private void addTestKeyboardControl (Rectangle r) {
-        this.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle (KeyEvent key) {
-                if (key.getCode() == KeyCode.M) {
-                    myCurrentLocation = new Point2D.Double(myCurrentLocation.getX() + 1,
-                                                           myCurrentLocation.getY() + 0);
-                    System.out.println(myCurrentLocation);
-                    System.out.println("-----");
-                }
-            }
-        });
-        highlightCurrentLocation(r);
-    }
-
+//  private void highlightCurrentLocation (Rectangle r) {
+//  myCurrentLocation = new Point2D.Double(100, 100);
+//  if (r.getX() == myCurrentLocation.getX() & r.getY() == myCurrentLocation.getY()) {
+//      System.out.println(myCurrentLocation.getX());
+//      r.setFill(Color.RED);
+//  }
+//}
     
-    private void addKeyboardController(){
-
-        Game game = new Game();
-        KeyboardController KBControl = new KeyboardController();
-        KBControl.setActionKeyControl(this, game);
-        KBControl.setMovementKeyControl(this, game);
-    }
-
-    private void highlightCurrentLocation (Rectangle r) {
-        myCurrentLocation = new Point2D.Double(100, 100);
-        if (r.getX() == myCurrentLocation.getX() & r.getY() == myCurrentLocation.getY()) {
-            System.out.println(myCurrentLocation.getX());
-            r.setFill(Color.RED);
-        }
-    }
-
     // TODO: implement the logic in View Controller class.
 
     /**
