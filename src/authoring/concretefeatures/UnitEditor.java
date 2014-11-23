@@ -25,6 +25,7 @@ import authoring.abstractfeatures.PopupWindow;
  */
 public class UnitEditor extends PopupWindow {
 	
+	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 	private final int HEIGHT = 400;
 	private final int WIDTH = 400;
 	private final String NAME = "Unit Editor";
@@ -55,6 +56,7 @@ public class UnitEditor extends PopupWindow {
 	protected void initialize() {
 		ScrollPane root = new ScrollPane();
 		Scene scene = new Scene(root, WIDTH, HEIGHT);
+		scene.getStylesheets().add(STYLESHEET);
 		
 		VBox mainVBox = new VBox();
 		
@@ -62,7 +64,8 @@ public class UnitEditor extends PopupWindow {
 		setStatsBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				new StatsTotalEditor(myStats);
+				StatsTotalEditor edit = new StatsTotalEditor(myStats);
+				edit.show();
 			}
 		});
 		
@@ -70,6 +73,4 @@ public class UnitEditor extends PopupWindow {
 		root.setContent(mainVBox);
 		setScene(scene);
 	}
-	
-
 }

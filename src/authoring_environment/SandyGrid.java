@@ -4,6 +4,8 @@ import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -46,6 +48,7 @@ public class SandyGrid extends Pane {
 				Shape bgShape = makeShape(r,c,myTileSize);
 				Point2D loc = new Point2D.Double(c,r);
 				SandyTile tile = new SandyTile(bgShape, myTileSize, loc);
+				setClickEvent(tile);
 				tileCol.add(tile);
 				super.getChildren().add(tile);
 			}
@@ -75,6 +78,16 @@ public class SandyGrid extends Pane {
         }
 		shape.setStroke(Color.GRAY);
 		shape.setStrokeWidth(0.75);
+	}
+	
+	private void setClickEvent(SandyTile tile) {
+		tile.setStyle("-fx-cursor: hand");
+		tile.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent m) {
+				System.out.println(tile.getXLocation() + " " + tile.getYLocation());
+			}
+		});
 	}
 	
 }
