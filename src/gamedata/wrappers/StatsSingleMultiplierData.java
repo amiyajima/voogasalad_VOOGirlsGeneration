@@ -4,7 +4,7 @@ import gamedata.action.StatsSingleMultiplier;
 import java.util.List;
 
 /**
- * 
+ * Wrapper for StatsSingleMultiplerData
  * @author Rica
  *
  */

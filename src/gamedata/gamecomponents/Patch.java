@@ -26,7 +26,7 @@ public abstract class Patch {
 	public Patch(int typeID, String imageLocation, Point2D p) {
 		myTypeID = typeID;
 		myImageLocation = imageLocation;
-		myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+		myImageView = new ImageView(new Image(imageLocation));
 		myLoc = p;
 	}
 

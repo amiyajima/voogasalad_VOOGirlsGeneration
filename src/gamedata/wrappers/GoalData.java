@@ -5,7 +5,7 @@ import java.util.List;
 
 
 /**
- * Wrapper for goals
+ * Wrapper for goals in GridData
  * 
  * @author Rica
  *
