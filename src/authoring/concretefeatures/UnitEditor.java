@@ -4,6 +4,7 @@ import java.util.List;
 
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
@@ -24,7 +25,6 @@ public class UnitEditor extends PopupWindow {
 	private final String NAME = "Unit Editor";
 	private Piece myUnit;
 	
-	private int myPlayerID;
 	private Stats myStats;
 	private List<Action> myActions;
 	
@@ -40,7 +40,6 @@ public class UnitEditor extends PopupWindow {
 		setTitle(NAME);
 		myUnit = unit;
 		
-		myPlayerID = myUnit.getPlayerID();
 		myStats = myUnit.getStats();
 		myActions = myUnit.getActions();
 		
@@ -52,6 +51,7 @@ public class UnitEditor extends PopupWindow {
 		ScrollPane root = new ScrollPane();
 		Scene scene = new Scene(root, WIDTH, HEIGHT);
 		
+		VBox mainVBox = new VBox();
 		
 	}
 }
