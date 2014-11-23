@@ -20,7 +20,7 @@ public abstract class Grid {
     protected Map<Point2D, Piece> myPieces;
 
     /**
-     * Default constructor for square grid
+     * Default constructor makes 5x5 grid
      */
     public Grid () {
        this(5, 5);

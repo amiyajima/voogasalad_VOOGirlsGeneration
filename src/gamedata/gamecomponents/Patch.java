@@ -13,7 +13,7 @@ public abstract class Patch {
 	private int myTypeID;
 	private Point2D myLoc;
 	private String myImageLocation;
-	private ImageView myImageView;
+	private transient ImageView myImageView;
 
 
 	/**
@@ -26,7 +26,7 @@ public abstract class Patch {
 	public Patch(int typeID, String imageLocation, Point2D p) {
 		myTypeID = typeID;
 		myImageLocation = imageLocation;
-		myImageView = new ImageView(new Image(imageLocation));
+		myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
 		myLoc = p;
 	}
 
