@@ -1,8 +1,11 @@
 package authoring.concretefeatures.menus;
 
+import gamedata.stats.Stats;
 import authoring.abstractfeatures.PopupWindow;
+import authoring.concretefeatures.StatsTotalEditor;
 // import authoring.concretefeatures.GameCreator;
 import authoring.concretefeatures.TerrainCreator;
+import authoring.concretefeatures.UnitEditor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
