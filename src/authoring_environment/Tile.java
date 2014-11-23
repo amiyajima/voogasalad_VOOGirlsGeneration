@@ -85,20 +85,20 @@ public class Tile extends Pane {
 
     public void switchSelected () {
         if (getSelected()) {
-        	deselecteTile();
+        	selecteTile(false);
         }
         else {
-        	selecteTile();
+        	selecteTile(true);
         }
     }
 
-    public void selecteTile(){
-    	setSelected(true);
+    public void selecteTile(boolean choose){
+    	setSelected(choose);
     }
     
-    public void deselecteTile(){
-    	setSelected(false);
-    }
+//    public void deselecteTile(boolean choose){
+//    	setSelected(false);
+//    }
     
     public void setSelected(boolean state){
     	 selected.setVisible(state);

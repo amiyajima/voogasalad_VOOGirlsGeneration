@@ -31,7 +31,7 @@ public class RangeEditor extends PopupWindow {
 
 	private static final String RADIUS = "Radius";
 
-	private static final String COLUMN_ROW_CROSS = "Column & Row Cross";
+	private static final String ALL = "All";
 
 	private static final String ROW = "Row";
 
@@ -55,10 +55,34 @@ public class RangeEditor extends PopupWindow {
 		setHeight(RANGE_EDITOR_HEIGHT);
 		setWidth(RANGE_EDITOR_WIDTH);
 		setTitle(NAME);
-		mySampleGridView = new RangeGrid(myGridLength, myGridLength,
-				myTileSize);
+		if ((range==null) || (range.size()==0)){
+			mySampleGridView = new RangeGrid(myGridLength, myGridLength,
+					myTileSize);
+		}else{
+			cacluateGridSize(range);
+			int initialWidth=(int)cacluateGridSize(range).getX();
+			int initialHeight=(int)cacluateGridSize(range).getY();
+			int initialSize=getPrefTileSize(initialWidth,initialHeight);
+			mySampleGridView = new RangeGrid(initialWidth, initialHeight,initialSize);
+		}
+		
 		mySampleGridView.setRange(range);
 		initialize();
+	}
+
+	private Point2D cacluateGridSize(List<Point2D> range) {
+		double maxX=0;
+		double maxY=0;
+		for (Point2D point:range){
+			if (Math.abs(point.getX())>maxX){
+				maxX=Math.abs(point.getX());
+			}
+			if (Math.abs(point.getY())>maxY){
+				maxY=Math.abs(point.getY());
+			}
+		}
+		return new Point2D.Double(maxX,maxY);
+		
 	}
 
 	@Override
@@ -75,10 +99,10 @@ public class RangeEditor extends PopupWindow {
 		
 		Label targetLabel = new Label("Select Range");
 		ChoiceBox<String> targetChoice = new ChoiceBox<>();
-		targetChoice.getItems().addAll(COLUMN, ROW, RADIUS,
+		targetChoice.getItems().addAll(COLUMN, ROW, RADIUS,ALL,
 				CUSTOM);
 		TextField specifiedData = new TextField();
-		Button choose= new Button("choose");
+		Button choose= new Button("Choose");
 		Button delete=new Button("Delete");
 		choose.setOnAction(new selectRangeHandler(targetChoice,specifiedData,choose));
 		delete.setOnAction(new selectRangeHandler(targetChoice,specifiedData,delete));
@@ -114,12 +138,7 @@ public class RangeEditor extends PopupWindow {
 			public void handle(ActionEvent event) {
 				myGridWidthNumber = Integer.parseInt(HRadius.getText()) * 2 + 1;
 				myGridHeightNumber = Integer.parseInt(VRadius.getText()) * 2 + 1;
-				int calculatedTileSize = Math.max(myGridLength
-						/ myGridWidthNumber, myGridLength / myGridHeightNumber);
-
-				myTileSize = (calculatedTileSize < MIN_TILE_SIZE) ? MIN_TILE_SIZE
-						: calculatedTileSize;
-
+				myTileSize=getPrefTileSize(myGridWidthNumber,myGridHeightNumber);
 				box.getChildren().clear();
 //				mySampleGridView = new RangeGrid(myGridLength, myGridLength,
 //						myTileSize);
@@ -128,14 +147,25 @@ public class RangeEditor extends PopupWindow {
 				box.getChildren().addAll(sizeChooser, enter,
 						mySampleGridView, specifedSelection,select);
 			}
+
+			
 		});
 
 		select.setOnAction(new SelectHandler(this));
 
 		sizeChooser.getChildren().addAll(horizontal, times, vertical);
 
-		box.getChildren().addAll(sizeChooser, enter);
+		box.getChildren().addAll(sizeChooser, enter,mySampleGridView);
 		setScene(new Scene(box));
+	}
+	
+	private int getPrefTileSize(int gridWidthNumber,int gridHeightNumber) {
+		int calculatedTileSize = Math.max(myGridLength
+				/ gridWidthNumber, myGridLength / gridWidthNumber);
+
+		int tileSize = (calculatedTileSize < MIN_TILE_SIZE) ? MIN_TILE_SIZE
+				: calculatedTileSize;
+		return tileSize;
 	}
 	
 	private class selectRangeHandler implements EventHandler<ActionEvent> {
@@ -150,8 +180,14 @@ public class RangeEditor extends PopupWindow {
 		@Override
 		public void handle(ActionEvent event) {
 			String chosen=targetChoice.getValue().toString();
-			int parameter=Integer.parseInt(specifiedData.getText());
-			boolean toChoose=(button.getText().equals("choose"))? true:false;
+			int parameter;
+			try { 
+				parameter=Integer.parseInt(specifiedData.getText()); 
+		    } catch(NumberFormatException e) { 
+		        parameter=0; 
+		    }
+			
+			boolean toChoose=(button.getText().equals("Choose"))? true:false;
 			switch (chosen) {
 			case COLUMN:
 				mySampleGridView.rangeColumn(parameter,toChoose);
@@ -161,6 +197,9 @@ public class RangeEditor extends PopupWindow {
 				break;
 			case RADIUS:
 				mySampleGridView.rangeRadius(parameter,toChoose);
+				break;
+			case ALL:
+				mySampleGridView.rangeAll(toChoose);
 				break;
 			case CUSTOM:
 				mySampleGridView.rangeSelectedList();
