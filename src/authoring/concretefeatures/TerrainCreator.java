@@ -39,7 +39,6 @@ public class TerrainCreator extends PopupWindow {
     private final String DELETE = "Delete";
     private final String EDIT = "Edit";
     private LibraryView myLibrary;
-    private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 
 
     private int myState;

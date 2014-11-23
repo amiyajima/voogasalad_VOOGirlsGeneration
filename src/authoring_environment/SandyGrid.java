@@ -17,7 +17,6 @@ import authoring.data.PieceData;
  * The SandyGrid is a square grid.
  * 
  * @author Jennie Ju
- *
  */
 public class SandyGrid extends Pane {
 	private int myRows;
@@ -28,8 +27,7 @@ public class SandyGrid extends Pane {
 	private PatchData myPatchData;
 	private List<List<SandyTile>> myGrid;
 	
-	public SandyGrid(int cols, int rows, int tileSize,
-			PieceData pieceData, PatchData patchData) {
+	public SandyGrid(int cols, int rows, int tileSize, PieceData pieceData, PatchData patchData) {
 		myRows = rows;
 		myCols = cols;
 		myTileSize = tileSize;
@@ -70,10 +68,10 @@ public class SandyGrid extends Pane {
 	}
 	
 	private void setCheckeredColor(int row, int col, Shape shape) {
-		if (((row % 2 == 0) && (col % 2 == 0)) || 
-				((row % 2 == 1) && (col % 2 == 1))) {
+		if (((row % 2 == 0) && (col % 2 == 0)) || ((row % 2 == 1) && (col % 2 == 1))) {
             shape.setFill(Color.WHITE);
-        } else {
+		}
+        else {
             shape.setFill(Color.WHITESMOKE);
         }
 		shape.setStroke(Color.GRAY);
@@ -89,5 +87,4 @@ public class SandyGrid extends Pane {
 			}
 		});
 	}
-	
 }

@@ -39,7 +39,6 @@ public class TerrainEditor extends PopupWindow {
     private final String LOAD_IMAGE_LABEL = "Load image";
     private final String IMAGE_LABEL = "Terrain image";
     private final String TEMPLATE_LABEL = "Change";
-    private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 
     private String myImageLocation;
 
