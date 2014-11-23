@@ -37,4 +37,8 @@ public class PieceData implements AuthoringData<Piece> {
 	public void clear() {
 		myPieces.clear();
 	}
+	
+	public List<Piece> getPieces(){
+        return myPieces;
+    }
 }

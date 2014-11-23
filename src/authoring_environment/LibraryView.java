@@ -21,6 +21,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -50,11 +51,11 @@ public class LibraryView extends TabPane {
 	private Map<String, VBox> myLibraryMap;
 	private Map<String, Tab> myTabMap;
 	private SingleSelectionModel<Tab> mySelection;
-	public static Piece currentlySelectedUnit;
-	public static Patch currentlySelectedTerrain;
-	public static boolean doNothing;
-	public static boolean unitSelected;
-	public static boolean reset;
+	private Piece currentUnit;
+	private Patch currentTerrain;
+	private boolean doNothing;
+	private boolean unitSelected;
+	private boolean reset;
 	
 	/**
 	 * LibraryView constructor. Initializes two tabs - one for units,
@@ -131,34 +132,69 @@ public class LibraryView extends TabPane {
 				}
 			}
 		});
-		
 		myLibraryMap = new HashMap<String, VBox>();
 		myLibraryMap.put(UNITS, unitLibrary);
 		myLibraryMap.put(TERRAIN, terrainLibrary);
 		myTabMap = new HashMap<String, Tab>();
 		myTabMap.put(UNITS, unitTab);
 		myTabMap.put(TERRAIN, terrainTab);
+		setGridActionEvents();
 	}
 	
-	public void addPiece(UnitEntry content){
+	private void setGridActionEvents() {
+		myGrid.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				myGrid.handleSingleClick(event, currentUnit, currentTerrain,
+						doNothing, unitSelected, reset);
+			}
+		});
+		myGrid.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				myGrid.handleDrag(event, currentUnit, currentTerrain,
+						doNothing, unitSelected, reset);
+			}
+		});
+	}
+	
+	public void selectUnit(Piece unit){
+		currentUnit = unit;
+		doNothing = false;
+		unitSelected = true;
+		reset = false;
+	}
+	
+	public void selectTerrain(Patch terrain){
+		currentTerrain = terrain;
+		doNothing = false;
+		unitSelected = false;
+		reset = false;
+	}
+
+	public void addPiece(UnitEntry unit){
 		mySelection.select(myTabMap.get(UNITS));
-		myLibraryMap.get(UNITS).getChildren().add(content);
-		myPieceData.add(content.getUnit());
+		myLibraryMap.get(UNITS).getChildren().add(unit);
+		myPieceData.add(unit.getUnit());
 	}
 	
-	public void addPatch(TerrainEntry content){
+	public void addPatch(TerrainEntry terrain){
 		mySelection.select(myTabMap.get(TERRAIN));
-		myLibraryMap.get(TERRAIN).getChildren().add(content);
-		myPatchData.add(content.getTerrain());
+		myLibraryMap.get(TERRAIN).getChildren().add(terrain);
+		myPatchData.add(terrain.getTerrain());
 	}
 	
-	public void removePiece(UnitEntry content){
-		myLibraryMap.get(UNITS).getChildren().remove(content);
-		myPieceData.remove(content.getUnit());
+	public void removePiece(UnitEntry unit){
+		myLibraryMap.get(UNITS).getChildren().remove(unit);
+		myGrid.removePieces(unit.getUnit());
+		myPieceData.remove(unit.getUnit());
+		doNothing = true;
 	}
 	
-	public void removePatch(TerrainEntry content){
-		myLibraryMap.get(TERRAIN).getChildren().remove(content);
-		myPatchData.remove(content.getTerrain());
+	public void removePatch(TerrainEntry terrain){
+		myLibraryMap.get(TERRAIN).getChildren().remove(terrain);
+		myGrid.removePatches(terrain.getTerrain());
+		myPatchData.remove(terrain.getTerrain());
+		doNothing = true;
 	}
 }

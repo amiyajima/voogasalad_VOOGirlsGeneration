@@ -1,10 +1,12 @@
 package authoring_environment;
 
+import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Piece;
+
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
 
-import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -35,22 +37,22 @@ public class SandyGrid extends Pane {
 		myPieceData = pieceData;
 		myPatchData = patchData;
 		
-		initGridTiles(myGrid);
+		initGridTiles();
 	}
 	
-	private void initGridTiles(List<List<SandyTile>> grid){
-		grid = new LinkedList<List<SandyTile>>();
+	private void initGridTiles(){
+		myGrid = new LinkedList<List<SandyTile>>();
 		for (int r = 0; r < myRows; r++) {
 			List<SandyTile> tileCol = new LinkedList<SandyTile>();
 			for (int c = 0; c < myCols; c++) {
 				Shape bgShape = makeShape(r,c,myTileSize);
 				Point2D loc = new Point2D.Double(c,r);
 				SandyTile tile = new SandyTile(bgShape, myTileSize, loc);
-				setClickEvent(tile);
+				tile.setStyle("-fx-cursor: hand");
 				tileCol.add(tile);
 				super.getChildren().add(tile);
 			}
-		grid.add(tileCol);
+			myGrid.add(tileCol);
 		}
 	}
 	
@@ -78,13 +80,90 @@ public class SandyGrid extends Pane {
 		shape.setStrokeWidth(0.75);
 	}
 	
-	private void setClickEvent(SandyTile tile) {
-		tile.setStyle("-fx-cursor: hand");
-		tile.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent m) {
-				System.out.println(tile.getXLocation() + " " + tile.getYLocation());
+	public void handleSingleClick(MouseEvent event, Piece currentUnit, Patch currentTerrain,
+			boolean doNothing, boolean unitSelected, boolean reset) {
+		int x = (int) event.getX() / myTileSize;
+		int y = (int) event.getY() / myTileSize;
+		SandyTile tile = myGrid.get(y).get(x);
+		setContents(tile, currentUnit, currentTerrain, doNothing, unitSelected, reset);
+	}
+
+	public void handleDrag(MouseEvent event, Piece currentUnit, Patch currentTerrain,
+			boolean doNothing, boolean unitSelected, boolean reset) {
+		int x = (int) event.getX() / myTileSize;
+		int y = (int) event.getY() / myTileSize;
+		SandyTile tile = myGrid.get(y).get(x);
+		setContents(tile, currentUnit, currentTerrain, doNothing, unitSelected, reset);
+	}
+
+	protected void setContents(SandyTile tile, Piece currentUnit, Patch currentTerrain,
+			boolean doNothing, boolean unitSelected, boolean reset) {
+		if(doNothing){
+			return;
+		}
+		if(reset) {
+			if (unitSelected) {
+				removeUnit(tile);
 			}
-		});
+			else {
+				removeTerrain(tile);
+			}
+		}
+		else {
+			if(unitSelected) {
+				if(tile.myUnit != null){
+					myPieceData.remove(tile.myUnit);
+				}
+				tile.myUnit = currentUnit;
+				tile.myUnit.setLoc(new Point2D.Double(tile.getYLocation(), tile.getXLocation()));
+				tile.myPieceImage.setImage(tile.myUnit.getImageView().getImage());
+				tile.myPieceImage.setVisible(true);
+				myPieceData.add(tile.myUnit);
+			}
+			else {
+				if(tile.myTerrain != null){
+					myPatchData.remove(tile.myTerrain);
+				}
+				tile.myTerrain = currentTerrain;
+				tile.myTerrain.setLoc(new Point2D.Double(tile.getYLocation(), tile.getXLocation()));
+				tile.myPatchImage.setImage(tile.myTerrain.getImageView().getImage());
+				tile.myPatchImage.setVisible(true);
+				myPatchData.add(tile.myTerrain);
+			}
+		}
+	}
+
+	private void removeUnit(SandyTile tile) {
+		tile.myUnit = null;
+		tile.myPieceImage.setVisible(false);
+		myPieceData.remove(tile.myUnit);
+	}
+	
+	private void removeTerrain(SandyTile tile) {
+		tile.myTerrain = null;
+		tile.myPatchImage.setVisible(false);
+		myPatchData.remove(tile.myTerrain);
+	}
+
+	public void removePieces(Piece unit) {
+		for (int r = 0; r < myRows; r++) {
+			for (int c = 0; c < myCols; c++) {
+				SandyTile tile = myGrid.get(r).get(c);
+				if(tile.myUnit != null && tile.myUnit.getTypeID() == unit.getTypeID()){
+					removeUnit(tile);
+				}
+			}
+		}
+	}
+	
+	public void removePatches(Patch terrain) {
+		for (int r = 0; r < myRows; r++) {
+			for (int c = 0; c < myCols; c++) {
+				SandyTile tile = myGrid.get(r).get(c);
+				if(tile.myTerrain != null && tile.myTerrain.getTypeID() == terrain.getTypeID()){
+					removeTerrain(tile);
+				}
+			}
+		}
 	}
 }

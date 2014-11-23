@@ -17,21 +17,21 @@ public class VoogaView extends BorderPane {
 	private final int GRID_VIEW_WIDTH = 700;
 	private final int GRID_VIEW_HEIGHT = 580;
 	private final int TILE_SIDE_LENGTH = 40;
-
-	private MenuView mySettingsView;
+	
 	private LibraryView myLibraryView;
 	private SandyGridView myGridView;
+	private MenuView mySettingsView;
 	private PieceData myPieceData;
 	private PatchData myPatchData;
 	
 	public VoogaView(){
 		myPieceData = new PieceData();
 		myPatchData = new PatchData();
-		mySettingsView = new MenuView(myLibraryView);
 		SandyGrid grid = new SandyGrid(NUM_TILES_ACROSS, NUM_TILES_DOWN,
 				TILE_SIDE_LENGTH, myPieceData, myPatchData);
 		myLibraryView = new LibraryView(myPieceData, myPatchData, grid);
 		myGridView = new SandyGridView(grid, GRID_VIEW_WIDTH, GRID_VIEW_HEIGHT);
+		mySettingsView = new MenuView(myLibraryView);
 		
 		setTop(mySettingsView);
 		setLeft(myLibraryView);

@@ -2,14 +2,9 @@ package authoring.concretefeatures;
 
 import gamedata.gamecomponents.Piece;
 import authoring.abstractfeatures.LibraryEntry;
-import authoring_environment.LibraryView;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 
 /**
  * @author Martin Tamayo
@@ -33,17 +28,6 @@ public class UnitEntry extends LibraryEntry {
 	public UnitEntry(Piece unit, ImageView image, Label name, Button editButton, Button delButton){
 		this.getChildren().addAll(delButton, editButton, image, name);
 		myUnit = unit;
-		
-		this.setStyle("-fx-cursor: hand");
-		this.setOnMouseClicked(new EventHandler<MouseEvent>(){
-			@Override
-			public void handle(MouseEvent m){
-				LibraryView.currentlySelectedUnit = myUnit;
-				LibraryView.doNothing = false;
-				LibraryView.unitSelected = true;
-				LibraryView.reset = false;
-			}
-		});
 	}
 	
 	/**

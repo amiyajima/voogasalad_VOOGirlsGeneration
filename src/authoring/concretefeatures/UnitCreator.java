@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -149,6 +150,14 @@ public class UnitCreator extends PopupWindow {
                 Button delButton = new Button(DELETE);
 
                 UnitEntry entry = new UnitEntry(unit, icon, name, editButton, delButton);
+                entry.setStyle("-fx-cursor: hand");
+        		entry.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        			@Override
+        			public void handle(MouseEvent m){
+        				myLibrary.selectUnit(unit);
+        			}
+        		});
+                
         		delButton.setOnAction(new EventHandler<ActionEvent>(){
         			@Override
         			public void handle(ActionEvent event) {
