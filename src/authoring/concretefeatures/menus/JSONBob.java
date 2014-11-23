@@ -1,6 +1,6 @@
 package authoring.concretefeatures.menus;
 
-import gamedata.JSONManager;
+import gamedata.JSON.JSONManager;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.FileChooser;
