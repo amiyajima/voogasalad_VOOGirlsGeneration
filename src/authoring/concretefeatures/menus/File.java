@@ -1,22 +1,12 @@
 package authoring.concretefeatures.menus;
 
-import java.awt.geom.Point2D;
-import java.util.List;
-import java.util.Map;
-import authoring.abstractfeatures.PopupWindow;
-import authoring.concretefeatures.StatsIndividualEditor;
-import gamedata.action.Action;
-import gamedata.gamecomponents.Inventory;
-import gamedata.gamecomponents.Piece;
-import gamedata.stats.Stats;
-import gameengine.movement.Movement;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-
-
 // import authoring.concretefeatures.GameCreator;
+
 
 public class File extends Menu {
 
@@ -28,9 +18,9 @@ public class File extends Menu {
         MenuItem exit = new MenuItem("Exit");
 
         newGame.setOnAction(new NewHandler());
-        // open.setOnAction(new OpenHandler());
-        // save.setOnAction(new SaveHandler());
-        // exit.setOnAction(new ExitHandler());
+        open.setOnAction(new OpenHandler());
+        save.setOnAction(new SaveHandler());
+        exit.setOnAction(new ExitHandler());
 
         getItems().addAll(newGame, open, save, exit);
     }
@@ -39,19 +29,9 @@ public class File extends Menu {
         @Override
         public void handle (ActionEvent event) {
             // Restart Game
-            // PopupWindow p = new GameCreator();
-            // p.show();
-            Stats myStats = new Stats();
-            myStats.add("attack", (double) 3);
-            myStats.add("kill", (double) 5);
-
-
-            Piece piece =
-                    new Piece(
-                              "file:/Users/seungwonlee/Documents/308workspace/game_sl269/src/game/images/bossbullet.png"
-                              , null, null, myStats, new Point2D.Double(0, 0), 0, 0, 0, null);
-            PopupWindow p = new StatsIndividualEditor(piece);
-            p.show();
+//             PopupWindow p = new GameCreator();
+//             p.show();
+            
         }
     }
 
