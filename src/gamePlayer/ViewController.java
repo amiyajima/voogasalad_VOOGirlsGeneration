@@ -213,6 +213,8 @@ private AudioClip myAudio;
         getGrid().setOnMouseExited(event->{changeCursor(CURSOR_GLOVE_TEST);});
         myGrid.requestFocus();
         addKeyboardController();
+        addMouseController();
+        
 //        addLocationSelector();
 //        
     }
@@ -329,9 +331,9 @@ private AudioClip myAudio;
   
         statsPane.getChildren().clear();
         ArrayList<Text> stats = new ArrayList<Text>();
-        piece.getStats().getStatsMap().keySet().forEach(key->stats.
-                                                        add(new Text(key+ ":  "+ piece.getStats().
-                                                         getStatsMap().get(key))));
+//        piece.getStats().getStatsMap().keySet().forEach(key->stats.
+//                                                        add(new Text(key+ ":  "+ piece.getStats().
+//                                                         getStatsMap().get(key))));
         statsPane.getChildren().addAll(stats);
 
     }
@@ -491,6 +493,11 @@ private AudioClip myAudio;
         KeyboardController KBControl = new KeyboardController();
 //        KBControl.setActionKeyControl(myGrid, myModel);
         KBControl.setMovementKeyControl(this, myGrid, myModel);
+    }
+    
+    private void addMouseController(){
+        MouseController MouseControl = new MouseController();
+        MouseControl.selectCurrentLocation(this, myGrid);
     }
     
     public void highlightCurrentLocation(Color c, Point2D oldLocation, Point2D newLocation){
