@@ -24,11 +24,13 @@ public class PatchData implements AuthoringData<Patch> {
 
     @Override
     public void add (Patch patch) {
+    	System.out.println("Added patch at location x = " + patch.getLoc().getX() + ", y = " + patch.getLoc().getY());
         myPatches.add(patch);
     }
 
     @Override
     public void remove (Patch patch) {
+    	System.out.println("Removed patch at location x = " + patch.getLoc().getX() + ", y = " + patch.getLoc().getY());
         myPatches.remove(patch);
     }
 

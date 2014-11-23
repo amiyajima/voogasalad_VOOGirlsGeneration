@@ -25,11 +25,13 @@ public class PieceData implements AuthoringData<Piece> {
     
 	@Override
 	public void add(Piece piece) {
+		System.out.println("Added piece at location x = " + piece.getLoc().getX() + ", y = " + piece.getLoc().getY());
 		myPieces.add(piece);
 	}
 
 	@Override
 	public void remove(Piece piece) {
+		System.out.println("Removed piece at location x = " + piece.getLoc().getX() + ", y = " + piece.getLoc().getY());
 		myPieces.remove(piece);
 	}
 

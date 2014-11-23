@@ -185,16 +185,16 @@ public class LibraryView extends TabPane {
 	}
 	
 	public void removePiece(UnitEntry unit){
+		myPieceData.remove(unit.getUnit());
 		myLibraryMap.get(UNITS).getChildren().remove(unit);
 		myGrid.removePieces(unit.getUnit());
-		myPieceData.remove(unit.getUnit());
 		doNothing = true;
 	}
 	
 	public void removePatch(TerrainEntry terrain){
+		myPatchData.remove(terrain.getTerrain());
 		myLibraryMap.get(TERRAIN).getChildren().remove(terrain);
 		myGrid.removePatches(terrain.getTerrain());
-		myPatchData.remove(terrain.getTerrain());
 		doNothing = true;
 	}
 }
