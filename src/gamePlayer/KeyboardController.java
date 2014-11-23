@@ -28,7 +28,7 @@ public class KeyboardController {
      * @param gameScene is the scene for GUI
      */
    
-    public void setActionKeyControl(SquareGameGrid grid, Game game) {
+    public void setActionKeyControl(GameGrid grid, Game game) {
         
 //        //for testing: 
 //        myCurrentPlayer = getCurrentPlayer(game);
@@ -60,7 +60,7 @@ public class KeyboardController {
      * @param movementKeyMap
      * @param gameScene
      */
-    public void setMovementKeyControl(SquareGameGrid grid, Game game) {
+    public void setMovementKeyControl(GameGrid grid, Game game) {
 //      //for testing: 
 //      myCurrentPlayer = getCurrentPlayer(game);
         

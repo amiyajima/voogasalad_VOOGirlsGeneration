@@ -17,16 +17,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import java.util.ResourceBundle;
 import java.util.Set;
-
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
 import java.awt.geom.Point2D;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 import tests.JSONBobTester;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -38,6 +34,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -45,6 +43,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 
@@ -75,7 +74,8 @@ public class ViewController{
     private BorderPane myPopup;
     private Scene scoreScene;
     private Scene myPopupScene;
-   
+    
+    
     private Piece activePiece;
     private Action activeAction;
  //   private Audio backGroundMusic;
@@ -196,6 +196,18 @@ private AudioClip myAudio;
         
         // uses JSON reader to generate an instance of the game
 
+    }
+    
+    @FXML
+    private void testGame() {
+        JSONBobTester JSBTester = new JSONBobTester();
+        myModel = JSBTester.createNewGame();
+        myStage.setScene(new Scene(myGameSpace));
+        
+        myGrid.requestFocus();
+        addTestKeyboardControl();
+        addLocationSelector();
+        
     }
     
     @FXML
@@ -383,6 +395,11 @@ private AudioClip myAudio;
     protected Game getGame(){
         return myModel;
     }
+    
+//    protected BorderPane getGameSpae(){
+//        return myGameSpace;
+//    }
+    
     protected void setActivePiece(Piece piece){
         activePiece = piece;
     }
@@ -451,6 +468,33 @@ private AudioClip myAudio;
 
         });
     }
+    
+    private void addLocationSelector () {
+        myGrid.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle (MouseEvent event) {
+//                myCurrentLocation = new Point2D.Double(r.getX(), r.getY());
+                System.out.println("hi");
+            }
+        });
+    }
 
+    private void addTestKeyboardControl () {
+        myGrid.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle (KeyEvent key) {
+                if (key.getCode() == KeyCode.M) {
+                    System.out.println("key works!");
+                }
+            }
+        });
+//        highlightCurrentLocation(r);
+    }
+    
+    private void addKeyboardController(){
+        KeyboardController KBControl = new KeyboardController();
+        KBControl.setActionKeyControl(myGrid, myModel);
+        KBControl.setMovementKeyControl(myGrid, myModel);
+    }
 
 }
