@@ -43,6 +43,7 @@ public class JSONManager {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Rule.class, new RuleAdapter());
         // builder.registerTypeAdapter(Goal.class, new GoalDeserializer());
+        // builder.registerTypeAdapter(Rule.class, new GenericTypeAdapter("gamedata.rules"));
         Gson gson = builder.create();
         String json = gson.toJson(r);
         System.out.println("JSONManager: game converted to json!");
@@ -66,21 +67,21 @@ public class JSONManager {
         System.out.println("JSONManager: read method called");
         // Gson gson = new Gson();
         GsonBuilder builder = new GsonBuilder();
-        // builder.registerTypeAdapter(Rule.class, new RuleAdapter());
-        builder.registerTypeAdapter(Goal.class, new GoalDeserializer());
-
-        Gson gson = builder.registerTypeAdapter(Rule.class, new RuleAdapter())
-                .enableComplexMapKeySerialization()
-                .create();
+        //builder.registerTypeAdapter(Rule.class, new RuleAdapter());
+        // builder.registerTypeAdapter(Goal.class, new GoalDeserializer());
+        builder.registerTypeAdapter(Rule.class, new GenericTypeAdapter("gamedata/rules"));
+        Gson gson = builder.create();
 
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
-        Rule r = gson.fromJson(br, Rule.class);
-        System.out.println(r.toString());
+        Rule rule = gson.fromJson(br, Rule.class);
+        System.out.println(rule.toString());
+
+        RuleData ruledata = gson.fromJson(br, RuleData.class);
+        System.out.println(ruledata.toString());
 
         GoalData g = gson.fromJson(br, GoalData.class);
         System.out.println(g.toString());
-        // System.out.println(r.getRules());
 
         PlayerData myPlayers = gson.fromJson(br, PlayerData.class);
         System.out.println(myPlayers.getPlayers().get(0).getID());

@@ -1,6 +1,8 @@
 package authoring.concretefeatures.menus;
 
 import gamedata.JSON.JSONManager;
+import gamedata.rules.MoveCountRule;
+import gamedata.rules.Rule;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.FileChooser;
@@ -45,7 +47,8 @@ public class JSONBob extends Menu {
 //TODO  for now since game construction in front end doesn't work, this uses
 //      the JSONBobTester to create a default game
         JSONBobTester jb = new JSONBobTester();
-        myJSONmanager.writeToJSON(jb.createNewGame(), file.getAbsolutePath());
+        //myJSONmanager.writeToJSON(jb.createNewGame(), file.getAbsolutePath());
+        myJSONmanager.writeToJSON(new MoveCountRule(3), file.getAbsolutePath());
     }
     
     private void handleLoad () {
