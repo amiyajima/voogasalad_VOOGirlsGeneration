@@ -33,29 +33,33 @@ import gameengine.player.Player;
  *
  */
 public class JSONBobTester {
+    private static String DEFAULT_DUVALL = "/resources/images/rcd.png";
+    private static String DEFAULT_BUNNY = "/resources/images/bbybunny.jpeg";
+    
     public JSONBobTester () {
-        createNewGame();
+        
     }
 
     /**
      * Create a new game to test
      * 
-     * @return
+     * @return a new default game
      */
     public Game createNewGame () {
-        System.out.println("JSONBobTester is running");
-
+        System.out.println("Bob Tester: Create new game");
         List<Player> myPlayers = new ArrayList<Player>();
-        Player myPlayer1 = new Player();
-        Player myPlayer2 = new Player();
+        Player myPlayer1 = new Player(12345);
+        Player myPlayer2 = new Player(54321);
         myPlayers.add(myPlayer1);
         myPlayers.add(myPlayer2);
 
-        Grid grid1 = new SquareGrid();
+        Grid grid = createNewGrid();
 
         List<Rule> myRules = new ArrayList<Rule>();
         Rule rule1 = new MoveCountRule(3);
+        Rule rule2 = new MoveCountRule(5);
         myRules.add(rule1);
+        myRules.add(rule2);
 
         List<Goal> myGoals = new ArrayList<Goal>();
         Goal goal1 = new PlayerPiecesRemovedGoal(myPlayer2);
@@ -64,17 +68,34 @@ public class JSONBobTester {
         myGoals.add(goal2);
 
         List<Level> myLevels = new ArrayList<Level>();
-        Level level1 = new Level(grid1, myGoals, myRules);
-        Level level2 = new Level(grid1, myGoals, myRules);
+        Level level1 = new Level(grid, myGoals, myRules);
+        Level level2 = new Level(grid, myGoals, myRules);
         myLevels.add(level1);
         myLevels.add(level2);
 
         Game myGame = new Game(myPlayers, myLevels);
         return myGame;
-
+    }
+    
+    public Grid createNewGrid () {
+        Grid grid1 = new SquareGrid();
+        for (int x = 0; x < grid1.getColumn(); x++) {
+            for (int y = 0; y < grid1.getRow(); y++) {
+                Patch patch = createNewPatch(new Point2D.Double(x,y));
+                grid1.setPatch(patch.getLoc(), patch);
+                System.out.println("Patch created: " + grid1.getPatch(new Point2D.Double(x,y)).toString());
+                Piece piece = createNewPiece(new Point2D.Double(x,y));
+                grid1.setPiece(piece.getLoc(), piece);
+                System.out.println("Piece created: " + grid1.getPiece(new Point2D.Double(x,y)).toString());
+            }
+        }
+        System.out.println("Bob Tester: Patches filled: " + grid1.getAllPatches().get(0).toString());
+        System.out.println("Bob Tester: Pieces filled: " + grid1.getAllPieces().get(0).toString());
+        System.out.println("Grid created: " + grid1.toString());
+        return grid1;
     }
 
-    public Piece createNewPiece () {
+    public Piece createNewPiece (Point2D p) {
         Point2D p1 = new Point2D.Double(1, 1);
         Point2D p2 = new Point2D.Double(2, 2);
         Point2D p3 = new Point2D.Double(3, 3);
@@ -92,79 +113,31 @@ public class JSONBobTester {
         pl1.add(p3);
 
         List<Movement> movements = new ArrayList<Movement>();
-        Movement m1 = new Movement(pl1);
-        Movement m2 = new Movement(pl2);
-        movements.add(m1);
-        movements.add(m2);
-
-        StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor", "health");
-        List<StatsSingleMultiplier> ssmList = new ArrayList<StatsSingleMultiplier>();
-        ssmList.add(ssm1);
-
-        List<StatsTotalLogic> stlList = new ArrayList<StatsTotalLogic>();
-        StatsTotalLogic s1 = new StatsTotalLogic("actor", "health", ssmList);
-        stlList.add(s1);
-
-        ActionConclusion ac = new ReceiverToInventoryConclusion();
+        movements.add(createNewMovement(pl1, pl2));
+        movements.add(createNewMovement(pl2, pl3));
 
         List<Action> actions = new ArrayList<Action>();
-        Action a1 = new ConcreteAction("kill", pl3, pl2, stlList, ac);
-        actions.add(a1);
-
+        actions.add(createNewAction(pl1, pl2));
+        actions.add(createNewAction(pl2, pl3));
+        
         Stats s = new Stats();
         Inventory i = new Inventory();
 
-        Piece piece = new Piece("/resources/images/rcd.png",
-                                movements, actions, s, p3, 5, 6, 7, i);
-
+        Piece piece = new Piece(DEFAULT_DUVALL, movements, actions, s, p, 5, 6, 7, i);
         return piece;
     }
 
-    public Grid createNewGrid () {
-        Grid grid1 = new SquareGrid();
-        return grid1;
-    }
-
-    public Patch createNewPatch () {
-        Point2D p1 = new Point2D.Double(1, 1);
-        Patch patch = new SquarePatch(3, "/resources/images/rcd.png", p1);
+    public Patch createNewPatch (Point2D p) {
+        Patch patch = new SquarePatch(3, DEFAULT_DUVALL, p);
         return patch;
     }
 
-    public Movement createNewMovement () {
-        Point2D p1 = new Point2D.Double(1, 1);
-        Point2D p2 = new Point2D.Double(2, 2);
-        Point2D p3 = new Point2D.Double(3, 3);
-
-        List<Point2D> pl1 = new ArrayList<Point2D>();
-        pl1.add(p1);
-        pl1.add(p2);
-
-        List<Point2D> pl2 = new ArrayList<Point2D>();
-        pl1.add(p1);
-        pl1.add(p3);
-
+    public Movement createNewMovement (List<Point2D> pl1, List<Point2D> pl2) {
         Movement m1 = new Movement(pl1, pl2);
         return m1;
     }
 
-    public Action createNewAction () {
-        Point2D p1 = new Point2D.Double(1, 1);
-        Point2D p2 = new Point2D.Double(2, 2);
-        Point2D p3 = new Point2D.Double(3, 3);
-
-        List<Point2D> pl1 = new ArrayList<Point2D>();
-        pl1.add(p1);
-        pl1.add(p2);
-
-        List<Point2D> pl2 = new ArrayList<Point2D>();
-        pl1.add(p1);
-        pl1.add(p3);
-
-        List<Point2D> pl3 = new ArrayList<Point2D>();
-        pl1.add(p2);
-        pl1.add(p3);
-
+    public Action createNewAction (List<Point2D> pl1, List<Point2D> pl2) {
         StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor", "health");
         List<StatsSingleMultiplier> ssmList = new ArrayList<StatsSingleMultiplier>();
         ssmList.add(ssm1);
@@ -175,8 +148,7 @@ public class JSONBobTester {
 
         ActionConclusion ac = new ReceiverToInventoryConclusion();
 
-        Action a1 = new ConcreteAction("kill", pl3, pl2, stlList, ac);
+        Action a1 = new ConcreteAction("kill", pl1, pl2, stlList, ac);
         return a1;
     }
-
 }

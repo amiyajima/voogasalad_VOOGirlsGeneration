@@ -41,11 +41,11 @@ public class JSONBob extends Menu {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new ExtensionFilter("JSON Files", "*.json"));
         File file = fileChooser.showSaveDialog(myStage);
-        JSONManager myGameBuilder = new JSONManager();
+        JSONManager myJSONmanager = new JSONManager();
 //TODO  for now since game construction in front end doesn't work, this uses
 //      the JSONBobTester to create a default game
         JSONBobTester jb = new JSONBobTester();
-        myGameBuilder.writeToJSON(jb.createNewGame(), file.getAbsolutePath());
+        myJSONmanager.writeToJSON(jb.createNewGrid(), file.getAbsolutePath());
     }
     
     private void handleLoad () {

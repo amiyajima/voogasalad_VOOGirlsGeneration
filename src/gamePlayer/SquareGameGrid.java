@@ -60,12 +60,10 @@ public class SquareGameGrid extends GameGrid {
     @Override
     protected void initializeGrid () {
 
-
-        myCurrentLocation = new Point2D.Double(0, 0);
-
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
-
+        myCurrentLocation = new Point2D.Double(0,0);
+        
+        for(int i=0; i<r; i++){
+            for(int j=0; j<c; j++){
                 StackPane sp = new StackPane();
                 sp.setAlignment(Pos.CENTER);
                 sp.setPrefHeight(500 / c);
@@ -116,7 +114,9 @@ public class SquareGameGrid extends GameGrid {
         highlightCurrentLocation(r);
     }
 
-    private void addKeyboardController () {
+    
+    private void addKeyboardController(){
+
         Game game = new Game();
         KeyboardController KBControl = new KeyboardController();
         KBControl.setActionKeyControl(this, game);
