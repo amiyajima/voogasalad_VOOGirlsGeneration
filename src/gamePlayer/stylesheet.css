@@ -26,7 +26,7 @@
 }
 
 .gridpane{
-	-fx-grid-lines-visible: true;
+	-fx-grid-lines-visible: false;
 	-fx-alignment: center;
 	-fx-background-color: #D1DBBD;
 }

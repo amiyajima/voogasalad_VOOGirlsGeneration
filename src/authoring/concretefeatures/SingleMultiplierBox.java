@@ -12,7 +12,7 @@ import javafx.scene.layout.HBox;
  * from a reference, scaled by a positive or negative number. This GUI element allows the
  * user to specify the scalar and reference stat (or constant).
  * 
- * @author Mike Zhu
+ * @author Mike Zhu, Jennie Ju
  *
  */
 public class SingleMultiplierBox extends HBox{
@@ -31,7 +31,7 @@ public class SingleMultiplierBox extends HBox{
 		Label x = new Label("x");
 		myStatRef = new ChoiceBox<String>();
 		myStatRef.setPrefWidth(MULTIPLIER_BOX_WIDTH);
-		myStatRef.getItems().addAll("Actor", "Receiver", "Constant");
+		myStatRef.getItems().addAll("actor", "receiver", "constant");
 
 		myScale = new TextField();
 		myStat = new TextField();
@@ -45,6 +45,12 @@ public class SingleMultiplierBox extends HBox{
 		getChildren().addAll(myScale, x, myStatRef, myStat);
 	}
 
+	/**
+	 * Gets the StatsSingleMultiplier class from the view
+	 * (connects this view to the data)
+	 * @return StatsSingleMultiplier - explains how to modify
+	 * the stat
+	 */
 	public StatsSingleMultiplier getSingleMultipler() {
 		//TODO: error checking to make sure this is a double
 		double multiplier = 0;

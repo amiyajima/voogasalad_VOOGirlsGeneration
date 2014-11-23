@@ -13,20 +13,20 @@ public abstract class Patch {
 	private int myTypeID;
 	private Point2D myLoc;
 	private String myImageLocation;
-	private ImageView myImageView;
+	private transient ImageView myImageView;
+
 
 	/**
-	 * Constructor for patch
-	 * @param state of patch (this is more like type of patch: ex. fire, water, etc)
-	 * @param id of patch (each patch has its unique ID)
-	 * @param imageLocation of patch(form like "images/myImage.jpg")
+	 * Constructor
+	 * 
+	 * @param typeID ID for this type of patch
+	 * @param imageLocation imageLocation of patch(form like "images/myImage.jpg")
 	 * @param p coordinate of patch
 	 */
-
 	public Patch(int typeID, String imageLocation, Point2D p) {
 		myTypeID = typeID;
 		myImageLocation = imageLocation;
-		myImageView = new ImageView(new Image(imageLocation));
+		myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
 		myLoc = p;
 	}
 
