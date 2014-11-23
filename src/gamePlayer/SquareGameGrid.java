@@ -1,21 +1,13 @@
 package gamePlayer;
 
-import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
-import java.util.Set;
-import javafx.event.EventHandler;
 import java.awt.geom.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -67,14 +59,14 @@ public class SquareGameGrid extends GameGrid {
                 sp.setAlignment(Pos.CENTER);
                 sp.setPrefHeight(500 / c);
                 sp.setPrefWidth(500 / this.r);
-                Rectangle r = new Rectangle(500 / this.r - 10, 500 / c - 10);
-                r.setFill(Color.BLACK);
-                
-                sp.getChildren().add(r);
+//                Rectangle r = new Rectangle(500 / this.r - 10, 500 / c - 10);
+//                r.setFill(Color.BLACK);
+//                
+//                sp.getChildren().add(r);
                 this.add(sp, i, j);
-                r.setOnMouseEntered(event -> onHover(r));
-                r.setOnMouseExited(event -> r.setFill(Color.BLACK));
-                
+//                r.setOnMouseEntered(event -> onHover(r));
+//                r.setOnMouseExited(event -> r.setFill(Color.BLACK));
+//                
                 
 
             }
@@ -103,7 +95,9 @@ public class SquareGameGrid extends GameGrid {
         
         });
         pieces.keySet().forEach(point -> {
-//            this.add(pieces.get(point).getImageView(), (int) point.getX(), (int) point.getY());
+            this.add(pieces.get(point).getImageView(), (int) point.getX(), (int) point.getY());
+            
+            
             Node n = get((int)point.getX(), (int)point.getY());
             ((StackPane)n).getChildren().add(pieces.get(point).getImageView());
         });

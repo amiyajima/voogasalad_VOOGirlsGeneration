@@ -19,5 +19,12 @@ public class MoveCountRule extends Rule {
 	public boolean conditionsMet(int turnCount) {
 		return (turnCount < myNumMoves);
 	}
+	
+	/**
+	 * FOR TESTING PURPOSES
+	 */
+	public String toString(){
+	    return "moves left are" + myNumMoves;
+	}
 
 }

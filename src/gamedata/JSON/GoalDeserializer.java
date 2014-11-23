@@ -1,20 +1,18 @@
 package gamedata.JSON;
 
 import com.google.gson.*;
-import gamedata.rules.Rule;
+import gamedata.goals.Goal;
 import java.lang.reflect.Type;
 
 /**
- * Abstract deserializer that allows the JSON Manager to deserialize an abstract object.
- * 
- * currently works for ruledata
+ * Custom deserializer that deserializes the Goal class
  * @author annamiyajima
  *
  */
-public class AbstractDeserializer implements JsonDeserializer<Rule> {
+public class GoalDeserializer implements JsonDeserializer<Goal> {
 
     @Override
-    public Rule deserialize (JsonElement json,
+    public Goal deserialize (JsonElement json,
                                         Type typeOfT,
                                         JsonDeserializationContext context)
 
