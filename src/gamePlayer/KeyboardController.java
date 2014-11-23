@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 
 public class KeyboardController {
     Player myCurrentPlayer;
@@ -56,8 +56,8 @@ public class KeyboardController {
      * @param movementKeyMap
      * @param gameScene
      */
-    public void setMovementKeyControl(GameGrid grid, Game game, Point2D currentLocation) {
-      myCurrentLocation = currentLocation;
+    public void setMovementKeyControl(ViewController vc, GameGrid grid, Game game) {
+        myCurrentLocation = new Point2D.Double(0.0,0.0);
 //        Map<KeyCode, Point2D> movementKeyMap = myCurrentPlayer.getMovementKeyMap();
       
       //for testing!!!
@@ -74,9 +74,12 @@ public class KeyboardController {
                for (KeyCode kc: movementKeyList){
                    if (key.getCode() == kc) {
 //                       getting something like {0,1}, {-1,1}, etc
-                       myCurrentLocation = new Point2D.Double(myCurrentLocation.getX() + movementKeyMap.get(kc).getX(),
+                       
+                       Point2D newCurrentLocation = new Point2D.Double(myCurrentLocation.getX() + movementKeyMap.get(kc).getX(),
                                                        myCurrentLocation.getY() + movementKeyMap.get(kc).getY()); 
-                       System.out.println(myCurrentLocation);
+                       System.out.println(newCurrentLocation);
+                       vc.highlightCurrentLocation(Color.BLUE, myCurrentLocation, newCurrentLocation);
+                       myCurrentLocation = newCurrentLocation;
                    }
                }
             }

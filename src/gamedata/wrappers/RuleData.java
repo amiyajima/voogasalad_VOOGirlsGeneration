@@ -6,19 +6,20 @@ import java.util.List;
 
 
 /**
- * Rule wrapper
+ * Rule wrapper for Rules in GridData
  * 
  * @author Rica
  *
  */
 public class RuleData {
-    private List<MoveCountRule> myRules;
 
-    public RuleData (List<MoveCountRule> rules) {
+    private List<RuleDataIndividual> myRules;
+
+    public RuleData (List<RuleDataIndividual> rules) {
         myRules = rules;
     }
 
-    public List<MoveCountRule> getRules () {
+    public List<RuleDataIndividual> getRules () {
         return myRules;
     }
 

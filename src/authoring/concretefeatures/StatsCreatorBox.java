@@ -14,6 +14,8 @@ import javafx.scene.layout.HBox;
 public class StatsCreatorBox extends HBox {
 	private static final int STAT_BOX_WIDTH = 100;
 	private static final int VALUE_BOX_WIDTH = 100;
+	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
+	
 	private static final String STAT_PROMPT = "Enter stat name";
 	private static final String VALUE_PROMPT = "Enter stat value (real number)";
 	protected static final String DEFAULT_STAT = "";
@@ -29,6 +31,7 @@ public class StatsCreatorBox extends HBox {
 	 */
 	public StatsCreatorBox() {
 		initStatsCreatorBox();
+		
 	}
 	
 	/**
@@ -58,10 +61,15 @@ public class StatsCreatorBox extends HBox {
 	 */
 	public double getStatValue() {
 		// TODO: Throw error for not a double value
+		if (myValueField.getText().trim().equals("")) {
+			return DEFAULT_VALUE;
+		}
 		return Double.parseDouble(myValueField.getText());
 	}
 
 	private void initStatsCreatorBox() {
+		getStylesheets().add(STYLESHEET);
+		getStyleClass().add("hbox");
 		Label equalsLabel = new Label(EQUALS_LABEL);
 		myStatField = new TextField();
 		myValueField = new TextField();

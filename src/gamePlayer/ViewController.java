@@ -4,19 +4,26 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
 import gamedata.gamecomponents.SquareGrid;
+
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import java.util.ResourceBundle;
+
 import javafx.event.EventHandler;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
 import tests.JSONBobTester;
 import javafx.geometry.Pos;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
@@ -26,6 +33,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -51,7 +59,7 @@ public class ViewController{
     
     public static final String AUDIO_TEST = "/src/gamePlayer/audioTest.mp3";
     public static final String CURSOR_ATTACK_TEST = "/src/gamePlayer/Cursor_attack.png";
-    public static final String CURSOR_GLOVE_TEST = "/src/gamePlayer/pointer-glove.png";
+    public static final String CURSOR_GLOVE_TEST = "/gamePlayer/pointer-glove.png";
 
     private ResourceBundle myLanguages;
     private Stage myStage;
@@ -63,6 +71,7 @@ public class ViewController{
     private BorderPane myPopup;
     private Scene scoreScene;
     private Scene myPopupScene;
+    private Scene myScene;
     
     private Point2D myCurrentLocation;
     private Piece activePiece;
@@ -97,7 +106,6 @@ private AudioClip myAudio;
        //initialize audio
         
        // myGrid = new SquareGameGrid(8,8);
-        
         
         loadFXML(GAMESPACE_FXML, myGameSpace);
         loadFXML(INITIALSCENE_FXML, myInitialScene);
@@ -139,7 +147,9 @@ private AudioClip myAudio;
         l.setText(file.getName().substring(0, file.getName().length()-5));
         l.setOnAction(event->{
            // myModel.initializeGame(file.getName());
-            myStage.setScene(new Scene(myGameSpace));
+            
+           
+           
             myAudio = new AudioClip(new File(System.getProperty("user.dir")+AUDIO_TEST).toURI().toString());
             myAudio.play();
 //              try {
@@ -193,11 +203,16 @@ private AudioClip myAudio;
         myModel = JSBTester.createNewGame();
         myGrid= new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel.getCurrentLevel().getGrid().getColumn());
         myGameSpace.setCenter(myGrid);
-        myStage.setScene(new Scene(myGameSpace));
+        myGrid.populateGrid(myModel.getCurrentLevel().getGrid().getPatches(), myModel.getCurrentLevel().getGrid().getPieces());
+
+        myScene = new Scene(myGameSpace);
+        myStage.setScene(myScene);
+
         setGridState(new SelectState(this));
-        
-      //  myGrid.requestFocus();
-//        addTestKeyboardControl();
+        changeCursor(CURSOR_GLOVE_TEST);
+        getGrid().setOnMouseExited(event->{changeCursor(CURSOR_GLOVE_TEST);});
+        myGrid.requestFocus();
+        addKeyboardController();
 //        addLocationSelector();
 //        
     }
@@ -387,11 +402,7 @@ private AudioClip myAudio;
     protected Game getGame(){
         return myModel;
     }
-    
-//    protected BorderPane getGameSpae(){
-//        return myGameSpace;
-//    }
-    
+       
     protected void setActivePiece(Piece piece){
         activePiece = piece;
     }
@@ -430,6 +441,10 @@ private AudioClip myAudio;
 
     }
 
+    protected void changeCursor(String string){
+        Image image = new Image(string);
+        myScene.setCursor(new ImageCursor(image, image.getWidth()/4,image.getWidth()/4));
+    }
     private void addDropShadow(Node n, Color c){
         DropShadow ds = new DropShadow(); 
         ds.setRadius(10.0);
@@ -437,8 +452,9 @@ private AudioClip myAudio;
         ds.setOffsetY(3.0);
         ds.setColor(c);
         n.setEffect(ds); 
+        System.out.println("drop shadow");
     }
-
+    
 
     /**
      * Highlight the effect range of an action if to be applied at a given position
@@ -460,35 +476,29 @@ private AudioClip myAudio;
 
         });
     }
-//    
-//    @FXML
-//    private void testGame() {
-//        JSONBobTester JSBTester = new JSONBobTester();
-//        myModel = JSBTester.createNewGame();
-//        myStage.setScene(new Scene(myGameSpace));
-//        
-//        myGrid.requestFocus();
-//        
-//        myCurrentLocation = new Point2D.Double(0.0,0.0);
-//        addKeyboardController();
-//        addLocationSelector();
-//        
-//    }
     
-    private void addLocationSelector () {
-        myGrid.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle (MouseEvent event) {
-//                myCurrentLocation = new Point2D.Double(r.getX(), r.getY());
-                System.out.println("hi");
-            }
-        });
-    }
-
+//    private void addLocationSelector () {
+//        myGrid.setOnMousePressed(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle (MouseEvent event) {
+////                myCurrentLocation = new Point2D.Double(r.getX(), r.getY());
+//                System.out.println("hi");
+//            }
+//        });
+//    }
     
     private void addKeyboardController(){
         KeyboardController KBControl = new KeyboardController();
 //        KBControl.setActionKeyControl(myGrid, myModel);
-        KBControl.setMovementKeyControl(myGrid, myModel, myCurrentLocation);
+        KBControl.setMovementKeyControl(this, myGrid, myModel);
     }
+    
+    public void highlightCurrentLocation(Color c, Point2D oldLocation, Point2D newLocation){
+        Node oldNode = myGrid.get((int)oldLocation.getX(), (int)oldLocation.getY());
+        Node newNode = myGrid.get((int)newLocation.getX(), (int)newLocation.getY());
+        oldNode.setEffect(null);
+        addDropShadow(newNode, c);
+    }
+
+   
 }

@@ -72,12 +72,13 @@ public class JSONManager {
         Gson gson = builder.create();
 
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
-
+        
         RuleData r = gson.fromJson(br, RuleData.class);
         System.out.println(r.toString());
 
         GoalData g = gson.fromJson(br, GoalData.class);
         System.out.println(g.toString());
+        System.out.println(r.getRules());
 
         PlayerData myPlayers = gson.fromJson(br, PlayerData.class);
         System.out.println(myPlayers.getPlayers().get(0).getID());

@@ -30,6 +30,7 @@ public class IndividualUnitEditor extends PopupWindow {
     private final String NAME = "Piece Editor";
     private final String NAME_LABEL = "Name: ";
     private final String STAT_EDITOR_LABEL = "Stats Editor";
+    private final String INVENTORY_EDITOR_LABEL = "Inventory Editor";
     private final String PLAYER_LABEL = "Player ID";
     private final String ROTATION_LABEL = "Image Rotation (degrees)";
     private GridPieceWrapper myUnitWrapper;
@@ -93,6 +94,17 @@ public class IndividualUnitEditor extends PopupWindow {
                 p.show();
             }
         });
+        
+        Button inventoryEditor = new Button(INVENTORY_EDITOR_LABEL);
+        statsEdit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent e) {
+                // TODO: pops up stats editor screen
+                // PopupWindow p = new InventoryEditor();
+                PopupWindow p = new GameCreator();
+                p.show();
+            }
+        });
 
         // get the data from above and set them when OK is pressed
         Button create = new Button("OK");
@@ -118,6 +130,10 @@ public class IndividualUnitEditor extends PopupWindow {
         setScene(new Scene(box));
     }
 
+    /**
+     * This method is to display name of the piece in the editor
+     * @param names contain labels
+     */
     private void initNameField (HBox names) {
         // TODO: pieceName should be really its name... needs to be changed later
         // String pieceName = Integer.toString(myUnitWrapper.getTypeID());
@@ -127,6 +143,10 @@ public class IndividualUnitEditor extends PopupWindow {
         names.getChildren().addAll(nameLable);
     }
 
+    /**
+     * This method is to display image of the piece
+     * @param images contains imageview 
+     */
     private void initImage (HBox images) {
         // TODO: ImageView pieceImage = myUnitWrapper.getImageView();
         ImageView pieceImage =
@@ -134,6 +154,11 @@ public class IndividualUnitEditor extends PopupWindow {
         images.getChildren().addAll(pieceImage);
     }
 
+    /**
+     * This method is to allow users to choose player for individual units
+     * @param players is an hbox
+     * @param playersChoice contain playerID choices
+     */
     private void initPlayerID (HBox players, ChoiceBox<Integer> playersChoice) {
         Label playersLable = new Label(PLAYER_LABEL);
         playersLable.setPadding(UIspecs.topRightPadding);
@@ -146,6 +171,11 @@ public class IndividualUnitEditor extends PopupWindow {
         players.getChildren().addAll(playersLable, playersChoice);
     }
 
+    /**
+     * This method is to allow users to rotate img of a unit
+     * @param imageRotation is an hbox displayed in the editor
+     * @param rotationAmt where the user types in amt to be rototated
+     */
     private void initRot (HBox imageRotation, TextField rotationAmt) {
         Label rotationLable = new Label(ROTATION_LABEL);
         rotationLable.setPadding(UIspecs.topRightPadding);

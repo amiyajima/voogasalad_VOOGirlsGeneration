@@ -36,6 +36,8 @@ import gameengine.player.Player;
 public class JSONBobTester {
     private static String DEFAULT_DUVALL = "/resources/images/rcd.png";
     private static String DEFAULT_BUNNY = "/resources/images/bbybunny.jpeg";
+    //private static String DEFAULT_DUVALL = "file:/C:/Users/Rica/Desktop/bbybunny.jpeg";
+    //private static String DEFAULT_BUNNY = "file:/C:/Users/Rica/Desktop/rcd.png";
     
     public JSONBobTester () {
         
@@ -138,6 +140,8 @@ public class JSONBobTester {
 
     public Movement createNewMovement (List<Point2D> pl1, List<Point2D> pl2) {
         Movement m1 = new Movement(pl1, pl2);
+        m1.addRule(new MoveCountRule(3));
+        m1.addRule(new MoveCountRule(5));
         return m1;
     }
 
