@@ -20,6 +20,7 @@ public class ApplyState implements IGridState{
     @Override
     public void onClick(Piece piece) {
         Piece actor = myController.getActivePiece();
+        System.out.println(actor.toString()+"  "+ piece.getTypeID());
         myController.getActiveAction().doBehavior(actor, piece);
         System.out.println("dobehavior called");
             myController.setGridState(new SelectState(myController));

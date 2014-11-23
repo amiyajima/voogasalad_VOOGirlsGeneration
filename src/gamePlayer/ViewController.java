@@ -194,9 +194,9 @@ public class ViewController{
         myStage.setScene(myScene);
         initializeGrid();
 
-       
+
     }
-    
+
     private void initializeGrid(){
         myGrid= new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel.getCurrentLevel().getGrid().getColumn());
         myGameSpace.setCenter(myGrid);
@@ -207,16 +207,16 @@ public class ViewController{
         setGridState(new SelectState(this));
         changeCursor(CURSOR_GLOVE_TEST);
         getGrid().setOnMouseExited(event->{changeCursor(CURSOR_GLOVE_TEST);});
-
-        addKeyboardController();
-        addMouseController();
+        //
+        //        addKeyboardController();
+        //        addMouseController();
     }
 
 
     @FXML
     private void doSettings(){
-        
-        
+
+
 
     }
 
@@ -235,9 +235,9 @@ public class ViewController{
 
     @FXML
     protected void cancelPopup(){
-        
-        
-        
+
+
+
 
     }
 
@@ -253,7 +253,7 @@ public class ViewController{
 
     @FXML
     private void save(){
-        
+
 
     }
 
@@ -285,12 +285,12 @@ public class ViewController{
     protected void restartGame () {
 
 
-//        Stage stage = new Stage();
-//
-//        stage.setScene(myPopupScene);
-//        stage.show();
-//        stage.setAlwaysOnTop(true);
-       initializeGrid();
+        //        Stage stage = new Stage();
+        //
+        //        stage.setScene(myPopupScene);
+        //        stage.show();
+        //        stage.setAlwaysOnTop(true);
+        initializeGrid();
 
 
     }
@@ -341,7 +341,7 @@ public class ViewController{
      * @param piece
      */
     protected void updateActions (Piece piece){
-       // setActivePiece(piece);
+        // setActivePiece(piece);
 
         controlPane.getChildren().clear();
         ArrayList<Label> actions = new ArrayList<Label>();
@@ -367,7 +367,7 @@ public class ViewController{
 
     private void setOnClick(){
         myGrid.setOnMouseClicked(event->{ 
-        performAction(event.getX(), event.getY());});
+            performAction(event.getX(), event.getY());});
     }
 
 
@@ -424,7 +424,7 @@ public class ViewController{
         return activeAction;
     }
 
-    
+
     /**
      * Highlight the tiles that represent the possible range of the action
      * selected
@@ -434,11 +434,14 @@ public class ViewController{
         System.out.println(activePiece.getLoc());
         System.out.println(activeAction.getActionRange(activePiece.getLoc()));
         myGrid.clearEffect();
-        activeAction.getActionRange(activePiece.getLoc()).forEach(point->{ Node n = myGrid.get((int)point.getX(),(int)point.getY());
+        activeAction.getActionRange(activePiece.getLoc()).forEach(point->{
 
-        addDropShadow(n, Color.YELLOW);
-        myGrid.getChildren().get((int)point.getX()*(int)point.getY()).setOnMouseEntered(event->highLightEffectRange(n, Color.RED));
-        n.setOnMouseExited(event->highLightEffectRange(n, Color.TRANSPARENT));
+            if(point.getX()<myGrid.getRow() && point.getY()<myGrid.getCol() && point.getX()>0 && point.getY()>0){
+                Node n = myGrid.get((int)point.getX(),(int)point.getY());
+
+                addDropShadow(n, Color.YELLOW);
+                n.setOnMouseEntered(event->highLightEffectRange(n, Color.RED));
+                n.setOnMouseExited(event->highLightEffectRange(n, Color.TRANSPARENT));}
 
         });
 
@@ -457,7 +460,7 @@ public class ViewController{
             ds.setOffsetY(0.0);
             ds.setColor(c);
             n.setEffect(ds); 
-           // System.out.println("drop shadow");
+            // System.out.println("drop shadow");
         }
     }
 
@@ -469,9 +472,8 @@ public class ViewController{
      */
     private void highLightEffectRange(Node n, Color c){
 
-        //  activeAction.getEffectRange();
         System.out.println(activeAction.getEffectRange());
-       // System.out.println(myGrid.getRowIndex(n)+" , "+ myGrid.getColumnIndex(n));
+        // System.out.println(myGrid.getRowIndex(n)+" , "+ myGrid.getColumnIndex(n));
         activeAction.getEffectRange().forEach(point->{Node node = myGrid.get(myGrid.getRowIndex(n)+ (int)point.getX(), myGrid.getColumnIndex(n)+ (int)point.getY());
 
         //        if(c ==Color.TRANSPARENT && node.getEffect()!=null){
@@ -485,15 +487,7 @@ public class ViewController{
         });
     }
 
-    //    private void addLocationSelector () {
-    //        myGrid.setOnMousePressed(new EventHandler<MouseEvent>() {
-    //            @Override
-    //            public void handle (MouseEvent event) {
-    ////                myCurrentLocation = new Point2D.Double(r.getX(), r.getY());
-    //                System.out.println("hi");
-    //            }
-    //        });
-    //    }
+
 
     private void addKeyboardController(){
         KeyboardController KBControl = new KeyboardController();
@@ -512,9 +506,9 @@ public class ViewController{
         oldNode.setEffect(null);
         addDropShadow(newNode, c);
     }
-    
+
     public void highlightLocation(Color c, Node oldNode, Node newNode){
-//        oldNode.setEffect(null);
+        //        oldNode.setEffect(null);
         addDropShadow(newNode,c);
     }
 
