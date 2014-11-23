@@ -29,7 +29,6 @@ import javafx.scene.shape.Rectangle;
 // TODO: maybe observing Game instead of Level.? (need access to player scores.)
 
 public class SquareGameGrid extends GameGrid {
-    private Point2D myCurrentLocation;
 
     public static final String TEST_IMAGE = "/src/voogasalad_VOOGirlsGeneration/turtle.png";
 
@@ -60,7 +59,6 @@ public class SquareGameGrid extends GameGrid {
     @Override
     protected void initializeGrid () {
 
-        myCurrentLocation = new Point2D.Double(0,0);
         
         for(int i=0; i<r; i++){
             for(int j=0; j<c; j++){
@@ -68,7 +66,6 @@ public class SquareGameGrid extends GameGrid {
                 sp.setAlignment(Pos.CENTER);
                 sp.setPrefHeight(500 / c);
                 sp.setPrefWidth(500 / this.r);
-//                sp.requestFocus();
                 Rectangle r = new Rectangle(500 / this.r - 10, 500 / c - 10);
                 r.setFill(Color.BLACK);
                 sp.getChildren().add(r);
@@ -76,17 +73,14 @@ public class SquareGameGrid extends GameGrid {
                 this.add(sp, i, j);
                 r.setOnMouseEntered(event -> onHover(r));
                 r.setOnMouseExited(event -> r.setFill(Color.BLACK));
-
-
-//                addTestKeyboardControl(r);
-//                // addKeyboardController(r);
-//                addLocationSelector(r);
+                
+                
 
             }
 
         }
-
     }
+    
     
     
 //  private void highlightCurrentLocation (Rectangle r) {
