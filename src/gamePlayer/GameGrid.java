@@ -43,8 +43,8 @@ public abstract class GameGrid extends GridPane implements Observer{
  
     protected Node get(int row, int col){
         Node result = null;
-        ObservableList<Node> childrens = this.getChildren();
-        for(Node node : childrens) {
+        ObservableList<Node> children = this.getChildren();
+        for(Node node : children) {
           // System.out.println("myGrid has a node at:" + myGrid.getRowIndex(node));
             if(this.getRowIndex(node) == row && this.getColumnIndex(node) == col) {
                 result = node;
