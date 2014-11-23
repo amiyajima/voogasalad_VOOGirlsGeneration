@@ -17,7 +17,7 @@ import authoring.concretefeatures.menus.JSONBob;
  */
 public class VoogaMain {
     public static void testJSONwrite() {
-        String saveTo = "C:\\Users\\Rica\\Desktop\\game_test.json";
+        String saveTo = "src/resources/json/FINALSAMPLE.json";
         JSONManager myJSONmanager = new JSONManager();
         JSONBobTester jb = new JSONBobTester();
         myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
