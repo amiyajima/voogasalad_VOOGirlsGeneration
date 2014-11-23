@@ -12,7 +12,7 @@ import java.awt.geom.Point2D;
  */
 public class SquareGrid extends Grid {
     private static final int DEFAULT_PATCH_TYPE = 1;
-    private static final String DEFAULT_PATCH_IMAGE_LOCATION = "";
+    private static final String DEFAULT_PATCH_IMAGE_LOCATION = "/resources/images/rcd.png";
     /**
      * Default constructor for square grid
      */

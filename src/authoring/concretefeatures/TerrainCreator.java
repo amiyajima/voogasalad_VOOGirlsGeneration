@@ -90,6 +90,7 @@ public class TerrainCreator extends PopupWindow {
 				File selectedFile = fileChoice.showOpenDialog(null);
 				if(selectedFile != null){
 				myImageLocation = selectedFile.toURI().toString();
+				System.out.println(myImageLocation);
 					Image image = new Image(myImageLocation);
 					icon.setImage(image);
 					icon.setFitHeight(40);

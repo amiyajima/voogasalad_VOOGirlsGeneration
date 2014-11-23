@@ -34,7 +34,6 @@ import gameengine.player.Player;
  */
 public class JSONBobTester {
     public JSONBobTester () {
-        createNewGame();
     }
 
     /**
@@ -46,12 +45,12 @@ public class JSONBobTester {
         System.out.println("JSONBobTester is running");
 
         List<Player> myPlayers = new ArrayList<Player>();
-        Player myPlayer1 = new Player();
-        Player myPlayer2 = new Player();
+        Player myPlayer1 = new Player(12345);
+        Player myPlayer2 = new Player(54321);
         myPlayers.add(myPlayer1);
         myPlayers.add(myPlayer2);
 
-        Grid grid1 = new SquareGrid();
+        Grid grid = createNewGrid();
 
         List<Rule> myRules = new ArrayList<Rule>();
         Rule rule1 = new MoveCountRule(3);
@@ -64,14 +63,13 @@ public class JSONBobTester {
         myGoals.add(goal2);
 
         List<Level> myLevels = new ArrayList<Level>();
-        Level level1 = new Level(grid1, myGoals, myRules);
-        Level level2 = new Level(grid1, myGoals, myRules);
+        Level level1 = new Level(grid, myGoals, myRules);
+        Level level2 = new Level(grid, myGoals, myRules);
         myLevels.add(level1);
         myLevels.add(level2);
 
         Game myGame = new Game(myPlayers, myLevels);
         return myGame;
-
     }
 
     public Piece createNewPiece () {

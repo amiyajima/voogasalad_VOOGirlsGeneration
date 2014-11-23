@@ -1,6 +1,7 @@
 package gamedata;
 
 import gamedata.gamecomponents.Game;
+import gameengine.player.Player;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -60,6 +61,11 @@ public class JSONManager {
 
         PlayerData myPlayers = gson.fromJson(br, PlayerData.class);
         System.out.println(myPlayers.getPlayers().get(0).getID());
+        System.out.println(myPlayers.getPlayers().get(1).getID());
+        
+        Player player = gson.fromJson(br, Player.class);
+        System.out.println(player.toString());
+        
 
         LevelData myLevels = gson.fromJson(br, LevelData.class);
         System.out.println(myLevels.getLevels().size());
