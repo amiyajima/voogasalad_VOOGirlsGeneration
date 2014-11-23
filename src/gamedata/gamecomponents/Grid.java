@@ -36,7 +36,7 @@ public abstract class Grid {
 
     private static final int DEFAULT_PATCH_STATE = 1;
     private static final int DEFAULT_PATCH_ID = 1;
-    private static final String DEFAULT_PATCH_IMAGE_LOCATION = "";
+    private static final String DEFAULT_PATCH_IMAGE_LOCATION = "/resources/images/rcd.png";
 
     /**
      * Default constructor for square grid
@@ -51,11 +51,12 @@ public abstract class Grid {
      * @param y number of columns
      */
     public Grid (int row, int column) {
-        System.out.println(row + " " + column);
-        System.out.println("Grid constructor called");
+        //Default constructor
+        System.out.println("Grid: " + row + " " + column);
+        System.out.println("Grid: Grid constructor called");
         myRow = row;
         myColumn = column;
-        System.out.println("Rows and columns set: " + myRow + myColumn);
+        System.out.println("Grid: Rows and columns set: " + myRow +", "+ myColumn);
         myPatches = new HashMap<Point2D, Patch>();
         myPieces = new HashMap<Point2D, Piece>();
 
@@ -67,7 +68,7 @@ public abstract class Grid {
                 myPatches.put(new Point2D.Double(x, y), patch);
             }
         }
-        System.out.println("Patches filled: " + myPatches.size());
+        System.out.println("Grid: Patches filled: " + myPatches.size());
 
         Point2D p1 = new Point2D.Double(1, 1);
         Point2D p2 = new Point2D.Double(2, 2);
@@ -123,7 +124,7 @@ public abstract class Grid {
             }
         }
 
-        System.out.println("Pieces filled: " + myPieces.size());
+        System.out.println("Grid: Pieces filled: " + myPieces.size());
     }
 
     /**
