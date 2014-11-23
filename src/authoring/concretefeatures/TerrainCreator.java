@@ -1,10 +1,14 @@
 package authoring.concretefeatures;
 
 import gamedata.gamecomponents.Patch;
+
 import java.io.File;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+
 import java.awt.geom.Point2D;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +16,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -126,6 +131,13 @@ public class TerrainCreator extends PopupWindow {
                 Button delButton = new Button(DELETE);
 
                 TerrainEntry entry = new TerrainEntry(terrain, icon, name, editButton, delButton);
+                entry.setStyle("-fx-cursor: hand");
+        		entry.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        			@Override
+        			public void handle(MouseEvent m){
+        				myLibrary.selectTerrain(terrain);
+        			}
+        		});
 
                 delButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
