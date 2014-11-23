@@ -1,17 +1,14 @@
 package authoring.concretefeatures;
 
 import gamedata.gamecomponents.Patch;
-
 import java.io.File;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-
 import java.awt.geom.Point2D;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,6 +38,8 @@ public class TerrainCreator extends PopupWindow {
     private final String DELETE = "Delete";
     private final String EDIT = "Edit";
     private LibraryView myLibrary;
+    private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
+
 
     private int myState;
     private String myImageLocation;
@@ -68,6 +67,11 @@ public class TerrainCreator extends PopupWindow {
 
     @Override
     protected void initialize () {
+    
+        ScrollPane root = new ScrollPane();
+        Scene scene = new Scene(root, WIDTH, HEIGHT);
+        scene.getStylesheets().add(STYLESHEET);
+        
         VBox box = new VBox();
         box.setPadding(UIspecs.allPadding);
         box.setSpacing(5);
