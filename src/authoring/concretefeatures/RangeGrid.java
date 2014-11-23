@@ -26,6 +26,8 @@ public class RangeGrid extends GridView{
 	private Grid sampleGrid;
 	private int centerX;
 	private int centerY;
+	private List<Point2D> myRange;
+	private int test;
 
 	public RangeGrid(int width, int height, int tileSize) {
 		super(width, height, tileSize);	
@@ -68,42 +70,60 @@ public class RangeGrid extends GridView{
 	 * as Point2D in a list.
 	 * @return The list of relative coordination relative to the center tile. 
 	 */
-	public List<Point2D> getSelectedList(){
+	public List<Point2D> rangeSelectedList(){
 		List<Point2D> selectedList=new ArrayList<Point2D>();
 		
 		for (int i=0;i<sampleGrid.getGridWidth();i++) {
 			for (int j=0;j<sampleGrid.getGridHeight();j++) {
 				if(sampleGrid.getGridTiles()[i][j].getSelected()){
 					selectedList.add(new Point2D.Double(i-centerX,centerY-j));
+//					System.out.println((i-centerX)+","+(centerY-j));
 				}
 			}
 		}
+		myRange=selectedList;
+//		test=4;
+//		System.out.println("t="+ test);
 		return selectedList;
+
 	}
 	
-	public List<Point2D> getCenterColumn(){
+	public List<Point2D> rangeCenterColumn(){
 		List<Point2D> selectedList=new ArrayList<Point2D>();
 
 		for (int i=0;i<sampleGrid.getGridHeight();i++) {
 			selectedList.add(new Point2D.Double(0,i-centerY));
+//			System.out.println("0,"+(i-centerY));
 		}
+//		test=1;
+//		System.out.println("t="+ test);
+		myRange=selectedList;
 		return selectedList;
 	}
 	
-	public List<Point2D> getCenterRow(){
+	public List<Point2D> rangeCenterRow(){
 		List<Point2D> selectedList=new ArrayList<Point2D>();
 		for (int i=0;i<sampleGrid.getGridWidth();i++) {
 			selectedList.add(new Point2D.Double(i-centerX,0));
 		}
+//		test=2;
+//		System.out.println("t="+ test);
+
+		myRange=selectedList;
 		return selectedList;
+
 	} 
 	
-	public List<Point2D> getCenterRowColumnCross(){
+	public List<Point2D> rangeCenterRowColumnCross(){
 		List<Point2D> selectedList=new ArrayList<Point2D>();
 		Set<Point2D> selectedSet=new HashSet<Point2D>();
-		selectedSet.addAll(getCenterColumn());
-		selectedSet.addAll(getCenterRow());
+		selectedSet.addAll(rangeCenterColumn());
+		selectedSet.addAll(rangeCenterRow());
 		selectedList.addAll(selectedSet);
+		myRange=selectedList;
+//		test=3;
+//		System.out.println("t="+ test);
+
 		return selectedList;
 	}
 	
@@ -118,6 +138,15 @@ public class RangeGrid extends GridView{
 				});
 			}
 		}
+	}
+	
+	public void setRange(List<Point2D> range){
+		myRange=range;
+//		test=0;
+	}
+	
+	public List<Point2D> getRange(){
+		return myRange;
 	}
 	
 }
