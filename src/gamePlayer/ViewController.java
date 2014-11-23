@@ -3,7 +3,6 @@ package gamePlayer;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,16 +11,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
-
-import authoring.concretefeatures.menus.JSONBobTester;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
 import java.awt.geom.Point2D;
+
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
+
+import tests.JSONBobTester;
 
 import javafx.geometry.Pos;
 import javafx.scene.Node;

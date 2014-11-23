@@ -17,6 +17,7 @@ import java.util.Map;
 
 /**
  * Contains the Grid defined for a level. Contains the pieces and patches
+ * 
  * @Author Jesse Ling, Sandy Lee
  * 
  */
@@ -32,7 +33,7 @@ public abstract class Grid {
 
     protected Map<Point2D, Patch> myPatches;
     protected Map<Point2D, Piece> myPieces;
-    
+
     private static final int DEFAULT_PATCH_STATE = 1;
     private static final int DEFAULT_PATCH_ID = 1;
     private static final String DEFAULT_PATCH_IMAGE_LOCATION = "";
@@ -57,17 +58,17 @@ public abstract class Grid {
         System.out.println("Rows and columns set: " + myRow + myColumn);
         myPatches = new HashMap<Point2D, Patch>();
         myPieces = new HashMap<Point2D, Piece>();
-        
+
         for (int x = 0; x < myColumn; x++) {
             for (int y = 0; y < myRow; y++) {
                 Patch patch = new SquarePatch(DEFAULT_PATCH_STATE,
-                                              DEFAULT_PATCH_ID, DEFAULT_PATCH_IMAGE_LOCATION,
+                                              DEFAULT_PATCH_IMAGE_LOCATION,
                                               new Point2D.Double(x, y));
                 myPatches.put(new Point2D.Double(x, y), patch);
             }
         }
         System.out.println("Patches filled: " + myPatches.size());
-        
+
         Point2D p1 = new Point2D.Double(1, 1);
         Point2D p2 = new Point2D.Double(2, 2);
         Point2D p3 = new Point2D.Double(3, 3);
@@ -93,17 +94,17 @@ public abstract class Grid {
         StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor", "health");
         List<StatsSingleMultiplier> ssmList = new ArrayList<StatsSingleMultiplier>();
         ssmList.add(ssm1);
-        
+
         List<StatsTotalLogic> stlList = new ArrayList<StatsTotalLogic>();
         StatsTotalLogic s1 = new StatsTotalLogic("actor", "health", ssmList);
         stlList.add(s1);
 
         ActionConclusion ac = new ReceiverToInventoryConclusion();
-        
+
         List<Action> actions = new ArrayList<Action>();
         Action a1 = new ConcreteAction("kill", pl3, pl2, stlList, ac);
         actions.add(a1);
-        
+
         Stats s = new Stats();
         Inventory i = new Inventory();
 
@@ -111,17 +112,17 @@ public abstract class Grid {
             for (int y = 0; y < myRow; y++) {
                 Piece piece;
                 if (x == y) {
-                    piece = new Piece("/resources/images/rcd.png", 
-                                             movements, actions, s, p3, 5, 6, 7, i);
+                    piece = new Piece("/resources/images/rcd.png",
+                                      movements, actions, s, p3, 5, 6, 7, i);
                 }
                 else {
-                    piece = new Piece("/resources/images/bbybunny.jpeg", 
-                                             movements, actions, s, p2, 1, 1, 1, i);
+                    piece = new Piece("/resources/images/bbybunny.jpeg",
+                                      movements, actions, s, p2, 1, 1, 1, i);
                 }
                 myPieces.put(piece.getLoc(), piece);
             }
         }
-        
+
         System.out.println("Pieces filled: " + myPieces.size());
     }
 
@@ -266,5 +267,5 @@ public abstract class Grid {
     public Map<Point2D, Piece> getPieces () {
         return myPieces;
     }
-    
+
 }
