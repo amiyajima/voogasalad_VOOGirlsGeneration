@@ -219,6 +219,8 @@ private AudioClip myAudio;
         getGrid().setOnMouseExited(event->{changeCursor(CURSOR_GLOVE_TEST);});
         myGrid.requestFocus();
         addKeyboardController();
+        addMouseController();
+        
 //        addLocationSelector();
 //        
     }
@@ -335,8 +337,10 @@ private AudioClip myAudio;
   
         statsPane.getChildren().clear();
         ArrayList<Text> stats = new ArrayList<Text>();
+
         piece.getStats().getStatNames().forEach(key->stats.
                                                         add(new Text(key+ ":  "+ piece.getStats().getValue(key))));
+
         statsPane.getChildren().addAll(stats);
 
     }
@@ -451,9 +455,9 @@ private AudioClip myAudio;
     }
     private void addDropShadow(Node n, Color c){
         DropShadow ds = new DropShadow(); 
-        ds.setRadius(10.0);
-        ds.setOffsetX(3.0);
-        ds.setOffsetY(3.0);
+        ds.setRadius(30.0);
+        ds.setOffsetX(0.0);
+        ds.setOffsetY(0.0);
         ds.setColor(c);
         n.setEffect(ds); 
         System.out.println("drop shadow");
@@ -496,6 +500,11 @@ private AudioClip myAudio;
         KeyboardController KBControl = new KeyboardController();
 //        KBControl.setActionKeyControl(myGrid, myModel);
         KBControl.setMovementKeyControl(this, myGrid, myModel);
+    }
+    
+    private void addMouseController(){
+        MouseController MouseControl = new MouseController();
+        MouseControl.selectCurrentLocation(this, myGrid);
     }
     
     public void highlightCurrentLocation(Color c, Point2D oldLocation, Point2D newLocation){

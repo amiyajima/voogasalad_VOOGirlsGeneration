@@ -1,6 +1,6 @@
 package tests;
 
-import java.awt.geom.Point2D;
+import java.awt.geom.Point2D; 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -17,7 +17,6 @@ import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import gamedata.gamecomponents.SquareGrid;
-import gamedata.gamecomponents.SquarePatch;
 import gamedata.goals.Goal;
 import gamedata.goals.PlayerPiecesRemovedGoal;
 import gamedata.rules.MoveCountRule;
@@ -134,7 +133,7 @@ public class JSONBobTester {
 
     public Patch createNewPatch (Point2D p) {
         Random r = new Random();
-        Patch patch = new SquarePatch(r.nextInt(50)+100, DEFAULT_BUNNY, p);
+        Patch patch = new Patch(r.nextInt(50)+100, DEFAULT_BUNNY, p);
         return patch;
     }
 

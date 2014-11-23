@@ -88,23 +88,22 @@ public class RangeGrid extends GridView{
 
 	}
 	
-	public void rangeCenterColumn(){
+	public void rangeColumn(int column,boolean toChoose){
 		for (int i=0;i<sampleGrid.getGridHeight();i++) {
-			sampleGrid.getTile(centerX, i).selecteTile();
+			sampleGrid.getTile(centerX+column, i).selecteTile(toChoose);
 		}
 	}
 	
-	public void rangeCenterRow(){
+	public void rangeRow(int row,boolean toChoose){
 		for (int i=0;i<sampleGrid.getGridWidth();i++) {
-			sampleGrid.getTile(i, centerY).selecteTile();
+			sampleGrid.getTile(i, centerY-row).selecteTile(toChoose);
 		}
-
 	} 
 	
-	public void rangeRadius(int radius){
+	public void rangeRadius(int radius,boolean toChoose){
 		for (int i=(centerX-radius);i<=(centerX+radius);i++){
 			for (int j=(centerY-radius);j<=(centerY+radius);j++){
-				sampleGrid.getTile(i, j).selecteTile();
+				sampleGrid.getTile(i, j).selecteTile(toChoose);
 			}
 		}
 	}

@@ -1,10 +1,9 @@
 package gamedata.JSON;
 
 import gamedata.gamecomponents.Game;
-import gamedata.gamecomponents.Grid;
-import gamedata.gamecomponents.Patch;
-import gamedata.gamecomponents.Piece;
+import gamedata.goals.Goal;
 import gamedata.rules.Rule;
+import gamedata.wrappers.GoalData;
 import gamedata.wrappers.LevelData;
 import gamedata.wrappers.PlayerData;
 import gamedata.wrappers.RuleData;
@@ -25,8 +24,6 @@ import com.google.gson.GsonBuilder;
  * @author annamiyajima, Rica Zhang
  */
 public class JSONManager {
-    final static String DEFAULT_JSON_DIRECTORY = "./src/resources/";
-    final static String SAMPLE_JSON = "./src/resources/test.json";
 
     /**
      * Constructor
@@ -41,7 +38,13 @@ public class JSONManager {
      * @param game
      */
     public void writeToJSON (Game g, String fileName) {
-        Gson gson = new Gson();
+        // Gson gson = new Gson();
+
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Rule.class, new RuleAdapter());
+        builder.registerTypeAdapter(Goal.class, new GoalDeserializer());
+        Gson gson = builder.create();
+
         String json = gson.toJson(g);
         System.out.println("JSONManager: game converted to json!");
         try {
@@ -64,15 +67,21 @@ public class JSONManager {
         System.out.println("JSONManager: read method called");
         // Gson gson = new Gson();
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Rule.class, new AbstractDeserializer());
+        builder.registerTypeAdapter(Rule.class, new RuleAdapter());
+        builder.registerTypeAdapter(Goal.class, new GoalDeserializer());
         Gson gson = builder.create();
 
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
         
-        RuleData r = gson.fromJson(br, RuleData.class);
-        System.out.println(r.toString());
-        System.out.println(r.getRules());
+        Rule rule = gson.fromJson(br,  Rule.class);
+        System.out.println(rule.toString());
         
+        RuleData ruledata = gson.fromJson(br, RuleData.class);
+        System.out.println(ruledata.toString());
+
+        GoalData g = gson.fromJson(br, GoalData.class);
+        System.out.println(g.toString());
+
         PlayerData myPlayers = gson.fromJson(br, PlayerData.class);
         System.out.println(myPlayers.getPlayers().get(0).getID());
         System.out.println(myPlayers.getPlayers().get(1).getID());
