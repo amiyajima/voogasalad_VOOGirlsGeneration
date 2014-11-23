@@ -26,13 +26,11 @@ public class PieceData implements AuthoringData<Piece> {
 	@Override
 	public void add(Piece piece) {
 		myPieces.add(piece);
-		System.out.println("Success!");
 	}
 
 	@Override
 	public void remove(Piece piece) {
 		myPieces.remove(piece);
-		System.out.println("Success!!");
 	}
 
 	@Override
