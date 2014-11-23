@@ -8,6 +8,8 @@ import java.util.List;
  * Defines a path(An arrangement of Points that must be traveresed during a
  * movement) for movement.
  * 
+ * DEPRECIATED
+ * 
  * @author Jesse, Rica
  *
  */

@@ -18,11 +18,14 @@
                   <content>
                     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="500.0" prefHeight="472.0" prefWidth="500.0">
                            <children>
-                              <VBox fx:id="controlPane" layoutX="26.0" layoutY="24.0" prefHeight="448.0" prefWidth="158.0">
+                              <VBox fx:id="controlPane" layoutX="26.0" layoutY="24.0" prefHeight="448.0" prefWidth="158.0" spacing="30.0">
                                  <children>
                                     <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="183.0" text="Action1" />
                                     <Button mnemonicParsing="false" onAction="#highLightActionRange" prefHeight="26.0" prefWidth="183.0" text="Action2" />
                                  </children>
+                                 <padding>
+                                    <Insets bottom="20.0" top="20.0" />
+                                 </padding>
                               </VBox>
                            </children>
                         </AnchorPane>

@@ -42,11 +42,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.layout.StackPane;
 
 
 
 public class ViewController{
-    
+
     public static final String GAMESPACE_FXML = "gameSpace.fxml";
     public static final String INITIALSCENE_FXML = "initialScene.fxml";
     public static final String SCOREBOARD_FXML = "scoreBoard.fxml";
@@ -56,9 +57,9 @@ public class ViewController{
     public static final String POPUP_FXML = "popup.fxml";
     public static final String ENGLISH = "English";
     public static final String Chinese = "Chinese";
-    
+
     public static final String AUDIO_TEST = "/src/gamePlayer/audioTest.mp3";
-    public static final String CURSOR_ATTACK_TEST = "/src/gamePlayer/Cursor_attack.png";
+    public static final String CURSOR_ATTACK_TEST = "/gamePlayer/Cursor_attack.png";
     public static final String CURSOR_GLOVE_TEST = "/gamePlayer/pointer-glove.png";
 
     private ResourceBundle myLanguages;
@@ -72,12 +73,12 @@ public class ViewController{
     private Scene scoreScene;
     private Scene myPopupScene;
     private Scene myScene;
-    
+
     private Point2D myCurrentLocation;
     private Piece activePiece;
     private Action activeAction;
- //   private Audio backGroundMusic;
-private AudioClip myAudio;
+    //   private Audio backGroundMusic;
+    private AudioClip myAudio;
     @FXML
     protected VBox statsPane;
 
@@ -89,24 +90,24 @@ private AudioClip myAudio;
     private Text gameName;
     @FXML
     private VBox scores;
-    
+
 
     private IGridState gridState;
 
     public ViewController(Stage s){
         myStage = s;
-       myInitialScene = new VBox();
-       myGameSpace = new BorderPane();
-       myScoreBoard = new VBox();
-       myPopup = new BorderPane();
-      //  myModel = new Game();
-       //TODO:
-       //uses JSON reader that takes in the file chosen by user and instantiate 
-       // a new Game object. 
-       //initialize audio
-        
-       // myGrid = new SquareGameGrid(8,8);
-        
+        myInitialScene = new VBox();
+        myGameSpace = new BorderPane();
+        myScoreBoard = new VBox();
+        myPopup = new BorderPane();
+        //  myModel = new Game();
+        //TODO:
+        //uses JSON reader that takes in the file chosen by user and instantiate 
+        // a new Game object. 
+        //initialize audio
+
+        // myGrid = new SquareGameGrid(8,8);
+
         loadFXML(GAMESPACE_FXML, myGameSpace);
         loadFXML(INITIALSCENE_FXML, myInitialScene);
 
@@ -114,18 +115,18 @@ private AudioClip myAudio;
         loadFXML(SCOREBOARD_FXML, myScoreBoard);
         scoreScene = new Scene(myScoreBoard);
         myPopupScene = new Scene(myPopup);
-       // myPopup = FXMLLoader.load(getClass().getResource(POPUP_FXML));
+        // myPopup = FXMLLoader.load(getClass().getResource(POPUP_FXML));
 
-        
-      //  myGameSpace.setCenter(myGrid);
-     //   myGrid.setAlignment(Pos.CENTER);
+
+        //  myGameSpace.setCenter(myGrid);
+        //   myGrid.setAlignment(Pos.CENTER);
         myStage.setScene(new Scene(myInitialScene));
 
-            try {
-                newGame();
-            }
-            catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            }
+        try {
+            newGame();
+        }
+        catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+        }
 
         myStage.show();
 
@@ -142,32 +143,32 @@ private AudioClip myAudio;
      */
     protected void newGame () throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         List<File> games = getGames();
-       
+
         games.forEach(file->{ MenuItem l = new MenuItem();
         l.setText(file.getName().substring(0, file.getName().length()-5));
         l.setOnAction(event->{
-           // myModel.initializeGame(file.getName());
-            
-           
-           
+            // myModel.initializeGame(file.getName());
+
+
+
             myAudio = new AudioClip(new File(System.getProperty("user.dir")+AUDIO_TEST).toURI().toString());
             myAudio.play();
-//              try {
-//                backGroundMusic = new Audio (System.getProperty("user.dir")+AUDIO_TEST);
-//            } catch (Exception e) {
-//                // TODO Auto-generated catch block
-//                //e.printStackTrace();
-//            }
-//              backGroundMusic.play();
+            //              try {
+            //                backGroundMusic = new Audio (System.getProperty("user.dir")+AUDIO_TEST);
+            //            } catch (Exception e) {
+            //                // TODO Auto-generated catch block
+            //                //e.printStackTrace();
+            //            }
+            //              backGroundMusic.play();
         });
         l.getStyleClass().add("button");
-            newGameButton.getItems().add(l);
+        newGameButton.getItems().add(l);
 
         });
-   
-      
+
+
     }
-    
+
     private void loadFXML(String url, Node n){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(url));
         fxmlLoader.setController(this);
@@ -178,7 +179,7 @@ private AudioClip myAudio;
         catch(IOException exception) {
             throw new RuntimeException(exception);
         }
-        
+
     }
 
     /**
@@ -192,7 +193,7 @@ private AudioClip myAudio;
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(new ExtensionFilter("JSON", "*.json"));
         File f = fc.showOpenDialog(myStage);
-        
+
         // uses JSON reader to generate an instance of the game
 
     }
@@ -203,26 +204,36 @@ private AudioClip myAudio;
         myModel = JSBTester.createNewGame();
         myGrid= new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel.getCurrentLevel().getGrid().getColumn());
         myGameSpace.setCenter(myGrid);
+        myGrid.setAlignment(Pos.CENTER);
         myGrid.populateGrid(myModel.getCurrentLevel().getGrid().getPatches(), myModel.getCurrentLevel().getGrid().getPieces());
-
+        //        myGrid.getChildren().forEach(node->{
+        //            node.setOnMouseClicked(event->
+        //            {   Piece piece = getPiece(findPosition(event.getX(), event.getY()));
+        //                updateActions(piece);
+        //                updateStats(piece);});});
+        setOnClick();
         myScene = new Scene(myGameSpace);
         myStage.setScene(myScene);
 
         setGridState(new SelectState(this));
         changeCursor(CURSOR_GLOVE_TEST);
         getGrid().setOnMouseExited(event->{changeCursor(CURSOR_GLOVE_TEST);});
-        myGrid.requestFocus();
+        //  myGrid.requestFocus();
         addKeyboardController();
-//        addLocationSelector();
-//        
+        addMouseController();
+
+        //        addLocationSelector();
+        //        
     }
 
-    
+
     @FXML
     private void doSettings(){
+        
+        
 
     }
-    
+
     /**
      * loads the players and their scores of the current game;
      * display the Highest score in the high score display at the bottom
@@ -233,48 +244,52 @@ private AudioClip myAudio;
         stage.setScene(scoreScene);
         loadScores();
         stage.show();
-        
+
     }
-    
+
     @FXML
     protected void cancelPopup(){
         
+        
+        
+
     }
-    
+
     protected void loadScores(){
-        gameName.setText(gameName.getText()+"stubName");
-        
+        gameName.setText(gameName.getText()+myModel.toString());
+
         //TODO: add in scores
-      //  myModel.getPlayers().forEach(player-> scores.getChildren().
-       //                              add(new Text(player.getID()+": ")));
-        
-        
+        //  myModel.getPlayers().forEach(player-> scores.getChildren().
+        //                              add(new Text(player.getID()+": ")));
+
+
     }
-    
+
     @FXML
     private void save(){
         
+
     }
-    
-    
+
+
     /**
      * The method to get all json files from the resources directory that 
      * stores all the games user has defined from the authoring environment
      */
     private List<File> getGames(){
-        
-       List<File> gameList =  new ArrayList<File>();
-        
+
+        List<File> gameList =  new ArrayList<File>();
+
         File files = new File(System.getProperty("user.dir")+GAME_LOCATION);
 
-            for (File f: files.listFiles()){
+        for (File f: files.listFiles()){
 
-                if(f.getName().endsWith(".json")){
-                    
-                    gameList.add(f);
-                }
+            if(f.getName().endsWith(".json")){
+
+                gameList.add(f);
             }
-            return gameList;
+        }
+        return gameList;
     }
     /**
      * the method to restart the game; it asks the use whether to save the current game
@@ -284,14 +299,14 @@ private AudioClip myAudio;
     protected void restartGame () {
 
         //System.out.println("restarting game");
-       // myModel=new Game();
-        
+        // myModel=new Game();
+
         Stage stage = new Stage();
-       
+
         stage.setScene(myPopupScene);
         stage.show();
         stage.setAlwaysOnTop(true);
-       // stage.addEventHandler(arg0, arg1);
+        // stage.addEventHandler(arg0, arg1);
         // Generate a new Game Object.
 
     }
@@ -326,12 +341,13 @@ private AudioClip myAudio;
      * @param piece
      */
     protected void updateStats(Piece piece){
-  
+
         statsPane.getChildren().clear();
         ArrayList<Text> stats = new ArrayList<Text>();
-        piece.getStats().getStatsMap().keySet().forEach(key->stats.
-                                                        add(new Text(key+ ":  "+ piece.getStats().
-                                                         getStatsMap().get(key))));
+
+        piece.getStats().getStatNames().forEach(key->stats.
+                                                add(new Text(key+ ":  "+ piece.getStats().getValue(key))));
+
         statsPane.getChildren().addAll(stats);
 
     }
@@ -341,10 +357,11 @@ private AudioClip myAudio;
      * @param piece
      */
     protected void updateActions (Piece piece){
-        
+       // setActivePiece(piece);
+
         controlPane.getChildren().clear();
         ArrayList<Label> actions = new ArrayList<Label>();
-        piece.getActions().forEach(action->{Label l = new Label(action.toString()); 
+        piece.getActions().forEach(action->{Label l = new Label(action.toString());
         l.setOnMouseClicked(event->bindAction(action));
         actions.add(l);});
 
@@ -358,14 +375,17 @@ private AudioClip myAudio;
      */
     private void bindAction(Action action){
         setActiveAction(action);
+
         highLightActionRange();
 
         setGridState(new ApplyState(this));
     }
 
     private void setOnClick(){
-        myGrid.setOnMouseClicked(event->{performAction(event.getX(), event.getY());});
+        myGrid.setOnMouseClicked(event->{ 
+        performAction(event.getX(), event.getY());});
     }
+
 
     /**
      * Perform the actions of a click at position (x,y) on game grid
@@ -373,7 +393,7 @@ private AudioClip myAudio;
      * @param y
      */
     private void performAction (double x, double y) {
-         gridState.onClick(getPiece(findPosition(x,y)));
+        gridState.onClick(getPiece(findPosition(x,y)));
 
     }
 
@@ -388,13 +408,16 @@ private AudioClip myAudio;
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
         int yCor = (int) (y/patchHeight);
-        return new Point2D.Double(xCor,yCor);
+        addDropShadow(myGrid.get(yCor, xCor), Color.PURPLE);
+        return new Point2D.Double(yCor,xCor);
     }
 
-        private Piece getPiece(Point2D loc){
-            return myModel.getCurrentLevel().getGrid().getPiece(loc);
-            
-        }
+    private Piece getPiece(Point2D loc){
+        return myModel.getCurrentLevel().getGrid().getPiece(loc);
+
+
+    }
+
     protected GameGrid getGrid(){
         return myGrid;
     }
@@ -402,7 +425,7 @@ private AudioClip myAudio;
     protected Game getGame(){
         return myModel;
     }
-       
+
     protected void setActivePiece(Piece piece){
         activePiece = piece;
     }
@@ -417,27 +440,22 @@ private AudioClip myAudio;
         return activeAction;
     }
 
+    
     /**
      * Highlight the tiles that represent the possible range of the action
      * selected
      */
     @FXML
     private void highLightActionRange(){
-        //TODO: getActionRange()shouldn't need a location. action is contained in piece, which knows its own location.
-        //  activeAction.getActionRange(activePiece.getLoc());
+        System.out.println(activePiece.getLoc());
+        System.out.println(activeAction.getActionRange(activePiece.getLoc()));
+        activeAction.getActionRange(activePiece.getLoc()).forEach(point->{ Node n = myGrid.get((int)point.getX(),(int)point.getY());
 
-
-        //temparary stub for testing highlight;
-        activeAction.getActionRange(activePiece.getLoc()).forEach(point->{ Node n = myGrid.get((int)point.getX(), (int)point.getY());
         addDropShadow(n, Color.YELLOW);
-        n.setOnMouseEntered(event->highLightEffectRange(n, Color.RED));
+        myGrid.getChildren().get((int)point.getX()*(int)point.getY()).setOnMouseEntered(event->highLightEffectRange(n, Color.RED));
         n.setOnMouseExited(event->highLightEffectRange(n, Color.TRANSPARENT));
 
         });
-
-
-
-
 
     }
 
@@ -446,15 +464,18 @@ private AudioClip myAudio;
         myScene.setCursor(new ImageCursor(image, image.getWidth()/4,image.getWidth()/4));
     }
     private void addDropShadow(Node n, Color c){
-        DropShadow ds = new DropShadow(); 
-        ds.setRadius(30.0);
-        ds.setOffsetX(0.0);
-        ds.setOffsetY(0.0);
-        ds.setColor(c);
-        n.setEffect(ds); 
-        System.out.println("drop shadow");
+
+        if(n != null){
+            DropShadow ds = new DropShadow(); 
+            ds.setRadius(30.0);
+            ds.setOffsetX(0.0);
+            ds.setOffsetY(0.0);
+            ds.setColor(c);
+            n.setEffect(ds); 
+           // System.out.println("drop shadow");
+        }
     }
-    
+
 
     /**
      * Highlight the effect range of an action if to be applied at a given position
@@ -464,41 +485,53 @@ private AudioClip myAudio;
     private void highLightEffectRange(Node n, Color c){
 
         //  activeAction.getEffectRange();
+        System.out.println(activeAction.getEffectRange());
+       // System.out.println(myGrid.getRowIndex(n)+" , "+ myGrid.getColumnIndex(n));
         activeAction.getEffectRange().forEach(point->{Node node = myGrid.get(myGrid.getRowIndex(n)+ (int)point.getX(), myGrid.getColumnIndex(n)+ (int)point.getY());
 
-        if(c ==Color.TRANSPARENT && node.getEffect()!=null){
-            node.setEffect(null);
-        }
-        else{
-            addDropShadow(node, c);
-        }
+        //        if(c ==Color.TRANSPARENT && node.getEffect()!=null){
+        //            node.setEffect(null);
+        //        }
+        //        else{
+        addDropShadow(node, c);
+        // }
 
 
         });
     }
-    
-//    private void addLocationSelector () {
-//        myGrid.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle (MouseEvent event) {
-////                myCurrentLocation = new Point2D.Double(r.getX(), r.getY());
-//                System.out.println("hi");
-//            }
-//        });
-//    }
-    
+
+    //    private void addLocationSelector () {
+    //        myGrid.setOnMousePressed(new EventHandler<MouseEvent>() {
+    //            @Override
+    //            public void handle (MouseEvent event) {
+    ////                myCurrentLocation = new Point2D.Double(r.getX(), r.getY());
+    //                System.out.println("hi");
+    //            }
+    //        });
+    //    }
+
     private void addKeyboardController(){
         KeyboardController KBControl = new KeyboardController();
-//        KBControl.setActionKeyControl(myGrid, myModel);
+        //        KBControl.setActionKeyControl(myGrid, myModel);
         KBControl.setMovementKeyControl(this, myGrid, myModel);
     }
-    
+
+    private void addMouseController(){
+        MouseController MouseControl = new MouseController();
+        MouseControl.selectCurrentLocation(this, myGrid);
+    }
+
     public void highlightCurrentLocation(Color c, Point2D oldLocation, Point2D newLocation){
         Node oldNode = myGrid.get((int)oldLocation.getX(), (int)oldLocation.getY());
         Node newNode = myGrid.get((int)newLocation.getX(), (int)newLocation.getY());
         oldNode.setEffect(null);
         addDropShadow(newNode, c);
     }
+    
+    public void highlightLocation(Color c, Node oldNode, Node newNode){
+//        oldNode.setEffect(null);
+        addDropShadow(newNode,c);
+    }
 
-   
+
 }

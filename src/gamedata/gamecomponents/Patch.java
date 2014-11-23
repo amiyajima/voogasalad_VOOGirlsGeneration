@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
  * @author Sandy Lee
  *
  */
-public abstract class Patch {
+public class Patch {
 
 	private int myTypeID;
 	private Point2D myLoc;

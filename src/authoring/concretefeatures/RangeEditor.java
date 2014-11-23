@@ -64,46 +64,28 @@ public class RangeEditor extends PopupWindow {
 	@Override
 	protected void initialize() {
 		VBox box = new VBox();
-//		HBox specifedSelection=new HBox();
+		HBox specifedSelection=new HBox();
 		VBox selection = new VBox();
 		selection.setMinHeight(50);
 		HBox sizeChooser = new HBox();
 		sizeChooser.setMinHeight(50);
 
 		// Range Selections
+		
+		
 		Label targetLabel = new Label("Select Range");
-		ComboBox<String> targetChoice = new ComboBox<>();
+		ChoiceBox<String> targetChoice = new ChoiceBox<>();
 		targetChoice.getItems().addAll(COLUMN, ROW, RADIUS,
 				CUSTOM);
-		targetChoice.getSelectionModel().selectedItemProperty()
-				.addListener(new ChangeListener<String>() {
-					@Override
-					public void changed(
-							ObservableValue<? extends String> observable,
-							String oldValue, String newValue) {
-						
-						switch (newValue) {
-						case COLUMN:
-							mySampleGridView.rangeCenterColumn();
-							break;
-						case ROW:
-							mySampleGridView.rangeCenterRow();
-							break;
-						case RADIUS:
-							mySampleGridView.rangeRadius(1);
-							break;
-						case CUSTOM:
-							mySampleGridView.rangeSelectedList();
-							break;
-//						default:
-//							mySampleGridView.rangeCenterColumn();
-						}
-						
-					}
-
-				});
-		
+		TextField specifiedData = new TextField();
+		Button choose= new Button("choose");
+		Button delete=new Button("Delete");
+		choose.setOnAction(new selectRangeHandler(targetChoice,specifiedData,choose));
+		delete.setOnAction(new selectRangeHandler(targetChoice,specifiedData,delete));
+			
 		selection.getChildren().addAll(targetLabel, targetChoice);
+
+		specifedSelection.getChildren().addAll(selection,specifiedData,choose,delete);
 
 		// Select Button
 		Button select = new Button("Select");
@@ -113,7 +95,7 @@ public class RangeEditor extends PopupWindow {
 		VBox times = new VBox();
 		VBox vertical = new VBox();
 		Label HRadiusLabel = new Label("Horizontal Radius");
-		Label multiply = new Label("    X      ");
+		Label multiply = new Label("    X     ");
 		Label VRadiusLabel = new Label("Vertical Radius");
 		TextField HRadius = new TextField();
 		TextField VRadius = new TextField();
@@ -144,7 +126,7 @@ public class RangeEditor extends PopupWindow {
 				mySampleGridView.update(myGridWidthNumber, myGridHeightNumber,
 						myTileSize);
 				box.getChildren().addAll(sizeChooser, enter,
-						mySampleGridView, selection,select);
+						mySampleGridView, specifedSelection,select);
 			}
 		});
 
@@ -154,6 +136,40 @@ public class RangeEditor extends PopupWindow {
 
 		box.getChildren().addAll(sizeChooser, enter);
 		setScene(new Scene(box));
+	}
+	
+	private class selectRangeHandler implements EventHandler<ActionEvent> {
+		ChoiceBox<String> targetChoice;
+		TextField specifiedData;
+		Button button;
+		public selectRangeHandler(ChoiceBox<String> tc,TextField sd,Button b){
+			targetChoice=tc;
+			specifiedData=sd;
+			button=b;
+		}
+		@Override
+		public void handle(ActionEvent event) {
+			String chosen=targetChoice.getValue().toString();
+			int parameter=Integer.parseInt(specifiedData.getText());
+			boolean toChoose=(button.getText().equals("choose"))? true:false;
+			switch (chosen) {
+			case COLUMN:
+				mySampleGridView.rangeColumn(parameter,toChoose);
+				break;
+			case ROW:
+				mySampleGridView.rangeRow(parameter,toChoose);
+				break;
+			case RADIUS:
+				mySampleGridView.rangeRadius(parameter,toChoose);
+				break;
+			case CUSTOM:
+				mySampleGridView.rangeSelectedList();
+				break;
+//			default:
+//				mySampleGridView.rangeCenterColumn();
+			}	
+		}
+		
 	}
 
 	/**
@@ -175,7 +191,6 @@ public class RangeEditor extends PopupWindow {
 			for (Point2D p:range){
 				System.out.println(p.getX()+","+p.getY());
 			}
-
 			current.close();
 		}
 	}

@@ -95,9 +95,8 @@ public abstract class Grid {
      * @param coord
      *        of piece
      */
-    public void removePiece (Point2D coord) {
-        Piece piece = myPieces.get(coord);
-        myPieces.remove(coord, piece);
+    public void removePiece (Piece p) {
+        myPieces.remove(p);
     }
 
     /**
@@ -105,9 +104,8 @@ public abstract class Grid {
      * 
      * @param coord of remove
      */
-    public void removePatch (Point2D coord) {
-        Patch patch = myPatches.get(coord);
-        myPatches.remove(coord, patch);
+    public void removePatch (Patch p) {
+        myPatches.remove(p);
     }
 
     public int getColumn () {

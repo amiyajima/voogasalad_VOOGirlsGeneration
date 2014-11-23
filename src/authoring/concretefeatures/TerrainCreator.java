@@ -1,7 +1,6 @@
 package authoring.concretefeatures;
 
-import gamedata.gamecomponents.Patch;
-import gamedata.gamecomponents.SquarePatch;
+import gamedata.gamecomponents.Patch; 
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -105,7 +104,7 @@ public class TerrainCreator extends PopupWindow {
             @Override
             public void handle (ActionEvent click) {
 
-                Patch terrain = new SquarePatch(myState, myImageLocation, myLoc);
+                Patch terrain = new Patch(myState, myImageLocation, myLoc);
                 Hyperlink link = new Hyperlink(terrainName.getText());
                 link.setTranslateY(10);
                 ;

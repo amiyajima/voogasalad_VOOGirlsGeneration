@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,34 +20,32 @@ import authoring_environment.UIspecs;
 
 
 /**
- * 
+ *  Creates a popup for editing individual units that are on the grid.
  * 
  * @author Sandy Lee
  **/
 public class IndividualUnitEditor extends PopupWindow {
 
-    private final int HEIGHT = 400;
-    private final int WIDTH = 400;
+    private final int WINDOW_HEIGHT = 400;
+    private final int WINDOW_WIDTH = 400;
     private final String NAME = "Piece Editor";
     private final String NAME_LABEL = "Name: ";
     private final String STAT_EDITOR_LABEL = "Stats Editor";
     private final String INVENTORY_EDITOR_LABEL = "Inventory Editor";
     private final String PLAYER_LABEL = "Player ID";
     private final String ROTATION_LABEL = "Image Rotation (degrees)";
+    private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
     private GridPieceWrapper myUnitWrapper;
     private Piece myUnit;
 
-    /**
-     * Constructor that sets the dimensions of the TerrainCreator GUI component
-     * and initializes it.
-     * 
-     * @param library : Library to which terrain will be added.
-     */
 
+    /**
+     * Constructor for the individual unit editor pop up
+     */
     public IndividualUnitEditor () {
         // myUnitWrapper = pieceWrapper;
-        setHeight(HEIGHT);
-        setWidth(WIDTH);
+        setHeight(WINDOW_HEIGHT);
+        setWidth(WINDOW_WIDTH);
         setTitle(NAME);
         initialize();
     }
@@ -54,6 +53,11 @@ public class IndividualUnitEditor extends PopupWindow {
     // after the piece class gets edited, wrapper class should be switched to piece class
     @Override
     protected void initialize () {
+
+        ScrollPane root = new ScrollPane();
+        Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+        scene.getStylesheets().add(STYLESHEET);
+
         VBox box = new VBox();
         box.setPadding(UIspecs.allPadding);
         box.setSpacing(5);
@@ -94,9 +98,9 @@ public class IndividualUnitEditor extends PopupWindow {
                 p.show();
             }
         });
-        
-        Button inventoryEditor = new Button(INVENTORY_EDITOR_LABEL);
-        statsEdit.setOnAction(new EventHandler<ActionEvent>() {
+
+        Button inventoryEdit = new Button(INVENTORY_EDITOR_LABEL);
+        inventoryEdit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent e) {
                 // TODO: pops up stats editor screen
@@ -125,13 +129,16 @@ public class IndividualUnitEditor extends PopupWindow {
             }
         });
 
-        box.getChildren().addAll(names, images, players, imageRotation, imageFlip, statsEdit,
+        box.getChildren().addAll(names, images, players, imageRotation, imageFlip, inventoryEdit,
+                                 statsEdit,
                                  create);
-        setScene(new Scene(box));
+        root.setContent(box);
+        setScene(scene);
     }
 
     /**
      * This method is to display name of the piece in the editor
+     * 
      * @param names contain labels
      */
     private void initNameField (HBox names) {
@@ -145,7 +152,8 @@ public class IndividualUnitEditor extends PopupWindow {
 
     /**
      * This method is to display image of the piece
-     * @param images contains imageview 
+     * 
+     * @param images contains imageview
      */
     private void initImage (HBox images) {
         // TODO: ImageView pieceImage = myUnitWrapper.getImageView();
@@ -156,6 +164,7 @@ public class IndividualUnitEditor extends PopupWindow {
 
     /**
      * This method is to allow users to choose player for individual units
+     * 
      * @param players is an hbox
      * @param playersChoice contain playerID choices
      */
@@ -173,6 +182,7 @@ public class IndividualUnitEditor extends PopupWindow {
 
     /**
      * This method is to allow users to rotate img of a unit
+     * 
      * @param imageRotation is an hbox displayed in the editor
      * @param rotationAmt where the user types in amt to be rototated
      */

@@ -55,6 +55,7 @@ public class Player {
         while (!level.checkTurnEnd(myNumMovesPlayed)) {
             // play a move
             if (level.levelCompleted()) { return true; }
+            level.garbageCollectPieces();
             myNumMovesPlayed++;
         }
         this.resetMovesPlayed();

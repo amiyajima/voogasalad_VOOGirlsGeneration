@@ -1,6 +1,7 @@
 package authoring.concretefeatures.menus;
 
 import authoring.abstractfeatures.PopupWindow;
+import authoring.concretefeatures.ActionCheck;
 import authoring.concretefeatures.RuleCreator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,7 +27,7 @@ public class GlobalRules extends Menu {
 
             @Override
             public void handle (ActionEvent t) {
-                PopupWindow p = new RuleCreator();
+                PopupWindow p = new ActionCheck();
                 p.show();
             }
         });

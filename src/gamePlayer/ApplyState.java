@@ -12,6 +12,7 @@ public class ApplyState implements IGridState{
     private ViewController myController;
     
     public ApplyState(ViewController controller){
+        System.out.println("new ApplyState");
         myController = controller;
         myController.getGrid().setOnMouseEntered(event->{myController.changeCursor(myController.CURSOR_ATTACK_TEST);});
     }
@@ -20,6 +21,7 @@ public class ApplyState implements IGridState{
     public void onClick(Piece piece) {
         Piece actor = myController.getActivePiece();
         myController.getActiveAction().doBehavior(actor, piece);
+        System.out.println("dobehavior called");
             myController.setGridState(new SelectState(myController));
      
        

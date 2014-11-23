@@ -59,14 +59,9 @@ public class SquareGameGrid extends GameGrid {
                 sp.setAlignment(Pos.CENTER);
                 sp.setPrefHeight(500 / c);
                 sp.setPrefWidth(500 / this.r);
-//                Rectangle r = new Rectangle(500 / this.r - 10, 500 / c - 10);
-//                r.setFill(Color.BLACK);
-//                
-//                sp.getChildren().add(r);
+
                 this.add(sp, i, j);
-//                r.setOnMouseEntered(event -> onHover(r));
-//                r.setOnMouseExited(event -> r.setFill(Color.BLACK));
-//                
+               
                 
 
             }
@@ -102,4 +97,5 @@ public class SquareGameGrid extends GameGrid {
             ((StackPane)n).getChildren().add(pieces.get(point).getImageView());
         });
     }
+    
 }
