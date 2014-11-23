@@ -1,20 +1,18 @@
 package gamePlayer;
 
-import gamedata.action.Action;
+import gamedata.action.Action; 
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import authoring.concretefeatures.menus.JSONBobTester;
-import javafx.event.EventHandler;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import java.awt.geom.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -25,12 +23,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+
+
 
 public class ViewController{
 
@@ -39,6 +40,7 @@ public class ViewController{
     public static final String SCOREBOARD_FXML = "scoreBoard.fxml";
     public static final String INITIALSCENE_TITLE = "VOOGASALAD!";
     public static final String GAME_LOCATION = "/src/resources";
+    public static final String POPUP_FXML = "popup.fxml";
 
 
     private Stage myStage;
@@ -46,7 +48,10 @@ public class ViewController{
     private GameGrid myGrid;
     private VBox myInitialScene;
     private BorderPane myGameSpace;
-    private BorderPane myScoreBoard;
+    private VBox myScoreBoard;
+    private BorderPane myPopup;
+    private Scene scoreScene;
+    private Scene myPopupScene;
    
     private Piece activePiece;
     private Action activeAction;
@@ -69,9 +74,9 @@ public class ViewController{
         myStage = s;
        myInitialScene = new VBox();
        myGameSpace = new BorderPane();
-       myScoreBoard = new BorderPane();
-       
-//       myModel = new Game();
+       myScoreBoard = new VBox();
+       myPopup = new BorderPane();
+      //  myModel = new Game();
        //TODO:
        //uses JSON reader that takes in the file chosen by user and instantiate 
        // a new Game object. 
@@ -81,24 +86,22 @@ public class ViewController{
         
         loadFXML(GAMESPACE_FXML, myGameSpace);
         loadFXML(INITIALSCENE_FXML, myInitialScene);
-   //     loadFXML(SCOREBOARD_FXML, myScoreBoard);
+        loadFXML(POPUP_FXML, myPopup);
+        loadFXML(SCOREBOARD_FXML, myScoreBoard);
+        scoreScene = new Scene(myScoreBoard);
+        myPopupScene = new Scene(myPopup);
+       // myPopup = FXMLLoader.load(getClass().getResource(POPUP_FXML));
         
         myGameSpace.setCenter(myGrid);
         myGrid.setAlignment(Pos.CENTER);
         myStage.setScene(new Scene(myInitialScene));
        
         newGame();
-        
         myStage.show();
 
     }
 
-//    protected void JSONBobTest.java(){
-//        
-//    }
-    
-    
-    
+
     /**
      * generates drop down menu that allow user to choose a new Game to play 
      * The Games are generated from the directory that stores all json files defined 
@@ -108,7 +111,7 @@ public class ViewController{
         List<File> games = getGames();
        
         games.forEach(file->{ MenuItem l = new MenuItem();
-        l.setText(file.getName());
+        l.setText(file.getName().substring(0, file.getName().length()-5));
         l.setOnAction(event->{
            // myModel.initializeGame(file.getName());
             myStage.setScene(new Scene(myGameSpace));
@@ -163,19 +166,29 @@ public class ViewController{
     @FXML
     protected void showScore(){
         Stage stage = new Stage();
-        stage.setScene(new Scene(myScoreBoard));
+        stage.setScene(scoreScene);
         loadScores();
         stage.show();
         
     }
     
+    @FXML
+    protected void cancelPopup(){
+        
+    }
+    
     protected void loadScores(){
-        gameName.setText(myModel.toString());
+        gameName.setText(gameName.getText()+"stubName");
         
         //TODO: add in scores
-        myModel.getPlayers().forEach(player-> scores.getChildren().
-                                     add(new Text(player.getID()+": ")));
+      //  myModel.getPlayers().forEach(player-> scores.getChildren().
+       //                              add(new Text(player.getID()+": ")));
         
+        
+    }
+    
+    @FXML
+    private void save(){
         
     }
     
@@ -210,9 +223,14 @@ public class ViewController{
         //System.out.println("restarting game");
        // myModel=new Game();
         
+        Stage stage = new Stage();
+       
+        stage.setScene(myPopupScene);
+        stage.show();
+        stage.setAlwaysOnTop(true);
+       // stage.addEventHandler(arg0, arg1);
         // Generate a new Game Object.
-        JSONBobTester jbtester = new JSONBobTester();
-        myModel = jbtester.createNewGame();
+
     }
     @FXML
     protected void exitGame () {
@@ -388,5 +406,7 @@ public class ViewController{
 
 
         });
-    }    
+    }
+
+
 }
