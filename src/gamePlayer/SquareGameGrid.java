@@ -87,6 +87,8 @@ public class SquareGameGrid extends GameGrid {
         }
 
     }
+    
+    
 //  private void highlightCurrentLocation (Rectangle r) {
 //  myCurrentLocation = new Point2D.Double(100, 100);
 //  if (r.getX() == myCurrentLocation.getX() & r.getY() == myCurrentLocation.getY()) {
