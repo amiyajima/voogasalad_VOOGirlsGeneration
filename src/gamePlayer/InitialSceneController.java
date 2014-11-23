@@ -64,7 +64,7 @@ public class InitialSceneController{
         l.setText(file.getName());
         l.setOnAction(event->{
             myGame.initializeGame(file.getName());
-            new ViewController(myStage);
+          //  new ViewController(myStage);
 
         });
         l.getStyleClass().add("button");

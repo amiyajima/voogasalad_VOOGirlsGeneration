@@ -1,5 +1,6 @@
 package gamePlayer;
 
+//This class is currently not used. 
 import java.io.File;
 import java.io.IOException;
 
