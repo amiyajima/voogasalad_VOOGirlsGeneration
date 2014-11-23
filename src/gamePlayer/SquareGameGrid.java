@@ -11,6 +11,7 @@ import java.util.Set;
 import javafx.event.EventHandler;
 import java.awt.geom.Point2D;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -106,7 +107,10 @@ public class SquareGameGrid extends GameGrid {
         });
         initializeGrid();
         patches.keySet().forEach(point -> {
-            this.add(patches.get(point).getImageView(), (int) point.getX(), (int) point.getY());
+           // this.add(patches.get(point).getImageView(), (int) point.getX(), (int) point.getY());
+            Node n = get((int)point.getX(), (int)point.getY());
+            ((StackPane)n).getChildren().add(patches.get(point).getImageView());
+        
         });
         pieces.keySet().forEach(point -> {
             this.add(pieces.get(point).getImageView(), (int) point.getX(), (int) point.getY());
