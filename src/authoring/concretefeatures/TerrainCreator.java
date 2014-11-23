@@ -122,15 +122,15 @@ public class TerrainCreator extends PopupWindow {
                 });
                 Button delButton = new Button(DELETE);
 
-                HBox entry = new TerrainEntry(terrain, icon, name, editButton, delButton);
+                TerrainEntry entry = new TerrainEntry(terrain, icon, name, editButton, delButton);
 
                 delButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle (ActionEvent event) {
-                        myLibrary.removeFromLibrary(entry, TERRAIN);
+                        myLibrary.removePatch(entry);
                     }
                 });
-                myLibrary.addToLibrary(entry, TERRAIN);
+                myLibrary.addPatch(entry);
                 close();
             }
         });

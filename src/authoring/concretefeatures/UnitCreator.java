@@ -148,15 +148,15 @@ public class UnitCreator extends PopupWindow {
                 });
                 Button delButton = new Button(DELETE);
 
-                HBox entry = new UnitEntry(unit, icon, name, editButton, delButton);
+                UnitEntry entry = new UnitEntry(unit, icon, name, editButton, delButton);
         		delButton.setOnAction(new EventHandler<ActionEvent>(){
         			@Override
         			public void handle(ActionEvent event) {
-        				myLibrary.removeFromLibrary(entry, UNITS);
+        				myLibrary.removePiece(entry);
         			}
         		});
 
-                myLibrary.addToLibrary(entry, UNITS);
+                myLibrary.addPiece(entry);
                 close();
             }
         });
