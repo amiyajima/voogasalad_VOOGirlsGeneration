@@ -36,14 +36,14 @@ public class ViewControllerTest {
     }
     @Test
     public void findPositionTest () {
-        ViewController controller = new ViewController(new Stage());
-        Point2D point = controller.findPosition (350.0,100.0);
-        assertEquals(123,point.getX(),0.001);
-        assertEquals(123,point.getY(),0.001);
+        ViewController controller = new ViewController(new Stage ());
+        Point2D point = controller.findPosition (450.0,120.0);
+        assertEquals(5,point.getX(),0.001);
+        assertEquals(2,point.getY(),0.001);
         
     }
     @Test 
-    void updateActionsTest () {
+    public void updateActionsTest () {
         ViewController controller = new ViewController(new Stage());
         Action move = new ConcreteAction("move", null, null, null, null);
         Action attack = new ConcreteAction("attack", null, null, null, null);

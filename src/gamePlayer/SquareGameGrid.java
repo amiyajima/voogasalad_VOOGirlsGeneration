@@ -79,9 +79,9 @@ public class SquareGameGrid extends GameGrid {
                 r.setOnMouseEntered(event -> onHover(r));
                 r.setOnMouseExited(event -> r.setFill(Color.BLACK));
 
-                addTestKeyboardControl(r);
-                // addKeyboardController(r);
-                addLocationSelector(r);
+//                addTestKeyboardControl(r);
+//                // addKeyboardController(r);
+//                addLocationSelector(r);
             }
 
         }

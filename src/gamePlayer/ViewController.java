@@ -3,11 +3,9 @@ package gamePlayer;
 import gamedata.action.Action; 
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
-<<<<<<< HEAD
 
-=======
 import java.awt.geom.Point2D;
->>>>>>> d545d27dc65180be981f63332dcdf926bb4e2100
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -64,7 +62,8 @@ public class ViewController{
     public static final String Chinese = "Chinese";
     
     public static final String AUDIO_TEST = "/src/gamePlayer/audioTest.mp3";
-    
+    public static final String CURSOR_ATTACK_TEST = "/src/gamePlayer/Cursor_attack.png";
+    public static final String CURSOR_GLOVE_TEST = "/src/gamePlayer/pointer-glove.png";
 
     private ResourceBundle myLanguages;
     private Stage myStage;
