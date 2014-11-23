@@ -1,4 +1,4 @@
-package gamedata;
+package gamedata.wrappers;
 
 import gamedata.action.StatsSingleMultiplier;
 import java.util.List;
