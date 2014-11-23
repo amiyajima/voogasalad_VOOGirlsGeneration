@@ -9,12 +9,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Set;
-import authoring.concretefeatures.menus.JSONBobTester;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import java.awt.geom.Point2D;
+import tests.JSONBobTester;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -39,8 +40,11 @@ public class ViewController{
     public static final String SCOREBOARD_FXML = "scoreBoard.fxml";
     public static final String INITIALSCENE_TITLE = "VOOGASALAD!";
     public static final String GAME_LOCATION = "/src/resources";
+    public static final String ENGLISH = "English";
+    public static final String Chinese = "Chinese";
+    
 
-
+    private ResourceBundle myLanguages;
     private Stage myStage;
     private Game myModel;
     private GameGrid myGrid;
@@ -55,7 +59,7 @@ public class ViewController{
     protected VBox statsPane;
 
     @FXML
-    private VBox controlPane;
+    protected VBox controlPane;
     @FXML
     private MenuButton newGameButton;
     @FXML
@@ -302,7 +306,7 @@ public class ViewController{
      * @param y
      * @return a Point2D representing tile coordinates
      */
-    private Point2D findPosition(double x, double y){
+    protected Point2D findPosition(double x, double y){
         double patchHeight = (double) myGrid.getHeight()/(double) myGrid.getCol();
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);

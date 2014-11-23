@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 public class SquarePatch extends Patch {
 
     public SquarePatch (int state, String imageLocation, Point2D p) {
-        super(state,imageLocation, p);
+        super(state, imageLocation, p);
     }
 
 }

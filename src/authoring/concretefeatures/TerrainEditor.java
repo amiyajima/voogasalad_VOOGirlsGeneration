@@ -21,7 +21,7 @@ import authoring_environment.UIspecs;
 
 
 /**
- * @author Martin Tamayo
+ * @author Martin Tamayo, Sandy Lee
  * 
  *         GUI component for editing the properties of a given terrain.
  *         This can be accessed by clicking on the hyperlink of the
