@@ -16,6 +16,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 
 
 /**
@@ -26,11 +27,15 @@ import com.google.gson.GsonBuilder;
  */
 public class JSONManager {
 
+    Gson myGson;
+
     /**
      * Constructor
      */
     public JSONManager () {
-
+        GsonBuilder builder = new GsonBuilder();
+        registerTypeAdapters(builder);
+        myGson = builder.create();
     }
 
     /**
@@ -39,15 +44,7 @@ public class JSONManager {
      * @param game
      */
     public void writeToJSON (Game game, String fileName) {
-        // Gson gson = new Gson();
-
-        GsonBuilder builder = new GsonBuilder();
-        //builder.registerTypeAdapter(Rule.class, new RuleAdapter());
-        // builder.registerTypeAdapter(Goal.class, new GoalDeserializer());
-        builder.registerTypeAdapter(Goal.class, new GenericTypeAdapter<Goal>("src/gamedata/goals"));
-        builder.registerTypeAdapter(Rule.class, new GenericTypeAdapter<Rule>("src/gamedata/rules"));
-        Gson gson = builder.create();
-        String json = gson.toJson(game);
+        String json = myGson.toJson(game);
         System.out.println("JSONManager: game converted to json!");
         try {
             FileWriter writer = new FileWriter(fileName);
@@ -67,43 +64,63 @@ public class JSONManager {
      */
     public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
-        // Gson gson = new Gson();
-        GsonBuilder builder = new GsonBuilder();
-        //builder.registerTypeAdapter(Rule.class, new RuleAdapter());
-        // builder.registerTypeAdapter(Goal.class, new GoalDeserializer());
-        
-        builder.registerTypeAdapter(Goal.class, new GenericTypeAdapter<Goal>("gamedata.goals"));
-        builder.registerTypeAdapter(Rule.class, new GenericTypeAdapter<Rule>("gamedata.rules"));
-        Gson gson = builder.create();
-
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
-
-        Goal g = gson.fromJson(br, Goal.class);
+        
+        LevelData myLevels = myGson.fromJson(br, LevelData.class);
+        System.out.println(myLevels.getLevels().size());
+        
+        Goal g = myGson.fromJson(br, Goal.class);
         System.out.println(g.toString());
-        
-        Rule rule = gson.fromJson(br, Rule.class);
+
+        Rule rule = myGson.fromJson(br, Rule.class);
         System.out.println(rule.toString());
-        
-        GoalData gd = gson.fromJson(br, GoalData.class);
-        System.out.println(gd.toString());
-        
-        RuleData ruledata = gson.fromJson(br, RuleData.class);
+
+        RuleData ruledata = myGson.fromJson(br, RuleData.class);
         System.out.println(ruledata.toString());
 
-        PlayerData myPlayers = gson.fromJson(br, PlayerData.class);
+        PlayerData myPlayers = myGson.fromJson(br, PlayerData.class);
         System.out.println(myPlayers.getPlayers().get(0).getID());
         System.out.println(myPlayers.getPlayers().get(1).getID());
 
-        RuleData myRules = gson.fromJson(br, RuleData.class);
+        RuleData myRules = myGson.fromJson(br, RuleData.class);
         System.out.println(myRules.getRules().get(0).toString());
 
-        Player player = gson.fromJson(br, Player.class);
+        Player player = myGson.fromJson(br, Player.class);
         System.out.println(player.toString());
 
-        LevelData myLevels = gson.fromJson(br, LevelData.class);
-        System.out.println(myLevels.getLevels().size());
-
         return null;
+    }
+
+    /*
+     * public void test(String type, BufferedReader reader){
+     * Object deserializedObject = null;
+     * Class classDefinition = null;
+     * try {
+     * classDefinition = Class.forName(type);
+     * try {
+     * deserializedObject = classDefinition.newInstance();
+     * }
+     * catch (InstantiationException e) {
+     * // TODO Auto-generated catch block
+     * e.printStackTrace();
+     * }
+     * catch (IllegalAccessException e) {
+     * // TODO Auto-generated catch block
+     * e.printStackTrace();
+     * }
+     * }
+     * catch (ClassNotFoundException e) {
+     * // TODO Auto-generated catch block
+     * e.printStackTrace();
+     * }
+     * deserializedObject = myGson.fromJson(reader, deserializedObject.getClass());
+     * System.out.println(deserializedObject.toString());
+     * }
+     */
+
+    public void registerTypeAdapters (GsonBuilder builder) {
+        builder.registerTypeAdapter(Goal.class, new GenericTypeAdapter<Goal>("gamedata.goals"));
+        builder.registerTypeAdapter(Rule.class, new GenericTypeAdapter<Rule>("gamedata.rules"));
     }
 
 }

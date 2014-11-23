@@ -1,1 +1,1 @@
-{"type":"PlayerPiecesRemovedGoal","properties":{"myID":12345}}
+"myGoals":[{"type":"PlayerPiecesRemovedGoal","properties":{"myID":12345}}],"myRules":[{"type":"MoveCountRule","properties":{"myNumMoves":5}}],"changed":false,"obs":[]}],"myCurrentLevel":{"myGoals":[{"type":"PlayerPiecesRemovedGoal","properties":{"myID":12345}}],"myRules":[{"type":"MoveCountRule","properties":{"myNumMoves":5}}],"changed":false,"obs":[]},"myCurrentPlayer":{"myNumMovesPlayed":0,"myID":54321},"myGameWon":false}

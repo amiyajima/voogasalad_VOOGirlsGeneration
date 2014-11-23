@@ -54,7 +54,7 @@ public class JSONBobTester {
         Player myPlayer1 = new Player(12345);
         Player myPlayer2 = new Player(54321);
         //myPlayers.add(myPlayer1);
-        myPlayers.add(myPlayer2);
+        //myPlayers.add(myPlayer2);
 
         Grid grid = createNewGrid();
 

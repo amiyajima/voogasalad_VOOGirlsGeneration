@@ -61,6 +61,7 @@ public class GenericTypeAdapter<T> implements JsonSerializer<T>, JsonDeserialize
     public T deserialize (JsonElement json, Type typeOfT,
                           JsonDeserializationContext context) throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
+        //jsonObject.getAsJsonArray();
         String type = jsonObject.get("type").getAsString();
         System.out.println("type " + type + " detected");
         JsonElement element = jsonObject.get("properties");
