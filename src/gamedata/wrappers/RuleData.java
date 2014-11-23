@@ -12,14 +12,14 @@ import java.util.List;
  *
  */
 public class RuleData {
-    //private List<RuleDataIndividual> myRules;
-    private List<Rule> myRules;
+    private List<RuleDataIndividual> myRules;
+    //private List<Rule> myRules;
     
-    public RuleData(List<Rule> rules) {
+    public RuleData(List<RuleDataIndividual> rules) {
         myRules = rules;
     }
     
-    public List<Rule> getRules() {
+    public List<RuleDataIndividual> getRules() {
         return myRules;
     }
 
