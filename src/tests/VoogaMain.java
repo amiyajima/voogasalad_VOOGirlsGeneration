@@ -17,7 +17,7 @@ import authoring.concretefeatures.menus.JSONBob;
  */
 public class VoogaMain {
     public static void testJSONwrite() {
-        String saveTo = "C:\\Users\\Rica\\Desktop\\game_test.json";
+        String saveTo = "src/resources/json/AnnaSample.json";
         JSONManager myJSONmanager = new JSONManager();
         JSONBobTester jb = new JSONBobTester();
         myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
@@ -26,7 +26,7 @@ public class VoogaMain {
     public static void testJSONload() {
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("C:\\Users\\Rica\\Desktop\\game_test.json");
+            jsonManager.readFromJSONFile("src/resources/json/AnnaSample.json");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
