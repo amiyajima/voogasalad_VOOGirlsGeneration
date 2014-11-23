@@ -73,5 +73,9 @@ public class Inventory {
 		return itemActions;
 
 	}
+	
+	public List<Piece> getAllInventory(){
+		return myInventory;
+	}
 
 }

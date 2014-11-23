@@ -208,5 +208,9 @@ public class Piece {
             myInventory.removeItem(item);
         }
     }
+    
+    public Inventory getInventory(){
+    	return myInventory;
+    }
 
 }
