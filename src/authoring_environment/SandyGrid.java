@@ -134,15 +134,15 @@ public class SandyGrid extends Pane {
 	}
 
 	private void removeUnit(SandyTile tile) {
+		myPieceData.remove(tile.myUnit);
 		tile.myUnit = null;
 		tile.myPieceImage.setVisible(false);
-		myPieceData.remove(tile.myUnit);
 	}
 	
 	private void removeTerrain(SandyTile tile) {
+		myPatchData.remove(tile.myTerrain);
 		tile.myTerrain = null;
 		tile.myPatchImage.setVisible(false);
-		myPatchData.remove(tile.myTerrain);
 	}
 
 	public void removePieces(Piece unit) {

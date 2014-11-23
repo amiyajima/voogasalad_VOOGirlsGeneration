@@ -175,24 +175,20 @@ public class LibraryView extends TabPane {
 	public void addPiece(UnitEntry unit){
 		mySelection.select(myTabMap.get(UNITS));
 		myLibraryMap.get(UNITS).getChildren().add(unit);
-		myPieceData.add(unit.getUnit());
 	}
 	
 	public void addPatch(TerrainEntry terrain){
 		mySelection.select(myTabMap.get(TERRAIN));
 		myLibraryMap.get(TERRAIN).getChildren().add(terrain);
-		myPatchData.add(terrain.getTerrain());
 	}
 	
 	public void removePiece(UnitEntry unit){
-		myPieceData.remove(unit.getUnit());
 		myLibraryMap.get(UNITS).getChildren().remove(unit);
 		myGrid.removePieces(unit.getUnit());
 		doNothing = true;
 	}
 	
 	public void removePatch(TerrainEntry terrain){
-		myPatchData.remove(terrain.getTerrain());
 		myLibraryMap.get(TERRAIN).getChildren().remove(terrain);
 		myGrid.removePatches(terrain.getTerrain());
 		doNothing = true;
