@@ -1,10 +1,13 @@
 package gamedata.wrappers;
 
+import gamedata.rules.MoveCountRule;
 import gamedata.rules.Rule;
 import java.util.List;
 
+
 /**
  * Rule wrapper for Rules in GridData
+ * 
  * @author Rica
  *
  */
@@ -18,5 +21,9 @@ public class RuleData {
     
     public List<Rule> getRules() {
         return myRules;
+    }
+
+    public String toString () {
+        return "toString called for " + this.getClass() + myRules;
     }
 }

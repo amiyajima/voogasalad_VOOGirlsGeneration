@@ -77,9 +77,9 @@ public class KeyboardController {
                        
                        Point2D newCurrentLocation = new Point2D.Double(myCurrentLocation.getX() + movementKeyMap.get(kc).getX(),
                                                        myCurrentLocation.getY() + movementKeyMap.get(kc).getY()); 
-                       System.out.println("wtf");
+                       System.out.println(newCurrentLocation);
                        vc.highlightCurrentLocation(Color.BLUE, myCurrentLocation, newCurrentLocation);
-//                       myCurrentLocation = newCurrentLocation;
+                       myCurrentLocation = newCurrentLocation;
                    }
                }
             }

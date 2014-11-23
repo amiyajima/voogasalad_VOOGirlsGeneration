@@ -67,15 +67,14 @@ public class SquareGameGrid extends GameGrid {
                 sp.setAlignment(Pos.CENTER);
                 sp.setPrefHeight(500 / c);
                 sp.setPrefWidth(500 / this.r);
-                Rectangle r = new Rectangle(500 / this.r - 10, 500 / c - 10);
-                r.setFill(Color.BLACK);
-                
-                sp.getChildren().add(r);
-                
+//                Rectangle r = new Rectangle(500 / this.r - 10, 500 / c - 10);
+//                r.setFill(Color.BLACK);
+//                
+//                sp.getChildren().add(r);
                 this.add(sp, i, j);
-                r.setOnMouseEntered(event -> onHover(r));
-                r.setOnMouseExited(event -> r.setFill(Color.BLACK));
-                
+//                r.setOnMouseEntered(event -> onHover(r));
+//                r.setOnMouseExited(event -> r.setFill(Color.BLACK));
+//                
                 
 
             }
@@ -83,15 +82,6 @@ public class SquareGameGrid extends GameGrid {
         }
     }
     
-    
-    
-//  private void highlightCurrentLocation (Rectangle r) {
-//  myCurrentLocation = new Point2D.Double(100, 100);
-//  if (r.getX() == myCurrentLocation.getX() & r.getY() == myCurrentLocation.getY()) {
-//      System.out.println(myCurrentLocation.getX());
-//      r.setFill(Color.RED);
-//  }
-//}
     
     // TODO: implement the logic in View Controller class.
 
@@ -114,7 +104,10 @@ public class SquareGameGrid extends GameGrid {
         });
         pieces.keySet().forEach(point -> {
             this.add(pieces.get(point).getImageView(), (int) point.getX(), (int) point.getY());
+            
+            
+            Node n = get((int)point.getX(), (int)point.getY());
+            ((StackPane)n).getChildren().add(pieces.get(point).getImageView());
         });
-
     }
 }

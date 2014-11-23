@@ -5,16 +5,12 @@ import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-
 import java.awt.geom.Point2D;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -31,6 +27,7 @@ import authoring.data.PieceData;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
+
 /**
  * GUI element that allows users to create new Piece templates and add them to
  * the Library. User defines unit name, image, and actions. Actions define a
@@ -39,6 +36,7 @@ import authoring_environment.UIspecs;
  * @author Mike Zhu
  */
 public class UnitCreator extends PopupWindow {
+
 
 	private final int HEIGHT = 400;
 	private final int WIDTH = 400;
@@ -104,13 +102,13 @@ public class UnitCreator extends PopupWindow {
         nameLabel.setPadding(UIspecs.topRightPadding);
         TextField unitName = new TextField();
         names.getChildren().addAll(nameLabel, unitName);
-        
+
         ImageView icon = new ImageView();
         Label loadLabel = new Label(IMAGE_LABEL);
         Button loadImage = new Button(LOAD_IMAGE_LABEL);
         loadImage.setOnAction(new EventHandler<ActionEvent>() {
-        //initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
-        //@Jesse Finish this 
+            // initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
+            // @Jesse Finish this
 
             @Override
             public void handle (ActionEvent click) {
@@ -127,15 +125,15 @@ public class UnitCreator extends PopupWindow {
             }
         });
         images.getChildren().addAll(loadLabel, loadImage, icon);
-        
+
         HBox modList = new ModulesList();
-        
+
         Button goButton = new Button(TEMPLATE_LABEL);
         goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
                 Piece unit = new Piece(myImageLocation, myPath, myActions, myStats,
-                                  myLoc, myTypeID, myUniqueID, myPlayerID, myInventory);
+                                       myLoc, myTypeID, myUniqueID, myPlayerID, myInventory);
 
                 Label link = new Label(unitName.getText());
                 //link.setTranslateY(10);
@@ -149,6 +147,7 @@ public class UnitCreator extends PopupWindow {
                 });
                 Button delButton = new Button(DELETE);
                 delButton.setLayoutY(5);
+
                 HBox entry = new UnitEntry(unit, icon, link, editButton, delButton);
         		delButton.setOnAction(new EventHandler<ActionEvent>(){
         			@Override
@@ -156,6 +155,7 @@ public class UnitCreator extends PopupWindow {
         				myLibrary.removeFromLibrary(entry, UNITS);
         			}
         		});
+
                 myLibrary.addToLibrary(entry, UNITS);
                 close();
             }
@@ -163,6 +163,7 @@ public class UnitCreator extends PopupWindow {
         box.getChildren().addAll(names, images, modList, goButton);
         setScene(new Scene(box));
     }
+
 
 	private void initSetRangeButton(VBox rangeBox, String label,
 			List<Point2D> range) {

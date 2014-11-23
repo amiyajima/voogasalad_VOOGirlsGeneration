@@ -12,7 +12,8 @@ import java.io.FileNotFoundException;
  */
 public class VoogaMain {
     public static void testJSONwrite () {
-        //String saveTo = "src/resources/json/AnnaSample.json";
+        // String saveTo = "src/resources/json/AnnaSample.json";
+
         String saveTo = "src/resources/json/RicaSample.json";
         JSONManager myJSONmanager = new JSONManager();
         JSONBobTester jb = new JSONBobTester();
