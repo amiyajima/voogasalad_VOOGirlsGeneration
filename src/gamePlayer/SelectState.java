@@ -12,7 +12,7 @@ public class SelectState implements IGridState {
 
     public SelectState (ViewController controller) {
         myController = controller;
-        myController.getGrid().getChildren().forEach(node->node.setOnMouseEntered(event->{System.out.println("mouse entered");}));
+     //   myController.getGrid().setOnMouseEntered(event->{myController.});
     }
 
     @Override

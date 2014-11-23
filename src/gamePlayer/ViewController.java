@@ -193,6 +193,7 @@ private AudioClip myAudio;
         myModel = JSBTester.createNewGame();
         myGrid= new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel.getCurrentLevel().getGrid().getColumn());
         myGameSpace.setCenter(myGrid);
+        myGrid.populateGrid(myModel.getCurrentLevel().getGrid().getPatches(), myModel.getCurrentLevel().getGrid().getPieces());
         myStage.setScene(new Scene(myGameSpace));
         setGridState(new SelectState(this));
         
@@ -491,4 +492,5 @@ private AudioClip myAudio;
 //        KBControl.setActionKeyControl(myGrid, myModel);
         KBControl.setMovementKeyControl(myGrid, myModel, myCurrentLocation);
     }
+   
 }
