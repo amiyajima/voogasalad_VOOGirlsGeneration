@@ -1,6 +1,6 @@
 package authoring.concretefeatures;
 
-import gamedata.gamecomponents.Patch; 
+import gamedata.gamecomponents.Patch;
 
 import java.io.File;
 
@@ -11,7 +11,6 @@ import java.awt.geom.Point2D;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -24,7 +23,6 @@ import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
-
 /**
  * GUI element used to create new Patch objects and add them to the library. Allows users
  * to specify the name and image of the patch.
@@ -33,9 +31,8 @@ import authoring_environment.UIspecs;
  */
 public class TerrainCreator extends PopupWindow {
 
-    private final int HEIGHT = 150;
+    private final int HEIGHT = 140;
     private final int WIDTH = 400;
-    private final String TERRAIN = "Terrain";
     private final String NAME = "Terrain Creator";
     private final String TERRAIN_NAME_LABEL = "Name";
     private final String IMAGE_LABEL = "Terrain image";
