@@ -1,12 +1,18 @@
 package authoring.concretefeatures.menus;
 
+import java.awt.geom.Point2D;
 import authoring.abstractfeatures.PopupWindow;
+import authoring.concretefeatures.GameCreator;
+import authoring.concretefeatures.IndividualUnitEditor;
 // import authoring.concretefeatures.GameCreator;
 import authoring.concretefeatures.TerrainCreator;
+import authoring.datawrappers.GridPieceWrapper;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 
 public class File extends Menu {
@@ -30,8 +36,12 @@ public class File extends Menu {
         @Override
         public void handle (ActionEvent event) {
             // Restart Game
-            // PopupWindow p = new GameCreator();
-            // p.show();
+//             PopupWindow p = new GameCreator();
+//             p.show();
+
+            PopupWindow p = new IndividualUnitEditor();
+            p.show();
+            
         }
     }
 

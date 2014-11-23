@@ -3,28 +3,18 @@ package gamePlayer;
 import gamedata.action.Action; 
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
+import gamedata.gamecomponents.SquareGrid;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import java.util.ResourceBundle;
-import java.util.Set;
-
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-
-import java.awt.geom.Point2D;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 import tests.JSONBobTester;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -36,10 +26,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
@@ -60,7 +50,8 @@ public class ViewController{
     public static final String Chinese = "Chinese";
     
     public static final String AUDIO_TEST = "/src/gamePlayer/audioTest.mp3";
-    
+    public static final String CURSOR_ATTACK_TEST = "/src/gamePlayer/Cursor_attack.png";
+    public static final String CURSOR_GLOVE_TEST = "/src/gamePlayer/pointer-glove.png";
 
     private ResourceBundle myLanguages;
     private Stage myStage;
@@ -73,7 +64,7 @@ public class ViewController{
     private Scene scoreScene;
     private Scene myPopupScene;
     
-    
+    private Point2D myCurrentLocation;
     private Piece activePiece;
     private Action activeAction;
  //   private Audio backGroundMusic;
@@ -105,7 +96,7 @@ private AudioClip myAudio;
        // a new Game object. 
        //initialize audio
         
-        myGrid = new SquareGameGrid(8,8);
+       // myGrid = new SquareGameGrid(8,8);
         
         
         loadFXML(GAMESPACE_FXML, myGameSpace);
@@ -118,8 +109,8 @@ private AudioClip myAudio;
        // myPopup = FXMLLoader.load(getClass().getResource(POPUP_FXML));
 
         
-        myGameSpace.setCenter(myGrid);
-        myGrid.setAlignment(Pos.CENTER);
+      //  myGameSpace.setCenter(myGrid);
+     //   myGrid.setAlignment(Pos.CENTER);
         myStage.setScene(new Scene(myInitialScene));
 
             try {
@@ -195,14 +186,22 @@ private AudioClip myAudio;
         // uses JSON reader to generate an instance of the game
 
     }
-    
+
     @FXML
     private void testGame() {
         JSONBobTester JSBTester = new JSONBobTester();
         myModel = JSBTester.createNewGame();
+        myGrid= new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel.getCurrentLevel().getGrid().getColumn());
+        myGameSpace.setCenter(myGrid);
         myStage.setScene(new Scene(myGameSpace));
+        setGridState(new SelectState(this));
         
+      //  myGrid.requestFocus();
+//        addTestKeyboardControl();
+//        addLocationSelector();
+//        
     }
+
     
     @FXML
     private void doSettings(){
@@ -266,7 +265,6 @@ private AudioClip myAudio;
      * the method to restart the game; it asks the use whether to save the current game
      * 
      */
-    // TODO: IMPLEMENT POP-UP.
     @FXML
     protected void restartGame () {
 
@@ -389,6 +387,11 @@ private AudioClip myAudio;
     protected Game getGame(){
         return myModel;
     }
+    
+//    protected BorderPane getGameSpae(){
+//        return myGameSpace;
+//    }
+    
     protected void setActivePiece(Piece piece){
         activePiece = piece;
     }
@@ -457,6 +460,35 @@ private AudioClip myAudio;
 
         });
     }
+//    
+//    @FXML
+//    private void testGame() {
+//        JSONBobTester JSBTester = new JSONBobTester();
+//        myModel = JSBTester.createNewGame();
+//        myStage.setScene(new Scene(myGameSpace));
+//        
+//        myGrid.requestFocus();
+//        
+//        myCurrentLocation = new Point2D.Double(0.0,0.0);
+//        addKeyboardController();
+//        addLocationSelector();
+//        
+//    }
+    
+    private void addLocationSelector () {
+        myGrid.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle (MouseEvent event) {
+//                myCurrentLocation = new Point2D.Double(r.getX(), r.getY());
+                System.out.println("hi");
+            }
+        });
+    }
 
-
+    
+    private void addKeyboardController(){
+        KeyboardController KBControl = new KeyboardController();
+//        KBControl.setActionKeyControl(myGrid, myModel);
+        KBControl.setMovementKeyControl(myGrid, myModel, myCurrentLocation);
+    }
 }

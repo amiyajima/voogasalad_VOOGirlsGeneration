@@ -19,6 +19,8 @@ public class DummyGame {
     
     public DummyGame(String s){
         
+        
+        
     }
     
     public String getStats(){
