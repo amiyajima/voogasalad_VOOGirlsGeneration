@@ -2,6 +2,7 @@ package gamedata;
 
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Grid;
+import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
 import java.io.BufferedReader;
@@ -34,7 +35,7 @@ public class JSONManager {
      * 
      * @param game
      */
-    public void writeToJSON (Grid g, String fileName) {
+    public void writeToJSON (Game g, String fileName) {
         Gson gson = new Gson();
         System.out.println("JSONManager: gson created");
 

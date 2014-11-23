@@ -3,6 +3,7 @@ package tests;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
@@ -83,14 +84,12 @@ public class JSONBobTester {
             for (int y = 0; y < grid1.getRow(); y++) {
                 Patch patch = createNewPatch(new Point2D.Double(x,y));
                 grid1.setPatch(patch.getLoc(), patch);
-                System.out.println("Patch created: " + grid1.getPatch(new Point2D.Double(x,y)).toString());
                 Piece piece = createNewPiece(new Point2D.Double(x,y));
                 grid1.setPiece(piece.getLoc(), piece);
-                System.out.println("Piece created: " + grid1.getPiece(new Point2D.Double(x,y)).toString());
             }
         }
-        System.out.println("Bob Tester: Patches filled: " + grid1.getAllPatches().get(0).toString());
-        System.out.println("Bob Tester: Pieces filled: " + grid1.getAllPieces().get(0).toString());
+        System.out.println("Bob Tester: Patches filled: " + grid1.getAllPatches().size());
+        System.out.println("Bob Tester: Pieces filled: " + grid1.getAllPieces().size());
         System.out.println("Grid created: " + grid1.toString());
         return grid1;
     }
@@ -122,13 +121,17 @@ public class JSONBobTester {
         
         Stats s = new Stats();
         Inventory i = new Inventory();
+        
+        Random r = new Random();
 
-        Piece piece = new Piece(DEFAULT_DUVALL, movements, actions, s, p, 5, 6, 7, i);
+        Piece piece = new Piece(DEFAULT_DUVALL, movements, actions, s, p, 
+                                r.nextInt(50), r.nextInt(50), r.nextInt(50), i);
         return piece;
     }
 
     public Patch createNewPatch (Point2D p) {
-        Patch patch = new SquarePatch(3, DEFAULT_DUVALL, p);
+        Random r = new Random();
+        Patch patch = new SquarePatch(r.nextInt(50)+100, DEFAULT_DUVALL, p);
         return patch;
     }
 
