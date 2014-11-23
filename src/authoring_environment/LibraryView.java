@@ -15,6 +15,8 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -34,6 +36,7 @@ public class LibraryView extends TabPane {
 	private final String UNITS = "Units";
 	private final String TERRAIN = "Terrain";
 	private final String DELETE = "Delete";
+	private final String EDIT = "Edit";
 	private Map<String, VBox> myLibraryMap;
 	private Map<String, Tab> myTabMap;
 	private SingleSelectionModel<Tab> mySelection;
@@ -58,7 +61,9 @@ public class LibraryView extends TabPane {
 		unitTab.setClosable(false);
 		ScrollPane unitContent = new ScrollPane();
 		VBox unitLibrary = new VBox();
+		unitLibrary.setSpacing(3);
 		Button unitDelete = new Button(DELETE);
+		Button unitEdit = new Button(EDIT);
 		unitDelete.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent e){
@@ -66,7 +71,22 @@ public class LibraryView extends TabPane {
 				reset = true;
 			}
 		});
-		unitLibrary.getChildren().addAll(new Label("Global Commands"),unitDelete,new Separator());
+		unitEdit.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent e){
+				//TODO: Implement Editing 
+			}
+		});
+		this.setOnKeyPressed(new EventHandler<KeyEvent>(){
+			@Override
+			public void handle(KeyEvent e){
+				if(e.getCode() == KeyCode.ESCAPE){
+					unitSelected = false;
+				}
+			}
+		});
+		unitLibrary.getChildren().addAll(new Label("Global Commands"),new HBox(unitEdit,unitDelete),new Separator()
+		,new Label("Piece Templates"));
 		unitContent.setContent(unitLibrary);
 		unitTab.setContent(unitContent);
 		

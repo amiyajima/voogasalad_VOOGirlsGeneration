@@ -48,7 +48,8 @@ public class UnitCreator extends PopupWindow {
 	private final String IMAGE_LABEL = "Unit image";
 	private final String LOAD_IMAGE_LABEL = "Load image";
 	private final String TEMPLATE_LABEL = "Create new unit template";
-	private final String DELETE = "Delete";
+	private final String DELETE = "Delete All Instances";
+	private final String EDIT = "Edit";
 	private LibraryView myLibrary;
 
 	private PieceData myPieceData;
@@ -136,9 +137,10 @@ public class UnitCreator extends PopupWindow {
                 Piece unit = new Piece(myImageLocation, myPath, myActions, myStats,
                                   myLoc, myTypeID, myUniqueID, myPlayerID, myInventory);
 
-                Hyperlink link = new Hyperlink(unitName.getText());
-                link.setTranslateY(10);
-                link.setOnAction(new EventHandler<ActionEvent>() {
+                Label link = new Label(unitName.getText());
+                //link.setTranslateY(10);
+                Button editButton = new Button(EDIT);
+                editButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle (ActionEvent e) {
                         PopupWindow p = new UnitEditor(unit);
@@ -147,7 +149,7 @@ public class UnitCreator extends PopupWindow {
                 });
                 Button delButton = new Button(DELETE);
                 delButton.setLayoutY(5);
-                HBox entry = new UnitEntry(delButton, icon, link, unit);
+                HBox entry = new UnitEntry(unit, icon, link, editButton, delButton);
         		delButton.setOnAction(new EventHandler<ActionEvent>(){
         			@Override
         			public void handle(ActionEvent event) {
