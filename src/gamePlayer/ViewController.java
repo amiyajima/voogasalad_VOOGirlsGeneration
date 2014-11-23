@@ -8,18 +8,11 @@ import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import java.awt.geom.Point2D;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import tests.JSONBobTester;
@@ -37,12 +30,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 
@@ -74,7 +64,7 @@ public class ViewController{
     private Scene scoreScene;
     private Scene myPopupScene;
     
-    
+    private Point2D myCurrentLocation;
     private Piece activePiece;
     private Action activeAction;
  //   private Audio backGroundMusic;
@@ -196,7 +186,7 @@ private AudioClip myAudio;
         // uses JSON reader to generate an instance of the game
 
     }
-    
+
     @FXML
     private void testGame() {
         JSONBobTester JSBTester = new JSONBobTester();
@@ -211,6 +201,7 @@ private AudioClip myAudio;
 //        addLocationSelector();
 //        
     }
+
     
     @FXML
     private void doSettings(){
@@ -469,6 +460,20 @@ private AudioClip myAudio;
 
         });
     }
+//    
+//    @FXML
+//    private void testGame() {
+//        JSONBobTester JSBTester = new JSONBobTester();
+//        myModel = JSBTester.createNewGame();
+//        myStage.setScene(new Scene(myGameSpace));
+//        
+//        myGrid.requestFocus();
+//        
+//        myCurrentLocation = new Point2D.Double(0.0,0.0);
+//        addKeyboardController();
+//        addLocationSelector();
+//        
+//    }
     
     private void addLocationSelector () {
         myGrid.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -480,22 +485,10 @@ private AudioClip myAudio;
         });
     }
 
-    private void addTestKeyboardControl () {
-        myGrid.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle (KeyEvent key) {
-                if (key.getCode() == KeyCode.M) {
-                    System.out.println("key works!");
-                }
-            }
-        });
-//        highlightCurrentLocation(r);
-    }
     
     private void addKeyboardController(){
         KeyboardController KBControl = new KeyboardController();
-        KBControl.setActionKeyControl(myGrid, myModel);
-        KBControl.setMovementKeyControl(myGrid, myModel);
+//        KBControl.setActionKeyControl(myGrid, myModel);
+        KBControl.setMovementKeyControl(myGrid, myModel, myCurrentLocation);
     }
-
 }
