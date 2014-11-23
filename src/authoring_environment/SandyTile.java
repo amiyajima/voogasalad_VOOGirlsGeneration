@@ -30,7 +30,6 @@ public class SandyTile extends Group {
 		myPieceImage = initImageView();
 		myPatchImage = initImageView();
 		super.getChildren().addAll(myShape, myPatchImage, myPieceImage);
-		setClickEvent();
 	}
 	
 	public double getXLocation() {
@@ -39,16 +38,6 @@ public class SandyTile extends Group {
 	
 	public double getYLocation() {
 		return myLocation.getY();
-	}
-	
-	private void setClickEvent() {
-		myShape.setStyle("-fx-cursor: hand");
-		myShape.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent m) {
-				System.out.println(getXLocation() + " " + getYLocation());
-			}
-		});
 	}
 	
 	private ImageView initImageView() {

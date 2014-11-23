@@ -27,8 +27,7 @@ public class GridView extends ScrollPane{
 		this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 //		setStyle("-fx-background-color:blue;");
 		
-		myGrid=new Grid(myWidth/myTileSize,myHeight/myTileSize,
-				myTileSize);
+		myGrid = new Grid(myWidth/myTileSize, myHeight/myTileSize, myTileSize);
 		this.setContent(myGrid);
 		
 	}

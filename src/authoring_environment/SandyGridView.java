@@ -5,7 +5,7 @@ import authoring.data.PatchData;
 import authoring.data.PieceData;
 
 public class SandyGridView extends ScrollPane {
-	private JennieGrid myGrid;
+	private SandyGrid myGrid;
 	
 	
 	public SandyGridView(int width, int height, int tileSize, 
@@ -13,11 +13,10 @@ public class SandyGridView extends ScrollPane {
 
 		this.setPrefSize(width, height);
 		this.setMaxSize(width, height);
-		myGrid = new JennieGrid(width/tileSize, height/tileSize,
+		myGrid = new SandyGrid(width/tileSize, height/tileSize,
 				tileSize, pieceDat, patchDat);
 		
 		super.setContent(myGrid);
 		
 	}
-
 }

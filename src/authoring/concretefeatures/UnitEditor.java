@@ -62,7 +62,8 @@ public class UnitEditor extends PopupWindow {
 		setStatsBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				new StatsTotalEditor(myStats);
+				StatsTotalEditor edit = new StatsTotalEditor(myStats);
+				edit.show();
 			}
 		});
 		
@@ -70,6 +71,4 @@ public class UnitEditor extends PopupWindow {
 		root.setContent(mainVBox);
 		setScene(scene);
 	}
-	
-
 }
