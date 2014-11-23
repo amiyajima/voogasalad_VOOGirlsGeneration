@@ -9,11 +9,6 @@ import gamedata.gamecomponents.Level;
  *
  */
 public abstract class Goal {
-
-    public Goal () {
-
-    }
-
     /**
      * Checked after every move that the player makes.
      * If the level has been won, return 1.

@@ -1,6 +1,5 @@
 package gamedata.wrappers;
 
-import gamedata.gamecomponents.Patch;
 import java.util.List;
 
 /**
@@ -9,13 +8,13 @@ import java.util.List;
  *
  */
 public class PatchData {
-    private List<Patch> myPatches;
+    private List<PatchDataIndividual> myPatches;
 
-    public PatchData (List<Patch> patches) {
+    public PatchData (List<PatchDataIndividual> patches) {
         myPatches = patches;
     }
 
-    public List<Patch> getPatches () {
+    public List<PatchDataIndividual> getPatches () {
         return myPatches;
     }
 
