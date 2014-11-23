@@ -9,7 +9,9 @@ import java.util.Map;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -64,7 +66,7 @@ public class LibraryView extends TabPane {
 				reset = true;
 			}
 		});
-		unitLibrary.getChildren().add(unitDelete);
+		unitLibrary.getChildren().addAll(new Label("Global Commands"),unitDelete,new Separator());
 		unitContent.setContent(unitLibrary);
 		unitTab.setContent(unitContent);
 		

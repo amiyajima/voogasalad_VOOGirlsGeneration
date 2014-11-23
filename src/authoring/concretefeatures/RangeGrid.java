@@ -88,43 +88,25 @@ public class RangeGrid extends GridView{
 
 	}
 	
-	public List<Point2D> rangeCenterColumn(){
-		List<Point2D> selectedList=new ArrayList<Point2D>();
-
+	public void rangeCenterColumn(){
 		for (int i=0;i<sampleGrid.getGridHeight();i++) {
-			selectedList.add(new Point2D.Double(0,i-centerY));
-//			System.out.println("0,"+(i-centerY));
+			sampleGrid.getTile(centerX, i).selecteTile();
 		}
-//		test=1;
-//		System.out.println("t="+ test);
-		myRange=selectedList;
-		return selectedList;
 	}
 	
-	public List<Point2D> rangeCenterRow(){
-		List<Point2D> selectedList=new ArrayList<Point2D>();
+	public void rangeCenterRow(){
 		for (int i=0;i<sampleGrid.getGridWidth();i++) {
-			selectedList.add(new Point2D.Double(i-centerX,0));
+			sampleGrid.getTile(i, centerY).selecteTile();
 		}
-//		test=2;
-//		System.out.println("t="+ test);
-
-		myRange=selectedList;
-		return selectedList;
 
 	} 
 	
-	public List<Point2D> rangeCenterRowColumnCross(){
-		List<Point2D> selectedList=new ArrayList<Point2D>();
-		Set<Point2D> selectedSet=new HashSet<Point2D>();
-		selectedSet.addAll(rangeCenterColumn());
-		selectedSet.addAll(rangeCenterRow());
-		selectedList.addAll(selectedSet);
-		myRange=selectedList;
-//		test=3;
-//		System.out.println("t="+ test);
-
-		return selectedList;
+	public void rangeRadius(int radius){
+		for (int i=(centerX-radius);i<=(centerX+radius);i++){
+			for (int j=(centerY-radius);j<=(centerY+radius);j++){
+				sampleGrid.getTile(i, j).selecteTile();
+			}
+		}
 	}
 	
 	private void sampleSelected() {

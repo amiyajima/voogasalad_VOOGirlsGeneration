@@ -1,15 +1,11 @@
 package authoring.concretefeatures.menus;
 
-import gamedata.stats.Stats;
-import authoring.abstractfeatures.PopupWindow;
-import authoring.concretefeatures.StatsTotalEditor;
-// import authoring.concretefeatures.GameCreator;
-import authoring.concretefeatures.TerrainCreator;
-import authoring.concretefeatures.UnitEditor;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+// import authoring.concretefeatures.GameCreator;
 
 
 public class File extends Menu {
@@ -33,8 +29,9 @@ public class File extends Menu {
         @Override
         public void handle (ActionEvent event) {
             // Restart Game
-            // PopupWindow p = new GameCreator();
-            // p.show();
+//             PopupWindow p = new GameCreator();
+//             p.show();
+            
         }
     }
 

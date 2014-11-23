@@ -1,5 +1,6 @@
 package gamePlayer;
 
+import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import java.util.Map;
@@ -11,6 +12,7 @@ import javafx.scene.layout.GridPane;
 
 public abstract class GameGrid extends GridPane implements Observer{
 
+    private Point2D myCurrentLocation;
     protected int r;
     protected int c;
     private Map<Point2D, Piece> myPieces;
@@ -38,8 +40,7 @@ public abstract class GameGrid extends GridPane implements Observer{
     public int getCol(){
         return c;
     }
-    
-    
+ 
     protected Node get(int row, int col){
         Node result = null;
         ObservableList<Node> childrens = this.getChildren();
