@@ -35,7 +35,9 @@ import gameengine.player.Player;
 public class JSONBobTester {
     private static String DEFAULT_DUVALL = "/resources/images/rcd.png";
     private static String DEFAULT_BUNNY = "/resources/images/bbybunny.jpeg";
+    
     public JSONBobTester () {
+        
     }
 
     /**
@@ -55,7 +57,9 @@ public class JSONBobTester {
 
         List<Rule> myRules = new ArrayList<Rule>();
         Rule rule1 = new MoveCountRule(3);
+        Rule rule2 = new MoveCountRule(5);
         myRules.add(rule1);
+        myRules.add(rule2);
 
         List<Goal> myGoals = new ArrayList<Goal>();
         Goal goal1 = new PlayerPiecesRemovedGoal(myPlayer2);
@@ -75,32 +79,23 @@ public class JSONBobTester {
     
     public Grid createNewGrid () {
         Grid grid1 = new SquareGrid();
-        
         for (int x = 0; x < grid1.getColumn(); x++) {
             for (int y = 0; y < grid1.getRow(); y++) {
-                Patch patch = createNewPatch(x, y);
+                Patch patch = createNewPatch(new Point2D.Double(x,y));
                 grid1.setPatch(patch.getLoc(), patch);
-            }
-        }
-        System.out.println("Bob Tester: Patches filled: " + grid1.getPatches().size());
-
-        for (int x = 0; x < grid1.getColumn(); x++) {
-            for (int y = 0; y < grid1.getRow(); y++) {
-                Piece piece;
-                if (x == y) {
-                    piece = createNewPiece(DEFAULT_DUVALL);
-                }
-                else {
-                    piece = createNewPiece(DEFAULT_BUNNY);
-                }
+                System.out.println("Patch created: " + grid1.getPatch(new Point2D.Double(x,y)).toString());
+                Piece piece = createNewPiece(new Point2D.Double(x,y));
                 grid1.setPiece(piece.getLoc(), piece);
+                System.out.println("Piece created: " + grid1.getPiece(new Point2D.Double(x,y)).toString());
             }
         }
-        System.out.println("Bob Tester: Pieces filled: " + grid1.getPieces().size());
+        System.out.println("Bob Tester: Patches filled: " + grid1.getAllPatches().get(0).toString());
+        System.out.println("Bob Tester: Pieces filled: " + grid1.getAllPieces().get(0).toString());
+        System.out.println("Grid created: " + grid1.toString());
         return grid1;
     }
 
-    public Piece createNewPiece (String imageLoc) {
+    public Piece createNewPiece (Point2D p) {
         Point2D p1 = new Point2D.Double(1, 1);
         Point2D p2 = new Point2D.Double(2, 2);
         Point2D p3 = new Point2D.Double(3, 3);
@@ -128,19 +123,17 @@ public class JSONBobTester {
         Stats s = new Stats();
         Inventory i = new Inventory();
 
-        Piece piece = new Piece(imageLoc, movements, actions, s, p3, 5, 6, 7, i);
+        Piece piece = new Piece(DEFAULT_DUVALL, movements, actions, s, p, 5, 6, 7, i);
         return piece;
     }
 
-    public Patch createNewPatch (double x, double y) {
-        Patch patch = new SquarePatch(3, DEFAULT_DUVALL, new Point2D.Double(x, y));
-        System.out.println("Bob Tester: One patch created");
+    public Patch createNewPatch (Point2D p) {
+        Patch patch = new SquarePatch(3, DEFAULT_DUVALL, p);
         return patch;
     }
 
     public Movement createNewMovement (List<Point2D> pl1, List<Point2D> pl2) {
         Movement m1 = new Movement(pl1, pl2);
-        System.out.println("Bob Tester: One movement created");
         return m1;
     }
 
@@ -156,7 +149,6 @@ public class JSONBobTester {
         ActionConclusion ac = new ReceiverToInventoryConclusion();
 
         Action a1 = new ConcreteAction("kill", pl1, pl2, stlList, ac);
-        System.out.println("Bob Tester: One action created");
         return a1;
     }
 }

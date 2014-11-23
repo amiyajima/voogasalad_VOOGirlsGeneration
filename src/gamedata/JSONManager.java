@@ -1,6 +1,8 @@
 package gamedata;
 
 import gamedata.gamecomponents.Game;
+import gamedata.gamecomponents.Grid;
+import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -24,6 +26,7 @@ public class JSONManager {
      * Constructor
      */
     public JSONManager () {
+        
     }
 
     /**
@@ -31,12 +34,12 @@ public class JSONManager {
      * 
      * @param game
      */
-    public void writeToJSON (Game g, String fileName) {
+    public void writeToJSON (Grid g, String fileName) {
         Gson gson = new Gson();
-        System.out.println("gson created");
+        System.out.println("JSONManager: gson created");
 
         String json = gson.toJson(g);
-        System.out.println("game converted to json");
+        System.out.println("JSONManager: game converted to json");
         try {
             FileWriter writer = new FileWriter(fileName);
             writer.write(json);
@@ -45,7 +48,6 @@ public class JSONManager {
         catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(json);
     }
 
     /**
@@ -55,7 +57,7 @@ public class JSONManager {
      * @throws FileNotFoundException
      */
     public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
-        System.out.println("read method called");
+        System.out.println("JSONManager: read method called");
         Gson gson = new Gson();
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 

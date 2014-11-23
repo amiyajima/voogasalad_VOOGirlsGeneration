@@ -45,7 +45,7 @@ public class JSONBob extends Menu {
 //TODO  for now since game construction in front end doesn't work, this uses
 //      the JSONBobTester to create a default game
         JSONBobTester jb = new JSONBobTester();
-        myJSONmanager.writeToJSON(jb.createNewGame(), file.getAbsolutePath());
+        myJSONmanager.writeToJSON(jb.createNewGrid(), file.getAbsolutePath());
     }
     
     private void handleLoad () {
