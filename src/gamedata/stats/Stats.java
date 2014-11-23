@@ -2,12 +2,13 @@ package gamedata.stats;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 /**
  * Numerical stats class.
  * Stats are contained in every piece.
  * Stats map a stat name to a double value.
  * 
- * @author jujs100
+ * @author Jennie Ju
  *
  */
 public class Stats {
@@ -66,12 +67,10 @@ public class Stats {
 	}
 
 	/**
-	 * Returns a map of all the stats 
+	 * Returns a set of all the stat names
 	 */
-	public Map<String, Double> getStatsMap() {
-		// if this is only for display, should maybe
-		// take in node instead of giving out myStats
-		return myStats;
+	public Set<String> getStatNames() {
+		return myStats.keySet();
 	}
 
 

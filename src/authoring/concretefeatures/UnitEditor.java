@@ -1,9 +1,14 @@
 package authoring.concretefeatures;
 
 import java.util.List;
+import java.util.Set;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
@@ -53,5 +58,18 @@ public class UnitEditor extends PopupWindow {
 		
 		VBox mainVBox = new VBox();
 		
+		Button setStatsBtn = new Button("Set Stats...");
+		setStatsBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				new StatsTotalEditor(myStats);
+			}
+		});
+		
+		mainVBox.getChildren().addAll(setStatsBtn);
+		root.setContent(mainVBox);
+		setScene(scene);
 	}
+	
+
 }

@@ -107,7 +107,6 @@ private AudioClip myAudio;
         
        // myGrid = new SquareGameGrid(8,8);
         
-        
         loadFXML(GAMESPACE_FXML, myGameSpace);
         loadFXML(INITIALSCENE_FXML, myInitialScene);
 
@@ -212,8 +211,8 @@ private AudioClip myAudio;
         setGridState(new SelectState(this));
         changeCursor(CURSOR_GLOVE_TEST);
         getGrid().setOnMouseExited(event->{changeCursor(CURSOR_GLOVE_TEST);});
-      //  myGrid.requestFocus();
-//        addTestKeyboardControl();
+        myGrid.requestFocus();
+        addKeyboardController();
 //        addLocationSelector();
 //        
     }
@@ -453,12 +452,13 @@ private AudioClip myAudio;
     private void addDropShadow(Node n, Color c){
         DropShadow ds = new DropShadow(); 
         ds.setRadius(10.0);
-        ds.setOffsetX(3.0);
-        ds.setOffsetY(3.0);
+        ds.setOffsetX(1.0);
+        ds.setOffsetY(1.0);
         ds.setColor(c);
         n.setEffect(ds); 
+        System.out.println("drop shadow");
     }
-
+    
 
     /**
      * Highlight the effect range of an action if to be applied at a given position
@@ -480,36 +480,32 @@ private AudioClip myAudio;
 
         });
     }
-//    
-//    @FXML
-//    private void testGame() {
-//        JSONBobTester JSBTester = new JSONBobTester();
-//        myModel = JSBTester.createNewGame();
-//        myStage.setScene(new Scene(myGameSpace));
-//        
-//        myGrid.requestFocus();
-//        
-//        myCurrentLocation = new Point2D.Double(0.0,0.0);
-//        addKeyboardController();
-//        addLocationSelector();
-//        
-//    }
-    
-    private void addLocationSelector () {
-        myGrid.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle (MouseEvent event) {
-//                myCurrentLocation = new Point2D.Double(r.getX(), r.getY());
-                System.out.println("hi");
-            }
-        });
-    }
 
+    
+
+    
+//    private void addLocationSelector () {
+//        myGrid.setOnMousePressed(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle (MouseEvent event) {
+////                myCurrentLocation = new Point2D.Double(r.getX(), r.getY());
+//                System.out.println("hi");
+//            }
+//        });
+//    }
     
     private void addKeyboardController(){
         KeyboardController KBControl = new KeyboardController();
 //        KBControl.setActionKeyControl(myGrid, myModel);
-        KBControl.setMovementKeyControl(myGrid, myModel, myCurrentLocation);
+        KBControl.setMovementKeyControl(this, myGrid, myModel);
     }
+    
+    public void highlightCurrentLocation(Color c, Point2D oldLocation, Point2D newLocation){
+        Node oldNode = myGrid.get((int)oldLocation.getX(), (int)oldLocation.getY());
+        Node newNode = myGrid.get((int)newLocation.getX(), (int)newLocation.getY());
+        oldNode.setEffect(null);
+        addDropShadow(newNode, c);
+    }
+
    
 }
