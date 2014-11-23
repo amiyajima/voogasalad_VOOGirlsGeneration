@@ -3,14 +3,15 @@ package gamedata;
 import gamedata.gamecomponents.Piece;
 import java.util.List;
 
+
 public class PieceData {
     private List<Piece> myPieces;
-    
-    public PieceData(List<Piece> pieces) {
+
+    public PieceData (List<Piece> pieces) {
         myPieces = pieces;
     }
-    
-    public List<Piece> getPieces() {
+
+    public List<Piece> getPieces () {
         return myPieces;
     }
 

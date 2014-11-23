@@ -86,18 +86,14 @@ public class RangeGrid extends GridView{
 
 		for (int i=0;i<sampleGrid.getGridHeight();i++) {
 			selectedList.add(new Point2D.Double(0,i-centerY));
-			System.out.println("0,"+(i-centerY));
-
 		}
 		return selectedList;
 	}
 	
 	public List<Point2D> getCenterRow(){
 		List<Point2D> selectedList=new ArrayList<Point2D>();
-
 		for (int i=0;i<sampleGrid.getGridWidth();i++) {
 			selectedList.add(new Point2D.Double(i-centerX,0));
-			System.out.println((i-centerX)+",0");
 		}
 		return selectedList;
 	} 
@@ -108,9 +104,6 @@ public class RangeGrid extends GridView{
 		selectedSet.addAll(getCenterColumn());
 		selectedSet.addAll(getCenterRow());
 		selectedList.addAll(selectedSet);
-		for (Point2D p:selectedList){
-			System.out.println(p.getX()+","+p.getY());
-		}
 		return selectedList;
 	}
 	

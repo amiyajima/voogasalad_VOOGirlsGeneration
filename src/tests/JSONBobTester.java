@@ -1,14 +1,11 @@
 package tests;
 
 import java.awt.geom.Point2D;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
-import gamedata.action.ActorRemovalConclusion;
 import gamedata.action.ConcreteAction;
-import gamedata.action.ReceiverRemovalConclusion;
 import gamedata.action.ReceiverToInventoryConclusion;
 import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
@@ -21,7 +18,6 @@ import gamedata.gamecomponents.Piece;
 import gamedata.gamecomponents.SquareGrid;
 import gamedata.gamecomponents.SquarePatch;
 import gamedata.goals.Goal;
-import gamedata.goals.PieceOnPatchGoal;
 import gamedata.goals.PlayerPiecesRemovedGoal;
 import gamedata.rules.MoveCountRule;
 import gamedata.rules.Rule;
