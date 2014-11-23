@@ -1,17 +1,18 @@
 package gamedata.wrappers;
 
 import gamedata.gamecomponents.Piece;
-import java.util.List;
+import java.awt.geom.Point2D;
+import java.util.Map;
 
 
 public class PieceData {
-    private List<Piece> myPieces;
+    private Map<Point2D, Piece> myPieces;
 
-    public PieceData (List<Piece> pieces) {
+    public PieceData (Map<Point2D, Piece> pieces) {
         myPieces = pieces;
     }
 
-    public List<Piece> getPieces () {
+    public Map<Point2D, Piece> getPieces () {
         return myPieces;
     }
 

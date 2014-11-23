@@ -3,13 +3,13 @@ package gamedata.wrappers;
 import java.util.List;
 
 public class ActionData {
-    private List<IndividualActionData> myActions;
+    private List<ActionDataIndividual> myActions;
     
-    public ActionData(List<IndividualActionData> actions) {
+    public ActionData(List<ActionDataIndividual> actions) {
         myActions = actions;
     }
     
-    public List<IndividualActionData> getActions() {
+    public List<ActionDataIndividual> getActions() {
         return myActions;
     }
 }
