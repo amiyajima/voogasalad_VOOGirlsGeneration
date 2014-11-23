@@ -1,4 +1,4 @@
-package gamedata;
+package gamedata.wrappers;
 
 import java.util.List;
 import gamedata.gamecomponents.Grid;

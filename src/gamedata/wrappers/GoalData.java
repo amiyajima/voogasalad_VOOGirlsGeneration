@@ -1,4 +1,4 @@
-package gamedata;
+package gamedata.wrappers;
 
 import gamedata.goals.Goal;
 import java.util.List;

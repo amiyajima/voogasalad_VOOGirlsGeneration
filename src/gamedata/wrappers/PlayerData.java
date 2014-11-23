@@ -1,4 +1,4 @@
-package gamedata;
+package gamedata.wrappers;
 
 import gameengine.player.Player;
 import java.util.List;
@@ -16,7 +16,6 @@ public class PlayerData {
     }
     
     public List<Player> getPlayers() {
-        System.out.println("Players get called: " + myPlayers.get(0).toString());
         return myPlayers;
     }
 
