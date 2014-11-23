@@ -6,8 +6,10 @@ import gamedata.gamecomponents.Piece;
 import java.util.Map;
 import java.util.Observable;
 import java.awt.geom.Point2D;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -59,6 +61,7 @@ public class SquareGameGrid extends GameGrid {
                 sp.setAlignment(Pos.CENTER);
                 sp.setPrefHeight(500 / c);
                 sp.setPrefWidth(500 / this.r);
+                                
 //                Rectangle r = new Rectangle(500 / this.r - 10, 500 / c - 10);
 //                r.setFill(Color.BLACK);
 //                

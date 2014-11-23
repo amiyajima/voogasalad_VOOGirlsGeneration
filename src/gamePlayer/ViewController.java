@@ -365,9 +365,6 @@ private AudioClip myAudio;
         setGridState(new ApplyState(this));
     }
 
-    private void setOnClick(){
-        myGrid.setOnMouseClicked(event->{performAction(event.getX(), event.getY());});
-    }
 
     /**
      * Perform the actions of a click at position (x,y) on game grid
@@ -393,8 +390,8 @@ private AudioClip myAudio;
         return new Point2D.Double(xCor,yCor);
     }
 
-        private Piece getPiece(Point2D loc){
-            return myModel.getCurrentLevel().getGrid().getPiece(loc);
+    private Piece getPiece(Point2D loc){
+        return myModel.getCurrentLevel().getGrid().getPiece(loc);
             
         }
     protected GameGrid getGrid(){
@@ -419,6 +416,7 @@ private AudioClip myAudio;
         return activeAction;
     }
 
+    
     /**
      * Highlight the tiles that represent the possible range of the action
      * selected
@@ -427,7 +425,6 @@ private AudioClip myAudio;
     private void highLightActionRange(){
         //TODO: getActionRange()shouldn't need a location. action is contained in piece, which knows its own location.
         //  activeAction.getActionRange(activePiece.getLoc());
-
 
         //temparary stub for testing highlight;
         activeAction.getActionRange(activePiece.getLoc()).forEach(point->{ Node n = myGrid.get((int)point.getX(), (int)point.getY());
@@ -505,6 +502,11 @@ private AudioClip myAudio;
         Node newNode = myGrid.get((int)newLocation.getX(), (int)newLocation.getY());
         oldNode.setEffect(null);
         addDropShadow(newNode, c);
+    }
+    
+    public void highlightLocation(Color c, Node oldNode, Node newNode){
+//        oldNode.setEffect(null);
+        addDropShadow(newNode,c);
     }
 
    
