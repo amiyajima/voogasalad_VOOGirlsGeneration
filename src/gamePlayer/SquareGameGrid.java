@@ -59,7 +59,7 @@ public class SquareGameGrid extends GameGrid {
                 sp.setAlignment(Pos.CENTER);
                 sp.setPrefHeight(500 / c);
                 sp.setPrefWidth(500 / this.r);
-                                                                                                                                                                                                                                                                                                                                                                                                
+
                 this.add(sp, i, j);
                
                 

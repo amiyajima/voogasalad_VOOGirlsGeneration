@@ -386,6 +386,7 @@ public class ViewController{
         performAction(event.getX(), event.getY());});
     }
 
+
     /**
      * Perform the actions of a click at position (x,y) on game grid
      * @param x
@@ -414,7 +415,9 @@ public class ViewController{
     private Piece getPiece(Point2D loc){
         return myModel.getCurrentLevel().getGrid().getPiece(loc);
 
+
     }
+
     protected GameGrid getGrid(){
         return myGrid;
     }
@@ -437,6 +440,7 @@ public class ViewController{
         return activeAction;
     }
 
+    
     /**
      * Highlight the tiles that represent the possible range of the action
      * selected
@@ -446,6 +450,7 @@ public class ViewController{
         System.out.println(activePiece.getLoc());
         System.out.println(activeAction.getActionRange(activePiece.getLoc()));
         activeAction.getActionRange(activePiece.getLoc()).forEach(point->{ Node n = myGrid.get((int)point.getX(),(int)point.getY());
+
         addDropShadow(n, Color.YELLOW);
         myGrid.getChildren().get((int)point.getX()*(int)point.getY()).setOnMouseEntered(event->highLightEffectRange(n, Color.RED));
         n.setOnMouseExited(event->highLightEffectRange(n, Color.TRANSPARENT));
@@ -521,6 +526,11 @@ public class ViewController{
         Node newNode = myGrid.get((int)newLocation.getX(), (int)newLocation.getY());
         oldNode.setEffect(null);
         addDropShadow(newNode, c);
+    }
+    
+    public void highlightLocation(Color c, Node oldNode, Node newNode){
+//        oldNode.setEffect(null);
+        addDropShadow(newNode,c);
     }
 
 
