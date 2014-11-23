@@ -18,7 +18,6 @@ import com.google.gson.Gson;
 public class JSONManager {
     final static String DEFAULT_JSON_DIRECTORY = "./src/resources/";
     final static String SAMPLE_JSON = "./src/resources/test.json";
-    final static String DEFAULT_JSON_READ_LOCATION = "C:\\Users\\Rica\\Desktop\\GAME.json";
 
     /**
      * Constructor
@@ -56,8 +55,6 @@ public class JSONManager {
      */
     public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("read method called");
-// TODO Remove this reassignment when JSON Reader is out of test phase
-        jsonFileLocation = DEFAULT_JSON_READ_LOCATION;
         Gson gson = new Gson();
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 

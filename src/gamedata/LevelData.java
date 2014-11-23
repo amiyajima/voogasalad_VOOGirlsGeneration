@@ -9,13 +9,15 @@ import java.util.List;
  *
  */
 public class LevelData {
-    private List<Level> myLevels;
+    private List<IndividualLevelData> myLevels;
     
-    public LevelData(List<Level> levels) {
+    public LevelData(List<IndividualLevelData> levels) {
         myLevels = levels;
+        System.out.println("My levels initiated: " + levels.get(0).toString());
     }
     
-    public List<Level> getLevels() {
+    public List<IndividualLevelData> getLevels() {
+        System.out.println("Levels get called: " + myLevels.get(0).toString());
         return myLevels;
     }
 

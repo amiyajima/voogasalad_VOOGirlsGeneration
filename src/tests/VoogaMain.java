@@ -14,7 +14,7 @@ public class VoogaMain {
         System.out.println("main is running");
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("");
+            jsonManager.readFromJSONFile("C:\\Users\\Rica\\Desktop\\GAME.json");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
