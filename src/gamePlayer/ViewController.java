@@ -204,6 +204,7 @@ public class ViewController{
         setOnClick();
 
         setGridState(new SelectState(this));
+        getGrid().setOnMouseExited(event->{changeCursor(CURSOR_GLOVE_TEST); });
 //        myMouseController.setCursorImage(myScene, myGrid, CURSOR_GLOVE_TEST);
 //        myMouseController.setOnClick(this, gridState, myGrid);
         
@@ -448,7 +449,7 @@ public class ViewController{
 //        myGrid.clearEffect();
 
 //        activeNodes = new ArrayList<Node>();
-
+        myGrid.clearEffect();
         activeAction.getActionRange(activePiece.getLoc()).forEach(point->{
 
             if(point.getX()<myGrid.getRow() && point.getY()<myGrid.getCol() && point.getX()>0 && point.getY()>0){
