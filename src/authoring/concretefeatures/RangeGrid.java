@@ -28,8 +28,9 @@ public class RangeGrid extends GridView{
 	private int centerY;
 	private List<Point2D> myRange;
 
-	public RangeGrid(int width, int height, int tileSize) {
+	public RangeGrid(int width, int height, int tileSize,List<Point2D> range) {
 		super(width, height, tileSize);	
+		myRange=range;
 		sampleGrid=getGrid();
 		sampleSelected();
 		centerX=sampleGrid.getGridWidth()/2;
@@ -61,6 +62,8 @@ public class RangeGrid extends GridView{
 		for (Point2D position:myRange){
 			int x=(int) (position.getX()+centerX);
 			int y=(int) (centerY-position.getY());
+//			System.out.println(x);
+//			System.out.println(y);
 			if ((x<=centerX*2) && (y<=centerY*2)){
 				sampleGrid.getTile(x,y).selecteTile(true);
 			}

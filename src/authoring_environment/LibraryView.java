@@ -52,6 +52,8 @@ public class LibraryView extends TabPane {
 	private boolean doNothing;
 	private boolean reset;
 	private boolean edit;
+	private int unitID;
+	private int terrainID;
 	
 	/**
 	 * LibraryView constructor. Initializes two tabs - one for units,
@@ -66,6 +68,8 @@ public class LibraryView extends TabPane {
 		doNothing = true;
 		reset = true;
 		edit = false;
+		unitID = 0;
+		terrainID = 0;
 		
 		Tab unitTab = new Tab(UNITS);
 		unitTab.setClosable(false);
@@ -141,6 +145,30 @@ public class LibraryView extends TabPane {
 		setGridActionEvents();
 	}
 	
+	public int getUnitID(){
+		unitID += 1;
+		return unitID;
+	}
+	
+	public int getTerrainID(){
+		terrainID += 1;
+		return terrainID;
+	}
+	
+	public void selectUnit(Piece unit){
+		currentUnit = unit;
+		doNothing = false;
+		reset = false;
+		edit = false;
+	}
+	
+	public void selectTerrain(Patch terrain){
+		currentTerrain = terrain;
+		doNothing = false;
+		reset = false;
+		edit = false;
+	}
+	
 	private void setGridActionEvents() {
 		myGrid.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -163,7 +191,7 @@ public class LibraryView extends TabPane {
 		}
 		if(mySelection.isSelected(0)){
 			if(currentUnit != null){
-				Piece unit = currentUnit;
+				Piece unit = new Piece(currentUnit);
 				if(reset){
 					myGrid.removeUnit(tile, unit);
 				}
@@ -177,7 +205,7 @@ public class LibraryView extends TabPane {
 		}
 		else{
 			if(currentTerrain != null){
-				Patch terrain = currentTerrain;
+				Patch terrain = new Patch(currentTerrain);
 				if(reset){
 					myGrid.removeTerrain(tile, terrain);
 				}
@@ -190,21 +218,7 @@ public class LibraryView extends TabPane {
 			}	
 		}
 	}
-
-	public void selectUnit(Piece unit){
-		currentUnit = unit;
-		doNothing = false;
-		reset = false;
-		edit = false;
-	}
 	
-	public void selectTerrain(Patch terrain){
-		currentTerrain = terrain;
-		doNothing = false;
-		reset = false;
-		edit = false;
-	}
-
 	public void addPiece(UnitEntry unit){
 		mySelection.select(myTabMap.get(UNITS));
 		myLibraryMap.get(UNITS).getChildren().add(unit);

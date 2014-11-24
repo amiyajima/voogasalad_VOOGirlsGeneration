@@ -66,6 +66,10 @@ public class StatsCreatorBox extends HBox {
 		}
 		return Double.parseDouble(myValueField.getText());
 	}
+	
+	public boolean isEmpty(){
+		return myValueField.getText().isEmpty() || myStatField.getText().isEmpty();
+	}
 
 	private void initStatsCreatorBox() {
 		getStylesheets().add(STYLESHEET);
