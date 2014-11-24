@@ -95,7 +95,12 @@ public class Level extends Observable {
 	public void garbageCollectPieces() {
 		List<Piece> pieces = myGrid.getAllPieces();
 		for(Piece p:pieces){
-			Inventory i = p.getInventory();
+			//For Testing Purposes Only.
+			if(p.getStats().getValue("health")<=0){
+				myGrid.removePiece(p);
+			}
+			
+		/*	Inventory i = p.getInventory();
 			List<Piece> list = i.getAllInventory();
 			for(Piece p2:list){
 				if(p2.shouldRemove()){
@@ -104,7 +109,7 @@ public class Level extends Observable {
 			}
 			if(p.shouldRemove()){
 				myGrid.removePiece(p);
-			}
+			}*/
 		}
 	}
 
