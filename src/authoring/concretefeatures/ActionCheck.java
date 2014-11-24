@@ -33,10 +33,9 @@ public class ActionCheck extends PopupWindow {
     private LibraryView myLibrary;
 
     private List<Action> myActions;
-    private List<String> myPieces;
+    private List<String> myPieces = new ArrayList<String>();
     private List<Patch> myPatches;
-    private Map<String,Map>  Conclusion;
-    
+    private Map<String, Map> Conclusion;
 
     private static final String STYLESHEET = "/resources/stylesheets/actioncreator_layout.css";
 
@@ -71,65 +70,72 @@ public class ActionCheck extends PopupWindow {
 
     @Override
     protected void initialize () {
+        myPieces.add("Piece A");
+        myPieces.add("Piece B");
+        myPieces.add("Piece C");
+        System.out.println(myPieces);
         ScrollPane root = new ScrollPane();
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().add(STYLESHEET);
-        
+
         VBox mainVBox = new VBox();
         mainVBox.getStyleClass().add("vbox");
         mainVBox.setId("vbox-main");
         VBox actionNameVBox = new VBox();
         VBox posActorVBox = new VBox();
         VBox posReceiverVBox = new VBox();
-        
+
         ChoiceBox<String> actionTypes = new ChoiceBox<String>();
-        initActionChooser(actionNameVBox, actionTypes );
-        
+        initActionChooser(actionNameVBox, actionTypes);
+
         ChoiceBox<String> posActors = new ChoiceBox<String>();
         initActorChooser(posActorVBox, posActors);
-        
-        initReceiverChooser(posReceiverVBox, posActors.getValue(),actionTypes.getValue());
-        
-        
+
+        initReceiverChooser(posReceiverVBox, posActors.getValue(), actionTypes);
         
         
-        mainVBox.getChildren().addAll(actionNameVBox, new Separator(), posActorVBox );
-                      root.setContent(mainVBox);
-                      setScene(scene);
         
+        
+        mainVBox.getChildren().addAll(actionNameVBox, new Separator(), posActorVBox,
+                                      new Separator(), posReceiverVBox);
+        root.setContent(mainVBox);
+        setScene(scene);
+
     }
 
-    private void initReceiverChooser (VBox posReceiverVBox, String actor, String action) {
+    private void initReceiverChooser (VBox posReceiverVBox, String actor, ChoiceBox<String> actionTypes) {
         // TODO Auto-generated method stub
         Label posReceiverLabel = new Label(RECEIVER);
         Button posReceiversbtn = new Button("Possible Receivers");
         List<String> posReceivers = getReceivers(actor);
-        
+
         posReceiversbtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
-                    PopupWindow receiversChooser = new ReceiverEditor(posReceivers, actor, action);
-                    receiversChooser.show();
-                    // TODO: set myRange in here somewhere (within RangeEditor?)
+            public void handle (ActionEvent event) {
+                PopupWindow receiversChooser = new ReceiverEditor(posReceivers, actor, actionTypes.getValue().toString());
+                receiversChooser.show();
+                // TODO: set myRange in here somewhere (within RangeEditor?)
             }
-    });
+        });
         
+        posReceiverVBox.getChildren().addAll(posReceiverLabel,posReceiversbtn);
+
     }
 
     private void initActorChooser (VBox posActorVBox, ChoiceBox<String> posActors) {
         // TODO Auto-generated method stub
         Label actorLabel = new Label(ACTOR);
         posActors.getItems().addAll("Piece A", "Piece B", "Piece C");
-        
+
         HBox actorsHbox = new HBox();
         actorsHbox.getChildren().addAll(posActors);
         posActorVBox.getChildren().addAll(actorLabel, actorsHbox);
-        
+
     }
 
     private void initActionChooser (VBox nameVBox, ChoiceBox<String> actionTypes) {
         // TODO: actionTypes needs to get List<String> that contains names of all the action types
-        // 
+        //
         Label targetLabel = new Label(ACTION_TYPE);
         actionTypes.getItems().addAll("Attack", "Heal", "AlltheRest");
 
@@ -137,15 +143,15 @@ public class ActionCheck extends PopupWindow {
         actionsHBox.getChildren().addAll(actionTypes);
         nameVBox.getChildren().addAll(targetLabel, actionsHBox);
     }
-    
-    private List<String> getReceivers(String actor){
+
+    private List<String> getReceivers (String actor) {
         List<String> receivers = new ArrayList<String>();
-        for(String p : myPieces){
-            if(!p.equals(actor)){
+        for (String p : myPieces) {
+            if (!p.equals(actor)) {
                 receivers.add(p);
             }
         }
         return receivers;
     }
-    
+
 }
