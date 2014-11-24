@@ -1,7 +1,9 @@
 package authoring_environment;
 
 import authoring.data.PatchData;
+import authoring.data.PatchTypeData;
 import authoring.data.PieceData;
+import authoring.data.PieceTypeData;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -19,14 +21,11 @@ public class VoogaView extends BorderPane {
 	private final int TILE_SIDE_LENGTH = 40;
 
 	private MenuView mySettingsView;
+
 	private WorkspaceView myWorkspaceView;
 	
-	private PieceData myPieceData;
-	private PatchData myPatchData;
 	
 	public VoogaView(){
-		myPieceData = new PieceData();
-		myPatchData = new PatchData();
 	
 		myWorkspaceView = new WorkspaceView();
 		mySettingsView = new MenuView(myWorkspaceView);

@@ -8,21 +8,19 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
 import authoring.data.PatchData;
+import authoring.data.PatchTypeData;
 import authoring.data.PieceData;
+import authoring.data.PieceTypeData;
 import authoring_environment.JennieGrid;
 import authoring_environment.LibraryView;
 import authoring_environment.SandyGrid;
 import authoring_environment.SandyGridView;
 import authoring_environment.UIspecs;
-import authoring_environment.VoogaView;
 import authoring_environment.WorkspaceView;
 
 
@@ -117,10 +115,12 @@ public class GameCreator extends PopupWindow {
     private void addWorkspaceTab(int numRows, int numCols) {
     	PieceData pieceData = new PieceData();
 		PatchData patchData = new PatchData();
+		PieceTypeData pieceTypeData = new PieceTypeData();
+		PatchTypeData patchTypeData = new PatchTypeData();
 		SandyGrid grid = new SandyGrid(numRows, numCols,
 		40, pieceData, patchData);
 
-		LibraryView libraryView = new LibraryView(grid);
+		LibraryView libraryView = new LibraryView(grid,pieceTypeData,patchTypeData);
 		SandyGridView gridView = new SandyGridView(grid, 700, 550);
 		Tab tab = new Tab();
 		BorderPane bPane = new BorderPane();
