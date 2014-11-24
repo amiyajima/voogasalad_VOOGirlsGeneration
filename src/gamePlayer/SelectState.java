@@ -15,7 +15,7 @@ public class SelectState implements IGridState {
         myController = controller;
         myMouseController = myController.getMouseController();
 //        myController.getGrid().setOnMouseEntered(event->{myController.changeCursor(myController.CURSOR_GLOVE_TEST);});
-        myController.getGrid().setOnMouseEntered(event->{myMouseController.changeCursorImage(myController.getScene(), myController.getGrid(), myController.CURSOR_GLOVE_TEST);;});        
+        myController.getGrid().setOnMouseEntered(event->{myMouseController.setCursorImage(myController.getScene(), myController.getGrid(), myController.CURSOR_GLOVE_TEST);;});        
         
     }
     
