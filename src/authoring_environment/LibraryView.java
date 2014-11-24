@@ -159,7 +159,6 @@ public class LibraryView extends TabPane {
 
     public void associateGrid (SandyGrid grid) {
     	myGrid = grid;
-    	System.out.println(grid);
     	setGridActionEvents();
     }
 

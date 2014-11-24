@@ -1,5 +1,7 @@
 package authoring.concretefeatures;
 
+import gamedata.stats.Stats;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -11,8 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import gamedata.gamecomponents.Piece;
-import gamedata.stats.Stats;
 import authoring.abstractfeatures.PopupWindow;
 
 /**
@@ -39,14 +39,14 @@ public class StatsTotalEditor extends PopupWindow {
 	 * @param stats - Stats of the piece whose stats
 	 * are being edited
 	 */
-	public StatsTotalEditor(Piece piece) {
+	public StatsTotalEditor(Stats stats) {
 		
 		setHeight(WINDOW_HEIGHT);
 		setWidth(WINDOW_WIDTH);
 		setTitle(WINDOW_TITLE);
 		
-		myStats = piece.getStats();
-		myBoxes = new ArrayList<>();
+		myStats = stats;
+		myBoxes = new ArrayList<StatsCreatorBox>();
 		initialize();
 	}
 	
@@ -62,9 +62,9 @@ public class StatsTotalEditor extends PopupWindow {
 		VBox statsVBox = new VBox();
 		initStatsEditorBox(statsVBox);
 		Button newStatBtn = makeAddButton(statsVBox);
-		Button doneButton = makeDoneButton(statsVBox);
+		Button doneBtn = makeDoneButton(statsVBox);
 		
-		mainVBox.getChildren().addAll(newStatBtn,statsVBox,doneButton);
+		mainVBox.getChildren().addAll(newStatBtn,statsVBox,doneBtn);
 		root.setContent(mainVBox);
 		setScene(scene);
 	}
@@ -78,6 +78,7 @@ public class StatsTotalEditor extends PopupWindow {
 		for (String name : statNames) {
 			double val = myStats.getValue(name);
 			StatsCreatorBox scb = new StatsCreatorBox(name,val);
+			myBoxes.add(scb);
 			addStatHBox(statsVBox, scb);
 		}
 	}
@@ -98,16 +99,18 @@ public class StatsTotalEditor extends PopupWindow {
 	private void addStatHBox(VBox statsVBox, StatsCreatorBox scb) {
 		HBox statsHBox = new HBox();
 		statsHBox.getStyleClass().add("hbox");
-		Button delStatBtn = makeDeleteButton(statsVBox, statsHBox);
+		Button delStatBtn = makeDeleteButton(statsVBox, statsHBox, scb);
 		statsHBox.getChildren().addAll(scb,delStatBtn);
 		statsVBox.getChildren().addAll(statsHBox);
 	}
 	
-	private Button makeDeleteButton(VBox statsVBox, HBox statsHBox) {
+	private Button makeDeleteButton(VBox statsVBox, HBox statsHBox,
+			StatsCreatorBox scb) {
 		Button delBtn = new Button("-");
 		delBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				myBoxes.remove(scb);
 				statsVBox.getChildren().remove(statsHBox);
 			}
 		});
@@ -116,11 +119,12 @@ public class StatsTotalEditor extends PopupWindow {
 	
 	private Button makeDoneButton(VBox statsVbox){
 		Button doneButton = new Button("Done");
-		doneButton.setOnAction(new EventHandler<ActionEvent>(){
+		doneButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent event){
-				for(StatsCreatorBox sbc: myBoxes){
-					if(!sbc.isEmpty()){
+			public void handle(ActionEvent event) {
+				myStats.clear();
+				for(StatsCreatorBox sbc: myBoxes) {
+					if (!sbc.isEmpty()) {
 						String name = sbc.getStatName();
 						Double val = sbc.getStatValue();
 						myStats.add(name, val);

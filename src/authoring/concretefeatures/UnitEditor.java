@@ -30,7 +30,7 @@ import authoring.data.ActionData;
  * authoring environment.
  */
 public class UnitEditor extends PopupWindow {
-	
+
 	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 	private final String NAME = "Unit Editor";
 	private final String UNIT_NAME_LABEL = "Name";
@@ -39,16 +39,16 @@ public class UnitEditor extends PopupWindow {
 	private final String TEMPLATE_LABEL = "Update unit";
 	private final String DELETE = "Delete";
 	private final String EDIT = "Edit";
-	
+
 	private final int HEIGHT = 400;
 	private final int WIDTH = 400;
 	private Piece myUnit;
-	
+
 	private Stats myStats;
 	private List<Action> myActions;
-	
+
 	private ActionData myAvailableActions;
-	
+
 	/**
 	 * Constructor that sets the dimensions of the UnitEditor
 	 * GUI component and initializes it.
@@ -61,62 +61,62 @@ public class UnitEditor extends PopupWindow {
 		setWidth(WIDTH);
 		setTitle(NAME);
 		myUnit = unit;
-		
+
 		myStats = myUnit.getStats();
 		myActions = myUnit.getActions();
-		
+
 		myAvailableActions = availableActions;
-		
+
 		initialize();
 	}
-	
+
 	@Override
 	protected void initialize() {
 		ScrollPane root = new ScrollPane();
 		Scene scene = new Scene(root, WIDTH, HEIGHT);
 		scene.getStylesheets().add(STYLESHEET);
-		
+
 		VBox mainVBox = new VBox();
-		
+
 		Button setStatsBtn = new Button("Set Stats...");
 		setStatsBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				StatsTotalEditor edit = new StatsTotalEditor(myUnit);
+				StatsTotalEditor edit = new StatsTotalEditor(myStats);
 				edit.show();
 			}
 		});
-		
+
 		//DIFFERENT FROM UNIT CREATOR
 		ObservableList<String> addedActionNames = FXCollections.observableArrayList();
 		for(Action a: myActions){
 			addedActionNames.add(a.toString());
 		}
-		
+
 		ModulesList modList = new ModulesList(myAvailableActions.getActionNames(), addedActionNames);
 
-        Button goButton = new Button(TEMPLATE_LABEL);
-        goButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent click) {
-            	myActions = addSelectedActions(modList.getSelectedActions());  
-            	for(Action a: myActions){
-            		myUnit.addAction(a);
-            	}
-                close();
-            }
-        });
-        
+		Button goButton = new Button(TEMPLATE_LABEL);
+		goButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle (ActionEvent click) {
+				myActions = addSelectedActions(modList.getSelectedActions());  
+				for(Action a: myActions){
+					myUnit.addAction(a);
+				}
+				close();
+			}
+		});
+
 		mainVBox.getChildren().addAll(setStatsBtn, modList, goButton);
 		root.setContent(mainVBox);
 		setScene(scene);
 	}
 
-protected List<Action> addSelectedActions(List<String> selected){
-	List<Action> list = new ArrayList<>();
-	for(String s: selected){
-		list.add(myAvailableActions.getAction(s));
+	protected List<Action> addSelectedActions(List<String> selected){
+		List<Action> list = new ArrayList<>();
+		for(String s: selected){
+			list.add(myAvailableActions.getAction(s));
+		}
+		return list;
 	}
-	return list;
-}
 }

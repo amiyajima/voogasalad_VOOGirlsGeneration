@@ -18,9 +18,9 @@ import javafx.scene.control.TabPane;
  *
  */
 public class WorkspaceView extends TabPane {
-	private int myTabCounter;
 	
 	private List<SandyGrid> myGrids;
+	private int myCurrentTabIdx;
 	
 	public WorkspaceView() {
 		myGrids = new ArrayList<>();
@@ -32,40 +32,55 @@ public class WorkspaceView extends TabPane {
 	 * number of tabs that have been made
 	 * @param tab
 	 */
-	public void addNextTab(Tab tab) {
-		tab.setText("Workspace");		
-		tab.setOnClosed(new EventHandler<Event>() {
-        	@Override
-			public void handle(Event closed) {
-        		myGrids.remove(Integer.parseInt(tab.getId()));
-        		myTabCounter--;
-			}
-        });
+	
+	/*
+	 * TODO: This only works when you close the most recent workspace (rightmost one). 
+	 * Closing any other workspace does not automatically select the next one (the 
+	 * workspaces ahead of the closed one shift left one - for some goddamn reason
+	 * JavaFX does not detect this as a change in index. Actually what the hell.
+	 * 
+	 * Also when you close the last tab, then make a new one. Creating that new tab is
+	 * not recognized as a selection switch. 
+	 * 
+	 * @Mike Zhu
+	 */
+	
+	public void addNextTab(Tab tab, String name) {
+		
+		tab.setText(name);	
 		
 		super.getTabs().add(tab);
 		getSelectionModel().select(tab);
+		
+		tab.setOnClosed(new EventHandler<Event>() {
+        	@Override
+			public void handle(Event closed) {
+        		System.out.println("second?");
+        		int idx = getSelectionModel().getSelectedIndex();
+
+            	if(idx>=0){
+        			myGrids.remove(idx);
+        		}
+            	if(idx==-1){
+            		myGrids.remove(0);
+            	}
+			}
+        });
 	}
 	
-	private void updateIDs(){
-		int i = 0;
-		for(Tab t: getTabs()){
-			t.setId(Integer.toString(i));
-			i++;
+	public SandyGrid getActiveGrid(){
+		SingleSelectionModel<Tab> selectionModel = getSelectionModel();
+		int idx = selectionModel.getSelectedIndex();
+		System.out.println(idx);
+		System.out.println("first?");
+		
+		if(idx==-1 || idx>=myGrids.size()){
+			return myGrids.get(0);
 		}
+		return myGrids.get(idx);
 	}
 	
 	public void addGrid(SandyGrid grid){
 		myGrids.add(grid);
-	}
-	
-	public SandyGrid getActiveGrid(){
-		updateIDs();
-		SingleSelectionModel<Tab> selectionModel = getSelectionModel();
-		for(int i=0; i<myGrids.size(); i++){
-			if(selectionModel.isSelected(i)){
-				return myGrids.get(i);
-			}
-		}
-		return myGrids.get(0);
 	}
 }
