@@ -53,6 +53,10 @@ public abstract class GameGrid extends GridPane implements Observer{
         }
         return result;
     }
+    
+    protected void clearEffect(){
+        this.getChildren().forEach(node->node.setEffect(null));
+    }
 
 
     protected abstract void initializeGrid();

@@ -53,32 +53,32 @@ public class JSONBobTester {
         List<Player> myPlayers = new ArrayList<Player>();
         Player myPlayer1 = new Player(12345);
         Player myPlayer2 = new Player(54321);
-        //myPlayers.add(myPlayer1);
-        //myPlayers.add(myPlayer2);
+        // myPlayers.add(myPlayer1);
+        // myPlayers.add(myPlayer2);
 
         Grid grid = createNewGrid();
 
         List<MoveCountRule> myRules = new ArrayList<MoveCountRule>();
         Rule rule1 = new MoveCountRule(3);
         MoveCountRule rule2 = new MoveCountRule(5);
-        //myRules.add(rule1);
-        //myRules.add(rule2);
+        // myRules.add(rule1);
+        // myRules.add(rule2);
 
         List<Goal> myGoals = new ArrayList<Goal>();
         Goal goal1 = new PlayerPiecesRemovedGoal(myPlayer2);
-        //myGoals.add(goal1);
+        // myGoals.add(goal1);
         Goal goal2 = new PlayerPiecesRemovedGoal(myPlayer1);
-        //myGoals.add(goal2);
+        // myGoals.add(goal2);
 
         List<Level> myLevels = new ArrayList<Level>();
-        //Level level1 = new Level(grid, myGoals, myRules);
+        // Level level1 = new Level(grid, myGoals, myRules);
         Level level2 = new Level(grid, myGoals, myRules);
-        //myLevels.add(level1);
+        // myLevels.add(level1);
         myLevels.add(level2);
 
         Piece piece = createNewPiece(new Point2D.Double(3, 3));
         Patch patch = createNewPatch(new Point2D.Double(3, 3));
-        
+
         Game myGame = new Game(myPlayers, myLevels);
         return patch;
     }
@@ -90,7 +90,7 @@ public class JSONBobTester {
                 Patch patch = createNewPatch(new Point2D.Double(x, y));
                 grid1.setPatch(patch.getLoc(), patch);
                 Piece piece = createNewPiece(new Point2D.Double(x, y));
-                //grid1.setPiece(piece.getLoc(), piece);
+                // grid1.setPiece(piece.getLoc(), piece);
             }
         }
         System.out.println("Bob Tester: Patches filled: " + grid1.getAllPatches().size());
@@ -105,27 +105,28 @@ public class JSONBobTester {
         Point2D p3 = new Point2D.Double(3, 3);
 
         List<Point2D> pl1 = new ArrayList<Point2D>();
-        //pl1.add(p1);
-        //pl1.add(p2);
+        // pl1.add(p1);
+        // pl1.add(p2);
 
         List<Point2D> pl2 = new ArrayList<Point2D>();
-        //pl2.add(p1);
-        //pl2.add(p3);
+        // pl2.add(p1);
+        // pl2.add(p3);
 
         List<Point2D> pl3 = new ArrayList<Point2D>();
-        //pl3.add(p2);
-        //pl3.add(p3);
+        // pl3.add(p2);
+        // pl3.add(p3);
 
         List<Movement> movements = new ArrayList<Movement>();
+
         // movements.add(createNewMovement(pl1, pl2));
         // movements.add(createNewMovement(pl2, pl3));
 
         List<Action> actions = new ArrayList<Action>();
-        //actions.add(createNewAction(pl1, pl2));
+        // actions.add(createNewAction(pl1, pl2));
         actions.add(createNewAction(pl2, pl3));
 
         Stats s = new Stats();
-        s.add("Health", 20);
+        s.add("health", 20);
         Inventory i = new Inventory();
 
         Random r = new Random();

@@ -35,25 +35,24 @@ public class IndividualUnitEditor extends PopupWindow {
     private final String PLAYER_LABEL = "Player ID";
     private final String ROTATION_LABEL = "Image Rotation (degrees)";
     private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
-    private GridPieceWrapper myUnitWrapper;
-    private Piece myUnit;
+    private Piece myPiece;
 
 
     /**
      * Constructor for the individual unit editor pop up
      */
-    public IndividualUnitEditor () {
-        // myUnitWrapper = pieceWrapper;
+    public IndividualUnitEditor (Piece piece) {
         setHeight(WINDOW_HEIGHT);
         setWidth(WINDOW_WIDTH);
         setTitle(NAME);
+        
+    	myPiece = piece;
         initialize();
     }
 
     // after the piece class gets edited, wrapper class should be switched to piece class
     @Override
     protected void initialize () {
-
         ScrollPane root = new ScrollPane();
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
         scene.getStylesheets().add(STYLESHEET);
@@ -87,28 +86,26 @@ public class IndividualUnitEditor extends PopupWindow {
         CheckBox cb2 = new CheckBox("Vertical Flip");
         imageFlip.getChildren().addAll(cb1, cb2);
 
-        // button that links to states editor, link to inventory editor
+        // button that links to stats editor, link to inventory editor
         Button statsEdit = new Button(STAT_EDITOR_LABEL);
         statsEdit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent e) {
-                // TODO: pops up stats editor screen
-                // PopupWindow p = new StatesEditor();
-                PopupWindow p = new GameCreator();
+                PopupWindow p = new StatsIndividualEditor(myPiece.getStats());
                 p.show();
             }
         });
 
-        Button inventoryEdit = new Button(INVENTORY_EDITOR_LABEL);
-        inventoryEdit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent e) {
-                // TODO: pops up stats editor screen
-                // PopupWindow p = new InventoryEditor();
-                PopupWindow p = new GameCreator();
-                p.show();
-            }
-        });
+//        Button inventoryEdit = new Button(INVENTORY_EDITOR_LABEL);
+//        inventoryEdit.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle (ActionEvent e) {
+//                // TODO: pops up stats editor screen
+//                // PopupWindow p = new InventoryEditor();
+//                PopupWindow p = new GameCreator();
+//                p.show();
+//            }
+//        });
 
         // get the data from above and set them when OK is pressed
         Button create = new Button("OK");
@@ -129,9 +126,8 @@ public class IndividualUnitEditor extends PopupWindow {
             }
         });
 
-        box.getChildren().addAll(names, images, players, imageRotation, imageFlip, inventoryEdit,
-                                 statsEdit,
-                                 create);
+        box.getChildren().addAll(names, images, players, imageRotation, imageFlip,
+                                 statsEdit,create);
         root.setContent(box);
         setScene(scene);
     }
@@ -159,6 +155,8 @@ public class IndividualUnitEditor extends PopupWindow {
         // TODO: ImageView pieceImage = myUnitWrapper.getImageView();
         ImageView pieceImage =
                 new ImageView(new Image(getClass().getResourceAsStream("images/233.gif")));
+        pieceImage.setFitHeight(40);
+        pieceImage.setFitWidth(40);
         images.getChildren().addAll(pieceImage);
     }
 
@@ -168,6 +166,7 @@ public class IndividualUnitEditor extends PopupWindow {
      * @param players is an hbox
      * @param playersChoice contain playerID choices
      */
+    //TODO: ideally should pass in as parameter
     private void initPlayerID (HBox players, ChoiceBox<Integer> playersChoice) {
         Label playersLable = new Label(PLAYER_LABEL);
         playersLable.setPadding(UIspecs.topRightPadding);

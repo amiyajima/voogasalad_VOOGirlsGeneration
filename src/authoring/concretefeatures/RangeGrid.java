@@ -27,10 +27,10 @@ public class RangeGrid extends GridView{
 	private int centerX;
 	private int centerY;
 	private List<Point2D> myRange;
-	private int test;
 
-	public RangeGrid(int width, int height, int tileSize) {
+	public RangeGrid(int width, int height, int tileSize,List<Point2D> range) {
 		super(width, height, tileSize);	
+		myRange=range;
 		sampleGrid=getGrid();
 		sampleSelected();
 		centerX=sampleGrid.getGridWidth()/2;
@@ -47,13 +47,27 @@ public class RangeGrid extends GridView{
 	 * @param myTileSize: The preferred size of the tile.
 	 */
 	public void update(int widthGridNumber,int heightGridNumber,int myTileSize){
+	
 		sampleGrid=new Grid(widthGridNumber,heightGridNumber,myTileSize);
 		sampleSelected();
 		centerX=widthGridNumber/2;
 		centerY=heightGridNumber/2;
 		Image image=new Image(getClass().getResourceAsStream(DEFAULT_CENTRAL_IMAGE));
 		addCenterImage(image);
+		showSelectedRange();
 		this.setContent(sampleGrid);
+	}
+
+	private void showSelectedRange() {
+		for (Point2D position:myRange){
+			int x=(int) (position.getX()+centerX);
+			int y=(int) (centerY-position.getY());
+//			System.out.println(x);
+//			System.out.println(y);
+			if ((x<=centerX*2) && (y<=centerY*2)){
+				sampleGrid.getTile(x,y).selecteTile(true);
+			}
+		}
 	}
 
 	/**
@@ -108,6 +122,14 @@ public class RangeGrid extends GridView{
 		}
 	}
 	
+	public void rangeAll(boolean toChoose) {
+		for (int i=0;i<sampleGrid.getGridWidth();i++) {
+			for (int j=0;j<sampleGrid.getGridHeight();j++) {
+				sampleGrid.getTile(i, j).selecteTile(toChoose);
+			}
+		}
+	}
+	
 	private void sampleSelected() {
 		for (Tile[] line : sampleGrid.getGridTiles()) {
 			for (Tile tile : line) {
@@ -123,11 +145,12 @@ public class RangeGrid extends GridView{
 	
 	public void setRange(List<Point2D> range){
 		myRange=range;
-//		test=0;
 	}
 	
 	public List<Point2D> getRange(){
 		return myRange;
 	}
+
+
 	
 }

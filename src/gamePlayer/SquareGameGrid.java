@@ -31,9 +31,6 @@ public class SquareGameGrid extends GameGrid {
 
     }
 
-    private void onHover (Rectangle rec) {
-        rec.setFill(Color.BURLYWOOD);
-    }
 
     @Override
     public void update (Observable o, Object arg) {
@@ -97,5 +94,7 @@ public class SquareGameGrid extends GameGrid {
             ((StackPane)n).getChildren().add(pieces.get(point).getImageView());
         });
     }
+    
+
     
 }

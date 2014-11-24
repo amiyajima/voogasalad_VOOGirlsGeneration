@@ -1,17 +1,22 @@
 package authoring.concretefeatures;
 
-import gamedata.gamecomponents.Patch; 
+import gamedata.gamecomponents.Patch;
+
 import java.io.File;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+
 import java.awt.geom.Point2D;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -20,7 +25,6 @@ import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
-
 /**
  * GUI element used to create new Patch objects and add them to the library. Allows users
  * to specify the name and image of the patch.
@@ -28,21 +32,23 @@ import authoring_environment.UIspecs;
  * @author Mike Zhu
  */
 public class TerrainCreator extends PopupWindow {
-
-    private final int HEIGHT = 150;
+	
+	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
+    private final int HEIGHT = 140;
     private final int WIDTH = 400;
-    private final String TERRAIN = "Terrain";
     private final String NAME = "Terrain Creator";
     private final String TERRAIN_NAME_LABEL = "Name";
     private final String IMAGE_LABEL = "Terrain image";
     private final String LOAD_IMAGE_LABEL = "Load image";
     private final String TEMPLATE_LABEL = "Create new terrain template";
     private final String DELETE = "Delete";
+    private final String EDIT = "Edit";
     private LibraryView myLibrary;
 
-    private int myState;
-    private Point2D myLoc;
+
+    private int myTypeID;
     private String myImageLocation;
+    private Point2D myLoc;
 
     /**
      * Constructor that sets the dimensions of the TerrainCreator GUI component
@@ -54,9 +60,9 @@ public class TerrainCreator extends PopupWindow {
     public TerrainCreator (LibraryView library) {
         myLibrary = library;
 
-        myState = 0;
-        myLoc = new Point2D.Double(0, 0);
+        myTypeID = library.getTerrainID();
         myImageLocation = "";
+        myLoc = new Point2D.Double(0, 0);
 
         setHeight(HEIGHT);
         setWidth(WIDTH);
@@ -66,10 +72,17 @@ public class TerrainCreator extends PopupWindow {
 
     @Override
     protected void initialize () {
+    
+        ScrollPane root = new ScrollPane();
+        Scene scene = new Scene(root, WIDTH, HEIGHT);
+        scene.getStylesheets().add(STYLESHEET);
+        
         VBox box = new VBox();
+        box.getStylesheets().add(STYLESHEET);
+        box.getStyleClass().add("vbox");
         box.setPadding(UIspecs.allPadding);
         box.setSpacing(5);
-
+        
         HBox names = new HBox();
         HBox images = new HBox();
 
@@ -82,14 +95,15 @@ public class TerrainCreator extends PopupWindow {
         Label loadLabel = new Label(IMAGE_LABEL);
         Button loadImage = new Button(LOAD_IMAGE_LABEL);
         loadImage.setOnAction(new EventHandler<ActionEvent>() {
+        	
             @Override
             public void handle (ActionEvent click) {
                 FileChooser fileChoice = new FileChooser();
-                fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png"));
+                fileChoice.getExtensionFilters().add(
+                		new ExtensionFilter("PNG Files", "*.png", "*.gif"));
                 File selectedFile = fileChoice.showOpenDialog(null);
                 if (selectedFile != null) {
                     myImageLocation = selectedFile.toURI().toString();
-                    System.out.println(myImageLocation);
                     Image image = new Image(myImageLocation);
                     icon.setImage(image);
                     icon.setFitHeight(40);
@@ -99,16 +113,16 @@ public class TerrainCreator extends PopupWindow {
         });
         images.getChildren().addAll(loadLabel, loadImage, icon);
 
-        Button create = new Button(TEMPLATE_LABEL);
-        create.setOnAction(new EventHandler<ActionEvent>() {
+        Button goButton = new Button(TEMPLATE_LABEL);
+        goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
+            	Patch terrain = new Patch(myTypeID, myImageLocation, myLoc);
 
-                Patch terrain = new Patch(myState, myImageLocation, myLoc);
-                Hyperlink link = new Hyperlink(terrainName.getText());
-                link.setTranslateY(10);
-                ;
-                link.setOnAction(new EventHandler<ActionEvent>() {
+            	Label name = new Label(terrainName.getText());
+                name.setTranslateY(10);
+                Button editButton = new Button(EDIT);
+                editButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle (ActionEvent e) {
                         PopupWindow p = new TerrainEditor(terrain);
@@ -116,21 +130,27 @@ public class TerrainCreator extends PopupWindow {
                     }
                 });
                 Button delButton = new Button(DELETE);
-                delButton.setLayoutY(5);
 
-                HBox entry = new TerrainEntry(delButton, icon, link, terrain);
+                TerrainEntry entry = new TerrainEntry(terrain, icon, name, editButton, delButton);
+                entry.setStyle("-fx-cursor: hand");
+        		entry.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        			@Override
+        			public void handle(MouseEvent m){
+        				myLibrary.selectTerrain(terrain);
+        			}
+        		});
 
                 delButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle (ActionEvent event) {
-                        myLibrary.removeFromLibrary(entry, TERRAIN);
+                        myLibrary.removePatch(entry);
                     }
                 });
-                myLibrary.addToLibrary(entry, TERRAIN);
+                myLibrary.addPatch(entry);
                 close();
             }
         });
-        box.getChildren().addAll(names, images, create);
+        box.getChildren().addAll(names, images, goButton);
         setScene(new Scene(box));
     }
 }

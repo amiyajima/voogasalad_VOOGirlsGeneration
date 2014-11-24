@@ -105,6 +105,7 @@ public class ConcreteAction implements Action {
 		for (StatsSingleMultiplier ssm : multiplierLogic) {
 			double doubleValue = 0;
 			String multiplierValue = ssm.getStatName();
+			System.out.println(multiplierValue);
 			if (ssm.checkTarget("actor")) {
 				doubleValue = actorStats.getValue(multiplierValue);
 			} else if (ssm.checkTarget("receiver")) {

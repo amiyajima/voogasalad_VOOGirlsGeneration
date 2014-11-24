@@ -5,28 +5,32 @@ import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+
 import java.awt.geom.Point2D;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import authoring.abstractfeatures.PopupWindow;
-import authoring.data.PieceData;
+import authoring.data.ActionData;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
-
 
 /**
  * GUI element that allows users to create new Piece templates and add them to
@@ -36,21 +40,20 @@ import authoring_environment.UIspecs;
  * @author Mike Zhu
  */
 public class UnitCreator extends PopupWindow {
-
-
+	
+	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 	private final int HEIGHT = 400;
 	private final int WIDTH = 400;
-	private final String UNITS = "Units";
 	private final String NAME = "Unit Creator";
 	private final String UNIT_NAME_LABEL = "Name";
 	private final String IMAGE_LABEL = "Unit image";
 	private final String LOAD_IMAGE_LABEL = "Load image";
 	private final String TEMPLATE_LABEL = "Create new unit template";
-	private final String DELETE = "Delete All Instances";
+	private final String DELETE = "Delete";
 	private final String EDIT = "Edit";
 	private LibraryView myLibrary;
-
-	private PieceData myPieceData;
+	private ActionData myAvailableActions;
+	
 	private int myTypeID;
 	private int myUniqueID;
 	private int myPlayerID;
@@ -63,22 +66,21 @@ public class UnitCreator extends PopupWindow {
 	private Inventory myInventory;
 
 	/**
-	 * Constructor that sets the dimensions of the UnitCreator GUI component and
 	 * initializes it.
 	 * 
 	 * @param library
 	 *            : Library to which units will be added.
 	 */
-	public UnitCreator(LibraryView library, PieceData pieceData) {
+	public UnitCreator(LibraryView library, ActionData availableActions) {
 		myLibrary = library;
-
-		myPieceData = pieceData;
+		myAvailableActions = availableActions;
+		
 		myImageLocation = "";
 		myPath = new ArrayList<Movement>();
 		myActions = new ArrayList<Action>();
 		myStats = new Stats();
 		myLoc = new Point2D.Double(0, 0);
-		myTypeID = 0;
+		myTypeID = library.getUnitID();
 		myUniqueID = 0;
 		myPlayerID = 0;
 		myInventory = new Inventory();
@@ -92,9 +94,11 @@ public class UnitCreator extends PopupWindow {
 	@Override
     protected void initialize () {
         VBox box = new VBox();
+        box.getStylesheets().add(STYLESHEET);
+        box.getStyleClass().add("vbox");
         box.setPadding(UIspecs.allPadding);
         box.setSpacing(5);
-
+        
         HBox names = new HBox();
         HBox images = new HBox();
 
@@ -107,13 +111,15 @@ public class UnitCreator extends PopupWindow {
         Label loadLabel = new Label(IMAGE_LABEL);
         Button loadImage = new Button(LOAD_IMAGE_LABEL);
         loadImage.setOnAction(new EventHandler<ActionEvent>() {
-            // initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
-            // @Jesse Finish this
+        	// initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
+        	// @Jesse Finish this
+        	// From Martin: You sure this code goes here, and not below the goButton ActionEvent?
 
             @Override
             public void handle (ActionEvent click) {
                 FileChooser fileChoice = new FileChooser();
-                fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png"));
+                fileChoice.getExtensionFilters().add(
+                		new ExtensionFilter("Image Files", "*.png", "*.gif"));
                 File selectedFile = fileChoice.showOpenDialog(null);
                 if (selectedFile != null) {
                     myImageLocation = selectedFile.toURI().toString();
@@ -126,47 +132,61 @@ public class UnitCreator extends PopupWindow {
         });
         images.getChildren().addAll(loadLabel, loadImage, icon);
 
-        HBox modList = new ModulesList();
+        ModulesList modList = new ModulesList(myAvailableActions.getActionNames(), FXCollections.observableArrayList());
 
         Button goButton = new Button(TEMPLATE_LABEL);
         goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
+            	myActions = addSelectedActions(modList.getSelectedActions());
+            	
                 Piece unit = new Piece(myImageLocation, myPath, myActions, myStats,
                                        myLoc, myTypeID, myUniqueID, myPlayerID, myInventory);
 
-                Label link = new Label(unitName.getText());
-                //link.setTranslateY(10);
+                Label name = new Label(unitName.getText());
+                name.setTranslateY(10);
                 Button editButton = new Button(EDIT);
                 editButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle (ActionEvent e) {
-                        PopupWindow p = new UnitEditor(unit);
+                        PopupWindow p = new UnitEditor(unit, myAvailableActions);
                         p.show();
                     }
                 });
                 Button delButton = new Button(DELETE);
-                delButton.setLayoutY(5);
 
-                HBox entry = new UnitEntry(unit, icon, link, editButton, delButton);
+                UnitEntry entry = new UnitEntry(unit, icon, name, editButton, delButton);
+                entry.setStyle("-fx-cursor: hand");
+        		entry.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        			@Override
+        			public void handle(MouseEvent m){
+        				myLibrary.selectUnit(unit);
+        			}
+        		});
+                
         		delButton.setOnAction(new EventHandler<ActionEvent>(){
         			@Override
         			public void handle(ActionEvent event) {
-        				myLibrary.removeFromLibrary(entry, UNITS);
+        				myLibrary.removePiece(entry);
         			}
         		});
 
-                myLibrary.addToLibrary(entry, UNITS);
+                myLibrary.addPiece(entry);
                 close();
             }
         });
         box.getChildren().addAll(names, images, modList, goButton);
         setScene(new Scene(box));
     }
+	protected List<Action> addSelectedActions(List<String> selected){
+		List<Action> list = new ArrayList<>();
+		for(String s: selected){
+			list.add(myAvailableActions.getAction(s));
+		}
+		return list;
+	}
 
-
-	private void initSetRangeButton(VBox rangeBox, String label,
-			List<Point2D> range) {
+	protected void initSetRangeButton(VBox rangeBox, String label, List<Point2D> range) {
 		Label rangeLabel = new Label(label);
 		Button setRange = new Button("Set Range...");
 		setRange.setOnAction(new EventHandler<ActionEvent>() {

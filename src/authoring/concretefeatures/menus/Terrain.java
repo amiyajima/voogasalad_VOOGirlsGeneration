@@ -6,22 +6,21 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import authoring.abstractfeatures.PopupWindow;
 import authoring.concretefeatures.TerrainCreator;
-import authoring.data.PatchData;
 import authoring_environment.LibraryView;
 
 public class Terrain extends Menu{
 	
 	private static final String NAME = "Terrain";
-	private static final String ITEM1 = "New Terrain";
+	private static final String NEW = "New Terrain";
 	private LibraryView myLibrary;
 
-	public Terrain(LibraryView library, PatchData patchData){
+	public Terrain(LibraryView library){
 		super(NAME);
 		myLibrary = library;
-		MenuItem eventsCreator = new MenuItem(ITEM1);
+		MenuItem terrainCreator = new MenuItem(NEW);
 		
-		setAction(eventsCreator);
-		getItems().addAll(eventsCreator);
+		setAction(terrainCreator);
+		getItems().addAll(terrainCreator);
 	}
 	
 	private void setAction(MenuItem item){

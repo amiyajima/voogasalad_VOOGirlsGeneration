@@ -2,6 +2,7 @@ package authoring.data;
 
 import gamedata.gamecomponents.Patch;
 
+import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @author Sandy Lee
  */
 public class PatchData implements AuthoringData<Patch> {
+	
     private List<Patch> myPatches;
 
     /**
@@ -35,6 +37,26 @@ public class PatchData implements AuthoringData<Patch> {
     @Override
     public void clear () {
         myPatches.clear();
+    }
+    
+    public void removePatch(Point2D location){
+		for(Patch patch : myPatches){
+			if(location.equals(patch.getLoc())){
+				myPatches.remove(patch);
+				return;
+			}
+		}
+	}
+    
+    public boolean terrainAtLoc(Patch terrain, int x, int y){
+    	Point2D location = new Point2D.Double(x, y);
+		for(Patch patch : myPatches){
+			if(location.equals(patch.getLoc()) && patch.getTypeID() == patch.getTypeID()){
+				myPatches.remove(patch);
+				return true;
+			}
+		}
+		return false;
     }
     
     public List<Patch> getPatches(){

@@ -82,12 +82,17 @@ public class KeyboardController {
                        }
                        
                        System.out.println(newCurrentLocation);
-                       vc.highlightCurrentLocation(Color.RED, myCurrentLocation, newCurrentLocation);
+                       vc.highlightCurrentLocation(Color.GREEN, myCurrentLocation, newCurrentLocation);
                        myCurrentLocation = newCurrentLocation;
                    }
                }
             }
         });
+        
+//        grid.get((int)myCurrentLocation.getX(), (int)myCurrentLocation.getY());
+        
+        
+        
     }
 }
 
