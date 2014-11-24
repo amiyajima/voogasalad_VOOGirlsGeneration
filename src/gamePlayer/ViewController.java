@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import java.util.ResourceBundle;
@@ -26,12 +27,14 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.input.KeyCode;
 
 
 
@@ -337,15 +340,21 @@ public class ViewController{
      */
     protected void updateActions (Piece piece){
         // setActivePiece(piece);
-
         controlPane.getChildren().clear();
         ArrayList<Label> actions = new ArrayList<Label>();
+        
         piece.getActions().forEach(action->{Label l = new Label(action.toString());
         l.setOnMouseClicked(event->bindAction(action));
         actions.add(l);});
-
+        
         controlPane.getChildren().addAll(actions);
 
+    }
+    
+    public void updateActionList(ArrayList<Label> actions){
+        controlPane.getChildren().clear();
+        controlPane.getChildren().addAll(actions);
+        System.out.println("i get here");
     }
 
     /**
@@ -353,7 +362,7 @@ public class ViewController{
      * @param action
      */
     private void bindAction(Action action){
-        
+
        if(activePiece==null) return;
         setActiveAction(action);      
         highLightActionRange();
@@ -369,6 +378,34 @@ public class ViewController{
         myGrid.setOnMouseClicked(event->{ 
             performAction(event.getX(), event.getY());});
     }
+    
+    public void setOnEnterKey(){
+        myGrid.requestFocus();
+        myGrid.setOnKeyPressed(new EventHandler<KeyEvent>(){
+
+            @Override
+            public void handle (KeyEvent arg0) {
+                // TODO Auto-generated method stub
+                if (arg0.getCode() == KeyCode.F){
+                    System.out.println("f");
+                    performAction(myKeyboardController.getCurrentLocation().getX(), myKeyboardController.getCurrentLocation().getY());
+                }
+                
+            }
+            
+        });
+        
+        
+        
+        
+//        myGrid.setOnKeyPressed(event->{ 
+//            if (event.getCode() == KeyCode.F){
+//                System.out.println("enter");
+//                performAction(myKeyboardController.getCurrentLocation().getX(), myKeyboardController.getCurrentLocation().getY());
+//            }
+//        }
+//    );
+    }
 
 
     /**
@@ -376,12 +413,24 @@ public class ViewController{
      * @param x
      * @param y
      */
-    private void performAction (double x, double y) {
+    public void performAction (double x, double y) {
         System.out.println("current mouse location:"+x +", "+y);
+        
+        if (getPiece(findPosition(x,y)) == null){
+            System.out.println("no piece");
+        }
+        
+        
         gridState.onClick(getPiece(findPosition(x,y)));
         myGrid.clearEffect();
         highlightCurrent(findPosition(x,y),Color.BLUE);
        // addDropShadow(myGrid.get(((int)findPosition(x,y).getX()), ((int)findPosition(x,y).getY())), Color.PURPLE);
+    }
+    
+    public void performActionKeyboard (Point2D location){
+        gridState.onClick(getPiece(location));
+        myGrid.clearEffect();
+        highlightCurrent(location,Color.BLUE);
     }
 
 
@@ -534,6 +583,7 @@ public class ViewController{
             myKeyboardController = new KeyboardController();
             myKeyboardController.setMovementKeyControl(this, myGrid, myModel);
             keyControlOn = true;
+//            setOnEnterKey();
         }
     }
 }
