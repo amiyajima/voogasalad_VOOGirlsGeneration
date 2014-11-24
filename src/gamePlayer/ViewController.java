@@ -416,15 +416,17 @@ public class ViewController{
      */
     public void performAction (double x, double y) {
         System.out.println("current mouse location:"+x +", "+y);
+        System.out.println("myGrid size is" + myGrid.getWidth()+ "*" + myGrid.getHeight());
+        System.out.println(myGrid.getBoundsInParent());
         
-        if (getPiece(findPosition(x,y)) == null){
+        if (getPiece(findPosition(x-45,y-20)) == null){
             System.out.println("no piece");
         }
         
         
-        gridState.onClick(getPiece(findPosition(x,y)));
+        gridState.onClick(getPiece(findPosition(x-45,y-20)));
         myGrid.clearEffect();
-        highlightCurrent(findPosition(x,y),Color.BLUE);
+        highlightCurrent(findPosition(x-45,y-20),Color.BLUE);
        // addDropShadow(myGrid.get(((int)findPosition(x,y).getX()), ((int)findPosition(x,y).getY())), Color.PURPLE);
     }
     
@@ -442,8 +444,8 @@ public class ViewController{
      * @return a Point2D representing tile coordinates
      */
     public Point2D findPosition(double x, double y){
-        double patchHeight = (double) myGrid.getHeight()/(double) myGrid.getCol();
-        double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
+        double patchHeight = 500/(double) myGrid.getCol();
+        double patchWidth = 500/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
         int yCor = (int) (y/patchHeight);
         System.out.println("Current Mouse Coodinatate:"+ xCor +" "+ yCor);

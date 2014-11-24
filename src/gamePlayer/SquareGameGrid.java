@@ -58,8 +58,8 @@ public class SquareGameGrid extends GameGrid {
             for(int j=0; j<c; j++){
                 StackPane sp = new StackPane();
                 sp.setAlignment(Pos.CENTER);
-                sp.setPrefHeight(500 / c);
-                sp.setPrefWidth(500 / this.r);
+//                sp.setPrefHeight(500 / c);
+//                sp.setPrefWidth(500/ this.r);
 
                 this.add(sp, i, j);
                
@@ -71,7 +71,6 @@ public class SquareGameGrid extends GameGrid {
     }
     
     
-    // TODO: implement the logic in View Controller class.
 
     /**
      * populates the grid according to the given the patch and piece maps.
