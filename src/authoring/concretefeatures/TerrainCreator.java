@@ -45,7 +45,6 @@ public class TerrainCreator extends PopupWindow {
     private final String EDIT = "Edit";
     private LibraryView myLibrary;
 
-
     private int myTypeID;
     private String myImageLocation;
     private Point2D myLoc;
