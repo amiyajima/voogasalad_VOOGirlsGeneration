@@ -3,6 +3,7 @@ package gamePlayer;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
+import java.util.List;
 import java.util.Map;
 import java.util.Observer;
 import javafx.collections.ObservableList;
@@ -61,7 +62,7 @@ public abstract class GameGrid extends GridPane implements Observer{
 
     protected abstract void initializeGrid();
 
-    protected abstract void populateGrid(Map<Point2D, Patch> patches, Map<Point2D, Piece>pieces);
+    protected abstract void populateGrid (List<Patch> patches, List<Piece> pieces);
 
 
 

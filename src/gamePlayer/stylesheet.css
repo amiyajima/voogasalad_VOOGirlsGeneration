@@ -42,12 +42,50 @@
 }
 
 
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-border-color: #82878c;
+    -fx-background-color: #82878c;
+}
+
+.tab{
+    -fx-background-insets: 0 1 0 1,0,0;
+    -fx-background-color: #82878c;
+    -fx-border-color:#82878c;
+    -fx-font-color: black;
+}
+
+.tab:selected {
+-fx-border-color:#82878c;
+}
+
+
+.tab-content-area 
+{
+	-fx-background-color: #82878c;
+	-fx-border-color:#82878c;
+}
+
+.tab .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #99FF66;
+}
+
+
 .label{
 	-fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
-    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+    -fx-background-color: #E5E4E2;
+    -fx-padding: 8px;
 }
+
 # menuButton{
 	-fx-background-color: #E8E5E2
 	   	-fx-font-size: 13px;

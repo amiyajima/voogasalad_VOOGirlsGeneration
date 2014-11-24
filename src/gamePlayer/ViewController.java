@@ -199,7 +199,7 @@ public class ViewController{
         myGrid= new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel.getCurrentLevel().getGrid().getColumn());
         myGameSpace.setCenter(myGrid);
         myGrid.setAlignment(Pos.CENTER);
-        myGrid.populateGrid(myModel.getCurrentLevel().getGrid().getPatches(), myModel.getCurrentLevel().getGrid().getPieces());
+        myGrid.populateGrid(myModel.getCurrentLevel().getGrid().getAllPatches(), myModel.getCurrentLevel().getGrid().getAllPieces());
         myModel.getLevels().forEach(level->level.addObserver(this.myGrid));
         setOnClick();
 
@@ -404,7 +404,14 @@ public class ViewController{
     }
 
     public Piece getPiece(Point2D loc){
-        return myModel.getCurrentLevel().getGrid().getPiece(loc);
+        
+        for(Piece p: myModel.getCurrentLevel().getGrid().getAllPieces()){
+            if(p.getLoc().equals(loc)){
+                return p;
+            }
+        }
+        return null;
+
     }
 
     protected Scene getScene(){

@@ -1,7 +1,10 @@
 package gameengine.movement;
 
+import gamedata.action.Action;
 import gamedata.gamecomponents.Grid;
+import gamedata.gamecomponents.Piece;
 import gamedata.rules.Rule;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.geom.Point2D;
@@ -13,7 +16,7 @@ import java.awt.geom.Point2D;
  * @author Jesse, Rica
  *
  */
-public class Movement {
+public class Movement implements Action {
 	// possible paths for this movement
 	private List<Point2D> myMoves;
 	private List<List<Point2D>> myPaths;
@@ -59,23 +62,22 @@ public class Movement {
 		return myAbsoluteMoves;
 	}
 
-	
 	/**
-	 * Checks to see if an absolute location (x,y) is valid 
-	 * @param x 
+	 * Checks to see if an absolute location (x,y) is valid
+	 * 
+	 * @param x
 	 * @param y
 	 * @return
 	 */
-	public boolean isValidLocation(int x, int y){
-		for(Point2D p:myAbsoluteMoves){
-			if(p.getX()==x && p.getY()==y){
+	public boolean isValidLocation(int x, int y) {
+		for (Point2D p : myAbsoluteMoves) {
+			if (p.getX() == x && p.getY() == y) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
-	
+
 	/**
 	 * Checks the collisions in the currently defined path. Checks with piece
 	 * and patch collisions.
@@ -94,5 +96,20 @@ public class Movement {
 		 * can collide with terrain return false; } }
 		 */
 		return b;
+	}
+
+	@Override
+	public List<Point2D> getActionRange(Point2D pieceLocation) {
+		return this.getPossibleLocs((int)pieceLocation.getX(), (int)pieceLocation.getY());
+	}
+
+	@Override
+	public List<Point2D> getEffectRange() {
+		return null;
+	}
+
+	@Override
+	public void doBehavior(Piece actor, Piece... receivers) {
+		
 	}
 }
