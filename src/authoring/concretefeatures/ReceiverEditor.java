@@ -37,8 +37,6 @@ public class ReceiverEditor extends PopupWindow {
 
     @Override
     protected void initialize () {
-        System.out.println(" awhatwhath");
-        System.out.println(myActor);
         ScrollPane root = new ScrollPane();
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().add(STYLESHEET);
@@ -56,8 +54,15 @@ public class ReceiverEditor extends PopupWindow {
         
         Label actorType = new Label("Actor:");
         Button actor = new Button(myActor);
+        actorVBox.getChildren().add(actorType);
+        
+        VBox actionNameVBoxx = new VBox();
 
-        mainVBox.getChildren().addAll(actionNameVBox);
+        Label testing = new Label("Action:");
+        Button tesster = new Button(myAction);
+        actionNameVBoxx.getChildren().addAll(testing, tesster);
+
+        mainVBox.getChildren().addAll(actionNameVBox, new Separator(), actionNameVBoxx);
         root.setContent(mainVBox);
         setScene(scene);
 

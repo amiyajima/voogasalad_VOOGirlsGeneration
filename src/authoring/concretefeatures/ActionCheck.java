@@ -90,7 +90,7 @@ public class ActionCheck extends PopupWindow {
         ChoiceBox<String> posActors = new ChoiceBox<String>();
         initActorChooser(posActorVBox, posActors);
 
-        initReceiverChooser(posReceiverVBox, posActors.getValue(), actionTypes);
+        initReceiverChooser(posReceiverVBox, posActors.getValue().toString(), actionTypes);
         
         
         
@@ -104,6 +104,10 @@ public class ActionCheck extends PopupWindow {
 
     private void initReceiverChooser (VBox posReceiverVBox, String actor, ChoiceBox<String> actionTypes) {
         // TODO Auto-generated method stub
+//        System.out.println("chosoesoereore");
+//        System.out.println(actor);
+//        System.out.println(actionTypes.getValue().toString());
+        
         Label posReceiverLabel = new Label(RECEIVER);
         Button posReceiversbtn = new Button("Possible Receivers");
         List<String> posReceivers = getReceivers(actor);
@@ -113,7 +117,6 @@ public class ActionCheck extends PopupWindow {
             public void handle (ActionEvent event) {
                 PopupWindow receiversChooser = new ReceiverEditor(posReceivers, actor, actionTypes.getValue().toString());
                 receiversChooser.show();
-                // TODO: set myRange in here somewhere (within RangeEditor?)
             }
         });
         
@@ -137,7 +140,6 @@ public class ActionCheck extends PopupWindow {
         //
         Label targetLabel = new Label(ACTION_TYPE);
         actionTypes.getItems().addAll("Attack", "Heal", "AlltheRest");
-        System.out.println(actionTypes.getItems().toString());
 
         HBox actionsHBox = new HBox();
         actionsHBox.getChildren().addAll(actionTypes);
