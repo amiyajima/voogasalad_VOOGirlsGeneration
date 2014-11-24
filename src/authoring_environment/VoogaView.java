@@ -1,7 +1,9 @@
 package authoring_environment;
 
 import authoring.data.PatchData;
+import authoring.data.PatchTypeData;
 import authoring.data.PieceData;
+import authoring.data.PieceTypeData;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -21,15 +23,19 @@ public class VoogaView extends BorderPane {
 	private LibraryView myLibraryView;
 	private SandyGridView myGridView;
 	private MenuView mySettingsView;
-	private PieceData myPieceData;
-	private PatchData myPatchData;
+	private PieceData myPieces;
+	private PatchData myPatches;
+	private PieceTypeData myPieceData;
+	private PatchTypeData myPatchData;
 	
 	public VoogaView(){
-		myPieceData = new PieceData();
-		myPatchData = new PatchData();
+		myPieces = new PieceData();
+		myPatches = new PatchData();
+		myPieceData = new PieceTypeData();
+		myPatchData = new PatchTypeData();
 		SandyGrid grid = new SandyGrid(NUM_TILES_ACROSS, NUM_TILES_DOWN,
-				TILE_SIDE_LENGTH, myPieceData, myPatchData);
-		myLibraryView = new LibraryView(grid);
+				TILE_SIDE_LENGTH, myPieces, myPatches);
+		myLibraryView = new LibraryView(grid, myPieceData, myPatchData);
 		myGridView = new SandyGridView(grid, GRID_VIEW_WIDTH, GRID_VIEW_HEIGHT);
 		mySettingsView = new MenuView(myLibraryView);
 		

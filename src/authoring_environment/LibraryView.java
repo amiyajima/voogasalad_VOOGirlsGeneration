@@ -8,6 +8,8 @@ import java.util.Map;
 
 import authoring.concretefeatures.TerrainEntry;
 import authoring.concretefeatures.UnitEntry;
+import authoring.data.PatchTypeData;
+import authoring.data.PieceTypeData;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -43,6 +45,8 @@ public class LibraryView extends TabPane {
 	private final String GLOBAL = "Global Commands";
 	private final String PIECES = "Piece Templates";
 	private final String PATCHES = "Patch Templates";
+	private PieceTypeData myPieces;
+	private PatchTypeData myPatches;
 	private SandyGrid myGrid;
 	private Map<String, VBox> myLibraryMap;
 	private Map<String, Tab> myTabMap;
@@ -61,9 +65,11 @@ public class LibraryView extends TabPane {
 	 * their respective tabs as they are created in the UnitCreator
 	 * and TerrainCreator.
 	 */
-	public LibraryView(SandyGrid grid){
+	public LibraryView(SandyGrid grid, PieceTypeData pieceData, PatchTypeData patchData){
 		mySelection = this.getSelectionModel();
 		this.setPrefSize(HEIGHT, WIDTH);
+		myPieces = pieceData;
+		myPatches = patchData;
 		myGrid = grid;
 		doNothing = true;
 		reset = true;
@@ -230,22 +236,26 @@ public class LibraryView extends TabPane {
 	public void addPiece(UnitEntry unit){
 		mySelection.select(myTabMap.get(UNITS));
 		myLibraryMap.get(UNITS).getChildren().add(unit);
+		myPieces.add(unit.getUnit());
 	}
 	
 	public void addPatch(TerrainEntry terrain){
 		mySelection.select(myTabMap.get(TERRAIN));
 		myLibraryMap.get(TERRAIN).getChildren().add(terrain);
+		myPatches.add(terrain.getTerrain());
 	}
 	
 	public void removePiece(UnitEntry unit){
 		myLibraryMap.get(UNITS).getChildren().remove(unit);
 		myGrid.removePieces(unit.getUnit());
+		myPieces.remove(unit.getUnit());
 		doNothing = true;
 	}
 	
 	public void removePatch(TerrainEntry terrain){
 		myLibraryMap.get(TERRAIN).getChildren().remove(terrain);
 		myGrid.removePatches(terrain.getTerrain());
+		myPatches.remove(terrain.getTerrain());
 		doNothing = true;
 	}
 }
