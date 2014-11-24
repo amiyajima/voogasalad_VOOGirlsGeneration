@@ -1,9 +1,10 @@
 .label{
-	-fx-font-size: 12px;
+	-fx-font-size: 13px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333333;
-    -fx-background-color: white;
-    -fx-padding: 6px;
+    -fx-padding: 5px;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: black;
 }
 
 .label:hover{

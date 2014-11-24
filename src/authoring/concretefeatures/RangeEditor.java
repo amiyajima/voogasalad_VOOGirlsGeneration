@@ -68,8 +68,8 @@ public class RangeEditor extends PopupWindow {
             // cacluateGridSize(range);
             int initialWidth = (int) cacluateGridSize(range).getX();
             int initialHeight = (int) cacluateGridSize(range).getY();
-            System.out.println(initialWidth);
-            System.out.println(initialHeight);
+//            System.out.println(initialWidth);
+//            System.out.println(initialHeight);
 
             int initialSize = getPrefTileSize(initialWidth * 2 + 1, initialHeight * 2 + 1);
             mySampleGridView.update(initialWidth * 2 + 1, initialHeight * 2 + 1, initialSize);
