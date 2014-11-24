@@ -111,7 +111,6 @@ public class RangeEditor extends PopupWindow {
 
 		// Range Selections
 		
-		
 		Label targetLabel = new Label("Select Range");
 		ChoiceBox<String> targetChoice = new ChoiceBox<>();
 		targetChoice.getItems().addAll(COLUMN, ROW, RADIUS,ALL,

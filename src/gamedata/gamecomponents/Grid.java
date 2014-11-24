@@ -16,14 +16,16 @@ import java.util.Map;
 public abstract class Grid {
     private int myRow;
     private int myColumn;
-    protected Map<Point2D, Patch> myPatches;
-    protected Map<Point2D, Piece> myPieces;
+    // protected Map<Point2D, Patch> myPatches;
+    // protected Map<Point2D, Piece> myPieces;
+    private List<Patch> myPatches;
+    private List<Piece> myPieces;
 
     /**
      * Default constructor makes 5x5 grid
      */
     public Grid () {
-       this(1, 1);
+        this(1, 1);
     }
 
     /**
@@ -35,8 +37,8 @@ public abstract class Grid {
     public Grid (int row, int column) {
         myRow = row;
         myColumn = column;
-        myPatches = new HashMap<Point2D, Patch>();
-        myPieces = new HashMap<Point2D, Piece>();
+        myPatches = new ArrayList<Patch>();
+        myPieces = new ArrayList<Piece>();
     }
 
     /**
@@ -46,7 +48,7 @@ public abstract class Grid {
      * @param coord of patch
      */
     public void setPatch (Point2D coord, Patch patch) {
-        myPatches.put(coord, patch);
+        myPatches.add(patch);
     }
 
     /**
@@ -55,14 +57,14 @@ public abstract class Grid {
      * @param coord of patch
      * @return patch
      */
-    public Patch getPatch (Point2D coord) {
-        for (Point2D coordinate : myPatches.keySet()) {
-            if (coordinate.equals(coord)) { 
-                return myPatches.get(coord); 
-            }
-        }
-        return null;
-    }
+    /*
+     * public Patch getPatch (Point2D coord) {
+     * for (Point2D coordinate : myPatches.keySet()) {
+     * if (coordinate.equals(coord)) { return myPatches.get(coord); }
+     * }
+     * return null;
+     * }
+     */
 
     /**
      * gets the piece on the given coordinate
@@ -71,22 +73,25 @@ public abstract class Grid {
      *        of piece
      * @return piece
      */
-    public Piece getPiece (Point2D loc) {
-        for (Point2D coordinate : myPieces.keySet()) {
-            {
-                if (coordinate.equals(loc)) { return myPieces.get(loc); }
-            }
-        }
-        return null;
-    }
-    
+    /*
+     * public Piece getPiece (Point2D loc) {
+     * for (Point2D coordinate : myPieces.keySet()) {
+     * {
+     * if (coordinate.equals(loc)) { return myPieces.get(loc); }
+     * }
+     * }
+     * return null;
+     * }
+     */
+
     /**
      * Set a piece on a specified coordinate
+     * 
      * @param coord
      * @param piece
      */
-    public void setPiece(Point2D coord, Piece piece) {
-        myPieces.put(coord, piece);
+    public void setPiece (Point2D coord, Piece piece) {
+        myPieces.add(piece);
     }
 
     /**
@@ -123,9 +128,9 @@ public abstract class Grid {
      * @return
      */
     public Piece getPiece (int id) {
-        for (Map.Entry<Point2D, Piece> entry : myPieces.entrySet()) {
-            if (entry.getValue().getUniqueID() == id)
-                return entry.getValue();
+        for (Piece p : myPieces) {
+            if (p.getUniqueID() == id)
+                return p;
         }
         return null;
     }
@@ -136,11 +141,13 @@ public abstract class Grid {
      * @return
      */
     public List<Piece> getAllPieces () {
-        List<Piece> all = new ArrayList<Piece>();
-        for (Map.Entry<Point2D, Piece> entry : myPieces.entrySet()) {
-            all.add(entry.getValue());
-        }
-        return all;
+        /*
+         * List<Piece> all = new ArrayList<Piece>();
+         * for (Map.Entry<Point2D, Piece> entry : myPieces.entrySet()) {
+         * all.add(entry.getValue());
+         * }
+         */
+        return myPieces;
     }
 
     /**
@@ -149,11 +156,13 @@ public abstract class Grid {
      * @return
      */
     public List<Patch> getAllPatches () {
-        List<Patch> all = new ArrayList<Patch>();
-        for (Map.Entry<Point2D, Patch> entry : myPatches.entrySet()) {
-            all.add(entry.getValue());
-        }
-        return all;
+        /*
+         * List<Patch> all = new ArrayList<Patch>();
+         * for (Map.Entry<Point2D, Patch> entry : myPatches.entrySet()) {
+         * all.add(entry.getValue());
+         * }
+         */
+        return myPatches;
     }
 
     /**
@@ -163,9 +172,11 @@ public abstract class Grid {
      *        of patch
      * @return patch
      */
-    public Map<Point2D, Patch> getPatches () {
-        return myPatches;
-    }
+    /*
+     * public Map<Point2D, Patch> getPatches () {
+     * return myPatches;
+     * }
+     */
 
     /**
      * gets the piece on the given coordinate
@@ -174,8 +185,10 @@ public abstract class Grid {
      *        of piece
      * @return piece
      */
-    public Map<Point2D, Piece> getPieces () {
-        return myPieces;
-    }
+    /*
+     * public Map<Point2D, Piece> getPieces () {
+     * return myPieces;
+     * }
+     */
 
 }

@@ -1,18 +1,23 @@
 package gamedata.JSON;
 
 import gamedata.gamecomponents.Game;
+import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import gamedata.goals.Goal;
 import gamedata.rules.MoveCountRule;
 import gamedata.rules.Rule;
+import gamedata.wrappers.GameData;
 import gamedata.wrappers.GoalData;
+import gamedata.wrappers.GridData;
 import gamedata.wrappers.LevelData;
+import gamedata.wrappers.LevelDataIndividual;
 import gamedata.wrappers.PatchData;
 import gamedata.wrappers.PatchDataIndividual;
 import gamedata.wrappers.PieceDataIndividual;
 import gamedata.wrappers.PlayerData;
+import gamedata.wrappers.PlayerDataIndividual;
 import gamedata.wrappers.RuleData;
 import gameengine.player.Player;
 import java.awt.geom.Point2D;
@@ -75,20 +80,36 @@ public class JSONManager {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
-        PatchDataIndividual patchData = myGson.fromJson(br, PatchDataIndividual.class);
-        System.out.println(patchData.getMyTypeID());
+        GameData myGameData = myGson.fromJson(br, GameData.class);
+        System.out.println(myGameData.toString());
         
-        PieceDataIndividual pieceData = myGson.fromJson(br, PieceDataIndividual.class);
-        System.out.println(pieceData.getMyTypeID());
-        
-        // map of patches
-        PatchData myPatches = myGson.fromJson(br,  PatchData.class);
-        System.out.println(myPatches);
-
-        // FUNCTIONAL
-        LevelData myLevels = myGson.fromJson(br, LevelData.class);
+        // need to add {myLevels: before and } after list
+        /*LevelData myLevels = myGson.fromJson(br, LevelData.class);
         System.out.println(myLevels.getLevels().get(0));
         // level data exists and contains levels. goals and rules within the level is empty.
+        
+        //works using singleLevel.json
+        LevelDataIndividual mySingleLevel = myGson.fromJson(br, LevelDataIndividual.class);
+        System.out.println(mySingleLevel);
+
+        // works using Grid.json
+        GridData gridData = myGson.fromJson(br, GridData.class);
+        System.out.println(gridData);
+
+        PlayerDataIndividual playerData = myGson.fromJson(br, PlayerDataIndividual.class);
+        System.out.println(playerData);
+
+        // works using SinglePatch.json
+        PatchDataIndividual patchData = myGson.fromJson(br, PatchDataIndividual.class);
+        System.out.println(patchData.getMyTypeID());
+
+        // works using SinglePiece.json
+        PieceDataIndividual pieceData = myGson.fromJson(br, PieceDataIndividual.class);
+        System.out.println(pieceData.getMyTypeID());
+
+        // map of patches
+        PatchData myPatches = myGson.fromJson(br, PatchData.class);
+        System.out.println(myPatches);
 
         // goal data is created, but contains no goals. does not work if it is called after rule
         // data
@@ -115,8 +136,20 @@ public class JSONManager {
         System.out.println(myPlayers.getPlayers().get(1).getID());
 
         Player player = myGson.fromJson(br, Player.class);
-        System.out.println(player.toString());
+        System.out.println(player.toString());*/
 
+        Game myGame = convertToGame(myGameData);
+        
+        return myGame;
+    }
+
+    /**
+     * Method that converts a game data object into a game object. may be an issue as every aspect of it is in a data wrapper
+     * @param myGameData
+     * @return
+     */
+    private Game convertToGame (GameData myGameData) {
+        
         return null;
     }
 

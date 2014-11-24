@@ -9,14 +9,18 @@ import java.util.List;
  *
  */
 public class PlayerData {
-    private List<Player> myPlayers;
+    private List<PlayerDataIndividual> myPlayers;
     
-    public PlayerData(List<Player> players) {
+    public PlayerData(List<PlayerDataIndividual> players) {
         myPlayers = players;
     }
     
-    public List<Player> getPlayers() {
+    public List<PlayerDataIndividual> getPlayers() {
         return myPlayers;
+    }
+    
+    public String toString(){
+        return myPlayers.toString();
     }
 
 }
