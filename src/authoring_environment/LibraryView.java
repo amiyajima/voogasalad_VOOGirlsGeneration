@@ -2,12 +2,10 @@ package authoring_environment;
 
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
+
 import java.util.HashMap;
 import java.util.Map;
-import authoring.concretefeatures.TerrainEntry;
-import authoring.concretefeatures.UnitEntry;
-import authoring.data.PatchTypeData;
-import authoring.data.PieceTypeData;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -22,6 +20,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import authoring.concretefeatures.TerrainEntry;
+import authoring.concretefeatures.UnitEntry;
+import authoring.data.PatchTypeData;
+import authoring.data.PieceTypeData;
 
 
 /**
@@ -46,7 +48,7 @@ public class LibraryView extends TabPane {
     private final String PATCHES = "Patch Templates";
     private PieceTypeData myPieces;
     private PatchTypeData myPatches;
-    private SandyGrid myGrid;
+    private ShapeGrid myGrid;
     private Map<String, VBox> myLibraryMap;
     private Map<String, Tab> myTabMap;
     private SingleSelectionModel<Tab> mySelection;
@@ -157,7 +159,7 @@ public class LibraryView extends TabPane {
         myTabMap.put(TERRAIN, terrainTab);
     }
 
-    public void associateGrid (SandyGrid grid) {
+    public void associateGrid (ShapeGrid grid) {
     	myGrid = grid;
     	setGridActionEvents();
     }

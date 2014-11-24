@@ -3,7 +3,6 @@ package authoring_environment;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.SingleSelectionModel;
@@ -19,7 +18,7 @@ import javafx.scene.control.TabPane;
  */
 public class WorkspaceView extends TabPane {
 	
-	private List<SandyGrid> myGrids;
+	private List<ShapeGrid> myGrids;
 	private int myCurrentTabIdx;
 	
 	public WorkspaceView() {
@@ -68,7 +67,7 @@ public class WorkspaceView extends TabPane {
         });
 	}
 	
-	public SandyGrid getActiveGrid(){
+	public ShapeGrid getActiveGrid(){
 		SingleSelectionModel<Tab> selectionModel = getSelectionModel();
 		int idx = selectionModel.getSelectedIndex();
 		System.out.println(idx);
@@ -80,7 +79,7 @@ public class WorkspaceView extends TabPane {
 		return myGrids.get(idx);
 	}
 	
-	public void addGrid(SandyGrid grid){
+	public void addGrid(ShapeGrid grid){
 		myGrids.add(grid);
 	}
 }
