@@ -56,6 +56,7 @@ public class PatchData implements AuthoringData<Patch> {
 		for(Patch patch : myPatches){
 			if(location.equals(patch.getLoc())){
 				myPatches.remove(patch);
+				return;
 			}
 		}
 	}

@@ -46,7 +46,7 @@ public class TerrainCreator extends PopupWindow {
     private LibraryView myLibrary;
 
 
-    private int myState;
+    private int myTypeID;
     private String myImageLocation;
     private Point2D myLoc;
 
@@ -60,7 +60,7 @@ public class TerrainCreator extends PopupWindow {
     public TerrainCreator (LibraryView library) {
         myLibrary = library;
 
-        myState = 0;
+        myTypeID = library.getTerrainID();
         myImageLocation = "";
         myLoc = new Point2D.Double(0, 0);
 
@@ -99,7 +99,8 @@ public class TerrainCreator extends PopupWindow {
             @Override
             public void handle (ActionEvent click) {
                 FileChooser fileChoice = new FileChooser();
-                fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png"));
+                fileChoice.getExtensionFilters().add(
+                		new ExtensionFilter("PNG Files", "*.png", "*.gif"));
                 File selectedFile = fileChoice.showOpenDialog(null);
                 if (selectedFile != null) {
                     myImageLocation = selectedFile.toURI().toString();
@@ -116,7 +117,7 @@ public class TerrainCreator extends PopupWindow {
         goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
-            	Patch terrain = new Patch(myState, myImageLocation, myLoc);
+            	Patch terrain = new Patch(myTypeID, myImageLocation, myLoc);
 
             	Label name = new Label(terrainName.getText());
                 name.setTranslateY(10);

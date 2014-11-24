@@ -55,6 +55,7 @@ public class PieceData implements AuthoringData<Piece> {
 		for(Piece piece : myPieces){
 			if(location.equals(piece.getLoc())){
 				myPieces.remove(piece);
+				return;
 			}
 		}
 	}
