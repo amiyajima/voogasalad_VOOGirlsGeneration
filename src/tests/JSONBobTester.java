@@ -48,13 +48,13 @@ public class JSONBobTester {
      * 
      * @return a new default game
      */
-    public Grid createNewGame () {
+    public Game createNewGame () {
         System.out.println("Bob Tester: Create new game");
         List<Player> myPlayers = new ArrayList<Player>();
         Player myPlayer1 = new Player(12345);
         Player myPlayer2 = new Player(54321);
         // myPlayers.add(myPlayer1);
-        // myPlayers.add(myPlayer2);
+        myPlayers.add(myPlayer2);
 
         Grid grid = createNewGrid();
 
@@ -62,7 +62,7 @@ public class JSONBobTester {
         Rule rule1 = new MoveCountRule(3);
         MoveCountRule rule2 = new MoveCountRule(5);
         // myRules.add(rule1);
-        // myRules.add(rule2);
+        myRules.add(rule2);
 
         List<Goal> myGoals = new ArrayList<Goal>();
         Goal goal1 = new PlayerPiecesRemovedGoal(myPlayer2);
@@ -80,7 +80,7 @@ public class JSONBobTester {
         Patch patch = createNewPatch(new Point2D.Double(3, 3));
 
         Game myGame = new Game(myPlayers, myLevels);
-        return grid;
+        return myGame;
     }
 
     public Grid createNewGrid () {

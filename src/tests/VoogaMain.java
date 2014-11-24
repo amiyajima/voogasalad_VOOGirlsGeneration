@@ -14,19 +14,17 @@ import java.io.FileNotFoundException;
  */
 public class VoogaMain {
     public static void testJSONwrite () {
-        String saveTo = "src/resources/json/Grid.json";
+        String saveTo = "src/resources/json/Game.json";
         // String saveTo = "src/resources/json/RicaSample.json";
         JSONManager myJSONmanager = new JSONManager();
         JSONBobTester jb = new JSONBobTester();
-        // myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
-        // myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
         myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
     }
 
     public static void testJSONload () {
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("src/resources/json/Grid.json");
+            jsonManager.readFromJSONFile("src/resources/json/Game.json");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -36,6 +34,6 @@ public class VoogaMain {
     public static void main (String[] args) {
         System.out.println("main is running");
         testJSONload();
-        // testJSONwrite();
+        //testJSONwrite();
     }
 }
