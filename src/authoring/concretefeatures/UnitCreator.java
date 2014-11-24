@@ -80,7 +80,7 @@ public class UnitCreator extends PopupWindow {
 		myActions = new ArrayList<Action>();
 		myStats = new Stats();
 		myLoc = new Point2D.Double(0, 0);
-		myTypeID = library.getUnitID();
+//		myTypeID = library.getUnitID();
 		myUniqueID = 0;
 		myPlayerID = 0;
 		myInventory = new Inventory();

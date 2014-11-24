@@ -127,7 +127,7 @@ public class GameCreator extends PopupWindow {
 		bPane.setLeft(libraryView);
 		bPane.setRight(gridView);
 		tab.setContent(bPane);
-		myWorkspaceView.getTabs().add(tab);
+		myWorkspaceView.addNextTab(tab);
     }
 
     public ChoiceBox<String> initChoiceBox (VBox box, ChoiceBox<String> choices) {
