@@ -32,12 +32,15 @@ import authoring_environment.WorkspaceView;
  */
 public class GameCreator extends PopupWindow {
 
-    private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
+    private static final int MIN_TILE_SIZE = 40;
+	private static final int GRID_VIEW_HEIGHT = 550;
+	private static final int GRID_VIEW_WIDTH = 700;
+	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
     private final int HEIGHT = 400;
     private final int WIDTH = 400;
     private final String NAME = "Game Creator";
-    private final String GRID_HEIGHT_LABEL = "Grid Length Level:";
-    private final String GRID_WIDTH_LABEL = "Grid Width Level:";
+    private final String GRID_HEIGHT_LABEL = "Number of Rows:";
+    private final String GRID_WIDTH_LABEL = "Number of Columns:";
     private final String PLAYER_NUMBER_LABEL = "Number of Players:";
     private final String TEMPLATE_LABEL = "Create";
 
@@ -117,11 +120,13 @@ public class GameCreator extends PopupWindow {
 		PatchData patchData = new PatchData();
 		PieceTypeData pieceTypeData = new PieceTypeData();
 		PatchTypeData patchTypeData = new PatchTypeData();
+		
+		int tileSize=getPrefTileSize(numRows,numCols);
 		SandyGrid grid = new SandyGrid(numRows, numCols,
-		40, pieceData, patchData);
+				tileSize, pieceData, patchData);
 
 		LibraryView libraryView = new LibraryView(grid,pieceTypeData,patchTypeData);
-		SandyGridView gridView = new SandyGridView(grid, 700, 550);
+		SandyGridView gridView = new SandyGridView(grid, GRID_VIEW_WIDTH, GRID_VIEW_HEIGHT);
 		Tab tab = new Tab();
 		BorderPane bPane = new BorderPane();
 		bPane.setLeft(libraryView);
@@ -129,6 +134,15 @@ public class GameCreator extends PopupWindow {
 		tab.setContent(bPane);
 		myWorkspaceView.addNextTab(tab);
     }
+    
+    private int getPrefTileSize(int gridWidthNumber,int gridHeightNumber) {
+		int calculatedTileSize = Math.max(GRID_VIEW_WIDTH
+				/ gridWidthNumber, GRID_VIEW_HEIGHT / gridHeightNumber);
+
+		int tileSize = (calculatedTileSize < MIN_TILE_SIZE) ? MIN_TILE_SIZE
+				: calculatedTileSize;
+		return tileSize;
+	}
 
     public ChoiceBox<String> initChoiceBox (VBox box, ChoiceBox<String> choices) {
         Label choiceLabel = new Label("Grid Type");
