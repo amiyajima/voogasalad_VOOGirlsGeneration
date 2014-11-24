@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import java.util.ResourceBundle;
@@ -16,7 +15,6 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import tests.JSONBobTester;
 import javafx.geometry.Pos;
-import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
@@ -26,7 +24,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
@@ -192,12 +189,14 @@ public class ViewController{
         myGrid.setAlignment(Pos.CENTER);
         myGrid.populateGrid(myModel.getCurrentLevel().getGrid().getPatches(), myModel.getCurrentLevel().getGrid().getPieces());
         
+        
         myMouseController = new MouseController();
-        myMouseController.changeCursorImage(myScene, myGrid, CURSOR_GLOVE_TEST);
-        
-        setOnClick();
         setGridState(new SelectState(this));
+        myMouseController.setCursorImage(myScene, myGrid, CURSOR_GLOVE_TEST);
+        myMouseController.setOnClick(this, gridState, myGrid);
         
+        
+//        setOnClick();
 //        changeCursor(CURSOR_GLOVE_TEST);
 //        getGrid().setOnMouseExited(event->{changeCursor(CURSOR_GLOVE_TEST);});
         
@@ -307,7 +306,7 @@ public class ViewController{
      * 
      * @param state the current state of the Grid, select/ apply action Mode
      */
-    protected void setGridState(IGridState state){
+    public void setGridState(IGridState state){
         gridState = state;
     }
 
@@ -356,31 +355,13 @@ public class ViewController{
         setGridState(new ApplyState(this));
     }
 
-    private void setOnClick(){
-        myGrid.setOnMouseClicked(event->{ 
-            performAction(event.getX(), event.getY());});
-    }
-
-
-    /**
-     * Perform the actions of a click at position (x,y) on game grid
-     * @param x
-     * @param y
-     */
-    private void performAction (double x, double y) {
-        System.out.println("where error happens");
-        System.out.println("current mouse location:"+x +", "+y);
-        gridState.onClick(getPiece(findPosition(x,y)));
-
-    }
-
     /**
      * Method to convert pixel coordinates into tile coordinates
      * @param x
      * @param y
      * @return a Point2D representing tile coordinates
      */
-    protected Point2D findPosition(double x, double y){
+    public Point2D findPosition(double x, double y){
         double patchHeight = (double) myGrid.getHeight()/(double) myGrid.getCol();
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
@@ -390,10 +371,8 @@ public class ViewController{
         return new Point2D.Double(yCor,xCor);
     }
 
-    private Piece getPiece(Point2D loc){
+    public Piece getPiece(Point2D loc){
         return myModel.getCurrentLevel().getGrid().getPiece(loc);
-
-
     }
 
     protected Scene getScene(){
@@ -439,17 +418,12 @@ public class ViewController{
                 Node n = myGrid.get((int)point.getX(),(int)point.getY());
 
                 addDropShadow(n, Color.YELLOW);
+                
                 n.setOnMouseEntered(event->highLightEffectRange(n, Color.RED));
                 n.setOnMouseExited(event->highLightEffectRange(n, Color.TRANSPARENT));}
 
         });
     }
-//    protected void changeCursor(String string){
-//        Image image = new Image(string);
-//        myScene.setCursor(new ImageCursor(image, image.getWidth()/4,image.getWidth()/4));
-//    }
-    
-    
     
     
     private void addDropShadow(Node n, Color c){
@@ -470,8 +444,8 @@ public class ViewController{
      * @param c
      */
     private void highLightEffectRange(Node n, Color c){
+        System.out.println("EFFECT RANGE!!!!!!!!!!!!!");
         System.out.println("effect Range: "+ activeAction.getEffectRange());
-        // System.out.println(myGrid.getRowIndex(n)+" , "+ myGrid.getColumnIndex(n));
         activeAction.getEffectRange().forEach(point->{Node node = myGrid.get(myGrid.getRowIndex(n)+ (int)point.getX(), myGrid.getColumnIndex(n)+ (int)point.getY());
 
         //        if(c ==Color.TRANSPARENT && node.getEffect()!=null){
@@ -493,6 +467,11 @@ public class ViewController{
     public MouseController getMouseController(){
         return myMouseController;
     }
+    
+    public IGridState getGridState(){
+        return gridState;
+    }
+    
 
     public void highlightCurrentLocation(Color c, Point2D oldLocation, Point2D newLocation){
         Node oldNode = myGrid.get((int)oldLocation.getX(), (int)oldLocation.getY());

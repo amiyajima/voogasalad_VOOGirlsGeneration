@@ -8,8 +8,6 @@ import java.util.Map;
 
 import authoring.concretefeatures.TerrainEntry;
 import authoring.concretefeatures.UnitEntry;
-import authoring.data.PatchData;
-import authoring.data.PieceData;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -46,16 +44,14 @@ public class LibraryView extends TabPane {
 	private final String PIECES = "Piece Templates";
 	private final String PATCHES = "Patch Templates";
 	private SandyGrid myGrid;
-	private PieceData myPieceData;
-	private PatchData myPatchData;
 	private Map<String, VBox> myLibraryMap;
 	private Map<String, Tab> myTabMap;
 	private SingleSelectionModel<Tab> mySelection;
 	private Piece currentUnit;
 	private Patch currentTerrain;
 	private boolean doNothing;
-	private boolean unitSelected;
 	private boolean reset;
+	private boolean edit;
 	
 	/**
 	 * LibraryView constructor. Initializes two tabs - one for units,
@@ -63,15 +59,13 @@ public class LibraryView extends TabPane {
 	 * their respective tabs as they are created in the UnitCreator
 	 * and TerrainCreator.
 	 */
-	public LibraryView(PieceData pieceData, PatchData patchData, SandyGrid grid){
+	public LibraryView(SandyGrid grid){
 		mySelection = this.getSelectionModel();
 		this.setPrefSize(HEIGHT, WIDTH);
-		myPieceData = pieceData;
-		myPatchData = patchData;
 		myGrid = grid;
 		doNothing = true;
-		unitSelected = false;
 		reset = true;
+		edit = false;
 		
 		Tab unitTab = new Tab(UNITS);
 		unitTab.setClosable(false);
@@ -83,14 +77,17 @@ public class LibraryView extends TabPane {
 		unitDelete.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent e){
-				unitSelected = true;
+				doNothing = false;
 				reset = true;
+				edit = false;
 			}
 		});
 		unitEdit.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent e){
-				//TODO: Implement Editing 
+				doNothing = false;
+				reset = false;
+				edit = true; 
 			}
 		});
 		unitLibrary.getChildren().addAll(new Label(GLOBAL),
@@ -108,14 +105,17 @@ public class LibraryView extends TabPane {
 		terrainDelete.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent e){
-				unitSelected = false;
+				doNothing = false;
 				reset = true;
+				edit = false;
 			}
 		});
 		terrainEdit.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent e){
-				//TODO: Implement Editing 
+				doNothing = false;
+				reset = false;
+				edit = true;
 			}
 		});
 		terrainLibrary.getChildren().addAll(new Label(GLOBAL),
@@ -145,31 +145,64 @@ public class LibraryView extends TabPane {
 		myGrid.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				myGrid.handleEvent(event, currentUnit, currentTerrain,
-						doNothing, unitSelected, reset);
+				handleAction(event);
 			}
 		});
 		myGrid.setOnMouseDragged(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				myGrid.handleEvent(event, currentUnit, currentTerrain,
-						doNothing, unitSelected, reset);
+				handleAction(event);
 			}
 		});
 	}
 	
+	protected void handleAction(MouseEvent event) {
+		SandyTile tile = myGrid.findTile(event);
+		if(doNothing || tile == null){
+			return;
+		}
+		if(mySelection.isSelected(0)){
+			if(currentUnit != null){
+				Piece unit = currentUnit;
+				if(reset){
+					myGrid.removeUnit(tile, unit);
+				}
+				else if(edit){
+					myGrid.editUnit(tile, unit);
+				}
+				else{
+					myGrid.addUnit(tile, unit);
+				}
+			}
+		}
+		else{
+			if(currentTerrain != null){
+				Patch terrain = currentTerrain;
+				if(reset){
+					myGrid.removeTerrain(tile, terrain);
+				}
+				else if(edit){
+					myGrid.editTerrain(tile, terrain);
+				}
+				else{
+					myGrid.addTerrain(tile, terrain);
+				}
+			}	
+		}
+	}
+
 	public void selectUnit(Piece unit){
 		currentUnit = unit;
 		doNothing = false;
-		unitSelected = true;
 		reset = false;
+		edit = false;
 	}
 	
 	public void selectTerrain(Patch terrain){
 		currentTerrain = terrain;
 		doNothing = false;
-		unitSelected = false;
 		reset = false;
+		edit = false;
 	}
 
 	public void addPiece(UnitEntry unit){

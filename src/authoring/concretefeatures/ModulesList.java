@@ -1,6 +1,8 @@
 package authoring.concretefeatures;
 
 import java.util.Collections;
+import java.util.Observable;
+import java.util.Observer;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +20,7 @@ import javafx.scene.layout.VBox;
  * @author Mike Zhu
  *
  */
-public class ModulesList extends HBox{
+public class ModulesList extends HBox implements Observer{
 	public static final int BUTTON_SPACING = 150;
 	public static final String AVAILABLE_MODULES_LABEL = "Available Modules";
 	public static final String ADDED_MODULES_LABEL = "Added Modules";
@@ -70,5 +72,11 @@ public class ModulesList extends HBox{
                 addedModulesVBox.setSpacing(5);
                 setSpacing(5);
 		getChildren().addAll(availableModulesVBox, addedModulesVBox);
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 }
