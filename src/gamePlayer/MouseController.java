@@ -15,16 +15,7 @@ public class MouseController {
     
     IGridState myGridState;
     
-    
-    
-//    public void setCursorImage(Scene scene, GameGrid grid, String filename){
-//        grid.setOnMouseExited(event->{applyCursorImage(scene, filename);});
-//    }
-//    
-//    public void applyCursorImage(Scene scene, String filename){
-//        Image image = new Image(filename);
-//        scene.setCursor(new ImageCursor(image, image.getWidth()/4,image.getWidth()/4));
-//    }
+  
     
     public void setOnClick(ViewController vc, IGridState gridState, GameGrid grid){
         myGridState = gridState;

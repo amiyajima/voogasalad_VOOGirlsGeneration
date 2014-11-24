@@ -51,7 +51,7 @@
     -fx-background-insets: 0 1 0 1,0,0;
     -fx-background-color: #82878c;
     -fx-border-color:#82878c;
-    -fx-font-color: 
+    -fx-font-color: black;
 }
 
 .tab:selected {
