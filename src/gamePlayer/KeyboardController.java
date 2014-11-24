@@ -59,7 +59,8 @@ public class KeyboardController {
     public void setMovementKeyControl(ViewController vc, GameGrid grid, Game game) {
         myCurrentLocation = new Point2D.Double(0.0,0.0);
 //        Map<KeyCode, Point2D> movementKeyMap = myCurrentPlayer.getMovementKeyMap();
-      
+      System.out.println("movement key control added");
+        
       //for testing!!!
       Map<KeyCode, Point2D> movementKeyMap = new HashMap<KeyCode, Point2D>();
       movementKeyMap.put(KeyCode.A, new Point2D.Double(-1.0,0.0));
@@ -67,6 +68,7 @@ public class KeyboardController {
       movementKeyMap.put(KeyCode.W, new Point2D.Double(0.0,1.0));
       movementKeyMap.put(KeyCode.S, new Point2D.Double(0.0,-1.0));
       
+      grid.requestFocus();
         grid.setOnKeyPressed(new EventHandler<KeyEvent>() {
             Set<KeyCode> movementKeyList = movementKeyMap.keySet();
             @Override
@@ -82,17 +84,18 @@ public class KeyboardController {
                        }
                        
                        System.out.println(newCurrentLocation);
-                       vc.highlightCurrentLocation(Color.GREEN, myCurrentLocation, newCurrentLocation);
+                       vc.unhighlight(myCurrentLocation);
                        myCurrentLocation = newCurrentLocation;
+                       vc.highlightCurrent(myCurrentLocation, Color.PURPLE);
+//                       vc.unhighlight(myCurrentLocation);
                    }
                }
             }
         });
-        
-//        grid.get((int)myCurrentLocation.getX(), (int)myCurrentLocation.getY());
-        
-        
-        
+    }
+    
+    public Point2D getCurrentLocation(){
+        return myCurrentLocation;
     }
 }
 

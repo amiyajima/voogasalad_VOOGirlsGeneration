@@ -53,7 +53,7 @@
    <top>
    	<HBox stylesheets="@stylesheet.css">
       <children>
-         <MenuButton mnemonicParsing="false" styleClass="menuButton" text="Game Menu" stylesheets="@stylesheet_label.css" BorderPane.alignment="CENTER_LEFT">
+         <MenuButton mnemonicParsing="false" styleClass="menuButton" stylesheets="@stylesheet_label.css" text="Game Menu" BorderPane.alignment="CENTER_LEFT">
            <items>
                <MenuItem fx:id="restartMenu" mnemonicParsing="false" onAction="#restartGame" text="restart" />
                <MenuItem fx:id="saveMenu" mnemonicParsing="false" onAction="#saveGame" text="Save Game" />
@@ -63,6 +63,7 @@
          </MenuButton>
          <Button fx:id="showScoreButton" mnemonicParsing="false" onAction="#showScore" styleClass="button" stylesheets="@stylesheet.css" text="Score Board">
       </Button>
+            <Button mnemonicParsing="false" text="Keyboard Control ON/OFF" onAction="#toggleKeyboardControl" />
       </children> 
       </HBox>
    </top>
