@@ -43,10 +43,11 @@ public class MouseController {
      * @param y
      */
     public void performAction (ViewController vc, double x, double y) {
-        System.out.println("where error happens");
-        System.out.println("current mouse location:"+x +", "+y);
+//        System.out.println("where error happens");
+//        System.out.println("current mouse location:"+x +", "+y);
         myGridState.onClick(vc.getPiece(vc.findPosition(x,y)));
     }
+    
     
 
     
@@ -57,27 +58,27 @@ public class MouseController {
     
     
     
-    public void selectCurrentLocation(ViewController vc, GameGrid grid) {
-        myPreviousLocation = new Point2D.Double(0,0);
-        myCurrentLocation = new Point2D.Double(0,0);
-        
-        List<Node> childrens = grid.getChildren();
-        myCurrentNode = childrens.get(0);
-        for(Node node : childrens) {
-            node.setOnMousePressed(new EventHandler<MouseEvent>() {
-          @Override
-          public void handle (MouseEvent arg0) {
-              myPreviousNode = myCurrentNode;
-              myCurrentNode = node;
-              
-              myPreviousLocation = new Point2D.Double(GridPane.getRowIndex(myPreviousNode),GridPane.getColumnIndex(myPreviousNode));
-              myCurrentLocation = new Point2D.Double(GridPane.getRowIndex(myCurrentNode), GridPane.getColumnIndex(myCurrentNode));
-              
-              vc.highlightCurrentLocation(Color.GREEN, myPreviousLocation, myCurrentLocation);
-          }
-      });
-        }
-    }
+//    public void selectCurrentLocation(ViewController vc, GameGrid grid) {
+//        myPreviousLocation = new Point2D.Double(0,0);
+//        myCurrentLocation = new Point2D.Double(0,0);
+//        
+//        List<Node> children = grid.getChildren();
+//        myCurrentNode = childrens.get(0);
+//        for(Node node : children) {
+//            node.setOnMousePressed(new EventHandler<MouseEvent>() {
+//          @Override
+//          public void handle (MouseEvent arg0) {
+//              myPreviousNode = myCurrentNode;
+//              myCurrentNode = node;
+//              
+//              myPreviousLocation = new Point2D.Double(GridPane.getRowIndex(myPreviousNode),GridPane.getColumnIndex(myPreviousNode));
+//              myCurrentLocation = new Point2D.Double(GridPane.getRowIndex(myCurrentNode), GridPane.getColumnIndex(myCurrentNode));
+//              
+//              vc.highlightCurrentLocation(Color.GREEN, myPreviousLocation, myCurrentLocation);
+//          }
+//      });
+//        }
+//    }
     
     
     
