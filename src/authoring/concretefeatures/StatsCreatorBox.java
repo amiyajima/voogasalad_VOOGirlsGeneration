@@ -12,8 +12,8 @@ import javafx.scene.layout.HBox;
  *
  */
 public class StatsCreatorBox extends HBox {
-	private static final int STAT_BOX_WIDTH = 100;
-	private static final int VALUE_BOX_WIDTH = 100;
+	private static final int STAT_BOX_WIDTH = 150;
+	private static final int VALUE_BOX_WIDTH = 150;
 	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 	
 	private static final String STAT_PROMPT = "Enter stat name";
