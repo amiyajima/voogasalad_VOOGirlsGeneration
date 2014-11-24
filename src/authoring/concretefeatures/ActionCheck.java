@@ -69,41 +69,39 @@ public class ActionCheck extends PopupWindow {
     }
 
     @Override
-     protected void initialize () {
-         myPieces.add("Piece A");
-         myPieces.add("Piece B");
-         myPieces.add("Piece C");
-         ScrollPane root = new ScrollPane();
-         Scene scene = new Scene(root, WIDTH, HEIGHT);
-         scene.getStylesheets().add(STYLESHEET);
- 
-         VBox mainVBox = new VBox();
-         mainVBox.getStyleClass().add("vbox");
-         mainVBox.setId("vbox-main");
-         VBox actionNameVBox = new VBox();
-         VBox posActorVBox = new VBox();
-         VBox posReceiverVBox = new VBox();
- 
-         ChoiceBox<String> actionTypes = new ChoiceBox<String>();
-         initActionChooser(actionNameVBox, actionTypes);
- 
-         ChoiceBox<String> posActors = new ChoiceBox<String>();
-         initActorChooser(posActorVBox, posActors);
- 
-         initReceiverChooser(posReceiverVBox, posActors, actionTypes);
-         
-         
-         
-         
-         mainVBox.getChildren().addAll(actionNameVBox, new Separator(), posActorVBox,
-                                       new Separator(), posReceiverVBox);
-         root.setContent(mainVBox);
-         setScene(scene);
- 
-     }
+    protected void initialize () {
+        myPieces.add("Piece A");
+        myPieces.add("Piece B");
+        myPieces.add("Piece C");
+        ScrollPane root = new ScrollPane();
+        Scene scene = new Scene(root, WIDTH, HEIGHT);
+        scene.getStylesheets().add(STYLESHEET);
 
-    private void initReceiverChooser (VBox posReceiverVBox, ChoiceBox<String> posActors, ChoiceBox<String> actionTypes) {
-        // TODO Auto-generated method stub
+        VBox mainVBox = new VBox();
+        mainVBox.getStyleClass().add("vbox");
+        mainVBox.setId("vbox-main");
+        VBox actionNameVBox = new VBox();
+        VBox posActorVBox = new VBox();
+        VBox posReceiverVBox = new VBox();
+
+        ChoiceBox<String> actionTypes = new ChoiceBox<String>();
+        initActionChooser(actionNameVBox, actionTypes);
+
+        ChoiceBox<String> posActors = new ChoiceBox<String>();
+        initActorChooser(posActorVBox, posActors);
+
+        initReceiverChooser(posReceiverVBox, posActors, actionTypes);
+
+        mainVBox.getChildren().addAll(actionNameVBox, new Separator(), posActorVBox,
+                                      new Separator(), posReceiverVBox);
+        root.setContent(mainVBox);
+        setScene(scene);
+
+    }
+
+    private void initReceiverChooser (VBox posReceiverVBox,
+                                      ChoiceBox<String> posActors,
+                                      ChoiceBox<String> actionTypes) {
         Label posReceiverLabel = new Label(RECEIVER);
         Button posReceiversbtn = new Button("Possible Receivers");
 
@@ -111,9 +109,9 @@ public class ActionCheck extends PopupWindow {
             @Override
             public void handle (ActionEvent event) {
                 PopupWindow receiversChooser =
-                        new ReceiverEditor(myPieces, posActors.getValue().toString(), actionTypes.getValue().toString());
+                        new ReceiverEditor(myPieces, posActors.getValue().toString(), actionTypes
+                                .getValue().toString());
                 receiversChooser.show();
-                // TODO: set myRange in here somewhere (within RangeEditor?)
             }
         });
 
@@ -133,24 +131,14 @@ public class ActionCheck extends PopupWindow {
     }
 
     private void initActionChooser (VBox nameVBox, ChoiceBox<String> actionTypes) {
-         // TODO: actionTypes needs to get List<String> that contains names of all the action types
-         //
-         Label targetLabel = new Label(ACTION_TYPE);
-         actionTypes.getItems().addAll("Attack", "Heal", "AlltheRest");
- 
-         HBox actionsHBox = new HBox();
-         actionsHBox.getChildren().addAll(actionTypes);
-         nameVBox.getChildren().addAll(targetLabel, actionsHBox);
-     }
+        // TODO: actionTypes needs to get List<String> that contains names of all the action types
+        //
+        Label targetLabel = new Label(ACTION_TYPE);
+        actionTypes.getItems().addAll("Attack", "Heal", "AlltheRest");
 
-    private List<String> getReceivers (String actor) {
-        List<String> receivers = new ArrayList<String>();
-        for (String p : myPieces) {
-            if (!p.equals(actor)) {
-                receivers.add(p);
-            }
-        }
-        return receivers;
+        HBox actionsHBox = new HBox();
+        actionsHBox.getChildren().addAll(actionTypes);
+        nameVBox.getChildren().addAll(targetLabel, actionsHBox);
     }
 
 }
