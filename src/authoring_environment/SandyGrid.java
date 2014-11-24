@@ -45,9 +45,10 @@ public class SandyGrid extends Pane {
 		for (int r = 0; r < myRows; r++) {
 			List<SandyTile> tileCol = new LinkedList<SandyTile>();
 			for (int c = 0; c < myCols; c++) {
-				Shape bgShape = makeShape(r,c,myTileSize);
-				Point2D loc = new Point2D.Double(c,r);
-				SandyTile tile = new SandyTile(bgShape, myTileSize, loc);
+				Point2D centerLoc = getCenter(r, c, myTileSize);
+				Shape bgShape = makeShape(centerLoc, r, c, myTileSize);
+				Point2D coor = new Point2D.Double(c,r);
+				SandyTile tile = new SandyTile(bgShape, myTileSize, coor, centerLoc);
 				tile.setStyle("-fx-cursor: hand");
 				tileCol.add(tile);
 				super.getChildren().add(tile);
@@ -56,14 +57,20 @@ public class SandyGrid extends Pane {
 		}
 	}
 	
-	private Shape makeShape(int row, int col, double h) {
-		double xCenter = col*h + 0.5*h;
-		double yCenter = row*h + 0.5*h;
+	private Point2D getCenter(int row, int col, double height) {
+		double xCenter = col*height + 0.5*height;
+		double yCenter = row*height + 0.5*height;
+		return new Point2D.Double(xCenter, yCenter);
+	}
+
+	private Shape makeShape(Point2D center, int row, int col, double height) {
+		double xCenter = center.getX();
+		double yCenter = center.getY();
 		Polygon p = new Polygon (
-				xCenter-0.5*h, yCenter-0.5*h,
-				xCenter-0.5*h, yCenter+0.5*h,
-				xCenter+0.5*h, yCenter+0.5*h,
-				xCenter+0.5*h, yCenter-0.5*h
+				xCenter-0.5*height, yCenter-0.5*height,
+				xCenter-0.5*height, yCenter+0.5*height,
+				xCenter+0.5*height, yCenter+0.5*height,
+				xCenter+0.5*height, yCenter-0.5*height
 				);
 		setCheckeredColor(row, col, p);
 		return p;
