@@ -1,1 +1,1 @@
-{"myPlayers":[],"myLevels":[{"myGoals":[{"type":"PlayerPiecesRemovedGoal","properties":{"myID":12345}}],"myRules":[{"type":"MoveCountRule","properties":{"myNumMoves":5}}],"changed":false,"obs":[]}],"myGameWon":false}
+{"myPlayers":[],"myLevels":[{"myGoals":[{"myID":12345}],"myRules":[{"myNumMoves":5}],"changed":false,"obs":[]}],"myGameWon":false}

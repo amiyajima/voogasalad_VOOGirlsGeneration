@@ -1,19 +1,28 @@
 package gamedata.JSON;
 
 import gamedata.gamecomponents.Game;
+import gamedata.gamecomponents.Level;
+import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Piece;
 import gamedata.goals.Goal;
 import gamedata.rules.MoveCountRule;
 import gamedata.rules.Rule;
 import gamedata.wrappers.GoalData;
 import gamedata.wrappers.LevelData;
+import gamedata.wrappers.PatchData;
+import gamedata.wrappers.PatchDataIndividual;
+import gamedata.wrappers.PieceDataIndividual;
 import gamedata.wrappers.PlayerData;
 import gamedata.wrappers.RuleData;
 import gameengine.player.Player;
+import java.awt.geom.Point2D;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -34,17 +43,17 @@ public class JSONManager {
      */
     public JSONManager () {
         GsonBuilder builder = new GsonBuilder();
-        registerTypeAdapters(builder);
+        // registerTypeAdapters(builder);
         myGson = builder.create();
     }
 
     /**
      * Write a game and its contents into a JSON file.
      * 
-     * @param game
+     * @param patch
      */
-    public void writeToJSON (Game game, String fileName) {
-        String json = myGson.toJson(game);
+    public void writeToJSON (Patch patch, String fileName) {
+        String json = myGson.toJson(patch);
         System.out.println("JSONManager: game converted to json!");
         try {
             FileWriter writer = new FileWriter(fileName);
@@ -65,25 +74,45 @@ public class JSONManager {
     public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
-        
-        LevelData myLevels = myGson.fromJson(br, LevelData.class);
-        System.out.println(myLevels.getLevels().size());
-        
-        Goal g = myGson.fromJson(br, Goal.class);
-        System.out.println(g.toString());
 
-        Rule rule = myGson.fromJson(br, Rule.class);
+        PatchDataIndividual patchData = myGson.fromJson(br, PatchDataIndividual.class);
+        System.out.println(patchData.getMyTypeID());
+        
+        PieceDataIndividual pieceData = myGson.fromJson(br, PieceDataIndividual.class);
+        System.out.println(pieceData.getMyTypeID());
+        
+        // map of patches
+        PatchData myPatches = myGson.fromJson(br,  PatchData.class);
+        System.out.println(myPatches);
+
+        // FUNCTIONAL
+        LevelData myLevels = myGson.fromJson(br, LevelData.class);
+        System.out.println(myLevels.getLevels().get(0));
+        // level data exists and contains levels. goals and rules within the level is empty.
+
+        // goal data is created, but contains no goals. does not work if it is called after rule
+        // data
+        GoalData myGoals = myGson.fromJson(br, GoalData.class);
+        System.out.println(myGoals.toString());
+
+        // ruledata exists but contains no rules. does not work if it is called after goal data
+        RuleData ruledata = myGson.fromJson(br, RuleData.class);
+        System.out.println(ruledata);
+        // issue = how to represent "properties" and put it in the IndividualRuleData super class
+        // same results whether rule data uses RuleDataIndividual or MoveCountRuleData. seems like
+        // the constructor within isn't called.
+
+        // when tested with SingleRule.json, creates a single MoveCountRule
+        Rule rule = myGson.fromJson(br, MoveCountRule.class);
         System.out.println(rule.toString());
 
-        RuleData ruledata = myGson.fromJson(br, RuleData.class);
-        System.out.println(ruledata.toString());
+        // when tested with the SingleGoal json, creates a PlayerPiecesRemovedGoal
+        Goal g = myGson.fromJson(br, Goal.class);
+        System.out.println(g.toString());
 
         PlayerData myPlayers = myGson.fromJson(br, PlayerData.class);
         System.out.println(myPlayers.getPlayers().get(0).getID());
         System.out.println(myPlayers.getPlayers().get(1).getID());
-
-        RuleData myRules = myGson.fromJson(br, RuleData.class);
-        System.out.println(myRules.getRules().get(0).toString());
 
         Player player = myGson.fromJson(br, Player.class);
         System.out.println(player.toString());

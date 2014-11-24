@@ -48,7 +48,7 @@ public class JSONBobTester {
      * 
      * @return a new default game
      */
-    public Game createNewGame () {
+    public Patch createNewGame () {
         System.out.println("Bob Tester: Create new game");
         List<Player> myPlayers = new ArrayList<Player>();
         Player myPlayer1 = new Player(12345);
@@ -58,26 +58,29 @@ public class JSONBobTester {
 
         Grid grid = createNewGrid();
 
-        List<Rule> myRules = new ArrayList<Rule>();
+        List<MoveCountRule> myRules = new ArrayList<MoveCountRule>();
         Rule rule1 = new MoveCountRule(3);
-        Rule rule2 = new MoveCountRule(5);
+        MoveCountRule rule2 = new MoveCountRule(5);
         //myRules.add(rule1);
-        myRules.add(rule2);
+        //myRules.add(rule2);
 
         List<Goal> myGoals = new ArrayList<Goal>();
         Goal goal1 = new PlayerPiecesRemovedGoal(myPlayer2);
         //myGoals.add(goal1);
         Goal goal2 = new PlayerPiecesRemovedGoal(myPlayer1);
-        myGoals.add(goal2);
+        //myGoals.add(goal2);
 
         List<Level> myLevels = new ArrayList<Level>();
         //Level level1 = new Level(grid, myGoals, myRules);
-        Level level2 = new Level(null, myGoals, myRules);
+        Level level2 = new Level(grid, myGoals, myRules);
         //myLevels.add(level1);
         myLevels.add(level2);
 
+        Piece piece = createNewPiece(new Point2D.Double(3, 3));
+        Patch patch = createNewPatch(new Point2D.Double(3, 3));
+        
         Game myGame = new Game(myPlayers, myLevels);
-        return myGame;
+        return patch;
     }
 
     public Grid createNewGrid () {
@@ -87,7 +90,7 @@ public class JSONBobTester {
                 Patch patch = createNewPatch(new Point2D.Double(x, y));
                 grid1.setPatch(patch.getLoc(), patch);
                 Piece piece = createNewPiece(new Point2D.Double(x, y));
-                grid1.setPiece(piece.getLoc(), piece);
+                //grid1.setPiece(piece.getLoc(), piece);
             }
         }
         System.out.println("Bob Tester: Patches filled: " + grid1.getAllPatches().size());
@@ -103,15 +106,15 @@ public class JSONBobTester {
 
         List<Point2D> pl1 = new ArrayList<Point2D>();
         //pl1.add(p1);
-        pl1.add(p2);
+        //pl1.add(p2);
 
         List<Point2D> pl2 = new ArrayList<Point2D>();
         //pl2.add(p1);
-        pl2.add(p3);
+        //pl2.add(p3);
 
         List<Point2D> pl3 = new ArrayList<Point2D>();
         //pl3.add(p2);
-        pl3.add(p3);
+        //pl3.add(p3);
 
         List<Movement> movements = new ArrayList<Movement>();
         // movements.add(createNewMovement(pl1, pl2));

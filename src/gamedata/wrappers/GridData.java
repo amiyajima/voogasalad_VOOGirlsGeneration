@@ -11,10 +11,10 @@ import java.util.Map;
 public class GridData {
     private int myRow;
     private int myColumn;
-    private Map<Point2D, PatchData> myPatches;
-    private Map<Point2D, PieceData> myPieces;
+    private Map<Point2DData, PatchData> myPatches;
+    private Map<Point2DData, PieceData> myPieces;
     
-    public GridData(int row, int column, Map<Point2D, PatchData> patches, Map<Point2D, PieceData> pieces) {
+    public GridData(int row, int column, Map<Point2DData, PatchData> patches, Map<Point2DData, PieceData> pieces) {
         myRow = row;
         myColumn = column;
         myPatches = patches;
@@ -29,11 +29,11 @@ public class GridData {
         return myColumn;
     }
     
-    public Map<Point2D, PatchData> getPatches() {
+    public Map<Point2DData, PatchData> getPatches() {
         return myPatches;
     }
     
-    public Map<Point2D, PieceData> getPieces() {
+    public Map<Point2DData, PieceData> getPieces() {
         return myPieces;
     }
 }
