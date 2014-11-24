@@ -35,6 +35,7 @@ public class SquareGameGrid extends GameGrid {
     @Override
     public void update (Observable o, Object arg) {
         if (o instanceof Level) {
+            System.out.println("updated!");
             populateGrid(((Level) o).getGrid().getPatches(), ((Level) o).getGrid().getPieces());
 
         }

@@ -141,4 +141,8 @@ public class Game {
 	public List<Player> getPlayers() {
 		return myPlayers;
 	}
+	
+	public List<Level> getLevels(){
+	    return myLevels;
+	}
 }
