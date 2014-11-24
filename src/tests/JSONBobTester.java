@@ -22,6 +22,7 @@ import gameengine.movement.Movement;
 import gameengine.player.Player;
 
 import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -109,10 +110,10 @@ public class JSONBobTester {
         Point2D p3 = new Point2D.Double(3, 3);
 
         List<Point2D> pl1 = new ArrayList<Point2D>();
-        pl1.add(p1);
-        pl1.add(p2);
-        pl1.add(p4);
-        pl1.add(p5);
+        pl1.add(new Point2D.Double(-1,0));
+        pl1.add(new Point2D.Double(1,0));
+        pl1.add(new Point2D.Double(0,1));
+        pl1.add(new Point2D.Double(0,-1));
 
         List<Point2D> pl2 = new ArrayList<Point2D>();
         pl2.add(p1);
@@ -124,13 +125,13 @@ public class JSONBobTester {
 
         List<Movement> movements = new ArrayList<Movement>();
 
-        movements.add(createNewMovement(pl1));
+        //movements.add(createNewMovement(pl1));
         //movements.add(createNewMovement(pl3));
 
         List<Action> actions = new ArrayList<Action>();
         actions.add(createNewAction(pl1, pl2));
         actions.add(createNewAction(pl2, pl3));
-        actions.add(createNewMovement(pl2));
+        actions.add(createNewMovement(pl1));
 
         Stats s = new Stats();
         s.add("health", 20);
