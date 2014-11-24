@@ -73,7 +73,6 @@ public class ActionCheck extends PopupWindow {
         myPieces.add("Piece A");
         myPieces.add("Piece B");
         myPieces.add("Piece C");
-        System.out.println(myPieces);
         ScrollPane root = new ScrollPane();
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().add(STYLESHEET);
@@ -138,6 +137,7 @@ public class ActionCheck extends PopupWindow {
         //
         Label targetLabel = new Label(ACTION_TYPE);
         actionTypes.getItems().addAll("Attack", "Heal", "AlltheRest");
+        System.out.println(actionTypes.getItems().toString());
 
         HBox actionsHBox = new HBox();
         actionsHBox.getChildren().addAll(actionTypes);

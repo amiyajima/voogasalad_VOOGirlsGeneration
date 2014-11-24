@@ -30,6 +30,15 @@ public class ApplyState implements IGridState{
             
             
         });
+//
+//        myController.setGridState(this);
+//
+//        myMouseController = myController.getMouseController();
+//        
+////        myController.getGrid().setOnMouseEntered(event->{myController.changeCursor(myController.CURSOR_ATTACK_TEST);});
+////      myController.getGrid().setOnMouseEntered(event->{myMouseController.setCursorImage(myController.getScene(), myController.getGrid(), myController.CURSOR_ATTACK_TEST);;});
+////      myMouseController.setOnClick(myController, myController.getGridState(), myController.getGrid());
+
 
     }
 
@@ -37,13 +46,12 @@ public class ApplyState implements IGridState{
     public void onClick(Piece piece) {
   
         Piece actor = myController.getActivePiece();
-    
+
         myController.getActiveAction().doBehavior(actor, piece);
-        System.out.println("dobehavior called");
+
             myController.setGridState(new SelectState(myController));
 
             myController.changeCursor(myController.CURSOR_GLOVE_TEST);
-       
 
     }
 }

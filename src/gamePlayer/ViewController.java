@@ -33,6 +33,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
@@ -358,12 +359,15 @@ public class ViewController{
      * @param action
      */
     private void bindAction(Action action){
-        setActiveAction(action);
-
+        setActiveAction(action);      
         highLightActionRange();
+
        // doThis();
 
         setGridState(new ApplyState(this));
+        
+        
+
     }
 
 
@@ -441,11 +445,20 @@ public class ViewController{
         System.out.println("activePiece at "+activePiece.getLoc());
         System.out.println("action range: "+ activeAction.getActionRange(activePiece.getLoc()));
 
+//        myGrid.clearEffect();
+
+//        activeNodes = new ArrayList<Node>();
+
         activeAction.getActionRange(activePiece.getLoc()).forEach(point->{
 
             if(point.getX()<myGrid.getRow() && point.getY()<myGrid.getCol() && point.getX()>0 && point.getY()>0){
                 Node n = myGrid.get((int)point.getX(),(int)point.getY());
                 addDropShadow(n, Color.YELLOW);
+
+////                activeNodes.add(n);
+//                
+//                n.setOnMouseEntered(event->highLightEffectRange(n, Color.RED));
+//                n.setOnMouseExited(event->highLightEffectRange(n, Color.TRANSPARENT));
 
                 }
 
@@ -461,8 +474,7 @@ public class ViewController{
 ////            n.setOnMouseEntered(event->highLightEffectRange(n,Color.RED));
 ////        }
 //    }
-    
-    
+
     private void addDropShadow(Node n, Color c){
         if(n != null){
             DropShadow ds = new DropShadow(); 
@@ -481,6 +493,7 @@ public class ViewController{
      * @param n
      * @param red
      */
+
 
     protected void highLightEffectRange(MouseEvent me, Color c){
        
