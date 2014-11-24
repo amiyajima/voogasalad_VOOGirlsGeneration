@@ -29,6 +29,14 @@ public class Stats {
 	public Stats(Map<String, Double> stats) {
 		myStats = stats;
 	}
+	
+	/**
+	 * Cloning constructor for deep cloning of stats
+	 * @param clone - Stats instance to be cloned
+	 */
+	public Stats(Stats clone) {
+		myStats = new HashMap<String,Double>(clone.myStats);
+	}
 
 	/**
 	 * Adds a new stat to the stats map
