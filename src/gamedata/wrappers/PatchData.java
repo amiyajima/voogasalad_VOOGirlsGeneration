@@ -3,7 +3,7 @@ package gamedata.wrappers;
 import java.util.List;
 
 /**
- * Wrapper for patchdata in GridData
+ * Wrapper for a list of patches in gamedata
  * @author Rica
  *
  */

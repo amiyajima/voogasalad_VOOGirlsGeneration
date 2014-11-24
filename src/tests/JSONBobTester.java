@@ -53,16 +53,16 @@ public class JSONBobTester {
         List<Player> myPlayers = new ArrayList<Player>();
         Player myPlayer1 = new Player(12345);
         Player myPlayer2 = new Player(54321);
-         myPlayers.add(myPlayer1);
-         myPlayers.add(myPlayer2);
+        // myPlayers.add(myPlayer1);
+        myPlayers.add(myPlayer2);
 
         Grid grid = createNewGrid();
 
         List<MoveCountRule> myRules = new ArrayList<MoveCountRule>();
         MoveCountRule rule1 = new MoveCountRule(3);
         MoveCountRule rule2 = new MoveCountRule(5);
-         myRules.add(rule1);
-         myRules.add(rule2);
+        // myRules.add(rule1);
+        myRules.add(rule2);
 
         List<Goal> myGoals = new ArrayList<Goal>();
         Goal goal1 = new PlayerPiecesRemovedGoal(myPlayer2);

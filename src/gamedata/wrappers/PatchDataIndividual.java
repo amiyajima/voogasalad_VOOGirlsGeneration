@@ -3,6 +3,11 @@ package gamedata.wrappers;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 
+/**
+ * Wrapper for an individual patch in gamedata
+ * @author annamiyajima
+ *
+ */
 public class PatchDataIndividual {
     private int myTypeID;
     private Point2D.Double myLoc;
