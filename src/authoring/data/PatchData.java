@@ -1,7 +1,6 @@
 package authoring.data;
 
 import gamedata.gamecomponents.Patch;
-import gamedata.gamecomponents.Piece;
 
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
@@ -27,24 +26,12 @@ public class PatchData implements AuthoringData<Patch> {
 
     @Override
     public void add (Patch patch) {
-    	System.out.println("Added patch at location x = " + patch.getLoc().getX() + ", y = " + patch.getLoc().getY());
         myPatches.add(patch);
-        for(Patch p : myPatches){
-			double x = p.getLoc().getX();
-			double y = p.getLoc().getY();
-			System.out.println(x + ", " + y);
-		}
     }
 
     @Override
     public void remove (Patch patch) {
-    	System.out.println("Removed patch at location x = " + patch.getLoc().getX() + ", y = " + patch.getLoc().getY());
         myPatches.remove(patch);
-        for(Patch p : myPatches){
-			double x = p.getLoc().getX();
-			double y = p.getLoc().getY();
-			System.out.println(x + ", " + y);
-		}
     }
 
     @Override
@@ -56,6 +43,7 @@ public class PatchData implements AuthoringData<Patch> {
 		for(Patch patch : myPatches){
 			if(location.equals(patch.getLoc())){
 				myPatches.remove(patch);
+				return;
 			}
 		}
 	}
