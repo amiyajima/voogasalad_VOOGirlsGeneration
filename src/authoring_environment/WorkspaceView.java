@@ -54,7 +54,7 @@ public class WorkspaceView extends TabPane {
 		tab.setOnClosed(new EventHandler<Event>() {
         	@Override
 			public void handle(Event closed) {
-        		System.out.println("second?");
+        		//System.out.println("second?");
         		int idx = getSelectionModel().getSelectedIndex();
 
             	if(idx>=0){
@@ -70,8 +70,8 @@ public class WorkspaceView extends TabPane {
 	public ShapeGrid getActiveGrid(){
 		SingleSelectionModel<Tab> selectionModel = getSelectionModel();
 		int idx = selectionModel.getSelectedIndex();
-		System.out.println(idx);
-		System.out.println("first?");
+		//System.out.println(idx);
+		//System.out.println("first?");
 		
 		if(idx==-1 || idx>=myGrids.size()){
 			return myGrids.get(0);

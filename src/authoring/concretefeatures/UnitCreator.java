@@ -143,7 +143,7 @@ public class UnitCreator extends PopupWindow {
             @Override
             public void handle (ActionEvent click) {
             	myName = unitName.getText();
-            	if(myImageLocation.equals("") || unitName.getText().equals("")){
+            	if(myImageLocation.equals("") || myName.equals("")){
             		return;
             	}
             	myActions = addSelectedActions(modList.getSelectedActions());
