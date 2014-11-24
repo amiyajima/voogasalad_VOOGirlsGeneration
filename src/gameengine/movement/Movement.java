@@ -31,7 +31,7 @@ public class Movement implements Action {
 	 *            movement
 	 */
 	@SafeVarargs
-	public Movement(List<Rule> rules, List<Point2D>... endPoints) {
+	public Movement(List<Point2D>... endPoints) {
 		boolean first = true;
 		// myRules = rules;
 		myPaths = new ArrayList<List<Point2D>>();
@@ -105,11 +105,14 @@ public class Movement implements Action {
 
 	@Override
 	public List<Point2D> getEffectRange() {
-		return null;
+		return new ArrayList<Point2D>();
 	}
 
 	@Override
 	public void doBehavior(Piece actor, Piece... receivers) {
-		
+		Piece p=receivers[0];
+		Point2D point = p.getLoc();
+		actor.setLoc(point);
+		System.out.println("Moving piece to: " + point.getX() + " " + point.getY());
 	}
 }

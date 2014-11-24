@@ -16,6 +16,7 @@ import gamedata.gamecomponents.SquareGrid;
 import gamedata.goals.Goal;
 import gamedata.goals.PlayerPiecesRemovedGoal;
 import gamedata.rules.MoveCountRule;
+import gamedata.rules.Rule;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
 import gameengine.player.Player;
@@ -87,8 +88,10 @@ public class JSONBobTester {
             for (int y = 0; y < grid1.getRow(); y++) {
                 Patch patch = createNewPatch(new Point2D.Double(x, y));
                 grid1.setPatch(patch.getLoc(), patch);
-                Piece piece = createNewPiece(new Point2D.Double(x, y));
-                grid1.setPiece(piece.getLoc(), piece);
+                if((x==grid1.getColumn()/2) && (y==grid1.getRow()/2)){
+                	   Piece piece = createNewPiece(new Point2D.Double(x, y));
+                       grid1.setPiece(piece.getLoc(), piece);
+                }
             }
         }
         System.out.println("Bob Tester: Patches filled: " + grid1.getAllPatches().size());
@@ -116,12 +119,13 @@ public class JSONBobTester {
 
         List<Movement> movements = new ArrayList<Movement>();
 
-        // movements.add(createNewMovement(pl1, pl2));
-        // movements.add(createNewMovement(pl2, pl3));
+        movements.add(createNewMovement(pl2));
+        movements.add(createNewMovement(pl3));
 
         List<Action> actions = new ArrayList<Action>();
         actions.add(createNewAction(pl1, pl2));
         actions.add(createNewAction(pl2, pl3));
+        actions.add(createNewMovement(pl2));
 
         Stats s = new Stats();
         s.add("health", 20);
@@ -146,12 +150,10 @@ public class JSONBobTester {
         return patch;
     }
 
-    // public Movement createNewMovement (List<Point2D> pl1, List<Point2D> pl2) {
-    // Movement m1 = new Movement(pl1, pl2);
-    // m1.addRule(new MoveCountRule(3));
-    // m1.addRule(new MoveCountRule(5));
-    // return m1;
-    // }
+    public Movement createNewMovement (List<Point2D> pl2) {
+    	Movement m1 = new Movement(pl2);
+    	return m1;
+     }
 
     public Action createNewAction (List<Point2D> pl1, List<Point2D> pl2) {
         StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor", "health");
