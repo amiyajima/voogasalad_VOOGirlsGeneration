@@ -25,6 +25,7 @@ public class ActionCheck extends PopupWindow {
     private final String ACTION = "Action";
     private final String NAME = "Available Actions for Units";
     private final String ACTION_TYPE = "Action Type";
+    private final String ACTOR = "Actor";
     private LibraryView myLibrary;
 
     private List<Action> myActions;
@@ -74,20 +75,31 @@ public class ActionCheck extends PopupWindow {
         mainVBox.getStyleClass().add("vbox");
         mainVBox.setId("vbox-main");
         VBox actionNameVBox = new VBox();
-        VBox posPieceVBox = new VBox();
+        VBox posActorVBox = new VBox();
         
         ChoiceBox<String> actionTypes = new ChoiceBox<String>();
         initActionChooser(actionNameVBox, actionTypes );
         
+        ChoiceBox<String> posActors = new ChoiceBox<String>();
+        initActorChooser(posActorVBox, posActors);
         
         
         
         
-        
-        
-        mainVBox.getChildren().addAll(actionNameVBox, new Separator() );
+        mainVBox.getChildren().addAll(actionNameVBox, new Separator(), posActorVBox );
                       root.setContent(mainVBox);
                       setScene(scene);
+        
+    }
+
+    private void initActorChooser (VBox posActorVBox, ChoiceBox<String> posActors) {
+        // TODO Auto-generated method stub
+        Label actorLabel = new Label(ACTOR);
+        posActors.getItems().addAll("Piece A", "Piece B", "Piece C");
+        
+        HBox actorsHbox = new HBox();
+        actorsHbox.getChildren().addAll(posActors);
+        posActorVBox.getChildren().addAll(actorLabel, actorsHbox);
         
     }
 
@@ -97,9 +109,9 @@ public class ActionCheck extends PopupWindow {
         Label targetLabel = new Label(ACTION_TYPE);
         actionTypes.getItems().addAll("Attack", "Heal", "AlltheRest");
 
-        HBox targetAndStatHBox = new HBox();
-        targetAndStatHBox.getChildren().addAll(actionTypes);
-        nameVBox.getChildren().addAll(targetLabel, targetAndStatHBox);
+        HBox actionsHBox = new HBox();
+        actionsHBox.getChildren().addAll(actionTypes);
+        nameVBox.getChildren().addAll(targetLabel, actionsHBox);
     }
     
     private List<Piece> getReceivers(Piece actor){
