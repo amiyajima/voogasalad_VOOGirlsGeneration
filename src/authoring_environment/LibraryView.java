@@ -57,7 +57,7 @@ public class LibraryView extends TabPane {
 	private boolean reset;
 	private boolean edit;
 	private int unitID;
-	private int terrainID;
+	private String terrainName;
 	
 	/**
 	 * LibraryView constructor. Initializes two tabs - one for units,
@@ -75,7 +75,7 @@ public class LibraryView extends TabPane {
 		reset = true;
 		edit = false;
 		unitID = 0;
-		terrainID = 0;
+		terrainName = "";
 		
 		Tab unitTab = new Tab(UNITS);
 		unitTab.setClosable(false);
@@ -164,9 +164,8 @@ public class LibraryView extends TabPane {
 		return unitID;
 	}
 	
-	public int getTerrainID(){
-		terrainID += 1;
-		return terrainID;
+	public String getTerrainName(){
+		return terrainName;
 	}
 	
 	public void selectUnit(Piece unit){
