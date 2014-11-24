@@ -33,9 +33,9 @@ import authoring_environment.WorkspaceView;
 public class GameCreator extends PopupWindow {
 
     private static final int MIN_TILE_SIZE = 40;
-	private static final int GRID_VIEW_HEIGHT = 550;
-	private static final int GRID_VIEW_WIDTH = 700;
-	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
+    private static final int GRID_VIEW_HEIGHT = 550;
+    private static final int GRID_VIEW_WIDTH = 700;
+    private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
     private final int HEIGHT = 400;
     private final int WIDTH = 400;
     private final String NAME = "Game Creator";
@@ -60,7 +60,7 @@ public class GameCreator extends PopupWindow {
         setHeight(HEIGHT);
         setWidth(WIDTH);
         setTitle(NAME);
-        
+
         myWorkspaceView = wsView;
         initialize();
     }
@@ -86,31 +86,32 @@ public class GameCreator extends PopupWindow {
 
         // choose # of player
         TextField player = initLabel(players, PLAYER_NUMBER_LABEL);
-        
-        //set grid
-        TextField gridHeight = initLabel(heights, GRID_HEIGHT_LABEL + "1");
-        TextField gridWidth = initLabel(widths, GRID_WIDTH_LABEL + "1");
 
-        //set grid type
+        // set grid
+        TextField gridHeight = initLabel(heights, GRID_HEIGHT_LABEL);
+        TextField gridWidth = initLabel(widths, GRID_WIDTH_LABEL);
+
+        // set grid type
         gridChoiceBox = new ChoiceBox<String>();
         gridChoiceBox = initChoiceBox(grid, gridChoiceBox);
-        
+
         Button create = new Button(TEMPLATE_LABEL);
         create.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
-                //set grid with such dimensions
+                // set grid with such dimensions
                 int width = Integer.parseInt(gridWidth.getText());
                 int height = Integer.parseInt(gridHeight.getText());
                 
                 //TODO: hard coded grid type
                 if (gridChoiceBox.getValue().equals("Square Grid")){
                     new SandyGrid(width, height, 40, new PieceData(), new PatchData());
+
                 }
-                if (gridChoiceBox.getValue().equals("Hexagon Grid")){
-                    new JennieGrid(width, height, 40, new PieceData(), new PatchData());
+                if (gridChoiceBox.getValue().equals("Hexagon Grid")) {
+                    new SandyGrid(width, height, 40, new PieceData(), new PatchData());
                 }
-                
+
                 addWorkspaceTab(width, height);
                 close();
             }
@@ -119,6 +120,7 @@ public class GameCreator extends PopupWindow {
         root.setContent(box);
         setScene(scene);
     }
+
     
     private void addWorkspaceTab(int numRows, int numCols) {
     	PieceData pieceData = new PieceData();
@@ -135,23 +137,23 @@ public class GameCreator extends PopupWindow {
 		tab.setContent(bPane);
 		myWorkspaceView.addNextTab(tab);
     }
-    
-    private int getPrefTileSize(int gridWidthNumber,int gridHeightNumber) {
-		int calculatedTileSize = Math.max(GRID_VIEW_WIDTH
-				/ gridWidthNumber, GRID_VIEW_HEIGHT / gridHeightNumber);
 
-		int tileSize = (calculatedTileSize < MIN_TILE_SIZE) ? MIN_TILE_SIZE
-				: calculatedTileSize;
-		return tileSize;
-	}
+    private int getPrefTileSize (int gridWidthNumber, int gridHeightNumber) {
+        int calculatedTileSize = Math.max(GRID_VIEW_WIDTH
+                                          / gridWidthNumber, GRID_VIEW_HEIGHT / gridHeightNumber);
+
+        int tileSize = (calculatedTileSize < MIN_TILE_SIZE) ? MIN_TILE_SIZE
+                                                           : calculatedTileSize;
+        return tileSize;
+    }
 
     public ChoiceBox<String> initChoiceBox (VBox box, ChoiceBox<String> choices) {
         Label choiceLabel = new Label("Grid Type");
         choiceLabel.setPadding(UIspecs.topRightPadding);
         choices.getItems().addAll("Square Grid", "Hexagon Grid");
-//        choices.getSelectionModel().selectFirst(); -> automatically chooses the first one
+        // choices.getSelectionModel().selectFirst(); -> automatically chooses the first one
         box.getChildren().addAll(choiceLabel, choices);
-     
+
         return choices;
     }
 

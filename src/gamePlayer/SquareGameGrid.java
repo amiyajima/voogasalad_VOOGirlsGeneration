@@ -3,9 +3,11 @@ package gamePlayer;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.awt.geom.Point2D;
+import javafx.scene.image.ImageView;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
@@ -28,6 +30,7 @@ public class SquareGameGrid extends GameGrid {
     public SquareGameGrid (int row, int col) {
         // will handle different size, stubbing it for now.
         super(row, col);
+         //this.setPrefSize(500, 500);
 
     }
 
@@ -36,7 +39,7 @@ public class SquareGameGrid extends GameGrid {
     public void update (Observable o, Object arg) {
         if (o instanceof Level) {
             System.out.println("updated!");
-            populateGrid(((Level) o).getGrid().getPatches(), ((Level) o).getGrid().getPieces());
+            populateGrid(((Level) o).getGrid().getAllPatches(), ((Level) o).getGrid().getAllPieces());
 
         }
 
@@ -75,24 +78,32 @@ public class SquareGameGrid extends GameGrid {
      * 
      */
 
+    //TODO: REFACTOR!
     @Override
-    protected void populateGrid (Map<Point2D, Patch> patches, Map<Point2D, Piece> pieces) {
+    protected void populateGrid (List<Patch> patches, List<Piece> pieces) {
         this.getChildren().forEach(node -> {
             ((StackPane) node).getChildren().clear();
         });
         initializeGrid();
-        patches.keySet().forEach(point -> {
-           // this.add(patches.get(point).getImageView(), (int) point.getX(), (int) point.getY());
-            Node n = get((int)point.getX(), (int)point.getY());
-            ((StackPane)n).getChildren().add(patches.get(point).getImageView());
+        patches.forEach(patch -> {
+            int x = (int)(patch.getLoc().getX());
+            int y = (int ) (patch.getLoc().getY());
+            Node n = get(x,y);
+            ImageView iv = patch.getImageView();
+            iv.setFitWidth(500/this.r);
+            iv.setFitHeight(500/this.c);
+            ((StackPane)n).getChildren().add(iv);
         
         });
-        pieces.keySet().forEach(point -> {
-            this.add(pieces.get(point).getImageView(), (int) point.getX(), (int) point.getY());
-            
-            
-            Node n = get((int)point.getX(), (int)point.getY());
-            ((StackPane)n).getChildren().add(pieces.get(point).getImageView());
+        pieces.forEach(piece -> {
+            int x = (int)(piece.getLoc().getX());
+            int y = (int ) (piece.getLoc().getY());
+            Node n = get(x,y);
+            ImageView iv = piece.getImageView();
+            iv.setFitWidth(500/this.r);
+            iv.setFitHeight(500/this.c);
+            ((StackPane)n).getChildren().add(iv);
+        
         });
     }
     

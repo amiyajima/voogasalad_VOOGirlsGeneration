@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
  */
 public class Patch {
 
-	private int myTypeID;
+	private String myName;
 	private Point2D myLoc;
 	private String myImageLocation;
 	private transient ImageView myImageView;
@@ -26,8 +26,8 @@ public class Patch {
 	 * @param p
 	 *            coordinate of patch
 	 */
-	public Patch(int typeID, String imageLocation, Point2D p) {
-		myTypeID = typeID;
+	public Patch(String name, String imageLocation, Point2D p) {
+		myName = name;
 		myImageLocation = imageLocation;
 		if (myImageLocation.startsWith("/")) {
 			myImageView = new ImageView(new Image(getClass()
@@ -46,7 +46,7 @@ public class Patch {
 		myImageLocation = clone.myImageLocation;
 		setImageView(myImageLocation);
 		myLoc = new Point2D.Double(clone.myLoc.getX(),clone.myLoc.getY());
-		myTypeID = clone.myTypeID;
+		myName = clone.myName;
 	}
 	
 	private void setImageView(String imageLocation) {
@@ -59,22 +59,22 @@ public class Patch {
     }
 
 	/**
-	 * Getter for state
+	 * Getter for patch's name
 	 * 
-	 * @return patch's state
+	 * @return String - patch name
 	 */
-	public int getTypeID() {
-		return myTypeID;
+	public String getName() {
+		return myName;
 	}
 
 	/**
-	 * Sets patch's state
+	 * Sets patch's name
 	 * 
-	 * @param myState
+	 * @param myName = string name of patch
 	 *            of patch
 	 */
-	public void setMyType(int type) {
-		this.myTypeID = type;
+	public void setMyName(String name) {
+		this.myName = name;
 	}
 
 	/**
