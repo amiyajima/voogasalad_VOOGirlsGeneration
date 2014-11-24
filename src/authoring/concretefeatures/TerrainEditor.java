@@ -1,7 +1,6 @@
 package authoring.concretefeatures;
 
-import java.io.File; 
-
+import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -20,6 +19,7 @@ import gamedata.gamecomponents.Patch;
 import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.UIspecs;
 
+
 /**
  * @author Martin Tamayo, Sandy Lee
  * 
@@ -29,8 +29,8 @@ import authoring_environment.UIspecs;
  *         environment.
  */
 public class TerrainEditor extends PopupWindow {
-	
-	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
+
+    private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
     private final int HEIGHT = 150;
     private final int WIDTH = 400;
     private final String NAME = "Terrain Editor";
@@ -57,28 +57,59 @@ public class TerrainEditor extends PopupWindow {
     }
 
     protected void initialize () {
-        
+
         ScrollPane root = new ScrollPane();
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().add(STYLESHEET);
-        
+
         VBox box = new VBox();
         box.getStylesheets().add(STYLESHEET);
         box.getStyleClass().add("vbox");
         box.setPadding(UIspecs.allPadding);
         box.setSpacing(5);
+
+        HBox nameBox = new HBox();
+        HBox imageBox = new HBox();
+
+        // name
+        TextField name = initLabel(nameBox, TERRAIN_NAME_LABEL);
+
+        // image load
+        // TODO: might want to return something
+        initImageLoader(imageBox, IMAGE_LABEL, LOAD_IMAGE_LABEL);
+
+        Button create = new Button(TEMPLATE_LABEL);
+        create.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent click) {
+                // change patches info... need access to patches made with previous info
+                
+
+            }
+        });
         
-        HBox names = new HBox();
-        HBox images = new HBox();
+        box.getChildren().addAll(nameBox, imageBox, create);
+        setScene(new Scene(box));
+        
+    }
 
-        Label nameLabel = new Label(TERRAIN_NAME_LABEL);
+    /**
+     * @param box
+     * @param labelName
+     * @return
+     */
+    public TextField initLabel (HBox box, String labelName) {
+        Label nameLabel = new Label(labelName);
         nameLabel.setPadding(UIspecs.topRightPadding);
-        TextField terrainName = new TextField();
-        names.getChildren().addAll(nameLabel, terrainName);
+        TextField tf = new TextField();
+        box.getChildren().addAll(nameLabel, tf);
+        return tf;
+    }
 
+    public void initImageLoader (HBox imageBox, String labelName, String buttonName) {
         ImageView icon = new ImageView();
-        Label loadLabel = new Label(IMAGE_LABEL);
-        Button loadImage = new Button(LOAD_IMAGE_LABEL);
+        Label loadLabel = new Label(labelName);
+        Button loadImage = new Button(buttonName);
         loadImage.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
@@ -94,20 +125,7 @@ public class TerrainEditor extends PopupWindow {
                 }
             }
         });
-        images.getChildren().addAll(loadLabel, loadImage, icon);
-
-        Button create = new Button(TEMPLATE_LABEL);
-        create.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent click) {
-
-                // change patches info... need access to patches made with previous info
-
-            }
-        });
-
-        box.getChildren().addAll(names, images, create);
-        setScene(new Scene(box));
+        imageBox.getChildren().addAll(loadLabel, loadImage, icon);
 
     }
 }

@@ -11,14 +11,15 @@ public class MenuView extends MenuBar {
 	private final int HEIGHT = 20;
 	
 	ActionData myActions;
+	LibraryView myLibrary;
 	
-	public MenuView(LibraryView library){
+	public MenuView(WorkspaceView wsView){
 		this.setPrefSize(LENGTH, HEIGHT);
 		
 		myActions = new ActionData();
 		
-		getMenus().addAll(new File(), new GlobalRules(), new Events(), new Units(library, myActions), 
-						  new Terrain(library), new Actions(library, myActions),
+		getMenus().addAll(new File(wsView), new GlobalRules(), new Events(), new Units(myLibrary, myActions), 
+						  new Terrain(myLibrary), new Actions(myLibrary, myActions),
 						  new JSONBob());
 	}
 }

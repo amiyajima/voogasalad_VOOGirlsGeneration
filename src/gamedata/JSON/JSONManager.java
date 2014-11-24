@@ -50,10 +50,10 @@ public class JSONManager {
     /**
      * Write a game and its contents into a JSON file.
      * 
-     * @param patch
+     * @param game
      */
-    public void writeToJSON (Patch patch, String fileName) {
-        String json = myGson.toJson(patch);
+    public void writeToJSON (Game game, String fileName) {
+        String json = myGson.toJson(game);
         System.out.println("JSONManager: game converted to json!");
         try {
             FileWriter writer = new FileWriter(fileName);
