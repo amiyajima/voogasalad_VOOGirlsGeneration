@@ -194,6 +194,7 @@ public class ViewController{
     private void initializeGrid(){
         JSONBobTester JSBTester = new JSONBobTester();
         myModel = JSBTester.createNewGame();
+       // myModel.play();
 
 
         myGrid= new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel.getCurrentLevel().getGrid().getColumn());

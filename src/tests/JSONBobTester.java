@@ -102,12 +102,17 @@ public class JSONBobTester {
 
     public Piece createNewPiece (Point2D p) {
         Point2D p1 = new Point2D.Double(1, 1);
+        Point2D p4 = new Point2D.Double(0, 1);
+        Point2D p5 = new Point2D.Double(-1, 0);
+        
         Point2D p2 = new Point2D.Double(2, 2);
         Point2D p3 = new Point2D.Double(3, 3);
 
         List<Point2D> pl1 = new ArrayList<Point2D>();
         pl1.add(p1);
         pl1.add(p2);
+        pl1.add(p4);
+        pl1.add(p5);
 
         List<Point2D> pl2 = new ArrayList<Point2D>();
         pl2.add(p1);

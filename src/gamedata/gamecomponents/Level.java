@@ -42,6 +42,7 @@ public class Level extends Observable {
 	 * @return
 	 */
 	public boolean levelCompleted() {
+	    System.out.println("observer!");
 		setChanged();
 		notifyObservers();
 		for (Goal g : myGoals) {
