@@ -32,7 +32,7 @@ public class VoogaView extends BorderPane {
 		 * Associate the LibraryView with the currently selected Tab
 		 */
 		myWorkspaceView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
-
+			
 			@Override
 			public void changed(ObservableValue<? extends Tab> arg0, Tab arg1, Tab arg2) {
 				SandyGrid activeGrid = myWorkspaceView.getActiveGrid();
