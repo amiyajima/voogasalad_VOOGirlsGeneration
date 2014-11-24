@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
@@ -59,13 +60,24 @@ public class ReceiverEditor extends PopupWindow {
         Button actor = new Button(myActor);
         actorVBox.getChildren().addAll(actorType, actor);
         
+        initCheckBoxes(ReceiverVBox, myPosReceivers);
+        
 
-        mainVBox.getChildren().addAll(actionNameVBox, new Separator(), actorVBox, new Separator());
+        mainVBox.getChildren().addAll(actionNameVBox, new Separator(), actorVBox, new Separator(), ReceiverVBox);
         root.setContent(mainVBox);
         setScene(scene);
 
     }
     
+    private void initCheckBoxes (VBox ReceiverVBox, List<String> myPosReceivers) {
+        // TODO Auto-generated method stub
+        Label title = new Label("Pieces that can recieve this type of action");
+        ReceiverVBox.getChildren().add(title);
+        for(String p : myPosReceivers){
+            ReceiverVBox.getChildren().add(new CheckBox(p));
+        }
+    }
+
     private List<String> getReceivers (List<String> myPieces, String actor) {
         List<String> receivers = new ArrayList<String>();
         for (String p : myPieces) {
