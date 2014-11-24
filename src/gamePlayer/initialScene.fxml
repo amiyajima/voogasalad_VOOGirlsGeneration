@@ -9,6 +9,6 @@
       <MenuButton fx:id="newGameButton" alignment="CENTER" mnemonicParsing="false" prefHeight="23.0" prefWidth="123.0" styleClass="button" stylesheets="@stylesheet.css" text="New Game" />
       <Button fx:id="loadGameButton" mnemonicParsing="false" onAction="#loadGame" text="Load Game" />
       <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#doSettings" text="Settings" />
-      <Button fx:id="testGameButton" mnemonicParsing="false" onAction="#testGame" text="JSONBobTester Game" />
+      <Button fx:id="testGameButton" mnemonicParsing="false" onAction="#testGame" text="Test Game" />
    </children>
 </fx:root>
