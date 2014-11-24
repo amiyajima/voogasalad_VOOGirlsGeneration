@@ -13,13 +13,15 @@ public class GlobalRules extends Menu {
 
     private static final String NAME = "Global Rules";
     private static final String ITEM1 = "Edit Rules";
+    private static final String ITEM2 = "Actor & Receiver";
 
     public GlobalRules () {
         super(NAME);
-        MenuItem creator = new MenuItem(ITEM1);
+        MenuItem ruleEditor = new MenuItem(ITEM1);
+        MenuItem actorReceiver = new MenuItem(ITEM2);
 
-        setAction(creator);
-        getItems().addAll(creator);
+        setAction(actorReceiver);
+        getItems().addAll(ruleEditor, actorReceiver);
     }
 
     private void setAction (MenuItem item) {
