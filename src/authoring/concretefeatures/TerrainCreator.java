@@ -1,14 +1,10 @@
 package authoring.concretefeatures;
 
 import gamedata.gamecomponents.Patch;
-
 import java.io.File;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-
 import java.awt.geom.Point2D;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,6 +21,7 @@ import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
+
 /**
  * GUI element used to create new Patch objects and add them to the library. Allows users
  * to specify the name and image of the patch.
@@ -32,8 +29,8 @@ import authoring_environment.UIspecs;
  * @author Mike Zhu
  */
 public class TerrainCreator extends PopupWindow {
-	
-	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
+
+    private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
     private final int HEIGHT = 155;
     private final int WIDTH = 400;
     private final String NAME = "Terrain Creator";
@@ -45,7 +42,7 @@ public class TerrainCreator extends PopupWindow {
     private final String EDIT = "Edit";
     private LibraryView myLibrary;
 
-    private int myTypeID;
+    private String myName; 
     private String myImageLocation;
     private Point2D myLoc;
 
@@ -59,7 +56,7 @@ public class TerrainCreator extends PopupWindow {
     public TerrainCreator (LibraryView library) {
         myLibrary = library;
 
-        myTypeID = library.getTerrainID();
+        myName = library.getTerrainName();
         myImageLocation = "";
         myLoc = new Point2D.Double(0, 0);
 
@@ -71,17 +68,17 @@ public class TerrainCreator extends PopupWindow {
 
     @Override
     protected void initialize () {
-    
+
         ScrollPane root = new ScrollPane();
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().add(STYLESHEET);
-        
+
         VBox box = new VBox();
         box.getStylesheets().add(STYLESHEET);
         box.getStyleClass().add("vbox");
         box.setPadding(UIspecs.allPadding);
         box.setSpacing(5);
-        
+
         HBox names = new HBox();
         names.setPadding(UIspecs.allPadding);
         names.setSpacing(5);
@@ -102,12 +99,13 @@ public class TerrainCreator extends PopupWindow {
         loadLabel.setPadding(UIspecs.topRightPadding);
         Button loadImage = new Button(LOAD_IMAGE_LABEL);
         loadImage.setOnAction(new EventHandler<ActionEvent>() {
-        	
+
             @Override
             public void handle (ActionEvent click) {
                 FileChooser fileChoice = new FileChooser();
                 fileChoice.getExtensionFilters().add(
-                		new ExtensionFilter("PNG Files", "*.png", "*.gif"));
+                                                     new ExtensionFilter("PNG Files", "*.png",
+                                                                         "*.gif"));
                 File selectedFile = fileChoice.showOpenDialog(null);
                 if (selectedFile != null) {
                     myImageLocation = selectedFile.toURI().toString();
@@ -122,16 +120,16 @@ public class TerrainCreator extends PopupWindow {
         goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
-            	if(myImageLocation.equals("") || terrainName.getText().equals("")){
-            		return;
-            	}
-            	Patch terrain = new Patch(myTypeID, myImageLocation, myLoc);
+                if (myImageLocation.equals("") || terrainName.getText().equals("")) {
+                return;
+                }
+                Patch terrain = new Patch(myName, myImageLocation, myLoc);
 
-            	Label name = new Label(terrainName.getText());
+                Label name = new Label(terrainName.getText());
                 name.setTranslateY(7.5);
-                
+
                 Button editButton = new Button(EDIT);
-                
+
                 editButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle (ActionEvent e) {
@@ -140,15 +138,15 @@ public class TerrainCreator extends PopupWindow {
                     }
                 });
                 Button delButton = new Button(DELETE);
-                
+
                 TerrainEntry entry = new TerrainEntry(terrain, icon, name, editButton, delButton);
                 entry.setStyle("-fx-cursor: hand");
-        		entry.setOnMouseClicked(new EventHandler<MouseEvent>(){
-        			@Override
-        			public void handle(MouseEvent m){
-        				myLibrary.selectTerrain(terrain);
-        			}
-        		});
+                entry.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle (MouseEvent m) {
+                        myLibrary.selectTerrain(terrain);
+                    }
+                });
 
                 delButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
