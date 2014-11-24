@@ -88,8 +88,8 @@ public class GameCreator extends PopupWindow {
         TextField player = initLabel(players, PLAYER_NUMBER_LABEL);
 
         // set grid
-        TextField gridHeight = initLabel(heights, GRID_HEIGHT_LABEL + "1");
-        TextField gridWidth = initLabel(widths, GRID_WIDTH_LABEL + "1");
+        TextField gridHeight = initLabel(heights, GRID_HEIGHT_LABEL);
+        TextField gridWidth = initLabel(widths, GRID_WIDTH_LABEL);
 
         // set grid type
         gridChoiceBox = new ChoiceBox<String>();
