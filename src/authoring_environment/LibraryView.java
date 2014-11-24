@@ -75,8 +75,6 @@ public class LibraryView extends TabPane {
         unitID = 0;
         terrainName = "";
 
-        myGrid = new SandyGrid(1, 1, 1, null, null);
-
         Tab unitTab = new Tab(UNITS);
         unitTab.setClosable(false);
         ScrollPane unitContent = new ScrollPane();
@@ -157,11 +155,12 @@ public class LibraryView extends TabPane {
         myTabMap = new HashMap<String, Tab>();
         myTabMap.put(UNITS, unitTab);
         myTabMap.put(TERRAIN, terrainTab);
-        setGridActionEvents();
     }
 
     public void associateGrid (SandyGrid grid) {
+    	System.out.println(grid);
     	myGrid = grid;
+    	setGridActionEvents();
     }
 
     public int getUnitID () {
@@ -203,6 +202,7 @@ public class LibraryView extends TabPane {
     }
 
     protected void handleAction (MouseEvent event) {
+    	
         SandyTile tile = myGrid.findTile(event);
         if (doNothing || tile == null) { return; }
         if (mySelection.isSelected(0)) {
