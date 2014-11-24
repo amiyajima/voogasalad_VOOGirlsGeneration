@@ -240,9 +240,9 @@ public class RangeEditor extends PopupWindow {
             // myRange = range;
             range.addAll(mySampleGridView.rangeSelectedList());
 
-            for (Point2D p : range) {
-                System.out.println(p.getX() + "," + p.getY());
-            }
+//            for (Point2D p : range) {
+//                System.out.println(p.getX() + "," + p.getY());
+//            }
             current.close();
         }
     }
