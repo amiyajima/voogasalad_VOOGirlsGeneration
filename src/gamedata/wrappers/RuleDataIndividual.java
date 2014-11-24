@@ -12,6 +12,7 @@ public class RuleDataIndividual {
     public RuleDataIndividual(String className, MoveCountRuleData instance) {
             CLASSNAME = className;
             INSTANCE = instance;
+            System.out.println("RuleDataIndividual: Constructor called");
     }
 
     public String getCLASSNAME () {
@@ -21,4 +22,6 @@ public class RuleDataIndividual {
     public MoveCountRuleData getINSTANCE () {
         return INSTANCE;
     }
+    
+    
 }

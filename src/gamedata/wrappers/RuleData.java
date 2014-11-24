@@ -11,15 +11,18 @@ import java.util.List;
  * @author Rica
  *
  */
+//TODO change movecountruledata to generic individual rule data  
 public class RuleData {
-    private List<RuleDataIndividual> myRules;
-    //private List<Rule> myRules;
+    private List<MoveCountRuleData> myRules;
     
-    public RuleData(List<RuleDataIndividual> rules) {
+    //private List<RuleDataIndividual> myRules;
+    
+    public RuleData(List<MoveCountRuleData> rules) {
         myRules = rules;
+        System.out.println("ruleData: Constructor called");
     }
     
-    public List<RuleDataIndividual> getRules() {
+    public List<MoveCountRuleData> getRules() {
         return myRules;
     }
 
