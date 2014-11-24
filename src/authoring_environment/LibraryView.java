@@ -34,55 +34,54 @@ import javafx.scene.layout.VBox;
  *         placement on the grid.
  */
 public class LibraryView extends TabPane {
-<<<<<<< HEAD
-	
-	private final int HEIGHT = 300;
-	private final int WIDTH = 580;
-	private final String UNITS = "Units";
-	private final String TERRAIN = "Terrain";
-	private final String DELETE = "Delete";
-	private final String EDIT = "Edit";
-	private final String GLOBAL = "Global Commands";
-	private final String PIECES = "Piece Templates";
-	private final String PATCHES = "Patch Templates";
-	private PieceTypeData myPieces;
-	private PatchTypeData myPatches;
-	private SandyGrid myGrid;
-	private Map<String, VBox> myLibraryMap;
-	private Map<String, Tab> myTabMap;
-	private SingleSelectionModel<Tab> mySelection;
-	private Piece currentUnit;
-	private Patch currentTerrain;
-	private boolean doNothing;
-	private boolean reset;
-	private boolean edit;
-	private int unitID;
-	private int terrainID;
-	
-	/**
-	 * LibraryView constructor. Initializes two tabs - one for units,
-	 * one for terrain. Units and terrain are added dynamically to
-	 * their respective tabs as they are created in the UnitCreator
-	 * and TerrainCreator.
-	 */
-	public LibraryView(PieceTypeData pieceData, PatchTypeData patchData){
-		mySelection = this.getSelectionModel();
-		this.setPrefSize(HEIGHT, WIDTH);
-		myPieces = pieceData;
-		myPatches = patchData;
-		doNothing = true;
-		reset = true;
-		edit = false;
-		unitID = 0;
-		terrainID = 0;
-		//A "null default" for the grid. Grid will be assigned to LibraryView when created
-		myGrid = new SandyGrid(1, 1, 1, null, null);
-		
-		Tab unitTab = new Tab(UNITS);
-		unitTab.setClosable(false);
-		ScrollPane unitContent = new ScrollPane();
-		VBox unitLibrary = new VBox();
-		unitLibrary.setPadding(UIspecs.allPadding);
+
+    private final int HEIGHT = 300;
+    private final int WIDTH = 580;
+    private final String UNITS = "Units";
+    private final String TERRAIN = "Terrain";
+    private final String DELETE = "Delete";
+    private final String EDIT = "Edit";
+    private final String GLOBAL = "Global Commands";
+    private final String PIECES = "Piece Templates";
+    private final String PATCHES = "Patch Templates";
+    private PieceTypeData myPieces;
+    private PatchTypeData myPatches;
+    private SandyGrid myGrid;
+    private Map<String, VBox> myLibraryMap;
+    private Map<String, Tab> myTabMap;
+    private SingleSelectionModel<Tab> mySelection;
+    private Piece currentUnit;
+    private Patch currentTerrain;
+    private boolean doNothing;
+    private boolean reset;
+    private boolean edit;
+    private int unitID;
+    private String terrainName;
+
+    /**
+     * LibraryView constructor. Initializes two tabs - one for units,
+     * one for terrain. Units and terrain are added dynamically to
+     * their respective tabs as they are created in the UnitCreator
+     * and TerrainCreator.
+     */
+    public LibraryView (PieceTypeData pieceData, PatchTypeData patchData) {
+        mySelection = this.getSelectionModel();
+        this.setPrefSize(HEIGHT, WIDTH);
+        myPieces = pieceData;
+        myPatches = patchData;
+        doNothing = true;
+        reset = true;
+        edit = false;
+        unitID = 0;
+        terrainName = "";
+
+        myGrid = new SandyGrid(1, 1, 1, null, null);
+
+        Tab unitTab = new Tab(UNITS);
+        unitTab.setClosable(false);
+        ScrollPane unitContent = new ScrollPane();
+        VBox unitLibrary = new VBox();
+        unitLibrary.setPadding(UIspecs.allPadding);
 
         unitLibrary.setSpacing(5);
         Button unitDelete = new Button(DELETE);
@@ -117,162 +116,6 @@ public class LibraryView extends TabPane {
         VBox terrainLibrary = new VBox();
         terrainLibrary.setPadding(UIspecs.allPadding);
         terrainLibrary.setSpacing(5);
-<<<<<<< HEAD
-		Button terrainDelete = new Button(DELETE);
-		Button terrainEdit = new Button(EDIT);
-		terrainDelete.setOnAction(new EventHandler<ActionEvent>(){
-			@Override
-			public void handle(ActionEvent e){
-				doNothing = false;
-				reset = true;
-				edit = false;
-			}
-		});
-		terrainEdit.setOnAction(new EventHandler<ActionEvent>(){
-			@Override
-			public void handle(ActionEvent e){
-				doNothing = false;
-				reset = false;
-				edit = true;
-			}
-		});
-		HBox terrainGlobal = new HBox(terrainEdit, terrainDelete);
-		terrainGlobal.setPadding(UIspecs.allPadding);
-		terrainGlobal.setSpacing(5);
-		terrainLibrary.getChildren().addAll(new Label(GLOBAL), terrainGlobal,
-				new Separator(), new Label(PATCHES));
-		terrainContent.setContent(terrainLibrary);
-		terrainTab.setContent(terrainContent);
-		
-		this.getTabs().addAll(unitTab, terrainTab);
-		this.setOnKeyPressed(new EventHandler<KeyEvent>(){
-			@Override
-			public void handle(KeyEvent e){
-				if(e.getCode() == KeyCode.ESCAPE){
-					doNothing = true;
-				}
-			}
-		});
-		myLibraryMap = new HashMap<String, VBox>();
-		myLibraryMap.put(UNITS, unitLibrary);
-		myLibraryMap.put(TERRAIN, terrainLibrary);
-		myTabMap = new HashMap<String, Tab>();
-		myTabMap.put(UNITS, unitTab);
-		myTabMap.put(TERRAIN, terrainTab);
-		setGridActionEvents();
-	}
-	public void associateGrid(SandyGrid grid){
-		System.out.println(grid);
-		myGrid = grid;
-	}
-	
-	public int getUnitID(){
-		unitID += 1;
-		return unitID;
-	}
-	
-	public int getTerrainID(){
-		terrainID += 1;
-		return terrainID;
-	}
-	
-	public void selectUnit(Piece unit){
-		currentUnit = unit;
-		doNothing = false;
-		reset = false;
-		edit = false;
-	}
-	
-	public void selectTerrain(Patch terrain){
-		currentTerrain = terrain;
-		doNothing = false;
-		reset = false;
-		edit = false;
-	}
-	
-	private void setGridActionEvents() {
-		myGrid.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				System.out.println("Grid Click");
-
-				handleAction(event);
-			}
-		});
-		myGrid.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			
-			@Override
-			public void handle(MouseEvent event) {
-				System.out.println("Grid Drag");
-
-				handleAction(event);
-			}
-		});
-	}
-	
-	protected void handleAction(MouseEvent event) {
-		System.out.println("Click");
-		SandyTile tile = myGrid.findTile(event);
-		if(doNothing || tile == null){
-			return;
-		}
-		if(mySelection.isSelected(0)){
-			if(currentUnit != null){
-				Piece unit = new Piece(currentUnit);
-				if(reset){
-					myGrid.removeUnit(tile, unit);
-				}
-				else if(edit){
-					myGrid.editUnit(tile, unit);
-				}
-				else{
-					myGrid.addUnit(tile, unit);
-				}
-			}
-		}
-		else{
-			if(currentTerrain != null){
-				Patch terrain = new Patch(currentTerrain);
-				if(reset){
-					myGrid.removeTerrain(tile, terrain);
-				}
-				else if(edit){
-					myGrid.editTerrain(tile, terrain);
-				}
-				else{
-					myGrid.addTerrain(tile, terrain);
-				}
-			}	
-		}
-	}
-	
-	public void addPiece(UnitEntry unit){
-		mySelection.select(myTabMap.get(UNITS));
-		myLibraryMap.get(UNITS).getChildren().add(unit);
-		myPieces.add(unit.getUnit());
-	}
-	
-	public void addPatch(TerrainEntry terrain){
-		mySelection.select(myTabMap.get(TERRAIN));
-		myLibraryMap.get(TERRAIN).getChildren().add(terrain);
-		myPatches.add(terrain.getTerrain());
-	}
-	
-	public void removePiece(UnitEntry unit){
-		myLibraryMap.get(UNITS).getChildren().remove(unit);
-		myGrid.removePieces(unit.getUnit());
-		myPieces.remove(unit.getUnit());
-		doNothing = true;
-	}
-	
-	public void removePatch(TerrainEntry terrain){
-		myLibraryMap.get(TERRAIN).getChildren().remove(terrain);
-		myGrid.removePatches(terrain.getTerrain());
-		myPatches.remove(terrain.getTerrain());
-		doNothing = true;
-	}
-}
-=======
         Button terrainDelete = new Button(DELETE);
         Button terrainEdit = new Button(EDIT);
         terrainDelete.setOnAction(new EventHandler<ActionEvent>() {
@@ -317,8 +160,8 @@ public class LibraryView extends TabPane {
         setGridActionEvents();
     }
 
-    public void registerGrid (Grid grid) {
-
+    public void associateGrid (SandyGrid grid) {
+    	myGrid = grid;
     }
 
     public int getUnitID () {
@@ -418,4 +261,3 @@ public class LibraryView extends TabPane {
         doNothing = true;
     }
 }
->>>>>>> 51d83c07813bcdcb216156523ddf1c6d85177fac
