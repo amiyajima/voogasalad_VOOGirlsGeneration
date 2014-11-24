@@ -88,10 +88,10 @@ public class JSONBobTester {
             for (int y = 0; y < grid1.getRow(); y++) {
                 Patch patch = createNewPatch(new Point2D.Double(x, y));
                 grid1.setPatch(patch.getLoc(), patch);
-                if((x==grid1.getColumn()/2) && (y==grid1.getRow()/2)){
+                //if((x==grid1.getColumn()/2) && (y==grid1.getRow()/2)){
                 	   Piece piece = createNewPiece(new Point2D.Double(x, y));
                        grid1.setPiece(piece.getLoc(), piece);
-                }
+                //}
             }
         }
         System.out.println("Bob Tester: Patches filled: " + grid1.getAllPatches().size());
