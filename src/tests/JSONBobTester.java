@@ -80,7 +80,7 @@ public class JSONBobTester {
         Patch patch = createNewPatch(new Point2D.Double(3, 3));
 
         Game myGame = new Game(myPlayers, myLevels);
-        return patch;
+        return myGame;
     }
 
     public Grid createNewGrid () {
