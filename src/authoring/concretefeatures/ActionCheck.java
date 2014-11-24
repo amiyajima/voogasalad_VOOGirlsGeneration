@@ -21,20 +21,25 @@ import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.LibraryView;
 
 
+/**
+ *GUI component that checks, for each type of actions,
+ *which pieces can perform this action and which other
+ *pieces can receive this action
+ *
+ */
 public class ActionCheck extends PopupWindow {
 
     private final int HEIGHT = 400;
     private final int WIDTH = 400;
-    private final String ACTION = "Action";
     private final String NAME = "Available Actions for Units";
     private final String ACTION_TYPE = "Action Type";
     private final String ACTOR = "Actor";
     private final String RECEIVER = "Receiver";
-    private LibraryView myLibrary;
-
+    //currently not being used, but will be soon
     private List<Action> myActions;
+    //currently using List<String>, but will be changed to List<Piece>
+    //Using List<String> for testing
     private List<String> myPieces = new ArrayList<String>();
-    private List<Patch> myPatches;
     private Map<String, Map> Conclusion;
 
     private static final String STYLESHEET = "/resources/stylesheets/actioncreator_layout.css";
@@ -46,19 +51,21 @@ public class ActionCheck extends PopupWindow {
      * @param pieceLst List of pieces
      * @param patchLst List of patches
      */
-    // public ActionCheck (List<Action> actionLst, List<Piece> pieceLst, List<Patch> patchLst) {
-    //
-    // myActions = actionLst;
-    // myPieces = pieceLst;
-    // myPatches = patchLst;
-    //
-    // setHeight(HEIGHT);
-    // setWidth(WIDTH);
-    // setTitle(NAME);
-    // initialize();
-    //
-    // }
-
+//    public ActionCheck (List<Action> actionLst, List<Piece> pieceLst, List<Patch> patchLst) {
+//
+//        myActions = actionLst;
+//        myPieces = pieceLst;
+//        myPatches = patchLst;
+//
+//        setHeight(HEIGHT);
+//        setWidth(WIDTH);
+//        setTitle(NAME);
+//        initialize();
+//
+//    }
+    
+    
+    //for testing purpose
     public ActionCheck () {
 
         setHeight(HEIGHT);
@@ -73,13 +80,15 @@ public class ActionCheck extends PopupWindow {
         myPieces.add("Piece A");
         myPieces.add("Piece B");
         myPieces.add("Piece C");
+        myPieces.add("Piece D");
+        
         ScrollPane root = new ScrollPane();
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().add(STYLESHEET);
 
         VBox mainVBox = new VBox();
-        mainVBox.getStyleClass().add("vbox");
-        mainVBox.setId("vbox-main");
+//        mainVBox.getStyleClass().add("vbox");
+//        mainVBox.setId("vbox-main");
         VBox actionNameVBox = new VBox();
         VBox posActorVBox = new VBox();
         VBox posReceiverVBox = new VBox();
@@ -120,9 +129,9 @@ public class ActionCheck extends PopupWindow {
     }
 
     private void initActorChooser (VBox posActorVBox, ChoiceBox<String> posActors) {
-        // TODO Auto-generated method stub
+        // TODO when myPieces is List<Piece>, I will need to use its type IDs.
         Label actorLabel = new Label(ACTOR);
-        posActors.getItems().addAll("Piece A", "Piece B", "Piece C");
+        posActors.getItems().addAll(myPieces);
 
         HBox actorsHbox = new HBox();
         actorsHbox.getChildren().addAll(posActors);
@@ -134,7 +143,7 @@ public class ActionCheck extends PopupWindow {
         // TODO: actionTypes needs to get List<String> that contains names of all the action types
         //
         Label targetLabel = new Label(ACTION_TYPE);
-        actionTypes.getItems().addAll("Attack", "Heal", "AlltheRest");
+        actionTypes.getItems().addAll("Attack", "Heal", "Steal", "Kill");
 
         HBox actionsHBox = new HBox();
         actionsHBox.getChildren().addAll(actionTypes);
