@@ -122,20 +122,6 @@ public abstract class Grid {
     }
 
     /**
-     * Returns a Piece of a given ID
-     * 
-     * @param id
-     * @return
-     */
-    public Piece getPiece (int id) {
-        for (Piece p : myPieces) {
-            if (p.getUniqueID() == id)
-                return p;
-        }
-        return null;
-    }
-
-    /**
      * Returns a list of all pieces
      * 
      * @return

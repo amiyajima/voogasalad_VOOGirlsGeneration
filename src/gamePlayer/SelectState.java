@@ -24,5 +24,4 @@ public class SelectState implements IGridState {
         myController.setActivePiece(piece);
         myController.updateActions(piece);
     }
-
 }

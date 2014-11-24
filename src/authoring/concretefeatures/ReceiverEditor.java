@@ -39,7 +39,7 @@ public class ReceiverEditor extends PopupWindow {
 
     @Override
     protected void initialize () {
-        List<String> myPosReceivers = getReceivers(myPieces,myActor); 
+        List<String> myPosReceivers = getReceivers(myPieces, myActor);
         System.out.println(myPosReceivers);
         ScrollPane root = new ScrollPane();
         Scene scene = new Scene(root, WIDTH, HEIGHT);
@@ -55,25 +55,25 @@ public class ReceiverEditor extends PopupWindow {
         Label actionName = new Label("Action:");
         Button action = new Button(myAction);
         actionNameVBox.getChildren().addAll(actionName, action);
-        
+
         Label actorType = new Label("Actor:");
         Button actor = new Button(myActor);
         actorVBox.getChildren().addAll(actorType, actor);
-        
-        initCheckBoxes(ReceiverVBox, myPosReceivers);
-        
 
-        mainVBox.getChildren().addAll(actionNameVBox, new Separator(), actorVBox, new Separator(), ReceiverVBox);
+        initCheckBoxes(ReceiverVBox, myPosReceivers);
+
+        mainVBox.getChildren().addAll(actionNameVBox, new Separator(), actorVBox, new Separator(),
+                                      ReceiverVBox);
         root.setContent(mainVBox);
         setScene(scene);
 
     }
-    
+
     private void initCheckBoxes (VBox ReceiverVBox, List<String> myPosReceivers) {
         // TODO Auto-generated method stub
         Label title = new Label("Pieces that can recieve this type of action");
         ReceiverVBox.getChildren().add(title);
-        for(String p : myPosReceivers){
+        for (String p : myPosReceivers) {
             ReceiverVBox.getChildren().add(new CheckBox(p));
         }
     }
