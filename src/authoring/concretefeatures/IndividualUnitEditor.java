@@ -166,6 +166,7 @@ public class IndividualUnitEditor extends PopupWindow {
      * @param players is an hbox
      * @param playersChoice contain playerID choices
      */
+    //TODO: ideally should pass in as parameter
     private void initPlayerID (HBox players, ChoiceBox<Integer> playersChoice) {
         Label playersLable = new Label(PLAYER_LABEL);
         playersLable.setPadding(UIspecs.topRightPadding);
