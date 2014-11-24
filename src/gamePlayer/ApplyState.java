@@ -25,20 +25,15 @@ public class ApplyState implements IGridState{
             myController.getGrid().getChildren().forEach(node->{node.setOnMouseEntered(event2->{
                                                             myController.highLightEffectRange(event2, Color.RED);
                                                             });
-                                                           node.setOnMouseExited(event3->myController.highLightActionRange());});
+                                                           node.setOnMouseExited(event3->{myController.highLightActionRange();
+                                                               if(myController.getActivePiece() != null){
+                                                                                           myController.highlightCurrent(myController.getActivePiece().getLoc());}});
+                                                           
+                                                                });
                                                                 
             
             
         });
-//
-//        myController.setGridState(this);
-//
-//        myMouseController = myController.getMouseController();
-//        
-////        myController.getGrid().setOnMouseEntered(event->{myController.changeCursor(myController.CURSOR_ATTACK_TEST);});
-////      myController.getGrid().setOnMouseEntered(event->{myMouseController.setCursorImage(myController.getScene(), myController.getGrid(), myController.CURSOR_ATTACK_TEST);;});
-////      myMouseController.setOnClick(myController, myController.getGridState(), myController.getGrid());
-
 
     }
 
@@ -52,6 +47,9 @@ public class ApplyState implements IGridState{
             myController.setGridState(new SelectState(myController));
 
             myController.changeCursor(myController.CURSOR_GLOVE_TEST);
+            
+            myController.setActivePiece(null);
+            myController.setActiveAction(null);
 
     }
 }

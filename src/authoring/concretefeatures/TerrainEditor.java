@@ -1,11 +1,11 @@
 package authoring.concretefeatures;
 
+import gamedata.gamecomponents.Patch;
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -15,7 +15,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import gamedata.gamecomponents.Patch;
 import authoring.abstractfeatures.PopupWindow;
 import authoring_environment.UIspecs;
 
@@ -72,40 +71,49 @@ public class TerrainEditor extends PopupWindow {
         HBox imageBox = new HBox();
 
         // name
-        TextField name = initLabel(nameBox, TERRAIN_NAME_LABEL);
+        TextField nameTf = nameField(nameBox, TERRAIN_NAME_LABEL);
 
-        // image load
-        // TODO: might want to return something
+        // loading image
         initImageLoader(imageBox, IMAGE_LABEL, LOAD_IMAGE_LABEL);
 
         Button create = new Button(TEMPLATE_LABEL);
         create.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
-                // change patches info... need access to patches made with previous info
-                
-
+                String name = nameTf.getText();
+                myTerrain.setMyName(name);
+                myTerrain.setMyImage(myImageLocation);
             }
         });
-        
+
         box.getChildren().addAll(nameBox, imageBox, create);
         setScene(new Scene(box));
-        
+
     }
 
     /**
-     * @param box
-     * @param labelName
-     * @return
+     * Initializes so that user can type in name in a textfield
+     * 
+     * @param box - HBox to put name label and textfield for name
+     * @param labelName - name of the name label
+     * @return textfield - user types in name
      */
-    public TextField initLabel (HBox box, String labelName) {
+    public TextField nameField (HBox box, String labelName) {
         Label nameLabel = new Label(labelName);
         nameLabel.setPadding(UIspecs.topRightPadding);
-        TextField tf = new TextField();
+        TextField tf = new TextField(myTerrain.getName());
         box.getChildren().addAll(nameLabel, tf);
         return tf;
     }
 
+    /**
+     * Initializes so that the user can add load in image
+     * (in order to change patch's image)
+     * 
+     * @param imageBox - HBox for image loader related elements
+     * @param labelName - name for label
+     * @param buttonName - name for button
+     */
     public void initImageLoader (HBox imageBox, String labelName, String buttonName) {
         ImageView icon = new ImageView();
         Label loadLabel = new Label(labelName);
@@ -126,6 +134,6 @@ public class TerrainEditor extends PopupWindow {
             }
         });
         imageBox.getChildren().addAll(loadLabel, loadImage, icon);
-
+        
     }
 }

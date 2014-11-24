@@ -13,22 +13,13 @@ import gamedata.gamecomponents.Piece;
  */
 public class SelectState implements IGridState {
     private ViewController myController;
-   // private MouseController myMouseController;
 
     public SelectState (ViewController controller) {
         myController = controller;
 
-
-       // myMouseController = myController.getMouseController();
         myController.getGrid().setOnMouseEntered(event->{myController.changeCursor(myController.CURSOR_GLOVE_TEST);});
-//        myController.getGrid().setOnMouseEntered(event->{myMouseController.setCursorImage(myController.getScene(), myController.getGrid(), myController.CURSOR_GLOVE_TEST);;});    
-//        
 
-//        myMouseController = myController.getMouseController();
-////        myController.getGrid().setOnMouseEntered(event->{myController.changeCursor(myController.CURSOR_GLOVE_TEST);});
-////        myController.getGrid().setOnMouseEntered(event->{myMouseController.setCursorImage(myController.getScene(), myController.getGrid(), myController.CURSOR_GLOVE_TEST);;});    
-////        myMouseController.setOnClick(myController, myController.getGridState(), myController.getGrid());
-
+        
     }
     
 
