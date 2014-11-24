@@ -5,24 +5,10 @@
 	-fx-spacing: 20;
 }
 
-
-.button{
--fx-text-fill: black;
-    -fx-font-family: "Arial Narrow";
-    -fx-font-weight: bold;
-    /*-fx-background-color: linear-gradient(#61a2b1, #2A5058);*/
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-}
-
 .vbox{
 	-fx-padding: 50 100 30 60;
 		-fx-spacing: 20;
 		-fx-alignment: center
-}
-
-
-.button:hover{
-    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
 }
 
 .gridpane{
@@ -30,39 +16,33 @@
 	-fx-alignment: center;
 	-fx-background-color: #D1DBBD;
 }
-.rectangle{
-	-fx-background-color: #fff9f9;
-	-fx-effect: innershadow(gaussian, #D1DBBD, 5, 0, 2,2)
-}
-.circle{
-	-fx-alignment: center;
-}
-.rectangle:hover{
-	-fx-background-color: linear-gradient(#2A5058, #61a2b1);
-}
-
 
 .tab-pane .tab-header-area .tab-header-background {
     -fx-border-color: #82878c;
     -fx-background-color: #82878c;
 }
 
+.tab-content-area 
+{
+	-fx-border-color:#82878c;
+	-fx-background-color: linear-gradient(#ffffff, #82878c);
+	-fx-border-radius: 2;
+    -fx-padding: 3 6 6 6;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 ); 
+	
+	
+	
+}
+
 .tab{
     -fx-background-insets: 0 1 0 1,0,0;
     -fx-background-color: #82878c;
     -fx-border-color:#82878c;
-    -fx-font-color: 
+    -fx-font-color: white;
 }
 
 .tab:selected {
 -fx-border-color:#82878c;
-}
-
-
-.tab-content-area 
-{
-	-fx-background-color: #82878c;
-	-fx-border-color:#82878c;
 }
 
 .tab .tab-label { 
@@ -74,20 +54,24 @@
 
 .tab:selected .tab-label { 
     -fx-alignment: CENTER;
-    -fx-text-fill: #99FF66;
+    -fx-text-fill: #D3E397;
 }
 
-
-.label{
-	-fx-font-size: 12px;
+.button{
+    -fx-text-fill: black ;
+    -fx-background-color: white;
+    -fx-font-family: "Arial Narrow";
     -fx-font-weight: bold;
-    -fx-text-fill: #333333;
-    -fx-background-color: #E5E4E2;
-    -fx-padding: 8px;
+    -fx-border-radius: 2;
+    -fx-padding: 3 6 6 6;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 ); 
+    -fx-background-color: linear-gradient(#ffffff, #bababa);
 }
 
-# menuButton{
-	-fx-background-color: #E8E5E2
-	   	-fx-font-size: 13px;
-	-fx-padding: 10 20 10 20;
+.button:hover{
+	-fx-background-color: #D3E397;
 }
+
+
+
+
