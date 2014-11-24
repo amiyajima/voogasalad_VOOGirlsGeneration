@@ -19,5 +19,6 @@ public class MenuView extends MenuBar {
 		getMenus().addAll(new File(wsView), new GlobalRules(), new Events(), new Units(library, actions), 
 						  new Terrain(library), new Actions(library, actions),
 						  new JSONBob());
+		
 	}
 }
