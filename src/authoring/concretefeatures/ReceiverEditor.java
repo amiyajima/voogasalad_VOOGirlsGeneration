@@ -40,7 +40,7 @@ public class ReceiverEditor extends PopupWindow {
     @Override
     protected void initialize () {
         List<String> myPosReceivers = getReceivers(myPieces, myActor);
-        System.out.println(myPosReceivers);
+        //System.out.println(myPosReceivers);
         ScrollPane root = new ScrollPane();
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().add(STYLESHEET);

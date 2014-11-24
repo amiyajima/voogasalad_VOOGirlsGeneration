@@ -56,7 +56,7 @@ public class TerrainCreator extends PopupWindow {
     public TerrainCreator (LibraryView library) {
         myLibrary = library;
 
-        myName = library.getTerrainName();
+        myName = "";
         myImageLocation = "";
         myLoc = new Point2D.Double(0, 0);
 
@@ -120,9 +120,11 @@ public class TerrainCreator extends PopupWindow {
         goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
+            	myName = terrainName.getText();
                 if (myImageLocation.equals("") || terrainName.getText().equals("")) {
-                return;
+                	return;
                 }
+                
                 Patch terrain = new Patch(myName, myImageLocation, myLoc);
 
                 Label name = new Label(terrainName.getText());

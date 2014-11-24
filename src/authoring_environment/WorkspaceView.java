@@ -3,7 +3,6 @@ package authoring_environment;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.SingleSelectionModel;
@@ -19,7 +18,7 @@ import javafx.scene.control.TabPane;
  */
 public class WorkspaceView extends TabPane {
 	
-	private List<SandyGrid> myGrids;
+	private List<ShapeGrid> myGrids;
 	private int myCurrentTabIdx;
 	
 	public WorkspaceView() {
@@ -55,7 +54,12 @@ public class WorkspaceView extends TabPane {
 		tab.setOnClosed(new EventHandler<Event>() {
         	@Override
 			public void handle(Event closed) {
+<<<<<<< HEAD
           		int idx = getSelectionModel().getSelectedIndex();
+=======
+        		//System.out.println("second?");
+        		int idx = getSelectionModel().getSelectedIndex();
+>>>>>>> 213773f8df2968a8b02494670ae4c30dd7e19e2a
 
             	if(idx>=0){
         			myGrids.remove(idx);
@@ -67,10 +71,10 @@ public class WorkspaceView extends TabPane {
         });
 	}
 	
-	public SandyGrid getActiveGrid(){
+	public ShapeGrid getActiveGrid(){
 		SingleSelectionModel<Tab> selectionModel = getSelectionModel();
 		int idx = selectionModel.getSelectedIndex();
-		System.out.println(idx);
+
 		
 		if(idx==-1 || idx>=myGrids.size()){
 			return myGrids.get(0);
@@ -78,7 +82,7 @@ public class WorkspaceView extends TabPane {
 		return myGrids.get(idx);
 	}
 	
-	public void addGrid(SandyGrid grid){
+	public void addGrid(ShapeGrid grid){
 		myGrids.add(grid);
 	}
 }

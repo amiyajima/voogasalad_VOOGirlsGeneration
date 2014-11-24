@@ -13,14 +13,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
 import authoring.data.PatchData;
-import authoring.data.PatchTypeData;
 import authoring.data.PieceData;
-import authoring.data.PieceTypeData;
 import authoring_environment.JennieGrid;
-import authoring_environment.LevelTab;
-import authoring_environment.LibraryView;
 import authoring_environment.SandyGrid;
 import authoring_environment.SandyGridView;
+import authoring_environment.ShapeGrid;
 import authoring_environment.UIspecs;
 import authoring_environment.WorkspaceView;
 
@@ -102,20 +99,27 @@ public class GameCreator extends PopupWindow {
             @Override
             public void handle (ActionEvent click) {
                 // set grid with such dimensions
-                int width = Integer.parseInt(gridWidth.getText());
-                int height = Integer.parseInt(gridHeight.getText());
+                int numCols = Integer.parseInt(gridWidth.getText());
+                int numRows = Integer.parseInt(gridHeight.getText());
                 String name = levelName.getText();
+                
+                int tileSize = getPrefTileSize(numRows,numCols);
+                PieceData pieceData = new PieceData();
+                PatchData patchData = new PatchData();
+                ShapeGrid shapeGrid = null;
                 
                 //TODO: hard coded grid type
                 if (gridChoiceBox.getValue().equals("Square Grid")){
-                    new SandyGrid(width, height, 40, new PieceData(), new PatchData());
+                   shapeGrid = new SandyGrid(numCols, numRows, 
+                		   tileSize, pieceData, patchData);
 
                 }
                 if (gridChoiceBox.getValue().equals("Hexagon Grid")) {
-                    new SandyGrid(width, height, 40, new PieceData(), new PatchData());
+                	shapeGrid = new JennieGrid(numCols, numRows, 
+                 		   tileSize, pieceData, patchData);
                 }
 
-                addWorkspaceTab(width, height, name);
+                addWorkspaceTab(shapeGrid, name);
                 close();
             }
         });
@@ -125,14 +129,7 @@ public class GameCreator extends PopupWindow {
     }
 
     
-    private void addWorkspaceTab(int numRows, int numCols, String name) {
-    	PieceData pieceData = new PieceData();
-		PatchData patchData = new PatchData();
-		
-		int tileSize=getPrefTileSize(numRows,numCols);
-		SandyGrid grid = new SandyGrid(numRows, numCols,
-				tileSize, pieceData, patchData);
-
+    private void addWorkspaceTab(ShapeGrid grid, String name) {
 		SandyGridView gridView = new SandyGridView(grid, GRID_VIEW_WIDTH, GRID_VIEW_HEIGHT);
 		Tab tab = new Tab();
 		BorderPane bPane = new BorderPane();

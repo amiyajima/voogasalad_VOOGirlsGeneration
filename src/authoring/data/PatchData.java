@@ -51,7 +51,7 @@ public class PatchData implements AuthoringData<Patch> {
     public boolean terrainAtLoc(Patch terrain, int x, int y){
     	Point2D location = new Point2D.Double(x, y);
 		for(Patch patch : myPatches){
-			if(location.equals(patch.getLoc()) && patch.getName() == patch.getName()){
+			if(location.equals(patch.getLoc()) && terrain.getName().equals(patch.getName())){
 				myPatches.remove(patch);
 				return true;
 			}
