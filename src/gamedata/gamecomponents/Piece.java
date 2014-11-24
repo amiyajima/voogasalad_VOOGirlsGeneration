@@ -137,7 +137,9 @@ public class Piece {
      * Adds an Action to the piece's list of Actions
      */
     public void addAction (Action a) {
-        myActions.add(a);
+    	if(!myActions.contains(a)){
+    		myActions.add(a);
+    	}
     }
 
     /**

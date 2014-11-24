@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
@@ -27,6 +28,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import authoring.abstractfeatures.PopupWindow;
+import authoring.data.ActionData;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
@@ -50,6 +52,7 @@ public class UnitCreator extends PopupWindow {
 	private final String DELETE = "Delete";
 	private final String EDIT = "Edit";
 	private LibraryView myLibrary;
+	private ActionData myAvailableActions;
 	
 	private int myTypeID;
 	private int myUniqueID;
@@ -63,14 +66,14 @@ public class UnitCreator extends PopupWindow {
 	private Inventory myInventory;
 
 	/**
-	 * Constructor that sets the dimensions of the UnitCreator GUI component and
 	 * initializes it.
 	 * 
 	 * @param library
 	 *            : Library to which units will be added.
 	 */
-	public UnitCreator(LibraryView library) {
+	public UnitCreator(LibraryView library, ActionData availableActions) {
 		myLibrary = library;
+		myAvailableActions = availableActions;
 		
 		myImageLocation = "";
 		myPath = new ArrayList<Movement>();
@@ -128,12 +131,14 @@ public class UnitCreator extends PopupWindow {
         });
         images.getChildren().addAll(loadLabel, loadImage, icon);
 
-        HBox modList = new ModulesList();
+        ModulesList modList = new ModulesList(myAvailableActions.getActionNames(), FXCollections.observableArrayList());
 
         Button goButton = new Button(TEMPLATE_LABEL);
         goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
+            	myActions = addSelectedActions(modList.getSelectedActions());
+            	
                 Piece unit = new Piece(myImageLocation, myPath, myActions, myStats,
                                        myLoc, myTypeID, myUniqueID, myPlayerID, myInventory);
 
@@ -143,7 +148,7 @@ public class UnitCreator extends PopupWindow {
                 editButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle (ActionEvent e) {
-                        PopupWindow p = new UnitEditor(unit);
+                        PopupWindow p = new UnitEditor(unit, myAvailableActions);
                         p.show();
                     }
                 });
@@ -172,6 +177,13 @@ public class UnitCreator extends PopupWindow {
         box.getChildren().addAll(names, images, modList, goButton);
         setScene(new Scene(box));
     }
+	protected List<Action> addSelectedActions(List<String> selected){
+		List<Action> list = new ArrayList<>();
+		for(String s: selected){
+			list.add(myAvailableActions.getAction(s));
+		}
+		return list;
+	}
 
 	protected void initSetRangeButton(VBox rangeBox, String label, List<Point2D> range) {
 		Label rangeLabel = new Label(label);
