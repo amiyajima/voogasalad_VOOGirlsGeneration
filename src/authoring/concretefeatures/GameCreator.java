@@ -39,16 +39,16 @@ public class GameCreator extends PopupWindow {
     private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
     private final int HEIGHT = 400;
     private final int WIDTH = 400;
-    private final String NAME = "Game Creator";
+    private final String NAME = "Level Creator";
     private final String GRID_HEIGHT_LABEL = "Number of Rows:";
     private final String GRID_WIDTH_LABEL = "Number of Columns:";
     private final String PLAYER_NUMBER_LABEL = "Number of Players:";
+    private final String NAME_LABEL = "Level name";
     private final String TEMPLATE_LABEL = "Create";
 
     private ChoiceBox<String> gridChoiceBox;
 
     private WorkspaceView myWorkspaceView;
-    private LibraryView myLibraryView;
 
     /**
      * Constructor that sets the dimensions of the TerrainCreator GUI component
@@ -68,8 +68,6 @@ public class GameCreator extends PopupWindow {
 
     @Override
     protected void initialize () {
-    	PieceTypeData pieceTypeData = new PieceTypeData();
-		PatchTypeData patchTypeData = new PatchTypeData();
 
         ScrollPane root = new ScrollPane();
                 
@@ -82,9 +80,12 @@ public class GameCreator extends PopupWindow {
 
         VBox heights = new VBox();
         VBox widths = new VBox();
+        VBox name = new VBox();
         VBox players = new VBox();
         VBox grid = new VBox();
 
+        // name the levle
+        TextField levelName = initLabel(name, NAME_LABEL);
         // choose # of player
         TextField player = initLabel(players, PLAYER_NUMBER_LABEL);
 
@@ -103,6 +104,7 @@ public class GameCreator extends PopupWindow {
                 // set grid with such dimensions
                 int width = Integer.parseInt(gridWidth.getText());
                 int height = Integer.parseInt(gridHeight.getText());
+                String name = levelName.getText();
                 
                 //TODO: hard coded grid type
                 if (gridChoiceBox.getValue().equals("Square Grid")){
@@ -113,17 +115,17 @@ public class GameCreator extends PopupWindow {
                     new SandyGrid(width, height, 40, new PieceData(), new PatchData());
                 }
 
-                addWorkspaceTab(width, height);
+                addWorkspaceTab(width, height, name);
                 close();
             }
         });
-        box.getChildren().addAll(grid, players, heights, widths, create);
+        box.getChildren().addAll(name, grid, players, heights, widths, create);
         root.setContent(box);
         setScene(scene);
     }
 
     
-    private void addWorkspaceTab(int numRows, int numCols) {
+    private void addWorkspaceTab(int numRows, int numCols, String name) {
     	PieceData pieceData = new PieceData();
 		PatchData patchData = new PatchData();
 		
@@ -138,7 +140,7 @@ public class GameCreator extends PopupWindow {
 		tab.setContent(bPane);
 				
 		myWorkspaceView.addGrid(grid);
-		myWorkspaceView.addNextTab(tab);
+		myWorkspaceView.addNextTab(tab, name);
     }
 
     private int getPrefTileSize (int gridWidthNumber, int gridHeightNumber) {

@@ -18,7 +18,7 @@ public class File extends Menu {
 	
     public File (WorkspaceView wsView) {
         super("File");
-        MenuItem newGame = new MenuItem("New Game");
+        MenuItem newGame = new MenuItem("New Level");
         MenuItem open = new MenuItem("Open");
         MenuItem save = new MenuItem("Save");
         MenuItem exit = new MenuItem("Exit");
