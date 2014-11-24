@@ -65,17 +65,17 @@ public class LibraryView extends TabPane {
 	 * their respective tabs as they are created in the UnitCreator
 	 * and TerrainCreator.
 	 */
-	public LibraryView(SandyGrid grid, PieceTypeData pieceData, PatchTypeData patchData){
+	public LibraryView(PieceTypeData pieceData, PatchTypeData patchData){
 		mySelection = this.getSelectionModel();
 		this.setPrefSize(HEIGHT, WIDTH);
 		myPieces = pieceData;
 		myPatches = patchData;
-		myGrid = grid;
 		doNothing = true;
 		reset = true;
 		edit = false;
 		unitID = 0;
 		terrainID = 0;
+		myGrid = new SandyGrid(1, 1, 1, null, null);
 		
 		Tab unitTab = new Tab(UNITS);
 		unitTab.setClosable(false);
@@ -157,6 +157,9 @@ public class LibraryView extends TabPane {
 		myTabMap.put(UNITS, unitTab);
 		myTabMap.put(TERRAIN, terrainTab);
 		setGridActionEvents();
+	}
+	public void registerGrid(Grid grid){
+		
 	}
 	
 	public int getUnitID(){
