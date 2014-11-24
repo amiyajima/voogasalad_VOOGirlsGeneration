@@ -17,6 +17,7 @@ import authoring.data.PatchTypeData;
 import authoring.data.PieceData;
 import authoring.data.PieceTypeData;
 import authoring_environment.JennieGrid;
+import authoring_environment.LevelTab;
 import authoring_environment.LibraryView;
 import authoring_environment.SandyGrid;
 import authoring_environment.SandyGridView;
@@ -133,6 +134,8 @@ public class GameCreator extends PopupWindow {
 		BorderPane bPane = new BorderPane();
 		bPane.setRight(gridView);
 		tab.setContent(bPane);
+				
+		myWorkspaceView.addGrid(grid);
 		myWorkspaceView.addNextTab(tab);
     }
     

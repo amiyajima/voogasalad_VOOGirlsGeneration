@@ -75,6 +75,7 @@ public class LibraryView extends TabPane {
 		edit = false;
 		unitID = 0;
 		terrainID = 0;
+		//A "null default" for the grid. Grid will be assigned to LibraryView when created
 		myGrid = new SandyGrid(1, 1, 1, null, null);
 		
 		Tab unitTab = new Tab(UNITS);
@@ -158,8 +159,9 @@ public class LibraryView extends TabPane {
 		myTabMap.put(TERRAIN, terrainTab);
 		setGridActionEvents();
 	}
-	public void registerGrid(Grid grid){
-		
+	public void associateGrid(SandyGrid grid){
+		System.out.println(grid);
+		myGrid = grid;
 	}
 	
 	public int getUnitID(){
@@ -190,18 +192,24 @@ public class LibraryView extends TabPane {
 		myGrid.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
+				System.out.println("Grid Click");
+
 				handleAction(event);
 			}
 		});
 		myGrid.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			
 			@Override
 			public void handle(MouseEvent event) {
+				System.out.println("Grid Drag");
+
 				handleAction(event);
 			}
 		});
 	}
 	
 	protected void handleAction(MouseEvent event) {
+		System.out.println("Click");
 		SandyTile tile = myGrid.findTile(event);
 		if(doNothing || tile == null){
 			return;

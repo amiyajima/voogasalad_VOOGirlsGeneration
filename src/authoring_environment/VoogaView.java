@@ -4,6 +4,9 @@ import authoring.data.PatchData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceData;
 import authoring.data.PieceTypeData;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -33,7 +36,18 @@ public class VoogaView extends BorderPane {
 		myWorkspaceView = new WorkspaceView();
 		myMenuView = new MenuView(myWorkspaceView, myLibraryView);
 		
-		setTop(myMenuView);
+		/**
+		 * Associate the LibraryView with the currently selected Tab
+		 */
+		myWorkspaceView.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+		    @Override
+		    public void changed(ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
+		    	SandyGrid activeGrid = myWorkspaceView.getActiveGrid();
+		        myLibraryView.associateGrid(activeGrid);
+		    }
+		}); 
+		
+		setTop(myMenuView);	
 		setLeft(myLibraryView);
 		setRight(myWorkspaceView);
 	}
