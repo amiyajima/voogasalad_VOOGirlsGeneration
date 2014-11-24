@@ -1,15 +1,10 @@
 package gamePlayer;
 
 import java.awt.geom.Point2D;
-import java.util.List;
-import javafx.event.EventHandler;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 
 public class MouseController {
     Point2D myPreviousLocation;
