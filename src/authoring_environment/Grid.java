@@ -65,10 +65,10 @@ public class Grid extends Pane {
 			for (int j = 0; j < myHeight; j++) {
 				grid[i][j] = new Tile(i, j, myTileSize);
 				this.getChildren().add(grid[i][j]);
-				setClickEvent(grid[i][j]);
+//				setClickEvent(grid[i][j]);
 			}
 		}
-		this.setDragEvent();
+//		this.setDragEvent();
 	}
 
 	/**
@@ -134,73 +134,73 @@ public class Grid extends Pane {
 		return tiles;
 	}
 
-	private void setDragEvent() {
-		this.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				int x = (int) event.getX() / myTileSize;
-				int y = (int) event.getY() / myTileSize;
-				Tile tile = getTile(x, y);
-				setContents(tile, x, y);
-			}
-		});
-	}
+//	private void setDragEvent() {
+//		this.setOnMouseDragged(new EventHandler<MouseEvent>() {
+//			@Override
+//			public void handle(MouseEvent event) {
+//				int x = (int) event.getX() / myTileSize;
+//				int y = (int) event.getY() / myTileSize;
+//				Tile tile = getTile(x, y);
+//				setContents(tile, x, y);
+//			}
+//		});
+//	}
 
-	private void setClickEvent(Tile tile) {
-		tile.setStyle("-fx-cursor: hand");
-		tile.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent m) {
-				int xCoord = tile.getX();
-				int yCoord = tile.getY();
-				setContents(tile, xCoord, yCoord);
+//	private void setClickEvent(Tile tile) {
+//		tile.setStyle("-fx-cursor: hand");
+//		tile.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//			@Override
+//			public void handle(MouseEvent m) {
+//				int xCoord = tile.getX();
+//				int yCoord = tile.getY();
+//				setContents(tile, xCoord, yCoord);
+//
+//				// get the coordinate of where the terrain is being put
+//				// create a new patch with such coord
+//				// add such patch to patchdata
+//			}
+//		});
+//	}
 
-				// get the coordinate of where the terrain is being put
-				// create a new patch with such coord
-				// add such patch to patchdata
-			}
-		});
-	}
-
-	protected void setContents(Tile tile, int xCoord, int yCoord) {
-		if(LibraryView.doNothing){
-			return;
-		}
-		if (LibraryView.reset) {
-			if (LibraryView.unitSelected) {
-				tile.myUnit = null;
-				tile.unitImage.setVisible(false);
-			} else {
-				tile.myTerrain = null;
-				tile.terrainImage.setVisible(false);
-				myPatchData.remove(tile.myTerrain);
-			}
-		}
-		else {
-			if (LibraryView.unitSelected) {
-				tile.myUnit = LibraryView.currentlySelectedUnit;
-				tile.unitImage.setImage(tile.myUnit.getImageView().getImage());
-				tile.unitImage.setVisible(true);
-			}
-			else {
-				tile.myTerrain = LibraryView.currentlySelectedTerrain;
-				tile.myTerrain.setLoc(new Point2D.Double(xCoord, yCoord));
-				tile.terrainImage.setImage(tile.myTerrain.getImageView().getImage());
-				tile.terrainImage.setVisible(true);
-				myPatchData.add(tile.myTerrain);
-
-				// allows overwriting patches on the same coordinate
-				List<Patch> myPatches = myPatchData.getPatches();
-				for (int i = 0; i < myPatches.size(); i++) {
-					if ((myPatches.get(i).getLoc().getX()) == xCoord
-							&& (myPatches.get(i).getLoc().getY()) == yCoord) {
-						myPatchData.remove(myPatches.get(i));
-					}
-				}
-
-			}
-		}
-	}
+//	protected void setContents(Tile tile, int xCoord, int yCoord) {
+//		if(LibraryView.doNothing){
+//			return;
+//		}
+//		if (LibraryView.reset) {
+//			if (LibraryView.unitSelected) {
+//				tile.myUnit = null;
+//				tile.unitImage.setVisible(false);
+//			} else {
+//				tile.myTerrain = null;
+//				tile.terrainImage.setVisible(false);
+//				myPatchData.remove(tile.myTerrain);
+//			}
+//		}
+//		else {
+//			if (LibraryView.unitSelected) {
+//				tile.myUnit = LibraryView.currentlySelectedUnit;
+//				tile.unitImage.setImage(tile.myUnit.getImageView().getImage());
+//				tile.unitImage.setVisible(true);
+//			}
+//			else {
+//				tile.myTerrain = LibraryView.currentlySelectedTerrain;
+//				tile.myTerrain.setLoc(new Point2D.Double(xCoord, yCoord));
+//				tile.terrainImage.setImage(tile.myTerrain.getImageView().getImage());
+//				tile.terrainImage.setVisible(true);
+//				myPatchData.add(tile.myTerrain);
+//
+//				// allows overwriting patches on the same coordinate
+//				List<Patch> myPatches = myPatchData.getPatches();
+//				for (int i = 0; i < myPatches.size(); i++) {
+//					if ((myPatches.get(i).getLoc().getX()) == xCoord
+//							&& (myPatches.get(i).getLoc().getY()) == yCoord) {
+//						myPatchData.remove(myPatches.get(i));
+//					}
+//				}
+//
+//			}
+//		}
+//	}
 
 	public Tile[][] getGridTiles() {
 		return grid;
