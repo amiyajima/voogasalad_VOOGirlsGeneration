@@ -48,7 +48,7 @@ public class JSONBobTester {
      * 
      * @return a new default game
      */
-    public Patch createNewGame () {
+    public Game createNewGame () {
         System.out.println("Bob Tester: Create new game");
         List<Player> myPlayers = new ArrayList<Player>();
         Player myPlayer1 = new Player(12345);

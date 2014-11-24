@@ -2,6 +2,7 @@ package authoring.concretefeatures;
 
 import gamedata.gamecomponents.Patch;
 import authoring.abstractfeatures.LibraryEntry;
+import authoring_environment.UIspecs;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -27,6 +28,8 @@ public class TerrainEntry extends LibraryEntry {
 	 */
 	public TerrainEntry(Patch terrain, ImageView image, Label name, Button editButton, Button delButton){
 		this.getChildren().addAll(delButton, editButton, image, name);
+		this.setPadding(UIspecs.allPadding);
+        this.setSpacing(5);
 		myTerrain = terrain;
 	}
 	
