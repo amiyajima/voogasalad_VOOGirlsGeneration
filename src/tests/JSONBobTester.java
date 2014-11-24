@@ -35,9 +35,7 @@ import gameengine.player.Player;
 public class JSONBobTester {
     private static String DEFAULT_DUVALL = "/resources/images/rcd.png";
     private static String DEFAULT_BUNNY = "/resources/images/bbybunny.jpeg";
-
-    // private static String DEFAULT_DUVALL = "file:/C:/Users/Rica/Desktop/bbybunny.jpeg";
-    // private static String DEFAULT_BUNNY = "file:/C:/Users/Rica/Desktop/rcd.png";
+    private static String DEFAULT_LAND = "/resources/images/Land.jpeg";
 
     public JSONBobTester () {
 
@@ -66,14 +64,14 @@ public class JSONBobTester {
 
         List<Goal> myGoals = new ArrayList<Goal>();
         Goal goal1 = new PlayerPiecesRemovedGoal(myPlayer2);
-         myGoals.add(goal1);
+        myGoals.add(goal1);
         Goal goal2 = new PlayerPiecesRemovedGoal(myPlayer1);
-         myGoals.add(goal2);
+        myGoals.add(goal2);
 
         List<Level> myLevels = new ArrayList<Level>();
-         Level level1 = new Level(grid, myGoals, myRules);
+        Level level1 = new Level(grid, myGoals, myRules);
         Level level2 = new Level(grid, myGoals, myRules);
-         myLevels.add(level1);
+        myLevels.add(level1);
         myLevels.add(level2);
 
         Piece piece = createNewPiece(new Point2D.Double(3, 3));
@@ -90,7 +88,7 @@ public class JSONBobTester {
                 Patch patch = createNewPatch(new Point2D.Double(x, y));
                 grid1.setPatch(patch.getLoc(), patch);
                 Piece piece = createNewPiece(new Point2D.Double(x, y));
-                 grid1.setPiece(piece.getLoc(), piece);
+                grid1.setPiece(piece.getLoc(), piece);
             }
         }
         System.out.println("Bob Tester: Patches filled: " + grid1.getAllPatches().size());
@@ -105,16 +103,16 @@ public class JSONBobTester {
         Point2D p3 = new Point2D.Double(3, 3);
 
         List<Point2D> pl1 = new ArrayList<Point2D>();
-         pl1.add(p1);
-         pl1.add(p2);
+        pl1.add(p1);
+        pl1.add(p2);
 
         List<Point2D> pl2 = new ArrayList<Point2D>();
-         pl2.add(p1);
-         pl2.add(p3);
+        pl2.add(p1);
+        pl2.add(p3);
 
         List<Point2D> pl3 = new ArrayList<Point2D>();
-         pl3.add(p2);
-         pl3.add(p3);
+        pl3.add(p2);
+        pl3.add(p3);
 
         List<Movement> movements = new ArrayList<Movement>();
 
@@ -122,7 +120,7 @@ public class JSONBobTester {
         // movements.add(createNewMovement(pl2, pl3));
 
         List<Action> actions = new ArrayList<Action>();
-         actions.add(createNewAction(pl1, pl2));
+        actions.add(createNewAction(pl1, pl2));
         actions.add(createNewAction(pl2, pl3));
 
         Stats s = new Stats();
@@ -131,14 +129,23 @@ public class JSONBobTester {
 
         Random r = new Random();
 
-        Piece piece = new Piece(DEFAULT_DUVALL, movements, actions, s, p,
-                                r.nextInt(50), r.nextInt(50), r.nextInt(50), i);
+        int randomInt = r.nextInt(50);
+        
+        Piece piece = new Piece(null, movements, actions, s, p3, randomInt, randomInt, randomInt, i);
+        if (randomInt % 2 == 1) {
+            piece = new Piece(DEFAULT_DUVALL, movements, actions, s, p,
+                                    randomInt, randomInt, randomInt, i);
+        }
+        else {
+            piece = new Piece(DEFAULT_BUNNY, movements, actions, s, p,
+                                    randomInt, randomInt, randomInt, i);
+        }
         return piece;
     }
 
     public Patch createNewPatch (Point2D p) {
         Random r = new Random();
-        Patch patch = new Patch(r.nextInt(50) + 100, DEFAULT_BUNNY, p);
+        Patch patch = new Patch(r.nextInt(50) + 100, DEFAULT_LAND, p);
         return patch;
     }
 

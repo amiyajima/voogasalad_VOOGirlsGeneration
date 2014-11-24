@@ -29,6 +29,8 @@ public class GameData {
 
     public String toString () {
         return "GAMEDATA: # players = " + myPlayers.size() + " # levels " +
-               myLevels + " my first player's ID is " + myPlayers.get(0).getID();
+               myLevels.size() + " my first player's ID is " + myPlayers.get(0).getID() +
+               " \n# pieces in grid = " + myLevels.get(0).getGrid().getPieces().size() +
+               "\n# patches in grid = " + myLevels.get(0).getGrid().getPatches().size();
     }
 }
