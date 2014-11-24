@@ -33,8 +33,6 @@ public class File extends Menu {
             // Restart Game
 //             PopupWindow p = new GameCreator();
 //             p.show();
-          PopupWindow p = new IndividualUnitEditor();
-          p.show();
             
         }
     }

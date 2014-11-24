@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import java.util.ResourceBundle;
@@ -16,7 +15,6 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import tests.JSONBobTester;
 import javafx.geometry.Pos;
-import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
@@ -26,7 +24,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
@@ -309,7 +306,7 @@ public class ViewController{
      * 
      * @param state the current state of the Grid, select/ apply action Mode
      */
-    protected void setGridState(IGridState state){
+    public void setGridState(IGridState state){
         gridState = state;
     }
 
@@ -357,23 +354,6 @@ public class ViewController{
 
         setGridState(new ApplyState(this));
     }
-
-//    private void setOnClick(){
-//        myGrid.setOnMouseClicked(event->{ 
-//            performAction(event.getX(), event.getY());});
-//    }
-
-
-//    /**
-//     * Perform the actions of a click at position (x,y) on game grid
-//     * @param x
-//     * @param y
-//     */
-//    public void performAction (double x, double y) {
-//        System.out.println("where error happens");
-//        System.out.println("current mouse location:"+x +", "+y);
-//        gridState.onClick(getPiece(findPosition(x,y)));
-//    }
 
     /**
      * Method to convert pixel coordinates into tile coordinates
@@ -438,6 +418,7 @@ public class ViewController{
                 Node n = myGrid.get((int)point.getX(),(int)point.getY());
 
                 addDropShadow(n, Color.YELLOW);
+                
                 n.setOnMouseEntered(event->highLightEffectRange(n, Color.RED));
                 n.setOnMouseExited(event->highLightEffectRange(n, Color.TRANSPARENT));}
 
@@ -463,8 +444,8 @@ public class ViewController{
      * @param c
      */
     private void highLightEffectRange(Node n, Color c){
+        System.out.println("EFFECT RANGE!!!!!!!!!!!!!");
         System.out.println("effect Range: "+ activeAction.getEffectRange());
-        // System.out.println(myGrid.getRowIndex(n)+" , "+ myGrid.getColumnIndex(n));
         activeAction.getEffectRange().forEach(point->{Node node = myGrid.get(myGrid.getRowIndex(n)+ (int)point.getX(), myGrid.getColumnIndex(n)+ (int)point.getY());
 
         //        if(c ==Color.TRANSPARENT && node.getEffect()!=null){
@@ -486,6 +467,11 @@ public class ViewController{
     public MouseController getMouseController(){
         return myMouseController;
     }
+    
+    public IGridState getGridState(){
+        return gridState;
+    }
+    
 
     public void highlightCurrentLocation(Color c, Point2D oldLocation, Point2D newLocation){
         Node oldNode = myGrid.get((int)oldLocation.getX(), (int)oldLocation.getY());
