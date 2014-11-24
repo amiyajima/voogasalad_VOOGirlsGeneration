@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -47,14 +48,16 @@ public class RangeEditor extends PopupWindow {
 	
 	private int myGridLength = RANGE_EDITOR_WIDTH - 100;
 	private int myTileSize = DEFAULT_TILE_SIZE;
+	private static final String STYLESHEET = "/resources/stylesheets/actioncreator_layout.css";
+
 	private int myGridWidthNumber;
 	private int myGridHeightNumber;
 	private RangeGrid mySampleGridView;
 
 
 	public RangeEditor(List<Point2D> range) {
-		range.add(new Point2D.Double(1,0));
-		range.add(new Point2D.Double(-1,1));
+//		range.add(new Point2D.Double(1,0));
+//		range.add(new Point2D.Double(-1,1));
 
 		setHeight(RANGE_EDITOR_HEIGHT);
 		setWidth(RANGE_EDITOR_WIDTH);
@@ -96,6 +99,10 @@ public class RangeEditor extends PopupWindow {
 	@Override
 	protected void initialize() {
 		VBox box = new VBox();
+		Scene scene = new Scene(box, RANGE_EDITOR_WIDTH, RANGE_EDITOR_HEIGHT);
+		scene.getStylesheets().add(STYLESHEET);
+		
+		
 		HBox specifedSelection=new HBox();
 		VBox selection = new VBox();
 		selection.setMinHeight(50);
@@ -164,7 +171,7 @@ public class RangeEditor extends PopupWindow {
 		sizeChooser.getChildren().addAll(horizontal, times, vertical);
 
 		box.getChildren().addAll(sizeChooser, enter,mySampleGridView);
-		setScene(new Scene(box));
+		setScene(scene);
 	}
 	
 	private int getPrefTileSize(int gridWidthNumber,int gridHeightNumber) {
