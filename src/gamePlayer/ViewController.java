@@ -3,16 +3,15 @@ package gamePlayer;
 import gamedata.action.Action; 
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
-import gamedata.gamecomponents.SquareGrid;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import java.util.ResourceBundle;
-import javafx.event.EventHandler;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import tests.JSONBobTester;
@@ -28,16 +27,11 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.layout.StackPane;
 
 
 
@@ -72,7 +66,9 @@ public class ViewController{
     private Point2D myCurrentLocation;
     private Piece activePiece;
     private Action activeAction;
-
+    
+    private MouseController myMouseController;
+    
     private AudioClip myAudio;
     @FXML
     protected VBox statsPane;
@@ -182,14 +178,9 @@ public class ViewController{
 
     @FXML
     private void testGame() {
-//        JSONBobTester JSBTester = new JSONBobTester();
-//        myModel = JSBTester.createNewGame();
-
         myScene = new Scene(myGameSpace);
         myStage.setScene(myScene);
         initializeGrid();
-
-
     }
 
     private void initializeGrid(){
@@ -200,14 +191,18 @@ public class ViewController{
         myGameSpace.setCenter(myGrid);
         myGrid.setAlignment(Pos.CENTER);
         myGrid.populateGrid(myModel.getCurrentLevel().getGrid().getPatches(), myModel.getCurrentLevel().getGrid().getPieces());
-
-        setOnClick();
+        
+        
+        myMouseController = new MouseController();
         setGridState(new SelectState(this));
-        changeCursor(CURSOR_GLOVE_TEST);
-        getGrid().setOnMouseExited(event->{changeCursor(CURSOR_GLOVE_TEST);});
-        //
-        //        addKeyboardController();
-        //        addMouseController();
+        myMouseController.setCursorImage(myScene, myGrid, CURSOR_GLOVE_TEST);
+        myMouseController.setOnClick(this, gridState, myGrid);
+        
+        
+//        setOnClick();
+//        changeCursor(CURSOR_GLOVE_TEST);
+//        getGrid().setOnMouseExited(event->{changeCursor(CURSOR_GLOVE_TEST);});
+        
     }
 
 
@@ -363,23 +358,22 @@ public class ViewController{
         setGridState(new ApplyState(this));
     }
 
-    private void setOnClick(){
-        myGrid.setOnMouseClicked(event->{ 
-            performAction(event.getX(), event.getY());});
-    }
+//    private void setOnClick(){
+//        myGrid.setOnMouseClicked(event->{ 
+//            performAction(event.getX(), event.getY());});
+//    }
 
 
-    /**
-     * Perform the actions of a click at position (x,y) on game grid
-     * @param x
-     * @param y
-     */
-    private void performAction (double x, double y) {
-        System.out.println("where error happens");
-        System.out.println("current mouse location:"+x +", "+y);
-        gridState.onClick(getPiece(findPosition(x,y)));
-
-    }
+//    /**
+//     * Perform the actions of a click at position (x,y) on game grid
+//     * @param x
+//     * @param y
+//     */
+//    public void performAction (double x, double y) {
+//        System.out.println("where error happens");
+//        System.out.println("current mouse location:"+x +", "+y);
+//        gridState.onClick(getPiece(findPosition(x,y)));
+//    }
 
     /**
      * Method to convert pixel coordinates into tile coordinates
@@ -387,7 +381,7 @@ public class ViewController{
      * @param y
      * @return a Point2D representing tile coordinates
      */
-    protected Point2D findPosition(double x, double y){
+    public Point2D findPosition(double x, double y){
         double patchHeight = (double) myGrid.getHeight()/(double) myGrid.getCol();
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
@@ -397,12 +391,14 @@ public class ViewController{
         return new Point2D.Double(yCor,xCor);
     }
 
-    private Piece getPiece(Point2D loc){
+    public Piece getPiece(Point2D loc){
         return myModel.getCurrentLevel().getGrid().getPiece(loc);
-
-
     }
 
+    protected Scene getScene(){
+        return myScene;
+    }
+    
     protected GameGrid getGrid(){
         return myGrid;
     }
@@ -447,11 +443,8 @@ public class ViewController{
 
         });
     }
-
-    protected void changeCursor(String string){
-        Image image = new Image(string);
-        myScene.setCursor(new ImageCursor(image, image.getWidth()/4,image.getWidth()/4));
-    }
+    
+    
     private void addDropShadow(Node n, Color c){
         if(n != null){
             DropShadow ds = new DropShadow(); 
@@ -460,7 +453,6 @@ public class ViewController{
             ds.setOffsetY(0.0);
             ds.setColor(c);
             n.setEffect(ds); 
-            // System.out.println("drop shadow");
         }
     }
 
@@ -485,15 +477,14 @@ public class ViewController{
 
         });
     }
-    private void addKeyboardController(){
-        KeyboardController KBControl = new KeyboardController();
-        //        KBControl.setActionKeyControl(myGrid, myModel);
-        KBControl.setMovementKeyControl(this, myGrid, myModel);
-    }
+//    private void addKeyboardController(){
+//        KeyboardController KBControl = new KeyboardController();
+//        //        KBControl.setActionKeyControl(myGrid, myModel);
+//        KBControl.setMovementKeyControl(this, myGrid, myModel);
+//    }
 
-    private void addMouseController(){
-        MouseController MouseControl = new MouseController();
-        MouseControl.selectCurrentLocation(this, myGrid);
+    public MouseController getMouseController(){
+        return myMouseController;
     }
 
     public void highlightCurrentLocation(Color c, Point2D oldLocation, Point2D newLocation){
@@ -501,10 +492,5 @@ public class ViewController{
         Node newNode = myGrid.get((int)newLocation.getX(), (int)newLocation.getY());
         oldNode.setEffect(null);
         addDropShadow(newNode, c);
-    }
-
-    public void highlightLocation(Color c, Node oldNode, Node newNode){
-        //        oldNode.setEffect(null);
-        addDropShadow(newNode,c);
     }
 }
