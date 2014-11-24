@@ -1,6 +1,7 @@
 package authoring.concretefeatures;
 
 import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,18 +53,25 @@ public class RangeEditor extends PopupWindow {
 
 
 	public RangeEditor(List<Point2D> range) {
+		range.add(new Point2D.Double(1,0));
+		range.add(new Point2D.Double(-1,1));
+
 		setHeight(RANGE_EDITOR_HEIGHT);
 		setWidth(RANGE_EDITOR_WIDTH);
 		setTitle(NAME);
-		if ((range==null) || (range.size()==0)){
-			mySampleGridView = new RangeGrid(myGridLength, myGridLength,
-					myTileSize);
-		}else{
-			cacluateGridSize(range);
+		mySampleGridView = new RangeGrid(myGridLength, myGridLength,
+				myTileSize,range);
+		if (!((range==null) || (range.size()==0))){
+		
+//			cacluateGridSize(range);
 			int initialWidth=(int)cacluateGridSize(range).getX();
 			int initialHeight=(int)cacluateGridSize(range).getY();
-			int initialSize=getPrefTileSize(initialWidth,initialHeight);
-			mySampleGridView = new RangeGrid(initialWidth, initialHeight,initialSize);
+			System.out.println(initialWidth);
+			System.out.println(initialHeight);
+
+			int initialSize=getPrefTileSize(initialWidth*2+1,initialHeight*2+1);
+			mySampleGridView.update(initialWidth*2+1, initialHeight*2+1,initialSize);
+			
 		}
 		
 		mySampleGridView.setRange(range);
@@ -161,7 +169,7 @@ public class RangeEditor extends PopupWindow {
 	
 	private int getPrefTileSize(int gridWidthNumber,int gridHeightNumber) {
 		int calculatedTileSize = Math.max(myGridLength
-				/ gridWidthNumber, myGridLength / gridWidthNumber);
+				/ gridWidthNumber, myGridLength / gridHeightNumber);
 
 		int tileSize = (calculatedTileSize < MIN_TILE_SIZE) ? MIN_TILE_SIZE
 				: calculatedTileSize;
