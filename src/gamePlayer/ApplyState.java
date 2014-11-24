@@ -1,5 +1,6 @@
 package gamePlayer;
 
+import javafx.scene.Node;
 import gamedata.gamecomponents.Piece;
 
 /**
@@ -16,17 +17,13 @@ public class ApplyState implements IGridState{
         System.out.println("new ApplyState");
         myController = controller;
         myController.setGridState(this);
+
         myMouseController = myController.getMouseController();
         
 //        myController.getGrid().setOnMouseEntered(event->{myController.changeCursor(myController.CURSOR_ATTACK_TEST);});
-      myController.getGrid().setOnMouseEntered(event->{myMouseController.setCursorImage(myController.getScene(), myController.getGrid(), myController.CURSOR_ATTACK_TEST);;});
-      
-//      myController.highLightEffectRange(   )
-      
-      
-      myMouseController.setOnClick(myController, myController.getGridState(), myController.getGrid());
+//      myController.getGrid().setOnMouseEntered(event->{myMouseController.setCursorImage(myController.getScene(), myController.getGrid(), myController.CURSOR_ATTACK_TEST);;});
+//      myMouseController.setOnClick(myController, myController.getGridState(), myController.getGrid());
 
-      
     }
 
     @Override
@@ -35,11 +32,10 @@ public class ApplyState implements IGridState{
         
         
         Piece actor = myController.getActivePiece();
-        System.out.println(actor.toString()+"  "+ piece.getTypeID());
+//        System.out.println(actor.toString()+"  "+ piece.getTypeID());
         myController.getActiveAction().doBehavior(actor, piece);
-        System.out.println("dobehavior called");
+//        System.out.println("dobehavior called");
             myController.setGridState(new SelectState(myController));
-//     myController.changeCursor(myController.CURSOR_GLOVE_TEST);
           myMouseController.setCursorImage(myController.getScene(), myController.getGrid(), myController.CURSOR_GLOVE_TEST);
     }
 }
