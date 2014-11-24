@@ -80,8 +80,8 @@ public class JSONManager {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
-        GameData myGame = myGson.fromJson(br, GameData.class);
-        System.out.println(myGame.toString());
+        GameData myGameData = myGson.fromJson(br, GameData.class);
+        System.out.println(myGameData.toString());
         
         // need to add {myLevels: before and } after list
         /*LevelData myLevels = myGson.fromJson(br, LevelData.class);
@@ -138,6 +138,18 @@ public class JSONManager {
         Player player = myGson.fromJson(br, Player.class);
         System.out.println(player.toString());*/
 
+        Game myGame = convertToGame(myGameData);
+        
+        return myGame;
+    }
+
+    /**
+     * Method that converts a game data object into a game object. may be an issue as every aspect of it is in a data wrapper
+     * @param myGameData
+     * @return
+     */
+    private Game convertToGame (GameData myGameData) {
+        
         return null;
     }
 

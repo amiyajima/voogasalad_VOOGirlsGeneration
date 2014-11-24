@@ -29,6 +29,6 @@ public class GameData {
 
     public String toString () {
         return "GAMEDATA: # players = " + myPlayers.size() + " # levels " +
-               myLevels.size();
+               myLevels + " my first player's ID is " + myPlayers.get(0).getID();
     }
 }
