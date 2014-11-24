@@ -53,7 +53,7 @@
    <top>
    	<HBox stylesheets="@stylesheet.css">
       <children>
-         <MenuButton mnemonicParsing="false" style="-fx-background-color: #FFFFFF;" styleClass="menuButton" text="Game Menu" BorderPane.alignment="CENTER_LEFT">
+         <MenuButton mnemonicParsing="false" styleClass="menuButton" text="Game Menu" stylesheets="@stylesheet_label.css" BorderPane.alignment="CENTER_LEFT">
            <items>
                <MenuItem fx:id="restartMenu" mnemonicParsing="false" onAction="#restartGame" text="restart" />
                <MenuItem fx:id="saveMenu" mnemonicParsing="false" onAction="#saveGame" text="Save Game" />
