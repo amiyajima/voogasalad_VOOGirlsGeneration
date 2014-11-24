@@ -87,7 +87,8 @@ public class ViewController{
     private Text gameName;
     @FXML
     private VBox scores;
-
+    
+    private Point2D currentClick;
 
     private IGridState gridState;
 
@@ -446,7 +447,8 @@ public class ViewController{
         int xCor = (int) (x/patchWidth);
         int yCor = (int) (y/patchHeight);
         System.out.println("Current Mouse Coodinatate:"+ xCor +" "+ yCor);
-        return new Point2D.Double(yCor,xCor);
+        currentClick = new Point2D.Double(yCor,xCor);
+        return currentClick;
     }
 
     public Piece getPiece(Point2D loc){
@@ -586,4 +588,9 @@ public class ViewController{
 //            setOnEnterKey();
         }
     }
+    
+    public Point2D getCurrentClick(){
+    	return currentClick;
+    }
+    
 }

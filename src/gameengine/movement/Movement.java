@@ -112,7 +112,9 @@ public class Movement implements Action {
 	public void doBehavior(Piece actor, Piece... receivers) {
 		Piece p=receivers[0];
 		Point2D point = p.getLoc();
-		actor.setLoc(point);
-		System.out.println("Moving piece to: " + point.getX() + " " + point.getY());
+		if(isValidLocation((int)point.getX(),(int)point.getY())){
+			actor.setLoc(point);
+			System.out.println("Moving piece to: " + point.getX() + " " + point.getY());
+		}
 	}
 }

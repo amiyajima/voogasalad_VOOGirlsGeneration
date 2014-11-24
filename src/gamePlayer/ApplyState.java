@@ -49,7 +49,7 @@ public class ApplyState implements IGridState{
         Piece actor = myController.getActivePiece();
         if(piece==null){
         	piece = new Piece(actor);
-        	piece.setLoc(new Point2D.Double(0,0));
+        	piece.setLoc(myController.getCurrentClick());
         }
         myController.getActiveAction().doBehavior(actor, piece);
 
