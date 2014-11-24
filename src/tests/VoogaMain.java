@@ -14,7 +14,7 @@ import java.io.FileNotFoundException;
  */
 public class VoogaMain {
     public static void testJSONwrite () {
-        String saveTo = "src/resources/json/SinglePatch.json";
+        String saveTo = "src/resources/json/Grid.json";
         // String saveTo = "src/resources/json/RicaSample.json";
         JSONManager myJSONmanager = new JSONManager();
         JSONBobTester jb = new JSONBobTester();
@@ -26,7 +26,7 @@ public class VoogaMain {
     public static void testJSONload () {
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("src/resources/json/SinglePatch.json");
+            jsonManager.readFromJSONFile("src/resources/json/Grid.json");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();

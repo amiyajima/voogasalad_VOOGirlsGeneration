@@ -1,6 +1,7 @@
 package gamedata.JSON;
 
 import gamedata.gamecomponents.Game;
+import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
@@ -8,11 +9,13 @@ import gamedata.goals.Goal;
 import gamedata.rules.MoveCountRule;
 import gamedata.rules.Rule;
 import gamedata.wrappers.GoalData;
+import gamedata.wrappers.GridData;
 import gamedata.wrappers.LevelData;
 import gamedata.wrappers.PatchData;
 import gamedata.wrappers.PatchDataIndividual;
 import gamedata.wrappers.PieceDataIndividual;
 import gamedata.wrappers.PlayerData;
+import gamedata.wrappers.PlayerDataIndividual;
 import gamedata.wrappers.RuleData;
 import gameengine.player.Player;
 import java.awt.geom.Point2D;
@@ -50,10 +53,10 @@ public class JSONManager {
     /**
      * Write a game and its contents into a JSON file.
      * 
-     * @param patch
+     * @param grid
      */
-    public void writeToJSON (Patch patch, String fileName) {
-        String json = myGson.toJson(patch);
+    public void writeToJSON (Grid grid, String fileName) {
+        String json = myGson.toJson(grid);
         System.out.println("JSONManager: game converted to json!");
         try {
             FileWriter writer = new FileWriter(fileName);
@@ -75,6 +78,12 @@ public class JSONManager {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
+        GridData gridData = myGson.fromJson(br, GridData.class);
+        System.out.println(gridData);
+        
+        PlayerDataIndividual playerData = myGson.fromJson(br, PlayerDataIndividual.class);
+        System.out.println(playerData);
+        
         PatchDataIndividual patchData = myGson.fromJson(br, PatchDataIndividual.class);
         System.out.println(patchData.getMyTypeID());
         

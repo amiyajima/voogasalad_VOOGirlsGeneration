@@ -1,6 +1,10 @@
 package gamedata.wrappers;
 
+import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Piece;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,10 +15,12 @@ import java.util.Map;
 public class GridData {
     private int myRow;
     private int myColumn;
-    private Map<Point2DData, PatchData> myPatches;
-    private Map<Point2DData, PieceData> myPieces;
+    //private Map<Point2DData, PatchData> myPatches;
+    //private Map<Point2DData, PieceData> myPieces;
+    private List<PatchData> myPatches;
+    private List<PieceData> myPieces;
     
-    public GridData(int row, int column, Map<Point2DData, PatchData> patches, Map<Point2DData, PieceData> pieces) {
+    public GridData(int row, int column, ArrayList<PatchData> patches, ArrayList<PieceData> pieces) {
         myRow = row;
         myColumn = column;
         myPatches = patches;
@@ -29,11 +35,15 @@ public class GridData {
         return myColumn;
     }
     
-    public Map<Point2DData, PatchData> getPatches() {
+    public List<PatchData> getPatches() {
         return myPatches;
     }
     
-    public Map<Point2DData, PieceData> getPieces() {
+    public List<PieceData> getPieces() {
         return myPieces;
+    }
+    
+    public String toString(){
+        return "GridData: # pieces = " + myPieces.size() + " # patches " + myPatches.size();
     }
 }
