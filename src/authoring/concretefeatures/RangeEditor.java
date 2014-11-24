@@ -161,8 +161,6 @@ public class RangeEditor extends PopupWindow {
 				box.getChildren().addAll(sizeChooser, enter,
 						mySampleGridView, specifedSelection,select);
 			}
-
-			
 		});
 
 		select.setOnAction(new SelectHandler(this));

@@ -47,6 +47,7 @@ public class GameCreator extends PopupWindow {
     private ChoiceBox<String> gridChoiceBox;
 
     private WorkspaceView myWorkspaceView;
+    private LibraryView myLibraryView;
 
     /**
      * Constructor that sets the dimensions of the TerrainCreator GUI component
@@ -66,7 +67,11 @@ public class GameCreator extends PopupWindow {
 
     @Override
     protected void initialize () {
+    	PieceTypeData pieceTypeData = new PieceTypeData();
+		PatchTypeData patchTypeData = new PatchTypeData();
+
         ScrollPane root = new ScrollPane();
+                
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().add(STYLESHEET);
 
@@ -115,24 +120,21 @@ public class GameCreator extends PopupWindow {
         setScene(scene);
     }
 
-    private void addWorkspaceTab (int numRows, int numCols) {
-        PieceData pieceData = new PieceData();
-        PatchData patchData = new PatchData();
-        PieceTypeData pieceTypeData = new PieceTypeData();
-        PatchTypeData patchTypeData = new PatchTypeData();
+    
+    private void addWorkspaceTab(int numRows, int numCols) {
+    	PieceData pieceData = new PieceData();
+		PatchData patchData = new PatchData();
+		
+		int tileSize=getPrefTileSize(numRows,numCols);
+		SandyGrid grid = new SandyGrid(numRows, numCols,
+				tileSize, pieceData, patchData);
 
-        int tileSize = getPrefTileSize(numRows, numCols);
-        SandyGrid grid = new SandyGrid(numRows, numCols,
-                                       tileSize, pieceData, patchData);
-
-        LibraryView libraryView = new LibraryView(grid, pieceTypeData, patchTypeData);
-        SandyGridView gridView = new SandyGridView(grid, GRID_VIEW_WIDTH, GRID_VIEW_HEIGHT);
-        Tab tab = new Tab();
-        BorderPane bPane = new BorderPane();
-        bPane.setLeft(libraryView);
-        bPane.setRight(gridView);
-        tab.setContent(bPane);
-        myWorkspaceView.addNextTab(tab);
+		SandyGridView gridView = new SandyGridView(grid, GRID_VIEW_WIDTH, GRID_VIEW_HEIGHT);
+		Tab tab = new Tab();
+		BorderPane bPane = new BorderPane();
+		bPane.setRight(gridView);
+		tab.setContent(bPane);
+		myWorkspaceView.addNextTab(tab);
     }
 
     private int getPrefTileSize (int gridWidthNumber, int gridHeightNumber) {

@@ -20,17 +20,21 @@ public class VoogaView extends BorderPane {
 	private final int GRID_VIEW_HEIGHT = 580;
 	private final int TILE_SIDE_LENGTH = 40;
 
-	private MenuView mySettingsView;
+	private MenuView myMenuView;
 
 	private WorkspaceView myWorkspaceView;
-	
+	private LibraryView myLibraryView;
 	
 	public VoogaView(){
+		PieceTypeData pieceTypeData = new PieceTypeData();
+		PatchTypeData patchTypeData = new PatchTypeData();
 	
+		myLibraryView = new LibraryView(pieceTypeData,patchTypeData);
 		myWorkspaceView = new WorkspaceView();
-		mySettingsView = new MenuView(myWorkspaceView);
+		myMenuView = new MenuView(myWorkspaceView, myLibraryView);
 		
-		setTop(mySettingsView);
-		setBottom(myWorkspaceView);
+		setTop(myMenuView);
+		setLeft(myLibraryView);
+		setRight(myWorkspaceView);
 	}
 }
