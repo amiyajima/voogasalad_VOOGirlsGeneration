@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.awt.geom.Point2D;
+import javafx.scene.image.ImageView;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
@@ -29,7 +30,7 @@ public class SquareGameGrid extends GameGrid {
     public SquareGameGrid (int row, int col) {
         // will handle different size, stubbing it for now.
         super(row, col);
-       // this.setPrefSize(500, 500);
+         //this.setPrefSize(500, 500);
 
     }
 
@@ -88,14 +89,20 @@ public class SquareGameGrid extends GameGrid {
             int x = (int)(patch.getLoc().getX());
             int y = (int ) (patch.getLoc().getY());
             Node n = get(x,y);
-            ((StackPane)n).getChildren().add(patch.getImageView());
+            ImageView iv = patch.getImageView();
+            iv.setFitWidth(500/this.r);
+            iv.setFitHeight(500/this.c);
+            ((StackPane)n).getChildren().add(iv);
         
         });
         pieces.forEach(piece -> {
             int x = (int)(piece.getLoc().getX());
             int y = (int ) (piece.getLoc().getY());
             Node n = get(x,y);
-            ((StackPane)n).getChildren().add(piece.getImageView());
+            ImageView iv = piece.getImageView();
+            iv.setFitWidth(500/this.r);
+            iv.setFitHeight(500/this.c);
+            ((StackPane)n).getChildren().add(iv);
         
         });
     }
