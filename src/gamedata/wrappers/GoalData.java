@@ -1,6 +1,7 @@
 package gamedata.wrappers;
 
 import gamedata.goals.Goal;
+import gamedata.goals.PlayerPiecesRemovedGoal;
 import java.util.List;
 
 
@@ -10,15 +11,19 @@ import java.util.List;
  * @author Rica
  *
  */
+// TODO generalize from PlayerPiecesRemovedGoal back to superclass Goal
 public class GoalData {
-    private List<Goal> myGoals;
+    private List<PlayerPiecesRemovedGoalData> myGoals;
 
-    public GoalData (List<Goal> goals) {
+    public GoalData (List<PlayerPiecesRemovedGoalData> goals) {
         myGoals = goals;
     }
 
-    public List<Goal> getGoals () {
+    public List<PlayerPiecesRemovedGoalData> getGoals () {
         return myGoals;
     }
 
+    public String toString () {
+        return "GoalData: tostring called. contains " + myGoals;
+    }
 }

@@ -47,14 +47,14 @@ public class Grid extends Pane {
 	private void initiateGridLines() {
 		for (int i = 0; i <= myWidth * myTileSize; i += myTileSize) {
 			Line gridLine = new Line(i, 0, i, myHeight * myTileSize);
-			gridLine.setStroke(Color.WHITE);
+			gridLine.setStroke(Color.GRAY);
 			gridLine.setStrokeWidth(1.5);
 			this.getChildren().add(gridLine);
 		}
 
 		for (int i = 0; i <= myHeight * myTileSize; i += myTileSize) {
 			Line gridLine = new Line(0, i, myWidth * myTileSize, i);
-			gridLine.setStroke(Color.WHITE);
+			gridLine.setStroke(Color.GRAY);
 			gridLine.setStrokeWidth(1.5);
 			this.getChildren().add(gridLine);
 		}

@@ -1,10 +1,11 @@
 package authoring.concretefeatures;
 
-import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -47,13 +48,12 @@ public class StatsIndividualEditor extends PopupWindow {
      * 
      * @param piece - individual piece (its stats are to be edited)
      */
-    public StatsIndividualEditor (Piece piece) {
-
+    public StatsIndividualEditor (Stats stats) {
         setHeight(WINDOW_HEIGHT);
         setWidth(WINDOW_WIDTH);
         setTitle(WINDOW_TITLE);
 
-        myStats = piece.getStats();
+        myStats = stats;
         values = new HashMap<String, TextField>();
         initialize();
     }

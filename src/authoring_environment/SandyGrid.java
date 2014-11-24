@@ -45,9 +45,10 @@ public class SandyGrid extends Pane {
 		for (int r = 0; r < myRows; r++) {
 			List<SandyTile> tileCol = new LinkedList<SandyTile>();
 			for (int c = 0; c < myCols; c++) {
-				Shape bgShape = makeShape(r,c,myTileSize);
-				Point2D loc = new Point2D.Double(c,r);
-				SandyTile tile = new SandyTile(bgShape, myTileSize, loc);
+				Point2D centerLoc = getCenter(r, c, myTileSize);
+				Shape bgShape = makeShape(centerLoc, r, c, myTileSize);
+				Point2D coor = new Point2D.Double(c,r);
+				SandyTile tile = new SandyTile(bgShape, myTileSize, coor, centerLoc);
 				tile.setStyle("-fx-cursor: hand");
 				tileCol.add(tile);
 				super.getChildren().add(tile);
@@ -56,14 +57,20 @@ public class SandyGrid extends Pane {
 		}
 	}
 	
-	private Shape makeShape(int row, int col, double h) {
-		double xCenter = col*h + 0.5*h;
-		double yCenter = row*h + 0.5*h;
+	private Point2D getCenter(int row, int col, double height) {
+		double xCenter = col*height + 0.5*height;
+		double yCenter = row*height + 0.5*height;
+		return new Point2D.Double(xCenter, yCenter);
+	}
+
+	private Shape makeShape(Point2D center, int row, int col, double height) {
+		double xCenter = center.getX();
+		double yCenter = center.getY();
 		Polygon p = new Polygon (
-				xCenter-0.5*h, yCenter-0.5*h,
-				xCenter-0.5*h, yCenter+0.5*h,
-				xCenter+0.5*h, yCenter+0.5*h,
-				xCenter+0.5*h, yCenter-0.5*h
+				xCenter-0.5*height, yCenter-0.5*height,
+				xCenter-0.5*height, yCenter+0.5*height,
+				xCenter+0.5*height, yCenter+0.5*height,
+				xCenter+0.5*height, yCenter-0.5*height
 				);
 		setCheckeredColor(row, col, p);
 		return p;
@@ -80,77 +87,55 @@ public class SandyGrid extends Pane {
 		shape.setStrokeWidth(0.75);
 	}
 	
-	public void handleSingleClick(MouseEvent event, Piece currentUnit, Patch currentTerrain,
-			boolean doNothing, boolean unitSelected, boolean reset) {
+	public SandyTile findTile(MouseEvent event) {
 		int x = (int) event.getX() / myTileSize;
 		int y = (int) event.getY() / myTileSize;
-		SandyTile tile = myGrid.get(y).get(x);
-		setContents(tile, currentUnit, currentTerrain, doNothing, unitSelected, reset);
+		if(x < 0 || x >= myCols || y < 0 || y >= myRows){
+			return null;
+		}
+		return myGrid.get(y).get(x);
 	}
 
-	public void handleDrag(MouseEvent event, Piece currentUnit, Patch currentTerrain,
-			boolean doNothing, boolean unitSelected, boolean reset) {
-		int x = (int) event.getX() / myTileSize;
-		int y = (int) event.getY() / myTileSize;
-		SandyTile tile = myGrid.get(y).get(x);
-		setContents(tile, currentUnit, currentTerrain, doNothing, unitSelected, reset);
-	}
-
-	protected void setContents(SandyTile tile, Piece currentUnit, Patch currentTerrain,
-			boolean doNothing, boolean unitSelected, boolean reset) {
-		if(doNothing){
-			return;
-		}
-		if(reset) {
-			if (unitSelected) {
-				removeUnit(tile);
-			}
-			else {
-				removeTerrain(tile);
-			}
-		}
-		else {
-			if(unitSelected) {
-				if(tile.myUnit != null){
-					myPieceData.remove(tile.myUnit);
-				}
-				tile.myUnit = currentUnit;
-				tile.myUnit.setLoc(new Point2D.Double(tile.getYLocation(), tile.getXLocation()));
-				tile.myPieceImage.setImage(tile.myUnit.getImageView().getImage());
-				tile.myPieceImage.setVisible(true);
-				myPieceData.add(tile.myUnit);
-			}
-			else {
-				if(tile.myTerrain != null){
-					myPatchData.remove(tile.myTerrain);
-				}
-				tile.myTerrain = currentTerrain;
-				tile.myTerrain.setLoc(new Point2D.Double(tile.getYLocation(), tile.getXLocation()));
-				tile.myPatchImage.setImage(tile.myTerrain.getImageView().getImage());
-				tile.myPatchImage.setVisible(true);
-				myPatchData.add(tile.myTerrain);
-			}
-		}
-	}
-
-	private void removeUnit(SandyTile tile) {
-		myPieceData.remove(tile.myUnit);
-		tile.myUnit = null;
-		tile.myPieceImage.setVisible(false);
+	protected void addUnit(SandyTile tile, Piece unit){
+		myPieceData.removePiece(tile.getLocation());
+		unit.setLoc(tile.getLocation());
+		tile.myPieceImage.setImage(unit.getImageView().getImage());
+		tile.myPieceImage.setVisible(true);
+		myPieceData.add(unit);
 	}
 	
-	private void removeTerrain(SandyTile tile) {
-		myPatchData.remove(tile.myTerrain);
-		tile.myTerrain = null;
-		tile.myPatchImage.setVisible(false);
+	protected void addTerrain(SandyTile tile, Patch terrain){
+		myPatchData.removePatch(tile.getLocation());
+		terrain.setLoc(tile.getLocation());
+		tile.myPatchImage.setImage(terrain.getImageView().getImage());
+		tile.myPatchImage.setVisible(true);
+		myPatchData.add(terrain);
 	}
-
+	
+	protected void removeUnit(SandyTile tile, Piece unit) {
+		tile.myPieceImage.setVisible(false);
+		myPieceData.remove(unit);
+	}
+	
+	protected void removeTerrain(SandyTile tile, Patch terrain) {
+		tile.myPatchImage.setVisible(false);
+		myPatchData.remove(terrain);
+	}
+	
+	protected void editUnit(SandyTile tile, Piece unit) {
+		// TO DO: Open individual unit editor.
+	}
+	
+	protected void editTerrain(SandyTile tile, Patch terrain) {
+		// TO DO: Open individual terrain editor.
+	}
+	
 	public void removePieces(Piece unit) {
 		for (int r = 0; r < myRows; r++) {
 			for (int c = 0; c < myCols; c++) {
-				SandyTile tile = myGrid.get(r).get(c);
-				if(tile.myUnit != null && tile.myUnit.getTypeID() == unit.getTypeID()){
-					removeUnit(tile);
+				if(myPieceData.unitAtLoc(unit, c, r)){
+					SandyTile tile = myGrid.get(r).get(c);
+					tile.myPieceImage.setVisible(false);
 				}
 			}
 		}
@@ -159,9 +144,9 @@ public class SandyGrid extends Pane {
 	public void removePatches(Patch terrain) {
 		for (int r = 0; r < myRows; r++) {
 			for (int c = 0; c < myCols; c++) {
-				SandyTile tile = myGrid.get(r).get(c);
-				if(tile.myTerrain != null && tile.myTerrain.getTypeID() == terrain.getTypeID()){
-					removeTerrain(tile);
+				if(myPatchData.terrainAtLoc(terrain, c, r)){
+					SandyTile tile = myGrid.get(r).get(c);
+					tile.myPatchImage.setVisible(false);
 				}
 			}
 		}

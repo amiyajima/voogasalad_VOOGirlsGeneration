@@ -8,8 +8,6 @@ import java.util.Map;
 
 import authoring.concretefeatures.TerrainEntry;
 import authoring.concretefeatures.UnitEntry;
-import authoring.data.PatchData;
-import authoring.data.PieceData;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -46,16 +44,16 @@ public class LibraryView extends TabPane {
 	private final String PIECES = "Piece Templates";
 	private final String PATCHES = "Patch Templates";
 	private SandyGrid myGrid;
-	private PieceData myPieceData;
-	private PatchData myPatchData;
 	private Map<String, VBox> myLibraryMap;
 	private Map<String, Tab> myTabMap;
 	private SingleSelectionModel<Tab> mySelection;
 	private Piece currentUnit;
 	private Patch currentTerrain;
 	private boolean doNothing;
-	private boolean unitSelected;
 	private boolean reset;
+	private boolean edit;
+	private int unitID;
+	private int terrainID;
 	
 	/**
 	 * LibraryView constructor. Initializes two tabs - one for units,
@@ -63,15 +61,15 @@ public class LibraryView extends TabPane {
 	 * their respective tabs as they are created in the UnitCreator
 	 * and TerrainCreator.
 	 */
-	public LibraryView(PieceData pieceData, PatchData patchData, SandyGrid grid){
+	public LibraryView(SandyGrid grid){
 		mySelection = this.getSelectionModel();
 		this.setPrefSize(HEIGHT, WIDTH);
-		myPieceData = pieceData;
-		myPatchData = patchData;
 		myGrid = grid;
 		doNothing = true;
-		unitSelected = false;
 		reset = true;
+		edit = false;
+		unitID = 0;
+		terrainID = 0;
 		
 		Tab unitTab = new Tab(UNITS);
 		unitTab.setClosable(false);
@@ -83,14 +81,17 @@ public class LibraryView extends TabPane {
 		unitDelete.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent e){
-				unitSelected = true;
+				doNothing = false;
 				reset = true;
+				edit = false;
 			}
 		});
 		unitEdit.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent e){
-				//TODO: Implement Editing 
+				doNothing = false;
+				reset = false;
+				edit = true; 
 			}
 		});
 		unitLibrary.getChildren().addAll(new Label(GLOBAL),
@@ -108,14 +109,17 @@ public class LibraryView extends TabPane {
 		terrainDelete.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent e){
-				unitSelected = false;
+				doNothing = false;
 				reset = true;
+				edit = false;
 			}
 		});
 		terrainEdit.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent e){
-				//TODO: Implement Editing 
+				doNothing = false;
+				reset = false;
+				edit = true;
 			}
 		});
 		terrainLibrary.getChildren().addAll(new Label(GLOBAL),
@@ -141,37 +145,80 @@ public class LibraryView extends TabPane {
 		setGridActionEvents();
 	}
 	
-	private void setGridActionEvents() {
-		myGrid.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				myGrid.handleSingleClick(event, currentUnit, currentTerrain,
-						doNothing, unitSelected, reset);
-			}
-		});
-		myGrid.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				myGrid.handleDrag(event, currentUnit, currentTerrain,
-						doNothing, unitSelected, reset);
-			}
-		});
+	public int getUnitID(){
+		unitID += 1;
+		return unitID;
+	}
+	
+	public int getTerrainID(){
+		terrainID += 1;
+		return terrainID;
 	}
 	
 	public void selectUnit(Piece unit){
 		currentUnit = unit;
 		doNothing = false;
-		unitSelected = true;
 		reset = false;
+		edit = false;
 	}
 	
 	public void selectTerrain(Patch terrain){
 		currentTerrain = terrain;
 		doNothing = false;
-		unitSelected = false;
 		reset = false;
+		edit = false;
 	}
-
+	
+	private void setGridActionEvents() {
+		myGrid.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				handleAction(event);
+			}
+		});
+		myGrid.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				handleAction(event);
+			}
+		});
+	}
+	
+	protected void handleAction(MouseEvent event) {
+		SandyTile tile = myGrid.findTile(event);
+		if(doNothing || tile == null){
+			return;
+		}
+		if(mySelection.isSelected(0)){
+			if(currentUnit != null){
+				Piece unit = new Piece(currentUnit);
+				if(reset){
+					myGrid.removeUnit(tile, unit);
+				}
+				else if(edit){
+					myGrid.editUnit(tile, unit);
+				}
+				else{
+					myGrid.addUnit(tile, unit);
+				}
+			}
+		}
+		else{
+			if(currentTerrain != null){
+				Patch terrain = new Patch(currentTerrain);
+				if(reset){
+					myGrid.removeTerrain(tile, terrain);
+				}
+				else if(edit){
+					myGrid.editTerrain(tile, terrain);
+				}
+				else{
+					myGrid.addTerrain(tile, terrain);
+				}
+			}	
+		}
+	}
+	
 	public void addPiece(UnitEntry unit){
 		mySelection.select(myTabMap.get(UNITS));
 		myLibraryMap.get(UNITS).getChildren().add(unit);

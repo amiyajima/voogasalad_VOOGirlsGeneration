@@ -3,7 +3,6 @@ package gamePlayer;
 import gamedata.action.Action; 
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
-import gamedata.gamecomponents.SquareGrid;
 
 import java.awt.geom.Point2D;
 import java.io.File;
@@ -11,12 +10,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 import java.util.ResourceBundle;
-
-import javafx.event.EventHandler;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -34,8 +32,6 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -43,7 +39,7 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.StackPane;
+
 
 
 public class ViewController{
@@ -74,10 +70,12 @@ public class ViewController{
     private Scene myPopupScene;
     private Scene myScene;
 
-    private Point2D myCurrentLocation;
+  //  private Point2D myCurrentLocation;
     private Piece activePiece;
     private Action activeAction;
-
+    
+    //private MouseController myMouseController;
+    
     private AudioClip myAudio;
     @FXML
     protected VBox statsPane;
@@ -140,9 +138,6 @@ public class ViewController{
         games.forEach(file->{ MenuItem l = new MenuItem();
         l.setText(file.getName().substring(0, file.getName().length()-5));
         l.setOnAction(event->{
-            // myModel.initializeGame(file.getName());
-
-
 
             myAudio = new AudioClip(new File(System.getProperty("user.dir")+AUDIO_TEST).toURI().toString());
             myAudio.play();
@@ -187,16 +182,11 @@ public class ViewController{
 
     @FXML
     private void testGame() {
-//        JSONBobTester JSBTester = new JSONBobTester();
-//        myModel = JSBTester.createNewGame();
-        
+
+
         myScene = new Scene(myGameSpace);
         myStage.setScene(myScene);
         initializeGrid();
-        
-        
-        
-
 
     }
 
@@ -211,12 +201,13 @@ public class ViewController{
         myGrid.populateGrid(myModel.getCurrentLevel().getGrid().getPatches(), myModel.getCurrentLevel().getGrid().getPieces());
         myModel.getLevels().forEach(level->level.addObserver(this.myGrid));
         setOnClick();
+
         setGridState(new SelectState(this));
-        changeCursor(CURSOR_GLOVE_TEST);
-        getGrid().setOnMouseExited(event->{changeCursor(CURSOR_GLOVE_TEST);});
-        //
-        //        addKeyboardController();
-        //        addMouseController();
+//        myMouseController.setCursorImage(myScene, myGrid, CURSOR_GLOVE_TEST);
+//        myMouseController.setOnClick(this, gridState, myGrid);
+        
+
+        
     }
 
 
@@ -325,7 +316,7 @@ public class ViewController{
      * 
      * @param state the current state of the Grid, select/ apply action Mode
      */
-    protected void setGridState(IGridState state){
+    public void setGridState(IGridState state){
         gridState = state;
     }
 
@@ -370,9 +361,11 @@ public class ViewController{
         setActiveAction(action);
 
         highLightActionRange();
+       // doThis();
 
         setGridState(new ApplyState(this));
     }
+
 
     private void setOnClick(){
         myGrid.setOnMouseClicked(event->{ 
@@ -392,28 +385,30 @@ public class ViewController{
         addDropShadow(myGrid.get(((int)findPosition(x,y).getX()), ((int)findPosition(x,y).getY())), Color.PURPLE);
     }
 
+
     /**
      * Method to convert pixel coordinates into tile coordinates
      * @param x
      * @param y
      * @return a Point2D representing tile coordinates
      */
-    protected Point2D findPosition(double x, double y){
+    public Point2D findPosition(double x, double y){
         double patchHeight = (double) myGrid.getHeight()/(double) myGrid.getCol();
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
         int yCor = (int) (y/patchHeight);
-     //   myGrid.clearEffect();
-//        addDropShadow(myGrid.get(yCor, xCor), Color.PURPLE);
+
         return new Point2D.Double(yCor,xCor);
     }
 
-    private Piece getPiece(Point2D loc){
+    public Piece getPiece(Point2D loc){
         return myModel.getCurrentLevel().getGrid().getPiece(loc);
-
-
     }
 
+    protected Scene getScene(){
+        return myScene;
+    }
+    
     protected GameGrid getGrid(){
         return myGrid;
     }
@@ -445,27 +440,30 @@ public class ViewController{
     protected void highLightActionRange(){
         System.out.println("activePiece at "+activePiece.getLoc());
         System.out.println("action range: "+ activeAction.getActionRange(activePiece.getLoc()));
-        myGrid.clearEffect();
-      
+
         activeAction.getActionRange(activePiece.getLoc()).forEach(point->{
 
             if(point.getX()<myGrid.getRow() && point.getY()<myGrid.getCol() && point.getX()>0 && point.getY()>0){
                 Node n = myGrid.get((int)point.getX(),(int)point.getY());
-
                 addDropShadow(n, Color.YELLOW);
 
                 }
 
+
         });
-
     }
-
-    protected void changeCursor(String string){
-        Image image = new Image(string);
-        myScene.setCursor(new ImageCursor(image, image.getWidth()/4,image.getWidth()/4));
-    }
+    
+//    private void doThis(){
+//      Node test = myGrid.get(0, 0);
+//      test.setOnMouseEntered(event->highLightEffectRange(test,Color.RED));
+//        
+////        for (Node n: activeNodes){
+////            n.setOnMouseEntered(event->highLightEffectRange(n,Color.RED));
+////        }
+//    }
+    
+    
     private void addDropShadow(Node n, Color c){
-
         if(n != null){
             DropShadow ds = new DropShadow(); 
             ds.setRadius(30.0);
@@ -483,9 +481,9 @@ public class ViewController{
      * @param n
      * @param red
      */
+
     protected void highLightEffectRange(MouseEvent me, Color c){
        
-
         activeAction.getActionRange(activePiece.getLoc()).forEach(point->{
             Point2D temp= findPosition(me.getSceneX(), me.getSceneY());
             if(temp.equals(point)){
@@ -501,18 +499,18 @@ public class ViewController{
         
     }
 
-
-
-    private void addKeyboardController(){
-        KeyboardController KBControl = new KeyboardController();
-        //        KBControl.setActionKeyControl(myGrid, myModel);
-        KBControl.setMovementKeyControl(this, myGrid, myModel);
+    
+    public IGridState getGridState(){
+        return gridState;
     }
 
-    private void addMouseController(){
-        MouseController MouseControl = new MouseController();
-        MouseControl.selectCurrentLocation(this, myGrid);
+    
+    public void changeCursor(String filename){
+        Image image = new Image(filename);
+        myScene.setCursor(new ImageCursor(image, image.getWidth()/4,image.getWidth()/4));
+    
     }
+    
 
     public void highlightCurrentLocation(Color c, Point2D oldLocation, Point2D newLocation){
         Node oldNode = myGrid.get((int)oldLocation.getX(), (int)oldLocation.getY());
@@ -520,11 +518,4 @@ public class ViewController{
         oldNode.setEffect(null);
         addDropShadow(newNode, c);
     }
-
-    public void highlightLocation(Color c, Node oldNode, Node newNode){
-        //        oldNode.setEffect(null);
-        addDropShadow(newNode,c);
-    }
-
-
 }

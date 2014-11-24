@@ -13,10 +13,12 @@ import gamedata.gamecomponents.Piece;
 public class ApplyState implements IGridState{
 
     private ViewController myController;
+    private MouseController myMouseController;
     
     public ApplyState(ViewController controller){
         System.out.println("new ApplyState");
         myController = controller;
+
         myController.getGrid().setOnMouseEntered(event->{
             myController.changeCursor(myController.CURSOR_ATTACK_TEST);
             
@@ -28,19 +30,20 @@ public class ApplyState implements IGridState{
             
             
         });
+
     }
 
     @Override
     public void onClick(Piece piece) {
+  
         Piece actor = myController.getActivePiece();
     
         myController.getActiveAction().doBehavior(actor, piece);
         System.out.println("dobehavior called");
             myController.setGridState(new SelectState(myController));
+
             myController.changeCursor(myController.CURSOR_GLOVE_TEST);
        
+
     }
-    
-
-
 }
