@@ -2,6 +2,7 @@ package authoring.concretefeatures;
 
 import gamedata.gamecomponents.Piece;
 import authoring.abstractfeatures.LibraryEntry;
+import authoring_environment.UIspecs;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -27,6 +28,8 @@ public class UnitEntry extends LibraryEntry {
 	 */
 	public UnitEntry(Piece unit, ImageView image, Label name, Button editButton, Button delButton){
 		this.getChildren().addAll(delButton, editButton, image, name);
+		this.setPadding(UIspecs.allPadding);
+        this.setSpacing(5);
 		myUnit = unit;
 	}
 	

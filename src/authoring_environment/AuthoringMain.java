@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 
 public class AuthoringMain extends Application{
 	
+	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 	private final String TITLE = "Girls GenerEditor";
 	private final int HEIGHT = 600;
 	private final int WIDTH = 1000;
@@ -14,6 +15,7 @@ public class AuthoringMain extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		VoogaView root = new VoogaView();
 		Scene scene = new Scene(root, WIDTH, HEIGHT);
+		scene.getStylesheets().add(STYLESHEET);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle(TITLE);
 		primaryStage.show();

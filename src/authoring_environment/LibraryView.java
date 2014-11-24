@@ -75,7 +75,8 @@ public class LibraryView extends TabPane {
 		unitTab.setClosable(false);
 		ScrollPane unitContent = new ScrollPane();
 		VBox unitLibrary = new VBox();
-		unitLibrary.setSpacing(3);
+		unitLibrary.setPadding(UIspecs.allPadding);
+        unitLibrary.setSpacing(5);
 		Button unitDelete = new Button(DELETE);
 		Button unitEdit = new Button(EDIT);
 		unitDelete.setOnAction(new EventHandler<ActionEvent>(){
@@ -94,8 +95,11 @@ public class LibraryView extends TabPane {
 				edit = true; 
 			}
 		});
-		unitLibrary.getChildren().addAll(new Label(GLOBAL),
-				new HBox(unitEdit, unitDelete), new Separator(), new Label(PIECES));
+		HBox unitGlobal = new HBox(unitEdit, unitDelete);
+		unitGlobal.setPadding(UIspecs.allPadding);
+		unitGlobal.setSpacing(5);
+		unitLibrary.getChildren().addAll(new Label(GLOBAL), unitGlobal,
+				new Separator(), new Label(PIECES));
 		unitContent.setContent(unitLibrary);
 		unitTab.setContent(unitContent);
 		
@@ -103,7 +107,8 @@ public class LibraryView extends TabPane {
 		terrainTab.setClosable(false);
 		ScrollPane terrainContent = new ScrollPane();
 		VBox terrainLibrary = new VBox();
-		terrainLibrary.setSpacing(3);
+		terrainLibrary.setPadding(UIspecs.allPadding);
+        terrainLibrary.setSpacing(5);
 		Button terrainDelete = new Button(DELETE);
 		Button terrainEdit = new Button(EDIT);
 		terrainDelete.setOnAction(new EventHandler<ActionEvent>(){
@@ -122,8 +127,11 @@ public class LibraryView extends TabPane {
 				edit = true;
 			}
 		});
-		terrainLibrary.getChildren().addAll(new Label(GLOBAL),
-				new HBox(terrainEdit, terrainDelete), new Separator(), new Label(PATCHES));
+		HBox terrainGlobal = new HBox(terrainEdit, terrainDelete);
+		terrainGlobal.setPadding(UIspecs.allPadding);
+		terrainGlobal.setSpacing(5);
+		terrainLibrary.getChildren().addAll(new Label(GLOBAL), terrainGlobal,
+				new Separator(), new Label(PATCHES));
 		terrainContent.setContent(terrainLibrary);
 		terrainTab.setContent(terrainContent);
 		
