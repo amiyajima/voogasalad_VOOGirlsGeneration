@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import java.util.ResourceBundle;
@@ -24,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
@@ -81,6 +83,8 @@ public class ViewController{
 
 
     private IGridState gridState;
+    
+    private List<Node> activeNodes;
 
     public ViewController(Stage s){
         myStage = s;
@@ -351,6 +355,7 @@ public class ViewController{
         setActiveAction(action);
 
         highLightActionRange();
+        doThis();
 
         setGridState(new ApplyState(this));
     }
@@ -410,19 +415,31 @@ public class ViewController{
     private void highLightActionRange(){
         System.out.println("activePiece at "+activePiece.getLoc());
         System.out.println("action range: "+ activeAction.getActionRange(activePiece.getLoc()));
-        myGrid.clearEffect();
-      
+//        myGrid.clearEffect();
+        
+        
+        activeNodes = new ArrayList<Node>();
+        
         activeAction.getActionRange(activePiece.getLoc()).forEach(point->{
 
             if(point.getX()<myGrid.getRow() && point.getY()<myGrid.getCol() && point.getX()>0 && point.getY()>0){
                 Node n = myGrid.get((int)point.getX(),(int)point.getY());
-
                 addDropShadow(n, Color.YELLOW);
+                activeNodes.add(n);
                 
-                n.setOnMouseEntered(event->highLightEffectRange(n, Color.RED));
-                n.setOnMouseExited(event->highLightEffectRange(n, Color.TRANSPARENT));}
-
+//                n.setOnMouseEntered(event->highLightEffectRange(test, Color.RED));
+//                n.setOnMouseExited(event->highLightEffectRange(n, Color.TRANSPARENT));
+                }
         });
+    }
+    
+    private void doThis(){
+      Node test = myGrid.get(0, 0);
+      test.setOnMouseEntered(event->highLightEffectRange(test,Color.RED));
+        
+//        for (Node n: activeNodes){
+//            n.setOnMouseEntered(event->highLightEffectRange(n,Color.RED));
+//        }
     }
     
     
@@ -443,7 +460,7 @@ public class ViewController{
      * @param n
      * @param c
      */
-    private void highLightEffectRange(Node n, Color c){
+    public void highLightEffectRange(Node n, Color c){
         System.out.println("EFFECT RANGE!!!!!!!!!!!!!");
         System.out.println("effect Range: "+ activeAction.getEffectRange());
         activeAction.getEffectRange().forEach(point->{Node node = myGrid.get(myGrid.getRowIndex(n)+ (int)point.getX(), myGrid.getColumnIndex(n)+ (int)point.getY());

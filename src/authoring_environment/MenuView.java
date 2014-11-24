@@ -10,11 +10,15 @@ public class MenuView extends MenuBar {
 	private final int LENGTH = 1000;
 	private final int HEIGHT = 20;
 	
+	ActionData myActions;
+	
 	public MenuView(LibraryView library){
 		this.setPrefSize(LENGTH, HEIGHT);
 		
-		getMenus().addAll(new File(), new GlobalRules(), new Events(), new Units(library), 
-						  new Terrain(library), new Actions(library, new ActionData()),
+		myActions = new ActionData();
+		
+		getMenus().addAll(new File(), new GlobalRules(), new Events(), new Units(library, myActions), 
+						  new Terrain(library), new Actions(library, myActions),
 						  new JSONBob());
 	}
 }

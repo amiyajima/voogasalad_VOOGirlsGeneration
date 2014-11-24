@@ -119,12 +119,14 @@ public class StatsTotalEditor extends PopupWindow {
 		doneButton.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent event){
-				for(StatsCreatorBox s: myBoxes){
-					String name = s.getStatName();
-					Double val = s.getStatValue();
-					myStats.add(name, val);
-					close();
+				for(StatsCreatorBox sbc: myBoxes){
+					if(!sbc.isEmpty()){
+						String name = sbc.getStatName();
+						Double val = sbc.getStatValue();
+						myStats.add(name, val);
+					}
 				}	
+				close();
 			}
 		});
 		return doneButton;

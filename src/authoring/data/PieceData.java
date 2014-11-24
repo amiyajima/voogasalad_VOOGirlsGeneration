@@ -26,24 +26,12 @@ public class PieceData implements AuthoringData<Piece> {
     
 	@Override
 	public void add(Piece piece) {
-		System.out.println("Added piece at location x = " + piece.getLoc().getX() + ", y = " + piece.getLoc().getY());
 		myPieces.add(piece);
-		for(Piece p : myPieces){
-			double x = p.getLoc().getX();
-			double y = p.getLoc().getY();
-			System.out.println(x + ", " + y);
-		}
 	}
 
 	@Override
 	public void remove(Piece piece) {
-		System.out.println("Removed piece at location x = " + piece.getLoc().getX() + ", y = " + piece.getLoc().getY());
 		myPieces.remove(piece);
-		for(Piece p : myPieces){
-			double x = p.getLoc().getX();
-			double y = p.getLoc().getY();
-			System.out.println(x + ", " + y);
-		}
 	}
 
 	@Override
@@ -55,6 +43,7 @@ public class PieceData implements AuthoringData<Piece> {
 		for(Piece piece : myPieces){
 			if(location.equals(piece.getLoc())){
 				myPieces.remove(piece);
+				return;
 			}
 		}
 	}

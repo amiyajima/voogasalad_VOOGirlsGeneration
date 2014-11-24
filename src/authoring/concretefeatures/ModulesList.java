@@ -1,6 +1,7 @@
 package authoring.concretefeatures;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -20,25 +21,32 @@ import javafx.scene.layout.VBox;
  * @author Mike Zhu
  *
  */
-public class ModulesList extends HBox implements Observer{
+public class ModulesList extends HBox{
 	public static final int BUTTON_SPACING = 150;
-	public static final String AVAILABLE_MODULES_LABEL = "Available Modules";
-	public static final String ADDED_MODULES_LABEL = "Added Modules";
-	public static final String ADD_MODULES_BUTTON = "Add Module >>";
-	public static final String REMOVE_MODULES_BUTTON = "<< Remove Module";
+	public static final String AVAILABLE_MODULES_LABEL = "Available Actions";
+	public static final String ADDED_MODULES_LABEL = "Added Actions";
+	public static final String ADD_MODULES_BUTTON = "Add Action >>";
+	public static final String REMOVE_MODULES_BUTTON = "<< Remove Action";
 	
-	public ModulesList(){
+	ObservableList<String> addedModules;
+	
+	public ModulesList(ObservableList<String> availableActions, ObservableList<String> addedActions){
             VBox availableModulesVBox = new VBox();
             VBox addedModulesVBox = new VBox();
+        
+        /**
+         * To ensure that there are no duplicates
+         */
+        availableActions.removeAll(addedActions);
+        
 
 		Label availableModsLabel = new Label(AVAILABLE_MODULES_LABEL);
-		ObservableList<String> availableModules = FXCollections.observableArrayList(
-				"Attack", "Move", "Build", "Swim", "Fly", "Capture");
+		ObservableList<String> availableModules = availableActions;
 		ListView<String> mods = new ListView<String>(availableModules);
 		Collections.sort(availableModules);
 
 		Label addedModsLabel = new Label(ADDED_MODULES_LABEL);
-		ObservableList<String> addedModules = FXCollections.observableArrayList();
+		addedModules = addedActions;
 		ListView<String> addedMods = new ListView<String>(addedModules);
 		Button addModule = new Button(ADD_MODULES_BUTTON);
 		addModule.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -74,9 +82,7 @@ public class ModulesList extends HBox implements Observer{
 		getChildren().addAll(availableModulesVBox, addedModulesVBox);
 	}
 
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
+	public ObservableList<String> getSelectedActions(){
+		return addedModules;
 	}
 }

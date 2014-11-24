@@ -20,6 +20,10 @@ public class ApplyState implements IGridState{
         
 //        myController.getGrid().setOnMouseEntered(event->{myController.changeCursor(myController.CURSOR_ATTACK_TEST);});
       myController.getGrid().setOnMouseEntered(event->{myMouseController.setCursorImage(myController.getScene(), myController.getGrid(), myController.CURSOR_ATTACK_TEST);;});
+      
+//      myController.highLightEffectRange(   )
+      
+      
       myMouseController.setOnClick(myController, myController.getGridState(), myController.getGrid());
 
       
