@@ -46,7 +46,7 @@ public class LibraryView extends TabPane {
     private final String PATCHES = "Patch Templates";
     private PieceTypeData myPieces;
     private PatchTypeData myPatches;
-    private SandyGrid myGrid;
+    private JennieGrid myGrid;
     private Map<String, VBox> myLibraryMap;
     private Map<String, Tab> myTabMap;
     private SingleSelectionModel<Tab> mySelection;
@@ -75,13 +75,14 @@ public class LibraryView extends TabPane {
         unitID = 0;
         terrainName = "";
 
-        myGrid = new SandyGrid(1, 1, 1, null, null);
+        myGrid = new JennieGrid(1, 1, 1, null, null);
 
         Tab unitTab = new Tab(UNITS);
         unitTab.setClosable(false);
         ScrollPane unitContent = new ScrollPane();
         VBox unitLibrary = new VBox();
         unitLibrary.setPadding(UIspecs.allPadding);
+
         unitLibrary.setSpacing(5);
         Button unitDelete = new Button(DELETE);
         Button unitEdit = new Button(EDIT);

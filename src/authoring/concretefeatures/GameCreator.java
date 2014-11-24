@@ -102,13 +102,14 @@ public class GameCreator extends PopupWindow {
                 // set grid with such dimensions
                 int width = Integer.parseInt(gridWidth.getText());
                 int height = Integer.parseInt(gridHeight.getText());
-
-                // TODO: hard coded grid type
-                if (gridChoiceBox.getValue().equals("Square Grid")) {
+                
+                //TODO: hard coded grid type
+                if (gridChoiceBox.getValue().equals("Square Grid")){
                     new SandyGrid(width, height, 40, new PieceData(), new PatchData());
+
                 }
                 if (gridChoiceBox.getValue().equals("Hexagon Grid")) {
-                    new JennieGrid(width, height, 40, new PieceData(), new PatchData());
+                    new SandyGrid(width, height, 40, new PieceData(), new PatchData());
                 }
 
                 addWorkspaceTab(width, height);
