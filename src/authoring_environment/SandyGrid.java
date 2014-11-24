@@ -80,15 +80,7 @@ public class SandyGrid extends Pane {
 		shape.setStrokeWidth(0.75);
 	}
 	
-	public void handleSingleClick(MouseEvent event, Piece currentUnit, Patch currentTerrain,
-			boolean doNothing, boolean unitSelected, boolean reset) {
-		int x = (int) event.getX() / myTileSize;
-		int y = (int) event.getY() / myTileSize;
-		SandyTile tile = myGrid.get(y).get(x);
-		setContents(tile, currentUnit, currentTerrain, doNothing, unitSelected, reset);
-	}
-
-	public void handleDrag(MouseEvent event, Piece currentUnit, Patch currentTerrain,
+	public void handleEvent(MouseEvent event, Piece currentUnit, Patch currentTerrain,
 			boolean doNothing, boolean unitSelected, boolean reset) {
 		int x = (int) event.getX() / myTileSize;
 		int y = (int) event.getY() / myTileSize;

@@ -145,14 +145,14 @@ public class LibraryView extends TabPane {
 		myGrid.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				myGrid.handleSingleClick(event, currentUnit, currentTerrain,
+				myGrid.handleEvent(event, currentUnit, currentTerrain,
 						doNothing, unitSelected, reset);
 			}
 		});
 		myGrid.setOnMouseDragged(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				myGrid.handleDrag(event, currentUnit, currentTerrain,
+				myGrid.handleEvent(event, currentUnit, currentTerrain,
 						doNothing, unitSelected, reset);
 			}
 		});
