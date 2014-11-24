@@ -1,6 +1,7 @@
 package gamedata.gamecomponents;
 
 import java.awt.geom.Point2D;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -36,6 +37,26 @@ public class Patch {
 		}
 		myLoc = p;
 	}
+	
+	/**
+	 * Deep cloning constructor for a Patch
+	 * @param clone - Patch instance to be cloned
+	 */
+	public Patch(Patch clone) {
+		myImageLocation = clone.myImageLocation;
+		setImageView(myImageLocation);
+		myLoc = new Point2D.Double(clone.myLoc.getX(),clone.myLoc.getY());
+		myTypeID = clone.myTypeID;
+	}
+	
+	private void setImageView(String imageLocation) {
+    	if(myImageLocation.startsWith("/")){
+        	myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+        }
+        else{
+        	myImageView = new ImageView(new Image(imageLocation));
+        }
+    }
 
 	/**
 	 * Getter for state

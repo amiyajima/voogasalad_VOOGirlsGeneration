@@ -6,7 +6,10 @@ import gamedata.gamecomponents.Piece;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -25,10 +28,12 @@ public class ActionCheck extends PopupWindow {
     private final String ACTION = "Action";
     private final String NAME = "Available Actions for Units";
     private final String ACTION_TYPE = "Action Type";
+    private final String ACTOR = "Actor";
+    private final String RECEIVER = "Receiver";
     private LibraryView myLibrary;
 
     private List<Action> myActions;
-    private List<Piece> myPieces;
+    private List<String> myPieces;
     private List<Patch> myPatches;
     private Map<String,Map>  Conclusion;
     
@@ -74,20 +79,51 @@ public class ActionCheck extends PopupWindow {
         mainVBox.getStyleClass().add("vbox");
         mainVBox.setId("vbox-main");
         VBox actionNameVBox = new VBox();
-        VBox posPieceVBox = new VBox();
+        VBox posActorVBox = new VBox();
+        VBox posReceiverVBox = new VBox();
         
         ChoiceBox<String> actionTypes = new ChoiceBox<String>();
         initActionChooser(actionNameVBox, actionTypes );
         
+        ChoiceBox<String> posActors = new ChoiceBox<String>();
+        initActorChooser(posActorVBox, posActors);
+        
+        initReceiverChooser(posReceiverVBox, posActors.getValue(),actionTypes.getValue());
         
         
         
         
-        
-        
-        mainVBox.getChildren().addAll(actionNameVBox, new Separator() );
+        mainVBox.getChildren().addAll(actionNameVBox, new Separator(), posActorVBox );
                       root.setContent(mainVBox);
                       setScene(scene);
+        
+    }
+
+    private void initReceiverChooser (VBox posReceiverVBox, String actor, String action) {
+        // TODO Auto-generated method stub
+        Label posReceiverLabel = new Label(RECEIVER);
+        Button posReceiversbtn = new Button("Possible Receivers");
+        List<String> posReceivers = getReceivers(actor);
+        
+        posReceiversbtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                    PopupWindow receiversChooser = new ReceiverEditor(posReceivers, actor, action);
+                    receiversChooser.show();
+                    // TODO: set myRange in here somewhere (within RangeEditor?)
+            }
+    });
+        
+    }
+
+    private void initActorChooser (VBox posActorVBox, ChoiceBox<String> posActors) {
+        // TODO Auto-generated method stub
+        Label actorLabel = new Label(ACTOR);
+        posActors.getItems().addAll("Piece A", "Piece B", "Piece C");
+        
+        HBox actorsHbox = new HBox();
+        actorsHbox.getChildren().addAll(posActors);
+        posActorVBox.getChildren().addAll(actorLabel, actorsHbox);
         
     }
 
@@ -97,14 +133,14 @@ public class ActionCheck extends PopupWindow {
         Label targetLabel = new Label(ACTION_TYPE);
         actionTypes.getItems().addAll("Attack", "Heal", "AlltheRest");
 
-        HBox targetAndStatHBox = new HBox();
-        targetAndStatHBox.getChildren().addAll(actionTypes);
-        nameVBox.getChildren().addAll(targetLabel, targetAndStatHBox);
+        HBox actionsHBox = new HBox();
+        actionsHBox.getChildren().addAll(actionTypes);
+        nameVBox.getChildren().addAll(targetLabel, actionsHBox);
     }
     
-    private List<Piece> getReceivers(Piece actor){
-        List<Piece> receivers = new ArrayList<Piece>();
-        for(Piece p: myPieces){
+    private List<String> getReceivers(String actor){
+        List<String> receivers = new ArrayList<String>();
+        for(String p : myPieces){
             if(!p.equals(actor)){
                 receivers.add(p);
             }

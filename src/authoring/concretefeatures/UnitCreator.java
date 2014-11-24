@@ -80,7 +80,7 @@ public class UnitCreator extends PopupWindow {
 		myActions = new ArrayList<Action>();
 		myStats = new Stats();
 		myLoc = new Point2D.Double(0, 0);
-		myTypeID = 0;
+		myTypeID = library.getUnitID();
 		myUniqueID = 0;
 		myPlayerID = 0;
 		myInventory = new Inventory();
@@ -113,12 +113,13 @@ public class UnitCreator extends PopupWindow {
         loadImage.setOnAction(new EventHandler<ActionEvent>() {
         	// initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
         	// @Jesse Finish this
-        	// From Martin: You sure this code goes here, and not below Line 133?
+        	// From Martin: You sure this code goes here, and not below the goButton ActionEvent?
 
             @Override
             public void handle (ActionEvent click) {
                 FileChooser fileChoice = new FileChooser();
-                fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png"));
+                fileChoice.getExtensionFilters().add(
+                		new ExtensionFilter("Image Files", "*.png", "*.gif"));
                 File selectedFile = fileChoice.showOpenDialog(null);
                 if (selectedFile != null) {
                     myImageLocation = selectedFile.toURI().toString();
