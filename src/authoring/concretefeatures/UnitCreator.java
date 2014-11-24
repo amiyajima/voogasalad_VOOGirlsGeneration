@@ -80,7 +80,7 @@ public class UnitCreator extends PopupWindow {
 		myActions = new ArrayList<Action>();
 		myStats = new Stats();
 		myLoc = new Point2D.Double(0, 0);
-		myTypeID = library.getUnitID();
+//		myTypeID = library.getUnitID();
 		myUniqueID = 0;
 		myPlayerID = 0;
 		myInventory = new Inventory();
@@ -100,7 +100,11 @@ public class UnitCreator extends PopupWindow {
         box.setSpacing(5);
         
         HBox names = new HBox();
+        names.setPadding(UIspecs.allPadding);
+        names.setSpacing(5);
         HBox images = new HBox();
+        images.setPadding(UIspecs.allPadding);
+        images.setSpacing(5);
 
         Label nameLabel = new Label(UNIT_NAME_LABEL);
         nameLabel.setPadding(UIspecs.topRightPadding);
@@ -108,7 +112,11 @@ public class UnitCreator extends PopupWindow {
         names.getChildren().addAll(nameLabel, unitName);
 
         ImageView icon = new ImageView();
+        icon.setTranslateY(-7.5);
+        icon.setFitHeight(40);
+        icon.setFitWidth(40);
         Label loadLabel = new Label(IMAGE_LABEL);
+        loadLabel.setPadding(UIspecs.topRightPadding);
         Button loadImage = new Button(LOAD_IMAGE_LABEL);
         loadImage.setOnAction(new EventHandler<ActionEvent>() {
         	// initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
@@ -125,8 +133,6 @@ public class UnitCreator extends PopupWindow {
                     myImageLocation = selectedFile.toURI().toString();
                     Image image = new Image(myImageLocation);
                     icon.setImage(image);
-                    icon.setFitHeight(40);
-                    icon.setFitWidth(40);
                 }
             }
         });
@@ -138,13 +144,17 @@ public class UnitCreator extends PopupWindow {
         goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
+            	if(myImageLocation.equals("") || unitName.getText().equals("")){
+            		return;
+            	}
             	myActions = addSelectedActions(modList.getSelectedActions());
             	
                 Piece unit = new Piece(myImageLocation, myPath, myActions, myStats,
                                        myLoc, myTypeID, myUniqueID, myPlayerID, myInventory);
 
                 Label name = new Label(unitName.getText());
-                name.setTranslateY(10);
+                name.setTranslateY(7.5);
+                
                 Button editButton = new Button(EDIT);
                 editButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -154,7 +164,6 @@ public class UnitCreator extends PopupWindow {
                     }
                 });
                 Button delButton = new Button(DELETE);
-
                 UnitEntry entry = new UnitEntry(unit, icon, name, editButton, delButton);
                 entry.setStyle("-fx-cursor: hand");
         		entry.setOnMouseClicked(new EventHandler<MouseEvent>(){
