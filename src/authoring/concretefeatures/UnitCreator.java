@@ -54,8 +54,7 @@ public class UnitCreator extends PopupWindow {
 	private LibraryView myLibrary;
 	private ActionData myAvailableActions;
 	
-	private int myTypeID;
-	private int myUniqueID;
+	private String myName;
 	private int myPlayerID;
 	private String myImageLocation;
 
@@ -75,13 +74,12 @@ public class UnitCreator extends PopupWindow {
 		myLibrary = library;
 		myAvailableActions = availableActions;
 		
+		myName = "";
 		myImageLocation = "";
 		myPath = new ArrayList<Movement>();
 		myActions = new ArrayList<Action>();
 		myStats = new Stats();
 		myLoc = new Point2D.Double(0, 0);
-//		myTypeID = library.getUnitID();
-		myUniqueID = 0;
 		myPlayerID = 0;
 		myInventory = new Inventory();
 
@@ -144,13 +142,14 @@ public class UnitCreator extends PopupWindow {
         goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
+            	myName = unitName.getText();
             	if(myImageLocation.equals("") || unitName.getText().equals("")){
             		return;
             	}
             	myActions = addSelectedActions(modList.getSelectedActions());
             	
-                Piece unit = new Piece(myImageLocation, myPath, myActions, myStats,
-                                       myLoc, myTypeID, myUniqueID, myPlayerID, myInventory);
+                Piece unit = new Piece(myName, myImageLocation, myPath, myActions, myStats,
+                                       myLoc, myPlayerID, myInventory);
 
                 Label name = new Label(unitName.getText());
                 name.setTranslateY(7.5);

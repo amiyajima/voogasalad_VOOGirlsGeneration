@@ -1,9 +1,5 @@
 package tests;
 
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
@@ -20,10 +16,14 @@ import gamedata.gamecomponents.SquareGrid;
 import gamedata.goals.Goal;
 import gamedata.goals.PlayerPiecesRemovedGoal;
 import gamedata.rules.MoveCountRule;
-import gamedata.rules.Rule;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
 import gameengine.player.Player;
+
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -131,8 +131,7 @@ public class JSONBobTester {
 
         Random r = new Random();
 
-        Piece piece = new Piece(DEFAULT_DUVALL, movements, actions, s, p,
-                                r.nextInt(50), r.nextInt(50), r.nextInt(50), i);
+        Piece piece = new Piece("Duvall", DEFAULT_DUVALL, movements, actions, s, p, 1, i);
         return piece;
     }
 

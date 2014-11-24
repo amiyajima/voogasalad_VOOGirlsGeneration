@@ -20,47 +20,44 @@ import javafx.scene.image.ImageView;
  */
 public class Piece {
 
-    private int myTypeID;
-    private int myUniqueID;
-    private int myPlayerID;
+	private String myName;
     private String myImageLocation;
-
     private transient ImageView myImageView;
-    private Point2D myLoc;
-    private Stats myStats;
     private List<Action> myActions;
     private List<Movement> myPath;
+    private Stats myStats;
+    private Point2D myLoc;
+    private int myPlayerID;
     private boolean myShouldRemove;
     private Inventory myInventory;
 
     /**
      * Piece constructor
      * 
-     * @param imageLocation - url of the piece's image location
-     * @param m - List of Movement defining how/where the
+     * @param imageLoc - url of the piece's image location
+     * @param movement - List of Movement defining how/where the
      *        piece moves relative to its current position
-     * @param a - List of Actions defining what actions are available
+     * @param actions - List of Actions defining what actions are available
      *        for each piece to perform
      * @param stats - the Piece's stats, already defined
-     * @param p2 - Point2D containing the piece's current coordinates
+     * @param loc - Point2D containing the piece's current coordinates
      * @param tid - Piece's type ID, serves as a reference to this type of piece
      * @param uid - Piece's unique ID, serves as a reference to this specific instance of piece
-     * @param pid - Piece's player ID, serves as a reference to which player
+     * @param playerID - Piece's player ID, serves as a reference to which player
      *        this piece belongs to
      * @param inventory - Piece's inventory if the user chooses to use an inventory
      */
 
-    public Piece (String imageLocation, List<Movement> m, List<Action> a, Stats stats,
-                   Point2D p2, int tid, int uid, int pid, Inventory inventory) {
-        myImageLocation = imageLocation;
+    public Piece (String name, String imageLoc, List<Movement> movement, 
+    		List<Action> actions, Stats stats, Point2D loc, int playerID, Inventory inventory) {
+    	myName = name;
+        myImageLocation = imageLoc;
         setImageView(myImageLocation);
-        myPath = m;
-        myActions = a;
+        myPath = movement;
+        myActions = actions;
         myStats = stats;
-        myLoc = p2;
-        myTypeID = tid;
-        myUniqueID = uid;
-        myPlayerID = pid;
+        myLoc = loc;
+        myPlayerID = playerID;
         myShouldRemove = false;
         myInventory = inventory;
     }
@@ -70,19 +67,16 @@ public class Piece {
      * @param clone - Piece instance to be cloned
      */
     public Piece(Piece clone) {
+    	myName = clone.myName;
     	myImageLocation = clone.myImageLocation;
     	setImageView(myImageLocation);
     	myPath = new LinkedList<Movement>(clone.myPath);
     	myActions = new LinkedList<Action>(clone.myActions);
     	myStats = new Stats(clone.myStats);
     	myLoc = new Point2D.Double(clone.myLoc.getX(),clone.myLoc.getY());
-    	myTypeID = clone.myTypeID;
-    	myUniqueID = clone.myUniqueID;
     	myPlayerID = clone.myPlayerID;
     	myShouldRemove = false;
-    	myInventory = null; // TODO: NOPE
-    	
-    	
+    	myInventory = null; // TODO: NOPE. NO INVENTORY.
     }
     
     private void setImageView(String imageLocation) {
@@ -93,6 +87,14 @@ public class Piece {
         	myImageView = new ImageView(new Image(imageLocation));
         }
     }
+    
+    /**
+     * Returns the name for this type of piece
+     */
+    public String getName () {
+        return myName;
+    }
+    
     /**
      * Returns the image location url (for data saving)
      */
@@ -105,20 +107,6 @@ public class Piece {
      */
     public ImageView getImageView () {
         return myImageView;
-    }
-
-    /**
-     * Returns the int ID for this type of piece
-     */
-    public int getTypeID () {
-        return myTypeID;
-    }
-
-    /**
-     * Returns the int ID for this instance of piece
-     */
-    public int getUniqueID () {
-        return myUniqueID;
     }
 
     /**
