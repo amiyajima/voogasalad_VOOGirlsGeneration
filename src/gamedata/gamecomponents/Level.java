@@ -42,6 +42,7 @@ public class Level extends Observable {
 	 * @return
 	 */
 	public boolean levelCompleted() {
+	    System.out.println("observer!");
 		setChanged();
 		notifyObservers();
 		for (Goal g : myGoals) {
@@ -94,8 +95,14 @@ public class Level extends Observable {
 	 */
 	public void garbageCollectPieces() {
 		List<Piece> pieces = myGrid.getAllPieces();
+		List<Piece> toRemove = new ArrayList<Piece>();
 		for(Piece p:pieces){
-			Inventory i = p.getInventory();
+			//For Testing Purposes Only.
+			if(p.getStats().getValue("health")<=0){
+				toRemove.add(p);
+			}
+			
+		/*	Inventory i = p.getInventory();
 			List<Piece> list = i.getAllInventory();
 			for(Piece p2:list){
 				if(p2.shouldRemove()){
@@ -104,7 +111,10 @@ public class Level extends Observable {
 			}
 			if(p.shouldRemove()){
 				myGrid.removePiece(p);
-			}
+			}*/
+		}
+		for(Piece p:toRemove){
+			myGrid.removePiece(p);
 		}
 	}
 

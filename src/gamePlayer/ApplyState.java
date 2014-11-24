@@ -20,8 +20,7 @@ import gameengine.movement.Movement;
 public class ApplyState implements IGridState{
 
     private ViewController myController;
-    private MouseController myMouseController;
-    
+
     public ApplyState(ViewController controller){
         System.out.println("new ApplyState");
         myController = controller;
@@ -50,14 +49,18 @@ public class ApplyState implements IGridState{
         Piece actor = myController.getActivePiece();
         if(piece==null){
         	piece = new Piece(actor);
-        	piece.setLoc(new Point2D.Double(0,0));
+        	piece.setLoc(myController.getCurrentClick());
         }
         myController.getActiveAction().doBehavior(actor, piece);
 
             myController.setGridState(new SelectState(myController));
 
             myController.changeCursor(myController.CURSOR_GLOVE_TEST);
-            
+            myController.getGame().getCurrentLevel().garbageCollectPieces();
+            myController.getGrid().populateGrid(myController.getGame().getCurrentLevel().getGrid().getAllPatches(), 
+                                                myController.getGame().getCurrentLevel().getGrid().getAllPieces());
+         
+         
             myController.setActivePiece(null);
             myController.setActiveAction(null);
 
