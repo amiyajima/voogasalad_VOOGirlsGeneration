@@ -47,7 +47,7 @@ public class LibraryView extends TabPane {
 	private final String PATCHES = "Patch Templates";
 	private PieceTypeData myPieces;
 	private PatchTypeData myPatches;
-	private SandyGrid myGrid;
+	private JennieGrid myGrid;
 	private Map<String, VBox> myLibraryMap;
 	private Map<String, Tab> myTabMap;
 	private SingleSelectionModel<Tab> mySelection;
@@ -75,7 +75,7 @@ public class LibraryView extends TabPane {
 		edit = false;
 		unitID = 0;
 		terrainID = 0;
-		myGrid = new SandyGrid(1, 1, 1, null, null);
+		myGrid = new JennieGrid(1, 1, 1, null, null);
 		
 		Tab unitTab = new Tab(UNITS);
 		unitTab.setClosable(false);

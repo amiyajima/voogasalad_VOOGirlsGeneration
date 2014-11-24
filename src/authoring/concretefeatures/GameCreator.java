@@ -105,7 +105,7 @@ public class GameCreator extends PopupWindow {
                 
                 //TODO: hard coded grid type
                 if (gridChoiceBox.getValue().equals("Square Grid")){
-                    new SandyGrid(width, height, 40, new PieceData(), new PatchData());
+                    new JennieGrid(width, height, 40, new PieceData(), new PatchData());
                 }
                 if (gridChoiceBox.getValue().equals("Hexagon Grid")){
                     new JennieGrid(width, height, 40, new PieceData(), new PatchData());
@@ -125,7 +125,7 @@ public class GameCreator extends PopupWindow {
 		PatchData patchData = new PatchData();
 		
 		int tileSize=getPrefTileSize(numRows,numCols);
-		SandyGrid grid = new SandyGrid(numRows, numCols,
+		JennieGrid grid = new JennieGrid(numRows, numCols,
 				tileSize, pieceData, patchData);
 
 		SandyGridView gridView = new SandyGridView(grid, GRID_VIEW_WIDTH, GRID_VIEW_HEIGHT);
