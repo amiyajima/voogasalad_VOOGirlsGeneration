@@ -1,5 +1,8 @@
 package gamePlayer;
 
+
+import javafx.scene.paint.Color;
+
 import gamedata.gamecomponents.Piece;
 
 /**
@@ -14,17 +17,27 @@ public class ApplyState implements IGridState{
     public ApplyState(ViewController controller){
         System.out.println("new ApplyState");
         myController = controller;
-        myController.getGrid().setOnMouseEntered(event->{myController.changeCursor(myController.CURSOR_ATTACK_TEST);});
+        myController.getGrid().setOnMouseEntered(event->{
+            myController.changeCursor(myController.CURSOR_ATTACK_TEST);
+            
+            myController.getGrid().getChildren().forEach(node->{node.setOnMouseEntered(event2->{
+                                                            myController.highLightEffectRange(event2, Color.RED);
+                                                            });
+                                                           node.setOnMouseExited(event3->myController.highLightActionRange());});
+                                                                
+            
+            
+        });
     }
 
     @Override
     public void onClick(Piece piece) {
         Piece actor = myController.getActivePiece();
-        System.out.println(actor.toString()+"  "+ piece.getTypeID());
+    
         myController.getActiveAction().doBehavior(actor, piece);
         System.out.println("dobehavior called");
             myController.setGridState(new SelectState(myController));
-     myController.changeCursor(myController.CURSOR_GLOVE_TEST);
+            myController.changeCursor(myController.CURSOR_GLOVE_TEST);
        
     }
     

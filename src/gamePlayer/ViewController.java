@@ -43,7 +43,7 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.layout.StackPane;
-
+import javafx.scene.layout.StackPane;
 
 
 public class ViewController{
@@ -189,10 +189,13 @@ public class ViewController{
     private void testGame() {
 //        JSONBobTester JSBTester = new JSONBobTester();
 //        myModel = JSBTester.createNewGame();
-
+        
         myScene = new Scene(myGameSpace);
         myStage.setScene(myScene);
         initializeGrid();
+        
+        
+        
 
 
     }
@@ -200,12 +203,13 @@ public class ViewController{
     private void initializeGrid(){
         JSONBobTester JSBTester = new JSONBobTester();
         myModel = JSBTester.createNewGame();
+        
 
         myGrid= new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel.getCurrentLevel().getGrid().getColumn());
         myGameSpace.setCenter(myGrid);
         myGrid.setAlignment(Pos.CENTER);
         myGrid.populateGrid(myModel.getCurrentLevel().getGrid().getPatches(), myModel.getCurrentLevel().getGrid().getPieces());
-
+        myModel.getLevels().forEach(level->level.addObserver(this.myGrid));
         setOnClick();
         setGridState(new SelectState(this));
         changeCursor(CURSOR_GLOVE_TEST);
@@ -294,6 +298,8 @@ public class ViewController{
         //        stage.show();
         //        stage.setAlwaysOnTop(true);
         initializeGrid();
+        statsPane.getChildren().clear();
+        controlPane.getChildren().clear();
 
 
     }
@@ -380,10 +386,10 @@ public class ViewController{
      * @param y
      */
     private void performAction (double x, double y) {
-        System.out.println("where error happens");
         System.out.println("current mouse location:"+x +", "+y);
         gridState.onClick(getPiece(findPosition(x,y)));
-
+        myGrid.clearEffect();
+        addDropShadow(myGrid.get(((int)findPosition(x,y).getX()), ((int)findPosition(x,y).getY())), Color.PURPLE);
     }
 
     /**
@@ -397,8 +403,8 @@ public class ViewController{
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
         int yCor = (int) (y/patchHeight);
-        myGrid.clearEffect();
-        addDropShadow(myGrid.get(yCor, xCor), Color.PURPLE);
+     //   myGrid.clearEffect();
+//        addDropShadow(myGrid.get(yCor, xCor), Color.PURPLE);
         return new Point2D.Double(yCor,xCor);
     }
 
@@ -436,7 +442,7 @@ public class ViewController{
      * selected
      */
     @FXML
-    private void highLightActionRange(){
+    protected void highLightActionRange(){
         System.out.println("activePiece at "+activePiece.getLoc());
         System.out.println("action range: "+ activeAction.getActionRange(activePiece.getLoc()));
         myGrid.clearEffect();
@@ -447,8 +453,8 @@ public class ViewController{
                 Node n = myGrid.get((int)point.getX(),(int)point.getY());
 
                 addDropShadow(n, Color.YELLOW);
-                n.setOnMouseEntered(event->highLightEffectRange(n, Color.RED));
-                n.setOnMouseExited(event->highLightEffectRange(n, Color.TRANSPARENT));}
+
+                }
 
         });
 
@@ -467,7 +473,7 @@ public class ViewController{
             ds.setOffsetY(0.0);
             ds.setColor(c);
             n.setEffect(ds); 
-            // System.out.println("drop shadow");
+
         }
     }
 
@@ -475,23 +481,24 @@ public class ViewController{
     /**
      * Highlight the effect range of an action if to be applied at a given position
      * @param n
-     * @param c
+     * @param red
      */
-    private void highLightEffectRange(Node n, Color c){
+    protected void highLightEffectRange(MouseEvent me, Color c){
+       
 
-        System.out.println("effect Range: "+ activeAction.getEffectRange());
-        // System.out.println(myGrid.getRowIndex(n)+" , "+ myGrid.getColumnIndex(n));
-        activeAction.getEffectRange().forEach(point->{Node node = myGrid.get(myGrid.getRowIndex(n)+ (int)point.getX(), myGrid.getColumnIndex(n)+ (int)point.getY());
-
-        //        if(c ==Color.TRANSPARENT && node.getEffect()!=null){
-        //            node.setEffect(null);
-        //        }
-        //        else{
-        addDropShadow(node, c);
-        // }
-
-
+        activeAction.getActionRange(activePiece.getLoc()).forEach(point->{
+            Point2D temp= findPosition(me.getSceneX(), me.getSceneY());
+            if(temp.equals(point)){
+                activeAction.getEffectRange().forEach(point2->{
+                    Node n = myGrid.get((int)(temp.getX()+point2.getX()), (int)(temp.getY()+point2.getY()));
+                    addDropShadow(n, c);
+                });
+                
+                
+            }
         });
+
+        
     }
 
 
