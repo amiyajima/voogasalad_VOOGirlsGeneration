@@ -58,6 +58,7 @@ public class ApplyState implements IGridState{
             myController.changeCursor(myController.CURSOR_GLOVE_TEST);
             myController.getGrid().populateGrid(myController.getGame().getCurrentLevel().getGrid().getAllPatches(), 
                                                 myController.getGame().getCurrentLevel().getGrid().getAllPieces());
+         
             myController.setActivePiece(null);
             myController.setActiveAction(null);
 

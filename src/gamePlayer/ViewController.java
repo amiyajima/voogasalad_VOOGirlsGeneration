@@ -396,7 +396,7 @@ public class ViewController{
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
         int yCor = (int) (y/patchHeight);
-
+        System.out.println("Current Mouse Coodinatate:"+ xCor +" "+ yCor);
         return new Point2D.Double(yCor,xCor);
     }
 
