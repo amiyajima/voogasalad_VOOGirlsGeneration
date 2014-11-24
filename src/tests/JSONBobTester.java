@@ -48,7 +48,7 @@ public class JSONBobTester {
      * 
      * @return a new default game
      */
-    public Patch createNewGame () {
+    public Game createNewGame () {
         System.out.println("Bob Tester: Create new game");
         List<Player> myPlayers = new ArrayList<Player>();
         Player myPlayer1 = new Player(12345);
@@ -80,7 +80,7 @@ public class JSONBobTester {
         Patch patch = createNewPatch(new Point2D.Double(3, 3));
 
         Game myGame = new Game(myPlayers, myLevels);
-        return patch;
+        return myGame;
     }
 
     public Grid createNewGrid () {

@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -35,13 +36,13 @@ import javafx.scene.text.Text;
 
 public class ViewController{
 
-    public static final String GAMESPACE_FXML = "gameSpace.fxml";
-    public static final String INITIALSCENE_FXML = "initialScene.fxml";
-    public static final String SCOREBOARD_FXML = "scoreBoard.fxml";
+//    public static final String GAMESPACE_FXML = "gameSpace.fxml";
+//    public static final String INITIALSCENE_FXML = "initialScene.fxml";
+//    public static final String SCOREBOARD_FXML = "scoreBoard.fxml";
     public static final String INITIALSCENE_TITLE = "VOOGASALAD!";
     public static final String GAME_LOCATION = "/src/resources/json";
 
-    public static final String POPUP_FXML = "popup.fxml";
+//    public static final String POPUP_FXML = "popup.fxml";
     public static final String ENGLISH = "English";
     public static final String Chinese = "Chinese";
 
@@ -82,25 +83,23 @@ public class ViewController{
 
 
     private IGridState gridState;
-    
-    private List<Node> activeNodes;
 
     public ViewController(Stage s){
         myStage = s;
-        myInitialScene = new VBox();
-        myGameSpace = new BorderPane();
-        myScoreBoard = new VBox();
-        myPopup = new BorderPane();
+//        myInitialScene = new VBox();
+//        myGameSpace = new BorderPane();
+//        myScoreBoard = new VBox();
+//        myPopup = new BorderPane();
 
         //TODO:
         //uses JSON reader that takes in the file chosen by user and instantiate 
         // a new Game object. 
 
-        loadFXML(GAMESPACE_FXML, myGameSpace);
-        loadFXML(INITIALSCENE_FXML, myInitialScene);
+//        loadFXML(GAMESPACE_FXML, myGameSpace);
+//        loadFXML(INITIALSCENE_FXML, myInitialScene);
 
-        loadFXML(POPUP_FXML, myPopup);
-        loadFXML(SCOREBOARD_FXML, myScoreBoard);
+//        loadFXML(POPUP_FXML, myPopup);
+//        loadFXML(SCOREBOARD_FXML, myScoreBoard);
         scoreScene = new Scene(myScoreBoard);
         myPopupScene = new Scene(myPopup);
 
@@ -147,18 +146,18 @@ public class ViewController{
 
     }
 
-    private void loadFXML(String url, Node n){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(url));
-        fxmlLoader.setController(this);
-        fxmlLoader.setRoot(n);
-        try{
-            fxmlLoader.load();
-        }
-        catch(IOException exception) {
-            throw new RuntimeException(exception);
-        }
-
-    }
+//    private void loadFXML(String url, Node n){
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(url));
+//        fxmlLoader.setController(this);
+//        fxmlLoader.setRoot(n);
+//        try{
+//            fxmlLoader.load();
+//        }
+//        catch(IOException exception) {
+//            throw new RuntimeException(exception);
+//        }
+//
+//    }
 
     /**
      * the method allows user to load the previously saved json representation
@@ -184,8 +183,8 @@ public class ViewController{
     }
 
     private void initializeGrid(){
-        JSONBobTester JSBTester = new JSONBobTester();
-        myModel = JSBTester.createNewGame();
+//        JSONBobTester JSBTester = new JSONBobTester();
+//        myModel = JSBTester.createNewGame();
 
         myGrid= new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel.getCurrentLevel().getGrid().getColumn());
         myGameSpace.setCenter(myGrid);
@@ -208,9 +207,7 @@ public class ViewController{
 
     @FXML
     private void doSettings(){
-
-
-
+        System.out.println("do i work?");
     }
 
     /**
@@ -334,16 +331,16 @@ public class ViewController{
      * @param piece
      */
     protected void updateActions (Piece piece){
-        // setActivePiece(piece);
-
-        controlPane.getChildren().clear();
-        ArrayList<Label> actions = new ArrayList<Label>();
-        piece.getActions().forEach(action->{Label l = new Label(action.toString());
-        l.setOnMouseClicked(event->bindAction(action));
-        actions.add(l);});
-
-        controlPane.getChildren().addAll(actions);
-
+////         setActivePiece(piece);
+//
+//        controlPane.getChildren().clear();
+//        
+//        ArrayList<Label> actions = new ArrayList<Label>();
+//        piece.getActions().forEach(action->{Label l = new Label(action.toString());
+//        l.setOnMouseClicked(event->bindAction(action));
+//        actions.add(l);});
+//        
+//        controlPane.getChildren().addAll(actions);
     }
 
     /**
@@ -464,11 +461,14 @@ public class ViewController{
 
         });
     }
-//    private void addKeyboardController(){
-//        KeyboardController KBControl = new KeyboardController();
-//        //        KBControl.setActionKeyControl(myGrid, myModel);
-//        KBControl.setMovementKeyControl(this, myGrid, myModel);
-//    }
+    
+    private void addKeyboardController(){
+        KeyboardController KBControl = new KeyboardController();
+        //        KBControl.setActionKeyControl(myGrid, myModel);
+        KBControl.setMovementKeyControl(this, myGrid, myModel);
+    }
+    
+    
 
     public MouseController getMouseController(){
         return myMouseController;
@@ -478,7 +478,6 @@ public class ViewController{
         return gridState;
     }
     
-
     public void highlightCurrentLocation(Color c, Point2D oldLocation, Point2D newLocation){
         Node oldNode = myGrid.get((int)oldLocation.getX(), (int)oldLocation.getY());
         Node newNode = myGrid.get((int)newLocation.getX(), (int)newLocation.getY());
