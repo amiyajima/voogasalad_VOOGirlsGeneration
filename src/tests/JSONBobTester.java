@@ -1,9 +1,5 @@
 package tests;
 
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
@@ -20,10 +16,14 @@ import gamedata.gamecomponents.SquareGrid;
 import gamedata.goals.Goal;
 import gamedata.goals.PlayerPiecesRemovedGoal;
 import gamedata.rules.MoveCountRule;
-import gamedata.rules.Rule;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
 import gameengine.player.Player;
+
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -128,24 +128,21 @@ public class JSONBobTester {
         Inventory i = new Inventory();
 
         Random r = new Random();
-
+        
         int randomInt = r.nextInt(50);
         
-        Piece piece = new Piece(null, movements, actions, s, p3, randomInt, randomInt, randomInt, i);
+        Piece piece = new Piece("Nullpiece", null, movements, actions, s, p3, 2, i);
         if (randomInt % 2 == 1) {
-            piece = new Piece(DEFAULT_DUVALL, movements, actions, s, p,
-                                    randomInt, randomInt, randomInt, i);
+            piece = new Piece("Duvall", DEFAULT_DUVALL, movements, actions, s, p, 1, i);
         }
         else {
-            piece = new Piece(DEFAULT_BUNNY, movements, actions, s, p,
-                                    randomInt, randomInt, randomInt, i);
+            piece = new Piece("Bunny", DEFAULT_BUNNY, movements, actions, s, p, 1, i);
         }
         return piece;
     }
 
     public Patch createNewPatch (Point2D p) {
-        Random r = new Random();
-        Patch patch = new Patch(r.nextInt(50) + 100, DEFAULT_LAND, p);
+        Patch patch = new Patch("", DEFAULT_LAND, p);
         return patch;
     }
 
