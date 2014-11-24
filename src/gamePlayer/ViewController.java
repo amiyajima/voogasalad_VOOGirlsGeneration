@@ -52,8 +52,8 @@ public class ViewController{
     public static final String GAME_LOCATION = "/src/resources/json";
 
     public static final String POPUP_FXML = "popup.fxml";
-    public static final String ENGLISH = "English";
-    public static final String Chinese = "Chinese";
+//    public static final String ENGLISH = "English";
+//    public static final String Chinese = "Chinese";
 
     public static final String AUDIO_TEST = "/src/gamePlayer/audioTest.mp3";
     public static final String CURSOR_ATTACK_TEST = "/gamePlayer/Cursor_attack.png";
@@ -71,12 +71,12 @@ public class ViewController{
     private Scene myPopupScene;
     private Scene myScene;
 
-  //  private Point2D myCurrentLocation;
+    //  private Point2D myCurrentLocation;
     private Piece activePiece;
     private Action activeAction;
-    
+
     //private MouseController myMouseController;
-    
+
     private AudioClip myAudio;
     @FXML
     protected VBox statsPane;
@@ -194,7 +194,7 @@ public class ViewController{
     private void initializeGrid(){
         JSONBobTester JSBTester = new JSONBobTester();
         myModel = JSBTester.createNewGame();
-        
+
 
         myGrid= new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel.getCurrentLevel().getGrid().getColumn());
         myGameSpace.setCenter(myGrid);
@@ -205,11 +205,7 @@ public class ViewController{
 
         setGridState(new SelectState(this));
         getGrid().setOnMouseExited(event->{changeCursor(CURSOR_GLOVE_TEST); });
-//        myMouseController.setCursorImage(myScene, myGrid, CURSOR_GLOVE_TEST);
-//        myMouseController.setOnClick(this, gridState, myGrid);
-        
 
-        
     }
 
 
@@ -332,7 +328,7 @@ public class ViewController{
         ArrayList<Text> stats = new ArrayList<Text>();
 
         piece.getStats().getStatNames().forEach(key->stats.
-                                                add(new Text(key+ ":  "+ piece.getStats().getValue(key))));
+                add(new Text(key+ ":  "+ piece.getStats().getValue(key))));
 
         statsPane.getChildren().addAll(stats);
 
@@ -360,14 +356,14 @@ public class ViewController{
      * @param action
      */
     private void bindAction(Action action){
+        
+       if(activePiece==null) return;
         setActiveAction(action);      
         highLightActionRange();
 
-       // doThis();
-
         setGridState(new ApplyState(this));
-        
-        
+
+
 
     }
 
@@ -387,7 +383,8 @@ public class ViewController{
         System.out.println("current mouse location:"+x +", "+y);
         gridState.onClick(getPiece(findPosition(x,y)));
         myGrid.clearEffect();
-        addDropShadow(myGrid.get(((int)findPosition(x,y).getX()), ((int)findPosition(x,y).getY())), Color.PURPLE);
+        highlightCurrent(findPosition(x,y));
+       // addDropShadow(myGrid.get(((int)findPosition(x,y).getX()), ((int)findPosition(x,y).getY())), Color.PURPLE);
     }
 
 
@@ -413,7 +410,7 @@ public class ViewController{
     protected Scene getScene(){
         return myScene;
     }
-    
+
     protected GameGrid getGrid(){
         return myGrid;
     }
@@ -443,38 +440,23 @@ public class ViewController{
      */
     @FXML
     protected void highLightActionRange(){
-        System.out.println("activePiece at "+activePiece.getLoc());
-        System.out.println("action range: "+ activeAction.getActionRange(activePiece.getLoc()));
 
-//        myGrid.clearEffect();
-
-//        activeNodes = new ArrayList<Node>();
         myGrid.clearEffect();
-        activeAction.getActionRange(activePiece.getLoc()).forEach(point->{
+        if(activePiece!= null && activeAction!= null){
+            activeAction.getActionRange(activePiece.getLoc()).forEach(point->{
 
-            if(point.getX()<myGrid.getRow() && point.getY()<myGrid.getCol() && point.getX()>0 && point.getY()>0){
-                Node n = myGrid.get((int)point.getX(),(int)point.getY());
-                addDropShadow(n, Color.YELLOW);
-
-////                activeNodes.add(n);
-//                
-//                n.setOnMouseEntered(event->highLightEffectRange(n, Color.RED));
-//                n.setOnMouseExited(event->highLightEffectRange(n, Color.TRANSPARENT));
+                if(point.getX()<myGrid.getRow() && point.getY()<myGrid.getCol() && point.getX()>0 && point.getY()>0){
+                    Node n = myGrid.get((int)point.getX(),(int)point.getY());
+                    addDropShadow(n, Color.YELLOW);
 
                 }
 
 
-        });
+            });
+        }
     }
-    
-//    private void doThis(){
-//      Node test = myGrid.get(0, 0);
-//      test.setOnMouseEntered(event->highLightEffectRange(test,Color.RED));
-//        
-////        for (Node n: activeNodes){
-////            n.setOnMouseEntered(event->highLightEffectRange(n,Color.RED));
-////        }
-//    }
+
+
 
     private void addDropShadow(Node n, Color c){
         if(n != null){
@@ -497,7 +479,8 @@ public class ViewController{
 
 
     protected void highLightEffectRange(MouseEvent me, Color c){
-       
+
+        if(activePiece!= null && activeAction!= null){
         activeAction.getActionRange(activePiece.getLoc()).forEach(point->{
             Point2D temp= findPosition(me.getSceneX(), me.getSceneY());
             if(temp.equals(point)){
@@ -505,31 +488,30 @@ public class ViewController{
                     Node n = myGrid.get((int)(temp.getX()+point2.getX()), (int)(temp.getY()+point2.getY()));
                     addDropShadow(n, c);
                 });
-                
-                
+
+
             }
         });
+        }
 
-        
+
     }
 
-    
+
     public IGridState getGridState(){
         return gridState;
     }
 
-    
+
     public void changeCursor(String filename){
         Image image = new Image(filename);
         myScene.setCursor(new ImageCursor(image, image.getWidth()/4,image.getWidth()/4));
-    
-    }
-    
 
-    public void highlightCurrentLocation(Color c, Point2D oldLocation, Point2D newLocation){
-        Node oldNode = myGrid.get((int)oldLocation.getX(), (int)oldLocation.getY());
-        Node newNode = myGrid.get((int)newLocation.getX(), (int)newLocation.getY());
-        oldNode.setEffect(null);
-        addDropShadow(newNode, c);
     }
+    
+    public void highlightCurrent(Point2D loc){
+        addDropShadow(myGrid.get((int)loc.getX(), (int)loc.getY()), Color.BLUE);
+    }
+
+    
 }
