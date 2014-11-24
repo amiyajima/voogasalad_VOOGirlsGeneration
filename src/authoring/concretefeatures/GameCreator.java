@@ -34,8 +34,6 @@ public class GameCreator extends PopupWindow {
     private final String GRID_HEIGHT_LABEL = "Grid Length Level:";
     private final String GRID_WIDTH_LABEL = "Grid Width Level:";
     private final String PLAYER_NUMBER_LABEL = "Number of Players:";
-    private final String TOTAL_LEVEL_LABEL = "Number of Levels";
-    private final String GAME_LEVEL_LABEL = "Level";
     private final String TEMPLATE_LABEL = "Create";
 
     private ChoiceBox<String> gridChoiceBox;
@@ -68,15 +66,9 @@ public class GameCreator extends PopupWindow {
 
         VBox heights = new VBox();
         VBox widths = new VBox();
-        VBox chooseLevel = new VBox();
         VBox players = new VBox();
         VBox grid = new VBox();
 
-//        // choose level
-//        //TODO:should ideally pass in total # of level that is set by the user
-//        ChoiceBox<Integer> levelChoiceBox = new ChoiceBox<Integer>();
-//        levelChoiceBox = initChoiceBox(chooseLevel, levelChoiceBox, GAME_LEVEL_LABEL, 3);   
-        
         // choose # of player
         TextField player = initLabel(players, PLAYER_NUMBER_LABEL);
         
