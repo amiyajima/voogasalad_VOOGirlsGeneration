@@ -12,6 +12,7 @@ import gamedata.rules.*;
  * has been won
  *
  */
+//TODO change MoveCountRule back to superclass Rule
 public class Level extends Observable {
 
 	private Grid myGrid;
@@ -22,13 +23,13 @@ public class Level extends Observable {
 	/**
 	 * Rules defining how the players turn ends
 	 */
-	private List<Rule> myRules;
+	private List<MoveCountRule> myRules;
 
 	public Level() {
-		this(new SquareGrid(), new ArrayList<Goal>(), new ArrayList<Rule>());
+		this(new SquareGrid(), new ArrayList<Goal>(), new ArrayList<MoveCountRule>());
 	}
 
-	public Level(Grid gr, List<Goal> goals, List<Rule> rules) {
+	public Level(Grid gr, List<Goal> goals, List<MoveCountRule> rules) {
 		myGrid = gr;
 		myGoals = goals;
 		myRules = rules;

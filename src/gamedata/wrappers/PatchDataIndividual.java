@@ -1,16 +1,17 @@
 package gamedata.wrappers;
 
 import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
 
 public class PatchDataIndividual {
     private int myTypeID;
-    private Point2D myLoc;
+    private Point2D.Double myLoc;
     private String myImageLocation;
     
     public PatchDataIndividual(int typeID, String imageLocation, Point2D p) {
         myTypeID = typeID;
         myImageLocation = imageLocation;
-        myLoc = p;
+        myLoc = (Double) p;
     }
 
     public int getMyTypeID () {

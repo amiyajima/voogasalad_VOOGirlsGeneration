@@ -1,5 +1,9 @@
 package gamePlayer;
 
+import java.util.ArrayList;
+import javafx.scene.Node;
+import javafx.scene.paint.Color;
+import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
 
 /**
@@ -13,13 +17,11 @@ public class SelectState implements IGridState {
 
     public SelectState (ViewController controller) {
         myController = controller;
-        myController.setGridState(this);
         myMouseController = myController.getMouseController();
 //        myController.getGrid().setOnMouseEntered(event->{myController.changeCursor(myController.CURSOR_GLOVE_TEST);});
-        myController.getGrid().setOnMouseEntered(event->{myMouseController.setCursorImage(myController.getScene(), myController.getGrid(), myController.CURSOR_GLOVE_TEST);;});    
-        
-        myMouseController.setOnClick(myController, myController.getGridState(), myController.getGrid());
-        
+//        myController.getGrid().setOnMouseEntered(event->{myMouseController.setCursorImage(myController.getScene(), myController.getGrid(), myController.CURSOR_GLOVE_TEST);;});    
+//        myMouseController.setOnClick(myController, myController.getGridState(), myController.getGrid());
+
     }
     
 
@@ -30,5 +32,4 @@ public class SelectState implements IGridState {
         myController.setActivePiece(piece);
         myController.updateActions(piece);
     }
-
 }
