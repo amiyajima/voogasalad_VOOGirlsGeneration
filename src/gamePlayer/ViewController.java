@@ -192,12 +192,14 @@ public class ViewController{
         myGrid.setAlignment(Pos.CENTER);
         myGrid.populateGrid(myModel.getCurrentLevel().getGrid().getPatches(), myModel.getCurrentLevel().getGrid().getPieces());
         
+        
         myMouseController = new MouseController();
-        myMouseController.changeCursorImage(myScene, myGrid, CURSOR_GLOVE_TEST);
-        
-        setOnClick();
         setGridState(new SelectState(this));
+        myMouseController.setCursorImage(myScene, myGrid, CURSOR_GLOVE_TEST);
+        myMouseController.setOnClick(this, gridState, myGrid);
         
+        
+//        setOnClick();
 //        changeCursor(CURSOR_GLOVE_TEST);
 //        getGrid().setOnMouseExited(event->{changeCursor(CURSOR_GLOVE_TEST);});
         
@@ -356,23 +358,22 @@ public class ViewController{
         setGridState(new ApplyState(this));
     }
 
-    private void setOnClick(){
-        myGrid.setOnMouseClicked(event->{ 
-            performAction(event.getX(), event.getY());});
-    }
+//    private void setOnClick(){
+//        myGrid.setOnMouseClicked(event->{ 
+//            performAction(event.getX(), event.getY());});
+//    }
 
 
-    /**
-     * Perform the actions of a click at position (x,y) on game grid
-     * @param x
-     * @param y
-     */
-    private void performAction (double x, double y) {
-        System.out.println("where error happens");
-        System.out.println("current mouse location:"+x +", "+y);
-        gridState.onClick(getPiece(findPosition(x,y)));
-
-    }
+//    /**
+//     * Perform the actions of a click at position (x,y) on game grid
+//     * @param x
+//     * @param y
+//     */
+//    public void performAction (double x, double y) {
+//        System.out.println("where error happens");
+//        System.out.println("current mouse location:"+x +", "+y);
+//        gridState.onClick(getPiece(findPosition(x,y)));
+//    }
 
     /**
      * Method to convert pixel coordinates into tile coordinates
@@ -380,7 +381,7 @@ public class ViewController{
      * @param y
      * @return a Point2D representing tile coordinates
      */
-    protected Point2D findPosition(double x, double y){
+    public Point2D findPosition(double x, double y){
         double patchHeight = (double) myGrid.getHeight()/(double) myGrid.getCol();
         double patchWidth = (double) myGrid.getWidth()/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
@@ -390,10 +391,8 @@ public class ViewController{
         return new Point2D.Double(yCor,xCor);
     }
 
-    private Piece getPiece(Point2D loc){
+    public Piece getPiece(Point2D loc){
         return myModel.getCurrentLevel().getGrid().getPiece(loc);
-
-
     }
 
     protected Scene getScene(){
@@ -444,12 +443,6 @@ public class ViewController{
 
         });
     }
-//    protected void changeCursor(String string){
-//        Image image = new Image(string);
-//        myScene.setCursor(new ImageCursor(image, image.getWidth()/4,image.getWidth()/4));
-//    }
-    
-    
     
     
     private void addDropShadow(Node n, Color c){

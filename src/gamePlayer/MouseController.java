@@ -18,10 +18,11 @@ public class MouseController {
     Node myPreviousNode;
     Node myCurrentNode;
     
+    IGridState myGridState;
     
     
     
-    public void changeCursorImage(Scene scene, GameGrid grid, String filename){
+    public void setCursorImage(Scene scene, GameGrid grid, String filename){
         grid.setOnMouseExited(event->{applyCursorImage(scene, filename);});
     }
     
@@ -30,8 +31,24 @@ public class MouseController {
         scene.setCursor(new ImageCursor(image, image.getWidth()/4,image.getWidth()/4));
     }
     
+    public void setOnClick(ViewController vc, IGridState gridState, GameGrid grid){
+        myGridState = gridState;
+        grid.setOnMouseClicked(event->{ 
+            performAction(vc, event.getX(), event.getY());});
+    }
     
+    /**
+     * Perform the actions of a click at position (x,y) on game grid
+     * @param x
+     * @param y
+     */
+    public void performAction (ViewController vc, double x, double y) {
+        System.out.println("where error happens");
+        System.out.println("current mouse location:"+x +", "+y);
+        myGridState.onClick(vc.getPiece(vc.findPosition(x,y)));
+    }
     
+
     
     
     
