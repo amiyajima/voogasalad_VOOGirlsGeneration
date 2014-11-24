@@ -29,10 +29,9 @@
 	-fx-border-radius: 2;
     -fx-padding: 3 6 6 6;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 ); 
-	
-	
-	
 }
+
+
 
 .tab{
     -fx-background-insets: 0 1 0 1,0,0;
@@ -71,6 +70,22 @@
 .button:hover{
 	-fx-background-color: #D3E397;
 }
+
+.label{
+	-fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color: linear-gradient(#bababa, #41464a);
+    -fx-padding: 12px;
+    -fx-border-radius: 6;
+    -fx-border-color: #82878c;
+}
+
+.label:hover{
+	-fx-background-color: #D3E397;
+}
+
+
 
 
 
