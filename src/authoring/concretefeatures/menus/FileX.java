@@ -3,13 +3,12 @@ package authoring.concretefeatures.menus;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import gamePlayer.ViewController;
 import gamedata.JSON.JSONManager;
 import gamedata.gamecomponents.Game;
 import tests.JSONBobTester;
 import authoring.abstractfeatures.PopupWindow;
 import authoring.concretefeatures.GameCreator;
-import authoring.concretefeatures.IndividualUnitEditor;
+import authoring.concretefeatures.LevelEditor;
 import authoring_environment.WorkspaceView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -35,28 +34,24 @@ public class FileX extends Menu {
 	
     public FileX (WorkspaceView wsView) {
         super(myLabel);
-        MenuItem newGame = new MenuItem(newLevelLabel);
+        myWorkspaceView = wsView;
+        
+        MenuItem newLevel = new MenuItem(newLevelLabel);
         MenuItem open = new MenuItem(openLabel);
         MenuItem save = new MenuItem(saveLabel);
         MenuItem exit = new MenuItem(exitLabel);
 
-        newGame.setOnAction(new NewHandler());
+        newLevel.setOnAction(event -> handleNewLevel());
         open.setOnAction(event -> handleLoad());
         save.setOnAction(event -> handleSave());
         exit.setOnAction(new ExitHandler());
-        
-        myWorkspaceView = wsView;
-        
-        getItems().addAll(newGame, open, save, exit);
+                
+        getItems().addAll(newLevel, open, save, exit);
     }
-
-    private class NewHandler implements EventHandler<ActionEvent> {
-        @Override
-        public void handle (ActionEvent event) {
-            // Restart Game
-             PopupWindow p = new GameCreator(myWorkspaceView);
-             p.show();
-        }
+    
+    private void handleNewLevel() {
+        PopupWindow p = new GameCreator(myWorkspaceView);
+        p.show();
     }
 
     private void handleLoad () {
