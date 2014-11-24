@@ -1,6 +1,10 @@
 package authoring.concretefeatures.menus;
 
 
+import authoring.abstractfeatures.PopupWindow;
+import authoring.concretefeatures.GameCreator;
+import authoring.concretefeatures.IndividualUnitEditor;
+import authoring_environment.WorkspaceView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
@@ -10,7 +14,9 @@ import javafx.scene.control.MenuItem;
 
 public class File extends Menu {
 
-    public File () {
+	private WorkspaceView myWorkspaceView;
+	
+    public File (WorkspaceView wsView) {
         super("File");
         MenuItem newGame = new MenuItem("New Game");
         MenuItem open = new MenuItem("Open");
@@ -21,7 +27,9 @@ public class File extends Menu {
         open.setOnAction(new OpenHandler());
         save.setOnAction(new SaveHandler());
         exit.setOnAction(new ExitHandler());
-
+        
+        myWorkspaceView = wsView;
+        
         getItems().addAll(newGame, open, save, exit);
     }
 
@@ -29,9 +37,8 @@ public class File extends Menu {
         @Override
         public void handle (ActionEvent event) {
             // Restart Game
-//             PopupWindow p = new GameCreator();
-//             p.show();
-            
+             PopupWindow p = new GameCreator(myWorkspaceView);
+             p.show();
         }
     }
 

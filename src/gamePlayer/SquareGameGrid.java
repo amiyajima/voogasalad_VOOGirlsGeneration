@@ -31,13 +31,11 @@ public class SquareGameGrid extends GameGrid {
 
     }
 
-    private void onHover (Rectangle rec) {
-        rec.setFill(Color.BURLYWOOD);
-    }
 
     @Override
     public void update (Observable o, Object arg) {
         if (o instanceof Level) {
+            System.out.println("updated!");
             populateGrid(((Level) o).getGrid().getPatches(), ((Level) o).getGrid().getPieces());
 
         }
@@ -97,5 +95,7 @@ public class SquareGameGrid extends GameGrid {
             ((StackPane)n).getChildren().add(pieces.get(point).getImageView());
         });
     }
+    
+
     
 }

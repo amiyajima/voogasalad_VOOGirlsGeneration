@@ -1,5 +1,7 @@
 package authoring.concretefeatures;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javafx.event.ActionEvent;
@@ -9,9 +11,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import authoring.abstractfeatures.PopupWindow;
 
+/**
+ * Popup window for editing the stats for a
+ * type of piece. Allows for full editing of
+ * the names and default values for a type of
+ * piece.
+ * 
+ * @author Jennie Ju
+ *
+ */
 public class StatsTotalEditor extends PopupWindow {
 	private static final int WINDOW_HEIGHT = 400;
 	private static final int WINDOW_WIDTH = 420;
@@ -19,6 +31,7 @@ public class StatsTotalEditor extends PopupWindow {
 	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 	
 	private Stats myStats;
+	private List<StatsCreatorBox> myBoxes;
 	
 	/**
 	 * Creates an editor popup for creating stats
@@ -26,13 +39,14 @@ public class StatsTotalEditor extends PopupWindow {
 	 * @param stats - Stats of the piece whose stats
 	 * are being edited
 	 */
-	public StatsTotalEditor(Stats stats) {
+	public StatsTotalEditor(Piece piece) {
 		
 		setHeight(WINDOW_HEIGHT);
 		setWidth(WINDOW_WIDTH);
 		setTitle(WINDOW_TITLE);
 		
-		myStats = stats;
+		myStats = piece.getStats();
+		myBoxes = new ArrayList<>();
 		initialize();
 	}
 	
@@ -48,8 +62,9 @@ public class StatsTotalEditor extends PopupWindow {
 		VBox statsVBox = new VBox();
 		initStatsEditorBox(statsVBox);
 		Button newStatBtn = makeAddButton(statsVBox);
+		Button doneButton = makeDoneButton(statsVBox);
 		
-		mainVBox.getChildren().addAll(newStatBtn,statsVBox);
+		mainVBox.getChildren().addAll(newStatBtn,statsVBox,doneButton);
 		root.setContent(mainVBox);
 		setScene(scene);
 	}
@@ -73,6 +88,7 @@ public class StatsTotalEditor extends PopupWindow {
 			@Override
 			public void handle(ActionEvent event) {
 				StatsCreatorBox scb = new StatsCreatorBox();
+				myBoxes.add(scb);
 				addStatHBox(statsVBox, scb);
 			}
 		});
@@ -97,5 +113,24 @@ public class StatsTotalEditor extends PopupWindow {
 		});
 		return delBtn;
 	}
+	
+	private Button makeDoneButton(VBox statsVbox){
+		Button doneButton = new Button("Done");
+		doneButton.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent event){
+				for(StatsCreatorBox sbc: myBoxes){
+					if(!sbc.isEmpty()){
+						String name = sbc.getStatName();
+						Double val = sbc.getStatValue();
+						myStats.add(name, val);
+					}
+				}	
+				close();
+			}
+		});
+		return doneButton;
+	}
+	
 
 }

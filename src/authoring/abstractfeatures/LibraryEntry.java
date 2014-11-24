@@ -3,7 +3,7 @@ package authoring.abstractfeatures;
 import javafx.scene.layout.HBox;
 
 /**
- * @author VOOGirls Generation
+ * @author Martin Tamayo
  * 
  * Abstract class that acts as a superclass to UnitEntry and TerrainEntry.
  * These are HBox classes that store units and terrain in the library in

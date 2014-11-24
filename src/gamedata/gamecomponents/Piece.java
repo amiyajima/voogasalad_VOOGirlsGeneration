@@ -53,12 +53,7 @@ public class Piece {
     public Piece (String imageLocation, List<Movement> m, List<Action> a, Stats stats,
                    Point2D p2, int tid, int uid, int pid, Inventory inventory) {
         myImageLocation = imageLocation;
-        if(myImageLocation.startsWith("/")){
-        	myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
-        }
-        else{
-        	myImageView = new ImageView(new Image(imageLocation));
-        }
+        setImageView(myImageLocation);
         myPath = m;
         myActions = a;
         myStats = stats;
@@ -70,6 +65,34 @@ public class Piece {
         myInventory = inventory;
     }
 
+    /**
+     * Cloning constructor for deeping cloning of a piece
+     * @param clone - Piece instance to be cloned
+     */
+    public Piece(Piece clone) {
+    	myImageLocation = clone.myImageLocation;
+    	setImageView(myImageLocation);
+    	myPath = new LinkedList<Movement>(clone.myPath);
+    	myActions = new LinkedList<Action>(clone.myActions);
+    	myStats = new Stats(clone.myStats);
+    	myLoc = new Point2D.Double(clone.myLoc.getX(),clone.myLoc.getY());
+    	myTypeID = clone.myTypeID;
+    	myUniqueID = clone.myUniqueID;
+    	myPlayerID = clone.myPlayerID;
+    	myShouldRemove = false;
+    	myInventory = null; // TODO: NOPE
+    	
+    	
+    }
+    
+    private void setImageView(String imageLocation) {
+    	if(myImageLocation.startsWith("/")){
+        	myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+        }
+        else{
+        	myImageView = new ImageView(new Image(imageLocation));
+        }
+    }
     /**
      * Returns the image location url (for data saving)
      */
@@ -137,7 +160,9 @@ public class Piece {
      * Adds an Action to the piece's list of Actions
      */
     public void addAction (Action a) {
-        myActions.add(a);
+    	if(!myActions.contains(a)){
+    		myActions.add(a);
+    	}
     }
 
     /**
