@@ -54,12 +54,8 @@ public class WorkspaceView extends TabPane {
 		tab.setOnClosed(new EventHandler<Event>() {
         	@Override
 			public void handle(Event closed) {
-<<<<<<< HEAD
           		int idx = getSelectionModel().getSelectedIndex();
-=======
-        		//System.out.println("second?");
-        		int idx = getSelectionModel().getSelectedIndex();
->>>>>>> 213773f8df2968a8b02494670ae4c30dd7e19e2a
+
 
             	if(idx>=0){
         			myGrids.remove(idx);
