@@ -42,9 +42,11 @@ public class VoogaView extends BorderPane {
 		myWorkspaceView.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 		    @Override
 		    public void changed(ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
+		    	
 		    	SandyGrid activeGrid = myWorkspaceView.getActiveGrid();
 		        myLibraryView.associateGrid(activeGrid);
 		    }
+
 		}); 
 		
 		setTop(myMenuView);	
