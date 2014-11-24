@@ -2,6 +2,7 @@ package authoring.concretefeatures.menus;
 
 
 import authoring.abstractfeatures.PopupWindow;
+import authoring.concretefeatures.GameCreator;
 import authoring.concretefeatures.IndividualUnitEditor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -31,8 +32,8 @@ public class File extends Menu {
         @Override
         public void handle (ActionEvent event) {
             // Restart Game
-//             PopupWindow p = new GameCreator();
-//             p.show();
+             PopupWindow p = new GameCreator();
+             p.show();
             
         }
     }
