@@ -7,16 +7,23 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
 import authoring.data.PatchData;
 import authoring.data.PieceData;
 import authoring_environment.JennieGrid;
+import authoring_environment.LibraryView;
 import authoring_environment.SandyGrid;
+import authoring_environment.SandyGridView;
 import authoring_environment.UIspecs;
 import authoring_environment.VoogaView;
+import authoring_environment.WorkspaceView;
 
 
 /**
@@ -38,7 +45,7 @@ public class GameCreator extends PopupWindow {
 
     private ChoiceBox<String> gridChoiceBox;
 
-    private final VoogaView myVooga = new VoogaView();
+    private WorkspaceView myWorkspaceView;
 
     /**
      * Constructor that sets the dimensions of the TerrainCreator GUI component
@@ -47,10 +54,12 @@ public class GameCreator extends PopupWindow {
      * @param library : Library to which terrain will be added.
      */
 
-    public GameCreator () {
+    public GameCreator (WorkspaceView wsView) {
         setHeight(HEIGHT);
         setWidth(WIDTH);
         setTitle(NAME);
+        
+        myWorkspaceView = wsView;
         initialize();
     }
 
@@ -96,12 +105,29 @@ public class GameCreator extends PopupWindow {
                     new JennieGrid(width, height, 40, new PieceData(), new PatchData());
                 }
                 
+                addWorkspaceTab(width, height);
                 close();
             }
         });
         box.getChildren().addAll(grid, players, heights, widths, create);
         root.setContent(box);
         setScene(scene);
+    }
+    
+    private void addWorkspaceTab(int numRows, int numCols) {
+    	PieceData pieceData = new PieceData();
+		PatchData patchData = new PatchData();
+		SandyGrid grid = new SandyGrid(numRows, numCols,
+		40, pieceData, patchData);
+
+		LibraryView libraryView = new LibraryView(grid);
+		SandyGridView gridView = new SandyGridView(grid, 700, 550);
+		Tab tab = new Tab();
+		BorderPane bPane = new BorderPane();
+		bPane.setLeft(libraryView);
+		bPane.setRight(gridView);
+		tab.setContent(bPane);
+		myWorkspaceView.getTabs().add(tab);
     }
 
     public ChoiceBox<String> initChoiceBox (VBox box, ChoiceBox<String> choices) {
