@@ -3,7 +3,9 @@ package authoring.concretefeatures;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -22,11 +24,14 @@ public class ActionCheck extends PopupWindow {
     private final int WIDTH = 400;
     private final String ACTION = "Action";
     private final String NAME = "Available Actions for Units";
+    private final String ACTION_TYPE = "Action Type";
     private LibraryView myLibrary;
 
     private List<Action> myActions;
     private List<Piece> myPieces;
     private List<Patch> myPatches;
+    private Map<String,Map>  Conclusion;
+    
 
     private static final String STYLESHEET = "/resources/stylesheets/actioncreator_layout.css";
 
@@ -78,7 +83,9 @@ public class ActionCheck extends PopupWindow {
         
         
         
-        mainVBox.getChildren().addAll(actionNameVBox );
+        
+        
+        mainVBox.getChildren().addAll(actionNameVBox, new Separator() );
                       root.setContent(mainVBox);
                       setScene(scene);
         
@@ -87,12 +94,22 @@ public class ActionCheck extends PopupWindow {
     private void initActionChooser (VBox nameVBox, ChoiceBox<String> actionTypes) {
         // TODO: actionTypes needs to get List<String> that contains names of all the action types
         // 
-        Label targetLabel = new Label("Action Type");
-        actionTypes.getItems().addAll("Attack", "Heal", "whatever");
+        Label targetLabel = new Label(ACTION_TYPE);
+        actionTypes.getItems().addAll("Attack", "Heal", "AlltheRest");
 
         HBox targetAndStatHBox = new HBox();
         targetAndStatHBox.getChildren().addAll(actionTypes);
         nameVBox.getChildren().addAll(targetLabel, targetAndStatHBox);
     }
-
+    
+    private List<Piece> getReceivers(Piece actor){
+        List<Piece> receivers = new ArrayList<Piece>();
+        for(Piece p: myPieces){
+            if(!p.equals(actor)){
+                receivers.add(p);
+            }
+        }
+        return receivers;
+    }
+    
 }
