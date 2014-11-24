@@ -10,7 +10,7 @@ public class SquareGrid extends Grid {
      * Default constructor makes a 5x5 square grid 
      */
     public SquareGrid () {
-        this(8, 8);
+        this(5, 5);
     }
 
     /**
