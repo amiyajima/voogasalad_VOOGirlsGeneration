@@ -131,7 +131,7 @@ public class JSONBobTester {
         
         int randomInt = r.nextInt(50);
         
-        Piece piece = new Piece("Nullpiece", DEFAULT_DUVALL , movements, actions, s, p3, 2, i);
+        Piece piece = null;
         if (randomInt % 2 == 1) {
             piece = new Piece("Duvall", DEFAULT_DUVALL, movements, actions, s, p, 1, i);
         }

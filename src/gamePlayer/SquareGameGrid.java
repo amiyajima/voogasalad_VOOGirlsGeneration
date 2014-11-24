@@ -29,6 +29,7 @@ public class SquareGameGrid extends GameGrid {
     public SquareGameGrid (int row, int col) {
         // will handle different size, stubbing it for now.
         super(row, col);
+       // this.setPrefSize(500, 500);
 
     }
 
