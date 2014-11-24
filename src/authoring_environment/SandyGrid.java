@@ -80,69 +80,55 @@ public class SandyGrid extends Pane {
 		shape.setStrokeWidth(0.75);
 	}
 	
-	public void handleEvent(MouseEvent event, Piece currentUnit, Patch currentTerrain,
-			boolean doNothing, boolean unitSelected, boolean reset) {
+	public SandyTile findTile(MouseEvent event) {
 		int x = (int) event.getX() / myTileSize;
 		int y = (int) event.getY() / myTileSize;
-		SandyTile tile = myGrid.get(y).get(x);
-		setContents(tile, currentUnit, currentTerrain, doNothing, unitSelected, reset);
+		if(x < 0 || x >= myCols || y < 0 || y >= myRows){
+			return null;
+		}
+		return myGrid.get(y).get(x);
 	}
 
-	protected void setContents(SandyTile tile, Piece currentUnit, Patch currentTerrain,
-			boolean doNothing, boolean unitSelected, boolean reset) {
-		if(doNothing){
-			return;
-		}
-		if(reset) {
-			if (unitSelected) {
-				removeUnit(tile);
-			}
-			else {
-				removeTerrain(tile);
-			}
-		}
-		else {
-			if(unitSelected) {
-				if(tile.myUnit != null){
-					myPieceData.remove(tile.myUnit);
-				}
-				tile.myUnit = currentUnit;
-				tile.myUnit.setLoc(new Point2D.Double(tile.getYLocation(), tile.getXLocation()));
-				tile.myPieceImage.setImage(tile.myUnit.getImageView().getImage());
-				tile.myPieceImage.setVisible(true);
-				myPieceData.add(tile.myUnit);
-			}
-			else {
-				if(tile.myTerrain != null){
-					myPatchData.remove(tile.myTerrain);
-				}
-				tile.myTerrain = currentTerrain;
-				tile.myTerrain.setLoc(new Point2D.Double(tile.getYLocation(), tile.getXLocation()));
-				tile.myPatchImage.setImage(tile.myTerrain.getImageView().getImage());
-				tile.myPatchImage.setVisible(true);
-				myPatchData.add(tile.myTerrain);
-			}
-		}
-	}
-
-	private void removeUnit(SandyTile tile) {
-		myPieceData.remove(tile.myUnit);
-		tile.myUnit = null;
-		tile.myPieceImage.setVisible(false);
+	protected void addUnit(SandyTile tile, Piece unit){
+		myPieceData.removePiece(tile.getLocation());
+		unit.setLoc(tile.getLocation());
+		tile.myPieceImage.setImage(unit.getImageView().getImage());
+		tile.myPieceImage.setVisible(true);
+		myPieceData.add(unit);
 	}
 	
-	private void removeTerrain(SandyTile tile) {
-		myPatchData.remove(tile.myTerrain);
-		tile.myTerrain = null;
-		tile.myPatchImage.setVisible(false);
+	protected void addTerrain(SandyTile tile, Patch terrain){
+		myPatchData.removePatch(tile.getLocation());
+		terrain.setLoc(tile.getLocation());
+		tile.myPatchImage.setImage(terrain.getImageView().getImage());
+		tile.myPatchImage.setVisible(true);
+		myPatchData.add(terrain);
 	}
-
+	
+	protected void removeUnit(SandyTile tile, Piece unit) {
+		tile.myPieceImage.setVisible(false);
+		myPieceData.remove(unit);
+	}
+	
+	protected void removeTerrain(SandyTile tile, Patch terrain) {
+		tile.myPatchImage.setVisible(false);
+		myPatchData.remove(terrain);
+	}
+	
+	protected void editUnit(SandyTile tile, Piece unit) {
+		// TO DO: Open individual unit editor.
+	}
+	
+	protected void editTerrain(SandyTile tile, Patch terrain) {
+		// TO DO: Open individual terrain editor.
+	}
+	
 	public void removePieces(Piece unit) {
 		for (int r = 0; r < myRows; r++) {
 			for (int c = 0; c < myCols; c++) {
-				SandyTile tile = myGrid.get(r).get(c);
-				if(tile.myUnit != null && tile.myUnit.getTypeID() == unit.getTypeID()){
-					removeUnit(tile);
+				if(myPieceData.unitAtLoc(unit, c, r)){
+					SandyTile tile = myGrid.get(r).get(c);
+					tile.myPieceImage.setVisible(false);
 				}
 			}
 		}
@@ -151,9 +137,9 @@ public class SandyGrid extends Pane {
 	public void removePatches(Patch terrain) {
 		for (int r = 0; r < myRows; r++) {
 			for (int c = 0; c < myCols; c++) {
-				SandyTile tile = myGrid.get(r).get(c);
-				if(tile.myTerrain != null && tile.myTerrain.getTypeID() == terrain.getTypeID()){
-					removeTerrain(tile);
+				if(myPatchData.terrainAtLoc(terrain, c, r)){
+					SandyTile tile = myGrid.get(r).get(c);
+					tile.myPatchImage.setVisible(false);
 				}
 			}
 		}

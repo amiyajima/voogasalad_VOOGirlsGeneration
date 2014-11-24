@@ -1,8 +1,5 @@
 package authoring_environment;
 
-import gamedata.gamecomponents.Patch;
-import gamedata.gamecomponents.Piece;
-
 import java.awt.geom.Point2D;
 
 import javafx.scene.Group;
@@ -19,8 +16,6 @@ public class SandyTile extends Group {
 	private int mySize;
 	private Point2D myLocation;
 	
-	protected Piece myUnit;
-	protected Patch myTerrain;
 	protected ImageView myPieceImage;
 	protected ImageView myPatchImage;
 
@@ -34,20 +29,16 @@ public class SandyTile extends Group {
 		super.getChildren().addAll(myShape, myPatchImage, myPieceImage);
 	}
 	
-	public int getXLocation() {
-		return (int)myLocation.getX();
-	}
-	
-	public int getYLocation() {
-		return (int)myLocation.getY();
+	public Point2D getLocation() {
+		return myLocation;
 	}
 	
 	private ImageView initImageView() {
 		ImageView imgView = new ImageView();
 		imgView.setFitHeight(mySize);
         imgView.setFitWidth(mySize);
-        imgView.setLayoutX(getXLocation() * mySize);
-        imgView.setLayoutY(getYLocation() * mySize);
+        imgView.setLayoutX(myLocation.getX() * mySize);
+        imgView.setLayoutY(myLocation.getY() * mySize);
         imgView.setVisible(false);
         return imgView;
 	}
