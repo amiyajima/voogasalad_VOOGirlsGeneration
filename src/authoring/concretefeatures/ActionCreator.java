@@ -4,13 +4,12 @@ import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
 import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import java.awt.geom.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,6 +22,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
 import authoring.data.ActionData;
+import authoring_environment.UIspecs;
 
 /**
  * Opens a dialog for creating new Actions in the authoring environment
@@ -32,13 +32,19 @@ import authoring.data.ActionData;
  */
 public class ActionCreator extends PopupWindow {
 
-	public static final int HEIGHT = 400;
-	public static final int WIDTH = 420;
+	public static final int HEIGHT = 550;
+	public static final int WIDTH = 400;
 	public static final String NAME = "Action Creator";
 	private static final String STYLESHEET = "/resources/stylesheets/actioncreator_layout.css";
 
 	private List<SingleMultiplierBox> operationsList;
 	private ActionData myActionData;
+	
+	private static final Insets MARGINS = new Insets(20, WIDTH/8, 20, WIDTH/8 - 10);
+        private static final Insets LABEL_MARGINS = new Insets(10, WIDTH/7, 10, WIDTH/7 - 10);
+        private static final String LABEL_CSS = "-fx-font-size: 25pt;";
+        private static final String BUTTON_CSS = "-fx-padding: 10;";
+        private static final String DEFAULT_IMAGE = "/resources/images/default_image.png";
 
 	private String myName;
 	private List<Point2D> myAttackRange;
@@ -74,9 +80,18 @@ public class ActionCreator extends PopupWindow {
 		Scene scene = new Scene(root, WIDTH, HEIGHT);
 		scene.getStylesheets().add(STYLESHEET);
 
-		VBox mainVBox = new VBox();
-		mainVBox.getStyleClass().add("vbox");
-		mainVBox.setId("vbox-main");
+		VBox box = new VBox();
+		//box.getStyleClass().add("vbox");
+		//box.setId("vbox-main");
+		box.setPadding(MARGINS);
+	        box.setSpacing(10);
+	        
+	        HBox labelBox = new HBox();
+	        labelBox.setPadding(LABEL_MARGINS);
+	        Label label = new Label(NAME);
+	        label.setStyle(LABEL_CSS);
+	        labelBox.getChildren().add(label);
+	        
 		VBox nameVBox = new VBox();
 		VBox rangeVBox = new VBox();
 		rangeVBox.getStyleClass().add("vbox");
@@ -86,6 +101,7 @@ public class ActionCreator extends PopupWindow {
 
 		// Action name
 		TextField nameField = new TextField();
+		nameField.setMaxWidth(WIDTH - WIDTH/4 - 10);
 		initNameField(nameVBox, nameField);
 		// Set the Action Range
 		initSetRangeButton(rangeVBox, "Action Range:", myAttackRange);
@@ -100,6 +116,8 @@ public class ActionCreator extends PopupWindow {
 		initOperationsBox(operationsVBox);
 
 		Button createBtn = new Button("Create new action");
+		createBtn.setStyle(BUTTON_CSS);
+		createBtn.setMaxWidth(WIDTH - WIDTH/4 - 10);
 		createBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent click) {
@@ -111,10 +129,10 @@ public class ActionCreator extends PopupWindow {
 			}
 		});
 
-		mainVBox.getChildren().addAll(nameVBox, rangeVBox, new Separator(),
+		box.getChildren().addAll(labelBox, nameVBox, rangeVBox, new Separator(),
 				targetVBox, operationsVBox, new Separator(), conclusionVBox,
 				new Separator(), createBtn);
-		root.setContent(mainVBox);
+		root.setContent(box);
 		setScene(scene);
 	}
 
@@ -149,6 +167,7 @@ public class ActionCreator extends PopupWindow {
 			List<Point2D> range) {
 		Label rangeLabel = new Label(label);
 		Button setRange = new Button("Set Range...");
+		setRange.setStyle(BUTTON_CSS); 
 		setRange.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -170,6 +189,7 @@ public class ActionCreator extends PopupWindow {
 		// Particular statistic modified
 		moddedStat.setPromptText("Stat to be modified");
 		HBox targetAndStatHBox = new HBox();
+		targetAndStatHBox.setSpacing(10);
 		targetAndStatHBox.getChildren().addAll(targetChoice, moddedStat);
 		targetVBox.getChildren().addAll(targetLabel, targetAndStatHBox);
 	}
@@ -177,12 +197,15 @@ public class ActionCreator extends PopupWindow {
 	private void initOperationsBox(VBox operationsBox) {
 		Label operationsLabel = new Label("Operations to be performed");
 		Button newOperation = new Button("New operation");
+		newOperation.setStyle(BUTTON_CSS);
+		operationsBox.setSpacing(10);
 		operationsBox.getChildren().addAll(operationsLabel, newOperation);
 
 		newOperation.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent click) {
 				SingleMultiplierBox operation = new SingleMultiplierBox();
+				operation.setSpacing(5);
 				operationsList.add(operation);
 				operationsBox.getChildren().add(operation);
 			}

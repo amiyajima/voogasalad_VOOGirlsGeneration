@@ -26,9 +26,9 @@ import javafx.stage.FileChooser.ExtensionFilter;
  */
 public class FileX extends Menu {
         public static final String myLabel = "File";
-        public static final String newLevelLabel = "New Level";
-        public static final String openLabel = "Open";
-        public static final String saveLabel = "Save";
+        public static final String newLevelLabel = "Create New Level";
+        public static final String openLabel = "Edit Existing Game";
+        public static final String saveLabel = "Save Game";
         public static final String exitLabel = "Exit";
 	private WorkspaceView myWorkspaceView;
 	
@@ -50,8 +50,7 @@ public class FileX extends Menu {
     }
     
     private void handleNewLevel() {
-        PopupWindow p = new GameCreator(myWorkspaceView);
-        p.show();
+        GameCreator g = new GameCreator(myWorkspaceView);
     }
 
     private void handleLoad () {

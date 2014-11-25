@@ -25,13 +25,18 @@ public class PieceData implements AuthoringData<Piece> {
     }
     
 	@Override
-	public void add(Piece piece) {
-		myPieces.add(piece);
+	public void add(Piece...pieces) {
+	    for (Piece p : pieces ) {
+	        myPieces.add(p);
+	    }
 	}
 
 	@Override
-	public void remove(Piece piece) {
-		myPieces.remove(piece);
+	public void remove(Piece...pieces) {
+	    for (Piece p : pieces) {
+	        myPieces.remove(p);
+	    }
+		
 	}
 
 	@Override
@@ -60,6 +65,11 @@ public class PieceData implements AuthoringData<Piece> {
 	}
 	
 	public List<Piece> getPieces(){
+        return myPieces;
+    }
+
+    @Override
+    public List<Piece> get () {
         return myPieces;
     }
 }

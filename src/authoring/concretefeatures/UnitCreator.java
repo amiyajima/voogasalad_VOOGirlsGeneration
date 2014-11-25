@@ -5,17 +5,14 @@ import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-
+import javafx.geometry.Insets;
 import java.awt.geom.Point2D;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -42,18 +39,24 @@ import authoring_environment.UIspecs;
 public class UnitCreator extends PopupWindow {
 	
 	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
-	private final int HEIGHT = 400;
-	private final int WIDTH = 400;
-	private final String NAME = "Unit Creator";
-	private final String UNIT_NAME_LABEL = "Name";
-	private final String IMAGE_LABEL = "Unit image";
-	private final String LOAD_IMAGE_LABEL = "Load image";
-	private final String TEMPLATE_LABEL = "Create new unit template";
-	private final String DELETE = "Delete";
-	private final String EDIT = "Edit";
+	private static final int HEIGHT = 500;
+	private static final int WIDTH = 400;
+	private static final String NAME = "Unit Creator";
+	private static final String UNIT_NAME_LABEL = "Name: ";
+	//private static final String IMAGE_LABEL = "Unit image";
+	private static final String LOAD_IMAGE_LABEL = "Load Unit Image";
+	private static final String TEMPLATE_LABEL = "Create new unit template";
+	private static final String DELETE = "Delete";
+	private static final String EDIT = "Edit";
 	private LibraryView myLibrary;
 	private ActionData myAvailableActions;
 	
+	private static final Insets MARGINS = new Insets(10, WIDTH/8, 10, WIDTH/8 - 10);
+        private static final Insets LABEL_MARGINS = new Insets(10, WIDTH/7, 10, WIDTH/7 - 10);
+        private static final String LABEL_CSS = "-fx-font-size: 25pt;";
+        private static final String BUTTON_CSS = "-fx-padding: 10;";
+        private static final String DEFAULT_IMAGE = "/resources/images/default_image.png";
+        
 	private String myName;
 	private int myPlayerID;
 	private String myImageLocation;
@@ -94,29 +97,38 @@ public class UnitCreator extends PopupWindow {
         VBox box = new VBox();
         box.getStylesheets().add(STYLESHEET);
         box.getStyleClass().add("vbox");
-        box.setPadding(UIspecs.allPadding);
-        box.setSpacing(5);
+        box.setPadding(MARGINS);
+        box.setSpacing(10);
+        
+        HBox labelBox = new HBox();
+        labelBox.setPadding(LABEL_MARGINS);
+        Label eventsLabel = new Label(NAME);
+        eventsLabel.setStyle(LABEL_CSS);
+        labelBox.getChildren().add(eventsLabel);
         
         HBox names = new HBox();
         names.setPadding(UIspecs.allPadding);
-        names.setSpacing(5);
+        names.setSpacing(10);
         HBox images = new HBox();
         images.setPadding(UIspecs.allPadding);
-        images.setSpacing(5);
+        images.setSpacing(10);
 
         Label nameLabel = new Label(UNIT_NAME_LABEL);
         nameLabel.setPadding(UIspecs.topRightPadding);
         TextField unitName = new TextField();
+        unitName.setMinWidth(WIDTH/2 + 20);
         names.getChildren().addAll(nameLabel, unitName);
 
         ImageView icon = new ImageView();
-        icon.setTranslateY(-7.5);
+        //icon.setTranslateY(-10);
         icon.setFitHeight(40);
         icon.setFitWidth(40);
-        Label loadLabel = new Label(IMAGE_LABEL);
-        loadLabel.setPadding(UIspecs.topRightPadding);
-        Button loadImage = new Button(LOAD_IMAGE_LABEL);
-        loadImage.setOnAction(new EventHandler<ActionEvent>() {
+        icon.setImage(new Image(getClass().getResourceAsStream(DEFAULT_IMAGE)));
+        //Label loadLabel = new Label(IMAGE_LABEL);
+        //loadLabel.setPadding(UIspecs.topRightPadding);
+        Button loadImageButton = new Button(LOAD_IMAGE_LABEL);
+        loadImageButton.setStyle(BUTTON_CSS);
+        loadImageButton.setOnAction(new EventHandler<ActionEvent>() {
         	// initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
         	// @Jesse Finish this
         	// From Martin: You sure this code goes here, and not below the goButton ActionEvent?
@@ -134,11 +146,12 @@ public class UnitCreator extends PopupWindow {
                 }
             }
         });
-        images.getChildren().addAll(loadLabel, loadImage, icon);
+        images.getChildren().addAll(icon, loadImageButton);
 
         ModulesList modList = new ModulesList(myAvailableActions.getActionNames(), FXCollections.observableArrayList());
 
         Button goButton = new Button(TEMPLATE_LABEL);
+        goButton.setStyle(BUTTON_CSS);
         goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
@@ -155,6 +168,7 @@ public class UnitCreator extends PopupWindow {
                 name.setTranslateY(7.5);
                 
                 Button editButton = new Button(EDIT);
+                editButton.setStyle(BUTTON_CSS);
                 editButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle (ActionEvent e) {
@@ -163,6 +177,7 @@ public class UnitCreator extends PopupWindow {
                     }
                 });
                 Button delButton = new Button(DELETE);
+                delButton.setStyle(BUTTON_CSS);
                 UnitEntry entry = new UnitEntry(unit, icon, name, editButton, delButton);
                 entry.setStyle("-fx-cursor: hand");
         		entry.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -183,7 +198,7 @@ public class UnitCreator extends PopupWindow {
                 close();
             }
         });
-        box.getChildren().addAll(names, images, modList, goButton);
+        box.getChildren().addAll(labelBox, names, images, modList, goButton);
         setScene(new Scene(box));
     }
 	protected List<Action> addSelectedActions(List<String> selected){
