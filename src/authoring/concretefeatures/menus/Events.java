@@ -26,8 +26,8 @@ public class Events extends Menu{
 			
 			@Override
 			public void handle(ActionEvent t){
-				PopupWindow p = new EventsWindow();
-				p.show();
+				//EventsWindow p = new EventsWindow();
+				//p.show();
 			}
 		});
 	}

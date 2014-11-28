@@ -13,10 +13,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import java.awt.geom.Point2D;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -36,11 +36,11 @@ import authoring_environment.UIspecs;
  * 
  * @author Mike Zhu
  */
-public class UnitCreator extends PopupWindow {
+public class UnitCreator extends TitledPane {
 	
 	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
-	private static final int HEIGHT = 500;
-	private static final int WIDTH = 400;
+	private static final int HEIGHT = 400;
+	private static final int WIDTH = 300;
 	private static final String NAME = "Unit Creator";
 	private static final String UNIT_NAME_LABEL = "Name: ";
 	//private static final String IMAGE_LABEL = "Unit image";
@@ -88,11 +88,10 @@ public class UnitCreator extends PopupWindow {
 
 		setHeight(HEIGHT);
 		setWidth(WIDTH);
-		setTitle(NAME);
+		setText(NAME);
 		initialize();
 	}
 
-	@Override
     protected void initialize () {
         VBox box = new VBox();
         box.getStylesheets().add(STYLESHEET);
@@ -195,11 +194,13 @@ public class UnitCreator extends PopupWindow {
         		});
 
                 myLibrary.addPiece(entry);
-                close();
+                //close();
             }
         });
         box.getChildren().addAll(labelBox, names, images, modList, goButton);
-        setScene(new Scene(box));
+        setContent(box);
+        setText(NAME);
+        //setScene(new Scene(box));
     }
 	protected List<Action> addSelectedActions(List<String> selected){
 		List<Action> list = new ArrayList<>();

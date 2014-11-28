@@ -28,8 +28,8 @@ public class Terrain extends Menu{
 			
 			@Override
 			public void handle(ActionEvent t){
-				PopupWindow p = new TerrainCreator(myLibrary);
-				p.show();
+				//PopupWindow p = new TerrainCreator(myLibrary);
+				//p.show();
 			}
 		});
 	}

@@ -29,8 +29,8 @@ public class Units extends Menu {
 			
 			@Override
 			public void handle(ActionEvent t){
-				PopupWindow p = new UnitCreator(myLibrary, actions);
-				p.show();
+				//PopupWindow p = new UnitCreator(myLibrary, actions);
+				//p.show();
 			}
 		});
 	}

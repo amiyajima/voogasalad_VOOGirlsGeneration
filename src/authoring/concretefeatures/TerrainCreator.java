@@ -1,16 +1,17 @@
 package authoring.concretefeatures;
 
 import gamedata.gamecomponents.Patch;
+import java.awt.geom.Point2D;
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import java.awt.geom.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -29,11 +30,11 @@ import authoring_environment.UIspecs;
  * 
  * @author Mike Zhu
  */
-public class TerrainCreator extends PopupWindow {
+public class TerrainCreator extends TitledPane {
 
     private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
     private static final int HEIGHT = 300;
-    private static final int WIDTH = 400;
+    private static final int WIDTH = 300;
     private static final String NAME = "Terrain Creator";
     private static final String TERRAIN_NAME_LABEL = "Name";
     //private static final String IMAGE_LABEL = "Terrain image";
@@ -69,11 +70,10 @@ public class TerrainCreator extends PopupWindow {
 
         setHeight(HEIGHT);
         setWidth(WIDTH);
-        setTitle(NAME);
+        setText(NAME);
         initialize();
     }
 
-    @Override
     protected void initialize () {
 
         ScrollPane root = new ScrollPane();
@@ -177,10 +177,12 @@ public class TerrainCreator extends PopupWindow {
                     }
                 });
                 myLibrary.addPatch(entry);
-                close();
+                
+                //close();
             }
         });
         box.getChildren().addAll(labelBox, names, images, goButton);
-        setScene(new Scene(box));
+        setContent(box);
+        setText(NAME);
     }
 }

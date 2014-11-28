@@ -3,21 +3,19 @@ package authoring.concretefeatures;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
-import authoring_environment.UIspecs;
 
-public class EventsWindow extends PopupWindow{
+public class EventsWindow extends TitledPane {
 
-	public static final int HEIGHT = 400;
-	public static final int WIDTH = 400;
-	public static final String NAME = "Events";
+	public static final int HEIGHT = 300;
+	public static final int WIDTH = 300;
+	public static final String NAME = "Event Creator";
 	public static final int BUTTON_SPACING = 20;
 	public static final String NEW_EVENT_BUTTON = "Add Event";
 	public static final String EDIT_EVENT_BUTTON = "Edit Event";
@@ -34,11 +32,10 @@ public class EventsWindow extends PopupWindow{
 	public EventsWindow(){
 		setHeight(HEIGHT);
 		setWidth(WIDTH);
-		setTitle(NAME);
+		setText(NAME);
 		initialize();
 	}
 	
-	@Override
 	protected void initialize() {
 				
     	        VBox box = new VBox();
@@ -73,10 +70,8 @@ public class EventsWindow extends PopupWindow{
 		removeEvent.setOnMouseClicked(event->removeEvent());
 		
 		box.getChildren().addAll(labelBox, eventsView, buttons);
-		
-		Scene scene = new Scene(box);
-		scene.getStylesheets().add(STYLESHEET);
-		setScene(scene);
+		setContent(box);
+		setText(NAME);
 	}
 	
 	private void newEvent(){
