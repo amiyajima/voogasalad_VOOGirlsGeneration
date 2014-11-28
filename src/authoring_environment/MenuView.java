@@ -16,8 +16,9 @@ public class MenuView extends MenuBar {
 		
 		
 		
-		getMenus().addAll(new FileX(wsView), new GlobalRules(), new Events(), new Units(library, actions), 
-						  new Terrain(library), new Actions(library, actions));
+		getMenus().addAll(new FileX(wsView), new GlobalRules()
+		/*, new Events(), new Units(library, actions), new Terrain(library), new Actions(library, actions)*/
+		);
 		
 	}
 }

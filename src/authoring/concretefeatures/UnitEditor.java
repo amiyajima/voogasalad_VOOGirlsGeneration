@@ -14,7 +14,7 @@ public class UnitEditor extends TitledPane {
     private static final int HEIGHT = 400;
     private static final int WIDTH = 350;
     private static final String NAME = "Unit Editor";
-    private  static final String EVENTS = "Units";
+    private  static final String UNITS_LIST_NAME = "Units";
     private static final int BUTTON_SPACING = 10;
     private static final String EDIT_BUTTON = "Edit";
     private static final String REMOVE_BUTTON = "Remove";
@@ -24,58 +24,20 @@ public class UnitEditor extends TitledPane {
     
     private ObservableList<String> units;
     private ListView<String> unitsView;
+    
+    private SuperEditorMenu myEditor;
                 
     public UnitEditor(){
-            setHeight(HEIGHT);
-            setWidth(WIDTH);
-            setText(NAME);
-            initialize();
+        myEditor = new SuperEditorMenu(NAME, UNITS_LIST_NAME);
+        units = FXCollections.observableArrayList("woo", "blah", "choochoo");
+        myEditor.initializeLibrary(units);
+        
+        setText(NAME);
+        setContent(myEditor);
     }
     
-    protected void initialize() {
-                            
-            VBox box = new VBox();
-            box.setSpacing(10);
-            box.setPadding(MARGINS);
-            
-            HBox labelBox = new HBox();
-            labelBox.setSpacing(10);
-            Label eventsLabel = new Label(EVENTS);
-            eventsLabel.setStyle(LABEL_CSS);
-            labelBox.getChildren().add(eventsLabel);
-            
-            units = FXCollections.observableArrayList("woo");
-            unitsView = new ListView<String>(events);
-            unitsView.setMaxWidth(WIDTH - (MARGINS.getRight()*2));
-            unitsView.setMaxHeight(HEIGHT - (MARGINS.getBottom()*2));
-            
-            HBox buttons = new HBox(BUTTON_SPACING);
-            Button editUnit = new Button(EDIT_BUTTON);
-            Button removeUnit = new Button(REMOVE_BUTTON);
-            editEvent.setMaxWidth(WIDTH - (MARGINS.getRight()*2) - BUTTON_SPACING);
-            removeEvent.setMaxWidth(WIDTH - (MARGINS.getRight()*2) - BUTTON_SPACING);
-            buttons.setSpacing(BUTTON_SPACING);
-            buttons.getChildren().addAll(editEvent, removeEvent);
-            editEvent.setOnMouseClicked(event->editEvent());
-            removeEvent.setOnMouseClicked(event->removeEvent());
-            
-            box.getChildren().addAll(labelBox, eventsView, buttons);
-            setContent(box);
-            setText(NAME);
-    }
-
-
-    private void editEvent(){
-            String s = eventsView.getSelectionModel().getSelectedItem();
-    }
-    
-    private void removeEvent(){
-            String s = eventsView.getSelectionModel().getSelectedItem();
-            events.remove(s);
-    }
-    
-    public ObservableList<String> getEvents() {
-        return events;
+    public ObservableList<String> getUnits() {
+        return units;
     }
 
 

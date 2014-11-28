@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -71,8 +72,9 @@ public class UnitCreator extends TitledPane {
 	 * 
 	 * @param library
 	 *            : Library to which units will be added.
+	 * @param units 
 	 */
-	public UnitCreator(LibraryView library, ActionData availableActions) {
+	public UnitCreator(LibraryView library, ActionData availableActions, ObservableList<String> units) {
 		myLibrary = library;
 		myAvailableActions = availableActions;
 		
