@@ -1,6 +1,7 @@
 package authoring_environment;
 
 import authoring.data.ActionData;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
@@ -19,8 +20,8 @@ public class CreatorEditor extends TabPane {
         editTab.setClosable(false);
         editTab.setContent(editAccordion);
         editTab.setText(EDIT);
-        
-        CreateThings createAccordion = new CreateThings(editAccordion.getEventEditor().getEvents(), editAccordion, myLibraryView, myActions);
+                
+        CreateThings createAccordion = new CreateThings(editAccordion, myLibraryView, myActions);
         Tab createTab = new Tab();
         createTab.setClosable(false);
         createTab.setContent(createAccordion);

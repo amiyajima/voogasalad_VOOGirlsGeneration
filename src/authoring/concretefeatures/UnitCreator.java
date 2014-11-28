@@ -54,7 +54,6 @@ public class UnitCreator extends TitledPane {
 	private static final Insets MARGINS = new Insets(10, WIDTH/8, 10, WIDTH/8 - 10);
         private static final Insets LABEL_MARGINS = new Insets(10, WIDTH/7, 10, WIDTH/7 - 10);
         private static final String LABEL_CSS = "-fx-font-size: 25pt;";
-        private static final String BUTTON_CSS = "-fx-padding: 10;";
         private static final String DEFAULT_IMAGE = "/resources/images/default_image.png";
         
 	private String myName;
@@ -113,14 +112,10 @@ public class UnitCreator extends TitledPane {
         names.getChildren().addAll(nameLabel, unitName);
 
         ImageView icon = new ImageView();
-        //icon.setTranslateY(-10);
         icon.setFitHeight(40);
         icon.setFitWidth(40);
         icon.setImage(new Image(getClass().getResourceAsStream(DEFAULT_IMAGE)));
-        //Label loadLabel = new Label(IMAGE_LABEL);
-        //loadLabel.setPadding(UIspecs.topRightPadding);
         Button loadImageButton = new Button(LOAD_IMAGE_LABEL);
-        loadImageButton.setStyle(BUTTON_CSS);
         loadImageButton.setOnAction(new EventHandler<ActionEvent>() {
         	// initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
         	// @Jesse Finish this
@@ -144,7 +139,6 @@ public class UnitCreator extends TitledPane {
         ModulesList modList = new ModulesList(myAvailableActions.getActionNames(), FXCollections.observableArrayList());
 
         Button goButton = new Button(TEMPLATE_LABEL);
-        goButton.setStyle(BUTTON_CSS);
         goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
@@ -161,16 +155,14 @@ public class UnitCreator extends TitledPane {
                 name.setTranslateY(7.5);
                 
                 Button editButton = new Button(EDIT);
-                editButton.setStyle(BUTTON_CSS);
                 editButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle (ActionEvent e) {
-                        PopupWindow p = new UnitEditor(unit, myAvailableActions);
+                        PopupWindow p = new LibraryUnitEditor(unit, myAvailableActions);
                         p.show();
                     }
                 });
                 Button delButton = new Button(DELETE);
-                delButton.setStyle(BUTTON_CSS);
                 UnitEntry entry = new UnitEntry(unit, icon, name, editButton, delButton);
                 entry.setStyle("-fx-cursor: hand");
         		entry.setOnMouseClicked(new EventHandler<MouseEvent>(){

@@ -21,7 +21,7 @@ import javafx.scene.layout.VBox;
  * @author Mike Zhu
  *
  */
-public class ModulesList extends HBox{
+public class ModulesList extends VBox {
 	public static final int BUTTON_SPACING = 150;
 	public static final String AVAILABLE_MODULES_LABEL = "Available Actions";
 	public static final String ADDED_MODULES_LABEL = "Added Actions";
@@ -42,41 +42,43 @@ public class ModulesList extends HBox{
 
 		Label availableModsLabel = new Label(AVAILABLE_MODULES_LABEL);
 		ObservableList<String> availableModules = availableActions;
+		availableModules.addAll("Blah", "one", "lsdkfjdsf");
 		ListView<String> mods = new ListView<String>(availableModules);
+		mods.setMaxHeight(400);
 		Collections.sort(availableModules);
 
 		Label addedModsLabel = new Label(ADDED_MODULES_LABEL);
 		addedModules = addedActions;
 		ListView<String> addedMods = new ListView<String>(addedModules);
-		Button addModule = new Button(ADD_MODULES_BUTTON);
-		addModule.setOnMouseClicked(new EventHandler<MouseEvent>(){
+		mods.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent click) {
-				String s = mods.getSelectionModel().getSelectedItem();
-				if(availableModules.contains(s)){
-					availableModules.remove(s);
-					addedModules.add(s);
-				}
-				Collections.sort(addedModules);
+			    if(click.getClickCount() == 2) {
+			        String s = mods.getSelectionModel().getSelectedItem();
+			        availableModules.remove(s);
+			        addedModules.add(s);
+			        //TODO removed this check because unnecessary, is that okay?
+			        //if(availableModules.contains(s)){
+			    }
+			    Collections.sort(addedModules);
 			}
 		});
 		
-		Button removeModule = new Button(REMOVE_MODULES_BUTTON);
-		removeModule.setOnMouseClicked(new EventHandler<MouseEvent>(){
+		addedMods.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent click) {
-				String s = addedMods.getSelectionModel().getSelectedItem();
-				if(addedModules.contains(s)){
-					addedModules.remove(s);
-					availableModules.add(s);
+				if(click.getClickCount() == 2){
+				    String s = addedMods.getSelectionModel().getSelectedItem();
+				    addedModules.remove(s);
+				    availableModules.add(s);
 				}
 				Collections.sort(availableModules);
 			}
 		});		
-		
-                availableModulesVBox.getChildren().addAll(availableModsLabel, mods, addModule);
+		addedMods.setMaxHeight(400);
+                availableModulesVBox.getChildren().addAll(availableModsLabel, mods);
                 availableModulesVBox.setSpacing(5);
-                addedModulesVBox.getChildren().addAll(addedModsLabel, addedMods, removeModule);
+                addedModulesVBox.getChildren().addAll(addedModsLabel, addedMods);
                 addedModulesVBox.setSpacing(5);
                 setSpacing(5);
 		getChildren().addAll(availableModulesVBox, addedModulesVBox);

@@ -12,7 +12,7 @@ import authoring_environment.UIspecs;
 
 public class EventCreator extends TitledPane {
 
-        //private static final int HEIGHT = 350;
+        private static final int HEIGHT = 350;
 	private static final int WIDTH = 350;
 	private static final String NAME = "Event Creator";
 	private static final String NEW_EVENT_BUTTON = "+ Event";
@@ -25,8 +25,8 @@ public class EventCreator extends TitledPane {
 			
 	public EventCreator(ObservableList<String> events2){
 	    events = events2;
-		//setHeight(HEIGHT);
-		//setWidth(WIDTH);
+		setHeight(HEIGHT);
+		setWidth(WIDTH);
 		setText(NAME);
 		initialize();
 	}

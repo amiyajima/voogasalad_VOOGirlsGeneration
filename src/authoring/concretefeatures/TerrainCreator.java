@@ -45,7 +45,6 @@ public class TerrainCreator extends TitledPane {
     
     private static final Insets MARGINS = new Insets(20, WIDTH/5, 20, WIDTH/5 - 10);
     private static final String LABEL_CSS = "-fx-font-size: 14pt;";
-    private static final String BUTTON_CSS = "-fx-padding: 10;";
     private static final String DEFAULT_IMAGE = "/resources/images/default_image.png";
 
     private String myName; 
@@ -108,10 +107,7 @@ public class TerrainCreator extends TitledPane {
         icon.setFitHeight(40);
         icon.setFitWidth(40);
         icon.setImage(new Image(getClass().getResourceAsStream(DEFAULT_IMAGE)));
-        //Label loadLabel = new Label(IMAGE_LABEL);
-        //loadLabel.setPadding(UIspecs.topRightPadding);
         Button loadImage = new Button(LOAD_IMAGE_LABEL);
-        loadImage.setStyle(BUTTON_CSS);
         loadImage.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -130,7 +126,6 @@ public class TerrainCreator extends TitledPane {
         images.getChildren().addAll(icon, loadImage);
 
         Button goButton = new Button(TEMPLATE_LABEL);
-        goButton.setStyle(BUTTON_CSS);
         goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
@@ -145,7 +140,6 @@ public class TerrainCreator extends TitledPane {
                 name.setTranslateY(7.5);
 
                 Button editButton = new Button(EDIT);
-                editButton.setStyle(BUTTON_CSS);
                 editButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle (ActionEvent e) {
@@ -154,7 +148,6 @@ public class TerrainCreator extends TitledPane {
                     }
                 });
                 Button delButton = new Button(DELETE);
-                delButton.setStyle(BUTTON_CSS);
                 TerrainEntry entry = new TerrainEntry(terrain, icon, name, editButton, delButton);
                 entry.setStyle("-fx-cursor: hand");
                 entry.setOnMouseClicked(new EventHandler<MouseEvent>() {

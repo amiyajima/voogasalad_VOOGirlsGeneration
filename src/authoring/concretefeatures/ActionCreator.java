@@ -86,6 +86,7 @@ public class ActionCreator extends TitledPane {
 	        
 		VBox nameVBox = new VBox();
 		VBox rangeVBox = new VBox();
+		rangeVBox.setSpacing(5);
 		rangeVBox.getStyleClass().add("vbox");
 		VBox targetVBox = new VBox();
 		VBox operationsVBox = new VBox();
@@ -116,6 +117,8 @@ public class ActionCreator extends TitledPane {
 				myStatsLogics = getStatsLogics(targetChoice, moddedStat);
 				myActionData.add(new ConcreteAction(myName, myAttackRange,
 						myEffectRange, myStatsLogics, myConclusion));
+				System.out.println("Created Action");
+				System.out.println(myActionData.getActionNames().get(0));
 				//close(); // close window once action is made
 			}
 		});
