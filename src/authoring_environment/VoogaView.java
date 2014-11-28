@@ -1,5 +1,6 @@
 package authoring_environment;
 
+import authoring.createedit.CreatorEditor;
 import authoring.data.ActionData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
@@ -29,9 +30,11 @@ public class VoogaView extends BorderPane {
         private final int WIDTH2 = 350;
         private final int WINDOW_PADDING = 10;	
         private ActionData myActions = new ActionData();
+        private PieceTypeData pieceTypeData;
+        private PatchTypeData patchTypeData;
         
 	public VoogaView(){
-		PieceTypeData pieceTypeData = new PieceTypeData();
+		pieceTypeData = new PieceTypeData();
 		PatchTypeData patchTypeData = new PatchTypeData();
 	
 		myLibraryView = new LibraryView(pieceTypeData,patchTypeData);
@@ -59,7 +62,7 @@ public class VoogaView extends BorderPane {
 	}
 	
 	private void initializeCreator() {
-	    CreatorEditor creatorEditor = new CreatorEditor(myLibraryView, myActions);
+	    CreatorEditor creatorEditor = new CreatorEditor(myLibraryView, myActions, pieceTypeData);
             Scene creatorScene = new Scene(new Group(), WIDTH2, HEIGHT);
             Group creatorRoot = (Group) creatorScene.getRoot();
             creatorRoot.getChildren().add(creatorEditor);

@@ -1,4 +1,4 @@
-package authoring.concretefeatures;
+package authoring.createedit;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 
 public class SuperEditorMenu extends VBox {
 
-    private static final int HEIGHT = 500;
+    private static final int HEIGHT = 400;
     private static final int WIDTH = 350;
     private static final int BUTTON_SPACING = 10;
     private static final Insets MARGINS = new Insets(20, WIDTH/8, 20, WIDTH/8);
@@ -32,12 +32,13 @@ public class SuperEditorMenu extends VBox {
             getChildren().add(label);            
     }
     
-    protected void initializeLibrary(ObservableList<String> thingsInLibrary) {
+    protected ListView<String> initializeLibrary(ObservableList<String> thingsInLibrary) {
         //TODO assuming that thingsInLibrary consists of Strings for now
-        ListView<?> thingsView = new ListView<String>(thingsInLibrary);
+        ListView<String> thingsView = new ListView<String>(thingsInLibrary);
         thingsView.setMaxWidth(WIDTH - (MARGINS.getRight()*2));
         thingsView.setMaxHeight(HEIGHT - (MARGINS.getBottom()*2));
         getChildren().add(thingsView);
+        return thingsView;
     }
     
     protected void initializeButtons(Button editButton, Button removeButton, Button...args) {

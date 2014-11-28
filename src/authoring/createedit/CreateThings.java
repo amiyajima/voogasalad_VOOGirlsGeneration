@@ -1,19 +1,17 @@
-package authoring_environment;
+package authoring.createedit;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.ListView;
-import authoring.concretefeatures.ActionCreator;
-import authoring.concretefeatures.EventCreator;
-import authoring.concretefeatures.TerrainCreator;
-import authoring.concretefeatures.UnitCreator;
 import authoring.data.ActionData;
+import authoring.data.PieceTypeData;
+import authoring_environment.LibraryView;
 
 public class CreateThings extends Accordion {
 
-    public CreateThings(EditThings editAccordion, LibraryView libraryView, ActionData actions) {
+    public CreateThings(EditThings editAccordion, LibraryView libraryView, ActionData actions, PieceTypeData pieceTypeData) {
         EventCreator eventCreator = new EventCreator(editAccordion.getEventEditor().getEvents());
-        UnitCreator unitCreator = new UnitCreator(libraryView, actions, editAccordion.getUnitEditor().getUnits());
+        UnitCreator unitCreator = new UnitCreator(libraryView, actions, editAccordion.getUnitEditor().getUnits(), pieceTypeData);
         TerrainCreator terrainCreator = new TerrainCreator(libraryView);
         ActionCreator actionCreator = new ActionCreator(actions);
         getPanes().addAll(eventCreator, unitCreator, terrainCreator, actionCreator);

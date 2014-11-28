@@ -3,7 +3,6 @@ package authoring.concretefeatures;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +18,7 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import authoring.abstractfeatures.PopupWindow;
+import authoring.createedit.ModulesList;
 import authoring.data.ActionData;
 
 /**

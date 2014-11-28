@@ -1,4 +1,4 @@
-package authoring.concretefeatures;
+package authoring.createedit;
 
 import gamedata.gamecomponents.Patch;
 import java.io.File;

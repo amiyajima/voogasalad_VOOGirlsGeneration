@@ -1,4 +1,4 @@
-package authoring.concretefeatures;
+package authoring.createedit;
 
 import gamedata.action.Action;
 import gamedata.gamecomponents.Inventory;
@@ -26,7 +26,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import authoring.abstractfeatures.PopupWindow;
+import authoring.concretefeatures.LibraryUnitEditor;
+import authoring.concretefeatures.UnitEntry;
 import authoring.data.ActionData;
+import authoring.data.PieceTypeData;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
@@ -44,7 +47,6 @@ public class UnitCreator extends TitledPane {
 	private static final int WIDTH = 300;
 	private static final String NAME = "Unit Creator";
 	private static final String UNIT_NAME_LABEL = "Name: ";
-	//private static final String IMAGE_LABEL = "Unit image";
 	private static final String LOAD_IMAGE_LABEL = "Load Unit Image";
 	private static final String TEMPLATE_LABEL = "Create new unit template";
 	private static final String DELETE = "Delete";
@@ -66,18 +68,15 @@ public class UnitCreator extends TitledPane {
 	private List<Action> myActions;
 	private List<Movement> myPath;
 	private Inventory myInventory;
+	
+	private ObservableList<String> myUnits;
+	private PieceTypeData pieceLibrary;
 
-	/**
-	 * initializes it.
-	 * 
-	 * @param library
-	 *            : Library to which units will be added.
-	 * @param units 
-	 */
-	public UnitCreator(LibraryView library, ActionData availableActions, ObservableList<String> units) {
-		myLibrary = library;
+	public UnitCreator(LibraryView library, ActionData availableActions, ObservableList<String> units, PieceTypeData pieceLibrary) {
+		this.pieceLibrary = pieceLibrary;
+	    myLibrary = library;
 		myAvailableActions = availableActions;
-		
+		myUnits = units;
 		myName = "";
 		myImageLocation = "";
 		myPath = new ArrayList<Movement>();
@@ -87,8 +86,6 @@ public class UnitCreator extends TitledPane {
 		myPlayerID = 0;
 		myInventory = new Inventory();
 
-		setHeight(HEIGHT);
-		setWidth(WIDTH);
 		setText(NAME);
 		initialize();
 	}
@@ -152,7 +149,8 @@ public class UnitCreator extends TitledPane {
             	
                 Piece unit = new Piece(myName, myImageLocation, myPath, myActions, myStats,
                                        myLoc, myPlayerID, myInventory);
-
+                myUnits.add(unit.getName());
+                pieceLibrary.add(unit);
                 Label name = new Label(unitName.getText());
                 name.setTranslateY(7.5);
                 
@@ -180,7 +178,7 @@ public class UnitCreator extends TitledPane {
         				myLibrary.removePiece(entry);
         			}
         		});
-
+        	
                 myLibrary.addPiece(entry);
             }
         });

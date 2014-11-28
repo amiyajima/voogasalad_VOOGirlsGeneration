@@ -1,4 +1,4 @@
-package authoring.concretefeatures;
+package authoring.createedit;
 
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -21,10 +21,10 @@ public class EventCreator extends TitledPane {
 	private static final Insets MARGINS = new Insets(20, WIDTH/8, 20, WIDTH/8);
 	private static final String LABEL_CSS = "-fx-font-size: 12pt;";
 	
-	private ObservableList<String> events;
+	private ObservableList<String> myEvents;
 			
-	public EventCreator(ObservableList<String> events2){
-	    events = events2;
+	public EventCreator(ObservableList<String> events){
+	    myEvents = events;
 		setHeight(HEIGHT);
 		setWidth(WIDTH);
 		setText(NAME);
@@ -54,6 +54,6 @@ public class EventCreator extends TitledPane {
 	}
 	
 	private void newEvent(String eventName){
-	    events.add(eventName);
+	    myEvents.add(eventName);
 	}
 }

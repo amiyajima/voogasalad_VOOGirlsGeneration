@@ -1,14 +1,10 @@
-package authoring_environment;
+package authoring.createedit;
 
 import javafx.scene.control.Accordion;
-import authoring.concretefeatures.ActionCreator;
-import authoring.concretefeatures.EventEditor;
-import authoring.concretefeatures.TerrainCreator;
-import authoring.concretefeatures.TerrainEditor;
-import authoring.concretefeatures.UnitCreator;
 import authoring.concretefeatures.LibraryUnitEditor;
-import authoring.concretefeatures.UnitEditor;
 import authoring.data.ActionData;
+import authoring.data.PieceTypeData;
+import authoring_environment.LibraryView;
 
 public class EditThings extends Accordion {
     EventEditor myEventEditor;
@@ -16,9 +12,9 @@ public class EditThings extends Accordion {
     TerrainEditor myTerrainEditor;
     //ActionEditor myActionEditor;
 
-    public EditThings(LibraryView libraryView, ActionData actions) {
+    public EditThings(LibraryView libraryView, ActionData actions, PieceTypeData pieceTypeData) {
         myEventEditor = new EventEditor();
-        myUnitEditor = new UnitEditor();
+        myUnitEditor = new UnitEditor(actions, pieceTypeData);
         TerrainCreator terrainCreator = new TerrainCreator(libraryView);
         //TerrainEditor terrainEditor = new TerrainEditor();
         ActionCreator actionCreator = new ActionCreator(actions);

@@ -1,4 +1,4 @@
-package authoring.concretefeatures;
+package authoring.createedit;
 
 import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
@@ -22,6 +22,8 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
+import authoring.concretefeatures.RangeEditor;
+import authoring.concretefeatures.SingleMultiplierBox;
 import authoring.data.ActionData;
 import authoring_environment.UIspecs;
 

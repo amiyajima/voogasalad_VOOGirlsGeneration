@@ -1,4 +1,4 @@
-package authoring.concretefeatures;
+package authoring.createedit;
 
 import gamedata.gamecomponents.Patch;
 import java.awt.geom.Point2D;
@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import authoring.abstractfeatures.PopupWindow;
+import authoring.concretefeatures.TerrainEntry;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
