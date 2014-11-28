@@ -31,8 +31,8 @@ public class Actions extends Menu{
 			
 			@Override
 			public void handle(ActionEvent t){
-				PopupWindow p = new ActionCreator(actionData);
-				p.show();
+				//PopupWindow p = new ActionCreator(actionData);
+				//p.show();
 			}
 		});
 	}

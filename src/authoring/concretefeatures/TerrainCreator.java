@@ -37,7 +37,6 @@ public class TerrainCreator extends TitledPane {
     private static final int WIDTH = 300;
     private static final String NAME = "Terrain Creator";
     private static final String TERRAIN_NAME_LABEL = "Name";
-    //private static final String IMAGE_LABEL = "Terrain image";
     private static final String LOAD_IMAGE_LABEL = "Load Terrain Image";
     private static final String TEMPLATE_LABEL = "Create new terrain template";
     private static final String DELETE = "Delete";
@@ -45,8 +44,7 @@ public class TerrainCreator extends TitledPane {
     private LibraryView myLibrary;
     
     private static final Insets MARGINS = new Insets(20, WIDTH/5, 20, WIDTH/5 - 10);
-    private static final Insets LABEL_MARGINS = new Insets(10, 20, 10, 20);
-    private static final String LABEL_CSS = "-fx-font-size: 25pt;";
+    private static final String LABEL_CSS = "-fx-font-size: 14pt;";
     private static final String BUTTON_CSS = "-fx-padding: 10;";
     private static final String DEFAULT_IMAGE = "/resources/images/default_image.png";
 
@@ -82,7 +80,6 @@ public class TerrainCreator extends TitledPane {
 
         VBox box = new VBox();
         box.getStylesheets().add(STYLESHEET);
-        box.getStyleClass().add("vbox");
         box.setPadding(MARGINS);
         box.setSpacing(10);
         
@@ -91,7 +88,6 @@ public class TerrainCreator extends TitledPane {
         label.setPadding(UIspecs.topBottomPadding);
         
         HBox labelBox = new HBox();
-        //labelBox.setPadding(LABEL_MARGINS);
         Label eventsLabel = new Label(NAME);
         eventsLabel.setStyle(LABEL_CSS);
         labelBox.getChildren().add(eventsLabel);
@@ -109,7 +105,6 @@ public class TerrainCreator extends TitledPane {
         names.getChildren().addAll(nameLabel, terrainName);
 
         ImageView icon = new ImageView();
-        //icon.setTranslateY(-7.5);
         icon.setFitHeight(40);
         icon.setFitWidth(40);
         icon.setImage(new Image(getClass().getResourceAsStream(DEFAULT_IMAGE)));
@@ -122,8 +117,7 @@ public class TerrainCreator extends TitledPane {
             @Override
             public void handle (ActionEvent click) {
                 FileChooser fileChoice = new FileChooser();
-                fileChoice.getExtensionFilters().add(
-                                                     new ExtensionFilter("PNG Files", "*.png",
+                fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png",
                                                                          "*.gif"));
                 File selectedFile = fileChoice.showOpenDialog(null);
                 if (selectedFile != null) {
@@ -177,8 +171,6 @@ public class TerrainCreator extends TitledPane {
                     }
                 });
                 myLibrary.addPatch(entry);
-                
-                //close();
             }
         });
         box.getChildren().addAll(labelBox, names, images, goButton);

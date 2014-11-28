@@ -1,7 +1,6 @@
 package authoring_environment;
 
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -11,7 +10,6 @@ public class AuthoringMain extends Application{
 	private final String MAIN_TITLE = "Girls GenerEditor";
 	private final int HEIGHT = 600;
 	private final int WIDTH = 1000;
-	private final int WIDTH2 = 400;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {

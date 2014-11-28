@@ -7,6 +7,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -22,10 +23,10 @@ public class VoogaView extends BorderPane {
 	private MenuView myMenuView;
 	private WorkspaceView myWorkspaceView;
 	private LibraryView myLibraryView;
-        private final String CREATOR_TITLE = "CREATOR";
+        private final String CREATOR_TITLE = "Creator";
         private final int HEIGHT = 600;
         private final int WIDTH = 1000;
-        private final int WIDTH2 = 300;
+        private final int WIDTH2 = 350;
         private final int WINDOW_PADDING = 10;	
         private ActionData myActions = new ActionData();
         
@@ -58,10 +59,10 @@ public class VoogaView extends BorderPane {
 	}
 	
 	private void initializeCreator() {
-	    Creator accordion = new Creator(myLibraryView, myActions);
+	    CreatorEditor creatorEditor = new CreatorEditor(myLibraryView, myActions);
             Scene creatorScene = new Scene(new Group(), WIDTH2, HEIGHT);
             Group creatorRoot = (Group) creatorScene.getRoot();
-            creatorRoot.getChildren().add(accordion);
+            creatorRoot.getChildren().add(creatorEditor);
             Stage creatorStage = new Stage();
             creatorStage.setTitle(CREATOR_TITLE);
             creatorStage.setX(WIDTH + WINDOW_PADDING);

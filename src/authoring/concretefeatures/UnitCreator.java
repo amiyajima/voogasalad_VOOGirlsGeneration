@@ -98,13 +98,7 @@ public class UnitCreator extends TitledPane {
         box.getStyleClass().add("vbox");
         box.setPadding(MARGINS);
         box.setSpacing(10);
-        
-        HBox labelBox = new HBox();
-        labelBox.setPadding(LABEL_MARGINS);
-        Label eventsLabel = new Label(NAME);
-        eventsLabel.setStyle(LABEL_CSS);
-        labelBox.getChildren().add(eventsLabel);
-        
+               
         HBox names = new HBox();
         names.setPadding(UIspecs.allPadding);
         names.setSpacing(10);
@@ -194,13 +188,11 @@ public class UnitCreator extends TitledPane {
         		});
 
                 myLibrary.addPiece(entry);
-                //close();
             }
         });
-        box.getChildren().addAll(labelBox, names, images, modList, goButton);
+        box.getChildren().addAll(names, images, modList, goButton);
         setContent(box);
         setText(NAME);
-        //setScene(new Scene(box));
     }
 	protected List<Action> addSelectedActions(List<String> selected){
 		List<Action> list = new ArrayList<>();
