@@ -36,7 +36,6 @@ public class PieceData implements AuthoringData<Piece> {
 	    for (Piece p : pieces) {
 	        myPieces.remove(p);
 	    }
-		
 	}
 
 	@Override
