@@ -150,6 +150,12 @@ public abstract class Grid {
          */
         return myPatches;
     }
+    
+    //TODO temporary fix because it was throwing an error
+    public Piece getPiece (Object uniqueID) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
     /**
      * gets the patch on the given coordinate

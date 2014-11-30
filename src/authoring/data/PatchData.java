@@ -25,13 +25,17 @@ public class PatchData implements AuthoringData<Patch> {
     }
 
     @Override
-    public void add (Patch patch) {
-        myPatches.add(patch);
+    public void add (Patch... patches) {
+        for (Patch p : patches) {
+            myPatches.add(p);
+        }
     }
 
     @Override
-    public void remove (Patch patch) {
-        myPatches.remove(patch);
+    public void remove (Patch... patches) {
+        for (Patch p : patches) {
+            myPatches.remove(p);
+        }
     }
 
     @Override
@@ -60,6 +64,11 @@ public class PatchData implements AuthoringData<Patch> {
     }
     
     public List<Patch> getPatches(){
+        return myPatches;
+    }
+
+    @Override
+    public List<Patch> get () {
         return myPatches;
     }
 }

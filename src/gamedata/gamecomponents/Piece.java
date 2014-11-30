@@ -226,4 +226,9 @@ public class Piece {
     	return myInventory;
     }
 
+    //TODO this was throwing an error, temporary fix
+    public Object getUniqueID () {
+        return myName.hashCode();
+    }
+
 }

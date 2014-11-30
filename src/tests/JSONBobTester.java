@@ -29,9 +29,9 @@ import java.util.Random;
 
 
 /**
- * Tester for JSON file writer
+ * JSON Write Tester
  * 
- * @author Rica
+ * @author Rica Zhang
  *
  */
 public class JSONBobTester {

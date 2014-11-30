@@ -18,7 +18,7 @@ import javafx.scene.layout.HBox;
 public class SingleMultiplierBox extends HBox{
 
 	public static final int MULTIPLIER_BOX_WIDTH = 75;
-	public static final int STATS_BOX_WIDTH = 200;
+	public static final int STATS_BOX_WIDTH = 120;
 	private static final String STYLESHEET = "resources/stylesheets/singlemultiplierbox_layout.css";
 
 	private ChoiceBox<String> myStatRef;
