@@ -3,17 +3,22 @@ package gamePlayer;
 import gamedata.action.Action; 
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
+
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import java.util.ResourceBundle;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
 import tests.JSONBobTester;
 import javafx.geometry.Pos;
 import javafx.scene.ImageCursor;
@@ -448,7 +453,7 @@ public class ViewController{
         double patchWidth = 500/(double) myGrid.getRow();
         int xCor = (int) (x/patchWidth);
         int yCor = (int) (y/patchHeight);
-        System.out.println("Current Mouse Coodinatate:"+ xCor +" "+ yCor);
+        //System.out.println("Current Mouse Coodinatate:"+ xCor +" "+ yCor);
         currentClick = new Point2D.Double(yCor,xCor);
         return currentClick;
     }
@@ -595,4 +600,5 @@ public class ViewController{
     	return currentClick;
     }
     
+
 }
