@@ -6,6 +6,8 @@ import gamedata.gamecomponents.Piece;
  * A rule that checks if a piece can attack another piece
  * For example, a piece that belongs to one player cannot attack another piece
  * that belongs to the same player
+ * 
+ * TODO: DEPRECIATED? Move into actions.
  *
  */
 public class CanAttackRule extends Rule {

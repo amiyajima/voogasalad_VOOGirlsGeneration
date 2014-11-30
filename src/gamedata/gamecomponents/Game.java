@@ -49,23 +49,6 @@ public class Game {
 		}
 	}
 
-	/**
-	 * Method called every iteration of the game loop. For each player that
-	 * exists, play the current level. If the level's goals are met, go to the
-	 * next level. If the player's turn is over, end the method so the loop can
-	 * call it again.
-	 * 
-	 * GameLoop moved to Player. Method will be removed eventually. 
-	 */
-	public void play() {
-		while (!myGameWon) {
-			if (myCurrentPlayer.levelWon(myCurrentLevel)) {
-				nextLevel();
-			}
-			nextPlayer();
-		}
-		// Call DisplayWin Method Here :) Yatta
-	}
 
 	/**
 	 * Iterates the Current Level to the Next Level If no more levels, game is

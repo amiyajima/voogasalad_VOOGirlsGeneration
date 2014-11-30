@@ -8,8 +8,10 @@ public class MoveCountRule extends Rule {
 	private int myNumMoves;
 
 	/**
-	 * Constructor 
-	 * @param moves Number of mounts a player can make in a turn
+	 * Constructor
+	 * 
+	 * @param moves
+	 *            Number of mounts a player can make in a turn
 	 */
 	public MoveCountRule(int moves) {
 		myNumMoves = moves;
@@ -17,14 +19,14 @@ public class MoveCountRule extends Rule {
 
 	@Override
 	public boolean conditionsMet(int turnCount) {
-		return (turnCount < myNumMoves);
+		return (turnCount >= myNumMoves);
 	}
-	
+
 	/**
 	 * FOR TESTING PURPOSES
 	 */
-	public String toString(){
-	    return "moves left are" + myNumMoves;
+	public String toString() {
+		return "moves left are" + myNumMoves;
 	}
 
 }
