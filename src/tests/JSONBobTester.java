@@ -152,7 +152,7 @@ public class JSONBobTester {
     }
 
     public Patch createNewPatch (Point2D p) {
-        Patch patch = new Patch("", DEFAULT_LAND, p);
+        Patch patch = new Patch("land", DEFAULT_LAND, p);
         return patch;
     }
 
