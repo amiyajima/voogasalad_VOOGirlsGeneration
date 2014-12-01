@@ -76,7 +76,7 @@ public class JSONBobTester {
         myLevels.add(level1);
         myLevels.add(level2);
 
-        Piece piece = createNewPiece(new Point2D.Double(3, 3));
+        Piece piece = createNewPiece(grid,new Point2D.Double(3, 3));
         Patch patch = createNewPatch(new Point2D.Double(3, 3));
 
         Game myGame = new Game(myPlayers, myLevels);
@@ -90,7 +90,7 @@ public class JSONBobTester {
                 Patch patch = createNewPatch(new Point2D.Double(x, y));
                 grid1.setPatch(patch.getLoc(), patch);
                 //if((x==grid1.getColumn()/2) && (y==grid1.getRow()/2)){
-                	   Piece piece = createNewPiece(new Point2D.Double(x, y));
+                	   Piece piece = createNewPiece(grid1, new Point2D.Double(x, y));
                        grid1.setPiece(piece.getLoc(), piece);
                 //}
             }
@@ -101,7 +101,7 @@ public class JSONBobTester {
         return grid1;
     }
 
-    public Piece createNewPiece (Point2D p) {
+    public Piece createNewPiece (Grid g,Point2D p) {
         Point2D p1 = new Point2D.Double(1, 1);
         Point2D p4 = new Point2D.Double(0, 1);
         Point2D p5 = new Point2D.Double(-1, 0);
@@ -131,7 +131,7 @@ public class JSONBobTester {
         List<Action> actions = new ArrayList<Action>();
         actions.add(createNewAction(pl1, pl2));
         actions.add(createNewAction(pl2, pl3));
-        actions.add(createNewMovement(pl1));
+        actions.add(createNewMovement(g,pl1));
 
         Stats s = new Stats();
         s.add("health", 20);
@@ -156,8 +156,8 @@ public class JSONBobTester {
         return patch;
     }
 
-    public Movement createNewMovement (List<Point2D> pl2) {
-    	Movement m1 = new Movement(pl2);
+    public Movement createNewMovement (Grid g, List<Point2D> pl2) {
+    	Movement m1 = new Movement(g,pl2);
     	return m1;
      }
 

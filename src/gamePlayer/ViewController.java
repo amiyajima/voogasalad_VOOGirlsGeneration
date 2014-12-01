@@ -14,6 +14,9 @@ import javafx.fxml.FXMLLoader;
 import java.util.ResourceBundle;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
+import com.leapmotion.leap.Controller;
+
 import tests.JSONBobTester;
 import javafx.geometry.Pos;
 import javafx.scene.ImageCursor;
@@ -65,7 +68,12 @@ public class ViewController {
     private Scene scoreScene;
     private Scene myPopupScene;
     private Scene myScene;
+<<<<<<< HEAD
 
+=======
+    private SampleListener myLeapListener;
+    
+>>>>>>> fd8638eb0549ca3fbbfe1a10c3bd7dda0d51c115
     private Boolean keyControlOn;
     private KeyboardController myKeyboardController;
 
@@ -98,6 +106,8 @@ public class ViewController {
         myGameSpace = new BorderPane();
         myScoreBoard = new VBox();
         myPopup = new BorderPane();
+        myLeapListener = new SampleListener();
+      //  myLeapController = new Controller();
 
         // TODO:
         // uses JSON reader that takes in the file chosen by user and instantiate
