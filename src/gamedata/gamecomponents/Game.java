@@ -49,27 +49,12 @@ public class Game {
 		}
 	}
 
-	/**
-	 * Method called every iteration of the game loop. For each player that
-	 * exists, play the current level. If the level's goals are met, go to the
-	 * next level. If the player's turn is over, end the method so the loop can
-	 * call it again.
-	 */
-	public void play() {
-		while (!myGameWon) {
-			if (myCurrentPlayer.levelWon(myCurrentLevel)) {
-				nextLevel();
-			}
-			nextPlayer();
-		}
-		// Call DisplayWin Method Here :) Yatta
-	}
 
 	/**
 	 * Iterates the Current Level to the Next Level If no more levels, game is
 	 * won.
 	 */
-	private void nextLevel() {
+	public void nextLevel() {
 		if (!isWin()) {
 			myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel) + 1);
 		} else {
@@ -93,7 +78,7 @@ public class Game {
 	 * Iterates to the next player to start that players turn. If the last
 	 * player has just played the first player is active again
 	 */
-	private void nextPlayer() {
+	public void nextPlayer() {
 		if (myPlayers.indexOf(myCurrentPlayer) == myPlayers.size() - 1) {
 			resetPlayer();
 		} else {

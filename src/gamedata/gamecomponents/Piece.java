@@ -48,6 +48,7 @@ public class Piece {
      * @param inventory - Piece's inventory if the user chooses to use an inventory
      */
 
+    //TODO: Think about playerID concept
     public Piece (String name, String imageLoc, List<Movement> movement, 
     		List<Action> actions, Stats stats, Point2D loc, int playerID, Inventory inventory) {
     	myName = name;

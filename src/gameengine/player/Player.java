@@ -45,24 +45,6 @@ public class Player {
     }
 
     /**
-     * Until you run out of moves, play the level. Return true if the level was
-     * won. Otherwise, play the next move until your turn is over. Return false
-     * if your turn is over and the level was not won
-     * 
-     * @param level
-     */
-    public boolean levelWon (Level level) {
-        while (!level.checkTurnEnd(myNumMovesPlayed)) {
-            // play a move
-            if (level.levelCompleted()) { return true; }
-            level.garbageCollectPieces();
-            myNumMovesPlayed++;
-        }
-        this.resetMovesPlayed();
-        return false;
-    }
-
-    /**
      * Resets number of moves player for the player
      */
     public void resetMovesPlayed () {
@@ -118,6 +100,10 @@ public class Player {
     public String toString () {
         return "ID:" + myID + " NumMovesPlayed:" + myNumMovesPlayed + " movement key map:" +
                myMovementKeyMap;
+    }
+    
+    public int getNumMovesPlayed(){
+    	return myNumMovesPlayed;
     }
 
 }

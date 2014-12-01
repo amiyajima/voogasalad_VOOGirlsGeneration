@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * A rule that checks if the piece can move to the given patch 
+ * TODO: DEPRECIATED. WILL BE MOVED INTO MOVEMENT
  */
 public class MovableRule extends Rule {
 

@@ -1,24 +1,23 @@
 package gamedata.rules;
 
 /**
- * A rule that checks if a player has more than the minimum requirement
+ * A rule that checks if a player has any possible moves left
  * 
  */
 public class AvailableMovesRule extends Rule {
-    
-    private int myMinNumUnit;
 
-    /**
-     * Constructor
-     * @param numUnits The minimum number of Units that each player 
-     */
-    public AvailableMovesRule (int numUnits) {
-        myMinNumUnit = numUnits;
-    }
+	private int myMinNumUnit;
 
-    @Override
-    public boolean conditionsMet (int currNumUnits) {
-        return (currNumUnits > myMinNumUnit);
-    }
+	/**
+	 * Constructor
+	 */
+	public AvailableMovesRule() {
+	}
+
+	@Override
+	public boolean conditionsMet(int playerID) {
+		//TODO:I need list of units here and rule differentiation. Look into this! 
+		return false;
+	}
 
 }
