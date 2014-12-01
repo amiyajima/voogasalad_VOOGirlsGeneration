@@ -1,12 +1,10 @@
 package authoring.data;
 
 import gamedata.action.Action;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -42,19 +40,26 @@ public class ActionData implements AuthoringData<Action> {
 		return names;
 	}
 	
-	public Action getAction(String name){
-		return myActionsMap.get(name);
-	}
 	@Override
-	public void add(Action action) {
-		myActions.add(action);
-		myActionsMap.put(action.toString(), action);
+	public List<Action> get(){
+		return myActions;
 	}
 	
 	@Override
-	public void remove(Action action) {
-		myActions.remove(action);
-		myActionsMap.remove(action.toString());
+	public void add(Action... actions) {
+	    for (Action a : actions) {
+	        myActions.add(a);
+	        myActionsMap.put(a.toString(),  a);
+
+	    }
+	}
+	
+	@Override
+	public void remove(Action... actions) {
+	          for (Action a : actions) {
+	                myActions.remove(a);
+	                myActionsMap.remove(a.toString());
+	            }
 	}
 	
 	@Override
@@ -62,7 +67,8 @@ public class ActionData implements AuthoringData<Action> {
 		myActions.clear();
 		myActionsMap.clear();
 	}
-	
-	
-	
+
+    public Action getAction (String s) {
+        return myActionsMap.get(s);
+    }
 }

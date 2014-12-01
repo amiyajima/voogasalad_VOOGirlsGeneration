@@ -117,4 +117,9 @@ public class Movement implements Action {
 			System.out.println("Moving piece to: " + point.getX() + " " + point.getY());
 		}
 	}
+	
+	@Override
+	public String toString(){
+		return "Movement";
+	}
 }

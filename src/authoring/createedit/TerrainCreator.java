@@ -1,15 +1,17 @@
-package authoring.concretefeatures;
+package authoring.createedit;
 
 import gamedata.gamecomponents.Patch;
+import java.awt.geom.Point2D;
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import java.awt.geom.Point2D;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -18,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import authoring.abstractfeatures.PopupWindow;
+import authoring.concretefeatures.TerrainEntry;
 import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
@@ -28,19 +31,22 @@ import authoring_environment.UIspecs;
  * 
  * @author Mike Zhu
  */
-public class TerrainCreator extends PopupWindow {
+public class TerrainCreator extends TitledPane {
 
     private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
-    private final int HEIGHT = 155;
-    private final int WIDTH = 400;
-    private final String NAME = "Terrain Creator";
-    private final String TERRAIN_NAME_LABEL = "Name";
-    private final String IMAGE_LABEL = "Terrain image";
-    private final String LOAD_IMAGE_LABEL = "Load image";
-    private final String TEMPLATE_LABEL = "Create new terrain template";
-    private final String DELETE = "Delete";
-    private final String EDIT = "Edit";
+    private static final int HEIGHT = 300;
+    private static final int WIDTH = 300;
+    private static final String NAME = "Terrain Creator";
+    private static final String TERRAIN_NAME_LABEL = "Name";
+    private static final String LOAD_IMAGE_LABEL = "Load Terrain Image";
+    private static final String TEMPLATE_LABEL = "Create new terrain template";
+    private static final String DELETE = "Delete";
+    private static final String EDIT = "Edit";
     private LibraryView myLibrary;
+    
+    private static final Insets MARGINS = new Insets(20, WIDTH/5, 20, WIDTH/5 - 10);
+    private static final String LABEL_CSS = "-fx-font-size: 14pt;";
+    private static final String DEFAULT_IMAGE = "/resources/images/default_image.png";
 
     private String myName; 
     private String myImageLocation;
@@ -56,17 +62,16 @@ public class TerrainCreator extends PopupWindow {
     public TerrainCreator (LibraryView library) {
         myLibrary = library;
 
-        myName = library.getTerrainName();
+        myName = "";
         myImageLocation = "";
         myLoc = new Point2D.Double(0, 0);
 
         setHeight(HEIGHT);
         setWidth(WIDTH);
-        setTitle(NAME);
+        setText(NAME);
         initialize();
     }
 
-    @Override
     protected void initialize () {
 
         ScrollPane root = new ScrollPane();
@@ -75,9 +80,17 @@ public class TerrainCreator extends PopupWindow {
 
         VBox box = new VBox();
         box.getStylesheets().add(STYLESHEET);
-        box.getStyleClass().add("vbox");
-        box.setPadding(UIspecs.allPadding);
-        box.setSpacing(5);
+        box.setPadding(MARGINS);
+        box.setSpacing(10);
+        
+        Label label = new Label(NAME);
+        label.setStyle(LABEL_CSS);
+        label.setPadding(UIspecs.topBottomPadding);
+        
+        HBox labelBox = new HBox();
+        Label eventsLabel = new Label(NAME);
+        eventsLabel.setStyle(LABEL_CSS);
+        labelBox.getChildren().add(eventsLabel);
 
         HBox names = new HBox();
         names.setPadding(UIspecs.allPadding);
@@ -92,19 +105,16 @@ public class TerrainCreator extends PopupWindow {
         names.getChildren().addAll(nameLabel, terrainName);
 
         ImageView icon = new ImageView();
-        icon.setTranslateY(-7.5);
         icon.setFitHeight(40);
         icon.setFitWidth(40);
-        Label loadLabel = new Label(IMAGE_LABEL);
-        loadLabel.setPadding(UIspecs.topRightPadding);
+        icon.setImage(new Image(getClass().getResourceAsStream(DEFAULT_IMAGE)));
         Button loadImage = new Button(LOAD_IMAGE_LABEL);
         loadImage.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle (ActionEvent click) {
                 FileChooser fileChoice = new FileChooser();
-                fileChoice.getExtensionFilters().add(
-                                                     new ExtensionFilter("PNG Files", "*.png",
+                fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png",
                                                                          "*.gif"));
                 File selectedFile = fileChoice.showOpenDialog(null);
                 if (selectedFile != null) {
@@ -114,22 +124,23 @@ public class TerrainCreator extends PopupWindow {
                 }
             }
         });
-        images.getChildren().addAll(loadLabel, loadImage, icon);
+        images.getChildren().addAll(icon, loadImage);
 
         Button goButton = new Button(TEMPLATE_LABEL);
         goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
+            	myName = terrainName.getText();
                 if (myImageLocation.equals("") || terrainName.getText().equals("")) {
-                return;
+                	return;
                 }
+                
                 Patch terrain = new Patch(myName, myImageLocation, myLoc);
 
                 Label name = new Label(terrainName.getText());
                 name.setTranslateY(7.5);
 
                 Button editButton = new Button(EDIT);
-
                 editButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle (ActionEvent e) {
@@ -138,7 +149,6 @@ public class TerrainCreator extends PopupWindow {
                     }
                 });
                 Button delButton = new Button(DELETE);
-
                 TerrainEntry entry = new TerrainEntry(terrain, icon, name, editButton, delButton);
                 entry.setStyle("-fx-cursor: hand");
                 entry.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -155,10 +165,10 @@ public class TerrainCreator extends PopupWindow {
                     }
                 });
                 myLibrary.addPatch(entry);
-                close();
             }
         });
-        box.getChildren().addAll(names, images, goButton);
-        setScene(new Scene(box));
+        box.getChildren().addAll(labelBox, names, images, goButton);
+        setContent(box);
+        setText(NAME);
     }
 }

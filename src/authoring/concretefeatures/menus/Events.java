@@ -1,7 +1,7 @@
 package authoring.concretefeatures.menus;
 
 import authoring.abstractfeatures.PopupWindow;
-import authoring.concretefeatures.EventsWindow;
+import authoring.createedit.EventCreator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
@@ -26,8 +26,8 @@ public class Events extends Menu{
 			
 			@Override
 			public void handle(ActionEvent t){
-				PopupWindow p = new EventsWindow();
-				p.show();
+				//EventsWindow p = new EventsWindow();
+				//p.show();
 			}
 		});
 	}

@@ -63,6 +63,19 @@ public class ApplyState implements IGridState{
          
             myController.setActivePiece(null);
             myController.setActiveAction(null);
-
+            checkLevelState();
+            checkPlayerState();
+    }
+    
+    private void checkLevelState(){
+    	if(myController.getGame().getCurrentLevel().levelCompleted()){
+    		myController.getGame().nextLevel();
+    	}
+    }
+    
+    private void checkPlayerState(){
+    	if(myController.getGame().getCurrentLevel().checkTurnEnd(myController.getGame().getCurrentPlayer().getNumMovesPlayed())){
+    		myController.getGame().nextPlayer();
+    	}
     }
 }

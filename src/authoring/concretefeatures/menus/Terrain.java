@@ -5,7 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import authoring.abstractfeatures.PopupWindow;
-import authoring.concretefeatures.TerrainCreator;
+import authoring.createedit.TerrainCreator;
 import authoring_environment.LibraryView;
 
 public class Terrain extends Menu{
@@ -28,8 +28,8 @@ public class Terrain extends Menu{
 			
 			@Override
 			public void handle(ActionEvent t){
-				PopupWindow p = new TerrainCreator(myLibrary);
-				p.show();
+				//PopupWindow p = new TerrainCreator(myLibrary);
+				//p.show();
 			}
 		});
 	}

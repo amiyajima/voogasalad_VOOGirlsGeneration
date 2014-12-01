@@ -3,7 +3,6 @@ package authoring.concretefeatures;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +18,7 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import authoring.abstractfeatures.PopupWindow;
+import authoring.createedit.ModulesList;
 import authoring.data.ActionData;
 
 /**
@@ -29,7 +29,7 @@ import authoring.data.ActionData;
  * the unit's name in the LibraryView of the game
  * authoring environment.
  */
-public class UnitEditor extends PopupWindow {
+public class LibraryUnitEditor extends PopupWindow {
 
 	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 	private final String NAME = "Unit Editor";
@@ -56,7 +56,7 @@ public class UnitEditor extends PopupWindow {
 	 * @param unit : Piece class of the unit to edit.
 	 * @param myAvailableActions 
 	 */
-	public UnitEditor(Piece unit, ActionData availableActions){
+	public LibraryUnitEditor(Piece unit, ActionData availableActions){
 		setHeight(HEIGHT);
 		setWidth(WIDTH);
 		setTitle(NAME);

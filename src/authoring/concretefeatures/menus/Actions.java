@@ -1,7 +1,7 @@
 package authoring.concretefeatures.menus;
 
 import authoring.abstractfeatures.PopupWindow;
-import authoring.concretefeatures.ActionCreator;
+import authoring.createedit.ActionCreator;
 import authoring.data.ActionData;
 import authoring_environment.LibraryView;
 import javafx.event.ActionEvent;
@@ -31,8 +31,8 @@ public class Actions extends Menu{
 			
 			@Override
 			public void handle(ActionEvent t){
-				PopupWindow p = new ActionCreator(actionData);
-				p.show();
+				//PopupWindow p = new ActionCreator(actionData);
+				//p.show();
 			}
 		});
 	}

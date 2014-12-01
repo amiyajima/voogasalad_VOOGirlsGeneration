@@ -23,13 +23,13 @@ public class Level extends Observable {
 	/**
 	 * Rules defining how the players turn ends
 	 */
-	private List<MoveCountRule> myRules;
+	private List<Rule> myRules;
 
 	public Level() {
-		this(new SquareGrid(), new ArrayList<Goal>(), new ArrayList<MoveCountRule>());
+		this(new SquareGrid(), new ArrayList<Goal>(), new ArrayList<Rule>());
 	}
 
-	public Level(Grid gr, List<Goal> goals, List<MoveCountRule> rules) {
+	public Level(Grid gr, List<Goal> goals, List<Rule> rules) {
 		myGrid = gr;
 		myGoals = goals;
 		myRules = rules;
@@ -42,11 +42,11 @@ public class Level extends Observable {
 	 * @return
 	 */
 	public boolean levelCompleted() {
-	    System.out.println("observer!");
 		setChanged();
 		notifyObservers();
 		for (Goal g : myGoals) {
 			if (g.checkGameState(this) == 1) {
+				System.out.println("Level Complete");
 				return true;
 			}
 		}
@@ -62,6 +62,7 @@ public class Level extends Observable {
 	public boolean checkTurnEnd(int numTurnsPlayed) {
 		for (Rule r : myRules) {
 			if (r.conditionsMet(numTurnsPlayed)) {
+				System.out.println("Player Turn Complete");
 				return true;
 			}
 		}

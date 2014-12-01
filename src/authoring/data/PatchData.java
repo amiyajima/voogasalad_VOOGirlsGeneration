@@ -25,13 +25,17 @@ public class PatchData implements AuthoringData<Patch> {
     }
 
     @Override
-    public void add (Patch patch) {
-        myPatches.add(patch);
+    public void add (Patch... patches) {
+        for (Patch p : patches) {
+            myPatches.add(p);
+        }
     }
 
     @Override
-    public void remove (Patch patch) {
-        myPatches.remove(patch);
+    public void remove (Patch... patches) {
+        for (Patch p : patches) {
+            myPatches.remove(p);
+        }
     }
 
     @Override
@@ -51,7 +55,7 @@ public class PatchData implements AuthoringData<Patch> {
     public boolean terrainAtLoc(Patch terrain, int x, int y){
     	Point2D location = new Point2D.Double(x, y);
 		for(Patch patch : myPatches){
-			if(location.equals(patch.getLoc()) && patch.getName() == patch.getName()){
+			if(location.equals(patch.getLoc()) && terrain.getName().equals(patch.getName())){
 				myPatches.remove(patch);
 				return true;
 			}
@@ -60,6 +64,11 @@ public class PatchData implements AuthoringData<Patch> {
     }
     
     public List<Patch> getPatches(){
+        return myPatches;
+    }
+
+    @Override
+    public List<Patch> get () {
         return myPatches;
     }
 }

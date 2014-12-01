@@ -4,7 +4,7 @@ import javafx.scene.control.ScrollPane;
 
 public class SandyGridView extends ScrollPane {
 	
-	public SandyGridView(SandyGrid grid, int viewWidth, int viewHeight) {
+	public SandyGridView(ShapeGrid grid, int viewWidth, int viewHeight) {
 		this.setPrefSize(viewWidth, viewHeight);
 		this.setMaxSize(viewWidth, viewHeight);
 		this.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
