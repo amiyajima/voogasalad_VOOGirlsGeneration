@@ -3,23 +3,20 @@ package gamePlayer;
 import gamedata.action.Action; 
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
-
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Map;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
 import java.util.ResourceBundle;
-
+import java.util.stream.Collectors;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import com.leapmotion.leap.Controller;
-
 import tests.JSONBobTester;
 import javafx.geometry.Pos;
 import javafx.scene.ImageCursor;
@@ -53,8 +50,8 @@ public class ViewController{
     public static final String GAME_LOCATION = "/src/resources/json";
 
     public static final String POPUP_FXML = "popup.fxml";
-//    public static final String ENGLISH = "English";
-//    public static final String Chinese = "Chinese";
+    //    public static final String ENGLISH = "English";
+    //    public static final String Chinese = "Chinese";
 
     public static final String AUDIO_TEST = "/src/gamePlayer/audioTest.mp3";
     public static final String CURSOR_ATTACK_TEST = "/gamePlayer/Cursor_attack.png";
@@ -72,7 +69,7 @@ public class ViewController{
     private Scene myPopupScene;
     private Scene myScene;
     private SampleListener myLeapListener;
-    
+
     private Boolean keyControlOn;
     private KeyboardController myKeyboardController;
 
@@ -94,7 +91,7 @@ public class ViewController{
     private Text gameName;
     @FXML
     private VBox scores;
-    
+
     private Point2D currentClick;
 
     private IGridState gridState;
@@ -106,7 +103,7 @@ public class ViewController{
         myScoreBoard = new VBox();
         myPopup = new BorderPane();
         myLeapListener = new SampleListener();
-      //  myLeapController = new Controller();
+        //  myLeapController = new Controller();
 
         //TODO:
         //uses JSON reader that takes in the file chosen by user and instantiate 
@@ -184,6 +181,8 @@ public class ViewController{
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(new ExtensionFilter("JSON", "*.json"));
         File f = fc.showOpenDialog(myStage);
+        
+        fc.setInitialDirectory(new File(System.getProperty("user.dir")+"/src/resources"));
 
         // uses JSON reader to generate an instance of the game
 
@@ -202,7 +201,7 @@ public class ViewController{
     private void initializeGrid(){
         JSONBobTester JSBTester = new JSONBobTester();
         myModel = JSBTester.createNewGame();
-       // myModel.play();
+        // myModel.play();
 
 
         myGrid= new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel.getCurrentLevel().getGrid().getColumn());
@@ -214,7 +213,7 @@ public class ViewController{
 
         setGridState(new SelectState(this));
         getGrid().setOnMouseExited(event->{changeCursor(CURSOR_GLOVE_TEST); });
-        
+
         keyControlOn = false;
     }
 
@@ -338,7 +337,7 @@ public class ViewController{
         ArrayList<Text> stats = new ArrayList<Text>();
 
         piece.getStats().getStatNames().forEach(key->stats.
-                add(new Text(key+ ":  "+ piece.getStats().getValue(key))));
+                                                add(new Text(key+ ":  "+ piece.getStats().getValue(key))));
 
         statsPane.getChildren().addAll(stats);
 
@@ -352,20 +351,30 @@ public class ViewController{
         // setActivePiece(piece);
         controlPane.getChildren().clear();
         ArrayList<Label> actions = new ArrayList<Label>();
-        
+        Map<KeyCode, Action> actionMap = myModel.getCurrentPlayer().getActionKeyMap();
+        Map<Action, KeyCode> keyMap = actionMap.entrySet().stream().collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
+
         piece.getActions().forEach(action->{Label l = new Label(action.toString());
         l.setOnMouseClicked(event->bindAction(action));
-        actions.add(l);});
-        
+        actions.add(l);
+
+        l.setOnKeyPressed(event->{if(keyMap.containsKey(action)){
+            if(event.getCode().equals(keyMap.get(action))){
+                bindAction(action);
+            }
+
+        }
+        });
+        });
         controlPane.getChildren().addAll(actions);
 
     }
-    
-    public void updateActionList(ArrayList<Label> actions){
-        controlPane.getChildren().clear();
-        controlPane.getChildren().addAll(actions);
-        System.out.println("i get here");
-    }
+
+//    public void updateActionList(ArrayList<Label> actions){
+//        controlPane.getChildren().clear();
+//        controlPane.getChildren().addAll(actions);
+//        System.out.println("i get here");
+//    }
 
     /**
      * Method called when user clicks an action button 
@@ -373,7 +382,7 @@ public class ViewController{
      */
     private void bindAction(Action action){
 
-       if(activePiece==null) return;
+        if(activePiece==null) return;
         setActiveAction(action);      
         highLightActionRange();
 
@@ -388,33 +397,23 @@ public class ViewController{
         myGrid.setOnMouseClicked(event->{ 
             performAction(event.getX(), event.getY());});
     }
-    
+
     public void setOnEnterKey(){
         myGrid.requestFocus();
         myGrid.setOnKeyPressed(new EventHandler<KeyEvent>(){
 
             @Override
             public void handle (KeyEvent arg0) {
-                // TODO Auto-generated method stub
                 if (arg0.getCode() == KeyCode.F){
                     System.out.println("f");
                     performAction(myKeyboardController.getCurrentLocation().getX(), myKeyboardController.getCurrentLocation().getY());
                 }
-                
+
             }
-            
+
         });
-        
-        
-        
-        
-//        myGrid.setOnKeyPressed(event->{ 
-//            if (event.getCode() == KeyCode.F){
-//                System.out.println("enter");
-//                performAction(myKeyboardController.getCurrentLocation().getX(), myKeyboardController.getCurrentLocation().getY());
-//            }
-//        }
-//    );
+
+
     }
 
 
@@ -427,18 +426,18 @@ public class ViewController{
         System.out.println("current mouse location:"+x +", "+y);
         System.out.println("myGrid size is" + myGrid.getWidth()+ "*" + myGrid.getHeight());
         System.out.println(myGrid.getBoundsInParent());
-        
+
         if (getPiece(findPosition(x-45,y-20)) == null){
             System.out.println("no piece");
         }
-        
-        
+
+
         gridState.onClick(getPiece(findPosition(x-45,y-20)));
         myGrid.clearEffect();
         highlightCurrent(findPosition(x-45,y-20),Color.BLUE);
-       // addDropShadow(myGrid.get(((int)findPosition(x,y).getX()), ((int)findPosition(x,y).getY())), Color.PURPLE);
+        // addDropShadow(myGrid.get(((int)findPosition(x,y).getX()), ((int)findPosition(x,y).getY())), Color.PURPLE);
     }
-    
+
     public void performActionKeyboard (Point2D location){
         gridState.onClick(getPiece(location));
         myGrid.clearEffect();
@@ -463,7 +462,7 @@ public class ViewController{
     }
 
     public Piece getPiece(Point2D loc){
-        
+
         for(Piece p: myModel.getCurrentLevel().getGrid().getAllPieces()){
             if(p.getLoc().equals(loc)){
                 return p;
@@ -547,17 +546,17 @@ public class ViewController{
     protected void highLightEffectRange(MouseEvent me, Color c){
 
         if(activePiece!= null && activeAction!= null){
-        activeAction.getActionRange(activePiece.getLoc()).forEach(point->{
-            Point2D temp= findPosition(me.getSceneX(), me.getSceneY());
-            if(temp.equals(point)){
-                activeAction.getEffectRange().forEach(point2->{
-                    Node n = myGrid.get((int)(temp.getX()+point2.getX()), (int)(temp.getY()+point2.getY()));
-                    addDropShadow(n, c);
-                });
+            activeAction.getActionRange(activePiece.getLoc()).forEach(point->{
+                Point2D temp= findPosition(me.getSceneX(), me.getSceneY());
+                if(temp.equals(point)){
+                    activeAction.getEffectRange().forEach(point2->{
+                        Node n = myGrid.get((int)(temp.getX()+point2.getX()), (int)(temp.getY()+point2.getY()));
+                        addDropShadow(n, c);
+                    });
 
 
-            }
-        });
+                }
+            });
         }
 
 
@@ -574,18 +573,18 @@ public class ViewController{
         myScene.setCursor(new ImageCursor(image, image.getWidth()/4,image.getWidth()/4));
 
     }
-    
+
     public void highlightCurrent(Point2D loc, Color c){
         addDropShadow(myGrid.get((int)loc.getX(), (int)loc.getY()), c);
     }
-    
+
     public void unhighlight(Point2D loc){
         Node n = myGrid.get((int)loc.getX(), (int)loc.getY());
         if(n != null){
             n.setEffect(null); 
         }
     }
-    
+
     public void toggleKeyboardControl(){
         if (keyControlOn){
             keyControlOn = false;
@@ -596,13 +595,13 @@ public class ViewController{
             myKeyboardController = new KeyboardController();
             myKeyboardController.setMovementKeyControl(this, myGrid, myModel);
             keyControlOn = true;
-//            setOnEnterKey();
+            //            setOnEnterKey();
         }
     }
-    
+
     public Point2D getCurrentClick(){
-    	return currentClick;
+        return currentClick;
     }
-    
+
 
 }
