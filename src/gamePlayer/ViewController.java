@@ -49,7 +49,8 @@ public class ViewController {
     // public static final String ENGLISH = "English";
     // public static final String Chinese = "Chinese";
 
-    private static final String MUSIC = "/resources/music/Cut_Gee_VooGirls.mp3";
+    //public static final String AUDIO_TEST = "/src/gamePlayer/audioTest.mp3";
+    private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
     public static final String CURSOR_ATTACK_TEST = "/gamePlayer/Cursor_attack.png";
     public static final String CURSOR_GLOVE_TEST = "/gamePlayer/pointer-glove.png";
 
@@ -184,14 +185,10 @@ public class ViewController {
 
     @FXML
     private void testGame () {
-        myAudio =
-                new AudioClip(new File(MUSIC).toURI()
-                        .toString());
-        myAudio.play();
         myScene = new Scene(myGameSpace);
         myStage.setScene(myScene);
         initializeGrid();
-
+        playMusic();
     }
 
     private void initializeGrid () {
@@ -504,15 +501,15 @@ public class ViewController {
             activeAction.getActionRange(activePiece.getLoc())
                     .forEach(point -> {
 
-                        if (point.getX() < myGrid.getRow() &&
-                            point.getY() < myGrid.getCol() && point.getX() > 0 &&
-                            point.getY() > 0) {
-                            Node n = myGrid.get((int) point.getX(), (int) point.getY());
-                            addDropShadow(n, Color.YELLOW);
+                                 if (point.getX() < myGrid.getRow() &&
+                                     point.getY() < myGrid.getCol() && point.getX() > 0 &&
+                                     point.getY() > 0) {
+                                     Node n = myGrid.get((int) point.getX(), (int) point.getY());
+                                     addDropShadow(n, Color.YELLOW);
 
-                        }
+                                 }
 
-                    });
+                             });
         }
     }
 
@@ -541,21 +538,21 @@ public class ViewController {
             activeAction
                     .getActionRange(activePiece.getLoc())
                     .forEach(point -> {
-                        Point2D temp = findPosition(me.getSceneX(), me.getSceneY());
-                        if (temp.equals(point)) {
-                            activeAction
-                                    .getEffectRange()
-                                    .forEach(point2 -> {
-                                        Node n =
-                                                myGrid.get((int) (temp.getX() + point2
-                                                        .getX()),
-                                                           (int) (temp.getY() + point2
-                                                                   .getY()));
-                                        addDropShadow(n, c);
-                                    });
+                                 Point2D temp = findPosition(me.getSceneX(), me.getSceneY());
+                                 if (temp.equals(point)) {
+                                     activeAction
+                                             .getEffectRange()
+                                             .forEach(point2 -> {
+                                                          Node n =
+                                                                  myGrid.get((int) (temp.getX() + point2
+                                                                                     .getX()),
+                                                                             (int) (temp.getY() + point2
+                                                                                     .getY()));
+                                                          addDropShadow(n, c);
+                                                      });
 
-                        }
-                    });
+                                 }
+                             });
         }
 
     }
@@ -597,6 +594,17 @@ public class ViewController {
 
     public Point2D getCurrentClick () {
         return currentClick;
+    }
+    
+    /**
+     * Add music to the designated action.
+     * Currently plays gee by default
+     */
+    private void playMusic(){
+        myAudio =
+                new AudioClip(new File(System.getProperty("user.dir")+MUSIC).toURI()
+                        .toString());
+        myAudio.play();
     }
 
 }
