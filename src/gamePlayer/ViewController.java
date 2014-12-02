@@ -331,7 +331,6 @@ public class ViewController {
         if (absolutePath.startsWith(basePath)) {
             relativePath = absolutePath.substring(basePath.length() + 1);
         }
-        
         myModel.getLevels().forEach(level -> level.deleteObserver(this.myGrid));
         myJSONManager.writeToJSON(myModel, f.getPath());
 
