@@ -274,11 +274,6 @@ public class ViewController {
 
     }
 
-    @FXML
-    private void save () {
-
-    }
-
     /**
      * The method to get all json files from the resources directory that
      * stores all the games user has defined from the authoring environment
@@ -336,9 +331,8 @@ public class ViewController {
         if (absolutePath.startsWith(basePath)) {
             relativePath = absolutePath.substring(basePath.length() + 1);
         }
-
-        System.out.println(relativePath);
-        System.out.println(myModel);
+        
+        myModel.getLevels().forEach(level -> level.deleteObserver(this.myGrid));
         myJSONManager.writeToJSON(myModel, f.getPath());
 
     }

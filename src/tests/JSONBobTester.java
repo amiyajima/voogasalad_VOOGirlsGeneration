@@ -78,10 +78,6 @@ public class JSONBobTester {
         Piece piece = createNewPiece(grid, new Point2D.Double(3, 3));
         Patch patch = createNewPatch(new Point2D.Double(3, 3));
 
-        System.out.println(myLevels);
-        System.out.println(myRules);
-        System.out.println(myGoals);
-
         Game myGame = new Game(myPlayers, myLevels);
         System.out.println(myGame);
         return myGame;
