@@ -8,13 +8,14 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
 
 
-public class PieceController extends IAuthoringController {
+public class PatchController extends IAuthoringController {
 
-    public PieceController (VBox piecesBox, TabPane gridTabs, ScrollPane propertiesPane) {
-        myVBox = piecesBox;
+    public PatchController (VBox patchesBox, TabPane gridTabs, ScrollPane propertiesPane) {
+        myVBox = patchesBox;
         myGridTabPane = gridTabs;
         myPropertiesSPane = propertiesPane;
         initControls();
+
     }
 
     @Override
@@ -23,7 +24,7 @@ public class PieceController extends IAuthoringController {
         newBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                System.out.println("HI NEW BUTTONFORPIECE HI");
+                System.out.println("HI NEW BUTTONFORPATCH HI");
             }
         });
     }
