@@ -156,31 +156,20 @@ public abstract class Grid {
         // TODO Auto-generated method stub
         return null;
     }
-
+    
     /**
-     * gets the patch on the given coordinate
-     * 
-     * @param coord
-     *        of patch
-     * @return patch
+     * Getter to return the piece at a specific x and y
+     * @param x
+     * @param y
+     * @return
      */
-    /*
-     * public Map<Point2D, Patch> getPatches () {
-     * return myPatches;
-     * }
-     */
-
-    /**
-     * gets the piece on the given coordinate
-     * 
-     * @param coord
-     *        of piece
-     * @return piece
-     */
-    /*
-     * public Map<Point2D, Piece> getPieces () {
-     * return myPieces;
-     * }
-     */
+    public Piece getPiece(int x, int y){
+    	for(Piece p:myPieces){
+    		if(p.getLoc().getX()==x && p.getLoc().getY()==y){
+    			return p;
+    		}
+    	}
+    	return null;
+    }
 
 }

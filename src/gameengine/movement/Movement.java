@@ -22,6 +22,7 @@ public class Movement implements Action {
 	private List<List<Point2D>> myPaths;
 	private List<Rule> myRules;
 	private List<Point2D> myAbsoluteMoves;
+	private Grid myGrid;
 
 	/**
 	 * Constructor
@@ -31,7 +32,8 @@ public class Movement implements Action {
 	 *            movement
 	 */
 	@SafeVarargs
-	public Movement(List<Point2D>... endPoints) {
+	public Movement(Grid g,List<Point2D>... endPoints) {
+		myGrid = g;
 		boolean first = true;
 		// myRules = rules;
 		myPaths = new ArrayList<List<Point2D>>();
@@ -71,7 +73,7 @@ public class Movement implements Action {
 	 */
 	public boolean isValidLocation(int x, int y) {
 		for (Point2D p : myAbsoluteMoves) {
-			if (p.getX() == x && p.getY() == y) {
+			if ((p.getX() == x && p.getY() == y)&&(myGrid.getPiece(x, y)==null)) {
 				return true;
 			}
 		}
@@ -84,7 +86,7 @@ public class Movement implements Action {
 	 * 
 	 * @return true or false
 	 */
-	private boolean checkPathCollision(Grid myGrid) {
+	private boolean checkPathCollision(Grid myGrid, Point2D endPoint) {
 		List<Point2D> path;
 		boolean b = true;
 		// Needs to find path with correct endpoint. Then check collision at
@@ -114,7 +116,6 @@ public class Movement implements Action {
 		Point2D point = p.getLoc();
 		if(isValidLocation((int)point.getX(),(int)point.getY())){
 			actor.setLoc(point);
-			System.out.println("Moving piece to: " + point.getX() + " " + point.getY());
 		}
 	}
 	
