@@ -5,6 +5,9 @@ import javafx.stage.Stage;
 
 public class Main extends Application{
 
+    //need to decide what data a player stores
+    
+    
     @Override
     public void start (Stage arg0) throws Exception {
         
