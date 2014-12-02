@@ -3,7 +3,7 @@
  * Use copy/paste to copy paste this code into your favorite IDE
  **/
 
-package fxml_example;
+package fxml_main;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,9 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
-
-public class FXMLExampleController
-implements Initializable {
+public class AuthoringController implements Initializable {
 
 	@FXML //  fx:id="myButton"
 	private Button myButton; // Value injected by FXMLLoader

@@ -1,4 +1,4 @@
-package fxml_example;
+package fxml_main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class FXMLExample extends Application{
+public class AuthoringMain extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
