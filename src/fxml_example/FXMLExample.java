@@ -10,11 +10,11 @@ public class FXMLExample extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("fxml_example.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("Voogirls_Authoring.fxml"));
 
-		Scene scene = new Scene(root, 1000, 800);
+		Scene scene = new Scene(root, 1024, 706);
 
-		stage.setTitle("FXML Welcome");
+		stage.setTitle("Girls GenerEditor");
 		stage.setScene(scene);
 		stage.show();
 	}
