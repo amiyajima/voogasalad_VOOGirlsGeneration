@@ -18,6 +18,7 @@ public class VoogaMain {
         // String saveTo = "src/resources/json/RicaSample.json";
         JSONManager myJSONmanager = new JSONManager();
         JSONBobTester jb = new JSONBobTester();
+        //System.out.println("things still work");
         myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
     }
 
@@ -33,7 +34,7 @@ public class VoogaMain {
 
     public static void main (String[] args) {
         System.out.println("main is running");
-        testJSONload();
-        //testJSONwrite();
+        //testJSONload();
+        testJSONwrite();
     }
 }

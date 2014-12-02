@@ -200,7 +200,9 @@ public class ViewController {
         // uses JSON reader to generate an instance of the game
 
         try {
-            myJSONManager.readFromJSONFile(f.getPath());
+            myModel = myJSONManager.readFromJSONFile(f.getPath());
+            initializeGrid();
+            playMusic();
         }
         catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
@@ -213,13 +215,13 @@ public class ViewController {
     private void testGame () {
         myScene = new Scene(myGameSpace);
         myStage.setScene(myScene);
+        JSONBobTester JSBTester = new JSONBobTester();
+        myModel = JSBTester.createNewGame();
         initializeGrid();
         playMusic();
     }
 
     private void initializeGrid () {
-        JSONBobTester JSBTester = new JSONBobTester();
-        myModel = JSBTester.createNewGame();
         // myModel.play();
 
         myGrid =
@@ -328,7 +330,16 @@ public class ViewController {
     protected void saveGame () {
         FileChooser fileChooser = new FileChooser();
         File f = fileChooser.showSaveDialog(myStage);
-        myJSONManager.writeToJSON(myModel, f.getName());
+        String basePath = System.getProperty("user.dir");
+        String absolutePath = f.getPath();
+        String relativePath = "";
+        if (absolutePath.startsWith(basePath)) {
+            relativePath = absolutePath.substring(basePath.length() + 1);
+        }
+
+        System.out.println(relativePath);
+        System.out.println(myModel);
+        myJSONManager.writeToJSON(myModel, f.getPath());
 
     }
 
