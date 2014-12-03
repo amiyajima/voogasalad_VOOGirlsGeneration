@@ -19,8 +19,8 @@ public abstract class ShapeGrid extends Pane {
 	protected int myCols;
 	protected int myTileSize;
 	
-	protected PieceData myPieceData;
-	protected PatchData myPatchData;
+	private PieceData myPieceData;
+	private PatchData myPatchData;
 	protected List<List<SandyTile>> myGrid;
 	
 	protected ShapeGrid(int cols, int rows, int tileSize,

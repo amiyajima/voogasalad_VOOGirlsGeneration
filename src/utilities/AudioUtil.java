@@ -1,4 +1,4 @@
-package gamePlayer;
+package utilities;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,11 +8,15 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-
-public class Audio {
+/**
+ * Audio utility. called from a 
+ * @author annamiyajima
+ *
+ */
+public class AudioUtil {
     private Clip myClip;
 
-    public Audio (String audioFileAddress) throws UnsupportedAudioFileException, IOException,
+    public AudioUtil (String audioFileAddress) throws UnsupportedAudioFileException, IOException,
         LineUnavailableException {
         File audioFile = new File(audioFileAddress);
         AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);

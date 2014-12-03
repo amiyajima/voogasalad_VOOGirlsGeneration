@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="706.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_main.AuthoringController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="Save" />
+              <MenuItem mnemonicParsing="false" text="Save As..." />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Game Properties">
+              <items>
+                <MenuItem mnemonicParsing="false" text="New Level..." />
+                  <MenuItem mnemonicParsing="false" text="Grid Properties" />
+                  <MenuItem mnemonicParsing="false" text="Player Properties" />
+                  <MenuItem mnemonicParsing="false" text="Actions Logic Chart..." />
+                  <MenuItem mnemonicParsing="false" text="Global Actions" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <TabPane fx:id="myGridTabPane" prefHeight="677.0" prefWidth="564.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
+   </center>
+   <left>
+      <TitledPane animated="false" collapsible="false" prefHeight="677.0" prefWidth="230.0" text="Game Components" BorderPane.alignment="CENTER">
+         <content>
+            <Accordion>
+              <panes>
+                <TitledPane animated="false" text="Pieces">
+                     <content>
+                        <ScrollPane prefHeight="545.0" prefWidth="226.0">
+                           <content>
+                              <VBox fx:id="myPiecesVBox" prefHeight="552.0" prefWidth="226.0" />
+                           </content>
+                        </ScrollPane>
+                     </content></TitledPane>
+                <TitledPane animated="false" text="Patches">
+                     <content>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                           <content>
+                              <VBox fx:id="myPatchesVBox" prefHeight="552.0" prefWidth="226.0" />
+                           </content>
+                        </ScrollPane>
+                     </content></TitledPane>
+                  <TitledPane animated="false" prefHeight="200.0" prefWidth="200.0" text="Actions">
+                     <content>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                           <content>
+                              <VBox fx:id="myActionsVBox" prefHeight="550.0" prefWidth="226.0" />
+                           </content>
+                        </ScrollPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" prefHeight="572.0" prefWidth="228.0" text="Levels">
+                     <content>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                           <content>
+                              <VBox prefHeight="551.0" prefWidth="226.0" />
+                           </content></ScrollPane>
+                     </content>
+                  </TitledPane>
+              </panes>
+            </Accordion>
+         </content>
+      </TitledPane>
+   </left>
+   <right>
+      <TitledPane animated="false" collapsible="false" prefHeight="677.0" prefWidth="270.0" text="Properties Editor" BorderPane.alignment="CENTER">
+         <content>
+            <ScrollPane fx:id="myPropertiesSPane" hbarPolicy="NEVER" prefHeight="650.0" prefWidth="270.0" />
+         </content>
+      </TitledPane>
+   </right>
+</BorderPane>

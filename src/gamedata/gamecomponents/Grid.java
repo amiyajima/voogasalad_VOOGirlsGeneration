@@ -150,37 +150,25 @@ public abstract class Grid {
          */
         return myPatches;
     }
-    
-    //TODO temporary fix because it was throwing an error
+
+    // TODO temporary fix because it was throwing an error
     public Piece getPiece (Object uniqueID) {
         // TODO Auto-generated method stub
         return null;
     }
 
     /**
-     * gets the patch on the given coordinate
+     * Getter to return the piece at a specific x and y
      * 
-     * @param coord
-     *        of patch
-     * @return patch
+     * @param x
+     * @param y
+     * @return
      */
-    /*
-     * public Map<Point2D, Patch> getPatches () {
-     * return myPatches;
-     * }
-     */
-
-    /**
-     * gets the piece on the given coordinate
-     * 
-     * @param coord
-     *        of piece
-     * @return piece
-     */
-    /*
-     * public Map<Point2D, Piece> getPieces () {
-     * return myPieces;
-     * }
-     */
+    public Piece getPiece (int x, int y) {
+        for (Piece p : myPieces) {
+            if (p.getLoc().getX() == x && p.getLoc().getY() == y) { return p; }
+        }
+        return null;
+    }
 
 }
