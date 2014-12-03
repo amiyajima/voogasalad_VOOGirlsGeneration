@@ -25,12 +25,9 @@ public class AuthoringController implements Initializable {
 	private PieceController myPieceController;
 	private PatchController myPatchController;
 
-
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		myPieceController = new PieceController(myPiecesVBox, myGridTabPane, myPropertiesSPane);
-	        myPatchController = new PatchController(myPatchesVBox, myGridTabPane, myPropertiesSPane);
-
+	    myPatchController = new PatchController(myPatchesVBox, myGridTabPane, myPropertiesSPane);
 	}
-	
 }

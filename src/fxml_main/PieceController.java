@@ -7,7 +7,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
 
-
 public class PieceController extends IAuthoringController {
 
     public PieceController (VBox piecesBox, TabPane gridTabs, ScrollPane propertiesPane) {
@@ -19,7 +18,6 @@ public class PieceController extends IAuthoringController {
 
     @Override
     protected void initNewButton (Button newBtn) {
-        // TODO Auto-generated method stub
         newBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
@@ -30,15 +28,21 @@ public class PieceController extends IAuthoringController {
 
     @Override
     protected void initEditButton (Button editBtn) {
-        // TODO Auto-generated method stub
-        
+    	editBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                System.out.println("HI EDIT BUTTONFORPIECE HI");
+            }
+        });
     }
 
     @Override
     protected void initDeleteButton (Button delBtn) {
-        // TODO Auto-generated method stub
-        
+    	delBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                System.out.println("HI DELETE BUTTONFORPIECE HI");
+            }
+        });
     }
-
-
 }
