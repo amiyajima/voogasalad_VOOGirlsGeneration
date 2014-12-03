@@ -1,7 +1,5 @@
 package fxml_main;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
@@ -23,19 +21,14 @@ public abstract class IAuthoringController {
 
     protected void initButtons () {
         HBox btnBox = new HBox();
-        Button newBtn = makeButton("New");
-        Button editBtn = makeButton("Edit");
-        Button delBtn = makeButton("Delete");
+        Button newBtn = new Button("New");
+        Button editBtn = new Button("Edit");
+        Button delBtn = new Button("Delete");
         initNewButton(newBtn);
         initEditButton(editBtn);
         initDeleteButton(delBtn);
         btnBox.getChildren().addAll(newBtn, editBtn, delBtn);
         myVBox.getChildren().add(btnBox);
-    }
-
-    protected Button makeButton (String buttonName) {
-        Button btn = new Button(buttonName);
-        return btn;
     }
 
     protected abstract void initNewButton (Button newBtn);
