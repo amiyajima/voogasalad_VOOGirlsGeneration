@@ -36,5 +36,4 @@ public abstract class IAuthoringController {
     protected abstract void initEditButton (Button editBtn);
 
     protected abstract void initDeleteButton (Button delBtn);
-
 }
