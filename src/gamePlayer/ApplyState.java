@@ -67,6 +67,7 @@ public class ApplyState implements IGridState{
             checkPlayerState();
     }
     
+   
     private void checkLevelState(){
     	if(myController.getGame().getCurrentLevel().levelCompleted()){
     		myController.getGame().nextLevel();

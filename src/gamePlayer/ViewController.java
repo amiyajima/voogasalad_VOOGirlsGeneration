@@ -469,7 +469,7 @@ public class ViewController {
      * 
      * @param action
      */
-    private void bindAction (Action action) {
+    protected void bindAction (Action action) {
 
 
         if (activePiece == null) return;
