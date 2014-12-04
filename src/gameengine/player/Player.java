@@ -41,7 +41,6 @@ public class Player {
         myID = id;
         setActionKeyMap(myActionKeyMap);
         setMovementKeyMap(myMovementKeyMap);
-
     }
 
     /**
