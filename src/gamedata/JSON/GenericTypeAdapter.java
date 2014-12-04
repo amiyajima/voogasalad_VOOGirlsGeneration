@@ -48,6 +48,7 @@ public class GenericTypeAdapter<T> implements JsonSerializer<T>, JsonDeserialize
     @Override
     public JsonElement serialize (T src, Type typeOfSrc,
                                   JsonSerializationContext context) {
+        System.out.println("serialize called in " + typeOfSrc + " adapter");
         JsonObject result = new JsonObject();
         result.add("type", new JsonPrimitive(src.getClass().getSimpleName()));
         result.add("properties", context.serialize(src, src.getClass()));

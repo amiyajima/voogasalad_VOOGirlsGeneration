@@ -22,7 +22,7 @@ public class Movement implements Action {
 	private List<List<Point2D>> myPaths;
 	private List<Rule> myRules;
 	private List<Point2D> myAbsoluteMoves;
-	private Grid myGrid;
+	private transient Grid myGrid;
 
 	/**
 	 * Constructor

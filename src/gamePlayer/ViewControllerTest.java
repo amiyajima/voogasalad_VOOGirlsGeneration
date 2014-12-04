@@ -56,6 +56,15 @@ public class ViewControllerTest {
         assertEquals ("build", ((Text) controller.controlPane.getChildren().get(2)).getText());
         
     }
+    @Test
+    public void bindActionTest(){
+        ViewController controller = new ViewController(new Stage());
+        Action move = new ConcreteAction("move", null, null, null, null);
+        controller.bindAction(move);
+        assertEquals("move",controller.getActiveAction().toString());
+        
+    }
+    
  
 
 }

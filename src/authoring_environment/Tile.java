@@ -12,7 +12,7 @@ import javafx.scene.shape.Rectangle;
 
 /**
  * 
- * @author huangmengen
+ * @author Mengen Huang, Jennie Ju
  *
  */
 public class Tile extends Pane {

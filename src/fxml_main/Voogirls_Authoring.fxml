@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="706.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="706.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_main.AuthoringController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -32,15 +34,7 @@
       </MenuBar>
    </top>
    <center>
-      <TabPane prefHeight="677.0" prefWidth="564.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Level 1 example">
-               <content>
-                  <ScrollPane prefHeight="644.0" prefWidth="955.0" />
-               </content>
-          </Tab>
-        </tabs>
-      </TabPane>
+      <TabPane fx:id="myGridTabPane" prefHeight="677.0" prefWidth="564.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
    </center>
    <left>
       <TitledPane animated="false" collapsible="false" prefHeight="677.0" prefWidth="230.0" text="Game Components" BorderPane.alignment="CENTER">
@@ -51,7 +45,7 @@
                      <content>
                         <ScrollPane prefHeight="545.0" prefWidth="226.0">
                            <content>
-                              <VBox prefHeight="200.0" prefWidth="230.0" />
+                              <VBox fx:id="myPiecesVBox" prefHeight="552.0" prefWidth="226.0" />
                            </content>
                         </ScrollPane>
                      </content></TitledPane>
@@ -59,7 +53,7 @@
                      <content>
                         <ScrollPane prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <VBox prefHeight="200.0" prefWidth="230.0" />
+                              <VBox fx:id="myPatchesVBox" prefHeight="552.0" prefWidth="226.0" />
                            </content>
                         </ScrollPane>
                      </content></TitledPane>
@@ -67,14 +61,17 @@
                      <content>
                         <ScrollPane prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <VBox prefHeight="200.0" prefWidth="230.0" />
+                              <VBox fx:id="myActionsVBox" prefHeight="550.0" prefWidth="226.0" />
                            </content>
                         </ScrollPane>
                      </content>
                   </TitledPane>
                   <TitledPane animated="false" prefHeight="572.0" prefWidth="228.0" text="Levels">
                      <content>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" />
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                           <content>
+                              <VBox prefHeight="551.0" prefWidth="226.0" />
+                           </content></ScrollPane>
                      </content>
                   </TitledPane>
               </panes>
@@ -83,9 +80,9 @@
       </TitledPane>
    </left>
    <right>
-      <TitledPane animated="false" collapsible="false" prefHeight="677.0" prefWidth="230.0" text="Properties Editor" BorderPane.alignment="CENTER">
+      <TitledPane animated="false" collapsible="false" prefHeight="677.0" prefWidth="270.0" text="Properties Editor" BorderPane.alignment="CENTER">
          <content>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="650.0" prefWidth="230.0" />
+            <ScrollPane fx:id="myPropertiesSPane" hbarPolicy="NEVER" prefHeight="650.0" prefWidth="270.0" />
          </content>
       </TitledPane>
    </right>

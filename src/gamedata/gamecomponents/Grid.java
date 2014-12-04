@@ -150,26 +150,25 @@ public abstract class Grid {
          */
         return myPatches;
     }
-    
-    //TODO temporary fix because it was throwing an error
+
+    // TODO temporary fix because it was throwing an error
     public Piece getPiece (Object uniqueID) {
         // TODO Auto-generated method stub
         return null;
     }
-    
+
     /**
      * Getter to return the piece at a specific x and y
+     * 
      * @param x
      * @param y
      * @return
      */
-    public Piece getPiece(int x, int y){
-    	for(Piece p:myPieces){
-    		if(p.getLoc().getX()==x && p.getLoc().getY()==y){
-    			return p;
-    		}
-    	}
-    	return null;
+    public Piece getPiece (int x, int y) {
+        for (Piece p : myPieces) {
+            if (p.getLoc().getX() == x && p.getLoc().getY() == y) { return p; }
+        }
+        return null;
     }
 
 }
