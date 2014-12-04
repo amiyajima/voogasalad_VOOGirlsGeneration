@@ -75,7 +75,6 @@ public class RangeEditor extends PopupWindow {
             mySampleGridView.update(initialWidth * 2 + 1, initialHeight * 2 + 1, initialSize);
 
         }
-
         mySampleGridView.setRange(range);
         initialize();
     }

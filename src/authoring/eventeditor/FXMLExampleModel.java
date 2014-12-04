@@ -1,4 +1,4 @@
-package fxml_example;
+package authoring.eventeditor;
 
 public class FXMLExampleModel {
 
