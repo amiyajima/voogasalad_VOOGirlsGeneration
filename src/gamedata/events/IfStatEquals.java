@@ -16,7 +16,6 @@ public class IfStatEquals extends Condition{
 
 	@Override
 	public boolean evaluate() {
-//		return reference.getStat(stat) == value);
-		return false;
+		return reference.getStats().getValue(stat) == value;
 	}	
 }

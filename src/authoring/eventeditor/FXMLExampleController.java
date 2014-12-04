@@ -3,7 +3,7 @@
  * Use copy/paste to copy paste this code into your favorite IDE
  **/
 
-package fxml_example;
+package authoring.eventeditor;
 
 import java.net.URL;
 import java.util.ResourceBundle;
