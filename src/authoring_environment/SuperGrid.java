@@ -16,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
 public class SuperGrid extends Pane {
+	private static final String HEXAGON_GRID = "Hexagon Grid";
 	private static final String SQUARE_GRID = "Square Grid";
 	protected int myRows;
 	protected int myCols;
@@ -45,11 +46,13 @@ public class SuperGrid extends Pane {
 		}
 	}
 
-
 	private SuperTile makeShapeTile(String shape, int tileSize, Point2D location) {
 		switch(shape){
 		case SQUARE_GRID:
 			return new SquareTile(tileSize,location);
+		case HEXAGON_GRID:
+			System.out.println("Hexagon here!");
+			return new HexagonTile(tileSize,location);
 		default:
 			return new SquareTile(tileSize,location);
 		}
