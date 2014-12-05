@@ -2,22 +2,18 @@ package authoring.concretefeatures;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
-import authoring.abstractfeatures.PopupWindow;
 import authoring.createedit.ModulesList;
 import authoring.data.ActionData;
 
@@ -29,7 +25,7 @@ import authoring.data.ActionData;
  * the unit's name in the LibraryView of the game
  * authoring environment.
  */
-public class LibraryUnitEditor extends PopupWindow {
+public class LibraryUnitEditor extends TitledPane {
 
 	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 	private final String NAME = "Unit Editor";
@@ -39,9 +35,7 @@ public class LibraryUnitEditor extends PopupWindow {
 	private final String TEMPLATE_LABEL = "Update unit";
 	private final String DELETE = "Delete";
 	private final String EDIT = "Edit";
-
-	private final int HEIGHT = 400;
-	private final int WIDTH = 400;
+	
 	private Piece myUnit;
 
 	private Stats myStats;
@@ -57,24 +51,15 @@ public class LibraryUnitEditor extends PopupWindow {
 	 * @param myAvailableActions 
 	 */
 	public LibraryUnitEditor(Piece unit, ActionData availableActions){
-		setHeight(HEIGHT);
-		setWidth(WIDTH);
-		setTitle(NAME);
+		
 		myUnit = unit;
 
 		myStats = myUnit.getStats();
 		myActions = myUnit.getActions();
 
 		myAvailableActions = availableActions;
-
-		initialize();
-	}
-
-	@Override
-	protected void initialize() {
+		
 		ScrollPane root = new ScrollPane();
-		Scene scene = new Scene(root, WIDTH, HEIGHT);
-		scene.getStylesheets().add(STYLESHEET);
 
 		VBox mainVBox = new VBox();
 
@@ -103,13 +88,13 @@ public class LibraryUnitEditor extends PopupWindow {
 				for(Action a: myActions){
 					myUnit.addAction(a);
 				}
-				close();
+				setContent(null);
 			}
 		});
 
 		mainVBox.getChildren().addAll(setStatsBtn, modList, goButton);
 		root.setContent(mainVBox);
-		setScene(scene);
+		setContent(root);
 	}
 
 	protected List<Action> addSelectedActions(List<String> selected){
