@@ -3,6 +3,11 @@ package gamePlayer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Main Method for Game Player
+ * @author 
+ *
+ */
 public class Main extends Application{
     
     @Override

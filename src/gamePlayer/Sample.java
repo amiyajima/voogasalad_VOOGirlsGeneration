@@ -1,11 +1,14 @@
 package gamePlayer;
 
-
 import java.io.IOException;
 import java.lang.Math;
 import com.leapmotion.leap.*;
 import com.leapmotion.leap.Gesture.State;
 
+/**
+ * For LeapMotion
+ * @author 
+ */
 class SampleListener extends Listener {
     public void onInit(Controller controller) {
         System.out.println("Initialized");

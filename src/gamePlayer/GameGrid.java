@@ -16,6 +16,7 @@ import javafx.scene.layout.GridPane;
  * @author
  *
  */
+//TODO: Replace with Authoring Environment Grid
 public abstract class GameGrid extends GridPane implements Observer{
 
     private Point2D myCurrentLocation;

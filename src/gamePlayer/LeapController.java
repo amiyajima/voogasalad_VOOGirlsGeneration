@@ -6,6 +6,11 @@ import javafx.beans.property.SimpleObjectProperty;
 
 import com.leapmotion.leap.*;
 //import com.leapmotion.leap.Gesture.State;
+/**
+ * For LeapMotion
+ * @author 
+ *
+ */
 public class LeapController {
 
 class leapListener extends Listener {

@@ -6,6 +6,13 @@ import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 
+/**
+ * Responsible for Highlighting the Grid
+ * 
+ * @author
+ *
+ */
+// TODO: Update once new Grids are implemented
 public class Highlighter {
 	/**
 	 * Turns on highlighting of a Patch at loc with Color c
