@@ -51,7 +51,6 @@ public class SuperGrid extends Pane {
 		case SQUARE_GRID:
 			return new SquareTile(tileSize,location);
 		case HEXAGON_GRID:
-			System.out.println("Hexagon here!");
 			return new HexagonTile(tileSize,location);
 		default:
 			return new SquareTile(tileSize,location);
