@@ -1,6 +1,6 @@
 package gamedata.gamecomponents;
 
-import gamedata.action.Action;
+import gamedata.action.GlobalAction;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -65,8 +65,8 @@ public class Inventory {
 	 * as a list of Actions
 	 * @return list of Actions contained in the items
 	 */
-	public List<Action> getItemActions() {
-		List<Action> itemActions = new LinkedList<Action>();
+	public List<GlobalAction> getItemActions() {
+		List<GlobalAction> itemActions = new LinkedList<GlobalAction>();
 		for (Piece item : myInventory) {
 			itemActions.addAll(item.getActions());
 		}

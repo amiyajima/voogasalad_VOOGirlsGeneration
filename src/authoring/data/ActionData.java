@@ -1,6 +1,6 @@
 package authoring.data;
 
-import gamedata.action.Action;
+import gamedata.action.GlobalAction;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,9 +19,9 @@ import javafx.collections.ObservableList;
  * There should be an easier way to do this.
  */
 
-public class ActionData implements AuthoringData<Action> {
-	private List<Action> myActions;
-	private transient Map<String, Action> myActionsMap;
+public class ActionData implements AuthoringData<GlobalAction> {
+	private List<GlobalAction> myActions;
+	private transient Map<String, GlobalAction> myActionsMap;
 	
 	/**
 	 * Constructor for new ActionData,
@@ -41,13 +41,13 @@ public class ActionData implements AuthoringData<Action> {
 	}
 	
 	@Override
-	public List<Action> get(){
+	public List<GlobalAction> get(){
 		return myActions;
 	}
 	
 	@Override
-	public void add(Action... actions) {
-	    for (Action a : actions) {
+	public void add(GlobalAction... actions) {
+	    for (GlobalAction a : actions) {
 	        myActions.add(a);
 	        myActionsMap.put(a.toString(),  a);
 
@@ -55,8 +55,8 @@ public class ActionData implements AuthoringData<Action> {
 	}
 	
 	@Override
-	public void remove(Action... actions) {
-	          for (Action a : actions) {
+	public void remove(GlobalAction... actions) {
+	          for (GlobalAction a : actions) {
 	                myActions.remove(a);
 	                myActionsMap.remove(a.toString());
 	            }
@@ -68,7 +68,7 @@ public class ActionData implements AuthoringData<Action> {
 		myActionsMap.clear();
 	}
 
-    public Action getAction (String s) {
+    public GlobalAction getAction (String s) {
         return myActionsMap.get(s);
     }
 }

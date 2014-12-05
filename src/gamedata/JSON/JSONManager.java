@@ -1,6 +1,6 @@
 package gamedata.JSON;
 
-import gamedata.action.Action;
+import gamedata.action.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
@@ -123,7 +123,7 @@ public class JSONManager {
     public void registerTypeAdapters (GsonBuilder builder) {
         builder.registerTypeAdapter(Goal.class, new GenericTypeAdapter<Goal>("gamedata.goals"));
         builder.registerTypeAdapter(Rule.class, new GenericTypeAdapter<Rule>("gamedata.rules"));
-        builder.registerTypeAdapter(Action.class, new GenericTypeAdapter<Action>("gamedata.action"));
+        builder.registerTypeAdapter(GlobalAction.class, new GenericTypeAdapter<GlobalAction>("gamedata.action"));
     }
 
 }

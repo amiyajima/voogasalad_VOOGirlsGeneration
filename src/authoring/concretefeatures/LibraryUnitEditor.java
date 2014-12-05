@@ -14,7 +14,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import gamedata.action.Action;
+import gamedata.action.GlobalAction;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import authoring.abstractfeatures.PopupWindow;
@@ -45,7 +45,7 @@ public class LibraryUnitEditor extends PopupWindow {
 	private Piece myUnit;
 
 	private Stats myStats;
-	private List<Action> myActions;
+	private List<GlobalAction> myActions;
 
 	private ActionData myAvailableActions;
 
@@ -89,7 +89,7 @@ public class LibraryUnitEditor extends PopupWindow {
 
 		//DIFFERENT FROM UNIT CREATOR
 		ObservableList<String> addedActionNames = FXCollections.observableArrayList();
-		for(Action a: myActions){
+		for(GlobalAction a: myActions){
 			addedActionNames.add(a.toString());
 		}
 
@@ -100,7 +100,7 @@ public class LibraryUnitEditor extends PopupWindow {
 			@Override
 			public void handle (ActionEvent click) {
 				myActions = addSelectedActions(modList.getSelectedActions());  
-				for(Action a: myActions){
+				for(GlobalAction a: myActions){
 					myUnit.addAction(a);
 				}
 				close();
@@ -112,8 +112,8 @@ public class LibraryUnitEditor extends PopupWindow {
 		setScene(scene);
 	}
 
-	protected List<Action> addSelectedActions(List<String> selected){
-		List<Action> list = new ArrayList<>();
+	protected List<GlobalAction> addSelectedActions(List<String> selected){
+		List<GlobalAction> list = new ArrayList<>();
 		for(String s: selected){
 			list.add(myAvailableActions.getAction(s));
 		}

@@ -1,6 +1,6 @@
 package authoring.createedit;
 
-import gamedata.action.Action;
+import gamedata.action.GlobalAction;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
@@ -65,7 +65,7 @@ public class UnitCreator extends TitledPane {
 
 	private Point2D myLoc;
 	private Stats myStats;
-	private List<Action> myActions;
+	private List<GlobalAction> myActions;
 	private List<Movement> myPath;
 	private Inventory myInventory;
 	
@@ -80,7 +80,7 @@ public class UnitCreator extends TitledPane {
 		myName = "";
 		myImageLocation = "";
 		myPath = new ArrayList<Movement>();
-		myActions = new ArrayList<Action>();
+		myActions = new ArrayList<GlobalAction>();
 		myStats = new Stats();
 		myLoc = new Point2D.Double(0, 0);
 		myPlayerID = 0;
@@ -186,8 +186,8 @@ public class UnitCreator extends TitledPane {
         setContent(box);
         setText(NAME);
     }
-	protected List<Action> addSelectedActions(List<String> selected){
-		List<Action> list = new ArrayList<>();
+	protected List<GlobalAction> addSelectedActions(List<String> selected){
+		List<GlobalAction> list = new ArrayList<>();
 		for(String s: selected){
 			list.add(myAvailableActions.getAction(s));
 		}

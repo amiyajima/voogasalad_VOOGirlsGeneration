@@ -3,7 +3,7 @@ package gameengine.player;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.input.KeyCode;
-import gamedata.action.Action;
+import gamedata.action.GlobalAction;
 import gamedata.gamecomponents.Level;
 import java.awt.geom.Point2D;
 
@@ -19,7 +19,7 @@ public class Player {
 
     private int myNumMovesPlayed;
     private int myID;
-    private Map<KeyCode, Action> myActionKeyMap;
+    private Map<KeyCode, GlobalAction> myActionKeyMap;
     // for keypressed, when keys don't trigger actions. ex) arrow keys
     private Map<KeyCode, Point2D> myMovementKeyMap;
 
@@ -65,7 +65,7 @@ public class Player {
      * 
      * @return myKeyMap which maps actions to pre-defined keycodes
      */
-    public Map<KeyCode, Action> getActionKeyMap () {
+    public Map<KeyCode, GlobalAction> getActionKeyMap () {
         return myActionKeyMap;
     }
 
@@ -74,8 +74,8 @@ public class Player {
      * 
      * @param myKeyMap
      */
-    public void setActionKeyMap (Map<KeyCode, Action> myActionKeyMap) {
-        myActionKeyMap = new HashMap<KeyCode, Action>();
+    public void setActionKeyMap (Map<KeyCode, GlobalAction> myActionKeyMap) {
+        myActionKeyMap = new HashMap<KeyCode, GlobalAction>();
     }
 
     /**
