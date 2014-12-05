@@ -33,14 +33,20 @@
         </menus>
       </MenuBar>
    </top>
-   <center>
-      <TabPane fx:id="myGridTabPane" prefHeight="677.0" prefWidth="564.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
-   </center>
    <left>
       <TitledPane animated="false" collapsible="false" prefHeight="677.0" prefWidth="230.0" text="Game Components" BorderPane.alignment="CENTER">
          <content>
             <Accordion>
               <panes>
+                  <TitledPane animated="false" prefHeight="572.0" prefWidth="228.0" text="Levels">
+                     <content>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                           <content>
+                              <VBox prefHeight="551.0" prefWidth="226.0" />
+                           </content>
+                        </ScrollPane>
+                     </content>
+                  </TitledPane>
                 <TitledPane animated="false" text="Pieces">
                      <content>
                         <ScrollPane prefHeight="545.0" prefWidth="226.0">
@@ -66,14 +72,6 @@
                         </ScrollPane>
                      </content>
                   </TitledPane>
-                  <TitledPane animated="false" prefHeight="572.0" prefWidth="228.0" text="Levels">
-                     <content>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                           <content>
-                              <VBox prefHeight="551.0" prefWidth="226.0" />
-                           </content></ScrollPane>
-                     </content>
-                  </TitledPane>
               </panes>
             </Accordion>
          </content>
@@ -86,4 +84,7 @@
          </content>
       </TitledPane>
    </right>
+   <center>
+      <ScrollPane fx:id="myGridSPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

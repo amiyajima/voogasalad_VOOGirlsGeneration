@@ -56,14 +56,15 @@ public class LevelEditor {
     //TODO If grid type doesn't match, this may cause a NullPointerException
     private void initializeGrid() {
         //TODO: hard coded grid type
+    	//TODO: CHANGE LEVEL ID THIS IS HARDCODED
         if (myGridType.equals("Square Grid")){
            shapeGrid = new SandyGrid(myCol, myRows, 
-                           tileSize, pieceData, patchData);
+                           tileSize, pieceData, patchData,"level1");
 
         }
         else if (myGridType.equals("Hexagon Grid")) {
             shapeGrid = new JennieGrid(myCol, myRows, 
-                       tileSize, pieceData, patchData);
+                       tileSize, pieceData, patchData,"level1");
         }
     }
 

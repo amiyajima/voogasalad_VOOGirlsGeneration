@@ -1,48 +1,71 @@
 package fxml_main;
 
+import gamedata.gamecomponents.Piece;
+
+import java.util.List;
+
+import authoring_environment.ShapeGrid;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class PieceController extends IAuthoringController {
+public class PieceController extends GridComponentAbstCtrl<Piece> {
 
-    public PieceController (VBox piecesBox, TabPane gridTabs, ScrollPane propertiesPane) {
-        myVBox = piecesBox;
-        myGridTabPane = gridTabs;
-        myPropertiesSPane = propertiesPane;
-        initControls();
+    public PieceController (VBox vbox, ScrollPane propertiesSPane, ShapeGrid currGrid) {
+    	super(vbox, propertiesSPane, currGrid);
     }
 
     @Override
-    protected void initNewButton (Button newBtn) {
+    protected void initGlobalNewBtn (Button newBtn) {
         newBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                System.out.println("HI NEW BUTTONFORPIECE HI");
+                System.out.println("HI NEW BUTTONFORPATCH HI");
             }
         });
     }
 
     @Override
-    protected void initEditButton (Button editBtn) {
+    protected void initGlobalEditBtn (Button editBtn) {
     	editBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                System.out.println("HI EDIT BUTTONFORPIECE HI");
+                System.out.println("HI EDIT BUTTONFORPATCH HI");
             }
         });
     }
 
     @Override
-    protected void initDeleteButton (Button delBtn) {
+    protected void initGlobalDelBtn (Button delBtn) {
     	delBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                System.out.println("HI DELETE BUTTONFORPIECE HI");
+                System.out.println("HI DELETE BUTTONFORPATCH HI");
             }
         });
     }
+
+	@Override
+	protected HBox makeEntryBox(Piece entry) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void initEntryEditBtn(Piece entry, Button editBtn) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void initEntryDelBtn(Piece entry, Button delBtn) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }
