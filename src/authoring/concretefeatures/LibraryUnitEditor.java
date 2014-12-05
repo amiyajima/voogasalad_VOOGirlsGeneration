@@ -52,6 +52,8 @@ public class LibraryUnitEditor extends TitledPane {
 	 */
 	public LibraryUnitEditor(Piece unit, ActionData availableActions){
 		
+		setText(NAME);
+		
 		myUnit = unit;
 
 		myStats = myUnit.getStats();

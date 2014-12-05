@@ -9,7 +9,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -25,12 +24,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import authoring.abstractfeatures.PopupWindow;
 import authoring.concretefeatures.LibraryUnitEditor;
 import authoring.concretefeatures.UnitEntry;
 import authoring.data.ActionData;
 import authoring.data.PieceTypeData;
-import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
 /**
@@ -51,7 +48,8 @@ public class UnitCreator extends TitledPane {
 	private static final String TEMPLATE_LABEL = "Create new unit template";
 	private static final String DELETE = "Delete";
 	private static final String EDIT = "Edit";
-	private LibraryView myLibrary;
+	
+	private VBox myUnitListView;
 	private ActionData myAvailableActions;
 
 	private static final Insets MARGINS = new Insets(10, WIDTH/8, 10, WIDTH/8 - 10);
@@ -69,14 +67,13 @@ public class UnitCreator extends TitledPane {
 	private List<Movement> myPath;
 	private Inventory myInventory;
 
-	private ObservableList<String> myUnits;
-	private PieceTypeData pieceLibrary;
+	private PieceTypeData myPieceTypes;
 
-	public UnitCreator(LibraryView library, ActionData availableActions, ObservableList<String> units, PieceTypeData pieceLibrary) {
-		this.pieceLibrary = pieceLibrary;
-		myLibrary = library;
-		myAvailableActions = availableActions;
-		myUnits = units;
+	public UnitCreator(ActionData actions, PieceTypeData pieceTypes, VBox unitListView) {
+		myUnitListView = unitListView;
+		
+		myPieceTypes = pieceTypes;
+		myAvailableActions = actions;
 		myName = "";
 		myImageLocation = "";
 		myPath = new ArrayList<Movement>();
@@ -87,10 +84,7 @@ public class UnitCreator extends TitledPane {
 		myInventory = new Inventory();
 
 		setText(NAME);
-		initialize();
-	}
-
-	protected void initialize () {
+		
 		VBox box = new VBox();
 		box.getStylesheets().add(STYLESHEET);
 		box.getStyleClass().add("vbox");
@@ -149,8 +143,7 @@ public class UnitCreator extends TitledPane {
 
 				Piece unit = new Piece(myName, myImageLocation, myPath, myActions, myStats,
 						myLoc, myPlayerID, myInventory);
-				myUnits.add(unit.getName());
-				pieceLibrary.add(unit);
+				myPieceTypes.add(unit);
 				Label name = new Label(unitName.getText());
 				name.setTranslateY(7.5);
 
@@ -168,24 +161,24 @@ public class UnitCreator extends TitledPane {
 				entry.setOnMouseClicked(new EventHandler<MouseEvent>(){
 					@Override
 					public void handle(MouseEvent m){
-						myLibrary.selectUnit(unit);
+						// myLibrary.selectUnit(unit);
 					}
 				});
 
 				delButton.setOnAction(new EventHandler<ActionEvent>(){
 					@Override
 					public void handle(ActionEvent event) {
-						myLibrary.removePiece(entry);
+						// myLibrary.removePiece(entry);
 					}
 				});
-
-				myLibrary.addPiece(entry);
+				//myLibrary.addPiece(entry);
+				myUnitListView.getChildren().add(entry);
 			}
 		});
 		box.getChildren().addAll(names, images, modList, goButton);
 		setContent(box);
-		setText(NAME);
 	}
+	
 	protected List<Action> addSelectedActions(List<String> selected){
 		List<Action> list = new ArrayList<>();
 		for(String s: selected){

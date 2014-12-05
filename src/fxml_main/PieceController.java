@@ -29,7 +29,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
         newBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                myPropertiesSPane.setContent(new UnitCreator(myActionData));
+                myPropertiesSPane.setContent(new UnitCreator(myActionData, myPieceTypes, myVBox));
             }
         });
     }
