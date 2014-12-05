@@ -7,7 +7,6 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Level;
 import java.awt.geom.Point2D;
 
-
 /**
  * A player object that contains the logic for playing each level. This object
  * requires no parameters for initialization.
@@ -17,52 +16,66 @@ import java.awt.geom.Point2D;
 
 public abstract class Player {
 
-    private int myNumMovesPlayed;
-    private int myID;
+	/**
+	 * Number of Moves made by the Player in a Given Turn
+	 */
+	private int myNumMovesPlayed;
+	/**
+	 * Unique ID Number of the Player that Identifies the Player
+	 */
+	private int myID;
 
-    /**
-     * Default constructor
-     */
-    public Player () {
-        this(0);
-    }
+	/**
+	 * Default constructor
+	 */
+	public Player() {
+		this(0);
+	}
 
-    /**
-     * Constructs a player with a specific ID
-     * 
-     * @param id
-     *        int ID corresponding to the Player
-     */
-    public Player (int id) {
-        myNumMovesPlayed = 0;
-        myID = id;
+	/**
+	 * Constructs a player with a specific ID
+	 * 
+	 * @param id
+	 *            int ID corresponding to the Player
+	 */
+	public Player(int id) {
+		myNumMovesPlayed = 0;
+		myID = id;
 
-    }
+	}
 
-    public abstract void play ();
+	public abstract void startTurn();
 
-    /**
-     * Resets number of moves played for the player
-     */
-    public void resetMovesPlayed () {
-        myNumMovesPlayed = 0;
-    }
+	/**
+	 * Resets number of moves played for the player
+	 */
+	public void resetMovesPlayed() {
+		myNumMovesPlayed = 0;
+	}
 
-    /**
-     * Getter to return the ID of the player
-     * 
-     * @return int ID of the player
-     */
-    public int getID () {
-        return myID;
-    }
+	/**
+	 * Getter to return the ID of the player
+	 * 
+	 * @return int ID of the player
+	 */
+	public int getID() {
+		return myID;
+	}
 
-    public int getNumMovesPlayed () {
-        return myNumMovesPlayed;
-    }
+	/**
+	 * Getter for Number of Moves Played
+	 * 
+	 * @return
+	 */
+	public int getNumMovesPlayed() {
+		return myNumMovesPlayed;
+	}
 
-    public String toString () {
-        return "ID:" + myID + " NumMovesPlayed:" + myNumMovesPlayed;
-    }
+	/**
+	 * ToString Method for Player Information. For debugging purposes.
+	 */
+	public String toString() {
+		return "ID:" + myID + " NumMovesPlayed:" + myNumMovesPlayed;
+	}
 
 }
