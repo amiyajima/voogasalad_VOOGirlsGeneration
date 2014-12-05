@@ -27,7 +27,7 @@ public class LevelCreator extends VBox {
 		TextField idField = new TextField(myLevel.getId());
 		idHBox.getChildren().addAll(idLabel, idField);
 		
-		HBox gridSizeHBox = new HBox();
+		VBox gridSizeVBox = new VBox();
 		Label gridSizeLabel = new Label("Grid Size:");
 		
 		VBox rowVBox = new VBox();
@@ -39,7 +39,9 @@ public class LevelCreator extends VBox {
 		TextField colField = new TextField("5");
 		colVBox.getChildren().addAll(colLabel,colField);
 		
-		gridSizeHBox.getChildren().addAll(gridSizeLabel, rowVBox, colVBox);
+		HBox gridSizeHBox = new HBox();
+		gridSizeHBox.getChildren().addAll(rowVBox, colVBox);
+		gridSizeVBox.getChildren().addAll(gridSizeLabel,gridSizeHBox);
 		
 		Button eventBtn = new Button("Add Global Events...");
 		
@@ -54,7 +56,7 @@ public class LevelCreator extends VBox {
 //		});
 		
 		
-		getChildren().addAll(idHBox, gridSizeHBox,
+		getChildren().addAll(idHBox, gridSizeVBox,
 				eventBtn, finalizeBtnsHBox);
 
 		

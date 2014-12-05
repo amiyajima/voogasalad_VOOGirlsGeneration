@@ -42,7 +42,7 @@
                      <content>
                         <ScrollPane prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <VBox prefHeight="551.0" prefWidth="226.0" />
+                              <VBox fx:id="myLevelsVBox" prefHeight="551.0" prefWidth="226.0" />
                            </content>
                         </ScrollPane>
                      </content>

@@ -2,9 +2,12 @@ package fxml_main;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import authoring.data.ActionData;
+import authoring.data.AuthoringLevel;
 import authoring.eventeditor.EventEditorController;
 import authoring.eventeditor.NewConditionController;
 import authoring_environment.ShapeGrid;
@@ -25,6 +28,9 @@ public class AuthoringController implements Initializable {
 	private ScrollPane myPropertiesSPane;
 	
 	@FXML
+	private VBox myLevelsVBox;
+	
+	@FXML
 	private VBox myPiecesVBox;
 	
 	@FXML
@@ -43,14 +49,19 @@ public class AuthoringController implements Initializable {
 	private ShapeGrid myCurrentGrid;
 	private PieceController myPieceController;
 	private PatchController myPatchController;
+	private LevelController myLevelController;
+	
 
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		
 		ActionData actions = new ActionData();
+		List<AuthoringLevel> myLevels = new LinkedList<AuthoringLevel>();
 		
 		myPieceController = new PieceController(myPiecesVBox, myPropertiesSPane, myCurrentGrid, actions);
 	    myPatchController = new PatchController(myPatchesVBox, myPropertiesSPane, myCurrentGrid);
+	    myLevelController = new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
+	    		myCurrentGrid, myLevels);
 	}
 	
 	@FXML
