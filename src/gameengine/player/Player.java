@@ -29,8 +29,8 @@ public abstract class Player {
     /**
      * Default constructor
      */
-    public Player (Grid g) {
-        this(0, g);
+    public Player () {
+        this(0, null);
     }
 
     /**
@@ -50,18 +50,19 @@ public abstract class Player {
      * 
      * @param g
      * @return
-     * TODO: itereate through pieces in grid, determine which ones have corresponding Player ID
+     *         TODO: itereate through pieces in grid, determine which ones have corresponding Player
+     *         ID
      */
     private List<Piece> populatePieces (Grid g) {
         // Set allPieces = g.get
         return null;
     }
-    
-    public List<Piece> getPieces(){
+
+    public List<Piece> getPieces () {
         return Collections.unmodifiableList(myPieces);
     }
 
-    public abstract void play ();
+    public abstract void startTurn ();
 
     /**
      * Resets number of moves played for the player
@@ -79,10 +80,18 @@ public abstract class Player {
         return myID;
     }
 
+    /**
+     * Getter for Number of Moves Played
+     * 
+     * @return
+     */
     public int getNumMovesPlayed () {
         return myNumMovesPlayed;
     }
 
+    /**
+     * ToString Method for Player Information. For debugging purposes.
+     */
     public String toString () {
         return "ID:" + myID + " NumMovesPlayed:" + myNumMovesPlayed;
     }

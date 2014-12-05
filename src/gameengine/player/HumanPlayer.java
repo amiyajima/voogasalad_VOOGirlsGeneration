@@ -26,6 +26,13 @@ public class HumanPlayer extends Player {
         setMovementKeyMap(myMovementKeyMap);
     }
 
+    @Override
+    public void startTurn () {
+        this.resetMovesPlayed();
+        // TODO: Map Keys Here
+
+    }
+
     /**
      * used by game player (GUI) so that it knows what action to perform when
      * certain keycodes are pressed/used.
@@ -63,9 +70,4 @@ public class HumanPlayer extends Player {
         myMovementKeyMap2 = new HashMap<KeyCode, Point2D>();
     }
 
-    @Override
-    public void play () {
-        // TODO Auto-generated method stub
-
-    }
 }

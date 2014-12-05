@@ -27,4 +27,10 @@ public class SimpleAIPlayer extends Player {
 
     }
 
+    @Override
+    public void startTurn () {
+        // TODO Auto-generated method stub
+        
+    }
+
 }
