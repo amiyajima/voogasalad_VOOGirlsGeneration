@@ -37,7 +37,7 @@ public class VoogaView extends BorderPane {
 		pieceTypeData = new PieceTypeData();
 		PatchTypeData patchTypeData = new PatchTypeData();
 	
-		myLibraryView = new LibraryView(pieceTypeData,patchTypeData);
+//		myLibraryView = new LibraryView(pieceTypeData,patchTypeData);
 		myWorkspaceView = new WorkspaceView();
 		myMenuView = new MenuView(myWorkspaceView, myLibraryView, myActions);
 		
@@ -49,13 +49,13 @@ public class VoogaView extends BorderPane {
 			@Override
 			public void changed(ObservableValue<? extends Tab> arg0, Tab arg1, Tab arg2) {
 				SuperGrid activeGrid = myWorkspaceView.getActiveGrid();
-		        myLibraryView.associateGrid(activeGrid);
+//		        myLibraryView.associateGrid(activeGrid);
 		    }
 
 		}); 
 		
 		setTop(myMenuView);	
-		setLeft(myLibraryView);
+//		setLeft(myLibraryView);
 		setRight(myWorkspaceView);
 	              
 		initializeCreator();
