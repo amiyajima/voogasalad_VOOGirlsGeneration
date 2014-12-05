@@ -23,6 +23,22 @@ public class GUIGrid extends SuperGrid {
 		myPieceData = new LinkedList<Piece>();
 		myPatchData = new LinkedList<Patch>();
 	}
+	
+	/**
+	 * Returns number of rows
+	 * @return int number of rows
+	 */
+	public int getNumRows() {
+		return super.myRows;
+	}
+	
+	/**
+	 * Returns number of columns
+	 * @return int number of columns
+	 */
+	public int getNumCols() {
+		return super.myCols;
+	}
 
 	protected void addPiece(Piece pieceType, Point2D loc) {
 		// create new instance of pieceType with this location
