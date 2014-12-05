@@ -9,9 +9,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
 /**
- * SandyTiles are any shape tiles
+ * Tile of different shapes
  * 
- * @author Jennie Ju, Mengen Huang
+ * @author Mengen Huang, Jennie Ju
  */
 public abstract class SuperTile extends Group {
 	private Shape myShape;
@@ -68,10 +68,10 @@ public abstract class SuperTile extends Group {
 
 	private void setCheckeredColor(int row, int col, Shape shape) {
 		if (((row % 2 == 0) && (col % 2 == 0)) || ((row % 2 == 1) && (col % 2 == 1))) {
-            shape.setFill(Color.WHITE);
+            shape.setFill(Color.WHITESMOKE);
 		}
         else {
-            shape.setFill(Color.BLACK);
+            shape.setFill(Color.WHITE);
         }
 		shape.setStroke(Color.GRAY);
 		shape.setStrokeWidth(0.75);
