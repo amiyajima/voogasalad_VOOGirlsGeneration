@@ -155,13 +155,8 @@ public class ViewController {
     }
 
     /**
-<<<<<<< HEAD
      * generates drop down menu that allow user to choose a new Game to play The
      * Games are generated from the directory that stores all json files defined
-=======
-     * generates drop down menu that allow user to choose a new Game to play
-     * The Games are generated from the directory that stores all json files defined
->>>>>>> b6ffb873072c1e0817996486bc5be58238c6d09e
      * from authoring environment
      * 
      * @throws LineUnavailableException
@@ -424,6 +419,7 @@ public class ViewController {
         ArrayList<Label> actions = new ArrayList<Label>();
 
         Map<KeyCode, Action> actionMap = myModel.getCurrentPlayer().getActionKeyMap();
+        System.out.println(actionMap);
         Map<Action, KeyCode> keyMap =
                 actionMap.entrySet().stream()
                         .collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));

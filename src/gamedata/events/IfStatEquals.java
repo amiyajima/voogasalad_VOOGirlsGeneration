@@ -2,7 +2,7 @@ package gamedata.events;
 
 import gamedata.gamecomponents.Piece;
 
-public class IfStatEquals extends Condition{
+public class IfStatEquals implements Condition{
 	public static final String description = "IF Piece Stat EQUALS Value";
 	private Piece reference;
 	private String stat;
@@ -16,7 +16,6 @@ public class IfStatEquals extends Condition{
 
 	@Override
 	public boolean evaluate() {
-//		return reference.getStat(stat) == value);
-		return false;
+		return reference.getStats().getValue(stat) == value;
 	}	
 }

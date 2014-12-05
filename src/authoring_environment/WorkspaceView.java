@@ -70,7 +70,6 @@ public class WorkspaceView extends TabPane {
 	public ShapeGrid getActiveGrid(){
 		SingleSelectionModel<Tab> selectionModel = getSelectionModel();
 		int idx = selectionModel.getSelectedIndex();
-
 		
 		if(idx==-1 || idx>=myGrids.size()){
 			return myGrids.get(0);

@@ -23,7 +23,8 @@ public class Event {
 		
 		if(conditionsFulfilled){
 			for(Action a: myActions){
-//				a.runAction();
+				//TODO: Find a way to run actions where the ACTOR is the game (god?) 
+//				a.doBehavior(actor, receivers);
 			}
 		}
 		
