@@ -2,6 +2,7 @@ package authoring.data;
 
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,12 +12,35 @@ import java.util.List;
  */
 public class GameCreator {
     Game myGame;
+    
+    /**
+     * Initialization of game creator creates an empty game
+     */
     public GameCreator() {
         myGame = new Game();
     }
     
-    public Game createGame(List<Level> myLevels, int numPlayers) {
+    /**
+     * Creates game using the levels and number of players you have
+     * @param myLevels
+     * @param numPlayers
+     * @return
+     */
+    public Game createGame(List<AuthoringLevel> myAuthoringLevels, int numPlayers) {
+        List<Level> myLevels = new ArrayList<Level>();
+        for (AuthoringLevel al : myAuthoringLevels) {
+            myLevels.add(convertAuthoringToLevel(al));
+        }
         myGame = new Game(myLevels, numPlayers);
         return myGame;
+    }
+    
+    /**
+     * Converts an authoring level to a regular level
+     * @param aLevel
+     * @return
+     */
+    private Level convertAuthoringToLevel(AuthoringLevel aLevel) {
+        return null;
     }
 }
