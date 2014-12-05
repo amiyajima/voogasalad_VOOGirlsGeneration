@@ -34,18 +34,18 @@ public class Game {
 	/**
 	 * Instantiate a new Game given a list of players and levels that exist.
 	 * 
-	 * @param players
+	 * @param myLevels
 	 *            List of players
-	 * @param levels
+	 * @param numPlayers
 	 *            List of levels that compose the game
 	 */
-	public Game(List<Player> players, List<Level> levels) {
+	public Game(List<Level> myLevels, int numPlayers) {
 		myGameWon = false;
-		myPlayers = players;
-		myLevels = levels;
-		if (levels.size() > 0 && players.size() > 0) {
-			myCurrentLevel = levels.get(0);
-			myCurrentPlayer = players.get(0);
+		myPlayers = myLevels;
+		myLevels = numPlayers;
+		if (numPlayers.size() > 0 && myLevels.size() > 0) {
+			myCurrentLevel = numPlayers.get(0);
+			myCurrentPlayer = myLevels.get(0);
 		}
 	}
 
