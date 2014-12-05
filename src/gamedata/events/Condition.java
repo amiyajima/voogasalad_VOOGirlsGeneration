@@ -9,6 +9,5 @@ package gamedata.events;
  *
  */
 public interface Condition {
-	
 	public abstract boolean evaluate();
 }

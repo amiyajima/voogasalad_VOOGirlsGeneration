@@ -1,10 +1,15 @@
 package gameengine.player;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javafx.scene.input.KeyCode;
 import gamedata.action.Action;
+import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
+import gamedata.gamecomponents.Piece;
 import java.awt.geom.Point2D;
 
 
@@ -19,12 +24,13 @@ public abstract class Player {
 
     private int myNumMovesPlayed;
     private int myID;
+    private List myPieces;
 
     /**
      * Default constructor
      */
-    public Player () {
-        this(0);
+    public Player (Grid g) {
+        this(0, g);
     }
 
     /**
@@ -33,10 +39,26 @@ public abstract class Player {
      * @param id
      *        int ID corresponding to the Player
      */
-    public Player (int id) {
+    public Player (int id, Grid g) {
         myNumMovesPlayed = 0;
         myID = id;
+        myPieces = populatePieces(g);
+    }
 
+    /**
+     * Iterate through the list of pieces available on the grid.
+     * 
+     * @param g
+     * @return
+     * TODO: itereate through pieces in grid, determine which ones have corresponding Player ID
+     */
+    private List<Piece> populatePieces (Grid g) {
+        // Set allPieces = g.get
+        return null;
+    }
+    
+    public List<Piece> getPieces(){
+        return Collections.unmodifiableList(myPieces);
     }
 
     public abstract void play ();

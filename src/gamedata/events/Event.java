@@ -3,6 +3,11 @@ package gamedata.events;
 import gamedata.action.Action;
 import java.util.List;
 
+/**
+ * 
+ * 
+ *
+ */
 public class Event {
 	List<Condition> myConditions;
 	List<Action> myActions;

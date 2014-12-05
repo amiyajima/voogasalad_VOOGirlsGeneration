@@ -1,6 +1,6 @@
 package gameengine.player;
 
-import gamePlayer.GameGrid;
+import gamedata.gamecomponents.Grid;
 import java.util.Set;
 
 
@@ -16,27 +16,15 @@ public class SimpleAIPlayer extends Player {
     // get a list of pieces that have available moves.
     private Set myPieces;
 
-    public SimpleAIPlayer (int id, GameGrid g) {
-        super(id);
-        myPieces = populatePieces(g);
-    }
-
-    /**
-     * Iterate through the list of pieces available on the grid.
-     * 
-     * @param g
-     * @return
-     */
-    private Set populatePieces (GameGrid g) {
-        // Set allPieces = g.get
-        return null;
+    public SimpleAIPlayer (int id, Grid g) {
+        super(id, g);
     }
 
     /**
      * 
      */
     public void play () {
-        
+
     }
 
 }

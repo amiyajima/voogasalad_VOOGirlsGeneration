@@ -19,6 +19,7 @@ import gamedata.rules.MoveCountRule;
 import gamedata.rules.Rule;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
+import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
@@ -50,8 +51,8 @@ public class JSONBobTester {
     public Game createNewGame () {
         System.out.println("Bob Tester: Create new game");
         List<Player> myPlayers = new ArrayList<Player>();
-        Player myPlayer1 = new Player(12345);
-        Player myPlayer2 = new Player(54321);
+        Player myPlayer1 = new HumanPlayer(12345);
+        Player myPlayer2 = new HumanPlayer(54321);
         // myPlayers.add(myPlayer1);
         myPlayers.add(myPlayer2);
 

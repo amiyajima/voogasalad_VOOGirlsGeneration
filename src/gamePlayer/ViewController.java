@@ -187,7 +187,6 @@ public class ViewController {
 	@FXML
 	protected void exitGame() {
 		myStage.close();
-
 	}
 
 	/**
@@ -242,11 +241,6 @@ public class ViewController {
 
 	@FXML
 	protected void cancelPopup() {
-
-	}
-
-	@FXML
-	private void save() {
 
 	}
 

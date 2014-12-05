@@ -1,6 +1,7 @@
 package gamedata.rules;
 
 /**
+ * REPLACED BY MOVECOUNTCONDITION
  * A rule that checks if the player has moves remaining in the current turn
  */
 public class MoveCountRule extends Rule {

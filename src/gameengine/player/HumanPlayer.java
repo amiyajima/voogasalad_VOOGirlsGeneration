@@ -1,6 +1,7 @@
 package gameengine.player;
 
 import gamedata.action.Action;
+import gamedata.gamecomponents.Grid;
 import java.awt.geom.Point2D;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,8 +20,8 @@ public class HumanPlayer extends Player {
     // for keypressed, when keys don't trigger actions. ex) arrow keys
     private Map<KeyCode, Point2D> myMovementKeyMap;
 
-    public HumanPlayer (int id) {
-        super(id);
+    public HumanPlayer (int id, Grid g) {
+        super(id, g);
         setActionKeyMap(myActionKeyMap);
         setMovementKeyMap(myMovementKeyMap);
     }
