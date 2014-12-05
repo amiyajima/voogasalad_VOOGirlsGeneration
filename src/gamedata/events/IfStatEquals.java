@@ -2,7 +2,7 @@ package gamedata.events;
 
 import gamedata.gamecomponents.Piece;
 
-public class IfStatEquals extends Condition{
+public class IfStatEquals implements Condition{
 	public static final String description = "IF Piece Stat EQUALS Value";
 	private Piece reference;
 	private String stat;
