@@ -1,8 +1,10 @@
 package fxml_main;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import authoring_environment.ShapeGrid;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
@@ -22,12 +24,14 @@ public class AuthoringController implements Initializable {
 	@FXML
 	private TabPane myGridTabPane;
 	
+	
+	private List<ShapeGrid> myLevelGrids;
 	private PieceController myPieceController;
 	private PatchController myPatchController;
 
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-		myPieceController = new PieceController(myPiecesVBox, myGridTabPane, myPropertiesSPane);
-	    myPatchController = new PatchController(myPatchesVBox, myGridTabPane, myPropertiesSPane);
+//		myPieceController = new PieceController(myPiecesVBox, myGridTabPane, myPropertiesSPane);
+//	    myPatchController = new PatchController(myPatchesVBox, myGridTabPane, myPropertiesSPane);
 	}
 }
