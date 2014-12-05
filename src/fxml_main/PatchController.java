@@ -2,6 +2,7 @@ package fxml_main;
 
 import java.awt.geom.Point2D;
 import java.io.File;
+import java.util.Map;
 import gamedata.gamecomponents.Patch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,6 +21,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import authoring.abstractfeatures.PopupWindow;
 import authoring.concretefeatures.TerrainEntry;
 import authoring.createedit.TerrainEditor;
+import authoring.data.PatchTypeData;
 import authoring_environment.ShapeGrid;
 import authoring_environment.UIspecs;
 
@@ -38,6 +40,8 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
     private String myName;
     private String myImageLocation;
     private Point2D myLoc;
+    // entry box.. might want to pass it as a parameter
+    private PatchTypeData myPatches;
 
     public PatchController (VBox vbox, ScrollPane propertiesSPane, ShapeGrid currGrid) {
         super(vbox, propertiesSPane, currGrid);
@@ -77,19 +81,38 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
     @Override
     protected HBox makeEntryBox (Patch entry) {
         // TODO Auto-generated method stub
-        return null;
+        HBox hb = new HBox();
+        ImageView img = entry.getImageView();
+        img.setFitHeight(40);
+        img.setFitWidth(40);
+        hb.getChildren().add(img);
+        return hb;
     }
 
     @Override
     protected void initEntryEditBtn (Patch entry, Button editBtn) {
-        // TODO Auto-generated method stub
-
+        editBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent e) {
+                PopupWindow p = new TerrainEditor(entry);
+                p.show();
+            }
+        });
     }
 
     @Override
     protected void initEntryDelBtn (Patch entry, Button delBtn) {
-        // TODO Auto-generated method stub
 
+        delBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle (ActionEvent event) {
+                HBox entryBox = myEntryMap.get(entry);
+                myVBox.getChildren().remove(entryBox);
+                // myLibrary.removePatch(entry);
+            }
+        });
+        // myLibrary.addPatch(entry);
     }
 
     /**
@@ -144,9 +167,9 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 
                 Label name = new Label(terrainName.getText());
                 name.setTranslateY(7.5);
-                
-                addEntry(terrain);
 
+                addEntry(terrain);
+          
             }
         });
     }
