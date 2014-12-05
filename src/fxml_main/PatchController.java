@@ -2,6 +2,7 @@ package fxml_main;
 
 import java.awt.geom.Point2D;
 import java.io.File;
+import java.util.Map;
 import gamedata.gamecomponents.Patch;
 import authoring.data.PatchTypeData;
 import authoring_environment.ShapeGrid;
@@ -18,11 +19,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import authoring.abstractfeatures.PopupWindow;
+import authoring.concretefeatures.TerrainEntry;
+import authoring.createedit.TerrainEditor;
+import authoring.data.PatchTypeData;
+import authoring_environment.ShapeGrid;
 import authoring_environment.UIspecs;
 
+
 public class PatchController extends GridComponentAbstCtrl<Patch> {
-	
-	private PatchTypeData myPatchTypes;
+
+    private PatchTypeData myPatchTypes;
 
     private static final int WIDTH = 150;
     private static final String NAME = "Terrain Creator";
@@ -36,6 +43,8 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
     private String myName;
     private String myImageLocation;
     private Point2D myLoc;
+    // entry box.. might want to pass it as a parameter
+    private PatchTypeData myPatches;
 
     public PatchController (VBox vbox, ScrollPane propertiesSPane, ShapeGrid currGrid) {
         super(vbox, propertiesSPane, currGrid);
@@ -73,30 +82,40 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
         });
     }
 
-	@Override
-	protected HBox makeEntryBox(Patch entry) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    protected HBox makeEntryBox (Patch entry) {
+        // TODO Auto-generated method stub
+        HBox hb = new HBox();
+        ImageView img = entry.getImageView();
+        img.setFitHeight(40);
+        img.setFitWidth(40);
+        hb.getChildren().add(img);
+        return hb;
+    }
 
     @Override
     protected void initEntryEditBtn (Patch entry, Button editBtn) {
-    	editBtn.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				
-			}
-		});
+        editBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent e) {
+                PopupWindow p = new TerrainEditor(entry);
+                p.show();
+            }
+        });
     }
 
     @Override
     protected void initEntryDelBtn (Patch entry, Button delBtn) {
-    	delBtn.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				System.out.println("Delete all instances of this patch!");
-			}
-		});
+
+        delBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle (ActionEvent event) {
+                HBox entryBox = myEntryMap.get(entry);
+                myVBox.getChildren().remove(entryBox);
+            }
+        });
+
     }
 
     /**
@@ -143,7 +162,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
             public void handle (ActionEvent click) {
                 myName = terrainName.getText();
                 if (myImageLocation.equals("") || terrainName.getText().equals("")) {
-                	return;
+                return;
                 }
 
                 myLoc = new Point2D.Double(0, 0);
@@ -151,7 +170,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 
                 Label name = new Label(terrainName.getText());
                 name.setTranslateY(7.5);
-                
+
                 addEntry(terrain);
             }
         });
