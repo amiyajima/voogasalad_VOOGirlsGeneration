@@ -29,6 +29,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 
     private static final int WIDTH = 150;
     private static final String NAME = "Terrain Creator";
+    private static final String CANCEL = "Cancel";
     private static final String TERRAIN_NAME_LABEL = "Name";
     private static final String LOAD_IMAGE_LABEL = "Load Terrain Image";
     private static final String TEMPLATE_LABEL = "Create new terrain template";
@@ -142,12 +143,24 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
         names.getChildren().addAll(nameLabel, terrainName);
 
         Button goButton = new Button(TEMPLATE_LABEL);
+        Button cancelButton = new Button(CANCEL);
 
         initImageLoader(images);
         initGoBtn(goButton, terrainName);
+        initCancelBtn(cancelButton);
 
-        box.getChildren().addAll(labelBox, names, images, goButton);
+        box.getChildren().addAll(labelBox, names, images, goButton, cancelButton);
         return box;
+    }
+
+    private void initCancelBtn (Button cancelBtn) {
+        cancelBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent click) {
+                myPropertiesSPane.setContent(null);
+            }
+
+        });
     }
 
     private void initGoBtn (Button goButton, TextField terrainName) {
