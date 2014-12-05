@@ -11,7 +11,7 @@ import javafx.scene.control.TitledPane;
 
 public class UnitEditor extends TitledPane {
     private static final String NAME = "Unit Editor";
-    private  static final String UNITS_LIST_NAME = "Units";
+    private static final String UNITS_LIST_NAME = "Units";
     private static final String EDIT_BUTTON = "Edit Unit";
     private static final String REMOVE_BUTTON = "Remove Unit";
     private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
@@ -45,8 +45,8 @@ public class UnitEditor extends TitledPane {
     private void editEvent(){
         String s = unitsView.getSelectionModel().getSelectedItem();
         LibraryUnitEditor individualUnitEditor = new LibraryUnitEditor(availablePieces.getPiece(s), availableActions);
-        individualUnitEditor.show();
-}
+        // individualUnitEditor.show();
+    }
 
     private void removeEvent(){
             String s = unitsView.getSelectionModel().getSelectedItem();

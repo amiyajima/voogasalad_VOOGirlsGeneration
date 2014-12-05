@@ -28,6 +28,7 @@ import authoring.abstractfeatures.PopupWindow;
  * @author Meng'en Huang, Jesse Ling, Jennie Ju
  *
  */
+
 public class RangeEditor extends PopupWindow {
     private static final String CUSTOM = "Custom(default)";
 
@@ -91,7 +92,6 @@ public class RangeEditor extends PopupWindow {
             }
         }
         return new Point2D.Double(maxX, maxY);
-
     }
 
     @Override
