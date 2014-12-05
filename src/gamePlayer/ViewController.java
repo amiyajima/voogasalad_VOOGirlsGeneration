@@ -69,15 +69,16 @@ public class ViewController {
 
 	private ResourceBundle myLanguages;
 	private Stage myStage;
-	private Game myModel;
-	private GameGrid myGrid;
-	private VBox myInitialScene;
 	private BorderPane myGameSpace;
-	private VBox myScoreBoard;
 	private BorderPane myPopup;
+	private VBox myInitialScene;
+	private VBox myScoreBoard;
 	private Scene scoreScene;
 	private Scene myPopupScene;
 	private Scene myScene;
+
+	private Game myModel;
+	private GameGrid myGrid;
 
 	// private SampleListener myLeapListener;
 
@@ -93,7 +94,6 @@ public class ViewController {
 	private AudioClip myAudio;
 	@FXML
 	protected VBox statsPane;
-
 	@FXML
 	protected VBox controlPane;
 	@FXML

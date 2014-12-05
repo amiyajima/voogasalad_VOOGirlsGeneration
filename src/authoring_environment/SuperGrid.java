@@ -20,30 +20,34 @@ public class SuperGrid extends Pane {
 	protected int myRows;
 	protected int myCols;
 	protected int myTileSize;
-	
+
 	private PieceData myPieceData;
 	private PatchData myPatchData;
 	protected List<List<SuperTile>> myGrid;
-	
+
+	public SuperGrid() {
+		this(1, 1, 40, SQUARE_GRID, null, null);
+	}
+
 	public SuperGrid(int cols, int rows, int tileSize, String shape,
 			PieceData pieceData, PatchData patchData) {
-		
+
 		myRows = rows;
 		myCols = cols;
 		myTileSize = tileSize;
-		
+
 		myPieceData = pieceData;
 		myPatchData = patchData;
-		
+
 		initGridTiles(shape);
 	}
-	
-	private void initGridTiles(String shape){
+
+	private void initGridTiles(String shape) {
 		myGrid = new LinkedList<List<SuperTile>>();
 		for (int r = 0; r < myRows; r++) {
 			List<SuperTile> tileCol = new LinkedList<SuperTile>();
 			for (int c = 0; c < myCols; c++) {
-				Point2D location=new Point2D.Double(r,c);
+				Point2D location = new Point2D.Double(r, c);
 				SuperTile tile = makeShapeTile(shape, myTileSize, location);
 				tileCol.add(tile);
 				super.getChildren().add(tile);
@@ -52,18 +56,13 @@ public class SuperGrid extends Pane {
 		}
 	}
 
-
 	private SuperTile makeShapeTile(String shape, int tileSize, Point2D location) {
-		switch(shape){
+		switch (shape) {
 		case SQUARE_GRID:
-			return new SquareTile(tileSize,location);
+			return new SquareTile(tileSize, location);
 		default:
-			return new SquareTile(tileSize,location);
+			return new SquareTile(tileSize, location);
 		}
 	}
 
-	
-	
-
 }
-
