@@ -21,20 +21,13 @@ public class SuperGrid extends Pane {
 	protected int myCols;
 	protected int myTileSize;
 	
-	private PieceData myPieceData;
-	private PatchData myPatchData;
 	protected List<List<SuperTile>> myGrid;
 	
-	public SuperGrid(int cols, int rows, int tileSize, String shape,
-			PieceData pieceData, PatchData patchData) {
+	public SuperGrid(int cols, int rows, int tileSize, String shape) {
 		
 		myRows = rows;
 		myCols = cols;
 		myTileSize = tileSize;
-		
-		myPieceData = pieceData;
-		myPatchData = patchData;
-		
 		initGridTiles(shape);
 	}
 	
