@@ -1,6 +1,7 @@
 package authoring_environment;
 
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 
 
 /**
@@ -9,38 +10,20 @@ import javafx.scene.control.ScrollPane;
  * demonstrates currently selected tile. It scrolls when the size of the grid exceeds
  * a certain size.
  * 
- * @author huangmengen
+ * @author Mengen Huang, Jennie Ju
  *
  */
 public class GridView extends ScrollPane {
 
-    private int myWidth;
-    private int myHeight;
-    private int myTileSize;
-    private Grid myGrid;
 
-    public GridView (int width, int height, int tileSize) {
-        myWidth = width;
-        myHeight = height;
-        myTileSize = tileSize;
-        this.setPrefSize(myWidth, myHeight);
-        this.setMaxSize(myWidth, myHeight);
-        // this.setMinSize(myWidth, myHeight);
-        this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
-        // setStyle("-fx-background-color:blue;");
+	public GridView(SuperGrid grid, int viewWidth, int viewHeight) {
+		this.setPrefSize(viewWidth, viewHeight);
+		this.setMaxSize(viewWidth, viewHeight);
+		this.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		super.setContent(grid);
 
-        myGrid = new Grid(myWidth / myTileSize, myHeight / myTileSize, myTileSize);
-        this.setContent(myGrid);
+	}
 
-    }
-
-    /**
-     * Get the grid which is the content of the GridView.
-     * 
-     * @return Grid which contains all the tiles.
-     */
-    public Grid getGrid () {
-        return myGrid;
-    }
 
 }
