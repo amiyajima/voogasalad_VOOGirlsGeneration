@@ -41,6 +41,15 @@
          <content>
             <Accordion>
               <panes>
+                  <TitledPane animated="false" prefHeight="572.0" prefWidth="228.0" text="Levels">
+                     <content>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                           <content>
+                              <VBox prefHeight="551.0" prefWidth="226.0" />
+                           </content>
+                        </ScrollPane>
+                     </content>
+                  </TitledPane>
                 <TitledPane animated="false" text="Pieces">
                      <content>
                         <ScrollPane prefHeight="545.0" prefWidth="226.0">
@@ -64,14 +73,6 @@
                               <VBox fx:id="myActionsVBox" prefHeight="550.0" prefWidth="226.0" />
                            </content>
                         </ScrollPane>
-                     </content>
-                  </TitledPane>
-                  <TitledPane animated="false" prefHeight="572.0" prefWidth="228.0" text="Levels">
-                     <content>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                           <content>
-                              <VBox prefHeight="551.0" prefWidth="226.0" />
-                           </content></ScrollPane>
                      </content>
                   </TitledPane>
               </panes>
