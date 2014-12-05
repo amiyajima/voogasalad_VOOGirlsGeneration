@@ -1,13 +1,10 @@
 package authoring.data;
 
 import gamedata.events.Event;
-import gamedata.gamecomponents.Grid;
-import gamedata.goals.Goal;
-import gamedata.rules.Rule;
 
 import java.util.List;
 
-import authoring_environment.ShapeGrid;
+import authoring_environment.GUIGrid;
 
 /**
  * Stores data for levels in the authoring environment.
@@ -19,22 +16,40 @@ import authoring_environment.ShapeGrid;
  */
 //TODO: Consolidate this with the GameData Level
 public class AuthoringLevel {
-	
-	private ShapeGrid myGrid;
-    private List<Event> myEvents;
-	private String myId;
-    
-    public AuthoringLevel(ShapeGrid grid, List<Event> events, String id) {
-    	myGrid = grid;
-    	myEvents = events;
-    	myId = id;
-    }
-    
-   public String getId() {
-	   return myId;
-   }
-   
-    
-    
 
+	private GUIGrid myGrid;
+	private List<Event> myEvents;
+	private String myId;
+
+	public AuthoringLevel(GUIGrid grid, List<Event> events, String id) {
+		myGrid = grid;
+		myEvents = events; // figure out what to do with these
+		myId = id;
+	}
+
+	/**
+	 * Gets the ID of this AuthoringLevel
+	 * 
+	 * @return String ID of this level
+	 */
+	public String getId() {
+		return myId;
+	}
+
+	/**
+	 * Sets the current grid to be edited by other authoring environment editors
+	 * to the grid contained in this level.
+	 * @param currGrid - pointer to the current grid to be edited
+	 */
+	public void setCurrentGrid(GUIGrid currGrid) {
+		currGrid = myGrid;
+	}
+
+	public GUIGrid getGrid() {
+	    return myGrid;
+	}
+	
+	public List<Event> getEvents() {
+	    return myEvents;
+	}
 }

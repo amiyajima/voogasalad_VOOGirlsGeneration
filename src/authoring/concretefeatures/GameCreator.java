@@ -2,6 +2,7 @@ package authoring.concretefeatures;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -28,7 +29,7 @@ import authoring_environment.WorkspaceView;
  * @author Sandy Lee
  */
 public class GameCreator extends Stage {
-    private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
+	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
     private static final int HEIGHT = 600;
     private static final int WIDTH = 400;
     private static final Insets MARGINS = new Insets(20, WIDTH/4, 20, WIDTH/4 - 10);
@@ -45,6 +46,7 @@ public class GameCreator extends Stage {
     private static final String GRID_CHOICE_LABEL = "Grid Type: ";
     private static final String SQUARE_GRID = "Square Grid";
     private static final String HEXAGON_GRID = "Hexagon Grid";
+    private static final String CIRCLE_GRID = "Circle Grid";
     private static final String DEFAULT_LEVEL_NAME = "Level 1";
     private static final String DEFAULT_PLAYER_NUM = "3";
     private static final String DEFAULT_GRID_HEIGHT = "10";
@@ -70,6 +72,7 @@ public class GameCreator extends Stage {
         
         gridTypes.add(SQUARE_GRID);
         gridTypes.add(HEXAGON_GRID);
+        gridTypes.add(CIRCLE_GRID);
         
         myWorkspaceView = wsView;
         ScrollPane root = new ScrollPane();
