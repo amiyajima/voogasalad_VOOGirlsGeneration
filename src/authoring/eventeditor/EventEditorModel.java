@@ -1,5 +1,5 @@
 package authoring.eventeditor;
 
-public class FXMLExampleModel {
+public class EventEditorModel {
 
 }
