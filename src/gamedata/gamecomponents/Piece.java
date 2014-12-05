@@ -20,7 +20,7 @@ import javafx.scene.image.ImageView;
  */
 public class Piece {
 
-	private String myName;
+    private String myName;
     private String myImageLocation;
     private transient ImageView myImageView;
     private List<Action> myActions;
@@ -48,10 +48,10 @@ public class Piece {
      * @param inventory - Piece's inventory if the user chooses to use an inventory
      */
 
-    //TODO: Think about playerID concept
-    public Piece (String name, String imageLoc, List<Movement> movement, 
-    		List<Action> actions, Stats stats, Point2D loc, int playerID, Inventory inventory) {
-    	myName = name;
+    // TODO: Think about playerID concept
+    public Piece (String name, String imageLoc, List<Movement> movement,
+                  List<Action> actions, Stats stats, Point2D loc, int playerID, Inventory inventory) {
+        myName = name;
         myImageLocation = imageLoc;
         setImageView(myImageLocation);
         myPath = movement;
@@ -65,37 +65,38 @@ public class Piece {
 
     /**
      * Cloning constructor for deeping cloning of a piece
+     * 
      * @param clone - Piece instance to be cloned
      */
-    public Piece(Piece clone) {
-    	myName = clone.myName;
-    	myImageLocation = clone.myImageLocation;
-    	setImageView(myImageLocation);
-    	myPath = new LinkedList<Movement>(clone.myPath);
-    	myActions = new LinkedList<Action>(clone.myActions);
-    	myStats = new Stats(clone.myStats);
-    	myLoc = new Point2D.Double(clone.myLoc.getX(),clone.myLoc.getY());
-    	myPlayerID = clone.myPlayerID;
-    	myShouldRemove = false;
-    	myInventory = null; // TODO: NOPE. NO INVENTORY.
+    public Piece (Piece clone) {
+        myName = clone.myName;
+        myImageLocation = clone.myImageLocation;
+        setImageView(myImageLocation);
+        myPath = new LinkedList<Movement>(clone.myPath);
+        myActions = new LinkedList<Action>(clone.myActions);
+        myStats = new Stats(clone.myStats);
+        myLoc = new Point2D.Double(clone.myLoc.getX(), clone.myLoc.getY());
+        myPlayerID = clone.myPlayerID;
+        myShouldRemove = false;
+        myInventory = null; // TODO: NOPE. NO INVENTORY.
     }
-    
-    private void setImageView(String imageLocation) {
-    	if(myImageLocation.startsWith("/")){
-        	myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+
+    private void setImageView (String imageLocation) {
+        if (myImageLocation.startsWith("/")) {
+            myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
         }
-        else{
-        	myImageView = new ImageView(new Image(imageLocation));
+        else {
+            myImageView = new ImageView(new Image(imageLocation));
         }
     }
-    
+
     /**
      * Returns the name for this type of piece
      */
     public String getName () {
         return myName;
     }
-    
+
     /**
      * Returns the image location url (for data saving)
      */
@@ -140,18 +141,18 @@ public class Piece {
         return myStats;
     }
 
-//    public double getStat (String s) {
-//        if (myStats.getStatsMap().containsKey(s)) { return myStats.getStatsMap().get(s); }
-//        return 0;
-//    }
+    // public double getStat (String s) {
+    // if (myStats.getStatsMap().containsKey(s)) { return myStats.getStatsMap().get(s); }
+    // return 0;
+    // }
 
     /**
      * Adds an Action to the piece's list of Actions
      */
     public void addAction (Action a) {
-    	if(!myActions.contains(a)){
-    		myActions.add(a);
-    	}
+        if (!myActions.contains(a)) {
+            myActions.add(a);
+        }
     }
 
     /**
@@ -222,12 +223,12 @@ public class Piece {
             myInventory.removeItem(item);
         }
     }
-    
-    public Inventory getInventory(){
-    	return myInventory;
+
+    public Inventory getInventory () {
+        return myInventory;
     }
 
-    //TODO this was throwing an error, temporary fix
+    // TODO this was throwing an error, temporary fix
     public Object getUniqueID () {
         return myName.hashCode();
     }
