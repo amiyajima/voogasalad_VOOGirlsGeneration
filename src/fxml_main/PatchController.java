@@ -92,8 +92,13 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
     protected void initEntryEditBtn (Patch entry, Button editBtn) {
         editBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
+            // TODO: need to clean code
             public void handle (ActionEvent e) {
-                Pane p = new TerrainEditor(entry);
+                TerrainEditor editor = new TerrainEditor(entry);
+                Button cancelBtn = new Button(CANCEL);
+                initCancelBtn(cancelBtn);
+                editor.addToBox(cancelBtn);
+                Pane p = editor;
                 myPropertiesSPane.setContent(p);
             }
         });

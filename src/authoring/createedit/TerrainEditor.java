@@ -4,6 +4,7 @@ import gamedata.gamecomponents.Patch;
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,6 +40,7 @@ public class TerrainEditor extends Pane {
     private final String LOAD_IMAGE_LABEL = "Load image";
     private final String IMAGE_LABEL = "Terrain image";
     private final String TEMPLATE_LABEL = "Change";
+    private VBox myBox;
 
     private String myImageLocation;
 
@@ -77,6 +79,7 @@ public class TerrainEditor extends Pane {
         initImageLoader(imageBox, IMAGE_LABEL, LOAD_IMAGE_LABEL);
 
         Button create = new Button(TEMPLATE_LABEL);
+
         create.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
@@ -87,8 +90,14 @@ public class TerrainEditor extends Pane {
         });
 
         box.getChildren().addAll(nameBox, imageBox, create);
+        myBox = box;
         getChildren().add(box);
 
+    }
+    
+    //for now... to implement the cancel button
+    public void addToBox(Node element){
+        myBox.getChildren().add(element);
     }
 
     /**
@@ -134,6 +143,6 @@ public class TerrainEditor extends Pane {
             }
         });
         imageBox.getChildren().addAll(loadLabel, loadImage, icon);
-        
+
     }
 }
