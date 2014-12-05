@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 //TODO: RIGHT NOW THIS CLASS ALSO HOLDS A LOT OF DATA. WE SHOULD NOT DO THAT
@@ -36,6 +37,10 @@ public class EventEditorController implements Initializable {
 	@FXML
 	private Button newAction;
 	
+	//Labels
+	@FXML
+	private Label conditionName;
+	
 	private EventEditorMain myMain;
 	private final ObservableList<String> conditionsList = FXCollections.observableArrayList();
 	private final ObservableList<String> actionsList = FXCollections.observableArrayList();
@@ -53,6 +58,9 @@ public class EventEditorController implements Initializable {
 		
 		conditionsList.addAll("Test 1", "Test 2");
 		actionsList.addAll("Action 1", "Action 2");			
+		
+		conditionsListView.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, selectedValue) -> showDetails(selectedValue));
 	}
 	
 	public void setMain(EventEditorMain eem){
@@ -60,8 +68,13 @@ public class EventEditorController implements Initializable {
 	}
 	
 	@FXML
+	private void showDetails(String s){
+		conditionName.setText(s);
+	}
+	
+	@FXML
 	private void handleNewCondition() throws IOException{
-		myMain.showNewConditionsWindow();
+		myMain.showNewConditionWindow();
 	}
 	
 	@FXML
@@ -71,8 +84,8 @@ public class EventEditorController implements Initializable {
 	}
 	
 	@FXML
-	private void handleNewAction(){
-		
+	private void handleNewAction() throws IOException{
+		myMain.showNewActionWindow();
 	}
 	
 	@FXML
