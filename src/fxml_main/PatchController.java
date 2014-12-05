@@ -4,6 +4,8 @@ import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.Map;
 import gamedata.gamecomponents.Patch;
+import authoring.data.PatchTypeData;
+import authoring_environment.ShapeGrid;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,7 +15,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -27,6 +28,8 @@ import authoring_environment.UIspecs;
 
 
 public class PatchController extends GridComponentAbstCtrl<Patch> {
+
+    private PatchTypeData myPatchTypes;
 
     private static final int WIDTH = 150;
     private static final String NAME = "Terrain Creator";
@@ -45,6 +48,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 
     public PatchController (VBox vbox, ScrollPane propertiesSPane, ShapeGrid currGrid) {
         super(vbox, propertiesSPane, currGrid);
+        myPatchTypes = new PatchTypeData();
     }
 
     @Override
@@ -109,10 +113,9 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
             public void handle (ActionEvent event) {
                 HBox entryBox = myEntryMap.get(entry);
                 myVBox.getChildren().remove(entryBox);
-                // myLibrary.removePatch(entry);
             }
         });
-        // myLibrary.addPatch(entry);
+
     }
 
     /**
@@ -169,7 +172,6 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
                 name.setTranslateY(7.5);
 
                 addEntry(terrain);
-          
             }
         });
     }
@@ -200,8 +202,6 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
                 }
             }
         });
-
         images.getChildren().addAll(icon, loadImage);
-
     }
 }
