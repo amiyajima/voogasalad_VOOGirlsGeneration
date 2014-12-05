@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -37,8 +38,8 @@
                   <ListView fx:id="eventsListView" />
                   <HBox>
                      <children>
-                        <Button mnemonicParsing="false" text="New Event" />
-                        <Button fx:id="delCondition1" mnemonicParsing="false" onAction="#handleDelCondition" text="Delete" />
+                        <Button fx:id="newEvent" mnemonicParsing="false" text="New Event" />
+                        <Button fx:id="delEvent" mnemonicParsing="false" text="Delete" />
                      </children>
                   </HBox>
                </children>

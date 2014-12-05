@@ -13,10 +13,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 //TODO: RIGHT NOW THIS CLASS ALSO HOLDS A LOT OF DATA. WE SHOULD NOT DO THAT
 public class EventEditorController implements Initializable {
@@ -30,6 +35,10 @@ public class EventEditorController implements Initializable {
 	private ListView<String> actionsListView;
 	
 	//Buttons
+	@FXML
+	private Button newEvent;
+	@FXML
+	private Button delEvent;
 	@FXML
 	private Button newCondition;
 	@FXML
@@ -68,7 +77,7 @@ public class EventEditorController implements Initializable {
 	
 	@FXML
 	private void handleNewCondition() throws IOException{
-		myMain.showNewConditionWindow();
+		showNewConditionWindow();
 	}
 	
 	@FXML
@@ -79,7 +88,7 @@ public class EventEditorController implements Initializable {
 	
 	@FXML
 	private void handleNewAction() throws IOException{
-		myMain.showNewActionWindow();
+		showNewActionWindow();
 	}
 	
 	@FXML
@@ -91,5 +100,41 @@ public class EventEditorController implements Initializable {
 	@FXML
 	private void handleClose(){
 		
+	}
+	
+	private void showNewConditionWindow() throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/authoring/eventeditor/NewCondition.fxml"));
+		Parent root = loader.load();
+
+		Stage newConditionStage  = new Stage();
+		newConditionStage.setTitle("New Condition");
+		newConditionStage.initModality(Modality.WINDOW_MODAL);
+		Scene scene = new Scene(root);
+		newConditionStage.setScene(scene);
+
+		NewConditionController controller = loader.getController();
+
+		//		controller.setEvent(event);
+
+		newConditionStage.showAndWait();
+	}
+	
+	private void showNewActionWindow() throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/authoring/eventeditor/NewAction.fxml"));
+		Parent root = loader.load();
+
+		Stage newConditionStage  = new Stage();
+		newConditionStage.setTitle("New Action");
+		newConditionStage.initModality(Modality.WINDOW_MODAL);
+		Scene scene = new Scene(root);
+		newConditionStage.setScene(scene);
+
+		NewConditionController controller = loader.getController();
+
+		//		controller.setEvent(event);
+
+		newConditionStage.showAndWait();
 	}
 }
