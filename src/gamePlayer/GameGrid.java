@@ -11,6 +11,11 @@ import java.awt.geom.Point2D;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
+/**
+ * 
+ * @author
+ *
+ */
 public abstract class GameGrid extends GridPane implements Observer{
 
     private Point2D myCurrentLocation;
