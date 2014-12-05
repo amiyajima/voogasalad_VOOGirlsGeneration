@@ -9,7 +9,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -25,12 +24,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import authoring.abstractfeatures.PopupWindow;
 import authoring.concretefeatures.LibraryUnitEditor;
 import authoring.concretefeatures.UnitEntry;
 import authoring.data.ActionData;
 import authoring.data.PieceTypeData;
-import authoring_environment.LibraryView;
 import authoring_environment.UIspecs;
 
 /**
@@ -41,7 +38,7 @@ import authoring_environment.UIspecs;
  * @author Mike Zhu
  */
 public class UnitCreator extends TitledPane {
-	
+
 	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 	private static final int HEIGHT = 400;
 	private static final int WIDTH = 300;
@@ -51,14 +48,15 @@ public class UnitCreator extends TitledPane {
 	private static final String TEMPLATE_LABEL = "Create new unit template";
 	private static final String DELETE = "Delete";
 	private static final String EDIT = "Edit";
-	private LibraryView myLibrary;
-	private ActionData myAvailableActions;
 	
+	private VBox myUnitListView;
+	private ActionData myAvailableActions;
+
 	private static final Insets MARGINS = new Insets(10, WIDTH/8, 10, WIDTH/8 - 10);
-        private static final Insets LABEL_MARGINS = new Insets(10, WIDTH/7, 10, WIDTH/7 - 10);
-        private static final String LABEL_CSS = "-fx-font-size: 25pt;";
-        private static final String DEFAULT_IMAGE = "/resources/images/default_image.png";
-        
+	private static final Insets LABEL_MARGINS = new Insets(10, WIDTH/7, 10, WIDTH/7 - 10);
+	private static final String LABEL_CSS = "-fx-font-size: 25pt;";
+	private static final String DEFAULT_IMAGE = "/resources/images/default_image.png";
+
 	private String myName;
 	private int myPlayerID;
 	private String myImageLocation;
@@ -68,15 +66,14 @@ public class UnitCreator extends TitledPane {
 	private List<Action> myActions;
 	private List<Movement> myPath;
 	private Inventory myInventory;
-	
-	private ObservableList<String> myUnits;
-	private PieceTypeData pieceLibrary;
 
-	public UnitCreator(LibraryView library, ActionData availableActions, ObservableList<String> units, PieceTypeData pieceLibrary) {
-		this.pieceLibrary = pieceLibrary;
-	    myLibrary = library;
-		myAvailableActions = availableActions;
-		myUnits = units;
+	private PieceTypeData myPieceTypes;
+
+	public UnitCreator(ActionData actions, PieceTypeData pieceTypes, VBox unitListView) {
+		myUnitListView = unitListView;
+		
+		myPieceTypes = pieceTypes;
+		myAvailableActions = actions;
 		myName = "";
 		myImageLocation = "";
 		myPath = new ArrayList<Movement>();
@@ -87,105 +84,101 @@ public class UnitCreator extends TitledPane {
 		myInventory = new Inventory();
 
 		setText(NAME);
-		initialize();
+		
+		VBox box = new VBox();
+		box.getStylesheets().add(STYLESHEET);
+		box.getStyleClass().add("vbox");
+		box.setPadding(MARGINS);
+		box.setSpacing(10);
+
+		HBox names = new HBox();
+		names.setPadding(UIspecs.allPadding);
+		names.setSpacing(10);
+		HBox images = new HBox();
+		images.setPadding(UIspecs.allPadding);
+		images.setSpacing(10);
+
+		Label nameLabel = new Label(UNIT_NAME_LABEL);
+		nameLabel.setPadding(UIspecs.topRightPadding);
+		TextField unitName = new TextField();
+		unitName.setMinWidth(WIDTH/2 + 20);
+		names.getChildren().addAll(nameLabel, unitName);
+
+		ImageView icon = new ImageView();
+		icon.setFitHeight(40);
+		icon.setFitWidth(40);
+		icon.setImage(new Image(getClass().getResourceAsStream(DEFAULT_IMAGE)));
+		Button loadImageButton = new Button(LOAD_IMAGE_LABEL);
+		loadImageButton.setOnAction(new EventHandler<ActionEvent>() {
+			// initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
+			// @Jesse Finish this
+			// From Martin: You sure this code goes here, and not below the goButton ActionEvent?
+
+			@Override
+			public void handle (ActionEvent click) {
+				FileChooser fileChoice = new FileChooser();
+				fileChoice.getExtensionFilters().add(
+						new ExtensionFilter("Image Files", "*.png", "*.gif"));
+				File selectedFile = fileChoice.showOpenDialog(null);
+				if (selectedFile != null) {
+					myImageLocation = selectedFile.toURI().toString();
+					Image image = new Image(myImageLocation);
+					icon.setImage(image);
+				}
+			}
+		});
+		images.getChildren().addAll(icon, loadImageButton);
+
+		ModulesList modList = new ModulesList(myAvailableActions.getActionNames(), FXCollections.observableArrayList());
+
+		Button goButton = new Button(TEMPLATE_LABEL);
+		goButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle (ActionEvent click) {
+				myName = unitName.getText();
+				if(myImageLocation.equals("") || myName.equals("")){
+					return;
+				}
+				myActions = addSelectedActions(modList.getSelectedActions());
+
+				Piece unit = new Piece(myName, myImageLocation, myPath, myActions, myStats,
+						myLoc, myPlayerID, myInventory);
+				myPieceTypes.add(unit);
+				Label name = new Label(unitName.getText());
+				name.setTranslateY(7.5);
+
+				Button editButton = new Button(EDIT);
+				editButton.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle (ActionEvent e) {
+						TitledPane p = new LibraryUnitEditor(unit, myAvailableActions);
+						// p.show();
+					}
+				});
+				Button delButton = new Button(DELETE);
+				UnitEntry entry = new UnitEntry(unit, icon, name, editButton, delButton);
+				entry.setStyle("-fx-cursor: hand");
+				entry.setOnMouseClicked(new EventHandler<MouseEvent>(){
+					@Override
+					public void handle(MouseEvent m){
+						// myLibrary.selectUnit(unit);
+					}
+				});
+
+				delButton.setOnAction(new EventHandler<ActionEvent>(){
+					@Override
+					public void handle(ActionEvent event) {
+						// myLibrary.removePiece(entry);
+					}
+				});
+				//myLibrary.addPiece(entry);
+				myUnitListView.getChildren().add(entry);
+			}
+		});
+		box.getChildren().addAll(names, images, modList, goButton);
+		setContent(box);
 	}
-
-    protected void initialize () {
-        VBox box = new VBox();
-        box.getStylesheets().add(STYLESHEET);
-        box.getStyleClass().add("vbox");
-        box.setPadding(MARGINS);
-        box.setSpacing(10);
-               
-        HBox names = new HBox();
-        names.setPadding(UIspecs.allPadding);
-        names.setSpacing(10);
-        HBox images = new HBox();
-        images.setPadding(UIspecs.allPadding);
-        images.setSpacing(10);
-
-        Label nameLabel = new Label(UNIT_NAME_LABEL);
-        nameLabel.setPadding(UIspecs.topRightPadding);
-        TextField unitName = new TextField();
-        unitName.setMinWidth(WIDTH/2 + 20);
-        names.getChildren().addAll(nameLabel, unitName);
-
-        ImageView icon = new ImageView();
-        icon.setFitHeight(40);
-        icon.setFitWidth(40);
-        icon.setImage(new Image(getClass().getResourceAsStream(DEFAULT_IMAGE)));
-        Button loadImageButton = new Button(LOAD_IMAGE_LABEL);
-        loadImageButton.setOnAction(new EventHandler<ActionEvent>() {
-        	// initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
-        	// @Jesse Finish this
-        	// From Martin: You sure this code goes here, and not below the goButton ActionEvent?
-
-            @Override
-            public void handle (ActionEvent click) {
-                FileChooser fileChoice = new FileChooser();
-                fileChoice.getExtensionFilters().add(
-                		new ExtensionFilter("Image Files", "*.png", "*.gif"));
-                File selectedFile = fileChoice.showOpenDialog(null);
-                if (selectedFile != null) {
-                    myImageLocation = selectedFile.toURI().toString();
-                    Image image = new Image(myImageLocation);
-                    icon.setImage(image);
-                }
-            }
-        });
-        images.getChildren().addAll(icon, loadImageButton);
-
-        ModulesList modList = new ModulesList(myAvailableActions.getActionNames(), FXCollections.observableArrayList());
-
-        Button goButton = new Button(TEMPLATE_LABEL);
-        goButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent click) {
-            	myName = unitName.getText();
-            	if(myImageLocation.equals("") || myName.equals("")){
-            		return;
-            	}
-            	myActions = addSelectedActions(modList.getSelectedActions());
-            	
-                Piece unit = new Piece(myName, myImageLocation, myPath, myActions, myStats,
-                                       myLoc, myPlayerID, myInventory);
-                myUnits.add(unit.getName());
-                pieceLibrary.add(unit);
-                Label name = new Label(unitName.getText());
-                name.setTranslateY(7.5);
-                
-                Button editButton = new Button(EDIT);
-                editButton.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle (ActionEvent e) {
-                        PopupWindow p = new LibraryUnitEditor(unit, myAvailableActions);
-                        p.show();
-                    }
-                });
-                Button delButton = new Button(DELETE);
-                UnitEntry entry = new UnitEntry(unit, icon, name, editButton, delButton);
-                entry.setStyle("-fx-cursor: hand");
-        		entry.setOnMouseClicked(new EventHandler<MouseEvent>(){
-        			@Override
-        			public void handle(MouseEvent m){
-        				myLibrary.selectUnit(unit);
-        			}
-        		});
-                
-        		delButton.setOnAction(new EventHandler<ActionEvent>(){
-        			@Override
-        			public void handle(ActionEvent event) {
-        				myLibrary.removePiece(entry);
-        			}
-        		});
-        	
-                myLibrary.addPiece(entry);
-            }
-        });
-        box.getChildren().addAll(names, images, modList, goButton);
-        setContent(box);
-        setText(NAME);
-    }
+	
 	protected List<Action> addSelectedActions(List<String> selected){
 		List<Action> list = new ArrayList<>();
 		for(String s: selected){
