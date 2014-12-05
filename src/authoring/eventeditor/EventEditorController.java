@@ -5,6 +5,7 @@
 
 package authoring.eventeditor;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -35,6 +36,7 @@ public class EventEditorController implements Initializable {
 	@FXML
 	private Button newAction;
 	
+	private EventEditorMain myMain;
 	private final ObservableList<String> conditionsList = FXCollections.observableArrayList();
 	private final ObservableList<String> actionsList = FXCollections.observableArrayList();
 	
@@ -53,9 +55,13 @@ public class EventEditorController implements Initializable {
 		actionsList.addAll("Action 1", "Action 2");			
 	}
 	
+	public void setMain(EventEditorMain eem){
+		myMain = eem;
+	}
+	
 	@FXML
-	private void handleNewCondition(){
-
+	private void handleNewCondition() throws IOException{
+		myMain.showNewConditionsWindow();
 	}
 	
 	@FXML
@@ -71,8 +77,8 @@ public class EventEditorController implements Initializable {
 	
 	@FXML
 	private void handleDelAction(){
-		int delIdx = conditionsListView.getSelectionModel().getSelectedIndex();
-	    conditionsListView.getItems().remove(delIdx);
+		int delIdx = actionsListView.getSelectionModel().getSelectedIndex();
+	    actionsListView.getItems().remove(delIdx);
 	}
 	
 	@FXML
