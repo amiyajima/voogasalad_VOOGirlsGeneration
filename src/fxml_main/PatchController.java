@@ -1,11 +1,8 @@
 package fxml_main;
 
+import gamedata.gamecomponents.Patch;
 import java.awt.geom.Point2D;
 import java.io.File;
-import java.util.Map;
-import gamedata.gamecomponents.Patch;
-import authoring.data.PatchTypeData;
-import authoring_environment.ShapeGrid;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -16,11 +13,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import authoring.abstractfeatures.PopupWindow;
-import authoring.concretefeatures.TerrainEntry;
 import authoring.createedit.TerrainEditor;
 import authoring.data.PatchTypeData;
 import authoring_environment.ShapeGrid;
@@ -33,6 +29,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 
     private static final int WIDTH = 150;
     private static final String NAME = "Terrain Creator";
+    private static final String CANCEL = "Cancel";
     private static final String TERRAIN_NAME_LABEL = "Name";
     private static final String LOAD_IMAGE_LABEL = "Load Terrain Image";
     private static final String TEMPLATE_LABEL = "Create new terrain template";
@@ -43,8 +40,6 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
     private String myName;
     private String myImageLocation;
     private Point2D myLoc;
-    // entry box.. might want to pass it as a parameter
-    private PatchTypeData myPatches;
 
     public PatchController (VBox vbox, ScrollPane propertiesSPane, ShapeGrid currGrid) {
         super(vbox, propertiesSPane, currGrid);
@@ -97,9 +92,14 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
     protected void initEntryEditBtn (Patch entry, Button editBtn) {
         editBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
+            // TODO: need to clean code
             public void handle (ActionEvent e) {
-                PopupWindow p = new TerrainEditor(entry);
-                p.show();
+                TerrainEditor editor = new TerrainEditor(entry);
+                Button cancelBtn = new Button(CANCEL);
+                initCancelBtn(cancelBtn);
+                editor.addToBox(cancelBtn);
+                Pane p = editor;
+                myPropertiesSPane.setContent(p);
             }
         });
     }
@@ -148,12 +148,24 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
         names.getChildren().addAll(nameLabel, terrainName);
 
         Button goButton = new Button(TEMPLATE_LABEL);
+        Button cancelButton = new Button(CANCEL);
 
         initImageLoader(images);
         initGoBtn(goButton, terrainName);
+        initCancelBtn(cancelButton);
 
-        box.getChildren().addAll(labelBox, names, images, goButton);
+        box.getChildren().addAll(labelBox, names, images, goButton, cancelButton);
         return box;
+    }
+
+    private void initCancelBtn (Button cancelBtn) {
+        cancelBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent click) {
+                myPropertiesSPane.setContent(null);
+            }
+
+        });
     }
 
     private void initGoBtn (Button goButton, TextField terrainName) {
@@ -167,7 +179,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 
                 myLoc = new Point2D.Double(0, 0);
                 Patch terrain = new Patch(myName, myImageLocation, myLoc);
-
+                myPatchTypes.add(terrain);
                 Label name = new Label(terrainName.getText());
                 name.setTranslateY(7.5);
 
