@@ -1,6 +1,6 @@
 package authoring.concretefeatures;
 
-import gamedata.action.GlobalAction;
+import gamedata.action.Action;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class ActionCheck extends PopupWindow {
     private final String ACTOR = "Actor";
     private final String RECEIVER = "Receiver";
     //currently not being used, but will be soon
-    private List<GlobalAction> myActions;
+    private List<Action> myActions;
     //currently using List<String>, but will be changed to List<Piece>
     //Using List<String> for testing
     private List<String> myPieces = new ArrayList<String>();

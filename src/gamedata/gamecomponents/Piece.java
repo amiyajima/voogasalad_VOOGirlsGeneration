@@ -1,6 +1,6 @@
 package gamedata.gamecomponents;
 
-import gamedata.action.GlobalAction;
+import gamedata.action.Action;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
 import java.util.LinkedList;
@@ -23,7 +23,7 @@ public class Piece {
 	private String myName;
     private String myImageLocation;
     private transient ImageView myImageView;
-    private List<GlobalAction> myActions;
+    private List<Action> myActions;
     private List<Movement> myPath;
     private Stats myStats;
     private Point2D myLoc;
@@ -50,7 +50,7 @@ public class Piece {
 
     //TODO: Think about playerID concept
     public Piece (String name, String imageLoc, List<Movement> movement, 
-    		List<GlobalAction> actions, Stats stats, Point2D loc, int playerID, Inventory inventory) {
+    		List<Action> actions, Stats stats, Point2D loc, int playerID, Inventory inventory) {
     	myName = name;
         myImageLocation = imageLoc;
         setImageView(myImageLocation);
@@ -72,7 +72,7 @@ public class Piece {
     	myImageLocation = clone.myImageLocation;
     	setImageView(myImageLocation);
     	myPath = new LinkedList<Movement>(clone.myPath);
-    	myActions = new LinkedList<GlobalAction>(clone.myActions);
+    	myActions = new LinkedList<Action>(clone.myActions);
     	myStats = new Stats(clone.myStats);
     	myLoc = new Point2D.Double(clone.myLoc.getX(),clone.myLoc.getY());
     	myPlayerID = clone.myPlayerID;
@@ -148,7 +148,7 @@ public class Piece {
     /**
      * Adds an Action to the piece's list of Actions
      */
-    public void addAction (GlobalAction a) {
+    public void addAction (Action a) {
     	if(!myActions.contains(a)){
     		myActions.add(a);
     	}
@@ -157,7 +157,7 @@ public class Piece {
     /**
      * Removes an Action from the piece's list of Actions
      */
-    public void removeAction (GlobalAction a) {
+    public void removeAction (Action a) {
         myActions.remove(a);
     }
 
@@ -168,8 +168,8 @@ public class Piece {
      * 
      * @return List of available actions
      */
-    public List<GlobalAction> getActions () {
-        List<GlobalAction> actions = new LinkedList<GlobalAction>(myActions);
+    public List<Action> getActions () {
+        List<Action> actions = new LinkedList<Action>(myActions);
         if (myInventory != null) {
             actions.addAll(myInventory.getItemActions());
         }

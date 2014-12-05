@@ -1,6 +1,6 @@
 package gamePlayer;
 
-import gamedata.action.GlobalAction;  
+import gamedata.action.Action;  
 import gamedata.gamecomponents.Game;
 import gameengine.player.Player;
 import java.awt.geom.Point2D;
@@ -51,7 +51,7 @@ public class KeyboardController {
 
         public void setActionKeyControl(GameGrid grid, Game game) {
             myCurrentPlayer = game.getCurrentPlayer();
-            Map<KeyCode, GlobalAction> actionKeyMap = myCurrentPlayer.getActionKeyMap();
+            Map<KeyCode, Action> actionKeyMap = myCurrentPlayer.getActionKeyMap();
             grid.setOnKeyPressed(new EventHandler<KeyEvent>() {
                 Set<KeyCode> actionKeyList = actionKeyMap.keySet();
                 @Override

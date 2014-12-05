@@ -1,6 +1,6 @@
 package gamePlayer;
 
-import gamedata.action.GlobalAction;
+import gamedata.action.Action;
 import java.util.Map;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -11,7 +11,7 @@ import javafx.scene.input.KeyEvent;
 public class ActionOnKey implements GridOnKeyActor{
     
     ViewController myController;
-    Map<KeyCode, GlobalAction> myActions;
+    Map<KeyCode, Action> myActions;
     
     public ActionOnKey(ViewController controller)
     {

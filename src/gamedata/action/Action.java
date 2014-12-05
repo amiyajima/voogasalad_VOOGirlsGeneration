@@ -11,7 +11,7 @@ import gamedata.gamecomponents.Piece;
  * 
  * @author Jennie Ju
  */
-public interface GlobalAction {
+public interface Action {
 	
 	/**
 	 * Returns the name of the Action for display

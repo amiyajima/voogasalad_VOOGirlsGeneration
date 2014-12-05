@@ -1,6 +1,6 @@
 package tests;
 
-import gamedata.action.GlobalAction;
+import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
 import gamedata.action.ReceiverToInventoryConclusion;
@@ -128,7 +128,7 @@ public class JSONBobTester {
         // movements.add(createNewMovement(pl1));
         // movements.add(createNewMovement(pl3));
 
-        List<GlobalAction> actions = new ArrayList<GlobalAction>();
+        List<Action> actions = new ArrayList<Action>();
         actions.add(createNewAction(pl1, pl2));
         actions.add(createNewAction(pl2, pl3));
         actions.add(createNewMovement(g,pl1));
@@ -161,7 +161,7 @@ public class JSONBobTester {
         return m1;
     }
 
-    public GlobalAction createNewAction (List<Point2D> pl1, List<Point2D> pl2) {
+    public Action createNewAction (List<Point2D> pl1, List<Point2D> pl2) {
         StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor", "health");
         List<StatsSingleMultiplier> ssmList = new ArrayList<StatsSingleMultiplier>();
         ssmList.add(ssm1);
@@ -172,7 +172,7 @@ public class JSONBobTester {
 
         ActionConclusion ac = new ReceiverToInventoryConclusion();
 
-        GlobalAction a1 = new ConcreteAction("kill", pl1, pl2, stlList, ac);
+        Action a1 = new ConcreteAction("kill", pl1, pl2, stlList, ac);
         return a1;
     }
 }

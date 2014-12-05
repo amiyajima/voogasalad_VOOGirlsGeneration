@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 import java.util.List;
 import javafx.scene.paint.Color;
-import gamedata.action.GlobalAction;
+import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;

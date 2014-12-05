@@ -1,6 +1,6 @@
 package gamedata.wrappers;
 
-import gamedata.action.GlobalAction;
+import gamedata.action.Action;
 import java.awt.geom.Point2D;
 import java.util.Map;
 import javafx.scene.input.KeyCode;

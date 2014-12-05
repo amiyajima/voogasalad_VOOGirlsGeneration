@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.stage.Stage;
-import gamedata.action.GlobalAction;
+import gamedata.action.Action;
 import gamedata.action.ConcreteAction;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
@@ -44,10 +44,10 @@ public class ViewControllerTest {
     @Test 
     public void updateActionsTest () {
         ViewController controller = new ViewController(new Stage());
-        GlobalAction move = new ConcreteAction("move", null, null, null, null);
-        GlobalAction attack = new ConcreteAction("attack", null, null, null, null);
-        GlobalAction build = new ConcreteAction("build", null, null, null, null);
-        List<GlobalAction> actionList = new ArrayList<GlobalAction>();
+        Action move = new ConcreteAction("move", null, null, null, null);
+        Action attack = new ConcreteAction("attack", null, null, null, null);
+        Action build = new ConcreteAction("build", null, null, null, null);
+        List<Action> actionList = new ArrayList<Action>();
         actionList.add(move);actionList.add(attack);actionList.add(build);
         Piece piece = new Piece("Test Piece", null, null, null, null, new Point2D.Double(0,0), 0, null);
         controller.updateActions(piece);
@@ -59,7 +59,7 @@ public class ViewControllerTest {
     @Test
     public void bindActionTest(){
         ViewController controller = new ViewController(new Stage());
-        GlobalAction move = new ConcreteAction("move", null, null, null, null);
+        Action move = new ConcreteAction("move", null, null, null, null);
         controller.bindAction(move);
         assertEquals("move",controller.getActiveAction().toString());
         

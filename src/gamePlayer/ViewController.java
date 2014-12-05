@@ -3,7 +3,7 @@ package gamePlayer;
 
 import gamedata.JSON.JSONManager;
 
-import gamedata.action.GlobalAction;
+import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
 import java.awt.geom.Point2D;
@@ -89,7 +89,7 @@ public class ViewController {
 
     // private Point2D myCurrentLocation;
     private Piece activePiece;
-    private GlobalAction activeAction;
+    private Action activeAction;
 
     // private MouseController myMouseController;
 
@@ -418,9 +418,9 @@ public class ViewController {
         controlPane.getChildren().clear();
         ArrayList<Label> actions = new ArrayList<Label>();
 
-        Map<KeyCode, GlobalAction> actionMap = myModel.getCurrentPlayer().getActionKeyMap();
+        Map<KeyCode, Action> actionMap = myModel.getCurrentPlayer().getActionKeyMap();
         System.out.println(actionMap);
-        Map<GlobalAction, KeyCode> keyMap =
+        Map<Action, KeyCode> keyMap =
                 actionMap.entrySet().stream()
                         .collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
 
@@ -465,7 +465,7 @@ public class ViewController {
      * 
      * @param action
      */
-    protected void bindAction (GlobalAction action) {
+    protected void bindAction (Action action) {
 
 
         if (activePiece == null) return;
@@ -595,11 +595,11 @@ public class ViewController {
         return activePiece;
     }
 
-    protected void setActiveAction (GlobalAction action) {
+    protected void setActiveAction (Action action) {
         activeAction = action;
     }
 
-    protected GlobalAction getActiveAction () {
+    protected Action getActiveAction () {
         return activeAction;
     }
 

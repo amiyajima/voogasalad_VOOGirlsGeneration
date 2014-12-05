@@ -1,6 +1,6 @@
 package gameengine.movement;
 
-import gamedata.action.GlobalAction;
+import gamedata.action.Action;
 import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Piece;
 import gamedata.rules.Rule;
@@ -16,7 +16,7 @@ import java.awt.geom.Point2D;
  * @author Jesse, Rica
  *
  */
-public class Movement implements GlobalAction {
+public class Movement implements Action {
 	// possible paths for this movement
 	private List<Point2D> myMoves;
 	private List<List<Point2D>> myPaths;

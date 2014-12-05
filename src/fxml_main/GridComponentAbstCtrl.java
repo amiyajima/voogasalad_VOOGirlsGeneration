@@ -1,11 +1,8 @@
 package fxml_main;
 
-import java.util.List;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring_environment.ShapeGrid;

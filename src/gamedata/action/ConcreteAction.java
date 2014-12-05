@@ -16,7 +16,7 @@ import java.awt.geom.Point2D;
  * @author Jennie Ju
  *
  */
-public class ConcreteAction implements GlobalAction {
+public class ConcreteAction implements Action {
 	private String myName;
 	private List<Point2D> myAttackRange;
 	private List<Point2D> myEffectRange;
