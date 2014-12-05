@@ -5,10 +5,12 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import authoring.data.PatchData;
 import authoring.data.PieceData;
+import authoring_environment.GridView;
 import authoring_environment.JennieGrid;
 import authoring_environment.SandyGrid;
 import authoring_environment.SandyGridView;
 import authoring_environment.ShapeGrid;
+import authoring_environment.SuperGrid;
 import authoring_environment.WorkspaceView;
 
 /**
@@ -18,7 +20,7 @@ import authoring_environment.WorkspaceView;
  */
 public class LevelEditor {
     private static final int MIN_TILE_SIZE = 40;
-    private static final int GRID_VIEW_HEIGHT = 550;
+    private static final int GRID_VIEW_HEIGHT = 500;
     private static final int GRID_VIEW_WIDTH = 700;
     
     private WorkspaceView myWorkspaceView;
@@ -27,7 +29,7 @@ public class LevelEditor {
     private String myGridType;
     private int myRows;
     private int myCol;
-    private ShapeGrid shapeGrid;
+    private SuperGrid shapeGrid;
     private int tileSize;
     
     private PieceData pieceData = new PieceData();
@@ -57,31 +59,27 @@ public class LevelEditor {
     private void initializeGrid() {
         //TODO: hard coded grid type
         if (myGridType.equals("Square Grid")){
-           shapeGrid = new SandyGrid(myCol, myRows, 
-                           tileSize, pieceData, patchData);
+           shapeGrid = new SuperGrid(myCol, myRows,
+                           tileSize, myGridType,pieceData, patchData);
+        }
 
-        }
-        else if (myGridType.equals("Hexagon Grid")) {
-            shapeGrid = new JennieGrid(myCol, myRows, 
-                       tileSize, pieceData, patchData);
-        }
     }
 
-    private void addWorkspaceTab(ShapeGrid grid, String name) {
+    private void addWorkspaceTab(SuperGrid superGrid, String name) {
         BorderPane bPane = new BorderPane();
-        SandyGridView gridView = new SandyGridView(grid, GRID_VIEW_WIDTH, GRID_VIEW_HEIGHT);
+        GridView gridView = new GridView(superGrid, GRID_VIEW_WIDTH, GRID_VIEW_HEIGHT);
         bPane.setRight(gridView);
         
         Tab tab = new Tab();
         tab.setContent(bPane);
                         
-        myWorkspaceView.addGrid(grid);
+        myWorkspaceView.addGrid(superGrid);
         myWorkspaceView.addNextTab(tab, name);
     }
     
     private int getPrefTileSize (int gridWidthNumber, int gridHeightNumber) {
         int calculatedTileSize = Math.max(GRID_VIEW_WIDTH
-                                          / gridWidthNumber, GRID_VIEW_HEIGHT / gridHeightNumber);
+                                          / gridWidthNumber, GRID_VIEW_HEIGHT/ gridHeightNumber);
         int tileSize = (calculatedTileSize < MIN_TILE_SIZE) ? MIN_TILE_SIZE
                                                            : calculatedTileSize;
         return tileSize;
