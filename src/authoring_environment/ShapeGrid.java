@@ -21,10 +21,12 @@ public abstract class ShapeGrid extends Pane {
 	
 	private PieceData myPieceData;
 	private PatchData myPatchData;
+	protected String myID;
+	
 	protected List<List<SandyTile>> myGrid;
 	
 	protected ShapeGrid(int cols, int rows, int tileSize,
-			PieceData pieceData, PatchData patchData) {
+			PieceData pieceData, PatchData patchData, String myID) {
 		
 		myRows = rows;
 		myCols = cols;
@@ -124,5 +126,9 @@ public abstract class ShapeGrid extends Pane {
 				}
 			}
 		}
+	}
+	
+	public String getID() {
+		return myID;
 	}
 }

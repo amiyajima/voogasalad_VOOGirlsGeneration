@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="706.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_main.AuthoringController">
+<BorderPane prefHeight="706.0" prefWidth="1024.0" stylesheets="@../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_main.AuthoringController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -19,10 +19,10 @@
             <Menu mnemonicParsing="false" text="Game Properties">
               <items>
                 <MenuItem mnemonicParsing="false" text="New Level..." />
+                  <MenuItem fx:id="events" mnemonicParsing="false" onAction="#showEventsEditorWindow" text="Events" />
                   <MenuItem mnemonicParsing="false" text="Grid Properties" />
                   <MenuItem mnemonicParsing="false" text="Player Properties" />
                   <MenuItem mnemonicParsing="false" text="Actions Logic Chart..." />
-                  <MenuItem mnemonicParsing="false" text="Global Actions" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -33,14 +33,20 @@
         </menus>
       </MenuBar>
    </top>
-   <center>
-      <TabPane fx:id="myGridTabPane" prefHeight="677.0" prefWidth="564.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
-   </center>
    <left>
       <TitledPane animated="false" collapsible="false" prefHeight="677.0" prefWidth="230.0" text="Game Components" BorderPane.alignment="CENTER">
          <content>
             <Accordion>
               <panes>
+                  <TitledPane animated="false" prefHeight="572.0" prefWidth="228.0" text="Levels">
+                     <content>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                           <content>
+                              <VBox prefHeight="551.0" prefWidth="226.0" />
+                           </content>
+                        </ScrollPane>
+                     </content>
+                  </TitledPane>
                 <TitledPane animated="false" text="Pieces">
                      <content>
                         <ScrollPane prefHeight="545.0" prefWidth="226.0">
@@ -66,14 +72,6 @@
                         </ScrollPane>
                      </content>
                   </TitledPane>
-                  <TitledPane animated="false" prefHeight="572.0" prefWidth="228.0" text="Levels">
-                     <content>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                           <content>
-                              <VBox prefHeight="551.0" prefWidth="226.0" />
-                           </content></ScrollPane>
-                     </content>
-                  </TitledPane>
               </panes>
             </Accordion>
          </content>
@@ -86,4 +84,7 @@
          </content>
       </TitledPane>
    </right>
+   <center>
+      <ScrollPane fx:id="myGridSPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

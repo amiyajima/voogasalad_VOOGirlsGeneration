@@ -1,15 +1,15 @@
 package gamedata.events;
 
-import gamedata.action.Action;
+import gamedata.events.GlobalAction;
 import java.util.List;
 
 public class Event {
 	List<Condition> myConditions;
-	List<Action> myActions;
+	List<GlobalAction> myGlobalActions;
 	
-	public Event(List<Condition> conditions, List<Action> actions){
+	public Event(List<Condition> conditions, List<GlobalAction> actions){
 		myConditions = conditions;
-		myActions = actions;
+		myGlobalActions = actions;
 	}
 	
 	public void runEvent(){
@@ -22,8 +22,9 @@ public class Event {
 		}
 		
 		if(conditionsFulfilled){
-			for(Action a: myActions){
-//				a.runAction();
+			for(GlobalAction a: myGlobalActions){
+				//TODO: Find a way to run actions where the ACTOR is the game (god?) 
+//				a.doBehavior(actor, receivers);
 			}
 		}
 		
