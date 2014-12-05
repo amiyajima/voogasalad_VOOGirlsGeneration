@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 import authoring.data.ActionData;
 import authoring.data.AuthoringLevel;
 import authoring.eventeditor.EventEditorController;
-import authoring.eventeditor.NewConditionController;
 import authoring_environment.ShapeGrid;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

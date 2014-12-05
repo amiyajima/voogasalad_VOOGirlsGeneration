@@ -10,5 +10,14 @@ package gamedata.events;
  */
 public interface Condition {
 	
+	/**
+	 * Constructor should take in whatever targets the Condition is observing, as an
+	 * unmodifiable data structure.
+	 */
+	
+	/** 
+	 * Return TRUE if the logic of the subclass is met. 
+	 * @return
+	 */
 	public abstract boolean evaluate();
 }

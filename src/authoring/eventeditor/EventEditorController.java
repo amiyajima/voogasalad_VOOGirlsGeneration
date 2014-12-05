@@ -1,7 +1,4 @@
-/**
- * Sample Skeleton for "simple.fxml" Controller Class
- * Use copy/paste to copy paste this code into your favorite IDE
- **/
+
 
 package authoring.eventeditor;
 
@@ -23,7 +20,6 @@ import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-//TODO: RIGHT NOW THIS CLASS ALSO HOLDS A LOT OF DATA. WE SHOULD NOT DO THAT
 public class EventEditorController implements Initializable {
 
 	//Lists
@@ -50,10 +46,7 @@ public class EventEditorController implements Initializable {
 	
 	//The model
 	private EventEditorMain myMain;
-	
-	private final ObservableList<String> conditionsList = FXCollections.observableArrayList();
-	private final ObservableList<String> actionsList = FXCollections.observableArrayList();
-	
+		
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		
@@ -69,10 +62,15 @@ public class EventEditorController implements Initializable {
 		myMain = main;
 	}
 	
+	//TODO: This should take in an Event object, and pull the Conditions and Actions from it
 	@FXML
 	private void showEventInEditor(String s){
-		conditionsListView.setItems(actionsList);
-		actionsListView.setItems(actionsList);
+		
+		ObservableList<String> conditions = FXCollections.observableArrayList();
+		ObservableList<String> actions = FXCollections.observableArrayList();
+		
+		conditionsListView.setItems(conditions);
+		actionsListView.setItems(actions);
 	}
 	
 	@FXML
