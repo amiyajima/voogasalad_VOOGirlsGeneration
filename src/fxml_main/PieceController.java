@@ -2,6 +2,7 @@ package fxml_main;
 
 import gamedata.gamecomponents.Piece;
 import authoring.concretefeatures.LibraryUnitEditor;
+import authoring.createedit.UnitCreator;
 import authoring.data.ActionData;
 import authoring.data.PieceTypeData;
 import authoring_environment.ShapeGrid;
@@ -28,7 +29,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
         newBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                System.out.println("HI NEW BUTTONFORPIECE HI");
+                myPropertiesSPane.setContent(new UnitCreator(myActionData));
             }
         });
     }

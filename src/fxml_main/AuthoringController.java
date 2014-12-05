@@ -1,7 +1,6 @@
 package fxml_main;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import authoring.data.ActionData;
@@ -9,19 +8,22 @@ import authoring_environment.ShapeGrid;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
 
 public class AuthoringController implements Initializable {
 
 	@FXML
 	private ScrollPane myPropertiesSPane;
+	
 	@FXML
 	private VBox myPiecesVBox;
+	
 	@FXML
 	private VBox myPatchesVBox;
+	
 	@FXML
 	private VBox myActionsVBox;
+	
 	@FXML
 	private ScrollPane myGridSPane;
 	

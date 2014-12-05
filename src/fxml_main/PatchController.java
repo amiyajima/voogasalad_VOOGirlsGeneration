@@ -143,7 +143,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
             public void handle (ActionEvent click) {
                 myName = terrainName.getText();
                 if (myImageLocation.equals("") || terrainName.getText().equals("")) {
-                return;
+                	return;
                 }
 
                 myLoc = new Point2D.Double(0, 0);
