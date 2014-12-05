@@ -114,26 +114,14 @@ public class ViewController {
     private JSONManager myJSONManager;
 
     public ViewController (Stage s) {
-        myJSONManager = new JSONManager();
-
-
         myStage = s;
         myInitialScene = new VBox();
         myGameSpace = new BorderPane();
         myScoreBoard = new VBox();
         myPopup = new BorderPane();
 
-
-        // TODO:
-        // uses JSON reader that takes in the file chosen by user and
-        // instantiate
-
+        myJSONManager = new JSONManager();
         // myLeapController = new Controller();
-
-        // TODO:
-        // uses JSON reader that takes in the file chosen by user and instantiate
-
-        // a new Game object.
 
         loadFXML(GAMESPACE_FXML, myGameSpace);
         loadFXML(INITIALSCENE_FXML, myInitialScene);
@@ -308,11 +296,6 @@ public class ViewController {
     /**
      * The method to get all json files from the resources directory that stores
      * all the games user has defined from the authoring environment
-=======
-    /**
-     * The method to get all json files from the resources directory that
-     * stores all the games user has defined from the authoring environment
->>>>>>> b6ffb873072c1e0817996486bc5be58238c6d09e
      */
     private List<File> getGames () {
 

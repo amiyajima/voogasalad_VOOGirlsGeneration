@@ -10,7 +10,6 @@ package gamedata.rules;
  * @Author Jesse
  */
 
-//@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="@class")
 public class Rule {
     /**
      * Returns true if end turn conditions are met.
