@@ -22,7 +22,7 @@
                   <MenuItem mnemonicParsing="false" text="Grid Properties" />
                   <MenuItem mnemonicParsing="false" text="Player Properties" />
                   <MenuItem mnemonicParsing="false" text="Actions Logic Chart..." />
-                  <MenuItem mnemonicParsing="false" text="Global Actions" />
+                  <MenuItem mnemonicParsing="false" text="Events" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">

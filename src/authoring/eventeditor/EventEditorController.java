@@ -23,6 +23,8 @@ public class EventEditorController implements Initializable {
 
 	//Lists
 	@FXML
+	private ListView<String> eventsListView;
+	@FXML
 	private ListView<String> conditionsListView;
 	@FXML
 	private ListView<String> actionsListView;
@@ -37,39 +39,31 @@ public class EventEditorController implements Initializable {
 	@FXML
 	private Button newAction;
 	
-	//Labels
-	@FXML
-	private Label conditionName;
-	
+	//The model
 	private EventEditorMain myMain;
+	
 	private final ObservableList<String> conditionsList = FXCollections.observableArrayList();
 	private final ObservableList<String> actionsList = FXCollections.observableArrayList();
-	
-
-	public EventEditorController(){
-		
-	}
 	
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		
-		conditionsListView.setItems(conditionsList);
-		actionsListView.setItems(actionsList);
+		eventsListView.getItems().addAll("Event 1", "Event 2");
 		
-		conditionsList.addAll("Test 1", "Test 2");
-		actionsList.addAll("Action 1", "Action 2");			
-		
-		conditionsListView.getSelectionModel().selectedItemProperty().addListener(
-				(observable, oldValue, selectedValue) -> showDetails(selectedValue));
+		//Makes it so that the right-hand Editor updates with respect to the selected
+		//Event on the left side
+		eventsListView.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, selectedEvent) -> showEventInEditor(selectedEvent));
 	}
 	
-	public void setMain(EventEditorMain eem){
-		myMain = eem;
+	public void setMain(EventEditorMain main){
+		myMain = main;
 	}
 	
 	@FXML
-	private void showDetails(String s){
-		conditionName.setText(s);
+	private void showEventInEditor(String s){
+		conditionsListView.setItems(actionsList);
+		actionsListView.setItems(actionsList);
 	}
 	
 	@FXML

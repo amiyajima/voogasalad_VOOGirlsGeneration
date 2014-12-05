@@ -2,6 +2,7 @@ package authoring.eventeditor;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import gamedata.events.Event;
 import javafx.application.Application;
@@ -13,6 +14,8 @@ import javafx.stage.Stage;
 
 public class EventEditorMain extends Application{
 
+	private List<Event> myEvents;
+	
 	private Stage primaryStage;
 
 	@Override
