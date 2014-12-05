@@ -10,7 +10,8 @@ import gamedata.gamecomponents.Piece;
  *
  */
 
-//TODO: This class likely needs to access the given Grid to place the Piece
+//TODO: This class likely needs to access the given Grid to place the Piece. 
+//TODO: Figure out how to deep clone a Piece and use it as input into this class
 
 public class CreatePieceAtPoint implements GlobalAction{
 

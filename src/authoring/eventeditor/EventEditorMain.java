@@ -2,6 +2,7 @@ package authoring.eventeditor;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import gamedata.events.Event;
 import javafx.application.Application;
@@ -13,6 +14,8 @@ import javafx.stage.Stage;
 
 public class EventEditorMain extends Application{
 
+	private List<Event> myEvents;
+	
 	private Stage primaryStage;
 
 	@Override
@@ -36,24 +39,5 @@ public class EventEditorMain extends Application{
 
 	public static void main(String[] args) {
 		launch(args);
-	}
-
-	public void showNewConditionsWindow() throws IOException{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("NewCondition.fxml"));
-		Parent root = loader.load();
-
-		Stage newConditionStage  = new Stage();
-		newConditionStage.setTitle("New Condition");
-		newConditionStage.initModality(Modality.WINDOW_MODAL);
-		newConditionStage.initOwner(primaryStage);
-		Scene scene = new Scene(root);
-		newConditionStage.setScene(scene);
-
-		NewConditionController controller = loader.getController();
-
-		//		controller.setEvent(event);
-
-		newConditionStage.showAndWait();
 	}
 }

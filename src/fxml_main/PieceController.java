@@ -1,22 +1,27 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Piece;
-
-import java.util.List;
-
+import authoring.concretefeatures.LibraryUnitEditor;
+import authoring.createedit.UnitCreator;
+import authoring.data.ActionData;
+import authoring.data.PieceTypeData;
 import authoring_environment.ShapeGrid;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class PieceController extends GridComponentAbstCtrl<Piece> {
-
-    public PieceController (VBox vbox, ScrollPane propertiesSPane, ShapeGrid currGrid) {
+	
+	private PieceTypeData myPieceTypes;
+	private ActionData myActionData;
+	
+    public PieceController (VBox vbox, ScrollPane propertiesSPane, ShapeGrid currGrid, ActionData actions) {
     	super(vbox, propertiesSPane, currGrid);
+    	myPieceTypes = new PieceTypeData();
+    	myActionData = actions;
     }
 
     @Override
@@ -24,7 +29,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
         newBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                System.out.println("HI NEW BUTTONFORPATCH HI");
+                myPropertiesSPane.setContent(new UnitCreator(myActionData, myPieceTypes, myVBox));
             }
         });
     }
@@ -34,7 +39,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
     	editBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                System.out.println("HI EDIT BUTTONFORPATCH HI");
+                System.out.println("HI EDIT BUTTONFORPIECE HI");
             }
         });
     }
@@ -44,7 +49,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
     	delBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                System.out.println("HI DELETE BUTTONFORPATCH HI");
+                System.out.println("HI DELETE BUTTONFORPIECE HI");
             }
         });
     }
@@ -57,15 +62,21 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 
 	@Override
 	protected void initEntryEditBtn(Piece entry, Button editBtn) {
-		// TODO Auto-generated method stub
-		
+		editBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				myPropertiesSPane.setContent(new LibraryUnitEditor(entry, myActionData));
+			}
+		});
 	}
 
 	@Override
 	protected void initEntryDelBtn(Piece entry, Button delBtn) {
-		// TODO Auto-generated method stub
-		
+		delBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Delete all instances of this piece!");
+			}
+		});
 	}
-
-
 }

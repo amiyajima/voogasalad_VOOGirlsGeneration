@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="706.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_main.AuthoringController">
+<BorderPane prefHeight="706.0" prefWidth="1024.0" stylesheets="@../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_main.AuthoringController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -19,10 +19,10 @@
             <Menu mnemonicParsing="false" text="Game Properties">
               <items>
                 <MenuItem mnemonicParsing="false" text="New Level..." />
+                  <MenuItem fx:id="events" mnemonicParsing="false" onAction="#showEventsEditorWindow" text="Events" />
                   <MenuItem mnemonicParsing="false" text="Grid Properties" />
                   <MenuItem mnemonicParsing="false" text="Player Properties" />
                   <MenuItem mnemonicParsing="false" text="Actions Logic Chart..." />
-                  <MenuItem mnemonicParsing="false" text="Global Actions" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">
