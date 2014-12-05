@@ -48,7 +48,7 @@ public class VoogaView extends BorderPane {
 			
 			@Override
 			public void changed(ObservableValue<? extends Tab> arg0, Tab arg1, Tab arg2) {
-				ShapeGrid activeGrid = myWorkspaceView.getActiveGrid();
+				SuperGrid activeGrid = myWorkspaceView.getActiveGrid();
 		        myLibraryView.associateGrid(activeGrid);
 		    }
 

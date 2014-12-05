@@ -23,10 +23,10 @@ public class CreatorEditor extends TabPane {
         editTab.setContent(editAccordion);
         editTab.setText(EDIT);
                 
-        CreateThings createAccordion = new CreateThings(editAccordion, myLibraryView, myActions, pieceTypeData);
+//        CreateThings createAccordion = new CreateThings(editAccordion, myLibraryView, myActions, pieceTypeData);
         Tab createTab = new Tab();
         createTab.setClosable(false);
-        createTab.setContent(createAccordion);
+//        createTab.setContent(createAccordion);
         createTab.setText(CREATE);
 
         

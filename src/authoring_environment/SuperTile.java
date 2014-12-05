@@ -71,7 +71,7 @@ public abstract class SuperTile extends Group {
             shape.setFill(Color.WHITE);
 		}
         else {
-            shape.setFill(Color.WHITESMOKE);
+            shape.setFill(Color.BLACK);
         }
 		shape.setStroke(Color.GRAY);
 		shape.setStrokeWidth(0.75);
