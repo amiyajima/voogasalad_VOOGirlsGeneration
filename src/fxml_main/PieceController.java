@@ -15,9 +15,8 @@ import javafx.scene.layout.VBox;
 
 public class PieceController extends GridComponentAbstCtrl<Piece> {
 
-    public PieceController (VBox vbox, ScrollPane propertiesSPane, TabPane gridTPane,
-    		List<ShapeGrid> levelGrids) {
-    	super(vbox, propertiesSPane, gridTPane, levelGrids);
+    public PieceController (VBox vbox, ScrollPane propertiesSPane, ShapeGrid currGrid) {
+    	super(vbox, propertiesSPane, currGrid);
     }
 
     @Override

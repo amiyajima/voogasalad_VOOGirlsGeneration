@@ -33,9 +33,6 @@
         </menus>
       </MenuBar>
    </top>
-   <center>
-      <TabPane fx:id="myGridTabPane" prefHeight="677.0" prefWidth="564.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
-   </center>
    <left>
       <TitledPane animated="false" collapsible="false" prefHeight="677.0" prefWidth="230.0" text="Game Components" BorderPane.alignment="CENTER">
          <content>
@@ -87,4 +84,7 @@
          </content>
       </TitledPane>
    </right>
+   <center>
+      <ScrollPane fx:id="myGridSPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

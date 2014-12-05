@@ -20,15 +20,13 @@ import authoring_environment.ShapeGrid;
 public abstract class GridComponentAbstCtrl<T>{
 	protected VBox myVBox;
 	protected ScrollPane myPropertiesSPane;
-	protected TabPane myGridTabPane;
-	protected List<ShapeGrid> myLevelGrids;
+	protected ShapeGrid myCurrentGrid;
 
 	protected GridComponentAbstCtrl (VBox vbox, ScrollPane propertiesSPane,
-			TabPane gridTPane, List<ShapeGrid> levelGrids) {
+			ShapeGrid currGrid) {
 		myVBox = vbox;
 		myPropertiesSPane = propertiesSPane;
-		myGridTabPane = gridTPane;
-		myLevelGrids = levelGrids;
+		myCurrentGrid = currGrid;
 		initGlobalControls();
 	}
 
