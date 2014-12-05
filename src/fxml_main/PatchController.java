@@ -1,11 +1,8 @@
 package fxml_main;
 
+import gamedata.gamecomponents.Patch;
 import java.awt.geom.Point2D;
 import java.io.File;
-import java.util.Map;
-import gamedata.gamecomponents.Patch;
-import authoring.data.PatchTypeData;
-import authoring_environment.ShapeGrid;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -16,11 +13,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import authoring.abstractfeatures.PopupWindow;
-import authoring.concretefeatures.TerrainEntry;
 import authoring.createedit.TerrainEditor;
 import authoring.data.PatchTypeData;
 import authoring_environment.ShapeGrid;
@@ -43,8 +39,6 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
     private String myName;
     private String myImageLocation;
     private Point2D myLoc;
-    // entry box.. might want to pass it as a parameter
-    private PatchTypeData myPatches;
 
     public PatchController (VBox vbox, ScrollPane propertiesSPane, ShapeGrid currGrid) {
         super(vbox, propertiesSPane, currGrid);
@@ -98,8 +92,8 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
         editBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent e) {
-                PopupWindow p = new TerrainEditor(entry);
-                p.show();
+                Pane p = new TerrainEditor(entry);
+                myPropertiesSPane.setContent(p);
             }
         });
     }
@@ -167,7 +161,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 
                 myLoc = new Point2D.Double(0, 0);
                 Patch terrain = new Patch(myName, myImageLocation, myLoc);
-
+                myPatchTypes.add(terrain);
                 Label name = new Label(terrainName.getText());
                 name.setTranslateY(7.5);
 
