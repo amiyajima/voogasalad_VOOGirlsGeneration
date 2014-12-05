@@ -1,7 +1,10 @@
 package authoring.data;
 
 import gamedata.gamecomponents.Game;
+import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
+import gamedata.goals.Goal;
+import gamedata.rules.Rule;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +44,9 @@ public class GameCreator {
      * @return
      */
     private Level convertAuthoringToLevel(AuthoringLevel aLevel) {
-        return null;
+        // TODO This returns a DEFAULT level because Level and AuthoringLevel haven't
+        // been changed to be similar yet
+        // return new Level(aLevel.getGrid(), aLevel.getEvents());
+        return new Level();
     }
 }

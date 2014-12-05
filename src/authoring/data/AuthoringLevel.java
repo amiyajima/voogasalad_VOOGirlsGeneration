@@ -45,7 +45,11 @@ public class AuthoringLevel {
 		currGrid = myGrid;
 	}
 
-
-
-
+	public GUIGrid getGrid() {
+	    return myGrid;
+	}
+	
+	public List<Event> getEvents() {
+	    return myEvents;
+	}
 }
