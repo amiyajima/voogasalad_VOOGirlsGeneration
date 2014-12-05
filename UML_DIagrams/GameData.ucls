@@ -43,10 +43,10 @@
   <association id="7">    
     <end type="SOURCE" refId="1" navigable="false">      
       <attribute id="8" name="myCurrentPlayer">        
-        <position height="18" width="100" x="570" y="285"/>      
+        <position height="18" width="100" x="557" y="323"/>      
       </attribute>      
       <multiplicity id="9" minimum="0" maximum="1">        
-        <position height="16" width="25" x="686" y="283"/>      
+        <position height="16" width="25" x="673" y="321"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
@@ -67,10 +67,10 @@
   <association id="13">    
     <end type="SOURCE" refId="1" navigable="false">      
       <attribute id="14" name="myPlayers">        
-        <position height="18" width="65" x="572" y="269"/>      
+        <position height="18" width="65" x="558" y="307"/>      
       </attribute>      
       <multiplicity id="15" minimum="0" maximum="2147483647">        
-        <position height="16" width="23" x="685" y="267"/>      
+        <position height="16" width="23" x="672" y="305"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
