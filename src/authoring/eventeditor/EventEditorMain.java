@@ -16,12 +16,8 @@ public class EventEditorMain extends Application{
 
 	private List<Event> myEvents;
 	
-	private Stage primaryStage;
-
 	@Override
 	public void start(Stage stage) throws IOException {
-
-		primaryStage = stage;
 
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("EventEditor.fxml"));
