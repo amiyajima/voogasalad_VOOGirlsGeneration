@@ -5,7 +5,6 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
-
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,20 +12,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 // import com.leapmotion.leap.Controller;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 import authoring_environment.GUIGrid;
 import tests.JSONBobTester;
 import javafx.geometry.Pos;
@@ -160,7 +155,7 @@ public class ViewController {
 		// fc.setInitialDirectory(new File(System.getProperty("user.dir") +
 		// "/src/resources"));
 		// uses JSON reader to generate an instance of the game
-
+		
 		try {
 			myModel = myJSONManager.readFromJSONFile(f.getPath());
 			initializeGrid();
@@ -168,6 +163,7 @@ public class ViewController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 
 	}
 
@@ -289,12 +285,23 @@ public class ViewController {
 			l.setText(file.getName().substring(0, file.getName().length() - 5));
 			l.getStyleClass().add("button");
 			newGameButton.getItems().add(l);
-
-		});
-
+			l.setOnAction(event -> {
+//			    try {
+			        myScene = new Scene(myGameSpace);
+			        myStage.setScene(myScene);
+//			        myModel = myJSONManager.readFromJSONFile(file.getPath());
+//			        }
+//			    catch (Exception e) {
+//			        // TODO Auto-generated catch block
+//			        e.printStackTrace();
+//			        }
+			    });
+			});
+//		initializeGrid();
 	}
 
 	private void initializeGrid() {
+	        
 		// myModel.play();
 
 		//myGrid = new SquareGameGrid(myModel.getCurrentLevel().getGrid()
@@ -318,8 +325,9 @@ public class ViewController {
 			changeCursor(CURSOR_GLOVE_TEST);
 		});
 		
-	        myGameGridEffect = new GameGridEffect(this);
+//	        myGameGridEffect = new GameGridEffect(this);
 		keyControlOn = false;
+	        System.out.println("Grid initialized");
 	}
 
 	/**
@@ -565,7 +573,7 @@ public class ViewController {
 		} else {
 			myKeyboardMovement = new KeyboardMovement();
 			myKeyboardAction = new KeyboardAction();
-			myKeyboardMovement.setMovementKeyControl(this, myGrid, myModel);
+			myKeyboardMovement.setMovementKeyControl(this, myGridPane, myModel);
 			keyControlOn = true;
 			// setOnEnterKey();
 		}

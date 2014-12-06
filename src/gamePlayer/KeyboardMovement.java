@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import javafx.event.EventHandler;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
@@ -27,10 +28,10 @@ public class KeyboardMovement {
      * @param movementKeyMap
      * @param gameScene
      */
-    public void setMovementKeyControl (ViewController vc, GUIGrid grid, Game game) {
+    public void setMovementKeyControl (ViewController vc, ScrollPane sp, Game game) {
         myCurrentLocation = new Point2D.Double(0.0, 0.0);
         // Map<KeyCode, Point2D> movementKeyMap = myCurrentPlayer.getMovementKeyMap();
-        System.out.println("movement key control added");
+        System.out.println("Keyboard Movement ON");
 
         // for testing!!!
         Map<KeyCode, Point2D> movementKeyMap = new HashMap<KeyCode, Point2D>();
@@ -39,36 +40,34 @@ public class KeyboardMovement {
         movementKeyMap.put(KeyCode.W, new Point2D.Double(0.0, 1.0));
         movementKeyMap.put(KeyCode.S, new Point2D.Double(0.0, -1.0));
 
-        grid.requestFocus();
-        grid.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        sp.requestFocus();
+        sp.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
             Set<KeyCode> movementKeyList = movementKeyMap.keySet();
 
             @Override
             public void handle (KeyEvent key) {
                 if (key.getCode() == KeyCode.F) {
-                    System.out.println(myCurrentLocation);
-                    vc.performActionKeyboard(myCurrentLocation);
+                    System.out.println("Selected with key: " + myCurrentLocation);
+//                    vc.performActionKeyboard(myCurrentLocation);
                 }
 
                 for (KeyCode kc : movementKeyList) {
                     if (key.getCode() == kc) {
                         Point2D newCurrentLocation =
-                                new Point2D.Double(myCurrentLocation.getX() -
-                                                   movementKeyMap.get(kc).getY(),
-                                                   myCurrentLocation.getY() +
-                                                           movementKeyMap.get(kc).getX());
+                                new Point2D.Double(myCurrentLocation.getX() - movementKeyMap.get(kc).getY(),
+                                                   myCurrentLocation.getY() + movementKeyMap.get(kc).getX());
 
-                        if ((newCurrentLocation.getX() > grid.r - 1) |
-                            (newCurrentLocation.getY() > grid.c - 1)
+                        if ((newCurrentLocation.getX() > sp.getWidth() - 1) |
+                            (newCurrentLocation.getY() > sp.getHeight() - 1)
                             | (newCurrentLocation.getX() < 0) | (newCurrentLocation.getY() < 0)) {
-                            newCurrentLocation.setLocation(myCurrentLocation.getX(),
-                                                           myCurrentLocation.getY());
+                            newCurrentLocation.setLocation(myCurrentLocation.getX(), myCurrentLocation.getY());
                         }
-
-                        myGameGridEffect.getHighlighter().unhighlight(grid, myCurrentLocation);
+                        
+//                        myGameGridEffect.getHighlighter().unhighlight(sp, myCurrentLocation);
                         myCurrentLocation = newCurrentLocation;
-                        myGameGridEffect.highlightCurrent(grid, myCurrentLocation, Color.PURPLE);
+                        System.out.println("KeyboardMovement New Location: " + myCurrentLocation);
+//                        myGameGridEffect.highlightCurrent(sp, myCurrentLocation, Color.PURPLE);
 
                         // ArrayList<Label> actions = new ArrayList<Label>();
                         // if (vc.getPiece(vc.findPosition(myCurrentLocation.getX(),
