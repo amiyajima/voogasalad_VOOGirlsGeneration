@@ -1,16 +1,15 @@
 package gamedata.events;
 
-import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 
 /**
  * Condition that determines if a piece is at the same location as a patch
- * @author annamiyajima
+ * @author annamiyajima, Mike Zhu
  *
  */
 public class PieceOnPatchCondition extends Condition {
-    public static final String description = "IF Piece Is On Particular Patch";
+	public static final String DESCRIPTION = "IF Piece is on a given Patch";
     private Piece myPiece;
     private Patch myPatch;
 
@@ -23,7 +22,7 @@ public class PieceOnPatchCondition extends Condition {
      *        Target Patch
      */
     public PieceOnPatchCondition (Piece pie, Patch pat) {
-    	super(description);
+    	super(IF + pie.getName() + " is on ");
         myPiece = pie;
         myPatch = pat;
     }

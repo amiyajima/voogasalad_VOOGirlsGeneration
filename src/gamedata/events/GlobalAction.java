@@ -12,7 +12,18 @@ package gamedata.events;
  * @author Mike Zhu
  *
  */
-public interface GlobalAction {
+public abstract class GlobalAction {
+	
+	protected final String myDescription;
+	
+	protected GlobalAction(String s){
+		myDescription = s;
+	}
 	
 	public abstract void doBehavior();
+	
+	@Override
+	public String toString(){
+		return myDescription;
+	}
 }

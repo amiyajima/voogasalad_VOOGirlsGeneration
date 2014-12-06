@@ -14,11 +14,11 @@ import gameengine.player.Player;
  */
 public class NoAvailableMoveCondition extends Condition {
 
-    public static final String description = "IF No Available Moves Remain";
+    public static final String DESCRIPTION = "IF No Available Moves Remain";
     private Player myPlayer;
 
     public NoAvailableMoveCondition (Player p) {
-    	super(description);
+    	super(DESCRIPTION);
         myPlayer = p;
     }
 

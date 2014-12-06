@@ -10,12 +10,12 @@ import gameengine.player.Player;
  *
  */
 public class PlayerPieceCountCondition extends Condition {
-    public static final String description = "IF Num Pieces Remaining Reached";
+    public static final String DESCRIPTION = "IF Num Pieces Remaining Reached";
     private Player myPlayer;
     private int myValue;
 
     public PlayerPieceCountCondition (Player p, int value) {
-    	super(description);
+    	super(IF + "Player " + p.getID() + " has " + value + " Pieces remaining");
         myPlayer = p;
         myValue = value;
     }

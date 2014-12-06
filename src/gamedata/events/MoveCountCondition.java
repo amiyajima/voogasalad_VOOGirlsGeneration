@@ -10,12 +10,12 @@ import gameengine.player.Player;
  *
  */
 public class MoveCountCondition extends Condition {
-    public static final String description = "IF Move Count Reached";
+    public static final String DESCRIPTION = "IF Move Count Reached";
     private int myValue;
     private Player myPlayer;
 
     public MoveCountCondition (Player p, int value) {
-    	super(description);
+    	super(DESCRIPTION);
         myPlayer = p;
         myValue = value;
     }

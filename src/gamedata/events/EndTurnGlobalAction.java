@@ -7,11 +7,13 @@ import gamedata.gamecomponents.Game;
  * @author Rica
  *
  */
-public class EndTurnGlobalAction implements GlobalAction {
+public class EndTurnGlobalAction extends GlobalAction {
+	public static final String DESCRIPTION = "End current player's turn";
     private Game myGame;
     private int myPlayerTurnToJumpTo;
     
     public EndTurnGlobalAction (Game game, int playerTurnToJumpTo) {
+    	super(DESCRIPTION);
         myGame = game;
         myPlayerTurnToJumpTo = playerTurnToJumpTo;
     }

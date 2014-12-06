@@ -13,6 +13,11 @@ public abstract class Condition {
 
 	protected final String myDescription;
 	
+	//Constant strings used to construct the dynamic title
+	protected final static String IF = "IF ";
+	protected final static String EQUALS = " = ";
+
+	
 	/**
 	 * Protected constructor used to set the description
 	 * @param s
@@ -22,7 +27,7 @@ public abstract class Condition {
 	}
 	
     /**
-     * Subclass onstructor should take in whatever targets the Condition is observing, as an
+     * Subclass constructor should take in whatever targets the Condition is observing, as an
      * unmodifiable data structure.
      */
 

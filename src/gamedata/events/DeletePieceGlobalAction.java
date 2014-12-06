@@ -5,10 +5,11 @@ import gamedata.gamecomponents.Piece;
 
 /**
  * Deletes a specified piece off the grid
- * @author Rica
+ * @author Rica, Mike Zhu
  *
  */
-public class DeletePieceGlobalAction implements GlobalAction {
+public class DeletePieceGlobalAction extends GlobalAction {
+	public static final String DESCRIPTION = "Delete ";
     Game myGame;
     Piece myPiece;
     
@@ -20,6 +21,7 @@ public class DeletePieceGlobalAction implements GlobalAction {
      * @param pieceToDelete
      */
     public DeletePieceGlobalAction(Game game, Piece pieceToDelete) {
+    	super(DESCRIPTION + pieceToDelete.getName());
         myGame = game;
         myPiece = pieceToDelete;
     }

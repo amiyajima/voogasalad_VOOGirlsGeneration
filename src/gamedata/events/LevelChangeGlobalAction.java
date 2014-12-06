@@ -7,11 +7,13 @@ import gamedata.gamecomponents.Game;
  * @author Rica
  *
  */
-public class LevelChangeGlobalAction implements GlobalAction {
+public class LevelChangeGlobalAction extends GlobalAction {
+	public static final String DESCRIPTION = "Change level";
     private Game myGame;
     private String myLevelToJumpTo;
 
     public LevelChangeGlobalAction(Game game, String levelToJumpTo) {
+    	super(DESCRIPTION + " to " + levelToJumpTo);
         myGame = game;
         myLevelToJumpTo = levelToJumpTo;
     }
