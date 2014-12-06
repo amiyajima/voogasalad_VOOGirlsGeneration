@@ -25,35 +25,48 @@ import authoring_environment.UIspecs;
  * 
  * @author Sandy Lee
  */
-public class newTerrainCreator extends Pane {
+public class PatchTypeEditor extends Pane {
 
     private static final int HEIGHT = 150;
     private static final int WIDTH = 150;
-    private static final String NAME = "Terrain Creator";
+    private static final String NAME = "Terrain Editor";
     private static final String TERRAIN_NAME_LABEL = "Name";
     private static final String LOAD_IMAGE_LABEL = "Load Terrain Image";
-    private static final String TEMPLATE_LABEL = "Create new terrain template";
+    private static final String TEMPLATE_LABEL = "OK";
     private static final Insets MARGINS = new Insets(20, WIDTH / 5, 20, WIDTH / 5 - 10);
     private static final String LABEL_CSS = "-fx-font-size: 14pt;";
     private static final String DEFAULT_IMAGE = "/resources/images/default_image.png";
     private PatchController myPatchController;
+    private Patch myPatch;
     private String myName;
     private String myImageLocation;
-    private Point2D myLoc;
 
     /**
      * Constructor that sets the dimensions of the TerrainCreator GUI component
      * and initializes it.
+     * this is for patch CREATOR
      * 
-     * @param library : Library to which terrain will be added.
+     */
+    public PatchTypeEditor (PatchController controller) {
+        constructor(controller);
+    }
+
+    /**
+     * Constructor that sets the dimensions of the TerrainCreator GUI component
+     * and initializes it.
+     * this is for patch EDITOR
+     * 
      */
 
-    public newTerrainCreator (PatchController controller) {
+    public PatchTypeEditor (PatchController controller, Patch patch) {
+        constructor(controller);
+        myPatch = patch;      
+    }
 
+    public void constructor (PatchController controller) {
+        myPatchController = controller;
         myName = "";
         myImageLocation = "";
-        myLoc = new Point2D.Double(0, 0);
-        myPatchController = controller;
         setHeight(HEIGHT);
         setWidth(WIDTH);
         initialize();
@@ -136,9 +149,8 @@ public class newTerrainCreator extends Pane {
                 return;
                 }
 
-                Patch terrain = new Patch(myName, myImageLocation, myLoc);
-
-                myPatchController.addEntry(terrain);
+                myPatch = new Patch(myName, myImageLocation, new Point2D.Double(0, 0));
+                myPatchController.addEntry(myPatch);
             }
         });
     }
