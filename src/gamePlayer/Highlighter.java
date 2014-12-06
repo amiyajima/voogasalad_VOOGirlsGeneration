@@ -17,12 +17,21 @@ public class Highlighter {
     
 	/**
 	 * Turns on highlighting of a Patch at loc with Color c
-	 * 
+	 * by adding a dropshadow to the node at loc
 	 * @param loc
 	 * @param c
 	 */
-	public void highlightCurrent(GUIGrid grid, Point2D loc, Color c) {
-	    //need to get the Node using GUIGrid to do the following:
+	public void highlight(GUIGrid grid, Point2D loc, Color c) {
+	    Node n = grid.get((int)loc.getX(), (int)loc.getY(), c);    //assuming this method exists
+	    if (n != null) {
+	        DropShadow ds = new DropShadow();
+	        ds.setRadius(30.0);
+	        ds.setOffsetX(0.0);
+	        ds.setOffsetY(0.0);
+	        ds.setColor(c);
+	        n.setEffect(ds);
+	    }
+	  
 //	    addDropShadow(grid.get((int) loc.getX(), (int) loc.getY()), c);
 	}
 
@@ -32,27 +41,26 @@ public class Highlighter {
 	 * @param loc
 	 */
 	public void unhighlight(GUIGrid grid, Point2D loc) {
-	        //need to get the Node using GUIGrid to do the following:
-//		Node n = grid.get((int) loc.getX(), (int) loc.getY());
-//		if (n != null) {
-//			n.setEffect(null);
-//		}
-	}
-
-	/**
-	 * Adds a Drop Shadow effect to a Node
-	 * 
-	 * @param n
-	 * @param c
-	 */
-	public void addDropShadow(Node n, Color c) {
+		Node n = grid.get((int) loc.getX(), (int) loc.getY());        //assuming this method exists
 		if (n != null) {
-			DropShadow ds = new DropShadow();
-			ds.setRadius(30.0);
-			ds.setOffsetX(0.0);
-			ds.setOffsetY(0.0);
-			ds.setColor(c);
-			n.setEffect(ds);
+			n.setEffect(null);
 		}
 	}
+
+//	/**
+//	 * Adds a Drop Shadow effect to a Node
+//	 * 
+//	 * @param n
+//	 * @param c
+//	 */
+//	public void addDropShadow(Node n, Color c) {
+//		if (n != null) {
+//			DropShadow ds = new DropShadow();
+//			ds.setRadius(30.0);
+//			ds.setOffsetX(0.0);
+//			ds.setOffsetY(0.0);
+//			ds.setColor(c);
+//			n.setEffect(ds);
+//		}
+//	}
 }
