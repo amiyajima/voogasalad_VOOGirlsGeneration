@@ -83,8 +83,8 @@ public class ViewController {
 	private Scene myScene;
 
 	private Game myModel;
-	private GameGrid myGrid;
-	//private GUIGrid myGrid;
+	//private GameGrid myGrid;
+	private GUIGrid myGrid;
 
 	// private SampleListener myLeapListener;
 
@@ -114,6 +114,8 @@ public class ViewController {
 	private IGridState gridState;
 
 	private JSONManager myJSONManager;
+	
+	private GameGridEffect myGameGridEffect;
 
 	public ViewController(Stage s) {
 		myStage = s;
@@ -298,10 +300,10 @@ public class ViewController {
 	private void initializeGrid() {
 		// myModel.play();
 
-		myGrid = new SquareGameGrid(myModel.getCurrentLevel().getGrid()
-				.getRow(), myModel.getCurrentLevel().getGrid().getColumn());
+		//myGrid = new SquareGameGrid(myModel.getCurrentLevel().getGrid()
+		//		.getRow(), myModel.getCurrentLevel().getGrid().getColumn());
 
-		//myGrid = new GUIGrid();
+		myGrid = new GUIGrid();
 		
 		myGameSpace.setCenter(myGrid);
 		myGrid.setAlignment(Pos.CENTER);
@@ -441,8 +443,9 @@ public class ViewController {
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
-
-		highLightActionRange();
+		
+//		highLightActionRange();
+		myGameGridEffect.highLightActionRange(myGrid, activePiece, action); //myGrid = GUIGrid?
 
 		setGridState(new ApplyState(this));
 
@@ -529,6 +532,7 @@ public class ViewController {
 		//highlightCurrent(location, Color.BLUE);
 	}
 
+// might move to GameGridEffect
 	/**
 	 * Method to convert pixel coordinates into tile coordinates
 	 * 
@@ -546,69 +550,69 @@ public class ViewController {
 		return currentClick;
 	}
 
-	/**
-	 * Highlight the tiles that represent the possible range of the action
-	 * selected
-	 */
-	@FXML
-	protected void highLightActionRange() {
+// MOVED TO: GameGridEffect
+//	/**
+//	 * Highlight the tiles that represent the possible range of the action
+//	 * selected
+//	 */
+//	@FXML
+//	protected void highLightActionRange() {
+//
+//		myGrid.clearEffect();
+//		if (activePiece != null && activeAction != null) {
+//
+//			activeAction.getActionRange(activePiece.getLoc()).forEach(
+//					point -> {
+//						if (point.getX() < myGrid.getRow()
+//								&& point.getY() < myGrid.getCol()
+//								&& point.getX() > 0 && point.getY() > 0) {
+//							Node n = myGrid.get((int) point.getX(),
+//									(int) point.getY());
+//							//TODO: Add back in
+//							//addDropShadow(n, Color.YELLOW);
+//
+//						}
+//
+//					});
+//		}
+//	}
 
-		myGrid.clearEffect();
-		if (activePiece != null && activeAction != null) {
-
-			activeAction.getActionRange(activePiece.getLoc()).forEach(
-					point -> {
-
-						if (point.getX() < myGrid.getRow()
-								&& point.getY() < myGrid.getCol()
-								&& point.getX() > 0 && point.getY() > 0) {
-							Node n = myGrid.get((int) point.getX(),
-									(int) point.getY());
-							//TODO: Add back in
-							//addDropShadow(n, Color.YELLOW);
-
-						}
-
-					});
-		}
-	}
-
-	/**
-	 * Highlight the effect range of an action if to be applied at a given
-	 * position Highlight the effect range of an action if to be applied at a
-	 * given position
-	 * 
-	 * @param n
-	 * @param red
-	 */
-
-	protected void highLightEffectRange(MouseEvent me, Color c) {
-
-		if (activePiece != null && activeAction != null) {
-
-			activeAction.getActionRange(activePiece.getLoc()).forEach(
-					point -> {
-						Point2D temp = findPosition(me.getSceneX(),
-								me.getSceneY());
-						if (temp.equals(point)) {
-							activeAction.getEffectRange().forEach(
-									point2 -> {
-										Node n = myGrid.get(
-												(int) (temp.getX() + point2
-														.getX()),
-												(int) (temp.getY() + point2
-														.getY()));
-
-										//TODO: Add this back in
-										//addDropShadow(n, c);
-									});
-
-						}
-					});
-
-		}
-
-	}
+//MOVED TO: GameGridEffect
+//	/**
+//	 * Highlight the effect range of an action if to be applied at a given
+//	 * position Highlight the effect range of an action if to be applied at a
+//	 * given position
+//	 * 
+//	 * @param n
+//	 * @param red
+//	 */
+//	protected void highLightEffectRange(MouseEvent me, Color c) {
+//
+//		if (activePiece != null && activeAction != null) {
+//
+//			activeAction.getActionRange(activePiece.getLoc()).forEach(
+//					point -> {
+//						Point2D temp = findPosition(me.getSceneX(),
+//								me.getSceneY());
+//						if (temp.equals(point)) {
+//							activeAction.getEffectRange().forEach(
+//									point2 -> {
+//										Node n = myGrid.get(
+//												(int) (temp.getX() + point2
+//														.getX()),
+//												(int) (temp.getY() + point2
+//														.getY()));
+//
+//										//TODO: Add this back in
+//										//addDropShadow(n, c);
+//									});
+//
+//						}
+//					});
+//
+//		}
+//
+//	}
 
 	/**
 	 * Changes the image of the Cursor

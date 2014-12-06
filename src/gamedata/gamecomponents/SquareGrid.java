@@ -1,6 +1,7 @@
 package gamedata.gamecomponents;
 
 /**
+ * DEPRICATED
  * Creates square grid
  * @author Sandy Lee
  *

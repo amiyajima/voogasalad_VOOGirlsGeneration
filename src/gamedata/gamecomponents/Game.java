@@ -4,6 +4,7 @@ import gameengine.player.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * A game that contains a list of players and the levels that players can play
  * 
@@ -12,122 +13,126 @@ import java.util.List;
  */
 public class Game {
 
-	/**
-	 * Contains player in order of their turns
-	 */
-	private List<Player> myPlayers;
-	/**
-	 * Contains ordered list of levels that compose the game
-	 */
-	private List<Level> myLevels;
-	private Level myCurrentLevel;
-	private Player myCurrentPlayer;
-	private boolean myGameWon;
+    /**
+     * Contains player in order of their turns
+     */
+    private List<Player> myPlayers;
+    /**
+     * Contains ordered list of levels that compose the game
+     */
+    private List<Level> myLevels;
+    private Level myCurrentLevel;
+    private Player myCurrentPlayer;
+    private boolean myGameWon;
+    private int myNumPlayers;
 
-	/**
-	 * Default Constructor
-	 */
-	public Game() {
-		this(null, 0);
-	}
+    /**
+     * Default Constructor
+     */
+    public Game () {
+        this(1, null);
+    }
 
-	/**
-	 * Instantiate a new Game given a list of players and levels that exist.
-	 * 
-	 * @param myLevels
-	 *            List of players
-	 * @param numPlayers
-	 *            List of levels that compose the game
-	 */
-	public Game(List<Level> levels, int numPlayers) {
-		myGameWon = false;
-		myLevels = levels;
-		myPlayers = new ArrayList<Player>(numPlayers);
-		if (myLevels.size() > 0) {
-			myCurrentLevel = myLevels.get(0);
-			myCurrentPlayer = null;
-		}
-	}
+    /**
+     * Instantiate a new Game given a list of players and levels that exist.
+     * 
+     * @param players
+     *        List of players
+     * @param levels
+     *        List of levels that compose the game
+     */
+    public Game (int numPlayers, List<Level> levels) {
+        this(numPlayers, levels, null);
+    }
 
-	/**
-	 * Iterates the Current Level to the Next Level If no more levels, game is
-	 * won.
-	 */
-	public void nextLevel() {
-		if (!isWin()) {
-			myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel) + 1);
-		} else {
-			myGameWon = true;
-		}
-	}
+    public Game (int numPlayers, List<Level> levels, Level currentLevel) {
+        myGameWon = false;
+        myNumPlayers = numPlayers;
+        myPlayers = new ArrayList<Player>();
+        myLevels = levels;
+        myCurrentLevel = currentLevel;
+        myCurrentPlayer = null;
+    }
 
-	/**
-	 * Checks to see if game has been beaten
-	 * 
-	 * @return True is game has been won. False otherwise
-	 */
-	private boolean isWin() {
-		if (myLevels.indexOf(myCurrentLevel) == myLevels.size() - 1) {
-			return true;
-		}
-		return false;
-	}
+    /**
+     * Iterates the Current Level to the Next Level If no more levels, game is
+     * won.
+     */
+    public void nextLevel () {
+        if (!isWin()) {
+            myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel) + 1);
+        }
+        else {
+            myGameWon = true;
+        }
+    }
 
-	/**
-	 * Iterates to the next player to start that players turn. If the last
-	 * player has just played the first player is active again
-	 */
-	public void nextPlayer() {
-		if (myPlayers.indexOf(myCurrentPlayer) == myPlayers.size() - 1) {
-			resetPlayer();
-		} else {
-			myCurrentPlayer = myPlayers
-					.get(myPlayers.indexOf(myCurrentPlayer) + 1);
-		}
-	}
+    /**
+     * Checks to see if game has been beaten
+     * 
+     * @return True is game has been won. False otherwise
+     */
+    private boolean isWin () {
+        if (myLevels.indexOf(myCurrentLevel) == myLevels.size() - 1) { return true; }
+        return false;
+    }
 
-	/**
-	 * Resets the active player to be the first player who has played
-	 */
-	private void resetPlayer() {
-		myCurrentPlayer = myPlayers.get(0);
-	}
+    /**
+     * Iterates to the next player to start that players turn. If the last
+     * player has just played the first player is active again
+     */
+    public void nextPlayer () {
+        if (myPlayers.indexOf(myCurrentPlayer) == myPlayers.size() - 1) {
+            resetPlayer();
+        }
+        else {
+            myCurrentPlayer = myPlayers
+                    .get(myPlayers.indexOf(myCurrentPlayer) + 1);
+        }
+    }
 
-	/**
-	 * Restarts the Level Note: This doesn't actually work. Need deep cloning
-	 */
-	private void restartLevel() {
-		myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel));
-	}
+    /**
+     * Resets the active player to be the first player who has played
+     */
+    private void resetPlayer () {
+        myCurrentPlayer = myPlayers.get(0);
+    }
 
-	public String toString() {
-		return "game with " + myPlayers.size() + " players and "
-				+ myLevels.size() + " levels";
-	}
+    /**
+     * Restarts the Level Note: This doesn't actually work. Need deep cloning
+     */
+    private void restartLevel () {
+        myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel));
+    }
 
-	/**
-	 * Getter for the Current Level
-	 * 
-	 * @return Returns the Current Level
-	 */
-	public Level getCurrentLevel() {
-		return myCurrentLevel;
-	}
+    public String toString () {
+        return "game with " + myPlayers.size() + " players and " + myLevels.size() + " levels";
+    }
 
-	/**
-	 * Getter for the Current Player
-	 * 
-	 * @return Returns the Current Player
-	 */
-	public Player getCurrentPlayer() {
-		return myCurrentPlayer;
-	}
+    /**
+     * Getter for the Current Level
+     * 
+     * @return Returns the Current Level
+     */
+    public Level getCurrentLevel () {
+        return myCurrentLevel;
+    }
 
-	public List<Player> getPlayers() {
-		return myPlayers;
-	}
+    /**
+     * Getter for the Current Player
+     * 
+     * @return Returns the Current Player
+     */
+    public Player getCurrentPlayer () {
+        return myCurrentPlayer;
+    }
 
-	public List<Level> getLevels() {
-		return myLevels;
-	}
+    public List<Player> getPlayers () {
+        return myPlayers;
+    }
+
+    public List<Level> getLevels () {
+        return myLevels;
+    }
+
 }

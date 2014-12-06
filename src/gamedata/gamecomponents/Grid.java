@@ -6,163 +6,169 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * Contains the Grid defined for a level. Contains the pieces and patches
  * 
  * @Author Jesse Ling, Sandy Lee
  * 
  */
-public abstract class Grid {
-	private int myRow;
-	private int myColumn;
-	// protected Map<Point2D, Patch> myPatches;
-	// protected Map<Point2D, Piece> myPieces;
-	private List<Patch> myPatches;
-	private List<Piece> myPieces;
+public class Grid {
+    private int myRow;
+    private int myColumn;
+    // protected Map<Point2D, Patch> myPatches;
+    // protected Map<Point2D, Piece> myPieces;
+    private List<Patch> myPatches;
+    private List<Piece> myPieces;
 
-	/**
-	 * Default constructor makes 5x5 grid
-	 */
-	public Grid() {
-		this(1, 1);
-	}
+    /**
+     * Default constructor makes 5x5 grid
+     */
+    public Grid () {
+        this(1, 1);
+    }
 
-	/**
-	 * constructor of grid
-	 * 
-	 * @param x
-	 *            number of rows
-	 * @param y
-	 *            number of columns
-	 */
-	public Grid(int row, int column) {
-		myRow = row;
-		myColumn = column;
-		myPatches = new ArrayList<Patch>();
-		myPieces = new ArrayList<Piece>();
-	}
+    /**
+     * constructor of grid
+     * 
+     * @param x
+     *        number of rows
+     * @param y
+     *        number of columns
+     */
+    public Grid (int row, int column) {
+        myRow = row;
+        myColumn = column;
+        myPatches = new ArrayList<Patch>();
+        myPieces = new ArrayList<Piece>();
+    }
 
-	/**
-	 * places a patch on the grid
-	 * 
-	 * @param patch
-	 *            to be put on grid
-	 * @param coord
-	 *            of patch
-	 */
-	public void setPatch(Point2D coord, Patch patch) {
-		myPatches.add(patch);
-	}
+    public Grid (int row, int column, List<Piece> pieces, List<Patch> patches) {
+        myRow = (int) Math.sqrt(pieces.size());
+        myRow = (int) Math.sqrt(pieces.size());
+        myPatches = patches;
+        myPieces = pieces;
+    }
 
-	/**
-	 * gets the patch on the given coordinate
-	 * 
-	 * @param coord
-	 *            of patch
-	 * @return patch
-	 */
-	/*
-	 * public Patch getPatch (Point2D coord) { for (Point2D coordinate :
-	 * myPatches.keySet()) { if (coordinate.equals(coord)) { return
-	 * myPatches.get(coord); } } return null; }
-	 */
+    /**
+     * places a patch on the grid
+     * 
+     * @param patch
+     *        to be put on grid
+     * @param coord
+     *        of patch
+     */
+    public void setPatch (Point2D coord, Patch patch) {
+        myPatches.add(patch);
+    }
 
-	/**
-	 * Set a piece on a specified coordinate
-	 * 
-	 * @param coord
-	 * @param piece
-	 */
-	public void setPiece(Point2D coord, Piece piece) {
-		myPieces.add(piece);
-	}
+    /**
+     * gets the patch on the given coordinate
+     * 
+     * @param coord
+     *        of patch
+     * @return patch
+     */
+    /*
+     * public Patch getPatch (Point2D coord) { for (Point2D coordinate :
+     * myPatches.keySet()) { if (coordinate.equals(coord)) { return
+     * myPatches.get(coord); } } return null; }
+     */
 
-	/**
-	 * removes the piece on the given coordinate
-	 * 
-	 * @param coord
-	 *            of piece
-	 */
-	public void removePiece(Piece p) {
-		myPieces.remove(p);
-	}
+    /**
+     * Set a piece on a specified coordinate
+     * 
+     * @param coord
+     * @param piece
+     */
+    public void setPiece (Point2D coord, Piece piece) {
+        myPieces.add(piece);
+    }
 
-	/**
-	 * removes the patch on the given coordinate
-	 * 
-	 * @param coord
-	 *            of remove
-	 */
-	public void removePatch(Patch p) {
-		myPatches.remove(p);
-	}
+    /**
+     * removes the piece on the given coordinate
+     * 
+     * @param coord
+     *        of piece
+     */
+    public void removePiece (Piece p) {
+        myPieces.remove(p);
+    }
 
-	public int getColumn() {
-		return myColumn;
-	}
+    /**
+     * removes the patch on the given coordinate
+     * 
+     * @param coord
+     *        of remove
+     */
+    public void removePatch (Patch p) {
+        myPatches.remove(p);
+    }
 
-	public int getRow() {
-		return myRow;
-	}
+    public int getColumn () {
+        return myColumn;
+    }
 
-	/**
-	 * Returns a list of all pieces
-	 * 
-	 * @return
-	 */
-	public List<Piece> getAllPieces() {
-		/*
-		 * List<Piece> all = new ArrayList<Piece>(); for (Map.Entry<Point2D,
-		 * Piece> entry : myPieces.entrySet()) { all.add(entry.getValue()); }
-		 */
-		return myPieces;
-	}
+    public int getRow () {
+        return myRow;
+    }
 
-	/**
-	 * Returns a list of all patches
-	 * 
-	 * @return
-	 */
-	public List<Patch> getAllPatches() {
-		/*
-		 * List<Patch> all = new ArrayList<Patch>(); for (Map.Entry<Point2D,
-		 * Patch> entry : myPatches.entrySet()) { all.add(entry.getValue()); }
-		 */
-		return myPatches;
-	}
+    /**
+     * Returns a list of all pieces
+     * 
+     * @return
+     */
+    public List<Piece> getAllPieces () {
+        /*
+         * List<Piece> all = new ArrayList<Piece>(); for (Map.Entry<Point2D,
+         * Piece> entry : myPieces.entrySet()) { all.add(entry.getValue()); }
+         */
+        return myPieces;
+    }
 
-	// TODO temporary fix because it was throwing an error
-	public Piece getPiece(int uniqueID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    /**
+     * Returns a list of all patches
+     * 
+     * @return
+     */
+    public List<Patch> getAllPatches () {
+        /*
+         * List<Patch> all = new ArrayList<Patch>(); for (Map.Entry<Point2D,
+         * Patch> entry : myPatches.entrySet()) { all.add(entry.getValue()); }
+         */
+        return myPatches;
+    }
 
-	/**
-	 * Getter to return the piece at a specific x and y
-	 * 
-	 * @param x
-	 * @param y
-	 * @return
-	 */
-	public Piece getPiece(int x, int y) {
-		for (Piece p : myPieces) {
-			if (p.getLoc().getX() == x && p.getLoc().getY() == y) {
-				return p;
-			}
-		}
-		return null;
-	}
+    // TODO temporary fix because it was throwing an error
+    public Piece getPiece (int uniqueID) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	/**
-	 * gets the piece on the given Point2D
-	 * 
-	 * @param loc
-	 *            of piece
-	 * @return piece
-	 */
+    /**
+     * Getter to return the piece at a specific x and y
+     * 
+     * @param x
+     * @param y
+     * @return
+     */
+    public Piece getPiece (int x, int y) {
+        for (Piece p : myPieces) {
+            if (p.getLoc().getX() == x && p.getLoc().getY() == y) { return p; }
+        }
+        return null;
+    }
 
-	public Piece getPiece(Point2D loc) {
-		return getPiece((int) loc.getX(), (int) loc.getY());
-	}
+    /**
+     * gets the piece on the given Point2D
+     * 
+     * @param loc
+     *        of piece
+     * @return piece
+     */
+
+    public Piece getPiece (Point2D loc) {
+        return getPiece((int) loc.getX(), (int) loc.getY());
+    }
 
 }

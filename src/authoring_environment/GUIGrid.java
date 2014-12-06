@@ -6,6 +6,8 @@ import gamedata.gamecomponents.Piece;
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Authoring, engine, and player may all use this grid!!
@@ -13,7 +15,7 @@ import java.util.List;
  * @author Jennie Ju
  *
  */
-public class GUIGrid extends SuperGrid {
+public class GUIGrid extends SuperGrid implements Observer{
 
 	private List<Piece> myPieceData;
 	private List<Patch> myPatchData;
@@ -48,6 +50,12 @@ public class GUIGrid extends SuperGrid {
 	
 	protected void removePatchType(Patch patchType) {
 		// remove all instances of this type of patch
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
