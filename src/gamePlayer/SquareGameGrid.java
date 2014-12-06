@@ -1,4 +1,4 @@
-package gamePlayer;
+/package gamePlayer;
 
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
