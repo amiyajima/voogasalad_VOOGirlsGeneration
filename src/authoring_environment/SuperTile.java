@@ -25,7 +25,7 @@ public abstract class SuperTile extends Group {
 	protected ImageView myPieceImage;
 	protected ImageView myPatchImage;
 	private Shape myHighlight;
-
+	
 	/**
 	 * 
 	 * @param bgShape Tile shape
