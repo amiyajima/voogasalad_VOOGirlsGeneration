@@ -54,22 +54,6 @@ public abstract class GridComponent {
 	}
 	
 	/**
-	 * Method for creating an ImageView using the location of the
-	 * image on file. This is for GUI display purposes. This method
-	 * is used by the GridComponent constructor methods.
-	 * 
-	 * @param imageLocation : String path to image on file.
-	 */
-	private void setImageView(String imageLocation) {
-    	if(myImageLocation.startsWith("/")){
-        	myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
-        }
-        else{
-        	myImageView = new ImageView(new Image(imageLocation));
-        }
-    }
-	
-	/**
 	 * Getter method for the name of the GridComponent.
 	 * 
 	 * @return myName : String name describing the piece or patch.
@@ -83,7 +67,7 @@ public abstract class GridComponent {
 	 * 
 	 * @param name : String name describing the piece or patch.
 	 */
-	public void setMyName(String name) {
+	public void setName(String name) {
 		this.myName = name;
 	}
 	
@@ -125,6 +109,7 @@ public abstract class GridComponent {
 	 */
 	public void setImageLocation(String imageLocation) {
 		myImageLocation = imageLocation;
+		setImageView(imageLocation);
 	}
 	
 	/**
@@ -135,5 +120,21 @@ public abstract class GridComponent {
 	 */
     public ImageView getImageView() {
         return myImageView;
+    }
+    
+    /**
+	 * Method for creating an ImageView using the location of the
+	 * image on file. This is for GUI display purposes. This method
+	 * is used privately by the GridComponent constructor methods.
+	 * 
+	 * @param imageLocation : String path to image on file.
+	 */
+	private void setImageView(String imageLocation) {
+    	if(myImageLocation.startsWith("/")){
+        	myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+        }
+        else{
+        	myImageView = new ImageView(new Image(imageLocation));
+        }
     }
 }

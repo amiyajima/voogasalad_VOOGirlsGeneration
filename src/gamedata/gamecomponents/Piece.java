@@ -19,7 +19,6 @@ public class Piece extends GridComponent {
     private List<Action> myActions;
     private Movement myMove;
     private Stats myStats;
-    private Point2D myLoc;
     private int myPlayerID;
     private boolean myShouldRemove;
     private Inventory myInventory;
@@ -48,7 +47,6 @@ public class Piece extends GridComponent {
         myMove = movement;
         myActions = actions;
         myStats = stats;
-        myLoc = loc;
         myPlayerID = playerID;
         myShouldRemove = false;
         myInventory = inventory;
@@ -64,7 +62,6 @@ public class Piece extends GridComponent {
         myMove = clone.myMove;
         myActions = new LinkedList<Action>(clone.myActions);
         myStats = new Stats(clone.myStats);
-        myLoc = new Point2D.Double(clone.myLoc.getX(), clone.myLoc.getY());
         myPlayerID = clone.myPlayerID;
         myShouldRemove = false;
         myInventory = null; // TODO: NOPE. NO INVENTORY.
