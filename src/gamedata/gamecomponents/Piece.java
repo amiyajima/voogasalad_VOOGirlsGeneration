@@ -176,6 +176,10 @@ public class Piece {
         }
         return actions;
     }
+    
+    public Movement getMovement(){
+        return myMove;
+    }
 
     /**
      * Marks the myShouldRemove boolean to true

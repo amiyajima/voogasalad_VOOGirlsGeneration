@@ -11,6 +11,7 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
+import gameengine.movement.Movement;
 import java.awt.geom.Point2D;
 
 
@@ -25,8 +26,6 @@ public abstract class Player {
 
     private int myNumMovesPlayed;
     private int myID;
-    private List<Piece> myPieces;
-    private boolean myCanMove;
 
     /**
      * Default constructor
@@ -45,7 +44,6 @@ public abstract class Player {
     public Player (int id) {
         myNumMovesPlayed = 0;
         myID = id;
-        myPieces = new ArrayList<Piece>();
         myCanMove = true;
     }
 
@@ -60,10 +58,6 @@ public abstract class Player {
     private List<Piece> populatePieces (Grid g) {
         // Set allPieces = g.get
         return null;
-    }
-
-    public List<Piece> getPieces () {
-        return Collections.unmodifiableList(myPieces);
     }
 
     public abstract void startTurn ();
@@ -91,15 +85,6 @@ public abstract class Player {
      */
     public int getNumMovesPlayed () {
         return myNumMovesPlayed;
-    }
-
-    /**
-     * Checks if pieces have moves available. Essential for NoAvailableMoveCondition
-     */
-    private void checkMovesAvailable () {
-        for (Piece p : myPieces) {
-            p.
-        }
     }
 
     /**
