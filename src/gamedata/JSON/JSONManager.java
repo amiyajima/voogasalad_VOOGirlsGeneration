@@ -9,8 +9,11 @@ import gamedata.gamecomponents.Piece;
 import gamedata.goals.Goal;
 import gamedata.rules.Rule;
 import gamedata.wrappers.GameData;
+import gamedata.wrappers.GoalData;
 import gamedata.wrappers.GridData;
 import gamedata.wrappers.LevelDataIndividual;
+import gamedata.wrappers.PatchData;
+import gamedata.wrappers.PieceData;
 import gamedata.wrappers.PlayerDataIndividual;
 import gameengine.player.Player;
 import java.io.BufferedReader;
@@ -72,19 +75,19 @@ public class JSONManager {
      * @param JSON file location
      * @throws FileNotFoundException
      */
-    public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
+    public GoalData readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
-        GameData myGameData = myGson.fromJson(br, GameData.class);
+        GoalData myGameData = myGson.fromJson(br, GoalData.class);
         System.out.println(myGameData.toString());
 
         // JSONParseTester jpt = new JSONParseTester();
         // jpt.testRead(myGson, br);
 
-        Game myGame = convertToGame(myGameData);
+        // Game myGame = convertToGame(myGameData);
 
-        return myGame;
+        return myGameData;
     }
 
     /**
@@ -104,8 +107,13 @@ public class JSONManager {
             GridData gridData = l.getGrid();
             
             List<Patch> patches = new ArrayList<Patch>();
-            
+            for(PatchData pd : gridData.getPatches()){
+                
+            }
             List<Piece> pieces = new ArrayList<Piece>();
+            for(PieceData pd : gridData.getPieces()){
+                
+            }
             
             Grid grid = new Grid(gridData.getRow(), gridData.getColumn(), pieces, patches);
             
