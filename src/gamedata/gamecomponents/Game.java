@@ -3,6 +3,7 @@ package gamedata.gamecomponents;
 import gameengine.player.Player;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -44,7 +45,7 @@ public class Game {
     public Game (int numPlayers, List<Level> levels) {
         this(numPlayers, levels, null);
     }
-
+    
     public Game (int numPlayers, List<Level> levels, Level currentLevel) {
         myGameWon = false;
         myNumPlayers = numPlayers;
@@ -76,6 +77,22 @@ public class Game {
         if (myLevels.indexOf(myCurrentLevel) == myLevels.size() - 1) { return true; }
         return false;
     }
+    
+    /**
+     * Jumps to the level specified by looking it up using the ID
+     * @param levelToJumpTo
+     */
+    public void jumpToLevel(String levelToJumpTo) {
+         for (Level level : myLevels) {
+            if (level.getID().equals(levelToJumpTo)) {
+                myCurrentLevel = level;
+                if (level.isWinningLevel()) {
+                    myGameWon = true;
+                }
+                break;
+            }
+        }
+    }
 
     /**
      * Iterates to the next player to start that players turn. If the last
@@ -102,7 +119,7 @@ public class Game {
      * Restarts the Level Note: This doesn't actually work. Need deep cloning
      */
     private void restartLevel () {
-        myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel));
+        //myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel));
     }
 
     public String toString () {
@@ -117,7 +134,7 @@ public class Game {
     public Level getCurrentLevel () {
         return myCurrentLevel;
     }
-
+    
     /**
      * Getter for the Current Player
      * 

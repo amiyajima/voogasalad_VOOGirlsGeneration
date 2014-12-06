@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import gamedata.events.Event;
 import gamedata.goals.*;
 import gamedata.rules.*;
 
@@ -13,43 +14,28 @@ import gamedata.rules.*;
  *
  */
 public class Level extends Observable {
+    private static final String DEFAULT_ID = "Default";
 
 	private Grid myGrid;
 	/**
 	 * Goals defining how to win the level
-	 */
-	private List<Goal> myGoals;
-	/**
-	 * Rules defining how the players turn ends
-	 */
-	private List<Rule> myRules;
+	 */	
+	private List<Event> myEvents;
+	private String myID;
+	private boolean winningLevel;
 
+	/**
+	 * Constructs a default level with a default ID and sets it as NOT the winning level
+	 */
 	public Level() {
-		this(new SquareGrid(), new ArrayList<Goal>(), new ArrayList<Rule>());
+		this(new Grid(), new ArrayList<Event>(), DEFAULT_ID, false);
 	}
 
-	public Level(Grid gr, List<Goal> goals, List<Rule> rules) {
+	public Level(Grid gr, List<Event> events, String id, boolean isWinningLevel) {
 		myGrid = gr;
-		myGoals = goals;
-		myRules = rules;
-	}
-
-	/**
-	 * Check if the level has been won after every move the player makes Returns
-	 * true if the level has been won, false if it has not.
-	 * 
-	 * @return
-	 */
-	public boolean levelCompleted() {
-		setChanged();
-		notifyObservers();
-		for (Goal g : myGoals) {
-			if (g.checkGameState(this) == 1) {
-				System.out.println("Level Complete");
-				return true;
-			}
-		}
-		return false;
+		myEvents = events;
+		myID = id;
+		winningLevel = isWinningLevel;
 	}
 
 	/**
@@ -59,11 +45,14 @@ public class Level extends Observable {
 	 * @return
 	 */
 	public boolean checkTurnEnd(int numTurnsPlayed) {
-		for (Rule r : myRules) {
+		for (Event e : myEvents) {
+		    /*
 			if (r.conditionsMet(numTurnsPlayed)) {
 				System.out.println("Player Turn Complete");
 				return true;
 			}
+			*/
+		    // TODO needs to be rewritten since we now have a EndTurnGlobalAction
 		}
 		return false;
 	}
@@ -81,9 +70,7 @@ public class Level extends Observable {
 	 * toString method used to test JSON read/write
 	 */
 	public String toString() {
-		// return "Level's tostring method called";
-		return "grid:" + myGrid.toString() + " myGoals" + myGoals.toString()
-				+ " myRules" + myRules.toString();
+		return "grid:" + myGrid.toString() + " myEvents" + myEvents.toString();
 	}
 
 	public void addObserverTo(Observer o) {
@@ -120,6 +107,14 @@ public class Level extends Observable {
 		for (Piece p : toRemove) {
 			myGrid.removePiece(p);
 		}
+	}
+	
+	public String getID() {
+	    return myID;
+	}
+	
+	public boolean isWinningLevel() {
+	    return winningLevel;
 	}
 
 }
