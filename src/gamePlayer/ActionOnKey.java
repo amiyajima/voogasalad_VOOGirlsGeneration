@@ -5,6 +5,7 @@ import java.util.Map;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+// probably not going to use this class
 // TODO: refactor keyboard controller
 // needs to specify what piece to perform the action on.!
 

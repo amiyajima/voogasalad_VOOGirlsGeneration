@@ -317,7 +317,8 @@ public class ViewController {
 		getGrid().setOnMouseExited(event -> {
 			changeCursor(CURSOR_GLOVE_TEST);
 		});
-
+		
+	        myGameGridEffect = new GameGridEffect(this);
 		keyControlOn = false;
 	}
 
@@ -613,6 +614,7 @@ public class ViewController {
 	 * 
 	 * @return
 	 */
+
 	protected ScrollPane getGrid() {
 		return myGridPane;
 	}
@@ -663,5 +665,13 @@ public class ViewController {
 	 */
 	public void setGridState(IGridState state) {
 		gridState = state;
+	}
+	
+	/**
+	 * returns the GameGridEffect
+	 * @return
+	 */
+	protected GameGridEffect getGameGridEffect(){
+	    return myGameGridEffect;
 	}
 }
