@@ -489,11 +489,11 @@ public class ViewController {
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(findPosition(x - 45, y - 20)));
 		// myGrid.clearEffect();
-		myGameGridEffect.clearAllEffects(myGrid);
+		//myGameGridEffect.clearAllEffects(myGrid);
 
 		// highlightCurrent(findPosition(x - 45, y - 20), Color.BLUE);
-		myGameGridEffect.highlightCurrent(findPosition(x - 45, y - 20),
-				Color.BLUE);
+		//myGameGridEffect.highlightCurrent(findPosition(x - 45, y - 20),
+		//		Color.BLUE);
 
 		// addDropShadow(myGrid.get(((int)findPosition(x,y).getX()),
 		// ((int)findPosition(x,y).getY())), Color.PURPLE);
