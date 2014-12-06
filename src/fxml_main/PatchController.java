@@ -1,9 +1,7 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Patch;
-
 import java.util.function.Consumer;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -12,16 +10,20 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import authoring.data.PatchData;
 import authoring.data.PatchTypeData;
 import authoring_environment.GUIGrid;
 
 public class PatchController extends GridComponentAbstCtrl<Patch> {
 
 	private PatchTypeData myPatchTypes;
-
+	private PatchData myPatches;
+	
 	public PatchController (VBox vbox, ScrollPane propertiesSPane, GUIGrid currGrid) {
 		super(vbox, propertiesSPane, currGrid);
+		//TODO: myPatchTypes needs to be changed..data..
 		myPatchTypes = new PatchTypeData();
+		myPatches = currGrid.getPatches();
 	}
 
 	@Override
@@ -92,8 +94,8 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 			@Override
 			public void handle (ActionEvent event) {
 				myPatchTypes.remove(entry);
-				HBox entryBox = myEntryMap.get(entry);
-				myVBox.getChildren().remove(entryBox);
+				myPatches.update(myPatches, entry);
+				myVBox.getChildren().remove(myEntryMap.get(entry));
 			}
 		});
 	}

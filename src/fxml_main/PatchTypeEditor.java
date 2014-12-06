@@ -183,6 +183,7 @@ public class PatchTypeEditor extends Pane {
 		 goButton.setOnAction(new EventHandler<ActionEvent>() {
 			 @Override
 			 public void handle (ActionEvent click) {
+			         //TODO: the user can't create patches with same id
 				 myID = terrainID.getText();
 				 myName = terrainName.getText();
 				 myPatch = new Patch(myID, myName, myImageLocation, DEFAULT_LOC);
