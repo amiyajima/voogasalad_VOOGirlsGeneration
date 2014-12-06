@@ -69,8 +69,8 @@ public class ViewController {
 
 	// public static final String AUDIO_TEST = "/src/gamePlayer/audioTest.mp3";
 	private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
-	public static final String CURSOR_ATTACK_TEST = "/gamePlayer/Cursor_attack.png";
-	public static final String CURSOR_GLOVE_TEST = "/gamePlayer/pointer-glove.png";
+	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
+	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
 
 	private ResourceBundle myLanguages;
 	private Stage myStage;
