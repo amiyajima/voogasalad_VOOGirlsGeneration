@@ -18,12 +18,20 @@ import java.util.List;
  *
  */
 public class Event {
-    List<Condition> myConditions;
-    List<GlobalAction> myGlobalActions;
+    private String myName;
+    private List<Condition> myConditions;
+    private List<GlobalAction> myGlobalActions;
 
     public Event (List<Condition> conditions, List<GlobalAction> actions) {
         myConditions = conditions;
         myGlobalActions = actions;
+        myName = "Event";
+    }
+    
+    public Event (List<Condition> conditions, List<GlobalAction> actions, String name) {
+        myConditions = conditions;
+        myGlobalActions = actions;
+        myName = name;
     }
 
     /**
@@ -47,6 +55,18 @@ public class Event {
                 a.doBehavior();
             }
         }
-
+    }
+    
+    @Override
+    public String toString(){
+    	return myName;
+    }
+    
+    public List<Condition> getConditions(){
+    	return myConditions;
+    }
+    
+    public List<GlobalAction> getGlobalActions(){
+    	return myGlobalActions;
     }
 }

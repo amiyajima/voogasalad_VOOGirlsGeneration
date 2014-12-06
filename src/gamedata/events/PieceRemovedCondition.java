@@ -11,12 +11,13 @@ import java.util.List;
  *
  *         TODO: guarantee that previously removed pieces are no longer in the list
  */
-public class PieceRemovedCondition implements Condition {
+public class PieceRemovedCondition extends Condition {
     public static final String description = "IF Piece with specified name";
     private List<Piece> myPieces;
 
-    PieceRemovedCondition (List<Piece> pieces) {
-        myPieces = pieces;
+    public PieceRemovedCondition (List<Piece> pieces) {
+        super(description);
+    	myPieces = pieces;
     }
 
     @Override

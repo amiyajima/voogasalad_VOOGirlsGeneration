@@ -9,10 +9,20 @@ package gamedata.events;
  * @author Mike Zhu
  *
  */
-public interface Condition {
+public abstract class Condition {
 
+	protected final String myDescription;
+	
+	/**
+	 * Protected constructor used to set the description
+	 * @param s
+	 */
+	protected Condition(String s){
+		myDescription = s;
+	}
+	
     /**
-     * Constructor should take in whatever targets the Condition is observing, as an
+     * Subclass onstructor should take in whatever targets the Condition is observing, as an
      * unmodifiable data structure.
      */
 
@@ -22,5 +32,10 @@ public interface Condition {
      * @return
      */
 
-    public abstract boolean evaluate ();
+    public abstract boolean evaluate();
+    
+    @Override
+    public String toString(){
+    	return myDescription;
+    }
 }

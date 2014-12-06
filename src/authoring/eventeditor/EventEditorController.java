@@ -2,8 +2,15 @@
 
 package authoring.eventeditor;
 
+import gamedata.events.Condition;
+import gamedata.events.Event;
+import gamedata.events.GlobalAction;
+import gamedata.events.IfStatEqualsCondition;
+
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -24,12 +31,12 @@ public class EventEditorController implements Initializable {
 
 	//Lists
 	@FXML
-	private ListView<String> eventsListView;
+	private ListView<Event> eventsListView;
 	@FXML
-	private ListView<String> conditionsListView;
+	private ListView<Condition> conditionsListView;
 	@FXML
-	private ListView<String> actionsListView;
-	
+	private ListView<GlobalAction> actionsListView;
+
 	//Buttons
 	@FXML
 	private Button newEvent;
@@ -43,63 +50,53 @@ public class EventEditorController implements Initializable {
 	private Button delAction;
 	@FXML
 	private Button newAction;
-	
-	//The model
-	private EventEditorMain myMain;
-		
+
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-		
-		eventsListView.getItems().addAll("Event 1", "Event 2");
-		
+
+		//Testing
+		eventsListView.getItems().addAll(new Event(new ArrayList<>(), new ArrayList<>(), "Testing"));
+
 		//Makes it so that the right-hand Editor updates with respect to the selected
 		//Event on the left side
 		eventsListView.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, selectedEvent) -> showEventInEditor(selectedEvent));
 	}
-	
-	public void setMain(EventEditorMain main){
-		myMain = main;
-	}
-	
-	//TODO: This should take in an Event object, and pull the Conditions and Actions from it
+
 	@FXML
-	private void showEventInEditor(String s){
-		
-		ObservableList<String> conditions = FXCollections.observableArrayList();
-		ObservableList<String> actions = FXCollections.observableArrayList();
-		
+	private void showEventInEditor(Event event){
+		ObservableList<Condition> conditions = FXCollections.observableArrayList();
+		ObservableList<GlobalAction> actions = FXCollections.observableArrayList();
+
+		conditions.addAll(event.getConditions());
+		actions.addAll(event.getGlobalActions());
+
 		conditionsListView.setItems(conditions);
 		actionsListView.setItems(actions);
 	}
-	
+
 	@FXML
 	private void handleNewCondition() throws IOException{
 		showNewConditionWindow();
 	}
-	
+
 	@FXML
 	private void handleDelCondition(){
-	    int delIdx = conditionsListView.getSelectionModel().getSelectedIndex();
-	    conditionsListView.getItems().remove(delIdx);
+		int delIdx = conditionsListView.getSelectionModel().getSelectedIndex();
+		conditionsListView.getItems().remove(delIdx);
 	}
-	
+
 	@FXML
 	private void handleNewAction() throws IOException{
 		showNewActionWindow();
 	}
-	
+
 	@FXML
 	private void handleDelAction(){
 		int delIdx = actionsListView.getSelectionModel().getSelectedIndex();
-	    actionsListView.getItems().remove(delIdx);
+		actionsListView.getItems().remove(delIdx);
 	}
-	
-	@FXML
-	private void handleClose(){
-		
-	}
-	
+
 	private void showNewConditionWindow() throws IOException{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/authoring/eventeditor/NewCondition.fxml"));
@@ -117,7 +114,7 @@ public class EventEditorController implements Initializable {
 
 		newConditionStage.showAndWait();
 	}
-	
+
 	private void showNewActionWindow() throws IOException{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/authoring/eventeditor/NewAction.fxml"));

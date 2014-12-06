@@ -9,7 +9,7 @@ import gamedata.gamecomponents.Piece;
  * @author annamiyajima
  *
  */
-public class PieceOnPatchCondition implements Condition {
+public class PieceOnPatchCondition extends Condition {
     public static final String description = "IF Piece Is On Particular Patch";
     private Piece myPiece;
     private Patch myPatch;
@@ -23,6 +23,7 @@ public class PieceOnPatchCondition implements Condition {
      *        Target Patch
      */
     public PieceOnPatchCondition (Piece pie, Patch pat) {
+    	super(description);
         myPiece = pie;
         myPatch = pat;
     }
