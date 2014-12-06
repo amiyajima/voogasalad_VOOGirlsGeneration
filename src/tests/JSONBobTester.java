@@ -1,6 +1,6 @@
 package tests;
 
-import gamedata.action.Action;
+import gamedata.action.Action; 
 import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
 import gamedata.action.ReceiverToInventoryConclusion;
