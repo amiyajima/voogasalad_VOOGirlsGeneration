@@ -3,6 +3,7 @@ package gamePlayer;
 import gamedata.JSON.JSONManager;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
+import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
 
 import java.awt.geom.Point2D;
@@ -303,7 +304,8 @@ public class ViewController {
 		//myGrid = new SquareGameGrid(myModel.getCurrentLevel().getGrid()
 		//		.getRow(), myModel.getCurrentLevel().getGrid().getColumn());
 
-		myGrid = new GUIGrid();
+		Level currentLevel = myModel.getCurrentLevel();
+		//myGrid = new GUIGrid(currentLevel.getGrid().getColumn(),currentLevel.getGrid().getRow(),);
 		
 		myGameSpace.setCenter(myGrid);
 		myGrid.setAlignment(Pos.CENTER);
