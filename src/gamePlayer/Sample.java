@@ -1,5 +1,12 @@
 package gamePlayer;
 
+/******************************************************************************\
+* Copyright (C) 2012-2013 Leap Motion, Inc. All rights reserved.               *
+* Leap Motion proprietary and confidential. Not for distribution.              *
+* Use subject to the terms of the Leap Motion SDK Agreement available at       *
+* https://developer.leapmotion.com/sdk_agreement, or another agreement         *
+* between Leap Motion and you, your company or other organization.             *
+\******************************************************************************/
 
 import java.io.IOException;
 import java.lang.Math;
@@ -31,20 +38,62 @@ class SampleListener extends Listener {
     public void onFrame(Controller controller) {
         // Get the most recent frame and report some basic information
         Frame frame = controller.frame();
-        System.out.println("Frame id: " + frame.id()
-                         + ", timestamp: " + frame.timestamp()
-                         + ", hands: " + frame.hands().count()
-                         + ", fingers: " + frame.fingers().count()
-                         + ", tools: " + frame.tools().count()
-                         + ", gestures " + frame.gestures().count());
+//        System.out.println("Frame id: " + frame.id()
+//                         + ", timestamp: " + frame.timestamp()
+//                         + ", hands: " + frame.hands().count()
+//                         + ", fingers: " + frame.fingers().count()
+//                         + ", tools: " + frame.tools().count()
+//                         + ", gestures " + frame.gestures().count());
 
+        //Get hands
+//        for(Hand hand : frame.hands()) {
+//            String handType = hand.isLeft() ? "Left hand" : "Right hand";
+//            System.out.println("  " + handType + ", id: " + hand.id()
+//                             + ", palm position: " + hand.palmPosition());
+//
+//            // Get the hand's normal vector and direction
+//            Vector normal = hand.palmNormal();
+//            Vector direction = hand.direction();
+//
+//            // Calculate the hand's pitch, roll, and yaw angles
+//            System.out.println("  pitch: " + Math.toDegrees(direction.pitch()) + " degrees, "
+//                             + "roll: " + Math.toDegrees(normal.roll()) + " degrees, "
+//                             + "yaw: " + Math.toDegrees(direction.yaw()) + " degrees");
+//
+//            // Get arm bone
+//            Arm arm = hand.arm();
+//            System.out.println("  Arm direction: " + arm.direction()
+//                             + ", wrist position: " + arm.wristPosition()
+//                             + ", elbow position: " + arm.elbowPosition());
 
+            // Get fingers
+//            for (Finger finger : hand.fingers()) {
+//                System.out.println("    " + finger.type() + ", id: " + finger.id()
+//                                 + ", length: " + finger.length()
+//                                 + "mm, width: " + finger.width() + "mm");
+//
+//                //Get Bones
+//                for(Bone.Type boneType : Bone.Type.values()) {
+//                    Bone bone = finger.bone(boneType);
+//                    System.out.println("      " + bone.type()
+//                                     + " bone, start: " + bone.prevJoint()
+//                                     + ", end: " + bone.nextJoint()
+//                                     + ", direction: " + bone.direction());
+//                }
+//            }
+       // }
 
-        
+        // Get tools
+//        for(Tool tool : frame.tools()) {
+//            System.out.println("  Tool id: " + tool.id()
+//                             + ", position: " + tool.tipPosition()
+//                             + ", direction: " + tool.direction());
+//        }
 
         GestureList gestures = frame.gestures();
         for (int i = 0; i < gestures.count(); i++) {
             Gesture gesture = gestures.get(i);
+           
 
             switch (gesture.type()) {
                 case TYPE_CIRCLE:
@@ -73,14 +122,14 @@ class SampleListener extends Listener {
                                + ", angle: " + Math.toDegrees(sweptAngle)
                                + ", " + clockwiseness);
                     break;
-                case TYPE_SWIPE:
-                    SwipeGesture swipe = new SwipeGesture(gesture);
-                    System.out.println("  Swipe id: " + swipe.id()
-                               + ", " + swipe.state()
-                               + ", position: " + swipe.position()
-                               + ", direction: " + swipe.direction()
-                               + ", speed: " + swipe.speed());
-                    break;
+//                case TYPE_SWIPE:
+//                    SwipeGesture swipe = new SwipeGesture(gesture);
+//                    System.out.println("  Swipe id: " + swipe.id()
+//                               + ", " + swipe.state()
+//                               + ", position: " + swipe.position()
+//                               + ", direction: " + swipe.direction()
+//                               + ", speed: " + swipe.speed());
+//                    break;
                 case TYPE_SCREEN_TAP:
                     ScreenTapGesture screenTap = new ScreenTapGesture(gesture);
                     System.out.println("  Screen Tap id: " + screenTap.id()
@@ -88,21 +137,21 @@ class SampleListener extends Listener {
                                + ", position: " + screenTap.position()
                                + ", direction: " + screenTap.direction());
                     break;
-                case TYPE_KEY_TAP:
-                    KeyTapGesture keyTap = new KeyTapGesture(gesture);
-                    System.out.println("  Key Tap id: " + keyTap.id()
-                               + ", " + keyTap.state()
-                               + ", position: " + keyTap.position()
-                               + ", direction: " + keyTap.direction());
-                    break;
-                default:
-                    System.out.println("Unknown gesture type.");
-                    break;
+//                case TYPE_KEY_TAP:
+//                    KeyTapGesture keyTap = new KeyTapGesture(gesture);
+//                    System.out.println("  Key Tap id: " + keyTap.id()
+//                               + ", " + keyTap.state()
+//                               + ", position: " + keyTap.position()
+//                               + ", direction: " + keyTap.direction());
+//                    break;
+//                default:
+//                    System.out.println("Unknown gesture type.");
+//                    break;
             }
         }
 
         if (!frame.hands().isEmpty() || !gestures.isEmpty()) {
-            System.out.println();
+          //  System.out.println();
         }
     }
 }
@@ -123,7 +172,6 @@ class Sample {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
 
         // Remove the sample listener when done
         controller.removeListener(listener);

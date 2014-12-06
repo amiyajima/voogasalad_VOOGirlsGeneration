@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+
+import authoring_environment.GUIGrid;
+import gamedata.events.Event;
 import gamedata.goals.*;
 import gamedata.rules.*;
-
 
 /**
  * Rules define how a player's turn ends Goals define whether or not the level
@@ -14,111 +16,112 @@ import gamedata.rules.*;
  *
  */
 public class Level extends Observable {
+	private static final String DEFAULT_ID = "Default";
 
-    private Grid myGrid;
-    /**
-     * Goals defining how to win the level
-     */
-    private List<Goal> myGoals;
-    /**
-     * Rules defining how the players turn ends
-     */
-    private List<Rule> myRules;
+	private GUIGrid myGrid;
+	/**
+	 * Goals defining how to win the level
+	 */
+	private List<Event> myEvents;
+	private String myID;
+	private boolean winningLevel;
 
-    public Level () {
-        this(new SquareGrid(), new ArrayList<Goal>(), new ArrayList<Rule>());
-    }
+	/**
+	 * Constructs a default level with a default ID and sets it as NOT the
+	 * winning level
+	 */
+	public Level() {
+		this(new GUIGrid(), new ArrayList<Event>(), DEFAULT_ID, false);
+	}
 
-    public Level (Grid gr, List<Goal> goals, List<Rule> rules) {
-        myGrid = gr;
-        myGoals = goals;
-        myRules = rules;
-    }
+	public Level(GUIGrid gr, List<Event> events, String id,
+			boolean isWinningLevel) {
+		myGrid = gr;
+		myEvents = events;
+		myID = id;
+		winningLevel = isWinningLevel;
+	}
 
-    /**
-     * Check if the level has been won after every move the player makes Returns
-     * true if the level has been won, false if it has not.
-     * 
-     * @return
-     */
-    public boolean levelCompleted () {
-        setChanged();
-        notifyObservers();
-        for (Goal g : myGoals) {
-            if (g.checkGameState(this) == 1) {
-                System.out.println("Level Complete");
-                return true;
-            }
-        }
-        return false;
-    }
+	/**
+	 * Check rules to see if a player's turn is over. Returns true if the turn
+	 * is over, false if the turn continues.
+	 * 
+	 * @return
+	 */
+	public boolean checkTurnEnd(int numTurnsPlayed) {
+		for (Event e : myEvents) {
+			/*
+			 * if (r.conditionsMet(numTurnsPlayed)) {
+			 * System.out.println("Player Turn Complete"); return true; }
+			 */
+			// TODO needs to be rewritten since we now have a
+			// EndTurnGlobalAction
+		}
+		return false;
+	}
 
-    /**
-     * Check rules to see if a player's turn is over. Returns true if the turn
-     * is over, false if the turn continues.
-     * 
-     * @return
-     */
-    public boolean checkTurnEnd (int numTurnsPlayed) {
-        for (Rule r : myRules) {
-            if (r.conditionsMet(numTurnsPlayed)) {
-                System.out.println("Player Turn Complete");
-                return true;
-            }
-        }
-        return false;
-    }
+	/**
+	 * Returns the grid contained in this level.
+	 * 
+	 * @return
+	 */
+	public GUIGrid getGrid() {
+		return myGrid;
+	}
 
-    /**
-     * Returns the grid contained in this level.
-     * 
-     * @return
-     */
-    public Grid getGrid () {
-        return myGrid;
-    }
+	/**
+	 * toString method used to test JSON read/write
+	 */
+	public String toString() {
+		return "grid:" + myGrid.toString() + " myEvents" + myEvents.toString();
+	}
 
-    /**
-     * toString method used to test JSON read/write
-     */
-    public String toString () {
-        // return "Level's tostring method called";
-        return "grid:" + myGrid.toString() + " myGoals" + myGoals.toString()
-               + " myRules" + myRules.toString();
-    }
+	public void addObserverTo(Observer o) {
+		addObserver(o);
+	}
 
-    public void addObserverTo (Observer o) {
-        addObserver(o);
-    }
+	/**
+	 * Removes all pieces marked for removal
+	 */
+	public void garbageCollectPieces() {
+		List<Piece> pieces = myGrid.getPieces();
+		List<Piece> toRemove = new ArrayList<Piece>();
+		for (Piece p : pieces) {
+			/*
+			 * For Testing Purposes Only. if (p.getStats().getValue("health") <=
+			 * 0) { toRemove.add(p); }
+			 */
 
-    /**
-     * Removes all pieces marked for removal
-     */
-    public void garbageCollectPieces () {
-        List<Piece> pieces = myGrid.getAllPieces();
-        List<Piece> toRemove = new ArrayList<Piece>();
-        for (Piece p : pieces) {
-            // For Testing Purposes Only.
-            if (p.getStats().getValue("health") <= 0) {
-                toRemove.add(p);
-            }
+			Inventory i = p.getInventory();
+			List<Piece> list = i.getAllInventory();
+			// Removes Items
+			for (Piece p2 : list) {
+				if (p2.shouldRemove()) {
+					i.removeItem(p2);
+				}
+			}
+			// Removes Pieces (Tagging)
+			if (p.shouldRemove()) {
+				toRemove.add(p);
+			}
 
-            /*
-             * Inventory i = p.getInventory();
-             * List<Piece> list = i.getAllInventory();
-             * for(Piece p2:list){
-             * if(p2.shouldRemove()){
-             * i.removeItem(p2);
-             * }
-             * }
-             * if(p.shouldRemove()){
-             * myGrid.removePiece(p);
-             * }
-             */
-        }
-        for (Piece p : toRemove) {
-            myGrid.removePiece(p);
-        }
-    }
+		}
+		// GarbageCollection to Remove Pieces
+		for (Piece p : toRemove) {
+			myGrid.removePiece(p);
+		}
+	}
+
+	public void restart() {
+		// TODO restarts level
+	}
+
+	public String getID() {
+		return myID;
+	}
+
+	public boolean isWinningLevel() {
+		return winningLevel;
+	}
 
 }

@@ -81,7 +81,7 @@ public abstract class ShapeGrid extends Pane {
 	}
 	
 	protected void addTerrain(SandyTile tile, Patch terrain){
-		myPatchData.removePatch(tile.getLocation());
+		myPatchData.removePatchAtLoc(tile.getLocation());
 		terrain.setLoc(tile.getLocation());
 		tile.myPatchImage.setImage(terrain.getImageView().getImage());
 		tile.myPatchImage.setVisible(true);

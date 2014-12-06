@@ -1,97 +1,102 @@
 package gamePlayer;
 
-import java.awt.geom.Point2D;
-import javafx.scene.Node;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
-import javafx.scene.effect.DropShadow;
+import java.awt.geom.Point2D;
+import authoring_environment.GUIGrid;
+import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+
 public class GameGridEffect {
-    GameGrid myGrid;
-    Piece activePiece;
-    Action activeAction;
+    ViewController myViewController;
+    Highlighter myHighlighter;
+    GUIGrid myGrid;
+    Piece myActivePiece;
+    Action myActiveAction;
+     
+    public GameGridEffect(ViewController vc){
+        myHighlighter = new Highlighter();
+        myViewController = vc;
+        myGrid = myViewController.getGrid();
+        myActivePiece = myViewController.getActivePiece();
+        myActiveAction = myViewController.getActiveAction();
+     }
     
+    /**
+     * Return the highlighter used for the grid
+     * @return
+     */
+    public Highlighter getHighlighter(){
+        return myHighlighter;
+    }
     
     /**
      * Highlight the tiles that represent the possible range of the action
      * selected
      */
-    // @FXML
-    protected void highLightActionRange () {
+    @FXML
+    public void highlightActionRange () {
 
-        myGrid.clearEffect();
-        if (activePiece != null && activeAction != null) {
+        clearAllEffects(myGrid);
+        if (myActivePiece != null && myActiveAction != null) {
 
-            activeAction.getActionRange(activePiece.getLoc()).forEach(point -> {
-                     if (point.getX() < myGrid.getRow() && point.getY() < myGrid.getCol()
-                             && point.getX() > 0 && point.getY() > 0) {
-                         Node n = myGrid.get((int) point.getX(), (int) point.getY());
-                         addDropShadow(n, Color.YELLOW);
-                     }
-                 });
+            myActiveAction.getActionRange(myActivePiece.getLoc())
+                    .forEach(point -> {
+                                 if (point.getX() < myGrid.getRow()       //assuming this method exists
+                                     && point.getY() < myGrid.getCol()    //assuming this method exists
+                                     && point.getX() > 0 && point.getY() > 0) {
+                                     Node n = myGrid.get((int) point.getX(), (int) point.getY()); //assuming this method exists
+//                                      myHighlighter.addDropShadow(n, Color.YELLOW);     
+                                     myHighlighter.highlight(myGrid, point, Color.YELLOW);
+                                 }
+                             });
         }
     }
- 
-    private void addDropShadow (Node n, Color c) {
-    if (n != null) {
-       DropShadow ds = new DropShadow();
-       ds.setRadius(30.0);
-       ds.setOffsetX(0.0);
-       ds.setOffsetY(0.0);
-       ds.setColor(c);
-       n.setEffect(ds);
-    }
-    }
-    
-      /**
-      * Highlight the effect range of an action if to be applied at a given
-      * position
-      * 
-      * @param n
-      * @param red
-      */
-     protected void highLightEffectRange (MouseEvent me, Color c) {
-    
-         if (activePiece != null && activeAction != null) {
-             activeAction
-                     .getActionRange(activePiece.getLoc())
-                     .forEach(point -> {
-                         Point2D temp = findPosition(me.getSceneX(), me.getSceneY());
-                         if (temp.equals(point)) {
-                             activeAction
-                                     .getEffectRange()
-                                     .forEach(point2 -> {
-                                         Node n =
-                                                 myGrid.get((int) (temp.getX() + point2
-                                                         .getX()),
-                                                            (int) (temp.getY() + point2
-                                                                    .getY()));
-    
-                                         addDropShadow(n, c);
-                                     });
-    
-                         }
-                     });
-    
-         }
-     }
-     
-       public void highlightCurrent (Point2D loc, Color c) {
-           addDropShadow(myGrid.get((int) loc.getX(), (int) loc.getY()), c);
-       }
-    
-       public void unhighlight (Point2D loc) {
-           Node n = myGrid.get((int) loc.getX(), (int) loc.getY());
-           if (n != null) {
-               n.setEffect(null);
-           }
-       }
 
-       
-       
-       
-       
-       
+    /**
+     * Highlight the effect range of an action if to be applied at a given
+     * position Highlight the effect range of an action if to be applied at a
+     * given position
+     * 
+     * @param n
+     * @param red
+     */
+    public void highlightEffectRange (MouseEvent me, Color c, Point2D loc) {
+        
+        if (myActivePiece != null && myActiveAction != null) {
+            myActiveAction.getActionRange(myActivePiece.getLoc()).forEach(point -> {
+                
+//                Point2D loc = myViewController.findPosition(me.getSceneX(),me.getSceneY());
+
+                if (loc.equals(point)) {
+                    myActiveAction.getEffectRange().forEach(point2 -> {
+//                        Node n =grid.get((int) (loc.getX() + point2.getX()),   //assuming this method exists
+//                                           (int) (loc.getY() + point2.getY()));
+//                         myHighlighter.addDropShadow(n, c);
+                        myHighlighter.highlight(myGrid, loc, c);
+                        });
+                    }
+                });
+            }
+        }
+    
+    /**
+     * Highlight the current location on the grid
+     */
+    public void highlightCurrent(Point2D loc, Color c){
+        myHighlighter.highlight(myGrid, loc, c);
+    }
+    
+    /**
+     * Clear all effects in grid
+     * @param grid
+     */
+    public void clearAllEffects(GUIGrid grid){
+        grid.getChildren().forEach(node->node.setEffect(null));
+    }
+    
+    
 }

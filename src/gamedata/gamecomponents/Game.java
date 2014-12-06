@@ -3,6 +3,7 @@ package gamedata.gamecomponents;
 import gameengine.player.Player;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A game that contains a list of players and the levels that players can play
@@ -23,32 +24,40 @@ public class Game {
 	private Level myCurrentLevel;
 	private Player myCurrentPlayer;
 	private boolean myGameWon;
+	private int myNumPlayers;
 
 	/**
 	 * Default Constructor
 	 */
 	public Game() {
-		this(null, null);
+		this(1, null);
 	}
 
 	/**
 	 * Instantiate a new Game given a list of players and levels that exist.
 	 * 
-	 * @param myLevels
+	 * @param players
 	 *            List of players
-	 * @param numPlayers
+	 * @param levels
 	 *            List of levels that compose the game
 	 */
-	public Game(List<Level> myLevels, int numPlayers) {
-		myGameWon = false;
-		myPlayers = myLevels;
-		myLevels = numPlayers;
-		if (numPlayers.size() > 0 && myLevels.size() > 0) {
-			myCurrentLevel = numPlayers.get(0);
-			myCurrentPlayer = myLevels.get(0);
-		}
+	public Game(int numPlayers, List<Level> levels) {
+		this(numPlayers, levels, null);
 	}
 
+	public Game(int numPlayers, List<Level> levels, Level currentLevel) {
+		myGameWon = false;
+		myNumPlayers = numPlayers;
+		myPlayers = new ArrayList<Player>();
+		myLevels = levels;
+		myCurrentLevel = currentLevel;
+		myCurrentPlayer = null;
+	}
+	
+	//TEMPORARY METHOD FOR BOB TESTER
+	public void addPlayer(Player p){
+	    myPlayers.add(p);
+	}
 
 	/**
 	 * Iterates the Current Level to the Next Level If no more levels, game is
@@ -75,15 +84,27 @@ public class Game {
 	}
 
 	/**
-	 * Iterates to the next player to start that players turn. If the last
-	 * player has just played the first player is active again
+	 * Jumps to the level specified by looking it up using the ID
+	 * 
+	 * @param levelToJumpTo
 	 */
-	public void nextPlayer() {
-		if (myPlayers.indexOf(myCurrentPlayer) == myPlayers.size() - 1) {
-			resetPlayer();
-		} else {
-			myCurrentPlayer = myPlayers
-					.get(myPlayers.indexOf(myCurrentPlayer) + 1);
+	public void jumpToLevel(String levelToJumpTo) {
+		for (Level level : myLevels) {
+			if (level.getID().equals(levelToJumpTo)) {
+				myCurrentLevel = level;
+				if (level.isWinningLevel()) {
+					myGameWon = true;
+				}
+				break;
+			}
+		}
+	}
+
+	public void changeTurn(int playerToChangeTo) {
+		for (Player player : myPlayers) {
+			if (player.getID() == playerToChangeTo) {
+				myCurrentPlayer = player;
+			}
 		}
 	}
 
@@ -91,18 +112,20 @@ public class Game {
 	 * Resets the active player to be the first player who has played
 	 */
 	private void resetPlayer() {
-		myCurrentPlayer = myPlayers.get(0);
+		// myCurrentPlayer = myPlayers.get(0);
+		// TODO Deprecated since player list isn't set to be the order anymore
 	}
 
 	/**
-	 * Restarts the Level Note: This doesn't actually work. Need deep cloning
+	 * Restarts the level
 	 */
 	private void restartLevel() {
-		myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel));
+		myCurrentLevel.restart();
 	}
-	
-	public String toString(){
-	    return "game with " + myPlayers.size() + " players and " + myLevels.size() + " levels";
+
+	public String toString() {
+		return "game with " + myPlayers.size() + " players and "
+				+ myLevels.size() + " levels";
 	}
 
 	/**
@@ -126,8 +149,13 @@ public class Game {
 	public List<Player> getPlayers() {
 		return myPlayers;
 	}
-	
-	public List<Level> getLevels(){
-	    return myLevels;
+
+	public List<Level> getLevels() {
+		return myLevels;
 	}
+
+	public void setPlayer(Player p, int pos) {
+		myPlayers.set(pos, p);
+	}
+
 }

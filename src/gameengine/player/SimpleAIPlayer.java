@@ -1,6 +1,6 @@
 package gameengine.player;
 
-import gamePlayer.GameGrid;
+import gamedata.gamecomponents.Level;
 import java.util.Set;
 
 
@@ -12,31 +12,24 @@ import java.util.Set;
  */
 public class SimpleAIPlayer extends Player {
 
-    // player needs to know what pieces belong to it.
-    // get a list of pieces that have available moves.
-    private Set myPieces;
+    Level myLevel;
 
-    public SimpleAIPlayer (int id, GameGrid g) {
+    public SimpleAIPlayer (int id, Level l) {
         super(id);
-        myPieces = populatePieces(g);
-    }
-
-    /**
-     * Iterate through the list of pieces available on the grid.
-     * 
-     * @param g
-     * @return
-     */
-    private Set populatePieces (GameGrid g) {
-        // Set allPieces = g.get
-        return null;
+        myLevel = l;
     }
 
     /**
      * 
      */
     public void play () {
-        
+
+    }
+
+    @Override
+    public void startTurn () {
+        // TODO Auto-generated method stub
+
     }
 
 }

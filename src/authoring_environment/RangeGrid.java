@@ -94,6 +94,7 @@ public class RangeGrid extends SuperGrid{
 		Image centerImage=new Image(getClass().getResourceAsStream(DEFAULT_CENTRAL_IMAGE));
 		centerTile.addPiece(centerImage);
 		centerTile.myPieceImage.setVisible(true);
+
 	}
 
 	

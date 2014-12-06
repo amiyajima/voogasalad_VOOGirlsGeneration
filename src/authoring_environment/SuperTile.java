@@ -22,10 +22,11 @@ public abstract class SuperTile extends Group {
 	private Point2D myCoordinates;
 	private Point2D myLocation;
 	private Point2D myImageCoord;
-	protected ImageView myPieceImage;
-	protected ImageView myPatchImage;
-	private Shape myHighlight;
 
+	protected transient ImageView myPieceImage;
+	protected transient ImageView myPatchImage;
+	private Shape myHighlight;
+	
 	/**
 	 * 
 	 * @param bgShape Tile shape
@@ -79,12 +80,12 @@ public abstract class SuperTile extends Group {
 		return myHighlight.isVisible();
 	}
 	
-	public void addPiece(Image image){
-		myPieceImage.setImage(image);
+	public void addPieceImage(ImageView imageView){
+		myPieceImage.setImage(imageView.getImage());
 	}
 	
-	public void addPatch(Image image){
-		myPatchImage.setImage(image);
+	public void addPatchImage(ImageView imageView){
+		myPatchImage.setImage(imageView.getImage());
 	}
 
 

@@ -1,12 +1,15 @@
-package gamePlayer;
+package tests;
 
 import static org.junit.Assert.*;
+
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.stage.Stage;
+import gamePlayer.ViewController;
 import gamedata.action.Action;
 import gamedata.action.ConcreteAction;
 import gamedata.gamecomponents.Inventory;
@@ -14,6 +17,7 @@ import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
 import javafx.scene.text.Text;
+
 import org.junit.Test;
 
 

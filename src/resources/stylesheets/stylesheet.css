@@ -1,6 +1,6 @@
 .root{
-	-fx-alignment: top-center;
-	-fx-background-image: url("background.jpg");
+	-fx-alignment: center;
+	-fx-background-image: url("../images/background.jpg");
 	-fx-padding: 10px;
 	-fx-spacing: 20;
 }

@@ -1,52 +1,50 @@
 package authoring.data;
 
 import gamedata.gamecomponents.Piece;
-import java.util.ArrayList;
+
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Set;
 
-public class PieceTypeData implements AuthoringData<Piece> {
+public class PieceTypeData extends Observable implements AuthoringData<Piece> {
 	
     private List<Piece> myPieces;
     
     public PieceTypeData() {
-        myPieces = new ArrayList<Piece>();
+        myPieces = new LinkedList<Piece>();
     }
     
-    @Override
-    public void add(Piece...pieces) {
-        System.out.println("PieceTypeData - Adding piece");
-        for (Piece p : pieces ) {
-            myPieces.add(p);
-        }
-        System.out.println("My pieces is now: " + myPieces.size() + " long");
-    }
-
-    @Override
-    public void remove(Piece...pieces) {
-        for (Piece p : pieces) {
-            myPieces.remove(p);
-        }
-    }
+    public boolean containsName(String name) {
+    	Set<String> nameSet = new HashSet<String>();
+		for (Piece p : myPieces) {
+			nameSet.add(p.getName());
+		}
+		return nameSet.contains(name);
+	}
     
-    @Override
-    public List<Piece> get () {
-        return myPieces;
-    }
-    
-    public Piece getPiece(String s) {
-        for (Piece p : myPieces) {
-            if (p.getName().equals(s)) {
-                System.out.println("PieceTypeData - Here is your piece: " + p.getName());
-                return p;
-            }
-        }
-        System.out.println("PieceTypeData - No piece exists by the name of: " + s);
-        return null;
-    }
+	@Override
+	public void add(Piece p) {
+		myPieces.add(p);
+	}
 
 	@Override
-	public void clear() {
-		myPieces.clear();
+	public void remove(Piece p) {
+		myPieces.remove(p);
+		setChanged();
+		notifyObservers();
+	}
+
+	@Override
+	public void replace(Piece origEl, Piece newEl) {
+		origEl = newEl;
+		setChanged();
+		notifyObservers(origEl);
+	}
+
+	@Override
+	public List<Piece> getData() {
+		return myPieces;
 	}
 }

@@ -1,6 +1,6 @@
 package gameengine.player;
 
-import gamedata.action.Action;
+import gamedata.action.Action; 
 import java.awt.geom.Point2D;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +23,13 @@ public class HumanPlayer extends Player {
         super(id);
         setActionKeyMap(myActionKeyMap);
         setMovementKeyMap(myMovementKeyMap);
+    }
+
+    @Override
+    public void startTurn () {
+        this.resetMovesPlayed();
+        // TODO: Map Keys Here
+
     }
 
     /**
@@ -62,9 +69,4 @@ public class HumanPlayer extends Player {
         myMovementKeyMap2 = new HashMap<KeyCode, Point2D>();
     }
 
-    @Override
-    public void play () {
-        // TODO Auto-generated method stub
-
-    }
 }

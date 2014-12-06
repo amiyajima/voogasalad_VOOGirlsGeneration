@@ -6,9 +6,6 @@ import gameengine.movement.Movement;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.geom.Point2D;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 
 /**
  * Class for pieces. Pieces are the primary unit for
@@ -16,17 +13,12 @@ import javafx.scene.image.ImageView;
  * various actions during the game.
  * 
  * @authors Sandy Lee, Jesse Ling, Jennie Ju
- *
  */
-public class Piece {
-
-    private String myName;
-    private String myImageLocation;
-    private transient ImageView myImageView;
+public class Piece extends GridComponent{
+	
     private List<Action> myActions;
-    private List<Movement> myPath;
+    private Movement myMove;
     private Stats myStats;
-    private Point2D myLoc;
     private int myPlayerID;
     private boolean myShouldRemove;
     private Inventory myInventory;
@@ -34,6 +26,7 @@ public class Piece {
     /**
      * Piece constructor
      * 
+     * @param id - Unique string ID for the piece or patch.
      * @param imageLoc - url of the piece's image location
      * @param movement - List of Movement defining how/where the
      *        piece moves relative to its current position
@@ -49,15 +42,12 @@ public class Piece {
      */
 
     // TODO: Think about playerID concept
-    public Piece (String name, String imageLoc, List<Movement> movement,
+    public Piece (String id, String name, String imageLoc, Movement movement,
                   List<Action> actions, Stats stats, Point2D loc, int playerID, Inventory inventory) {
-        myName = name;
-        myImageLocation = imageLoc;
-        setImageView(myImageLocation);
-        myPath = movement;
+        super(id, name, imageLoc, loc);
+        myMove = movement;
         myActions = actions;
         myStats = stats;
-        myLoc = loc;
         myPlayerID = playerID;
         myShouldRemove = false;
         myInventory = inventory;
@@ -68,47 +58,14 @@ public class Piece {
      * 
      * @param clone - Piece instance to be cloned
      */
-    public Piece (Piece clone) {
-        myName = clone.myName;
-        myImageLocation = clone.myImageLocation;
-        setImageView(myImageLocation);
-        myPath = new LinkedList<Movement>(clone.myPath);
+    public Piece (Piece clone, Point2D placeHere) {
+        super(clone, placeHere);
+        myMove = clone.myMove;
         myActions = new LinkedList<Action>(clone.myActions);
         myStats = new Stats(clone.myStats);
-        myLoc = new Point2D.Double(clone.myLoc.getX(), clone.myLoc.getY());
         myPlayerID = clone.myPlayerID;
         myShouldRemove = false;
         myInventory = null; // TODO: NOPE. NO INVENTORY.
-    }
-
-    private void setImageView (String imageLocation) {
-        if (myImageLocation.startsWith("/")) {
-            myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
-        }
-        else {
-            myImageView = new ImageView(new Image(imageLocation));
-        }
-    }
-
-    /**
-     * Returns the name for this type of piece
-     */
-    public String getName () {
-        return myName;
-    }
-
-    /**
-     * Returns the image location url (for data saving)
-     */
-    public String getImageLocation () {
-        return myImageLocation;
-    }
-
-    /**
-     * Returns the ImageView of the piece for display
-     */
-    public ImageView getImageView () {
-        return myImageView;
     }
 
     /**
@@ -116,22 +73,6 @@ public class Piece {
      */
     public int getPlayerID () {
         return myPlayerID;
-    }
-
-    /**
-     * Sets the piece's location to the specified Point2D
-     * 
-     * @param p - Point2D of the piece's new location
-     */
-    public void setLoc (Point2D p) {
-        myLoc = p;
-    }
-
-    /**
-     * Returns the Point2D indicating the piece's coordinates
-     */
-    public Point2D getLoc () {
-        return myLoc;
     }
 
     /**
@@ -175,6 +116,10 @@ public class Piece {
             actions.addAll(myInventory.getItemActions());
         }
         return actions;
+    }
+    
+    public Movement getMovement(){
+        return myMove;
     }
 
     /**
@@ -232,5 +177,4 @@ public class Piece {
     public Object getUniqueID () {
         return myName.hashCode();
     }
-
 }

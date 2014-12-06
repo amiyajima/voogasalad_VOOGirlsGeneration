@@ -11,15 +11,14 @@ import java.util.List;
  * @author Rica
  *
  */
-// TODO generalize from PlayerPiecesRemovedGoal back to superclass Goal
 public class GoalData {
-    private List<PlayerPiecesRemovedGoalData> myGoals;
+    private List<Goal> myGoals;
 
-    public GoalData (List<PlayerPiecesRemovedGoalData> goals) {
+    public GoalData (List<Goal> goals) {
         myGoals = goals;
     }
 
-    public List<PlayerPiecesRemovedGoalData> getGoals () {
+    public List<Goal> getGoals () {
         return myGoals;
     }
 

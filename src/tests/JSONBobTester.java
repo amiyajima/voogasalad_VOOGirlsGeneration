@@ -6,8 +6,8 @@ import gamedata.action.ConcreteAction;
 import gamedata.action.ReceiverToInventoryConclusion;
 import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
+import gamedata.events.Event;
 import gamedata.gamecomponents.Game;
-import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
@@ -26,12 +26,14 @@ import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import authoring_environment.GUIGrid;
+import authoring_environment.SuperGrid;
 
 
 /**
  * JSON Write Tester
  * 
- * @author Rica Zhang :D
+ * @author Rica Zhang, Anna Miyajima
  *
  */
 public class JSONBobTester {
@@ -43,6 +45,18 @@ public class JSONBobTester {
 
     }
 
+    // TODO: remove, used for testing purposes
+    public GUIGrid createGUIGrid () {
+        GUIGrid test = new GUIGrid(2, 2, 5, "square");
+        return test;
+    }
+
+    // TODO: remove, used for testing purposes
+    public SuperGrid createSuperGrid () {
+        SuperGrid grid = new SuperGrid(2, 2, 5, "square");
+        return grid;
+    }
+
     /**
      * Create a new game to test
      * 
@@ -51,60 +65,67 @@ public class JSONBobTester {
     public Game createNewGame () {
         System.out.println("Bob Tester: Create new game");
         List<Player> myPlayers = new ArrayList<Player>();
-        Player myPlayer1 = new Player(12345);
-        Player myPlayer2 = new Player(54321);
-//        Player myPlayer1 = new HumanPlayer(12345);
-//        Player myPlayer2 = new HumanPlayer(54321);
+
+        Player myPlayer1 = new HumanPlayer(12345);
+        Player myPlayer2 = new HumanPlayer(54321);
         // myPlayers.add(myPlayer1);
         myPlayers.add(myPlayer2);
 
-        Grid grid = createNewGrid();
+        GUIGrid grid = createNewGrid();
 
-        List<Rule> myRules = new ArrayList<Rule>();
-        MoveCountRule rule1 = new MoveCountRule(3);
-        MoveCountRule rule2 = new MoveCountRule(5);
-        // myRules.add(rule1);
-        myRules.add(rule2);
+        /*
+         * List<Rule> myRules = new ArrayList<Rule>();
+         * MoveCountRule rule1 = new MoveCountRule(3);
+         * MoveCountRule rule2 = new MoveCountRule(5);
+         * // myRules.add(rule1);
+         * myRules.add(rule2);
+         * 
+         * List<Goal> myGoals = new ArrayList<Goal>();
+         * Goal goal1 = new PlayerPiecesRemovedGoal(myPlayer2);
+         * myGoals.add(goal1);
+         * // Goal goal2 = new PlayerPiecesRemovedGoal(myPlayer1);
+         * // myGoals.add(goal2);
+         */
 
-        List<Goal> myGoals = new ArrayList<Goal>();
-        Goal goal1 = new PlayerPiecesRemovedGoal(myPlayer2);
-        myGoals.add(goal1);
-        // Goal goal2 = new PlayerPiecesRemovedGoal(myPlayer1);
-        // myGoals.add(goal2);
+        List<Event> myEvents = new ArrayList<Event>();
 
         List<Level> myLevels = new ArrayList<Level>();
-        Level level1 = new Level(grid, myGoals, myRules);
-        Level level2 = new Level(grid, myGoals, myRules);
+        Level level1 = new Level(grid, myEvents, "Default ID", false);
+        Level level2 = new Level(grid, myEvents, "Default ID", true);
         myLevels.add(level1);
         myLevels.add(level2);
 
         Piece piece = createNewPiece(grid, new Point2D.Double(3, 3));
         Patch patch = createNewPatch(new Point2D.Double(3, 3));
 
-        Game myGame = new Game(myPlayers, myLevels);
+        Game myGame = new Game(1, myLevels, myLevels.get(0));
+        myGame.addPlayer(myPlayer1);
         System.out.println(myGame);
         return myGame;
     }
 
-    public Grid createNewGrid () {
-        Grid grid1 = new SquareGrid();
-        for (int x = 0; x < grid1.getColumn(); x++) {
+    public GUIGrid createNewGrid () {
+        GUIGrid grid1 = new GUIGrid(5, 5, 75, "Square Grid");
+
+        Piece templ = createNewPiece(grid1, new Point2D.Double(0, 0));
+        System.out.println(templ.getImageLocation());
+        Patch templPatch = createNewPatch(new Point2D.Double(0, 0));
+        System.out.println(templPatch.getImageLocation());
+
+        for (int x = 0; x < grid1.getCol(); x++) {
             for (int y = 0; y < grid1.getRow(); y++) {
-                Patch patch = createNewPatch(new Point2D.Double(x, y));
-                grid1.setPatch(patch.getLoc(), patch);
-                // if((x==grid1.getColumn()/2) && (y==grid1.getRow()/2)){
-                Piece piece = createNewPiece(grid1, new Point2D.Double(x, y));
-                grid1.setPiece(piece.getLoc(), piece);
-                // }
+                grid1.addPiece(templ, new Point2D.Double(x, y));
+                grid1.addPatch(templPatch, new Point2D.Double(x, y));
             }
         }
-        System.out.println("Bob Tester: Patches filled: " + grid1.getAllPatches().size());
-        System.out.println("Bob Tester: Pieces filled: " + grid1.getAllPieces().size());
+
+        System.out.println("Bob Tester: Patches filled: " + grid1.getPatches().size());
+        System.out.println("Bob Tester: Pieces filled: " + grid1.getPieces().size());
         System.out.println("Grid created: " + grid1.toString());
         return grid1;
     }
 
-    public Piece createNewPiece (Grid g, Point2D p) {
+    public Piece createNewPiece (GUIGrid g, Point2D p) {
         Point2D p1 = new Point2D.Double(1, 1);
         Point2D p4 = new Point2D.Double(0, 1);
         Point2D p5 = new Point2D.Double(-1, 0);
@@ -126,15 +147,11 @@ public class JSONBobTester {
         pl3.add(p2);
         pl3.add(p3);
 
-        List<Movement> movements = new ArrayList<Movement>();
-
-        // movements.add(createNewMovement(pl1));
-        // movements.add(createNewMovement(pl3));
+        Movement move = new Movement(g, pl1);
 
         List<Action> actions = new ArrayList<Action>();
         actions.add(createNewAction(pl1, pl2));
         actions.add(createNewAction(pl2, pl3));
-        actions.add(createNewMovement(g,pl1));
 
         Stats s = new Stats();
         s.add("health", 20);
@@ -146,10 +163,10 @@ public class JSONBobTester {
 
         Piece piece = null;
         if (randomInt % 2 == 1) {
-            piece = new Piece("Duvall", DEFAULT_DUVALL, movements, actions, s, p, 1, i);
+            piece = new Piece("Duvall", DEFAULT_DUVALL, move, actions, s, p, 1, i);
         }
         else {
-            piece = new Piece("Bunny", DEFAULT_BUNNY, movements, actions, s, p, 1, i);
+            piece = new Piece("Bunny", DEFAULT_BUNNY, move, actions, s, p, 1, i);
         }
         return piece;
     }
@@ -159,7 +176,7 @@ public class JSONBobTester {
         return patch;
     }
 
-    public Movement createNewMovement (Grid g, List<Point2D> pl2) {
+    public Movement createNewMovement (GUIGrid g, List<Point2D> pl2) {
         Movement m1 = new Movement(g, pl2);
         return m1;
     }
