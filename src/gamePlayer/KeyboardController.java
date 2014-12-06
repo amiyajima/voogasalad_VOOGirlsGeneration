@@ -2,7 +2,7 @@ package gamePlayer;
 
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
-import gameengine.player.Player;
+import gameengine.player.HumanPlayer;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +16,7 @@ import javafx.scene.paint.Color;
 
 
 public class KeyboardController {
-    Player myCurrentPlayer;
+    HumanPlayer myCurrentPlayer;
     Point2D myCurrentLocation;
     ViewController myController;
 

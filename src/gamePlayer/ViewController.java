@@ -2,7 +2,6 @@ package gamePlayer;
 
 
 import gamedata.JSON.JSONManager;
-
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
@@ -59,10 +58,6 @@ public class ViewController {
     // public static final String ENGLISH = "English";
     // public static final String Chinese = "Chinese";
 
-
-    // public static final String ENGLISH = "English";
-    // public static final String Chinese = "Chinese";
-
     // public static final String AUDIO_TEST = "/src/gamePlayer/audioTest.mp3";
     private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
     public static final String CURSOR_ATTACK_TEST = "/gamePlayer/Cursor_attack.png";
@@ -79,24 +74,18 @@ public class ViewController {
     private Scene scoreScene;
     private Scene myPopupScene;
     private Scene myScene;
-
-
-    // private SampleListener myLeapListener;
-
-
-    private Boolean keyControlOn;
-    private KeyboardController myKeyboardController;
-
-    // private Point2D myCurrentLocation;
+    private AudioClip myAudio;
     private Piece activePiece;
     private Action activeAction;
 
-    // private MouseController myMouseController;
+    // private SampleListener myLeapListener;
 
-    private AudioClip myAudio;
+    // private MouseController myMouseController;
+    private Boolean keyControlOn;
+    private KeyboardController myKeyboardController;
+
     @FXML
     protected VBox statsPane;
-
     @FXML
     protected VBox controlPane;
     @FXML
@@ -107,10 +96,7 @@ public class ViewController {
     private VBox scores;
 
     private Point2D currentClick;
-
     private IGridState gridState;
-
-
     private JSONManager myJSONManager;
 
     public ViewController (Stage s) {
@@ -141,6 +127,20 @@ public class ViewController {
         myStage.show();
 
     }
+    
+    private void loadFXML (String url, Node n) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(url));
+        fxmlLoader.setController(this);
+        fxmlLoader.setRoot(n);
+        try {
+            fxmlLoader.load();
+            
+        }
+        catch (IOException exception) {
+            
+            throw new RuntimeException(exception);
+        }
+    }
 
     /**
      * generates drop down menu that allow user to choose a new Game to play The
@@ -151,6 +151,7 @@ public class ViewController {
      * @throws IOException
      * @throws UnsupportedAudioFileException
      */
+    @FXML
     protected void newGame () throws UnsupportedAudioFileException, IOException,
 
             LineUnavailableException {
@@ -163,36 +164,30 @@ public class ViewController {
             l.setText(file.getName().substring(0, file.getName().length() - 5));
             l.setOnAction(event -> {
 
-
-   
                 myAudio =
                         new AudioClip(new File(System.getProperty("user.dir") + MUSIC).toURI()
                                 .toString());
-
                 myAudio.play();
+                myScene = new Scene(myGameSpace);
+                myStage.setScene(myScene);
+//                try {
+//                    myModel = myJSONManager.readFromJSONFile(file.getPath());
+//                }
+//                catch (Exception e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
+//                initializeGrid();
 
             });
             l.getStyleClass().add("button");
             newGameButton.getItems().add(l);
+            
 
         });
 
     }
 
-    private void loadFXML (String url, Node n) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(url));
-        fxmlLoader.setController(this);
-        fxmlLoader.setRoot(n);
-        try {
-            fxmlLoader.load();
-
-        }
-        catch (IOException exception) {
-
-            throw new RuntimeException(exception);
-        }
-
-    }
 
     /**
      * the method allows user to load the previously saved json representation
@@ -221,7 +216,12 @@ public class ViewController {
         }
 
     }
-
+    
+    @FXML
+    private void doSettings () {
+        System.out.println("settings");
+    }
+    
     @FXML
     private void testGame () {
 
@@ -234,7 +234,7 @@ public class ViewController {
     }
 
     private void initializeGrid () {
-        // myModel.play();
+//         myModel.play();
 
         myGrid =
                 new SquareGameGrid(myModel.getCurrentLevel().getGrid().getRow(), myModel
@@ -255,10 +255,6 @@ public class ViewController {
         keyControlOn = false;
     }
 
-    @FXML
-    private void doSettings () {
-
-    }
 
     /**
      * loads the players and their scores of the current game; display the
@@ -272,21 +268,20 @@ public class ViewController {
         stage.show();
 
     }
-
-    @FXML
-    protected void cancelPopup () {
-
-    }
-
+    
     protected void loadScores () {
         gameName.setText(gameName.getText() + myModel.toString());
 
         // TODO: add in scores
         // myModel.getPlayers().forEach(player-> scores.getChildren().
         // add(new Text(player.getID()+": ")));
-
     }
 
+    
+    @FXML
+    protected void cancelPopup () {
+
+    }
 
     @FXML
     private void save () {
@@ -358,13 +353,8 @@ public class ViewController {
     }
 
     /**
-<<<<<<< HEAD
      * Method to switch the state of the game grid between select mode and apply
      * mode
-=======
-     * Method to switch the state of the game grid between select mode
-     * and apply mode
->>>>>>> b6ffb873072c1e0817996486bc5be58238c6d09e
      * 
      * @param state
      *            the current state of the Grid, select/ apply action Mode
@@ -477,7 +467,6 @@ public class ViewController {
             public void handle (KeyEvent arg0) {
 
                 if (arg0.getCode() == KeyCode.F) {
-
                     System.out.println("f");
                     performAction(myKeyboardController.getCurrentLocation().getX(),
                                   myKeyboardController.getCurrentLocation().getY());
@@ -487,17 +476,6 @@ public class ViewController {
             }
 
         });
-
-
-        // myGrid.setOnKeyPressed(event->{
-        // if (event.getCode() == KeyCode.F){
-        // System.out.println("enter");
-        // performAction(myKeyboardController.getCurrentLocation().getX(),
-        // myKeyboardController.getCurrentLocation().getY());
-        // }
-        // }
-        // );
-
     }
 
     /**
@@ -586,82 +564,79 @@ public class ViewController {
         return activeAction;
     }
 
-    /**
-     * Highlight the tiles that represent the possible range of the action
-     * selected
-     */
-    @FXML
-    protected void highLightActionRange () {
+// MOVED TO GameGridEffect
+//    /**
+//     * Highlight the tiles that represent the possible range of the action
+//     * selected
+//     */
+//    @FXML
+//    protected void highLightActionRange () {
+//
+//        myGrid.clearEffect();
+//        if (activePiece != null && activeAction != null) {
+//
+//            activeAction.getActionRange(activePiece.getLoc()).forEach(
+//                    point -> {
+//
+//                        if (point.getX() < myGrid.getRow() && point.getY() < myGrid.getCol()
+//                                && point.getX() > 0 && point.getY() > 0) {
+//                            Node n = myGrid.get((int) point.getX(), (int) point.getY());
+//                            addDropShadow(n, Color.YELLOW);
+//
+//                        }
+//
+//
+//                    });
+//        }
+//    }
 
-        myGrid.clearEffect();
-        if (activePiece != null && activeAction != null) {
+// MOVED TO GameGridEffect
+//    private void addDropShadow (Node n, Color c) {
+//        if (n != null) {
+//            DropShadow ds = new DropShadow();
+//            ds.setRadius(30.0);
+//            ds.setOffsetX(0.0);
+//            ds.setOffsetY(0.0);
+//            ds.setColor(c);
+//            n.setEffect(ds);
+//
+//        }
+//    }
 
-            activeAction.getActionRange(activePiece.getLoc()).forEach(
-                    point -> {
-
-                        if (point.getX() < myGrid.getRow() && point.getY() < myGrid.getCol()
-                                && point.getX() > 0 && point.getY() > 0) {
-                            Node n = myGrid.get((int) point.getX(), (int) point.getY());
-                            addDropShadow(n, Color.YELLOW);
-
-                        }
-
-
-                    });
-        }
-    }
-
-    private void addDropShadow (Node n, Color c) {
-        if (n != null) {
-            DropShadow ds = new DropShadow();
-            ds.setRadius(30.0);
-            ds.setOffsetX(0.0);
-            ds.setOffsetY(0.0);
-            ds.setColor(c);
-            n.setEffect(ds);
-
-        }
-    }
-
-    /**
-<<<<<<< HEAD
-     * Highlight the effect range of an action if to be applied at a given
-     * position
-=======
-     * Highlight the effect range of an action if to be applied at a given position
->>>>>>> b6ffb873072c1e0817996486bc5be58238c6d09e
-     * 
-     * @param n
-     * @param red
-     */
-
-    protected void highLightEffectRange (MouseEvent me, Color c) {
-
-        if (activePiece != null && activeAction != null) {
-
-            activeAction
-                    .getActionRange(activePiece.getLoc())
-                    .forEach(point -> {
-                        Point2D temp = findPosition(me.getSceneX(), me.getSceneY());
-                        if (temp.equals(point)) {
-                            activeAction
-                                    .getEffectRange()
-                                    .forEach(point2 -> {
-                                        Node n =
-                                                myGrid.get((int) (temp.getX() + point2
-                                                        .getX()),
-                                                           (int) (temp.getY() + point2
-                                                                   .getY()));
-
-                                        addDropShadow(n, c);
-                                    });
-
-                        }
-                    });
-
-        }
-
-    }
+// MOVED TO GameGridEffect
+//    /**
+//     * Highlight the effect range of an action if to be applied at a given
+//     * position
+//     * 
+//     * @param n
+//     * @param red
+//     */
+//    protected void highLightEffectRange (MouseEvent me, Color c) {
+//
+//        if (activePiece != null && activeAction != null) {
+//            activeAction
+//                    .getActionRange(activePiece.getLoc())
+//                    .forEach(point -> {
+//                        Point2D temp = findPosition(me.getSceneX(), me.getSceneY());
+//                        if (temp.equals(point)) {
+//                            activeAction
+//                                    .getEffectRange()
+//                                    .forEach(point2 -> {
+//                                        Node n =
+//                                                myGrid.get((int) (temp.getX() + point2
+//                                                        .getX()),
+//                                                           (int) (temp.getY() + point2
+//                                                                   .getY()));
+//
+//                                        addDropShadow(n, c);
+//                                    });
+//
+//                        }
+//                    });
+//
+//        }
+//
+//    }
 
     public IGridState getGridState () {
         return gridState;
@@ -673,16 +648,18 @@ public class ViewController {
 
     }
 
-    public void highlightCurrent (Point2D loc, Color c) {
-        addDropShadow(myGrid.get((int) loc.getX(), (int) loc.getY()), c);
-    }
+//MOVED TO GameGridEffect
+//    public void highlightCurrent (Point2D loc, Color c) {
+//        addDropShadow(myGrid.get((int) loc.getX(), (int) loc.getY()), c);
+//    }
 
-    public void unhighlight (Point2D loc) {
-        Node n = myGrid.get((int) loc.getX(), (int) loc.getY());
-        if (n != null) {
-            n.setEffect(null);
-        }
-    }
+//MOVED TO GameGridEffect
+//    public void unhighlight (Point2D loc) {
+//        Node n = myGrid.get((int) loc.getX(), (int) loc.getY());
+//        if (n != null) {
+//            n.setEffect(null);
+//        }
+//    }
 
     public void toggleKeyboardControl () {
         if (keyControlOn) {

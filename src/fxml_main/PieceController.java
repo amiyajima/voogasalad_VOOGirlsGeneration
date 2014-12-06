@@ -1,24 +1,24 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Piece;
-import authoring.concretefeatures.LibraryUnitEditor;
-import authoring.createedit.UnitCreator;
-import authoring.data.ActionData;
-import authoring.data.PieceTypeData;
-import authoring_environment.ShapeGrid;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import authoring.concretefeatures.LibraryUnitEditor;
+import authoring.createedit.UnitCreator;
+import authoring.data.ActionData;
+import authoring.data.PieceTypeData;
+import authoring_environment.GUIGrid;
 
 public class PieceController extends GridComponentAbstCtrl<Piece> {
 	
 	private PieceTypeData myPieceTypes;
 	private ActionData myActionData;
 	
-    public PieceController (VBox vbox, ScrollPane propertiesSPane, ShapeGrid currGrid, ActionData actions) {
+    public PieceController (VBox vbox, ScrollPane propertiesSPane, GUIGrid currGrid, ActionData actions) {
     	super(vbox, propertiesSPane, currGrid);
     	myPieceTypes = new PieceTypeData();
     	myActionData = actions;

@@ -1,19 +1,10 @@
 package authoring_environment;
 
-import gamedata.gamecomponents.Patch;
-import gamedata.gamecomponents.Piece;
-
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Double;
 import java.util.LinkedList;
 import java.util.List;
 
-import authoring.data.PatchData;
-import authoring.data.PieceData;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
 
 public class SuperGrid extends Pane {
 	private static final String CIRCLE_GRID = "Circle Grid";
