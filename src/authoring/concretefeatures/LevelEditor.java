@@ -51,20 +51,17 @@ public class LevelEditor {
         myCol = col;
         tileSize = getPrefTileSize(myRows,myCol);
         
-        initializeGrid();
         addWorkspaceTab(shapeGrid, levelName);
     }
     
-    private void initializeGrid() {
-    	   
-           shapeGrid = new SuperGrid(GridView, myCol, myRows,
-                           tileSize, myGridType);
-    }
 
     private void addWorkspaceTab(SuperGrid superGrid, String name) {
         BorderPane bPane = new BorderPane();
         GridView gridView = new GridView(superGrid, GRID_VIEW_WIDTH, GRID_VIEW_HEIGHT);
         bPane.setRight(gridView);
+        
+        shapeGrid = new SuperGrid(myCol, myRows,
+                tileSize, myGridType);
         
         Tab tab = new Tab();
         tab.setContent(bPane);
