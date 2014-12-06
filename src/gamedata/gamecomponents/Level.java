@@ -109,6 +109,10 @@ public class Level extends Observable {
 		}
 	}
 	
+	public void restart() {
+	    // TODO restarts level
+	}
+	
 	public String getID() {
 	    return myID;
 	}
