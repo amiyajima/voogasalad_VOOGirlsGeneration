@@ -373,7 +373,8 @@ public class ViewController {
 		controlPane.getChildren().clear();
 		ArrayList<Label> actions = new ArrayList<Label>();
 
-		Map<KeyCode, Action> actionMap = myModel.getCurrentPlayer()
+		//TODO: What does this code do?
+		/*Map<KeyCode, Action> actionMap = myModel.getCurrentPlayer()
 				.getActionKeyMap();
 		System.out.println(actionMap);
 		Map<Action, KeyCode> keyMap = actionMap
@@ -382,7 +383,7 @@ public class ViewController {
 				.collect(
 						Collectors
 								.toMap(Map.Entry::getValue, Map.Entry::getKey));
-
+*/
 		piece.getActions().forEach(action -> {
 			Label l = new Label(action.toString());
 			l.setOnMouseClicked(event -> bindAction(action));
@@ -503,7 +504,10 @@ public class ViewController {
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(findPosition(x - 45, y - 20)));
 		myGrid.clearEffect();
-		highlightCurrent(findPosition(x - 45, y - 20), Color.BLUE);
+		
+		//TODO: Put this back in
+		//highlightCurrent(findPosition(x - 45, y - 20), Color.BLUE);
+		
 		// addDropShadow(myGrid.get(((int)findPosition(x,y).getX()),
 		// ((int)findPosition(x,y).getY())), Color.PURPLE);
 	}
@@ -513,7 +517,8 @@ public class ViewController {
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(location));
 		myGrid.clearEffect();
-		highlightCurrent(location, Color.BLUE);
+		//TODO: Put this back in
+		//highlightCurrent(location, Color.BLUE);
 	}
 
 	/**
@@ -551,7 +556,8 @@ public class ViewController {
 								&& point.getX() > 0 && point.getY() > 0) {
 							Node n = myGrid.get((int) point.getX(),
 									(int) point.getY());
-							addDropShadow(n, Color.YELLOW);
+							//TODO: Add back in
+							//addDropShadow(n, Color.YELLOW);
 
 						}
 
@@ -585,7 +591,8 @@ public class ViewController {
 												(int) (temp.getY() + point2
 														.getY()));
 
-										addDropShadow(n, c);
+										//TODO: Add this back in
+										//addDropShadow(n, c);
 									});
 
 						}
@@ -614,7 +621,8 @@ public class ViewController {
 		if (keyControlOn) {
 
 			keyControlOn = false;
-			unhighlight(myKeyboardController.getCurrentLocation());
+			//TODO: Add this back in
+			//unhighlight(myKeyboardController.getCurrentLocation());
 			myKeyboardController = null;
 		} else {
 			myKeyboardController = new KeyboardController();

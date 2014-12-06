@@ -3,6 +3,11 @@ package authoring_environment;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * IGNORE THIS PLEASE. THANK YOU. HI
+ * @author Jesse
+ *
+ */
 public class PlayerGrid extends SuperGrid implements Observer {
 
 	public PlayerGrid() {

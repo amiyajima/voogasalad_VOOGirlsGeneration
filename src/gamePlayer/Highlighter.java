@@ -12,8 +12,8 @@ import javafx.scene.paint.Color;
  * @author
  *
  */
-// TODO: Update once new Grids are implemented
 public class Highlighter {
+	
 	/**
 	 * Turns on highlighting of a Patch at loc with Color c
 	 * 
@@ -50,7 +50,6 @@ public class Highlighter {
 			ds.setOffsetY(0.0);
 			ds.setColor(c);
 			n.setEffect(ds);
-
 		}
 	}
 

@@ -42,13 +42,14 @@ public class ApplyState implements IGridState {
                                                             });
                                                             node.setOnMouseExited(event3 -> {
                                                                 myController.highLightActionRange();
-                                                                if (myController.getActivePiece() != null) {
+                                                                //TODO: Put this back in
+                                                             /*   if (myController.getActivePiece() != null) {
                                                                     myController
                                                                             .highlightCurrent(myController
                                                                                                       .getActivePiece()
                                                                                                       .getLoc(),
                                                                                               Color.BLUE);
-                                                                }
+                                                                }*/
                                                             });
 
                                                         });

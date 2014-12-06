@@ -28,7 +28,7 @@ public class Game {
 	 * Default Constructor
 	 */
 	public Game() {
-		this(null, null);
+		this(null, 0);
 	}
 
 	/**
@@ -39,16 +39,15 @@ public class Game {
 	 * @param numPlayers
 	 *            List of levels that compose the game
 	 */
-	public Game(List<Level> myLevels, int numPlayers) {
+	public Game(List<Level> levels, int numPlayers) {
 		myGameWon = false;
-		myPlayers = myLevels;
-		myLevels = numPlayers;
-		if (numPlayers.size() > 0 && myLevels.size() > 0) {
-			myCurrentLevel = numPlayers.get(0);
-			myCurrentPlayer = myLevels.get(0);
+		myLevels = levels;
+		myPlayers = new ArrayList<Player>(numPlayers);
+		if (myLevels.size() > 0) {
+			myCurrentLevel = myLevels.get(0);
+			myCurrentPlayer = null;
 		}
 	}
-
 
 	/**
 	 * Iterates the Current Level to the Next Level If no more levels, game is
@@ -100,9 +99,10 @@ public class Game {
 	private void restartLevel() {
 		myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel));
 	}
-	
-	public String toString(){
-	    return "game with " + myPlayers.size() + " players and " + myLevels.size() + " levels";
+
+	public String toString() {
+		return "game with " + myPlayers.size() + " players and "
+				+ myLevels.size() + " levels";
 	}
 
 	/**
@@ -126,8 +126,8 @@ public class Game {
 	public List<Player> getPlayers() {
 		return myPlayers;
 	}
-	
-	public List<Level> getLevels(){
-	    return myLevels;
+
+	public List<Level> getLevels() {
+		return myLevels;
 	}
 }

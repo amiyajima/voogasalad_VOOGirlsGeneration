@@ -28,18 +28,14 @@ public class SuperGrid extends Pane {
 	protected List<List<SuperTile>> myGrid;
 
 	public SuperGrid() {
-		this(1, 1, 40, SQUARE_GRID, null, null);
+		this(1, 1, 40, SQUARE_GRID);
 	}
 
-	public SuperGrid(int cols, int rows, int tileSize, String shape,
-			PieceData pieceData, PatchData patchData) {
+	public SuperGrid(int cols, int rows, int tileSize, String shape) {
 
 		myRows = rows;
 		myCols = cols;
 		myTileSize = tileSize;
-
-		myPieceData = pieceData;
-		myPatchData = patchData;
 
 		initGridTiles(shape);
 	}
@@ -61,7 +57,6 @@ public class SuperGrid extends Pane {
 	private SuperTile makeShapeTile(String shape, int tileSize, Point2D location) {
 		switch (shape) {
 		case SQUARE_GRID:
-
 			return new SquareTile(tileSize, location);
 		case HEXAGON_GRID:
 			return new HexagonTile(tileSize, location);
@@ -71,5 +66,6 @@ public class SuperGrid extends Pane {
 			return new SquareTile(tileSize, location);
 		}
 	}
+	
 
 }
