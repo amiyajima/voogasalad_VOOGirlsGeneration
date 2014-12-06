@@ -26,6 +26,7 @@ import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import authoring_environment.GUIGrid;
 
 
 /**
@@ -42,6 +43,11 @@ public class JSONBobTester {
     public JSONBobTester () {
 
     }
+    
+    public GUIGrid createGUIGrid(){
+        GUIGrid test = new GUIGrid(2,2,5,"square");
+        return test;
+    }
 
     /**
      * Create a new game to test
@@ -51,8 +57,15 @@ public class JSONBobTester {
     public Game createNewGame () {
         System.out.println("Bob Tester: Create new game");
         List<Player> myPlayers = new ArrayList<Player>();
+<<<<<<< HEAD
         Player myPlayer1 = new HumanPlayer(12345);
         Player myPlayer2 = new HumanPlayer(54321);
+=======
+        Player myPlayer1 = new Player(12345);
+        Player myPlayer2 = new Player(54321);
+//        Player myPlayer1 = new HumanPlayer(12345);
+//        Player myPlayer2 = new HumanPlayer(54321);
+>>>>>>> 21d79220377783422b4155f54ae6bf25c487a9b9
         // myPlayers.add(myPlayer1);
         myPlayers.add(myPlayer2);
 

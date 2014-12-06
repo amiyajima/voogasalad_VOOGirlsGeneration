@@ -30,6 +30,24 @@ public class GUIGrid extends SuperGrid implements Observer {
 		myPatchData = new LinkedList<Patch>();
 	}
 
+	/**
+	 * Returns number of rows
+	 * 
+	 * @return int number of rows
+	 */
+	public int getNumRows() {
+		return super.myRows;
+	}
+
+	/**
+	 * Returns number of columns
+	 * 
+	 * @return int number of columns
+	 */
+	public int getNumCols() {
+		return super.myCols;
+	}
+
 	public void addPiece(Piece pieceType, Point2D loc) {
 		// create new instance of pieceType with this location
 		// add to PieceData and set image within tile at this location
@@ -71,7 +89,7 @@ public class GUIGrid extends SuperGrid implements Observer {
 	public List<Patch> getPatche(Patch p) {
 		return null;
 	}
-	
+
 	public List<Piece> getPiece(int x, int y) {
 		return null;
 	}

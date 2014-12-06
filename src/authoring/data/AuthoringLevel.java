@@ -35,6 +35,22 @@ public class AuthoringLevel {
 	public String getId() {
 		return myId;
 	}
+	
+	/**
+	 * Returns number of rows
+	 * @return int number of rows
+	 */
+	public int getNumRows() {
+		return myGrid.getNumRows();
+	}
+	
+	/**
+	 * Returns number of columns
+	 * @return int number of columns
+	 */
+	public int getNumCols() {
+		return myGrid.getNumCols();
+	}
 
 	/**
 	 * Sets the current grid to be edited by other authoring environment editors
