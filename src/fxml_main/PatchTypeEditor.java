@@ -1,8 +1,11 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Patch;
+
 import java.awt.geom.Point2D;
 import java.io.File;
+import java.util.function.Consumer;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -27,132 +30,140 @@ import authoring_environment.UIspecs;
  */
 public class PatchTypeEditor extends Pane {
 
-    private static final int HEIGHT = 150;
-    private static final int WIDTH = 150;
-    private static final String NAME = "Terrain Editor";
-    private static final String TERRAIN_NAME_LABEL = "Name";
-    private static final String LOAD_IMAGE_LABEL = "Load Terrain Image";
-    private static final String TEMPLATE_LABEL = "OK";
-    private static final Insets MARGINS = new Insets(20, WIDTH / 5, 20, WIDTH / 5 - 10);
-    private static final String LABEL_CSS = "-fx-font-size: 14pt;";
-    private static final String DEFAULT_IMAGE = "/resources/images/default_image.png";
-    private PatchController myPatchController;
-    private Patch myPatch;
-    private String myName;
-    private String myImageLocation;
+	private static final int HEIGHT = 150;
+	private static final int WIDTH = 150;
+	private static final String NAME_LABEL = "Name";
+	private static final String LOADIMAGE_LABEL = "Load Terrain Image";
+	private static final String TEMPLATE_LABEL = "OK";
+	private static final String NAME_PROMPT = "Enter patch name...";
+	private static final Insets MARGINS = new Insets(20, WIDTH / 5, 20, WIDTH / 5 - 10);
+	private static final String LABEL_CSS = "-fx-font-size: 14pt;";
 
-    /**
-     * Constructor that sets the dimensions of the TerrainCreator GUI component
-     * and initializes it.
-     * this is for patch CREATOR
-     * 
-     */
-    public PatchTypeEditor (PatchController controller) {
-        constructor(controller);
-    }
 
-    /**
-     * Constructor that sets the dimensions of the TerrainCreator GUI component
-     * and initializes it.
-     * this is for patch EDITOR
-     * 
-     */
+	private static final String DEFAULT_IMAGE_LOC = "/resources/images/default_image.png";
+	private static final Point2D DEFAULT_LOC = new Point2D.Double(0,0);
 
-    public PatchTypeEditor (PatchController controller, Patch patch) {
-        constructor(controller);
-        myPatch = patch;      
-    }
+	private String myEditorTitle;
+	private Consumer<Patch> myOkLambda;
+	
+	private String myName;
+	private String myImageLocation;
+	private Patch myPatch;
 
-    public void constructor (PatchController controller) {
-        myPatchController = controller;
-        myName = "";
-        myImageLocation = "";
-        setHeight(HEIGHT);
-        setWidth(WIDTH);
-        initialize();
-    }
+	/**
+	 * Constructor that sets the dimensions of the TerrainCreator GUI component
+	 * and initializes it.
+	 * this is for patch CREATOR
+	 * 
+	 */
+	public PatchTypeEditor (Consumer<Patch> okLambda) {
+		myEditorTitle = "Terrain Creator";
+		myName = "";
+		myImageLocation = DEFAULT_IMAGE_LOC;
+		constructor(okLambda);
+	}
 
-    protected void initialize () {
+	/**
+	 * Constructor that sets the dimensions of the TerrainCreator GUI component
+	 * and initializes it.
+	 * this is for patch EDITOR
+	 * 
+	 */
 
-        VBox box = new VBox();
-        box.setPadding(MARGINS);
-        box.setSpacing(10);
+	public PatchTypeEditor (Consumer<Patch> okLambda, Patch patch) {
+		myEditorTitle = "Terrain Editor";
+		myName = patch.getName();
+		myImageLocation = patch.getImageLocation();
+		myPatch = patch;   
+		constructor(okLambda);
+	}
 
-        HBox labelBox = new HBox();
-        Label eventsLabel = new Label(NAME);
-        eventsLabel.setStyle(LABEL_CSS);
-        labelBox.getChildren().add(eventsLabel);
+	public void constructor (Consumer<Patch> okLambda) {
+		myOkLambda = okLambda;
+		setHeight(HEIGHT);
+		setWidth(WIDTH);
+		initialize();
+	}
 
-        HBox names = new HBox();
-        names.setPadding(UIspecs.allPadding);
-        names.setSpacing(5);
+	protected void initialize () {
 
-        HBox images = new HBox();
-        images.setPadding(UIspecs.allPadding);
-        images.setSpacing(5);
+		VBox box = new VBox();
+		box.setPadding(MARGINS);
+		box.setSpacing(10);
 
-        Label nameLabel = new Label(TERRAIN_NAME_LABEL);
-        nameLabel.setPadding(UIspecs.topRightPadding);
-        TextField terrainName = new TextField();
-        names.getChildren().addAll(nameLabel, terrainName);
+		HBox labelBox = new HBox();
+		Label eventsLabel = new Label(myEditorTitle);
+		eventsLabel.setStyle(LABEL_CSS);
+		labelBox.getChildren().add(eventsLabel);
 
-        Button goButton = new Button(TEMPLATE_LABEL);
-        initImageLoader(images);
-        initGoBtn(goButton, terrainName);
+		HBox names = new HBox();
+		names.setPadding(UIspecs.allPadding);
+		names.setSpacing(5);
 
-        box.getChildren().addAll(labelBox, names, images, goButton);
+		HBox images = new HBox();
+		images.setPadding(UIspecs.allPadding);
+		images.setSpacing(5);
 
-        getChildren().add(box);
-    }
+		Label nameLabel = new Label(NAME_LABEL);
+		nameLabel.setPadding(UIspecs.topRightPadding);
+		TextField terrainName = new TextField();
+		terrainName.setText(myName);
+		terrainName.setPromptText(NAME_PROMPT);
+		names.getChildren().addAll(nameLabel, terrainName);
 
-    /**
-     * initializes necessary contents for the user to load an img
-     * 
-     * @param images - HBox
-     */
-    private void initImageLoader (HBox images) {
-        ImageView icon = new ImageView();
-        icon.setFitHeight(40);
-        icon.setFitWidth(40);
-        icon.setImage(new Image(getClass().getResourceAsStream(DEFAULT_IMAGE)));
-        Button loadImage = new Button(LOAD_IMAGE_LABEL);
-        loadImage.setOnAction(new EventHandler<ActionEvent>() {
+		Button goButton = new Button(TEMPLATE_LABEL);
+		initImageLoader(images);
+		initGoBtn(goButton, terrainName);
 
-            @Override
-            public void handle (ActionEvent click) {
-                FileChooser fileChoice = new FileChooser();
-                fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png",
-                                                                         "*.gif"));
-                File selectedFile = fileChoice.showOpenDialog(null);
-                if (selectedFile != null) {
-                    myImageLocation = selectedFile.toURI().toString();
-                    Image image = new Image(myImageLocation);
-                    icon.setImage(image);
-                }
-            }
-        });
-        images.getChildren().addAll(icon, loadImage);
-    }
+		box.getChildren().addAll(labelBox, names, images, goButton);
 
-    /**
-     * initializes the go button
-     * 
-     * @param goButton
-     * @param terrainName
-     */
-    private void initGoBtn (Button goButton, TextField terrainName) {
-        goButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent click) {
-                myName = terrainName.getText();
-                if (myImageLocation.equals("") || terrainName.getText().equals("")) {
-                return;
-                }
+		getChildren().add(box);
+	}
 
-                myPatch = new Patch(myName, myImageLocation, new Point2D.Double(0, 0));
-                myPatchController.addEntry(myPatch);
-            }
-        });
-    }
+	/**
+	 * initializes necessary contents for the user to load an img
+	 * 
+	 * @param images - HBox
+	 */
+	 private void initImageLoader (HBox images) {
+		 ImageView icon = new ImageView();
+		 icon.setFitHeight(40);
+		 icon.setFitWidth(40);
+		 icon.setImage(new Image(getClass().getResourceAsStream(myImageLocation)));
+		 Button loadImage = new Button(LOADIMAGE_LABEL);
+		 loadImage.setOnAction(new EventHandler<ActionEvent>() {
+
+			 @Override
+			 public void handle (ActionEvent click) {
+				 FileChooser fileChoice = new FileChooser();
+				 fileChoice.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.png",
+						 "*.gif"));
+				 File selectedFile = fileChoice.showOpenDialog(null);
+				 if (selectedFile != null) {
+					 myImageLocation = selectedFile.toURI().toString();
+					 Image image = new Image(myImageLocation);
+					 icon.setImage(image);
+				 }
+			 }
+		 });
+		 images.getChildren().addAll(icon, loadImage);
+	 }
+
+	 /**
+	  * initializes the go button
+	  * 
+	  * @param goButton
+	  * @param terrainName
+	  */
+	 private void initGoBtn (Button goButton, TextField terrainName) {
+		 goButton.setOnAction(new EventHandler<ActionEvent>() {
+			 @Override
+			 public void handle (ActionEvent click) {
+				 myName = terrainName.getText();
+				 myPatch = new Patch(myName, myImageLocation, DEFAULT_LOC);
+				 myOkLambda.accept(myPatch);
+			 }
+		 });
+	 }
 
 }
