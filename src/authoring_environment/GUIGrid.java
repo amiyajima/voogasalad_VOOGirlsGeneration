@@ -23,7 +23,7 @@ public class GUIGrid extends SuperGrid {
         super();
     }
 
-    public GUIGrid (int cols, int rows, int tileSize, String shape) {
+    public GUIGrid (int cols, int rows, double tileSize, String shape) {
         super(cols, rows, tileSize, shape);
         myPieceData = new PieceData();
         myPatchData = new PatchData();
