@@ -20,42 +20,37 @@ import gameengine.movement.Movement;
 public class ApplyState implements IGridState {
 
     private ViewController myController;
+    private GameGridEffect myGameGridEffect;
     private Game myGame;
 
     public ApplyState (ViewController controller) {
-        //System.out.println("new ApplyState");
+        // System.out.println("new ApplyState");
         myController = controller;
+        myGameGridEffect = controller.getGameGridEffect();
         myGame = controller.getGame();
-        myController
-                .getGrid()
-                .setOnMouseEntered(event -> {
-                                       myController.changeCursor(myController.CURSOR_ATTACK_TEST);
-
-                                       myController
-                                               .getGrid()
-                                               .getChildren()
-                                               .forEach(node -> {
-                                                            node.setOnMouseEntered(event2 -> {
-                                                                myController
-                                                                        .highLightEffectRange(event2,
-                                                                                              Color.RED);
-                                                            });
-                                                            node.setOnMouseExited(event3 -> {
-                                                                myController.highLightActionRange();
-                                                                //TODO: Put this back in
-                                                             /*   if (myController.getActivePiece() != null) {
-                                                                    myController
-                                                                            .highlightCurrent(myController
-                                                                                                      .getActivePiece()
-                                                                                                      .getLoc(),
-                                                                                              Color.BLUE);
-                                                                }*/
-                                                            });
-
-                                                        });
-
-                                   });
-
+        
+        myController.getGrid().setOnMouseEntered(event -> {
+                    myController.changeCursor(myController.CURSOR_ATTACK_TEST);
+                    myController.getGrid().getChildren().forEach(node -> {
+                        node.setOnMouseEntered(event2 -> {
+                            myGameGridEffect.highLightEffectRange(myController.getGrid(), event2,Color.RED);
+                        });
+                        
+                        node.setOnMouseExited(event3 -> {
+                            myGameGridEffect.highLightActionRange();
+                            // TODO: Put this back in
+                            /*
+                             * if (myController.getActivePiece() != null) {
+                             * myController
+                             * .highlightCurrent(myController
+                             * .getActivePiece()
+                             * .getLoc(),
+                             * Color.BLUE);
+                             * }
+                             */
+                        });
+                    });
+                });
     }
 
     @Override
@@ -72,14 +67,12 @@ public class ApplyState implements IGridState {
 
         myController.changeCursor(myController.CURSOR_GLOVE_TEST);
         myController.getGame().getCurrentLevel().garbageCollectPieces();
-        myController.getGrid().populateGrid(myController.getGame().getCurrentLevel().getGrid()
-                                                    .getAllPatches(),
-                                            myController.getGame().getCurrentLevel().getGrid()
-                                                    .getAllPieces());
+        myController.getGrid().populateGrid(myController.getGame().getCurrentLevel().getGrid().getAllPatches(),
+                                            myController.getGame().getCurrentLevel().getGrid().getAllPieces());
 
         myController.setActivePiece(null);
         myController.setActiveAction(null);
-        
+
         checkLevelState();
         checkPlayerState();
     }

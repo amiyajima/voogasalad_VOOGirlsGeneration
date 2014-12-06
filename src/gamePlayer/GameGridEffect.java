@@ -13,10 +13,16 @@ import javafx.scene.paint.Color;
 public class GameGridEffect {
     ViewController myViewController;
     Highlighter myHighlighter;
+    GUIGrid myGrid;
+    Piece myActivePiece;
+    Action myActiveAction;
      
     public GameGridEffect(ViewController vc){
         myHighlighter = new Highlighter();
         myViewController = vc;
+        myGrid = myViewController.getGrid();
+        myActivePiece = myViewController.getActivePiece();
+        myActiveAction = myViewController.getActiveAction();
      }
     
     /**
@@ -32,20 +38,19 @@ public class GameGridEffect {
      * selected
      */
     @FXML
-    public void highlightActionRange (GUIGrid grid, Piece activePiece, Action activeAction) {
+    public void highlightActionRange () {
 
-        clearAllEffects(grid);
-        if (activePiece != null && activeAction != null) {
+        clearAllEffects(myGrid);
+        if (myActivePiece != null && myActiveAction != null) {
 
-            activeAction.getActionRange(activePiece.getLoc())
-                    .forEach(
-                             point -> {
-                                 if (point.getX() < grid.getRow()       //assuming this method exists
-                                     && point.getY() < grid.getCol()    //assuming this method exists
+            myActiveAction.getActionRange(myActivePiece.getLoc())
+                    .forEach(point -> {
+                                 if (point.getX() < myGrid.getRow()       //assuming this method exists
+                                     && point.getY() < myGrid.getCol()    //assuming this method exists
                                      && point.getX() > 0 && point.getY() > 0) {
-                                     Node n = grid.get((int) point.getX(), (int) point.getY()); //assuming this method exists
+                                     Node n = myGrid.get((int) point.getX(), (int) point.getY()); //assuming this method exists
 //                                      myHighlighter.addDropShadow(n, Color.YELLOW);     
-                                     myHighlighter.highlight(grid, point, Color.YELLOW);
+                                     myHighlighter.highlight(myGrid, point, Color.YELLOW);
                                  }
                              });
         }
@@ -59,19 +64,19 @@ public class GameGridEffect {
      * @param n
      * @param red
      */
-    public void highlightEffectRange (MouseEvent me, Color c, GUIGrid grid, Piece activePiece, Action activeAction, Point2D loc) {
+    public void highlightEffectRange (MouseEvent me, Color c, Point2D loc) {
         
-        if (activePiece != null && activeAction != null) {
-            activeAction.getActionRange(activePiece.getLoc()).forEach(point -> {
+        if (myActivePiece != null && myActiveAction != null) {
+            myActiveAction.getActionRange(myActivePiece.getLoc()).forEach(point -> {
                 
 //                Point2D loc = myViewController.findPosition(me.getSceneX(),me.getSceneY());
 
                 if (loc.equals(point)) {
-                    activeAction.getEffectRange().forEach(point2 -> {
+                    myActiveAction.getEffectRange().forEach(point2 -> {
 //                        Node n =grid.get((int) (loc.getX() + point2.getX()),   //assuming this method exists
 //                                           (int) (loc.getY() + point2.getY()));
 //                         myHighlighter.addDropShadow(n, c);
-                        myHighlighter.highlight(grid, loc, c);
+                        myHighlighter.highlight(myGrid, loc, c);
                         });
                     }
                 });
@@ -81,8 +86,8 @@ public class GameGridEffect {
     /**
      * Highlight the current location on the grid
      */
-    public void highlightCurrent(GUIGrid grid, Point2D loc, Color c){
-        myHighlighter.highlight(grid, loc, c);
+    public void highlightCurrent(Point2D loc, Color c){
+        myHighlighter.highlight(myGrid, loc, c);
     }
     
     /**
