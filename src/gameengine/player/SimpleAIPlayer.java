@@ -16,8 +16,8 @@ public class SimpleAIPlayer extends Player {
     // get a list of pieces that have available moves.
     private Set myPieces;
 
-    public SimpleAIPlayer (int id, Grid g) {
-        super(id, g);
+    public SimpleAIPlayer (int id) {
+        super(id);
     }
 
     /**

@@ -1,5 +1,6 @@
 package gameengine.player;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +25,7 @@ public abstract class Player {
 
     private int myNumMovesPlayed;
     private int myID;
+    private List myPieces;
 
     /**
      * Default constructor
@@ -37,20 +39,22 @@ public abstract class Player {
      * 
      * @param id
      *        int ID corresponding to the Player
+     * @param  
      */
     public Player (int id) {
         myNumMovesPlayed = 0;
         myID = id;
+        myPieces = new ArrayList<Piece>();
     }
 
-/*    *//**
+    /*    *//**
      * Iterate through the list of pieces available on the grid.
      * 
      * @param g
      * @return
      *         TODO: itereate through pieces in grid, determine which ones have corresponding Player
      *         ID
-     *//*
+     */
     private List<Piece> populatePieces (Grid g) {
         // Set allPieces = g.get
         return null;
@@ -58,7 +62,7 @@ public abstract class Player {
 
     public List<Piece> getPieces () {
         return Collections.unmodifiableList(myPieces);
-    }*/
+    }
 
     public abstract void startTurn ();
 
