@@ -10,7 +10,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-public class KeyboardActionController {
+public class KeyboardAction {
     HumanPlayer myCurrentPlayer;
     Point2D myCurrentLocation;
     GameGridEffect myGameGridEffect;

@@ -12,7 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import authoring_environment.GUIGrid;
 
-public class KeyboardMovementController {
+public class KeyboardMovement {
     HumanPlayer myCurrentPlayer;
     Point2D myCurrentLocation;
     GameGridEffect myGameGridEffect;

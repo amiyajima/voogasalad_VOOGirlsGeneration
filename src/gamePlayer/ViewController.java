@@ -89,7 +89,8 @@ public class ViewController {
 	// private SampleListener myLeapListener;
 
 	private Boolean keyControlOn;
-	private KeyboardController myKeyboardController;
+	private KeyboardAction myKeyboardAction;
+	private KeyboardMovement myKeyboardMovement;
 	// private MouseController myMouseController;
 
 	private Piece activePiece;
@@ -454,11 +455,11 @@ public class ViewController {
 		});
 	}
 
+	
 	/**
 	 * TODO: Add javadoc
 	 */
 	public void setOnEnterKey() {
-
 		myGrid.requestFocus();
 		myGrid.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
@@ -466,19 +467,15 @@ public class ViewController {
 			public void handle(KeyEvent arg0) {
 
 				if (arg0.getCode() == KeyCode.F) {
-
 					System.out.println("f");
-					performAction(myKeyboardController.getCurrentLocation()
-							.getX(), myKeyboardController.getCurrentLocation()
-							.getY());
-
+					performAction(myKeyboardMovement.getCurrentLocation().getX(), 
+					              myKeyboardMovement.getCurrentLocation().getY());
 				}
-
 			}
-
 		});
 	}
 
+	
 	/**
 	 * Perform the actions of a click at position (x,y) on game grid
 	 * 
@@ -556,11 +553,13 @@ public class ViewController {
 	public void toggleKeyboardControl() {
 		if (keyControlOn) {
 			keyControlOn = false;
-			myGameGridEffect.getHighlighter().unhighlight(myGrid, myKeyboardController.getCurrentLocation());
-			myKeyboardController = null;
+			myGameGridEffect.getHighlighter().unhighlight(myGrid, myKeyboardMovement.getCurrentLocation());
+			myKeyboardMovement = null;
+			myKeyboardAction = null;
 		} else {
-			myKeyboardController = new KeyboardController();
-//			myKeyboardController.setMovementKeyControl(this, myGrid, myModel);
+			myKeyboardMovement = new KeyboardMovement();
+			myKeyboardAction = new KeyboardAction();
+			myKeyboardMovement.setMovementKeyControl(this, myGrid, myModel);
 			keyControlOn = true;
 			// setOnEnterKey();
 		}
