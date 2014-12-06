@@ -20,8 +20,8 @@ public abstract class SuperTile extends Group {
 	private Point2D myCoordinates;
 	private Point2D myLocation;
 	private Point2D myImageCoord;
-	protected ImageView myPieceImage;
-	protected ImageView myPatchImage;
+	protected transient ImageView myPieceImage;
+	protected transient ImageView myPatchImage;
 
 	/**
 	 * 

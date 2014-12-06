@@ -6,7 +6,7 @@ import java.util.List;
 
 import javafx.scene.layout.Pane;
 
-public class SuperGrid extends Pane {
+public class SuperGrid  {
         private static final String CIRCLE_GRID = "Circle Grid";
         private static final String HEXAGON_GRID = "Hexagon Grid";
         private static final String SQUARE_GRID = "Square Grid";
@@ -32,7 +32,7 @@ public class SuperGrid extends Pane {
                                 Point2D location=new Point2D.Double(r,c);
                                 SuperTile tile = makeShapeTile(shape, myTileSize, location);
                                 tileCol.add(tile);
-                                super.getChildren().add(tile);
+                               // super.getChildren().add(tile);
                         }
                         myGrid.add(tileCol);
                 }
