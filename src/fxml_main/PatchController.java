@@ -4,6 +4,7 @@ import gamedata.gamecomponents.Patch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -11,14 +12,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import authoring.createedit.TerrainEditor;
 import authoring.data.PatchTypeData;
-import authoring_environment.ShapeGrid;
+import authoring_environment.GUIGrid;
 
 
 public class PatchController extends GridComponentAbstCtrl<Patch> {
 
     private PatchTypeData myPatchTypes;
 
-    public PatchController (VBox vbox, ScrollPane propertiesSPane, ShapeGrid currGrid) {
+    public PatchController (VBox vbox, ScrollPane propertiesSPane, GUIGrid currGrid) {
         super(vbox, propertiesSPane, currGrid);
         myPatchTypes = new PatchTypeData();
     }
@@ -58,10 +59,12 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
     protected HBox makeEntryBox (Patch entry) {
         myPatchTypes.add(entry);
         HBox hb = new HBox();
+        Label name = new Label(entry.getName());
+        name.setTranslateY(7.5);
         ImageView img = entry.getImageView();
         img.setFitHeight(40);
         img.setFitWidth(40);
-        hb.getChildren().add(img);
+        hb.getChildren().addAll(img, name);
         return hb;
     }
 
@@ -83,6 +86,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 
             @Override
             public void handle (ActionEvent event) {
+                myPatchTypes.remove(entry);
                 HBox entryBox = myEntryMap.get(entry);
                 myVBox.getChildren().remove(entryBox);
             }

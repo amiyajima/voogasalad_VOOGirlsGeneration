@@ -137,8 +137,6 @@ public class newTerrainCreator extends Pane {
                 }
 
                 Patch terrain = new Patch(myName, myImageLocation, myLoc);
-                Label name = new Label(terrainName.getText());
-                name.setTranslateY(7.5);
 
                 myPatchController.addEntry(terrain);
             }
