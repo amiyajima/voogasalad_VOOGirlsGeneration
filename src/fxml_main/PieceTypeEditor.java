@@ -2,6 +2,7 @@ package fxml_main;
 
 import gamedata.action.Action;
 import gamedata.gamecomponents.Inventory;
+import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
@@ -10,6 +11,7 @@ import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -35,7 +37,6 @@ import authoring.data.PieceTypeData;
 import authoring_environment.UIspecs;
 
 /**
- * 
  * @author Mike Zhu, Jennie Ju
  *
  */
