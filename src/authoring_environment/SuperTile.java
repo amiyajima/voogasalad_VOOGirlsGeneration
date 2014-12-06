@@ -80,12 +80,12 @@ public abstract class SuperTile extends Group {
 		return myHighlight.isVisible();
 	}
 	
-	public void addPiece(Image image){
-		myPieceImage.setImage(image);
+	public void addPieceImage(ImageView imageView){
+		myPieceImage.setImage(imageView.getImage());
 	}
 	
-	public void addPatch(Image image){
-		myPatchImage.setImage(image);
+	public void addPatchImage(ImageView imageView){
+		myPatchImage.setImage(imageView.getImage());
 	}
 
 
