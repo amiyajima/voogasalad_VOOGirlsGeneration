@@ -53,6 +53,11 @@ public class Game {
 		myCurrentLevel = currentLevel;
 		myCurrentPlayer = null;
 	}
+	
+	//TEMPORARY METHOD FOR BOB TESTER
+	public void addPlayer(Player p){
+	    myPlayers.add(p);
+	}
 
 	/**
 	 * Iterates the Current Level to the Next Level If no more levels, game is

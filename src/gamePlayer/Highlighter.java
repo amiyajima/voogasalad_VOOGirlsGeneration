@@ -3,6 +3,7 @@ package gamePlayer;
 import java.awt.geom.Point2D;
 import authoring_environment.GUIGrid;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 
@@ -40,11 +41,12 @@ public class Highlighter {
 	 * 
 	 * @param loc
 	 */
-	public void unhighlight(GUIGrid grid, Point2D loc) {
-		Node n = grid.get((int) loc.getX(), (int) loc.getY());        //assuming this method exists
-		if (n != null) {
-			n.setEffect(null);
-		}
+	public void unhighlight(ScrollPane myGridPane, Point2D loc) {
+	    System.out.println("unhighlight");
+//		Node n = myGridPane.get((int) loc.getX(), (int) loc.getY());        //assuming this method exists
+//		if (n != null) {
+//			n.setEffect(null);
+//		}
 	}
 
 //	/**
