@@ -1,13 +1,12 @@
 package tests;
 
-import gamedata.action.Action;
+import gamedata.action.Action; 
 import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
 import gamedata.action.ReceiverToInventoryConclusion;
 import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
 import gamedata.gamecomponents.Game;
-import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
@@ -69,7 +68,7 @@ public class JSONBobTester {
         // myPlayers.add(myPlayer1);
         myPlayers.add(myPlayer2);
 
-        Grid grid = createNewGrid();
+        GUIGrid grid = createNewGrid();
 
         List<Rule> myRules = new ArrayList<Rule>();
         MoveCountRule rule1 = new MoveCountRule(3);
