@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+
+import authoring_environment.GUIGrid;
 import gamedata.events.Event;
 import gamedata.goals.*;
 import gamedata.rules.*;
@@ -16,7 +18,7 @@ import gamedata.rules.*;
 public class Level extends Observable {
     private static final String DEFAULT_ID = "Default";
 
-	private Grid myGrid;
+	private GUIGrid myGrid;
 	/**
 	 * Goals defining how to win the level
 	 */	
@@ -28,10 +30,10 @@ public class Level extends Observable {
 	 * Constructs a default level with a default ID and sets it as NOT the winning level
 	 */
 	public Level() {
-		this(new Grid(), new ArrayList<Event>(), DEFAULT_ID, false);
+		this(new GUIGrid(), new ArrayList<Event>(), DEFAULT_ID, false);
 	}
 
-	public Level(Grid gr, List<Event> events, String id, boolean isWinningLevel) {
+	public Level(GUIGrid gr, List<Event> events, String id, boolean isWinningLevel) {
 		myGrid = gr;
 		myEvents = events;
 		myID = id;
@@ -62,7 +64,7 @@ public class Level extends Observable {
 	 * 
 	 * @return
 	 */
-	public Grid getGrid() {
+	public GUIGrid getGrid() {
 		return myGrid;
 	}
 
@@ -81,7 +83,7 @@ public class Level extends Observable {
 	 * Removes all pieces marked for removal
 	 */
 	public void garbageCollectPieces() {
-		List<Piece> pieces = myGrid.getAllPieces();
+		List<Piece> pieces = myGrid.getPieces();
 		List<Piece> toRemove = new ArrayList<Piece>();
 		for (Piece p : pieces) {
 			/*
