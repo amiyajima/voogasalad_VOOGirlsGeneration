@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -18,6 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
+import authoring_environment.RangeGrid;
+import authoring_environment.RangeGridView;
 
 
 /**
@@ -53,35 +56,32 @@ public class RangeEditor extends PopupWindow {
 
     private int myGridWidthNumber;
     private int myGridHeightNumber;
-    private RangeGrid mySampleGrid;
-    private ScrollPane testView;
+    private RangeGridView rangeGridView;
     
 
     public RangeEditor (List<Point2D> range) {
-        // range.add(new Point2D.Double(1,0));
-        // range.add(new Point2D.Double(-1,1));
+    	range.add(new Point2D.Double(1,0));
+    	range.add(new Point2D.Double(-1,1));
 
-        setHeight(RANGE_EDITOR_HEIGHT);
-        setWidth(RANGE_EDITOR_WIDTH);
-        setTitle(NAME);
-        
-    	testView=new ScrollPane();
-        mySampleGrid = new RangeGrid(myGridLength, myGridLength,
-                                         myTileSize, "Square Grid", range);
-        mySampleGrid.displayPane(testView);
-        if (!((range == null) || (range.size() == 0))) {
+    	setHeight(RANGE_EDITOR_HEIGHT);
+    	setWidth(RANGE_EDITOR_WIDTH);
+    	setTitle(NAME);
 
-            // cacluateGridSize(range);
-            int initialWidth = (int) cacluateGridSize(range).getX();
-            int initialHeight = (int) cacluateGridSize(range).getY();
-//            System.out.println(initialWidth);
-//            System.out.println(initialHeight);
+    	rangeGridView = new RangeGridView(myGridLength, myGridLength,
+    			myTileSize, "Square Grid", range);
 
-            int initialSize = getPrefTileSize(initialWidth * 2 + 1, initialHeight * 2 + 1);
-            mySampleGrid=new RangeGrid (initialWidth * 2 + 1,initialHeight * 2 + 1,initialSize,
-            		"Square Grid",range);
-
-        }
+//        if (!((range == null) || (range.size() == 0))) {
+//            // cacluateGridSize(range);
+//            int initialWidth = (int) cacluateGridSize(range).getX();
+//            int initialHeight = (int) cacluateGridSize(range).getY();
+////            System.out.println(initialWidth);
+////            System.out.println(initialHeight);
+//
+//            int initialSize = getPrefTileSize(initialWidth * 2 + 1, initialHeight * 2 + 1);
+//            mySampleGrid=new RangeGrid (initialWidth * 2 + 1,initialHeight * 2 + 1,initialSize,
+//            		"Square Grid",range);
+//
+//        }
         initialize();
     }
 
@@ -169,7 +169,7 @@ public class RangeEditor extends PopupWindow {
 
         sizeChooser.getChildren().addAll(horizontal, times, vertical);
 
-        box.getChildren().addAll(sizeChooser, enter, testView);
+        box.getChildren().addAll(sizeChooser, enter, rangeGridView);
         setScene(scene);
     }
 

@@ -17,15 +17,11 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 	}
 	
 	public boolean containsName(String name) {
-		return getPatchNames().contains(name);
-	}
-	
-	private Set<String> getPatchNames() {
-		Set nameSet = new HashSet<String>();
+		Set<String> nameSet = new HashSet<String>();
 		for (Patch p : myPatches) {
 			nameSet.add(p.getName());
 		}
-		return nameSet;
+		return nameSet.contains(name);
 	}
 
 	@Override
