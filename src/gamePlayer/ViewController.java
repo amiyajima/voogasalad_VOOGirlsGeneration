@@ -170,10 +170,15 @@ public class ViewController {
                                 .toString());
 
                 myAudio.play();
+                myScene = new Scene(myGameSpace);
+                myStage.setScene(myScene);
+//                myModel = 
+//                initializeGrid();
 
             });
             l.getStyleClass().add("button");
             newGameButton.getItems().add(l);
+            
 
         });
 
