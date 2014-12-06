@@ -2,9 +2,9 @@
 
 package authoring.eventeditor;
 
+import gamedata.events.Condition;
 import gamedata.events.Event;
 import gamedata.events.GlobalAction;
-import gamedata.events.conditions.Condition;
 import gamedata.events.conditions.IfStatEqualsConstant;
 
 import java.io.IOException;
@@ -45,9 +45,13 @@ public class EventEditorController implements Initializable {
 	@FXML
 	private Button newCondition;
 	@FXML
+	private Button editCondition;
+	@FXML
 	private Button delCondition;
 	@FXML
 	private Button delAction;
+	@FXML
+	private Button editAction;
 	@FXML
 	private Button newAction;
 
@@ -79,6 +83,11 @@ public class EventEditorController implements Initializable {
 	private void handleNewCondition() throws IOException{
 		showNewConditionWindow();
 	}
+	
+	@FXML
+	private void handleEditCondition() throws IOException{
+		
+	}
 
 	@FXML
 	private void handleDelCondition(){
@@ -89,6 +98,11 @@ public class EventEditorController implements Initializable {
 	@FXML
 	private void handleNewAction() throws IOException{
 		showNewActionWindow();
+	}
+	
+	@FXML
+	private void handleEditAction() throws IOException{
+		
 	}
 
 	@FXML

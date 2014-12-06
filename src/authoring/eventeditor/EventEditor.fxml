@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" stylesheets="@../../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="authoring.eventeditor.EventEditorController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="authoring.eventeditor.EventEditorController">
    <center>
       <VBox prefHeight="400.0" prefWidth="391.0" styleClass="vbox" BorderPane.alignment="CENTER">
          <children>
@@ -52,7 +52,6 @@
       <HBox>
          <children>
             <Separator orientation="VERTICAL" prefHeight="200.0" />
-            <VBox prefHeight="500.0" prefWidth="359.0" />
          </children>
       </HBox>
    </right>
