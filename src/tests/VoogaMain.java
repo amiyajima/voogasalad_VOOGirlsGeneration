@@ -20,8 +20,8 @@ public class VoogaMain {
         JSONManager myJSONmanager = new JSONManager();
         JSONBobTester jb = new JSONBobTester();
         //System.out.println("things still work");
-        //myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
-        myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
+        myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
+        //myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
     }
 
     public static void testJSONload () {

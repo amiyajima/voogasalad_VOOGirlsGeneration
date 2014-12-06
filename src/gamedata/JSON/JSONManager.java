@@ -50,13 +50,13 @@ public class JSONManager {
     /**
      * Write a game and its contents into a JSON file.
      * 
-     * @param superGrid
+     * @param myModel
      * 
      * @param grid
      */
-    public void writeToJSON (SuperGrid superGrid, String fileName) {
+    public void writeToJSON (Game myModel, String fileName) {
         System.out.println("JSONManager: write method called");
-        String json = myGson.toJson(superGrid);
+        String json = myGson.toJson(myModel);
         System.out.println("JSONManager: game converted to json!");
 
         try {
@@ -77,11 +77,11 @@ public class JSONManager {
      * @param JSON file location
      * @throws FileNotFoundException
      */
-    public GoalData readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
+    public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
-        GoalData myGameData = myGson.fromJson(br, GoalData.class);
+        Game myGameData = myGson.fromJson(br, Game.class);
         System.out.println(myGameData.toString());
 
         // JSONParseTester jpt = new JSONParseTester();
