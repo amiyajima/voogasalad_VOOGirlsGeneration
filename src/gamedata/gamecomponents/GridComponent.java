@@ -46,9 +46,9 @@ public abstract class GridComponent {
 	 * 
 	 * @param clone : Piece or patch class to copy over.
 	 */
-	public GridComponent(GridComponent clone){
+	public GridComponent(GridComponent clone, Point2D placeHere){
 		myName = clone.myName;
-		myLoc = new Point2D.Double(clone.myLoc.getX(),clone.myLoc.getY());
+		myLoc = new Point2D.Double(placeHere.getX(),placeHere.getY());
 		myImageLocation = clone.myImageLocation;
 		setImageView(myImageLocation);
 	}

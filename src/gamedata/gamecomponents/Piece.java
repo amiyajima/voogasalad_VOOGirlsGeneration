@@ -57,8 +57,8 @@ public class Piece extends GridComponent {
      * 
      * @param clone - Piece instance to be cloned
      */
-    public Piece (Piece clone) {
-        super(clone);
+    public Piece (Piece clone, Point2D placeHere) {
+        super(clone, placeHere);
         myMove = clone.myMove;
         myActions = new LinkedList<Action>(clone.myActions);
         myStats = new Stats(clone.myStats);
