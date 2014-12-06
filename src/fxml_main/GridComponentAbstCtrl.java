@@ -60,7 +60,7 @@ public abstract class GridComponentAbstCtrl<T> {
 
     protected abstract void initGlobalDelBtn (Button delBtn);
 
-    protected void addEntry (T entry) {
+    public void addEntry (T entry) {
         HBox entryBox = makeEntryBox(entry);
         HBox entryCtrls = initEntryControls(entry);
         entryCtrls.getChildren().add(entryBox);
