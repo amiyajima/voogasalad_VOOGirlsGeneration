@@ -445,7 +445,7 @@ public class ViewController {
 			return;
 		setActiveAction(action);
 		
-		myGameGridEffect.highLightActionRange(myGrid, activePiece, action);
+		myGameGridEffect.highlightActionRange();
 
 		setGridState(new ApplyState(this));
 
@@ -507,7 +507,7 @@ public class ViewController {
 		
 		
 		//highlightCurrent(findPosition(x - 45, y - 20), Color.BLUE);
-		myGameGridEffect.highlightCurrent(myGrid, findPosition(x-45, y-20), Color.BLUE);
+		myGameGridEffect.highlightCurrent(findPosition(x-45, y-20), Color.BLUE);
 		
 		// addDropShadow(myGrid.get(((int)findPosition(x,y).getX()),
 		// ((int)findPosition(x,y).getY())), Color.PURPLE);
@@ -521,7 +521,7 @@ public class ViewController {
 		myGameGridEffect.clearAllEffects(myGrid);
 		
 		//highlightCurrent(location, Color.BLUE);
-		myGameGridEffect.highlightCurrent(myGrid, location, Color.BLUE);
+		myGameGridEffect.highlightCurrent(location, Color.BLUE);
 	}
 
 
