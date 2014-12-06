@@ -23,6 +23,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import authoring_environment.GUIGrid;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -49,12 +50,13 @@ public class JSONManager {
     /**
      * Write a game and its contents into a JSON file.
      * 
-     * @param game
+     * @param guiGrid
      * 
      * @param grid
      */
-    public void writeToJSON (Game game, String fileName) {
-        String json = myGson.toJson(game);
+    public void writeToJSON (GUIGrid guiGrid, String fileName) {
+        System.out.println("JSONManager: write method called");
+        String json = myGson.toJson(guiGrid);
         System.out.println("JSONManager: game converted to json!");
 
         try {
@@ -124,33 +126,6 @@ public class JSONManager {
 
         return null;
     }
-
-    /*
-     * public void test(String type, BufferedReader reader){
-     * Object deserializedObject = null;
-     * Class classDefinition = null;
-     * try {
-     * classDefinition = Class.forName(type);
-     * try {
-     * deserializedObject = classDefinition.newInstance();
-     * }
-     * catch (InstantiationException e) {
-     * // TODO Auto-generated catch block
-     * e.printStackTrace();
-     * }
-     * catch (IllegalAccessException e) {
-     * // TODO Auto-generated catch block
-     * e.printStackTrace();
-     * }
-     * }
-     * catch (ClassNotFoundException e) {
-     * // TODO Auto-generated catch block
-     * e.printStackTrace();
-     * }
-     * deserializedObject = myGson.fromJson(reader, deserializedObject.getClass());
-     * System.out.println(deserializedObject.toString());
-     * }
-     */
 
     public void registerTypeAdapters (GsonBuilder builder) {
         builder.registerTypeAdapter(Goal.class, new GenericTypeAdapter<Goal>("gamedata.goals"));

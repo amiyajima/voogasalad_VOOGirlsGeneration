@@ -5,11 +5,6 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import authoring.data.ActionData;
-import authoring.data.AuthoringLevel;
-import authoring.eventeditor.EventEditorController;
-import authoring_environment.ShapeGrid;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,6 +15,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import authoring.data.ActionData;
+import authoring.data.AuthoringLevel;
+import authoring.eventeditor.EventEditorController;
+import authoring_environment.GUIGrid;
 
 public class AuthoringController implements Initializable {
 
@@ -45,7 +44,7 @@ public class AuthoringController implements Initializable {
 	@FXML
 	private MenuItem events;
 	
-	private ShapeGrid myCurrentGrid;
+	private GUIGrid myCurrentGrid;
 	private PieceController myPieceController;
 	private PatchController myPatchController;
 	private LevelController myLevelController;

@@ -1,13 +1,14 @@
 package gameengine.movement;
 
 import gamedata.action.Action;
-import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Piece;
 import gamedata.rules.Rule;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.geom.Point2D;
+
+import authoring_environment.GUIGrid;
 
 /**
  * Defines the movement of a piece. Responsible for maintaining the behavior
@@ -32,7 +33,7 @@ public class Movement implements Action {
 	/**
 	 * Grid the Piece is on and movement will be execute on
 	 */
-	private transient Grid myGrid;
+	private transient GUIGrid myGrid;
 
 	/**
 	 * Orientator resonsible for calculating orientations
@@ -51,7 +52,7 @@ public class Movement implements Action {
 	 *            movement
 	 */
 	@SafeVarargs
-	public Movement(Grid g, List<Point2D>... endPoints) {
+	public Movement(GUIGrid g, List<Point2D>... endPoints) {
 		myOrientation = 0;
 		myOrientator = new Orientator();
 		myGrid = g;

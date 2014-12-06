@@ -13,7 +13,7 @@ import java.util.Map;
  * @Author Jesse Ling, Sandy Lee
  * 
  */
-public class Grid {
+public class XGrid {
     private int myRow;
     private int myColumn;
     // protected Map<Point2D, Patch> myPatches;
