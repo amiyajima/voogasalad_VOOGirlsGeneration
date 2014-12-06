@@ -13,15 +13,17 @@ import javafx.scene.paint.Color;
  *
  */
 public class Highlighter {
-	
+    
+//    GameGrid myGrid;
+    
 	/**
 	 * Turns on highlighting of a Patch at loc with Color c
 	 * 
 	 * @param loc
 	 * @param c
 	 */
-	public void highlightCurrent(Point2D loc, Color c) {
-		addDropShadow(myGrid.get((int) loc.getX(), (int) loc.getY()), c);
+	public void highlightCurrent(GameGrid grid, Point2D loc, Color c) {
+	    addDropShadow(grid.get((int) loc.getX(), (int) loc.getY()), c);
 	}
 
 	/**
@@ -29,8 +31,8 @@ public class Highlighter {
 	 * 
 	 * @param loc
 	 */
-	public void unhighlight(Point2D loc) {
-		Node n = myGrid.get((int) loc.getX(), (int) loc.getY());
+	public void unhighlight(GameGrid grid, Point2D loc) {
+		Node n = grid.get((int) loc.getX(), (int) loc.getY());
 		if (n != null) {
 			n.setEffect(null);
 		}
@@ -52,5 +54,4 @@ public class Highlighter {
 			n.setEffect(ds);
 		}
 	}
-
 }
