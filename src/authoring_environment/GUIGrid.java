@@ -61,7 +61,7 @@ public class GUIGrid extends SuperGrid {
         Patch clone = new Patch(patchType, loc);
         myPatchData.add(clone);
         SuperTile myTile = myGrid.get((int) loc.getX()).get((int) loc.getY());
-        myTile.addPatchImage(clone.getImageView());
+        myTile.addPatchImage(clone.getImageLocation());
     }
 
     public void removePiece (Piece p) {
