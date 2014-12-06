@@ -4,8 +4,10 @@ import java.awt.geom.Point2D;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
 
 /**
@@ -22,6 +24,7 @@ public abstract class SuperTile extends Group {
 	private Point2D myImageCoord;
 	protected ImageView myPieceImage;
 	protected ImageView myPatchImage;
+	private Shape myHighlight;
 
 	/**
 	 * 
@@ -37,12 +40,13 @@ public abstract class SuperTile extends Group {
 		
 		setStyle("-fx-cursor: hand");
 		
-		super.getChildren().addAll(myShape,myPieceImage,myPatchImage);
+		super.getChildren().addAll(myShape,myPatchImage,myPieceImage);
 	}
 	
 
 	protected void makeShapeTile(int size, Point2D loc){
 		myShape=makeShape(size);
+		makeHighlight(size);
 		setCheckeredColor((int)loc.getX(),(int)loc.getY(),myShape);
 		myCoordinates=calculateCoord(size,loc);
 		myImageCoord=calculateImageCoord(size,loc);
@@ -51,9 +55,37 @@ public abstract class SuperTile extends Group {
 		myPieceImage = initImageView(myImageSize);
 		myPatchImage = initImageView(myImageSize);
 		
-		alignNodes(myCoordinates,myImageCoord, myPieceImage, myPatchImage);
+		alignNodes(myCoordinates,myShape,myHighlight);
+		alignNodes(myImageCoord,myPatchImage,myPieceImage);
 
+	}
+
+
+	private void makeHighlight(int size) {
+		myHighlight=makeShape(size);
+		myHighlight.setFill(Color.web("#0000FF", 0.3));
+		myHighlight.setVisible(false);
 	};
+	
+	public void selectTile(){
+		myHighlight.setVisible(true);
+	}
+	
+	public void deselectTile(){
+		myHighlight.setVisible(false);
+	}
+	
+	public boolean ifSelected(){
+		return myHighlight.isVisible();
+	}
+	
+	public void addPiece(Image image){
+		myPieceImage.setImage(image);
+	}
+	
+	public void addPatch(Image image){
+		myPatchImage.setImage(image);
+	}
 
 
 	protected abstract Shape makeShape(int size);
@@ -83,12 +115,10 @@ public abstract class SuperTile extends Group {
 		return imgView;
 	}
  
-	private void alignNodes(Point2D layoutCoord, Point2D imageCoord, Node...nodes) {
-		myShape.setLayoutX(layoutCoord.getX());
-		myShape.setLayoutY(layoutCoord.getY());
+	private void alignNodes(Point2D coord, Node...nodes) {
 		for (Node node : nodes) {
-			node.setLayoutX(imageCoord.getX());
-			node.setLayoutY(imageCoord.getY());
+			node.setLayoutX(coord.getX());
+			node.setLayoutY(coord.getY());
 		}
 	}
 	

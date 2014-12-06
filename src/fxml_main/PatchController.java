@@ -10,7 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import authoring.createedit.TerrainEditor;
 import authoring.data.PatchTypeData;
 import authoring_environment.GUIGrid;
 
@@ -26,7 +25,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 
     @Override
     protected void initGlobalNewBtn (Button newBtn) {
-        Pane box = new newTerrainCreator(this);
+        Pane box = new PatchTypeEditor(this);
         newBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
@@ -70,10 +69,10 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 
     @Override
     protected void initEntryEditBtn (Patch entry, Button editBtn) {
+        Pane p = new PatchTypeEditor(this, entry);
         editBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent e) {
-                Pane p = new TerrainEditor(entry);
                 myPropertiesSPane.setContent(p);
             }
         });
