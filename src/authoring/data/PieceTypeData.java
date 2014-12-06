@@ -2,8 +2,8 @@ package authoring.data;
 
 import gamedata.gamecomponents.Piece;
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Set;
@@ -13,19 +13,15 @@ public class PieceTypeData extends Observable implements AuthoringData<Piece> {
     private List<Piece> myPieces;
     
     public PieceTypeData() {
-        myPieces = new ArrayList<Piece>();
+        myPieces = new LinkedList<Piece>();
     }
     
     public boolean containsName(String name) {
-		return getPieceNames().contains(name);
-	}
-    
-    private Set<String> getPieceNames() {
-		Set nameSet = new HashSet<String>();
+    	Set<String> nameSet = new HashSet<String>();
 		for (Piece p : myPieces) {
 			nameSet.add(p.getName());
 		}
-		return nameSet;
+		return nameSet.contains(name);
 	}
     
 	@Override

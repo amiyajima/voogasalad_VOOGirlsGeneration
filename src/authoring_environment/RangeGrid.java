@@ -1,4 +1,4 @@
-package authoring.concretefeatures;
+package authoring_environment;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList; 
@@ -8,12 +8,8 @@ import java.util.Set;
 
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import authoring_environment.Grid;
-import authoring_environment.GridView;
-import authoring_environment.SuperGrid;
-import authoring_environment.SuperTile;
-import authoring_environment.Tile;
 
 /**
  * The view of the grid especially for selecting the range.  
@@ -22,7 +18,7 @@ import authoring_environment.Tile;
  */
 public class RangeGrid extends SuperGrid{
 
-	private static final String DEFAULT_CENTRAL_IMAGE="images/images.jpeg";
+	private static final String DEFAULT_CENTRAL_IMAGE="/resources/images/Patrick.jpeg";
 
 	private List<List<SuperTile>> rangeGrid;
 	private int myWidth;
@@ -49,7 +45,6 @@ public class RangeGrid extends SuperGrid{
 		
 		addSelectAction();
 		
-
 	}
 
 	private void addSelectAction() {
@@ -98,7 +93,10 @@ public class RangeGrid extends SuperGrid{
 	private void addCenterImage(int rows,int columns) {
 		SuperTile centerTile=findCenterTile(columns,rows);
 		Image centerImage=new Image(getClass().getResourceAsStream(DEFAULT_CENTRAL_IMAGE));
-		centerTile.addPatchImage(centerImage);
+		ImageView centerPatrick=new ImageView(centerImage);
+		centerTile.addPieceImage(centerPatrick);
+		centerTile.myPieceImage.setVisible(true);
+
 	}
 
 	
