@@ -16,24 +16,26 @@ import gamedata.rules.*;
  *
  */
 public class Level extends Observable {
-    private static final String DEFAULT_ID = "Default";
+	private static final String DEFAULT_ID = "Default";
 
 	private GUIGrid myGrid;
 	/**
 	 * Goals defining how to win the level
-	 */	
+	 */
 	private List<Event> myEvents;
 	private String myID;
 	private boolean winningLevel;
 
 	/**
-	 * Constructs a default level with a default ID and sets it as NOT the winning level
+	 * Constructs a default level with a default ID and sets it as NOT the
+	 * winning level
 	 */
 	public Level() {
 		this(new GUIGrid(), new ArrayList<Event>(), DEFAULT_ID, false);
 	}
 
-	public Level(GUIGrid gr, List<Event> events, String id, boolean isWinningLevel) {
+	public Level(GUIGrid gr, List<Event> events, String id,
+			boolean isWinningLevel) {
 		myGrid = gr;
 		myEvents = events;
 		myID = id;
@@ -48,13 +50,12 @@ public class Level extends Observable {
 	 */
 	public boolean checkTurnEnd(int numTurnsPlayed) {
 		for (Event e : myEvents) {
-		    /*
-			if (r.conditionsMet(numTurnsPlayed)) {
-				System.out.println("Player Turn Complete");
-				return true;
-			}
-			*/
-		    // TODO needs to be rewritten since we now have a EndTurnGlobalAction
+			/*
+			 * if (r.conditionsMet(numTurnsPlayed)) {
+			 * System.out.println("Player Turn Complete"); return true; }
+			 */
+			// TODO needs to be rewritten since we now have a
+			// EndTurnGlobalAction
 		}
 		return false;
 	}
@@ -110,17 +111,17 @@ public class Level extends Observable {
 			myGrid.removePiece(p);
 		}
 	}
-	
+
 	public void restart() {
-	    // TODO restarts level
+		// TODO restarts level
 	}
-	
+
 	public String getID() {
-	    return myID;
+		return myID;
 	}
-	
+
 	public boolean isWinningLevel() {
-	    return winningLevel;
+		return winningLevel;
 	}
 
 }
