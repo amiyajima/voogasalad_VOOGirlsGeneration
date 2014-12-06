@@ -6,8 +6,6 @@ import gameengine.movement.Movement;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.geom.Point2D;
-import javafx.scene.image.ImageView;
-
 
 /**
  * Class for pieces. Pieces are the primary unit for
@@ -15,7 +13,6 @@ import javafx.scene.image.ImageView;
  * various actions during the game.
  * 
  * @authors Sandy Lee, Jesse Ling, Jennie Ju
- *
  */
 public class Piece extends GridComponent {
 	
@@ -71,20 +68,6 @@ public class Piece extends GridComponent {
         myPlayerID = clone.myPlayerID;
         myShouldRemove = false;
         myInventory = null; // TODO: NOPE. NO INVENTORY.
-    }
-
-    /**
-     * Returns the image location url (for data saving)
-     */
-    public String getImageLocation () {
-        return myImageLocation;
-    }
-
-    /**
-     * Returns the ImageView of the piece for display
-     */
-    public ImageView getImageView () {
-        return myImageView;
     }
 
     /**

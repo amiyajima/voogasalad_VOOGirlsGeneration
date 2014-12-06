@@ -1,7 +1,6 @@
 package gamedata.gamecomponents;
 
 import java.awt.geom.Point2D;
-import javafx.scene.image.ImageView;
 
 /**
  * @author Sandy Lee
@@ -29,38 +28,5 @@ public class Patch extends GridComponent {
 	 */
 	public Patch(Patch clone) {
 		super(clone);
-	}
-
-	/**
-	 * Sets patch's name
-	 * 
-	 * @param myName = string name of patch
-	 *            of patch
-	 */
-	public void setMyName(String name) {
-		this.myName = name;
-	}
-
-	/**
-	 * Getter for patch's image
-	 * 
-	 * @return image of the patch
-	 */
-	public ImageView getImageView() {
-		return myImageView;
-	}
-
-	public String getImageLocation() {
-		return myImageLocation;
-	}
-
-	/**
-	 * Sets chosen image to patch's location
-	 * 
-	 * @param imageLocation
-	 *            image file's location
-	 */
-	public void setMyImage(String imageLocation) {
-		myImageLocation = imageLocation;
 	}
 }
