@@ -1,4 +1,4 @@
-package gamedata.events;
+package gamedata.events.conditions;
 
 /**
  * Simple interface defining behavior of Condition classes.
@@ -11,13 +11,12 @@ package gamedata.events;
  */
 public abstract class Condition {
 
-	protected final String myDescription;
+	protected String myDescription;
 	
 	//Constant strings used to construct the dynamic title
 	protected final static String IF = "IF ";
 	protected final static String EQUALS = " = ";
 
-	
 	/**
 	 * Protected constructor used to set the description
 	 * @param s

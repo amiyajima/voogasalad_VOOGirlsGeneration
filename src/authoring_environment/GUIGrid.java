@@ -6,8 +6,8 @@ import gamedata.gamecomponents.Piece;
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+
+import authoring.data.PatchData;
 
 /**
  * Authoring, engine, and player may all use this grid!!
@@ -15,10 +15,10 @@ import java.util.Observer;
  * @author Jennie Ju
  *
  */
-public class GUIGrid extends SuperGrid implements Observer {
+public class GUIGrid extends SuperGrid {
 
 	private List<Piece> myPieceData;
-	private List<Patch> myPatchData;
+	private PatchData myPatchData;
 
 	public GUIGrid() {
 		super();
@@ -27,7 +27,7 @@ public class GUIGrid extends SuperGrid implements Observer {
 	public GUIGrid(int cols, int rows, int tileSize, String shape) {
 		super(cols, rows, tileSize, shape);
 		myPieceData = new LinkedList<Piece>();
-		myPatchData = new LinkedList<Patch>();
+		myPatchData = new PatchData();
 	}
 
 	/**
@@ -110,14 +110,8 @@ public class GUIGrid extends SuperGrid implements Observer {
 		return myPieceData;
 	}
 
-	public List<Patch> getPatches() {
+	public PatchData getPatches() {
 		return myPatchData;
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

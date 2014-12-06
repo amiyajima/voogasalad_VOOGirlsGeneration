@@ -1,5 +1,7 @@
 package gamedata.gamecomponents;
 
+import gamedata.stats.Stats;
+
 import java.awt.geom.Point2D;
 
 /**
@@ -26,7 +28,12 @@ public class Patch extends GridComponent {
 	 * Deep cloning constructor for a Patch
 	 * @param clone - Patch instance to be cloned
 	 */
-	public Patch(Patch clone) {
-		super(clone);
+	public Patch(Patch clone, Point2D placeHere) {
+		super(clone, placeHere);
+	}
+
+	@Override
+	public Stats getStats() {
+		return null;
 	}
 }

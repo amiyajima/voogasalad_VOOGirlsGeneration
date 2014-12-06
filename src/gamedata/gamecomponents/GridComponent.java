@@ -14,7 +14,7 @@ import javafx.scene.image.ImageView;
  * 
  * @author Martin Tamayo
  */
-public abstract class GridComponent {
+public abstract class GridComponent implements IHasStats{
 	
 	protected String myName;
 	protected Point2D myLoc;
@@ -46,28 +46,12 @@ public abstract class GridComponent {
 	 * 
 	 * @param clone : Piece or patch class to copy over.
 	 */
-	public GridComponent(GridComponent clone){
+	public GridComponent(GridComponent clone, Point2D placeHere){
 		myName = clone.myName;
-		myLoc = new Point2D.Double(clone.myLoc.getX(),clone.myLoc.getY());
+		myLoc = new Point2D.Double(placeHere.getX(),placeHere.getY());
 		myImageLocation = clone.myImageLocation;
 		setImageView(myImageLocation);
 	}
-	
-	/**
-	 * Method for creating an ImageView using the location of the
-	 * image on file. This is for GUI display purposes. This method
-	 * is used by the GridComponent constructor methods.
-	 * 
-	 * @param imageLocation : String path to image on file.
-	 */
-	private void setImageView(String imageLocation) {
-    	if(myImageLocation.startsWith("/")){
-        	myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
-        }
-        else{
-        	myImageView = new ImageView(new Image(imageLocation));
-        }
-    }
 	
 	/**
 	 * Getter method for the name of the GridComponent.
@@ -83,7 +67,7 @@ public abstract class GridComponent {
 	 * 
 	 * @param name : String name describing the piece or patch.
 	 */
-	public void setMyName(String name) {
+	public void setName(String name) {
 		this.myName = name;
 	}
 	
@@ -125,6 +109,7 @@ public abstract class GridComponent {
 	 */
 	public void setImageLocation(String imageLocation) {
 		myImageLocation = imageLocation;
+		setImageView(imageLocation);
 	}
 	
 	/**
@@ -135,5 +120,21 @@ public abstract class GridComponent {
 	 */
     public ImageView getImageView() {
         return myImageView;
+    }
+    
+    /**
+	 * Method for creating an ImageView using the location of the
+	 * image on file. This is for GUI display purposes. This method
+	 * is used privately by the GridComponent constructor methods.
+	 * 
+	 * @param imageLocation : String path to image on file.
+	 */
+	private void setImageView(String imageLocation) {
+    	if(myImageLocation.startsWith("/")){
+        	myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+        }
+        else{
+        	myImageView = new ImageView(new Image(imageLocation));
+        }
     }
 }
