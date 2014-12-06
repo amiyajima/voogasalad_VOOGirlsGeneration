@@ -469,7 +469,6 @@ public class ViewController {
 		myGridPane.requestFocus();
 		myGridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
-
 			@Override
 			public void handle(KeyEvent arg0) {
 
@@ -507,7 +506,7 @@ public class ViewController {
 		
 		
 		//highlightCurrent(findPosition(x - 45, y - 20), Color.BLUE);
-		myGameGridEffect.highlightCurrent(myGrid, findPosition(x-45, y-20), Color.BLUE);
+		myGameGridEffect.highlightCurrent(findPosition(x-45, y-20), Color.BLUE);
 		
 		// addDropShadow(myGrid.get(((int)findPosition(x,y).getX()),
 		// ((int)findPosition(x,y).getY())), Color.PURPLE);
@@ -521,7 +520,7 @@ public class ViewController {
 		myGameGridEffect.clearAllEffects(myGrid);
 		
 		//highlightCurrent(location, Color.BLUE);
-		myGameGridEffect.highlightCurrent(myGrid, location, Color.BLUE);
+		myGameGridEffect.highlightCurrent(location, Color.BLUE);
 	}
 
 
