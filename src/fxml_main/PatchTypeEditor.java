@@ -21,7 +21,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import authoring_environment.UIspecs;
 
-
 /**
  * GUI element used to create new Patch objects and add them to the library. Allows users
  * to specify the name and image of the patch.
@@ -38,7 +37,6 @@ public class PatchTypeEditor extends Pane {
 	private static final String NAME_PROMPT = "Enter patch name...";
 	private static final Insets MARGINS = new Insets(20, WIDTH / 5, 20, WIDTH / 5 - 10);
 	private static final String LABEL_CSS = "-fx-font-size: 14pt;";
-
 
 	private static final String DEFAULT_IMAGE_LOC = "/resources/images/default_image.png";
 	private static final Point2D DEFAULT_LOC = new Point2D.Double(0,0);
@@ -126,10 +124,9 @@ public class PatchTypeEditor extends Pane {
 	 * @param images - HBox
 	 */
 	 private void initImageLoader (HBox images) {
-		 ImageView icon = new ImageView();
+		 ImageView icon = setImageView(myImageLocation);
 		 icon.setFitHeight(40);
 		 icon.setFitWidth(40);
-		 icon.setImage(new Image(getClass().getResourceAsStream(myImageLocation)));
 		 Button loadImage = new Button(LOADIMAGE_LABEL);
 		 loadImage.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -148,6 +145,15 @@ public class PatchTypeEditor extends Pane {
 		 });
 		 images.getChildren().addAll(icon, loadImage);
 	 }
+	 
+	 private ImageView setImageView(String imageLocation) {
+		 if(myImageLocation.startsWith("/")){
+			 return new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+		 }
+		 else{
+			 return new ImageView(new Image(imageLocation));
+		 }
+	 }
 
 	 /**
 	  * initializes the go button
@@ -165,5 +171,4 @@ public class PatchTypeEditor extends Pane {
 			 }
 		 });
 	 }
-
 }

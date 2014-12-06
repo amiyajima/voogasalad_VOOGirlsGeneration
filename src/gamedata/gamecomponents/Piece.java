@@ -6,8 +6,6 @@ import gameengine.movement.Movement;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.geom.Point2D;
-import javafx.scene.image.ImageView;
-
 
 /**
  * Class for pieces. Pieces are the primary unit for
@@ -15,14 +13,12 @@ import javafx.scene.image.ImageView;
  * various actions during the game.
  * 
  * @authors Sandy Lee, Jesse Ling, Jennie Ju
- *
  */
 public class Piece extends GridComponent{
 	
     private List<Action> myActions;
     private Movement myMove;
     private Stats myStats;
-    private Point2D myLoc;
     private int myPlayerID;
     private boolean myShouldRemove;
     private Inventory myInventory;
@@ -51,7 +47,6 @@ public class Piece extends GridComponent{
         myMove = movement;
         myActions = actions;
         myStats = stats;
-        myLoc = loc;
         myPlayerID = playerID;
         myShouldRemove = false;
         myInventory = inventory;
@@ -62,29 +57,14 @@ public class Piece extends GridComponent{
      * 
      * @param clone - Piece instance to be cloned
      */
-    public Piece (Piece clone) {
-        super(clone);
+    public Piece (Piece clone, Point2D placeHere) {
+        super(clone, placeHere);
         myMove = clone.myMove;
         myActions = new LinkedList<Action>(clone.myActions);
         myStats = new Stats(clone.myStats);
-        myLoc = new Point2D.Double(clone.myLoc.getX(), clone.myLoc.getY());
         myPlayerID = clone.myPlayerID;
         myShouldRemove = false;
         myInventory = null; // TODO: NOPE. NO INVENTORY.
-    }
-
-    /**
-     * Returns the image location url (for data saving)
-     */
-    public String getImageLocation () {
-        return myImageLocation;
-    }
-
-    /**
-     * Returns the ImageView of the piece for display
-     */
-    public ImageView getImageView () {
-        return myImageView;
     }
 
     /**
