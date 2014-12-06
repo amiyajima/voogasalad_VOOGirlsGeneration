@@ -9,20 +9,13 @@
    <center>
       <VBox prefHeight="400.0" prefWidth="391.0" styleClass="vbox" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Conditions" />
+            <Label text="Actors" />
             <ListView fx:id="conditionsListView" />
-            <HBox prefHeight="37.0" prefWidth="365.0" styleClass="hbox">
-               <children>
-                  <Button fx:id="newCondition" mnemonicParsing="false" onAction="#handleNewCondition" text="New Condition" />
-                  <Button fx:id="delCondition" mnemonicParsing="false" onAction="#handleDelCondition" text="Delete" />
-               </children>
-            </HBox>
-            <Label text="Actions" />
-            <ListView fx:id="actionsListView" />
+            <Separator prefWidth="200.0" />
+            <Label text="Receivers" />
             <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
                <children>
-                  <Button fx:id="newAction" mnemonicParsing="false" onAction="#handleNewAction" text="New Action" />
-                  <Button fx:id="delAction" mnemonicParsing="false" onAction="#handleDelAction" text="Delete" />
+                  <Button mnemonicParsing="false" onAction="#handleNewAction" text="Save" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" />
@@ -34,14 +27,8 @@
          <children>
             <VBox prefHeight="400.0" prefWidth="267.0" styleClass="vbox" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Events" />
-                  <ListView fx:id="eventsListView" />
-                  <HBox>
-                     <children>
-                        <Button fx:id="newEvent" mnemonicParsing="false" text="New Event" />
-                        <Button fx:id="delEvent" mnemonicParsing="false" text="Delete" />
-                     </children>
-                  </HBox>
+                  <Label text="Available Actions" />
+                  <ListView fx:id="eventsListView" prefHeight="473.0" prefWidth="267.0" />
                </children>
             </VBox>
             <Separator orientation="VERTICAL" prefHeight="200.0" />
