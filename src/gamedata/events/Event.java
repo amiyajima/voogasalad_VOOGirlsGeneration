@@ -34,18 +34,17 @@ public class Event {
      * is run in order.
      */
     public void runEvent () {
-        boolean conditionsFulfilled = true;
+        boolean allConditionsFulfilled = true;
 
         for (Condition c : myConditions) {
             if (!c.evaluate()) {
-                conditionsFulfilled = false;
+                allConditionsFulfilled = false;
             }
         }
 
-        if (conditionsFulfilled) {
+        if (allConditionsFulfilled) {
             for (GlobalAction a : myGlobalActions) {
-                // TODO: Find a way to run actions where the ACTOR is the game (god?)
-                // a.doBehavior(actor, receivers);
+                a.doBehavior();
             }
         }
 
