@@ -71,6 +71,9 @@ public class Piece extends GridComponent{
     /**
      * Returns the int ID for the player controlling this piece
      */
+    public int getPlayerID () {
+        return myPlayerID;
+    }
 
 
 
