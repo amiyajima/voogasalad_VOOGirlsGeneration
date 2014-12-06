@@ -11,20 +11,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 // import com.leapmotion.leap.Controller;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import authoring_environment.GUIGrid;
 import tests.JSONBobTester;
-import javafx.geometry.Pos;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -35,16 +29,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.input.KeyCode;
 
 /**
  * 
@@ -303,12 +293,6 @@ public class ViewController {
 	}
 
 	private void initializeGrid() {
-
-		// myModel.play();
-
-		// myGrid = new SquareGameGrid(myModel.getCurrentLevel().getGrid()
-		// .getRow(), myModel.getCurrentLevel().getGrid().getColumn());
-
 		myGridPane = new ScrollPane();
 		Level currentLevel = myModel.getCurrentLevel();
 		myGrid = currentLevel.getGrid();
@@ -317,21 +301,6 @@ public class ViewController {
 
 		myGameSpace.setCenter(myGridPane);
 
-		/*
-		 * myGrid.populateGrid(
-		 * myModel.getCurrentLevel().getGrid().getAllPatches(), myModel
-		 * .getCurrentLevel().getGrid().getAllPieces());
-		 * myModel.getLevels().forEach(level -> level.addObserver(this.myGrid));
-		 */
-
-		if (myGrid.getPiece(new Point2D.Double(0, 0)) != null) {
-			System.out.println("THERE'S A PIECE HERE");
-		}
-<<<<<<< Updated upstream
-
-=======
-	
->>>>>>> Stashed changes
 		setOnClick();
 
 		setGridState(new SelectState(this));
@@ -430,7 +399,8 @@ public class ViewController {
 	 * @param actions
 	 */
 	public void updateActionList(ArrayList<Label> actions) {
-		controlPane.getChildren().clear();
+	    System.out.println("i use this");
+	    controlPane.getChildren().clear();
 
 		// l.setOnKeyPressed(event -> {
 		// if (keyMap.containsKey(action)) {
@@ -519,11 +489,11 @@ public class ViewController {
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(findPosition(x - 45, y - 20)));
 		// myGrid.clearEffect();
-		myGameGridEffect.clearAllEffects(myGrid);
+		//myGameGridEffect.clearAllEffects(myGrid);
 
 		// highlightCurrent(findPosition(x - 45, y - 20), Color.BLUE);
-		myGameGridEffect.highlightCurrent(findPosition(x - 45, y - 20),
-				Color.BLUE);
+		//myGameGridEffect.highlightCurrent(findPosition(x - 45, y - 20),
+		//		Color.BLUE);
 
 		// addDropShadow(myGrid.get(((int)findPosition(x,y).getX()),
 		// ((int)findPosition(x,y).getY())), Color.PURPLE);

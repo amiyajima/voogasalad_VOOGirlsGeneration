@@ -53,7 +53,7 @@ public class GlobalActionTester {
     @Test
     public void TestLevelChange() {
         myLevelChange.doBehavior();
-        assertEquals(myGame.getCurrentLevel().getID(), "Level 1");
+        assertEquals(myGame.getCurrentLevel().getId(), "Level 1");
     }
 
 }

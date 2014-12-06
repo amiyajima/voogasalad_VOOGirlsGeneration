@@ -17,7 +17,7 @@ public class SuperGrid {
 	private static final String SQUARE_GRID = "Square Grid";
 	protected int myRows;
 	protected int myCols;
-	protected int myTileSize;
+	protected double myTileSize;
 
 	public Pane myPane;
 
@@ -27,7 +27,7 @@ public class SuperGrid {
 		this(1, 1, 40, SQUARE_GRID);
 	}
 
-	public SuperGrid(int cols, int rows, int tileSize, String shape) {
+	public SuperGrid(int cols, int rows, double tileSize, String shape) {
 		myPane = new Pane();
 		myRows = rows;
 		myCols = cols;
@@ -53,7 +53,7 @@ public class SuperGrid {
 		}
 	}
 
-	private SuperTile makeShapeTile(String shape, int tileSize, Point2D location) {
+	private SuperTile makeShapeTile(String shape, double tileSize, Point2D location) {
 		switch (shape) {
 		case SQUARE_GRID:
 			return new SquareTile(tileSize, location);

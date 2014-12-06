@@ -49,9 +49,7 @@ public class GUIGrid extends SuperGrid {
 
     // TODO: set image within tile at this location
     public void addPiece (Piece pieceType, Point2D loc) {
-        System.out.println("adding piece at: " + loc);
         Piece clone = new Piece(pieceType, loc);
-//        System.out.println(myPieceData.get(0).getLoc());
         myPieceData.add(clone); 
         SuperTile myTile = myGrid.get((int) loc.getX()).get((int) loc.getY());
         myTile.addPieceImage(clone.getImageView());
@@ -60,7 +58,6 @@ public class GUIGrid extends SuperGrid {
 
     // TODO: set image within tile at this location
     public void addPatch (Patch patchType, Point2D loc) {
-        System.out.println("adding patch at: " + loc);
         Patch clone = new Patch(patchType, loc);
         myPatchData.add(clone);
         SuperTile myTile = myGrid.get((int) loc.getX()).get((int) loc.getY());
