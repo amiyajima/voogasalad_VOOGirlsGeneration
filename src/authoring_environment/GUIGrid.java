@@ -5,8 +5,7 @@ import gamedata.gamecomponents.Piece;
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import authoring.data.PatchData;
 
 
 /**
@@ -15,7 +14,7 @@ import java.util.Observer;
  * @author Jennie Ju
  *
  */
-public class GUIGrid extends SuperGrid implements Observer {
+public class GUIGrid extends SuperGrid {
 
     private List<Piece> myPieceData;
     private List<Patch> myPatchData;
@@ -48,13 +47,13 @@ public class GUIGrid extends SuperGrid implements Observer {
         return super.myCols;
     }
 
-    //TODO: set image within tile at this location
+    // TODO: set image within tile at this location
     public void addPiece (Piece pieceType, Point2D loc) {
         Piece clone = new Piece(pieceType, loc);
         myPieceData.add(clone);
     }
 
-    //TODO: set image within tile at this location
+    // TODO: set image within tile at this location
     public void addPatch (Patch patchType, Point2D loc) {
         Patch clone = new Patch(patchType, loc);
         myPatchData.add(clone);
@@ -114,12 +113,6 @@ public class GUIGrid extends SuperGrid implements Observer {
 
     public List<Patch> getPatches () {
         return myPatchData;
-    }
-
-    @Override
-    public void update (Observable o, Object arg) {
-        // TODO Auto-generated method stub
-
     }
 
 }

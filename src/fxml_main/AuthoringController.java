@@ -18,6 +18,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import authoring.data.ActionData;
 import authoring.data.AuthoringLevel;
+import authoring.data.PatchTypeData;
 import authoring.eventeditor.EventEditorController;
 import authoring_environment.GUIGrid;
 

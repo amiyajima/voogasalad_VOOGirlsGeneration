@@ -205,7 +205,7 @@ public class ViewController {
 		if (absolutePath.startsWith(basePath)) {
 			relativePath = absolutePath.substring(basePath.length() + 1);
 		}
-		myModel.getLevels().forEach(level -> level.deleteObserver(this.myGrid));
+		//myModel.getLevels().forEach(level -> level.deleteObserver(this.myGrid));
 		myJSONManager.writeToJSON(myModel, f.getPath());
 
 	}
@@ -220,6 +220,7 @@ public class ViewController {
 		myStage.setScene(myScene);
 		JSONBobTester JSBTester = new JSONBobTester();
 		myModel = JSBTester.createNewGame();
+		System.out.println("model found in viewcontroller: " + myModel);
 		initializeGrid();
 	}
 
@@ -310,14 +311,15 @@ public class ViewController {
 		myGridPane = new ScrollPane();
 		Level currentLevel = myModel.getCurrentLevel();
 		myGrid = currentLevel.getGrid();
+		System.out.println("myGrid: " + myGrid);
 		myGrid.displayPane(myGridPane);
 		
 		myGameSpace.setCenter(myGridPane);
 		//myGridPane.setAlignment(Pos.CENTER);
-		//myGrid.populateGrid(
-		//		myModel.getCurrentLevel().getGrid().getAllPatches(), myModel
-		//				.getCurrentLevel().getGrid().getAllPieces());
-		myModel.getLevels().forEach(level -> level.addObserver(this.myGrid));
+		/*myGrid.populateGrid(
+				myModel.getCurrentLevel().getGrid().getAllPatches(), myModel
+						.getCurrentLevel().getGrid().getAllPieces());
+		myModel.getLevels().forEach(level -> level.addObserver(this.myGrid));*/
 		setOnClick();
 
 		setGridState(new SelectState(this));

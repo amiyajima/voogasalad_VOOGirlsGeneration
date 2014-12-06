@@ -103,10 +103,12 @@ public class JSONBobTester {
     }
 
     public GUIGrid createNewGrid () {
-        GUIGrid grid1 = new GUIGrid(2, 2, 2, "Square Grid");
+        GUIGrid grid1 = new GUIGrid(5, 5, 75, "Square Grid");
 
         Piece templ = createNewPiece(grid1, new Point2D.Double(0, 0));
+        System.out.println(templ.getImageLocation());
         Patch templPatch = createNewPatch(new Point2D.Double(0, 0));
+        System.out.println(templPatch.getImageLocation());
         
         for (int x = 0; x < grid1.getCol(); x++) {
             for (int y = 0; y < grid1.getRow(); y++) {

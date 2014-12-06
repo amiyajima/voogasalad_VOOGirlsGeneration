@@ -14,7 +14,7 @@ import javafx.scene.image.ImageView;
  * 
  * @author Martin Tamayo
  */
-public abstract class GridComponent {
+public abstract class GridComponent implements IHasStats{
 	
 	protected String myName;
 	protected Point2D myLoc;

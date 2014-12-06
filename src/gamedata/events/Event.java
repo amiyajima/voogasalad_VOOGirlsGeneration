@@ -1,6 +1,8 @@
 package gamedata.events;
 
 import gamedata.events.GlobalAction;
+import gamedata.events.conditions.Condition;
+
 import java.util.List;
 
 

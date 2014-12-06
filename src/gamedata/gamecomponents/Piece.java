@@ -14,7 +14,7 @@ import java.awt.geom.Point2D;
  * 
  * @authors Sandy Lee, Jesse Ling, Jennie Ju
  */
-public class Piece extends GridComponent {
+public class Piece extends GridComponent{
 	
     private List<Action> myActions;
     private Movement myMove;
