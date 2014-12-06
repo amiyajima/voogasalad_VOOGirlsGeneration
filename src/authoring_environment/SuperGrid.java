@@ -33,7 +33,7 @@ public class SuperGrid extends Pane {
 		initGridTiles(shape);
 	}
 	
-	private void initGridTiles(String shape){
+	protected void initGridTiles(String shape){
 		myGrid = new LinkedList<List<SuperTile>>();
 		for (int r = 0; r < myRows; r++) {
 			List<SuperTile> tileCol = new LinkedList<SuperTile>();
