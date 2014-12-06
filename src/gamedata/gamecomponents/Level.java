@@ -1,14 +1,14 @@
 package gamedata.gamecomponents;
 
+import gamedata.events.Event;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javafx.scene.control.ScrollPane;
 import authoring_environment.GUIGrid;
-import gamedata.events.Event;
-import gamedata.goals.*;
-import gamedata.rules.*;
 
 /**
  * Rules define how a player's turn ends Goals define whether or not the level
@@ -23,7 +23,7 @@ public class Level extends Observable {
 	 * Goals defining how to win the level
 	 */
 	private List<Event> myEvents;
-	private String myID;
+	private String myId;
 	private boolean winningLevel;
 
 	/**
@@ -38,7 +38,7 @@ public class Level extends Observable {
 			boolean isWinningLevel) {
 		myGrid = gr;
 		myEvents = events;
-		myID = id;
+		myId = id;
 		winningLevel = isWinningLevel;
 	}
 
@@ -116,8 +116,8 @@ public class Level extends Observable {
 		// TODO restarts level
 	}
 
-	public String getID() {
-		return myID;
+	public String getId() {
+		return myId;
 	}
 
 	public boolean isWinningLevel() {

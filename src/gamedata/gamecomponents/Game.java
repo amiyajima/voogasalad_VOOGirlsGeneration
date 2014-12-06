@@ -90,7 +90,7 @@ public class Game {
 	 */
 	public void jumpToLevel(String levelToJumpTo) {
 		for (Level level : myLevels) {
-			if (level.getID().equals(levelToJumpTo)) {
+			if (level.getId().equals(levelToJumpTo)) {
 				myCurrentLevel = level;
 				if (level.isWinningLevel()) {
 					myGameWon = true;
