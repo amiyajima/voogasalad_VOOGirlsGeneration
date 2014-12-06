@@ -6,7 +6,6 @@ import gameengine.movement.Movement;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.geom.Point2D;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
@@ -18,11 +17,8 @@ import javafx.scene.image.ImageView;
  * @authors Sandy Lee, Jesse Ling, Jennie Ju
  *
  */
-public class Piece {
-
-    private String myName;
-    private String myImageLocation;
-    private transient ImageView myImageView;
+public class Piece extends GridComponent {
+	
     private List<Action> myActions;
     private Movement myMove;
     private Stats myStats;
@@ -51,9 +47,7 @@ public class Piece {
     // TODO: Think about playerID concept
     public Piece (String name, String imageLoc, Movement movement,
                   List<Action> actions, Stats stats, Point2D loc, int playerID, Inventory inventory) {
-        myName = name;
-        myImageLocation = imageLoc;
-        setImageView(myImageLocation);
+        super(name, imageLoc, loc);
         myMove = movement;
         myActions = actions;
         myStats = stats;
@@ -69,9 +63,7 @@ public class Piece {
      * @param clone - Piece instance to be cloned
      */
     public Piece (Piece clone) {
-        myName = clone.myName;
-        myImageLocation = clone.myImageLocation;
-        setImageView(myImageLocation);
+        super(clone);
         myMove = clone.myMove;
         myActions = new LinkedList<Action>(clone.myActions);
         myStats = new Stats(clone.myStats);
@@ -79,22 +71,6 @@ public class Piece {
         myPlayerID = clone.myPlayerID;
         myShouldRemove = false;
         myInventory = null; // TODO: NOPE. NO INVENTORY.
-    }
-
-    private void setImageView (String imageLocation) {
-        if (myImageLocation.startsWith("/")) {
-            myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
-        }
-        else {
-            myImageView = new ImageView(new Image(imageLocation));
-        }
-    }
-
-    /**
-     * Returns the name for this type of piece
-     */
-    public String getName () {
-        return myName;
     }
 
     /**
@@ -116,22 +92,6 @@ public class Piece {
      */
     public int getPlayerID () {
         return myPlayerID;
-    }
-
-    /**
-     * Sets the piece's location to the specified Point2D
-     * 
-     * @param p - Point2D of the piece's new location
-     */
-    public void setLoc (Point2D p) {
-        myLoc = p;
-    }
-
-    /**
-     * Returns the Point2D indicating the piece's coordinates
-     */
-    public Point2D getLoc () {
-        return myLoc;
     }
 
     /**
@@ -236,5 +196,4 @@ public class Piece {
     public Object getUniqueID () {
         return myName.hashCode();
     }
-
 }

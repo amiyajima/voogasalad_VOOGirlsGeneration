@@ -1,20 +1,13 @@
 package gamedata.gamecomponents;
 
 import java.awt.geom.Point2D;
-
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
  * @author Sandy Lee
  *
  */
-public class Patch {
-
-	private String myName;
-	private Point2D myLoc;
-	private String myImageLocation;
-	private transient ImageView myImageView;
+public class Patch extends GridComponent {
 
 	/**
 	 * Constructor
@@ -27,15 +20,7 @@ public class Patch {
 	 *            coordinate of patch
 	 */
 	public Patch(String name, String imageLocation, Point2D p) {
-		myName = name;
-		myImageLocation = imageLocation;
-		if (myImageLocation.startsWith("/")) {
-			myImageView = new ImageView(new Image(getClass()
-					.getResourceAsStream(imageLocation)));
-		} else {
-			myImageView = new ImageView(new Image(imageLocation));
-		}
-		myLoc = p;
+		super(name, imageLocation, p);
 	}
 	
 	/**
@@ -43,28 +28,7 @@ public class Patch {
 	 * @param clone - Patch instance to be cloned
 	 */
 	public Patch(Patch clone) {
-		myImageLocation = clone.myImageLocation;
-		setImageView(myImageLocation);
-		myLoc = new Point2D.Double(clone.myLoc.getX(),clone.myLoc.getY());
-		myName = clone.myName;
-	}
-	
-	private void setImageView(String imageLocation) {
-    	if(myImageLocation.startsWith("/")){
-        	myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
-        }
-        else{
-        	myImageView = new ImageView(new Image(imageLocation));
-        }
-    }
-
-	/**
-	 * Getter for patch's name
-	 * 
-	 * @return String - patch name
-	 */
-	public String getName() {
-		return myName;
+		super(clone);
 	}
 
 	/**
@@ -75,25 +39,6 @@ public class Patch {
 	 */
 	public void setMyName(String name) {
 		this.myName = name;
-	}
-
-	/**
-	 * Getter for patch's coordinate location
-	 * 
-	 * @return coord of patch
-	 */
-	public Point2D getLoc() {
-		return myLoc;
-	}
-
-	/**
-	 * sets patch's coordinate location
-	 * 
-	 * @param coord
-	 * 
-	 */
-	public void setLoc(Point2D coord) {
-		myLoc = coord;
 	}
 
 	/**
@@ -118,5 +63,4 @@ public class Patch {
 	public void setMyImage(String imageLocation) {
 		myImageLocation = imageLocation;
 	}
-
 }
