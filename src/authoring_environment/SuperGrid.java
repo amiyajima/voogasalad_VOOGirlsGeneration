@@ -23,8 +23,7 @@ public class SuperGrid {
 
 	protected List<List<SuperTile>> myGrid;
 
-	public SuperGrid(ScrollPane parent, int cols, int rows, int tileSize,
-			String shape) {
+	public SuperGrid(int cols, int rows, int tileSize, String shape) {
 		myPane = new Pane();
 		myRows = rows;
 		myCols = cols;

@@ -15,7 +15,6 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
  */
 public class GridView extends ScrollPane {
 
-
 	public GridView(SuperGrid grid, int viewWidth, int viewHeight) {
 		this.setPrefSize(viewWidth, viewHeight);
 		this.setMaxSize(viewWidth, viewHeight);
