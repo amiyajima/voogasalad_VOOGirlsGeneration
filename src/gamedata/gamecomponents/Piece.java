@@ -75,6 +75,8 @@ public class Piece extends GridComponent{
         return myPlayerID;
     }
 
+
+
     /**
      * Returns the piece's stats
      */

@@ -112,7 +112,7 @@ public abstract class SuperTile extends Group {
 		ImageView imgView = new ImageView();
 		imgView.setFitHeight(size);
 		imgView.setFitWidth(size);
-		imgView.setVisible(false);
+		imgView.setVisible(true);
 		return imgView;
 	}
  
