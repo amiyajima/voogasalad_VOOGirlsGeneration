@@ -4,31 +4,38 @@ import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
 
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.Control;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 
-public class SuperGrid extends Pane {
+public class SuperGrid {
 	private static final String CIRCLE_GRID = "Circle Grid";
 	private static final String HEXAGON_GRID = "Hexagon Grid";
 	private static final String SQUARE_GRID = "Square Grid";
 	protected int myRows;
 	protected int myCols;
 	protected int myTileSize;
+	public Pane myPane;
 
 	protected List<List<SuperTile>> myGrid;
 
-	public SuperGrid() {
-		this(1, 1, 40, SQUARE_GRID);
-	}
-
-	public SuperGrid(int cols, int rows, int tileSize, String shape) {
-
+	public SuperGrid(ScrollPane parent, int cols, int rows, int tileSize,
+			String shape) {
+		myPane = new Pane();
 		myRows = rows;
 		myCols = cols;
 		myTileSize = tileSize;
 		initGridTiles(shape);
 	}
 
-	private void initGridTiles(String shape) {
+	public void displayPane(ScrollPane parent) {
+		parent.setContent(myPane);
+	}
+
+	protected void initGridTiles(String shape) {
 		myGrid = new LinkedList<List<SuperTile>>();
 		for (int r = 0; r < myRows; r++) {
 			List<SuperTile> tileCol = new LinkedList<SuperTile>();
@@ -36,7 +43,7 @@ public class SuperGrid extends Pane {
 				Point2D location = new Point2D.Double(r, c);
 				SuperTile tile = makeShapeTile(shape, myTileSize, location);
 				tileCol.add(tile);
-				super.getChildren().add(tile);
+				myPane.getChildren().add(tile);
 			}
 			myGrid.add(tileCol);
 		}

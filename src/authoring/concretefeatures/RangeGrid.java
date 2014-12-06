@@ -11,137 +11,181 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import authoring_environment.Grid;
 import authoring_environment.GridView;
+import authoring_environment.SuperGrid;
+import authoring_environment.SuperTile;
 import authoring_environment.Tile;
 
 /**
  * The view of the grid especially for selecting the range.  
- * @author huangmengen
+ * @author Mengen Huang
  *
  */
-public class RangeGrid extends GridView{
-
+public class RangeGrid extends SuperGrid{
 
 	private static final String DEFAULT_CENTRAL_IMAGE="images/images.jpeg";
 
-	private Grid sampleGrid;
+	private List<List<SuperTile>> rangeGrid;
+	private int myWidth;
+	private int myHeight;
 	private int centerX;
 	private int centerY;
 	private List<Point2D> myRange;
 
-	public RangeGrid(int width, int height, int tileSize,List<Point2D> range) {
-		super(width, height, tileSize);	
+	public RangeGrid(int columns, int rows, int tileSize, String shape, List<Point2D> range) {
+		super(columns, rows, tileSize, shape);	
 		myRange=range;
-		sampleGrid=getGrid();
-		sampleSelected();
-		centerX=sampleGrid.getGridWidth()/2;
-		centerY=sampleGrid.getGridHeight()/2;
-		this.setContent(sampleGrid);	
-//		getCenterColumn();
-	}
-
-	/**
-	 * Update the grid with new number of tiles in rows and columns from user type in.
-	 * Demonstrate the selected tiles and set a image in the center of the grid. 
-	 * @param widthGridNumber: The number of tiles in a row.
-	 * @param heightGridNumber: The number of tiles in a column.
-	 * @param myTileSize: The preferred size of the tile.
-	 */
-	public void update(int widthGridNumber,int heightGridNumber,int myTileSize){
-	
-		sampleGrid=new Grid(widthGridNumber,heightGridNumber,myTileSize);
-		sampleSelected();
-		centerX=widthGridNumber/2;
-		centerY=heightGridNumber/2;
-		Image image=new Image(getClass().getResourceAsStream(DEFAULT_CENTRAL_IMAGE));
-		addCenterImage(image);
-		showSelectedRange();
-		this.setContent(sampleGrid);
-	}
-
-	private void showSelectedRange() {
-		for (Point2D position:myRange){
-			int x=(int) (position.getX()+centerX);
-			int y=(int) (centerY-position.getY());
-//			System.out.println(x);
-//			System.out.println(y);
-			if ((x<=centerX*2) && (y<=centerY*2)){
-				sampleGrid.getTile(x,y).selecteTile(true);
-			}
-		}
-	}
-
-	/**
-	 * Add the image at the center of the grid as a reference. 
-	 * @param image: The image to put in the center.
-	 */
-	public void addCenterImage(Image image){
-		Tile central=sampleGrid.getTile(centerX, centerY);
-		central.addSurfaceImage(image);		
-	}
-	
-	/**
-	 * Collect all the coordination of selected tiles relative to the center tile
-	 * as Point2D in a list.
-	 * @return The list of relative coordination relative to the center tile. 
-	 */
-	public List<Point2D> rangeSelectedList(){
-		List<Point2D> selectedList=new ArrayList<Point2D>();
+		myWidth=columns;
+		myHeight=rows;
 		
-		for (int i=0;i<sampleGrid.getGridWidth();i++) {
-			for (int j=0;j<sampleGrid.getGridHeight();j++) {
-				if(sampleGrid.getGridTiles()[i][j].getSelected()){
-					selectedList.add(new Point2D.Double(i-centerX,centerY-j));
-//					System.out.println((i-centerX)+","+(centerY-j));
-				}
-			}
-		}
-		myRange=selectedList;
-//		test=4;
-//		System.out.println("t="+ test);
-		return selectedList;
+		centerX=myWidth/2;
+		centerY=myHeight/2;
+		
+		initGridTiles(shape);
+		rangeGrid=super.myGrid;
+		
+		addCenterImage(columns, rows);
+		
+		highlightRange(range);
+		
+		addSelectAction();
+		
 
 	}
-	
-	public void rangeColumn(int column,boolean toChoose){
-		for (int i=0;i<sampleGrid.getGridHeight();i++) {
-			sampleGrid.getTile(centerX+column, i).selecteTile(toChoose);
-		}
-	}
-	
-	public void rangeRow(int row,boolean toChoose){
-		for (int i=0;i<sampleGrid.getGridWidth();i++) {
-			sampleGrid.getTile(i, centerY-row).selecteTile(toChoose);
-		}
-	} 
-	
-	public void rangeRadius(int radius,boolean toChoose){
-		for (int i=(centerX-radius);i<=(centerX+radius);i++){
-			for (int j=(centerY-radius);j<=(centerY+radius);j++){
-				sampleGrid.getTile(i, j).selecteTile(toChoose);
-			}
-		}
-	}
-	
-	public void rangeAll(boolean toChoose) {
-		for (int i=0;i<sampleGrid.getGridWidth();i++) {
-			for (int j=0;j<sampleGrid.getGridHeight();j++) {
-				sampleGrid.getTile(i, j).selecteTile(toChoose);
-			}
-		}
-	}
-	
-	private void sampleSelected() {
-		for (Tile[] line : sampleGrid.getGridTiles()) {
-			for (Tile tile : line) {
+
+	private void addSelectAction() {
+		for (List<SuperTile> row:rangeGrid){
+			for (SuperTile tile:row){
 				tile.setOnMouseClicked(new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent event) {
-						tile.switchSelected();
+						swtichHighlight(tile);
 					}
+					
 				});
 			}
 		}
 	}
+
+	private void swtichHighlight(SuperTile tile) {
+		if (tile.ifSelected())
+			tile.deselectTile();
+		else
+			tile.selectTile();
+	}
+	
+	private void highlightRange(List<Point2D> range) {
+		if ((range!=null) && (range.size()>0)){
+			for (Point2D loc: range){
+				int col=(int) (loc.getX()+centerX);
+				int row=(int) (centerY-loc.getY());
+				if ((col>=0) && (col<=myWidth) && (row>=0) && (row<=myHeight)){
+					SuperTile tile=findTile(row,col);
+					tile.selectTile();
+				}
+				
+			}
+		}
+	}
+	
+
+
+	private SuperTile findTile(int row, int col) {
+		SuperTile tile=rangeGrid.get(col).get(row);
+		return tile;
+	}
+
+
+	private void addCenterImage(int rows,int columns) {
+		SuperTile centerTile=findCenterTile(columns,rows);
+		Image centerImage=new Image(getClass().getResourceAsStream(DEFAULT_CENTRAL_IMAGE));
+		centerTile.addPatch(centerImage);
+	}
+
+	
+	private SuperTile findCenterTile(int rows,int columns) {
+		SuperTile centerTile=findTile(centerX,centerY);
+		return centerTile;
+	}
+
+
+
+//	private void showSelectedRange() {
+//		for (Point2D position:myRange){
+//			int x=(int) (position.getX()+centerX);
+//			int y=(int) (centerY-position.getY());
+////			System.out.println(x);
+////			System.out.println(y);
+//			if ((x<=centerX*2) && (y<=centerY*2)){
+//				sampleGrid.getTile(x,y).selecteTile(true);
+//			}
+//		}
+//	}
+//
+//
+//	
+//	/**
+//	 * Collect all the coordination of selected tiles relative to the center tile
+//	 * as Point2D in a list.
+//	 * @return The list of relative coordination relative to the center tile. 
+//	 */
+//	public List<Point2D> rangeSelectedList(){
+//		List<Point2D> selectedList=new ArrayList<Point2D>();
+//		
+//		for (int i=0;i<sampleGrid.getGridWidth();i++) {
+//			for (int j=0;j<sampleGrid.getGridHeight();j++) {
+//				if(sampleGrid.getGridTiles()[i][j].getSelected()){
+//					selectedList.add(new Point2D.Double(i-centerX,centerY-j));
+////					System.out.println((i-centerX)+","+(centerY-j));
+//				}
+//			}
+//		}
+//		myRange=selectedList;
+////		test=4;
+////		System.out.println("t="+ test);
+//		return selectedList;
+//
+//	}
+//	
+//	public void rangeColumn(int column,boolean toChoose){
+//		for (int i=0;i<sampleGrid.getGridHeight();i++) {
+//			sampleGrid.getTile(centerX+column, i).selecteTile(toChoose);
+//		}
+//	}
+//	
+//	public void rangeRow(int row,boolean toChoose){
+//		for (int i=0;i<sampleGrid.getGridWidth();i++) {
+//			sampleGrid.getTile(i, centerY-row).selecteTile(toChoose);
+//		}
+//	} 
+//	
+//	public void rangeRadius(int radius,boolean toChoose){
+//		for (int i=(centerX-radius);i<=(centerX+radius);i++){
+//			for (int j=(centerY-radius);j<=(centerY+radius);j++){
+//				sampleGrid.getTile(i, j).selecteTile(toChoose);
+//			}
+//		}
+//	}
+//	
+//	public void rangeAll(boolean toChoose) {
+//		for (int i=0;i<sampleGrid.getGridWidth();i++) {
+//			for (int j=0;j<sampleGrid.getGridHeight();j++) {
+//				sampleGrid.getTile(i, j).selecteTile(toChoose);
+//			}
+//		}
+//	}
+//	
+//	private void sampleSelected() {
+//		for (Tile[] line : sampleGrid.getGridTiles()) {
+//			for (Tile tile : line) {
+//				tile.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//					@Override
+//					public void handle(MouseEvent event) {
+//						tile.switchSelected();
+//					}
+//				});
+//			}
+//		}
+//	}
 	
 	public void setRange(List<Point2D> range){
 		myRange=range;

@@ -14,7 +14,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.concretefeatures.GridEditor;
-import authoring.concretefeatures.LevelCreator;
 import authoring.data.AuthoringLevel;
 import authoring_environment.GUIGrid;
 import authoring_environment.ShapeGrid;
@@ -49,7 +48,7 @@ public class LevelController extends GridComponentAbstCtrl<ShapeGrid> {
 		//TODO: Need to not hard-code square, have it passed through the constructor
 		// as maybe a gridshapeproperty (new class?)
 		AuthoringLevel newLevel = new AuthoringLevel(null, new LinkedList<Event>(), "myID");
-		super.myPropertiesSPane.setContent(new LevelCreator(newLevel,this,"square"));
+		super.myPropertiesSPane.setContent(new LevelEditor(newLevel,this));
 	}
 
 	@Override

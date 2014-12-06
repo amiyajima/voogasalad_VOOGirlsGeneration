@@ -11,10 +11,11 @@ public class CreateThings extends Accordion {
 
     public CreateThings(EditThings editAccordion, LibraryView libraryView, ActionData actions, PieceTypeData pieceTypeData) {
         EventCreator eventCreator = new EventCreator(editAccordion.getEventEditor().getEvents());
-        UnitCreator unitCreator = new UnitCreator(libraryView, actions, editAccordion.getUnitEditor().getUnits(), pieceTypeData);
+        UnitCreator unitCreator = new UnitCreator(actions, pieceTypeData,null);
         TerrainCreator terrainCreator = new TerrainCreator(libraryView);
         ActionCreator actionCreator = new ActionCreator(actions);
         getPanes().addAll(eventCreator, unitCreator, terrainCreator, actionCreator);
         setExpandedPane(eventCreator);
     }
 }
+
