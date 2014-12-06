@@ -1,10 +1,10 @@
 package gamePlayer;
 
 import gamedata.JSON.JSONManager;
-
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
+
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,16 +12,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 // import com.leapmotion.leap.Controller;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
+import authoring_environment.GUIGrid;
 import tests.JSONBobTester;
 import javafx.geometry.Pos;
 import javafx.scene.ImageCursor;
@@ -79,6 +84,7 @@ public class ViewController {
 
 	private Game myModel;
 	private GameGrid myGrid;
+	//private GUIGrid myGrid;
 
 	// private SampleListener myLeapListener;
 
@@ -94,7 +100,7 @@ public class ViewController {
 	private AudioClip myAudio;
 	@FXML
 	protected VBox statsPane;
-	@FXML
+	@FXML	
 	protected VBox controlPane;
 	@FXML
 	private MenuButton newGameButton;
@@ -295,6 +301,8 @@ public class ViewController {
 		myGrid = new SquareGameGrid(myModel.getCurrentLevel().getGrid()
 				.getRow(), myModel.getCurrentLevel().getGrid().getColumn());
 
+		//myGrid = new GUIGrid();
+		
 		myGameSpace.setCenter(myGrid);
 		myGrid.setAlignment(Pos.CENTER);
 		myGrid.populateGrid(
