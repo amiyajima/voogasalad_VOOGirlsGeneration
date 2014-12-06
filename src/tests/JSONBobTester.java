@@ -97,6 +97,7 @@ public class JSONBobTester {
         Patch patch = createNewPatch(new Point2D.Double(3, 3));
 
         Game myGame = new Game(1, myLevels, myLevels.get(0));
+        myGame.addPlayer(myPlayer1);
         System.out.println(myGame);
         return myGame;
     }
@@ -104,14 +105,13 @@ public class JSONBobTester {
     public GUIGrid createNewGrid () {
         GUIGrid grid1 = new GUIGrid(2, 2, 2, "Square Grid");
 
-        for (int x = 0; x < grid1.getColumn(); x++) {
+        Piece templ = createNewPiece(grid1, new Point2D.Double(0, 0));
+        Patch templPatch = createNewPatch(new Point2D.Double(0, 0));
+        
+        for (int x = 0; x < grid1.getCol(); x++) {
             for (int y = 0; y < grid1.getRow(); y++) {
-                Patch patch = createNewPatch(new Point2D.Double(x, y));
-                grid1.setPatch(patch.getLoc(), patch);
-                // if((x==grid1.getColumn()/2) && (y==grid1.getRow()/2)){
-                Piece piece = createNewPiece(grid1, new Point2D.Double(x, y));
-                grid1.setPiece(piece.getLoc(), piece);
-                // }
+                grid1.addPiece(templ, new Point2D.Double(x,y));
+                grid1.addPatch(templPatch, new Point2D.Double(x,y));
             }
         }
 

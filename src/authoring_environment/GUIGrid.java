@@ -48,16 +48,16 @@ public class GUIGrid extends SuperGrid implements Observer {
         return super.myCols;
     }
 
+    //TODO: set image within tile at this location
     public void addPiece (Piece pieceType, Point2D loc) {
-        // create new instance of pieceType with this location
-        // add to PieceData and set image within tile at this location
         Piece clone = new Piece(pieceType, loc);
+        myPieceData.add(clone);
     }
 
+    //TODO: set image within tile at this location
     public void addPatch (Patch patchType, Point2D loc) {
-        // create new instance of patchType with this location
-        // add to PatchData and set image within tile at this location
         Patch clone = new Patch(patchType, loc);
+        myPatchData.add(clone);
     }
 
     public void removePiece (Piece p) {
