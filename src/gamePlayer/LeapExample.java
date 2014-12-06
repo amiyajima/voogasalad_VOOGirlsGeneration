@@ -11,8 +11,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import com.leapmotion.leap.Controller;
+import com.leapmotion.leap.Gesture;
+import com.leapmotion.leap.GestureList;
+import com.leapmotion.leap.Leap;
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.event.InputEvent;
 
 public class LeapExample extends Application { 
     private SimpleLeapListener listener = new SimpleLeapListener();
@@ -27,9 +31,7 @@ public class LeapExample extends Application {
         robot = new Robot();
 
         leapController.addListener(listener);        
-//        circle.setLayoutX(circle.getRadius());
-//        circle.setLayoutY(circle.getRadius());
-//        root.getChildren().add(circle);
+
         final Scene scene = new Scene(root, 800, 600); 
 
         //        ChangeListener cl = new ChangeListener<Point2D>()
@@ -46,10 +48,32 @@ public class LeapExample extends Application {
                         double dx=d.getX(), dy=d.getY();
                         if(dx>=0d && dx<=root.getWidth()-2d*circle.getRadius() && 
                                 dy>=0d && dy<=root.getHeight()-2d*circle.getRadius()){
-//                            circle.setTranslateX(dx);
-//                            circle.setTranslateY(dy);   
+                            //                            circle.setTranslateX(dx);
+                            //                            circle.setTranslateY(dy);   
                             robot.mouseMove((int)dx, (int)dy);
-                            
+
+
+                        }
+                        leapController.enableGesture(Gesture.Type.TYPE_SCREEN_TAP);
+                        GestureList gestures = leapController.frame().gestures();
+                        System.out.println(gestures.count());
+
+                        //COMMENT THIS STUFF OUT IF YOU HAVE UNCOMMENTED JAB CLICKING
+                        for (int i = 0; i < gestures.count(); i++) {
+                            Gesture gesture = gestures.get(i);
+                            if(gesture.type().equals(Gesture.Type.TYPE_SCREEN_TAP)){
+                                robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+                                try {
+                                    Thread.sleep(200);
+                                }
+                                catch (InterruptedException e) {
+                                    // TODO Auto-generated catch block
+                                    e.printStackTrace();
+                                }
+                                robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+                                System.out.println("CLICK");
+                            }
+                            //if(leapController.frame().)
                         }
                     }
                 });
@@ -68,7 +92,7 @@ public class LeapExample extends Application {
         leapController.removeListener(listener);
 
     }
-    
+
     public static void main(String[] args){
         launch();
     }
