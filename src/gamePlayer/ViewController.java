@@ -214,7 +214,6 @@ public class ViewController {
 		}
 		myModel.getLevels().forEach(level -> level.deleteObserver(this.myGrid));
 		myJSONManager.writeToJSON(myModel, f.getPath());
-
 	}
 
 	/**

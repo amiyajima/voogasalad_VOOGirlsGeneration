@@ -26,6 +26,7 @@ import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import authoring_environment.GUIGrid;
 
 
 /**
@@ -41,6 +42,11 @@ public class JSONBobTester {
 
     public JSONBobTester () {
 
+    }
+    
+    public GUIGrid createGUIGrid(){
+        GUIGrid test = new GUIGrid(2,2,5,"square");
+        return test;
     }
 
     /**
