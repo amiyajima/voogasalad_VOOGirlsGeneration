@@ -1,8 +1,9 @@
 package fxml_main;
 
+import gamedata.gamecomponents.Patch;
+
 import java.util.function.Consumer;
 
-import gamedata.gamecomponents.Patch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -10,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import authoring.data.PatchTypeData;
 import authoring_environment.GUIGrid;
@@ -73,13 +73,17 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 
 	@Override
 	protected void initEntryEditBtn (Patch entry, Button editBtn) {
-//		Pane p = new PatchTypeEditor(this, entry);
-//		editBtn.setOnAction(new EventHandler<ActionEvent>() {
-//			@Override
-//			public void handle (ActionEvent e) {
-//				myPropertiesSPane.setContent(p);
-//			}
-//		});
+		editBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle (ActionEvent e) {
+				Consumer<Patch> okLambda = (Patch patch) -> {
+					//TODO: Use observables to make all the pieces and
+					// patches in the grid change to fit the updated patch
+				};
+				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda,entry));
+			}
+		});
+
 	}
 
 	@Override
