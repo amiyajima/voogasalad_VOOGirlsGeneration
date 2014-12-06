@@ -30,8 +30,8 @@ public class HexagonTile extends SuperTile{
 	@Override
 	protected Point2D calculateCoord(int size, Point2D loc) {
 		double radius = size/Math.sqrt(3);
-		double xCoord = loc.getY()*1.5*radius + radius/2;
-		double yCoord = loc.getX()*size + (loc.getY()%2)*0.5*size;
+		double xCoord = loc.getY()*1.5*radius + radius;
+		double yCoord = loc.getX()*size + (loc.getY()%2)*0.5*size+size/2;
 		return new Point2D.Double(xCoord, yCoord);
 		
 	}

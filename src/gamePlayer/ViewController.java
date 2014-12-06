@@ -1,10 +1,10 @@
 package gamePlayer;
 
 import gamedata.JSON.JSONManager;
-
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
+
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,16 +12,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 // import com.leapmotion.leap.Controller;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
+import authoring_environment.GUIGrid;
 import tests.JSONBobTester;
 import javafx.geometry.Pos;
 import javafx.scene.ImageCursor;
@@ -64,20 +69,22 @@ public class ViewController {
 
 	// public static final String AUDIO_TEST = "/src/gamePlayer/audioTest.mp3";
 	private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
-	public static final String CURSOR_ATTACK_TEST = "/gamePlayer/Cursor_attack.png";
-	public static final String CURSOR_GLOVE_TEST = "/gamePlayer/pointer-glove.png";
+	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
+	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
 
 	private ResourceBundle myLanguages;
 	private Stage myStage;
-	private Game myModel;
-	private GameGrid myGrid;
-	private VBox myInitialScene;
 	private BorderPane myGameSpace;
-	private VBox myScoreBoard;
 	private BorderPane myPopup;
+	private VBox myInitialScene;
+	private VBox myScoreBoard;
 	private Scene scoreScene;
 	private Scene myPopupScene;
 	private Scene myScene;
+
+	private Game myModel;
+	private GameGrid myGrid;
+	//private GUIGrid myGrid;
 
 	// private SampleListener myLeapListener;
 
@@ -93,8 +100,7 @@ public class ViewController {
 	private AudioClip myAudio;
 	@FXML
 	protected VBox statsPane;
-
-	@FXML
+	@FXML	
 	protected VBox controlPane;
 	@FXML
 	private MenuButton newGameButton;
@@ -108,6 +114,8 @@ public class ViewController {
 	private IGridState gridState;
 
 	private JSONManager myJSONManager;
+	
+//	private Highlighter myHighlighter;
 
 	public ViewController(Stage s) {
 		myStage = s;
@@ -295,6 +303,8 @@ public class ViewController {
 		myGrid = new SquareGameGrid(myModel.getCurrentLevel().getGrid()
 				.getRow(), myModel.getCurrentLevel().getGrid().getColumn());
 
+		//myGrid = new GUIGrid();
+		
 		myGameSpace.setCenter(myGrid);
 		myGrid.setAlignment(Pos.CENTER);
 		myGrid.populateGrid(
@@ -373,7 +383,8 @@ public class ViewController {
 		controlPane.getChildren().clear();
 		ArrayList<Label> actions = new ArrayList<Label>();
 
-		Map<KeyCode, Action> actionMap = myModel.getCurrentPlayer()
+		//TODO: What does this code do?
+		/*Map<KeyCode, Action> actionMap = myModel.getCurrentPlayer()
 				.getActionKeyMap();
 		System.out.println(actionMap);
 		Map<Action, KeyCode> keyMap = actionMap
@@ -382,7 +393,7 @@ public class ViewController {
 				.collect(
 						Collectors
 								.toMap(Map.Entry::getValue, Map.Entry::getKey));
-
+*/
 		piece.getActions().forEach(action -> {
 			Label l = new Label(action.toString());
 			l.setOnMouseClicked(event -> bindAction(action));
@@ -503,7 +514,10 @@ public class ViewController {
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(findPosition(x - 45, y - 20)));
 		myGrid.clearEffect();
-		highlightCurrent(findPosition(x - 45, y - 20), Color.BLUE);
+		
+		//TODO: Put this back in
+		//highlightCurrent(findPosition(x - 45, y - 20), Color.BLUE);
+		
 		// addDropShadow(myGrid.get(((int)findPosition(x,y).getX()),
 		// ((int)findPosition(x,y).getY())), Color.PURPLE);
 	}
@@ -513,7 +527,8 @@ public class ViewController {
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(location));
 		myGrid.clearEffect();
-		highlightCurrent(location, Color.BLUE);
+		//TODO: Put this back in
+		//highlightCurrent(location, Color.BLUE);
 	}
 
 	/**
@@ -533,67 +548,69 @@ public class ViewController {
 		return currentClick;
 	}
 
-	/**
-	 * Highlight the tiles that represent the possible range of the action
-	 * selected
-	 */
-	@FXML
-	protected void highLightActionRange() {
+// MOVED TO: GameGridEffect
+//	/**
+//	 * Highlight the tiles that represent the possible range of the action
+//	 * selected
+//	 */
+//	@FXML
+//	protected void highLightActionRange() {
+//
+//		myGrid.clearEffect();
+//		if (activePiece != null && activeAction != null) {
+//
+//			activeAction.getActionRange(activePiece.getLoc()).forEach(
+//					point -> {
+//						if (point.getX() < myGrid.getRow()
+//								&& point.getY() < myGrid.getCol()
+//								&& point.getX() > 0 && point.getY() > 0) {
+//							Node n = myGrid.get((int) point.getX(),
+//									(int) point.getY());
+//							//TODO: Add back in
+//							//addDropShadow(n, Color.YELLOW);
+//
+//						}
+//
+//					});
+//		}
+//	}
 
-		myGrid.clearEffect();
-		if (activePiece != null && activeAction != null) {
-
-			activeAction.getActionRange(activePiece.getLoc()).forEach(
-					point -> {
-
-						if (point.getX() < myGrid.getRow()
-								&& point.getY() < myGrid.getCol()
-								&& point.getX() > 0 && point.getY() > 0) {
-							Node n = myGrid.get((int) point.getX(),
-									(int) point.getY());
-							addDropShadow(n, Color.YELLOW);
-
-						}
-
-					});
-		}
-	}
-
-	/**
-	 * Highlight the effect range of an action if to be applied at a given
-	 * position Highlight the effect range of an action if to be applied at a
-	 * given position
-	 * 
-	 * @param n
-	 * @param red
-	 */
-
-	protected void highLightEffectRange(MouseEvent me, Color c) {
-
-		if (activePiece != null && activeAction != null) {
-
-			activeAction.getActionRange(activePiece.getLoc()).forEach(
-					point -> {
-						Point2D temp = findPosition(me.getSceneX(),
-								me.getSceneY());
-						if (temp.equals(point)) {
-							activeAction.getEffectRange().forEach(
-									point2 -> {
-										Node n = myGrid.get(
-												(int) (temp.getX() + point2
-														.getX()),
-												(int) (temp.getY() + point2
-														.getY()));
-
-										addDropShadow(n, c);
-									});
-
-						}
-					});
-
-		}
-
-	}
+//MOVED TO: GameGridEffect
+//	/**
+//	 * Highlight the effect range of an action if to be applied at a given
+//	 * position Highlight the effect range of an action if to be applied at a
+//	 * given position
+//	 * 
+//	 * @param n
+//	 * @param red
+//	 */
+//	protected void highLightEffectRange(MouseEvent me, Color c) {
+//
+//		if (activePiece != null && activeAction != null) {
+//
+//			activeAction.getActionRange(activePiece.getLoc()).forEach(
+//					point -> {
+//						Point2D temp = findPosition(me.getSceneX(),
+//								me.getSceneY());
+//						if (temp.equals(point)) {
+//							activeAction.getEffectRange().forEach(
+//									point2 -> {
+//										Node n = myGrid.get(
+//												(int) (temp.getX() + point2
+//														.getX()),
+//												(int) (temp.getY() + point2
+//														.getY()));
+//
+//										//TODO: Add this back in
+//										//addDropShadow(n, c);
+//									});
+//
+//						}
+//					});
+//
+//		}
+//
+//	}
 
 	/**
 	 * Changes the image of the Cursor
@@ -614,7 +631,8 @@ public class ViewController {
 		if (keyControlOn) {
 
 			keyControlOn = false;
-			unhighlight(myKeyboardController.getCurrentLocation());
+			//TODO: Add this back in
+			//unhighlight(myKeyboardController.getCurrentLocation());
 			myKeyboardController = null;
 		} else {
 			myKeyboardController = new KeyboardController();

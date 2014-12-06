@@ -65,7 +65,6 @@ public abstract class SuperTile extends Group {
 	protected abstract int calculateImageSize(int size);
 
 
-
 	private void setCheckeredColor(int row, int col, Shape shape) {
 		if (((row % 2 == 0) && (col % 2 == 0)) || ((row % 2 == 1) && (col % 2 == 1))) {
             shape.setFill(Color.WHITESMOKE);

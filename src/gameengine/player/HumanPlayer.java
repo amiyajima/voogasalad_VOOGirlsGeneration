@@ -20,8 +20,8 @@ public class HumanPlayer extends Player {
     // for keypressed, when keys don't trigger actions. ex) arrow keys
     private Map<KeyCode, Point2D> myMovementKeyMap;
 
-    public HumanPlayer (int id, Grid g) {
-        super(id, g);
+    public HumanPlayer (int id) {
+        super(id);
         setActionKeyMap(myActionKeyMap);
         setMovementKeyMap(myMovementKeyMap);
     }

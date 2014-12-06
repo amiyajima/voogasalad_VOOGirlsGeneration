@@ -55,16 +55,9 @@ public class LevelEditor {
         addWorkspaceTab(shapeGrid, levelName);
     }
     
-    //TODO If grid type doesn't match, this may cause a NullPointerException
     private void initializeGrid() {
-        //TODO: hard coded grid type
-    	//TODO: CHANGE LEVEL ID THIS IS HARDCODED
-        if (myGridType.equals("Square Grid")){
            shapeGrid = new SuperGrid(myCol, myRows,
                            tileSize, myGridType);
-
-        }
-
     }
 
     private void addWorkspaceTab(SuperGrid superGrid, String name) {
