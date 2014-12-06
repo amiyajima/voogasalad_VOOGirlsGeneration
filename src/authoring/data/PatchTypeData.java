@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Set;
 
-
 public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 
 	private List<Patch> myPatches;
@@ -34,7 +33,6 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 		myPatches.add(p);
 	}
 	
-
 	@Override
 	public void remove(Patch p) {
 		myPatches.remove(p);

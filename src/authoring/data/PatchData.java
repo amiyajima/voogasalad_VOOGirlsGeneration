@@ -35,9 +35,8 @@ public class PatchData implements AuthoringData<Patch>, Observer {
 	@Override
 	public void replace(Patch origEl, Patch newEl) {
 		origEl.setName(newEl.getName());
-		origEl.setImage(newEl.getImageLocation());
+		origEl.setImageLocation(newEl.getImageLocation());
 	}
-
 
 	@Override
 	public void remove(Patch p) {
@@ -70,7 +69,6 @@ public class PatchData implements AuthoringData<Patch>, Observer {
 			}
 		}
 	}
-
 
 	public void removePatchAtLoc(Point2D location){
 		for(Patch patch : myPatches){

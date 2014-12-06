@@ -3,8 +3,10 @@ package authoring.data;
 import gamedata.gamecomponents.Piece;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Observable;
+import java.util.Set;
 
 public class PieceTypeData extends Observable implements AuthoringData<Piece> {
 	
@@ -14,40 +16,39 @@ public class PieceTypeData extends Observable implements AuthoringData<Piece> {
         myPieces = new ArrayList<Piece>();
     }
     
-    @Override
-    public void add(Piece...pieces) {
-        System.out.println("PieceTypeData - Adding piece");
-        for (Piece p : pieces ) {
-            myPieces.add(p);
-        }
-        System.out.println("My pieces is now: " + myPieces.size() + " long");
-    }
-
-    @Override
-    public void remove(Piece...pieces) {
-        for (Piece p : pieces) {
-            myPieces.remove(p);
-        }
-    }
+    public boolean containsName(String name) {
+		return getPieceNames().contains(name);
+	}
     
-    @Override
-    public List<Piece> get () {
-        return myPieces;
-    }
+    private Set<String> getPieceNames() {
+		Set nameSet = new HashSet<String>();
+		for (Piece p : myPieces) {
+			nameSet.add(p.getName());
+		}
+		return nameSet;
+	}
     
-    public Piece getPiece(String s) {
-        for (Piece p : myPieces) {
-            if (p.getName().equals(s)) {
-                System.out.println("PieceTypeData - Here is your piece: " + p.getName());
-                return p;
-            }
-        }
-        System.out.println("PieceTypeData - No piece exists by the name of: " + s);
-        return null;
-    }
+	@Override
+	public void add(Piece p) {
+		myPieces.add(p);
+	}
 
 	@Override
-	public void clear() {
-		myPieces.clear();
+	public void remove(Piece p) {
+		myPieces.remove(p);
+		setChanged();
+		notifyObservers();
+	}
+
+	@Override
+	public void replace(Piece origEl, Piece newEl) {
+		origEl = newEl;
+		setChanged();
+		notifyObservers(origEl);
+	}
+
+	@Override
+	public List<Piece> getData() {
+		return myPieces;
 	}
 }

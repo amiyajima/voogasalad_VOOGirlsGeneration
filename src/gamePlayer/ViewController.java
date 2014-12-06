@@ -206,6 +206,7 @@ public class ViewController {
 			relativePath = absolutePath.substring(basePath.length() + 1);
 		}
 		//myModel.getLevels().forEach(level -> level.deleteObserver(this.myGrid));
+
 		myJSONManager.writeToJSON(myModel, f.getPath());
 
 	}
@@ -316,10 +317,12 @@ public class ViewController {
 		
 		myGameSpace.setCenter(myGridPane);
 		//myGridPane.setAlignment(Pos.CENTER);
+
 		/*myGrid.populateGrid(
 				myModel.getCurrentLevel().getGrid().getAllPatches(), myModel
 						.getCurrentLevel().getGrid().getAllPieces());
 		myModel.getLevels().forEach(level -> level.addObserver(this.myGrid));*/
+
 		setOnClick();
 
 		setGridState(new SelectState(this));
