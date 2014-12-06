@@ -48,7 +48,7 @@ public class LibraryView extends TabPane {
     private final String PATCHES = "Patch Templates";
     private PieceTypeData myPieces;
     private PatchTypeData myPatches;
-    private ShapeGrid myGrid;
+    private SuperGrid myGrid;
     private Map<String, VBox> myLibraryMap;
     private Map<String, Tab> myTabMap;
     private SingleSelectionModel<Tab> mySelection;
@@ -159,8 +159,8 @@ public class LibraryView extends TabPane {
         myTabMap.put(TERRAIN, terrainTab);
     }
 
-    public void associateGrid (ShapeGrid grid) {
-    	myGrid = grid;
+    public void associateGrid (SuperGrid activeGrid) {
+    	myGrid = activeGrid;
     	setGridActionEvents();
     }
 

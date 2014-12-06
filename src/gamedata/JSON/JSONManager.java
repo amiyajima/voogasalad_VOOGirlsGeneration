@@ -4,15 +4,21 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
+import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Piece;
 import gamedata.goals.Goal;
 import gamedata.rules.Rule;
 import gamedata.wrappers.GameData;
+import gamedata.wrappers.GridData;
+import gamedata.wrappers.LevelDataIndividual;
+import gamedata.wrappers.PlayerDataIndividual;
 import gameengine.player.Player;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -39,7 +45,8 @@ public class JSONManager {
 
     /**
      * Write a game and its contents into a JSON file.
-     * @param game 
+     * 
+     * @param game
      * 
      * @param grid
      */
@@ -81,15 +88,32 @@ public class JSONManager {
     }
 
     /**
-     * DEPRECATED. should be unnecessary
      * Method that converts a game data object into a game object. may be an issue as every aspect
      * of it is in a data wrapper
      * 
      * @param myGameData
      * @return
      */
-    private Game convertToGame (GameData myGameData) {
-        Game createdGame = new Game();
+    private Game convertToGame (GameData gameData) {
+        List<PlayerDataIndividual> myPlayerData = gameData.getPlayerData();
+        List<LevelDataIndividual> myLevelData = gameData.getLevelData();
+        PlayerDataIndividual myCurrentPlayerData = gameData.getCurrentPlayerData();
+        LevelDataIndividual myCurentLevelData = gameData.getCurrentLevelData();
+        
+        for(LevelDataIndividual l : myLevelData){
+            GridData gridData = l.getGrid();
+            
+            List<Patch> patches = new ArrayList<Patch>();
+            
+            List<Piece> pieces = new ArrayList<Piece>();
+            
+            Grid grid = new Grid(gridData.getRow(), gridData.getColumn(), pieces, patches);
+            
+            Level currentLevel = new Level(grid,l.getGoals(), l.getRules());
+        }
+
+        Game newGame = new Game(myPlayerData.size(), );
+
         return null;
     }
 

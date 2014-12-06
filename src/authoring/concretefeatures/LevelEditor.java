@@ -61,7 +61,7 @@ public class LevelEditor {
     	//TODO: CHANGE LEVEL ID THIS IS HARDCODED
         if (myGridType.equals("Square Grid")){
            shapeGrid = new SuperGrid(myCol, myRows,
-                           tileSize, myGridType,pieceData, patchData);
+                           tileSize, myGridType);
 
         }
 

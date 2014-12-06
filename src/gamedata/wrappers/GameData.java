@@ -26,6 +26,22 @@ public class GameData {
         myCurrentPlayer = currentplayer;
         myGameWon = gamewon;
     }
+    
+    public List<PlayerDataIndividual> getPlayerData(){
+        return myPlayers;
+    }
+    
+    public List<LevelDataIndividual> getLevelData(){
+        return myLevels;
+    }
+    
+    public PlayerDataIndividual getCurrentPlayerData(){
+        return myCurrentPlayer;
+    }
+    
+    public LevelDataIndividual getCurrentLevelData(){
+        return myCurrentLevel;
+    }
 
     public String toString () {
         return "GAMEDATA: # players = " + myPlayers.size() + " # levels " +
