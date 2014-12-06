@@ -56,7 +56,8 @@ public class LevelEditor {
     }
     
     private void initializeGrid() {
-           shapeGrid = new SuperGrid(myCol, myRows,
+    	   
+           shapeGrid = new SuperGrid(GridView, myCol, myRows,
                            tileSize, myGridType);
     }
 

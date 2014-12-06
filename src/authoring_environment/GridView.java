@@ -21,7 +21,7 @@ public class GridView extends ScrollPane {
 		this.setMaxSize(viewWidth, viewHeight);
 		this.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
-		super.setContent(grid);
+		grid.displayPane(this);
 
 	}
 

@@ -52,7 +52,6 @@ public class RangeGrid extends SuperGrid{
 
 	}
 
-
 	private void addSelectAction() {
 		for (List<SuperTile> row:rangeGrid){
 			for (SuperTile tile:row){
