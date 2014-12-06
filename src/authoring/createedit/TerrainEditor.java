@@ -95,10 +95,6 @@ public class TerrainEditor extends Pane {
 
     }
     
-    //for now... to implement the cancel button
-    public void addToBox(Node element){
-        myBox.getChildren().add(element);
-    }
 
     /**
      * Initializes so that user can type in name in a textfield

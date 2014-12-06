@@ -3,10 +3,8 @@ package fxml_main;
 import gamedata.events.Event;
 import gamedata.goals.Goal;
 import authoring.data.AuthoringLevel;
-
 import java.util.LinkedList;
 import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -17,8 +15,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.concretefeatures.GridEditor;
 import authoring.data.AuthoringLevel;
+import authoring_environment.GUIGrid;
 import authoring_environment.ShapeGrid;
-
 import com.sun.javafx.css.Rule;
 
 /**
@@ -31,7 +29,7 @@ public class LevelController extends GridComponentAbstCtrl<ShapeGrid> {
 	private List<AuthoringLevel> myLevels;
 
 	protected LevelController (VBox vbox, ScrollPane propertiesSPane,
-			ScrollPane gridSPane, ShapeGrid currGrid, List<AuthoringLevel> myLevels) {
+			ScrollPane gridSPane, GUIGrid currGrid, List<AuthoringLevel> myLevels) {
 		super(vbox, propertiesSPane, currGrid);
 		myGridSPane = gridSPane;
 	}
