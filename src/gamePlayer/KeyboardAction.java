@@ -1,11 +1,9 @@
 package gamePlayer;
 
 import gamedata.action.Action;
-import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.HumanPlayer;
 import java.awt.geom.Point2D;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

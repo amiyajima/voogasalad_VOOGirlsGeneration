@@ -10,8 +10,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
-import authoring_environment.GUIGrid;
 
 public class KeyboardMovement {
     HumanPlayer myCurrentPlayer;
