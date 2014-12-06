@@ -446,8 +446,7 @@ public class ViewController {
 			return;
 		setActiveAction(action);
 		
-//		highLightActionRange();
-		myGameGridEffect.highLightActionRange(myGrid, activePiece, action); //myGrid = GUIGrid?
+		myGameGridEffect.highLightActionRange(myGrid, activePiece, action);
 
 		setGridState(new ApplyState(this));
 
@@ -516,10 +515,12 @@ public class ViewController {
 
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(findPosition(x - 45, y - 20)));
-		myGrid.clearEffect();
+//		myGrid.clearEffect();
+		myGameGridEffect.clearAllEffects(myGrid);
 		
-		//TODO: Put this back in
+		
 		//highlightCurrent(findPosition(x - 45, y - 20), Color.BLUE);
+		myGameGridEffect.highlightCurrent(myGrid, findPosition(x-45, y-20), Color.BLUE);
 		
 		// addDropShadow(myGrid.get(((int)findPosition(x,y).getX()),
 		// ((int)findPosition(x,y).getY())), Color.PURPLE);
@@ -529,9 +530,11 @@ public class ViewController {
 
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(location));
-		myGrid.clearEffect();
-		//TODO: Put this back in
+//		myGrid.clearEffect();
+		myGameGridEffect.clearAllEffects(myGrid);
+		
 		//highlightCurrent(location, Color.BLUE);
+		myGameGridEffect.highlightCurrent(myGrid, location, Color.BLUE);
 	}
 
 // might move to GameGridEffect
@@ -635,15 +638,13 @@ public class ViewController {
 		if (keyControlOn) {
 
 			keyControlOn = false;
-			//TODO: Add this back in
-			//unhighlight(myKeyboardController.getCurrentLocation());
+			myGameGridEffect.getHighlighter().unhighlight(myGrid, myKeyboardController.getCurrentLocation());
 			myKeyboardController = null;
 		} else {
 			myKeyboardController = new KeyboardController();
-			myKeyboardController.setMovementKeyControl(this, myGrid, myModel);
+//			myKeyboardController.setMovementKeyControl(this, myGrid, myModel);
 			keyControlOn = true;
 			// setOnEnterKey();
-
 		}
 	}
 

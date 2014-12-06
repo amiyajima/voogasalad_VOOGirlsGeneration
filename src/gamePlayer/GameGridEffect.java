@@ -19,23 +19,32 @@ public class GameGridEffect {
      }
     
     /**
+     * Return the highlighter used for the grid
+     * @return
+     */
+    public Highlighter getHighlighter(){
+        return myHighlighter;
+    }
+    
+    /**
      * Highlight the tiles that represent the possible range of the action
      * selected
      */
     @FXML
-    protected void highLightActionRange (GUIGrid grid, Piece activePiece, Action activeAction) {
+    public void highlightActionRange (GUIGrid grid, Piece activePiece, Action activeAction) {
 
-        grid.clearEffect();
+        clearAllEffects(grid);
         if (activePiece != null && activeAction != null) {
 
             activeAction.getActionRange(activePiece.getLoc())
                     .forEach(
                              point -> {
-                                 if (point.getX() < grid.getRow()
-                                     && point.getY() < grid.getCol()
+                                 if (point.getX() < grid.getRow()       //assuming this method exists
+                                     && point.getY() < grid.getCol()    //assuming this method exists
                                      && point.getX() > 0 && point.getY() > 0) {
-                                     Node n = grid.get((int) point.getX(), (int) point.getY());
-                                      myHighlighter.addDropShadow(n, Color.YELLOW);
+                                     Node n = grid.get((int) point.getX(), (int) point.getY()); //assuming this method exists
+//                                      myHighlighter.addDropShadow(n, Color.YELLOW);     
+                                     myHighlighter.highlight(grid, point, Color.YELLOW);
                                  }
                              });
         }
@@ -49,7 +58,7 @@ public class GameGridEffect {
      * @param n
      * @param red
      */
-    protected void highLightEffectRange (MouseEvent me, Color c, GUIGrid grid, Piece activePiece, Action activeAction) {
+    public void highlightEffectRange (MouseEvent me, Color c, GUIGrid grid, Piece activePiece, Action activeAction) {
         
         if (activePiece != null && activeAction != null) {
             activeAction.getActionRange(activePiece.getLoc()).forEach(point -> {
@@ -57,16 +66,30 @@ public class GameGridEffect {
                 
                 if (temp.equals(point)) {
                     activeAction.getEffectRange().forEach(point2 -> {
-                        Node n =grid.get((int) (temp.getX() + point2.getX()), 
-                                           (int) (temp.getY() + point2.getY()));
-                         myHighlighter.addDropShadow(n, c);
+//                        Node n =grid.get((int) (temp.getX() + point2.getX()),   //assuming this method exists
+//                                           (int) (temp.getY() + point2.getY()));
+//                         myHighlighter.addDropShadow(n, c);
+                        myHighlighter.highlight(grid, temp, c);
                         });
                     }
                 });
             }
         }
     
+    /**
+     * Highlight the current location on the grid
+     */
+    public void highlightCurrent(GUIGrid grid, Point2D loc, Color c){
+        myHighlighter.highlight(grid, loc, c);
+    }
     
+    /**
+     * Clear all effects in grid
+     * @param grid
+     */
+    public void clearAllEffects(GUIGrid grid){
+        grid.getChildren().forEach(node->node.setEffect(null));
+    }
     
     
 }
