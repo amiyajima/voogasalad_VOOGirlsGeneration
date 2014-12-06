@@ -41,7 +41,7 @@ public abstract class SuperTile extends Group {
 		
 		setStyle("-fx-cursor: hand");
 		
-		super.getChildren().addAll(myShape,myPatchImage,myPieceImage);
+		super.getChildren().addAll(myShape,myPatchImage,myPieceImage,myHighlight);
 	}
 	
 
@@ -84,8 +84,8 @@ public abstract class SuperTile extends Group {
 		myPieceImage.setImage(imageView.getImage());
 	}
 	
-	public void addPatchImage(ImageView imageView){
-		myPatchImage.setImage(imageView.getImage());
+	public void addPatchImage(String imageLoc){
+		myPatchImage.setImage(new Image(imageLoc));
 	}
 
 

@@ -22,6 +22,8 @@ public abstract class GridComponentAbstCtrl<T> {
     protected ScrollPane myPropertiesSPane;
     protected GUIGrid myCurrentGrid;
     protected Map<T, HBox> myEntryMap;
+    protected HashMap<HBox, HBox> myIndivEntMap;
+
 
     protected GridComponentAbstCtrl (VBox vbox, ScrollPane propertiesSPane,
                                      GUIGrid currGrid) {
@@ -29,6 +31,7 @@ public abstract class GridComponentAbstCtrl<T> {
         myPropertiesSPane = propertiesSPane;
         myCurrentGrid = currGrid;
         myEntryMap = new HashMap<T, HBox>();
+        myIndivEntMap = new HashMap<HBox, HBox>();
         initGlobalControls();
     }
 
@@ -66,6 +69,7 @@ public abstract class GridComponentAbstCtrl<T> {
         HBox entryCompleteBox = new HBox();
         entryCompleteBox.getChildren().addAll(entryCtrls, entryBox);
         myEntryMap.put(entry, entryCompleteBox);
+        myIndivEntMap.put(entryCompleteBox, entryBox);
         myVBox.getChildren().add(entryCompleteBox);
     }
 

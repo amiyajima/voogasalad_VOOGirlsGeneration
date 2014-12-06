@@ -119,8 +119,8 @@ public class JSONBobTester {
             }
         }
 
-        System.out.println("Bob Tester: Patches filled: " + grid1.getPatches().size());
-        System.out.println("Bob Tester: Pieces filled: " + grid1.getPieces().size());
+        System.out.println("Bob Tester: Patches filled: " + grid1.getPatches().getData().size());
+        System.out.println("Bob Tester: Pieces filled: " + grid1.getPieces().getData().size());
         System.out.println("Grid created: " + grid1.toString());
         return grid1;
     }
@@ -163,16 +163,16 @@ public class JSONBobTester {
 
         Piece piece = null;
         if (randomInt % 2 == 1) {
-            piece = new Piece("Duvall", DEFAULT_DUVALL, move, actions, s, p, 1, i);
+            piece = new Piece("ID", "Duvall", DEFAULT_DUVALL, move, actions, s, p, 1, i);
         }
         else {
-            piece = new Piece("Bunny", DEFAULT_BUNNY, move, actions, s, p, 1, i);
+            piece = new Piece("ID", "Bunny", DEFAULT_BUNNY, move, actions, s, p, 1, i);
         }
         return piece;
     }
 
     public Patch createNewPatch (Point2D p) {
-        Patch patch = new Patch("land", DEFAULT_LAND, p);
+        Patch patch = new Patch("ID", "land", DEFAULT_LAND, p);
         return patch;
     }
 
