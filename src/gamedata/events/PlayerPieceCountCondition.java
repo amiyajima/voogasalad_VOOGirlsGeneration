@@ -9,12 +9,13 @@ import gameengine.player.Player;
  * @author annamiyajima
  *
  */
-public class PlayerPieceCountCondition implements Condition {
+public class PlayerPieceCountCondition extends Condition {
     public static final String description = "IF Num Pieces Remaining Reached";
     private Player myPlayer;
     private int myValue;
 
-    PlayerPieceCountCondition (Player p, int value) {
+    public PlayerPieceCountCondition (Player p, int value) {
+    	super(description);
         myPlayer = p;
         myValue = value;
     }

@@ -12,12 +12,13 @@ import gameengine.player.Player;
  * @author annamiyajima
  *
  */
-public class NoAvailableMoveCondition implements Condition {
+public class NoAvailableMoveCondition extends Condition {
 
     public static final String description = "IF No Available Moves Remain";
     private Player myPlayer;
 
-    NoAvailableMoveCondition (Player p) {
+    public NoAvailableMoveCondition (Player p) {
+    	super(description);
         myPlayer = p;
     }
 

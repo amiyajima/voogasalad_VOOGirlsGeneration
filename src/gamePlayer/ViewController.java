@@ -445,7 +445,7 @@ public class ViewController {
 			return;
 		setActiveAction(action);
 		
-		myGameGridEffect.highLightActionRange(myGrid, activePiece, action);
+		myGameGridEffect.highlightActionRange();
 
 		setGridState(new ApplyState(this));
 
