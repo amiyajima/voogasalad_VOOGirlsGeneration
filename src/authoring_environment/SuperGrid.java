@@ -18,6 +18,7 @@ public class SuperGrid {
 	protected int myRows;
 	protected int myCols;
 	protected int myTileSize;
+
 	public Pane myPane;
 
 	protected List<List<SuperTile>> myGrid;

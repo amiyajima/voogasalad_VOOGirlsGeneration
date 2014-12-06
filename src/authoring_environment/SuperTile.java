@@ -22,15 +22,11 @@ public abstract class SuperTile extends Group {
 	private Point2D myCoordinates;
 	private Point2D myLocation;
 	private Point2D myImageCoord;
-<<<<<<< HEAD
-	protected ImageView myPieceImage;
-	protected ImageView myPatchImage;
-	private Shape myHighlight;
-=======
+
 	protected transient ImageView myPieceImage;
 	protected transient ImageView myPatchImage;
->>>>>>> 26e1723f2a0e19c7ab70c9eba6b7637a549e1007
-
+	private Shape myHighlight;
+	
 	/**
 	 * 
 	 * @param bgShape Tile shape
