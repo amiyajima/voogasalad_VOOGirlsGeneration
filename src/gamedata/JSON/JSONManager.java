@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import authoring_environment.GUIGrid;
+import authoring_environment.SuperGrid;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -50,13 +51,13 @@ public class JSONManager {
     /**
      * Write a game and its contents into a JSON file.
      * 
-     * @param guiGrid
+     * @param superGrid
      * 
      * @param grid
      */
-    public void writeToJSON (GUIGrid guiGrid, String fileName) {
+    public void writeToJSON (SuperGrid superGrid, String fileName) {
         System.out.println("JSONManager: write method called");
-        String json = myGson.toJson(guiGrid);
+        String json = myGson.toJson(superGrid);
         System.out.println("JSONManager: game converted to json!");
 
         try {

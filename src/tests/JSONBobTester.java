@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import authoring_environment.GUIGrid;
+import authoring_environment.SuperGrid;
 
 
 /**
@@ -43,10 +44,15 @@ public class JSONBobTester {
     public JSONBobTester () {
 
     }
-    
-    public GUIGrid createGUIGrid(){
-        GUIGrid test = new GUIGrid(2,2,5,"square");
+
+    public GUIGrid createGUIGrid () {
+        GUIGrid test = new GUIGrid(2, 2, 5, "square");
         return test;
+    }
+    
+    public SuperGrid createSuperGrid(){
+        SuperGrid grid = new SuperGrid(2, 2, 5, "square");
+        return grid;
     }
 
     /**
@@ -60,7 +66,6 @@ public class JSONBobTester {
 
         Player myPlayer1 = new HumanPlayer(12345);
         Player myPlayer2 = new HumanPlayer(54321);
-
         // myPlayers.add(myPlayer1);
         myPlayers.add(myPlayer2);
 
@@ -87,7 +92,7 @@ public class JSONBobTester {
         Piece piece = createNewPiece(grid, new Point2D.Double(3, 3));
         Patch patch = createNewPatch(new Point2D.Double(3, 3));
 
-        Game myGame = new Game(myLevels,1);
+        Game myGame = new Game(myLevels, 1);
         System.out.println(myGame);
         return myGame;
     }
@@ -140,7 +145,7 @@ public class JSONBobTester {
         List<Action> actions = new ArrayList<Action>();
         actions.add(createNewAction(pl1, pl2));
         actions.add(createNewAction(pl2, pl3));
-        actions.add(createNewMovement(g,pl1));
+        actions.add(createNewMovement(g, pl1));
 
         Stats s = new Stats();
         s.add("health", 20);
