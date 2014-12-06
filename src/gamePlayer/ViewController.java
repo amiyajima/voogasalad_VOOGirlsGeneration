@@ -63,7 +63,6 @@ public class ViewController {
 	public static final String SCOREBOARD_FXML = "scoreBoard.fxml";
 	public static final String INITIALSCENE_TITLE = "VOOGASALAD!";
 	public static final String GAME_LOCATION = "/src/resources/json";
-
 	public static final String POPUP_FXML = "popup.fxml";
 
 	// public static final String ENGLISH = "English";
@@ -90,13 +89,12 @@ public class ViewController {
 	// private SampleListener myLeapListener;
 
 	private Boolean keyControlOn;
-	private KeyboardController myKeyboardController;
+	private KeyboardAction myKeyboardAction;
+	private KeyboardMovement myKeyboardMovement;
+	// private MouseController myMouseController;
 
-	// private Point2D myCurrentLocation;
 	private Piece activePiece;
 	private Action activeAction;
-
-	// private MouseController myMouseController;
 
 	private AudioClip myAudio;
 	@FXML
@@ -113,11 +111,8 @@ public class ViewController {
 	private ScrollPane myGridPane;
 	
 	private Point2D currentClick;
-
 	private IGridState gridState;
-
 	private JSONManager myJSONManager;
-	
 	private GameGridEffect myGameGridEffect;
 
 	public ViewController(Stage s) {
@@ -234,7 +229,6 @@ public class ViewController {
 
 	@FXML
 	private void doSettings() {
-
 	}
 
 	/**
@@ -465,6 +459,7 @@ public class ViewController {
 		});
 	}
 
+	
 	/**
 	 * TODO: Add javadoc
 	 */
@@ -473,33 +468,20 @@ public class ViewController {
 		myGridPane.requestFocus();
 		myGridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
+
 			@Override
 			public void handle(KeyEvent arg0) {
 
 				if (arg0.getCode() == KeyCode.F) {
-
 					System.out.println("f");
-					performAction(myKeyboardController.getCurrentLocation()
-							.getX(), myKeyboardController.getCurrentLocation()
-							.getY());
-
+					performAction(myKeyboardMovement.getCurrentLocation().getX(), 
+					              myKeyboardMovement.getCurrentLocation().getY());
 				}
-
 			}
-
 		});
-
-		// myGrid.setOnKeyPressed(event->{
-		// if (event.getCode() == KeyCode.F){
-		// System.out.println("enter");
-		// performAction(myKeyboardController.getCurrentLocation().getX(),
-		// myKeyboardController.getCurrentLocation().getY());
-		// }
-		// }
-		// );
-
 	}
 
+	
 	/**
 	 * Perform the actions of a click at position (x,y) on game grid
 	 * 
@@ -576,13 +558,14 @@ public class ViewController {
 	 */
 	public void toggleKeyboardControl() {
 		if (keyControlOn) {
-
 			keyControlOn = false;
-			myGameGridEffect.getHighlighter().unhighlight(myGrid, myKeyboardController.getCurrentLocation());
-			myKeyboardController = null;
+			myGameGridEffect.getHighlighter().unhighlight(myGrid, myKeyboardMovement.getCurrentLocation());
+			myKeyboardMovement = null;
+			myKeyboardAction = null;
 		} else {
-			myKeyboardController = new KeyboardController();
-//			myKeyboardController.setMovementKeyControl(this, myGrid, myModel);
+			myKeyboardMovement = new KeyboardMovement();
+			myKeyboardAction = new KeyboardAction();
+			myKeyboardMovement.setMovementKeyControl(this, myGrid, myModel);
 			keyControlOn = true;
 			// setOnEnterKey();
 		}
