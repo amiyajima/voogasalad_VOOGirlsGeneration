@@ -303,7 +303,7 @@ public class ViewController {
 
 	private void initializeGrid() {
 	        
-		// myModel.play();
+//		 myModel.play();
 
 		//myGrid = new SquareGameGrid(myModel.getCurrentLevel().getGrid()
 		//		.getRow(), myModel.getCurrentLevel().getGrid().getColumn());
@@ -470,26 +470,27 @@ public class ViewController {
 		});
 	}
 
-	
-	/**
-	 * TODO: Add javadoc
-	 */
-	public void setOnEnterKey() {
 
-		myGridPane.requestFocus();
-		myGridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-			@Override
-			public void handle(KeyEvent arg0) {
-
-				if (arg0.getCode() == KeyCode.F) {
-					System.out.println("f");
-					performAction(myKeyboardMovement.getCurrentLocation().getX(), 
-					              myKeyboardMovement.getCurrentLocation().getY());
-				}
-			}
-		});
-	}
+// Probably going to move this to KeyboardAction class
+//	/**
+//	 * TODO: Add javadoc
+//	 */
+//	public void setOnEnterKey() {
+//	    System.out.println("do i need this?");
+//		myGridPane.requestFocus();
+//		myGridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
+//
+//			@Override
+//			public void handle(KeyEvent arg0) {
+//
+//				if (arg0.getCode() == KeyCode.F) {
+//					System.out.println("f");
+//					performAction(myKeyboardMovement.getCurrentLocation().getX(), 
+//					              myKeyboardMovement.getCurrentLocation().getY());
+//				}
+//			}
+//		});
+//	}
 
 	
 	/**
@@ -569,13 +570,15 @@ public class ViewController {
 	public void toggleKeyboardControl() {
 		if (keyControlOn) {
 			keyControlOn = false;
-			myGameGridEffect.getHighlighter().unhighlight(myGrid, myKeyboardMovement.getCurrentLocation());
+//			myGameGridEffect.getHighlighter().unhighlight(myGridPane, myKeyboardMovement.getCurrentLocation());
 			myKeyboardMovement = null;
 			myKeyboardAction = null;
+			System.out.println("Keyboard OFF");
 		} else {
 			myKeyboardMovement = new KeyboardMovement();
 			myKeyboardAction = new KeyboardAction();
 			myKeyboardMovement.setMovementKeyControl(this, myGridPane, myModel);
+			myKeyboardAction.setActionKeyControl(myGridPane, activePiece);
 			keyControlOn = true;
 			// setOnEnterKey();
 		}
