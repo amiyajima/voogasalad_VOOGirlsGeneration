@@ -5,7 +5,7 @@ import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public abstract class GridComponent {
+public abstract class GridComponent implements IHasStats{
 	
 	protected String myName;
 	protected Point2D myLoc;

@@ -17,7 +17,7 @@ import javafx.scene.image.ImageView;
  * @authors Sandy Lee, Jesse Ling, Jennie Ju
  *
  */
-public class Piece extends GridComponent {
+public class Piece extends GridComponent{
 	
     private List<Action> myActions;
     private Movement myMove;

@@ -1,5 +1,6 @@
 package gamedata.events;
 
+import gamedata.events.conditions.Condition;
 import gameengine.player.Player;
 
 
