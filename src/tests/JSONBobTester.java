@@ -113,7 +113,7 @@ public class JSONBobTester {
          * }
          * }
          */
-
+        
         System.out.println("Bob Tester: Patches filled: " + grid1.getPatches().size());
         System.out.println("Bob Tester: Pieces filled: " + grid1.getPieces().size());
         System.out.println("Grid created: " + grid1.toString());

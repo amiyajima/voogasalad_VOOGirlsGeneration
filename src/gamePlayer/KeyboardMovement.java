@@ -17,6 +17,7 @@ public class KeyboardMovement {
     HumanPlayer myCurrentPlayer;
     Point2D myCurrentLocation;
     GameGridEffect myGameGridEffect;
+    Map<KeyCode, Point2D> movementKeyMap;
     
     /**
      * 
@@ -34,7 +35,7 @@ public class KeyboardMovement {
         System.out.println("Keyboard Movement ON");
 
         // for testing!!!
-        Map<KeyCode, Point2D> movementKeyMap = new HashMap<KeyCode, Point2D>();
+        movementKeyMap = new HashMap<KeyCode, Point2D>();
         movementKeyMap.put(KeyCode.A, new Point2D.Double(-1.0, 0.0));
         movementKeyMap.put(KeyCode.D, new Point2D.Double(1.0, 0.0));
         movementKeyMap.put(KeyCode.W, new Point2D.Double(0.0, 1.0));
@@ -90,4 +91,6 @@ public class KeyboardMovement {
     public Point2D getCurrentLocation () {
         return myCurrentLocation;
     }
+    
+//    Map<KeyCode, Point2D> getovementKeyMap
 }
