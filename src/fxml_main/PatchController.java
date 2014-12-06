@@ -23,9 +23,12 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 		super(vbox, propertiesSPane, currGrid);
 		//TODO: myPatchTypes needs to be changed..data..
 		myPatchTypes = new PatchTypeData();
+		//TODO: this is just for testing..
+		currGrid = new GUIGrid(10, 10, 2, "Square Grid");
 		myPatches = currGrid.getPatches();
 	}
 
+	           
 	@Override
 	protected void initGlobalNewBtn (Button newBtn) {
 		newBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -80,6 +83,17 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 				Consumer<Patch> okLambda = (Patch patch) -> {
 					//TODO: Use observables to make all the pieces and
 					// patches in the grid change to fit the updated patch
+				    HBox entryBox = myEntryMap.get(entry);
+				    HBox imgNameBox = myIndivEntMap.get(entryBox);
+				    
+				    entryBox.getChildren().remove(imgNameBox);
+				    HBox newImgNameBox = makeEntryBox(patch);	
+				    
+				    entryBox.getChildren().add(newImgNameBox);
+				    myIndivEntMap.replace(entryBox, newImgNameBox);
+				    
+				    myPatchTypes.replace(entry, patch);
+				    myPatches.update(myPatchTypes, entry);
 				};
 				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda,entry));
 			}
@@ -94,7 +108,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 			@Override
 			public void handle (ActionEvent event) {
 				myPatchTypes.remove(entry);
-				myPatches.update(myPatches, entry);
+				myPatches.update(myPatchTypes, entry);
 				myVBox.getChildren().remove(myEntryMap.get(entry));
 			}
 		});
