@@ -51,9 +51,6 @@ public class AuthoringController implements Initializable {
 	private PatchController myPatchController;
 	private LevelController myLevelController;
 	
-	private PatchTypeData myPatchTypeData;
-	
-
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		

@@ -1,6 +1,6 @@
 package tests;
 
-import gamedata.action.Action; 
+import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
 import gamedata.action.ReceiverToInventoryConclusion;
@@ -71,18 +71,20 @@ public class JSONBobTester {
 
         GUIGrid grid = createNewGrid();
 
-        /*List<Rule> myRules = new ArrayList<Rule>();
-        MoveCountRule rule1 = new MoveCountRule(3);
-        MoveCountRule rule2 = new MoveCountRule(5);
-        // myRules.add(rule1);
-        myRules.add(rule2);
+        /*
+         * List<Rule> myRules = new ArrayList<Rule>();
+         * MoveCountRule rule1 = new MoveCountRule(3);
+         * MoveCountRule rule2 = new MoveCountRule(5);
+         * // myRules.add(rule1);
+         * myRules.add(rule2);
+         * 
+         * List<Goal> myGoals = new ArrayList<Goal>();
+         * Goal goal1 = new PlayerPiecesRemovedGoal(myPlayer2);
+         * myGoals.add(goal1);
+         * // Goal goal2 = new PlayerPiecesRemovedGoal(myPlayer1);
+         * // myGoals.add(goal2);
+         */
 
-        List<Goal> myGoals = new ArrayList<Goal>();
-        Goal goal1 = new PlayerPiecesRemovedGoal(myPlayer2);
-        myGoals.add(goal1);
-        // Goal goal2 = new PlayerPiecesRemovedGoal(myPlayer1);
-        // myGoals.add(goal2);*/
-        
         List<Event> myEvents = new ArrayList<Event>();
 
         List<Level> myLevels = new ArrayList<Level>();
@@ -101,18 +103,17 @@ public class JSONBobTester {
 
     public GUIGrid createNewGrid () {
         GUIGrid grid1 = new GUIGrid(2, 2, 2, "Square Grid");
-        /*
-         * for (int x = 0; x < grid1.getColumn(); x++) {
-         * for (int y = 0; y < grid1.getRow(); y++) {
-         * Patch patch = createNewPatch(new Point2D.Double(x, y));
-         * grid1.setPatch(patch.getLoc(), patch);
-         * // if((x==grid1.getColumn()/2) && (y==grid1.getRow()/2)){
-         * Piece piece = createNewPiece(grid1, new Point2D.Double(x, y));
-         * grid1.setPiece(piece.getLoc(), piece);
-         * // }
-         * }
-         * }
-         */
+
+        for (int x = 0; x < grid1.getColumn(); x++) {
+            for (int y = 0; y < grid1.getRow(); y++) {
+                Patch patch = createNewPatch(new Point2D.Double(x, y));
+                grid1.setPatch(patch.getLoc(), patch);
+                // if((x==grid1.getColumn()/2) && (y==grid1.getRow()/2)){
+                Piece piece = createNewPiece(grid1, new Point2D.Double(x, y));
+                grid1.setPiece(piece.getLoc(), piece);
+                // }
+            }
+        }
 
         System.out.println("Bob Tester: Patches filled: " + grid1.getPatches().size());
         System.out.println("Bob Tester: Pieces filled: " + grid1.getPieces().size());

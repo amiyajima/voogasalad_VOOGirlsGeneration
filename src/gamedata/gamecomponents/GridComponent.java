@@ -5,27 +5,130 @@ import java.awt.geom.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public abstract class GridComponent {
+/**
+ * Abstract superclass for pieces and patches,
+ * which together constitute every element of a
+ * level that can be directly interacted with on
+ * a grid. This class contains methods that are
+ * accessible to both of them.
+ * 
+ * @author Martin Tamayo
+ */
+public abstract class GridComponent implements IHasStats{
 	
 	protected String myName;
 	protected Point2D myLoc;
 	protected String myImageLocation;
 	protected transient ImageView myImageView;
 	
-	public GridComponent(String name, String imageLocation, Point2D p) {
+	/**
+	 * General constructor for instantiating a brand new
+	 * piece or patch. Any instance variables specific to
+	 * pieces or patches are dealt with in their own,
+	 * separate constructors.
+	 * 
+	 * @param name : String name describing the piece or patch.
+	 * @param imageLocation : String path to image on file.
+	 * @param point : Point2D location of piece or patch on grid.
+	 */
+	public GridComponent(String name, String imageLocation, Point2D point) {
 		myName = name;
+		myLoc = point;
 		myImageLocation = imageLocation;
 		setImageView(imageLocation);
-		myLoc = p;
 	}
 	
-	public GridComponent(GridComponent clone){
+	/**
+	 * General constructor for cloning a piece or patch. Once a
+	 * piece or patch is created, one will often want to create
+	 * copies of them to place on the grid. This constructor is
+	 * for handling such cases.
+	 * 
+	 * @param clone : Piece or patch class to copy over.
+	 */
+	public GridComponent(GridComponent clone, Point2D placeHere){
+		myName = clone.myName;
+		myLoc = new Point2D.Double(placeHere.getX(),placeHere.getY());
 		myImageLocation = clone.myImageLocation;
 		setImageView(myImageLocation);
-		myLoc = new Point2D.Double(clone.myLoc.getX(),clone.myLoc.getY());
-		myName = clone.myName;
 	}
 	
+	/**
+	 * Getter method for the name of the GridComponent.
+	 * 
+	 * @return myName : String name describing the piece or patch.
+	 */
+	public String getName() {
+		return myName;
+	}
+	
+	/**
+	 * Setter method for the name of the GirdComponent.
+	 * 
+	 * @param name : String name describing the piece or patch.
+	 */
+	public void setName(String name) {
+		this.myName = name;
+	}
+	
+	/**
+	 * Getter method for the location of the GridComponent
+	 * on the grid.
+	 * 
+	 * @return myLoc : Point2D location of piece or patch on grid.
+	 */
+    public Point2D getLoc() {
+        return myLoc;
+    }
+    
+    /**
+	 * Setter method for the location of the GridComponent
+	 * on the grid.
+	 * 
+	 * @param loc : Point2D location of piece or patch on grid.
+	 */
+	public void setLoc(Point2D loc) {
+		myLoc = loc;
+	}
+	
+    /**
+     * Getter method for the path to the image for the
+     * GridComponent on file.
+     * 
+     * @return myImageLocation : String path to image on file.
+     */
+    public String getImageLocation() {
+        return myImageLocation;
+    }
+    
+	/**
+	 * Setter method for the path to the image for the
+	 * GridComponent on file.
+	 * 
+	 * @param imageLocation : String path to image on file.
+	 */
+	public void setImageLocation(String imageLocation) {
+		myImageLocation = imageLocation;
+		setImageView(imageLocation);
+	}
+	
+	/**
+	 * Getter method for the ImageView for the GridComponent
+	 * for GUI display purposes.
+	 * 
+	 * @return myImageView : Image for the GridComponent.
+	 */
+    public ImageView getImageView() {
+        return myImageView;
+    }
+    
+    /**
+	 * Method for creating an ImageView using the location of the
+	 * image on file. This is for GUI display purposes. This method
+	 * is used privately by the GridComponent constructor methods.
+	 * 
+	 * @param imageLocation : String path to image on file.
+	 */
 	private void setImageView(String imageLocation) {
     	if(myImageLocation.startsWith("/")){
         	myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
@@ -34,29 +137,4 @@ public abstract class GridComponent {
         	myImageView = new ImageView(new Image(imageLocation));
         }
     }
-	
-	/**
-	 * Getter for patch's name
-	 * 
-	 * @return String - patch name
-	 */
-	public String getName() {
-		return myName;
-	}
-	
-	/**
-     * Returns the Point2D indicating the piece's coordinates
-     */
-    public Point2D getLoc () {
-        return myLoc;
-    }
-    
-    /**
-	 * sets patch's coordinate location
-	 * 
-	 * @param coord
-	 */
-	public void setLoc(Point2D coord) {
-		myLoc = coord;
-	}
 }
