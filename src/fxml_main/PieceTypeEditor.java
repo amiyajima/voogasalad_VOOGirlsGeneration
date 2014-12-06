@@ -1,18 +1,20 @@
-package authoring.createedit;
+package fxml_main;
 
 import gamedata.action.Action;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
+
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import java.awt.geom.Point2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -21,34 +23,34 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import authoring.concretefeatures.LibraryUnitEditor;
 import authoring.concretefeatures.UnitEntry;
+import authoring.createedit.ModulesList;
 import authoring.data.ActionData;
 import authoring.data.PieceTypeData;
 import authoring_environment.UIspecs;
 
 /**
- * GUI element that allows users to create new Piece templates and add them to
- * the Library. User defines unit name, image, and actions. Actions define a
- * units behavior and ultimately make the unit what it is.
  * 
- * @author Mike Zhu
+ * @author Mike Zhu, Jennie Ju
+ *
  */
-public class UnitCreator extends TitledPane {
-
+public class PieceTypeEditor extends VBox {
+	
 	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 	private static final int HEIGHT = 400;
-	private static final int WIDTH = 100;
+	private static final int WIDTH = 300;
 	private static final String NAME = "Unit Creator";
 	private static final String UNIT_NAME_LABEL = "Name: ";
 	private static final String LOAD_IMAGE_LABEL = "Load Unit Image";
 	private static final String TEMPLATE_LABEL = "Create new unit template";
 	private static final String DELETE = "Delete";
 	private static final String EDIT = "Edit";
-	
+
 	private VBox myUnitListView;
 	private ActionData myAvailableActions;
 
@@ -56,7 +58,6 @@ public class UnitCreator extends TitledPane {
 	private static final Insets LABEL_MARGINS = new Insets(10, WIDTH/7, 10, WIDTH/7 - 10);
 	private static final String LABEL_CSS = "-fx-font-size: 25pt;";
 	private static final String DEFAULT_IMAGE = "/resources/images/default_image.png";
-
 	private String myName;
 	private int myPlayerID;
 	private String myImageLocation;
@@ -68,10 +69,25 @@ public class UnitCreator extends TitledPane {
 	private Inventory myInventory;
 
 	private PieceTypeData myPieceTypes;
-
-	public UnitCreator(ActionData actions, PieceTypeData pieceTypes, VBox unitListView) {
+	
+	/**
+	 * Called when creating a new Piece
+	 * @param pieceController
+	 */
+	public PieceTypeEditor(PieceController pieceController) {
+		myName = "";
+		myImageLocation = "";
+		myPath = new ArrayList<Movement>();
+		myActions = new ArrayList<Action>();
+		myStats = new Stats();
+		myLoc = new Point2D.Double(0, 0);
+		myPlayerID = 0;
+		myInventory = new Inventory();
+	}
+	
+	public PieceTypeEditor(ActionData actions, PieceTypeData pieceTypes, VBox unitListView) {
 		myUnitListView = unitListView;
-		
+
 		myPieceTypes = pieceTypes;
 		myAvailableActions = actions;
 		myName = "";
@@ -83,8 +99,7 @@ public class UnitCreator extends TitledPane {
 		myPlayerID = 0;
 		myInventory = new Inventory();
 
-		setText(NAME);
-		
+
 		VBox box = new VBox();
 		box.getStylesheets().add(STYLESHEET);
 		box.getStyleClass().add("vbox");
@@ -176,9 +191,9 @@ public class UnitCreator extends TitledPane {
 			}
 		});
 		box.getChildren().addAll(names, images, modList, goButton);
-		setContent(box);
+		getChildren().add(box);
 	}
-	
+
 	protected List<Action> addSelectedActions(List<String> selected){
 		List<Action> list = new ArrayList<>();
 		for(String s: selected){

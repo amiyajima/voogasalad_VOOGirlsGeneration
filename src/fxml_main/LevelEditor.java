@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -22,7 +23,8 @@ public class LevelEditor extends VBox {
 
 	private void initialize() {
 		this.getStylesheets().add(STYLESHEET);
-		this.getStyleClass().add("vbox");
+		this.getStyleClass().addAll("vbox");
+		this.setId("vbox-main");
 
 		HBox idHBox = new HBox();
 		Label idLabel = new Label("ID:");
@@ -58,12 +60,13 @@ public class LevelEditor extends VBox {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 
+				
 			}
 		});
 
 
-		getChildren().addAll(idHBox, gridSizeVBox,
-				eventBtn, finalizeBtnsHBox);
+		getChildren().addAll(idHBox, new Separator(), gridSizeVBox,
+				new Separator(), eventBtn, finalizeBtnsHBox);
 
 
 	}
