@@ -82,11 +82,19 @@ public class GUIGrid extends SuperGrid implements Observer {
 		// remove all instances of this type of patch
 	}
 
-	public List<Piece> getPiece(Piece p) {
+	public Piece getPiece(Piece p) {
 		return null;
 	}
 
-	public List<Patch> getPatche(Patch p) {
+	public Patch getPatch(Patch p) {
+		return null;
+	}
+	
+	public Piece getPiece(Point2D loc) {
+		return null;
+	}
+
+	public Patch getPatch(Point2D loc) {
 		return null;
 	}
 
@@ -94,7 +102,7 @@ public class GUIGrid extends SuperGrid implements Observer {
 		return null;
 	}
 
-	public List<Patch> getPatche(int x, int y) {
+	public List<Patch> getPatch(int x, int y) {
 		return null;
 	}
 

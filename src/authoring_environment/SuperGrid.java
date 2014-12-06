@@ -66,4 +66,11 @@ public class SuperGrid {
 		}
 	}
 
+	public int getRow() {
+		return myRows;
+	}
+
+	public int getCol() {
+		return myCols;
+	}
 }

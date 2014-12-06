@@ -1,6 +1,6 @@
 package gamePlayer;
 
-import gamedata.JSON.JSONManager;
+import gamedata.JSON.JSONManager; 
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
@@ -39,6 +39,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
@@ -52,7 +53,7 @@ import javafx.scene.input.KeyCode;
 
 /**
  * 
- * @author
+ * @author 
  *
  */
 public class ViewController {
@@ -83,7 +84,6 @@ public class ViewController {
 	private Scene myScene;
 
 	private Game myModel;
-	//private GameGrid myGrid;
 	private GUIGrid myGrid;
 
 	// private SampleListener myLeapListener;
@@ -108,6 +108,8 @@ public class ViewController {
 	@FXML
 	private VBox scores;
 
+	private ScrollPane myGridPane;
+	
 	private Point2D currentClick;
 	private IGridState gridState;
 	private JSONManager myJSONManager;
@@ -298,14 +300,16 @@ public class ViewController {
 		//myGrid = new SquareGameGrid(myModel.getCurrentLevel().getGrid()
 		//		.getRow(), myModel.getCurrentLevel().getGrid().getColumn());
 
+		myGridPane = new ScrollPane();
 		Level currentLevel = myModel.getCurrentLevel();
-		//myGrid = new GUIGrid(currentLevel.getGrid().getColumn(),currentLevel.getGrid().getRow(),);
+		myGrid = currentLevel.getGrid();
+		myGrid.displayPane(myGridPane);
 		
-		myGameSpace.setCenter(myGrid);
-		myGrid.setAlignment(Pos.CENTER);
-		myGrid.populateGrid(
-				myModel.getCurrentLevel().getGrid().getAllPatches(), myModel
-						.getCurrentLevel().getGrid().getAllPieces());
+		myGameSpace.setCenter(myGridPane);
+		//myGridPane.setAlignment(Pos.CENTER);
+		//myGrid.populateGrid(
+		//		myModel.getCurrentLevel().getGrid().getAllPatches(), myModel
+		//				.getCurrentLevel().getGrid().getAllPieces());
 		myModel.getLevels().forEach(level -> level.addObserver(this.myGrid));
 		setOnClick();
 
@@ -451,7 +455,7 @@ public class ViewController {
 	 * TODO: Add javadoc
 	 */
 	private void setOnClick() {
-		myGrid.setOnMouseClicked(event -> {
+		myGridPane.setOnMouseClicked(event -> {
 			performAction(event.getX(), event.getY());
 		});
 	}
@@ -461,8 +465,10 @@ public class ViewController {
 	 * TODO: Add javadoc
 	 */
 	public void setOnEnterKey() {
-		myGrid.requestFocus();
-		myGrid.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+		myGridPane.requestFocus();
+		myGridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
 
 			@Override
 			public void handle(KeyEvent arg0) {
@@ -484,10 +490,10 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(double x, double y) {
-		System.out.println("current mouse location:" + x + ", " + y);
-		System.out.println("myGrid size is" + myGrid.getWidth() + "*"
-				+ myGrid.getHeight());
-		System.out.println(myGrid.getBoundsInParent());
+		//System.out.println("current mouse location:" + x + ", " + y);
+		//System.out.println("myGrid size is" + myGridPane.getWidth() + "*"
+		//		+ myGrid.getHeight());
+		//System.out.println(myGrid.getBoundsInParent());
 
 		if (myModel.getCurrentLevel().getGrid()
 				.getPiece(findPosition(x - 45, y - 20)) == null) {
@@ -604,12 +610,13 @@ public class ViewController {
 	}
 
 	/**
-	 * Getter to get the Game Grid
+	 * Getter to get the GameGrid
 	 * 
 	 * @return
 	 */
-	protected GUIGrid getGrid() {
-		return myGrid;
+
+	protected ScrollPane getGrid() {
+		return myGridPane;
 	}
 
 	/**
