@@ -40,7 +40,7 @@ public abstract class SuperTile extends Group {
 		
 		setStyle("-fx-cursor: hand");
 		
-		super.getChildren().addAll(myShape,myPatchImage,myPieceImage);
+		super.getChildren().addAll(myShape,myPatchImage,myPieceImage,myHighlight);
 	}
 	
 
