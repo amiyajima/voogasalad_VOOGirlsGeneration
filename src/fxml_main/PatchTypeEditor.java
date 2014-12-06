@@ -126,10 +126,9 @@ public class PatchTypeEditor extends Pane {
 	 * @param images - HBox
 	 */
 	 private void initImageLoader (HBox images) {
-		 ImageView icon = new ImageView();
+		 ImageView icon = setImageView(myImageLocation);
 		 icon.setFitHeight(40);
 		 icon.setFitWidth(40);
-		 icon.setImage(new Image(getClass().getResourceAsStream(myImageLocation)));
 		 Button loadImage = new Button(LOADIMAGE_LABEL);
 		 loadImage.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -147,6 +146,15 @@ public class PatchTypeEditor extends Pane {
 			 }
 		 });
 		 images.getChildren().addAll(icon, loadImage);
+	 }
+	 
+	 private ImageView setImageView(String imageLocation) {
+		 if(myImageLocation.startsWith("/")){
+			 return new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+		 }
+		 else{
+			 return new ImageView(new Image(imageLocation));
+		 }
 	 }
 
 	 /**

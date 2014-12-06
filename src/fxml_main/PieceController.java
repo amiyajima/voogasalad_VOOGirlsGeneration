@@ -8,7 +8,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.concretefeatures.LibraryUnitEditor;
-import authoring.createedit.UnitCreator;
 import authoring.data.ActionData;
 import authoring.data.PieceTypeData;
 import authoring_environment.GUIGrid;
