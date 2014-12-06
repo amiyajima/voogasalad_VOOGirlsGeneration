@@ -1,4 +1,4 @@
-/package gamePlayer;
+package gamePlayer;
 
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
@@ -17,10 +17,8 @@ import javafx.scene.shape.Rectangle;
 /**
  * The View of square game grid. It observes the (Level in) Game and updates
  * (re-populate the grid and update scores of players) upon notified.
- *
+ * DEPRICATED
  */
-// TODO:Replace with Authoring Environment Grid
-// TODO: maybe observing Game instead of Level.? (need access to player scores.)
 
 public class SquareGameGrid extends GameGrid {
 

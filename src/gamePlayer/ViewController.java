@@ -3,6 +3,7 @@ package gamePlayer;
 import gamedata.JSON.JSONManager;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
+import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
 
 import java.awt.geom.Point2D;
@@ -115,7 +116,7 @@ public class ViewController {
 
 	private JSONManager myJSONManager;
 	
-//	private Highlighter myHighlighter;
+	private GameGridEffect myGameGridEffect;
 
 	public ViewController(Stage s) {
 		myStage = s;
@@ -303,7 +304,8 @@ public class ViewController {
 		//myGrid = new SquareGameGrid(myModel.getCurrentLevel().getGrid()
 		//		.getRow(), myModel.getCurrentLevel().getGrid().getColumn());
 
-		myGrid = new GUIGrid();
+		Level currentLevel = myModel.getCurrentLevel();
+		//myGrid = new GUIGrid(currentLevel.getGrid().getColumn(),currentLevel.getGrid().getRow(),);
 		
 		myGameSpace.setCenter(myGrid);
 		myGrid.setAlignment(Pos.CENTER);
@@ -443,8 +445,9 @@ public class ViewController {
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
-
-		highLightActionRange();
+		
+//		highLightActionRange();
+		myGameGridEffect.highLightActionRange(myGrid, activePiece, action); //myGrid = GUIGrid?
 
 		setGridState(new ApplyState(this));
 
@@ -531,6 +534,7 @@ public class ViewController {
 		//highlightCurrent(location, Color.BLUE);
 	}
 
+// might move to GameGridEffect
 	/**
 	 * Method to convert pixel coordinates into tile coordinates
 	 * 

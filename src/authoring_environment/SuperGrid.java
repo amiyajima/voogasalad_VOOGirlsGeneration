@@ -25,7 +25,7 @@ public class SuperGrid extends Pane {
 
 	private PieceData myPieceData;
 	private PatchData myPatchData;
-	protected List<List<SuperTile>> myGrid;
+	protected transient List<List<SuperTile>> myGrid;
 
 	public SuperGrid() {
 		this(1, 1, 40, SQUARE_GRID);
