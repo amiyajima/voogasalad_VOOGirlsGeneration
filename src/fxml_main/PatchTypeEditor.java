@@ -31,6 +31,8 @@ public class PatchTypeEditor extends Pane {
 
 	private static final int HEIGHT = 150;
 	private static final int WIDTH = 150;
+	private static final String CREATOR_TITLE = "Terrain Creator";
+	private static final String EDITOR_TITLE = "Terrain Editor";
 	private static final String ID_LABEL = "Unique ID";
 	private static final String NAME_LABEL = "Name";
 	private static final String LOADIMAGE_LABEL = "Load Terrain Image";
@@ -58,7 +60,7 @@ public class PatchTypeEditor extends Pane {
 	 * 
 	 */
 	public PatchTypeEditor (Consumer<Patch> okLambda) {
-		myEditorTitle = "Terrain Creator";
+		myEditorTitle = CREATOR_TITLE;
 		myID = "";
 		myName = "";
 		myImageLocation = DEFAULT_IMAGE_LOC;
@@ -72,7 +74,7 @@ public class PatchTypeEditor extends Pane {
 	 */
 
 	public PatchTypeEditor (Consumer<Patch> okLambda, Patch patch) {
-		myEditorTitle = "Terrain Editor";
+		myEditorTitle = EDITOR_TITLE;
 		myID = patch.getID();
 		myName = patch.getName();
 		myImageLocation = patch.getImageLocation();

@@ -32,7 +32,6 @@ public class PieceData implements AuthoringData<Piece>, Observer {
 		myPieces.add(p);
 	}
     
-
 	@Override
 	public void replace(Piece origEl, Piece newEl) {
 		origEl.setName(newEl.getName());

@@ -1,13 +1,16 @@
 package fxml_main;
 
+import java.util.function.Consumer;
+
 import gamedata.gamecomponents.Piece;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import authoring.concretefeatures.LibraryUnitEditor;
 import authoring.data.ActionData;
 import authoring.data.PieceTypeData;
 import authoring_environment.GUIGrid;
@@ -25,12 +28,15 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 
     @Override
     protected void initGlobalNewBtn (Button newBtn) {
-        newBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                myPropertiesSPane.setContent(new PieceTypeEditor(myActionData, myPieceTypes, myVBox));
-            }
-        });
+    	newBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle (ActionEvent event) {
+				Consumer<Piece> okLambda = (Piece piece) -> {
+					addEntry(piece);
+				};
+				myPropertiesSPane.setContent(new PieceTypeEditor(okLambda));
+			}
+		});
     }
 
     @Override
@@ -55,16 +61,27 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 
 	@Override
 	protected HBox makeEntryBox(Piece entry) {
-		// TODO Auto-generated method stub
-		return null;
+		myPieceTypes.add(entry);
+		HBox hb = new HBox();
+		Label name = new Label(entry.getName());
+		name.setTranslateY(7.5);
+		ImageView img = entry.getImageView();
+		img.setFitHeight(40);
+		img.setFitWidth(40);
+		hb.getChildren().addAll(img, name);
+		return hb;
 	}
 
 	@Override
 	protected void initEntryEditBtn(Piece entry, Button editBtn) {
 		editBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent event) {
-				myPropertiesSPane.setContent(new LibraryUnitEditor(entry, myActionData));
+			public void handle (ActionEvent e) {
+				Consumer<Piece> okLambda = (Piece piece) -> {
+					//TODO: Use observables to make all the pieces and
+					// patches in the grid change to fit the updated patch
+				};
+				myPropertiesSPane.setContent(new PieceTypeEditor(okLambda, entry, myActionData));
 			}
 		});
 	}
@@ -73,8 +90,10 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 	protected void initEntryDelBtn(Piece entry, Button delBtn) {
 		delBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent event) {
-				System.out.println("Delete all instances of this piece!");
+			public void handle (ActionEvent event) {
+				myPieceTypes.remove(entry);
+				HBox entryBox = myEntryMap.get(entry);
+				myVBox.getChildren().remove(entryBox);
 			}
 		});
 	}

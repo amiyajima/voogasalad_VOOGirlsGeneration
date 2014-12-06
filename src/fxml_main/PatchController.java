@@ -71,7 +71,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 	}
 
 	@Override
-	protected void initEntryEditBtn (Patch entry, Button editBtn) {
+	protected void initEntryEditBtn(Patch entry, Button editBtn) {
 		editBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent e) {
@@ -79,16 +79,14 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 					//TODO: Use observables to make all the pieces and
 					// patches in the grid change to fit the updated patch
 				};
-				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda,entry));
+				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda, entry));
 			}
 		});
 	}
 
 	@Override
 	protected void initEntryDelBtn (Patch entry, Button delBtn) {
-
 		delBtn.setOnAction(new EventHandler<ActionEvent>() {
-
 			@Override
 			public void handle (ActionEvent event) {
 				myPatchTypes.remove(entry);
