@@ -41,10 +41,10 @@ public class SuperGrid {
 
 	protected void initGridTiles(String shape) {
 		myGrid = new LinkedList<List<SuperTile>>();
-		for (int r = 0; r < myRows; r++) {
+		for (int row = 0; row < myRows; row++) {
 			List<SuperTile> tileCol = new LinkedList<SuperTile>();
-			for (int c = 0; c < myCols; c++) {
-				Point2D location = new Point2D.Double(r, c);
+			for (int col = 0; col < myCols; col++) {
+				Point2D location = new Point2D.Double(row, col);
 				SuperTile tile = makeShapeTile(shape, myTileSize, location);
 				tileCol.add(tile);
 				myPane.getChildren().add(tile);
@@ -72,5 +72,16 @@ public class SuperGrid {
 
 	public int getCol() {
 		return myCols;
+	}
+	
+	public SuperTile findClickedTile(double xCoord, double yCoord){
+		for (List<SuperTile> rows:myGrid){
+			for (SuperTile tile:rows){
+				if (tile.myShape.contains(xCoord,yCoord)){
+					return tile;
+				}
+			}
+		}
+		return null;
 	}
 }

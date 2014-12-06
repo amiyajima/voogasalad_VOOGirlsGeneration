@@ -16,7 +16,7 @@ import javafx.scene.shape.Shape;
  * @author Mengen Huang, Jennie Ju
  */
 public abstract class SuperTile extends Group {
-	private Shape myShape;
+	protected Shape myShape;
 //	private int mySize;
 	private int myImageSize;
 	private Point2D myCoordinates;
@@ -123,7 +123,9 @@ public abstract class SuperTile extends Group {
 		}
 	}
 	
-	protected Point2D getLocation(){
+	public Point2D getLocation(){
 		return myLocation;
 	}
+	
+	
 }

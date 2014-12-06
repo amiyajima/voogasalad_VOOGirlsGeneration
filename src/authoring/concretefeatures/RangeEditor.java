@@ -60,17 +60,18 @@ public class RangeEditor extends PopupWindow {
     
 
     public RangeEditor (List<Point2D> range) {
-    	range.add(new Point2D.Double(1,0));
-    	range.add(new Point2D.Double(-1,1));
+//         range.add(new Point2D.Double(1,0));
+//         range.add(new Point2D.Double(-1,1));
 
-    	setHeight(RANGE_EDITOR_HEIGHT);
-    	setWidth(RANGE_EDITOR_WIDTH);
-    	setTitle(NAME);
-
+        setHeight(RANGE_EDITOR_HEIGHT);
+        setWidth(RANGE_EDITOR_WIDTH);
+        setTitle(NAME);
+        
     	rangeGridView = new RangeGridView(myGridLength, myGridLength,
-    			myTileSize, "Square Grid", range);
-
+                                         myTileSize, "Square Grid", range);
+        
 //        if (!((range == null) || (range.size() == 0))) {
+//
 //            // cacluateGridSize(range);
 //            int initialWidth = (int) cacluateGridSize(range).getX();
 //            int initialHeight = (int) cacluateGridSize(range).getY();

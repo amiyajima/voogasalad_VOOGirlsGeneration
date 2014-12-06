@@ -21,8 +21,8 @@ import authoring_environment.WorkspaceView;
 public class LevelEditor {
     private static final int DEFAULT_TILE_SIZE = 100;
 	private static final int MIN_TILE_SIZE = 40;
-    private static final int GRID_VIEW_HEIGHT = 500;
-    private static final int GRID_VIEW_WIDTH = 700;
+    private static final int GRID_VIEW_HEIGHT = 400;
+    private static final int GRID_VIEW_WIDTH = 800;
     
     private WorkspaceView myWorkspaceView;
     private String levelName;
