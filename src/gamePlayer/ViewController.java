@@ -83,8 +83,8 @@ public class ViewController {
 	private Scene myScene;
 
 	private Game myModel;
-	private GameGrid myGrid;
-	//private GUIGrid myGrid;
+	//private GameGrid myGrid;
+	private GUIGrid myGrid;
 
 	// private SampleListener myLeapListener;
 
@@ -298,10 +298,10 @@ public class ViewController {
 	private void initializeGrid() {
 		// myModel.play();
 
-		myGrid = new SquareGameGrid(myModel.getCurrentLevel().getGrid()
-				.getRow(), myModel.getCurrentLevel().getGrid().getColumn());
+		//myGrid = new SquareGameGrid(myModel.getCurrentLevel().getGrid()
+		//		.getRow(), myModel.getCurrentLevel().getGrid().getColumn());
 
-		//myGrid = new GUIGrid();
+		myGrid = new GUIGrid();
 		
 		myGameSpace.setCenter(myGrid);
 		myGrid.setAlignment(Pos.CENTER);
