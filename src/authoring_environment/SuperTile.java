@@ -127,5 +127,9 @@ public abstract class SuperTile extends Group {
 		return myLocation;
 	}
 	
+	public Point2D getCoordinates(){
+		return myCoordinates;
+	}
+	
 	
 }
