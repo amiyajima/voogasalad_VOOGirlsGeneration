@@ -62,7 +62,6 @@ public class ViewController {
 	public static final String SCOREBOARD_FXML = "scoreBoard.fxml";
 	public static final String INITIALSCENE_TITLE = "VOOGASALAD!";
 	public static final String GAME_LOCATION = "/src/resources/json";
-
 	public static final String POPUP_FXML = "popup.fxml";
 
 	// public static final String ENGLISH = "English";
@@ -91,12 +90,10 @@ public class ViewController {
 
 	private Boolean keyControlOn;
 	private KeyboardController myKeyboardController;
+	// private MouseController myMouseController;
 
-	// private Point2D myCurrentLocation;
 	private Piece activePiece;
 	private Action activeAction;
-
-	// private MouseController myMouseController;
 
 	private AudioClip myAudio;
 	@FXML
@@ -111,11 +108,8 @@ public class ViewController {
 	private VBox scores;
 
 	private Point2D currentClick;
-
 	private IGridState gridState;
-
 	private JSONManager myJSONManager;
-	
 	private GameGridEffect myGameGridEffect;
 
 	public ViewController(Stage s) {
@@ -232,7 +226,6 @@ public class ViewController {
 
 	@FXML
 	private void doSettings() {
-
 	}
 
 	/**
@@ -484,16 +477,6 @@ public class ViewController {
 			}
 
 		});
-
-		// myGrid.setOnKeyPressed(event->{
-		// if (event.getCode() == KeyCode.F){
-		// System.out.println("enter");
-		// performAction(myKeyboardController.getCurrentLocation().getX(),
-		// myKeyboardController.getCurrentLocation().getY());
-		// }
-		// }
-		// );
-
 	}
 
 	/**
@@ -572,7 +555,6 @@ public class ViewController {
 	 */
 	public void toggleKeyboardControl() {
 		if (keyControlOn) {
-
 			keyControlOn = false;
 			myGameGridEffect.getHighlighter().unhighlight(myGrid, myKeyboardController.getCurrentLocation());
 			myKeyboardController = null;
