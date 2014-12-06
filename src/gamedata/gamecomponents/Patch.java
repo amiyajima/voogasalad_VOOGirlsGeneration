@@ -1,5 +1,7 @@
 package gamedata.gamecomponents;
 
+import gamedata.stats.Stats;
+
 import java.awt.geom.Point2D;
 
 /**
@@ -28,5 +30,10 @@ public class Patch extends GridComponent {
 	 */
 	public Patch(Patch clone, Point2D placeHere) {
 		super(clone, placeHere);
+	}
+
+	@Override
+	public Stats getStats() {
+		return null;
 	}
 }
