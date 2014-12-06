@@ -52,9 +52,10 @@ public class GUIGrid extends SuperGrid {
         System.out.println("adding piece at: " + loc);
         Piece clone = new Piece(pieceType, loc);
 //        System.out.println(myPieceData.get(0).getLoc());
-        myPieceData.add(clone);
+        myPieceData.add(clone); 
         SuperTile myTile = myGrid.get((int) loc.getX()).get((int) loc.getY());
         myTile.addPieceImage(clone.getImageView());
+        
     }
 
     // TODO: set image within tile at this location

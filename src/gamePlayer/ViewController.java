@@ -327,7 +327,11 @@ public class ViewController {
 		if (myGrid.getPiece(new Point2D.Double(0, 0)) != null) {
 			System.out.println("THERE'S A PIECE HERE");
 		}
+<<<<<<< Updated upstream
 
+=======
+	
+>>>>>>> Stashed changes
 		setOnClick();
 
 		setGridState(new SelectState(this));
