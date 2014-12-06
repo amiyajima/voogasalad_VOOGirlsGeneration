@@ -1,7 +1,7 @@
 package gamePlayer;
 
 import java.awt.geom.Point2D;
-
+import authoring_environment.GUIGrid;
 import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
@@ -14,7 +14,6 @@ import javafx.scene.paint.Color;
  */
 public class Highlighter {
     
-//    GameGrid myGrid;
     
 	/**
 	 * Turns on highlighting of a Patch at loc with Color c
@@ -22,8 +21,9 @@ public class Highlighter {
 	 * @param loc
 	 * @param c
 	 */
-	public void highlightCurrent(GameGrid grid, Point2D loc, Color c) {
-	    addDropShadow(grid.get((int) loc.getX(), (int) loc.getY()), c);
+	public void highlightCurrent(GUIGrid grid, Point2D loc, Color c) {
+	    //need to get the Node using GUIGrid to do the following:
+//	    addDropShadow(grid.get((int) loc.getX(), (int) loc.getY()), c);
 	}
 
 	/**
@@ -31,11 +31,12 @@ public class Highlighter {
 	 * 
 	 * @param loc
 	 */
-	public void unhighlight(GameGrid grid, Point2D loc) {
-		Node n = grid.get((int) loc.getX(), (int) loc.getY());
-		if (n != null) {
-			n.setEffect(null);
-		}
+	public void unhighlight(GUIGrid grid, Point2D loc) {
+	        //need to get the Node using GUIGrid to do the following:
+//		Node n = grid.get((int) loc.getX(), (int) loc.getY());
+//		if (n != null) {
+//			n.setEffect(null);
+//		}
 	}
 
 	/**
@@ -44,7 +45,7 @@ public class Highlighter {
 	 * @param n
 	 * @param c
 	 */
-	private void addDropShadow(Node n, Color c) {
+	public void addDropShadow(Node n, Color c) {
 		if (n != null) {
 			DropShadow ds = new DropShadow();
 			ds.setRadius(30.0);

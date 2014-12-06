@@ -115,7 +115,7 @@ public class ViewController {
 
 	private JSONManager myJSONManager;
 	
-//	private Highlighter myHighlighter;
+	private GameGridEffect myGameGridEffect;
 
 	public ViewController(Stage s) {
 		myStage = s;
@@ -443,8 +443,9 @@ public class ViewController {
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
-
-		highLightActionRange();
+		
+//		highLightActionRange();
+		myGameGridEffect.highLightActionRange(myGrid, activePiece, action); //myGrid = GUIGrid?
 
 		setGridState(new ApplyState(this));
 
@@ -531,6 +532,7 @@ public class ViewController {
 		//highlightCurrent(location, Color.BLUE);
 	}
 
+// might move to GameGridEffect
 	/**
 	 * Method to convert pixel coordinates into tile coordinates
 	 * 
