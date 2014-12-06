@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -92,7 +93,8 @@ public class RangeGrid extends SuperGrid{
 	private void addCenterImage(int rows,int columns) {
 		SuperTile centerTile=findCenterTile(columns,rows);
 		Image centerImage=new Image(getClass().getResourceAsStream(DEFAULT_CENTRAL_IMAGE));
-		centerTile.addPiece(centerImage);
+		ImageView centerPatrick=new ImageView(centerImage);
+		centerTile.addPieceImage(centerPatrick);
 		centerTile.myPieceImage.setVisible(true);
 
 	}
