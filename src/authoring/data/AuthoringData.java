@@ -10,7 +10,7 @@ import java.util.List;
  * @param <T> - Type of object to be stored in data
  */
 public interface AuthoringData<T> {
-
+	
 	/**
 	 * Adds an object of type T to data
 	 */

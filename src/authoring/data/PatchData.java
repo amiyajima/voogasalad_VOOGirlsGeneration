@@ -67,13 +67,12 @@ public class PatchData implements AuthoringData<Patch>, Observer {
 				Patch patchType = (Patch) arg;
 				for (Patch p : myPatches) {
 				    if (p.getID() == patchType.getID()){
-					replace(p,patchType);
+				    	replace(p, patchType);
 				    }
 				}
 			}
 		}
 	}
-	
 
 	public void removePatchAtLoc(Point2D location){
 		for(Patch patch : myPatches){

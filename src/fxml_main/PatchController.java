@@ -76,7 +76,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 	}
 
 	@Override
-	protected void initEntryEditBtn (Patch entry, Button editBtn) {
+	protected void initEntryEditBtn(Patch entry, Button editBtn) {
 		editBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent e) {
@@ -95,16 +95,14 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 				    myPatchTypes.replace(entry, patch);
 				    myPatches.update(myPatchTypes, entry);
 				};
-				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda,entry));
+				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda, entry));
 			}
 		});
 	}
 
 	@Override
 	protected void initEntryDelBtn (Patch entry, Button delBtn) {
-
 		delBtn.setOnAction(new EventHandler<ActionEvent>() {
-
 			@Override
 			public void handle (ActionEvent event) {
 				myPatchTypes.remove(entry);
