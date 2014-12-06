@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" stylesheets="@../../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="authoring.eventeditor.EventEditorController">
+   <center>
+      <VBox prefHeight="400.0" prefWidth="391.0" styleClass="vbox" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Actors" />
+            <ListView fx:id="conditionsListView" />
+            <Separator prefWidth="200.0" />
+            <Label text="Receivers" />
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleNewAction" text="Save" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+   </center>
+   <left>
+      <HBox styleClass="hbox">
+         <children>
+            <VBox prefHeight="400.0" prefWidth="267.0" styleClass="vbox" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Available Actions" />
+                  <ListView fx:id="eventsListView" prefHeight="473.0" prefWidth="267.0" />
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+         </children>
+      </HBox>
+   </left>
+   <right>
+      <HBox>
+         <children>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <VBox prefHeight="500.0" prefWidth="359.0" />
+         </children>
+      </HBox>
+   </right>
+</BorderPane>

@@ -33,7 +33,7 @@ import authoring_environment.SuperGrid;
 /**
  * JSON Write Tester
  * 
- * @author Rica Zhang :D
+ * @author Rica Zhang, Anna Miyajima
  *
  */
 public class JSONBobTester {
@@ -45,11 +45,13 @@ public class JSONBobTester {
 
     }
 
+    // TODO: remove, used for testing purposes
     public GUIGrid createGUIGrid () {
         GUIGrid test = new GUIGrid(2, 2, 5, "square");
         return test;
     }
 
+    // TODO: remove, used for testing purposes
     public SuperGrid createSuperGrid () {
         SuperGrid grid = new SuperGrid(2, 2, 5, "square");
         return grid;
@@ -97,26 +99,28 @@ public class JSONBobTester {
         Patch patch = createNewPatch(new Point2D.Double(3, 3));
 
         Game myGame = new Game(1, myLevels, myLevels.get(0));
+        myGame.addPlayer(myPlayer1);
         System.out.println(myGame);
         return myGame;
     }
 
     public GUIGrid createNewGrid () {
-        GUIGrid grid1 = new GUIGrid(2, 2, 2, "Square Grid");
+        GUIGrid grid1 = new GUIGrid(5, 5, 75, "Square Grid");
 
-        for (int x = 0; x < grid1.getColumn(); x++) {
+        Piece templ = createNewPiece(grid1, new Point2D.Double(0, 0));
+        System.out.println(templ.getImageLocation());
+        Patch templPatch = createNewPatch(new Point2D.Double(0, 0));
+        System.out.println(templPatch.getImageLocation());
+
+        for (int x = 0; x < grid1.getCol(); x++) {
             for (int y = 0; y < grid1.getRow(); y++) {
-                Patch patch = createNewPatch(new Point2D.Double(x, y));
-                grid1.setPatch(patch.getLoc(), patch);
-                // if((x==grid1.getColumn()/2) && (y==grid1.getRow()/2)){
-                Piece piece = createNewPiece(grid1, new Point2D.Double(x, y));
-                grid1.setPiece(piece.getLoc(), piece);
-                // }
+                grid1.addPiece(templ, new Point2D.Double(x, y));
+                grid1.addPatch(templPatch, new Point2D.Double(x, y));
             }
         }
 
-        System.out.println("Bob Tester: Patches filled: " + grid1.getPatches().size());
-        System.out.println("Bob Tester: Pieces filled: " + grid1.getPieces().size());
+        System.out.println("Bob Tester: Patches filled: " + grid1.getPatches().getData().size());
+        System.out.println("Bob Tester: Pieces filled: " + grid1.getPieces().getData().size());
         System.out.println("Grid created: " + grid1.toString());
         return grid1;
     }
@@ -159,16 +163,16 @@ public class JSONBobTester {
 
         Piece piece = null;
         if (randomInt % 2 == 1) {
-            piece = new Piece("Duvall", DEFAULT_DUVALL, move, actions, s, p, 1, i);
+            piece = new Piece("ID", "Duvall", DEFAULT_DUVALL, move, actions, s, p, 1, i);
         }
         else {
-            piece = new Piece("Bunny", DEFAULT_BUNNY, move, actions, s, p, 1, i);
+            piece = new Piece("ID", "Bunny", DEFAULT_BUNNY, move, actions, s, p, 1, i);
         }
         return piece;
     }
 
     public Patch createNewPatch (Point2D p) {
-        Patch patch = new Patch("land", DEFAULT_LAND, p);
+        Patch patch = new Patch("ID", "land", DEFAULT_LAND, p);
         return patch;
     }
 

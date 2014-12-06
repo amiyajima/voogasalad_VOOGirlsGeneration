@@ -15,15 +15,14 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
  */
 public class GridView extends ScrollPane {
 
-	public GridView(int viewWidth, int viewHeight) {
+
+	public GridView(int viewWidth, int viewHeight, int tileSize,String shape) {
 		this.setPrefSize(viewWidth, viewHeight);
 		this.setMaxSize(viewWidth, viewHeight);
 		this.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
-		SuperGrid grid = new SuperGrid(10, 10, 50,"Square Grid");
-
+		SuperGrid grid = new SuperGrid(viewWidth/tileSize,viewHeight/tileSize,tileSize,shape);
 		grid.displayPane(this);
-
 	}
 
 

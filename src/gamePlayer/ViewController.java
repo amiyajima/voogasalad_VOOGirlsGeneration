@@ -1,6 +1,6 @@
 package gamePlayer;
 
-import gamedata.JSON.JSONManager; 
+import gamedata.JSON.JSONManager;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
@@ -11,20 +11,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 // import com.leapmotion.leap.Controller;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import authoring_environment.GUIGrid;
 import tests.JSONBobTester;
-import javafx.geometry.Pos;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -35,20 +29,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.input.KeyCode;
 
 /**
  * 
- * @author 
+ * @author
  *
  */
 public class ViewController {
@@ -94,7 +84,7 @@ public class ViewController {
 	private AudioClip myAudio;
 	@FXML
 	protected VBox statsPane;
-	@FXML	
+	@FXML
 	protected VBox controlPane;
 	@FXML
 	private MenuButton newGameButton;
@@ -104,7 +94,7 @@ public class ViewController {
 	private VBox scores;
 
 	private ScrollPane myGridPane;
-	
+
 	private Point2D currentClick;
 	private IGridState gridState;
 	private JSONManager myJSONManager;
@@ -155,7 +145,7 @@ public class ViewController {
 		// fc.setInitialDirectory(new File(System.getProperty("user.dir") +
 		// "/src/resources"));
 		// uses JSON reader to generate an instance of the game
-		
+
 		try {
 			myModel = myJSONManager.readFromJSONFile(f.getPath());
 			initializeGrid();
@@ -163,7 +153,6 @@ public class ViewController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
 	}
 
@@ -205,7 +194,9 @@ public class ViewController {
 		if (absolutePath.startsWith(basePath)) {
 			relativePath = absolutePath.substring(basePath.length() + 1);
 		}
-		myModel.getLevels().forEach(level -> level.deleteObserver(this.myGrid));
+		// myModel.getLevels().forEach(level ->
+		// level.deleteObserver(this.myGrid));
+
 		myJSONManager.writeToJSON(myModel, f.getPath());
 
 	}
@@ -220,6 +211,7 @@ public class ViewController {
 		myStage.setScene(myScene);
 		JSONBobTester JSBTester = new JSONBobTester();
 		myModel = JSBTester.createNewGame();
+		System.out.println("model found in viewcontroller: " + myModel);
 		initializeGrid();
 	}
 
@@ -286,48 +278,39 @@ public class ViewController {
 			l.getStyleClass().add("button");
 			newGameButton.getItems().add(l);
 			l.setOnAction(event -> {
-//			    try {
-			        myScene = new Scene(myGameSpace);
-			        myStage.setScene(myScene);
-//			        myModel = myJSONManager.readFromJSONFile(file.getPath());
-//			        }
-//			    catch (Exception e) {
-//			        // TODO Auto-generated catch block
-//			        e.printStackTrace();
-//			        }
-			    });
+				// try {
+				myScene = new Scene(myGameSpace);
+				myStage.setScene(myScene);
+				// myModel = myJSONManager.readFromJSONFile(file.getPath());
+				// }
+				// catch (Exception e) {
+				// // TODO Auto-generated catch block
+				// e.printStackTrace();
+				// }
 			});
-//		initializeGrid();
+		});
+		// initializeGrid();
 	}
 
 	private void initializeGrid() {
-	        
-		// myModel.play();
-
-		//myGrid = new SquareGameGrid(myModel.getCurrentLevel().getGrid()
-		//		.getRow(), myModel.getCurrentLevel().getGrid().getColumn());
-
 		myGridPane = new ScrollPane();
 		Level currentLevel = myModel.getCurrentLevel();
 		myGrid = currentLevel.getGrid();
+		System.out.println("myGrid: " + myGrid);
 		myGrid.displayPane(myGridPane);
-		
+
 		myGameSpace.setCenter(myGridPane);
-		//myGridPane.setAlignment(Pos.CENTER);
-		//myGrid.populateGrid(
-		//		myModel.getCurrentLevel().getGrid().getAllPatches(), myModel
-		//				.getCurrentLevel().getGrid().getAllPieces());
-		myModel.getLevels().forEach(level -> level.addObserver(this.myGrid));
+
 		setOnClick();
 
 		setGridState(new SelectState(this));
-		getGrid().setOnMouseExited(event -> {
+		getGridPane().setOnMouseExited(event -> {
 			changeCursor(CURSOR_GLOVE_TEST);
 		});
-		
-//	        myGameGridEffect = new GameGridEffect(this);
+
+		// myGameGridEffect = new GameGridEffect(this);
 		keyControlOn = false;
-	        System.out.println("Grid initialized");
+		System.out.println("Grid initialized");
 	}
 
 	/**
@@ -392,17 +375,13 @@ public class ViewController {
 		controlPane.getChildren().clear();
 		ArrayList<Label> actions = new ArrayList<Label>();
 
-		//TODO: What does this code do?
-		/*Map<KeyCode, Action> actionMap = myModel.getCurrentPlayer()
-				.getActionKeyMap();
-		System.out.println(actionMap);
-		Map<Action, KeyCode> keyMap = actionMap
-				.entrySet()
-				.stream()
-				.collect(
-						Collectors
-								.toMap(Map.Entry::getValue, Map.Entry::getKey));
-*/
+		// TODO: What does this code do?
+		/*
+		 * Map<KeyCode, Action> actionMap = myModel.getCurrentPlayer()
+		 * .getActionKeyMap(); System.out.println(actionMap); Map<Action,
+		 * KeyCode> keyMap = actionMap .entrySet() .stream() .collect(
+		 * Collectors .toMap(Map.Entry::getValue, Map.Entry::getKey));
+		 */
 		piece.getActions().forEach(action -> {
 			Label l = new Label(action.toString());
 			l.setOnMouseClicked(event -> bindAction(action));
@@ -420,7 +399,8 @@ public class ViewController {
 	 * @param actions
 	 */
 	public void updateActionList(ArrayList<Label> actions) {
-		controlPane.getChildren().clear();
+	    System.out.println("i use this");
+	    controlPane.getChildren().clear();
 
 		// l.setOnKeyPressed(event -> {
 		// if (keyMap.containsKey(action)) {
@@ -452,7 +432,7 @@ public class ViewController {
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
-		
+
 		myGameGridEffect.highlightActionRange();
 
 		setGridState(new ApplyState(this));
@@ -468,28 +448,27 @@ public class ViewController {
 		});
 	}
 
-	
-	/**
-	 * TODO: Add javadoc
-	 */
-	public void setOnEnterKey() {
+	// Probably going to move this to KeyboardAction class
+	// /**
+	// * TODO: Add javadoc
+	// */
+	// public void setOnEnterKey() {
+	// System.out.println("do i need this?");
+	// myGridPane.requestFocus();
+	// myGridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
+	//
+	// @Override
+	// public void handle(KeyEvent arg0) {
+	//
+	// if (arg0.getCode() == KeyCode.F) {
+	// System.out.println("f");
+	// performAction(myKeyboardMovement.getCurrentLocation().getX(),
+	// myKeyboardMovement.getCurrentLocation().getY());
+	// }
+	// }
+	// });
+	// }
 
-		myGridPane.requestFocus();
-		myGridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-			@Override
-			public void handle(KeyEvent arg0) {
-
-				if (arg0.getCode() == KeyCode.F) {
-					System.out.println("f");
-					performAction(myKeyboardMovement.getCurrentLocation().getX(), 
-					              myKeyboardMovement.getCurrentLocation().getY());
-				}
-			}
-		});
-	}
-
-	
 	/**
 	 * Perform the actions of a click at position (x,y) on game grid
 	 * 
@@ -497,10 +476,10 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(double x, double y) {
-		//System.out.println("current mouse location:" + x + ", " + y);
-		//System.out.println("myGrid size is" + myGridPane.getWidth() + "*"
-		//		+ myGrid.getHeight());
-		//System.out.println(myGrid.getBoundsInParent());
+		// System.out.println("current mouse location:" + x + ", " + y);
+		// System.out.println("myGrid size is" + myGridPane.getWidth() + "*"
+		// + myGrid.getHeight());
+		// System.out.println(myGrid.getBoundsInParent());
 
 		if (myModel.getCurrentLevel().getGrid()
 				.getPiece(findPosition(x - 45, y - 20)) == null) {
@@ -509,13 +488,13 @@ public class ViewController {
 
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(findPosition(x - 45, y - 20)));
-//		myGrid.clearEffect();
+		// myGrid.clearEffect();
 		myGameGridEffect.clearAllEffects(myGrid);
-		
-		
-		//highlightCurrent(findPosition(x - 45, y - 20), Color.BLUE);
-		myGameGridEffect.highlightCurrent(findPosition(x-45, y-20), Color.BLUE);
-		
+
+		// highlightCurrent(findPosition(x - 45, y - 20), Color.BLUE);
+		myGameGridEffect.highlightCurrent(findPosition(x - 45, y - 20),
+				Color.BLUE);
+
 		// addDropShadow(myGrid.get(((int)findPosition(x,y).getX()),
 		// ((int)findPosition(x,y).getY())), Color.PURPLE);
 	}
@@ -524,13 +503,12 @@ public class ViewController {
 
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(location));
-//		myGrid.clearEffect();
+		// myGrid.clearEffect();
 		myGameGridEffect.clearAllEffects(myGrid);
-		
-		//highlightCurrent(location, Color.BLUE);
+
+		// highlightCurrent(location, Color.BLUE);
 		myGameGridEffect.highlightCurrent(location, Color.BLUE);
 	}
-
 
 	/**
 	 * Method to convert pixel coordinates into tile coordinates
@@ -567,13 +545,16 @@ public class ViewController {
 	public void toggleKeyboardControl() {
 		if (keyControlOn) {
 			keyControlOn = false;
-			myGameGridEffect.getHighlighter().unhighlight(myGrid, myKeyboardMovement.getCurrentLocation());
+			// myGameGridEffect.getHighlighter().unhighlight(myGridPane,
+			// myKeyboardMovement.getCurrentLocation());
 			myKeyboardMovement = null;
 			myKeyboardAction = null;
+			System.out.println("Keyboard OFF");
 		} else {
 			myKeyboardMovement = new KeyboardMovement();
 			myKeyboardAction = new KeyboardAction();
 			myKeyboardMovement.setMovementKeyControl(this, myGridPane, myModel);
+			// myKeyboardAction.setActionKeyControl(myGridPane, activePiece);
 			keyControlOn = true;
 			// setOnEnterKey();
 		}
@@ -622,8 +603,18 @@ public class ViewController {
 	 * @return
 	 */
 
-	protected ScrollPane getGrid() {
+	protected ScrollPane getGridPane() {
 		return myGridPane;
+	}
+
+	/**
+	 * Getter to get the GUIGrid
+	 * 
+	 * @return
+	 */
+
+	protected GUIGrid getGrid() {
+		return myGrid;
 	}
 
 	/**
@@ -673,12 +664,13 @@ public class ViewController {
 	public void setGridState(IGridState state) {
 		gridState = state;
 	}
-	
+
 	/**
 	 * returns the GameGridEffect
+	 * 
 	 * @return
 	 */
-	protected GameGridEffect getGameGridEffect(){
-	    return myGameGridEffect;
+	protected GameGridEffect getGameGridEffect() {
+		return myGameGridEffect;
 	}
 }

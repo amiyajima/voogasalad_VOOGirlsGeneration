@@ -8,12 +8,12 @@ import javafx.scene.shape.Shape;
 
 public class HexagonTile extends SuperTile{
 
-	public HexagonTile(int size, Point2D loc) {
+	public HexagonTile(double size, Point2D loc) {
 		super(size, loc);
 	}
 
 	@Override
-	protected Shape makeShape(int size) {
+	protected Shape makeShape(double size) {
 		double radius = size/Math.sqrt(3);
 		
 		Polygon hexagon = new Polygon(
@@ -28,7 +28,7 @@ public class HexagonTile extends SuperTile{
 	}
 
 	@Override
-	protected Point2D calculateCoord(int size, Point2D loc) {
+	protected Point2D calculateCoord(double size, Point2D loc) {
 		double radius = size/Math.sqrt(3);
 		double xCoord = loc.getY()*1.5*radius + radius;
 		double yCoord = loc.getX()*size + (loc.getY()%2)*0.5*size+size/2;
@@ -37,7 +37,7 @@ public class HexagonTile extends SuperTile{
 	}
 
 	@Override
-	protected Point2D calculateImageCoord(int size, Point2D loc) {
+	protected Point2D calculateImageCoord(double size, Point2D loc) {
 		Point2D layoutCoord=calculateCoord(size,loc);
 		double radius = size/Math.sqrt(3);
 		double imageX=layoutCoord.getX()-radius/2;
@@ -46,7 +46,7 @@ public class HexagonTile extends SuperTile{
 	}
 
 	@Override
-	protected int calculateImageSize(int size) {
+	protected double calculateImageSize(double size) {
 		return size/2;
 	}
 

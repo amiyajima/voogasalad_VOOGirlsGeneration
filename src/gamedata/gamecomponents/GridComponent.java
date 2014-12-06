@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
  */
 public abstract class GridComponent implements IHasStats{
 	
+	protected String myID;
 	protected String myName;
 	protected Point2D myLoc;
 	protected String myImageLocation;
@@ -27,11 +28,13 @@ public abstract class GridComponent implements IHasStats{
 	 * pieces or patches are dealt with in their own,
 	 * separate constructors.
 	 * 
+	 * @param id : Unique string ID for the piece or patch.
 	 * @param name : String name describing the piece or patch.
 	 * @param imageLocation : String path to image on file.
 	 * @param point : Point2D location of piece or patch on grid.
 	 */
-	public GridComponent(String name, String imageLocation, Point2D point) {
+	public GridComponent(String id, String name, String imageLocation, Point2D point) {
+		myID = id;
 		myName = name;
 		myLoc = point;
 		myImageLocation = imageLocation;
@@ -47,10 +50,20 @@ public abstract class GridComponent implements IHasStats{
 	 * @param clone : Piece or patch class to copy over.
 	 */
 	public GridComponent(GridComponent clone, Point2D placeHere){
+		myID = clone.myID;
 		myName = clone.myName;
 		myLoc = new Point2D.Double(placeHere.getX(),placeHere.getY());
 		myImageLocation = clone.myImageLocation;
 		setImageView(myImageLocation);
+	}
+	
+	/**
+	 * Getter method for the unique ID of the GridComponent.
+	 * 
+	 * @return : Unique string ID for the piece or patch.
+	 */
+	public String getID() {
+		return myID;
 	}
 	
 	/**

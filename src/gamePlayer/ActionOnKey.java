@@ -1,6 +1,9 @@
 package gamePlayer;
 
 import gamedata.action.Action;
+import gameengine.player.HumanPlayer;
+import java.awt.geom.Point2D;
+import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -23,6 +26,8 @@ public class ActionOnKey implements GridOnKeyActor{
     {
         myController = controller;
         // myActions = get player from Game
+       
+
         
     }
     @Override

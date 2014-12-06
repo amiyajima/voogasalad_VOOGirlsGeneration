@@ -53,6 +53,11 @@ public class Game {
 		myCurrentLevel = currentLevel;
 		myCurrentPlayer = null;
 	}
+	
+	//TEMPORARY METHOD FOR BOB TESTER
+	public void addPlayer(Player p){
+	    myPlayers.add(p);
+	}
 
 	/**
 	 * Iterates the Current Level to the Next Level If no more levels, game is
@@ -85,7 +90,7 @@ public class Game {
 	 */
 	public void jumpToLevel(String levelToJumpTo) {
 		for (Level level : myLevels) {
-			if (level.getID().equals(levelToJumpTo)) {
+			if (level.getId().equals(levelToJumpTo)) {
 				myCurrentLevel = level;
 				if (level.isWinningLevel()) {
 					myGameWon = true;

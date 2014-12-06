@@ -10,24 +10,24 @@ import java.util.List;
  * @param <T> - Type of object to be stored in data
  */
 public interface AuthoringData<T> {
-
-	/**
-	 * Adds a variable number of objects of type T to data
-	 */
-	public void add(T...args);
 	
 	/**
-	 * Removes a variable number of objects of type T from data
+	 * Adds an object of type T to data
 	 */
-	public void remove(T...args);
+	public void add(T p);
 	
 	/**
-	 * Clears the data
+	 * Removes an object of type T from data
 	 */
-	public void clear();
+	public void remove(T p);
+	
+	/**
+	 * Replaces an object of type T in data
+	 */
+	public void replace(T origEl, T newEl);
 	
 	/**
 	 * Method so Game Data can get the data about the objects of type T
 	 */
-	public List<T> get();
+	public List<T> getData();
 }

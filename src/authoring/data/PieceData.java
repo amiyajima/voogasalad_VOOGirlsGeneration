@@ -3,8 +3,11 @@ package authoring.data;
 import gamedata.gamecomponents.Piece;
 
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Class for storing the each type of piece created by the user.
@@ -12,7 +15,7 @@ import java.util.List;
  * 
  * @author Martin Tamayo
  */
-public class PieceData implements AuthoringData<Piece> {
+public class PieceData implements AuthoringData<Piece>, Observer {
 	
     private List<Piece> myPieces;
     
@@ -24,26 +27,54 @@ public class PieceData implements AuthoringData<Piece> {
         myPieces = new LinkedList<Piece>();
     }
     
+    @Override
+	public void add(Piece p) {
+		myPieces.add(p);
+	}
+    
 	@Override
-	public void add(Piece...pieces) {
-	    for (Piece p : pieces ) {
-	        myPieces.add(p);
-	    }
+	public void replace(Piece origEl, Piece newEl) {
+		origEl.setName(newEl.getName());
+		origEl.setImageLocation(newEl.getImageLocation());
+	}
+    
+	@Override
+	public void remove(Piece p) {
+		myPieces.remove(p);
 	}
 
 	@Override
-	public void remove(Piece...pieces) {
-	    for (Piece p : pieces) {
-	        myPieces.remove(p);
-	    }
-	}
-
-	@Override
-	public void clear() {
-		myPieces.clear();
+	public List<Piece> getData() {
+		return myPieces;
 	}
 	
-	public void removePiece(Point2D location){
+	@Override
+	public void update(Observable o, Object arg) {
+		if (o instanceof PieceTypeData) {
+			//removing -> observable notifies that arg has been removed from piecetypedata
+			List<Piece> toRemove = new ArrayList<Piece>();
+			PieceTypeData typeData = (PieceTypeData) o;
+			for (Piece p : myPieces) {
+				if (!typeData.containsName(p.getName())) {
+					toRemove.add(p);
+				}
+			}
+			
+			myPieces.removeAll(toRemove);
+
+			//replacing -> observable notifies that arg has been replaced from piecetypedata
+			if (arg instanceof Piece) {
+				Piece pieceType = (Piece) arg;
+				for (Piece p : myPieces) {
+					if (p.getID() == pieceType.getID()){
+				    	replace(p, pieceType);
+				    }
+				}
+			}
+		}
+	}
+	
+	public void removePieceAtLoc(Point2D location){
 		for(Piece piece : myPieces){
 			if(location.equals(piece.getLoc())){
 				myPieces.remove(piece);
@@ -52,6 +83,7 @@ public class PieceData implements AuthoringData<Piece> {
 		}
 	}
 	
+	// Can we also rename this?
 	public boolean unitAtLoc(Piece unit, int x, int y){
 		Point2D location = new Point2D.Double(x, y);
 		for(Piece piece : myPieces){
@@ -62,13 +94,4 @@ public class PieceData implements AuthoringData<Piece> {
 		}
 		return false;
 	}
-	
-	public List<Piece> getPieces(){
-        return myPieces;
-    }
-
-    @Override
-    public List<Piece> get () {
-        return myPieces;
-    }
 }

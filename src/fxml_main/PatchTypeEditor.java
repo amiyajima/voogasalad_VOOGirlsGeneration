@@ -31,9 +31,13 @@ public class PatchTypeEditor extends Pane {
 
 	private static final int HEIGHT = 150;
 	private static final int WIDTH = 150;
+	private static final String CREATOR_TITLE = "Terrain Creator";
+	private static final String EDITOR_TITLE = "Terrain Editor";
+	private static final String ID_LABEL = "Unique ID";
 	private static final String NAME_LABEL = "Name";
 	private static final String LOADIMAGE_LABEL = "Load Terrain Image";
 	private static final String TEMPLATE_LABEL = "OK";
+	private static final String ID_PROMPT = "Enter patch ID...";
 	private static final String NAME_PROMPT = "Enter patch name...";
 	private static final Insets MARGINS = new Insets(20, WIDTH / 5, 20, WIDTH / 5 - 10);
 	private static final String LABEL_CSS = "-fx-font-size: 14pt;";
@@ -44,6 +48,7 @@ public class PatchTypeEditor extends Pane {
 	private String myEditorTitle;
 	private Consumer<Patch> myOkLambda;
 	
+	private String myID;
 	private String myName;
 	private String myImageLocation;
 	private Patch myPatch;
@@ -55,7 +60,8 @@ public class PatchTypeEditor extends Pane {
 	 * 
 	 */
 	public PatchTypeEditor (Consumer<Patch> okLambda) {
-		myEditorTitle = "Terrain Creator";
+		myEditorTitle = CREATOR_TITLE;
+		myID = "";
 		myName = "";
 		myImageLocation = DEFAULT_IMAGE_LOC;
 		constructor(okLambda);
@@ -65,11 +71,11 @@ public class PatchTypeEditor extends Pane {
 	 * Constructor that sets the dimensions of the TerrainCreator GUI component
 	 * and initializes it.
 	 * this is for patch EDITOR
-	 * 
 	 */
 
 	public PatchTypeEditor (Consumer<Patch> okLambda, Patch patch) {
-		myEditorTitle = "Terrain Editor";
+		myEditorTitle = EDITOR_TITLE;
+		myID = patch.getID();
 		myName = patch.getName();
 		myImageLocation = patch.getImageLocation();
 		myPatch = patch;   
@@ -93,7 +99,11 @@ public class PatchTypeEditor extends Pane {
 		Label eventsLabel = new Label(myEditorTitle);
 		eventsLabel.setStyle(LABEL_CSS);
 		labelBox.getChildren().add(eventsLabel);
-
+		
+		HBox ids = new HBox();
+		ids.setPadding(UIspecs.allPadding);
+		ids.setSpacing(5);
+		
 		HBox names = new HBox();
 		names.setPadding(UIspecs.allPadding);
 		names.setSpacing(5);
@@ -101,7 +111,17 @@ public class PatchTypeEditor extends Pane {
 		HBox images = new HBox();
 		images.setPadding(UIspecs.allPadding);
 		images.setSpacing(5);
-
+		
+		Label idLabel = new Label(ID_LABEL);
+		idLabel.setPadding(UIspecs.topRightPadding);
+		TextField terrainID = new TextField();
+		terrainID.setText(myID);
+		if(!myID.equals("")){
+			terrainID.setDisable(true);
+		}
+		terrainID.setPromptText(ID_PROMPT);
+		ids.getChildren().addAll(idLabel, terrainID);
+		
 		Label nameLabel = new Label(NAME_LABEL);
 		nameLabel.setPadding(UIspecs.topRightPadding);
 		TextField terrainName = new TextField();
@@ -111,9 +131,9 @@ public class PatchTypeEditor extends Pane {
 
 		Button goButton = new Button(TEMPLATE_LABEL);
 		initImageLoader(images);
-		initGoBtn(goButton, terrainName);
+		initGoBtn(goButton, terrainID, terrainName);
 
-		box.getChildren().addAll(labelBox, names, images, goButton);
+		box.getChildren().addAll(labelBox, ids, names, images, goButton);
 
 		getChildren().add(box);
 	}
@@ -161,12 +181,14 @@ public class PatchTypeEditor extends Pane {
 	  * @param goButton
 	  * @param terrainName
 	  */
-	 private void initGoBtn (Button goButton, TextField terrainName) {
+	 private void initGoBtn (Button goButton, TextField terrainID, TextField terrainName) {
 		 goButton.setOnAction(new EventHandler<ActionEvent>() {
 			 @Override
 			 public void handle (ActionEvent click) {
+			         //TODO: the user can't create patches with same id
+				 myID = terrainID.getText();
 				 myName = terrainName.getText();
-				 myPatch = new Patch(myName, myImageLocation, DEFAULT_LOC);
+				 myPatch = new Patch(myID, myName, myImageLocation, DEFAULT_LOC);
 				 myOkLambda.accept(myPatch);
 			 }
 		 });

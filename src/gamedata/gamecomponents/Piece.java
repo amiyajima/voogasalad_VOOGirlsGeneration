@@ -26,6 +26,7 @@ public class Piece extends GridComponent{
     /**
      * Piece constructor
      * 
+     * @param id - Unique string ID for the piece or patch.
      * @param imageLoc - url of the piece's image location
      * @param movement - List of Movement defining how/where the
      *        piece moves relative to its current position
@@ -41,9 +42,9 @@ public class Piece extends GridComponent{
      */
 
     // TODO: Think about playerID concept
-    public Piece (String name, String imageLoc, Movement movement,
+    public Piece (String id, String name, String imageLoc, Movement movement,
                   List<Action> actions, Stats stats, Point2D loc, int playerID, Inventory inventory) {
-        super(name, imageLoc, loc);
+        super(id, name, imageLoc, loc);
         myMove = movement;
         myActions = actions;
         myStats = stats;
@@ -73,6 +74,8 @@ public class Piece extends GridComponent{
     public int getPlayerID () {
         return myPlayerID;
     }
+
+
 
     /**
      * Returns the piece's stats
