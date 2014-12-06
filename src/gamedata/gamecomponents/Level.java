@@ -84,7 +84,7 @@ public class Level extends Observable {
 	 * Removes all pieces marked for removal
 	 */
 	public void garbageCollectPieces() {
-		List<Piece> pieces = myGrid.getPieces();
+		List<Piece> pieces = myGrid.getRemovedPieces();
 		List<Piece> toRemove = new ArrayList<Piece>();
 		for (Piece p : pieces) {
 			/*
