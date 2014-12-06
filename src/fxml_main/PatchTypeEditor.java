@@ -1,8 +1,11 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Patch;
+
 import java.awt.geom.Point2D;
 import java.io.File;
+import java.util.function.Consumer;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -36,10 +39,11 @@ public class PatchTypeEditor extends Pane {
     private static final Insets MARGINS = new Insets(20, WIDTH / 5, 20, WIDTH / 5 - 10);
     private static final String LABEL_CSS = "-fx-font-size: 14pt;";
     private static final String DEFAULT_IMAGE = "/resources/images/default_image.png";
-    private PatchController myPatchController;
+    
     private Patch myPatch;
     private String myName;
     private String myImageLocation;
+    private Consumer<Patch> myOkLambda;
 
     /**
      * Constructor that sets the dimensions of the TerrainCreator GUI component
@@ -47,8 +51,8 @@ public class PatchTypeEditor extends Pane {
      * this is for patch CREATOR
      * 
      */
-    public PatchTypeEditor (PatchController controller) {
-        constructor(controller);
+    public PatchTypeEditor (Consumer<Patch> okLambda) {
+        constructor(okLambda);
     }
 
     /**
@@ -58,15 +62,15 @@ public class PatchTypeEditor extends Pane {
      * 
      */
 
-    public PatchTypeEditor (PatchController controller, Patch patch) {
-        constructor(controller);
+    public PatchTypeEditor (Consumer<Patch> okLambda, Patch patch) {
+        constructor(okLambda);
         myPatch = patch;      
     }
 
-    public void constructor (PatchController controller) {
-        myPatchController = controller;
+    public void constructor (Consumer<Patch> okLambda) {
         myName = "";
         myImageLocation = "";
+        myOkLambda = okLambda;
         setHeight(HEIGHT);
         setWidth(WIDTH);
         initialize();
@@ -150,7 +154,7 @@ public class PatchTypeEditor extends Pane {
                 }
 
                 myPatch = new Patch(myName, myImageLocation, new Point2D.Double(0, 0));
-                myPatchController.addEntry(myPatch);
+                myOkLambda.accept(myPatch);
             }
         });
     }
