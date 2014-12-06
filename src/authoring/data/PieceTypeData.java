@@ -1,11 +1,12 @@
 package authoring.data;
 
 import gamedata.gamecomponents.Piece;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
-public class PieceTypeData implements AuthoringData<Piece> {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+
+public class PieceTypeData extends Observable implements AuthoringData<Piece> {
 	
     private List<Piece> myPieces;
     
