@@ -55,6 +55,7 @@ public class JSONManager {
      * @param grid
      */
     public void writeToJSON (GUIGrid guiGrid, String fileName) {
+        System.out.println("JSONManager: write method called");
         String json = myGson.toJson(guiGrid);
         System.out.println("JSONManager: game converted to json!");
 

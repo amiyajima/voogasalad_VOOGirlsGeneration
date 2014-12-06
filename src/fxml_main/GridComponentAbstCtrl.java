@@ -7,7 +7,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import authoring_environment.ShapeGrid;
+import authoring_environment.GUIGrid;
 
 
 /**
@@ -20,11 +20,11 @@ import authoring_environment.ShapeGrid;
 public abstract class GridComponentAbstCtrl<T> {
     protected VBox myVBox;
     protected ScrollPane myPropertiesSPane;
-    protected ShapeGrid myCurrentGrid;
+    protected GUIGrid myCurrentGrid;
     protected Map<T, HBox> myEntryMap;
 
     protected GridComponentAbstCtrl (VBox vbox, ScrollPane propertiesSPane,
-                                     ShapeGrid currGrid) {
+                                     GUIGrid currGrid) {
         myVBox = vbox;
         myPropertiesSPane = propertiesSPane;
         myCurrentGrid = currGrid;
@@ -63,12 +63,10 @@ public abstract class GridComponentAbstCtrl<T> {
     protected void addEntry (T entry) {
         HBox entryBox = makeEntryBox(entry);
         HBox entryCtrls = initEntryControls(entry);
-        entryCtrls.getChildren().add(entryBox);
         HBox entryCompleteBox = new HBox();
         entryCompleteBox.getChildren().addAll(entryCtrls, entryBox);
         myEntryMap.put(entry, entryCompleteBox);
         myVBox.getChildren().add(entryCompleteBox);
-//        myVBox.getChildren().addAll(entryCtrls, entryBox);
     }
 
     protected HBox initEntryControls (T entry) {

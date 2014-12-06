@@ -15,7 +15,7 @@ import java.util.Observer;
  * @author Jennie Ju
  *
  */
-public class GUIGrid extends SuperGrid implements Observer{
+public class GUIGrid extends SuperGrid {
 
 	private List<Piece> myPieceData;
 	private List<Patch> myPatchData;
@@ -24,6 +24,22 @@ public class GUIGrid extends SuperGrid implements Observer{
 		super(cols,rows,tileSize,shape);
 		myPieceData = new LinkedList<Piece>();
 		myPatchData = new LinkedList<Patch>();
+	}
+	
+	/**
+	 * Returns number of rows
+	 * @return int number of rows
+	 */
+	public int getNumRows() {
+		return super.myRows;
+	}
+	
+	/**
+	 * Returns number of columns
+	 * @return int number of columns
+	 */
+	public int getNumCols() {
+		return super.myCols;
 	}
 
 	protected void addPiece(Piece pieceType, Point2D loc) {
@@ -52,10 +68,10 @@ public class GUIGrid extends SuperGrid implements Observer{
 		// remove all instances of this type of patch
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
+	//@Override
+	/*public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		
-	}
+	}*/
 
 }
