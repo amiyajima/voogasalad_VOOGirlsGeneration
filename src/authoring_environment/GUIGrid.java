@@ -5,6 +5,9 @@ import gamedata.gamecomponents.Piece;
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import authoring.data.PatchData;
 import authoring.data.PieceData;
 
@@ -50,7 +53,9 @@ public class GUIGrid extends SuperGrid {
 
     // TODO: set image within tile at this location
     public void addPiece (Piece pieceType, Point2D loc) {
+        System.out.println("adding piece at: " + loc);
         Piece clone = new Piece(pieceType, loc);
+//        System.out.println(myPieceData.get(0).getLoc());
         myPieceData.add(clone);
         SuperTile myTile = myGrid.get((int) loc.getX()).get((int) loc.getY());
         myTile.addPieceImage(clone.getImageView());
@@ -58,11 +63,13 @@ public class GUIGrid extends SuperGrid {
 
     // TODO: set image within tile at this location
     public void addPatch (Patch patchType, Point2D loc) {
+        System.out.println("adding patch at: " + loc);
         Patch clone = new Patch(patchType, loc);
         myPatchData.add(clone);
         SuperTile myTile = myGrid.get((int) loc.getX()).get((int) loc.getY());
         myTile.addPatchImage(clone.getImageView());
     }
+    
 
     public void removePiece (Piece p) {
         // remove piece at this location from data and tiles
@@ -96,11 +103,31 @@ public class GUIGrid extends SuperGrid {
         return null;
     }
 
+    /**
+     * Returns the piece at loc
+     * @param loc
+     * @return
+     */
     public Piece getPiece (Point2D loc) {
+        for (Piece p: myPieceData.getData()){
+            if ((p.getLoc().getX()==loc.getX()) & (p.getLoc().getY()==loc.getY())){
+                return p;
+            }
+        }
         return null;
     }
-
+    
+    /**
+     * Returns the patch at loc
+     * @param loc
+     * @return
+     */
     public Patch getPatch (Point2D loc) {
+        for (Patch p: myPatchData.getData()){
+            if ((p.getLoc().getX()==loc.getX()) & (p.getLoc().getY()==loc.getY())){
+                return p;
+            }
+        }
         return null;
     }
 

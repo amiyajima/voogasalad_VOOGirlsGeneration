@@ -316,13 +316,19 @@ public class ViewController {
 		myGrid.displayPane(myGridPane);
 		
 		myGameSpace.setCenter(myGridPane);
-		//myGridPane.setAlignment(Pos.CENTER);
 
 		/*myGrid.populateGrid(
 				myModel.getCurrentLevel().getGrid().getAllPatches(), myModel
 						.getCurrentLevel().getGrid().getAllPieces());
 		myModel.getLevels().forEach(level -> level.addObserver(this.myGrid));*/
-
+		
+		
+		if (myGrid.getPiece(new Point2D.Double(0,0))!=null){
+		    System.out.println("THERE'S A PIECE HERE");
+		}
+	
+		
+		
 		setOnClick();
 
 		setGridState(new SelectState(this));
@@ -581,7 +587,7 @@ public class ViewController {
 			myKeyboardMovement = new KeyboardMovement();
 			myKeyboardAction = new KeyboardAction();
 			myKeyboardMovement.setMovementKeyControl(this, myGridPane, myModel);
-			myKeyboardAction.setActionKeyControl(myGridPane, activePiece);
+//			myKeyboardAction.setActionKeyControl(myGridPane, activePiece);
 			keyControlOn = true;
 			// setOnEnterKey();
 		}
