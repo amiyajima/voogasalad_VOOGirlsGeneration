@@ -51,20 +51,24 @@ public class PatchData implements AuthoringData<Patch>, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof PatchTypeData) {
+		    //removing -> observable notifies that arg has been removed from patchtypedata
 			List<Patch> toRemove = new ArrayList<Patch>();
 			PatchTypeData typeData = (PatchTypeData) o;
 			for (Patch p : myPatches) {
-				if (!typeData.containsName(p.getName())) {
+				if (!typeData.containsName(p.getID())) {
 					toRemove.add(p);
 				}
 			}
 			
 			myPatches.removeAll(toRemove);
 
+			//replacing -> observable notifies that arg has been replaced from patchtypedata
 			if (arg instanceof Patch) {
 				Patch patchType = (Patch) arg;
 				for (Patch p : myPatches) {
-					replace(p,patchType);
+				    if (p.getID() == patchType.getID()){
+				    	replace(p, patchType);
+				    }
 				}
 			}
 		}

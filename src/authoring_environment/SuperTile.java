@@ -84,8 +84,8 @@ public abstract class SuperTile extends Group {
 		myPieceImage.setImage(imageView.getImage());
 	}
 	
-	public void addPatchImage(ImageView imageView){
-		myPatchImage.setImage(imageView.getImage());
+	public void addPatchImage(String imageLoc){
+		myPatchImage.setImage(new Image(imageLoc));
 	}
 
 
@@ -112,7 +112,7 @@ public abstract class SuperTile extends Group {
 		ImageView imgView = new ImageView();
 		imgView.setFitHeight(size);
 		imgView.setFitWidth(size);
-		imgView.setVisible(false);
+		imgView.setVisible(true);
 		return imgView;
 	}
  

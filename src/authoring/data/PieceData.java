@@ -32,7 +32,6 @@ public class PieceData implements AuthoringData<Piece>, Observer {
 		myPieces.add(p);
 	}
     
-
 	@Override
 	public void replace(Piece origEl, Piece newEl) {
 		origEl.setName(newEl.getName());
@@ -52,6 +51,7 @@ public class PieceData implements AuthoringData<Piece>, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof PieceTypeData) {
+			//removing -> observable notifies that arg has been removed from piecetypedata
 			List<Piece> toRemove = new ArrayList<Piece>();
 			PieceTypeData typeData = (PieceTypeData) o;
 			for (Piece p : myPieces) {
@@ -62,10 +62,13 @@ public class PieceData implements AuthoringData<Piece>, Observer {
 			
 			myPieces.removeAll(toRemove);
 
+			//replacing -> observable notifies that arg has been replaced from piecetypedata
 			if (arg instanceof Piece) {
-				Piece patchType = (Piece) arg;
+				Piece pieceType = (Piece) arg;
 				for (Piece p : myPieces) {
-					replace(p, patchType);
+					if (p.getID() == pieceType.getID()){
+				    	replace(p, pieceType);
+				    }
 				}
 			}
 		}

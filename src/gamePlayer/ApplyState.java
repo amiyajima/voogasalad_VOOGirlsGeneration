@@ -29,11 +29,11 @@ public class ApplyState implements IGridState {
         myGameGridEffect = controller.getGameGridEffect();
         myGame = controller.getGame();
         
-        myController.getGrid().setOnMouseEntered(event -> {
+        myController.getGridPane().setOnMouseEntered(event -> {
                     myController.changeCursor(myController.CURSOR_ATTACK_TEST);
-                    myController.getGrid().getChildren().forEach(node -> {
+                    myController.getGridPane().getChildren().forEach(node -> {
                         node.setOnMouseEntered(event2 -> {
-                            myGameGridEffect.highLightEffectRange(myController.getGrid(), event2,Color.RED);
+                            myGameGridEffect.highLightEffectRange(myController.getGridPane(), event2,Color.RED);
                         });
                         
                         node.setOnMouseExited(event3 -> {
@@ -67,7 +67,7 @@ public class ApplyState implements IGridState {
 
         myController.changeCursor(myController.CURSOR_GLOVE_TEST);
         myController.getGame().getCurrentLevel().garbageCollectPieces();
-        myController.getGrid().populateGrid(myController.getGame().getCurrentLevel().getGrid().getAllPatches(),
+        myController.getGridPane().populateGrid(myController.getGame().getCurrentLevel().getGrid().getAllPatches(),
                                             myController.getGame().getCurrentLevel().getGrid().getAllPieces());
 
         myController.setActivePiece(null);
