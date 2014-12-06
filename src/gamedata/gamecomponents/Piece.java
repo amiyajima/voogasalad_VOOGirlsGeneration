@@ -24,7 +24,7 @@ public class Piece {
     private String myImageLocation;
     private transient ImageView myImageView;
     private List<Action> myActions;
-    private List<Movement> myPath;
+    private Movement myMove;
     private Stats myStats;
     private Point2D myLoc;
     private int myPlayerID;
@@ -49,12 +49,12 @@ public class Piece {
      */
 
     // TODO: Think about playerID concept
-    public Piece (String name, String imageLoc, List<Movement> movement,
+    public Piece (String name, String imageLoc, Movement movement,
                   List<Action> actions, Stats stats, Point2D loc, int playerID, Inventory inventory) {
         myName = name;
         myImageLocation = imageLoc;
         setImageView(myImageLocation);
-        myPath = movement;
+        myMove = movement;
         myActions = actions;
         myStats = stats;
         myLoc = loc;
@@ -72,7 +72,7 @@ public class Piece {
         myName = clone.myName;
         myImageLocation = clone.myImageLocation;
         setImageView(myImageLocation);
-        myPath = new LinkedList<Movement>(clone.myPath);
+        myMove = clone.myMove;
         myActions = new LinkedList<Action>(clone.myActions);
         myStats = new Stats(clone.myStats);
         myLoc = new Point2D.Double(clone.myLoc.getX(), clone.myLoc.getY());

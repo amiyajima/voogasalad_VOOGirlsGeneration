@@ -25,7 +25,8 @@ public abstract class Player {
 
     private int myNumMovesPlayed;
     private int myID;
-    private List myPieces;
+    private List<Piece> myPieces;
+    private boolean myCanMove;
 
     /**
      * Default constructor
@@ -39,15 +40,16 @@ public abstract class Player {
      * 
      * @param id
      *        int ID corresponding to the Player
-     * @param  
+     * @param
      */
     public Player (int id) {
         myNumMovesPlayed = 0;
         myID = id;
         myPieces = new ArrayList<Piece>();
+        myCanMove = true;
     }
 
-    /*    *//**
+    /* *//**
      * Iterate through the list of pieces available on the grid.
      * 
      * @param g
@@ -89,6 +91,15 @@ public abstract class Player {
      */
     public int getNumMovesPlayed () {
         return myNumMovesPlayed;
+    }
+
+    /**
+     * Checks if pieces have moves available. Essential for NoAvailableMoveCondition
+     */
+    private void checkMovesAvailable () {
+        for (Piece p : myPieces) {
+            p.
+        }
     }
 
     /**
