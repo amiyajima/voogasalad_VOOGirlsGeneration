@@ -98,7 +98,7 @@ public class RangeGrid extends SuperGrid{
 	private void addCenterImage(int rows,int columns) {
 		SuperTile centerTile=findCenterTile(columns,rows);
 		Image centerImage=new Image(getClass().getResourceAsStream(DEFAULT_CENTRAL_IMAGE));
-		centerTile.addPatch(centerImage);
+		centerTile.addPatchImage(centerImage);
 	}
 
 	
