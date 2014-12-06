@@ -1,18 +1,21 @@
 package gameengine.player;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import javafx.scene.input.KeyCode;
 import gamedata.action.Action;
-import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
 import gameengine.movement.Movement;
+
 import java.awt.geom.Point2D;
+
+import authoring_environment.GUIGrid;
 
 
 /**
@@ -44,7 +47,6 @@ public abstract class Player {
     public Player (int id) {
         myNumMovesPlayed = 0;
         myID = id;
-        myCanMove = true;
     }
 
     /* *//**
@@ -55,7 +57,7 @@ public abstract class Player {
      *         TODO: itereate through pieces in grid, determine which ones have corresponding Player
      *         ID
      */
-    private List<Piece> populatePieces (Grid g) {
+    private List<Piece> populatePieces (GUIGrid g) {
         // Set allPieces = g.get
         return null;
     }

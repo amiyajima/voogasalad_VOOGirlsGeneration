@@ -23,6 +23,10 @@ public class SuperGrid {
 
 	protected List<List<SuperTile>> myGrid;
 
+	public SuperGrid() {
+		this(1, 1, 40, SQUARE_GRID);
+	}
+
 	public SuperGrid(int cols, int rows, int tileSize, String shape) {
 		myPane = new Pane();
 		myRows = rows;

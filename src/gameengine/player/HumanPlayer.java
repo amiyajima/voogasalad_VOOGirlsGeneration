@@ -1,7 +1,6 @@
 package gameengine.player;
 
-import gamedata.action.Action;
-import gamedata.gamecomponents.Grid;
+import gamedata.action.Action; 
 import java.awt.geom.Point2D;
 import java.util.HashMap;
 import java.util.Map;

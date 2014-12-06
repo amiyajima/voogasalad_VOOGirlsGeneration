@@ -108,7 +108,7 @@ public class Movement implements Action {
 	 * 
 	 * @return true or false
 	 */
-	private boolean checkPathCollision(Grid myGrid, Point2D endPoint) {
+	private boolean checkPathCollision(GUIGrid myGrid, Point2D endPoint) {
 		List<Point2D> path;
 		boolean b = true;
 		// TODO: Implement Path Collision Once Constraints are Implemented

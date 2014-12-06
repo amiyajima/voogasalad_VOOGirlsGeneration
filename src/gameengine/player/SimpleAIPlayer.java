@@ -1,6 +1,5 @@
 package gameengine.player;
 
-import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
 import java.util.Set;
 
