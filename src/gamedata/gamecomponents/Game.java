@@ -93,18 +93,12 @@ public class Game {
             }
         }
     }
-
-    /**
-     * Iterates to the next player to start that players turn. If the last
-     * player has just played the first player is active again
-     */
-    public void nextPlayer () {
-        if (myPlayers.indexOf(myCurrentPlayer) == myPlayers.size() - 1) {
-            resetPlayer();
-        }
-        else {
-            myCurrentPlayer = myPlayers
-                    .get(myPlayers.indexOf(myCurrentPlayer) + 1);
+    
+    public void changeTurn(int playerToChangeTo) {
+        for (Player player : myPlayers) {
+            if (player.getID() == playerToChangeTo) {
+                myCurrentPlayer = player;
+            }
         }
     }
 
@@ -112,14 +106,15 @@ public class Game {
      * Resets the active player to be the first player who has played
      */
     private void resetPlayer () {
-        myCurrentPlayer = myPlayers.get(0);
+        // myCurrentPlayer = myPlayers.get(0);
+        // TODO Deprecated since player list isn't set to be the order anymore
     }
 
     /**
-     * Restarts the Level Note: This doesn't actually work. Need deep cloning
+     * Restarts the level
      */
     private void restartLevel () {
-        //myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel));
+        myCurrentLevel.restart();
     }
 
     public String toString () {
