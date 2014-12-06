@@ -33,7 +33,7 @@ import authoring_environment.SuperGrid;
 /**
  * JSON Write Tester
  * 
- * @author Rica Zhang :D
+ * @author Rica Zhang, Anna Miyajima
  *
  */
 public class JSONBobTester {
@@ -45,11 +45,13 @@ public class JSONBobTester {
 
     }
 
+    // TODO: remove, used for testing purposes
     public GUIGrid createGUIGrid () {
         GUIGrid test = new GUIGrid(2, 2, 5, "square");
         return test;
     }
 
+    // TODO: remove, used for testing purposes
     public SuperGrid createSuperGrid () {
         SuperGrid grid = new SuperGrid(2, 2, 5, "square");
         return grid;
@@ -109,11 +111,11 @@ public class JSONBobTester {
         System.out.println(templ.getImageLocation());
         Patch templPatch = createNewPatch(new Point2D.Double(0, 0));
         System.out.println(templPatch.getImageLocation());
-        
+
         for (int x = 0; x < grid1.getCol(); x++) {
             for (int y = 0; y < grid1.getRow(); y++) {
-                grid1.addPiece(templ, new Point2D.Double(x,y));
-                grid1.addPatch(templPatch, new Point2D.Double(x,y));
+                grid1.addPiece(templ, new Point2D.Double(x, y));
+                grid1.addPatch(templPatch, new Point2D.Double(x, y));
             }
         }
 

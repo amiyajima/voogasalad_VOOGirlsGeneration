@@ -6,6 +6,7 @@ import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
 import authoring.data.PatchData;
+import authoring.data.PieceData;
 
 
 /**
@@ -16,8 +17,8 @@ import authoring.data.PatchData;
  */
 public class GUIGrid extends SuperGrid {
 
-    private List<Piece> myPieceData;
-    private List<Patch> myPatchData;
+    private PieceData myPieceData;
+    private PatchData myPatchData;
 
     public GUIGrid () {
         super();
@@ -25,8 +26,8 @@ public class GUIGrid extends SuperGrid {
 
     public GUIGrid (int cols, int rows, int tileSize, String shape) {
         super(cols, rows, tileSize, shape);
-        myPieceData = new LinkedList<Piece>();
-        myPatchData = new LinkedList<Patch>();
+        myPieceData = new PieceData();
+        myPatchData = new PatchData();
     }
 
     /**
@@ -51,12 +52,16 @@ public class GUIGrid extends SuperGrid {
     public void addPiece (Piece pieceType, Point2D loc) {
         Piece clone = new Piece(pieceType, loc);
         myPieceData.add(clone);
+        SuperTile myTile = myGrid.get((int) loc.getX()).get((int) loc.getY());
+        myTile.addPieceImage(clone.getImageView());
     }
 
     // TODO: set image within tile at this location
     public void addPatch (Patch patchType, Point2D loc) {
         Patch clone = new Patch(patchType, loc);
         myPatchData.add(clone);
+        SuperTile myTile = myGrid.get((int) loc.getX()).get((int) loc.getY());
+        myTile.addPatchImage(clone.getImageView());
     }
 
     public void removePiece (Piece p) {
@@ -107,11 +112,11 @@ public class GUIGrid extends SuperGrid {
         return null;
     }
 
-    public List<Piece> getPieces () {
+    public PieceData getPieces () {
         return myPieceData;
     }
 
-    public List<Patch> getPatches () {
+    public PatchData getPatches () {
         return myPatchData;
     }
 
