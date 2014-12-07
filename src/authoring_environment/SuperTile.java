@@ -48,6 +48,7 @@ public abstract class SuperTile extends Group {
 	
 
 	protected void makeShapeTile(double size, Point2D loc){
+
 		myCoordinates=calculateCoord(size,loc);
 		myImageCoord=calculateImageCoord(size,loc);
 		myImageSize=calculateImageSize(size);
@@ -64,10 +65,12 @@ public abstract class SuperTile extends Group {
 	}
 
 
+
 	/**
 	 * Creates the highlight settings for this tile
 	 * @param size
 	 */
+
 	private void makeHighlight(double size) {
 		myHighlight=makeShape(size,myCoordinates);
 		myHighlight.setFill(DEFAULT_HIGHLIGHT_COLOR);

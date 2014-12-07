@@ -18,10 +18,16 @@ public class GameGridEffect {
     Piece myActivePiece;
     Action myActiveAction;
     List<SuperTile> myHighlightedTiles;
+
+    
+    public static final String ACTION_RANGE_COLOR = "#FFBF00";
+    private static final Color DEFAULT_HIGHLIGHT_COLOR = Color.web("#0000FF", 0.3);
     
     private static final String DEFAULT_COLOR = "#0000FF";
      
     public GameGridEffect(ViewController vc){
+//        myHighlighter = new Highlighter();
+
         myViewController = vc;
         myGrid = myViewController.getGrid();
         myActivePiece = myViewController.getActivePiece();
@@ -29,10 +35,12 @@ public class GameGridEffect {
         myHighlightedTiles = new ArrayList<SuperTile>();
      }
     
+
     /**
      * Highlight the tiles that represent the possible range of the action
      * selected
      */
+
     @FXML
     public void highlightActionRange () {
         clearAllEffects();
@@ -46,13 +54,14 @@ public class GameGridEffect {
                                      && point.getX() > 0 && point.getY() > 0) {
                                      
                                      SuperTile toHighlight = myGrid.findClickedTile(point);
-                                     toHighlight.selectTile(DEFAULT_COLOR);
+                                     toHighlight.selectTile(ACTION_RANGE_COLOR);
                                      myHighlightedTiles.add(toHighlight);
                                      
                                  }
                              });
         }
     }
+
 
     /**
      * Highlight the effect range of an action if to be applied at a given
@@ -71,7 +80,7 @@ public class GameGridEffect {
                 if (loc.equals(point)) {
                     myActiveAction.getEffectRange().forEach(point2 -> {
                         SuperTile toHighlight = myGrid.findClickedTile(point);
-                        toHighlight.selectTile(DEFAULT_COLOR);
+                        toHighlight.selectTile(ACTION_RANGE_COLOR);
                         myHighlightedTiles.add(toHighlight);
                         });
                     }
@@ -90,6 +99,7 @@ public class GameGridEffect {
         myHighlightedTiles.add(toHighlight);
     }
     
+
     /**
      * Clear all effects in grid, currently only clears highlights
      * @param grid
@@ -99,6 +109,7 @@ public class GameGridEffect {
             myGrid.findClickedTile(st.getLocation()).deselectTile();
         }
     }
+
     
     
     

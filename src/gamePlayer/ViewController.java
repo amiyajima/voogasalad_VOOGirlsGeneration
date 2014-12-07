@@ -429,6 +429,7 @@ public class ViewController {
 			return;
 		setActiveAction(action);
 
+
 		System.out.println("ViewController: Active piece location" + activePiece.getLoc());
 		SuperTile activeTile = myGrid.findClickedTile(activePiece.getLoc());
 
@@ -475,7 +476,7 @@ public class ViewController {
 
 		Point2D loc = myModel.getCurrentLevel().getGrid().findClickedTile(x, y).getLocation();
 		
-		System.out.println("Tile Found is: "+ myModel.getCurrentLevel().getGrid().findClickedTile(x, y) + " at X:" + loc.getX() +" at Y:"+ loc.getY());
+		//System.out.println("Tile Found is: "+ myModel.getCurrentLevel().getGrid().findClickedTile(x, y) + " at X:" + loc.getX() +" at Y:"+ loc.getY());
 		
 		if (myModel.getCurrentLevel().getGrid().getPiece(loc) == null) {
 			System.out.println("no piece");
@@ -500,6 +501,7 @@ public class ViewController {
 
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(location));
+
 		myGameGridEffect.highlightCurrent(location, Color.BLUE);
 	}
 	*/

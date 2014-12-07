@@ -41,8 +41,10 @@ public class ApplyState implements IGridState {
 
             
             //find where the mouse is hovering over
+
             activeTile = myController.getGrid().findClickedTile(event.getX(), event.getY());
             activeTile = myController.getGrid().findClickedTile(0, 0);
+
             
             activeTile.setOnMouseExited(event3 -> {
             });
