@@ -1,9 +1,12 @@
 package gameengine.player;
 
 import gamedata.action.Action; 
+import gamedata.gamecomponents.Level;
+
 import java.awt.geom.Point2D;
 import java.util.HashMap;
 import java.util.Map;
+
 import javafx.scene.input.KeyCode;
 
 
@@ -26,7 +29,7 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public void startTurn () {
+    public void startTurn (Level l) {
         this.resetMovesPlayed();
         // TODO: Map Keys Here
 

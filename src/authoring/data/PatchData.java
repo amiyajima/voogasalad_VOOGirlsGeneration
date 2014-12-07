@@ -16,7 +16,7 @@ import java.util.Set;
  * 
  * @author Sandy Lee
  */
-public class PatchData implements AuthoringData<Patch>, Observer {
+public class PatchData implements AuthoringData<Patch> {
 
 	private List<Patch> myPatches;
 
@@ -47,32 +47,6 @@ public class PatchData implements AuthoringData<Patch>, Observer {
 	@Override
 	public List<Patch> getData() {
 		return myPatches;
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		if (o instanceof PatchTypeData) {
-		    //removing -> observable notifies that arg has been removed from patchtypedata
-			List<Patch> toRemove = new ArrayList<Patch>();
-			PatchTypeData typeData = (PatchTypeData) o;
-			for (Patch p : myPatches) {
-				if (!typeData.containsName(p.getID())) {
-					toRemove.add(p);
-				}
-			}
-			
-			myPatches.removeAll(toRemove);
-
-			//replacing -> observable notifies that arg has been replaced from patchtypedata
-			if (arg instanceof Patch) {
-				Patch patchType = (Patch) arg;
-				for (Patch p : myPatches) {
-				    if (p.getID() == patchType.getID()){
-				    	replace(p, patchType);
-				    }
-				}
-			}
-		}
 	}
 
 	public void removePatchAtLoc(Point2D location){
@@ -112,6 +86,7 @@ public class PatchData implements AuthoringData<Patch>, Observer {
 	
 	public List<Point2D> replace(Patch patchType) {
     	List<Point2D> pointsToReplace = new ArrayList<Point2D>();
+    	System.out.println(pointsToReplace.toString());
     	myPatches.forEach(patch -> {
     		if (patch.getID().equals(patchType.getID())) {
     			replace(patch, patchType);
