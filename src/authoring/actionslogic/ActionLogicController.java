@@ -58,9 +58,12 @@ public class ActionLogicController implements Initializable {
 
     private void updatePossibleReceivers (String selectedActor) {
         List<String> myPosReceivers = getReceivers(myPieceTypes, selectedActor);
-        for (String p : myPosReceivers) {
-            myReceiversVBox.getChildren().add(new CheckBox(p));
-        }
+        ChoiceBox<String> cb = new ChoiceBox<String>();
+        cb.getItems().addAll(myPosReceivers);
+        myReceiversVBox.getChildren().add(cb);
+//        for (String p : myPosReceivers) {
+//            myReceiversVBox.getChildren().add(new CheckBox(p));
+//        }
     }
 
     private List<String> getReceivers (List<String> myPieceTypes, String actor) {
