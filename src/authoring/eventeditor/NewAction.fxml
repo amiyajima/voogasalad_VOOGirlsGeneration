@@ -8,7 +8,7 @@
    <children>
       <HBox prefHeight="47.0" prefWidth="600.0" styleClass="hbox">
          <children>
-            <Label text="Condition type" />
+            <Label text="Global Action Type" />
             <ChoiceBox fx:id="actionChoiceBox" />
          </children>
       </HBox>
