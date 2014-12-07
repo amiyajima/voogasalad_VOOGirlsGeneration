@@ -48,8 +48,12 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 		// as maybe a gridshapeproperty (new class?)
 		Level newLevel = new Level(null, new LinkedList<Event>(), "myID", false);
 		
-		Consumer<Level> okLambda = (Level level) -> {addEntry(level);};
-		super.myPropertiesSPane.setContent(new LevelEditor(newLevel,this));
+		Consumer<Level> okLambda = (Level level) -> {
+			addEntry(level);
+			myCurrentGrid = level.getGrid();
+			level.getGrid().displayPane(myGridSPane);
+			};
+		super.myPropertiesSPane.setContent(new LevelEditor(okLambda));
 	}
 
 	@Override
@@ -71,7 +75,7 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 			@Override
 			public void handle(MouseEvent event) {
 				myCurrentGrid = entry.getGrid();
-//				entry.getGrid().displayPane(myGridSPane);
+				entry.getGrid().displayPane(myGridSPane);
 			}
 		});
 		entryBox.getChildren().add(nameLabel);

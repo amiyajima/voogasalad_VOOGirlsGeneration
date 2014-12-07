@@ -152,6 +152,7 @@ public class JSONBobTester {
         List<Action> actions = new ArrayList<Action>();
         actions.add(createNewAction(pl1, pl2));
         actions.add(createNewAction(pl2, pl3));
+        actions.add(move);
 
         Stats s = new Stats();
         s.add("health", 20);
@@ -163,11 +164,12 @@ public class JSONBobTester {
 
         Piece piece = null;
         if (randomInt % 2 == 1) {
-            piece = new Piece("ID", "Duvall", DEFAULT_DUVALL, move, actions, s, p, 1, i);
+            piece = new Piece("ID", "Duvall", DEFAULT_DUVALL, actions, s, p, 1, i);
         }
         else {
-            piece = new Piece("ID", "Bunny", DEFAULT_BUNNY, move, actions, s, p, 1, i);
+            piece = new Piece("ID", "Bunny", DEFAULT_BUNNY, actions, s, p, 1, i);
         }
+        System.out.println(piece.getActions().size());
         return piece;
     }
 
