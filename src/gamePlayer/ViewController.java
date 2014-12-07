@@ -265,7 +265,7 @@ public class ViewController {
 				myStage.setScene(myScene);
 			});
 		});
-		// initializeGrid();
+//		 initializeGrid();
 	}
 
 	/**

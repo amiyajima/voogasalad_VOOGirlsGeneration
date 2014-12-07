@@ -10,16 +10,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 
 /**
@@ -73,7 +69,7 @@ public class KeyboardAction {
                     // Do action here
                     if (key.getCode() == KeyCode.F) {
                         vc.bindAction(myCurrentAction);
-                        System.out.println("Selected action with key");
+//                        System.out.println("Selected action with key");
                     }
 
                     // Select action here
