@@ -45,7 +45,7 @@ public class GameGridEffect {
         clearAllEffects();
 
         if (myActivePiece != null && myActiveAction != null) {
-
+            System.out.println("GameGridEffect: action ABOUT TO HIGHLIGHT\n\n");
             myActiveAction.getActionRange(myActivePiece.getLoc())
                     .forEach(point -> { if (point.getX() < myGrid.getRow()
                                      && point.getY() < myGrid.getCol()
@@ -57,11 +57,6 @@ public class GameGridEffect {
                                      
                                  }
                              });
-            
-            System.out.println("GameGridEffect: " + myHighlightedTiles.size());
-            for (SuperTile st : myHighlightedTiles) {
-                System.out.println("GameGridEffect: Highlighted tile" + st.toString());
-            }
         }
     }
 
@@ -78,6 +73,7 @@ public class GameGridEffect {
         clearAllEffects();
         
         if (myActivePiece != null && myActiveAction != null) {
+            System.out.println("GameGridEffect: effect ABOUT TO HIGHLIGHT\n\n");
             myActiveAction.getActionRange(myActivePiece.getLoc()).forEach(point -> {
                 if (loc.equals(point)) {
                     myActiveAction.getEffectRange().forEach(point2 -> {
@@ -94,6 +90,7 @@ public class GameGridEffect {
      * Uses GRID COORDINATE LOCATION to highlight the current location on the grid
      */
     public void highlightCurrent(Point2D loc, Color c){
+        clearAllEffects();
         myGrid.findClickedTile(loc);
     }
     

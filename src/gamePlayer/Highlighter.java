@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
  * @author
  *
  */
-public class Highlighter {
+public class XHighlighter {
     
     
 	/**

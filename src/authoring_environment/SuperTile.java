@@ -65,6 +65,7 @@ public abstract class SuperTile extends Group {
 	}
 
 
+<<<<<<< HEAD
 //<<<<<<< HEAD
 //	public void makeHighlight(double size, Color c) {
 //		myHighlight=makeShape(size);
@@ -73,6 +74,12 @@ public abstract class SuperTile extends Group {
 //	        System.out.println("highlight");
 //=======
 	
+=======
+	/**
+	 * Creates the highlight settings for this tile
+	 * @param size
+	 */
+>>>>>>> FETCH_HEAD
 	private void makeHighlight(double size) {
 		myHighlight=makeShape(size,myCoordinates);
 		myHighlight.setFill(DEFAULT_HIGHLIGHT_COLOR);
@@ -80,11 +87,18 @@ public abstract class SuperTile extends Group {
 		myHighlight.setVisible(false);
 	};
 	
+	/**
+	 * Select a tile to highlight, passing in a hex color
+	 * @param color
+	 */
 	public void selectTile(String color){
 	        myHighlight.setFill(Color.web(color, 0.3));
 		myHighlight.setVisible(true);
 	}
 	
+	/**
+	 * De-highlight something
+	 */
 	public void deselectTile(){
 		myHighlight.setVisible(false);
 	}
