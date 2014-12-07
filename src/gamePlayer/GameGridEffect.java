@@ -5,12 +5,11 @@ import gamedata.gamecomponents.Piece;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
-import authoring_environment.GUIGrid;
-import authoring_environment.SuperTile;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import authoring_environment.GUIGrid;
+import authoring_environment.SuperTile;
 
 
 public class GameGridEffect {
@@ -85,6 +84,7 @@ public class GameGridEffect {
      */
     public void highlightCurrent(Point2D loc){
         clearAllEffects();
+        System.out.println("GGE highlight location: " + loc.getX() + " " + loc.getY());
         SuperTile toHighlight = myGrid.findClickedTile(loc);
         toHighlight.selectTile(DEFAULT_COLOR);
         myHighlightedTiles.add(toHighlight);
@@ -96,7 +96,7 @@ public class GameGridEffect {
      */
     private void clearAllEffects(){
         for (SuperTile st : myHighlightedTiles) {
-            myGrid.findClickedTile(st.getLocation()).deselectTile();;
+            myGrid.findClickedTile(st.getLocation()).deselectTile();
         }
     }
     
