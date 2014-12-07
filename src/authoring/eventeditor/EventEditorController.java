@@ -13,19 +13,27 @@ import java.util.function.Consumer;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class EventEditorController implements Initializable {
 
-
+	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
+	private static final String NAME_PROMPT = "New Event name:";
+	
 	//Lists
 	@FXML
 	private ListView<Event> eventsListView;
@@ -40,6 +48,8 @@ public class EventEditorController implements Initializable {
 	@FXML
 	private Button delEvent;
 	@FXML
+	private Button saveEvents;
+	@FXML
 	private Button newCondition;
 	@FXML
 	private Button editCondition;
@@ -52,32 +62,20 @@ public class EventEditorController implements Initializable {
 	@FXML
 	private Button newAction;
 	
-	private Stage myParentStage;
 	private Stage newConditionStage;
 	
+	private List<Event> myEvents;
 	private List<Condition> myConditions;
 	private List<GlobalAction> myActions;
+	private Stage myStage;
 
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-
-		//Testing
-		eventsListView.getItems().addAll(new Event("Test Event 1"),
-										 new Event("Test Event 2"));
 
 		//Makes it so that the right-hand Editor updates with respect to the selected
 		//Event on the left side
 		eventsListView.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, selectedEvent) -> showEventInEditor(selectedEvent));
-	}
-
-	@FXML
-	private void showEventInEditor(Event event){
-		myConditions = event.getConditions();
-		myActions = event.getGlobalActions();
-
-		conditionsListView.setItems((ObservableList<Condition>) myConditions);
-		actionsListView.setItems((ObservableList<GlobalAction>) myActions);
 	}
 
 	@FXML
@@ -92,10 +90,7 @@ public class EventEditorController implements Initializable {
 	@FXML
 	private void handleEditCondition() throws IOException{
 		Condition entry = conditionsListView.getSelectionModel().getSelectedItem();
-		
-		System.out.println("what");
-		System.out.println(entry);
-		
+				
 		if(entry==null){
 			return;
 		}
@@ -132,7 +127,37 @@ public class EventEditorController implements Initializable {
 	
 	@FXML
 	private void handleNewEvent(){
+		VBox root = new VBox();
+		root.getStylesheets().add(STYLESHEET);
 		
+		Stage newEventStage  = new Stage();
+		newEventStage.setTitle("New Event");
+		newEventStage.initModality(Modality.WINDOW_MODAL);
+		Scene scene = new Scene(root);
+		newEventStage.setScene(scene);
+
+		Label nameLabel = new Label(NAME_PROMPT);
+		TextField eventName = new TextField();
+		eventName.setPromptText("Enter Event name");
+		
+		Button doneButton = new Button("Done");
+		doneButton.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent click) {
+				myEvents.add(new Event(eventName.getText()));
+				newEventStage.close();
+			}
+		});
+		
+		root.getChildren().addAll(nameLabel, eventName, doneButton);
+		newEventStage.showAndWait();
+	}
+	
+	@FXML
+	private void handleSaveEvents(){
+		Stage stage = (Stage) saveEvents.getScene().getWindow();
+		stage.close();
 	}
 	
 	@FXML
@@ -141,6 +166,27 @@ public class EventEditorController implements Initializable {
 		conditionsListView.getItems().remove(delIdx);
 	}
 
+	/**
+	 * When user selects an Event from the left-hand list, it populates the Conditions
+	 * and GlobalActions lists on the right-hand side. Also enables all Buttons allowing
+	 * interaction with those objects.
+	 * @param event
+	 */
+	private void showEventInEditor(Event event){
+		myConditions = event.getConditions();
+		myActions = event.getGlobalActions();
+
+		conditionsListView.setItems((ObservableList<Condition>) myConditions);
+		actionsListView.setItems((ObservableList<GlobalAction>) myActions);
+	
+		newCondition.setDisable(false);
+		editCondition.setDisable(false);
+		delCondition.setDisable(false);
+		delAction.setDisable(false);
+		editAction.setDisable(false);
+		newAction.setDisable(false);
+	}
+	
 	private void showNewConditionWindow(Consumer<Condition> okLambda, Condition entry) throws IOException{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/authoring/eventeditor/NewCondition.fxml"));
@@ -171,16 +217,18 @@ public class EventEditorController implements Initializable {
 		Scene scene = new Scene(root);
 		newConditionStage.setScene(scene);
 
-		NewConditionController controller = loader.getController();
-
 		newConditionStage.showAndWait();
 	}
 
 	/**
-	 * Used to link the Controller with the Stage that contains the Event Editor
-	 * @param eventEditorStage
+	 * Loads a Level's Events into the editor. We pass the entire collection into this class
+	 * because Editor must be able to add/remove from the list and modify individual Events
+	 * 
+	 * @param myEvents - an ObservableList to interface with the ListView
 	 */
-	public void setStage(Stage eventEditorStage) {
-		myParentStage = eventEditorStage;
+	public void loadEvents(ObservableList<Event> events) {
+		myEvents = events;
+		eventsListView.setItems(events);
 	}
+
 }

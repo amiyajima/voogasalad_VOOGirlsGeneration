@@ -47,22 +47,27 @@
 .tab .tab-label { 
     -fx-alignment: CENTER;
     -fx-text-fill: white;
-    -fx-font-size: 12px;
+    -fx-font-size: 13px;
+    -fx-font-family: Consolas;
     -fx-font-weight: bold;
 }
 
 .tab:selected .tab-label { 
     -fx-alignment: CENTER;
-    -fx-text-fill: #D3E397;
+    -fx-text-fill: #add8e6;
+}
+
+#gameMenu {
+    -fx-padding: 4;
 }
 
 .button{
     -fx-text-fill: black ;
     -fx-background-color: white;
-    -fx-font-family: "Franklin Gothic Medium";
-    -fx-font-weight: bold;
+    -fx-font-family: "Consolas";
+    -fx-font-size: 14px;
     -fx-border-radius: 2;
-    -fx-padding: 3 6 6 6;
+    -fx-padding: 10;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 ); 
     -fx-background-color: linear-gradient(#ffffff, #bababa);
 }
@@ -72,7 +77,7 @@
 }
 
 .label{
-	-fx-font-size: 16px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: white;
     -fx-background-color: linear-gradient(#bababa, #41464a);
@@ -82,11 +87,11 @@
 }
 
 .label:hover{
-	-fx-background-color: #D3E397;
+    -fx-background-color: #D3E397;
 }
 
-
-
-
+#newGameButton{
+     -fx-padding: 4;
+}
 
 
