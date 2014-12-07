@@ -53,7 +53,6 @@ public class ActionLogicController implements Initializable {
         myPieceTypes.add("Piece C");
 
         actorsChoiceBox.getItems().addAll(myPieceTypes);
-        
 
         actorsChoiceBox
                 .getSelectionModel()
@@ -65,12 +64,21 @@ public class ActionLogicController implements Initializable {
     private void updatePossibleReceivers (String selectedActor) {
         // TODO Auto-generated method stub
         List<String> myPosReceivers = getReceivers(myPieceTypes, selectedActor);
+//        myReceiversVBox = new VBox();
         for (String p : myPosReceivers) {
+            
             myReceiversVBox.getChildren().add(new CheckBox(p));
         }
     }
 
-    
-
+    private List<String> getReceivers (List<String> myPieceTypes, String actor) {
+        List<String> receivers = new ArrayList<String>();
+        for (String p : myPieceTypes) {
+            if (!p.equals(actor)) {
+                receivers.add(p);
+            }
+        }
+        return receivers;
+    }
 
 }
