@@ -183,6 +183,7 @@ public class GUIGrid extends SuperGrid implements Observer {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Gets Pieces that have been tagged for removal
 	 * 
 	 * @return
@@ -204,6 +205,8 @@ public class GUIGrid extends SuperGrid implements Observer {
 	}
 
 	/**
+=======
+>>>>>>> 81dff75686db2e323819d437531f2a5876287f04
 	 * Returns all pieces that belong to a given player
 	 * 
 	 * @param playerId
