@@ -27,8 +27,6 @@ public class GameGridEffect {
     private static final String DEFAULT_COLOR = "#0000FF";
      
     public GameGridEffect(ViewController vc){
-//        myHighlighter = new Highlighter();
-
         myViewController = vc;
         myGrid = myViewController.getGrid();
         myActivePiece = myViewController.getActivePiece();
@@ -41,7 +39,6 @@ public class GameGridEffect {
      * Highlight the tiles that represent the possible range of the action
      * selected
      */
-
     public void highlightActionRange () {
         clearAllEffects();
         System.out.println("Highlighting action111 range");
