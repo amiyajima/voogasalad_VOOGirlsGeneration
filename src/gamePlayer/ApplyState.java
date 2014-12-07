@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Inventory;
+import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
@@ -31,21 +32,21 @@ public class ApplyState implements IGridState {
         myGameGridEffect = controller.getGameGridEffect();
         myGame = controller.getGame();
         
-//        myController.getGrid().findEnteredTile(); //assuming this method works
         
-        myController.getGridPane().setOnMouseEntered(event -> {
-            myController.changeCursor(myController.CURSOR_ATTACK_TEST);
-            
-            //first highlight the action range?
-            
+        
+        myController.getGridPane().setOnMouseMoved(event -> {
 
+//            find where the mouse is hovering over
+            System.out.println(event.getX());
+            System.out.println(event.getY());
+            System.out.println("-----------");
             
-            //find where the mouse is hovering over
-
-            activeTile = myController.getGrid().findClickedTile(event.getX(), event.getY());
+            
+            
+//            activeTile = myController.getGrid().findClickedTile(event.getX(), event.getY());
             activeTile = myController.getGrid().findClickedTile(0, 0);
-
             
+
             activeTile.setOnMouseExited(event3 -> {
             });
         });
