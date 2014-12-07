@@ -81,7 +81,7 @@ public class SuperGrid {
 		for (List<SuperTile> rows:myGrid){
 			for (SuperTile tile:rows){
 				//System.out.println(tile.getLocation().getX());
-				if (tile.myShape.contains(yCoord,xCoord)){
+				if (tile.myShape.contains(xCoord,yCoord)){
 					//System.out.println("Here");
 					return tile;
 				}
@@ -99,7 +99,7 @@ public class SuperGrid {
 	public SuperTile findClickedTile(Point2D loc){
 	                int col=(int) loc.getX();
 	                int row=(int) loc.getY();
-	                return myGrid.get(col).get(row);
+	                return myGrid.get(row).get(col);
 	        }
 	
 	
