@@ -1,13 +1,16 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Patch;
+
 import java.util.function.Consumer;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.data.PatchData;
@@ -17,15 +20,12 @@ import authoring_environment.GUIGrid;
 public class PatchController extends GridComponentAbstCtrl<Patch> {
 
 	private PatchTypeData myPatchTypes;
-	private PatchData myPatches;
 	
 	public PatchController (VBox vbox, ScrollPane propertiesSPane, GUIGrid currGrid) {
 		super(vbox, propertiesSPane, currGrid);
 		//TODO: myPatchTypes needs to be changed..data..
 		myPatchTypes = new PatchTypeData();
-		//TODO: this is just for testing..
-		currGrid = new GUIGrid(10, 10, 2, "Square Grid");
-		myPatches = currGrid.getPatches();
+		myCurrentGrid = currGrid;
 	}
 
 	           
@@ -71,6 +71,12 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 		ImageView img = entry.getImageView();
 		img.setFitHeight(40);
 		img.setFitWidth(40);
+		hb.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				myCurrentGrid.addPatch(entry, loc);
+			}
+		});
 		hb.getChildren().addAll(img, name);
 		return hb;
 	}
@@ -93,7 +99,6 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 				    myIndivEntMap.replace(entryBox, newImgNameBox);
 				    
 				    myPatchTypes.replace(entry, patch);
-				    myPatches.update(myPatchTypes, entry);
 				};
 				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda, entry));
 			}
@@ -106,7 +111,6 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 			@Override
 			public void handle (ActionEvent event) {
 				myPatchTypes.remove(entry);
-				myPatches.update(myPatchTypes, entry);
 				myVBox.getChildren().remove(myEntryMap.get(entry));
 			}
 		});

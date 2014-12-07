@@ -7,6 +7,7 @@ import gamedata.rules.Rule;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
 
 import authoring_environment.GUIGrid;
 
@@ -95,7 +96,7 @@ public class Movement implements Action {
 	public boolean isValidLocation(int x, int y) {
 		for (Point2D p : myAbsoluteMoves) {
 			if ((p.getX() == x && p.getY() == y)
-					&& (myGrid.getPiece(x, y) == null)) {
+					&& (myGrid.getPiece(new Point2D.Double(x, y)) == null)) {
 				return true;
 			}
 		}

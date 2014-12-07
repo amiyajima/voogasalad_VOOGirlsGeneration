@@ -15,14 +15,14 @@ public class PieceTypeData extends Observable implements AuthoringData<Piece> {
     public PieceTypeData() {
         myPieces = new LinkedList<Piece>();
     }
-    
-    public boolean containsName(String name) {
-    	Set<String> nameSet = new HashSet<String>();
+ 
+    public Set<String> getIdSet() {
+    	Set<String> idSet = new HashSet<String>();
 		for (Piece p : myPieces) {
-			nameSet.add(p.getName());
+			idSet.add(p.getID());
 		}
-		return nameSet.contains(name);
-	}
+		return idSet;
+    }
     
 	@Override
 	public void add(Piece p) {
