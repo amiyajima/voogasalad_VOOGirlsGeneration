@@ -1,6 +1,7 @@
-package gamedata.events;
+package gamedata.events.globalaction;
 
 import authoring_environment.GUIGrid;
+import gamedata.events.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
 

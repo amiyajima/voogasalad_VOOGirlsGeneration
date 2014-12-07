@@ -48,10 +48,10 @@
       </SplitPane>
    </right>
    <bottom>
-      <HBox fx:id="console" prefHeight="54.0" prefWidth="536.0" BorderPane.alignment="CENTER" />
+      <HBox fx:id="console" prefHeight="54.0" prefWidth="536.0" style="-fx-spacing: 5;" BorderPane.alignment="CENTER" />
    </bottom>
    <top>
-   	<HBox style="-fx-spacing: 5;">
+   	<HBox style="-fx-spacing: 5; -fx-padding: 10;">
       <children>
          <MenuButton fx:id="gameMenu" mnemonicParsing="false" styleClass="button" stylesheets="@../resources/stylesheets/stylesheet_label.css" text="Game Menu" BorderPane.alignment="CENTER_LEFT">
            <items>
