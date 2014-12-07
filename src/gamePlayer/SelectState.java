@@ -13,7 +13,7 @@ public class SelectState implements IGridState {
 	// private MouseController myMouseController;
 
 	public SelectState(ViewController controller) {
-		System.out.println("At Select State");
+		//System.out.println("At Select State");
 		myController = controller;
 		myController.getGridPane().setOnMouseEntered(event -> {
 			myController.changeCursor(myController.CURSOR_GLOVE_TEST);
