@@ -4,6 +4,8 @@ import gamedata.gamecomponents.Patch;
 
 import java.awt.geom.Point2D;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Consumer;
 
 import javafx.event.ActionEvent;
@@ -19,6 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import authoring.data.PatchTypeData;
 import authoring_environment.UIspecs;
 
 /**
@@ -48,6 +51,8 @@ public class PatchTypeEditor extends Pane {
 	private String myEditorTitle;
 	private Consumer<Patch> myOkLambda;
 	
+	private Set<String> myIDSet;
+	
 	private String myID;
 	private String myName;
 	private String myImageLocation;
@@ -59,8 +64,9 @@ public class PatchTypeEditor extends Pane {
 	 * this is for patch CREATOR
 	 * 
 	 */
-	public PatchTypeEditor (Consumer<Patch> okLambda) {
+	public PatchTypeEditor (Consumer<Patch> okLambda, PatchTypeData patchTypes) {
 		myEditorTitle = CREATOR_TITLE;
+		myIDSet = patchTypes.getIdSet();
 		myID = "";
 		myName = "";
 		myImageLocation = DEFAULT_IMAGE_LOC;
@@ -116,6 +122,7 @@ public class PatchTypeEditor extends Pane {
 		TextField terrainID = new TextField();
 		terrainID.setText(myID);
 		if(!myID.equals("")){
+			myIDSet = new HashSet<String>();
 			terrainID.setDisable(true);
 		}
 		terrainID.setPromptText(ID_PROMPT);
@@ -184,8 +191,11 @@ public class PatchTypeEditor extends Pane {
 		 goButton.setOnAction(new EventHandler<ActionEvent>() {
 			 @Override
 			 public void handle (ActionEvent click) {
-			         //TODO: the user can't create patches with same id
 				 myID = terrainID.getText();
+				 if(myIDSet.contains(myID)){
+					 return;
+				 }
+				 myIDSet.add(myID);
 				 myName = terrainName.getText();
 				 myPatch = new Patch(myID, myName, myImageLocation, DEFAULT_LOC);
 				 myOkLambda.accept(myPatch);

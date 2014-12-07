@@ -1,9 +1,8 @@
-package utilities;
+package utilities.leapMotion;
 
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.util.ResourceBundle;
-
 import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Gesture;
