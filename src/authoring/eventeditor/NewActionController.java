@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+import authoring.data.EventsDataContainer;
 import utilities.ClassGrabber;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,6 +33,7 @@ public class NewActionController implements Initializable{
         
         private GlobalAction myGlobalAction;
         private Consumer<GlobalAction> myDoneLambda;
+        private EventsDataContainer myData;
         
         @Override
         public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -88,11 +90,11 @@ public class NewActionController implements Initializable{
                     
                 }
                 if(myGlobalAction==null){
-                        editorScrollPane.setContent(new ActionEditorPane(myDoneLambda));
+                        editorScrollPane.setContent(new ActionEditorPane(myDoneLambda, myData));
                 }
-                else{
-                        editorScrollPane.setContent(new ActionEditorPane(myDoneLambda, myGlobalAction));
-                }
+//                else{
+//                        editorScrollPane.setContent(new ActionEditorPane(myDoneLambda, myGlobalAction));
+//                }
         }
         
         /**
@@ -123,4 +125,8 @@ public class NewActionController implements Initializable{
         public void loadEntryCondition(GlobalAction entry){
                 myGlobalAction = entry;
         }
+        
+        public void loadData(EventsDataContainer data) {
+            myData = data;
+    }
 }
