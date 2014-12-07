@@ -3,18 +3,26 @@ package fxml_main;
 import gamedata.events.Event;
 import gamedata.gamecomponents.Level;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import authoring.eventeditor.EventEditorController;
 import authoring_environment.GUIGrid;
 
 public class LevelEditor extends VBox { 
@@ -87,6 +95,18 @@ public class LevelEditor extends VBox {
 		tileHeightHBox.getChildren().addAll(heightLabel, heightField);
 
 		Button eventBtn = new Button("Add Global Events...");
+		eventBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent click) {
+				try {
+					showEventsEditorWindow();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		});
 
 		Button okBtn = new Button("OK");
 		Button cancelBtn = new Button("Cancel");
@@ -114,6 +134,23 @@ public class LevelEditor extends VBox {
 				eventBtn, finalizeBtnsHBox);
 
 
+	}
+	
+	private void showEventsEditorWindow() throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/authoring/eventeditor/EventEditor.fxml"));
+		Parent root = loader.load();
+
+		Stage eventEditorStage  = new Stage();
+		eventEditorStage.setTitle("Events Editor");
+		eventEditorStage.initModality(Modality.WINDOW_MODAL);
+		Scene scene = new Scene(root);
+		eventEditorStage.setScene(scene);
+
+		EventEditorController controller = loader.getController();
+		controller.setStage(eventEditorStage);
+
+		eventEditorStage.showAndWait();
 	}
 
 }

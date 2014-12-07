@@ -30,21 +30,6 @@ public class NewConditionController implements Initializable{
 	private Condition myCondition;
 	private Consumer<Condition> myOkLambda;
 	
-	/**
-	 * Used when making a new Condition
-	 */
-	public NewConditionController(){
-		
-	}
-	
-	/**
-	 * Used when editing a previous condition
-	 * @param condition
-	 */
-	public NewConditionController(Condition condition){
-		
-	}
-	
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		
@@ -89,7 +74,12 @@ public class NewConditionController implements Initializable{
 		if("class gamedata.events.ConditionEquals".equals(c.getSuperclass().toString())){
 		}
 		
-		editorScrollPane.setContent(new ConditionEditorPane(myOkLambda));
+		if(myCondition==null){
+			editorScrollPane.setContent(new ConditionEditorPane(myOkLambda));
+		}
+		else{
+			editorScrollPane.setContent(new ConditionEditorPane(myOkLambda, myCondition));
+		}
 	}
 	
 	/**
@@ -110,5 +100,14 @@ public class NewConditionController implements Initializable{
 
 	public void loadLambda(Consumer<Condition> okLambda) {
 		myOkLambda = okLambda;
+	}
+	
+	/**
+	 * Loads the data of a Condition into the editor.
+	 * Used when editing a previous condition, rather than creating a new one from scratch
+	 * @param entry
+	 */
+	public void loadEntryCondition(Condition entry){
+		myCondition = entry;
 	}
 }

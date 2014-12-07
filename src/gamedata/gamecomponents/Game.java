@@ -105,7 +105,7 @@ public class Game {
     public void changeTurn (int playerToChangeTo) {
         for (Player player : myPlayers) {
             if (player.getID() == playerToChangeTo) {
-                myCurrentPlayer = player;
+                setCurrentPlayer(player);
             }
         }
     }
@@ -171,6 +171,7 @@ public class Game {
 
     public void setCurrentPlayer (Player p) {
         myCurrentPlayer = p;
+        p.startTurn(myCurrentLevel);
     }
 
     /**

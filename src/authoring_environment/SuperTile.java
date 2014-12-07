@@ -89,6 +89,7 @@ public abstract class SuperTile extends Group {
 	 * De-highlight something
 	 */
 	public void deselectTile(){
+//	    System.out.println("De-highlighting tile at " + myLocation.getX() + ", " + myLocation.getY());
 		myHighlight.setVisible(false);
 	}
 	
@@ -140,7 +141,7 @@ public abstract class SuperTile extends Group {
 	}
 	
 	/**
-	 * Grid coordinate location
+	 * Pixel location
 	 * @return
 	 */
 	public Point2D getLocation(){
@@ -148,7 +149,7 @@ public abstract class SuperTile extends Group {
 	}
 	
 	/**
-	 * Pixel location
+	 * Grid coordinate location
 	 * @return
 	 */
 	public Point2D getCoordinates(){

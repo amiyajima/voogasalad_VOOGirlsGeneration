@@ -20,16 +20,16 @@ import authoring_environment.GUIGrid;
 public abstract class GridComponentAbstCtrl<T> {
     protected VBox myVBox;
     protected ScrollPane myPropertiesSPane;
-    protected GUIGrid myCurrentGrid;
+    protected GUIGridReference myGridReference;
     protected Map<T, HBox> myEntryMap;
     protected HashMap<HBox, HBox> myIndivEntMap;
 
 
     protected GridComponentAbstCtrl (VBox vbox, ScrollPane propertiesSPane,
-                                     GUIGrid currGrid) {
+                                     GUIGridReference gridRef) {
         myVBox = vbox;
         myPropertiesSPane = propertiesSPane;
-        myCurrentGrid = currGrid;
+        myGridReference = gridRef;
         myEntryMap = new HashMap<T, HBox>();
         myIndivEntMap = new HashMap<HBox, HBox>();
         initGlobalControls();

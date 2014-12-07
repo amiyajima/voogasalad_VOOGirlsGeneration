@@ -7,8 +7,8 @@ import gamedata.events.GlobalAction;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
-
 import java.util.function.Consumer;
 
 import javafx.collections.FXCollections;
@@ -22,7 +22,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 
 public class EventEditorController implements Initializable {
 
@@ -53,13 +52,18 @@ public class EventEditorController implements Initializable {
 	@FXML
 	private Button newAction;
 	
+	private Stage myParentStage;
 	private Stage newConditionStage;
+	
+	private List<Condition> myConditions;
+	private List<GlobalAction> myActions;
 
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 
 		//Testing
-		eventsListView.getItems().addAll(new Event(new ArrayList<>(), new ArrayList<>(), "Testing"));
+		eventsListView.getItems().addAll(new Event("Test Event 1"),
+										 new Event("Test Event 2"));
 
 		//Makes it so that the right-hand Editor updates with respect to the selected
 		//Event on the left side
@@ -69,14 +73,11 @@ public class EventEditorController implements Initializable {
 
 	@FXML
 	private void showEventInEditor(Event event){
-		ObservableList<Condition> conditions = FXCollections.observableArrayList();
-		ObservableList<GlobalAction> actions = FXCollections.observableArrayList();
+		myConditions = event.getConditions();
+		myActions = event.getGlobalActions();
 
-		conditions.addAll(event.getConditions());
-		actions.addAll(event.getGlobalActions());
-
-		conditionsListView.setItems(conditions);
-		actionsListView.setItems(actions);
+		conditionsListView.setItems((ObservableList<Condition>) myConditions);
+		actionsListView.setItems((ObservableList<GlobalAction>) myActions);
 	}
 
 	@FXML
@@ -85,12 +86,16 @@ public class EventEditorController implements Initializable {
 		    conditionsListView.getItems().add(condition);
 		    newConditionStage.close();
 		};
-		showNewConditionWindow(okLambda);
+		showNewConditionWindow(okLambda, null);
 	}
 	
 	@FXML
 	private void handleEditCondition() throws IOException{
 		Condition entry = conditionsListView.getSelectionModel().getSelectedItem();
+		
+		System.out.println("what");
+		System.out.println(entry);
+		
 		if(entry==null){
 			return;
 		}
@@ -100,7 +105,7 @@ public class EventEditorController implements Initializable {
 		    conditionsListView.getItems().add(condition);
 		    newConditionStage.close();
 		};
-		showNewConditionWindow(okLambda);
+		showNewConditionWindow(okLambda, entry);
 	}
 
 	@FXML
@@ -124,8 +129,19 @@ public class EventEditorController implements Initializable {
 		int delIdx = actionsListView.getSelectionModel().getSelectedIndex();
 		actionsListView.getItems().remove(delIdx);
 	}
+	
+	@FXML
+	private void handleNewEvent(){
+		
+	}
+	
+	@FXML
+	private void handleDelEvent(){
+		int delIdx = eventsListView.getSelectionModel().getSelectedIndex();
+		conditionsListView.getItems().remove(delIdx);
+	}
 
-	private void showNewConditionWindow(Consumer<Condition> okLambda) throws IOException{
+	private void showNewConditionWindow(Consumer<Condition> okLambda, Condition entry) throws IOException{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/authoring/eventeditor/NewCondition.fxml"));
 		Parent root = loader.load();
@@ -139,6 +155,7 @@ public class EventEditorController implements Initializable {
 		NewConditionController controller = loader.getController();
 		
 		controller.loadLambda(okLambda);
+		controller.loadEntryCondition(entry);
 
 		newConditionStage.showAndWait();
 	}
@@ -157,5 +174,13 @@ public class EventEditorController implements Initializable {
 		NewConditionController controller = loader.getController();
 
 		newConditionStage.showAndWait();
+	}
+
+	/**
+	 * Used to link the Controller with the Stage that contains the Event Editor
+	 * @param eventEditorStage
+	 */
+	public void setStage(Stage eventEditorStage) {
+		myParentStage = eventEditorStage;
 	}
 }
