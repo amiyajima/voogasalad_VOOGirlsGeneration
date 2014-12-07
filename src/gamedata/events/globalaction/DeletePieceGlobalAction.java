@@ -13,26 +13,27 @@ import gamedata.gamecomponents.Piece;
 public class DeletePieceGlobalAction extends GlobalAction {
 	public static final String DESCRIPTION = "Delete ";
     private Game myGame;
-    private String myID;
+    private String myName;
     
     /**
      * Make sure you construct this referring to the piece that you want to delete rather than 
      * creating a new piece because the grid will try to look for that piece to delete when the
      * method is called
      * @param game
-     * @param pieceToDelete
+     * @param name of type of piece to delete
      */
-    public DeletePieceGlobalAction(String name, Game game, String ID) {
+    public DeletePieceGlobalAction(String name, Game game) {
         super(name);
         myGame = game;
-        myID=ID;
+        myName = name;
     }
 
     @Override
     public void doBehavior () {
        GUIGrid grid =  myGame.getCurrentLevel().getGrid();
-       for(Piece p : grid.getPieces().getData()){
-           if(p.getID().equals(myID)){
+       //currently needs to get all pieces and iterate through them
+       for(Piece p : grid.){
+           if(p.getName().equals(myName)){
                grid.removePiece(p);
            }
        }
