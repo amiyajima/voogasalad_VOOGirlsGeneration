@@ -41,14 +41,10 @@ public class ApplyState implements IGridState {
 
             
             //find where the mouse is hovering over
-<<<<<<< HEAD
-            activeTile = myController.getGrid().findActiveTile(event.getX(), event.getY());
-            activeTile = myController.getGrid().findActiveTile(0, 0);
-//            activeTile.makeHighlight(1.0);      //highlighting the effect range?
-=======
+
             activeTile = myController.getGrid().findClickedTile(event.getX(), event.getY());
             activeTile = myController.getGrid().findClickedTile(0, 0);
->>>>>>> FETCH_HEAD
+
             
             activeTile.setOnMouseExited(event3 -> {
             });

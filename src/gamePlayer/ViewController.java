@@ -58,13 +58,9 @@ public class ViewController {
 	private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
-<<<<<<< HEAD
-	
-	public static final Color SELECTION_COLOR = Color.web("#0000FF", 0.3);
-	public static final String TEST_COLOR = "#0000FF";
-=======
+
 	private static final String DEFAULT_HIGHLIGHT_COLOR = "#0000FF";
->>>>>>> FETCH_HEAD
+
 
 	private ResourceBundle myLanguages;
 	private Stage myStage;
@@ -441,29 +437,12 @@ public class ViewController {
 			return;
 		setActiveAction(action);
 
-<<<<<<< HEAD
-		// highlight the action range.
-		System.out.println(activePiece.getLoc());
-//<<<<<<< HEAD
-//		SuperTile activeTile = myGrid.findActiveTile(activePiece.getLoc());
-//		
-//		activeTile.selectTile();
-//		activeTile.makeHighlight(1.0, SELECTION_COLOR);
-////		myGameGridEffect.highlightActionRange();
-//		
-//=======
-		SuperTile activeTile = myGrid.findClickedTile(activePiece.getLoc());
 
-		activeTile.selectTile(TEST_COLOR);
-//		activeTile.makeHighlight(1.0);
-//		 myGameGridEffect.highlightActionRange();
-//>>>>>>> FETCH_HEAD
-=======
 		System.out.println("ViewController: Active piece location" + activePiece.getLoc());
 		SuperTile activeTile = myGrid.findClickedTile(activePiece.getLoc());
 
 		activeTile.selectTile(DEFAULT_HIGHLIGHT_COLOR);
->>>>>>> FETCH_HEAD
+
 
 		setGridState(new ApplyState(this));
 	}
@@ -531,13 +510,7 @@ public class ViewController {
 
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(location));
-<<<<<<< HEAD
-		// myGrid.clearEffect();
-//		myGameGridEffect.clearAllEffects(myGrid);
 
-		// highlightCurrent(location, Color.BLUE);
-=======
->>>>>>> FETCH_HEAD
 		myGameGridEffect.highlightCurrent(location, Color.BLUE);
 	}
 
