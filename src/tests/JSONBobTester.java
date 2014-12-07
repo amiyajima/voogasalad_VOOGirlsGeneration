@@ -129,7 +129,7 @@ public class JSONBobTester {
 
     public Piece createNewPiece (GUIGrid g, Point2D p) {
         Point2D p1 = new Point2D.Double(1, 1);
-        Point2D p4 = new Point2D.Double(0, 1);
+        Point2D p4 = new Point2D.Double(1, 0);
         Point2D p5 = new Point2D.Double(-1, 0);
 
         Point2D p2 = new Point2D.Double(2, 2);
@@ -142,18 +142,19 @@ public class JSONBobTester {
         pl1.add(new Point2D.Double(0, -1));
 
         List<Point2D> pl2 = new ArrayList<Point2D>();
-        pl2.add(p1);
-        pl2.add(p3);
+        pl2.add(p4);
 
         List<Point2D> pl3 = new ArrayList<Point2D>();
         pl3.add(p2);
         pl3.add(p3);
+        
+        List<Point2D> pl4 = new ArrayList<Point2D>();
 
         Movement move = new Movement(g, pl1);
 
         List<Action> actions = new ArrayList<Action>();
-        actions.add(createNewAction(pl1, pl2));
-        actions.add(createNewAction(pl2, pl3));
+        actions.add(createNewAction(pl2, pl4));
+        //actions.add(createNewAction(pl2, pl3));
         actions.add(move);
 
         Stats s = new Stats();
