@@ -59,16 +59,15 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
     	delBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-            	myVBox.getChildren().clear();
-				//TODO: This implementation is v incorrect. Will fix later.
-
-				PieceTypeData clone = new PieceTypeData();
-				for (Piece pieceType : myPieceTypes.getData()) {
-					clone.add(pieceType);
-				}
-				for (Piece pieceType : clone.getData()) {
-					myPieceTypes.remove(pieceType);
-				}
+            	EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
+					@Override
+					public void handle (MouseEvent e) {
+						GUIGrid grid = myGridReference.getGrid();
+						Point2D coor = grid.calculateClicked(e.getX(), e.getY());
+						grid.removePatch(coor);
+					}
+				};
+				myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
             }
         });
     }
