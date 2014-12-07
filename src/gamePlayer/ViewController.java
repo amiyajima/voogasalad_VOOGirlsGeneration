@@ -18,6 +18,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
+import authoring_environment.SuperTile;
 import tests.JSONBobTester;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
@@ -371,7 +372,7 @@ public class ViewController {
 	 * @param piece
 	 */
 	protected void updateActions(Piece piece) {
-		// setActivePiece(piece);
+		 setActivePiece(piece);
 		controlPane.getChildren().clear();
 		ArrayList<Label> actions = new ArrayList<Label>();
 
@@ -432,11 +433,17 @@ public class ViewController {
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
-
-		myGameGridEffect.highlightActionRange();
+		
+		//highlight the action range.
+		System.out.println(activePiece.getLoc());
+		SuperTile activeTile = myGrid.findClickedTile(activePiece.getLoc());
+		
+		activeTile.selectTile();
+		activeTile.makeHighlight(1.0);
+//		myGameGridEffect.highlightActionRange();
+		
 
 		setGridState(new ApplyState(this));
-
 	}
 
 	/**
@@ -526,6 +533,9 @@ public class ViewController {
 		currentClick = new Point2D.Double(yCor, xCor);
 		return currentClick;
 	}
+	
+	
+
 
 	/**
 	 * Changes the image of the Cursor

@@ -1,5 +1,7 @@
 package gamePlayer;
 
+
+//probably won't use this
 import java.awt.geom.Point2D;
 import authoring_environment.GUIGrid;
 import javafx.scene.Node;
