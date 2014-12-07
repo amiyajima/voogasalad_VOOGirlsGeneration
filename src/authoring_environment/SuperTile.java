@@ -56,7 +56,7 @@ public abstract class SuperTile extends Group {
 
         myPieceImage = initImageView(myImageSize);
         myPatchImage = makeShape(size, myCoordinates);
-        myPatchImage.setFill(Color.WHITE);
+        myPatchImage.setFill(Color.TRANSPARENT);
 
         alignNodes(myImageCoord, myPieceImage);
     }
@@ -103,7 +103,11 @@ public abstract class SuperTile extends Group {
     public void addPatchImage (ImageView imageView) {
         myPatchImage.setFill(new ImagePattern(imageView.getImage()));
     }
-
+    
+    public void removePieceImage () {
+    	myPieceImage.setVisible(false);
+    }
+    
     public void removePatchImage () {
         myPatchImage.setFill(Color.WHITE);
     }

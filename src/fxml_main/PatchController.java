@@ -15,7 +15,6 @@ import javafx.scene.layout.VBox;
 import authoring.data.PatchTypeData;
 import authoring_environment.GUIGrid;
 
-
 public class PatchController extends GridComponentAbstCtrl<Patch> {
 
 	private PatchTypeData myPatchTypes;
@@ -24,7 +23,6 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 			PatchTypeData patchTypes) {
 		super(vbox, propertiesSPane, gridRef);
 		myPatchTypes = patchTypes;
-		myGridReference = gridRef;
 	}
 
 	@Override
@@ -66,7 +64,6 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 				for (Patch patchType : clone.getData()) {
 					myPatchTypes.remove(patchType);
 				}
-
 			}
 		});
 	}

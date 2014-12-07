@@ -14,7 +14,6 @@ import authoring.data.PatchTypeData;
 import authoring.data.PieceData;
 import authoring.data.PieceTypeData;
 
-
 /**
  * Authoring, engine, and player may all use this grid!!
  * 
@@ -64,6 +63,8 @@ public class GUIGrid extends SuperGrid implements Observer {
 
     // TODO: set image within tile at this location
     public void addPiece (Piece pieceType, Point2D loc) {
+    	System.out.println(myPieceData.getData().size());
+    	
         Piece clone = new Piece(pieceType, loc);
         myPieceData.add(clone);
         SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
@@ -107,6 +108,14 @@ public class GUIGrid extends SuperGrid implements Observer {
             tile.addPatchImage(patchType.getImageView());
         }
     }
+    
+    public void removePiece (PieceTypeData typeData) {
+        List<Point2D> pointsToRemove = myPieceData.removeUnknown(typeData.getIdSet());
+        for (Point2D loc : pointsToRemove) {
+            SuperTile tile = super.findClickedTile(loc);
+            tile.removePieceImage();
+        }
+    }
 
     private void removePatch (PatchTypeData typeData) {
         List<Point2D> pointsToRemove = myPatchData.removeUnknown(typeData.getIdSet());
@@ -124,7 +133,9 @@ public class GUIGrid extends SuperGrid implements Observer {
      */
     public Piece getPiece (Point2D loc) {
         for (Piece p : myPieceData.getData()) {
-            if ((p.getLoc().getX() == loc.getX()) & (p.getLoc().getY() == loc.getY())) { return p; }
+            if ((p.getLoc().getX() == loc.getX()) & (p.getLoc().getY() == loc.getY())) {
+            	return p;
+            }
         }
         return null;
     }
@@ -137,17 +148,11 @@ public class GUIGrid extends SuperGrid implements Observer {
      */
     public Patch getPatch (Point2D loc) {
         for (Patch p : myPatchData.getData()) {
-            if ((p.getLoc().getX() == loc.getX()) & (p.getLoc().getY() == loc.getY())) { return p; }
+            if ((p.getLoc().getX() == loc.getX()) & (p.getLoc().getY() == loc.getY())) {
+            	return p;
+            }
         }
         return null;
-    }
-
-    public void removePiece (Piece p) {
-        SuperTile currentTile = findClickedTile(p.getLoc());
-        System.out.println(currentTile.getLocation().getY());
-        myPieceData.remove(p);
-        currentTile.clearPieceImage();
-
     }
 
     public void repopulateGrid(){
@@ -209,7 +214,8 @@ public class GUIGrid extends SuperGrid implements Observer {
         if (o instanceof PieceTypeData) {
             PieceTypeData typeData = (PieceTypeData) o;
             if (arg == null) {
-                myPieceData.removeUnknown(typeData.getIdSet());
+                // myPieceData.removeUnknown(typeData.getIdSet());
+            	removePiece(typeData);
             }
             if (arg instanceof Piece) {
                 Piece pieceType = (Piece) arg;

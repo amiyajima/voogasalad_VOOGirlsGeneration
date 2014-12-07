@@ -43,6 +43,7 @@ public class SuperGrid {
 			for (int col = 0; col < myWidth; col++) {
 				Point2D location = new Point2D.Double(col,row);
 				SuperTile tile = makeShapeTile(shape, myTileSize, location);
+				
 				tileCol.add(tile);
 				myPane.getChildren().add(tile);
 			}

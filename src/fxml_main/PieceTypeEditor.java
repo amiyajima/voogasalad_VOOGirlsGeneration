@@ -4,7 +4,6 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
-import gameengine.movement.Movement;
 
 import java.awt.geom.Point2D;
 import java.io.File;
@@ -66,7 +65,6 @@ public class PieceTypeEditor extends Pane {
 	private int myPlayerID;
 	private Stats myStats;
 	private List<Action> myActions;
-	private Movement myPath;
 	private Inventory myInventory;
 	
 	/**
@@ -79,10 +77,6 @@ public class PieceTypeEditor extends Pane {
 		myID = "";
 		myName = "";
 		myImageLocation = DEFAULT_IMAGE_LOC;
-		
-//		TODO : myPath should not be null. It takes in the GUI Grid and
-//				a list of relative locations that the unit can move to.
-		myPath = null;
 		myActions = new ArrayList<Action>();
 		myStats = new Stats();
 		myPlayerID = 0;
@@ -96,7 +90,6 @@ public class PieceTypeEditor extends Pane {
 		myID = piece.getID();
 		myName = piece.getName();
 		myImageLocation = piece.getImageLocation();
-		myPath = piece.getMovement();
 		myActions = piece.getActions();
 		myStats = piece.getStats();
 		myPlayerID = piece.getPlayerID();
@@ -213,7 +206,7 @@ public class PieceTypeEditor extends Pane {
 				 myID = unitID.getText();
 				 myName = unitName.getText();
 				 myActions = addSelectedActions(modList.getSelectedActions());
-				 myPiece = new Piece(myID, myName, myImageLocation, myPath, myActions, 
+				 myPiece = new Piece(myID, myName, myImageLocation, myActions, 
 						 myStats, DEFAULT_LOC, myPlayerID, myInventory);
 				 myOkLambda.accept(myPiece);
 			 }

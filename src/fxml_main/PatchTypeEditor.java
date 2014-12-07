@@ -72,7 +72,6 @@ public class PatchTypeEditor extends Pane {
 	 * and initializes it.
 	 * this is for patch EDITOR
 	 */
-
 	public PatchTypeEditor (Consumer<Patch> okLambda, Patch patch) {
 		myEditorTitle = EDITOR_TITLE;
 		myID = patch.getID();
