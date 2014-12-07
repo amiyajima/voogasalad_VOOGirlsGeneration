@@ -71,7 +71,7 @@ public class GameGridEffect {
      * @param red
      */
     public void highlightEffectRange (Point2D loc) {
-//        clearAllEffects();
+        clearAllEffects();
         
         myActivePiece = myViewController.getActivePiece();
         myActiveAction = myViewController.getActiveAction();
