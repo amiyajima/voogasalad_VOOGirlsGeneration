@@ -57,7 +57,6 @@ public class ViewController {
 	private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
-	private static final String DEFAULT_HIGHLIGHT_COLOR = "#ff0000";
 
 	private ResourceBundle myLanguages;
 	private Stage myStage;
@@ -391,36 +390,40 @@ public class ViewController {
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
-		SuperTile activeTile = myGrid.findClickedTile(activePiece.getLoc());
-		activeTile.selectTile(DEFAULT_HIGHLIGHT_COLOR);
-
 	        myGameGridEffect.highlightActionRange();
 		setGridState(new ApplyState(this));
 	}
 
 	private void setOnClick() {
 	    myGridPane.getContent().setOnMouseClicked(event -> {
-			performAction(event.getX(), event.getY());
+		Point2D loc = findPosition(event.getX(), event.getY());
+		performAction(loc);
+//	        performAction(event.getX(), event.getY());
 		});
 	}
+        
+//	public void setOnEnterKey() {
+//	    performAction(myKeyboardMovement.getCurrentLocation().getX(),
+//	                  myKeyboardMovement.getCurrentLocation().getY());
+//        }
+        
 
-	// Probably going to move this to KeyboardAction class
-	// public void setOnEnterKey() {
-	// System.out.println("do i need this?");
-	// myGridPane.requestFocus();
-	// myGridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
-	//
-	// @Override
-	// public void handle(KeyEvent arg0) {
-	//
-	// if (arg0.getCode() == KeyCode.F) {
-	// System.out.println("f");
-	// performAction(myKeyboardMovement.getCurrentLocation().getX(),
-	// myKeyboardMovement.getCurrentLocation().getY());
-	// }
-	// }
-	// });
-	// }
+//	 Probably going to move this to KeyboardAction class
+//	 public void setOnEnterKey() {
+//	     myGridPane.requestFocus();
+//	     myGridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
+//	
+//	 @Override
+//	 public void handle(KeyEvent arg0) {
+//	
+//	 if (arg0.getCode() == KeyCode.F) {
+//	 System.out.println("f");
+//	 performAction(myKeyboardMovement.getCurrentLocation().getX(),
+//	 myKeyboardMovement.getCurrentLocation().getY());
+//	 }
+//	 }
+//	 });
+//	 }
 
 	/**
 	 * Perform the actions of a click at position (x,y) on game grid
@@ -429,14 +432,21 @@ public class ViewController {
 	 * @param x
 	 * @param y
 	 */
-	public void performAction(double x, double y) {
+	public void performAction(Point2D loc) {
 		//System.out.println("current mouse location:" + x + ", " + y);
 		// System.out.println("myGrid size is" + myGridPane.getWidth() + "*"
 		// + myGrid.getHeight());
 		// System.out.println(myGrid.getBoundsInParent());
-	        System.out.println("ViewController onClick -> performAction" + gridState.toString());
-		Point2D loc = myModel.getCurrentLevel().getGrid().findClickedTile(x, y).getLocation();
-		//System.out.println("Tile Found is: "+ myModel.getCurrentLevel().getGrid().findClickedTile(x, y) + " at X:" + loc.getX() +" at Y:"+ loc.getY());
+
+//	        System.out.println("i get the following coord: ");
+//	        System.out.println(x);
+	        
+	        
+//		Point2D loc = myModel.getCurrentLevel().getGrid().findClickedTile(x, y).getLocation();
+//		System.out.println("performing action here: ");
+//		System.out.println(loc);
+		
+
 		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
 	}
 	
@@ -463,7 +473,7 @@ public class ViewController {
 		int yCor = (int) (y / patchHeight);
 		// System.out.println("Current Mouse Exact:"+ x +" "+ y);
 		// System.out.println("Current Mouse Coodinatate:"+ xCor +" "+ yCor);
-		currentClick = new Point2D.Double(yCor, xCor);
+		currentClick = new Point2D.Double(xCor, yCor);
 		return currentClick;
 	}
 

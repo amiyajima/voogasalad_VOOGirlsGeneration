@@ -61,6 +61,9 @@ public class GameGridEffect {
                                  }
                              });
         }
+        printPieceHighlights();
+        printEffectHighlights();
+        printActionHighlights();
     }
 
 
@@ -91,6 +94,9 @@ public class GameGridEffect {
                     }
                 });
             }
+        printPieceHighlights();
+        printEffectHighlights();
+        printActionHighlights();
     }
     
     /**
@@ -119,14 +125,14 @@ public class GameGridEffect {
         myHighlightedEffects.clear();
     }
     
-    private void clearAllActionHighlights(){
+    public void clearAllActionHighlights(){
         for (SuperTile st : myHighlightedActions) {
             myGrid.findClickedTile(st.getLocation()).deselectTile();
         }
         myHighlightedActions.clear();
     }
     
-    private void clearAllPieceHighlights(){
+    public void clearAllPieceHighlights(){
         for (SuperTile st : myHighlightedPiece) {
             myGrid.findClickedTile(st.getLocation()).deselectTile();
         }
@@ -138,16 +144,26 @@ public class GameGridEffect {
         myActiveAction = myViewController.getActiveAction();
     }
 
-    private void printHighlights() {
+    private void printPieceHighlights() {
         for (SuperTile st : myHighlightedPiece) {
-            System.out.println("Highlights: " + st.getLocation().getX() + ", " + st.getLocation().getY());
+            System.out.println("Piece Highlights: " + st.getLocation().getX() + ", " + st.getLocation().getY());
         }
-        for (SuperTile st : myHighlightedActions) {
-            System.out.println("Highlights: " + st.getLocation().getX() + ", " + st.getLocation().getY());
-        }
+    }
+    
+    private void printEffectHighlights() {
         for (SuperTile st : myHighlightedEffects) {
-            System.out.println("Highlights: " + st.getLocation().getX() + ", " + st.getLocation().getY());
+            System.out.println("Effect Highlights: " + st.getLocation().getX() + ", " + st.getLocation().getY());
         }
+    }
+    
+    private void printActionHighlights() {
+        for (SuperTile st : myHighlightedActions) {
+            System.out.println("Action Highlights: " + st.getLocation().getX() + ", " + st.getLocation().getY());
+        }
+    }
+    
+    public List<SuperTile> getActionHighlights() {
+        return myHighlightedActions;
     }
     
     

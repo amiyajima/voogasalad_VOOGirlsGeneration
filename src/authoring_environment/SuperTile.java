@@ -141,7 +141,7 @@ public abstract class SuperTile extends Group {
 	}
 	
 	/**
-	 * Grid coordinate location
+	 * Pixel location
 	 * @return
 	 */
 	public Point2D getLocation(){
@@ -149,7 +149,7 @@ public abstract class SuperTile extends Group {
 	}
 	
 	/**
-	 * Pixel location
+	 * Grid coordinate location
 	 * @return
 	 */
 	public Point2D getCoordinates(){
