@@ -291,7 +291,8 @@ public class ViewController {
 		myGrid = currentLevel.getGrid();
 		System.out.println("myGrid: " + myGrid);
 		myGrid.displayPane(myGridPane);
-
+		
+		myGameGridEffect = new GameGridEffect(this);
 		myGameSpace.setCenter(myGridPane);
 
 		setOnClick();
@@ -301,7 +302,6 @@ public class ViewController {
 			changeCursor(CURSOR_GLOVE_TEST);
 		});
 
-		// myGameGridEffect = new GameGridEffect(this);
 		keyControlOn = false;
 		System.out.println("Grid initialized");
 		
@@ -353,9 +353,8 @@ public class ViewController {
 
 		piece.getStats()
 				.getStatNames()
-				.forEach(
-						key -> stats.add(new Text(key + ":  "
-								+ piece.getStats().getValue(key))));
+				.forEach(key -> stats.add(new Text(key + ":  "
+					+ piece.getStats().getValue(key))));
 
 		statsPane.getChildren().addAll(stats);
 
@@ -367,7 +366,6 @@ public class ViewController {
 	 * @param piece
 	 */
 	protected void updateActions(Piece piece) {
-		setActivePiece(piece);
 		controlPane.getChildren().clear();
 		ArrayList<Label> actions = new ArrayList<Label>();
 
@@ -429,12 +427,11 @@ public class ViewController {
 			return;
 		setActiveAction(action);
 
-
-		System.out.println("ViewController: Active piece location" + activePiece.getLoc());
 		SuperTile activeTile = myGrid.findClickedTile(activePiece.getLoc());
-
 		activeTile.selectTile(DEFAULT_HIGHLIGHT_COLOR);
+
 		myGameGridEffect.highlightActionRange();
+
 		setGridState(new ApplyState(this));
 	}
 
@@ -475,36 +472,11 @@ public class ViewController {
 		// System.out.println(myGrid.getBoundsInParent());
 
 		Point2D loc = myModel.getCurrentLevel().getGrid().findClickedTile(x, y).getLocation();
-		
 		//System.out.println("Tile Found is: "+ myModel.getCurrentLevel().getGrid().findClickedTile(x, y) + " at X:" + loc.getX() +" at Y:"+ loc.getY());
 		
-		if (myModel.getCurrentLevel().getGrid().getPiece(loc) == null) {
-			System.out.println("no piece");
-		}
-
-		gridState.onClick(myModel.getCurrentLevel().getGrid()
-				.getPiece(loc));
-		myGameGridEffect.highlightCurrent(loc);
-		// myGrid.clearEffect();
-		// myGameGridEffect.clearAllEffects(myGrid);
-
-		// highlightCurrent(findPosition(x - 45, y - 20), Color.BLUE);
-		// myGameGridEffect.highlightCurrent(findPosition(x - 45, y - 20),
-		// Color.BLUE);
-
-		// addDropShadow(myGrid.get(((int)findPosition(x,y).getX()),
-		// ((int)findPosition(x,y).getY())), Color.PURPLE);
+		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
+		myGameGridEffect.highlightCurrent(loc, myModel.getCurrentLevel().getGrid().getPiece(loc));
 	}
-
-	/*
-	public void performActionKeyboard(Point2D location) {
-
-		gridState.onClick(myModel.getCurrentLevel().getGrid()
-				.getPiece(location));
-
-		myGameGridEffect.highlightCurrent(location, Color.BLUE);
-	}
-	*/
 
 	/**
 	 * Method to convert pixel coordinates into tile coordinates
@@ -542,7 +514,6 @@ public class ViewController {
 	public void toggleKeyboardControl() {
 		if (keyControlOn) {
 			keyControlOn = false;
-			// myGameGridEffect.getHighlighter().unhighlight(myGridPane,
 			// myKeyboardMovement.getCurrentLocation());
 			myKeyboardMovement = null;
 			myKeyboardAction = null;
@@ -564,7 +535,6 @@ public class ViewController {
 	 */
 	public Point2D getCurrentClick() {
 		return currentClick;
-
 	}
 
 	/**

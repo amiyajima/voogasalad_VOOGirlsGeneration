@@ -21,6 +21,7 @@ public class GameGridEffect {
 
     
     public static final String ACTION_RANGE_COLOR = "#FFBF00";
+    public static final String EFFECT_RANGE_COLOR = "#DF0101";
     private static final Color DEFAULT_HIGHLIGHT_COLOR = Color.web("#0000FF", 0.3);
     
     private static final String DEFAULT_COLOR = "#0000FF";
@@ -41,10 +42,10 @@ public class GameGridEffect {
      * selected
      */
 
-    @FXML
     public void highlightActionRange () {
         clearAllEffects();
-        
+        System.out.println("Highlighting action111 range");
+
         
         if (myActivePiece != null && myActiveAction != null) {
             System.out.println("GameGridEffect: action ABOUT TO HIGHLIGHT\n\n");
@@ -73,6 +74,7 @@ public class GameGridEffect {
      */
     public void highlightEffectRange (MouseEvent me, Color c, Point2D loc) {
         clearAllEffects();
+        System.out.println("Highlighting effect range");
         
         if (myActivePiece != null && myActiveAction != null) {
             System.out.println("GameGridEffect: effect ABOUT TO HIGHLIGHT\n\n");
@@ -80,7 +82,7 @@ public class GameGridEffect {
                 if (loc.equals(point)) {
                     myActiveAction.getEffectRange().forEach(point2 -> {
                         SuperTile toHighlight = myGrid.findClickedTile(point);
-                        toHighlight.selectTile(ACTION_RANGE_COLOR);
+                        toHighlight.selectTile(EFFECT_RANGE_COLOR);
                         myHighlightedTiles.add(toHighlight);
                         });
                     }
@@ -91,8 +93,9 @@ public class GameGridEffect {
     /**
      * Uses GRID COORDINATE LOCATION to highlight the current location on the grid
      */
-    public void highlightCurrent(Point2D loc){
+    public void highlightCurrent(Point2D loc, Piece activeP){
         clearAllEffects();
+        myActivePiece = activeP;
         System.out.println("GGE highlight location: " + loc.getX() + " " + loc.getY());
         SuperTile toHighlight = myGrid.findClickedTile(loc);
         toHighlight.selectTile(DEFAULT_COLOR);
