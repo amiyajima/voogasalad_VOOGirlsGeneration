@@ -33,7 +33,9 @@ public class ApplyState implements IGridState {
         myGame = controller.getGame();
         
         myController.getGridPane().setOnMouseMoved(event -> {
-            myController.getGameGridEffect().highlightEffectRange(event);
+            activeTile = myController.getGrid().findClickedTile(event.getX(), event.getY());
+            myController.getGameGridEffect().highlightEffectRange(activeTile.getLocation());
+            
 //            activeTile.setOnMouseExited(event3 -> {
 //            });
         });

@@ -388,15 +388,18 @@ public class ViewController {
 	 * @param action
 	 */
 	protected void bindAction(Action action) {
-
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
+		SuperTile activeTile = myGrid.findClickedTile(activePiece.getLoc());
+		activeTile.selectTile(DEFAULT_HIGHLIGHT_COLOR);
+
+	        myGameGridEffect.highlightActionRange();
 		setGridState(new ApplyState(this));
 	}
 
 	private void setOnClick() {
-		myGridPane.getContent().setOnMouseClicked(event -> {
+	    myGridPane.getContent().setOnMouseClicked(event -> {
 			performAction(event.getX(), event.getY());
 		});
 	}
