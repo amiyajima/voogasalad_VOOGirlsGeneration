@@ -21,7 +21,7 @@
                   <MenuItem fx:id="events" mnemonicParsing="false" onAction="#showEventsEditorWindow" text="Events" />
                   <MenuItem mnemonicParsing="false" text="Grid Properties" />
                   <MenuItem mnemonicParsing="false" text="Player Properties" />
-                  <MenuItem mnemonicParsing="false" text="Actions Logic Chart..." />
+                  <MenuItem fx:id="actonsLogicChart" mnemonicParsing="false" onAction="#showActionzlogicChartWindow" text="Actions Logic Chart..." />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">

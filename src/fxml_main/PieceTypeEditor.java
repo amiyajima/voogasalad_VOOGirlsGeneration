@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -72,8 +73,9 @@ public class PieceTypeEditor extends Pane {
 	 * Called when creating a new Piece
 	 * @param pieceController
 	 */
-	public PieceTypeEditor(Consumer<Piece> okLambda) {
+	public PieceTypeEditor(Consumer<Piece> okLambda, ActionData actions) {
 		myEditorTitle = CREATOR_TITLE;
+		myAvailableActions = actions;
 		myID = "";
 		myName = "";
 		myImageLocation = DEFAULT_IMAGE_LOC;
@@ -149,15 +151,27 @@ public class PieceTypeEditor extends Pane {
 		unitName.setPromptText(NAME_PROMPT);
 		names.getChildren().addAll(nameLabel, unitName);
 		
-		//ModulesList modList = new ModulesList(myAvailableActions.getActionNames(), FXCollections.observableArrayList());
+		ModulesList modList = initModList();
 		
 		Button goButton = new Button(TEMPLATE_LABEL);
 		initImageLoader(images);
-		initGoBtn(goButton, unitID, unitName);
+		initGoBtn(goButton, unitID, unitName, modList);
 
-		box.getChildren().addAll(labelBox, ids, names, images, goButton);
+		box.getChildren().addAll(labelBox, ids, names, images, modList, goButton);
 
 		getChildren().add(box);
+	}
+
+	private ModulesList initModList() {
+		ObservableList<String> availableActions = myAvailableActions.getActionNames();
+		ObservableList<String> addedActions = FXCollections.observableArrayList();
+//		TODO : Actions need to be properly implemented before this can work.
+//		for(Action action : myActions){
+//			System.out.println(myActions.size());
+//			availableActions.remove(action);
+//			addedActions.add(action);
+//		}
+		return new ModulesList(availableActions, addedActions);
 	}
 
 	private void initImageLoader(HBox images) {
@@ -192,120 +206,28 @@ public class PieceTypeEditor extends Pane {
 		}
 	}
 	
-	private void initGoBtn(Button goButton, TextField unitID, TextField unitName) {
+	private void initGoBtn(Button goButton, TextField unitID, TextField unitName, ModulesList modList) {
 		goButton.setOnAction(new EventHandler<ActionEvent>() {
 			 @Override
 			 public void handle (ActionEvent click) {
 				 myID = unitID.getText();
 				 myName = unitName.getText();
+				 myActions = addSelectedActions(modList.getSelectedActions());
 				 myPiece = new Piece(myID, myName, myImageLocation, myPath, myActions, 
 						 myStats, DEFAULT_LOC, myPlayerID, myInventory);
 				 myOkLambda.accept(myPiece);
 			 }
 		 });
 	}
+	
+	protected List<Action> addSelectedActions(List<String> selected){
+		List<Action> list = new ArrayList<>();
+		for(String s: selected){
+			list.add(myAvailableActions.getAction(s));
+		}
+		return list;
+	}
 
-//	public void oldInitialize(){
-//		VBox box = new VBox();
-//		box.getStyleClass().add("vbox");
-//		box.setPadding(MARGINS);
-//		box.setSpacing(10);
-//
-//		HBox names = new HBox();
-//		names.setPadding(UIspecs.allPadding);
-//		names.setSpacing(10);
-//		HBox images = new HBox();
-//		images.setPadding(UIspecs.allPadding);
-//		images.setSpacing(10);
-//
-//		Label nameLabel = new Label(UNIT_NAME_LABEL);
-//		nameLabel.setPadding(UIspecs.topRightPadding);
-//		TextField unitName = new TextField();
-//		unitName.setMinWidth(WIDTH/2 + 20);
-//		names.getChildren().addAll(nameLabel, unitName);
-//
-//		ImageView icon = new ImageView();
-//		icon.setFitHeight(40);
-//		icon.setFitWidth(40);
-//		icon.setImage(new Image(getClass().getResourceAsStream(DEFAULT_IMAGE)));
-//		Button loadImageButton = new Button(LOAD_IMAGE_LABEL);
-//		loadImageButton.setOnAction(new EventHandler<ActionEvent>() {
-//			// initSetRangeButton(rangeVBox, "Effect Range (Splashzone):",myEffectRange);
-//			// @Jesse Finish this
-//			// From Martin: You sure this code goes here, and not below the goButton ActionEvent?
-//
-//			@Override
-//			public void handle (ActionEvent click) {
-//				FileChooser fileChoice = new FileChooser();
-//				fileChoice.getExtensionFilters().add(
-//						new ExtensionFilter("Image Files", "*.png", "*.gif"));
-//				File selectedFile = fileChoice.showOpenDialog(null);
-//				if (selectedFile != null) {
-//					myImageLocation = selectedFile.toURI().toString();
-//					Image image = new Image(myImageLocation);
-//					icon.setImage(image);
-//				}
-//			}
-//		});
-//		images.getChildren().addAll(icon, loadImageButton);
-//
-//		
-//		Button goButton = new Button(TEMPLATE_LABEL);
-//		goButton.setOnAction(new EventHandler<ActionEvent>() {
-//			@Override
-//			public void handle (ActionEvent click) {
-//				myName = unitName.getText();
-//				if(myImageLocation.equals("") || myName.equals("")){
-//					return;
-//				}
-//				myActions = addSelectedActions(modList.getSelectedActions());
-//
-//				Piece unit = new Piece(myID, myName, myImageLocation, myPath, myActions, myStats,
-//						myLoc, myPlayerID, myInventory);
-//				// myPieceTypes.add(unit);
-//				Label name = new Label(unitName.getText());
-//				name.setTranslateY(7.5);
-//
-//				Button editButton = new Button(EDIT);
-//				editButton.setOnAction(new EventHandler<ActionEvent>() {
-//					@Override
-//					public void handle (ActionEvent e) {
-//						TitledPane p = new LibraryUnitEditor(unit, myAvailableActions);
-//						// p.show();
-//					}
-//				});
-//				Button delButton = new Button(DELETE);
-//				UnitEntry entry = new UnitEntry(unit, icon, name, editButton, delButton);
-//				entry.setStyle("-fx-cursor: hand");
-//				entry.setOnMouseClicked(new EventHandler<MouseEvent>(){
-//					@Override
-//					public void handle(MouseEvent m){
-//						// myLibrary.selectUnit(unit);
-//					}
-//				});
-//
-//				delButton.setOnAction(new EventHandler<ActionEvent>(){
-//					@Override
-//					public void handle(ActionEvent event) {
-//						// myLibrary.removePiece(entry);
-//					}
-//				});
-//				//myLibrary.addPiece(entry);
-//				// myUnitListView.getChildren().add(entry);
-//			}
-//		});
-//		box.getChildren().addAll(names, images, modList, goButton);
-//		getChildren().add(box);
-//	}
-//
-//	protected List<Action> addSelectedActions(List<String> selected){
-//		List<Action> list = new ArrayList<>();
-//		for(String s: selected){
-//			list.add(myAvailableActions.getAction(s));
-//		}
-//		return list;
-//	}
-//
 //	protected void initSetRangeButton(VBox rangeBox, String label, List<Point2D> range) {
 //		Label rangeLabel = new Label(label);
 //		Button setRange = new Button("Set Range...");

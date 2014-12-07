@@ -5,20 +5,20 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" stylesheets="@../../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="authoring.eventeditor.EventEditorController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" stylesheets="@../../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="authoring.actionslogic.ActionLogicController">
    <center>
       <VBox prefHeight="400.0" prefWidth="391.0" styleClass="vbox" BorderPane.alignment="CENTER">
          <children>
             <Label text="Actors" />
-            <ListView fx:id="conditionsListView" />
+            <ListView fx:id="actorsListView" prefHeight="242.0" prefWidth="357.0" />
             <Separator prefWidth="200.0" />
             <Label text="Receivers" />
-            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+            <VBox prefHeight="200.0" prefWidth="100.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#handleNewAction" text="Save" />
+                  <Button fx:id="save" mnemonicParsing="false" text="Save" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
          </children>
       </VBox>
    </center>
@@ -28,7 +28,7 @@
             <VBox prefHeight="400.0" prefWidth="267.0" styleClass="vbox" BorderPane.alignment="CENTER">
                <children>
                   <Label text="Available Actions" />
-                  <ListView fx:id="eventsListView" prefHeight="473.0" prefWidth="267.0" />
+                  <ListView fx:id="actionsListView" prefHeight="473.0" prefWidth="267.0" />
                </children>
             </VBox>
             <Separator orientation="VERTICAL" prefHeight="200.0" />

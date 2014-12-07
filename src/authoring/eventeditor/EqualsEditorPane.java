@@ -1,11 +1,11 @@
 package authoring.eventeditor;
 
-import gamedata.gamecomponents.Patch;
-
-import java.awt.geom.Point2D;
+import gamedata.events.Condition;
 import java.util.function.Consumer;
 
 import authoring_environment.UIspecs;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -17,17 +17,25 @@ import javafx.scene.layout.VBox;
 
 public class EqualsEditorPane extends Pane{
 
-	private static final int HEIGHT = 150;
-	private static final int WIDTH = 150;
+	private static final int WIDTH_OFFSET = 30;
 	private static final String NAME_LABEL = "Name";
 	private static final String NAME_PROMPT = "Enter Condition name...";
 	private static final String COMPONENTS_LABEL = "Expression";
 	private static final String EQUALS_LABEL = "EQUALS";
-	private static final Insets MARGINS = new Insets(5, WIDTH / 5, 10, WIDTH / 5);
+	private static final String DONE_LABEL = "DONE";
+	private static final Insets MARGINS = new Insets(5, WIDTH_OFFSET, 10, WIDTH_OFFSET);
 	private static final String LABEL_CSS = "-fx-font-size: 14pt;";
 
-	private Consumer<Patch> myOkLambda;
+	private Consumer<Condition> myDoneLambda;
 
+	private ChoiceBox<String> refType1 = new ChoiceBox<>();
+	private ChoiceBox<String> refName1 = new ChoiceBox<>();
+	private TextField statName1 = new TextField();
+	
+	private ChoiceBox<String> refType2 = new ChoiceBox<>();
+	private ChoiceBox<String> refName2 = new ChoiceBox<>();
+	private TextField statName2 = new TextField();
+	
 	public EqualsEditorPane(){
 		initialize();
 	}
@@ -63,26 +71,11 @@ public class EqualsEditorPane extends Pane{
 		names.getChildren().addAll(nameLabel, terrainName);
 
 		Label componentsLabel = new Label(COMPONENTS_LABEL);
-		ChoiceBox<String> refType1 = new ChoiceBox<>();
-		ChoiceBox<String> refName1 = new ChoiceBox<>();
-		TextField statName1 = new TextField();
-
-		refType1.getItems().addAll("Piece", "Patch", "Player", "Constant");
-		refType1.getSelectionModel().selectedItemProperty().addListener(
-				(observable, oldValue, selectedType) -> setUpEditor(oldValue, selectedType, refName1, statName1));
-
-		refName1.getItems().addAll(); 
-
 		
-		ChoiceBox<String> refType2 = new ChoiceBox<>();
-		ChoiceBox<String> refName2 = new ChoiceBox<>();
-		TextField statName2 = new TextField();
 		
-		refType2.getItems().addAll("Piece", "Patch", "Player", "Constant");
-		refType2.getSelectionModel().selectedItemProperty().addListener(
-				(observable, oldValue, selectedType) -> setUpEditor(oldValue, selectedType, refName1, statName1));
 
-		refName2.getItems().addAll(); 
+		setUpComponents(refType1, refName1, statName1);
+		setUpComponents(refType2, refName2, statName2);
 		
 		Label equalsLabel = new Label(EQUALS_LABEL);
 
@@ -92,8 +85,29 @@ public class EqualsEditorPane extends Pane{
 		components.getChildren().addAll(componentsLabel, leftHandSide, rightHandSide);
 
 		box.getChildren().addAll(labelBox, names, components);
+		
+		Button doneButton = new Button(DONE_LABEL);
+		initDoneButton(doneButton);
+
 
 		getChildren().add(box);
+	}
+
+	private void initDoneButton(Button doneButton) {
+		doneButton.setOnAction(new EventHandler<ActionEvent>() {
+			 @Override
+			 public void handle (ActionEvent click) {
+				
+				myDoneLambda.accept(null);
+			 }
+		 });
+	}
+
+	private void setUpComponents(ChoiceBox<String> refType1,
+			ChoiceBox<String> refName1, TextField statName1) {
+		refType1.getItems().addAll("Piece", "Patch", "Player", "Constant");
+		refType1.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, selectedType) -> setUpEditor(oldValue, selectedType, refName1, statName1));
 	}
 
 	private void setUpEditor(String oldType, String type, ChoiceBox<String> refName, TextField statName) {
@@ -109,14 +123,17 @@ public class EqualsEditorPane extends Pane{
 		switch(type){
 			case "Piece": 
 			{
+				refName.getItems().addAll("Llama rancher", "Janitor");
 				break;
 			}
 			case "Patch":
 			{
-				break;
+				refName.getItems().addAll("Lava", "Rocks");
+				break;	
 			}
 			case "Player":
 			{
+				refName.getItems().addAll("Player 1", "Player 2");
 				break;
 			}
 			case "Constant": 

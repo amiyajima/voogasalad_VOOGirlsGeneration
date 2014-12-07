@@ -2,8 +2,11 @@ package authoring_environment;
 
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
+
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.List;
+
 import authoring.data.PatchData;
 import authoring.data.PieceData;
 
@@ -68,6 +71,7 @@ public class GUIGrid extends SuperGrid {
         Patch clone = new Patch(patchType, loc);
         myPatchData.add(clone);
         SuperTile myTile = myGrid.get((int) loc.getX()).get((int) loc.getY());
+        System.out.println(clone.getImageLocation());
         myTile.addPatchImage(clone.getImageLocation());
     }
     
@@ -146,6 +150,16 @@ public class GUIGrid extends SuperGrid {
 
     public PatchData getPatches () {
         return myPatchData;
+    }
+    
+    public List<Piece> getRemovedPieces(){
+    	List<Piece> l = new ArrayList<Piece>();
+    	for(Piece p:myPieceData.getData()){
+    		if(p.shouldRemove()){
+    			l.add(p);
+    		}
+    	}
+    	return l;
     }
 
 }

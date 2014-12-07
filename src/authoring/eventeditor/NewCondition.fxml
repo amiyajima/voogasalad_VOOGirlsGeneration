@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="vbox" stylesheets="@../../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="authoring.eventeditor.NewConditionController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" styleClass="vbox" stylesheets="@../../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="authoring.eventeditor.NewConditionController">
    <children>
       <HBox prefHeight="47.0" prefWidth="600.0" styleClass="hbox">
          <children>
@@ -12,11 +12,10 @@
             <ChoiceBox fx:id="conditionChoiceBox" />
          </children>
       </HBox>
-      <ScrollPane fx:id="editorScrollPane" prefHeight="293.0" prefWidth="600.0">
+      <ScrollPane fx:id="editorScrollPane">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" />
         </content>
       </ScrollPane>
-      <Button mnemonicParsing="false" text="Done" />
    </children>
 </VBox>

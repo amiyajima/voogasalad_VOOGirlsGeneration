@@ -42,7 +42,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 				Consumer<Piece> okLambda = (Piece piece) -> {
 					addEntry(piece);
 				};
-				myPropertiesSPane.setContent(new PieceTypeEditor(okLambda));
+				myPropertiesSPane.setContent(new PieceTypeEditor(okLambda, myActionData));
 			}
 		});
     }

@@ -62,7 +62,7 @@ public abstract class SuperTile extends Group {
 	}
 
 
-	private void makeHighlight(double size) {
+	public void makeHighlight(double size) {
 		myHighlight=makeShape(size);
 		myHighlight.setFill(Color.web("#0000FF", 0.3));
 		myHighlight.setVisible(false);
@@ -85,7 +85,7 @@ public abstract class SuperTile extends Group {
 	}
 	
 	public void addPatchImage(String imageLoc){
-		myPatchImage.setImage(new Image(imageLoc));
+		myPatchImage.setImage(new Image(getClass().getResourceAsStream(imageLoc)));
 	}
 
 
