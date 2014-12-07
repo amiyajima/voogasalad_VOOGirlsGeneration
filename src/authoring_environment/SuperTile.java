@@ -68,7 +68,8 @@ public abstract class SuperTile extends Group {
 		myHighlight.setVisible(false);
 	};
 	
-	public void selectTile(){
+	public void selectTile(String color){
+	        myHighlight.setFill(Color.web(color, 0.3));
 		myHighlight.setVisible(true);
 	}
 	
@@ -123,10 +124,18 @@ public abstract class SuperTile extends Group {
 		}
 	}
 	
+	/**
+	 * Grid coordinate location
+	 * @return
+	 */
 	public Point2D getLocation(){
 		return myLocation;
 	}
 	
+	/**
+	 * Pixel location
+	 * @return
+	 */
 	public Point2D getCoordinates(){
 		return myCoordinates;
 	}

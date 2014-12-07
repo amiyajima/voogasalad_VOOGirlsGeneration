@@ -445,9 +445,6 @@ public class ViewController {
 		setGridState(new ApplyState(this));
 	}
 
-	/**
-	 * TODO: Add javadoc
-	 */
 	private void setOnClick() {
 		myGridPane.setOnMouseClicked(event -> {
 			// System.out.println("Exact Mouse Coordinate:"+event.getX()+" Y:"+event.getY());
@@ -456,9 +453,6 @@ public class ViewController {
 	}
 
 	// Probably going to move this to KeyboardAction class
-	// /**
-	// * TODO: Add javadoc
-	// */
 	// public void setOnEnterKey() {
 	// System.out.println("do i need this?");
 	// myGridPane.requestFocus();
