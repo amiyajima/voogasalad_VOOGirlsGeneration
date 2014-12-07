@@ -1,7 +1,12 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Level;
+import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Piece;
+import gameengine.player.Player;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Consumer;
 
 import javafx.event.ActionEvent;
@@ -12,6 +17,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import authoring.data.EventsDataContainer;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
@@ -52,16 +58,24 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 		//TODO: Need to not hard-code square, have it passed through the constructor
 		// as maybe a gridshapeproperty (new class?)
 		Consumer<Level> okLambda = (Level level) -> {
+						
 			addEntry(level);
 			myLevelData.add(level);
 			myPieceTypes.addObserver(level.getGrid());
 			myPatchTypes.addObserver(level.getGrid());
 			setAndDisplayGrid(level);
 			};
-		super.myPropertiesSPane.setContent(new LevelEditor(okLambda));
+			
+		List<Piece> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
+		List<Patch> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
+		List<Player> playersRO = null;
+
+		EventsDataContainer wrapper = new EventsDataContainer(piecesRO, patchesRO, playersRO);
+		super.myPropertiesSPane.setContent(new LevelEditor(okLambda, wrapper));
 	}
 	
 	private void setAndDisplayGrid(Level level) {
+		
 		myGridReference.setGrid(level.getGrid());
 		myGridReference.getGrid().displayPane(myGridSPane);
 	}
@@ -93,20 +107,43 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 
 	@Override
 	protected void initEntryEditBtn(Level entry, Button editBtn) {
-		Consumer<Level> okLambda = (Level level) -> {
-//			myPieceTypes.addObserver(level.getGrid());
-//			myPatchTypes.addObserver(level.getGrid());
-//			myLevelData.replace(entry, level);
-//		    HBox entryBox = myEntryMap.get(entry);
-//		    HBox imgNameBox = myIndivEntMap.get(entryBox);
-//		    
-//		    entryBox.getChildren().remove(imgNameBox);
-//		    HBox newImgNameBox = makeEntryBox(level);	
-//		    
-//		    entryBox.getChildren().add(newImgNameBox);
-//		    myIndivEntMap.replace(entryBox, newImgNameBox);
-		};
-		myPropertiesSPane.setContent(new LevelEditor(okLambda, entry));
+		
+		//TODO: THIS ONLY SORT OF WORKS
+			//WORKS WHEN YOU CLICK ON LHS PANE THEN RHS PANE THEN DONE. 
+			//ALSO LEVELS ARE SORTED IN ORDER OR MOST RECENTLY MODIFIED
+		editBtn.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent click) {
+				Consumer<Level> okLambda = (Level level) -> {
+					
+				    myVBox.getChildren().remove(entry);
+					addEntry(level);
+					
+					myPieceTypes.addObserver(level.getGrid());
+					myPatchTypes.addObserver(level.getGrid());
+					myLevelData.replace(entry, 	level);
+					
+				    HBox entryHolderBox = myEntryMap.get(entry);
+					entryHolderBox.getChildren().clear();
+				   				    			    				    
+				    myLevelData.replace(entry, level);
+				    
+				    myEntryMap.get(entry);
+				    
+					setAndDisplayGrid(level);
+
+				};
+				List<Piece> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
+				List<Patch> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
+				List<Player> playersRO = null;
+
+				EventsDataContainer wrapper = new EventsDataContainer(piecesRO, patchesRO, playersRO);
+				
+				myPropertiesSPane.setContent(new LevelEditor(okLambda, entry, wrapper));
+				
+			}
+			
+		});
 	}
 
 	@Override

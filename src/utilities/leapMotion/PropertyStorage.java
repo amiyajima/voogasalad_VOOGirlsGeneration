@@ -1,4 +1,4 @@
-package utilities;
+package utilities.leapMotion;
 
 import java.io.File;
 import java.io.FileNotFoundException;

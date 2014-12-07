@@ -2,10 +2,12 @@ package fxml_main;
 
 import gamedata.events.Event;
 import gamedata.gamecomponents.Level;
+
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import authoring.data.EventsDataContainer;
 import authoring.eventeditor.EventEditorController;
 import authoring_environment.GUIGrid;
 
@@ -30,6 +33,7 @@ public class LevelEditor extends VBox {
     private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 
     private static final String CREATOR_TITLE = "Level Creator";
+    private static final String EDITOR_TITLE = "Level Editor";
     private static final String LABEL_CSS = "-fx-font-size: 14pt;";
 
     private String myId;
@@ -42,16 +46,25 @@ public class LevelEditor extends VBox {
 
     private Consumer<Level> myOkLambda;
 
-    public LevelEditor (Consumer<Level> okLambda) {
+	private String myEditorTitle;
+	
+	private EventsDataContainer myData;
+
+    public LevelEditor (Consumer<Level> okLambda, EventsDataContainer data) {
+    	myEditorTitle = CREATOR_TITLE;
+    	
         myId = "";
         myGridRows = 0;
         myGridCols = 0;
         myTileHeight = 0;
         myEvents = FXCollections.observableArrayList();
+        myData = data;
         initEditor(okLambda);
     }
 
-    public LevelEditor (Consumer<Level> okLambda, Level level) {
+    public LevelEditor (Consumer<Level> okLambda, Level level, EventsDataContainer data) {
+    	myEditorTitle = EDITOR_TITLE;
+    	
         myGrid = level.getGrid();
         myId = level.getId();
         myGridRows = myGrid.getRow();
@@ -59,6 +72,7 @@ public class LevelEditor extends VBox {
         myTileHeight = myGrid.getTileSize();
         myLevel = level;
         myEvents = (ObservableList<Event>) level.getEvents();
+        myData = data;
 
         initEditor(okLambda);
     }
@@ -74,7 +88,7 @@ public class LevelEditor extends VBox {
         this.setId("vbox-main");
 
         HBox labelBox = new HBox();
-        Label eventsLabel = new Label(CREATOR_TITLE);
+        Label eventsLabel = new Label(myEditorTitle);
         eventsLabel.setStyle(LABEL_CSS);
         labelBox.getChildren().add(eventsLabel);
         
@@ -161,6 +175,7 @@ public class LevelEditor extends VBox {
 
         EventEditorController controller = loader.getController();
         controller.loadEvents(myEvents);
+        controller.loadData(myData);
 
         eventEditorStage.showAndWait();
     }

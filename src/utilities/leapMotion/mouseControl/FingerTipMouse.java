@@ -1,15 +1,16 @@
-package utilities;
+package utilities.leapMotion.mouseControl;
 
 import java.awt.Dimension;
 import java.awt.Robot;
-
 import com.leapmotion.leap.Finger;
 import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.InteractionBox;
 import com.leapmotion.leap.Vector;
-
 import java.awt.Toolkit;
+import utilities.leapMotion.ILeapMouse;
 public class FingerTipMouse implements ILeapMouse{
+    
+    public static final String FINGER_TIP_MOUSE = "Finger Tip Tracking";
 
     @Override
     public void mouseMove (Frame frame, Robot robot) {
