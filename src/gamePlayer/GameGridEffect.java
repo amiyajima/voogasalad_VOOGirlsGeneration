@@ -44,7 +44,8 @@ public class GameGridEffect {
     @FXML
     public void highlightActionRange () {
         clearAllEffects();
-        
+        System.out.println("Highlighting action111 range");
+
         
         if (myActivePiece != null && myActiveAction != null) {
             System.out.println("GameGridEffect: action ABOUT TO HIGHLIGHT\n\n");
@@ -73,6 +74,7 @@ public class GameGridEffect {
      */
     public void highlightEffectRange (MouseEvent me, Color c, Point2D loc) {
         clearAllEffects();
+        System.out.println("Highlighting effect range");
         
         if (myActivePiece != null && myActiveAction != null) {
             System.out.println("GameGridEffect: effect ABOUT TO HIGHLIGHT\n\n");
@@ -91,8 +93,9 @@ public class GameGridEffect {
     /**
      * Uses GRID COORDINATE LOCATION to highlight the current location on the grid
      */
-    public void highlightCurrent(Point2D loc){
+    public void highlightCurrent(Point2D loc, Piece activeP){
         clearAllEffects();
+        myActivePiece = activeP;
         System.out.println("GGE highlight location: " + loc.getX() + " " + loc.getY());
         SuperTile toHighlight = myGrid.findClickedTile(loc);
         toHighlight.selectTile(DEFAULT_COLOR);
