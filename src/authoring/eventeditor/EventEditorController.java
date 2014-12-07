@@ -243,7 +243,9 @@ public class EventEditorController implements Initializable {
 
         controller.loadLambda(okActionLambda);
         controller.loadEntryCondition(entry);
+        controller.loadData(myData);
 
+        
         newActionStage.showAndWait();
     }
 

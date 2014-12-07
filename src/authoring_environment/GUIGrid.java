@@ -2,11 +2,14 @@ package authoring_environment;
 
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
+
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import authoring.data.PatchData;
@@ -298,17 +301,11 @@ public class GUIGrid extends SuperGrid implements Observer {
         myPane.setOnMouseDragged(handler);
     }
 
-    /**
-     * Get the whole list of Pieces and Patches in this level. Read by Conditions and
-     * modified by Global Actions (e.g., adding/removing Pieces).
-     * @author MIKE ZHU
-     * @return
-     */
-    public PieceData getPieces () {
-        return myPieceData;
+    public List<Piece> getReadOnlyPieceList () {
+        return Collections.unmodifiableList(myPieceData.getData());
     }
 
-    public PatchData getPatches () {
-        return myPatchData;
+    public List<Patch> getReadOnlyPatchList () {
+        return Collections.unmodifiableList(myPatchData.getData());
     }
 }
