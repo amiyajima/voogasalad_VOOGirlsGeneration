@@ -129,7 +129,10 @@ public class GUIGrid extends SuperGrid implements Observer{
 	}
 
 	public void removePiece(Piece p){
+		SuperTile currentTile = findClickedTile(p.getLoc());
+		System.out.println(currentTile.getLocation().getY());
 		myPieceData.remove(p);
+		currentTile.clearPieceImage();
 		
 	}
 //	public PieceData getPieces () {

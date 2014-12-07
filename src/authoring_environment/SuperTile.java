@@ -132,6 +132,10 @@ public abstract class SuperTile extends Group {
 		imgView.setVisible(true);
 		return imgView;
 	}
+	
+	public void clearPieceImage(){
+		this.addPieceImage(this.initImageView(myImageSize));
+	}
  
 	private void alignNodes(Point2D coord, Node...nodes) {
 		for (Node node : nodes) {

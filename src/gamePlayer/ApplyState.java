@@ -60,6 +60,9 @@ public class ApplyState implements IGridState {
     @Override
     public void onClick (Piece piece) {
         Piece actor = myController.getActivePiece();
+        if(actor==null){
+        	actor = new Piece()
+        }
         myController.getActiveAction().doBehavior(actor, piece);
         
         myGameGridEffect.clearAllPieceHighlights();
