@@ -21,6 +21,7 @@ public class GameGridEffect {
 
     
     public static final String ACTION_RANGE_COLOR = "#FFBF00";
+    public static final String EFFECT_RANGE_COLOR = "#DF0101";
     private static final Color DEFAULT_HIGHLIGHT_COLOR = Color.web("#0000FF", 0.3);
     
     private static final String DEFAULT_COLOR = "#0000FF";
@@ -41,7 +42,6 @@ public class GameGridEffect {
      * selected
      */
 
-    @FXML
     public void highlightActionRange () {
         clearAllEffects();
         System.out.println("Highlighting action111 range");
@@ -82,7 +82,7 @@ public class GameGridEffect {
                 if (loc.equals(point)) {
                     myActiveAction.getEffectRange().forEach(point2 -> {
                         SuperTile toHighlight = myGrid.findClickedTile(point);
-                        toHighlight.selectTile(ACTION_RANGE_COLOR);
+                        toHighlight.selectTile(EFFECT_RANGE_COLOR);
                         myHighlightedTiles.add(toHighlight);
                         });
                     }

@@ -291,7 +291,8 @@ public class ViewController {
 		myGrid = currentLevel.getGrid();
 		System.out.println("myGrid: " + myGrid);
 		myGrid.displayPane(myGridPane);
-
+		
+		myGameGridEffect = new GameGridEffect(this);
 		myGameSpace.setCenter(myGridPane);
 
 		setOnClick();
@@ -428,7 +429,9 @@ public class ViewController {
 
 		SuperTile activeTile = myGrid.findClickedTile(activePiece.getLoc());
 		activeTile.selectTile(DEFAULT_HIGHLIGHT_COLOR);
+
 		myGameGridEffect.highlightActionRange();
+
 		setGridState(new ApplyState(this));
 	}
 
