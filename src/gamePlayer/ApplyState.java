@@ -59,28 +59,16 @@ public class ApplyState implements IGridState {
 
     @Override
     public void onClick (Piece piece) {
-
         Piece actor = myController.getActivePiece();
-//        if (piece == null) {
-//            piece = new Piece(actor);
-//            piece.setLoc(myController.getCurrentClick());
-//        }
         myController.getActiveAction().doBehavior(actor, piece);
+        
         myGameGridEffect.clearAllPieceHighlights();
         myGameGridEffect.clearAllActionHighlights();
+        myController.clearActions();
         myController.setGridState(new SelectState(myController));
         myController.changeCursor(myController.CURSOR_GLOVE_TEST);
-
-        //        myController.getGame().getCurrentLevel().garbageCollectPieces();
-        
-        //still need to update the grid somehow?
-//        myController.getGridPane().populateGrid(myController.getGame().getCurrentLevel().getGrid().getPatches(),
-//                                            myController.getGame().getCurrentLevel().getGrid().getPieces());
-
         myController.setActivePiece(null);
         myController.setActiveAction(null);
-//        checkLevelState();
-//        checkPlayerState();
     }
 
     /**

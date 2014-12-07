@@ -369,6 +369,13 @@ public class ViewController {
 		controlPane.getChildren().addAll(actions);
 
 	}
+	
+	/**
+	 * Clears control pane of actions after you've selected one to do
+	 */
+	public void clearActions() {
+	    controlPane.getChildren().clear();
+	}
 
 	/**
 	 * Updates the list of actions displayed
