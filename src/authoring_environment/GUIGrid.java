@@ -137,10 +137,29 @@ public class GUIGrid extends SuperGrid implements Observer{
 //		return myPatchData;
 //	}
 
+	/**
+	 * Gets Pieces that have been tagged for removal 
+	 * @return
+	 */
 	public List<Piece> getRemovedPieces(){
 		List<Piece> l = new ArrayList<Piece>();
 		for(Piece p:myPieceData.getData()){
 			if(p.shouldRemove()){
+				l.add(p);
+			}
+		}
+		return l;
+	}
+	
+	/**
+	 * Returns all pieces that belong to a given player
+	 * @param id
+	 * @return
+	 */
+	public List<Piece> getPlayerPieces(int id){
+		List<Piece> l = new ArrayList<Piece>();
+		for(Piece p:myPieceData.getData()){
+			if(p.getPlayerID()==id){
 				l.add(p);
 			}
 		}
