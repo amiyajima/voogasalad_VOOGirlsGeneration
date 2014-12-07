@@ -42,7 +42,7 @@ public class HexagonTile extends SuperTile{
 		Point2D layoutCoord=calculateCoord(size,loc);
 		double radius = size/Math.sqrt(3);
 		double imageX=layoutCoord.getX()-radius/2;
-		double imageY=layoutCoord.getY()+size/4;
+		double imageY=layoutCoord.getY()-size/4;
 		return new Point2D.Double(imageX,imageY);
 	}
 

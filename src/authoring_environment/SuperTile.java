@@ -25,7 +25,7 @@ public abstract class SuperTile extends Group {
 	private Point2D myImageCoord;
 
 	protected transient ImageView myPieceImage;
-	protected transient ImageView myPatchImage;
+	protected transient Shape myPatchImage;
 	private Shape myHighlight;
 	
 	
@@ -58,9 +58,10 @@ public abstract class SuperTile extends Group {
 		setCheckeredColor((int)loc.getX(),(int)loc.getY(),myShape);
 
 		myPieceImage = initImageView(myImageSize);
-		myPatchImage = initImageView(myImageSize);
+		myPatchImage = makeShape(size,myCoordinates);
+		myPatchImage.setFill(Color.WHITE);
 		
-		alignNodes(myImageCoord,myPatchImage,myPieceImage);
+		alignNodes(myImageCoord,myPieceImage);
 	}
 
 
@@ -102,7 +103,7 @@ public abstract class SuperTile extends Group {
 	}
 	
 	public void addPatchImage(ImageView imageView){
-		myPatchImage.setImage(imageView.getImage());
+		myPatchImage.setFill(new ImagePattern(imageView.getImage()));
 	}
 
 
