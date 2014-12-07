@@ -71,7 +71,8 @@ public abstract class GridComponent implements IHasStats{
 	 * 
 	 * @return myName : String name describing the piece or patch.
 	 */
-	public String getName() {
+	@Override
+	public String toString() {
 		return myName;
 	}
 	
