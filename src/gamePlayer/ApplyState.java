@@ -39,7 +39,7 @@ public class ApplyState implements IGridState {
 			activeTile = myController.getGrid().findClickedTile(event.getX(),
 					event.getY());
 			myController.getGameGridEffect().highlightEffectRange(
-					activeTile.getLocation());
+					activeTile.getPixelLocation());
 		}
 	}
 

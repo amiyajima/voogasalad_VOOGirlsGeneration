@@ -72,22 +72,21 @@ public class GUIGrid extends SuperGrid implements Observer {
 	}
 
 	public void addPiece(Piece pieceType, Point2D loc) {
-		//System.out.println(myPieceData.getData().size());
-
 		Piece clone = new Piece(pieceType, loc);
 		myPieceData.add(clone);
 		SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
 		myTile.addPieceImage(clone.getImageView());
 
+		System.out.println(myPieceData.getData().size());
 	}
 
 	public void addPatch(Patch patchType, Point2D loc) {
-		//System.out.println(myPatchData.getData().size());
-
 		Patch clone = new Patch(patchType, loc);
 		myPatchData.add(clone);
 		SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
 		myTile.addPatchImage(clone.getImageView());
+
+		System.out.println(myPatchData.getData().size());
 	}
 
 	private void replacePiece(Piece pieceType) {
@@ -100,7 +99,7 @@ public class GUIGrid extends SuperGrid implements Observer {
 
 	private void replacePatch(Patch patchType) {
 		List<Point2D> pointsToReplace = myPatchData.replace(patchType);
-		//System.out.println(pointsToReplace.toString());
+		// System.out.println(pointsToReplace.toString());
 		for (Point2D loc : pointsToReplace) {
 			SuperTile tile = super.findClickedTile(loc);
 			tile.addPatchImage(patchType.getImageView());
@@ -150,7 +149,6 @@ public class GUIGrid extends SuperGrid implements Observer {
 
 	public void removePiece(Piece p) {
 		SuperTile currentTile = findClickedTile(p.getLoc());
-		//System.out.println(currentTile.getLocation().getY());
 		myPieceData.remove(p);
 		currentTile.clearPieceImage();
 
@@ -183,8 +181,7 @@ public class GUIGrid extends SuperGrid implements Observer {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Gets Pieces that have been tagged for removal
+	 * <<<<<<< HEAD Gets Pieces that have been tagged for removal
 	 * 
 	 * @return
 	 */
@@ -205,9 +202,8 @@ public class GUIGrid extends SuperGrid implements Observer {
 	}
 
 	/**
-=======
->>>>>>> 81dff75686db2e323819d437531f2a5876287f04
-	 * Returns all pieces that belong to a given player
+	 * ======= >>>>>>> 81dff75686db2e323819d437531f2a5876287f04 Returns all
+	 * pieces that belong to a given player
 	 * 
 	 * @param playerId
 	 *            - ID of player
@@ -221,6 +217,16 @@ public class GUIGrid extends SuperGrid implements Observer {
 			}
 		}
 		return l;
+	}
+
+	public void repopulateGrid() {
+		this.initGridTiles(this.myShape);
+		for (Patch p : myPatchData.getData()) {
+			this.addPatch(p, p.getLoc());
+		}
+		for (Piece p : myPieceData.getData()) {
+			this.addPiece(p, p.getLoc());
+		}
 	}
 
 	@Override
@@ -258,16 +264,6 @@ public class GUIGrid extends SuperGrid implements Observer {
 	public void addPatchToTile(Patch patchType, Point2D loc) {
 		SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
 		myTile.addPatchImage(patchType.getImageView());
-	}
-
-	public void repopulateGrid() {
-		this.initGridTiles(this.myShape);
-		for (Patch p : myPatchData.getData()) {
-			this.addPatchToTile(p, p.getLoc());
-		}
-		for (Piece p : myPieceData.getData()) {
-			this.addPieceToTile(p, p.getLoc());
-		}
 	}
 
 	// TODO: separate the two types of mouse events (drag and click)

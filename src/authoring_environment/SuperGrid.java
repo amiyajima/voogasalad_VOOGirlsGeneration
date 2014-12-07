@@ -72,8 +72,6 @@ public class SuperGrid {
 		return myWidth;
 	}
 	
-
-
 	/**
 	 * Use PIXELS to get a tile
 	 * @param xCoord
@@ -92,7 +90,6 @@ public class SuperGrid {
 		}
 		return null;
 	}
-	
 
 	/**
 	 * Use GRID COORDINATE LOCATION to get a tile
@@ -100,11 +97,10 @@ public class SuperGrid {
 	 * @return
 	 */
 	public SuperTile findClickedTile(Point2D loc){
-	                int col=(int) loc.getX();
-	                int row=(int) loc.getY();
-	                return myGrid.get(row).get(col);
-	        }
-	
+		int col = (int) loc.getX();
+		int row = (int) loc.getY();
+		return myGrid.get(row).get(col);
+	}
 	
 	public double getTileSize() {
 		return myTileSize;
@@ -115,10 +111,10 @@ public class SuperGrid {
 		return tile.getCoordinates();
 	}
 	
-	public Point2D calculateClicked(double xCoord, double yCoord){
-	    Point2D coord = new Point2D.Double(xCoord/myTileSize, yCoord/myTileSize);
+	public Point2D calculateClicked(double xLoc, double yLoc){
+		int xCoord = (int)(xLoc / myTileSize);
+		int yCoord = (int)(yLoc / myTileSize);
+	    Point2D coord = new Point2D.Double(xCoord, yCoord);
 	    return coord;
-	    
 	}
-	
 }
