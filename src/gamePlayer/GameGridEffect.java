@@ -5,12 +5,11 @@ import gamedata.gamecomponents.Piece;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
-import authoring_environment.GUIGrid;
-import authoring_environment.SuperTile;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import authoring_environment.GUIGrid;
+import authoring_environment.SuperTile;
 
 
 public class GameGridEffect {
@@ -24,6 +23,8 @@ public class GameGridEffect {
     public static final String ACTION_RANGE_COLOR = "#FFBF00";
     public static final String EFFECT_RANGE_COLOR = "#DF0101";
     private static final Color DEFAULT_HIGHLIGHT_COLOR = Color.web("#0000FF", 0.3);
+    
+    private static final String DEFAULT_COLOR = "#0000FF";
      
     public GameGridEffect(ViewController vc){
 //        myHighlighter = new Highlighter();
@@ -43,7 +44,8 @@ public class GameGridEffect {
 
     public void highlightActionRange () {
         clearAllEffects();
-
+        
+        
         if (myActivePiece != null && myActiveAction != null) {
             System.out.println("GameGridEffect: action ABOUT TO HIGHLIGHT\n\n");
             myActiveAction.getActionRange(myActivePiece.getLoc())
@@ -89,9 +91,12 @@ public class GameGridEffect {
     /**
      * Uses GRID COORDINATE LOCATION to highlight the current location on the grid
      */
-    public void highlightCurrent(Point2D loc, Color c){
+    public void highlightCurrent(Point2D loc){
         clearAllEffects();
-        myGrid.findClickedTile(loc);
+        System.out.println("GGE highlight location: " + loc.getX() + " " + loc.getY());
+        SuperTile toHighlight = myGrid.findClickedTile(loc);
+        toHighlight.selectTile(DEFAULT_COLOR);
+        myHighlightedTiles.add(toHighlight);
     }
     
 
@@ -101,10 +106,12 @@ public class GameGridEffect {
      */
     private void clearAllEffects(){
         for (SuperTile st : myHighlightedTiles) {
-            myGrid.findClickedTile(st.getLocation()).deselectTile();;
+            myGrid.findClickedTile(st.getLocation()).deselectTile();
         }
     }
 
+    
+    
     
     
 }

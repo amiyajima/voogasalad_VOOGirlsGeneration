@@ -11,21 +11,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import java.util.ResourceBundle;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-// import com.leapmotion.leap.Controller;
-import authoring_environment.GUIGrid;
-import authoring_environment.SuperTile;
-import tests.JSONBobTester;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -34,8 +25,16 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import tests.JSONBobTester;
+// import com.leapmotion.leap.Controller;
+import authoring_environment.GUIGrid;
+import authoring_environment.SuperTile;
 
 /**
  * 
@@ -58,9 +57,7 @@ public class ViewController {
 	private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
-
-	private static final String DEFAULT_HIGHLIGHT_COLOR = "#0000FF";
-
+	private static final String DEFAULT_HIGHLIGHT_COLOR = "#ff0000";
 
 	private ResourceBundle myLanguages;
 	private Stage myStage;
@@ -112,7 +109,6 @@ public class ViewController {
 		myPopup = new BorderPane();
 		myJSONManager = new JSONManager();
 		// myLeapController = new Controller();
-
 		loadFXML(GAMESPACE_FXML, myGameSpace);
 		loadFXML(INITIALSCENE_FXML, myInitialScene);
 		loadFXML(POPUP_FXML, myPopup);
@@ -282,15 +278,8 @@ public class ViewController {
 			l.getStyleClass().add("button");
 			newGameButton.getItems().add(l);
 			l.setOnAction(event -> {
-				// try {
 				myScene = new Scene(myGameSpace);
 				myStage.setScene(myScene);
-				// myModel = myJSONManager.readFromJSONFile(file.getPath());
-				// }
-				// catch (Exception e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
 			});
 		});
 		// initializeGrid();
@@ -316,6 +305,9 @@ public class ViewController {
 		// myGameGridEffect = new GameGridEffect(this);
 		keyControlOn = false;
 		System.out.println("Grid initialized");
+		
+		myGameGridEffect = new GameGridEffect(this);
+		System.out.println("Game grid effect initialized");
 	}
 
 	/**
@@ -442,9 +434,9 @@ public class ViewController {
 		System.out.println("ViewController: Active piece location" + activePiece.getLoc());
 		SuperTile activeTile = myGrid.findClickedTile(activePiece.getLoc());
 		activeTile.selectTile(DEFAULT_HIGHLIGHT_COLOR);
-		
+
 		myGameGridEffect.highlightActionRange();
-		
+
 		setGridState(new ApplyState(this));
 	}
 
@@ -486,9 +478,7 @@ public class ViewController {
 
 		Point2D loc = myModel.getCurrentLevel().getGrid().findClickedTile(x, y).getLocation();
 		
-
 		//System.out.println("Tile Found is: "+ myModel.getCurrentLevel().getGrid().findClickedTile(x, y) + " at X:" + loc.getX() +" at Y:"+ loc.getY());
-
 		
 		if (myModel.getCurrentLevel().getGrid().getPiece(loc) == null) {
 			System.out.println("no piece");
@@ -496,6 +486,7 @@ public class ViewController {
 
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(loc));
+		myGameGridEffect.highlightCurrent(loc);
 		// myGrid.clearEffect();
 		// myGameGridEffect.clearAllEffects(myGrid);
 
@@ -507,6 +498,7 @@ public class ViewController {
 		// ((int)findPosition(x,y).getY())), Color.PURPLE);
 	}
 
+	/*
 	public void performActionKeyboard(Point2D location) {
 
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
@@ -514,6 +506,7 @@ public class ViewController {
 
 		myGameGridEffect.highlightCurrent(location, Color.BLUE);
 	}
+	*/
 
 	/**
 	 * Method to convert pixel coordinates into tile coordinates
