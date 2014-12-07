@@ -211,13 +211,13 @@ public class EventEditorController implements Initializable {
 		loader.setLocation(getClass().getResource("/authoring/eventeditor/NewAction.fxml"));
 		Parent root = loader.load();
 
-		Stage newConditionStage  = new Stage();
-		newConditionStage.setTitle("New Action");
-		newConditionStage.initModality(Modality.WINDOW_MODAL);
+		Stage newActionStage  = new Stage();
+		newActionStage.setTitle("New Action");
+		newActionStage.initModality(Modality.WINDOW_MODAL);
 		Scene scene = new Scene(root);
-		newConditionStage.setScene(scene);
+		newActionStage.setScene(scene);
 
-		newConditionStage.showAndWait();
+		newActionStage.showAndWait();
 	}
 
 	/**
