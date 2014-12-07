@@ -1,8 +1,12 @@
 package gamedata.stats;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javafx.collections.FXCollections;
 /**
  * Numerical stats class.
  * Stats are contained in every piece.
@@ -77,8 +81,8 @@ public class Stats {
 	/**
 	 * Returns a set of all the stat names
 	 */
-	public Set<String> getStatNames() {
-		return myStats.keySet();
+	public List<String> getStatNames() {
+		return FXCollections.observableArrayList(myStats.keySet());
 	}
 
 
