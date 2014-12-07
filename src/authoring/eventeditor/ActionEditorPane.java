@@ -1,6 +1,7 @@
 package authoring.eventeditor;
 
 import gamedata.events.GlobalAction;
+import gamedata.events.globalaction.LevelChangeGlobalAction;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Patch;
 import java.util.function.Consumer;
@@ -16,103 +17,99 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-public class ActionEditorPane extends Pane{
 
-        private static final int WIDTH_OFFSET = 30;
-        private static final String NAME_LABEL = "Name";
-        private static final String NAME_PROMPT = "Enter Condition name...";
-        private static final String COMPONENTS_LABEL = "Expression";
-        private static final String EQUALS_LABEL = "EQUALS";
-        private static final String DONE_LABEL = "Done";
-        private static final Insets MARGINS = new Insets(5, WIDTH_OFFSET, 10, WIDTH_OFFSET);
-        private static final String LABEL_CSS = "-fx-font-size: 14pt;";
+public class ActionEditorPane extends Pane {
 
-        private TextField myNameField = new TextField();
+    private static final int WIDTH_OFFSET = 30;
+    private static final String NAME_LABEL = "Name";
+    private static final String NAME_PROMPT = "Enter Condition name...";
+    private static final String COMPONENTS_LABEL = "Expression";
+    private static final String EQUALS_LABEL = "EQUALS";
+    private static final String DONE_LABEL = "Done";
+    private static final Insets MARGINS = new Insets(5, WIDTH_OFFSET, 10, WIDTH_OFFSET);
+    private static final String LABEL_CSS = "-fx-font-size: 14pt;";
 
-        private ChoiceBox<String> refType1 = new ChoiceBox<>();
-        private ChoiceBox<IHasStats> refName1 = new ChoiceBox<>();
-        private TextField statName1 = new TextField();
+    private TextField myNameField = new TextField();
 
-        private ChoiceBox<String> refType2 = new ChoiceBox<>();
-        private ChoiceBox<IHasStats> refName2 = new ChoiceBox<>();
-        private TextField statName2 = new TextField();
+    private ChoiceBox<String> refType1 = new ChoiceBox<>();
+    private ChoiceBox<IHasStats> refName1 = new ChoiceBox<>();
+    private TextField statName1 = new TextField();
 
-        private Consumer<GlobalAction> myDoneLambda;
-        private GlobalAction myGlobalAction;
+    private Consumer<GlobalAction> myDoneLambda;
+    private GlobalAction myGlobalAction;
 
-        public ActionEditorPane(Consumer<GlobalAction> doneLambda){
-                myDoneLambda = doneLambda;
-                initialize();
-        }
+    public ActionEditorPane (Consumer<GlobalAction> doneLambda) {
+        myDoneLambda = doneLambda;
+        initialize();
+    }
 
-        public ActionEditorPane (Consumer<GlobalAction> doneLambda, GlobalAction globalAction) {
-                myDoneLambda = doneLambda;
-                myGlobalAction = globalAction;
-                initialize();
-                updateFields(globalAction);
-        }
+    public ActionEditorPane (Consumer<GlobalAction> doneLambda, GlobalAction globalAction) {
+        myDoneLambda = doneLambda;
+        myGlobalAction = globalAction;
+        initialize();
+        updateFields(globalAction);
+    }
 
-        //TODO: Implement this so we can UPDATE Conditions, in addition to creating and deleting them
-        private void updateFields(GlobalAction globalAction) {
+    // TODO: Implement this so we can UPDATE Conditions, in addition to creating and deleting them
+    private void updateFields (GlobalAction globalAction) {
 
-        }
+    }
 
-        private void initialize(){
-                VBox box = new VBox();
-                box.setPadding(MARGINS);
-                box.setSpacing(10);
+    private void initialize () {
+        VBox box = new VBox();
+        box.setPadding(MARGINS);
+        box.setSpacing(10);
 
-                HBox labelBox = new HBox();
-                Label eventsLabel = new Label();
-                eventsLabel.setStyle(LABEL_CSS);
-                labelBox.getChildren().add(eventsLabel);
+        HBox labelBox = new HBox();
+        Label eventsLabel = new Label();
+        eventsLabel.setStyle(LABEL_CSS);
+        labelBox.getChildren().add(eventsLabel);
 
-                HBox names = new HBox();
-                names.setPadding(UIspecs.allPadding);
-                names.setSpacing(5);
+        HBox names = new HBox();
+        names.setPadding(UIspecs.allPadding);
+        names.setSpacing(5);
 
-                VBox components = new VBox();
+        VBox components = new VBox();
 
-                HBox leftHandSide = new HBox();
-                leftHandSide.setPadding(UIspecs.allPadding);
-                leftHandSide.setSpacing(5);
+        HBox leftHandSide = new HBox();
+        leftHandSide.setPadding(UIspecs.allPadding);
+        leftHandSide.setSpacing(5);
 
-                HBox rightHandSide = new HBox();
-                rightHandSide.setPadding(UIspecs.allPadding);
-                rightHandSide.setSpacing(5);
+        HBox rightHandSide = new HBox();
+        rightHandSide.setPadding(UIspecs.allPadding);
+        rightHandSide.setSpacing(5);
 
-                Label nameLabel = new Label(NAME_LABEL);
-                nameLabel.setPadding(UIspecs.topRightPadding);
-                myNameField = new TextField();
-                myNameField.setPromptText(NAME_PROMPT);
-                names.getChildren().addAll(nameLabel, myNameField);
+        Label nameLabel = new Label(NAME_LABEL);
+        nameLabel.setPadding(UIspecs.topRightPadding);
+        myNameField = new TextField();
+        myNameField.setPromptText(NAME_PROMPT);
+        names.getChildren().addAll(nameLabel, myNameField);
 
-                Label componentsLabel = new Label(COMPONENTS_LABEL);
+        Label componentsLabel = new Label(COMPONENTS_LABEL);
 
-                setUpComponents(refType1, refName1, statName1);
-                setUpComponents(refType2, refName2, statName2);
+        setUpComponents(refType1, refName1, statName1);
 
-                Label equalsLabel = new Label(EQUALS_LABEL);
+        Label equalsLabel = new Label(EQUALS_LABEL);
 
-                leftHandSide.getChildren().addAll(refType1, refName1, statName1, equalsLabel);
-                rightHandSide.getChildren().addAll(refType2, refName2, statName2);
+        leftHandSide.getChildren().addAll(refType1, refName1, statName1, equalsLabel);
 
-                components.getChildren().addAll(componentsLabel, leftHandSide, rightHandSide);
+        components.getChildren().addAll(componentsLabel, leftHandSide, rightHandSide);
 
-                Button doneButton = new Button(DONE_LABEL);
-                initDoneButton(doneButton);
+        Button doneButton = new Button(DONE_LABEL);
+        initDoneButton(doneButton);
 
-                box.getChildren().addAll(labelBox, names, components, doneButton);
+        box.getChildren().addAll(labelBox, names, components, doneButton);
 
-                getChildren().add(box);
-        }
+        getChildren().add(box);
+    }
 
-        /**
-         * References the specific values specified by the ChoiceBox and TextField. Then 
-         * constructs a Condition object from those values.
-         * @param doneButton
-         */
-         private void initDoneButton(Button doneButton) {
+    /**
+     * References the specific values specified by the ChoiceBox and TextField. Then
+     * constructs a Condition object from those values.
+     * 
+     * @param doneButton
+     */
+    private void initDoneButton(Button doneButton) {
                 doneButton.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle (ActionEvent click) {
@@ -122,13 +119,13 @@ public class ActionEditorPane extends Pane{
                                 String stat1 = statName1.getText();
 
                                 String type2 = refType1.getSelectionModel().getSelectedItem();
-                                IHasStats ref2 = refName2.getSelectionModel().getSelectedItem();
-                                String stat2 = statName2.getText();
 
                                 double val1 = getTargetValue(type1, ref1, stat1);
                                 double val2 = getTargetValue(type2, ref2, stat2);
                                 
-                                myGlobalAction = new ConditionEquals(myNameField.getText(), val1, val2);
+                                //specify which instance variable we're looking for, then the value we're changing it to.
+                                //the value is determined by the user
+                                myGlobalAction = new LevelChangeGlobalAction(, null);
                                 myDoneLambda.accept(myGlobalAction);
                         }
 
@@ -136,66 +133,72 @@ public class ActionEditorPane extends Pane{
                 });
          }
 
+    /**
+     * Extracts a double from the given source. Handles two input cases:
+     * 1) Type equals Piece, Patch, or Player, and Source equals Stat name. References
+     * the given stat by name.
+     * 2) Type equals Constant, and Source equals a numerical value. Returns the number.
+     * 
+     * @param type = Piece, Patch, Player, or Constant
+     * @param ref = Specific IHasStats object that contains target stat
+     * @param source = Name of target stat
+     * @return
+     */
+    private double getTargetValue (String type, IHasStats ref, String source) {
+        double val;
+        if ("Constant".equals(type)) {
+            val = Double.parseDouble(source);
+        }
+        else {
+            val = ref.getStats().getValue(source);
+        }
+        return val;
+    }
+
+    private void setUpComponents (ChoiceBox<String> refType,
+                                  ChoiceBox<IHasStats> refName1, TextField statName1) {
+        refType.getItems().addAll("Piece", "Patch", "Player", "Constant");
+        refType.getSelectionModel()
+                .selectedItemProperty()
+                .addListener(
+                             (observable, oldValue, selectedType) -> setUpEditor(oldValue,
+                                                                                 selectedType,
+                                                                                 refName1,
+                                                                                 statName1));
+    }
+
+    private void setUpEditor (String oldType,
+                              String type,
+                              ChoiceBox<IHasStats> refName,
+                              TextField statName) {
+        statName.setPromptText("Enter stat name");
+        if ("Constant".equals(oldType)) {
+            refName.setVisible(true);
+        }
+
+        // TODO: IMPLEMENT THIS SHIT. instead of the switch statement can we get all of the piece's
+        // instance variables or something?
+        // or like each thing can have a list of stats and we display each of the things contained
+        // in stats regardless of what it is.
+        // and if its a constant, its stat is just its value.
         /**
-         * Extracts a double from the given source. Handles two input cases:
-         * 1) Type equals Piece, Patch, or Player, and Source equals Stat name. References 
-         * the given stat by name.
-         * 2) Type equals Constant, and Source equals a numerical value. Returns the number.
-         * @param type = Piece, Patch, Player, or Constant
-         * @param ref = Specific IHasStats object that contains target stat
-         * @param source = Name of target stat
-         * @return
+         * Selects between the four types of input into this Condition
          */
-         private double getTargetValue(String type, IHasStats ref, String source){
-                 double val;
-                 if("Constant".equals(type)){
-                         val = Double.parseDouble(source);      
-                 }
-                 else{
-                         val = ref.getStats().getValue(source);
-                 }
-                 return val;
-         }
-
-         private void setUpComponents(ChoiceBox<String> refType,
-                         ChoiceBox<IHasStats> refName1, TextField statName1) {
-                 refType.getItems().addAll("Piece", "Patch", "Player", "Constant");
-                 refType.getSelectionModel().selectedItemProperty().addListener(
-                                 (observable, oldValue, selectedType) -> setUpEditor(oldValue, selectedType, refName1, statName1));
-         }
-
-         private void setUpEditor(String oldType, String type, ChoiceBox<IHasStats> refName, TextField statName) {
-                 statName.setPromptText("Enter stat name");
-                 if("Constant".equals(oldType)){
-                         refName.setVisible(true);
-                 }
-
-                 //TODO: IMPLEMENT THIS SHIT. instead of the switch statement can we get all of the piece's instance variables or something?
-                 //or like each thing can have a list of stats and we display each of the things contained in stats regardless of what it is.
-                 //and if its a constant, its stat is just its value. 
-                 /**
-                  * Selects between the four types of input into this Condition
-                  */
-                 switch(type){
-                         case "Piece": 
-                         {
-                                 break;
-                         }
-                         case "Patch":
-                         {
-                                 break;  
-                         }
-                         case "Player":
-                         {
-                                 break;
-                         }
-                         case "Constant": 
-                         {
-                                 refName.setVisible(false);
-                                 statName.setPromptText("Enter constant value");
-                                 break;
-                         }
-                 }
-         }
+        switch (type) {
+            case "Piece": {
+                break;
+            }
+            case "Patch": {
+                break;
+            }
+            case "Player": {
+                break;
+            }
+            case "Constant": {
+                refName.setVisible(false);
+                statName.setPromptText("Enter constant value");
+                break;
+            }
+        }
+    }
 }
-

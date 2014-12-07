@@ -1,10 +1,8 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Patch;
-
 import java.awt.geom.Point2D;
 import java.util.function.Consumer;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -25,9 +23,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 			PatchTypeData patchTypes) {
 		super(vbox, propertiesSPane, gridRef);
 		myPatchTypes = patchTypes;
-		myGridReference = gridRef;
 	}
-
 
 	@Override
 	protected void initGlobalNewBtn (Button newBtn) {
@@ -35,9 +31,10 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 			@Override
 			public void handle (ActionEvent event) {
 				Consumer<Patch> okLambda = (Patch patch) -> {
+					myPatchTypes.add(patch);
 					addEntry(patch);
 				};
-				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda));
+				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda, myPatchTypes));
 			}
 		});
 	}
@@ -57,14 +54,21 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 		delBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent event) {
-				System.out.println("HI DELETE BUTTONFORPATCH HI");
+				EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
+					@Override
+					public void handle (MouseEvent e) {
+						GUIGrid grid = myGridReference.getGrid();
+						Point2D coor = grid.calculateClicked(e.getX(), e.getY());
+						grid.removePatch(coor);
+					}
+				};
+				myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
 			}
 		});
 	}
 
 	@Override
 	protected HBox makeEntryBox (Patch entry) {
-		myPatchTypes.add(entry);
 		HBox hb = new HBox();
 		Label name = new Label(entry.getName());
 		name.setTranslateY(7.5);
@@ -72,18 +76,17 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 		img.setFitHeight(40);
 		img.setFitWidth(40);
 		hb.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			GUIGrid grid = myGridReference.getGrid();
 			@Override
-			public void handle(MouseEvent event) {
+			public void handle (MouseEvent event) {
 				EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
 					@Override
-					public void handle(MouseEvent e) {
-						Point2D coor = grid.findClickedCoordinate(e.getX(),e.getY());
-						Point2D loc = new Point2D.Double(1,2);
-						grid.addPatch(entry, loc);
+					public void handle (MouseEvent e) {
+						GUIGrid grid = myGridReference.getGrid();
+						Point2D coor = grid.calculateClicked(e.getX(), e.getY());
+						grid.addPatch(entry, coor);
 					}
 				};
-				myGridReference.getGrid().paneSetOnMouseClicked(clickHandler);
+				myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
 			}
 		});
 		hb.getChildren().addAll(img, name);
@@ -91,24 +94,18 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 	}
 
 	@Override
-	protected void initEntryEditBtn(Patch entry, Button editBtn) {
+	protected void initEntryEditBtn (Patch entry, Button editBtn) {
 		editBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent e) {
 				Consumer<Patch> okLambda = (Patch patch) -> {
-					//TODO: Use observables to make all the pieces and
-					// patches in the grid change to fit the updated patch
-					HBox entryBox = myEntryMap.get(entry);
-					HBox imgNameBox = myIndivEntMap.get(entryBox);
+					HBox entryBox = makeCompleteEntryBox(patch);
 
-					entryBox.getChildren().remove(imgNameBox);
-					HBox newImgNameBox = makeEntryBox(patch);	
-
-					entryBox.getChildren().add(newImgNameBox);
-					myIndivEntMap.replace(entryBox, newImgNameBox);
+					HBox entryHolderBox = myEntryMap.get(entry);
+					entryHolderBox.getChildren().clear();
+					entryHolderBox.getChildren().add(entryBox);
 
 					myPatchTypes.replace(entry, patch);
-					myGridReference.getGrid().update(myPatchTypes, patch);
 				};
 				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda, entry));
 			}

@@ -72,6 +72,8 @@ public abstract class GridComponent implements IHasStats{
 	 * @return myName : String name describing the piece or patch.
 	 */
 	public String getName() {
+//		Note from Martin: Do not change method names without using "Refactor".
+//							One method name change can break everything.
 		return myName;
 	}
 	

@@ -41,10 +41,9 @@ public class GameGridEffect {
     public void highlightActionRange () {
         clearAllActionHighlights();
         updateActives();
-        System.out.println("Highlighting action range");
         
         if (myActivePiece != null && myActiveAction != null) {
-            System.out.println("GameGridEffect: action ABOUT TO HIGHLIGHT\n\n");
+            //System.out.println("GameGridEffect: action ABOUT TO HIGHLIGHT\n\n");
             myActiveAction.getActionRange(myActivePiece.getLoc())
                     .forEach(point -> { if (point.getX() < myGrid.getRow()
                                      && point.getY() < myGrid.getCol()
@@ -75,14 +74,12 @@ public class GameGridEffect {
         myActiveAction = myViewController.getActiveAction();
         
         if (myActivePiece != null && myActiveAction != null) {
-//            System.out.println("GameGridEffect: effect ABOUT TO HIGHLIGHT\n\n");
             myActiveAction.getActionRange(myActivePiece.getLoc()).forEach(point -> {
                 if (loc.equals(point)){
                     myActiveAction.getEffectRange().forEach(point2 -> {
                         SuperTile toHighlight = myGrid.findClickedTile(point2);
                         toHighlight.selectTile(EFFECT_RANGE_COLOR);
                         myHighlightedEffects.add(toHighlight);
-//                        System.out.println("Effect Range Highlight!");
                         });
                     }
                 });
@@ -97,7 +94,7 @@ public class GameGridEffect {
         clearAllActionHighlights();
         clearAllEffectHighlights();
         updateActives();
-        System.out.println("GGE highlight location: " + loc.getX() + " " + loc.getY());
+        //System.out.println("GGE highlight location: " + loc.getX() + " " + loc.getY());
         SuperTile toHighlight = myGrid.findClickedTile(loc);
         toHighlight.selectTile(DEFAULT_COLOR);
         myHighlightedPiece.add(toHighlight);
@@ -110,21 +107,21 @@ public class GameGridEffect {
      */
     private void clearAllEffectHighlights(){
         for (SuperTile st : myHighlightedEffects) {
-            myGrid.findClickedTile(st.getLocation()).deselectTile();
+            myGrid.findClickedTile(st.getPixelLocation()).deselectTile();
         }
         myHighlightedEffects.clear();
     }
     
     public void clearAllActionHighlights(){
         for (SuperTile st : myHighlightedActions) {
-            myGrid.findClickedTile(st.getLocation()).deselectTile();
+            myGrid.findClickedTile(st.getPixelLocation()).deselectTile();
         }
         myHighlightedActions.clear();
     }
     
     public void clearAllPieceHighlights(){
         for (SuperTile st : myHighlightedPiece) {
-            myGrid.findClickedTile(st.getLocation()).deselectTile();
+            myGrid.findClickedTile(st.getPixelLocation()).deselectTile();
         }
         myHighlightedPiece.clear();
     }
@@ -136,25 +133,40 @@ public class GameGridEffect {
 
     private void printPieceHighlights() {
         for (SuperTile st : myHighlightedPiece) {
-            System.out.println("Piece Highlights: " + st.getLocation().getX() + ", " + st.getLocation().getY());
+            System.out.println("Piece Highlights: " + st.getPixelLocation().getX() + ", " + st.getPixelLocation().getY());
         }
     }
     
     private void printEffectHighlights() {
         for (SuperTile st : myHighlightedEffects) {
-            System.out.println("Effect Highlights: " + st.getLocation().getX() + ", " + st.getLocation().getY());
+            System.out.println("Effect Highlights: " + st.getPixelLocation().getX() + ", " + st.getPixelLocation().getY());
         }
     }
     
     private void printActionHighlights() {
         for (SuperTile st : myHighlightedActions) {
-            System.out.println("Action Highlights: " + st.getLocation().getX() + ", " + st.getLocation().getY());
+            System.out.println("Action Highlights: " + st.getPixelLocation().getX() + ", " + st.getPixelLocation().getY());
         }
     }
     
-    public List<SuperTile> getActionHighlights() {
-        return myHighlightedActions;
+    /**
+     * Checks if the mouse movement has it hovering over an action tile Only
+     * then will it update the highlight of the effect range
+     * 
+     * @param mouseX
+     * @param mouseY
+     * @return
+     */
+    public boolean isHoveringOverActionHighlight(double mouseX, double mouseY) {
+            for (SuperTile st : myHighlightedActions) {
+                    if (myViewController.getGrid().findClickedTile(mouseX, mouseY)
+                                    .getPixelLocation() == st.getPixelLocation()) {
+                            return true;
+                    }
+            }
+            return false;
     }
+
     
     
     

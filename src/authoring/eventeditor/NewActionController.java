@@ -2,6 +2,10 @@ package authoring.eventeditor;
 
 import gamedata.events.Condition;
 import gamedata.events.GlobalAction;
+import gamedata.events.globalaction.CreatePieceGlobalAction;
+import gamedata.events.globalaction.DeletePieceGlobalAction;
+import gamedata.events.globalaction.LevelChangeGlobalAction;
+import gamedata.events.globalaction.SwitchPlayerGlobalAction;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,7 +39,7 @@ public class NewActionController implements Initializable{
                 //TODO: Remove print stack traces. Add in error windows
                 actionList = new ArrayList<>();
                 try {
-                        actionList = Arrays.asList(ClassGrabber.getClasses("gamedata.events.globalactions"));
+                        actionList = Arrays.asList(ClassGrabber.getClasses("gamedata.events.globalaction"));
                 } catch (ClassNotFoundException e) {
                         e.printStackTrace();
                 } catch (IOException e) {
@@ -63,16 +67,26 @@ public class NewActionController implements Initializable{
                 return displayList;
         }
         
+        //TODO: determine how to distinguish between different types of actions
         private void showActionEditorPane(){
                 int idx = actionChoiceBox.getSelectionModel().getSelectedIndex();
-                Class<?> c = actionList.get(idx);
-                
+                Class c = actionList.get(idx);
+                //System.out.println(c);
                 /**
                  * If statements to choose which Condition Editor to pull up
                  */
-                if("class gamedata.events.ConditionEquals".equals(c.getSuperclass().toString())){
+                if(c.equals(CreatePieceGlobalAction.class)){
+                    
                 }
-                
+                else if (c.equals(DeletePieceGlobalAction.class)){
+                    
+                }
+                else if (c.equals(LevelChangeGlobalAction.class)){
+                    
+                }
+                else if (c.equals(SwitchPlayerGlobalAction.class)){
+                    
+                }
                 if(myGlobalAction==null){
                         editorScrollPane.setContent(new ActionEditorPane(myDoneLambda));
                 }

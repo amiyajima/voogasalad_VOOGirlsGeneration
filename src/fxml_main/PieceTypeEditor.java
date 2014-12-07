@@ -4,12 +4,13 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
-import gameengine.movement.Movement;
 
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 import javafx.collections.FXCollections;
@@ -29,6 +30,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import authoring.createedit.ModulesList;
 import authoring.data.ActionData;
+import authoring.data.PieceTypeData;
 import authoring_environment.UIspecs;
 
 /**
@@ -62,27 +64,24 @@ public class PieceTypeEditor extends Pane {
 	private Piece myPiece;
 	
 	private ActionData myAvailableActions;
+	private Set<String> myIDSet;
 
 	private int myPlayerID;
 	private Stats myStats;
 	private List<Action> myActions;
-	private Movement myPath;
 	private Inventory myInventory;
 	
 	/**
 	 * Called when creating a new Piece
 	 * @param pieceController
 	 */
-	public PieceTypeEditor(Consumer<Piece> okLambda, ActionData actions) {
+	public PieceTypeEditor(Consumer<Piece> okLambda, PieceTypeData pieceTypes, ActionData actions) {
 		myEditorTitle = CREATOR_TITLE;
+		myIDSet = pieceTypes.getIdSet();
 		myAvailableActions = actions;
 		myID = "";
 		myName = "";
 		myImageLocation = DEFAULT_IMAGE_LOC;
-		
-//		TODO : myPath should not be null. It takes in the GUI Grid and
-//				a list of relative locations that the unit can move to.
-		myPath = null;
 		myActions = new ArrayList<Action>();
 		myStats = new Stats();
 		myPlayerID = 0;
@@ -96,7 +95,6 @@ public class PieceTypeEditor extends Pane {
 		myID = piece.getID();
 		myName = piece.getName();
 		myImageLocation = piece.getImageLocation();
-		myPath = piece.getMovement();
 		myActions = piece.getActions();
 		myStats = piece.getStats();
 		myPlayerID = piece.getPlayerID();
@@ -139,6 +137,7 @@ public class PieceTypeEditor extends Pane {
 		TextField unitID = new TextField();
 		unitID.setText(myID);
 		if(!myID.equals("")){
+			myIDSet = new HashSet<String>();
 			unitID.setDisable(true);
 		}
 		unitID.setPromptText(ID_PROMPT);
@@ -211,9 +210,13 @@ public class PieceTypeEditor extends Pane {
 			 @Override
 			 public void handle (ActionEvent click) {
 				 myID = unitID.getText();
+				 if(myIDSet.contains(myID)){
+					 return;
+				 }
+				 myIDSet.add(myID);
 				 myName = unitName.getText();
 				 myActions = addSelectedActions(modList.getSelectedActions());
-				 myPiece = new Piece(myID, myName, myImageLocation, myPath, myActions, 
+				 myPiece = new Piece(myID, myName, myImageLocation, myActions, 
 						 myStats, DEFAULT_LOC, myPlayerID, myInventory);
 				 myOkLambda.accept(myPiece);
 			 }

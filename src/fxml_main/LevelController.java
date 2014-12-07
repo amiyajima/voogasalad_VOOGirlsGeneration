@@ -52,6 +52,7 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 		//TODO: Need to not hard-code square, have it passed through the constructor
 		// as maybe a gridshapeproperty (new class?)
 		Consumer<Level> okLambda = (Level level) -> {
+						
 			addEntry(level);
 			myLevelData.add(level);
 			myPieceTypes.addObserver(level.getGrid());
@@ -62,9 +63,9 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 	}
 	
 	private void setAndDisplayGrid(Level level) {
+		
 		myGridReference.setGrid(level.getGrid());
-		GUIGrid grid = myGridReference.getGrid();
-		grid.displayPane(myGridSPane);
+		myGridReference.getGrid().displayPane(myGridSPane);
 	}
 
 	@Override
@@ -94,21 +95,37 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 
 	@Override
 	protected void initEntryEditBtn(Level entry, Button editBtn) {
-		Consumer<Level> okLambda = (Level level) -> {
-			GUIGrid grid = myGridReference.getGrid();
-			myPieceTypes.addObserver(grid);
-			myPatchTypes.addObserver(grid);
-			myLevelData.replace(entry, level);
-		    HBox entryBox = myEntryMap.get(entry);
-		    HBox imgNameBox = myIndivEntMap.get(entryBox);
-		    
-		    entryBox.getChildren().remove(imgNameBox);
-		    HBox newImgNameBox = makeEntryBox(level);	
-		    
-		    entryBox.getChildren().add(newImgNameBox);
-		    myIndivEntMap.replace(entryBox, newImgNameBox);
-		};
-		myPropertiesSPane.setContent(new LevelEditor(okLambda, entry));
+		
+		//TODO: THIS ONLY SORT OF WORKS
+			//WORKS WHEN YOU CLICK ON LHS PANE THEN RHS PANE THEN DONE. 
+			//ALSO LEVELS ARE SORTED IN ORDER OR MOST RECENTLY MODIFIED
+		editBtn.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent click) {
+				Consumer<Level> okLambda = (Level level) -> {
+					
+				    myVBox.getChildren().remove(entry);
+					addEntry(level);
+					
+					myPieceTypes.addObserver(level.getGrid());
+					myPatchTypes.addObserver(level.getGrid());
+					myLevelData.replace(entry, 	level);
+					
+				    HBox entryHolderBox = myEntryMap.get(entry);
+					entryHolderBox.getChildren().clear();
+				   				    			    				    
+				    myLevelData.replace(entry, level);
+				    
+				    myEntryMap.get(entry);
+				    
+					setAndDisplayGrid(level);
+
+				};
+				myPropertiesSPane.setContent(new LevelEditor(okLambda, entry));
+				
+			}
+			
+		});
 	}
 
 	@Override
