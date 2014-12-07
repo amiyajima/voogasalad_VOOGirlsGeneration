@@ -16,6 +16,7 @@ import javafx.scene.shape.Shape;
  * @author Mengen Huang, Jennie Ju
  */
 public abstract class SuperTile extends Group {
+	private static final Color DEFAULT_HIGHLIGHT_COLOR = Color.web("#0000FF", 0.3);
 	protected Shape myShape;
 //	private int mySize;
 	private double myImageSize;
@@ -26,6 +27,7 @@ public abstract class SuperTile extends Group {
 	protected transient ImageView myPieceImage;
 	protected transient ImageView myPatchImage;
 	private Shape myHighlight;
+	
 	
 	/**
 	 * 
@@ -46,25 +48,27 @@ public abstract class SuperTile extends Group {
 	
 
 	protected void makeShapeTile(double size, Point2D loc){
-		myShape=makeShape(size);
-		makeHighlight(size);
-		setCheckeredColor((int)loc.getX(),(int)loc.getY(),myShape);
 		myCoordinates=calculateCoord(size,loc);
 		myImageCoord=calculateImageCoord(size,loc);
 		myImageSize=calculateImageSize(size);
 		
+		myShape=makeShape(size,myCoordinates);
+		makeHighlight(size);
+		setCheckeredColor((int)loc.getX(),(int)loc.getY(),myShape);
+
 		myPieceImage = initImageView(myImageSize);
 		myPatchImage = initImageView(myImageSize);
 		
-		alignNodes(myCoordinates,myShape,myHighlight);
 		alignNodes(myImageCoord,myPatchImage,myPieceImage);
 
 	}
 
 
-	public void makeHighlight(double size) {
-		myHighlight=makeShape(size);
-		myHighlight.setFill(Color.web("#0000FF", 0.3));
+	
+	private void makeHighlight(double size) {
+		myHighlight=makeShape(size,myCoordinates);
+		myHighlight.setFill(DEFAULT_HIGHLIGHT_COLOR);
+
 		myHighlight.setVisible(false);
 	};
 	
@@ -90,7 +94,7 @@ public abstract class SuperTile extends Group {
 	}
 
 
-	protected abstract Shape makeShape(double size);
+	protected abstract Shape makeShape(double size,Point2D coordinates);
 	
 	protected abstract Point2D calculateCoord(double size, Point2D loc);
 	
@@ -139,6 +143,7 @@ public abstract class SuperTile extends Group {
 	public Point2D getCoordinates(){
 		return myCoordinates;
 	}
+	
 	
 	
 }
