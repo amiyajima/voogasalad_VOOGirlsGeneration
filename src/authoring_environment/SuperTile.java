@@ -70,7 +70,6 @@ public abstract class SuperTile extends Group {
 	 * @param size
 	 */
 
-
 	private void makeHighlight(double size) {
 		myHighlight=makeShape(size,myCoordinates);
 		myHighlight.setFill(DEFAULT_HIGHLIGHT_COLOR);
