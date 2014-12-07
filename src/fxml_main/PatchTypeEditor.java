@@ -195,7 +195,9 @@ public class PatchTypeEditor extends Pane {
 				 if(myIDSet.contains(myID)){
 					 return;
 				 }
-				 myIDSet.add(myID);
+				 if(!terrainID.isDisabled()){
+					 myIDSet.add(myID);
+				 }
 				 myName = terrainName.getText();
 				 myPatch = new Patch(myID, myName, myImageLocation, DEFAULT_LOC);
 				 myOkLambda.accept(myPatch);

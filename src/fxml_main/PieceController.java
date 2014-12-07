@@ -109,6 +109,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 					HBox entryHolderBox = myEntryMap.get(entry);
 					entryHolderBox.getChildren().clear();
 					entryHolderBox.getChildren().add(entryBox);
+					myEntryMap.put(piece, entryHolderBox);
 
 					myPieceTypes.replace(entry, piece);
 				};

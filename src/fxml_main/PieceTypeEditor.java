@@ -213,7 +213,9 @@ public class PieceTypeEditor extends Pane {
 				 if(myIDSet.contains(myID)){
 					 return;
 				 }
-				 myIDSet.add(myID);
+				 if(!unitID.isDisabled()){
+					 myIDSet.add(myID);
+				 }
 				 myName = unitName.getText();
 				 myActions = addSelectedActions(modList.getSelectedActions());
 				 myPiece = new Piece(myID, myName, myImageLocation, myActions, 

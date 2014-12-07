@@ -6,6 +6,7 @@ import gamedata.gamecomponents.Piece;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collections;
+
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -16,7 +17,6 @@ import authoring.data.PatchData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceData;
 import authoring.data.PieceTypeData;
-
 
 // TODO: REMOVE THE DUPLICATED CODE. SO MUCH.
 /**
@@ -308,4 +308,5 @@ public class GUIGrid extends SuperGrid implements Observer {
     public List<Patch> getReadOnlyPatchList () {
         return Collections.unmodifiableList(myPatchData.getData());
     }
+
 }

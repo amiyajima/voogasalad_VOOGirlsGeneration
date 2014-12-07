@@ -472,7 +472,7 @@ public class ViewController {
 
 			// dehighlighting the tile the keyboard is currently highlighting
 			if (myKeyboardMovement != null) {
-				keySelectedTile = myGrid.findClickedTile(myKeyboardMovement
+				keySelectedTile = myGrid.findTile(myKeyboardMovement
 						.getCurrentLocation());
 				keySelectedTile.deselectTile();
 			}
@@ -483,7 +483,7 @@ public class ViewController {
 
 			// dehighlighting the tile the mouse click is currently highlighting
 			if (currentClick != null) {
-				SuperTile selectedTile = myGrid.findClickedTile(currentClick);
+				SuperTile selectedTile = myGrid.findTile(currentClick);
 				selectedTile.deselectTile();
 			}
 
