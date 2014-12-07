@@ -11,8 +11,6 @@ import gamedata.stats.Stats;
  *
  */
 public interface IHasStats {
-	
-	public abstract String getName();
-	
+		
 	public abstract Stats getStats();
 }

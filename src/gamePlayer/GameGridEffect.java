@@ -75,14 +75,12 @@ public class GameGridEffect {
         myActiveAction = myViewController.getActiveAction();
         
         if (myActivePiece != null && myActiveAction != null) {
-//            System.out.println("GameGridEffect: effect ABOUT TO HIGHLIGHT\n\n");
             myActiveAction.getActionRange(myActivePiece.getLoc()).forEach(point -> {
                 if (loc.equals(point)){
                     myActiveAction.getEffectRange().forEach(point2 -> {
                         SuperTile toHighlight = myGrid.findClickedTile(point2);
                         toHighlight.selectTile(EFFECT_RANGE_COLOR);
                         myHighlightedEffects.add(toHighlight);
-//                        System.out.println("Effect Range Highlight!");
                         });
                     }
                 });
@@ -152,9 +150,24 @@ public class GameGridEffect {
         }
     }
     
-    public List<SuperTile> getActionHighlights() {
-        return myHighlightedActions;
+    /**
+     * Checks if the mouse movement has it hovering over an action tile Only
+     * then will it update the highlight of the effect range
+     * 
+     * @param mouseX
+     * @param mouseY
+     * @return
+     */
+    public boolean isHoveringOverActionHighlight(double mouseX, double mouseY) {
+            for (SuperTile st : myHighlightedActions) {
+                    if (myViewController.getGrid().findClickedTile(mouseX, mouseY)
+                                    .getLocation() == st.getLocation()) {
+                            return true;
+                    }
+            }
+            return false;
     }
+
     
     
     
