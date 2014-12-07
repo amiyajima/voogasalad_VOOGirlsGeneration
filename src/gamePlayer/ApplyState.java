@@ -1,22 +1,15 @@
 package gamePlayer;
 
-import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Double;
-import java.util.List;
-import authoring_environment.SuperTile;
-import javafx.scene.paint.Color;
-import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
-import gamedata.gamecomponents.Inventory;
-import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
-import gamedata.stats.Stats;
-import gameengine.movement.Movement;
+import javafx.scene.input.MouseEvent;
+import authoring_environment.SuperTile;
 
 
 /**
  * Class representing the state of the grid when a particular action
  * has been selected and is ready to be applied on the grid
+ * @author Yoon, Rica
  *
  */
 public class ApplyState implements IGridState {
@@ -27,58 +20,56 @@ public class ApplyState implements IGridState {
     private SuperTile activeTile;
 
     public ApplyState (ViewController controller) {
-         System.out.println("new ApplyState");
+        System.out.println("New ApplyState");
         myController = controller;
         myGameGridEffect = controller.getGameGridEffect();
         myGame = controller.getGame();
-        
-        myController.getGridPane().setOnMouseMoved(event -> {
-            if (myController.getGrid().findClickedTile(event.getX(), event.getY()) != null){
-                activeTile = myController.getGrid().findClickedTile(event.getX(), event.getY());
-                myController.getGameGridEffect().highlightEffectRange(activeTile.getLocation());
+
+        myController.getGridPane().setOnMouseMoved(event -> handleMouseMove(event)); 
+    }
+    
+    /**
+     * When the mouse of moved, it will find a new effect range to highlight relative to
+     * the current location
+     * @param event
+     */
+    private void handleMouseMove(MouseEvent event) {
+        if (myController.getGrid().findClickedTile(event.getX(), event.getY()) != null
+                && hoveringOverActionHighlight(event.getX(), event.getY())){
+            activeTile = myController.getGrid().findClickedTile(event.getX(), event.getY());
+            myController.getGameGridEffect().highlightEffectRange(activeTile.getLocation());
+        }
+    }
+    
+    /**
+     * Checks if the mouse movement has it hovering over an action tile
+     * Only then will it update the highlight of the effect range
+     * @param mouseX
+     * @param mouseY
+     * @return
+     */
+    private boolean hoveringOverActionHighlight(double mouseX, double mouseY) {
+        for (SuperTile st : myGameGridEffect.getActionHighlights()) {
+            if (myController.getGrid().findClickedTile(mouseX, mouseY).getLocation() == st.getLocation()) {
+                return true;
             }
-        });
+        }
+        return false;
     }
 
     @Override
     public void onClick (Piece piece) {
-
         Piece actor = myController.getActivePiece();
-//        if (piece == null) {
-//            piece = new Piece(actor);
-//            piece.setLoc(myController.getCurrentClick());
-//        }
         myController.getActiveAction().doBehavior(actor, piece);
+        
+        myGameGridEffect.clearAllPieceHighlights();
+        myGameGridEffect.clearAllActionHighlights();
+        myController.clearActions();
         myController.setGridState(new SelectState(myController));
-
         myController.changeCursor(myController.CURSOR_GLOVE_TEST);
-
-        //        myController.getGame().getCurrentLevel().garbageCollectPieces();
-        //still need to update the grid somehow?
-//        myController.getGridPane().populateGrid(myController.getGame().getCurrentLevel().getGrid().getPatches(),
-//                                            myController.getGame().getCurrentLevel().getGrid().getPieces());
-
         myController.setActivePiece(null);
         myController.setActiveAction(null);
-//        checkLevelState();
-//        checkPlayerState();
+        myController.getGame().getCurrentLevel().runGameEvents();
     }
 
-    /**
-     * TODO: Temporary Location of GameLoop Check
-     */
-    private void checkLevelState () {
-        if (myGame.getCurrentLevel().levelCompleted()) {
-            myGame.nextLevel();
-        }
-    }
-
-    /**
-     * TODO: Temporary Location of GameLoop Check
-     */
-    private void checkPlayerState () {
-        if (myGame.getCurrentLevel().checkTurnEnd(myGame.getCurrentPlayer().getNumMovesPlayed())) {
-            myGame.nextPlayer();
-        }
-    }
 }

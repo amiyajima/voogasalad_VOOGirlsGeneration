@@ -25,5 +25,6 @@ public class SelectState implements IGridState {
         myController.updateStats(piece);
         myController.setActivePiece(piece);
         myController.updateActions(piece);
+        myController.highlightSelected(piece);
     }
 }

@@ -13,6 +13,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.data.LevelData;
+import authoring.data.PatchTypeData;
+import authoring.data.PieceTypeData;
 import authoring_environment.GUIGrid;
 
 /**
@@ -23,12 +25,17 @@ import authoring_environment.GUIGrid;
 public class LevelController extends GridComponentAbstCtrl<Level> {
 	private ScrollPane myGridSPane;
 	private LevelData myLevelData;
+	private PieceTypeData myPieceTypes;
+	private PatchTypeData myPatchTypes;
 	
 	protected LevelController (VBox vbox, ScrollPane propertiesSPane,
-			ScrollPane gridSPane, GUIGrid currGrid, LevelData levels) {
-		super(vbox, propertiesSPane, currGrid);
+			ScrollPane gridSPane, GUIGridReference gridRef, LevelData levels,
+			PieceTypeData pieceTypes, PatchTypeData patchTypes) {
+		super(vbox, propertiesSPane, gridRef);
 		myGridSPane = gridSPane;
 		myLevelData = levels;
+		myPieceTypes = pieceTypes;
+		myPatchTypes = patchTypes;
 	}
 
 	@Override
@@ -47,14 +54,18 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 		Consumer<Level> okLambda = (Level level) -> {
 			addEntry(level);
 			myLevelData.add(level);
+			GUIGrid grid = myGridReference.getGrid();
+			myPieceTypes.addObserver(grid);
+			myPatchTypes.addObserver(grid);
 			setAndDisplayGrid(level);
 			};
 		super.myPropertiesSPane.setContent(new LevelEditor(okLambda));
 	}
 	
 	private void setAndDisplayGrid(Level level) {
-		myCurrentGrid = level.getGrid();
-		myCurrentGrid.displayPane(myGridSPane);
+		myGridReference.setGrid(level.getGrid());
+		GUIGrid grid = myGridReference.getGrid();
+		grid.displayPane(myGridSPane);
 	}
 
 	@Override
@@ -85,8 +96,10 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 	@Override
 	protected void initEntryEditBtn(Level entry, Button editBtn) {
 		Consumer<Level> okLambda = (Level level) -> {
+			GUIGrid grid = myGridReference.getGrid();
+			myPieceTypes.addObserver(grid);
+			myPatchTypes.addObserver(grid);
 			myLevelData.replace(entry, level);
-			
 		    HBox entryBox = myEntryMap.get(entry);
 		    HBox imgNameBox = myIndivEntMap.get(entryBox);
 		    

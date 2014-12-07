@@ -1,8 +1,10 @@
 package gameengine.player;
 
 import gamedata.gamecomponents.Level;
-import java.util.Set;
+import gamedata.gamecomponents.Piece;
 
+import java.util.List;
+import java.util.Set;
 
 /**
  * Defines a simple AI for playing turn-based strategy games
@@ -12,24 +14,22 @@ import java.util.Set;
  */
 public class SimpleAIPlayer extends Player {
 
-    Level myLevel;
+	private Level myCurrentLevel;
 
-    public SimpleAIPlayer (int id, Level l) {
-        super(id);
-        myLevel = l;
-    }
+	public SimpleAIPlayer(int id) {
+		super(id);
+	}
 
-    /**
-     * 
-     */
-    public void play () {
+	@Override
+	public void startTurn(Level l) {
+		myCurrentLevel = l;
+		this.play();
+	}
 
-    }
-
-    @Override
-    public void startTurn () {
-        // TODO Auto-generated method stub
-
-    }
+	private void play() {
+		List<Piece> myPieces = myCurrentLevel.getGrid().getPlayerPieces(
+				this.myID);
+		
+	}
 
 }

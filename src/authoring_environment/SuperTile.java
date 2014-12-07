@@ -4,7 +4,6 @@ import java.awt.geom.Point2D;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -25,7 +24,7 @@ public abstract class SuperTile extends Group {
 	private Point2D myImageCoord;
 
 	protected transient ImageView myPieceImage;
-	protected transient ImageView myPatchImage;
+	protected transient Shape myPatchImage;
 	private Shape myHighlight;
 	
 	
@@ -58,9 +57,10 @@ public abstract class SuperTile extends Group {
 		setCheckeredColor((int)loc.getX(),(int)loc.getY(),myShape);
 
 		myPieceImage = initImageView(myImageSize);
-		myPatchImage = initImageView(myImageSize);
+		myPatchImage = makeShape(size,myCoordinates);
+		myPatchImage.setFill(Color.WHITE);
 		
-		alignNodes(myImageCoord,myPatchImage,myPieceImage);
+		alignNodes(myImageCoord,myPieceImage);
 	}
 
 
@@ -89,6 +89,7 @@ public abstract class SuperTile extends Group {
 	 * De-highlight something
 	 */
 	public void deselectTile(){
+//	    System.out.println("De-highlighting tile at " + myLocation.getX() + ", " + myLocation.getY());
 		myHighlight.setVisible(false);
 	}
 	
@@ -101,7 +102,7 @@ public abstract class SuperTile extends Group {
 	}
 	
 	public void addPatchImage(ImageView imageView){
-		myPatchImage.setImage(imageView.getImage());
+		myPatchImage.setFill(new ImagePattern(imageView.getImage()));
 	}
 
 
@@ -140,7 +141,7 @@ public abstract class SuperTile extends Group {
 	}
 	
 	/**
-	 * Grid coordinate location
+	 * Pixel location
 	 * @return
 	 */
 	public Point2D getLocation(){
@@ -148,7 +149,7 @@ public abstract class SuperTile extends Group {
 	}
 	
 	/**
-	 * Pixel location
+	 * Grid coordinate location
 	 * @return
 	 */
 	public Point2D getCoordinates(){
