@@ -1,8 +1,10 @@
 package fxml_main;
 
+import gamedata.events.Event;
 import gamedata.gamecomponents.Level;
-import gamedata.gamecomponents.Patch;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.function.Consumer;
 
 import javafx.event.ActionEvent;
@@ -22,28 +24,36 @@ public class LevelEditor extends VBox {
 	private int myGridRows;
 	private int myGridCols;
 	private double myTileHeight;
+	private List<Event> myEvents;
 	private Level myLevel;
 	private LevelController myLevelController;
+	
 	private Consumer<Level> myOkLambda;
 
-	public LevelEditor(LevelController levelController) {
-		
-		initialize();
+	public LevelEditor(Consumer<Level> okLambda) {
+		myId = "";
+		myGridRows = 0;
+		myGridCols = 0;
+		myTileHeight = 0;
+		myEvents = new LinkedList<Event>();
+		initEditor(okLambda);
 	}
 	
 	
-	public LevelEditor(Level level, LevelController levelController) {
+	public LevelEditor(Consumer<Level> okLambda, Level level) {
+		GUIGrid grid = level.getGrid();
 		myId = level.getId();
-		myGridRows = level.getGrid().getRow();
-		myGridCols = level.getGrid().getCol();
+		myGridRows = grid.getRow();
+		myGridCols = grid.getCol();
+		myTileHeight = grid.getTileSize();
 		myLevel = level;
 		
-		myLevelController = levelController;
-		initialize();
+		initEditor(okLambda);
 	}
 	
-	public void initalize (Consumer<Level> okLambda) {
+	public void initEditor (Consumer<Level> okLambda) {
 		myOkLambda = okLambda;
+		initialize();
 	}
 
 	private void initialize() {
@@ -53,7 +63,7 @@ public class LevelEditor extends VBox {
 
 		HBox idHBox = new HBox();
 		Label idLabel = new Label("ID: ");
-		TextField idField = new TextField(myLevel.getId());
+		TextField idField = new TextField(myId);
 		idHBox.getChildren().addAll(idLabel, idField);
 
 		VBox gridSizeVBox = new VBox();
@@ -61,11 +71,11 @@ public class LevelEditor extends VBox {
 
 		VBox rowVBox = new VBox();
 		Label rowLabel = new Label("Rows");
-		TextField rowField = new TextField("5");
+		TextField rowField = new TextField(""+myGridRows);
 		rowVBox.getChildren().addAll(rowLabel,rowField);
 		VBox colVBox = new VBox();
 		Label colLabel = new Label("Columns");
-		TextField colField = new TextField("5");
+		TextField colField = new TextField(""+myGridCols);
 		colVBox.getChildren().addAll(colLabel,colField);
 
 		HBox gridSizeHBox = new HBox();
@@ -74,7 +84,7 @@ public class LevelEditor extends VBox {
 		
 		HBox tileHeightHBox = new HBox();
 		Label heightLabel = new Label("Tile Height: ");
-		TextField heightField = new TextField();
+		TextField heightField = new TextField(""+myTileHeight);
 		tileHeightHBox.getChildren().addAll(heightLabel, heightField);
 
 		Button eventBtn = new Button("Add Global Events...");
@@ -88,7 +98,14 @@ public class LevelEditor extends VBox {
 
 			@Override
 			public void handle(ActionEvent event) {
-				Level level = new Level()
+				myId = idField.getText();
+				myGridRows = Integer.parseInt(rowField.getText());
+				myGridCols = Integer.parseInt(colField.getText());
+				myTileHeight = Double.parseDouble(heightField.getText());
+				
+				GUIGrid grid = new GUIGrid(myGridCols, myGridRows, myTileHeight,"Square Grid");
+				Level level = new Level(grid, myEvents, myId, false);
+				myOkLambda.accept(level);
 			}
 		});
 

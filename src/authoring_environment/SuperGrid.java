@@ -74,6 +74,7 @@ public class SuperGrid {
 		return myCols;
 	}
 	
+
 	public SuperTile findClickedTile(double xCoord, double yCoord){
 		for (List<SuperTile> rows:myGrid){
 			for (SuperTile tile:rows){
@@ -83,5 +84,9 @@ public class SuperGrid {
 			}
 		}
 		return null;
+	}
+	
+	public double getTileSize() {
+		return myTileSize;
 	}
 }

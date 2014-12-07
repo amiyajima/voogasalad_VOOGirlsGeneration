@@ -44,7 +44,7 @@ public class RangeGridView extends ScrollPane{
 		myGrid.displayPane(this);
 	}
 
-    private int getPrefTileSize (int col, int row,int minTileSize) {
+    private int getPrefTileSize (int col,int row,int minTileSize) {
         int calculatedTileSize = Math.max(myViewWidth
                                           / col, myViewHeight / row);
 

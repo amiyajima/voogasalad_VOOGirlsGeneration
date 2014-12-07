@@ -42,10 +42,9 @@ public class Piece extends GridComponent{
      */
 
     // TODO: Think about playerID concept
-    public Piece (String id, String name, String imageLoc, Movement movement,
+    public Piece (String id, String name, String imageLoc,
                   List<Action> actions, Stats stats, Point2D loc, int playerID, Inventory inventory) {
         super(id, name, imageLoc, loc);
-        myMove = movement;
         myActions = actions;
         myStats = stats;
         myPlayerID = playerID;
