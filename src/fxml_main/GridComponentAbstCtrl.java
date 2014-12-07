@@ -22,7 +22,7 @@ public abstract class GridComponentAbstCtrl<T> {
     protected ScrollPane myPropertiesSPane;
     protected GUIGridReference myGridReference;
     protected Map<T, HBox> myEntryMap;
-    protected HashMap<HBox, HBox> myIndivEntMap;
+//    protected HashMap<HBox, HBox> myIndivEntMap;
 
 
     protected GridComponentAbstCtrl (VBox vbox, ScrollPane propertiesSPane,
@@ -31,7 +31,7 @@ public abstract class GridComponentAbstCtrl<T> {
         myPropertiesSPane = propertiesSPane;
         myGridReference = gridRef;
         myEntryMap = new HashMap<T, HBox>();
-        myIndivEntMap = new HashMap<HBox, HBox>();
+//        myIndivEntMap = new HashMap<HBox, HBox>();
         initGlobalControls();
     }
 
@@ -64,13 +64,11 @@ public abstract class GridComponentAbstCtrl<T> {
     protected abstract void initGlobalDelBtn (Button delBtn);
 
     protected void addEntry (T entry) {
-    	HBox entryBox = makeEntryBox(entry);
-        HBox entryCtrls = initEntryControls(entry);
-        HBox entryCompleteBox = new HBox();
-        entryCompleteBox.getChildren().addAll(entryCtrls, entryBox);
-        myEntryMap.put(entry, entryCompleteBox);
-        myIndivEntMap.put(entryCompleteBox, entryBox);
-        myVBox.getChildren().add(entryCompleteBox);
+    	HBox entryHolderBox = new HBox();
+        HBox entryCompleteBox = makeCompleteEntryBox(entry);
+        myEntryMap.put(entry, entryHolderBox);
+        entryHolderBox.getChildren().add(entryCompleteBox);
+        myVBox.getChildren().add(entryHolderBox);
     }
     
     protected HBox makeCompleteEntryBox(T entry) {

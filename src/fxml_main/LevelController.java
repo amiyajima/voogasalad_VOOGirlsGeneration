@@ -63,8 +63,7 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 	
 	private void setAndDisplayGrid(Level level) {
 		myGridReference.setGrid(level.getGrid());
-		GUIGrid grid = myGridReference.getGrid();
-		grid.displayPane(myGridSPane);
+		myGridReference.getGrid().displayPane(myGridSPane);
 	}
 
 	@Override
@@ -95,18 +94,17 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 	@Override
 	protected void initEntryEditBtn(Level entry, Button editBtn) {
 		Consumer<Level> okLambda = (Level level) -> {
-			GUIGrid grid = myGridReference.getGrid();
-			myPieceTypes.addObserver(grid);
-			myPatchTypes.addObserver(grid);
-			myLevelData.replace(entry, level);
-		    HBox entryBox = myEntryMap.get(entry);
-		    HBox imgNameBox = myIndivEntMap.get(entryBox);
-		    
-		    entryBox.getChildren().remove(imgNameBox);
-		    HBox newImgNameBox = makeEntryBox(level);	
-		    
-		    entryBox.getChildren().add(newImgNameBox);
-		    myIndivEntMap.replace(entryBox, newImgNameBox);
+//			myPieceTypes.addObserver(level.getGrid());
+//			myPatchTypes.addObserver(level.getGrid());
+//			myLevelData.replace(entry, level);
+//		    HBox entryBox = myEntryMap.get(entry);
+//		    HBox imgNameBox = myIndivEntMap.get(entryBox);
+//		    
+//		    entryBox.getChildren().remove(imgNameBox);
+//		    HBox newImgNameBox = makeEntryBox(level);	
+//		    
+//		    entryBox.getChildren().add(newImgNameBox);
+//		    myIndivEntMap.replace(entryBox, newImgNameBox);
 		};
 		myPropertiesSPane.setContent(new LevelEditor(okLambda, entry));
 	}

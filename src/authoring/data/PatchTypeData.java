@@ -35,6 +35,7 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 	@Override
 	public void add(Patch p) {
 		myPatches.add(p);
+		System.out.println("Add to patch type: " + myPatches.size());
 	}
 	
 	@Override
@@ -46,9 +47,10 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 	
 	@Override
 	public void replace(Patch origEl, Patch newEl) {
-	        origEl = newEl;
+	    remove(origEl);
+	    add(newEl);
 		setChanged();
-		notifyObservers(origEl);
+		notifyObservers(newEl);
 	}
 	
 	@Override

@@ -210,7 +210,8 @@ public class GUIGrid extends SuperGrid implements Observer {
         }
     }
 
-    public <T> void paneSetOnMouseEvent (EventHandler<MouseEvent> handler) {
+    // TODO: separate the two types of mouse events (drag and click)
+    public void paneSetOnMouseEvent (EventHandler<MouseEvent> handler) {
         myPane.setOnMouseClicked(handler);
         myPane.setOnMouseDragged(handler);
     }

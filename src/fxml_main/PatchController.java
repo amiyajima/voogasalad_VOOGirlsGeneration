@@ -18,122 +18,112 @@ import authoring_environment.GUIGrid;
 
 public class PatchController extends GridComponentAbstCtrl<Patch> {
 
-    private PatchTypeData myPatchTypes;
+	private PatchTypeData myPatchTypes;
 
-    public PatchController (VBox vbox, ScrollPane propertiesSPane, GUIGridReference gridRef,
-                            PatchTypeData patchTypes) {
-        super(vbox, propertiesSPane, gridRef);
-        myPatchTypes = patchTypes;
-        myGridReference = gridRef;
-    }
+	public PatchController (VBox vbox, ScrollPane propertiesSPane, GUIGridReference gridRef,
+			PatchTypeData patchTypes) {
+		super(vbox, propertiesSPane, gridRef);
+		myPatchTypes = patchTypes;
+		myGridReference = gridRef;
+	}
 
-    @Override
-    protected void initGlobalNewBtn (Button newBtn) {
-        newBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                Consumer<Patch> okLambda = (Patch patch) -> {
-                    addEntry(patch);
-                };
-                myPropertiesSPane.setContent(new PatchTypeEditor(okLambda));
-            }
-        });
-    }
+	@Override
+	protected void initGlobalNewBtn (Button newBtn) {
+		newBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle (ActionEvent event) {
+				Consumer<Patch> okLambda = (Patch patch) -> {
+					myPatchTypes.add(patch);
+					addEntry(patch);
+				};
+				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda));
+			}
+		});
+	}
 
-    @Override
-    protected void initGlobalEditBtn (Button editBtn) {
-        editBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                System.out.println("HI EDIT BUTTONFORPATCH HI");
-            }
-        });
-    }
+	@Override
+	protected void initGlobalEditBtn (Button editBtn) {
+		editBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle (ActionEvent event) {
+				System.out.println("HI EDIT BUTTONFORPATCH HI");
+			}
+		});
+	}
 
-    @Override
-    protected void initGlobalDelBtn (Button delBtn) {
-        delBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                myVBox.getChildren().clear();
-                //TODO: I don't know how else to do it....clone...............
-                
-                PatchTypeData clone = new PatchTypeData();
-                for (Patch patchType : myPatchTypes.getData()) {
-                    clone.add(patchType);
-                }
-                for (Patch patchType : clone.getData()) {
-                    myPatchTypes.remove(patchType);
-                }
+	@Override
+	protected void initGlobalDelBtn (Button delBtn) {
+		delBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle (ActionEvent event) {
+				myVBox.getChildren().clear();
+				//TODO: I don't know how else to do it....clone...............
 
-            }
-        });
-    }
+				PatchTypeData clone = new PatchTypeData();
+				for (Patch patchType : myPatchTypes.getData()) {
+					clone.add(patchType);
+				}
+				for (Patch patchType : clone.getData()) {
+					myPatchTypes.remove(patchType);
+				}
 
-    @Override
-    protected HBox makeEntryBox (Patch entry) {
-        myPatchTypes.add(entry);
-        HBox hb = new HBox();
-        Label name = new Label(entry.getName());
-        name.setTranslateY(7.5);
-        ImageView img = entry.getImageView();
-        img.setFitHeight(40);
-        img.setFitWidth(40);
-        hb.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            GUIGrid grid = myGridReference.getGrid();
+			}
+		});
+	}
 
-            @Override
-            public void handle (MouseEvent event) {
-                EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle (MouseEvent e) {
+	@Override
+	protected HBox makeEntryBox (Patch entry) {
+		HBox hb = new HBox();
+		Label name = new Label(entry.getName());
+		name.setTranslateY(7.5);
+		ImageView img = entry.getImageView();
+		img.setFitHeight(40);
+		img.setFitWidth(40);
+		hb.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle (MouseEvent event) {
+				EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
+					@Override
+					public void handle (MouseEvent e) {
+						GUIGrid grid = myGridReference.getGrid();
+						Point2D coor = grid.calculateClicked(e.getX(), e.getY());
+						grid.addPatch(entry, coor);
+					}
+				};
+				myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
+			}
+		});
+		hb.getChildren().addAll(img, name);
+		return hb;
+	}
 
-                        Point2D coor = grid.calculateClicked(e.getX(), e.getY());
-                        grid.addPatch(entry, coor);
-                    }
-                };
-                myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
-            }
-        });
-        hb.getChildren().addAll(img, name);
-        return hb;
-    }
+	@Override
+	protected void initEntryEditBtn (Patch entry, Button editBtn) {
+		editBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle (ActionEvent e) {
+				Consumer<Patch> okLambda = (Patch patch) -> {
+					HBox entryBox = makeCompleteEntryBox(patch);
 
-    @Override
-    protected void initEntryEditBtn (Patch entry, Button editBtn) {
-        editBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent e) {
-                Consumer<Patch> okLambda = (Patch patch) -> {
-                    // TODO: Use observables to make all the pieces and
-                    // patches in the grid change to fit the updated patch
-                        HBox entryBox = myEntryMap.get(entry);
-                        HBox imgNameBox = myIndivEntMap.get(entryBox);
+					HBox entryHolderBox = myEntryMap.get(entry);
+					entryHolderBox.getChildren().clear();
+					entryHolderBox.getChildren().add(entryBox);
 
-                        entryBox.getChildren().remove(imgNameBox);
-                        HBox newImgNameBox = makeEntryBox(patch);
+					myPatchTypes.replace(entry, patch);
+				};
+				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda, entry));
+			}
+		});
+	}
 
-                        entryBox.getChildren().add(newImgNameBox);
-                        myIndivEntMap.replace(entryBox, newImgNameBox);
-
-                        entry.setImageLocation(patch.getImageLocation());
-                        entry.setName(patch.getName());
-
-                        myPatchTypes.replace(entry, patch);
-                    };
-                myPropertiesSPane.setContent(new PatchTypeEditor(okLambda, entry));
-            }
-        });
-    }
-
-    @Override
-    protected void initEntryDelBtn (Patch entry, Button delBtn) {
-        delBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                myPatchTypes.remove(entry);
-                myVBox.getChildren().remove(myEntryMap.get(entry));
-            }
-        });
-    }
+	@Override
+	protected void initEntryDelBtn (Patch entry, Button delBtn) {
+		delBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle (ActionEvent event) {
+				myPatchTypes.remove(entry);
+				myVBox.getChildren().remove(myEntryMap.get(entry));
+			}
+		});
+	}
 }
