@@ -434,12 +434,19 @@ public class ViewController {
 		// System.out.println("myGrid size is" + myGridPane.getWidth() + "*"
 		// + myGrid.getHeight());
 		// System.out.println(myGrid.getBoundsInParent());
-
+	        System.out.println("ViewController onClick -> performAction" + gridState.toString());
 		Point2D loc = myModel.getCurrentLevel().getGrid().findClickedTile(x, y).getLocation();
 		//System.out.println("Tile Found is: "+ myModel.getCurrentLevel().getGrid().findClickedTile(x, y) + " at X:" + loc.getX() +" at Y:"+ loc.getY());
-		
 		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
-		myGameGridEffect.highlightCurrent(loc, myModel.getCurrentLevel().getGrid().getPiece(loc));
+	}
+	
+	/**
+	 * Select state tells VC to highlight the selected piece
+	 * @param p
+	 */
+	public void highlightSelected(Piece p) {
+	           myGameGridEffect.highlightCurrent(p.getLoc(), myModel.getCurrentLevel().getGrid().getPiece(p.getLoc()));
+
 	}
 
 	/**
