@@ -474,14 +474,14 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(double x, double y) {
-		System.out.println("current mouse location:" + x + ", " + y);
+		//System.out.println("current mouse location:" + x + ", " + y);
 		// System.out.println("myGrid size is" + myGridPane.getWidth() + "*"
 		// + myGrid.getHeight());
 		// System.out.println(myGrid.getBoundsInParent());
 
 		Point2D loc = myModel.getCurrentLevel().getGrid().findClickedTile(x, y).getLocation();
 		
-		System.out.println("Tile Found is: "+ myModel.getCurrentLevel().getGrid().findClickedTile(x, y) + " at X:" + loc.getX() +" at Y:"+ loc.getY());
+		//System.out.println("Tile Found is: "+ myModel.getCurrentLevel().getGrid().findClickedTile(x, y) + " at X:" + loc.getX() +" at Y:"+ loc.getY());
 		
 		if (myModel.getCurrentLevel().getGrid().getPiece(loc) == null) {
 			System.out.println("no piece");
