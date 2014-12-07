@@ -21,6 +21,7 @@ public class SwitchPlayerGlobalAction implements GlobalAction {
 
     @Override
     public void performAction () {
+
         // lambda called by level when conditions are met
         Consumer<Game> c = (Game g) -> {
             g.setCurrentPlayer(myPlayer);

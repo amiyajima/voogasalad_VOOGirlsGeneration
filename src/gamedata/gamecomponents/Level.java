@@ -41,6 +41,19 @@ public class Level extends Observable {
         myId = id;
         // winningLevel = isWinningLevel;
     }
+    
+    //lambda, take conditions as predicates and events as Consumers
+    public void runGridEvents(){
+        for(Event e: myEvents){
+            e.runEvent();
+        }
+    }
+    
+    public void runGameEvents(){
+        for(Event e: myEvents){
+            e.runEvent();
+        }
+    }
 
     /**
      * Check rules to see if a player's turn is over. Returns true if the turn
