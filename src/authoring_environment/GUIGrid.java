@@ -255,10 +255,10 @@ public class GUIGrid extends SuperGrid implements Observer {
 	public void repopulateGrid() {
 		this.initGridTiles(this.myShape);
 		for (Patch p : myPatchData.getData()) {
-			this.addPatch(p, p.getLoc());
+			this.addPatchToTile(p, p.getLoc());
 		}
 		for (Piece p : myPieceData.getData()) {
-			this.addPiece(p, p.getLoc());
+			this.addPieceToTile(p, p.getLoc());
 		}
 	}
 
