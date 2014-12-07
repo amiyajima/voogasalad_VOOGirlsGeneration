@@ -38,7 +38,6 @@ public class GameGridEffect {
      * Highlight the tiles that represent the possible range of the action
      * selected
      */
-
     public void highlightActionRange () {
         clearAllActionHighlights();
         updateActives();
