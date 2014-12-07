@@ -43,7 +43,7 @@ public class GameGridEffect {
      */
 
     public void highlightActionRange () {
-        clearAllEffects();
+        //clearAllEffects();
         updateActives();
         System.out.println("Highlighting action111 range");
 
@@ -113,12 +113,8 @@ public class GameGridEffect {
      * @param grid
      */
     private void clearAllEffects(){
-    	//System.out.println("Clearing Effects");
         for (SuperTile st : myHighlightedTiles) {
-        	//System.out.println("Location 1: X:"+st.getLocation().getX()+" Y:"+ st.getLocation().getY());
             myGrid.findClickedTile(st.getLocation()).deselectTile();
-            
-            //System.out.println("Location 2: X:"+myGrid.findClickedTile(st.getLocation()).getLocation().getX()+" Y:"+ myGrid.findClickedTile(st.getLocation()).getLocation().getY());
         }
         myHighlightedTiles.clear();
     }
