@@ -89,6 +89,7 @@ public abstract class SuperTile extends Group {
 	 * De-highlight something
 	 */
 	public void deselectTile(){
+	    System.out.println("De-highlighting tile at " + myLocation.getX() + ", " + myLocation.getY());
 		myHighlight.setVisible(false);
 	}
 	

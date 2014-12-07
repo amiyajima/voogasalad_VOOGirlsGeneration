@@ -27,8 +27,6 @@ public class GameGridEffect {
     private static final String DEFAULT_COLOR = "#0000FF";
      
     public GameGridEffect(ViewController vc){
-//        myHighlighter = new Highlighter();
-
         myViewController = vc;
         myGrid = myViewController.getGrid();
         myActivePiece = myViewController.getActivePiece();
@@ -62,6 +60,7 @@ public class GameGridEffect {
                                  }
                              });
         }
+        printHighlights();
     }
 
 
@@ -92,7 +91,8 @@ public class GameGridEffect {
                     }
                 });
             }
-        }
+        printHighlights();
+    }
     
     /**
      * Uses GRID COORDINATE LOCATION to highlight the current location on the grid
@@ -105,6 +105,7 @@ public class GameGridEffect {
         SuperTile toHighlight = myGrid.findClickedTile(loc);
         toHighlight.selectTile(DEFAULT_COLOR);
         myHighlightedTiles.add(toHighlight);
+        printHighlights();
     }
     
 
@@ -125,7 +126,11 @@ public class GameGridEffect {
         myActiveAction = myViewController.getActiveAction();
     }
 
-    
+    private void printHighlights() {
+        for (SuperTile st : myHighlightedTiles) {
+            System.out.println("Highlights: " + st.getLocation().getX() + ", " + st.getLocation().getY());
+        }
+    }
     
     
     
