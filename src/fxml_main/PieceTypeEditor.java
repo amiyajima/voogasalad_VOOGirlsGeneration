@@ -93,7 +93,7 @@ public class PieceTypeEditor extends Pane {
 		myEditorTitle = EDITOR_TITLE;
 		myAvailableActions = actions;
 		myID = piece.getID();
-		myName = piece.getName();
+		myName = piece.toString();
 		myImageLocation = piece.getImageLocation();
 		myActions = piece.getActions();
 		myStats = piece.getStats();

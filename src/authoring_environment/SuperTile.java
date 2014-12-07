@@ -102,7 +102,7 @@ public abstract class SuperTile extends Group {
     }
     
     public void removePatchImage () {
-        myPatchImage.setFill(Color.WHITE);
+        myPatchImage.setFill(Color.TRANSPARENT);
     }
 
     protected abstract Shape makeShape (double size, Point2D coordinates);
@@ -135,6 +135,7 @@ public abstract class SuperTile extends Group {
     protected void clearPatchImage () {
         myPatchImage.setFill(Color.TRANSPARENT);
     }
+    
 
     private void alignNodes (Point2D coord, Node ... nodes) {
         for (Node node : nodes) {
