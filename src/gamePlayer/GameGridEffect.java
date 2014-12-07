@@ -5,9 +5,6 @@ import gamedata.gamecomponents.Piece;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import authoring_environment.GUIGrid;
 import authoring_environment.SuperTile;
 
