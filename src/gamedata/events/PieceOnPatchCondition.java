@@ -1,6 +1,5 @@
 package gamedata.events;
 
-import gamedata.events.conditions.Condition;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 

@@ -1,4 +1,4 @@
-package gamedata.events.conditions;
+package gamedata.events;
 
 /**
  * Simple interface defining behavior of Condition classes.
