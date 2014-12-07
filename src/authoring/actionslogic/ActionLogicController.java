@@ -4,7 +4,9 @@ import gamedata.action.Action;
 import gamedata.action.ConcreteAction;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,7 +20,7 @@ import javafx.scene.layout.VBox;
 public class ActionLogicController implements Initializable {
 
     @FXML
-    private ListView<Action> actionsListView;
+    private ListView<String> actionsListView;
 
     @FXML
     private ChoiceBox<String> actorsChoiceBox;
@@ -30,6 +32,7 @@ public class ActionLogicController implements Initializable {
     private Button saveButton;
 
     private List<String> myPieceTypes = new ArrayList<String>();
+    private Map<String,Map> myLogicMap = new HashMap<String,Map>();
 
     @Override
     // TODO: [IMPORTANT] This constructor will need a List<String> or Set<String> that contains
@@ -38,9 +41,9 @@ public class ActionLogicController implements Initializable {
     public void initialize (URL location, ResourceBundle resources) {
 
         // for testing
-        actionsListView.getItems().addAll(new ConcreteAction("Attack", null, null, null, null));
-        actionsListView.getItems().addAll(new ConcreteAction("Heal", null, null, null, null));
-        actionsListView.getItems().addAll(new ConcreteAction("Run", null, null, null, null));
+        actionsListView.getItems().addAll("Attack");
+        actionsListView.getItems().addAll("Heal");
+        actionsListView.getItems().addAll("Run");
         myPieceTypes.add("Piece A");
         myPieceTypes.add("Piece B");
         myPieceTypes.add("Piece C");
@@ -55,7 +58,6 @@ public class ActionLogicController implements Initializable {
 
     private void updatePossibleReceivers (String selectedActor) {
         List<String> myPosReceivers = getReceivers(myPieceTypes, selectedActor);
-        // myReceiversVBox = new VBox();
         for (String p : myPosReceivers) {
             myReceiversVBox.getChildren().add(new CheckBox(p));
         }
@@ -69,6 +71,15 @@ public class ActionLogicController implements Initializable {
             }
         }
         return receivers;
+    }
+    
+    @FXML
+    private void saveLogic(){
+        String currAction = actionsListView.getSelectionModel().getSelectedItem();
+        System.out.println(currAction);
+        String currActor = actorsChoiceBox.getSelectionModel().getSelectedItem();
+        System.out.println(currActor);
+        
     }
 
 }

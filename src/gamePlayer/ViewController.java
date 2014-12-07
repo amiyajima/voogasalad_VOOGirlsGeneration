@@ -265,7 +265,7 @@ public class ViewController {
 				myStage.setScene(myScene);
 			});
 		});
-		// initializeGrid();
+//		 initializeGrid();
 	}
 
 	/**
@@ -389,7 +389,7 @@ public class ViewController {
 		    //after i click action button, i need to go back to KeyboardMovement
 		    myKeyboardAction = null;
 		    myKeyboardMovement = new KeyboardMovement();
-		    myKeyboardMovement.setMovementKeyControl(this, myGridPane, myModel);
+		    myKeyboardMovement.setMovementKeyControl(this);
 		}
 	}
 
@@ -414,7 +414,7 @@ public class ViewController {
 		if (keyControlOn){
                   myKeyboardMovement = null;
 		  myKeyboardAction = new KeyboardAction();
-                  myKeyboardAction.setActionKeyControl(this, myGridPane); 
+                  myKeyboardAction.setActionKeyControl(this); 
 		}
 	}
 	
@@ -481,7 +481,7 @@ public class ViewController {
 			}
 			
                       myKeyboardMovement = new KeyboardMovement();
-                      myKeyboardMovement.setMovementKeyControl(this, myGridPane, myModel);
+                      myKeyboardMovement.setMovementKeyControl(this);
 			
 			keyControlOn = true;
 		}

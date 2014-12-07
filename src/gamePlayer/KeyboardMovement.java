@@ -1,6 +1,5 @@
 package gamePlayer;
 
-import gamedata.gamecomponents.Game;
 import gameengine.player.HumanPlayer;
 import java.awt.geom.Point2D;
 import java.util.HashMap;
@@ -9,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 import authoring_environment.SuperTile;
 import javafx.event.EventHandler;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -53,9 +51,9 @@ public class KeyboardMovement {
      * @param movementKeyMap
      * @param gameScene
      */
-    public void setMovementKeyControl (ViewController vc, ScrollPane sp, Game game) {
-        sp.requestFocus();
-        sp.setOnKeyPressed(new EventHandler<KeyEvent>() {
+    public void setMovementKeyControl (ViewController vc) {
+        vc.getGridPane().requestFocus();
+        vc.getGridPane().setOnKeyPressed(new EventHandler<KeyEvent>() {
 
             Set<KeyCode> movementKeyList = movementKeyMap.keySet();
 
@@ -68,18 +66,19 @@ public class KeyboardMovement {
 
                 for (KeyCode kc : movementKeyList) {
                     if (key.getCode() == kc) {
+                        // unhighlight before you highlight the next one
+                        currentTile = vc.getGrid().findClickedTile(myCurrentLocation);
+                        currentTile.deselectTile();
+                        
                         Point2D newCurrentLocation =
                                 new Point2D.Double(myCurrentLocation.getX() + movementKeyMap.get(kc).getX(),
                                                    myCurrentLocation.getY() - movementKeyMap.get(kc).getY());
 
-                        if ((newCurrentLocation.getX() > sp.getWidth() - 1) | (newCurrentLocation.getY() > sp.getHeight() - 1)
+                        if ((newCurrentLocation.getX() > vc.getGrid().getRow() - 1) | (newCurrentLocation.getY() > vc.getGrid().getCol() - 1)
                             | (newCurrentLocation.getX() < 0) | (newCurrentLocation.getY() < 0)) {
                             newCurrentLocation.setLocation(myCurrentLocation.getX(), myCurrentLocation.getY());
                         }
 
-                        // unhighlight before you highlight the next one
-                        currentTile = vc.getGrid().findClickedTile(myCurrentLocation);
-                        currentTile.deselectTile();
                         myCurrentLocation = newCurrentLocation;
 
                         // highlight the new location now
