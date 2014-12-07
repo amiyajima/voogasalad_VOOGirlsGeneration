@@ -4,7 +4,6 @@ import java.awt.geom.Point2D;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -132,6 +131,10 @@ public abstract class SuperTile extends Group {
 		imgView.setFitWidth(size);
 		imgView.setVisible(true);
 		return imgView;
+	}
+	
+	public void clearPieceImage(){
+		this.addPieceImage(this.initImageView(myImageSize));
 	}
  
 	private void alignNodes(Point2D coord, Node...nodes) {

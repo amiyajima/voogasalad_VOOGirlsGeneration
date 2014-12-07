@@ -12,7 +12,6 @@ import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
-import gamedata.gamecomponents.SquareGrid;
 import gamedata.goals.Goal;
 import gamedata.goals.PlayerPiecesRemovedGoal;
 import gamedata.rules.MoveCountRule;

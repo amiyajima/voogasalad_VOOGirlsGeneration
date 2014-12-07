@@ -2,12 +2,12 @@ package fxml_main;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import authoring_environment.GUIGrid;
 
 
 /**
@@ -64,13 +64,21 @@ public abstract class GridComponentAbstCtrl<T> {
     protected abstract void initGlobalDelBtn (Button delBtn);
 
     protected void addEntry (T entry) {
-        HBox entryBox = makeEntryBox(entry);
+    	HBox entryBox = makeEntryBox(entry);
         HBox entryCtrls = initEntryControls(entry);
         HBox entryCompleteBox = new HBox();
         entryCompleteBox.getChildren().addAll(entryCtrls, entryBox);
         myEntryMap.put(entry, entryCompleteBox);
         myIndivEntMap.put(entryCompleteBox, entryBox);
         myVBox.getChildren().add(entryCompleteBox);
+    }
+    
+    protected HBox makeCompleteEntryBox(T entry) {
+    	HBox entryBox = makeEntryBox(entry);
+        HBox entryCtrls = initEntryControls(entry);
+        HBox completeEntryBox = new HBox();
+        completeEntryBox.getChildren().addAll(entryCtrls, entryBox);
+        return completeEntryBox;
     }
 
     protected HBox initEntryControls (T entry) {
