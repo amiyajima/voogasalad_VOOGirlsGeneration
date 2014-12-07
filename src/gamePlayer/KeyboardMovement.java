@@ -4,18 +4,25 @@ import gamedata.gamecomponents.Game;
 import gameengine.player.HumanPlayer;
 import java.awt.geom.Point2D;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import authoring_environment.SuperTile;
 import javafx.event.EventHandler;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 
 public class KeyboardMovement {
+    private static final String KEY_MOVEMENT_COLOR = "#AC58FA";
     HumanPlayer myCurrentPlayer;
     Point2D myCurrentLocation;
     GameGridEffect myGameGridEffect;
     Map<KeyCode, Point2D> movementKeyMap;
+    SuperTile selectedTile;
+    List<SuperTile> myHighlightedTiles;
+    
     
     /**
      * 
@@ -54,8 +61,8 @@ public class KeyboardMovement {
                 for (KeyCode kc : movementKeyList) {
                     if (key.getCode() == kc) {
                         Point2D newCurrentLocation =
-                                new Point2D.Double(myCurrentLocation.getX() - movementKeyMap.get(kc).getY(),
-                                                   myCurrentLocation.getY() + movementKeyMap.get(kc).getX());
+                                new Point2D.Double(myCurrentLocation.getX() + movementKeyMap.get(kc).getX(),
+                                                   myCurrentLocation.getY() - movementKeyMap.get(kc).getY());
 
                         if ((newCurrentLocation.getX() > sp.getWidth() - 1) |
                             (newCurrentLocation.getY() > sp.getHeight() - 1)
@@ -63,10 +70,15 @@ public class KeyboardMovement {
                             newCurrentLocation.setLocation(myCurrentLocation.getX(), myCurrentLocation.getY());
                         }
                         
-//                        myGameGridEffect.getHighlighter().unhighlight(sp, myCurrentLocation);
+                        //unhighlight before you highlight the next one
+                        selectedTile = vc.getGrid().findClickedTile(myCurrentLocation);
+                        selectedTile.deselectTile();
                         myCurrentLocation = newCurrentLocation;
+                        
+                        //highlight the new location now
+                        selectedTile = vc.getGrid().findClickedTile(myCurrentLocation);
+                        selectedTile.selectTile(KEY_MOVEMENT_COLOR);
                         System.out.println("KeyboardMovement New Location: " + myCurrentLocation);
-//                        myGameGridEffect.highlightCurrent(sp, myCurrentLocation, Color.PURPLE);
 
                         // ArrayList<Label> actions = new ArrayList<Label>();
                         // if (vc.getPiece(vc.findPosition(myCurrentLocation.getX(),
@@ -90,5 +102,4 @@ public class KeyboardMovement {
         return myCurrentLocation;
     }
     
-//    Map<KeyCode, Point2D> getovementKeyMap
 }
