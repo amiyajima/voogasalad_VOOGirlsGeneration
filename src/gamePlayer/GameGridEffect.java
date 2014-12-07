@@ -27,6 +27,8 @@ public class GameGridEffect {
     private static final String DEFAULT_COLOR = "#0000FF";
      
     public GameGridEffect(ViewController vc){
+//        myHighlighter = new Highlighter();
+
         myViewController = vc;
         myGrid = myViewController.getGrid();
         myActivePiece = myViewController.getActivePiece();
@@ -39,12 +41,12 @@ public class GameGridEffect {
      * Highlight the tiles that represent the possible range of the action
      * selected
      */
+
     public void highlightActionRange () {
         clearAllEffects();
-        updateActives();
         System.out.println("Highlighting action111 range");
-        
 
+        
         if (myActivePiece != null && myActiveAction != null) {
             System.out.println("GameGridEffect: action ABOUT TO HIGHLIGHT\n\n");
             myActiveAction.getActionRange(myActivePiece.getLoc())
@@ -84,7 +86,7 @@ public class GameGridEffect {
                         SuperTile toHighlight = myGrid.findClickedTile(point2);
                         toHighlight.selectTile(EFFECT_RANGE_COLOR);
                         myHighlightedTiles.add(toHighlight);
-                        System.out.println("Effect Range Highlight!");
+//                        System.out.println("Effect Range Highlight!");
                         });
                     }
                 });
@@ -96,7 +98,7 @@ public class GameGridEffect {
      */
     public void highlightCurrent(Point2D loc, Piece activeP){
         clearAllEffects();
-        updateActives();
+        myActivePiece = activeP;
         System.out.println("GGE highlight location: " + loc.getX() + " " + loc.getY());
         SuperTile toHighlight = myGrid.findClickedTile(loc);
         toHighlight.selectTile(DEFAULT_COLOR);
@@ -114,10 +116,6 @@ public class GameGridEffect {
         }
     }
 
-    private void updateActives() {
-        myActivePiece = myViewController.getActivePiece();
-        myActiveAction = myViewController.getActiveAction();
-    }
     
     
     
