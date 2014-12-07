@@ -5,10 +5,12 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import authoring.data.PatchData;
 import authoring.data.PieceData;
+import authoring_environment.GridView;
 import authoring_environment.JennieGrid;
 import authoring_environment.SandyGrid;
 import authoring_environment.SandyGridView;
 import authoring_environment.ShapeGrid;
+import authoring_environment.SuperGrid;
 import authoring_environment.WorkspaceView;
 
 /**
@@ -17,9 +19,10 @@ import authoring_environment.WorkspaceView;
  *
  */
 public class LevelEditor {
-    private static final int MIN_TILE_SIZE = 40;
-    private static final int GRID_VIEW_HEIGHT = 550;
-    private static final int GRID_VIEW_WIDTH = 700;
+    private static final int DEFAULT_TILE_SIZE = 100;
+	private static final int MIN_TILE_SIZE = 40;
+    private static final int GRID_VIEW_HEIGHT = 400;
+    private static final int GRID_VIEW_WIDTH = 800;
     
     private WorkspaceView myWorkspaceView;
     private String levelName;
@@ -27,7 +30,7 @@ public class LevelEditor {
     private String myGridType;
     private int myRows;
     private int myCol;
-    private ShapeGrid shapeGrid;
+    private SuperGrid shapeGrid;
     private int tileSize;
     
     private PieceData pieceData = new PieceData();
@@ -49,39 +52,29 @@ public class LevelEditor {
         myCol = col;
         tileSize = getPrefTileSize(myRows,myCol);
         
-        initializeGrid();
-        addWorkspaceTab(shapeGrid, levelName);
+        addWorkspaceTab(shapeGrid, levelName,gridType);
     }
     
-    //TODO If grid type doesn't match, this may cause a NullPointerException
-    private void initializeGrid() {
-        //TODO: hard coded grid type
-        if (myGridType.equals("Square Grid")){
-           shapeGrid = new SandyGrid(myCol, myRows, 
-                           tileSize, pieceData, patchData);
 
-        }
-        else if (myGridType.equals("Hexagon Grid")) {
-            shapeGrid = new JennieGrid(myCol, myRows, 
-                       tileSize, pieceData, patchData);
-        }
-    }
-
-    private void addWorkspaceTab(ShapeGrid grid, String name) {
+    private void addWorkspaceTab(SuperGrid superGrid, String name,String shape) {
         BorderPane bPane = new BorderPane();
-        SandyGridView gridView = new SandyGridView(grid, GRID_VIEW_WIDTH, GRID_VIEW_HEIGHT);
+ 
+        GridView gridView = new GridView(GRID_VIEW_WIDTH, GRID_VIEW_HEIGHT,
+        											DEFAULT_TILE_SIZE,shape);
         bPane.setRight(gridView);
+        
+   
         
         Tab tab = new Tab();
         tab.setContent(bPane);
                         
-        myWorkspaceView.addGrid(grid);
+        myWorkspaceView.addGrid(superGrid);
         myWorkspaceView.addNextTab(tab, name);
     }
     
     private int getPrefTileSize (int gridWidthNumber, int gridHeightNumber) {
         int calculatedTileSize = Math.max(GRID_VIEW_WIDTH
-                                          / gridWidthNumber, GRID_VIEW_HEIGHT / gridHeightNumber);
+                                          / gridWidthNumber, GRID_VIEW_HEIGHT/ gridHeightNumber);
         int tileSize = (calculatedTileSize < MIN_TILE_SIZE) ? MIN_TILE_SIZE
                                                            : calculatedTileSize;
         return tileSize;

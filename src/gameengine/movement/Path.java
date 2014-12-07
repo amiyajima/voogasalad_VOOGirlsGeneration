@@ -5,10 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Defines a path(An arrangement of Points that must be traveresed during a
- * movement) for movement.
- * 
- * DEPRECIATED
+ * Defines a path(An arrangement of Points that must be traversed during a
+ * movement) for movement. 
+ * TODO: Decide if paths will be implemented or not.
  * 
  * @author Jesse, Rica
  *

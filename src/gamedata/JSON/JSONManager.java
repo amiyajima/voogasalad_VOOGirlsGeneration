@@ -2,18 +2,28 @@ package gamedata.JSON;
 
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
-import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
+import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Piece;
 import gamedata.goals.Goal;
 import gamedata.rules.Rule;
 import gamedata.wrappers.GameData;
+import gamedata.wrappers.GoalData;
+import gamedata.wrappers.GridData;
+import gamedata.wrappers.LevelDataIndividual;
+import gamedata.wrappers.PatchData;
+import gamedata.wrappers.PieceData;
+import gamedata.wrappers.PlayerDataIndividual;
 import gameengine.player.Player;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import authoring_environment.GUIGrid;
+import authoring_environment.SuperGrid;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -39,12 +49,14 @@ public class JSONManager {
 
     /**
      * Write a game and its contents into a JSON file.
-     * @param game 
+     * 
+     * @param myModel
      * 
      * @param grid
      */
-    public void writeToJSON (Game game, String fileName) {
-        String json = myGson.toJson(game);
+    public void writeToJSON (Game myModel, String fileName) {
+        System.out.println("JSONManager: write method called");
+        String json = myGson.toJson(myModel);
         System.out.println("JSONManager: game converted to json!");
 
         try {
@@ -69,56 +81,51 @@ public class JSONManager {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
-        GameData myGameData = myGson.fromJson(br, GameData.class);
+        Game myGameData = myGson.fromJson(br, Game.class);
         System.out.println(myGameData.toString());
 
         // JSONParseTester jpt = new JSONParseTester();
         // jpt.testRead(myGson, br);
 
-        Game myGame = convertToGame(myGameData);
+        // Game myGame = convertToGame(myGameData);
 
-        return myGame;
+        return myGameData;
     }
 
     /**
-     * DEPRECATED. should be unnecessary
      * Method that converts a game data object into a game object. may be an issue as every aspect
      * of it is in a data wrapper
      * 
      * @param myGameData
      * @return
      */
-    private Game convertToGame (GameData myGameData) {
-        Game createdGame = new Game();
+    private Game convertToGame (GameData gameData) {
+        List<PlayerDataIndividual> myPlayerData = gameData.getPlayerData();
+        List<LevelDataIndividual> myLevelData = gameData.getLevelData();
+        PlayerDataIndividual myCurrentPlayerData = gameData.getCurrentPlayerData();
+        LevelDataIndividual myCurentLevelData = gameData.getCurrentLevelData();
+        
+        for(LevelDataIndividual l : myLevelData){
+            GridData gridData = l.getGrid();
+            
+            List<Patch> patches = new ArrayList<Patch>();
+            for(PatchData pd : gridData.getPatches()){
+                
+            }
+            List<Piece> pieces = new ArrayList<Piece>();
+            for(PieceData pd : gridData.getPieces()){
+                
+            }
+            
+            Grid grid = new Grid(gridData.getRow(), gridData.getColumn(), pieces, patches);
+            
+            Level currentLevel = new Level(grid,l.getGoals(), l.getRules());
+        }
+
+        Game newGame = new Game(myPlayerData.size(), );
+
         return null;
     }
-
-    /*
-     * public void test(String type, BufferedReader reader){
-     * Object deserializedObject = null;
-     * Class classDefinition = null;
-     * try {
-     * classDefinition = Class.forName(type);
-     * try {
-     * deserializedObject = classDefinition.newInstance();
-     * }
-     * catch (InstantiationException e) {
-     * // TODO Auto-generated catch block
-     * e.printStackTrace();
-     * }
-     * catch (IllegalAccessException e) {
-     * // TODO Auto-generated catch block
-     * e.printStackTrace();
-     * }
-     * }
-     * catch (ClassNotFoundException e) {
-     * // TODO Auto-generated catch block
-     * e.printStackTrace();
-     * }
-     * deserializedObject = myGson.fromJson(reader, deserializedObject.getClass());
-     * System.out.println(deserializedObject.toString());
-     * }
-     */
 
     public void registerTypeAdapters (GsonBuilder builder) {
         builder.registerTypeAdapter(Goal.class, new GenericTypeAdapter<Goal>("gamedata.goals"));

@@ -20,6 +20,13 @@ public class SandyTile extends Group {
 	protected ImageView myPieceImage;
 	protected ImageView myPatchImage;
 
+	/**
+	 * 
+	 * @param bgShape Tile shape
+	 * @param size Tile size
+	 * @param coor Grid coordination
+	 * @param loc Layout coordination
+	 */
 	public SandyTile(Shape bgShape, int size, Point2D coor,
 			Point2D loc) {
 		myShape = bgShape;

@@ -1,11 +1,21 @@
 package gameengine.player;
 
+import java.util.ArrayList; 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import javafx.scene.input.KeyCode;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Level;
+import gamedata.gamecomponents.Piece;
+import gameengine.movement.Movement;
+
 import java.awt.geom.Point2D;
+
+import authoring_environment.GUIGrid;
 
 
 /**
@@ -15,13 +25,10 @@ import java.awt.geom.Point2D;
  * @Author Jesse, Sandy
  */
 
-public class Player {
+public abstract class Player {
 
     private int myNumMovesPlayed;
     private int myID;
-    private Map<KeyCode, Action> myActionKeyMap;
-    // for keypressed, when keys don't trigger actions. ex) arrow keys
-    private Map<KeyCode, Point2D> myMovementKeyMap;
 
     /**
      * Default constructor
@@ -35,17 +42,30 @@ public class Player {
      * 
      * @param id
      *        int ID corresponding to the Player
+     * @param
      */
     public Player (int id) {
         myNumMovesPlayed = 0;
         myID = id;
-        setActionKeyMap(myActionKeyMap);
-        setMovementKeyMap(myMovementKeyMap);
-
     }
 
+    /* *//**
+     * Iterate through the list of pieces available on the grid.
+     * 
+     * @param g
+     * @return
+     *         TODO: itereate through pieces in grid, determine which ones have corresponding Player
+     *         ID
+     */
+    private List<Piece> populatePieces (GUIGrid g) {
+        // Set allPieces = g.get
+        return null;
+    }
+
+    public abstract void startTurn ();
+
     /**
-     * Resets number of moves player for the player
+     * Resets number of moves played for the player
      */
     public void resetMovesPlayed () {
         myNumMovesPlayed = 0;
@@ -61,49 +81,19 @@ public class Player {
     }
 
     /**
-     * used by game player (GUI) so that it knows what action to perform when
-     * certain keycodes are pressed/used.
-     * 
-     * @return myKeyMap which maps actions to pre-defined keycodes
-     */
-    public Map<KeyCode, Action> getActionKeyMap () {
-        return myActionKeyMap;
-    }
-
-    /**
-     * needs to get info from the authoring environment to set up the map..
-     * 
-     * @param myKeyMap
-     */
-    public void setActionKeyMap (Map<KeyCode, Action> myActionKeyMap) {
-        myActionKeyMap = new HashMap<KeyCode, Action>();
-    }
-
-    /**
-     * Returns the Key Mapping for the Player
+     * Getter for Number of Moves Played
      * 
      * @return
      */
-    public Map<KeyCode, Point2D> getMovementKeyMap () {
-        return myMovementKeyMap;
+    public int getNumMovesPlayed () {
+        return myNumMovesPlayed;
     }
 
     /**
-     * Sets the Key Mapping for the Player
-     * 
-     * @param myMovementKeyMap2
+     * ToString Method for Player Information. For debugging purposes.
      */
-    public void setMovementKeyMap (Map<KeyCode, Point2D> myMovementKeyMap2) {
-        myMovementKeyMap2 = new HashMap<KeyCode, Point2D>();
-    }
-
     public String toString () {
-        return "ID:" + myID + " NumMovesPlayed:" + myNumMovesPlayed + " movement key map:" +
-               myMovementKeyMap;
-    }
-    
-    public int getNumMovesPlayed(){
-    	return myNumMovesPlayed;
+        return "ID:" + myID + " NumMovesPlayed:" + myNumMovesPlayed;
     }
 
 }

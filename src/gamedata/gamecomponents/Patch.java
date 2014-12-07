@@ -1,24 +1,20 @@
 package gamedata.gamecomponents;
 
-import java.awt.geom.Point2D;
+import gamedata.stats.Stats;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import java.awt.geom.Point2D;
 
 /**
  * @author Sandy Lee
  *
  */
-public class Patch {
-
-	private String myName;
-	private Point2D myLoc;
-	private String myImageLocation;
-	private transient ImageView myImageView;
+public class Patch extends GridComponent {
 
 	/**
 	 * Constructor
 	 * 
+	 * @param id
+	 * 			  Unique string ID for the piece or patch.
 	 * @param typeID
 	 *            ID for this type of patch
 	 * @param imageLocation
@@ -26,97 +22,20 @@ public class Patch {
 	 * @param p
 	 *            coordinate of patch
 	 */
-	public Patch(String name, String imageLocation, Point2D p) {
-		myName = name;
-		myImageLocation = imageLocation;
-		if (myImageLocation.startsWith("/")) {
-			myImageView = new ImageView(new Image(getClass()
-					.getResourceAsStream(imageLocation)));
-		} else {
-			myImageView = new ImageView(new Image(imageLocation));
-		}
-		myLoc = p;
+	public Patch(String id, String name, String imageLocation, Point2D p) {
+		super(id, name, imageLocation, p);
 	}
 	
 	/**
 	 * Deep cloning constructor for a Patch
 	 * @param clone - Patch instance to be cloned
 	 */
-	public Patch(Patch clone) {
-		myImageLocation = clone.myImageLocation;
-		setImageView(myImageLocation);
-		myLoc = new Point2D.Double(clone.myLoc.getX(),clone.myLoc.getY());
-		myName = clone.myName;
-	}
-	
-	private void setImageView(String imageLocation) {
-    	if(myImageLocation.startsWith("/")){
-        	myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
-        }
-        else{
-        	myImageView = new ImageView(new Image(imageLocation));
-        }
-    }
-
-	/**
-	 * Getter for patch's name
-	 * 
-	 * @return String - patch name
-	 */
-	public String getName() {
-		return myName;
+	public Patch(Patch clone, Point2D placeHere) {
+		super(clone, placeHere);
 	}
 
-	/**
-	 * Sets patch's name
-	 * 
-	 * @param myName = string name of patch
-	 *            of patch
-	 */
-	public void setMyName(String name) {
-		this.myName = name;
+	@Override
+	public Stats getStats() {
+		return null;
 	}
-
-	/**
-	 * Getter for patch's coordinate location
-	 * 
-	 * @return coord of patch
-	 */
-	public Point2D getLoc() {
-		return myLoc;
-	}
-
-	/**
-	 * sets patch's coordinate location
-	 * 
-	 * @param coord
-	 * 
-	 */
-	public void setLoc(Point2D coord) {
-		myLoc = coord;
-	}
-
-	/**
-	 * Getter for patch's image
-	 * 
-	 * @return image of the patch
-	 */
-	public ImageView getImageView() {
-		return myImageView;
-	}
-
-	public String getImageLocation() {
-		return myImageLocation;
-	}
-
-	/**
-	 * Sets chosen image to patch's location
-	 * 
-	 * @param imageLocation
-	 *            image file's location
-	 */
-	public void setMyImage(String imageLocation) {
-		myImageLocation = imageLocation;
-	}
-
 }

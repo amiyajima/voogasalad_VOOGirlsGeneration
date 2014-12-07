@@ -8,10 +8,13 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="/Users/Eric/Downloads/LeapDeveloperKit_2.2.0+23475_mac/LeapSDK/lib/LeapJava.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/Users/Eric/Downloads/LeapDeveloperKit_2.2.0+23475_mac/LeapSDK/lib/LeapJava.jar"/>
 		</attributes>
 	</classpathentry>
+=======
+>>>>>>> 4b38630b831548813850e8ff33aaaa3ec975aab1
 	<classpathentry kind="output" path="bin"/>
 </classpath>

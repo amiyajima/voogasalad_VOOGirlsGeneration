@@ -18,13 +18,13 @@ import javafx.scene.control.Tab;
  * TODO: WHY IS JAVAFX SO ANNOYING SOMETIMES?!?!
  */
 public class LevelTab extends Tab{
-	private SandyGrid myGrid;
+	private SuperGrid myGrid;
 	
-	public void setGrid(SandyGrid grid){
+	public void setGrid(SuperGrid grid){
 		myGrid = grid;
 	}
 	
-	public SandyGrid getGrid(){
+	public SuperGrid getGrid(){
 		return myGrid;
 	}
 }

@@ -18,7 +18,7 @@ import javafx.scene.control.TabPane;
  */
 public class WorkspaceView extends TabPane {
 	
-	private List<ShapeGrid> myGrids;
+	private List<SuperGrid> myGrids;
 	private int myCurrentTabIdx;
 	
 	public WorkspaceView() {
@@ -67,10 +67,9 @@ public class WorkspaceView extends TabPane {
         });
 	}
 	
-	public ShapeGrid getActiveGrid(){
+	public SuperGrid getActiveGrid(){
 		SingleSelectionModel<Tab> selectionModel = getSelectionModel();
 		int idx = selectionModel.getSelectedIndex();
-
 		
 		if(idx==-1 || idx>=myGrids.size()){
 			return myGrids.get(0);
@@ -78,7 +77,7 @@ public class WorkspaceView extends TabPane {
 		return myGrids.get(idx);
 	}
 	
-	public void addGrid(ShapeGrid grid){
-		myGrids.add(grid);
+	public void addGrid(SuperGrid superGrid){
+		myGrids.add(superGrid);
 	}
 }

@@ -1,13 +1,15 @@
 package gameengine.movement;
 
 import gamedata.action.Action;
-import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Piece;
 import gamedata.rules.Rule;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
+
+import authoring_environment.GUIGrid;
 
 /**
  * Defines the movement of a piece. Responsible for maintaining the behavior
@@ -17,12 +19,31 @@ import java.awt.geom.Point2D;
  *
  */
 public class Movement implements Action {
-	// possible paths for this movement
+	/**
+	 * Point2Ds referring to relative positions of movement
+	 */
 	private List<Point2D> myMoves;
-	private List<List<Point2D>> myPaths;
-	private List<Rule> myRules;
+	/**
+	 * Point2Ds referring to currently calculated absolute positions of movement
+	 */
 	private List<Point2D> myAbsoluteMoves;
-	private transient Grid myGrid;
+	/**
+	 * List of Point2Ds referring to relative paths of movement
+	 */
+	private List<List<Point2D>> myPaths;
+	/**
+	 * Grid the Piece is on and movement will be execute on
+	 */
+	private transient GUIGrid myGrid;
+
+	/**
+	 * Orientator resonsible for calculating orientations
+	 */
+	private Orientator myOrientator;
+	/**
+	 * Orientation of the piece (depending on last movement made)
+	 */
+	private double myOrientation;
 
 	/**
 	 * Constructor
@@ -32,12 +53,12 @@ public class Movement implements Action {
 	 *            movement
 	 */
 	@SafeVarargs
-	public Movement(Grid g,List<Point2D>... endPoints) {
+	public Movement(GUIGrid g, List<Point2D>... endPoints) {
+		myOrientation = 0;
+		myOrientator = new Orientator();
 		myGrid = g;
 		boolean first = true;
-		// myRules = rules;
 		myPaths = new ArrayList<List<Point2D>>();
-		myRules = new ArrayList<Rule>();
 		for (List<Point2D> p : endPoints) {
 			if (first) {
 				myMoves = p;
@@ -65,7 +86,8 @@ public class Movement implements Action {
 	}
 
 	/**
-	 * Checks to see if an absolute location (x,y) is valid
+	 * Checks to see if an absolute location (x,y) is a valid location for
+	 * movement and that the destination is empty (no pieces overlapping)
 	 * 
 	 * @param x
 	 * @param y
@@ -73,7 +95,8 @@ public class Movement implements Action {
 	 */
 	public boolean isValidLocation(int x, int y) {
 		for (Point2D p : myAbsoluteMoves) {
-			if ((p.getX() == x && p.getY() == y)&&(myGrid.getPiece(x, y)==null)) {
+			if ((p.getX() == x && p.getY() == y)
+					&& (myGrid.getPiece(new Point2D.Double(x, y)) == null)) {
 				return true;
 			}
 		}
@@ -86,9 +109,10 @@ public class Movement implements Action {
 	 * 
 	 * @return true or false
 	 */
-	private boolean checkPathCollision(Grid myGrid, Point2D endPoint) {
+	private boolean checkPathCollision(GUIGrid myGrid, Point2D endPoint) {
 		List<Point2D> path;
 		boolean b = true;
+		// TODO: Implement Path Collision Once Constraints are Implemented
 		// Needs to find path with correct endpoint. Then check collision at
 		// each point2D of the path
 
@@ -102,7 +126,8 @@ public class Movement implements Action {
 
 	@Override
 	public List<Point2D> getActionRange(Point2D pieceLocation) {
-		return this.getPossibleLocs((int)pieceLocation.getX(), (int)pieceLocation.getY());
+		return this.getPossibleLocs((int) pieceLocation.getX(),
+				(int) pieceLocation.getY());
 	}
 
 	@Override
@@ -110,17 +135,21 @@ public class Movement implements Action {
 		return new ArrayList<Point2D>();
 	}
 
+	/**
+	 * Contains the logic to execute the behavior of moving the piece
+	 */
 	@Override
 	public void doBehavior(Piece actor, Piece... receivers) {
-		Piece p=receivers[0];
+		Piece p = receivers[0];
 		Point2D point = p.getLoc();
-		if(isValidLocation((int)point.getX(),(int)point.getY())){
+		if (isValidLocation((int) point.getX(), (int) point.getY())) {
+			// TODO: Implement Orientation Calculation Here
 			actor.setLoc(point);
 		}
 	}
-	
+
 	@Override
-	public String toString(){
+	public String toString() {
 		return "Movement";
 	}
 }

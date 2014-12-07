@@ -12,14 +12,16 @@ public class SelectState implements IGridState {
     //private MouseController myMouseController;
 
     public SelectState (ViewController controller) {
+        System.out.println("At Select State");
         myController = controller;
-        myController.getGrid().setOnMouseEntered(event->{myController.changeCursor(myController.CURSOR_GLOVE_TEST);;});    
+        myController.getGridPane().setOnMouseEntered(event->{myController.changeCursor(myController.CURSOR_GLOVE_TEST);;});    
     
     }
     
 
     @Override
     public void onClick (Piece piece) {
+    	System.out.println("Piece is at X:"+piece.getLoc().getX()+" Y:"+piece.getLoc().getY());
         myController.updateStats(piece);
         myController.setActivePiece(piece);
         myController.updateActions(piece);

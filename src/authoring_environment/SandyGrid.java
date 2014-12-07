@@ -15,8 +15,9 @@ import authoring.data.PieceData;
  */
 public class SandyGrid extends ShapeGrid {
 	
-	public SandyGrid(int cols, int rows, int tileSize, PieceData pieceData, PatchData patchData) {
-		super(cols, rows, tileSize, pieceData, patchData);
+	public SandyGrid(int cols, int rows, int tileSize, PieceData pieceData, PatchData patchData,
+			String id) {
+		super(cols, rows, tileSize, pieceData, patchData, id);
 	}
 	
 	@Override

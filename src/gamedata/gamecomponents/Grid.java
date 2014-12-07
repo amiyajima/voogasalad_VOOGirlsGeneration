@@ -13,7 +13,7 @@ import java.util.Map;
  * @Author Jesse Ling, Sandy Lee
  * 
  */
-public abstract class Grid {
+public class XGrid {
     private int myRow;
     private int myColumn;
     // protected Map<Point2D, Patch> myPatches;
@@ -31,8 +31,10 @@ public abstract class Grid {
     /**
      * constructor of grid
      * 
-     * @param x number of rows
-     * @param y number of columns
+     * @param x
+     *        number of rows
+     * @param y
+     *        number of columns
      */
     public Grid (int row, int column) {
         myRow = row;
@@ -41,11 +43,20 @@ public abstract class Grid {
         myPieces = new ArrayList<Piece>();
     }
 
+    public Grid (int row, int column, List<Piece> pieces, List<Patch> patches) {
+        myRow = (int) Math.sqrt(pieces.size());
+        myRow = (int) Math.sqrt(pieces.size());
+        myPatches = patches;
+        myPieces = pieces;
+    }
+
     /**
      * places a patch on the grid
      * 
-     * @param patch to be put on grid
-     * @param coord of patch
+     * @param patch
+     *        to be put on grid
+     * @param coord
+     *        of patch
      */
     public void setPatch (Point2D coord, Patch patch) {
         myPatches.add(patch);
@@ -54,34 +65,14 @@ public abstract class Grid {
     /**
      * gets the patch on the given coordinate
      * 
-     * @param coord of patch
+     * @param coord
+     *        of patch
      * @return patch
      */
     /*
-     * public Patch getPatch (Point2D coord) {
-     * for (Point2D coordinate : myPatches.keySet()) {
-     * if (coordinate.equals(coord)) { return myPatches.get(coord); }
-     * }
-     * return null;
-     * }
-     */
-
-    /**
-     * gets the piece on the given coordinate
-     * 
-     * @param loc
-     *        of piece
-     * @return piece
-     */
-    /*
-     * public Piece getPiece (Point2D loc) {
-     * for (Point2D coordinate : myPieces.keySet()) {
-     * {
-     * if (coordinate.equals(loc)) { return myPieces.get(loc); }
-     * }
-     * }
-     * return null;
-     * }
+     * public Patch getPatch (Point2D coord) { for (Point2D coordinate :
+     * myPatches.keySet()) { if (coordinate.equals(coord)) { return
+     * myPatches.get(coord); } } return null; }
      */
 
     /**
@@ -107,7 +98,8 @@ public abstract class Grid {
     /**
      * removes the patch on the given coordinate
      * 
-     * @param coord of remove
+     * @param coord
+     *        of remove
      */
     public void removePatch (Patch p) {
         myPatches.remove(p);
@@ -128,10 +120,8 @@ public abstract class Grid {
      */
     public List<Piece> getAllPieces () {
         /*
-         * List<Piece> all = new ArrayList<Piece>();
-         * for (Map.Entry<Point2D, Piece> entry : myPieces.entrySet()) {
-         * all.add(entry.getValue());
-         * }
+         * List<Piece> all = new ArrayList<Piece>(); for (Map.Entry<Point2D,
+         * Piece> entry : myPieces.entrySet()) { all.add(entry.getValue()); }
          */
         return myPieces;
     }
@@ -143,16 +133,14 @@ public abstract class Grid {
      */
     public List<Patch> getAllPatches () {
         /*
-         * List<Patch> all = new ArrayList<Patch>();
-         * for (Map.Entry<Point2D, Patch> entry : myPatches.entrySet()) {
-         * all.add(entry.getValue());
-         * }
+         * List<Patch> all = new ArrayList<Patch>(); for (Map.Entry<Point2D,
+         * Patch> entry : myPatches.entrySet()) { all.add(entry.getValue()); }
          */
         return myPatches;
     }
 
     // TODO temporary fix because it was throwing an error
-    public Piece getPiece (Object uniqueID) {
+    public Piece getPiece (int uniqueID) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -169,6 +157,18 @@ public abstract class Grid {
             if (p.getLoc().getX() == x && p.getLoc().getY() == y) { return p; }
         }
         return null;
+    }
+
+    /**
+     * gets the piece on the given Point2D
+     * 
+     * @param loc
+     *        of piece
+     * @return piece
+     */
+
+    public Piece getPiece (Point2D loc) {
+        return getPiece((int) loc.getX(), (int) loc.getY());
     }
 
 }

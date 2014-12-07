@@ -1,7 +1,6 @@
 package gamedata.wrappers;
 
-import java.util.List;
-import gamedata.gamecomponents.Grid;
+import java.util.List; 
 import gamedata.goals.Goal;
 import gamedata.rules.Rule;
 

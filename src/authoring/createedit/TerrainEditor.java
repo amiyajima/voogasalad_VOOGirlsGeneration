@@ -4,6 +4,7 @@ import gamedata.gamecomponents.Patch;
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,6 +14,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -28,17 +30,17 @@ import authoring_environment.UIspecs;
  *         terrain's name in the LibraryView of the game authoring
  *         environment.
  */
-public class TerrainEditor extends PopupWindow {
+public class TerrainEditor extends Pane {
 
     private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
     private final int HEIGHT = 150;
     private final int WIDTH = 400;
-    private final String NAME = "Terrain Editor";
     private Patch myTerrain;
     private final String TERRAIN_NAME_LABEL = "Name";
     private final String LOAD_IMAGE_LABEL = "Load image";
     private final String IMAGE_LABEL = "Terrain image";
     private final String TEMPLATE_LABEL = "Change";
+    private VBox myBox;
 
     private String myImageLocation;
 
@@ -51,12 +53,10 @@ public class TerrainEditor extends PopupWindow {
     public TerrainEditor (Patch terrain) {
         setHeight(HEIGHT);
         setWidth(WIDTH);
-        setTitle(NAME);
         myTerrain = terrain;
         initialize();
     }
 
-    @Override
     protected void initialize () {
 
         ScrollPane root = new ScrollPane();
@@ -79,6 +79,7 @@ public class TerrainEditor extends PopupWindow {
         initImageLoader(imageBox, IMAGE_LABEL, LOAD_IMAGE_LABEL);
 
         Button create = new Button(TEMPLATE_LABEL);
+
         create.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
@@ -89,9 +90,11 @@ public class TerrainEditor extends PopupWindow {
         });
 
         box.getChildren().addAll(nameBox, imageBox, create);
-        setScene(new Scene(box));
+        myBox = box;
+        getChildren().add(box);
 
     }
+    
 
     /**
      * Initializes so that user can type in name in a textfield
@@ -136,6 +139,6 @@ public class TerrainEditor extends PopupWindow {
             }
         });
         imageBox.getChildren().addAll(loadLabel, loadImage, icon);
-        
+
     }
 }

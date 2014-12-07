@@ -1,5 +1,6 @@
 package gamePlayer;
 
+
 import com.leapmotion.leap.*;
 import java.awt.Robot;
 
@@ -18,6 +19,7 @@ class LeapListener extends Listener {
         c.enableGesture(Gesture.Type.TYPE_CIRCLE);
         
     }
+
     public void onFrame(Controller controller){
         Frame frame = controller.frame();
         InteractionBox box = frame.interactionBox();

@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -18,6 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
+import authoring_environment.RangeGrid;
+import authoring_environment.RangeGridView;
 
 
 /**
@@ -28,6 +31,7 @@ import authoring.abstractfeatures.PopupWindow;
  * @author Meng'en Huang, Jesse Ling, Jennie Ju
  *
  */
+
 public class RangeEditor extends PopupWindow {
     private static final String CUSTOM = "Custom(default)";
 
@@ -52,31 +56,35 @@ public class RangeEditor extends PopupWindow {
 
     private int myGridWidthNumber;
     private int myGridHeightNumber;
-    private RangeGrid mySampleGridView;
+    private RangeGridView rangeGridView;
+    private List<Point2D> myRange;
+    
 
-    public RangeEditor (List<Point2D> range) {
-        // range.add(new Point2D.Double(1,0));
-        // range.add(new Point2D.Double(-1,1));
+    public RangeEditor (List<Point2D> range, String shape) {
+//         range.add(new Point2D.Double(1,0));
+//         range.add(new Point2D.Double(-1,1));
 
+    	myRange=range;
         setHeight(RANGE_EDITOR_HEIGHT);
         setWidth(RANGE_EDITOR_WIDTH);
         setTitle(NAME);
-        mySampleGridView = new RangeGrid(myGridLength, myGridLength,
-                                         myTileSize, range);
-        if (!((range == null) || (range.size() == 0))) {
-
-            // cacluateGridSize(range);
-            int initialWidth = (int) cacluateGridSize(range).getX();
-            int initialHeight = (int) cacluateGridSize(range).getY();
-//            System.out.println(initialWidth);
-//            System.out.println(initialHeight);
-
-            int initialSize = getPrefTileSize(initialWidth * 2 + 1, initialHeight * 2 + 1);
-            mySampleGridView.update(initialWidth * 2 + 1, initialHeight * 2 + 1, initialSize);
-
-        }
-
-        mySampleGridView.setRange(range);
+        
+    	rangeGridView = new RangeGridView(myGridLength, myGridLength,
+                                         myTileSize, shape, range);
+        
+//        if (!((range == null) || (range.size() == 0))) {
+//
+//            // cacluateGridSize(range);
+//            int initialWidth = (int) cacluateGridSize(range).getX();
+//            int initialHeight = (int) cacluateGridSize(range).getY();
+////            System.out.println(initialWidth);
+////            System.out.println(initialHeight);
+//
+//            int initialSize = getPrefTileSize(initialWidth * 2 + 1, initialHeight * 2 + 1);
+//            mySampleGrid=new RangeGrid (initialWidth * 2 + 1,initialHeight * 2 + 1,initialSize,
+//            		"Square Grid",range);
+//
+//        }
         initialize();
     }
 
@@ -92,7 +100,6 @@ public class RangeEditor extends PopupWindow {
             }
         }
         return new Point2D.Double(maxX, maxY);
-
     }
 
     @Override
@@ -116,8 +123,8 @@ public class RangeEditor extends PopupWindow {
         TextField specifiedData = new TextField();
         Button choose = new Button("Choose");
         Button delete = new Button("Delete");
-        choose.setOnAction(new selectRangeHandler(targetChoice, specifiedData, choose));
-        delete.setOnAction(new selectRangeHandler(targetChoice, specifiedData, delete));
+//        choose.setOnAction(new selectRangeHandler(targetChoice, specifiedData, choose));
+//        delete.setOnAction(new selectRangeHandler(targetChoice, specifiedData, delete));
 
         selection.getChildren().addAll(targetLabel, targetChoice);
 
@@ -152,20 +159,22 @@ public class RangeEditor extends PopupWindow {
                 myGridHeightNumber = Integer.parseInt(VRadius.getText()) * 2 + 1;
                 myTileSize = getPrefTileSize(myGridWidthNumber, myGridHeightNumber);
                 box.getChildren().clear();
-                // mySampleGridView = new RangeGrid(myGridLength, myGridLength,
-                // myTileSize);
-                mySampleGridView.update(myGridWidthNumber, myGridHeightNumber,
-                                        myTileSize);
+                myRange=rangeGridView.returnSelectedList();
+                for(Point2D p:myRange){
+                	System.out.println(p.getX()+","+p.getY());
+                }
+                rangeGridView.update(myGridWidthNumber, myGridHeightNumber,
+                						myRange);
                 box.getChildren().addAll(sizeChooser, enter,
-                                         mySampleGridView, specifedSelection, select);
+                		rangeGridView, specifedSelection, select);
             }
-        });
+        });	
 
         select.setOnAction(new SelectHandler(this));
 
         sizeChooser.getChildren().addAll(horizontal, times, vertical);
 
-        box.getChildren().addAll(sizeChooser, enter, mySampleGridView);
+        box.getChildren().addAll(sizeChooser, enter, rangeGridView);
         setScene(scene);
     }
 
@@ -203,7 +212,7 @@ public class RangeEditor extends PopupWindow {
             boolean toChoose = (button.getText().equals("Choose")) ? true : false;
             switch (chosen) {
                 case COLUMN:
-                    mySampleGridView.rangeColumn(parameter, toChoose);
+                    mySampleGrid.rangeColumn(parameter, toChoose);
                     break;
                 case ROW:
                     mySampleGridView.rangeRow(parameter, toChoose);

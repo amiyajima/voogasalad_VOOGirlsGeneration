@@ -3,8 +3,12 @@ package authoring.data;
 import gamedata.gamecomponents.Patch;
 
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Set;
 
 /**
  * Class for storing the patches created by the user
@@ -12,38 +16,66 @@ import java.util.List;
  * 
  * @author Sandy Lee
  */
-public class PatchData implements AuthoringData<Patch> {
+public class PatchData implements AuthoringData<Patch>, Observer {
+
+	private List<Patch> myPatches;
+
+	/**
+	 * Constructor for new PatchData,
+	 * initializes empty list of Patch
+	 */
+	public PatchData () {
+		myPatches = new LinkedList<Patch>();
+	}
+
+	@Override
+	public void add(Patch p) {
+		myPatches.add(p);
+	}
 	
-    private List<Patch> myPatches;
+	@Override
+	public void replace(Patch origEl, Patch newEl) {
+		origEl.setName(newEl.getName());
+		origEl.setImageLocation(newEl.getImageLocation());
+	}
 
-    /**
-     * Constructor for new PatchData,
-     * initializes empty list of Patch
-     */
-    public PatchData () {
-        myPatches = new LinkedList<Patch>();
-    }
+	@Override
+	public void remove(Patch p) {
+		myPatches.remove(p);
+	}
 
-    @Override
-    public void add (Patch... patches) {
-        for (Patch p : patches) {
-            myPatches.add(p);
-        }
-    }
+	@Override
+	public List<Patch> getData() {
+		return myPatches;
+	}
 
-    @Override
-    public void remove (Patch... patches) {
-        for (Patch p : patches) {
-            myPatches.remove(p);
-        }
-    }
+	@Override
+	public void update(Observable o, Object arg) {
+		if (o instanceof PatchTypeData) {
+		    //removing -> observable notifies that arg has been removed from patchtypedata
+			List<Patch> toRemove = new ArrayList<Patch>();
+			PatchTypeData typeData = (PatchTypeData) o;
+			for (Patch p : myPatches) {
+				if (!typeData.containsName(p.getID())) {
+					toRemove.add(p);
+				}
+			}
+			
+			myPatches.removeAll(toRemove);
 
-    @Override
-    public void clear () {
-        myPatches.clear();
-    }
-    
-    public void removePatch(Point2D location){
+			//replacing -> observable notifies that arg has been replaced from patchtypedata
+			if (arg instanceof Patch) {
+				Patch patchType = (Patch) arg;
+				for (Patch p : myPatches) {
+				    if (p.getID() == patchType.getID()){
+				    	replace(p, patchType);
+				    }
+				}
+			}
+		}
+	}
+
+	public void removePatchAtLoc(Point2D location){
 		for(Patch patch : myPatches){
 			if(location.equals(patch.getLoc())){
 				myPatches.remove(patch);
@@ -51,9 +83,10 @@ public class PatchData implements AuthoringData<Patch> {
 			}
 		}
 	}
-    
-    public boolean terrainAtLoc(Patch terrain, int x, int y){
-    	Point2D location = new Point2D.Double(x, y);
+
+	// Can we rename this?
+	public boolean terrainAtLoc(Patch terrain, int x, int y){
+		Point2D location = new Point2D.Double(x, y);
 		for(Patch patch : myPatches){
 			if(location.equals(patch.getLoc()) && terrain.getName().equals(patch.getName())){
 				myPatches.remove(patch);
@@ -61,14 +94,30 @@ public class PatchData implements AuthoringData<Patch> {
 			}
 		}
 		return false;
-    }
-    
-    public List<Patch> getPatches(){
-        return myPatches;
-    }
-
-    @Override
-    public List<Patch> get () {
-        return myPatches;
+	}
+	
+	public List<Point2D> removeUnknown(Set<String> idSet) {
+		List<Patch> patchToRemove = new ArrayList<Patch>();
+		List<Point2D> pointsToRemove = new ArrayList<Point2D>();
+		for (Patch patch : myPatches) {
+    		if (!idSet.contains(patch.getID())) {
+				patchToRemove.add(patch);
+				patch.getImageView().setImage(null);
+    			pointsToRemove.add(patch.getLoc());
+    		}
+		}
+		myPatches.remove(patchToRemove);
+		return pointsToRemove;
+	}
+	
+	public List<Point2D> replace(Patch patchType) {
+    	List<Point2D> pointsToReplace = new ArrayList<Point2D>();
+    	myPatches.forEach(patch -> {
+    		if (patch.getID().equals(patchType.getID())) {
+    			replace(patch, patchType);
+    			pointsToReplace.add(patch.getLoc());
+    		}
+    	});
+    	return pointsToReplace;
     }
 }
