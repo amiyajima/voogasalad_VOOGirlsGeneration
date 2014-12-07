@@ -1,27 +1,24 @@
 package gamedata.events;
 
 import gamedata.gamecomponents.Game;
+import gamedata.gamecomponents.Level;
 
-/**
- * If this action is run, it will make the game jump to the level that this game is set to jump to
- * @author Rica
- *
- */
+
 public class LevelChangeGlobalAction extends GlobalAction {
-	public static final String DESCRIPTION = "Change level";
+    public static final String DESCRIPTION = "Change level";
     private Game myGame;
-    private String myLevelToJumpTo;
+    private Level myLevelToJumpTo;
 
-    public LevelChangeGlobalAction(Game game, String levelToJumpTo) {
-    	super(DESCRIPTION + " to " + levelToJumpTo);
+    public LevelChangeGlobalAction (Game game, Level l) {
+        super(DESCRIPTION + " to " + l);
         myGame = game;
-        myLevelToJumpTo = levelToJumpTo;
+        myLevelToJumpTo = l;
     }
-    
+
     @Override
     public void doBehavior () {
         // TODO Auto-generated method stub
-        myGame.jumpToLevel(myLevelToJumpTo);
+        myGame.setCurrentLevel(myLevelToJumpTo);
     }
 
 }
