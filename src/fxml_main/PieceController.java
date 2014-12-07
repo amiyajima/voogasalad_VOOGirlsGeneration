@@ -105,7 +105,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 			public void handle (ActionEvent e) {
 				Consumer<Piece> okLambda = (Piece piece) -> {
 					HBox entryBox = makeCompleteEntryBox(piece);
-
+					
 					HBox entryHolderBox = myEntryMap.get(entry);
 					entryHolderBox.getChildren().clear();
 					entryHolderBox.getChildren().add(entryBox);
