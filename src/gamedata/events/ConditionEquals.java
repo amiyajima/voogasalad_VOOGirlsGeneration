@@ -28,4 +28,5 @@ public abstract class ConditionEquals extends Condition{
 		myValue = val;
 	}
 	
+
 }
