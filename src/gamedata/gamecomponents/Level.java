@@ -56,7 +56,16 @@ public class Level extends Observable {
 	public GUIGrid getGrid() {
 		return myGrid;
 	}
-
+	
+	/**
+	 * Returns the List of Events contained in this level.
+	 *
+	 * @return
+	 */
+	public List<Event> getEvents(){
+		return myEvents;
+	}
+	
 	/**
 	 * toString method used to test JSON read/write
 	 */
