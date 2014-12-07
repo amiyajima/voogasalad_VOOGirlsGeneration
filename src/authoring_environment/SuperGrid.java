@@ -97,8 +97,8 @@ public class SuperGrid {
 	 * @return
 	 */
 	public SuperTile findClickedTile(Point2D loc){
-	                int row=(int) loc.getX();
-	                int col=(int) loc.getY();
+	                int col=(int) loc.getX();
+	                int row=(int) loc.getY();
 	                return myGrid.get(col).get(row);
 	        }
 	

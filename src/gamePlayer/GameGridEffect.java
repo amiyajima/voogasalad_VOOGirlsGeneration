@@ -117,6 +117,7 @@ public class GameGridEffect {
         for (SuperTile st : myHighlightedTiles) {
             myGrid.findClickedTile(st.getLocation()).deselectTile();
         }
+        myHighlightedTiles.clear();
     }
     
     private void updateActives() {
