@@ -1,6 +1,7 @@
-package gamedata.events;
+package gamedata.events.globalaction;
 
 import java.awt.geom.Point2D;
+import gamedata.events.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
 

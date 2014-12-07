@@ -62,7 +62,7 @@ public class RangeEditor extends PopupWindow {
 
     public RangeEditor (List<Point2D> range, String shape) {
          range.add(new Point2D.Double(1,0));
-         range.add(new Point2D.Double(-1,1));
+         range.add(new Point2D.Double(-1,2));
 
     	myRange=range;
         setHeight(RANGE_EDITOR_HEIGHT);

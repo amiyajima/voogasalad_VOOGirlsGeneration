@@ -55,6 +55,7 @@ public class ConditionEditorPane extends Pane{
 		updateFields(condition);
 	}
 
+	//TODO: Implement this so we can UPDATE Conditions, in addition to creating and deleting them
 	private void updateFields(Condition condition) {
 
 	}

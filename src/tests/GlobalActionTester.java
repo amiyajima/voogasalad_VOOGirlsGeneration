@@ -3,10 +3,10 @@ package tests;
 import static org.junit.Assert.*;
 import java.awt.geom.Point2D;
 import org.junit.Test;
-import gamedata.events.CreatePieceGlobalAction;
-import gamedata.events.DeletePieceGlobalAction;
-import gamedata.events.SwitchPlayerGlobalAction;
-import gamedata.events.LevelChangeGlobalAction;
+import gamedata.events.globalaction.CreatePieceGlobalAction;
+import gamedata.events.globalaction.DeletePieceGlobalAction;
+import gamedata.events.globalaction.LevelChangeGlobalAction;
+import gamedata.events.globalaction.SwitchPlayerGlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
 

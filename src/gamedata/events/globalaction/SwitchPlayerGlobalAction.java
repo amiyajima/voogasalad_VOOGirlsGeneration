@@ -1,5 +1,6 @@
-package gamedata.events;
+package gamedata.events.globalaction;
 
+import gamedata.events.GlobalAction;
 import gamedata.gamecomponents.Game;
 
 

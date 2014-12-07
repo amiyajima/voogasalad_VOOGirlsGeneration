@@ -95,12 +95,12 @@ public class EventEditorController implements Initializable {
 			return;
 		}
 		
-		Consumer<Condition> okLambda = (Condition condition) -> {
+		Consumer<Condition> doneLambda = (Condition condition) -> {
 			conditionsListView.getItems().remove(entry);
 		    conditionsListView.getItems().add(condition);
 		    newConditionStage.close();
 		};
-		showNewConditionWindow(okLambda, entry);
+		showNewConditionWindow(doneLambda, entry);
 	}
 
 	@FXML
@@ -163,7 +163,7 @@ public class EventEditorController implements Initializable {
 	@FXML
 	private void handleDelEvent(){
 		int delIdx = eventsListView.getSelectionModel().getSelectedIndex();
-		conditionsListView.getItems().remove(delIdx);
+		eventsListView.getItems().remove(delIdx);
 	}
 
 	/**
@@ -173,6 +173,12 @@ public class EventEditorController implements Initializable {
 	 * @param event
 	 */
 	private void showEventInEditor(Event event){
+		/**
+		 * To avoid null-pointer exceptions. 
+		 */
+		if(event==null){
+			return;
+		}
 		myConditions = event.getConditions();
 		myActions = event.getGlobalActions();
 
@@ -211,13 +217,13 @@ public class EventEditorController implements Initializable {
 		loader.setLocation(getClass().getResource("/authoring/eventeditor/NewAction.fxml"));
 		Parent root = loader.load();
 
-		Stage newConditionStage  = new Stage();
-		newConditionStage.setTitle("New Action");
-		newConditionStage.initModality(Modality.WINDOW_MODAL);
+		Stage newActionStage  = new Stage();
+		newActionStage.setTitle("New Action");
+		newActionStage.initModality(Modality.WINDOW_MODAL);
 		Scene scene = new Scene(root);
-		newConditionStage.setScene(scene);
+		newActionStage.setScene(scene);
 
-		newConditionStage.showAndWait();
+		newActionStage.showAndWait();
 	}
 
 	/**
