@@ -11,21 +11,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import java.util.ResourceBundle;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-// import com.leapmotion.leap.Controller;
-import authoring_environment.GUIGrid;
-import authoring_environment.SuperTile;
-import tests.JSONBobTester;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -34,8 +25,16 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import tests.JSONBobTester;
+// import com.leapmotion.leap.Controller;
+import authoring_environment.GUIGrid;
+import authoring_environment.SuperTile;
 
 /**
  * 
@@ -58,6 +57,7 @@ public class ViewController {
 	private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
+	private static final String DEFAULT_HIGHLIGHT_COLOR = "#ff0000";
 
 	private ResourceBundle myLanguages;
 	private Stage myStage;
@@ -109,7 +109,6 @@ public class ViewController {
 		myPopup = new BorderPane();
 		myJSONManager = new JSONManager();
 		// myLeapController = new Controller();
-
 		loadFXML(GAMESPACE_FXML, myGameSpace);
 		loadFXML(INITIALSCENE_FXML, myInitialScene);
 		loadFXML(POPUP_FXML, myPopup);
@@ -279,15 +278,8 @@ public class ViewController {
 			l.getStyleClass().add("button");
 			newGameButton.getItems().add(l);
 			l.setOnAction(event -> {
-				// try {
 				myScene = new Scene(myGameSpace);
 				myStage.setScene(myScene);
-				// myModel = myJSONManager.readFromJSONFile(file.getPath());
-				// }
-				// catch (Exception e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
 			});
 		});
 		// initializeGrid();
@@ -299,7 +291,8 @@ public class ViewController {
 		myGrid = currentLevel.getGrid();
 		System.out.println("myGrid: " + myGrid);
 		myGrid.displayPane(myGridPane);
-
+		
+		myGameGridEffect = new GameGridEffect(this);
 		myGameSpace.setCenter(myGridPane);
 
 		setOnClick();
@@ -309,9 +302,11 @@ public class ViewController {
 			changeCursor(CURSOR_GLOVE_TEST);
 		});
 
-		// myGameGridEffect = new GameGridEffect(this);
 		keyControlOn = false;
 		System.out.println("Grid initialized");
+		
+		myGameGridEffect = new GameGridEffect(this);
+		System.out.println("Game grid effect initialized");
 	}
 
 	/**
@@ -358,9 +353,8 @@ public class ViewController {
 
 		piece.getStats()
 				.getStatNames()
-				.forEach(
-						key -> stats.add(new Text(key + ":  "
-								+ piece.getStats().getValue(key))));
+				.forEach(key -> stats.add(new Text(key + ":  "
+					+ piece.getStats().getValue(key))));
 
 		statsPane.getChildren().addAll(stats);
 
@@ -372,7 +366,6 @@ public class ViewController {
 	 * @param piece
 	 */
 	protected void updateActions(Piece piece) {
-		setActivePiece(piece);
 		controlPane.getChildren().clear();
 		ArrayList<Label> actions = new ArrayList<Label>();
 
@@ -429,36 +422,23 @@ public class ViewController {
 	 * @param action
 	 */
 	protected void bindAction(Action action) {
-
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
-
-		// highlight the action range.
-		System.out.println(activePiece.getLoc());
 		SuperTile activeTile = myGrid.findClickedTile(activePiece.getLoc());
+		activeTile.selectTile(DEFAULT_HIGHLIGHT_COLOR);
 
-		activeTile.selectTile();
-		activeTile.makeHighlight(1.0);
-		// myGameGridEffect.highlightActionRange();
-
+	        myGameGridEffect.highlightActionRange();
 		setGridState(new ApplyState(this));
 	}
 
-	/**
-	 * TODO: Add javadoc
-	 */
 	private void setOnClick() {
-		myGridPane.setOnMouseClicked(event -> {
-			// System.out.println("Exact Mouse Coordinate:"+event.getX()+" Y:"+event.getY());
-				performAction(event.getX(), event.getY());
-			});
+	    myGridPane.getContent().setOnMouseClicked(event -> {
+			performAction(event.getX(), event.getY());
+		});
 	}
 
 	// Probably going to move this to KeyboardAction class
-	// /**
-	// * TODO: Add javadoc
-	// */
 	// public void setOnEnterKey() {
 	// System.out.println("do i need this?");
 	// myGridPane.requestFocus();
@@ -483,37 +463,16 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(double x, double y) {
-		// System.out.println("current mouse location:" + x + ", " + y);
+		//System.out.println("current mouse location:" + x + ", " + y);
 		// System.out.println("myGrid size is" + myGridPane.getWidth() + "*"
 		// + myGrid.getHeight());
 		// System.out.println(myGrid.getBoundsInParent());
 
-		if (myModel.getCurrentLevel().getGrid().getPiece(findPosition(x, y)) == null) {
-			System.out.println("no piece");
-		}
-
-		gridState.onClick(myModel.getCurrentLevel().getGrid()
-				.getPiece(findPosition(x, y)));
-		// myGrid.clearEffect();
-		// myGameGridEffect.clearAllEffects(myGrid);
-
-		// highlightCurrent(findPosition(x - 45, y - 20), Color.BLUE);
-		// myGameGridEffect.highlightCurrent(findPosition(x - 45, y - 20),
-		// Color.BLUE);
-
-		// addDropShadow(myGrid.get(((int)findPosition(x,y).getX()),
-		// ((int)findPosition(x,y).getY())), Color.PURPLE);
-	}
-
-	public void performActionKeyboard(Point2D location) {
-
-		gridState.onClick(myModel.getCurrentLevel().getGrid()
-				.getPiece(location));
-		// myGrid.clearEffect();
-		myGameGridEffect.clearAllEffects(myGrid);
-
-		// highlightCurrent(location, Color.BLUE);
-		myGameGridEffect.highlightCurrent(location, Color.BLUE);
+		Point2D loc = myModel.getCurrentLevel().getGrid().findClickedTile(x, y).getLocation();
+		//System.out.println("Tile Found is: "+ myModel.getCurrentLevel().getGrid().findClickedTile(x, y) + " at X:" + loc.getX() +" at Y:"+ loc.getY());
+		
+		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
+		myGameGridEffect.highlightCurrent(loc, myModel.getCurrentLevel().getGrid().getPiece(loc));
 	}
 
 	/**
@@ -552,7 +511,6 @@ public class ViewController {
 	public void toggleKeyboardControl() {
 		if (keyControlOn) {
 			keyControlOn = false;
-			// myGameGridEffect.getHighlighter().unhighlight(myGridPane,
 			// myKeyboardMovement.getCurrentLocation());
 			myKeyboardMovement = null;
 			myKeyboardAction = null;
@@ -574,7 +532,6 @@ public class ViewController {
 	 */
 	public Point2D getCurrentClick() {
 		return currentClick;
-
 	}
 
 	/**

@@ -16,6 +16,14 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 		myPatches = new LinkedList<Patch>();
 	}
 	
+    public Set<String> getIdSet() {
+    	Set<String> idSet = new HashSet<String>();
+		for (Patch p : myPatches) {
+			idSet.add(p.getID());
+		}
+		return idSet;
+    }
+	
 	public boolean containsName(String name) {
 		Set<String> nameSet = new HashSet<String>();
 		for (Patch p : myPatches) {

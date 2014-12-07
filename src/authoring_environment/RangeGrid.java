@@ -81,7 +81,6 @@ public class RangeGrid extends SuperGrid{
 		}
 	}
 	
-
 	private SuperTile findTile(int row, int col) {
 		SuperTile tile=rangeGrid.get(col).get(row);
 		return tile;

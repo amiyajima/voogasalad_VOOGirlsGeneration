@@ -4,12 +4,8 @@ import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
 
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.Control;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 
 public class SuperGrid {
 	private static final String CIRCLE_GRID = "Circle Grid";
@@ -74,10 +70,19 @@ public class SuperGrid {
 	}
 	
 
+
+	/**
+	 * Use PIXELS to get a tile
+	 * @param xCoord
+	 * @param yCoord
+	 * @return
+	 */
 	public SuperTile findClickedTile(double xCoord, double yCoord){
 		for (List<SuperTile> rows:myGrid){
 			for (SuperTile tile:rows){
+				//System.out.println(tile.getLocation().getX());
 				if (tile.myShape.contains(xCoord,yCoord)){
+					//System.out.println("Here");
 					return tile;
 				}
 			}
@@ -85,6 +90,12 @@ public class SuperGrid {
 		return null;
 	}
 	
+
+	/**
+	 * Use GRID COORDINATE LOCATION to get a tile
+	 * @param loc
+	 * @return
+	 */
 	public SuperTile findClickedTile(Point2D loc){
 	                int row=(int) loc.getX();
 	                int col=(int) loc.getY();

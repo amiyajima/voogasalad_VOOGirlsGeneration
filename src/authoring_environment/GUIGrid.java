@@ -6,9 +6,13 @@ import gamedata.gamecomponents.Piece;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import authoring.data.PatchData;
+import authoring.data.PatchTypeData;
 import authoring.data.PieceData;
+import authoring.data.PieceTypeData;
 
 /**
  * Authoring, engine, and player may all use this grid!!
@@ -16,6 +20,7 @@ import authoring.data.PieceData;
  * @author Jennie Ju
  *
  */
+
 public class GUIGrid extends SuperGrid {
 
 
@@ -67,13 +72,13 @@ public class GUIGrid extends SuperGrid {
     }
 
     // TODO: set image within tile at this location
-    public void addPatch (Patch patchType, Point2D loc) {
-        Patch clone = new Patch(patchType, loc);
-        myPatchData.add(clone);
-        SuperTile myTile = myGrid.get((int) loc.getX()).get((int) loc.getY());
-        System.out.println(clone.getImageLocation());
-        myTile.addPatchImage(clone.getImageLocation());
-    }
+	public void addPatch (Patch patchType, Point2D loc) {
+		Patch clone = new Patch(patchType, loc);
+		myPatchData.add(clone);
+		SuperTile myTile = myGrid.get((int) loc.getX()).get((int) loc.getY());
+		System.out.println(clone.getImageLocation());
+		myTile.addPatchImage(clone.getImageView());
+	}
     
 
     public void removePiece (Piece p) {

@@ -48,6 +48,7 @@ public abstract class SuperTile extends Group {
 	
 
 	protected void makeShapeTile(double size, Point2D loc){
+
 		myCoordinates=calculateCoord(size,loc);
 		myImageCoord=calculateImageCoord(size,loc);
 		myImageSize=calculateImageSize(size);
@@ -62,16 +63,34 @@ public abstract class SuperTile extends Group {
 		alignNodes(myImageCoord,myPatchImage,myPieceImage);
 	}
 
+<<<<<<< HEAD
+=======
+
+
+	/**
+	 * Creates the highlight settings for this tile
+	 * @param size
+	 */
+
+>>>>>>> c3ec931b18a0ad0d545ac1a70cb8bc2d0b4b6e9c
 	private void makeHighlight(double size) {
 		myHighlight=makeShape(size,myCoordinates);
 		myHighlight.setFill(DEFAULT_HIGHLIGHT_COLOR);
 		myHighlight.setVisible(false);
 	};
 	
-	public void selectTile(){
+	/**
+	 * Select a tile to highlight, passing in a hex color
+	 * @param color
+	 */
+	public void selectTile(String color){
+	        myHighlight.setFill(Color.web(color, 0.3));
 		myHighlight.setVisible(true);
 	}
 	
+	/**
+	 * De-highlight something
+	 */
 	public void deselectTile(){
 		myHighlight.setVisible(false);
 	}
@@ -84,8 +103,8 @@ public abstract class SuperTile extends Group {
 		myPieceImage.setImage(imageView.getImage());
 	}
 	
-	public void addPatchImage(String imageLoc){
-		myPatchImage.setImage(new Image(getClass().getResourceAsStream(imageLoc)));
+	public void addPatchImage(ImageView imageView){
+		myPatchImage.setImage(imageView.getImage());
 	}
 
 
@@ -123,10 +142,18 @@ public abstract class SuperTile extends Group {
 		}
 	}
 	
+	/**
+	 * Grid coordinate location
+	 * @return
+	 */
 	public Point2D getLocation(){
 		return myLocation;
 	}
 	
+	/**
+	 * Pixel location
+	 * @return
+	 */
 	public Point2D getCoordinates(){
 		return myCoordinates;
 	}

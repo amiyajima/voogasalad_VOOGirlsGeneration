@@ -26,7 +26,6 @@ public class LevelEditor extends VBox {
 	private double myTileHeight;
 	private List<Event> myEvents;
 	private Level myLevel;
-	private LevelController myLevelController;
 	
 	private Consumer<Level> myOkLambda;
 
