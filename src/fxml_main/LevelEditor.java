@@ -32,12 +32,12 @@ public class LevelEditor extends VBox {
     private static final String CREATOR_TITLE = "Level Creator";
     private static final String LABEL_CSS = "-fx-font-size: 14pt;";
 
-
     private String myId;
     private int myGridRows;
     private int myGridCols;
     private double myTileHeight;
     private ObservableList<Event> myEvents;
+    private GUIGrid myGrid;
     private Level myLevel;
 
     private Consumer<Level> myOkLambda;
@@ -52,11 +52,11 @@ public class LevelEditor extends VBox {
     }
 
     public LevelEditor (Consumer<Level> okLambda, Level level) {
-        GUIGrid grid = level.getGrid();
+        myGrid = level.getGrid();
         myId = level.getId();
-        myGridRows = grid.getRow();
-        myGridCols = grid.getCol();
-        myTileHeight = grid.getTileSize();
+        myGridRows = myGrid.getRow();
+        myGridCols = myGrid.getCol();
+        myTileHeight = myGrid.getTileSize();
         myLevel = level;
         myEvents = (ObservableList<Event>) level.getEvents();
 
@@ -133,8 +133,10 @@ public class LevelEditor extends VBox {
                 myGridCols = Integer.parseInt(colField.getText());
                 myTileHeight = Double.parseDouble(heightField.getText());
 
-                GUIGrid grid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
-                Level level = new Level(grid, myEvents, myId, false);
+                if(myGrid==null){
+                	myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
+                }
+                Level level = new Level(myGrid, myEvents, myId, false);
 
                 myOkLambda.accept(level);
             }

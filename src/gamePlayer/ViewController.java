@@ -355,11 +355,11 @@ public class ViewController {
 		piece.getActions().forEach(action -> {
 			Label l = new Label(action.toString());
 			l.setOnMouseClicked(event -> bindAction(action));
+			l.getStyleClass().add("label");
 			actions.add(l);
 		});
 
 		controlPane.getChildren().addAll(actions);
-
 	}
 	
 	/**
