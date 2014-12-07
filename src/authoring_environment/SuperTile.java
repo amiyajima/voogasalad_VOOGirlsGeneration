@@ -91,16 +91,17 @@ public abstract class SuperTile extends Group {
         return myHighlight.isVisible();
     }
 
-    public void addPieceImage (ImageView imageView) {
+    public void setPieceImage (ImageView imageView) {
         myPieceImage.setImage(imageView.getImage());
+        myPieceImage.setVisible(true);
     }
 
-    public void addPatchImage (ImageView imageView) {
+    public void setPatchImage (ImageView imageView) {
         myPatchImage.setFill(new ImagePattern(imageView.getImage()));
     }
     
     public void removePieceImage () {
-    	myPieceImage.setImage(null);
+    	myPieceImage.setVisible(false);
     }
     
     public void removePatchImage () {
@@ -133,15 +134,6 @@ public abstract class SuperTile extends Group {
         imgView.setVisible(true);
         return imgView;
     }
-
-    protected void clearPieceImage () {
-        myPieceImage.setImage(null);
-    }
-    
-    protected void clearPatchImage () {
-        myPatchImage.setFill(Color.TRANSPARENT);
-    }
-    
 
     private void alignNodes (Point2D coord, Node ... nodes) {
         for (Node node : nodes) {
