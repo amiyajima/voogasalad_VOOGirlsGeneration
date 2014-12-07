@@ -51,7 +51,7 @@ public class ViewController {
 	public static final String GAME_LOCATION = "/src/resources/json";
 	public static final String POPUP_FXML = "popup.fxml";
 
-	private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
+	private static final String DEFAULT_MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
 
@@ -79,7 +79,10 @@ public class ViewController {
 	private Piece activePiece;
 	private Action activeAction;
 
-	private AudioClip myAudio;
+//	private AudioClip myAudio;
+	private Audio myAudio;
+	
+	
 	@FXML
 	protected VBox statsPane;
 	@FXML
@@ -101,8 +104,12 @@ public class ViewController {
 	private GameGridEffect myGameGridEffect;
 	private SuperTile keySelectedTile;
 
-	public ViewController(Stage s) {
+	public ViewController(Stage s) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		myStage = s;
+		
+//	        myAudio = new Audio(DEFAULT_MUSIC);
+//	        myAudio.play();
+		
 		openInitialMenu();
 		try {
 			newGame();
@@ -165,7 +172,7 @@ public class ViewController {
 	
 	
 	/**
-	 * the method to restart the game; it asks the use whether to save the
+	 * the method to restart the game; it asks the user whether to save the
 	 * current game
 	 * 
 	 */
@@ -236,7 +243,7 @@ public class ViewController {
 
 	@FXML
 	protected void cancelPopup() {
-
+	    System.out.println("cancel popup");
 	}
 
 	/**
@@ -290,7 +297,9 @@ public class ViewController {
 	 * Initializes grid and its effects manager (gamegrideffect)
 	 */
 	private void initializeGrid() {
-		myGridPane = new ScrollPane();
+		
+	        
+	        myGridPane = new ScrollPane();
 		Level currentLevel = myModel.getCurrentLevel();
 		myGrid = currentLevel.getGrid();
 		System.out.println("myGrid: " + myGrid);
@@ -308,6 +317,8 @@ public class ViewController {
 		keyControlOn = false;
 		myGameGridEffect = new GameGridEffect(this);
 	}
+	
+
 
 	/**
 	 * Loads the Score from a Player for Display
