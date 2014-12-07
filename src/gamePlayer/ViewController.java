@@ -87,7 +87,7 @@ public class ViewController {
 	@FXML
 	protected VBox controlPane;
 	@FXML
-	private MenuButton newGameButton;
+	private MenuButton newGameMenu;
 	@FXML
 	private Text gameName;
 	@FXML
@@ -274,7 +274,7 @@ public class ViewController {
 			MenuItem l = new MenuItem();
 			l.setText(file.getName().substring(0, file.getName().length() - 5));
 			l.getStyleClass().add("button");
-			newGameButton.getItems().add(l);
+			newGameMenu.getItems().add(l);
 			l.setOnAction(event -> {
 				myScene = new Scene(myGameSpace);
 				myStage.setScene(myScene);

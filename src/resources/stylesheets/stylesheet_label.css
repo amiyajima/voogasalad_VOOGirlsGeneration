@@ -8,7 +8,7 @@
 }
 
 .label:hover{
-	-fx-background-color: #D3E397;
+	-fx-background-color: #add8e6;
 }
 
 .context-menu {
@@ -18,7 +18,7 @@
 }
 
 .menu-item:hover{	
-	-fx-background-color:#D3E397;
+	-fx-background-color: #add8e6;
 }
 
 
