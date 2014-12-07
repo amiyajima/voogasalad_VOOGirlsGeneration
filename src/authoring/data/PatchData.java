@@ -28,6 +28,7 @@ public class PatchData implements AuthoringData<Patch> {
 
 	@Override
 	public void add(Patch p) {
+		removePatchAtLoc(p.getLoc());
 		myPatches.add(p);
 	}
 	
