@@ -504,10 +504,6 @@ public class ViewController {
 
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(location));
-		// myGrid.clearEffect();
-		myGameGridEffect.clearAllEffects(myGrid);
-
-		// highlightCurrent(location, Color.BLUE);
 		myGameGridEffect.highlightCurrent(location, Color.BLUE);
 	}
 
