@@ -49,6 +49,7 @@ public class ApplyState implements IGridState {
 		if (piece == null) {
 			piece = new Piece(actor,myController.getCurrentClick());
 			piece.setLoc(myController.getCurrentClick());
+			//TODO: Add in dummy piece check 
 		}
 		myController.getActiveAction().doBehavior(actor, piece);
 		myController.getGrid().repopulateGrid();
