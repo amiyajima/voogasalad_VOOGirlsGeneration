@@ -14,7 +14,7 @@
             <HBox prefHeight="37.0" prefWidth="365.0" styleClass="hbox">
                <children>
                   <Button fx:id="newCondition" mnemonicParsing="false" onAction="#handleNewCondition" text="New Condition" />
-                  <Button fx:id="editCondition" mnemonicParsing="false" text="Edit" />
+                  <Button fx:id="editCondition" mnemonicParsing="false" onAction="#handleEditCondition" text="Edit" />
                   <Button fx:id="delCondition" mnemonicParsing="false" onAction="#handleDelCondition" text="Delete" />
                </children>
             </HBox>
@@ -23,7 +23,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
                <children>
                   <Button fx:id="newAction" mnemonicParsing="false" onAction="#handleNewAction" text="New Action" />
-                  <Button fx:id="editAction" mnemonicParsing="false" text="Edit" />
+                  <Button fx:id="editAction" mnemonicParsing="false" onAction="#handleEditAction" text="Edit" />
                   <Button fx:id="delAction" mnemonicParsing="false" onAction="#handleDelAction" text="Delete" />
                </children>
             </HBox>
@@ -44,6 +44,7 @@
                         <Button fx:id="delEvent" mnemonicParsing="false" text="Delete" />
                      </children>
                   </HBox>
+                  <Button mnemonicParsing="false" text="Save All Events" />
                </children>
             </VBox>
             <Separator orientation="VERTICAL" prefHeight="200.0" />

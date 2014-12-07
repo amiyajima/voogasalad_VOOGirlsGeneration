@@ -78,8 +78,7 @@ public class AuthoringController implements Initializable {
 		eventEditorStage.setScene(scene);
 
 		EventEditorController controller = loader.getController();
-		
-		//EventsEditorController.setEvents(events); 
+		controller.setStage(eventEditorStage);
 
 		eventEditorStage.showAndWait();
 	}
