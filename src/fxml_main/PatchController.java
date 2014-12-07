@@ -106,9 +106,11 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 
 					entryBox.getChildren().add(newImgNameBox);
 					myIndivEntMap.replace(entryBox, newImgNameBox);
-
+					
+					entry.setImageLocation(patch.getImageLocation());
+					entry.setName(patch.getName());
+					
 					myPatchTypes.replace(entry, patch);
-					myGridReference.getGrid().update(myPatchTypes, patch);
 				};
 				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda, entry));
 			}
