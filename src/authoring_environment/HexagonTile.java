@@ -13,16 +13,17 @@ public class HexagonTile extends SuperTile{
 	}
 
 	@Override
-	protected Shape makeShape(double size) {
+	protected Shape makeShape(double size,Point2D centerCoord) {
 		double radius = size/Math.sqrt(3);
-		
+		double centerX=centerCoord.getX();
+		double centerY=centerCoord.getY();
 		Polygon hexagon = new Polygon(
-				0-radius, 0,
-				0-0.5*radius, 0+0.5*size,
-				0+0.5*radius, 0+0.5*size,
-				0+radius, 0,
-				0+0.5*radius, 0-0.5*size,
-				0-0.5*radius, 0-0.5*size
+				centerX-radius, centerY,
+				centerX-0.5*radius, centerY+0.5*size,
+				centerX+0.5*radius, centerY+0.5*size,
+				centerX+radius, centerY,
+				centerX+0.5*radius, centerY-0.5*size,
+				centerX-0.5*radius, centerY-0.5*size
 				);
 		return hexagon;
 	}

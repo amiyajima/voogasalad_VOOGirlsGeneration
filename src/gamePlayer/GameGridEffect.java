@@ -73,7 +73,7 @@ public class GameGridEffect {
      * @param red
      */
     public void highlightEffectRange (Point2D loc) {
-//        clearAllEffects();
+        clearAllEffects();
         
         myActivePiece = myViewController.getActivePiece();
         myActiveAction = myViewController.getActiveAction();
@@ -86,7 +86,7 @@ public class GameGridEffect {
                         SuperTile toHighlight = myGrid.findClickedTile(point2);
                         toHighlight.selectTile(EFFECT_RANGE_COLOR);
                         myHighlightedTiles.add(toHighlight);
-                        System.out.println("Effect Range Highlight!");
+//                        System.out.println("Effect Range Highlight!");
                         });
                     }
                 });

@@ -27,11 +27,11 @@ public class RangeGrid extends SuperGrid{
 	private int centerY;
 	private List<Point2D> myRange;
 
-	public RangeGrid(int columns, int rows, int tileSize, String shape, List<Point2D> range) {
-		super(columns, rows, tileSize, shape);	
+	public RangeGrid(int width, int height, int tileSize, String shape, List<Point2D> range) {
+		super(width, height, tileSize, shape);	
 		myRange=range;
-		myWidth=columns;
-		myHeight=rows;
+		myWidth=width;
+		myHeight=height;
 		
 		centerX=myWidth/2;
 		centerY=myHeight/2;
@@ -39,7 +39,7 @@ public class RangeGrid extends SuperGrid{
 		initGridTiles(shape);
 		rangeGrid=super.myGrid;
 		
-		addCenterImage(columns, rows);
+		addCenterImage(width, height);
 		
 		highlightRange(range);
 		
@@ -74,15 +74,13 @@ public class RangeGrid extends SuperGrid{
 				int col=(int) (loc.getX()+centerX);
 				int row=(int) (centerY-loc.getY());
 				if ((col>=0) && (col<=myWidth) && (row>=0) && (row<=myHeight)){
-					SuperTile tile=findTile(row,col);
+					SuperTile tile=findTile(col,row);
 					tile.selectTile();
 				}
-				
 			}
 		}
 	}
 	
-
 	private SuperTile findTile(int row, int col) {
 		SuperTile tile=rangeGrid.get(col).get(row);
 		return tile;
@@ -97,12 +95,10 @@ public class RangeGrid extends SuperGrid{
 
 	}
 
-	
 	private SuperTile findCenterTile(int rows,int columns) {
 		SuperTile centerTile=findTile(centerX,centerY);
 		return centerTile;
 	}
-
 
 
 //	private void showSelectedRange() {
@@ -127,10 +123,10 @@ public class RangeGrid extends SuperGrid{
 	public List<Point2D> rangeSelectedList(){
 		List<Point2D> selectedList=new ArrayList<Point2D>();
 		
-		for (int i=0;i<myWidth;i++) {
-			for (int j=0;j<myHeight;j++) {
+		for (int i=0;i<myHeight;i++) {
+			for (int j=0;j<myWidth;j++) {
 				if(rangeGrid.get(i).get(j).ifSelected()){
-					selectedList.add(new Point2D.Double(i-centerX,centerY-j));
+					selectedList.add(new Point2D.Double(j-centerX,centerY-i));
 //					System.out.println((i-centerX)+","+(centerY-j));
 				}
 			}
@@ -139,7 +135,6 @@ public class RangeGrid extends SuperGrid{
 //		test=4;
 //		System.out.println("t="+ test);
 		return myRange;
-
 	}
 //	
 //	public void rangeColumn(int column,boolean toChoose){
@@ -183,9 +178,9 @@ public class RangeGrid extends SuperGrid{
 //		}
 //	}
 	
-	public void setRange(List<Point2D> range){
-		myRange=range;
-	}
+//	public void setRange(List<Point2D> range){
+//		myRange=range;
+//	}
 	
 	public List<Point2D> getRange(){
 		return myRange;
