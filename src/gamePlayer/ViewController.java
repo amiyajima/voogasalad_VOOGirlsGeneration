@@ -5,6 +5,7 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
+import gameengine.player.Player;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -66,6 +67,8 @@ public class ViewController {
 
 	private Game myModel;
 	private GUIGrid myGrid;
+	
+	private Player myCurrentPlayer;
 
 	// private SampleListener myLeapListener;
 
@@ -87,6 +90,9 @@ public class ViewController {
 	private Text gameName;
 	@FXML
 	private VBox scores;
+	@FXML
+	private Label playerTurn;
+
 
 	private ScrollPane myGridPane;
 
@@ -588,7 +594,13 @@ public class ViewController {
 	 *            the current state of the Grid, select/ apply action Mode
 	 */
 	public void setGridState(IGridState state) {
-		gridState = state;
+	    myCurrentPlayer = myModel.getCurrentPlayer();
+	    setPlayerTurnDisplay();
+	    gridState = state;
+	}
+	
+	private void setPlayerTurnDisplay() {
+	    playerTurn.setText("Turn: " + myCurrentPlayer.getID());
 	}
 
 	/**
