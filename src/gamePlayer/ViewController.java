@@ -441,6 +441,7 @@ public class ViewController {
 		// System.out.println("myGrid size is" + myGridPane.getWidth() + "*"
 		// + myGrid.getHeight());
 		// System.out.println(myGrid.getBoundsInParent());
+
 //	        System.out.println("i get the following coord: ");
 //	        System.out.println(x);
 	        
@@ -449,8 +450,17 @@ public class ViewController {
 //		System.out.println("performing action here: ");
 //		System.out.println(loc);
 		
+
 		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
-		myGameGridEffect.highlightCurrent(loc, myModel.getCurrentLevel().getGrid().getPiece(loc));
+	}
+	
+	/**
+	 * Select state tells VC to highlight the selected piece
+	 * @param p
+	 */
+	public void highlightSelected(Piece p) {
+	           myGameGridEffect.highlightCurrent(p.getLoc(), myModel.getCurrentLevel().getGrid().getPiece(p.getLoc()));
+
 	}
 
 	/**

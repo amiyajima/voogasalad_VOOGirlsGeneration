@@ -27,7 +27,7 @@ public class ApplyState implements IGridState {
     private SuperTile activeTile;
 
     public ApplyState (ViewController controller) {
-         System.out.println("new ApplyState");
+        System.out.println("new ApplyState");
         myController = controller;
         myGameGridEffect = controller.getGameGridEffect();
         myGame = controller.getGame();
@@ -50,7 +50,6 @@ public class ApplyState implements IGridState {
 //        }
         myController.getActiveAction().doBehavior(actor, piece);
         myController.setGridState(new SelectState(myController));
-
         myController.changeCursor(myController.CURSOR_GLOVE_TEST);
 
         //        myController.getGame().getCurrentLevel().garbageCollectPieces();
