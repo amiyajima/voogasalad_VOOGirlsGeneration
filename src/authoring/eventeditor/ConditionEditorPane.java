@@ -10,7 +10,7 @@ import gamedata.gamecomponents.Piece;
 import java.util.List;
 import java.util.function.Consumer;
 
-import authoring.data.EventsDataContainer;
+import authoring.data.EventsDataWrapper;
 import authoring_environment.UIspecs;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -48,9 +48,9 @@ public class ConditionEditorPane extends Pane{
 
 	private Consumer<Condition> myDoneLambda;
 	private Condition myCondition;
-	private EventsDataContainer myData;
+	private EventsDataWrapper myData;
 
-	public ConditionEditorPane(Consumer<Condition> doneLambda, EventsDataContainer data){
+	public ConditionEditorPane(Consumer<Condition> doneLambda, EventsDataWrapper data){
 		myDoneLambda = doneLambda;
 		myData = data;
 		initialize();

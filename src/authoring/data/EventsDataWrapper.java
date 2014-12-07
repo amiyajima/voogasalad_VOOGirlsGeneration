@@ -10,13 +10,13 @@ import gameengine.player.Player;
  * @author Mike Zhu
  *
  */
-public class EventsDataContainer {
+public class EventsDataWrapper {
 
 	private List<Piece> myPieces;
 	private List<Patch> myPatches;
 	private List<Player> myPlayers;
 	
-	public EventsDataContainer(List<Piece> pieces, List<Patch> patches, List<Player> players){
+	public EventsDataWrapper(List<Piece> pieces, List<Patch> patches, List<Player> players){
 		myPieces = pieces;
 		myPatches = patches;
 		myPlayers = players;

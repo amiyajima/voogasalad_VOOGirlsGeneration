@@ -70,7 +70,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 	@Override
 	protected HBox makeEntryBox (Patch entry) {
 		HBox hb = new HBox();
-		Label name = new Label(entry.getName());
+		Label name = new Label(entry.toString());
 		name.setTranslateY(7.5);
 		ImageView img = entry.getImageView();
 		img.setFitHeight(40);

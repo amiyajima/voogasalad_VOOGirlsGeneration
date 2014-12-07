@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
-import authoring.data.EventsDataContainer;
+import authoring.data.EventsDataWrapper;
 import utilities.ClassGrabber;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,7 +30,7 @@ public class NewConditionController implements Initializable{
 	
 	private Condition myCondition;
 	private Consumer<Condition> myDoneLambda;
-	private EventsDataContainer myData;
+	private EventsDataWrapper myData;
 	
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -113,7 +113,7 @@ public class NewConditionController implements Initializable{
 		myCondition = entry;
 	}
 
-	public void loadData(EventsDataContainer data) {
+	public void loadData(EventsDataWrapper data) {
 		myData = data;
 	}
 }

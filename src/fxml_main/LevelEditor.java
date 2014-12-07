@@ -24,7 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import authoring.data.EventsDataContainer;
+import authoring.data.EventsDataWrapper;
 import authoring.eventeditor.EventEditorController;
 import authoring_environment.GUIGrid;
 
@@ -48,9 +48,9 @@ public class LevelEditor extends VBox {
 
 	private String myEditorTitle;
 	
-	private EventsDataContainer myData;
+	private EventsDataWrapper myData;
 
-    public LevelEditor (Consumer<Level> okLambda, EventsDataContainer data) {
+    public LevelEditor (Consumer<Level> okLambda, EventsDataWrapper data) {
     	myEditorTitle = CREATOR_TITLE;
     	
         myId = "";
@@ -62,7 +62,7 @@ public class LevelEditor extends VBox {
         initEditor(okLambda);
     }
 
-    public LevelEditor (Consumer<Level> okLambda, Level level, EventsDataContainer data) {
+    public LevelEditor (Consumer<Level> okLambda, Level level, EventsDataWrapper data) {
     	myEditorTitle = EDITOR_TITLE;
     	
         myGrid = level.getGrid();
