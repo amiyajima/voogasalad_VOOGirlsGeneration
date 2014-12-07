@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -32,7 +34,7 @@ public class LevelEditor extends VBox {
 	private int myGridRows;
 	private int myGridCols;
 	private double myTileHeight;
-	private List<Event> myEvents;
+	private ObservableList<Event> myEvents;
 	private Level myLevel;
 	
 	private Consumer<Level> myOkLambda;
@@ -42,7 +44,7 @@ public class LevelEditor extends VBox {
 		myGridRows = 0;
 		myGridCols = 0;
 		myTileHeight = 0;
-		myEvents = new LinkedList<Event>();
+		myEvents = FXCollections.observableArrayList();
 		initEditor(okLambda);
 	}
 	
@@ -148,8 +150,8 @@ public class LevelEditor extends VBox {
 		eventEditorStage.setScene(scene);
 
 		EventEditorController controller = loader.getController();
-		controller.setStage(eventEditorStage);
-
+		controller.loadEvents(myEvents);
+		
 		eventEditorStage.showAndWait();
 	}
 

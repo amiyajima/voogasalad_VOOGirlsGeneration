@@ -20,50 +20,55 @@ import javafx.collections.FXCollections;
  *
  */
 public class Event {
-    private String myName;
-    private List<Condition> myConditions;
-    private List<GlobalAction> myGlobalActions;
-    
-    public Event (String name) {
-        myConditions = FXCollections.observableArrayList();
-        myGlobalActions = FXCollections.observableArrayList();
-        myName = name;
-    }
+	private String myName;
+	private List<Condition> myConditions;
+	private List<GlobalAction> myGlobalActions;
 
-    /**
-     * Method called by an external Event manager during each "event running" cycle
-     * (can be at the end of a user action, end of turn, end of level, etc.).
-     * 
-     * The list of Conditions is evaluated, and if all return true, the list of Actions
-     * is run in order.
-     */
-    public void runEvent () {
-        boolean allConditionsFulfilled = true;
+	public Event (String name) {
+		myConditions = FXCollections.observableArrayList();
+		myGlobalActions = FXCollections.observableArrayList();
+		if(name.equals("") || name==null){
+			myName = "Nameless Event";
+		}
+		else{
+			myName = name;
+		}
+	}
 
-        for (Condition c : myConditions) {
-            if (!c.evaluate()) {
-                allConditionsFulfilled = false;
-            }
-        }
+	/**
+	 * Method called by an external Event manager during each "event running" cycle
+	 * (can be at the end of a user action, end of turn, end of level, etc.).
+	 * 
+	 * The list of Conditions is evaluated, and if all return true, the list of Actions
+	 * is run in order.
+	 */
+	public void runEvent () {
+		boolean allConditionsFulfilled = true;
 
-        if (allConditionsFulfilled) {
-            for (GlobalAction a : myGlobalActions) {
-                a.doBehavior();
-            }
-        }
-    }
-    
-    @Override
-    public String toString(){
-    	return myName;
-    }
-    
-    
-    public List<Condition> getConditions(){
-    	return myConditions;
-    }
-    
-    public List<GlobalAction> getGlobalActions(){
-    	return myGlobalActions;
-    }
+		for (Condition c : myConditions) {
+			if (!c.evaluate()) {
+				allConditionsFulfilled = false;
+			}
+		}
+
+		if (allConditionsFulfilled) {
+			for (GlobalAction a : myGlobalActions) {
+				a.doBehavior();
+			}
+		}
+	}
+
+	@Override
+	public String toString(){
+		return myName;
+	}
+
+
+	public List<Condition> getConditions(){
+		return myConditions;
+	}
+
+	public List<GlobalAction> getGlobalActions(){
+		return myGlobalActions;
+	}
 }
