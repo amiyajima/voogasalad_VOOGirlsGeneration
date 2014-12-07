@@ -73,7 +73,8 @@ public class GUIGrid extends SuperGrid implements Observer {
 
     // TODO: set image within tile at this location
     public void addPatch (Patch patchType, Point2D loc) {
-        System.out.println("addpatch");
+        System.out.println(myPatchData.getData().size());
+
         Patch clone = new Patch(patchType, loc);
         myPatchData.add(clone);
         SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
@@ -97,13 +98,13 @@ public class GUIGrid extends SuperGrid implements Observer {
         }
     }
 
-    private void removePatch(PatchTypeData typeData) {
-	            List<Point2D> pointsToRemove = myPatchData.removeUnknown(typeData.getIdSet());
-	            for (Point2D loc : pointsToRemove) {
-	                    SuperTile tile = super.findClickedTile(loc);
-	                    tile.removePatchImage();
-	            }
-	    }
+    private void removePatch (PatchTypeData typeData) {
+        List<Point2D> pointsToRemove = myPatchData.removeUnknown(typeData.getIdSet());
+        for (Point2D loc : pointsToRemove) {
+            SuperTile tile = super.findClickedTile(loc);
+            tile.removePatchImage();
+        }
+    }
 
     /**
      * Returns the piece at loc
@@ -199,7 +200,7 @@ public class GUIGrid extends SuperGrid implements Observer {
         if (o instanceof PatchTypeData) {
             PatchTypeData typeData = (PatchTypeData) o;
             if (arg == null) {
-//                myPatchData.removeUnknown(typeData.getIdSet());
+                // myPatchData.removeUnknown(typeData.getIdSet());
                 removePatch(typeData);
             }
             if (arg instanceof Patch) {
@@ -209,7 +210,8 @@ public class GUIGrid extends SuperGrid implements Observer {
         }
     }
 
-    public <T> void paneSetOnMouseClicked (EventHandler<MouseEvent> handler) {
+    public <T> void paneSetOnMouseEvent (EventHandler<MouseEvent> handler) {
         myPane.setOnMouseClicked(handler);
+        myPane.setOnMouseDragged(handler);
     }
 }

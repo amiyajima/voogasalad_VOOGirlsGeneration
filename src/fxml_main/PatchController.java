@@ -92,7 +92,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
                         grid.addPatch(entry, coor);
                     }
                 };
-                myGridReference.getGrid().paneSetOnMouseClicked(clickHandler);
+                myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
             }
         });
         hb.getChildren().addAll(img, name);
