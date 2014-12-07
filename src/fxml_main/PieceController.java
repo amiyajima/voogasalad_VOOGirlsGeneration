@@ -1,8 +1,9 @@
 package fxml_main;
 
+import gamedata.gamecomponents.Piece;
+
 import java.util.function.Consumer;
 
-import gamedata.gamecomponents.Piece;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -12,23 +13,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.data.ActionData;
-import authoring.data.PieceData;
 import authoring.data.PieceTypeData;
-import authoring_environment.GUIGrid;
 
 public class PieceController extends GridComponentAbstCtrl<Piece> {
 	
 	private PieceTypeData myPieceTypes;
-	private PieceData myPieces;
 	private ActionData myActionData;
 	
-    public PieceController (VBox vbox, ScrollPane propertiesSPane, GUIGrid currGrid, ActionData actions) {
-    	super(vbox, propertiesSPane, currGrid);
-    	myPieceTypes = new PieceTypeData();
+    public PieceController (VBox vbox, ScrollPane propertiesSPane, GUIGridReference gridRef, 
+    		PieceTypeData pieceTypes, ActionData actions) {
+    	super(vbox, propertiesSPane, gridRef);
     	myActionData = actions;
-    	
-    	//TODO: myPatchTypes needs to be changed..data..
-    	myPieceTypes = new PieceTypeData();
+    	myPieceTypes = pieceTypes;
     }
 
     @Override

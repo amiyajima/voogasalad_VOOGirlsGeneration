@@ -162,6 +162,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 				myPatchData.removeUnknown(typeData.getIdSet());
 			}
 			if (arg instanceof Patch) {
+				System.out.println("I'M HERE");
 				Patch patchType = (Patch) arg;
 				replacePatch(patchType);
 			}

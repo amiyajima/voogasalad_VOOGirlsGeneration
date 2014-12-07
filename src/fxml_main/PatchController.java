@@ -21,11 +21,11 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 
 	private PatchTypeData myPatchTypes;
 
-	public PatchController (VBox vbox, ScrollPane propertiesSPane, GUIGrid currGrid) {
-		super(vbox, propertiesSPane, currGrid);
-		//TODO: myPatchTypes needs to be changed..data..
-		myPatchTypes = new PatchTypeData();
-		myCurrentGrid = currGrid;
+	public PatchController (VBox vbox, ScrollPane propertiesSPane, GUIGridReference gridRef,
+			PatchTypeData patchTypes) {
+		super(vbox, propertiesSPane, gridRef);
+		myPatchTypes = patchTypes;
+		myGridReference = gridRef;
 	}
 
 
@@ -72,16 +72,18 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 		img.setFitHeight(40);
 		img.setFitWidth(40);
 		hb.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			GUIGrid grid = myGridReference.getGrid();
 			@Override
 			public void handle(MouseEvent event) {
 				EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent e) {
-						Point2D loc = new Point2D.Double(e.getX(),e.getY());
-						myCurrentGrid.addPatch(entry, loc);
+						Point2D coor = grid.findClickedCoordinate(e.getX(),e.getY());
+						Point2D loc = new Point2D.Double(1,2);
+						grid.addPatch(entry, loc);
 					}
 				};
-				myCurrentGrid.paneSetOnMouseClicked(clickHandler);
+				myGridReference.getGrid().paneSetOnMouseClicked(clickHandler);
 			}
 		});
 		hb.getChildren().addAll(img, name);
