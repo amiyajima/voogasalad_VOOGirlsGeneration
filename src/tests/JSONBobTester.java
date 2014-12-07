@@ -38,7 +38,7 @@ import authoring_environment.SuperGrid;
  */
 public class JSONBobTester {
     private static String DEFAULT_DUVALL = "/resources/images/rcd.png";
-    private static String DEFAULT_BUNNY = "/resources/images/bbybunny.jpeg";
+    private static String DEFAULT_BUNNY = "/resources/images/Rica.png";
     private static String DEFAULT_LAND = "/resources/images/Land.jpeg";
 
     public JSONBobTester () {
@@ -119,8 +119,10 @@ public class JSONBobTester {
             }
         }
 
+
         //System.out.println("Bob Tester: Patches filled: " + grid1.getPatches().getData().size());
         //System.out.println("Bob Tester: Pieces filled: " + grid1.getPieces().getData().size());
+
         System.out.println("Grid created: " + grid1.toString());
         return grid1;
     }

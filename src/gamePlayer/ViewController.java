@@ -267,7 +267,6 @@ public class ViewController {
 	 * @throws UnsupportedAudioFileException
 	 */
 	protected void newGame() throws UnsupportedAudioFileException, IOException,
-
 	LineUnavailableException {
 
 		List<File> games = getGames();
@@ -285,14 +284,16 @@ public class ViewController {
 		// initializeGrid();
 	}
 
+	/**
+	 * Initializes grid and its effects manager (gamegrideffect)
+	 */
 	private void initializeGrid() {
 		myGridPane = new ScrollPane();
 		Level currentLevel = myModel.getCurrentLevel();
 		myGrid = currentLevel.getGrid();
 		System.out.println("myGrid: " + myGrid);
 		myGrid.displayPane(myGridPane);
-		
-		myGameGridEffect = new GameGridEffect(this);
+
 		myGameSpace.setCenter(myGridPane);
 
 		setOnClick();
@@ -303,10 +304,7 @@ public class ViewController {
 		});
 
 		keyControlOn = false;
-		System.out.println("Grid initialized");
-		
 		myGameGridEffect = new GameGridEffect(this);
-		System.out.println("Game grid effect initialized");
 	}
 
 	/**
@@ -314,11 +312,9 @@ public class ViewController {
 	 */
 	protected void loadScores() {
 		gameName.setText(gameName.getText() + myModel.toString());
-
 		// TODO: add in scores
 		// myModel.getPlayers().forEach(player-> scores.getChildren().
 		// add(new Text(player.getID()+": ")));
-
 	}
 
 	/**
@@ -328,13 +324,10 @@ public class ViewController {
 	private List<File> getGames() {
 
 		List<File> gameList = new ArrayList<File>();
-
 		File files = new File(System.getProperty("user.dir") + GAME_LOCATION);
 
 		for (File f : files.listFiles()) {
-
 			if (f.getName().endsWith(".json")) {
-
 				gameList.add(f);
 			}
 		}
@@ -368,19 +361,10 @@ public class ViewController {
 	protected void updateActions(Piece piece) {
 		controlPane.getChildren().clear();
 		ArrayList<Label> actions = new ArrayList<Label>();
-
-		// TODO: What does this code do?
-		/*
-		 * Map<KeyCode, Action> actionMap = myModel.getCurrentPlayer()
-		 * .getActionKeyMap(); System.out.println(actionMap); Map<Action,
-		 * KeyCode> keyMap = actionMap .entrySet() .stream() .collect(
-		 * Collectors .toMap(Map.Entry::getValue, Map.Entry::getKey));
-		 */
 		piece.getActions().forEach(action -> {
 			Label l = new Label(action.toString());
 			l.setOnMouseClicked(event -> bindAction(action));
 			actions.add(l);
-
 		});
 
 		controlPane.getChildren().addAll(actions);
@@ -395,26 +379,8 @@ public class ViewController {
 	public void updateActionList(ArrayList<Label> actions) {
 		System.out.println("i use this");
 		controlPane.getChildren().clear();
-
-		// l.setOnKeyPressed(event -> {
-		// if (keyMap.containsKey(action)) {
-		// if (event.getCode().equals(keyMap.get(action))) {
-		// bindAction(action);
-		// }
-		//
-		// }
-		// });
-		// });
-
 		controlPane.getChildren().addAll(actions);
-
 	}
-
-	// public void updateActionList(ArrayList<Label> actions){
-	// controlPane.getChildren().clear();
-	// controlPane.getChildren().addAll(actions);
-	// System.out.println("i get here");
-	// }
 
 	/**
 	 * Method called when user clicks an action button
@@ -422,21 +388,18 @@ public class ViewController {
 	 * @param action
 	 */
 	protected void bindAction(Action action) {
-
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
-
 		SuperTile activeTile = myGrid.findClickedTile(activePiece.getLoc());
 		activeTile.selectTile(DEFAULT_HIGHLIGHT_COLOR);
 
-		myGameGridEffect.highlightActionRange();
-
+	        myGameGridEffect.highlightActionRange();
 		setGridState(new ApplyState(this));
 	}
 
 	private void setOnClick() {
-		myGridPane.getContent().setOnMouseClicked(event -> {
+	    myGridPane.getContent().setOnMouseClicked(event -> {
 			performAction(event.getX(), event.getY());
 		});
 	}
@@ -461,6 +424,7 @@ public class ViewController {
 
 	/**
 	 * Perform the actions of a click at position (x,y) on game grid
+	 * and highlights the piece that was clicked
 	 * 
 	 * @param x
 	 * @param y

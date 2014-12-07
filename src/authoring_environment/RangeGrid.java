@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 /**
  * The view of the grid especially for selecting the range.  
@@ -19,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 public class RangeGrid extends SuperGrid{
 
 	private static final String DEFAULT_CENTRAL_IMAGE="/resources/images/Patrick.jpeg";
+	private static final String DEFAULT_HIGHLIGHT_COLOR = "#0000FF";
 
 	private List<List<SuperTile>> rangeGrid;
 	private int myWidth;
@@ -27,11 +29,11 @@ public class RangeGrid extends SuperGrid{
 	private int centerY;
 	private List<Point2D> myRange;
 
-	public RangeGrid(int columns, int rows, int tileSize, String shape, List<Point2D> range) {
-		super(columns, rows, tileSize, shape);	
+	public RangeGrid(int width, int height, int tileSize, String shape, List<Point2D> range) {
+		super(width, height, tileSize, shape);	
 		myRange=range;
-		myWidth=columns;
-		myHeight=rows;
+		myWidth=width;
+		myHeight=height;
 		
 		centerX=myWidth/2;
 		centerY=myHeight/2;
@@ -39,7 +41,7 @@ public class RangeGrid extends SuperGrid{
 		initGridTiles(shape);
 		rangeGrid=super.myGrid;
 		
-		addCenterImage(columns, rows);
+		addCenterImage(width, height);
 		
 		highlightRange(range);
 		
@@ -65,7 +67,7 @@ public class RangeGrid extends SuperGrid{
 		if (tile.ifSelected())
 			tile.deselectTile();
 		else
-			tile.selectTile();
+			tile.selectTile(DEFAULT_HIGHLIGHT_COLOR);
 	}
 	
 	private void highlightRange(List<Point2D> range) {
@@ -74,15 +76,13 @@ public class RangeGrid extends SuperGrid{
 				int col=(int) (loc.getX()+centerX);
 				int row=(int) (centerY-loc.getY());
 				if ((col>=0) && (col<=myWidth) && (row>=0) && (row<=myHeight)){
-					SuperTile tile=findTile(row,col);
-					tile.selectTile();
+					SuperTile tile=findTile(col,row);
+					tile.selectTile(DEFAULT_HIGHLIGHT_COLOR);
 				}
-				
 			}
 		}
 	}
 	
-
 	private SuperTile findTile(int row, int col) {
 		SuperTile tile=rangeGrid.get(col).get(row);
 		return tile;
@@ -97,12 +97,10 @@ public class RangeGrid extends SuperGrid{
 
 	}
 
-	
 	private SuperTile findCenterTile(int rows,int columns) {
 		SuperTile centerTile=findTile(centerX,centerY);
 		return centerTile;
 	}
-
 
 
 //	private void showSelectedRange() {
@@ -127,10 +125,10 @@ public class RangeGrid extends SuperGrid{
 	public List<Point2D> rangeSelectedList(){
 		List<Point2D> selectedList=new ArrayList<Point2D>();
 		
-		for (int i=0;i<myWidth;i++) {
-			for (int j=0;j<myHeight;j++) {
+		for (int i=0;i<myHeight;i++) {
+			for (int j=0;j<myWidth;j++) {
 				if(rangeGrid.get(i).get(j).ifSelected()){
-					selectedList.add(new Point2D.Double(i-centerX,centerY-j));
+					selectedList.add(new Point2D.Double(j-centerX,centerY-i));
 //					System.out.println((i-centerX)+","+(centerY-j));
 				}
 			}
@@ -139,7 +137,6 @@ public class RangeGrid extends SuperGrid{
 //		test=4;
 //		System.out.println("t="+ test);
 		return myRange;
-
 	}
 //	
 //	public void rangeColumn(int column,boolean toChoose){
@@ -183,9 +180,9 @@ public class RangeGrid extends SuperGrid{
 //		}
 //	}
 	
-	public void setRange(List<Point2D> range){
-		myRange=range;
-	}
+//	public void setRange(List<Point2D> range){
+//		myRange=range;
+//	}
 	
 	public List<Point2D> getRange(){
 		return myRange;

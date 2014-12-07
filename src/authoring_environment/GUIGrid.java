@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.function.Consumer;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import authoring.data.PatchData;
@@ -24,62 +22,62 @@ import authoring.data.PieceTypeData;
  * @author Jennie Ju
  *
  */
-public class GUIGrid extends SuperGrid implements Observer {
+
+public class GUIGrid extends SuperGrid implements Observer{
 
 
-	private PieceData myPieceData;
-	private PatchData myPatchData;
+    private PieceData myPieceData;
+    private PatchData myPatchData;
 
-	public GUIGrid () {
-		super();
-	}
+    public GUIGrid () {
+        super();
+    }
 
-	public GUIGrid (int cols, int rows, double tileSize, String shape) {
-		super(cols, rows, tileSize, shape);
-		myPieceData = new PieceData();
-		myPatchData = new PatchData();
-	}
+    public GUIGrid (int cols, int rows, double tileSize, String shape) {
+        super(cols, rows, tileSize, shape);
+        myPieceData = new PieceData();
+        myPatchData = new PatchData();
+    }
 
-	public GUIGrid (int cols, int rows, double tileSize, String shape,
-			PieceData pieceData, PatchData patchData) {
-		super(cols, rows, tileSize, shape);
-		myPieceData = pieceData;
-		myPatchData = patchData;
-	}
+    public GUIGrid (int cols, int rows, double tileSize, String shape,
+    		PieceData pieceData, PatchData patchData) {
+    	super(cols, rows, tileSize, shape);
+        myPieceData = pieceData;
+        myPatchData = patchData;
+    }
+    
+    /**
+     * Returns number of rows
+     * 
+     * @return int number of rows
+     */
+    public int getNumRows () {
+        return super.myHeight;
+    }
 
-	/**
-	 * Returns number of rows
-	 * 
-	 * @return int number of rows
-	 */
-	public int getNumRows () {
-		return super.myRows;
-	}
+    /**
+     * Returns number of columns
+     * 
+     * @return int number of columns
+     */
+    public int getNumCols () {
+        return super.myWidth;
+    }
 
-	/**
-	 * Returns number of columns
-	 * 
-	 * @return int number of columns
-	 */
-	public int getNumCols () {
-		return super.myCols;
-	}
+    // TODO: set image within tile at this location
+    public void addPiece (Piece pieceType, Point2D loc) {
+        Piece clone = new Piece(pieceType, loc);
+        myPieceData.add(clone); 
+        SuperTile myTile = myGrid.get((int) loc.getX()).get((int) loc.getY());
+        myTile.addPieceImage(clone.getImageView());
+        
+    }
 
-	// TODO: set image within tile at this location
-	public void addPiece (Piece pieceType, Point2D loc) {
-		Piece clone = new Piece(pieceType, loc);
-		myPieceData.add(clone); 
-		SuperTile myTile = myGrid.get((int) loc.getX()).get((int) loc.getY());
-		myTile.addPieceImage(clone.getImageView());
-
-	}
-
-	// TODO: set image within tile at this location
+    // TODO: set image within tile at this location
 	public void addPatch (Patch patchType, Point2D loc) {
 		Patch clone = new Patch(patchType, loc);
 		myPatchData.add(clone);
 		SuperTile myTile = myGrid.get((int) loc.getX()).get((int) loc.getY());
-		System.out.println(clone.getImageLocation());
 		myTile.addPatchImage(clone.getImageView());
 	}
 	
