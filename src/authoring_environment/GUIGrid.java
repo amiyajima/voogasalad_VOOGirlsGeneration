@@ -188,50 +188,50 @@ public class GUIGrid extends SuperGrid implements Observer {
     public void removePatch (Patch p) {
         myPatchData.remove(p);
         SuperTile currentTile = findClickedTile(p.getLoc());
-        currentTile.clearPieceImage();
+        currentTile.removePatchImage();
     }
 
-    /**
-     * Removes a piece at the given coordinates.
-     * NOTE: Point2D coordinates given as
-     * X = column number, Y = row number
-     * 
-     * @param coor - Point2D containing coordinates of
-     *        the piece to remove given as [Col, Row]
-     */
-    public void removePiece (Point2D coor) {
-        List<Piece> cloneData = new LinkedList<Piece>(myPieceData.getData());
-
-        for (Piece p : cloneData) {
-            if (p.getLoc().equals(coor)){
-                myPieceData.remove(p);
-                SuperTile currentTile = findClickedTile(coor);
-                currentTile.removePieceImage();
-            }
-        }
-
-    }
-
-    /**
-     * Removes a patch at the given coordinates.
-     * NOTE: Point2D coordinates given as
-     * X = column number, Y = row number
-     * 
-     * @param coor - Point2D containing coordinates of
-     *        the patch to remove given as [Col, Row]
-     */
-    public void removePatch (Point2D coor) {
-        List<Patch> cloneData = new LinkedList<Patch>(myPatchData.getData());
-
-        for (Patch p : cloneData) {
-            if (p.getLoc().equals(coor)){
-                myPatchData.remove(p);
-                SuperTile currentTile = findClickedTile(coor);
-                currentTile.removePatchImage();
-            }
-        }
-
-    }
+//    /**
+//     * Removes a piece at the given coordinates.
+//     * NOTE: Point2D coordinates given as
+//     * X = column number, Y = row number
+//     * 
+//     * @param coor - Point2D containing coordinates of
+//     *        the piece to remove given as [Col, Row]
+//     */
+//    public void removePiece (Point2D coor) {
+//        List<Piece> cloneData = new LinkedList<Piece>(myPieceData.getData());
+//
+//        for (Piece p : cloneData) {
+//            if (p.getLoc().equals(coor)){
+//                myPieceData.remove(p);
+//                SuperTile currentTile = findClickedTile(coor);
+//                currentTile.removePieceImage();
+//            }
+//        }
+//
+//    }
+//
+//    /**
+//     * Removes a patch at the given coordinates.
+//     * NOTE: Point2D coordinates given as
+//     * X = column number, Y = row number
+//     * 
+//     * @param coor - Point2D containing coordinates of
+//     *        the patch to remove given as [Col, Row]
+//     */
+//    public void removePatch (Point2D coor) {
+//        List<Patch> cloneData = new LinkedList<Patch>(myPatchData.getData());
+//
+//        for (Patch p : cloneData) {
+//            if (p.getLoc().equals(coor)){
+//                myPatchData.remove(p);
+//                SuperTile currentTile = findClickedTile(coor);
+//                currentTile.removePatchImage();
+//            }
+//        }
+//
+//    }
 
     /**
      * Gets Pieces that have been tagged for removal
