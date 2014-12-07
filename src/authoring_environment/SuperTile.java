@@ -103,7 +103,7 @@ public abstract class SuperTile extends Group {
 	}
 	
 	public void addPatchImage(ImageView imageView){
-		myPatchImage.setImage(imageView.getImage())
+		myPatchImage.setImage(imageView.getImage());
 	}
 
 
