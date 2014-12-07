@@ -29,7 +29,6 @@ public class DeletePieceGlobalAction extends GlobalAction {
     @Override
     public void doBehavior () {
         myGame.getCurrentLevel().getGrid().removePiece(myPiece);
-        
     }
     
 
