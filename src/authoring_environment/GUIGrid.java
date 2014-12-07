@@ -143,7 +143,7 @@ public class GUIGrid extends SuperGrid implements Observer {
         List<Point2D> pointsToReplace = myPieceData.replace(pieceType);
         for (Point2D loc : pointsToReplace) {
             SuperTile tile = super.findTile(loc);
-            tile.setPatchImage(pieceType.getImageView());
+            tile.setPieceImage(pieceType.getImageView());
         }
     }
 

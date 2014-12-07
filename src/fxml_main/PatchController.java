@@ -113,7 +113,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 	}
 
 	@Override
-	protected void initEntryDelBtn (Patch entry, Button delBtn) {
+	protected void initEntryDelBtn(Patch entry, Button delBtn) {
 		delBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent event) {
