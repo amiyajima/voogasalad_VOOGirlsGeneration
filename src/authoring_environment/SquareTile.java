@@ -12,8 +12,8 @@ public class SquareTile extends SuperTile{
 	}
 
 	@Override
-	protected Shape makeShape(double size) {
-		return new Rectangle(size, size);
+	protected Shape makeShape(double size, Point2D coord) {
+		return new Rectangle(coord.getX(),coord.getY(),size, size);
 	}
 	
 	@Override

@@ -4,9 +4,9 @@ import java.awt.geom.Point2D;
 import java.util.List;
 
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 
 public class RangeGridView extends ScrollPane{
+	private static final int MIN_TILESIZE = 50;
 	private int myViewWidth;
 	private int myViewHeight;
 	private int myTileSize;
@@ -38,8 +38,15 @@ public class RangeGridView extends ScrollPane{
 
 	public void update(int width, int height,List<Point2D> range){
 		this.setContent(null);
-		myTileSize=getPrefTileSize(width,height,myTileSize);
-		myGrid=new RangeGrid(width,height,
+		Point2D minGridSize=cacluateGridSize(range);
+		int minX=(int) minGridSize.getX();
+		int minY=(int) minGridSize.getY();
+		int prefWidth=Math.max(width, minX);
+		int prefHeight=Math.max(height, minY);
+		System.out.println(prefWidth);
+		System.out.println(prefHeight);
+		myTileSize=getPrefTileSize(prefWidth,prefHeight,MIN_TILESIZE);
+		myGrid=new RangeGrid(prefWidth,prefHeight,
 				myTileSize,myShape,range);
 		myGrid.displayPane(this);
 	}
@@ -66,5 +73,9 @@ public class RangeGridView extends ScrollPane{
         }
         return new Point2D.Double(maxX, maxY);
     }
+
+	public List<Point2D> returnSelectedList() {
+		return ((RangeGrid) myGrid).rangeSelectedList();
+	}
 
 }

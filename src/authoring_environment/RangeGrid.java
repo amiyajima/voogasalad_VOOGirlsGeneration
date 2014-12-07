@@ -83,7 +83,6 @@ public class RangeGrid extends SuperGrid{
 	}
 	
 
-
 	private SuperTile findTile(int row, int col) {
 		SuperTile tile=rangeGrid.get(col).get(row);
 		return tile;
@@ -120,28 +119,28 @@ public class RangeGrid extends SuperGrid{
 //
 //
 //	
-//	/**
-//	 * Collect all the coordination of selected tiles relative to the center tile
-//	 * as Point2D in a list.
-//	 * @return The list of relative coordination relative to the center tile. 
-//	 */
-//	public List<Point2D> rangeSelectedList(){
-//		List<Point2D> selectedList=new ArrayList<Point2D>();
-//		
-//		for (int i=0;i<sampleGrid.getGridWidth();i++) {
-//			for (int j=0;j<sampleGrid.getGridHeight();j++) {
-//				if(sampleGrid.getGridTiles()[i][j].getSelected()){
-//					selectedList.add(new Point2D.Double(i-centerX,centerY-j));
-////					System.out.println((i-centerX)+","+(centerY-j));
-//				}
-//			}
-//		}
-//		myRange=selectedList;
-////		test=4;
-////		System.out.println("t="+ test);
-//		return selectedList;
-//
-//	}
+	/**
+	 * Collect all the coordination of selected tiles relative to the center tile
+	 * as Point2D in a list.
+	 * @return The list of relative coordination relative to the center tile. 
+	 */
+	public List<Point2D> rangeSelectedList(){
+		List<Point2D> selectedList=new ArrayList<Point2D>();
+		
+		for (int i=0;i<myWidth;i++) {
+			for (int j=0;j<myHeight;j++) {
+				if(rangeGrid.get(i).get(j).ifSelected()){
+					selectedList.add(new Point2D.Double(i-centerX,centerY-j));
+//					System.out.println((i-centerX)+","+(centerY-j));
+				}
+			}
+		}
+		myRange=selectedList;
+//		test=4;
+//		System.out.println("t="+ test);
+		return myRange;
+
+	}
 //	
 //	public void rangeColumn(int column,boolean toChoose){
 //		for (int i=0;i<sampleGrid.getGridHeight();i++) {
