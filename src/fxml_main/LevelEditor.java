@@ -56,6 +56,7 @@ public class LevelEditor extends VBox {
 		myGridCols = grid.getCol();
 		myTileHeight = grid.getTileSize();
 		myLevel = level;
+		myEvents = (ObservableList<Event>) level.getEvents(); 
 		
 		initEditor(okLambda);
 	}
@@ -126,6 +127,7 @@ public class LevelEditor extends VBox {
 				
 				GUIGrid grid = new GUIGrid(myGridCols, myGridRows, myTileHeight,"Square Grid");
 				Level level = new Level(grid, myEvents, myId, false);
+								
 				myOkLambda.accept(level);
 			}
 		});
