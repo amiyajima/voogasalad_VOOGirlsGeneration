@@ -21,7 +21,7 @@ public class SelectState implements IGridState {
 
     @Override
     public void onClick (Piece piece) {
-    	System.out.println(piece.getActions().size());
+    	System.out.println("Piece is at X:"+piece.getLoc().getX()+" Y:"+piece.getLoc().getY());
         myController.updateStats(piece);
         myController.setActivePiece(piece);
         myController.updateActions(piece);

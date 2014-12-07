@@ -1,13 +1,9 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Level;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,7 +14,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import authoring.actionslogic.ActionLogicController;
 import authoring.data.ActionData;
+import authoring.data.LevelData;
 import authoring.eventeditor.EventEditorController;
 import authoring_environment.GUIGrid;
 
@@ -46,6 +44,9 @@ public class AuthoringController implements Initializable {
 	@FXML
 	private MenuItem events;
 	
+	@FXML
+        private MenuItem actonsLogicChart;
+	
 	private GUIGrid myCurrentGrid;
 	private PieceController myPieceController;
 	private PatchController myPatchController;
@@ -55,12 +56,12 @@ public class AuthoringController implements Initializable {
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		
 		ActionData actions = new ActionData();
-		List<Level> myLevels = new LinkedList<Level>();
+		LevelData myLevelData = new LevelData();
 		
 		myPieceController = new PieceController(myPiecesVBox, myPropertiesSPane, myCurrentGrid, actions);
 	    myPatchController = new PatchController(myPatchesVBox, myPropertiesSPane, myCurrentGrid);
 	    myLevelController = new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
-	    		myCurrentGrid, myLevels);
+	    		myCurrentGrid, myLevelData);
 	}
 	
 	@FXML
@@ -82,4 +83,23 @@ public class AuthoringController implements Initializable {
 
 		eventEditorStage.showAndWait();
 	}
+	
+	@FXML
+        private void showActionzlogicChartWindow() throws IOException{
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/authoring/actionslogic/ActionLogic.fxml"));
+                Parent root = loader.load();
+
+                Stage eventEditorStage  = new Stage();
+                eventEditorStage.setTitle("Actions Logic Chart");
+                eventEditorStage.initModality(Modality.WINDOW_MODAL);
+                Scene scene = new Scene(root);
+                eventEditorStage.setScene(scene);
+
+                ActionLogicController controller = loader.getController();
+                
+                //EventsEditorController.setEvents(events); 
+
+                eventEditorStage.showAndWait();
+        }
 }

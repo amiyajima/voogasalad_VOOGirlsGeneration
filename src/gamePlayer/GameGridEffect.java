@@ -40,16 +40,16 @@ public class GameGridEffect {
      * Highlight the tiles that represent the possible range of the action
      * selected
      */
-    public void highlightActionRange () {
-//        clearAllEffects(myGrid);
-        if ( (myActivePiece != null) && (myActiveAction !=null)){
-            myActiveAction.getActionRange(myActivePiece.getLoc()).forEach(point -> {
-                SuperTile activeTile = myGrid.findActiveTile(point);
-                activeTile.selectTile();
-                activeTile.makeHighlight(1.0, ACTION_RANGE_COLOR);
-            });
-        }
-    }
+//    public void highlightActionRange () {
+////        clearAllEffects(myGrid);
+//        if ( (myActivePiece != null) && (myActiveAction !=null)){
+//            myActiveAction.getActionRange(myActivePiece.getLoc()).forEach(point -> {
+//                SuperTile activeTile = myGrid.findActiveTile(point);
+//                activeTile.selectTile();
+//                activeTile.makeHighlight(1.0, ACTION_RANGE_COLOR);
+//            });
+//        }
+//    }
         
 //        if (myActivePiece != null && myActiveAction != null) {
 //            myActiveAction.getActionRange(myActivePiece.getLoc()).forEach(point -> {

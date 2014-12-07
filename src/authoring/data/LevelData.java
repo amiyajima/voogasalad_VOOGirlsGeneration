@@ -2,11 +2,20 @@ package authoring.data;
 
 import gamedata.gamecomponents.Level;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class LevelData implements AuthoringData<Level> {
 	
 	private List<Level> myLevels;
+	
+	 /**
+     * Constructor for new LevelData,
+     * initializes empty list of LevelData.
+     */
+    public LevelData() {
+        myLevels = new LinkedList<Level>();
+    }
 	
 	@Override
 	public void add(Level p) {

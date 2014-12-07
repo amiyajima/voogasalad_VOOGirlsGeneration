@@ -375,7 +375,7 @@ public class ViewController {
 	 * @param piece
 	 */
 	protected void updateActions(Piece piece) {
-		 setActivePiece(piece);
+		setActivePiece(piece);
 		controlPane.getChildren().clear();
 		ArrayList<Label> actions = new ArrayList<Label>();
 
@@ -403,8 +403,8 @@ public class ViewController {
 	 * @param actions
 	 */
 	public void updateActionList(ArrayList<Label> actions) {
-	    System.out.println("i use this");
-	    controlPane.getChildren().clear();
+		System.out.println("i use this");
+		controlPane.getChildren().clear();
 
 		// l.setOnKeyPressed(event -> {
 		// if (keyMap.containsKey(action)) {
@@ -436,15 +436,23 @@ public class ViewController {
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
-		
-		//highlight the action range.
+
+		// highlight the action range.
 		System.out.println(activePiece.getLoc());
+//<<<<<<< HEAD
+//		SuperTile activeTile = myGrid.findActiveTile(activePiece.getLoc());
+//		
+//		activeTile.selectTile();
+//		activeTile.makeHighlight(1.0, SELECTION_COLOR);
+////		myGameGridEffect.highlightActionRange();
+//		
+//=======
 		SuperTile activeTile = myGrid.findActiveTile(activePiece.getLoc());
-		
+
 		activeTile.selectTile();
-		activeTile.makeHighlight(1.0, SELECTION_COLOR);
-//		myGameGridEffect.highlightActionRange();
-		
+//		activeTile.makeHighlight(1.0);
+//		 myGameGridEffect.highlightActionRange();
+//>>>>>>> FETCH_HEAD
 
 		setGridState(new ApplyState(this));
 	}
@@ -453,7 +461,7 @@ public class ViewController {
 	 * TODO: Add javadoc
 	 */
 	private void setOnClick() {
-		myGridPane.setOnMouseClicked(event -> {
+		myGridPane.getContent().setOnMouseClicked(event -> {
 			performAction(event.getX(), event.getY());
 		});
 	}
@@ -486,24 +494,27 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(double x, double y) {
-		// System.out.println("current mouse location:" + x + ", " + y);
+		System.out.println("current mouse location:" + x + ", " + y);
 		// System.out.println("myGrid size is" + myGridPane.getWidth() + "*"
 		// + myGrid.getHeight());
 		// System.out.println(myGrid.getBoundsInParent());
 
-		if (myModel.getCurrentLevel().getGrid()
-				.getPiece(findPosition(x - 45, y - 20)) == null) {
+		Point2D loc = myModel.getCurrentLevel().getGrid().findActiveTile(x, y).getLocation();
+		
+		System.out.println("Tile Found is: "+ myModel.getCurrentLevel().getGrid().findActiveTile(x, y) + " at X:" + loc.getX() +" at Y:"+ loc.getY());
+		
+		if (myModel.getCurrentLevel().getGrid().getPiece(loc) == null) {
 			System.out.println("no piece");
 		}
 
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
-				.getPiece(findPosition(x - 45, y - 20)));
+				.getPiece(loc));
 		// myGrid.clearEffect();
-		//myGameGridEffect.clearAllEffects(myGrid);
+		// myGameGridEffect.clearAllEffects(myGrid);
 
 		// highlightCurrent(findPosition(x - 45, y - 20), Color.BLUE);
-		//myGameGridEffect.highlightCurrent(findPosition(x - 45, y - 20),
-		//		Color.BLUE);
+		// myGameGridEffect.highlightCurrent(findPosition(x - 45, y - 20),
+		// Color.BLUE);
 
 		// addDropShadow(myGrid.get(((int)findPosition(x,y).getX()),
 		// ((int)findPosition(x,y).getY())), Color.PURPLE);
@@ -528,17 +539,15 @@ public class ViewController {
 	 * @return a Point2D representing tile coordinates
 	 */
 	public Point2D findPosition(double x, double y) {
-		double patchHeight = 500 / (double) myGrid.getCol();
-		double patchWidth = 500 / (double) myGrid.getRow();
+		double patchHeight = myGrid.getTileSize();
+		double patchWidth = myGrid.getTileSize();
 		int xCor = (int) (x / patchWidth);
 		int yCor = (int) (y / patchHeight);
+		// System.out.println("Current Mouse Exact:"+ x +" "+ y);
 		// System.out.println("Current Mouse Coodinatate:"+ xCor +" "+ yCor);
 		currentClick = new Point2D.Double(yCor, xCor);
 		return currentClick;
 	}
-	
-	
-
 
 	/**
 	 * Changes the image of the Cursor
