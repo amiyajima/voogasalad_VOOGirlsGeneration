@@ -91,7 +91,8 @@ public class KeyboardMovement {
                         //highlight the new location now
                         currentTile = vc.getGrid().findClickedTile(myCurrentLocation);
                         currentTile.selectTile(KEY_MOVEMENT_COLOR);
-                        System.out.println("KeyboardMovement New Location: " + myCurrentLocation);
+//                        System.out.println("KeyboardMovement New Location: " + myCurrentLocation);
+
 
                         // ArrayList<Label> actions = new ArrayList<Label>();
                         // if (vc.getPiece(vc.findPosition(myCurrentLocation.getX(),

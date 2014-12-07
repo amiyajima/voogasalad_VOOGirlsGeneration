@@ -409,28 +409,6 @@ public class ViewController {
 		});
 	}
         
-//	public void setOnEnterKey() {
-//	    performAction(myKeyboardMovement.getCurrentLocation().getX(),
-//	                  myKeyboardMovement.getCurrentLocation().getY());
-//        }
-        
-
-//	 Probably going to move this to KeyboardAction class
-//	 public void setOnEnterKey() {
-//	     myGridPane.requestFocus();
-//	     myGridPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//	
-//	 @Override
-//	 public void handle(KeyEvent arg0) {
-//	
-//	 if (arg0.getCode() == KeyCode.F) {
-//	 System.out.println("f");
-//	 performAction(myKeyboardMovement.getCurrentLocation().getX(),
-//	 myKeyboardMovement.getCurrentLocation().getY());
-//	 }
-//	 }
-//	 });
-//	 }
 
 	/**
 	 * Perform the actions of a click at position (x,y) on game grid
@@ -440,22 +418,9 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(Point2D loc) {
-		//System.out.println("current mouse location:" + x + ", " + y);
-		// System.out.println("myGrid size is" + myGridPane.getWidth() + "*"
-		// + myGrid.getHeight());
-		// System.out.println(myGrid.getBoundsInParent());
-
-//	        System.out.println("i get the following coord: ");
-//	        System.out.println(x);
-	        
-	        
-//		Point2D loc = myModel.getCurrentLevel().getGrid().findClickedTile(x, y).getLocation();
-//		System.out.println("performing action here: ");
-//		System.out.println(loc);
-		
-
 		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
 	}
+	
 	
 	/**
 	 * Select state tells VC to highlight the selected piece
@@ -478,8 +443,6 @@ public class ViewController {
 		double patchWidth = myGrid.getTileSize();
 		int xCor = (int) (x / patchWidth);
 		int yCor = (int) (y / patchHeight);
-		// System.out.println("Current Mouse Exact:"+ x +" "+ y);
-		// System.out.println("Current Mouse Coodinatate:"+ xCor +" "+ yCor);
 		currentClick = new Point2D.Double(xCor, yCor);
 		return currentClick;
 	}
@@ -502,13 +465,23 @@ public class ViewController {
 	public void toggleKeyboardControl() {
 		if (keyControlOn) {
 			keyControlOn = false;
-			// myKeyboardMovement.getCurrentLocation());
+			
+			//dehighlighting the tile the keyboard is currently highlighting
+			SuperTile keySelectedTile = 
+			        myGrid.findClickedTile(myKeyboardMovement.getCurrentLocation());
+			keySelectedTile.deselectTile();
 			myKeyboardMovement = null;
 			myKeyboardAction = null;
 			System.out.println("Keyboard OFF");
 		} else {
 			myKeyboardMovement = new KeyboardMovement();
 			myKeyboardAction = new KeyboardAction();
+			
+			//dehighlighting the tile the mouse click is currently highlighting
+			SuperTile selectedTile =
+			        myGrid.findClickedTile(currentClick);
+			selectedTile.deselectTile();
+			
 			myKeyboardMovement.setMovementKeyControl(this, myGridPane, myModel);
 			// myKeyboardAction.setActionKeyControl(myGridPane, activePiece);
 			keyControlOn = true;
