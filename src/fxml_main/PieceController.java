@@ -64,7 +64,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 					public void handle (MouseEvent e) {
 						GUIGrid grid = myGridReference.getGrid();
 						Point2D coor = grid.calculateClicked(e.getX(), e.getY());
-						grid.removePatch(coor);
+						grid.removePieceAtCoordinate(coor);
 					}
 				};
 				myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
