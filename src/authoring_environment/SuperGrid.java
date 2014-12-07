@@ -75,12 +75,19 @@ public class SuperGrid {
 	}
 	
 
-	public SuperTile findActiveTile(double xCoord, double yCoord){
+
+	/**
+	 * Use PIXELS to get a tile
+	 * @param xCoord
+	 * @param yCoord
+	 * @return
+	 */
+	public SuperTile findClickedTile(double xCoord, double yCoord){
 		for (List<SuperTile> rows:myGrid){
 			for (SuperTile tile:rows){
-				System.out.println(tile.getLocation().getX());
+				//System.out.println(tile.getLocation().getX());
 				if (tile.myShape.contains(xCoord,yCoord)){
-					System.out.println("Here");
+					//System.out.println("Here");
 					return tile;
 				}
 			}
@@ -88,7 +95,13 @@ public class SuperGrid {
 		return null;
 	}
 	
-	public SuperTile findActiveTile(Point2D loc){
+
+	/**
+	 * Use GRID COORDINATE LOCATION to get a tile
+	 * @param loc
+	 * @return
+	 */
+	public SuperTile findClickedTile(Point2D loc){
 	                int row=(int) loc.getX();
 	                int col=(int) loc.getY();
 	                return myGrid.get(row).get(col);

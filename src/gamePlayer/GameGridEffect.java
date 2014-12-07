@@ -3,6 +3,8 @@ package gamePlayer;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.List;
 import authoring_environment.GUIGrid;
 import authoring_environment.SuperTile;
 import javafx.fxml.FXML;
@@ -13,57 +15,56 @@ import javafx.scene.paint.Color;
 
 public class GameGridEffect {
     ViewController myViewController;
-    Highlighter myHighlighter;
     GUIGrid myGrid;
     Piece myActivePiece;
     Action myActiveAction;
+    List<SuperTile> myHighlightedTiles;
+
     
-    public static final Color ACTION_RANGE_COLOR = Color.web("#FFBF00", 0.3);
+    public static final String ACTION_RANGE_COLOR = "#FFBF00";
+    private static final Color DEFAULT_HIGHLIGHT_COLOR = Color.web("#0000FF", 0.3);
      
     public GameGridEffect(ViewController vc){
 //        myHighlighter = new Highlighter();
+
         myViewController = vc;
         myGrid = myViewController.getGrid();
         myActivePiece = myViewController.getActivePiece();
         myActiveAction = myViewController.getActiveAction();
+        myHighlightedTiles = new ArrayList<SuperTile>();
      }
     
-//    /**
-//     * Return the highlighter used for the grid
-//     * @return
-//     */
-//    public Highlighter getHighlighter(){
-//        return myHighlighter;
-//    }
-    
+
     /**
      * Highlight the tiles that represent the possible range of the action
      * selected
      */
-//    public void highlightActionRange () {
-////        clearAllEffects(myGrid);
-//        if ( (myActivePiece != null) && (myActiveAction !=null)){
-//            myActiveAction.getActionRange(myActivePiece.getLoc()).forEach(point -> {
-//                SuperTile activeTile = myGrid.findActiveTile(point);
-//                activeTile.selectTile();
-//                activeTile.makeHighlight(1.0, ACTION_RANGE_COLOR);
-//            });
-//        }
-//    }
-        
-//        if (myActivePiece != null && myActiveAction != null) {
-//            myActiveAction.getActionRange(myActivePiece.getLoc()).forEach(point -> {
-//                if (point.getX() < myGrid.getRow()       //assuming this method exists
-//                    && point.getY() < myGrid.getCol()    //assuming this method exists
-//                    && point.getX() > 0 && point.getY() > 0) {
-//                    
-//                    Node n = myGrid.get((int) point.getX(), (int) point.getY()); //assuming this method exists
-////                                      myHighlighter.addDropShadow(n, Color.YELLOW);     
-//                                     myHighlighter.highlight(myGrid, point, Color.YELLOW);
-//                                 }
-//                             });
-//        }
-//    }
+
+    @FXML
+    public void highlightActionRange () {
+        clearAllEffects();
+
+        if (myActivePiece != null && myActiveAction != null) {
+
+            myActiveAction.getActionRange(myActivePiece.getLoc())
+                    .forEach(point -> { if (point.getX() < myGrid.getRow()
+                                     && point.getY() < myGrid.getCol()
+                                     && point.getX() > 0 && point.getY() > 0) {
+                                     
+                                     SuperTile toHighlight = myGrid.findClickedTile(point);
+                                     toHighlight.selectTile(ACTION_RANGE_COLOR);
+                                     myHighlightedTiles.add(toHighlight);
+                                     
+                                 }
+                             });
+            
+            System.out.println("GameGridEffect: " + myHighlightedTiles.size());
+            for (SuperTile st : myHighlightedTiles) {
+                System.out.println("GameGridEffect: Highlighted tile" + st.toString());
+            }
+        }
+    }
+
 
     /**
      * Highlight the effect range of an action if to be applied at a given
@@ -74,18 +75,15 @@ public class GameGridEffect {
      * @param red
      */
     public void highlightEffectRange (MouseEvent me, Color c, Point2D loc) {
+        clearAllEffects();
         
         if (myActivePiece != null && myActiveAction != null) {
             myActiveAction.getActionRange(myActivePiece.getLoc()).forEach(point -> {
-                
-//                Point2D loc = myViewController.findPosition(me.getSceneX(),me.getSceneY());
-
                 if (loc.equals(point)) {
                     myActiveAction.getEffectRange().forEach(point2 -> {
-//                        Node n =grid.get((int) (loc.getX() + point2.getX()),   //assuming this method exists
-//                                           (int) (loc.getY() + point2.getY()));
-//                         myHighlighter.addDropShadow(n, c);
-                        myHighlighter.highlight(myGrid, loc, c);
+                        SuperTile toHighlight = myGrid.findClickedTile(point);
+                        toHighlight.selectTile(ACTION_RANGE_COLOR);
+                        myHighlightedTiles.add(toHighlight);
                         });
                     }
                 });
@@ -93,19 +91,23 @@ public class GameGridEffect {
         }
     
     /**
-     * Highlight the current location on the grid
+     * Uses GRID COORDINATE LOCATION to highlight the current location on the grid
      */
     public void highlightCurrent(Point2D loc, Color c){
-        myHighlighter.highlight(myGrid, loc, c);
+        myGrid.findClickedTile(loc);
     }
     
-//    /**
-//     * Clear all effects in grid
-//     * @param grid
-//     */
-//    public void clearAllEffects(GUIGrid grid){
-//        grid.getChildren().forEach(node->node.setEffect(null));
-//    }
+
+    /**
+     * Clear all effects in grid, currently only clears highlights
+     * @param grid
+     */
+    private void clearAllEffects(){
+        for (SuperTile st : myHighlightedTiles) {
+            myGrid.findClickedTile(st.getLocation()).deselectTile();;
+        }
+    }
+
     
     
 }

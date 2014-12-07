@@ -105,7 +105,7 @@ public class JSONBobTester {
     }
 
     public GUIGrid createNewGrid () {
-        GUIGrid grid1 = new GUIGrid(10, 10, 75, "Square Grid");
+        GUIGrid grid1 = new GUIGrid(5, 5, 75, "Square Grid");
 
         Piece templ = createNewPiece(grid1, new Point2D.Double(0, 0));
         //System.out.println(templ.getImageLocation());

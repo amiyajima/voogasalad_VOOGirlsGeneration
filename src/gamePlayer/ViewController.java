@@ -60,7 +60,7 @@ public class ViewController {
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
 	
 	public static final Color SELECTION_COLOR = Color.web("#0000FF", 0.3);
-//	public static final String TEST_COLOR = "#0000FF";
+	public static final String TEST_COLOR = "#0000FF";
 
 	private ResourceBundle myLanguages;
 	private Stage myStage;
@@ -447,9 +447,9 @@ public class ViewController {
 ////		myGameGridEffect.highlightActionRange();
 //		
 //=======
-		SuperTile activeTile = myGrid.findActiveTile(activePiece.getLoc());
+		SuperTile activeTile = myGrid.findClickedTile(activePiece.getLoc());
 
-		activeTile.selectTile();
+		activeTile.selectTile(TEST_COLOR);
 //		activeTile.makeHighlight(1.0);
 //		 myGameGridEffect.highlightActionRange();
 //>>>>>>> FETCH_HEAD
@@ -457,9 +457,6 @@ public class ViewController {
 		setGridState(new ApplyState(this));
 	}
 
-	/**
-	 * TODO: Add javadoc
-	 */
 	private void setOnClick() {
 		myGridPane.getContent().setOnMouseClicked(event -> {
 			performAction(event.getX(), event.getY());
@@ -467,9 +464,6 @@ public class ViewController {
 	}
 
 	// Probably going to move this to KeyboardAction class
-	// /**
-	// * TODO: Add javadoc
-	// */
 	// public void setOnEnterKey() {
 	// System.out.println("do i need this?");
 	// myGridPane.requestFocus();
@@ -494,14 +488,16 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(double x, double y) {
-		System.out.println("current mouse location:" + x + ", " + y);
+		//System.out.println("current mouse location:" + x + ", " + y);
 		// System.out.println("myGrid size is" + myGridPane.getWidth() + "*"
 		// + myGrid.getHeight());
 		// System.out.println(myGrid.getBoundsInParent());
 
-		Point2D loc = myModel.getCurrentLevel().getGrid().findActiveTile(x, y).getLocation();
+		Point2D loc = myModel.getCurrentLevel().getGrid().findClickedTile(x, y).getLocation();
 		
-		System.out.println("Tile Found is: "+ myModel.getCurrentLevel().getGrid().findActiveTile(x, y) + " at X:" + loc.getX() +" at Y:"+ loc.getY());
+
+		//System.out.println("Tile Found is: "+ myModel.getCurrentLevel().getGrid().findClickedTile(x, y) + " at X:" + loc.getX() +" at Y:"+ loc.getY());
+
 		
 		if (myModel.getCurrentLevel().getGrid().getPiece(loc) == null) {
 			System.out.println("no piece");
