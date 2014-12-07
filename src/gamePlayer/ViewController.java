@@ -355,11 +355,11 @@ public class ViewController {
 		piece.getActions().forEach(action -> {
 			Label l = new Label(action.toString());
 			l.setOnMouseClicked(event -> bindAction(action));
-			l.getStyleClass().add("label");
 			actions.add(l);
 		});
 
 		controlPane.getChildren().addAll(actions);
+
 	}
 	
 	/**
@@ -401,7 +401,7 @@ public class ViewController {
 	}
 
 	private void setOnClick() {
-		if(myCurrentPlayer.getNumMovesPlayed()>3){
+		if(myModel.getCurrentPlayer().getNumMovesPlayed()>3){
 			myModel.nextPlayer();
 		}
 		if(myModel.getCurrentLevel().getGrid().getPiece(new Point2D.Double(0,0))==null){
