@@ -38,29 +38,6 @@ public class ApplyState implements IGridState {
                 myController.getGameGridEffect().highlightEffectRange(activeTile.getLocation());
             }
         });
-        
-//        myController.getGridPane().setOnMouseEntered(event -> {
-//            myController.changeCursor(myController.CURSOR_ATTACK_TEST);
-//                                       myController.getGridPane().getChildren().forEach(node -> {
-//                        node.setOnMouseEntered(event2 -> {
-//                            myGameGridEffect.highLightEffectRange(myController.getGridPane(), event2,Color.RED);
-//                        });
-//                        
-//                        node.setOnMouseExited(event3 -> {
-//                            myGameGridEffect.highLightActionRange();
-//                            // TODO: Put this back in
-//                            /*
-//                             * if (myController.getActivePiece() != null) {
-//                             * myController
-//                             * .highlightCurrent(myController
-//                             * .getActivePiece()
-//                             * .getLoc(),
-//                             * Color.BLUE);
-//                             * }
-//                             */
-//                        });
-//                    });
-//                });
     }
 
     @Override
