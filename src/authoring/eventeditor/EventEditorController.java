@@ -5,7 +5,6 @@ package authoring.eventeditor;
 import gamedata.events.Condition;
 import gamedata.events.Event;
 import gamedata.events.GlobalAction;
-import gamedata.events.conditions.IfStatEqualsConstant;
 
 import java.io.IOException;
 import java.net.URL;

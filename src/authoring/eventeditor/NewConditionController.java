@@ -65,9 +65,8 @@ public class NewConditionController implements Initializable{
 		Class<?> c = conditionsList.get(idx);
 		
 		/**
-		 * Unfortunate if statements
+		 * If statements to choose which Condition Editor to pull up
 		 */
-		
 		if("class gamedata.events.ConditionEquals".equals(c.getSuperclass().toString())){
 		}
 		
