@@ -55,6 +55,9 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
         delBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
+                for (Patch patchType : myPatchTypes.getData()) {
+
+                }
                 System.out.println("HI DELETE BUTTONFORPATCH HI");
             }
         });
