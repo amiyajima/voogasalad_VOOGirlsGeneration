@@ -29,6 +29,13 @@ public class GUIGrid extends SuperGrid {
         myPatchData = new PatchData();
     }
 
+    public GUIGrid (int cols, int rows, double tileSize, String shape,
+    		PieceData pieceData, PatchData patchData) {
+    	super(cols, rows, tileSize, shape);
+        myPieceData = pieceData;
+        myPatchData = patchData;
+    }
+    
     /**
      * Returns number of rows
      * 

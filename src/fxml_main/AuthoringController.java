@@ -1,11 +1,7 @@
 package fxml_main;
 
-import gamedata.gamecomponents.Level;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -19,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import authoring.data.ActionData;
+import authoring.data.LevelData;
 import authoring.eventeditor.EventEditorController;
 import authoring_environment.GUIGrid;
 
@@ -55,12 +52,12 @@ public class AuthoringController implements Initializable {
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		
 		ActionData actions = new ActionData();
-		List<Level> myLevels = new LinkedList<Level>();
+		LevelData myLevelData = new LevelData();
 		
 		myPieceController = new PieceController(myPiecesVBox, myPropertiesSPane, myCurrentGrid, actions);
 	    myPatchController = new PatchController(myPatchesVBox, myPropertiesSPane, myCurrentGrid);
 	    myLevelController = new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
-	    		myCurrentGrid, myLevels);
+	    		myCurrentGrid, myLevelData);
 	}
 	
 	@FXML
