@@ -35,7 +35,7 @@ public class PatchData implements AuthoringData<Patch> {
 	
 	@Override
 	public void replace(Patch origEl, Patch newEl) {
-		origEl.setName(newEl.getName());
+		origEl.setName(newEl.toString());
 		origEl.setImageLocation(newEl.getImageLocation());
 	}
 
@@ -62,7 +62,7 @@ public class PatchData implements AuthoringData<Patch> {
 	public boolean terrainAtLoc(Patch terrain, int x, int y){
 		Point2D location = new Point2D.Double(x, y);
 		for(Patch patch : myPatches){
-			if(location.equals(patch.getLoc()) && terrain.getName().equals(patch.getName())){
+			if(location.equals(patch.getLoc()) && terrain.toString().equals(patch.toString())){
 				myPatches.remove(patch);
 				return true;
 			}

@@ -27,7 +27,7 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 	public boolean containsName(String name) {
 		Set<String> nameSet = new HashSet<String>();
 		for (Patch p : myPatches) {
-			nameSet.add(p.getName());
+			nameSet.add(p.toString());
 		}
 		return nameSet.contains(name);
 	}
