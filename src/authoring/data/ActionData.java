@@ -20,6 +20,7 @@ import javafx.collections.ObservableList;
  */
 
 public class ActionData implements AuthoringData<Action> {
+	
 	private List<Action> myActions;
 	private transient Map<String, Action> myActionsMap;
 	
@@ -39,36 +40,31 @@ public class ActionData implements AuthoringData<Action> {
 		}
 		return names;
 	}
-	
-	@Override
-	public List<Action> get(){
-		return myActions;
-	}
-	
-	@Override
-	public void add(Action... actions) {
-	    for (Action a : actions) {
-	        myActions.add(a);
-	        myActionsMap.put(a.toString(),  a);
-
-	    }
-	}
-	
-	@Override
-	public void remove(Action... actions) {
-	          for (Action a : actions) {
-	                myActions.remove(a);
-	                myActionsMap.remove(a.toString());
-	            }
-	}
-	
-	@Override
-	public void clear() {
-		myActions.clear();
-		myActionsMap.clear();
-	}
 
     public Action getAction (String s) {
         return myActionsMap.get(s);
     }
+
+	@Override
+	public void add(Action a) {
+		myActions.add(a);
+        myActionsMap.put(a.toString(),  a);
+	}
+
+	@Override
+	public void remove(Action a) {
+		myActions.remove(a);
+        myActionsMap.remove(a.toString());
+	}
+
+	@Override
+	public void replace(Action origEl, Action newEl) {
+		// TODO : Does ActionData need this method?
+		return;
+	}
+
+	@Override
+	public List<Action> getData() {
+		return myActions;
+	}
 }

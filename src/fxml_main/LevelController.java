@@ -1,10 +1,7 @@
 package fxml_main;
 
-import gamedata.events.Event;
 import gamedata.gamecomponents.Level;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.function.Consumer;
 
 import javafx.event.ActionEvent;
@@ -15,6 +12,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import authoring.data.LevelData;
 import authoring_environment.GUIGrid;
 
 /**
@@ -24,13 +22,13 @@ import authoring_environment.GUIGrid;
  */
 public class LevelController extends GridComponentAbstCtrl<Level> {
 	private ScrollPane myGridSPane;
-	private List<Level> myLevels;
+	private LevelData myLevelData;
 	
 	protected LevelController (VBox vbox, ScrollPane propertiesSPane,
-			ScrollPane gridSPane, GUIGrid currGrid, List<Level> levels) {
+			ScrollPane gridSPane, GUIGrid currGrid, LevelData levels) {
 		super(vbox, propertiesSPane, currGrid);
 		myGridSPane = gridSPane;
-		myLevels = levels;
+		myLevelData = levels;
 	}
 
 	@Override
@@ -46,15 +44,22 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 	private void globalNewBtnOnClickAction() {
 		//TODO: Need to not hard-code square, have it passed through the constructor
 		// as maybe a gridshapeproperty (new class?)
-		Level newLevel = new Level(null, new LinkedList<Event>(), "myID", false);
-		
-		Consumer<Level> okLambda = (Level level) -> {addEntry(level);};
-		super.myPropertiesSPane.setContent(new LevelEditor(newLevel,this));
+		Consumer<Level> okLambda = (Level level) -> {
+			addEntry(level);
+			myLevelData.add(level);
+			setAndDisplayGrid(level);
+			};
+		super.myPropertiesSPane.setContent(new LevelEditor(okLambda));
+	}
+	
+	private void setAndDisplayGrid(Level level) {
+		myCurrentGrid = level.getGrid();
+		myCurrentGrid.displayPane(myGridSPane);
 	}
 
 	@Override
 	protected void initGlobalEditBtn(Button editBtn) {
-
+		//do nothing
 	}
 
 	@Override
@@ -70,23 +75,38 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 		entryBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				myCurrentGrid = entry.getGrid();
-//				entry.getGrid().displayPane(myGridSPane);
+				setAndDisplayGrid(entry);
 			}
 		});
 		entryBox.getChildren().add(nameLabel);
 		return entryBox;
 	}
-	
-	
 
 	@Override
 	protected void initEntryEditBtn(Level entry, Button editBtn) {
-		
+		Consumer<Level> okLambda = (Level level) -> {
+			myLevelData.replace(entry, level);
+			
+		    HBox entryBox = myEntryMap.get(entry);
+		    HBox imgNameBox = myIndivEntMap.get(entryBox);
+		    
+		    entryBox.getChildren().remove(imgNameBox);
+		    HBox newImgNameBox = makeEntryBox(level);	
+		    
+		    entryBox.getChildren().add(newImgNameBox);
+		    myIndivEntMap.replace(entryBox, newImgNameBox);
+		};
+		myPropertiesSPane.setContent(new LevelEditor(okLambda, entry));
 	}
 
 	@Override
 	protected void initEntryDelBtn(Level entry, Button delBtn) {
-//		myLevels.remove(index)
+		delBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle (ActionEvent event) {
+				myLevelData.remove(entry);
+				myVBox.getChildren().remove(myEntryMap.get(entry));
+			}
+		});
 	}
 }

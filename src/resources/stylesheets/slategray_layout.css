@@ -4,7 +4,6 @@
 	-fx-text-color: #F7F7F7;
 	-fx-base: #343434;
 	-fx-background-color: #343434;
-
 	-fx-padding: 5;
 }
 
@@ -22,4 +21,8 @@
 
 #vbox-main {
 	-fx-padding: 10;
+}
+
+#editor-title {
+	-fx-font-size: 14pt;
 }
