@@ -35,7 +35,7 @@ public class NewActionController implements Initializable{
                 //TODO: Remove print stack traces. Add in error windows
                 actionList = new ArrayList<>();
                 try {
-                        actionList = Arrays.asList(ClassGrabber.getClasses("gamedata.events.globalactions"));
+                        actionList = Arrays.asList(ClassGrabber.getClasses("gamedata.events.globalaction"));
                 } catch (ClassNotFoundException e) {
                         e.printStackTrace();
                 } catch (IOException e) {
