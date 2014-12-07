@@ -24,7 +24,7 @@ public class EventEditorMain extends Application{
 		Parent root = loader.load();
 
 		EventEditorController controller = loader.getController();
-		controller.setMain(this);
+		//controller.setMain(this);
 		
 		Scene scene = new Scene(root, 800, 512);
 

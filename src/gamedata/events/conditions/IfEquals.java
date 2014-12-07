@@ -3,6 +3,12 @@ package gamedata.events.conditions;
 import gamedata.events.ConditionEquals;
 import gamedata.gamecomponents.IHasStats;
 
+/**
+ * 
+ * 
+ * @author Mike Zhu
+ *
+ */
 public class IfEquals extends ConditionEquals{
 	
 	public IfEquals(String name, IHasStats ref1, String stat1, IHasStats ref2, String stat2) {

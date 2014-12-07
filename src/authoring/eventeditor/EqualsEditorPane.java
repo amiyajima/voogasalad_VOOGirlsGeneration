@@ -116,7 +116,9 @@ public class EqualsEditorPane extends Pane{
 			refName.setVisible(true);
 		}
 		
-		//TODO: IMPLEMENT THIS SHIT
+		//TODO: IMPLEMENT THIS SHIT. instead of the switch statement can we get all of the piece's instance variables or something?
+		//or like each thing can have a list of stats and we display each of the things contained in stats regardless of what it is.
+		//and if its a constant, its stat is just its value. 
 		/**
 		 * Selects between the four types of input into this Condition
 		 */
