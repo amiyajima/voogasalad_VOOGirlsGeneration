@@ -113,6 +113,7 @@ public class GameGridEffect {
      * @param grid
      */
     private void clearAllEffects(){
+    	//System.out.println("Clearing Effects");
         for (SuperTile st : myHighlightedTiles) {
             myGrid.findClickedTile(st.getLocation()).deselectTile();
         }
