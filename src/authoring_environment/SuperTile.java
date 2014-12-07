@@ -85,7 +85,7 @@ public abstract class SuperTile extends Group {
 	}
 	
 	public void addPatchImage(String imageLoc){
-		myPatchImage.setImage(new Image(imageLoc));
+		myPatchImage.setImage(new Image(getClass().getResourceAsStream(imageLoc)));
 	}
 
 

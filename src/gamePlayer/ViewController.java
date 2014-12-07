@@ -451,6 +451,7 @@ public class ViewController {
 	 */
 	private void setOnClick() {
 		myGridPane.setOnMouseClicked(event -> {
+			//System.out.println("Exact Mouse Coordinate:"+event.getX()+" Y:"+event.getY());
 			performAction(event.getX(), event.getY());
 		});
 	}
@@ -483,7 +484,7 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(double x, double y) {
-		// System.out.println("current mouse location:" + x + ", " + y);
+		 //System.out.println("current mouse location:" + x + ", " + y);
 		// System.out.println("myGrid size is" + myGridPane.getWidth() + "*"
 		// + myGrid.getHeight());
 		// System.out.println(myGrid.getBoundsInParent());
@@ -525,11 +526,12 @@ public class ViewController {
 	 * @return a Point2D representing tile coordinates
 	 */
 	public Point2D findPosition(double x, double y) {
-		double patchHeight = 500 / (double) myGrid.getCol();
-		double patchWidth = 500 / (double) myGrid.getRow();
+		double patchHeight = myGrid.getTileSize();
+		double patchWidth = myGrid.getTileSize();
 		int xCor = (int) (x / patchWidth);
 		int yCor = (int) (y / patchHeight);
-		// System.out.println("Current Mouse Coodinatate:"+ xCor +" "+ yCor);
+		//System.out.println("Current Mouse Exact:"+ x +" "+ y);
+		//System.out.println("Current Mouse Coodinatate:"+ xCor +" "+ yCor);
 		currentClick = new Point2D.Double(yCor, xCor);
 		return currentClick;
 	}
