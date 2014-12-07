@@ -63,7 +63,7 @@ public class Piece extends GridComponent {
 	}
 
 	/**
-	 * Cloning constructor for deeping cloning of a piece
+	 * Cloning constructor for deep cloning of a piece
 	 * 
 	 * @param clone
 	 *            - Piece instance to be cloned

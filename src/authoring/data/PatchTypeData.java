@@ -15,27 +15,10 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 	public PatchTypeData() {
 		myPatches = new LinkedList<Patch>();
 	}
-	
-    public Set<String> getIdSet() {
-    	Set<String> idSet = new HashSet<String>();
-		for (Patch p : myPatches) {
-			idSet.add(p.getID());
-		}
-		return idSet;
-    }
-	
-	public boolean containsName(String name) {
-		Set<String> nameSet = new HashSet<String>();
-		for (Patch p : myPatches) {
-			nameSet.add(p.toString());
-		}
-		return nameSet.contains(name);
-	}
 
 	@Override
 	public void add(Patch p) {
 		myPatches.add(p);
-		System.out.println("Add to patch type: " + myPatches.size());
 	}
 	
 	@Override
@@ -56,5 +39,21 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 	@Override
 	public List<Patch> getData() {
 		return myPatches;
+	}
+	
+    public Set<String> getIdSet() {
+    	Set<String> idSet = new HashSet<String>();
+		for (Patch p : myPatches) {
+			idSet.add(p.getID());
+		}
+		return idSet;
+    }
+	
+	public boolean containsName(String name) {
+		Set<String> nameSet = new HashSet<String>();
+		for (Patch p : myPatches) {
+			nameSet.add(p.getName());
+		}
+		return nameSet.contains(name);
 	}
 }
