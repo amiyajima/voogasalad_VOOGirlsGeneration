@@ -69,6 +69,7 @@ public class ViewController {
 	private GUIGrid myGrid;
 	
 	private Player myCurrentPlayer;
+	
 
 	// private SampleListener myLeapListener;
 
@@ -400,6 +401,13 @@ public class ViewController {
 	}
 
 	private void setOnClick() {
+		if(myCurrentPlayer.getNumMovesPlayed()>3){
+			myModel.nextPlayer();
+		}
+		if(myModel.getCurrentLevel().getGrid().getPiece(new Point2D.Double(0,0))==null){
+			myModel.nextLevel();
+		}
+		
 	    myGridPane.getContent().setOnMouseClicked(event -> {
 		Point2D loc = findPosition(event.getX(), event.getY());
 		performAction(loc);
@@ -414,9 +422,7 @@ public class ViewController {
 	 * @param x
 	 * @param y
 	 */
-	public void performAction(Point2D loc) {
-	    gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
-		
+	public void performAction(Point2D loc) {		
 		if (keyControlOn){
                   myKeyboardMovement = null;
 		  myKeyboardAction = new KeyboardAction();
