@@ -47,7 +47,7 @@ public class Game {
     }
 
     public Game (int numPlayers, List<Level> levels, Level currentLevel) {
-        myGameWon = false;
+        myGameWon = 0;
         myNumPlayers = numPlayers;
         myPlayers = new ArrayList<Player>();
         myLevels = levels;
@@ -69,7 +69,7 @@ public class Game {
             myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel) + 1);
         }
         else {
-            myGameWon = true;
+            myGameWon = 1;
         }
     }
 
