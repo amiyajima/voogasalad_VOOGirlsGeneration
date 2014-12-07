@@ -265,7 +265,7 @@ public class ViewController {
 				myStage.setScene(myScene);
 			});
 		});
-		// initializeGrid();
+//		 initializeGrid();
 	}
 
 	/**
@@ -389,7 +389,7 @@ public class ViewController {
 		    //after i click action button, i need to go back to KeyboardMovement
 		    myKeyboardAction = null;
 		    myKeyboardMovement = new KeyboardMovement();
-		    myKeyboardMovement.setMovementKeyControl(this, myGridPane, myModel);
+		    myKeyboardMovement.setMovementKeyControl(this);
 		}
 	}
 
@@ -409,12 +409,12 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(Point2D loc) {
-		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
+	    gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
 		
 		if (keyControlOn){
                   myKeyboardMovement = null;
 		  myKeyboardAction = new KeyboardAction();
-                  myKeyboardAction.setActionKeyControl(this, myGridPane); 
+                  myKeyboardAction.setActionKeyControl(this); 
 		}
 	}
 	
@@ -481,7 +481,7 @@ public class ViewController {
 			}
 			
                       myKeyboardMovement = new KeyboardMovement();
-                      myKeyboardMovement.setMovementKeyControl(this, myGridPane, myModel);
+                      myKeyboardMovement.setMovementKeyControl(this);
 			
 			keyControlOn = true;
 		}
@@ -598,5 +598,9 @@ public class ViewController {
 	 */
 	protected GameGridEffect getGameGridEffect() {
 		return myGameGridEffect;
+	}
+	
+	public VBox getcontrolPane() {
+	    return controlPane;
 	}
 }
