@@ -107,21 +107,21 @@ public class GameGridEffect {
      */
     private void clearAllEffectHighlights(){
         for (SuperTile st : myHighlightedEffects) {
-            myGrid.findClickedTile(st.getPixelLocation()).deselectTile();
+            myGrid.findClickedTile(st.getCoordinates()).deselectTile();
         }
         myHighlightedEffects.clear();
     }
     
     public void clearAllActionHighlights(){
         for (SuperTile st : myHighlightedActions) {
-            myGrid.findClickedTile(st.getPixelLocation()).deselectTile();
+            myGrid.findClickedTile(st.getCoordinates()).deselectTile();
         }
         myHighlightedActions.clear();
     }
     
     public void clearAllPieceHighlights(){
         for (SuperTile st : myHighlightedPiece) {
-            myGrid.findClickedTile(st.getPixelLocation()).deselectTile();
+            myGrid.findClickedTile(st.getCoordinates()).deselectTile();
         }
         myHighlightedPiece.clear();
     }
@@ -133,19 +133,19 @@ public class GameGridEffect {
 
     private void printPieceHighlights() {
         for (SuperTile st : myHighlightedPiece) {
-            System.out.println("Piece Highlights: " + st.getPixelLocation().getX() + ", " + st.getPixelLocation().getY());
+            System.out.println("Piece Highlights: " + st.getCoordinates().getX() + ", " + st.getCoordinates().getY());
         }
     }
     
     private void printEffectHighlights() {
         for (SuperTile st : myHighlightedEffects) {
-            System.out.println("Effect Highlights: " + st.getPixelLocation().getX() + ", " + st.getPixelLocation().getY());
+            System.out.println("Effect Highlights: " + st.getCoordinates().getX() + ", " + st.getCoordinates().getY());
         }
     }
     
     private void printActionHighlights() {
         for (SuperTile st : myHighlightedActions) {
-            System.out.println("Action Highlights: " + st.getPixelLocation().getX() + ", " + st.getPixelLocation().getY());
+            System.out.println("Action Highlights: " + st.getCoordinates().getX() + ", " + st.getCoordinates().getY());
         }
     }
     
@@ -160,7 +160,7 @@ public class GameGridEffect {
     public boolean isHoveringOverActionHighlight(double mouseX, double mouseY) {
             for (SuperTile st : myHighlightedActions) {
                     if (myViewController.getGrid().findClickedTile(mouseX, mouseY)
-                                    .getPixelLocation() == st.getPixelLocation()) {
+                                    .getCoordinates() == st.getCoordinates()) {
                             return true;
                     }
             }

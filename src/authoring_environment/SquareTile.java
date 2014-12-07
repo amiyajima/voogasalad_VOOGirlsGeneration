@@ -21,4 +21,14 @@ public class SquareTile extends SuperTile{
 		Point2D coord = new Point2D.Double(loc.getX()*size, loc.getY()*size);
 		return coord;
 	}
+	
+	@Override
+	protected Point2D calculateImageLocation(double size, Point2D loc) {
+		return calculatePixelLocation(size, loc);
+	}
+	
+	@Override
+	protected double calculateImageSize(double size) {
+		return size;
+	}
 }

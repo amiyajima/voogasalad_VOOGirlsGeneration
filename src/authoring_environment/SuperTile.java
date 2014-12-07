@@ -19,6 +19,7 @@ public abstract class SuperTile extends Group {
     // private int mySize;
     private double myImageSize;
     private Point2D myLocation;
+    private Point2D myImageLocation;
     private Point2D myCoordinates;
 
     protected transient ImageView myPieceImage;
@@ -41,7 +42,8 @@ public abstract class SuperTile extends Group {
     protected void makeShapeTile (double size, Point2D loc) {
 
         myLocation = calculatePixelLocation(size, loc);
-        myImageSize = size;
+        myImageLocation = calculateImageLocation(size, loc);
+        myImageSize = calculateImageSize(size);
 
         myShape = makeShape(size, myLocation);
         makeHighlight(size);
@@ -51,7 +53,7 @@ public abstract class SuperTile extends Group {
         myPatchImage = makeShape(size, myLocation);
         myPatchImage.setFill(Color.TRANSPARENT);
 
-        alignNodes(myLocation, myPieceImage);
+        alignNodes(myImageLocation, myPieceImage);
     }
 
     /**
@@ -109,6 +111,10 @@ public abstract class SuperTile extends Group {
 
     protected abstract Point2D calculatePixelLocation (double size, Point2D loc);
     
+    protected abstract Point2D calculateImageLocation(double size, Point2D loc);
+    
+    protected abstract double calculateImageSize(double size);
+    
     private void setCheckeredColor (int row, int col, Shape shape) {
         if (((row % 2 == 0) && (col % 2 == 0)) || ((row % 2 == 1) && (col % 2 == 1))) {
             shape.setFill(Color.WHITESMOKE);
@@ -149,7 +155,7 @@ public abstract class SuperTile extends Group {
      * 
      * @return
      */
-    public Point2D getPixelLocation () {
+    public Point2D getCoordinates () {
         return myCoordinates;
     }
 
@@ -158,7 +164,7 @@ public abstract class SuperTile extends Group {
      * 
      * @return
      */
-    public Point2D getCoordinates () {
+    public Point2D getLocation () {
         return myLocation;
     }
 }

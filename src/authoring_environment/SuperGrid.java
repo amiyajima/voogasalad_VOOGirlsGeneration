@@ -108,7 +108,7 @@ public class SuperGrid {
 	
 	public Point2D findClickedCoordinate(double xCoord, double yCoord){
 		SuperTile tile = findClickedTile(xCoord, yCoord);
-		return tile.getCoordinates();
+		return tile.getLocation();
 	}
 	
 	public Point2D calculateClicked(double xLoc, double yLoc){
