@@ -27,7 +27,7 @@ public class ApplyState implements IGridState {
     private SuperTile activeTile;
 
     public ApplyState (ViewController controller) {
-         System.out.println("new ApplyState");
+        System.out.println("new ApplyState");
         myController = controller;
         myGameGridEffect = controller.getGameGridEffect();
         myGame = controller.getGame();
