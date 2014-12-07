@@ -41,9 +41,10 @@ public class GameGridEffect {
      */
     public void highlightActionRange () {
         clearAllEffects();
+        updateActives();
         System.out.println("Highlighting action111 range");
-
         
+
         if (myActivePiece != null && myActiveAction != null) {
             System.out.println("GameGridEffect: action ABOUT TO HIGHLIGHT\n\n");
             myActiveAction.getActionRange(myActivePiece.getLoc())
@@ -71,6 +72,7 @@ public class GameGridEffect {
      */
     public void highlightEffectRange (MouseEvent me) {
         clearAllEffects();
+        updateActives();
         System.out.println("Highlighting effect range");
         
         myActivePiece = myViewController.getActivePiece();
@@ -97,7 +99,7 @@ public class GameGridEffect {
      */
     public void highlightCurrent(Point2D loc, Piece activeP){
         clearAllEffects();
-        myActivePiece = activeP;
+        updateActives();
         System.out.println("GGE highlight location: " + loc.getX() + " " + loc.getY());
         SuperTile toHighlight = myGrid.findClickedTile(loc);
         toHighlight.selectTile(DEFAULT_COLOR);
@@ -115,6 +117,10 @@ public class GameGridEffect {
         }
     }
 
+    private void updateActives() {
+        myActivePiece = myViewController.getActivePiece();
+        myActiveAction = myViewController.getActiveAction();
+    }
     
     
     
