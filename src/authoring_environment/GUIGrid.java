@@ -128,6 +128,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 
 	public void removePiece(Piece p){
 		myPieceData.remove(p);
+		
 	}
 //	public PieceData getPieces () {
 //		return myPieceData;
@@ -144,6 +145,12 @@ public class GUIGrid extends SuperGrid implements Observer{
 	public List<Piece> getRemovedPieces(){
 		List<Piece> l = new ArrayList<Piece>();
 		for(Piece p:myPieceData.getData()){
+			
+			//TODO: FOR TESTING ONLY
+			if(p.getStats().getValue("health")<=0){
+				p.markForRemoval();
+			}
+			
 			if(p.shouldRemove()){
 				l.add(p);
 			}
