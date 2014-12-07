@@ -20,9 +20,22 @@ public class KeyboardMovement {
     Point2D myCurrentLocation;
     GameGridEffect myGameGridEffect;
     Map<KeyCode, Point2D> movementKeyMap;
-    SuperTile selectedTile;
+    SuperTile currentTile;
     List<SuperTile> myHighlightedTiles;
     
+    public KeyboardMovement() {
+      myCurrentLocation = new Point2D.Double(0.0, 0.0);
+//    myCurrentLocation = new Point2D.Double(0.0, 0.0);
+    // Map<KeyCode, Point2D> movementKeyMap = myCurrentPlayer.getMovementKeyMap();
+    System.out.println("Keyboard Movement ON");
+
+    // for testing!!!
+    movementKeyMap = new HashMap<KeyCode, Point2D>();
+    movementKeyMap.put(KeyCode.A, new Point2D.Double(-1.0, 0.0));
+    movementKeyMap.put(KeyCode.D, new Point2D.Double(1.0, 0.0));
+    movementKeyMap.put(KeyCode.W, new Point2D.Double(0.0, 1.0));
+    movementKeyMap.put(KeyCode.S, new Point2D.Double(0.0, -1.0));
+    }
     
     /**
      * 
@@ -35,16 +48,16 @@ public class KeyboardMovement {
      * @param gameScene
      */
     public void setMovementKeyControl (ViewController vc, ScrollPane sp, Game game) {
-        myCurrentLocation = new Point2D.Double(0.0, 0.0);
-        // Map<KeyCode, Point2D> movementKeyMap = myCurrentPlayer.getMovementKeyMap();
-        System.out.println("Keyboard Movement ON");
-
-        // for testing!!!
-        movementKeyMap = new HashMap<KeyCode, Point2D>();
-        movementKeyMap.put(KeyCode.A, new Point2D.Double(-1.0, 0.0));
-        movementKeyMap.put(KeyCode.D, new Point2D.Double(1.0, 0.0));
-        movementKeyMap.put(KeyCode.W, new Point2D.Double(0.0, 1.0));
-        movementKeyMap.put(KeyCode.S, new Point2D.Double(0.0, -1.0));
+////        myCurrentLocation = new Point2D.Double(0.0, 0.0);
+//        // Map<KeyCode, Point2D> movementKeyMap = myCurrentPlayer.getMovementKeyMap();
+//        System.out.println("Keyboard Movement ON");
+//
+//        // for testing!!!
+//        movementKeyMap = new HashMap<KeyCode, Point2D>();
+//        movementKeyMap.put(KeyCode.A, new Point2D.Double(-1.0, 0.0));
+//        movementKeyMap.put(KeyCode.D, new Point2D.Double(1.0, 0.0));
+//        movementKeyMap.put(KeyCode.W, new Point2D.Double(0.0, 1.0));
+//        movementKeyMap.put(KeyCode.S, new Point2D.Double(0.0, -1.0));
 
         sp.requestFocus();
         sp.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -55,7 +68,7 @@ public class KeyboardMovement {
             public void handle (KeyEvent key) {
                 if (key.getCode() == KeyCode.F) {
                     System.out.println("Selected with key: " + myCurrentLocation);
-//                    vc.performActionKeyboard(myCurrentLocation);
+                    vc.performAction(myCurrentLocation);
                 }
 
                 for (KeyCode kc : movementKeyList) {
@@ -71,13 +84,13 @@ public class KeyboardMovement {
                         }
                         
                         //unhighlight before you highlight the next one
-                        selectedTile = vc.getGrid().findClickedTile(myCurrentLocation);
-                        selectedTile.deselectTile();
+                        currentTile = vc.getGrid().findClickedTile(myCurrentLocation);
+                        currentTile.deselectTile();
                         myCurrentLocation = newCurrentLocation;
                         
                         //highlight the new location now
-                        selectedTile = vc.getGrid().findClickedTile(myCurrentLocation);
-                        selectedTile.selectTile(KEY_MOVEMENT_COLOR);
+                        currentTile = vc.getGrid().findClickedTile(myCurrentLocation);
+                        currentTile.selectTile(KEY_MOVEMENT_COLOR);
                         System.out.println("KeyboardMovement New Location: " + myCurrentLocation);
 
                         // ArrayList<Label> actions = new ArrayList<Label>();
