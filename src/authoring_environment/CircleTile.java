@@ -13,8 +13,10 @@ public class CircleTile extends SuperTile{
 	}
 
 	@Override
-	protected Shape makeShape(double size) {
-		return new Circle(size/2);
+	protected Shape makeShape(double size, Point2D centerCoord) {
+		double centerX=centerCoord.getX();
+		double centerY=centerCoord.getY();
+		return new Circle(centerX,centerY,size/2);
 	}
 
 	@Override

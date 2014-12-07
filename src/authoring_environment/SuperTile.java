@@ -60,15 +60,11 @@ public abstract class SuperTile extends Group {
 		myPatchImage = initImageView(myImageSize);
 		
 		alignNodes(myImageCoord,myPatchImage,myPieceImage);
-
 	}
 
-
-	
 	private void makeHighlight(double size) {
 		myHighlight=makeShape(size,myCoordinates);
 		myHighlight.setFill(DEFAULT_HIGHLIGHT_COLOR);
-
 		myHighlight.setVisible(false);
 	};
 	

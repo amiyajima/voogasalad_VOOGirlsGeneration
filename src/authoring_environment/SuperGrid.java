@@ -15,22 +15,21 @@ public class SuperGrid {
 	private static final String CIRCLE_GRID = "Circle Grid";
 	private static final String HEXAGON_GRID = "Hexagon Grid";
 	private static final String SQUARE_GRID = "Square Grid";
-	protected int myRows;
-	protected int myCols;
+	protected int myHeight;
+	protected int myWidth;
 	protected double myTileSize;
 
-	public Pane myPane;
-
+	private Pane myPane;
 	protected List<List<SuperTile>> myGrid;
 
 	public SuperGrid() {
 		this(1, 1, 40, SQUARE_GRID);
 	}
 
-	public SuperGrid(int cols, int rows, double tileSize, String shape) {
+	public SuperGrid(int width, int height, double tileSize, String shape) {
 		myPane = new Pane();
-		myRows = rows;
-		myCols = cols;
+		myHeight = height;
+		myWidth = width;
 		myTileSize = tileSize;
 		initGridTiles(shape);
 	}
@@ -41,10 +40,10 @@ public class SuperGrid {
 
 	protected void initGridTiles(String shape) {
 		myGrid = new LinkedList<List<SuperTile>>();
-		for (int row = 0; row < myRows; row++) {
+		for (int row = 0; row < myHeight; row++) {
 			List<SuperTile> tileCol = new LinkedList<SuperTile>();
-			for (int col = 0; col < myCols; col++) {
-				Point2D location = new Point2D.Double(row, col);
+			for (int col = 0; col < myWidth; col++) {
+				Point2D location = new Point2D.Double(col,row);
 				SuperTile tile = makeShapeTile(shape, myTileSize, location);
 				tileCol.add(tile);
 				myPane.getChildren().add(tile);
@@ -67,11 +66,11 @@ public class SuperGrid {
 	}
 
 	public int getRow() {
-		return myRows;
+		return myHeight;
 	}
 
 	public int getCol() {
-		return myCols;
+		return myWidth;
 	}
 	
 

@@ -45,7 +45,7 @@ public class GUIGrid extends SuperGrid {
      * @return int number of rows
      */
     public int getNumRows () {
-        return super.myRows;
+        return super.myHeight;
     }
 
     /**
@@ -54,7 +54,7 @@ public class GUIGrid extends SuperGrid {
      * @return int number of columns
      */
     public int getNumCols () {
-        return super.myCols;
+        return super.myWidth;
     }
 
     // TODO: set image within tile at this location
