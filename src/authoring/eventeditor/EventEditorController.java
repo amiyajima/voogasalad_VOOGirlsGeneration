@@ -3,7 +3,6 @@ package authoring.eventeditor;
 import gamedata.events.Condition;
 import gamedata.events.Event;
 import gamedata.events.GlobalAction;
-import gamedata.gamecomponents.Patch;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,134 +19,143 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
 public class EventEditorController implements Initializable {
 
-    // Lists
-    @FXML
-    private ListView<Event> eventsListView;
-    @FXML
-    private ListView<Condition> conditionsListView;
-    @FXML
-    private ListView<GlobalAction> actionsListView;
 
-    // Buttons
-    @FXML
-    private Button newEvent;
-    @FXML
-    private Button delEvent;
-    @FXML
-    private Button newCondition;
-    @FXML
-    private Button editCondition;
-    @FXML
-    private Button delCondition;
-    @FXML
-    private Button delAction;
-    @FXML
-    private Button editAction;
-    @FXML
-    private Button newAction;
+	//Lists
+	@FXML
+	private ListView<Event> eventsListView;
+	@FXML
+	private ListView<Condition> conditionsListView;
+	@FXML
+	private ListView<GlobalAction> actionsListView;
 
-    @Override
-    // This method is called by the FXMLLoader when initialization is complete
-    public void initialize (URL fxmlFileLocation, ResourceBundle resources) {
+	//Buttons
+	@FXML
+	private Button newEvent;
+	@FXML
+	private Button delEvent;
+	@FXML
+	private Button newCondition;
+	@FXML
+	private Button editCondition;
+	@FXML
+	private Button delCondition;
+	@FXML
+	private Button delAction;
+	@FXML
+	private Button editAction;
+	@FXML
+	private Button newAction;
+	
+	private Stage newConditionStage;
 
-        // Testing
-        eventsListView.getItems()
-                .addAll(new Event(new ArrayList<>(), new ArrayList<>(), "Testing"));
+	@Override // This method is called by the FXMLLoader when initialization is complete
+	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 
-        // Makes it so that the right-hand Editor updates with respect to the selected
-        // Event on the left side
-        eventsListView
-                .getSelectionModel()
-                .selectedItemProperty()
-                .addListener(
-                             (observable, oldValue, selectedEvent) -> showEventInEditor(selectedEvent));
-    }
+		//Testing
+		eventsListView.getItems().addAll(new Event(new ArrayList<>(), new ArrayList<>(), "Testing"));
 
-    @FXML
-    private void showEventInEditor (Event event) {
-        ObservableList<Condition> conditions = FXCollections.observableArrayList();
-        ObservableList<GlobalAction> actions = FXCollections.observableArrayList();
+		//Makes it so that the right-hand Editor updates with respect to the selected
+		//Event on the left side
+		eventsListView.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, selectedEvent) -> showEventInEditor(selectedEvent));
+	}
 
-        conditions.addAll(event.getConditions());
-        actions.addAll(event.getGlobalActions());
+	@FXML
+	private void showEventInEditor(Event event){
+		ObservableList<Condition> conditions = FXCollections.observableArrayList();
+		ObservableList<GlobalAction> actions = FXCollections.observableArrayList();
 
-        conditionsListView.setItems(conditions);
-        actionsListView.setItems(actions);
-    }
+		conditions.addAll(event.getConditions());
+		actions.addAll(event.getGlobalActions());
 
-    @FXML
-    private void handleNewCondition () throws IOException {
-        showNewConditionWindow();
-    }
+		conditionsListView.setItems(conditions);
+		actionsListView.setItems(actions);
+	}
 
-    @FXML
-    private void handleEditCondition () throws IOException {
+	@FXML
+	private void handleNewCondition() throws IOException{
+		Consumer<Condition> okLambda = (Condition condition) -> {
+		    conditionsListView.getItems().add(condition);
+		    newConditionStage.close();
+		};
+		showNewConditionWindow(okLambda);
+	}
+	
+	@FXML
+	private void handleEditCondition() throws IOException{
+		Condition entry = conditionsListView.getSelectionModel().getSelectedItem();
+		if(entry==null){
+			return;
+		}
+		
+		Consumer<Condition> okLambda = (Condition condition) -> {
+			conditionsListView.getItems().remove(entry);
+		    conditionsListView.getItems().add(condition);
+		    newConditionStage.close();
+		};
+		showNewConditionWindow(okLambda);
+	}
 
-    }
+	@FXML
+	private void handleDelCondition(){
+		int delIdx = conditionsListView.getSelectionModel().getSelectedIndex();
+		conditionsListView.getItems().remove(delIdx);
+	}
 
-    @FXML
-    private void handleDelCondition () {
-        int delIdx = conditionsListView.getSelectionModel().getSelectedIndex();
-        conditionsListView.getItems().remove(delIdx);
-    }
+	@FXML
+	private void handleNewAction() throws IOException{
+		showNewActionWindow();
+	}
+	
+	@FXML
+	private void handleEditAction() throws IOException{
+		
+	}
 
-    @FXML
-    private void handleNewAction () throws IOException {
-        showNewActionWindow();
-    }
+	@FXML
+	private void handleDelAction(){
+		int delIdx = actionsListView.getSelectionModel().getSelectedIndex();
+		actionsListView.getItems().remove(delIdx);
+	}
 
-    @FXML
-    private void handleEditAction () throws IOException {
+	private void showNewConditionWindow(Consumer<Condition> okLambda) throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/authoring/eventeditor/NewCondition.fxml"));
+		Parent root = loader.load();
 
-    }
+		newConditionStage  = new Stage();
+		newConditionStage.setTitle("New Condition");
+		newConditionStage.initModality(Modality.WINDOW_MODAL);
+		Scene scene = new Scene(root);
+		newConditionStage.setScene(scene);
 
-    @FXML
-    private void handleDelAction () {
-        int delIdx = actionsListView.getSelectionModel().getSelectedIndex();
-        actionsListView.getItems().remove(delIdx);
-    }
+		NewConditionController controller = loader.getController();
+		
+		controller.loadLambda(okLambda);
 
-    private void showNewConditionWindow () throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/authoring/eventeditor/NewCondition.fxml"));
-        Parent root = loader.load();
+		newConditionStage.showAndWait();
+	}
 
-        Stage newConditionStage = new Stage();
-        newConditionStage.setTitle("New Condition");
-        newConditionStage.initModality(Modality.WINDOW_MODAL);
-        Scene scene = new Scene(root);
-        newConditionStage.setScene(scene);
+	private void showNewActionWindow() throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/authoring/eventeditor/NewAction.fxml"));
+		Parent root = loader.load();
 
-        NewConditionController controller = loader.getController();
+		Stage newConditionStage  = new Stage();
+		newConditionStage.setTitle("New Action");
+		newConditionStage.initModality(Modality.WINDOW_MODAL);
+		Scene scene = new Scene(root);
+		newConditionStage.setScene(scene);
 
-        // controller.setEvent(event);
+		NewConditionController controller = loader.getController();
 
-        newConditionStage.showAndWait();
-    }
-
-    private void showNewActionWindow () throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/authoring/eventeditor/NewAction.fxml"));
-        Parent root = loader.load();
-
-        Stage newConditionStage = new Stage();
-        newConditionStage.setTitle("New Action");
-        newConditionStage.initModality(Modality.WINDOW_MODAL);
-        Scene scene = new Scene(root);
-        newConditionStage.setScene(scene);
-
-        NewConditionController controller = loader.getController();
-
-        newConditionStage.showAndWait();
-    }
+		newConditionStage.showAndWait();
+	}
 }
-
