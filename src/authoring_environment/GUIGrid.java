@@ -87,8 +87,32 @@ public class GUIGrid extends SuperGrid implements Observer {
 		
 		System.out.println(myPatchData.getData().size());
 	}
+	
+	/**
+	 * Removes a piece at the given coordinates.
+	 * NOTE: Point2D coordinates given as
+	 * X = column number, Y = row number 
+	 * @param coor - Point2D containing coordinates of
+	 * the piece to remove given as [Col, Row]
+	 */
+	public void removePieceAtCoordinate(Point2D coor) {
+		Piece toRemove = getPiece(coor);
+		removePiece(toRemove);
+	}
 
-	private void replacePiece (Piece pieceType) {
+	/**
+	 * Removes a piece at the given coordinates.
+	 * NOTE: Point2D coordinates given as
+	 * X = column number, Y = row number 
+	 * @param coor - Point2D containing coordinates of
+	 * the piece to remove given as [Col, Row]
+	 */
+	public void removePatchAtCoordinate (Point2D coor) {
+		Patch toRemove = getPatch(coor);
+		removePatch(toRemove);
+	}
+
+	private void replacePieceType (Piece pieceType) {
 		List<Point2D> pointsToReplace = myPieceData.replace(pieceType);
 		for (Point2D loc : pointsToReplace) {
 			SuperTile tile = super.findClickedTile(loc);
@@ -96,7 +120,7 @@ public class GUIGrid extends SuperGrid implements Observer {
 		}
 	}
 
-	private void replacePatch (Patch patchType) {
+	private void replacePatchType (Patch patchType) {
 		List<Point2D> pointsToReplace = myPatchData.replace(patchType);
 		System.out.println(pointsToReplace.toString());
 		for (Point2D loc : pointsToReplace) {
@@ -143,31 +167,14 @@ public class GUIGrid extends SuperGrid implements Observer {
 		SuperTile currentTile = findClickedTile(p.getLoc());
 		myPieceData.remove(p);
 		currentTile.clearPieceImage();
-
 	}
 
-	/**
-	 * Removes a piece at the given coordinates.
-	 * NOTE: Point2D coordinates given as
-	 * X = column number, Y = row number 
-	 * @param coor - Point2D containing coordinates of
-	 * the piece to remove given as [Col, Row]
-	 */
-	public void removePiece(Point2D coor) {
-//		Piece toRemove = getPiece(Point2D coor) {
-//			
-//		}
-	}
 
-	/**
-	 * Removes a piece at the given coordinates.
-	 * NOTE: Point2D coordinates given as
-	 * X = column number, Y = row number 
-	 * @param coor - Point2D containing coordinates of
-	 * the piece to remove given as [Col, Row]
-	 */
-	public void removePatch(Point2D loc) {
-
+	
+	public void removePatch (Patch p) {
+		myPatchData.remove(p);
+		SuperTile currentTile = findClickedTile(p.getLoc());
+		currentTile.clearPieceImage();
 	}
 
 	/**
@@ -186,16 +193,6 @@ public class GUIGrid extends SuperGrid implements Observer {
 		return l;
 	}
 	
-	public void repopulateGrid(){
-    	this.initGridTiles(this.myShape);
-    	for(Patch p:myPatchData.getData()){
-    		this.addPatch(p, p.getLoc());
-    	}
-    	for(Piece p:myPieceData.getData()){
-    		this.addPiece(p, p.getLoc());
-    	}
-    }
-
 	@Override
 	public void update (Observable o, Object arg) {
 		if (o instanceof PieceTypeData) {
@@ -206,7 +203,7 @@ public class GUIGrid extends SuperGrid implements Observer {
 
 			if (arg instanceof Piece) {
 				Piece pieceType = (Piece) arg;
-				replacePiece(pieceType);
+				replacePieceType(pieceType);
 			}
 		}
 		if (o instanceof PatchTypeData) {
@@ -217,7 +214,7 @@ public class GUIGrid extends SuperGrid implements Observer {
 			}
 			if (arg instanceof Patch) {
 				Patch patchType = (Patch) arg;
-				replacePatch(patchType);
+				replacePatchType(patchType);
 			}
 		}
 	}
