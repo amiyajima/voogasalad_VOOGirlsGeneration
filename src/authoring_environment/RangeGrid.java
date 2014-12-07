@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 /**
  * The view of the grid especially for selecting the range.  
@@ -19,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 public class RangeGrid extends SuperGrid{
 
 	private static final String DEFAULT_CENTRAL_IMAGE="/resources/images/Patrick.jpeg";
+	private static final String DEFAULT_HIGHLIGHT_COLOR = "#0000FF";
 
 	private List<List<SuperTile>> rangeGrid;
 	private int myWidth;
@@ -65,7 +67,7 @@ public class RangeGrid extends SuperGrid{
 		if (tile.ifSelected())
 			tile.deselectTile();
 		else
-			tile.selectTile();
+			tile.selectTile(DEFAULT_HIGHLIGHT_COLOR);
 	}
 	
 	private void highlightRange(List<Point2D> range) {
@@ -75,7 +77,7 @@ public class RangeGrid extends SuperGrid{
 				int row=(int) (centerY-loc.getY());
 				if ((col>=0) && (col<=myWidth) && (row>=0) && (row<=myHeight)){
 					SuperTile tile=findTile(col,row);
-					tile.selectTile();
+					tile.selectTile(DEFAULT_HIGHLIGHT_COLOR);
 				}
 			}
 		}

@@ -65,7 +65,6 @@ public abstract class SuperTile extends Group {
 
 
 
-
 	/**
 	 * Creates the highlight settings for this tile
 	 * @param size
