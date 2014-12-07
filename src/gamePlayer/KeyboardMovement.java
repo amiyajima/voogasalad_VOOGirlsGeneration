@@ -25,7 +25,6 @@ public class KeyboardMovement {
     
     public KeyboardMovement() {
       myCurrentLocation = new Point2D.Double(0.0, 0.0);
-//    myCurrentLocation = new Point2D.Double(0.0, 0.0);
     // Map<KeyCode, Point2D> movementKeyMap = myCurrentPlayer.getMovementKeyMap();
     System.out.println("Keyboard Movement ON");
 
@@ -48,17 +47,6 @@ public class KeyboardMovement {
      * @param gameScene
      */
     public void setMovementKeyControl (ViewController vc, ScrollPane sp, Game game) {
-////        myCurrentLocation = new Point2D.Double(0.0, 0.0);
-//        // Map<KeyCode, Point2D> movementKeyMap = myCurrentPlayer.getMovementKeyMap();
-//        System.out.println("Keyboard Movement ON");
-//
-//        // for testing!!!
-//        movementKeyMap = new HashMap<KeyCode, Point2D>();
-//        movementKeyMap.put(KeyCode.A, new Point2D.Double(-1.0, 0.0));
-//        movementKeyMap.put(KeyCode.D, new Point2D.Double(1.0, 0.0));
-//        movementKeyMap.put(KeyCode.W, new Point2D.Double(0.0, 1.0));
-//        movementKeyMap.put(KeyCode.S, new Point2D.Double(0.0, -1.0));
-
         sp.requestFocus();
         sp.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
@@ -115,5 +103,4 @@ public class KeyboardMovement {
     public Point2D getCurrentLocation () {
         return myCurrentLocation;
     }
-    
 }

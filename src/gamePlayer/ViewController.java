@@ -50,10 +50,6 @@ public class ViewController {
 	public static final String GAME_LOCATION = "/src/resources/json";
 	public static final String POPUP_FXML = "popup.fxml";
 
-	// public static final String ENGLISH = "English";
-	// public static final String Chinese = "Chinese";
-
-	// public static final String AUDIO_TEST = "/src/gamePlayer/audioTest.mp3";
 	private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
@@ -76,7 +72,6 @@ public class ViewController {
 	private Boolean keyControlOn;
 	private KeyboardAction myKeyboardAction;
 	private KeyboardMovement myKeyboardMovement;
-	// private MouseController myMouseController;
 
 	private Piece activePiece;
 	private Action activeAction;
@@ -142,16 +137,11 @@ public class ViewController {
 		fc.setInitialDirectory(new File("src/resources/json"));
 		File f = fc.showOpenDialog(myStage);
 
-		// fc.setInitialDirectory(new File(System.getProperty("user.dir") +
-		// "/src/resources"));
-		// uses JSON reader to generate an instance of the game
-
 		try {
 			myModel = myJSONManager.readFromJSONFile(f.getPath());
 			initializeGrid();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Could not find JSON: " + "f.getPath()");
 		}
 
 	}
@@ -163,12 +153,6 @@ public class ViewController {
 	 */
 	@FXML
 	protected void restartGame() {
-
-		// Stage stage = new Stage();
-		//
-		// stage.setScene(myPopupScene);
-		// stage.show();
-		// stage.setAlwaysOnTop(true);
 		initializeGrid();
 		statsPane.getChildren().clear();
 		controlPane.getChildren().clear();
@@ -400,6 +384,13 @@ public class ViewController {
 		setActiveAction(action);
 	        myGameGridEffect.highlightActionRange();
 		setGridState(new ApplyState(this));
+		if (keyControlOn){
+		    
+		    //after i click action button, i need to go back to KeyboardMovement
+		    myKeyboardAction = null;
+		    myKeyboardMovement = new KeyboardMovement();
+		    myKeyboardMovement.setMovementKeyControl(this, myGridPane, myModel);
+		}
 	}
 
 	private void setOnClick() {
