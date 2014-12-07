@@ -2,15 +2,12 @@ package authoring_environment;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList; 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 
 /**
  * The view of the grid especially for selecting the range.  
@@ -103,20 +100,6 @@ public class RangeGrid extends SuperGrid{
 	}
 
 
-//	private void showSelectedRange() {
-//		for (Point2D position:myRange){
-//			int x=(int) (position.getX()+centerX);
-//			int y=(int) (centerY-position.getY());
-////			System.out.println(x);
-////			System.out.println(y);
-//			if ((x<=centerX*2) && (y<=centerY*2)){
-//				sampleGrid.getTile(x,y).selecteTile(true);
-//			}
-//		}
-//	}
-//
-//
-//	
 	/**
 	 * Collect all the coordination of selected tiles relative to the center tile
 	 * as Point2D in a list.
@@ -134,10 +117,10 @@ public class RangeGrid extends SuperGrid{
 			}
 		}
 		myRange=selectedList;
-//		test=4;
-//		System.out.println("t="+ test);
+
 		return myRange;
 	}
+	
 //	
 //	public void rangeColumn(int column,boolean toChoose){
 //		for (int i=0;i<sampleGrid.getGridHeight();i++) {
