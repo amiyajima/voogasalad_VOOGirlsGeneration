@@ -34,7 +34,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 					myPatchTypes.add(patch);
 					addEntry(patch);
 				};
-				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda));
+				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda, myPatchTypes));
 			}
 		});
 	}

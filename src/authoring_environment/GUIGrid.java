@@ -131,7 +131,7 @@ public class GUIGrid extends SuperGrid implements Observer {
 		}
 	}
 	
-	private void removePiece (PieceTypeData typeData) {
+	private void removePieceType (PieceTypeData typeData) {
 		List<Point2D> pointsToRemove = myPieceData.removeUnknown(typeData.getIdSet());
 		for (Point2D loc : pointsToRemove) {
 			SuperTile tile = super.findClickedTile(loc);
@@ -139,7 +139,7 @@ public class GUIGrid extends SuperGrid implements Observer {
 		}
 	}
 
-	private void removePatch(PatchTypeData typeData) {
+	private void removePatchType(PatchTypeData typeData) {
 		List<Point2D> pointsToRemove = myPatchData.removeUnknown(typeData
 				.getIdSet());
 		for (Point2D loc : pointsToRemove) {
@@ -267,8 +267,9 @@ public class GUIGrid extends SuperGrid implements Observer {
 		if (o instanceof PieceTypeData) {
 			PieceTypeData typeData = (PieceTypeData) o;
 			if (arg == null) {
+				System.out.println("AH!");
 				// TODO : FIX!
-				removePiece(typeData);
+				removePieceType(typeData);
 			}
 			if (arg instanceof Piece) {
 				Piece pieceType = (Piece) arg;
@@ -278,8 +279,9 @@ public class GUIGrid extends SuperGrid implements Observer {
 		if (o instanceof PatchTypeData) {
 			PatchTypeData typeData = (PatchTypeData) o;
 			if (arg == null) {
+				System.out.println("GAH!");
 				// TODO : FIX!
-				removePatch(typeData);
+				removePatchType(typeData);
 			}
 			if (arg instanceof Patch) {
 				Patch patchType = (Patch) arg;
