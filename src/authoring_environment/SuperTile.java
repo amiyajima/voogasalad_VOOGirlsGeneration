@@ -109,6 +109,7 @@ public abstract class SuperTile extends Group {
     
     public void removePatchImage () {
         myPatchImage.setFill(Color.WHITE);
+        myPatchImage.setVisible(false);
     }
 
     protected abstract Shape makeShape (double size, Point2D coordinates);

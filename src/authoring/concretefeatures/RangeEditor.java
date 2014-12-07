@@ -71,7 +71,6 @@ public class RangeEditor extends PopupWindow {
         
     	rangeGridView = new RangeGridView(myGridLength, myGridLength,
                                          myTileSize, shape, range);
-        
         initialize();
     }
 
