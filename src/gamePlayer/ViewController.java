@@ -409,7 +409,7 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(Point2D loc) {
-		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
+	    gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
 		
 		if (keyControlOn){
                   myKeyboardMovement = null;
@@ -598,5 +598,9 @@ public class ViewController {
 	 */
 	protected GameGridEffect getGameGridEffect() {
 		return myGameGridEffect;
+	}
+	
+	public VBox getcontrolPane() {
+	    return controlPane;
 	}
 }

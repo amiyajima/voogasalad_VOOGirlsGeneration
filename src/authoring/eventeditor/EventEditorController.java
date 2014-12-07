@@ -229,6 +229,11 @@ public class EventEditorController implements Initializable {
         newActionStage.initModality(Modality.WINDOW_MODAL);
         Scene scene = new Scene(root);
         newActionStage.setScene(scene);
+        
+        NewActionController controller = loader.getController();
+
+        controller.loadLambda(okActionLambda);
+        controller.loadEntryCondition(entry);
 
         newActionStage.showAndWait();
     }
