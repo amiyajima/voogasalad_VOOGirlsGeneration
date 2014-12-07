@@ -34,7 +34,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 					myPatchTypes.add(patch);
 					addEntry(patch);
 				};
-				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda));
+				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda, myPatchTypes));
 			}
 		});
 	}
@@ -63,17 +63,6 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 					}
 				};
 				myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
-
-//				myVBox.getChildren().clear();
-//				//TODO: I don't know how else to do it....clone...............
-//
-//				PatchTypeData clone = new PatchTypeData();
-//				for (Patch patchType : myPatchTypes.getData()) {
-//					clone.add(patchType);
-//				}
-//				for (Patch patchType : clone.getData()) {
-//					myPatchTypes.remove(patchType);
-//				}
 			}
 		});
 	}

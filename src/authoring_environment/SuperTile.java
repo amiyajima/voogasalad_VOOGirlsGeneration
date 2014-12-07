@@ -8,7 +8,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
 
-
 /**
  * Tile of different shapes
  * 
@@ -155,7 +154,7 @@ public abstract class SuperTile extends Group {
      * 
      * @return
      */
-    public Point2D getLocation () {
+    public Point2D getPixelLocation () {
         return myLocation;
     }
 
