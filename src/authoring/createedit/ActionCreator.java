@@ -165,9 +165,8 @@ public class ActionCreator extends TitledPane {
 		setRange.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				PopupWindow actionRangeEditor = new RangeEditor(range);
+				PopupWindow actionRangeEditor = new RangeEditor(range,"Square Grid");
 				actionRangeEditor.show();
-				// TODO: set myRange in here somewhere (within RangeEditor?)
 			}
 		});
 		rangeBox.getChildren().addAll(rangeLabel, setRange);

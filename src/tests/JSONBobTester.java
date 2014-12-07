@@ -108,9 +108,9 @@ public class JSONBobTester {
         GUIGrid grid1 = new GUIGrid(5, 5, 75, "Square Grid");
 
         Piece templ = createNewPiece(grid1, new Point2D.Double(0, 0));
-        System.out.println(templ.getImageLocation());
+        //System.out.println(templ.getImageLocation());
         Patch templPatch = createNewPatch(new Point2D.Double(0, 0));
-        System.out.println(templPatch.getImageLocation());
+        //System.out.println(templPatch.getImageLocation());
 
         for (int x = 0; x < grid1.getCol(); x++) {
             for (int y = 0; y < grid1.getRow(); y++) {
@@ -169,7 +169,7 @@ public class JSONBobTester {
         else {
             piece = new Piece("ID", "Bunny", DEFAULT_BUNNY, actions, s, p, 1, i);
         }
-        System.out.println(piece.getActions().size());
+        //System.out.println(piece.getActions().size());
         return piece;
     }
 
