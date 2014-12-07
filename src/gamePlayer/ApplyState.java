@@ -54,6 +54,7 @@ public class ApplyState implements IGridState {
         myController.changeCursor(myController.CURSOR_GLOVE_TEST);
 
         //        myController.getGame().getCurrentLevel().garbageCollectPieces();
+        
         //still need to update the grid somehow?
 //        myController.getGridPane().populateGrid(myController.getGame().getCurrentLevel().getGrid().getPatches(),
 //                                            myController.getGame().getCurrentLevel().getGrid().getPieces());
