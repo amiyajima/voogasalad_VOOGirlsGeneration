@@ -28,7 +28,7 @@ public class NewConditionController implements Initializable{
 	private List<Class> conditionsList;
 	
 	private Condition myCondition;
-	private Consumer<Condition> myOkLambda;
+	private Consumer<Condition> myDoneLambda;
 	
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -75,10 +75,10 @@ public class NewConditionController implements Initializable{
 		}
 		
 		if(myCondition==null){
-			editorScrollPane.setContent(new ConditionEditorPane(myOkLambda));
+			editorScrollPane.setContent(new ConditionEditorPane(myDoneLambda));
 		}
 		else{
-			editorScrollPane.setContent(new ConditionEditorPane(myOkLambda, myCondition));
+			editorScrollPane.setContent(new ConditionEditorPane(myDoneLambda, myCondition));
 		}
 	}
 	
@@ -99,7 +99,7 @@ public class NewConditionController implements Initializable{
 	}
 
 	public void loadLambda(Consumer<Condition> okLambda) {
-		myOkLambda = okLambda;
+		myDoneLambda = okLambda;
 	}
 	
 	/**

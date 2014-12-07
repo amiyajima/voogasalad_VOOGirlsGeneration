@@ -15,6 +15,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -52,37 +53,24 @@ public class ActionLogicController implements Initializable {
         myPieceTypes.add("Piece C");
 
         actorsChoiceBox.getItems().addAll(myPieceTypes);
+        
 
         actorsChoiceBox
                 .getSelectionModel()
                 .selectedItemProperty()
                 .addListener(
                              (observable, oldValue, selectedActor) -> updatePossibleReceivers(selectedActor));
-
     }
 
-    private Object updatePossibleReceivers (String selectedEvent) {
+    private void updatePossibleReceivers (String selectedActor) {
         // TODO Auto-generated method stub
-        return null;
+        List<String> myPosReceivers = getReceivers(myPieceTypes, selectedActor);
+        for (String p : myPosReceivers) {
+            myReceiversVBox.getChildren().add(new CheckBox(p));
+        }
     }
 
-    // private void initReceiverChooser (VBox posReceiverVBox,
-    // ChoiceBox<String> posActors,
-    // ChoiceBox<String> actionTypes) {
-    // Button posReceiversbtn = new Button("Possible Receivers");
-    //
-    // posReceiversbtn.setOnAction(new EventHandler<ActionEvent>() {
-    // @Override
-    // public void handle (ActionEvent event) {
-    // PopupWindow receiversChooser =
-    // new ReceiverEditor(myPieces, posActors.getValue().toString(), actionTypes
-    // .getValue().toString());
-    // receiversChooser.show();
-    // }
-    // });
-    //
-    // posReceiverVBox.getChildren().addAll(posReceiverLabel, posReceiversbtn);
-    //
-    // }
+    
+
 
 }
