@@ -112,4 +112,10 @@ public class SuperGrid {
 		return tile.getCoordinates();
 	}
 	
+	public Point2D calculateClicked(double xCoord, double yCoord){
+	    Point2D coord = new Point2D.Double(xCoord/myTileSize, yCoord/myTileSize);
+	    return coord;
+	    
+	}
+	
 }
