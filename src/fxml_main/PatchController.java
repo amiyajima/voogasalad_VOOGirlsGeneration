@@ -55,10 +55,17 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
         delBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
+                myVBox.getChildren().clear();
+                //TODO: I don't know how else to do it....clone...............
+                
+                PatchTypeData clone = new PatchTypeData();
                 for (Patch patchType : myPatchTypes.getData()) {
-
+                    clone.add(patchType);
                 }
-                System.out.println("HI DELETE BUTTONFORPATCH HI");
+                for (Patch patchType : clone.getData()) {
+                    myPatchTypes.remove(patchType);
+                }
+
             }
         });
     }
