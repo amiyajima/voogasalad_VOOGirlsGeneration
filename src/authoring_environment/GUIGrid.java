@@ -130,7 +130,11 @@ public class GUIGrid extends SuperGrid implements Observer {
      */
     public void removePatchAtCoordinate (Point2D coor) {
         Patch toRemove = getPatch(coor);
-        removePatch(toRemove);
+        //TODO: remove only if there is a patch to be removed
+        //to avoid nullerpt..
+        if (isPatchOccupied(coor)){
+            removePatch(toRemove);
+        }
     }
 
     private void replacePieceType (Piece pieceType) {
@@ -143,7 +147,6 @@ public class GUIGrid extends SuperGrid implements Observer {
 
     private void replacePatchType (Patch patchType) {
         List<Point2D> pointsToReplace = myPatchData.replace(patchType);
-        // System.out.println(pointsToReplace.toString());
         for (Point2D loc : pointsToReplace) {
             SuperTile tile = super.findClickedTile(loc);
             tile.addPatchImage(patchType.getImageView());
