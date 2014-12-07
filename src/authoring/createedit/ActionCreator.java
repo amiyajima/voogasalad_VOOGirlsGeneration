@@ -165,7 +165,7 @@ public class ActionCreator extends TitledPane {
 		setRange.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				PopupWindow actionRangeEditor = new RangeEditor(range,"Square Grid");
+				PopupWindow actionRangeEditor = new RangeEditor(range,"Hexagon Grid");
 				actionRangeEditor.show();
 			}
 		});
