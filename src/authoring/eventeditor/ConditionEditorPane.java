@@ -1,6 +1,10 @@
 package authoring.eventeditor;
 
 import gamedata.events.Condition;
+import gamedata.events.conditions.IfEquals;
+import gamedata.gamecomponents.IHasStats;
+import gamedata.gamecomponents.Patch;
+
 import java.util.function.Consumer;
 
 import authoring_environment.UIspecs;
@@ -15,28 +19,38 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-public class EqualsEditorPane extends Pane{
+public class ConditionEditorPane extends Pane{
 
 	private static final int WIDTH_OFFSET = 30;
 	private static final String NAME_LABEL = "Name";
 	private static final String NAME_PROMPT = "Enter Condition name...";
 	private static final String COMPONENTS_LABEL = "Expression";
 	private static final String EQUALS_LABEL = "EQUALS";
-	private static final String DONE_LABEL = "DONE";
+	private static final String DONE_LABEL = "Done";
 	private static final Insets MARGINS = new Insets(5, WIDTH_OFFSET, 10, WIDTH_OFFSET);
 	private static final String LABEL_CSS = "-fx-font-size: 14pt;";
 
-	private Consumer<Condition> myDoneLambda;
-
+	private TextField myName = new TextField();
+	
 	private ChoiceBox<String> refType1 = new ChoiceBox<>();
-	private ChoiceBox<String> refName1 = new ChoiceBox<>();
+	private ChoiceBox<IHasStats> refName1 = new ChoiceBox<>();
 	private TextField statName1 = new TextField();
 	
 	private ChoiceBox<String> refType2 = new ChoiceBox<>();
-	private ChoiceBox<String> refName2 = new ChoiceBox<>();
+	private ChoiceBox<IHasStats> refName2 = new ChoiceBox<>();
 	private TextField statName2 = new TextField();
 	
-	public EqualsEditorPane(){
+	private Consumer<Condition> myDoneLambda;
+	private Condition myCondition;
+
+	public ConditionEditorPane(Consumer<Condition> doneLambda){
+		myDoneLambda = doneLambda;
+		initialize();
+	}
+	
+	public ConditionEditorPane (Consumer<Condition> doneLambda, Condition condition) {
+		myDoneLambda = doneLambda;
+		myCondition = condition;
 		initialize();
 	}
 
@@ -66,14 +80,12 @@ public class EqualsEditorPane extends Pane{
 
 		Label nameLabel = new Label(NAME_LABEL);
 		nameLabel.setPadding(UIspecs.topRightPadding);
-		TextField terrainName = new TextField();
-		terrainName.setPromptText(NAME_PROMPT);
-		names.getChildren().addAll(nameLabel, terrainName);
+		myName = new TextField();
+		myName.setPromptText(NAME_PROMPT);
+		names.getChildren().addAll(nameLabel, myName);
 
 		Label componentsLabel = new Label(COMPONENTS_LABEL);
 		
-		
-
 		setUpComponents(refType1, refName1, statName1);
 		setUpComponents(refType2, refName2, statName2);
 		
@@ -84,11 +96,10 @@ public class EqualsEditorPane extends Pane{
 		
 		components.getChildren().addAll(componentsLabel, leftHandSide, rightHandSide);
 
-		box.getChildren().addAll(labelBox, names, components);
-		
 		Button doneButton = new Button(DONE_LABEL);
 		initDoneButton(doneButton);
 
+		box.getChildren().addAll(labelBox, names, components, doneButton);
 
 		getChildren().add(box);
 	}
@@ -98,19 +109,27 @@ public class EqualsEditorPane extends Pane{
 			 @Override
 			 public void handle (ActionEvent click) {
 				
-				myDoneLambda.accept(null);
+				IHasStats ref1 = refName1.getSelectionModel().getSelectedItem();
+				String stat1 = statName1.getText();
+				
+				IHasStats ref2 = refName2.getSelectionModel().getSelectedItem();
+				String stat2 = statName2.getText();
+				 
+				myCondition = new IfEquals(myName.getText(), ref1, stat1, ref2, stat2);
+				//TODO: construct myCondition
+				myDoneLambda.accept(myCondition);
 			 }
 		 });
 	}
 
 	private void setUpComponents(ChoiceBox<String> refType1,
-			ChoiceBox<String> refName1, TextField statName1) {
+			ChoiceBox<IHasStats> refName1, TextField statName1) {
 		refType1.getItems().addAll("Piece", "Patch", "Player", "Constant");
 		refType1.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, selectedType) -> setUpEditor(oldValue, selectedType, refName1, statName1));
 	}
 
-	private void setUpEditor(String oldType, String type, ChoiceBox<String> refName, TextField statName) {
+	private void setUpEditor(String oldType, String type, ChoiceBox<IHasStats> refName, TextField statName) {
 		statName.setPromptText("Enter stat name");
 		if("Constant".equals(oldType)){
 			refName.setVisible(true);
@@ -125,17 +144,14 @@ public class EqualsEditorPane extends Pane{
 		switch(type){
 			case "Piece": 
 			{
-				refName.getItems().addAll("Llama rancher", "Janitor");
 				break;
 			}
 			case "Patch":
 			{
-				refName.getItems().addAll("Lava", "Rocks");
 				break;	
 			}
 			case "Player":
 			{
-				refName.getItems().addAll("Player 1", "Player 2");
 				break;
 			}
 			case "Constant": 

@@ -5,12 +5,14 @@ package authoring.eventeditor;
 import gamedata.events.Condition;
 import gamedata.events.Event;
 import gamedata.events.GlobalAction;
+import gamedata.gamecomponents.Patch;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -53,6 +56,8 @@ public class EventEditorController implements Initializable {
 	private Button editAction;
 	@FXML
 	private Button newAction;
+	
+	private Stage newConditionStage;
 
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -80,12 +85,26 @@ public class EventEditorController implements Initializable {
 
 	@FXML
 	private void handleNewCondition() throws IOException{
-		showNewConditionWindow();
+		Consumer<Condition> okLambda = (Condition condition) -> {
+		    conditionsListView.getItems().add(condition);
+		    newConditionStage.close();
+		};
+		showNewConditionWindow(okLambda);
 	}
 	
 	@FXML
 	private void handleEditCondition() throws IOException{
+		Condition entry = conditionsListView.getSelectionModel().getSelectedItem();
+		if(entry==null){
+			return;
+		}
 		
+		Consumer<Condition> okLambda = (Condition condition) -> {
+			conditionsListView.getItems().remove(entry);
+		    conditionsListView.getItems().add(condition);
+		    newConditionStage.close();
+		};
+		showNewConditionWindow(okLambda);
 	}
 
 	@FXML
@@ -110,20 +129,20 @@ public class EventEditorController implements Initializable {
 		actionsListView.getItems().remove(delIdx);
 	}
 
-	private void showNewConditionWindow() throws IOException{
+	private void showNewConditionWindow(Consumer<Condition> okLambda) throws IOException{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/authoring/eventeditor/NewCondition.fxml"));
 		Parent root = loader.load();
 
-		Stage newConditionStage  = new Stage();
+		newConditionStage  = new Stage();
 		newConditionStage.setTitle("New Condition");
 		newConditionStage.initModality(Modality.WINDOW_MODAL);
 		Scene scene = new Scene(root);
 		newConditionStage.setScene(scene);
 
 		NewConditionController controller = loader.getController();
-
-		//		controller.setEvent(event);
+		
+		controller.loadLambda(okLambda);
 
 		newConditionStage.showAndWait();
 	}
@@ -140,8 +159,6 @@ public class EventEditorController implements Initializable {
 		newConditionStage.setScene(scene);
 
 		NewConditionController controller = loader.getController();
-
-		//		controller.setEvent(event);
 
 		newConditionStage.showAndWait();
 	}

@@ -22,8 +22,8 @@ public class CreatePieceGlobalAction extends GlobalAction {
      * @param game
      * @param pieceToCreate
      */
-    public CreatePieceGlobalAction (Game game, Piece pieceToCreate, Point2D loc) {
-    	super(ACTION_TYPE + pieceToCreate.getName() + " at " + pieceToCreate.getLoc().toString());
+    public CreatePieceGlobalAction (String name, Game game, Piece pieceToCreate, Point2D loc) {
+    	super(name);
         myGame = game;
         myPiece = pieceToCreate;
         myLoc = loc;
