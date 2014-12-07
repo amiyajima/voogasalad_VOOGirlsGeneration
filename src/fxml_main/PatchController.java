@@ -56,16 +56,28 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 		delBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent event) {
-				myVBox.getChildren().clear();
-				//TODO: I don't know how else to do it....clone...............
-
-				PatchTypeData clone = new PatchTypeData();
-				for (Patch patchType : myPatchTypes.getData()) {
-					clone.add(patchType);
-				}
-				for (Patch patchType : clone.getData()) {
-					myPatchTypes.remove(patchType);
-				}
+				EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
+					@Override
+					public void handle (MouseEvent e) {
+						GUIGrid grid = myGridReference.getGrid();
+						Point2D coor = grid.calculateClicked(e.getX(), e.getY());
+						grid.removePatch(coor);
+					}
+				};
+				myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
+				
+//				
+//				
+//				myVBox.getChildren().clear();
+//				//TODO: I don't know how else to do it....clone...............
+//
+//				PatchTypeData clone = new PatchTypeData();
+//				for (Patch patchType : myPatchTypes.getData()) {
+//					clone.add(patchType);
+//				}
+//				for (Patch patchType : clone.getData()) {
+//					myPatchTypes.remove(patchType);
+//				}
 
 			}
 		});
