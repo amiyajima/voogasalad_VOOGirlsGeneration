@@ -4,12 +4,8 @@ import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
 
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.Control;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 
 public class SuperGrid {
 	private static final String CIRCLE_GRID = "Circle Grid";

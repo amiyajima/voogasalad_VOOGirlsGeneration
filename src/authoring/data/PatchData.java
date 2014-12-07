@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 
 /**
  * Class for storing the patches created by the user
@@ -94,4 +95,29 @@ public class PatchData implements AuthoringData<Patch>, Observer {
 		}
 		return false;
 	}
+	
+	public List<Point2D> removeUnknown(Set<String> idSet) {
+		List<Patch> patchToRemove = new ArrayList<Patch>();
+		List<Point2D> pointsToRemove = new ArrayList<Point2D>();
+		for (Patch patch : myPatches) {
+    		if (!idSet.contains(patch.getID())) {
+				patchToRemove.add(patch);
+				patch.getImageView().setImage(null);
+    			pointsToRemove.add(patch.getLoc());
+    		}
+		}
+		myPatches.remove(patchToRemove);
+		return pointsToRemove;
+	}
+	
+	public List<Point2D> replace(Patch patchType) {
+    	List<Point2D> pointsToReplace = new ArrayList<Point2D>();
+    	myPatches.forEach(patch -> {
+    		if (patch.getID().equals(patchType.getID())) {
+    			replace(patch, patchType);
+    			pointsToReplace.add(patch.getLoc());
+    		}
+    	});
+    	return pointsToReplace;
+    }
 }

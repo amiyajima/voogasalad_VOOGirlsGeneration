@@ -6,8 +6,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.Set;
 
 /**
  * Class for storing the each type of piece created by the user.
@@ -15,7 +14,7 @@ import java.util.Observer;
  * 
  * @author Martin Tamayo
  */
-public class PieceData implements AuthoringData<Piece>, Observer {
+public class PieceData implements AuthoringData<Piece> {
 	
     private List<Piece> myPieces;
     
@@ -31,6 +30,17 @@ public class PieceData implements AuthoringData<Piece>, Observer {
 	public void add(Piece p) {
 		myPieces.add(p);
 	}
+    
+    public List<Point2D> replace(Piece pieceType) {
+    	List<Point2D> pointsToReplace = new ArrayList<Point2D>();
+    	myPieces.forEach(piece -> {
+    		if (piece.getID().equals(pieceType.getID())) {
+    			replace(piece, pieceType);
+    			pointsToReplace.add(piece.getLoc());
+    		}
+    	});
+    	return pointsToReplace;
+    }
     
 	@Override
 	public void replace(Piece origEl, Piece newEl) {
@@ -48,30 +58,18 @@ public class PieceData implements AuthoringData<Piece>, Observer {
 		return myPieces;
 	}
 	
-	@Override
-	public void update(Observable o, Object arg) {
-		if (o instanceof PieceTypeData) {
-			//removing -> observable notifies that arg has been removed from piecetypedata
-			List<Piece> toRemove = new ArrayList<Piece>();
-			PieceTypeData typeData = (PieceTypeData) o;
-			for (Piece p : myPieces) {
-				if (!typeData.containsName(p.getName())) {
-					toRemove.add(p);
-				}
-			}
-			
-			myPieces.removeAll(toRemove);
-
-			//replacing -> observable notifies that arg has been replaced from piecetypedata
-			if (arg instanceof Piece) {
-				Piece pieceType = (Piece) arg;
-				for (Piece p : myPieces) {
-					if (p.getID() == pieceType.getID()){
-				    	replace(p, pieceType);
-				    }
-				}
-			}
+	public List<Point2D> removeUnknown(Set<String> idSet) {
+		List<Piece> piecesToRemove = new ArrayList<Piece>();
+		List<Point2D> pointsToRemove = new ArrayList<Point2D>();
+		for (Piece piece : myPieces) {
+    		if (!idSet.contains(piece.getID())) {
+				piecesToRemove.add(piece);
+				piece.getImageView().setImage(null);
+    			pointsToRemove.add(piece.getLoc());
+    		}
 		}
+		myPieces.remove(piecesToRemove);
+		return pointsToRemove;
 	}
 	
 	public void removePieceAtLoc(Point2D location){

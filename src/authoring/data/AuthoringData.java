@@ -30,4 +30,6 @@ public interface AuthoringData<T> {
 	 * Method so Game Data can get the data about the objects of type T
 	 */
 	public List<T> getData();
+
+	
 }
