@@ -5,7 +5,7 @@ import java.awt.geom.Point2D;
 import org.junit.Test;
 import gamedata.events.CreatePieceGlobalAction;
 import gamedata.events.DeletePieceGlobalAction;
-import gamedata.events.EndTurnGlobalAction;
+import gamedata.events.SwitchPlayerGlobalAction;
 import gamedata.events.LevelChangeGlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
@@ -15,7 +15,7 @@ public class GlobalActionTester {
     private Game myGame;
     private CreatePieceGlobalAction myCreatePiece;
     private DeletePieceGlobalAction myDeletePiece;
-    private EndTurnGlobalAction myEndTurn;
+    private SwitchPlayerGlobalAction myEndTurn;
     private LevelChangeGlobalAction myLevelChange;
     
     private Piece pieceToCreate;
@@ -28,7 +28,7 @@ public class GlobalActionTester {
         pieceToCreate = myBob.createNewPiece(myGame.getCurrentLevel().getGrid(), DEFAULT_PIECE_LOCATION);
         myCreatePiece = new CreatePieceGlobalAction(myGame, pieceToCreate);
         myDeletePiece = new DeletePieceGlobalAction(myGame, pieceToCreate);
-        myEndTurn = new EndTurnGlobalAction(myGame, DEFAULT_TURN_CHANGE);
+        myEndTurn = new SwitchPlayerGlobalAction(myGame, DEFAULT_TURN_CHANGE);
         myLevelChange = new LevelChangeGlobalAction(myGame, DEFAULT_LEVEL_JUMP);
     }
     

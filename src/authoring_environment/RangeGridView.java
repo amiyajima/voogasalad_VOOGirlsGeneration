@@ -9,11 +9,11 @@ public class RangeGridView extends ScrollPane{
 	private static final int MIN_TILESIZE = 50;
 	private int myViewWidth;
 	private int myViewHeight;
-	private int myTileSize;
+	private double myTileSize;
 	private String myShape;
-	private SuperGrid myGrid;
+	private RangeGrid myGrid;
 	
-	public RangeGridView(int viewWidth, int viewHeight, int tileSize,
+	public RangeGridView(int viewWidth, int viewHeight, double tileSize,
 			String shape, List<Point2D> range) {
 		myViewWidth=viewWidth;
 		myViewHeight=viewHeight;
@@ -23,15 +23,18 @@ public class RangeGridView extends ScrollPane{
 		this.setMaxSize(viewWidth, viewHeight);
 		this.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		
 		if ((range==null) || (range.size()==0)){
-			myGrid = new RangeGrid(viewWidth/tileSize,viewHeight/tileSize,
-										tileSize,shape,range);
+			myGrid = new RangeGrid((int)Math.round(myViewWidth/myTileSize),
+					(int)Math.round(myViewHeight/myTileSize),
+					myTileSize,shape,range);
 		}else{
 			Point2D minGridSize=cacluateGridSize(range);
+
 			myTileSize=getPrefTileSize((int)minGridSize.getX(),(int)minGridSize.getY(),
 										myTileSize);
 			myGrid = new RangeGrid((int)minGridSize.getX(),(int)minGridSize.getY(),
-					tileSize,shape,range);
+					myTileSize,shape,range);
 		}
 			myGrid.displayPane(this);
 	}
@@ -43,19 +46,16 @@ public class RangeGridView extends ScrollPane{
 		int minY=(int) minGridSize.getY();
 		int prefWidth=Math.max(width, minX);
 		int prefHeight=Math.max(height, minY);
-		System.out.println(prefWidth);
-		System.out.println(prefHeight);
 		myTileSize=getPrefTileSize(prefWidth,prefHeight,MIN_TILESIZE);
 		myGrid=new RangeGrid(prefWidth,prefHeight,
 				myTileSize,myShape,range);
 		myGrid.displayPane(this);
 	}
 
-    private int getPrefTileSize (int col,int row,int minTileSize) {
+    private double getPrefTileSize (int col,int row,double minTileSize) {
         int calculatedTileSize = Math.max(myViewWidth
                                           / col, myViewHeight / row);
-
-        int tileSize = (calculatedTileSize < minTileSize) ? minTileSize
+        double tileSize = (calculatedTileSize < minTileSize) ? minTileSize
                                                            : calculatedTileSize;
         return tileSize;
     }
@@ -75,7 +75,11 @@ public class RangeGridView extends ScrollPane{
     }
 
 	public List<Point2D> returnSelectedList() {
-		return ((RangeGrid) myGrid).rangeSelectedList();
+		return  myGrid.rangeSelectedList();
+	}
+	
+	public RangeGrid getGrid(){
+		return myGrid;
 	}
 
 }

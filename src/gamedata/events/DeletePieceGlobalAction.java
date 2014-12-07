@@ -1,5 +1,6 @@
 package gamedata.events;
 
+import authoring_environment.GUIGrid;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
 
@@ -10,8 +11,8 @@ import gamedata.gamecomponents.Piece;
  */
 public class DeletePieceGlobalAction extends GlobalAction {
 	public static final String DESCRIPTION = "Delete ";
-    Game myGame;
-    Piece myPiece;
+    private Game myGame;
+    private String myID;
     
     /**
      * Make sure you construct this referring to the piece that you want to delete rather than 
@@ -20,17 +21,19 @@ public class DeletePieceGlobalAction extends GlobalAction {
      * @param game
      * @param pieceToDelete
      */
-    public DeletePieceGlobalAction(Game game, Piece pieceToDelete) {
-    	super(DESCRIPTION + pieceToDelete.getName());
+    public DeletePieceGlobalAction(String name, Game game, String ID) {
+        super(name);
         myGame = game;
-        myPiece = pieceToDelete;
+        myID=ID;
     }
 
     @Override
     public void doBehavior () {
-        myGame.getCurrentLevel().getGrid().removePiece(myPiece);
-        
+       GUIGrid grid =  myGame.getCurrentLevel().getGrid();
+       for(Piece p : grid.getPieces().getData()){
+           if(p.getID().equals(myID)){
+               grid.removePiece(p);
+           }
+       }
     }
-    
-
 }

@@ -1,8 +1,9 @@
 package gamedata.events;
 
-import gamedata.events.GlobalAction;
-
+import java.util.ArrayList;
 import java.util.List;
+
+import javafx.collections.FXCollections;
 
 
 /**
@@ -22,16 +23,10 @@ public class Event {
     private String myName;
     private List<Condition> myConditions;
     private List<GlobalAction> myGlobalActions;
-
-    public Event (List<Condition> conditions, List<GlobalAction> actions) {
-        myConditions = conditions;
-        myGlobalActions = actions;
-        myName = "Event";
-    }
     
-    public Event (List<Condition> conditions, List<GlobalAction> actions, String name) {
-        myConditions = conditions;
-        myGlobalActions = actions;
+    public Event (String name) {
+        myConditions = FXCollections.observableArrayList();
+        myGlobalActions = FXCollections.observableArrayList();
         myName = name;
     }
 
@@ -62,6 +57,7 @@ public class Event {
     public String toString(){
     	return myName;
     }
+    
     
     public List<Condition> getConditions(){
     	return myConditions;

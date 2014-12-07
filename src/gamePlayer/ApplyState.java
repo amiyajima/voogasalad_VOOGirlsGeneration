@@ -27,7 +27,7 @@ public class ApplyState implements IGridState {
     private SuperTile activeTile;
 
     public ApplyState (ViewController controller) {
-         System.out.println("new ApplyState");
+        System.out.println("new ApplyState");
         myController = controller;
         myGameGridEffect = controller.getGameGridEffect();
         myGame = controller.getGame();
@@ -49,20 +49,17 @@ public class ApplyState implements IGridState {
 //            piece.setLoc(myController.getCurrentClick());
 //        }
         myController.getActiveAction().doBehavior(actor, piece);
-
         myController.setGridState(new SelectState(myController));
-
         myController.changeCursor(myController.CURSOR_GLOVE_TEST);
-        myController.getGame().getCurrentLevel().garbageCollectPieces();
- 
+
+        //        myController.getGame().getCurrentLevel().garbageCollectPieces();
+        
         //still need to update the grid somehow?
 //        myController.getGridPane().populateGrid(myController.getGame().getCurrentLevel().getGrid().getPatches(),
 //                                            myController.getGame().getCurrentLevel().getGrid().getPieces());
 
         myController.setActivePiece(null);
         myController.setActiveAction(null);
-
-        //commented out until myGame is fixed
 //        checkLevelState();
 //        checkPlayerState();
     }

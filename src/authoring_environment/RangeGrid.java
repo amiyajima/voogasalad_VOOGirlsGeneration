@@ -2,15 +2,12 @@ package authoring_environment;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList; 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 
 /**
  * The view of the grid especially for selecting the range.  
@@ -29,7 +26,7 @@ public class RangeGrid extends SuperGrid{
 	private int centerY;
 	private List<Point2D> myRange;
 
-	public RangeGrid(int width, int height, int tileSize, String shape, List<Point2D> range) {
+	public RangeGrid(int width, int height, double tileSize, String shape, List<Point2D> range) {
 		super(width, height, tileSize, shape);	
 		myRange=range;
 		myWidth=width;
@@ -103,20 +100,6 @@ public class RangeGrid extends SuperGrid{
 	}
 
 
-//	private void showSelectedRange() {
-//		for (Point2D position:myRange){
-//			int x=(int) (position.getX()+centerX);
-//			int y=(int) (centerY-position.getY());
-////			System.out.println(x);
-////			System.out.println(y);
-//			if ((x<=centerX*2) && (y<=centerY*2)){
-//				sampleGrid.getTile(x,y).selecteTile(true);
-//			}
-//		}
-//	}
-//
-//
-//	
 	/**
 	 * Collect all the coordination of selected tiles relative to the center tile
 	 * as Point2D in a list.
@@ -134,55 +117,56 @@ public class RangeGrid extends SuperGrid{
 			}
 		}
 		myRange=selectedList;
-//		test=4;
-//		System.out.println("t="+ test);
+
 		return myRange;
 	}
-//	
-//	public void rangeColumn(int column,boolean toChoose){
-//		for (int i=0;i<sampleGrid.getGridHeight();i++) {
-//			sampleGrid.getTile(centerX+column, i).selecteTile(toChoose);
-//		}
-//	}
-//	
-//	public void rangeRow(int row,boolean toChoose){
-//		for (int i=0;i<sampleGrid.getGridWidth();i++) {
-//			sampleGrid.getTile(i, centerY-row).selecteTile(toChoose);
-//		}
-//	} 
-//	
-//	public void rangeRadius(int radius,boolean toChoose){
-//		for (int i=(centerX-radius);i<=(centerX+radius);i++){
-//			for (int j=(centerY-radius);j<=(centerY+radius);j++){
-//				sampleGrid.getTile(i, j).selecteTile(toChoose);
-//			}
-//		}
-//	}
-//	
-//	public void rangeAll(boolean toChoose) {
-//		for (int i=0;i<sampleGrid.getGridWidth();i++) {
-//			for (int j=0;j<sampleGrid.getGridHeight();j++) {
-//				sampleGrid.getTile(i, j).selecteTile(toChoose);
-//			}
-//		}
-//	}
-//	
-//	private void sampleSelected() {
-//		for (Tile[] line : sampleGrid.getGridTiles()) {
-//			for (Tile tile : line) {
-//				tile.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//					@Override
-//					public void handle(MouseEvent event) {
-//						tile.switchSelected();
-//					}
-//				});
-//			}
-//		}
-//	}
 	
-//	public void setRange(List<Point2D> range){
-//		myRange=range;
-//	}
+
+	public void rangeColumn(int column,boolean toChoose){
+		if ((centerX+column>=0) && (centerX+column<myWidth)){
+			for (int i=0;i<myHeight;i++) {
+				if (toChoose)
+					findTile(centerX+column, i).selectTile(DEFAULT_HIGHLIGHT_COLOR);
+				else
+					findTile(centerX+column, i).deselectTile();
+			}
+		}
+	}
+	
+	public void rangeRow(int row, boolean toChoose){
+		if ((centerY-row>=0) && (centerY-row<myHeight)){
+			for (int i=0;i<myWidth;i++) {
+				if (toChoose)
+					findTile(i, centerY-row).selectTile(DEFAULT_HIGHLIGHT_COLOR);
+				else
+					findTile(i, centerY-row).deselectTile();
+			}
+		} 
+	}
+
+	public void rangeRadius(int radius,boolean toChoose){
+		if (centerX-radius<0) {
+			rangeAll(toChoose);
+		}else{
+			for (int i=(centerX-radius);i<=(centerX+radius);i++){
+				for (int j=(centerY-radius);j<=(centerY+radius);j++){
+					findTile(i, j).selectTile(DEFAULT_HIGHLIGHT_COLOR);
+				}
+			}
+		}
+	}
+	
+	public void rangeAll(boolean toChoose) {
+		for (int i=0;i<myWidth;i++) {
+			for (int j=0;j<myHeight;j++) {
+				if (toChoose)
+					findTile(i, j).selectTile(DEFAULT_HIGHLIGHT_COLOR);
+				else
+					findTile(i, j).deselectTile();
+			}
+		}
+	}
+
 	
 	public List<Point2D> getRange(){
 		return myRange;

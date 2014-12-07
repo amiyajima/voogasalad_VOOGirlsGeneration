@@ -1,6 +1,6 @@
 package authoring.eventeditor;
 
-import gamedata.events.ConditionEquals;
+import gamedata.events.Condition;
 
 import java.io.IOException;
 import java.net.URL;
@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 import utilities.ClassGrabber;
 import javafx.fxml.FXML;
@@ -24,7 +25,10 @@ public class NewConditionController implements Initializable{
 	@FXML
 	private ScrollPane editorScrollPane;
 	
-	List<Class> conditionsList;
+	private List<Class> conditionsList;
+	
+	private Condition myCondition;
+	private Consumer<Condition> myOkLambda;
 	
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -70,7 +74,12 @@ public class NewConditionController implements Initializable{
 		if("class gamedata.events.ConditionEquals".equals(c.getSuperclass().toString())){
 		}
 		
-		editorScrollPane.setContent(new EqualsEditorPane());
+		if(myCondition==null){
+			editorScrollPane.setContent(new ConditionEditorPane(myOkLambda));
+		}
+		else{
+			editorScrollPane.setContent(new ConditionEditorPane(myOkLambda, myCondition));
+		}
 	}
 	
 	/**
@@ -87,5 +96,18 @@ public class NewConditionController implements Initializable{
 		}
 		String trimmed = s.substring(idx+1);
 		return trimmed;
+	}
+
+	public void loadLambda(Consumer<Condition> okLambda) {
+		myOkLambda = okLambda;
+	}
+	
+	/**
+	 * Loads the data of a Condition into the editor.
+	 * Used when editing a previous condition, rather than creating a new one from scratch
+	 * @param entry
+	 */
+	public void loadEntryCondition(Condition entry){
+		myCondition = entry;
 	}
 }

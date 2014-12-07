@@ -70,7 +70,6 @@ public abstract class SuperTile extends Group {
 	 * @param size
 	 */
 
-
 	private void makeHighlight(double size) {
 		myHighlight=makeShape(size,myCoordinates);
 		myHighlight.setFill(DEFAULT_HIGHLIGHT_COLOR);
@@ -90,6 +89,7 @@ public abstract class SuperTile extends Group {
 	 * De-highlight something
 	 */
 	public void deselectTile(){
+//	    System.out.println("De-highlighting tile at " + myLocation.getX() + ", " + myLocation.getY());
 		myHighlight.setVisible(false);
 	}
 	

@@ -61,8 +61,8 @@ public class RangeEditor extends PopupWindow {
     
 
     public RangeEditor (List<Point2D> range, String shape) {
-//         range.add(new Point2D.Double(1,0));
-//         range.add(new Point2D.Double(-1,1));
+         range.add(new Point2D.Double(1,0));
+         range.add(new Point2D.Double(-1,1));
 
     	myRange=range;
         setHeight(RANGE_EDITOR_HEIGHT);
@@ -72,35 +72,9 @@ public class RangeEditor extends PopupWindow {
     	rangeGridView = new RangeGridView(myGridLength, myGridLength,
                                          myTileSize, shape, range);
         
-//        if (!((range == null) || (range.size() == 0))) {
-//
-//            // cacluateGridSize(range);
-//            int initialWidth = (int) cacluateGridSize(range).getX();
-//            int initialHeight = (int) cacluateGridSize(range).getY();
-////            System.out.println(initialWidth);
-////            System.out.println(initialHeight);
-//
-//            int initialSize = getPrefTileSize(initialWidth * 2 + 1, initialHeight * 2 + 1);
-//            mySampleGrid=new RangeGrid (initialWidth * 2 + 1,initialHeight * 2 + 1,initialSize,
-//            		"Square Grid",range);
-//
-//        }
         initialize();
     }
 
-    private Point2D cacluateGridSize (List<Point2D> range) {
-        double maxX = 0;
-        double maxY = 0;
-        for (Point2D point : range) {
-            if (Math.abs(point.getX()) > maxX) {
-                maxX = Math.abs(point.getX());
-            }
-            if (Math.abs(point.getY()) > maxY) {
-                maxY = Math.abs(point.getY());
-            }
-        }
-        return new Point2D.Double(maxX, maxY);
-    }
 
     @Override
     protected void initialize () {
@@ -123,8 +97,8 @@ public class RangeEditor extends PopupWindow {
         TextField specifiedData = new TextField();
         Button choose = new Button("Choose");
         Button delete = new Button("Delete");
-//        choose.setOnAction(new selectRangeHandler(targetChoice, specifiedData, choose));
-//        delete.setOnAction(new selectRangeHandler(targetChoice, specifiedData, delete));
+        choose.setOnAction(new selectRangeHandler(targetChoice, specifiedData, choose));
+        delete.setOnAction(new selectRangeHandler(targetChoice, specifiedData, delete));
 
         selection.getChildren().addAll(targetLabel, targetChoice);
 
@@ -160,9 +134,7 @@ public class RangeEditor extends PopupWindow {
                 myTileSize = getPrefTileSize(myGridWidthNumber, myGridHeightNumber);
                 box.getChildren().clear();
                 myRange=rangeGridView.returnSelectedList();
-                for(Point2D p:myRange){
-                	System.out.println(p.getX()+","+p.getY());
-                }
+        
                 rangeGridView.update(myGridWidthNumber, myGridHeightNumber,
                 						myRange);
                 box.getChildren().addAll(sizeChooser, enter,
@@ -170,7 +142,7 @@ public class RangeEditor extends PopupWindow {
             }
         });	
 
-//        select.setOnAction(new SelectHandler(this));
+        select.setOnAction(new SelectHandler(this));
 
         sizeChooser.getChildren().addAll(horizontal, times, vertical);
 
@@ -187,74 +159,71 @@ public class RangeEditor extends PopupWindow {
         return tileSize;
     }
 
-//    private class selectRangeHandler implements EventHandler<ActionEvent> {
-//        ChoiceBox<String> targetChoice;
-//        TextField specifiedData;
-//        Button button;
-//
-//        public selectRangeHandler (ChoiceBox<String> tc, TextField sd, Button b) {
-//            targetChoice = tc;
-//            specifiedData = sd;
-//            button = b;
-//        }
-//
-//        @Override
-//        public void handle (ActionEvent event) {
-//            String chosen = targetChoice.getValue().toString();
-//            int parameter;
-//            try {
-//                parameter = Integer.parseInt(specifiedData.getText());
-//            }
-//            catch (NumberFormatException e) {
-//                parameter = 0;
-//            }
-//
-//            boolean toChoose = (button.getText().equals("Choose")) ? true : false;
-//            switch (chosen) {
-//                case COLUMN:
-//                    mySampleGrid.rangeColumn(parameter, toChoose);
-//                    break;
-//                case ROW:
-//                    mySampleGridView.rangeRow(parameter, toChoose);
-//                    break;
-//                case RADIUS:
-//                    mySampleGridView.rangeRadius(parameter, toChoose);
-//                    break;
-//                case ALL:
-//                    mySampleGridView.rangeAll(toChoose);
-//                    break;
-//                case CUSTOM:
-//                    mySampleGridView.rangeSelectedList();
-//                    break;
-//            // default:
-//            // mySampleGridView.rangeCenterColumn();
-//            }
-//        }
-//
-//    }
+    private class selectRangeHandler implements EventHandler<ActionEvent> {
+        ChoiceBox<String> targetChoice;
+        TextField specifiedData;
+        Button button;
 
-//    /**
-//     * Event Handler that Sends the Selected and then Closes the Popup
-//     */
-//    private class SelectHandler implements EventHandler<ActionEvent> {
-//        RangeEditor current;
-//
-//        public SelectHandler (RangeEditor re) {
-//            current = re;
-//        }
-//
-//        @Override
-//        public void handle (ActionEvent event) {
-//            List<Point2D> range = mySampleGridView.getRange();
-//            // myRange = range;
-//            range.addAll(mySampleGridView.rangeSelectedList());
-//
-////            for (Point2D p : range) {
-////                System.out.println(p.getX() + "," + p.getY());
-////            }
-//            current.close();
-//        }
-//    }
+        public selectRangeHandler (ChoiceBox<String> tc, TextField sd, Button b) {
+            targetChoice = tc;
+            specifiedData = sd;
+            button = b;
+        }
+
+        @Override
+        public void handle (ActionEvent event) {
+            String chosen = targetChoice.getValue().toString();
+            int parameter;
+            try {
+                parameter = Integer.parseInt(specifiedData.getText());
+            }
+            catch (NumberFormatException e) {
+                parameter = 0;
+            }
+
+            boolean toChoose = (button.getText().equals("Choose")) ? true : false;
+            switch (chosen) {
+                case COLUMN:
+                	rangeGridView.getGrid().rangeColumn(parameter, toChoose);
+                    break;
+                case ROW:
+                	rangeGridView.getGrid().rangeRow(parameter, toChoose);
+                    break;
+                case RADIUS:
+                	rangeGridView.getGrid().rangeRadius(parameter, toChoose);
+                    break;
+                case ALL:
+                	rangeGridView.getGrid().rangeAll(toChoose);
+                    break;
+//                case CUSTOM:
+//                	rangeGridView.getGrid().rangeSelectedList();
+//                    break;
+//             default:
+//             mySampleGridView.rangeCenterColumn();
+            }
+        }
+
+    }
+
+    /**
+     * Event Handler that Sends the Selected and then Closes the Popup
+     */
+    private class SelectHandler implements EventHandler<ActionEvent> {
+        RangeEditor current;
+
+        public SelectHandler (RangeEditor re) {
+            current = re;
+        }
+
+        @Override
+        public void handle (ActionEvent event) {
+            myRange=rangeGridView.returnSelectedList();
+            for (Point2D p : myRange) {
+                System.out.println(p.getX() + "," + p.getY());
+            }
+            current.close();
+        }
+    }
 
     // Can't use this function to create all the vbox containing one label and
     // a textfiled because it makes impossible to get the content of the textfield.

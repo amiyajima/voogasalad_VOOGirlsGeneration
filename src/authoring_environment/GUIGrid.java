@@ -126,6 +126,9 @@ public class GUIGrid extends SuperGrid implements Observer{
 		return null;
 	}
 
+	public void removePiece(Piece p){
+		myPieceData.remove(p);
+	}
 //	public PieceData getPieces () {
 //		return myPieceData;
 //	}

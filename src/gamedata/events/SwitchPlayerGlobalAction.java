@@ -2,18 +2,18 @@ package gamedata.events;
 
 import gamedata.gamecomponents.Game;
 
+
 /**
- * Ends the turn by changing to a new specified turn
- * @author Rica
+ * Switches to a player with a specified int ID
  *
  */
-public class EndTurnGlobalAction extends GlobalAction {
-	public static final String DESCRIPTION = "End current player's turn";
+public class SwitchPlayerGlobalAction extends GlobalAction {
+    public static final String DESCRIPTION = "Jump to player";
     private Game myGame;
     private int myPlayerTurnToJumpTo;
-    
-    public EndTurnGlobalAction (Game game, int playerTurnToJumpTo) {
-    	super(DESCRIPTION);
+
+    public SwitchPlayerGlobalAction (Game game, int playerTurnToJumpTo) {
+        super(DESCRIPTION);
         myGame = game;
         myPlayerTurnToJumpTo = playerTurnToJumpTo;
     }
