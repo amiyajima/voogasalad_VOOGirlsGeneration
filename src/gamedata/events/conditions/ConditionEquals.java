@@ -22,18 +22,18 @@ public class ConditionEquals extends Condition{
 		myStat1 = stat1;
 		myStat2 = stat2;
 	}
-	
-	public ConditionEquals(String description, double val1, double val2){
-		super(description);
-		
-		myVal1 = val1;
-		myVal2 = val2;
-	}
 
 	@Override
 	public boolean evaluate() {
-		return myVal1==myVal2;
+		return myReference1.getStats().getValue(myStat1) == myReference2.getStats().getValue(myStat2);
 	}
 	
+	/**
+	 * For testing purposes
+	 */
+	public String printOut(){
+		String print = "IF " + myReference1 + ": " + myStat1 + " EQUALS " + myReference2 + ": " + myStat2;
+		return print;
+	}
 
 }

@@ -3,12 +3,15 @@ package authoring.eventeditor;
 import gamedata.events.Condition;
 import gamedata.events.Event;
 import gamedata.events.GlobalAction;
+import gamedata.events.conditions.ConditionEquals;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -94,8 +97,10 @@ public class EventEditorController implements Initializable {
     @FXML
     private void handleEditCondition () throws IOException {
         Condition entry = conditionsListView.getSelectionModel().getSelectedItem();
-
+        
         if (entry == null) { return; }
+        //TODO: Remove below line. Used for testing
+        System.out.println(((ConditionEquals) entry).printOut());
 
         Consumer<Condition> doneLambda = (Condition condition) -> {
             conditionsListView.getItems().remove(entry);

@@ -20,11 +20,9 @@ public class ApplyState implements IGridState {
 	private SuperTile activeTile;
 
 	public ApplyState(ViewController controller) {
-		System.out.println("New ApplyState");
 		myController = controller;
 		myGameGridEffect = controller.getGameGridEffect();
 		myGame = controller.getGame();
-
 		myController.getGridPane().setOnMouseMoved(
 				event -> handleMouseMove(event));
 	}
@@ -37,30 +35,12 @@ public class ApplyState implements IGridState {
 	 */
 	private void handleMouseMove(MouseEvent event) {
 		if (myController.getGrid().findClickedTile(event.getX(), event.getY()) != null
-				&& hoveringOverActionHighlight(event.getX(), event.getY())) {
+				&& myGameGridEffect.isHoveringOverActionHighlight(event.getX(), event.getY())) {
 			activeTile = myController.getGrid().findClickedTile(event.getX(),
 					event.getY());
 			myController.getGameGridEffect().highlightEffectRange(
 					activeTile.getLocation());
 		}
-	}
-
-	/**
-	 * Checks if the mouse movement has it hovering over an action tile Only
-	 * then will it update the highlight of the effect range
-	 * 
-	 * @param mouseX
-	 * @param mouseY
-	 * @return
-	 */
-	private boolean hoveringOverActionHighlight(double mouseX, double mouseY) {
-		for (SuperTile st : myGameGridEffect.getActionHighlights()) {
-			if (myController.getGrid().findClickedTile(mouseX, mouseY)
-					.getLocation() == st.getLocation()) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	@Override
@@ -69,6 +49,7 @@ public class ApplyState implements IGridState {
 		if (piece == null) {
 			piece = new Piece(actor,myController.getCurrentClick());
 			piece.setLoc(myController.getCurrentClick());
+			//TODO: Add in dummy piece check 
 		}
 		myController.getActiveAction().doBehavior(actor, piece);
 		myController.getGrid().repopulateGrid();

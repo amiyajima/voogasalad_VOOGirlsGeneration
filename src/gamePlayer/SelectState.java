@@ -24,7 +24,7 @@ public class SelectState implements IGridState {
 
 	@Override
 	public void onClick(Piece piece) {
-		if (piece != null) {
+		if (piece != null && piece.getPlayerID()==myController.getGame().getCurrentPlayer().getID()) {
 			myController.updateStats(piece);
 			myController.setActivePiece(piece);
 			myController.updateActions(piece);
