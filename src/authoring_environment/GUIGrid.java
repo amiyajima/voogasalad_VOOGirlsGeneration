@@ -325,4 +325,18 @@ public class GUIGrid extends SuperGrid implements Observer {
         myPane.setOnMouseClicked(handler);
         myPane.setOnMouseDragged(handler);
     }
+    
+    /**
+     * Get the whole list of Pieces and Patches in this level. Read by Conditions and
+     * modified by Global Actions (e.g., adding/removing Pieces).
+     * @MIKE ZHU
+     * @return
+     */
+    public PieceData getPieces(){
+    	return myPieceData;
+    }
+    
+    public PatchData getPatches(){
+    	return myPatchData;
+    }
 }

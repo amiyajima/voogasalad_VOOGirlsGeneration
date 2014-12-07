@@ -175,6 +175,13 @@ public class LevelEditor extends VBox {
 
         EventEditorController controller = loader.getController();
         controller.loadEvents(myEvents);
+        
+        
+        /**
+         * Passing a lot of data around
+         */
+        myData.loadLevelPieces(myGrid.getPieces().getData());
+        myData.loadLevelPatches(myGrid.getPatches().getData());
         controller.loadData(myData);
 
         eventEditorStage.showAndWait();
