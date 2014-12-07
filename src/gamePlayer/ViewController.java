@@ -99,6 +99,7 @@ public class ViewController {
 	private IGridState gridState;
 	private JSONManager myJSONManager;
 	private GameGridEffect myGameGridEffect;
+	private SuperTile keySelectedTile;
 
 	public ViewController(Stage s) {
 		myStage = s;
@@ -405,7 +406,6 @@ public class ViewController {
 	    myGridPane.getContent().setOnMouseClicked(event -> {
 		Point2D loc = findPosition(event.getX(), event.getY());
 		performAction(loc);
-//	        performAction(event.getX(), event.getY());
 		});
 	}
         
@@ -419,6 +419,12 @@ public class ViewController {
 	 */
 	public void performAction(Point2D loc) {
 		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
+		
+		if (keyControlOn){
+                  myKeyboardMovement = null;
+		  myKeyboardAction = new KeyboardAction();
+                  myKeyboardAction.setActionKeyControl(this, myGridPane); 
+		}
 	}
 	
 	
@@ -467,25 +473,26 @@ public class ViewController {
 			keyControlOn = false;
 			
 			//dehighlighting the tile the keyboard is currently highlighting
-			SuperTile keySelectedTile = 
-			        myGrid.findClickedTile(myKeyboardMovement.getCurrentLocation());
-			keySelectedTile.deselectTile();
+	                if(myKeyboardMovement!=null){
+	                    keySelectedTile = myGrid.findClickedTile(myKeyboardMovement.getCurrentLocation());
+	                    keySelectedTile.deselectTile();
+	                }
 			myKeyboardMovement = null;
 			myKeyboardAction = null;
 			System.out.println("Keyboard OFF");
 		} else {
-			myKeyboardMovement = new KeyboardMovement();
-			myKeyboardAction = new KeyboardAction();
 			
 			//dehighlighting the tile the mouse click is currently highlighting
-			SuperTile selectedTile =
-			        myGrid.findClickedTile(currentClick);
-			selectedTile.deselectTile();
+			if (currentClick != null){
+			    SuperTile selectedTile =
+			            myGrid.findClickedTile(currentClick);
+			    selectedTile.deselectTile();			    
+			}
 			
-			myKeyboardMovement.setMovementKeyControl(this, myGridPane, myModel);
-			// myKeyboardAction.setActionKeyControl(myGridPane, activePiece);
+                      myKeyboardMovement = new KeyboardMovement();
+                      myKeyboardMovement.setMovementKeyControl(this, myGridPane, myModel);
+			
 			keyControlOn = true;
-			// setOnEnterKey();
 		}
 	}
 
