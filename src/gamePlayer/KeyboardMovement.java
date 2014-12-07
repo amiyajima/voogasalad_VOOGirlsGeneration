@@ -1,6 +1,5 @@
 package gamePlayer;
 
-import gamedata.gamecomponents.Game;
 import gameengine.player.HumanPlayer;
 import java.awt.geom.Point2D;
 import java.util.HashMap;
@@ -9,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 import authoring_environment.SuperTile;
 import javafx.event.EventHandler;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -53,9 +51,9 @@ public class KeyboardMovement {
      * @param movementKeyMap
      * @param gameScene
      */
-    public void setMovementKeyControl (ViewController vc, ScrollPane sp, Game game) {
-        sp.requestFocus();
-        sp.setOnKeyPressed(new EventHandler<KeyEvent>() {
+    public void setMovementKeyControl (ViewController vc) {
+        vc.getGridPane().requestFocus();
+        vc.getGridPane().setOnKeyPressed(new EventHandler<KeyEvent>() {
 
             Set<KeyCode> movementKeyList = movementKeyMap.keySet();
 

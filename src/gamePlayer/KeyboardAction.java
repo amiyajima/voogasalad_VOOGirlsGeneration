@@ -11,11 +11,9 @@ import java.util.Map;
 import java.util.Set;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.VBox;
 
 
 /**
@@ -52,15 +50,15 @@ public class KeyboardAction {
         movementKeyMap.put(KeyCode.S, new Point2D.Double(0.0, -1.0));
     }
 
-    public void setActionKeyControl (ViewController vc, ScrollPane sp) {
+    public void setActionKeyControl (ViewController vc) {
         System.out.println("KeyboardAction ON");
 
         if (vc.getActivePiece() != null) {
             Piece activePiece = vc.getActivePiece();
             myActions = activePiece.getActions();
 
-            sp.requestFocus();
-            sp.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            vc.getGridPane().requestFocus();
+            vc.getGridPane().setOnKeyPressed(new EventHandler<KeyEvent>() {
                 Set<KeyCode> movementKeyList = movementKeyMap.keySet();
 
                 @Override
@@ -75,8 +73,7 @@ public class KeyboardAction {
                     // Select action here
                     for (KeyCode kc : movementKeyList) {
                         if (key.getCode() == kc) {
-                            int newActionIndex =
-                                    myActionIndex - (int) movementKeyMap.get(kc).getY();
+                            int newActionIndex = myActionIndex - (int) movementKeyMap.get(kc).getY();
                             if ((newActionIndex >= 0) & (newActionIndex < myActions.size())) {
                                 myActionIndex = newActionIndex;
                             }
@@ -94,8 +91,7 @@ public class KeyboardAction {
 
     public void markAction (ViewController vc) {
         unmarkAction(vc);
-        VBox controlPane = vc.getcontrolPane();
-        controlPane.getChildren().forEach(label -> {
+        vc.getcontrolPane().getChildren().forEach(label -> {
             Label l = (Label) label;
             if (l.getText() == myCurrentAction.toString()) {
                 InnerShadow is = new InnerShadow();
@@ -107,8 +103,7 @@ public class KeyboardAction {
     }
 
     public void unmarkAction (ViewController vc) {
-        VBox controlPane = vc.getcontrolPane();
-        controlPane.getChildren().forEach(label -> {
+        vc.getcontrolPane().getChildren().forEach(label -> {
             label.setEffect(null);
         });
     }
