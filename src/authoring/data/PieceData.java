@@ -31,17 +31,6 @@ public class PieceData implements AuthoringData<Piece> {
 		myPieces.add(p);
 	}
     
-    public List<Point2D> replace(Piece pieceType) {
-    	List<Point2D> pointsToReplace = new ArrayList<Point2D>();
-    	myPieces.forEach(piece -> {
-    		if (piece.getID().equals(pieceType.getID())) {
-    			replace(piece, pieceType);
-    			pointsToReplace.add(piece.getLoc());
-    		}
-    	});
-    	return pointsToReplace;
-    }
-    
 	@Override
 	public void replace(Piece origEl, Piece newEl) {
 		origEl.setName(newEl.getName());
@@ -57,6 +46,17 @@ public class PieceData implements AuthoringData<Piece> {
 	public List<Piece> getData() {
 		return myPieces;
 	}
+    
+    public List<Point2D> replace(Piece pieceType) {
+    	List<Point2D> pointsToReplace = new ArrayList<Point2D>();
+    	myPieces.forEach(piece -> {
+    		if (piece.getID().equals(pieceType.getID())) {
+    			replace(piece, pieceType);
+    			pointsToReplace.add(piece.getLoc());
+    		}
+    	});
+    	return pointsToReplace;
+    }
 	
 	public List<Point2D> removeUnknown(Set<String> idSet) {
 		List<Piece> piecesToRemove = new ArrayList<Piece>();

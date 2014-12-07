@@ -15,16 +15,8 @@ public class PieceTypeData extends Observable implements AuthoringData<Piece> {
     public PieceTypeData() {
         myPieces = new LinkedList<Piece>();
     }
- 
-    public Set<String> getIdSet() {
-    	Set<String> idSet = new HashSet<String>();
-		for (Piece p : myPieces) {
-			idSet.add(p.getID());
-		}
-		return idSet;
-    }
     
-	@Override
+    @Override
 	public void add(Piece p) {
 		myPieces.add(p);
 	}
@@ -38,13 +30,30 @@ public class PieceTypeData extends Observable implements AuthoringData<Piece> {
 
 	@Override
 	public void replace(Piece origEl, Piece newEl) {
-		origEl = newEl;
+		remove(origEl);
+	    add(newEl);
 		setChanged();
-		notifyObservers(origEl);
+		notifyObservers(newEl);
 	}
 
 	@Override
 	public List<Piece> getData() {
 		return myPieces;
+	}
+ 
+    public Set<String> getIdSet() {
+    	Set<String> idSet = new HashSet<String>();
+		for (Piece p : myPieces) {
+			idSet.add(p.getID());
+		}
+		return idSet;
+    }
+    
+    public boolean containsName(String name) {
+		Set<String> nameSet = new HashSet<String>();
+		for (Piece p : myPieces) {
+			nameSet.add(p.getName());
+		}
+		return nameSet.contains(name);
 	}
 }

@@ -41,7 +41,6 @@ public class GameGridEffect {
     public void highlightActionRange () {
         clearAllActionHighlights();
         updateActives();
-        //System.out.println("Highlighting action range");
         
         if (myActivePiece != null && myActiveAction != null) {
             //System.out.println("GameGridEffect: action ABOUT TO HIGHLIGHT\n\n");
