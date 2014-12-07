@@ -95,12 +95,12 @@ public class EventEditorController implements Initializable {
 			return;
 		}
 		
-		Consumer<Condition> okLambda = (Condition condition) -> {
+		Consumer<Condition> doneLambda = (Condition condition) -> {
 			conditionsListView.getItems().remove(entry);
 		    conditionsListView.getItems().add(condition);
 		    newConditionStage.close();
 		};
-		showNewConditionWindow(okLambda, entry);
+		showNewConditionWindow(doneLambda, entry);
 	}
 
 	@FXML
@@ -163,7 +163,7 @@ public class EventEditorController implements Initializable {
 	@FXML
 	private void handleDelEvent(){
 		int delIdx = eventsListView.getSelectionModel().getSelectedIndex();
-		conditionsListView.getItems().remove(delIdx);
+		eventsListView.getItems().remove(delIdx);
 	}
 
 	/**
@@ -173,6 +173,12 @@ public class EventEditorController implements Initializable {
 	 * @param event
 	 */
 	private void showEventInEditor(Event event){
+		/**
+		 * To avoid null-pointer exceptions. 
+		 */
+		if(event==null){
+			return;
+		}
 		myConditions = event.getConditions();
 		myActions = event.getGlobalActions();
 
