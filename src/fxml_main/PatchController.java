@@ -104,6 +104,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 					HBox entryHolderBox = myEntryMap.get(entry);
 					entryHolderBox.getChildren().clear();
 					entryHolderBox.getChildren().add(entryBox);
+					myEntryMap.put(patch, entryHolderBox);
 
 					myPatchTypes.replace(entry, patch);
 				};
