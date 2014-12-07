@@ -58,7 +58,7 @@ public class ViewController {
 	private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
-	private static final String DEFAULT_HIGHLIGHT_COLOR = "#0000FF";
+	private static final String DEFAULT_HIGHLIGHT_COLOR = "#ff0000";
 
 	private ResourceBundle myLanguages;
 	private Stage myStage;
@@ -439,7 +439,7 @@ public class ViewController {
 		SuperTile activeTile = myGrid.findClickedTile(activePiece.getLoc());
 
 		activeTile.selectTile(DEFAULT_HIGHLIGHT_COLOR);
-
+		myGameGridEffect.highlightActionRange();
 		setGridState(new ApplyState(this));
 	}
 
@@ -489,6 +489,7 @@ public class ViewController {
 
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(loc));
+		myGameGridEffect.highlightCurrent(loc);
 		// myGrid.clearEffect();
 		// myGameGridEffect.clearAllEffects(myGrid);
 
@@ -500,12 +501,14 @@ public class ViewController {
 		// ((int)findPosition(x,y).getY())), Color.PURPLE);
 	}
 
+	/*
 	public void performActionKeyboard(Point2D location) {
 
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(location));
 		myGameGridEffect.highlightCurrent(location, Color.BLUE);
 	}
+	*/
 
 	/**
 	 * Method to convert pixel coordinates into tile coordinates

@@ -37,7 +37,8 @@ public class GameGridEffect {
     @FXML
     public void highlightActionRange () {
         clearAllEffects();
-
+        
+        
         if (myActivePiece != null && myActiveAction != null) {
             System.out.println("GameGridEffect: action ABOUT TO HIGHLIGHT\n\n");
             myActiveAction.getActionRange(myActivePiece.getLoc())
@@ -82,9 +83,11 @@ public class GameGridEffect {
     /**
      * Uses GRID COORDINATE LOCATION to highlight the current location on the grid
      */
-    public void highlightCurrent(Point2D loc, Color c){
+    public void highlightCurrent(Point2D loc){
         clearAllEffects();
-        myGrid.findClickedTile(loc);
+        SuperTile toHighlight = myGrid.findClickedTile(loc);
+        toHighlight.selectTile(DEFAULT_COLOR);
+        myHighlightedTiles.add(toHighlight);
     }
     
     /**
@@ -96,6 +99,8 @@ public class GameGridEffect {
             myGrid.findClickedTile(st.getLocation()).deselectTile();;
         }
     }
+    
+    
     
     
 }
