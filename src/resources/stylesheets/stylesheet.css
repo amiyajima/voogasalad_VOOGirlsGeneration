@@ -1,6 +1,6 @@
 .root{
 	-fx-alignment: center;
-	-fx-background-image: url("../images/background.jpg");
+	-fx-background-image: url("../images/background_space.jpg");
 	-fx-padding: 10px;
 	-fx-spacing: 20;
 }
@@ -59,7 +59,7 @@
 .button{
     -fx-text-fill: black ;
     -fx-background-color: white;
-    -fx-font-family: "Arial Narrow";
+    -fx-font-family: "Franklin Gothic Medium";
     -fx-font-weight: bold;
     -fx-border-radius: 2;
     -fx-padding: 3 6 6 6;

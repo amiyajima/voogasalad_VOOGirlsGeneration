@@ -61,9 +61,6 @@ public class GameGridEffect {
                                  }
                              });
         }
-        printPieceHighlights();
-        printEffectHighlights();
-        printActionHighlights();
     }
 
 
@@ -94,9 +91,6 @@ public class GameGridEffect {
                     }
                 });
             }
-        printPieceHighlights();
-        printEffectHighlights();
-        printActionHighlights();
     }
     
     /**

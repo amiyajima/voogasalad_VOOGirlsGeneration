@@ -48,7 +48,7 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 	public void replace(Patch origEl, Patch newEl) {
 		origEl = newEl;
 		setChanged();
-		notifyObservers(origEl);
+		notifyObservers(newEl);
 	}
 	
 	@Override
