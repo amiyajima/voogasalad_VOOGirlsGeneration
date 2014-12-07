@@ -85,6 +85,8 @@ public class AuthoringController implements Initializable {
 	}
 	
 	@FXML
+	//TODO: [IMPORTANT] This method will need a List<String> or Set<String> that contains names of Pieces
+	//Also, need a list of existing actions
         private void showActionzlogicChartWindow() throws IOException{
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/authoring/actionslogic/ActionLogic.fxml"));
@@ -98,7 +100,6 @@ public class AuthoringController implements Initializable {
 
                 ActionLogicController controller = loader.getController();
                 
-                //EventsEditorController.setEvents(events); 
 
                 eventEditorStage.showAndWait();
         }
