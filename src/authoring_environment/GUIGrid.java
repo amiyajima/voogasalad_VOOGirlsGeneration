@@ -124,7 +124,6 @@ public class GUIGrid extends SuperGrid implements Observer {
 
 	private void replacePatchType (Patch patchType) {
 		List<Point2D> pointsToReplace = myPatchData.replace(patchType);
-		// System.out.println(pointsToReplace.toString());
 		for (Point2D loc : pointsToReplace) {
 			SuperTile tile = super.findClickedTile(loc);
 			tile.addPatchImage(patchType.getImageView());
@@ -140,8 +139,7 @@ public class GUIGrid extends SuperGrid implements Observer {
 	}
 
 	private void removePatchType(PatchTypeData typeData) {
-		List<Point2D> pointsToRemove = myPatchData.removeUnknown(typeData
-				.getIdSet());
+		List<Point2D> pointsToRemove = myPatchData.removeUnknown(typeData.getIdSet());
 		for (Point2D loc : pointsToRemove) {
 			SuperTile tile = super.findClickedTile(loc);
 			tile.removePatchImage();
@@ -189,7 +187,7 @@ public class GUIGrid extends SuperGrid implements Observer {
 	public void removePatch (Patch p) {
 		myPatchData.remove(p);
 		SuperTile currentTile = findClickedTile(p.getLoc());
-		currentTile.clearPieceImage();
+		currentTile.clearPatchImage();
 	}
 
 	/**
@@ -267,8 +265,6 @@ public class GUIGrid extends SuperGrid implements Observer {
 		if (o instanceof PieceTypeData) {
 			PieceTypeData typeData = (PieceTypeData) o;
 			if (arg == null) {
-				System.out.println("AH!");
-				// TODO : FIX!
 				removePieceType(typeData);
 			}
 			if (arg instanceof Piece) {
@@ -279,8 +275,6 @@ public class GUIGrid extends SuperGrid implements Observer {
 		if (o instanceof PatchTypeData) {
 			PatchTypeData typeData = (PatchTypeData) o;
 			if (arg == null) {
-				System.out.println("GAH!");
-				// TODO : FIX!
 				removePatchType(typeData);
 			}
 			if (arg instanceof Patch) {

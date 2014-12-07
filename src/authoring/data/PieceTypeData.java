@@ -30,7 +30,7 @@ public class PieceTypeData extends Observable implements AuthoringData<Piece> {
 
 	@Override
 	public void replace(Piece origEl, Piece newEl) {
-		remove(origEl);
+		myPieces.remove(origEl);
 	    add(newEl);
 		setChanged();
 		notifyObservers(newEl);
