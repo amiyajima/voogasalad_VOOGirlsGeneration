@@ -6,9 +6,12 @@ import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import java.awt.geom.Point2D;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 import javafx.collections.FXCollections;
@@ -16,6 +19,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
@@ -27,6 +31,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import authoring.concretefeatures.StatsCreatorBox;
+import authoring.concretefeatures.StatsTotalEditor;
 import authoring.createedit.ModulesList;
 import authoring.data.ActionData;
 import authoring.data.PieceTypeData;
@@ -49,10 +57,6 @@ public class PieceTypeEditor extends Pane {
     private static final String TEMPLATE_LABEL = "OK";
     private static final String ID_PROMPT = "Enter piece ID...";
     private static final String NAME_PROMPT = "Enter piece name...";
-    private static final String STAT_NAME_LABEL = "Stat name";
-    private static final String STAT_VALUE_LABEL = "Stat value";
-    private static final String STAT_NAME_PROMPT = "Enter stat name";
-    private static final String STAT_VALUE_PROMPT = "Enter stat value";
     private static final String STAT_CREATE_LABEL = "Add stat";
     private static final Insets MARGINS = new Insets(20, WIDTH / 5, 20, WIDTH / 5 - 10);
     private static final String LABEL_CSS = "-fx-font-size: 14pt;";
@@ -134,14 +138,6 @@ public class PieceTypeEditor extends Pane {
         names.setPadding(UIspecs.allPadding);
         names.setSpacing(5);
 
-        HBox namingStat = new HBox();
-        namingStat.setPadding(UIspecs.allPadding);
-        namingStat.setSpacing(5);
-
-        HBox assignStatValue = new HBox();
-        assignStatValue.setPadding(UIspecs.allPadding);
-        assignStatValue.setSpacing(5);
-
         HBox createStat = new HBox();
         createStat.setPadding(UIspecs.allPadding);
         createStat.setSpacing(5);
@@ -154,20 +150,8 @@ public class PieceTypeEditor extends Pane {
         images.setPadding(UIspecs.allPadding);
         images.setSpacing(5);
 
-        Label statNameLabel = new Label(STAT_NAME_LABEL);
-        statNameLabel.setPadding(UIspecs.topRightPadding);
-        TextField statName = new TextField();
-        statName.setPromptText(STAT_NAME_PROMPT);
-        namingStat.getChildren().addAll(statNameLabel, statName);
-
-        Label statValueLabel = new Label(STAT_VALUE_LABEL);
-        statValueLabel.setPadding(UIspecs.topRightPadding);
-        TextField statValue = new TextField();
-        statValue.setPromptText(STAT_VALUE_PROMPT);
-        assignStatValue.getChildren().addAll(statValueLabel, statValue);
-
         Button createStatButton = new Button(STAT_CREATE_LABEL);
-        initStatButton(createStatButton, statName, statValue);
+        initStatButton(createStatButton);
         createStat.getChildren().addAll(createStatButton);
 
         TableView<Stats> myStats = new TableView<Stats>();
@@ -197,23 +181,28 @@ public class PieceTypeEditor extends Pane {
         initImageLoader(images);
         initGoBtn(goButton, unitID, unitName, modList);
 
-        box.getChildren().addAll(labelBox, ids, names, namingStat, assignStatValue, createStat,
-                                 availableStats,
+        box.getChildren().addAll(labelBox, ids, names, createStat, availableStats,
                                  images, modList, goButton);
 
         getChildren().add(box);
     }
 
-    private void initStatButton (Button createStatButton, TextField statName, TextField statValue) {
+    private void initStatButton (Button createStatButton) {
         createStatButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
-                Stats add = new Stats();
-                add.add(statName.getText(), Double.parseDouble(statValue.getText()));
-                System.out.println("piecetypeeditor: add = " + add);
+                showStatEditorWindow();
             }
         });
+    }
 
+    private void showStatEditorWindow () {
+        Map<String, Double> sample = new HashMap<String, Double>();
+        sample.put("sample", 5.0);
+        Stats sampleStat = new Stats(sample);
+        
+        StatsTotalEditor editor = new StatsTotalEditor(sampleStat);
+        editor.show();
     }
 
     private ModulesList initModList () {
