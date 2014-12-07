@@ -449,10 +449,9 @@ public class ViewController {
 	 * TODO: Add javadoc
 	 */
 	private void setOnClick() {
-		myGridPane.setOnMouseClicked(event -> {
-			// System.out.println("Exact Mouse Coordinate:"+event.getX()+" Y:"+event.getY());
-				performAction(event.getX(), event.getY());
-			});
+		myGridPane.getContent().setOnMouseClicked(event -> {
+			performAction(event.getX(), event.getY());
+		});
 	}
 
 	// Probably going to move this to KeyboardAction class
@@ -483,17 +482,21 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(double x, double y) {
-		// System.out.println("current mouse location:" + x + ", " + y);
+		System.out.println("current mouse location:" + x + ", " + y);
 		// System.out.println("myGrid size is" + myGridPane.getWidth() + "*"
 		// + myGrid.getHeight());
 		// System.out.println(myGrid.getBoundsInParent());
 
-		if (myModel.getCurrentLevel().getGrid().getPiece(findPosition(x, y)) == null) {
+		Point2D loc = myModel.getCurrentLevel().getGrid().findClickedTile(x, y).getLocation();
+		
+		System.out.println("Tile Found is: "+ myModel.getCurrentLevel().getGrid().findClickedTile(x, y) + " at X:" + loc.getX() +" at Y:"+ loc.getY());
+		
+		if (myModel.getCurrentLevel().getGrid().getPiece(loc) == null) {
 			System.out.println("no piece");
 		}
 
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
-				.getPiece(findPosition(x, y)));
+				.getPiece(loc));
 		// myGrid.clearEffect();
 		// myGameGridEffect.clearAllEffects(myGrid);
 
