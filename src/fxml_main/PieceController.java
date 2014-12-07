@@ -39,7 +39,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 					myPieceTypes.add(piece);
 					addEntry(piece);
 				};
-				myPropertiesSPane.setContent(new PieceTypeEditor(okLambda, myActionData));
+				myPropertiesSPane.setContent(new PieceTypeEditor(okLambda, myPieceTypes, myActionData));
 			}
 		});
     }
@@ -64,7 +64,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 					public void handle (MouseEvent e) {
 						GUIGrid grid = myGridReference.getGrid();
 						Point2D coor = grid.calculateClicked(e.getX(), e.getY());
-						grid.removePatch(coor);
+						grid.removePieceAtCoordinate(coor);
 					}
 				};
 				myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
@@ -75,7 +75,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 	@Override
 	protected HBox makeEntryBox(Piece entry) {
 		HBox hb = new HBox();
-		Label name = new Label(entry.getName());
+		Label name = new Label(entry.toString());
 		name.setTranslateY(7.5);
 		ImageView img = entry.getImageView();
 		img.setFitHeight(40);
@@ -105,10 +105,11 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 			public void handle (ActionEvent e) {
 				Consumer<Piece> okLambda = (Piece piece) -> {
 					HBox entryBox = makeCompleteEntryBox(piece);
-
+					
 					HBox entryHolderBox = myEntryMap.get(entry);
 					entryHolderBox.getChildren().clear();
 					entryHolderBox.getChildren().add(entryBox);
+					myEntryMap.put(piece, entryHolderBox);
 
 					myPieceTypes.replace(entry, piece);
 				};

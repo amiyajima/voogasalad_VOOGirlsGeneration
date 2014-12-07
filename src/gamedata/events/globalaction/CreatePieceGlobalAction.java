@@ -7,13 +7,11 @@ import gamedata.gamecomponents.Piece;
 
 /**
  * Creates a piece on the grid in a level in a specified location
- * @author Rica, Mike Zhu
+ * @author Mike Zhu
  *	
  */
 public class CreatePieceGlobalAction extends GlobalAction {
-	//Space in the description needed when we concatenate Strings to make dynamic title
-	public static final String ACTION_TYPE = "Create ";
-    private Game myGame;
+
     private Piece myPiece;
     private Point2D myLoc;
     
@@ -25,14 +23,12 @@ public class CreatePieceGlobalAction extends GlobalAction {
      */
     public CreatePieceGlobalAction (String name, Game game, Piece pieceToCreate, Point2D loc) {
     	super(name);
-        myGame = game;
         myPiece = pieceToCreate;
         myLoc = loc;
     }
     
     @Override
     public void doBehavior () {
-        myGame.getCurrentLevel().getGrid().addPiece(myPiece, myLoc);;
     }
 
 }

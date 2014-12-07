@@ -79,6 +79,10 @@ public abstract class Player {
     public int getID () {
         return myID;
     }
+    
+    public void playTurn(){
+    	myNumMovesPlayed++;
+    }
 
     /**
      * Getter for Number of Moves Played

@@ -34,7 +34,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 					myPatchTypes.add(patch);
 					addEntry(patch);
 				};
-				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda));
+				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda, myPatchTypes));
 			}
 		});
 	}
@@ -57,9 +57,9 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 				EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
 					@Override
 					public void handle (MouseEvent e) {
-						GUIGrid grid = myGridReference.getGrid();
+						GUIGrid grid = myGridReference.getGrid(); 
 						Point2D coor = grid.calculateClicked(e.getX(), e.getY());
-						grid.removePatch(coor);
+						grid.removePatchAtCoordinate(coor);
 					}
 				};
 				myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
@@ -70,7 +70,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 	@Override
 	protected HBox makeEntryBox (Patch entry) {
 		HBox hb = new HBox();
-		Label name = new Label(entry.getName());
+		Label name = new Label(entry.toString());
 		name.setTranslateY(7.5);
 		ImageView img = entry.getImageView();
 		img.setFitHeight(40);
@@ -94,7 +94,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 	}
 
 	@Override
-	protected void initEntryEditBtn (Patch entry, Button editBtn) {
+	protected void initEntryEditBtn(Patch entry, Button editBtn) {
 		editBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent e) {
@@ -104,6 +104,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 					HBox entryHolderBox = myEntryMap.get(entry);
 					entryHolderBox.getChildren().clear();
 					entryHolderBox.getChildren().add(entryBox);
+					myEntryMap.put(patch, entryHolderBox);
 
 					myPatchTypes.replace(entry, patch);
 				};
@@ -113,7 +114,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 	}
 
 	@Override
-	protected void initEntryDelBtn (Patch entry, Button delBtn) {
+	protected void initEntryDelBtn(Patch entry, Button delBtn) {
 		delBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent event) {

@@ -67,9 +67,8 @@ public class ViewController {
 
 	private Game myModel;
 	private GUIGrid myGrid;
-	
+
 	private Player myCurrentPlayer;
-	
 
 	// private SampleListener myLeapListener;
 
@@ -93,7 +92,6 @@ public class ViewController {
 	private VBox scores;
 	@FXML
 	private Label playerTurn;
-
 
 	private ScrollPane myGridPane;
 
@@ -258,7 +256,7 @@ public class ViewController {
 	 * @throws UnsupportedAudioFileException
 	 */
 	protected void newGame() throws UnsupportedAudioFileException, IOException,
-	LineUnavailableException {
+			LineUnavailableException {
 
 		List<File> games = getGames();
 
@@ -272,7 +270,7 @@ public class ViewController {
 				myStage.setScene(myScene);
 			});
 		});
-//		 initializeGrid();
+		// initializeGrid();
 	}
 
 	/**
@@ -337,8 +335,9 @@ public class ViewController {
 
 		piece.getStats()
 				.getStatNames()
-				.forEach(key -> stats.add(new Text(key + ":  "
-					+ piece.getStats().getValue(key))));
+				.forEach(
+						key -> stats.add(new Text(key + ":  "
+								+ piece.getStats().getValue(key))));
 
 		statsPane.getChildren().addAll(stats);
 
@@ -361,12 +360,12 @@ public class ViewController {
 		controlPane.getChildren().addAll(actions);
 
 	}
-	
+
 	/**
 	 * Clears control pane of actions after you've selected one to do
 	 */
 	public void clearActions() {
-	    controlPane.getChildren().clear();
+		controlPane.getChildren().clear();
 	}
 
 	/**
@@ -389,54 +388,50 @@ public class ViewController {
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
-	        myGameGridEffect.highlightActionRange();
+		myGameGridEffect.highlightActionRange();
 		setGridState(new ApplyState(this));
-		if (keyControlOn){
-		    
-		    //after i click action button, i need to go back to KeyboardMovement
-		    myKeyboardAction = null;
-		    myKeyboardMovement = new KeyboardMovement();
-		    myKeyboardMovement.setMovementKeyControl(this);
+		if (keyControlOn) {
+
+			// after i click action button, i need to go back to
+			// KeyboardMovement
+			myKeyboardAction = null;
+			myKeyboardMovement = new KeyboardMovement();
+			myKeyboardMovement.setMovementKeyControl(this);
 		}
 	}
 
 	private void setOnClick() {
-		if(myModel.getCurrentPlayer().getNumMovesPlayed()>3){
-			myModel.nextPlayer();
-		}
-		if(myModel.getCurrentLevel().getGrid().getPiece(new Point2D.Double(0,0))==null){
-			myModel.nextLevel();
-		}
-		
-	    myGridPane.getContent().setOnMouseClicked(event -> {
-		Point2D loc = findPosition(event.getX(), event.getY());
-		performAction(loc);
+		myGridPane.getContent().setOnMouseClicked(event -> {
+			Point2D loc = findPosition(event.getX(), event.getY());
+			performAction(loc);
 		});
 	}
-        
 
 	/**
-	 * Perform the actions of a click at position (x,y) on game grid
-	 * and highlights the piece that was clicked
+	 * Perform the actions of a click at position (x,y) on game grid and
+	 * highlights the piece that was clicked
 	 * 
 	 * @param x
 	 * @param y
 	 */
-	public void performAction(Point2D loc) {		
-		if (keyControlOn){
-                  myKeyboardMovement = null;
-		  myKeyboardAction = new KeyboardAction();
-                  myKeyboardAction.setActionKeyControl(this); 
+	public void performAction(Point2D loc) {
+		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
+		
+		if (keyControlOn) {
+			myKeyboardMovement = null;
+			myKeyboardAction = new KeyboardAction();
+			myKeyboardAction.setActionKeyControl(this);
 		}
 	}
-	
-	
+
 	/**
 	 * Select state tells VC to highlight the selected piece
+	 * 
 	 * @param p
 	 */
 	public void highlightSelected(Piece p) {
-	           myGameGridEffect.highlightCurrent(p.getLoc(), myModel.getCurrentLevel().getGrid().getPiece(p.getLoc()));
+		myGameGridEffect.highlightCurrent(p.getLoc(), myModel.getCurrentLevel()
+				.getGrid().getPiece(p.getLoc()));
 
 	}
 
@@ -474,27 +469,27 @@ public class ViewController {
 	public void toggleKeyboardControl() {
 		if (keyControlOn) {
 			keyControlOn = false;
-			
-			//dehighlighting the tile the keyboard is currently highlighting
-	                if(myKeyboardMovement!=null){
-	                    keySelectedTile = myGrid.findClickedTile(myKeyboardMovement.getCurrentLocation());
-	                    keySelectedTile.deselectTile();
-	                }
+
+			// dehighlighting the tile the keyboard is currently highlighting
+			if (myKeyboardMovement != null) {
+				keySelectedTile = myGrid.findTile(myKeyboardMovement
+						.getCurrentLocation());
+				keySelectedTile.deselectTile();
+			}
 			myKeyboardMovement = null;
 			myKeyboardAction = null;
 			System.out.println("Keyboard OFF");
 		} else {
-			
-			//dehighlighting the tile the mouse click is currently highlighting
-			if (currentClick != null){
-			    SuperTile selectedTile =
-			            myGrid.findClickedTile(currentClick);
-			    selectedTile.deselectTile();			    
+
+			// dehighlighting the tile the mouse click is currently highlighting
+			if (currentClick != null) {
+				SuperTile selectedTile = myGrid.findTile(currentClick);
+				selectedTile.deselectTile();
 			}
-			
-                      myKeyboardMovement = new KeyboardMovement();
-                      myKeyboardMovement.setMovementKeyControl(this);
-			
+
+			myKeyboardMovement = new KeyboardMovement();
+			myKeyboardMovement.setMovementKeyControl(this);
+
 			keyControlOn = true;
 		}
 	}
@@ -600,13 +595,24 @@ public class ViewController {
 	 *            the current state of the Grid, select/ apply action Mode
 	 */
 	public void setGridState(IGridState state) {
-	    myCurrentPlayer = myModel.getCurrentPlayer();
-	    setPlayerTurnDisplay();
-	    gridState = state;
+		myModel.getCurrentPlayer().playTurn();
+		if (myModel.getCurrentPlayer().getNumMovesPlayed() > 3) {
+			System.out.println("VC: NEXT PLAYER. MOVES:" + myModel.getCurrentPlayer().getNumMovesPlayed());
+			myModel.nextLevel();
+		}
+		if (myModel.getCurrentLevel().getGrid()
+				.getPiece(new Point2D.Double(0, 0)) == null) {
+			System.out.println("Next LEVEL");
+			myModel.nextLevel();
+		}
+		
+		myCurrentPlayer = myModel.getCurrentPlayer();
+		setPlayerTurnDisplay();
+		gridState = state;
 	}
-	
+
 	private void setPlayerTurnDisplay() {
-	    playerTurn.setText("Turn: " + myCurrentPlayer.getID());
+		playerTurn.setText("Turn: " + myCurrentPlayer.getID());
 	}
 
 	/**
@@ -617,8 +623,8 @@ public class ViewController {
 	protected GameGridEffect getGameGridEffect() {
 		return myGameGridEffect;
 	}
-	
+
 	public VBox getcontrolPane() {
-	    return controlPane;
+		return controlPane;
 	}
 }

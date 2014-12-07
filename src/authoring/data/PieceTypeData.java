@@ -30,7 +30,7 @@ public class PieceTypeData extends Observable implements AuthoringData<Piece> {
 
 	@Override
 	public void replace(Piece origEl, Piece newEl) {
-		remove(origEl);
+		myPieces.remove(origEl);
 	    add(newEl);
 		setChanged();
 		notifyObservers(newEl);
@@ -52,7 +52,7 @@ public class PieceTypeData extends Observable implements AuthoringData<Piece> {
     public boolean containsName(String name) {
 		Set<String> nameSet = new HashSet<String>();
 		for (Piece p : myPieces) {
-			nameSet.add(p.getName());
+			nameSet.add(p.toString());
 		}
 		return nameSet.contains(name);
 	}

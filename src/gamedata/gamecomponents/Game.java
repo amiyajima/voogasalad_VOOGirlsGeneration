@@ -118,6 +118,7 @@ public class Game {
 	 */
 	private void resetPlayer() {
 		myCurrentPlayer = myPlayers.get(0);
+		myCurrentPlayer.resetMovesPlayed();
 	}
 
 	/**
