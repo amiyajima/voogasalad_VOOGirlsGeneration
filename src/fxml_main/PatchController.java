@@ -2,6 +2,7 @@ package fxml_main;
 
 import gamedata.gamecomponents.Patch;
 
+import java.awt.geom.Point2D;
 import java.util.function.Consumer;
 
 import javafx.event.ActionEvent;
@@ -13,14 +14,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import authoring.data.PatchData;
 import authoring.data.PatchTypeData;
 import authoring_environment.GUIGrid;
 
 public class PatchController extends GridComponentAbstCtrl<Patch> {
 
 	private PatchTypeData myPatchTypes;
-	
+
 	public PatchController (VBox vbox, ScrollPane propertiesSPane, GUIGrid currGrid) {
 		super(vbox, propertiesSPane, currGrid);
 		//TODO: myPatchTypes needs to be changed..data..
@@ -28,7 +28,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 		myCurrentGrid = currGrid;
 	}
 
-	           
+
 	@Override
 	protected void initGlobalNewBtn (Button newBtn) {
 		newBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -74,7 +74,14 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 		hb.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				myCurrentGrid.addPatch(entry, loc);
+				EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent e) {
+						Point2D loc = new Point2D.Double(e.getX(),e.getY());
+						myCurrentGrid.addPatch(entry, loc);
+					}
+				};
+				myCurrentGrid.paneSetOnMouseClicked(clickHandler);
 			}
 		});
 		hb.getChildren().addAll(img, name);
@@ -89,16 +96,16 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 				Consumer<Patch> okLambda = (Patch patch) -> {
 					//TODO: Use observables to make all the pieces and
 					// patches in the grid change to fit the updated patch
-				    HBox entryBox = myEntryMap.get(entry);
-				    HBox imgNameBox = myIndivEntMap.get(entryBox);
-				    
-				    entryBox.getChildren().remove(imgNameBox);
-				    HBox newImgNameBox = makeEntryBox(patch);	
-				    
-				    entryBox.getChildren().add(newImgNameBox);
-				    myIndivEntMap.replace(entryBox, newImgNameBox);
-				    
-				    myPatchTypes.replace(entry, patch);
+					HBox entryBox = myEntryMap.get(entry);
+					HBox imgNameBox = myIndivEntMap.get(entryBox);
+
+					entryBox.getChildren().remove(imgNameBox);
+					HBox newImgNameBox = makeEntryBox(patch);	
+
+					entryBox.getChildren().add(newImgNameBox);
+					myIndivEntMap.replace(entryBox, newImgNameBox);
+
+					myPatchTypes.replace(entry, patch);
 				};
 				myPropertiesSPane.setContent(new PatchTypeEditor(okLambda, entry));
 			}

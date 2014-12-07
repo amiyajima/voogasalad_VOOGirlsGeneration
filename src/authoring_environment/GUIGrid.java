@@ -8,7 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.function.Consumer;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import authoring.data.PatchData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceData;
@@ -164,5 +168,9 @@ public class GUIGrid extends SuperGrid implements Observer {
 				replacePatch(patchType);
 			}
 		}
+	}
+	
+	public <T> void paneSetOnMouseClicked(EventHandler<MouseEvent> handler) {
+		myPane.setOnMouseClicked(handler);
 	}
 }

@@ -107,4 +107,5 @@ public class SuperGrid {
 	public double getTileSize() {
 		return myTileSize;
 	}
+	
 }

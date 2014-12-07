@@ -29,9 +29,6 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
     	
     	//TODO: myPatchTypes needs to be changed..data..
     	myPieceTypes = new PieceTypeData();
-    	//TODO: this is just for testing..
-    	currGrid = new GUIGrid(10, 10, 2, "Square Grid");
-    	myPieces = currGrid.getPieces();
     }
 
     @Override
@@ -98,7 +95,6 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 				    myIndivEntMap.replace(entryBox, newImgNameBox);
 				    
 				    myPieceTypes.replace(entry, piece);
-				    myPieces.update(myPieceTypes, entry);
 				};
 				myPropertiesSPane.setContent(new PieceTypeEditor(okLambda, entry, myActionData));
 			}
