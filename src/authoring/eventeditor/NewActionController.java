@@ -26,7 +26,7 @@ public class NewActionController implements Initializable{
         
         private List<Class> actionList;
         
-        private GlobalAction myAction;
+        private GlobalAction myGlobalAction;
         private Consumer<GlobalAction> myDoneLambda;
         
         @Override
@@ -43,29 +43,29 @@ public class NewActionController implements Initializable{
                 }
                 
                 List<String> displayList = new ArrayList<>();
-                for(Class<?> c: conditionsList){
+                for(Class<?> c: actionList){
                         displayList.add(c.toString());
                 }
                 displayList = trimClassList(displayList);
                 
-                conditionChoiceBox.getItems().addAll(displayList);
+                actionChoiceBox.getItems().addAll(displayList);
                 
-                conditionChoiceBox.getSelectionModel().selectedItemProperty().addListener(
-                                (observable, oldValue, selectedType) -> showConditionEditorPane());
+                actionChoiceBox.getSelectionModel().selectedItemProperty().addListener(
+                                (observable, oldValue, selectedType) -> showActionEditorPane());
         }
 
-        private List<String> trimClassList(List<String> conditionsList) {
+        private List<String> trimClassList(List<String> actionList) {
                 List<String> displayList = new ArrayList<>();
-                for(String s: conditionsList){
+                for(String s: actionList){
                         String trimmed = trimClassPaths(s);
                         displayList.add(trimmed);
                 }
                 return displayList;
         }
         
-        private void showConditionEditorPane(){
-                int idx = conditionChoiceBox.getSelectionModel().getSelectedIndex();
-                Class<?> c = conditionsList.get(idx);
+        private void showActionEditorPane(){
+                int idx = actionChoiceBox.getSelectionModel().getSelectedIndex();
+                Class<?> c = actionList.get(idx);
                 
                 /**
                  * If statements to choose which Condition Editor to pull up
@@ -73,11 +73,11 @@ public class NewActionController implements Initializable{
                 if("class gamedata.events.ConditionEquals".equals(c.getSuperclass().toString())){
                 }
                 
-                if(myCondition==null){
-                        editorScrollPane.setContent(new ConditionEditorPane(myDoneLambda));
+                if(myGlobalAction==null){
+                        editorScrollPane.setContent(new ActionEditorPane(myDoneLambda));
                 }
                 else{
-                        editorScrollPane.setContent(new ConditionEditorPane(myDoneLambda, myCondition));
+                        editorScrollPane.setContent(new ActionEditorPane(myDoneLambda, myGlobalAction));
                 }
         }
         
@@ -97,7 +97,7 @@ public class NewActionController implements Initializable{
                 return trimmed;
         }
 
-        public void loadLambda(Consumer<Condition> okLambda) {
+        public void loadLambda(Consumer<GlobalAction> okLambda) {
                 myDoneLambda = okLambda;
         }
         
@@ -106,7 +106,7 @@ public class NewActionController implements Initializable{
          * Used when editing a previous condition, rather than creating a new one from scratch
          * @param entry
          */
-        public void loadEntryCondition(Condition entry){
-                myCondition = entry;
+        public void loadEntryCondition(GlobalAction entry){
+                myGlobalAction = entry;
         }
 }
