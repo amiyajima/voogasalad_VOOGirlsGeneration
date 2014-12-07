@@ -36,8 +36,13 @@ import authoring_environment.SuperGrid;
  */
 public class JSONBobTester {
 	private static String DEFAULT_DUVALL = "/resources/images/rcd.png";
-	private static String DEFAULT_BUNNY = "/resources/images/Rica.png";
+	private static String DEFAULT_BUNNY = "/resources/images/bbybunny.jpeg";
+	private static String DEFAULT_RICA = "/resources/images/Rica.png";
 	private static String DEFAULT_LAND = "/resources/images/Land.jpeg";
+	private static int RANDOMIZE = 0;
+	private static int DUVALL = 1;
+	private static int BUNNY = 2;
+	private static int RICA = 3;
 
 	public JSONBobTester() {
 
@@ -63,34 +68,21 @@ public class JSONBobTester {
 	public Game createNewGame() {
 		System.out.println("Bob Tester: Create new game");
 		List<Player> myPlayers = new ArrayList<Player>();
-
 		Player myPlayer1 = new HumanPlayer(1);
 		Player myPlayer2 = new HumanPlayer(2);
 		myPlayers.add(myPlayer1);
 		myPlayers.add(myPlayer2);
 
-		GUIGrid grid = createNewGrid();
-
-		/*
-		 * List<Rule> myRules = new ArrayList<Rule>(); MoveCountRule rule1 = new
-		 * MoveCountRule(3); MoveCountRule rule2 = new MoveCountRule(5); //
-		 * myRules.add(rule1); myRules.add(rule2);
-		 * 
-		 * List<Goal> myGoals = new ArrayList<Goal>(); Goal goal1 = new
-		 * PlayerPiecesRemovedGoal(myPlayer2); myGoals.add(goal1); // Goal goal2
-		 * = new PlayerPiecesRemovedGoal(myPlayer1); // myGoals.add(goal2);
-		 */
+		GUIGrid gridLevel1 = createNewGrid();
+		GUIGrid gridLevel2 = createNewGrid();
 
 		List<Event> myEvents = new ArrayList<Event>();
 
 		List<Level> myLevels = new ArrayList<Level>();
-		Level level1 = new Level(grid, myEvents, "Default ID", false);
-		Level level2 = new Level(grid, myEvents, "Default ID", true);
+		Level level1 = new Level(gridLevel1, myEvents, "Level 1", false);
+		Level level2 = new Level(gridLevel2, myEvents, "Level 2", true);
 		myLevels.add(level1);
 		myLevels.add(level2);
-
-		Piece piece = createNewPiece(grid, new Point2D.Double(3, 3));
-		Patch patch = createNewPatch(new Point2D.Double(3, 3));
 
 		Game myGame = new Game(1, myLevels, myLevels.get(0));
 		myGame.addPlayers(myPlayers);
@@ -101,32 +93,37 @@ public class JSONBobTester {
 	public GUIGrid createNewGrid() {
 		GUIGrid grid1 = new GUIGrid(5, 5, 75, "Square Grid");
 
-		Piece templ = createNewPiece(grid1, new Point2D.Double(0, 0));
-		// System.out.println(templ.getImageLocation());
+		Piece randomTemplate = createNewPiece(grid1, new Point2D.Double(0, 0), 0);
+		Piece duvallTemplate = createNewPiece(grid1, new Point2D.Double(0, 0), 1);
+		Piece bunnyTemplate = createNewPiece(grid1, new Point2D.Double(0, 0), 2);
+		Piece ricaTemplate = createNewPiece(grid1, new Point2D.Double(0, 0), 3);
 		Patch templPatch = createNewPatch(new Point2D.Double(0, 0));
-		// System.out.println(templPatch.getImageLocation());
 
 		for (int x = 0; x < grid1.getCol(); x++) {
 			for (int y = 0; y < grid1.getRow(); y++) {
-				Piece actual = new Piece(templ, new Point2D.Double(x, y));
-				if (x == 0) {
-					actual.setPlayerID(2);
-				}
-				grid1.addPiece(actual, new Point2D.Double(x, y));
-				grid1.addPatch(templPatch, new Point2D.Double(x, y));
+			    Piece actual;
+			    if (x == y) {
+			        actual = new Piece(ricaTemplate, new Point2D.Double(x, y));
+			    }
+			    else {
+			        actual = new Piece(randomTemplate, new Point2D.Double(x, y));
+			    }
+			    if (x == 0) {
+			        actual.setPlayerID(2);
+			    }
+			    else {
+			        actual.setPlayerID(1);
+			    }
+			    grid1.addPiece(actual, new Point2D.Double(x, y));
+			    grid1.addPatch(templPatch, new Point2D.Double(x, y));
 			}
 		}
-
-		// System.out.println("Bob Tester: Patches filled: " +
-		// grid1.getPatches().getData().size());
-		// System.out.println("Bob Tester: Pieces filled: " +
-		// grid1.getPieces().getData().size());
 
 		System.out.println("Grid created: " + grid1.toString());
 		return grid1;
 	}
 
-	public Piece createNewPiece(GUIGrid g, Point2D p) {
+	public Piece createNewPiece(GUIGrid g, Point2D p, int type) {
 		Point2D p1 = new Point2D.Double(1, 1);
 		Point2D p4 = new Point2D.Double(1, 0);
 		Point2D p5 = new Point2D.Double(-1, 0);
@@ -153,7 +150,6 @@ public class JSONBobTester {
 
 		List<Action> actions = new ArrayList<Action>();
 		actions.add(createNewAction(pl2, pl4));
-		// actions.add(createNewAction(pl2, pl3));
 		actions.add(move);
 
 		Stats s = new Stats();
@@ -165,13 +161,23 @@ public class JSONBobTester {
 		int randomInt = r.nextInt(50);
 
 		Piece piece = null;
-		if (randomInt % 2 == 1) {
-			piece = new Piece("ID", "Duvall", DEFAULT_DUVALL, actions, s, p, 1,
-					i);
-		} else {
-			piece = new Piece("ID", "Bunny", DEFAULT_BUNNY, actions, s, p, 1, i);
+		if (type == 0) {
+		        if (randomInt % 2 == 1) {
+	                        piece = new Piece("ID", "Duvall", DEFAULT_DUVALL, actions, s, p, 1,
+	                                        i);
+	                } else {
+	                        piece = new Piece("ID", "Bunny", DEFAULT_BUNNY, actions, s, p, 1, i);
+	                }
 		}
-		// System.out.println(piece.getActions().size());
+		else if (type == 1) {
+	              piece = new Piece("Duvall_ID", "Duvall", DEFAULT_DUVALL, actions, s, p, 1, i);
+		}
+		else if (type == 2) {
+		    piece = new Piece("Bunny_ID", "Bunny", DEFAULT_BUNNY, actions, s, p, 1, i);
+		}
+		else {
+		    piece = new Piece("Rica_ID", "Rica", DEFAULT_RICA, actions, s, p, 1, i);
+		}
 		return piece;
 	}
 
@@ -186,8 +192,7 @@ public class JSONBobTester {
 	}
 
 	public Action createNewAction(List<Point2D> pl1, List<Point2D> pl2) {
-		StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor",
-				"health");
+		StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor", "health");
 		List<StatsSingleMultiplier> ssmList = new ArrayList<StatsSingleMultiplier>();
 		ssmList.add(ssm1);
 

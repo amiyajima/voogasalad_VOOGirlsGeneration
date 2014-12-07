@@ -34,7 +34,7 @@ public class PieceData implements AuthoringData<Piece> {
     
 	@Override
 	public void replace(Piece origEl, Piece newEl) {
-		origEl.setName(newEl.getName());
+		origEl.setName(newEl.toString());
 		origEl.setImageLocation(newEl.getImageLocation());
 	}
     
@@ -86,7 +86,7 @@ public class PieceData implements AuthoringData<Piece> {
 	public boolean unitAtLoc(Piece unit, int x, int y){
 		Point2D location = new Point2D.Double(x, y);
 		for(Piece piece : myPieces){
-			if(location.equals(piece.getLoc()) && unit.getName().equals(piece.getName())){
+			if(location.equals(piece.getLoc()) && unit.toString().equals(piece.toString())){
 				myPieces.remove(piece);
 				return true;
 			}

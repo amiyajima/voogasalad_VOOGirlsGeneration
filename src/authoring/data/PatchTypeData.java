@@ -15,7 +15,7 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 	public PatchTypeData() {
 		myPatches = new LinkedList<Patch>();
 	}
-	
+
 	@Override
 	public void add(Patch p) {
 		myPatches.add(p);

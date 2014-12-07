@@ -171,27 +171,6 @@ public class GUIGrid extends SuperGrid implements Observer {
 	}
 
 	/**
-	 * Gets Pieces that have been tagged for removal
-	 * 
-	 * @return
-	 */
-	public List<Piece> getRemovedPieces () {
-		List<Piece> l = new ArrayList<Piece>();
-		for (Piece p : myPieceData.getData()) {
-
-			// TODO: FOR TESTING ONLY
-			if (p.getStats().getValue("health") <= 0) {
-				p.markForRemoval();
-			}
-
-			if (p.shouldRemove()) {
-				l.add(p);
-			}
-		}
-		return l;
-	}
-
-	/**
 	 * Returns all pieces that belong to a given player
 	 * 
 	 * @param playerId - ID of player
@@ -248,4 +227,24 @@ public class GUIGrid extends SuperGrid implements Observer {
 		myPane.setOnMouseClicked(handler);
 		myPane.setOnMouseDragged(handler);
 	}
+    
+    public void addPieceToTile (Piece pieceType, Point2D loc) {
+        SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
+        myTile.addPieceImage(pieceType.getImageView());
+
+    }
+    public void addPatchToTile (Patch patchType, Point2D loc) {
+        SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
+        myTile.addPatchImage(patchType.getImageView());
+    }
+
+    public void repopulateGrid(){
+    	this.initGridTiles(this.myShape);
+    	for(Patch p:myPatchData.getData()){
+    		this.addPatchToTile(p, p.getLoc());
+    	}
+    	for(Piece p:myPieceData.getData()){
+    		this.addPieceToTile(p, p.getLoc());
+    	}
+    }
 }
