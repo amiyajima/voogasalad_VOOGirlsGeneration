@@ -47,7 +47,7 @@ public abstract class SuperTile extends Group {
 
 	protected void makeShapeTile(double size, Point2D loc){
 		myShape=makeShape(size);
-		makeHighlight(size);
+		makeHighlight(size, Color.web("#0000FF", 0.3));
 		setCheckeredColor((int)loc.getX(),(int)loc.getY(),myShape);
 		myCoordinates=calculateCoord(size,loc);
 		myImageCoord=calculateImageCoord(size,loc);
@@ -62,9 +62,11 @@ public abstract class SuperTile extends Group {
 	}
 
 
-	public void makeHighlight(double size) {
+	public void makeHighlight(double size, Color c) {
 		myHighlight=makeShape(size);
-		myHighlight.setFill(Color.web("#0000FF", 0.3));
+//		myHighlight.setFill(Color.web("#0000FF", 0.3));
+	        myHighlight.setFill(c);
+	        System.out.println("highlight");
 		myHighlight.setVisible(false);
 	};
 	

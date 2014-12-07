@@ -58,6 +58,9 @@ public class ViewController {
 	private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
+	
+	public static final Color SELECTION_COLOR = Color.web("#0000FF", 0.3);
+//	public static final String TEST_COLOR = "#0000FF";
 
 	private ResourceBundle myLanguages;
 	private Stage myStage;
@@ -436,10 +439,10 @@ public class ViewController {
 		
 		//highlight the action range.
 		System.out.println(activePiece.getLoc());
-		SuperTile activeTile = myGrid.findClickedTile(activePiece.getLoc());
+		SuperTile activeTile = myGrid.findActiveTile(activePiece.getLoc());
 		
 		activeTile.selectTile();
-		activeTile.makeHighlight(1.0);
+		activeTile.makeHighlight(1.0, SELECTION_COLOR);
 //		myGameGridEffect.highlightActionRange();
 		
 
@@ -511,7 +514,7 @@ public class ViewController {
 		gridState.onClick(myModel.getCurrentLevel().getGrid()
 				.getPiece(location));
 		// myGrid.clearEffect();
-		myGameGridEffect.clearAllEffects(myGrid);
+//		myGameGridEffect.clearAllEffects(myGrid);
 
 		// highlightCurrent(location, Color.BLUE);
 		myGameGridEffect.highlightCurrent(location, Color.BLUE);

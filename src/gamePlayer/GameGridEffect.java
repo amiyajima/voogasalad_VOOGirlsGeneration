@@ -4,6 +4,7 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
 import java.awt.geom.Point2D;
 import authoring_environment.GUIGrid;
+import authoring_environment.SuperTile;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
@@ -16,45 +17,53 @@ public class GameGridEffect {
     GUIGrid myGrid;
     Piece myActivePiece;
     Action myActiveAction;
+    
+    public static final Color ACTION_RANGE_COLOR = Color.web("#FFBF00", 0.3);
      
     public GameGridEffect(ViewController vc){
-        myHighlighter = new Highlighter();
+//        myHighlighter = new Highlighter();
         myViewController = vc;
         myGrid = myViewController.getGrid();
         myActivePiece = myViewController.getActivePiece();
         myActiveAction = myViewController.getActiveAction();
      }
     
-    /**
-     * Return the highlighter used for the grid
-     * @return
-     */
-    public Highlighter getHighlighter(){
-        return myHighlighter;
-    }
+//    /**
+//     * Return the highlighter used for the grid
+//     * @return
+//     */
+//    public Highlighter getHighlighter(){
+//        return myHighlighter;
+//    }
     
     /**
      * Highlight the tiles that represent the possible range of the action
      * selected
      */
-    @FXML
     public void highlightActionRange () {
-
-        clearAllEffects(myGrid);
-        if (myActivePiece != null && myActiveAction != null) {
-
-            myActiveAction.getActionRange(myActivePiece.getLoc())
-                    .forEach(point -> {
-                                 if (point.getX() < myGrid.getRow()       //assuming this method exists
-                                     && point.getY() < myGrid.getCol()    //assuming this method exists
-                                     && point.getX() > 0 && point.getY() > 0) {
-                                     Node n = myGrid.get((int) point.getX(), (int) point.getY()); //assuming this method exists
-//                                      myHighlighter.addDropShadow(n, Color.YELLOW);     
-                                     myHighlighter.highlight(myGrid, point, Color.YELLOW);
-                                 }
-                             });
+//        clearAllEffects(myGrid);
+        if ( (myActivePiece != null) && (myActiveAction !=null)){
+            myActiveAction.getActionRange(myActivePiece.getLoc()).forEach(point -> {
+                SuperTile activeTile = myGrid.findActiveTile(point);
+                activeTile.selectTile();
+                activeTile.makeHighlight(1.0, ACTION_RANGE_COLOR);
+            });
         }
     }
+        
+//        if (myActivePiece != null && myActiveAction != null) {
+//            myActiveAction.getActionRange(myActivePiece.getLoc()).forEach(point -> {
+//                if (point.getX() < myGrid.getRow()       //assuming this method exists
+//                    && point.getY() < myGrid.getCol()    //assuming this method exists
+//                    && point.getX() > 0 && point.getY() > 0) {
+//                    
+//                    Node n = myGrid.get((int) point.getX(), (int) point.getY()); //assuming this method exists
+////                                      myHighlighter.addDropShadow(n, Color.YELLOW);     
+//                                     myHighlighter.highlight(myGrid, point, Color.YELLOW);
+//                                 }
+//                             });
+//        }
+//    }
 
     /**
      * Highlight the effect range of an action if to be applied at a given
@@ -90,13 +99,13 @@ public class GameGridEffect {
         myHighlighter.highlight(myGrid, loc, c);
     }
     
-    /**
-     * Clear all effects in grid
-     * @param grid
-     */
-    public void clearAllEffects(GUIGrid grid){
-        grid.getChildren().forEach(node->node.setEffect(null));
-    }
+//    /**
+//     * Clear all effects in grid
+//     * @param grid
+//     */
+//    public void clearAllEffects(GUIGrid grid){
+//        grid.getChildren().forEach(node->node.setEffect(null));
+//    }
     
     
 }
