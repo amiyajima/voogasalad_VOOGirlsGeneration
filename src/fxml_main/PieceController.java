@@ -64,7 +64,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 					public void handle (MouseEvent e) {
 						GUIGrid grid = myGridReference.getGrid();
 						Point2D coor = grid.calculateClicked(e.getX(), e.getY());
-						grid.removePatch(coor);
+						grid.removePieceAtCoordinate(coor);
 					}
 				};
 				myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
@@ -105,7 +105,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 			public void handle (ActionEvent e) {
 				Consumer<Piece> okLambda = (Piece piece) -> {
 					HBox entryBox = makeCompleteEntryBox(piece);
-
+					
 					HBox entryHolderBox = myEntryMap.get(entry);
 					entryHolderBox.getChildren().clear();
 					entryHolderBox.getChildren().add(entryBox);

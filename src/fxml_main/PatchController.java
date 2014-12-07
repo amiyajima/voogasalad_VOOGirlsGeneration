@@ -59,7 +59,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 					public void handle (MouseEvent e) {
 						GUIGrid grid = myGridReference.getGrid(); 
 						Point2D coor = grid.calculateClicked(e.getX(), e.getY());
-						grid.removePatch(coor);
+						grid.removePatchAtCoordinate(coor);
 					}
 				};
 				myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
@@ -94,7 +94,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 	}
 
 	@Override
-	protected void initEntryEditBtn (Patch entry, Button editBtn) {
+	protected void initEntryEditBtn(Patch entry, Button editBtn) {
 		editBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent e) {

@@ -9,7 +9,6 @@ import javafx.scene.control.Separator;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-
 /**
  * 
  * 
@@ -22,8 +21,6 @@ public abstract class GridComponentAbstCtrl<T> {
     protected ScrollPane myPropertiesSPane;
     protected GUIGridReference myGridReference;
     protected Map<T, HBox> myEntryMap;
-//    protected HashMap<HBox, HBox> myIndivEntMap;
-
 
     protected GridComponentAbstCtrl (VBox vbox, ScrollPane propertiesSPane,
                                      GUIGridReference gridRef) {
@@ -31,7 +28,6 @@ public abstract class GridComponentAbstCtrl<T> {
         myPropertiesSPane = propertiesSPane;
         myGridReference = gridRef;
         myEntryMap = new HashMap<T, HBox>();
-//        myIndivEntMap = new HashMap<HBox, HBox>();
         initGlobalControls();
     }
 
@@ -78,7 +74,7 @@ public abstract class GridComponentAbstCtrl<T> {
         completeEntryBox.getChildren().addAll(entryCtrls, entryBox);
         return completeEntryBox;
     }
-
+    
     protected HBox initEntryControls (T entry) {
         HBox btnBox = new HBox();
         Button editBtn = new Button("Edit");

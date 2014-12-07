@@ -1,7 +1,6 @@
 package authoring_environment;
 
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Double;
 
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
@@ -29,7 +28,7 @@ public class HexagonTile extends SuperTile{
 	}
 
 	@Override
-	protected Point2D calculateCoord(double size, Point2D loc) {
+	protected Point2D calculatePixelLocation(double size, Point2D loc) {
 		double radius = size/Math.sqrt(3);
 		double xCoord = loc.getY()*1.5*radius + radius;
 		double yCoord = loc.getX()*size + (loc.getY()%2)*0.5*size+size/2;
@@ -38,11 +37,11 @@ public class HexagonTile extends SuperTile{
 	}
 
 	@Override
-	protected Point2D calculateImageCoord(double size, Point2D loc) {
-		Point2D layoutCoord=calculateCoord(size,loc);
+	protected Point2D calculateImageLocation(double size, Point2D loc) {
+		Point2D layoutCoord = calculatePixelLocation(size,loc);
 		double radius = size/Math.sqrt(3);
-		double imageX=layoutCoord.getX()-radius/2;
-		double imageY=layoutCoord.getY()-size/4;
+		double imageX = layoutCoord.getX()-radius/2;
+		double imageY = layoutCoord.getY()-size/4;
 		return new Point2D.Double(imageX,imageY);
 	}
 
@@ -50,5 +49,4 @@ public class HexagonTile extends SuperTile{
 	protected double calculateImageSize(double size) {
 		return size/2;
 	}
-
 }
