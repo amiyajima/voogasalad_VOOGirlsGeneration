@@ -54,9 +54,8 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 		Consumer<Level> okLambda = (Level level) -> {
 			addEntry(level);
 			myLevelData.add(level);
-			GUIGrid grid = myGridReference.getGrid();
-			myPieceTypes.addObserver(grid);
-			myPatchTypes.addObserver(grid);
+			myPieceTypes.addObserver(level.getGrid());
+			myPatchTypes.addObserver(level.getGrid());
 			setAndDisplayGrid(level);
 			};
 		super.myPropertiesSPane.setContent(new LevelEditor(okLambda));

@@ -86,13 +86,13 @@ public class PatchData implements AuthoringData<Patch> {
 	
 	public List<Point2D> replace(Patch patchType) {
     	List<Point2D> pointsToReplace = new ArrayList<Point2D>();
-    	System.out.println(pointsToReplace.toString());
     	myPatches.forEach(patch -> {
     		if (patch.getID().equals(patchType.getID())) {
     			replace(patch, patchType);
     			pointsToReplace.add(patch.getLoc());
     		}
     	});
+    	System.out.println(pointsToReplace.toString());
     	return pointsToReplace;
     }
 }
