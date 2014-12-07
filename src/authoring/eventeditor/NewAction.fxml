@@ -4,19 +4,18 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="vbox" stylesheets="@../../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="vbox" stylesheets="@../../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="authoring.eventeditor.NewActionController">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+      <HBox prefHeight="47.0" prefWidth="600.0" styleClass="hbox">
          <children>
-            <Label text="Action Type" />
-            <ChoiceBox prefWidth="150.0" />
+            <Label text="Condition type" />
+            <ChoiceBox fx:id="conditionChoiceBox" />
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
-         <children>
-            <Button mnemonicParsing="false" text="Done" />
-            <Button mnemonicParsing="false" text="Cancel" />
-         </children>
-      </HBox>
+      <ScrollPane fx:id="editorScrollPane">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" />
+         </content>
+      </ScrollPane>
    </children>
 </VBox>
