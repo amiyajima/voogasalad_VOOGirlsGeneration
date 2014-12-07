@@ -1,7 +1,12 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Level;
+import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Piece;
+import gameengine.player.Player;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Consumer;
 
 import javafx.event.ActionEvent;
@@ -12,6 +17,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import authoring.data.EventsDataContainer;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
@@ -59,7 +65,13 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 			myPatchTypes.addObserver(level.getGrid());
 			setAndDisplayGrid(level);
 			};
-		super.myPropertiesSPane.setContent(new LevelEditor(okLambda));
+			
+		List<Piece> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
+		List<Patch> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
+		List<Player> playersRO = null;
+
+		EventsDataContainer wrapper = new EventsDataContainer(piecesRO, patchesRO, playersRO);
+		super.myPropertiesSPane.setContent(new LevelEditor(okLambda, wrapper));
 	}
 	
 	private void setAndDisplayGrid(Level level) {
@@ -121,7 +133,13 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 					setAndDisplayGrid(level);
 
 				};
-				myPropertiesSPane.setContent(new LevelEditor(okLambda, entry));
+				List<Piece> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
+				List<Patch> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
+				List<Player> playersRO = null;
+
+				EventsDataContainer wrapper = new EventsDataContainer(piecesRO, patchesRO, playersRO);
+				
+				myPropertiesSPane.setContent(new LevelEditor(okLambda, entry, wrapper));
 				
 			}
 			

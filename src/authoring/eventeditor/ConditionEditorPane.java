@@ -5,9 +5,12 @@ import gamedata.events.conditions.ConditionEquals;
 import gamedata.gamecomponents.Constant;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Piece;
 
+import java.util.List;
 import java.util.function.Consumer;
 
+import authoring.data.EventsDataContainer;
 import authoring_environment.UIspecs;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -45,9 +48,11 @@ public class ConditionEditorPane extends Pane{
 
 	private Consumer<Condition> myDoneLambda;
 	private Condition myCondition;
+	private EventsDataContainer myData;
 
-	public ConditionEditorPane(Consumer<Condition> doneLambda){
+	public ConditionEditorPane(Consumer<Condition> doneLambda, EventsDataContainer data){
 		myDoneLambda = doneLambda;
+		myData = data;
 		initialize();
 	}
 
@@ -137,14 +142,18 @@ public class ConditionEditorPane extends Pane{
 		 switch(type){
 			 case "Piece": 
 			 {
+				 List<Piece> pieceTypes = myData.getPieceTypes();
+				 refName.getItems().addAll(pieceTypes);
 				 break;
 			 }
 			 case "Patch":
 			 {
+				 refName.getItems().addAll();
 				 break;  
 			 }
 			 case "Player":
 			 {
+				 refName.getItems().addAll();
 				 break;
 			 }
 			 case "Constant": 
