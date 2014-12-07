@@ -57,7 +57,6 @@ public class ViewController {
 	private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
-	private static final String DEFAULT_HIGHLIGHT_COLOR = "#ff0000";
 
 	private ResourceBundle myLanguages;
 	private Stage myStage;
@@ -391,9 +390,6 @@ public class ViewController {
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
-		SuperTile activeTile = myGrid.findClickedTile(activePiece.getLoc());
-		activeTile.selectTile(DEFAULT_HIGHLIGHT_COLOR);
-
 	        myGameGridEffect.highlightActionRange();
 		setGridState(new ApplyState(this));
 	}
