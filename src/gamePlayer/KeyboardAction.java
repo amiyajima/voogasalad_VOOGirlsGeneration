@@ -63,8 +63,7 @@ public class KeyboardAction {
 
                 // Do action here
                 if (key.getCode() == KeyCode.F) {
-                    // vc.performActionKeyboard(myCurrentLocation);
-                    // performAction(myActions.get(myActionIndex));
+                    vc.bindAction(myCurrentAction);
                     System.out.println("Selected action with key");
                 }
 

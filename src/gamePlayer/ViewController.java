@@ -76,7 +76,6 @@ public class ViewController {
 	private Boolean keyControlOn;
 	private KeyboardAction myKeyboardAction;
 	private KeyboardMovement myKeyboardMovement;
-	// private MouseController myMouseController;
 
 	private Piece activePiece;
 	private Action activeAction;
@@ -400,6 +399,13 @@ public class ViewController {
 		setActiveAction(action);
 	        myGameGridEffect.highlightActionRange();
 		setGridState(new ApplyState(this));
+		if (keyControlOn){
+		    
+		    //after i click action button, i need to go back to KeyboardMovement
+		    myKeyboardAction = null;
+		    myKeyboardMovement = new KeyboardMovement();
+		    myKeyboardMovement.setMovementKeyControl(this, myGridPane, myModel);
+		}
 	}
 
 	private void setOnClick() {
