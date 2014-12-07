@@ -42,11 +42,9 @@ public class AuthoringController implements Initializable {
 	private ScrollPane myGridSPane;
 	
 	//Menu items
-	@FXML
-	private MenuItem events;
 	
 	@FXML
-        private MenuItem actonsLogicChart;
+    private MenuItem actonsLogicChart;
 	
 	private GUIGridReference myGridReference;
 	private PieceController myPieceController;
@@ -68,24 +66,6 @@ public class AuthoringController implements Initializable {
 	    		myPatchTypes);
 	    myLevelController = new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
 	    		myGridReference, myLevelData, myPieceTypes, myPatchTypes);
-	}
-	
-	@FXML
-	//TODO: make the List<Event> storing all Events an input to this method!
-	private void showEventsEditorWindow() throws IOException{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/authoring/eventeditor/EventEditor.fxml"));
-		Parent root = loader.load();
-
-		Stage eventEditorStage  = new Stage();
-		eventEditorStage.setTitle("Events Editor");
-		eventEditorStage.initModality(Modality.WINDOW_MODAL);
-		Scene scene = new Scene(root);
-		eventEditorStage.setScene(scene);
-
-		EventEditorController controller = loader.getController();
-
-		eventEditorStage.showAndWait();
 	}
 	
 	@FXML
