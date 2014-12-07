@@ -27,8 +27,8 @@ import authoring_environment.GUIGrid;
 
 public abstract class Player {
 
-    private int myNumMovesPlayed;
-    private int myID;
+    protected int myNumMovesPlayed;
+    protected int myID;
 
     /**
      * Default constructor
@@ -62,7 +62,7 @@ public abstract class Player {
         return null;
     }
 
-    public abstract void startTurn ();
+    public abstract void startTurn (Level l);
 
     /**
      * Resets number of moves played for the player
