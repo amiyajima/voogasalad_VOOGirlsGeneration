@@ -14,6 +14,7 @@ public class SuperGrid {
 	protected int myHeight;
 	protected int myWidth;
 	protected double myTileSize;
+	protected String myShape;
 
 	protected Pane myPane;
 	protected List<List<SuperTile>> myGrid;
@@ -27,6 +28,7 @@ public class SuperGrid {
 		myHeight = height;
 		myWidth = width;
 		myTileSize = tileSize;
+		myShape = shape;
 		initGridTiles(shape);
 	}
 

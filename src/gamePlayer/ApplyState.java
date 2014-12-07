@@ -71,7 +71,7 @@ public class ApplyState implements IGridState {
 			piece.setLoc(myController.getCurrentClick());
 		}
 		myController.getActiveAction().doBehavior(actor, piece);
-
+		myController.getGrid().repopulateGrid();
 		myGameGridEffect.clearAllPieceHighlights();
 		myGameGridEffect.clearAllActionHighlights();
 		myController.clearActions();

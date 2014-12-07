@@ -80,6 +80,16 @@ public class GUIGrid extends SuperGrid implements Observer {
         SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
         myTile.addPatchImage(clone.getImageView());
     }
+    
+    public void addPieceToTile (Piece pieceType, Point2D loc) {
+        SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
+        myTile.addPieceImage(pieceType.getImageView());
+
+    }
+    public void addPatchToTile (Patch patchType, Point2D loc) {
+        SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
+        myTile.addPatchImage(patchType.getImageView());
+    }
 
     private void replacePiece (Piece pieceType) {
         List<Point2D> pointsToReplace = myPieceData.replace(pieceType);
@@ -140,6 +150,15 @@ public class GUIGrid extends SuperGrid implements Observer {
 
     }
 
+    public void repopulateGrid(){
+    	this.initGridTiles(this.myShape);
+    	for(Patch p:myPatchData.getData()){
+    		this.addPatchToTile(p, p.getLoc());
+    	}
+    	for(Piece p:myPieceData.getData()){
+    		this.addPieceToTile(p, p.getLoc());
+    	}
+    }
     // public PieceData getPieces () {
     // return myPieceData;
     // }

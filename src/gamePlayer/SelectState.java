@@ -3,28 +3,32 @@ package gamePlayer;
 import gamedata.gamecomponents.Piece;
 
 /**
- * The class representing the state of the grid before any piece on
- * the grid is selected
+ * The class representing the state of the grid before any piece on the grid is
+ * selected
  *
  */
 public class SelectState implements IGridState {
-    private ViewController myController;
-    //private MouseController myMouseController;
+	private ViewController myController;
 
-    public SelectState (ViewController controller) {
-        System.out.println("At Select State");
-        myController = controller;
-        myController.getGridPane().setOnMouseEntered(event->{myController.changeCursor(myController.CURSOR_GLOVE_TEST);;});    
-    
-    }
-    
+	// private MouseController myMouseController;
 
-    @Override
-    public void onClick (Piece piece) {
-    	System.out.println("Piece is at X:"+piece.getLoc().getX()+" Y:"+piece.getLoc().getY());
-        myController.updateStats(piece);
-        myController.setActivePiece(piece);
-        myController.updateActions(piece);
-        myController.highlightSelected(piece);
-    }
+	public SelectState(ViewController controller) {
+		System.out.println("At Select State");
+		myController = controller;
+		myController.getGridPane().setOnMouseEntered(event -> {
+			myController.changeCursor(myController.CURSOR_GLOVE_TEST);
+			;
+		});
+
+	}
+
+	@Override
+	public void onClick(Piece piece) {
+		if (piece != null) {
+			myController.updateStats(piece);
+			myController.setActivePiece(piece);
+			myController.updateActions(piece);
+			myController.highlightSelected(piece);
+		}
+	}
 }
