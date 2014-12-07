@@ -46,10 +46,9 @@ public class ApplyState implements IGridState {
 	@Override
 	public void onClick(Piece piece) {
 		Piece actor = myController.getActivePiece();
-		if (piece == null) {
+		if (piece == null && myController.getActiveAction().toString().equals("Movement")) {
 			piece = new Piece(actor,myController.getCurrentClick());
 			piece.setLoc(myController.getCurrentClick());
-			//TODO: Add in dummy piece check 
 		}
 		myController.getActiveAction().doBehavior(actor, piece);
 		myController.getGrid().repopulateGrid();
@@ -60,7 +59,7 @@ public class ApplyState implements IGridState {
 		myController.changeCursor(myController.CURSOR_GLOVE_TEST);
 		myController.setActivePiece(null);
 		myController.setActiveAction(null);
-		myController.getGame().getCurrentLevel().runGameEvents();
+		myGame.getCurrentLevel().runGameEvents();
 	}
 
 }

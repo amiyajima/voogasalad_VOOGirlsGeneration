@@ -71,6 +71,8 @@ public class GUIGrid extends SuperGrid implements Observer {
 	}
 
 	public void addPiece (Piece pieceType, Point2D loc) {
+		System.out.println(myPieceData.getData().size());
+		
 		Piece clone = new Piece(pieceType, loc);
 		myPieceData.add(clone);
 		SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
@@ -79,6 +81,8 @@ public class GUIGrid extends SuperGrid implements Observer {
 	}
 
 	public void addPatch (Patch patchType, Point2D loc) {
+		System.out.println(myPatchData.getData().size());
+		
 		Patch clone = new Patch(patchType, loc);
 		myPatchData.add(clone);
 		SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
@@ -215,7 +219,6 @@ public class GUIGrid extends SuperGrid implements Observer {
 		myPane.setOnMouseClicked(handler);
 		myPane.setOnMouseDragged(handler);
 	}
-
     
     public void addPieceToTile (Piece pieceType, Point2D loc) {
         SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
@@ -236,9 +239,4 @@ public class GUIGrid extends SuperGrid implements Observer {
     		this.addPieceToTile(p, p.getLoc());
     	}
     }
-
-
-
-
-
 }
