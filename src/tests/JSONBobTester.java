@@ -38,7 +38,7 @@ import authoring_environment.SuperGrid;
  */
 public class JSONBobTester {
     private static String DEFAULT_DUVALL = "/resources/images/rcd.png";
-    private static String DEFAULT_BUNNY = "/resources/images/bbybunny.jpeg";
+    private static String DEFAULT_BUNNY = "/resources/images/Rica.png";
     private static String DEFAULT_LAND = "/resources/images/Land.jpeg";
 
     public JSONBobTester () {
