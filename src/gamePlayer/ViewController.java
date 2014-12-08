@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -152,7 +153,8 @@ public class ViewController {
         private CheckBox KoreanCheck;
 	@FXML
         private CheckBox ChineseCheck;
-	
+	@FXML
+	private Button clearHighScores;
 
 	private ScrollPane myGridPane;
 
@@ -428,7 +430,7 @@ public class ViewController {
 		backgroundMusicOn = true;
 		clickSoundOn = true;
 		myGameGridEffect = new GameGridEffect(this);
-		
+		clearHighScores.setOnMouseClicked(event->handleClearHighScores());
 //		addLanguages();
 	}
 	
@@ -770,7 +772,8 @@ public class ViewController {
 	    if (myModel.getCurrentLevel().getGameWon() || tempMoveCount > 0) {
 	        // TODO assuming that the most recent currentPlayer won
 	        String highScorer = "Bob";
-	        int highScore = 10000;
+	        Random randy = new Random();
+	        int highScore = randy.nextInt(100000);
 	        for (Player p : myModel.getPlayers()) {
 	            /*
 	            if (p.getScore() > highScore) {
@@ -788,10 +791,18 @@ public class ViewController {
 		gridState = state;
 	}
 
+	/**
+	 * Changes the label that displays who's turn it is
+	 */
 	void setPlayerTurnDisplay() {
 		playerTurn.setText("Player " + myCurrentPlayer.getID() + "'s Move");
 	}
 	
+	/**
+	 * Pops up a window for the user to enter their nickname to go down in history
+	 * @param highScorer
+	 * @param highScore
+	 */
 	private void showHighScoreInfo(String highScorer, int highScore) {
 	    final Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
@@ -821,6 +832,12 @@ public class ViewController {
             dialog.show();
 	}
 	
+	/**
+	 * Adds an entry to the high scores file while also adding it to the view
+	 * @param stage
+	 * @param nickname
+	 * @param score
+	 */
 	private void addEntryToHallOfFame(Stage stage, String nickname, String score) {
 	    try {
 	        File myScores2 = new File(getClass().getResource("/resources/highscore/highscore.txt").getPath());
@@ -846,7 +863,6 @@ public class ViewController {
                 currentScore.add(nickname);
                 currentScore.add(score);
                 highScores.add(currentScore);
-	        /*
 	        Collections.sort(highScores, new Comparator<List<String>> () {
 	            @Override
 	            public int compare(List<String> a, List<String> b) {
@@ -854,9 +870,8 @@ public class ViewController {
 	            }
 
 	        });
-	        */
 	        for (List<String> each : highScores) {
-	            myScoreBoard.getChildren().add(1, new Label(each.get(0) + ": " + each.get(1)));
+	            scores.getChildren().add(new Text(each.get(0) + ": " + each.get(1)));
 	        }
 	        stage.setScene(scoreScene);
 	        stage.show();
@@ -868,6 +883,21 @@ public class ViewController {
                 System.out.println("Write failed");
             }
 
+	}
+	
+	/**
+	 * Clears the file that stores high scores and the display of high scores
+	 */
+	private void handleClearHighScores() {
+            try {
+                File myScores = new File(getClass().getResource("/resources/highscore/highscore.txt").getPath());
+                BufferedWriter writer = new BufferedWriter(new FileWriter(myScores));
+                writer.write("");
+            }
+            catch (IOException io) {
+                System.out.println("IO exception while clearing high scores");
+            }
+            scores.getChildren().clear();
 	}
 
 	/**
