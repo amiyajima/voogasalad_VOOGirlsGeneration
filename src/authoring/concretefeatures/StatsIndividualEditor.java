@@ -1,11 +1,10 @@
 package authoring.concretefeatures;
 
 import gamedata.stats.Stats;
-
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -69,7 +68,7 @@ public class StatsIndividualEditor extends PopupWindow {
         mainVBox.setId("vbox-main");
 
         // creating label and textfield for stats of the piece to be edited
-        Set<String> statNames = myStats.getStatNames();
+        Set<String> statNames = new HashSet(myStats.getStatNames());
         for (String name : statNames) {
             HBox statsHBox = initStatsEditorBox(name);
             mainVBox.getChildren().add(statsHBox);

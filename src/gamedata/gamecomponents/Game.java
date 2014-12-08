@@ -11,7 +11,7 @@ import java.util.Map;
  * The play method in this class is called in every iteration of the game loop.
  *
  */
-public class Game {
+public class Game implements IChangeGameState{
 
 	/**
 	 * Contains player in order of their turns
@@ -104,14 +104,6 @@ public class Game {
 		}
 	}
 
-	public void nextPlayer() {
-		int next = myPlayers.indexOf(myCurrentPlayer) + 1;
-		if (next >= myPlayers.size()) {
-			resetPlayer();
-		} else {
-			myCurrentPlayer = myPlayers.get(next);
-		}
-	}
 
 	/**
 	 * Resets the active player to be the first player who has played
@@ -188,4 +180,27 @@ public class Game {
 		myGameWon = gameStatus;
 	}
 
+	/**
+	 * Used by global action. 
+	 * @param name
+	 */
+	public void changeLevel(String name){
+		for (Level level :myLevels) { 
+			if (level.getId().equals(name)) { 
+				myCurrentLevel = level; 
+			}
+		}
+	}
+	
+	/**
+	 * Used by global action.
+	 */
+	public void endTurn() {
+		int next = myPlayers.indexOf(myCurrentPlayer) + 1;
+		if (next >= myPlayers.size()) {
+			resetPlayer();
+		} else {
+			myCurrentPlayer = myPlayers.get(next);
+		}
+	}
 }
