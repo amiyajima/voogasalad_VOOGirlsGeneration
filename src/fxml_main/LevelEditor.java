@@ -70,7 +70,7 @@ public class LevelEditor extends VBox {
         myId = level.getId();
         myGridRows = myGrid.getRow();
         myGridCols = myGrid.getCol();
-        myTileHeight = myGrid.getTileSize();
+        myTileHeight = myGrid.getTileHeight();
         myLevel = level;
         myEvents = (ObservableList<Event>) level.getEvents();
         myData = data;

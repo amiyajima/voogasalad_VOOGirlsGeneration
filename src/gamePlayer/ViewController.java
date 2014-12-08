@@ -467,8 +467,8 @@ public class ViewController {
 	 * @return a Point2D representing tile coordinates
 	 */
 	public Point2D findPosition(double x, double y) {
-		double patchHeight = myGrid.getTileSize();
-		double patchWidth = myGrid.getTileSize();
+		double patchHeight = myGrid.getTileHeight();
+		double patchWidth = myGrid.getTileHeight();
 		int xCor = (int) (x / patchWidth);
 		int yCor = (int) (y / patchHeight);
 		currentClick = new Point2D.Double(xCor, yCor);

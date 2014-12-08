@@ -16,7 +16,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import authoring.data.EventsDataContainer;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
