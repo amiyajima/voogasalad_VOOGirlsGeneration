@@ -69,28 +69,33 @@ public class AuthoringController implements Initializable {
 
 	// Authoring Data
 	private GameAuthoringData myTotalData;
+	private ActionData myActionData;
+	private LevelData myLevelData;
+	private PieceTypeData myPieceTypes;
+	private PatchTypeData myPatchTypes;
 	private GamePropertiesData myGamePropertiesData;
+
 
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-		ActionData actionData = new ActionData();
-		LevelData levelData = new LevelData();
-		PieceTypeData pieceTypes = new PieceTypeData();
-		PatchTypeData patchTypes = new PatchTypeData();
+		myActionData = new ActionData();
+		myLevelData = new LevelData();
+		myPieceTypes = new PieceTypeData();
+		myPatchTypes = new PatchTypeData();
 		myGamePropertiesData = new GamePropertiesData();
 
-		myTotalData = new GameAuthoringData(levelData, pieceTypes, patchTypes,
-				actionData, myGamePropertiesData);
+		myTotalData = new GameAuthoringData(myLevelData, myPieceTypes, myPatchTypes,
+				myActionData, myGamePropertiesData);
 		GUIGridReference myGridReference = new GUIGridReference();
 
 		myPieceController = new PieceController(myPiecesVBox, myPropertiesSPane, myGridReference, 
-				pieceTypes, actionData, myGamePropertiesData);
+				myPieceTypes, myActionData, myGamePropertiesData);
 		myPatchController = new PatchController(myPatchesVBox, myPropertiesSPane, myGridReference,
-				patchTypes);
+				myPatchTypes);
 		myLevelController = new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
-				myGridReference, levelData, pieceTypes, patchTypes, myGamePropertiesData);
+				myGridReference, myLevelData, myPieceTypes, myPatchTypes, myGamePropertiesData);
 
-		myActionController = new ActionController(myActionsVBox, myPropertiesSPane, myGridReference, actionData);
+		myActionController = new ActionController(myActionsVBox, myPropertiesSPane, myGridReference, myActionData);
 	}
 
 	@FXML
