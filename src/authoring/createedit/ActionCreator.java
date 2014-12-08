@@ -24,6 +24,7 @@ import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
 import authoring.concretefeatures.RangeEditor;
 import authoring.concretefeatures.SingleMultiplierBox;
+import authoring.concretefeatures.StatsOperationBox;
 import authoring.data.ActionData;
 
 
@@ -127,7 +128,7 @@ public class ActionCreator extends PopupWindow {
                                                     myEffectRange, myStatsLogics, myConclusion));
                 System.out.println("Created Action");
                 System.out.println(myActionData.getActionIDs().get(0));
-                // close(); // close window once action is made
+                close(); // close window once action is made
             }
         });
 
@@ -204,9 +205,24 @@ public class ActionCreator extends PopupWindow {
                 SingleMultiplierBox operation = new SingleMultiplierBox();
                 operation.setSpacing(5);
                 operationsList.add(operation);
-                operationsBox.getChildren().add(operation);
+                Button delStatBtn = makeDeleteButton(operationsBox, operation);
+                operationsBox.getChildren().addAll(operation, delStatBtn);
             }
         });
+    }
+    
+    private Button makeDeleteButton (VBox operationsBox, SingleMultiplierBox operation) {
+        Button delBtn = new Button("-");
+        delBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                System.out.println("ActionOperationEditor: delete button pressed");
+                operationsList.remove(operation);
+                operationsBox.getChildren().remove(operation);
+                operationsBox.getChildren().remove(delBtn);
+            }
+        });
+        return delBtn;
     }
 
     protected void setAttackRange (List<Point2D> attackRange) {

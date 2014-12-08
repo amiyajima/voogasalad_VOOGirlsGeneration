@@ -11,12 +11,11 @@ public class ConditionEquals extends Condition{
 	protected String myStat;
 	protected Double myConstant;
 
-	//TODO: There might be an error with passing myDescription up the pipeline
-	public ConditionEquals(String description, IHasStats ref1, String stat1, Double constant){
+	public ConditionEquals(String description, IHasStats ref1, String stat1, String constant){
 		super(description);
 		myReference = ref1;
 		myStat = stat1;
-		myConstant = constant;
+		myConstant = Double.parseDouble(constant);
 	}
 
 	@Override

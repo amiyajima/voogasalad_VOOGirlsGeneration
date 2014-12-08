@@ -21,6 +21,7 @@ import authoring.data.ActionData;
 
 
 /**
+ * DEPRICATED BECASUE ITS JUST A REDO OF ACTIONCREATOR
  * Combines SingleMultiplierBoxes to allow definition of a stat operation.
  * Used to define actions
  * 
