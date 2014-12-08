@@ -1,6 +1,7 @@
 package gamedata.JSON;
 
 import gamedata.action.Action;
+import gamedata.events.Event;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
@@ -15,6 +16,7 @@ import gamedata.wrappers.PatchData;
 import gamedata.wrappers.PieceData;
 import gamedata.wrappers.PlayerDataIndividual;
 import gameengine.player.Player;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -22,8 +24,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import authoring_environment.GUIGrid;
 import authoring_environment.SuperGrid;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -128,9 +132,7 @@ public class JSONManager {
     }
 
     public void registerTypeAdapters (GsonBuilder builder) {
-        builder.registerTypeAdapter(Goal.class, new GenericTypeAdapter<Goal>("gamedata.goals"));
-        builder.registerTypeAdapter(Rule.class, new GenericTypeAdapter<Rule>("gamedata.rules"));
-        builder.registerTypeAdapter(Action.class, new GenericTypeAdapter<Action>("gamedata.action"));
+        builder.registerTypeAdapter(Event.class, new GenericTypeAdapter<Event>("gamedata.events"));
     }
 
 }
