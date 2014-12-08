@@ -4,11 +4,9 @@ import gamedata.events.StatComparison;
 import gamedata.gamecomponents.IHasStats;
 
 public class StatEquals extends StatComparison{
-
-	public static final String description = "EQUALS";
 	
-	public StatEquals(String description, IHasStats ref1, String stat1, String constant){
-		super(description, ref1, stat1, constant);
+	public StatEquals(IHasStats ref1, String stat1, String constant){
+		super(String.format("IF %s %s = %s", ref1, stat1, constant), ref1, stat1, constant);
 	}
 
 	/**
@@ -20,7 +18,7 @@ public class StatEquals extends StatComparison{
 	}
 
 	@Override
-	protected boolean comparison(IHasStats source) {
+	protected boolean compare(IHasStats source) {
 		return myConstant.equals(source.getStats().getValue(myStat));
 	}
 

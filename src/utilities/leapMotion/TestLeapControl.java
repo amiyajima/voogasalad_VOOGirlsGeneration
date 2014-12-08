@@ -9,9 +9,8 @@ import com.leapmotion.leap.Controller;
 public class TestLeapControl extends Application{
     
     public static void main(String[] args){
-  
+
        launch();
-        
     }
 
     @Override
