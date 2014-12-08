@@ -1,7 +1,6 @@
 package authoring.data;
 
 import gamedata.gamecomponents.Game;
-import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
 import gamedata.goals.Goal;
 import gamedata.rules.Rule;
@@ -34,7 +33,7 @@ public class GameCreator {
         for (AuthoringLevel al : myAuthoringLevels) {
             myLevels.add(convertAuthoringToLevel(al));
         }
-        myGame = new Game(myLevels, numPlayers);
+        myGame = new Game(numPlayers, myLevels);
         return myGame;
     }
     

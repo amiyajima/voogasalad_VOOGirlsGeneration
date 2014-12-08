@@ -6,7 +6,6 @@ import gamedata.events.globalaction.CreatePiece;
 import gamedata.events.globalaction.DeletePiece;
 import gamedata.events.globalaction.LevelChangeGlobalAction;
 import gamedata.events.globalaction.SwitchPlayerGlobalAction;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
-
 import authoring.data.EventsDataWrapper;
 import utilities.ClassGrabber;
 import javafx.fxml.FXML;
@@ -95,7 +93,7 @@ public class NewActionController implements Initializable{
 			editorScrollPane.setContent(new ActionEditorPane(myDoneLambda, myData));
 		}
 		else{
-			editorScrollPane.setContent(new ActionEditorPane(myDoneLambda, myGlobalAction));
+			editorScrollPane.setContent(new ActionEditorPane(myDoneLambda, myData));
 		}
 	}
 
