@@ -78,16 +78,14 @@ public class AuthoringController implements Initializable {
 	
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-		ActionData actionData = null;
-		LevelData levelData = null;
-		PieceTypeData pieceTypes = null;
-		PatchTypeData patchTypes = null;
-		myGamePropertiesData = null;
+		ActionData actionData = new ActionData();
+		LevelData levelData = new LevelData();
+		PieceTypeData pieceTypes = new PieceTypeData();
+		PatchTypeData patchTypes = new PatchTypeData();
+		myGamePropertiesData = new GamePropertiesData();
 		
-		myTotalData = new GameAuthoringData();
-		myTotalData.initDataPointers(levelData, pieceTypes, patchTypes,
+		myTotalData = new GameAuthoringData(levelData, pieceTypes, patchTypes,
 				actionData, myGamePropertiesData);
-		
 		GUIGridReference myGridReference = new GUIGridReference();
 
 		myPieceController = new PieceController(myPiecesVBox, myPropertiesSPane, myGridReference, 
