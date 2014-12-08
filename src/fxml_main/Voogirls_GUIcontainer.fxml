@@ -35,9 +35,13 @@
               </menus>
             </MenuBar>
          </top>
-         <bottom>
-            <BorderPane fx:id="testauthor" minHeight="100.0" minWidth="100.0" prefHeight="740.0" prefWidth="1024.0" BorderPane.alignment="CENTER" />
-         </bottom>
+         <center>
+            <TabPane prefHeight="0.0" prefWidth="1024.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+              <tabs>
+                <Tab fx:id="testauthor" text="Tab 1" />
+              </tabs>
+            </TabPane>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>

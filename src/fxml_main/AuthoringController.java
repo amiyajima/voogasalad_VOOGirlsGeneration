@@ -2,13 +2,14 @@ package fxml_main;
 
 import gamePlayer.ViewController;
 import gamedata.gamecomponents.Game;
+import gameengine.player.HumanPlayer;
+import gameengine.player.Player;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
-
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import authoring.actionslogic.ActionLogicController;
 import authoring.concretefeatures.StatsTotalEditor;
 import authoring.createedit.GamePropertiesEditor;
@@ -137,6 +142,12 @@ public class AuthoringController implements Initializable {
 	@FXML
 	private void saveGame () {
 		Game game = myTotalData.createGame();
+		Player p1 = new HumanPlayer(1);
+		List<Player> players = new ArrayList<Player>();
+		players.add(p1);
+		game.addPlayers(players);
+		
+		
 		Stage s = new Stage();
 		try {
 			ViewController viewCtrl = new ViewController(s);
