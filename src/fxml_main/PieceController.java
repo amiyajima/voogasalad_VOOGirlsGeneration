@@ -1,8 +1,10 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Piece;
+
 import java.awt.geom.Point2D;
 import java.util.function.Consumer;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -15,7 +17,6 @@ import javafx.scene.layout.VBox;
 import authoring.data.ActionData;
 import authoring.data.PieceTypeData;
 import authoring_environment.GUIGrid;
-
 
 public class PieceController extends GridComponentAbstCtrl<Piece> {
 

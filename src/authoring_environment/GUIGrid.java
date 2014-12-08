@@ -352,11 +352,11 @@ public class GUIGrid extends SuperGrid implements Observer{
 	public void paneSetOnMousePressed (EventHandler<MouseEvent> handler) {
 		myPane.setOnMousePressed(handler);
 	}
-
+	
 	public void paneSetOnMouseDragged (EventHandler<MouseEvent> handler) {
 		myPane.setOnMouseDragged(handler);
 	}
-
+	
 	public void runEvent(BiConsumer<List<IHasStats>, GUIGrid> eventFunc){
 		List<IHasStats> allObjects = new ArrayList<>();
 		allObjects.addAll(myPieceData.getData());
