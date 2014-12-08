@@ -16,6 +16,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import authoring.data.ActionData;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
@@ -28,18 +29,14 @@ import authoring.data.PieceTypeData;
  */
 public class ActionController extends GridComponentAbstCtrl<Action> {
     private ScrollPane myGridSPane;
-    private LevelData myLevelData;
-    private PieceTypeData myPieceTypes;
-    private PatchTypeData myPatchTypes;
+    private ActionData myActionData;
 
-    protected ActionController (VBox vbox, ScrollPane propertiesSPane,
-                                ScrollPane gridSPane, GUIGridReference gridRef, LevelData levels,
-                                PieceTypeData pieceTypes, PatchTypeData patchTypes) {
+    protected ActionController (VBox vbox,
+                                ScrollPane propertiesSPane,
+                                GUIGridReference gridRef,
+                                ActionData actions) {
         super(vbox, propertiesSPane, gridRef);
-        myGridSPane = gridSPane;
-        myLevelData = levels;
-        myPieceTypes = pieceTypes;
-        myPatchTypes = patchTypes;
+        myActionData = actions;
     }
 
     @Override
@@ -55,27 +52,11 @@ public class ActionController extends GridComponentAbstCtrl<Action> {
     private void globalNewBtnOnClickAction () {
         // TODO: Need to not hard-code square, have it passed through the constructor
         // as maybe a gridshapeproperty (new class?)
-        Consumer<Level> okLambda = (Level level) -> {
-
-            addEntry(level);
-            myLevelData.add(level);
-            myPieceTypes.addObserver(level.getGrid());
-            myPatchTypes.addObserver(level.getGrid());
-            setAndDisplayGrid(level);
+        Consumer<Action> okLambda = (Action action) -> {
+            globalNewBtnOnClickAction();
         };
 
-        List<Piece> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
-        List<Patch> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
-        List<Player> playersRO = null;
-
-        EventsDataContainer wrapper = new EventsDataContainer(piecesRO, patchesRO, playersRO);
-        super.myPropertiesSPane.setContent(new LevelEditor(okLambda, wrapper));
-    }
-
-    private void setAndDisplayGrid (Level level) {
-
-        myGridReference.setGrid(level.getGrid());
-        myGridReference.getGrid().displayPane(myGridSPane);
+        super.myPropertiesSPane.setContent(new ActionEditor(okLambda));
     }
 
     @Override
@@ -89,7 +70,7 @@ public class ActionController extends GridComponentAbstCtrl<Action> {
     }
 
     @Override
-    protected void initEntryEditBtn (Level entry, Button editBtn) {
+    protected void initEntryEditBtn (Action entry, Button editBtn) {
 
         // TODO: THIS ONLY SORT OF WORKS
         // WORKS WHEN YOU CLICK ON LHS PANE THEN RHS PANE THEN DONE.
@@ -97,73 +78,47 @@ public class ActionController extends GridComponentAbstCtrl<Action> {
         editBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
-                Consumer<Level> okLambda = (Level level) -> {
+                Consumer<Action> okLambda = (Action action) -> {
 
                     myVBox.getChildren().remove(entry);
-                    addEntry(level);
-
-                    myPieceTypes.addObserver(level.getGrid());
-                    myPatchTypes.addObserver(level.getGrid());
-                    myLevelData.replace(entry, level);
 
                     HBox entryHolderBox = myEntryMap.get(entry);
                     entryHolderBox.getChildren().clear();
 
-                    myLevelData.replace(entry, level);
-
                     myEntryMap.get(entry);
 
-                    setAndDisplayGrid(level);
-
                 };
-                List<Piece> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
-                List<Patch> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
+
                 List<Player> playersRO = null;
 
-                EventsDataContainer wrapper =
-                        new EventsDataContainer(piecesRO, patchesRO, playersRO);
-
-                myPropertiesSPane.setContent(new LevelEditor(okLambda, entry, wrapper));
+                myPropertiesSPane.setContent(new ActionEditor(okLambda, entry));
 
             }
 
-        });
-    }
-
-    @Override
-    protected void initEntryDelBtn (Level entry, Button delBtn) {
-        delBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                myLevelData.remove(entry);
-                myVBox.getChildren().remove(myEntryMap.get(entry));
-            }
         });
     }
 
     @Override
     protected HBox makeEntryBox (Action entry) {
         HBox entryBox = new HBox();
-        Label nameLabel = new Label(entry.getId());
+        //Label nameLabel = new Label(entry.getId());
         entryBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle (MouseEvent event) {
-                setAndDisplayGrid(entry);
+                //setAndDisplayGrid(entry);
             }
         });
-        entryBox.getChildren().add(nameLabel);
+        //entryBox.getChildren().add(nameLabel);
         return entryBox;
     }
 
     @Override
-    protected void initEntryEditBtn (Action entry, Button editBtn) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     protected void initEntryDelBtn (Action entry, Button delBtn) {
-        // TODO Auto-generated method stub
-
+        delBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                myVBox.getChildren().remove(myEntryMap.get(entry));
+            }
+        });
     }
 }

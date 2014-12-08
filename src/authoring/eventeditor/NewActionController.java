@@ -4,8 +4,10 @@ import gamedata.events.Condition;
 import gamedata.events.GlobalAction;
 import gamedata.events.globalaction.CreatePiece;
 import gamedata.events.globalaction.DeletePiece;
-import gamedata.events.globalaction.LevelChangeGlobalAction;
-import gamedata.events.globalaction.SwitchPlayerGlobalAction;
+import gamedata.events.globalaction.LevelChange;
+import gamedata.events.globalaction.EndTurn;
+import gamedata.gamecomponents.IChangeGameState;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,12 +15,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+
 import authoring.data.EventsDataWrapper;
 import utilities.ClassGrabber;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 
 public class NewActionController implements Initializable{
 
@@ -27,13 +32,18 @@ public class NewActionController implements Initializable{
 	@FXML
 	private ChoiceBox<String> actionChoiceBox;
 	@FXML
-	private ScrollPane editorScrollPane;
+	private TextField myNameField;
+	@FXML
+	private TextField myNextLevelField;
 
+	@FXML
+	private Button myDoneButton;
+	
 	private List<Class> actionList;
 
-	private GlobalAction myGlobalAction;
 	private Consumer<GlobalAction> myDoneLambda;
 	private EventsDataWrapper myData;
+	private IChangeGameState myState;
 
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -59,6 +69,28 @@ public class NewActionController implements Initializable{
 		actionChoiceBox.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, selectedType) -> showActionEditorPane());
 	}
+	
+	//TODO: Refactor this to be less gross
+	@FXML
+	private void handleDoneButton(){
+		int idx = actionChoiceBox.getSelectionModel().getSelectedIndex();
+		Class<?> c = actionList.get(idx);
+
+		if(c.equals(CreatePiece.class)){
+			
+		}
+		else if (c.equals(DeletePiece.class)){
+
+		}
+		else if (c.equals(LevelChange.class)){
+			GlobalAction action = new LevelChange(myNameField.getText(), myState, myNextLevelField.getText());
+			myDoneLambda.accept(action);
+		}
+		else if (c.equals(EndTurn.class)){
+			GlobalAction action = new EndTurn(myNameField.getText(), myState);
+			myDoneLambda.accept(action);
+		}
+	}
 
 	private List<String> trimClassList(List<String> actionList) {
 		List<String> displayList = new ArrayList<>();
@@ -71,8 +103,10 @@ public class NewActionController implements Initializable{
 
 	//TODO: determine how to distinguish between different types of actions
 	private void showActionEditorPane(){
+		myNextLevelField.setVisible(false);
+		
 		int idx = actionChoiceBox.getSelectionModel().getSelectedIndex();
-		Class c = actionList.get(idx);
+		Class<?> c = actionList.get(idx);
 		//System.out.println(c);
 		/**
 		 * If statements to choose which Condition Editor to pull up
@@ -83,17 +117,11 @@ public class NewActionController implements Initializable{
 		else if (c.equals(DeletePiece.class)){
 
 		}
-		else if (c.equals(LevelChangeGlobalAction.class)){
+		else if (c.equals(LevelChange.class)){
+			myNextLevelField.setVisible(true);
+		}
+		else if (c.equals(EndTurn.class)){
 
-		}
-		else if (c.equals(SwitchPlayerGlobalAction.class)){
-
-		}
-		if(myGlobalAction==null){
-			editorScrollPane.setContent(new ActionEditorPane(myDoneLambda, myData));
-		}
-		else{
-			editorScrollPane.setContent(new ActionEditorPane(myDoneLambda, myData));
 		}
 	}
 
@@ -117,16 +145,11 @@ public class NewActionController implements Initializable{
 		myDoneLambda = okLambda;
 	}
 
-	/**
-	 * Loads the data of a Condition into the editor.
-	 * Used when editing a previous condition, rather than creating a new one from scratch
-	 * @param entry
-	 */
-	public void loadEntryCondition(GlobalAction entry){
-		myGlobalAction = entry;
-	}
-
 	public void loadData(EventsDataWrapper data) {
 		myData = data;
+	}
+
+	public void loadState(IChangeGameState state) {
+		myState = state;
 	}
 }

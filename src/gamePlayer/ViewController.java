@@ -8,7 +8,7 @@ import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
 import java.awt.geom.Point2D;
 import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,16 +25,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayerBuilder;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import com.sun.media.jfxmedia.MediaPlayer;
 import tests.JSONBobTester;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
@@ -53,8 +49,8 @@ public class ViewController {
 	public static final String INITIALSCENE_TITLE = "VOOGASALAD!";
 	public static final String GAME_LOCATION = "/src/resources/json";
 	public static final String POPUP_FXML = "popup.fxml";
+	public static final String SETTINGS_FXML = "settings.fxml";
 
-//	private static final String DEFAULT_MUSIC = "/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
 	public static final double CURSOR_RATIO = 0.25;
@@ -62,8 +58,10 @@ public class ViewController {
 	private Stage myStage;
 	private BorderPane myGameSpace;
 	private BorderPane myPopup;
+	private BorderPane mySettings;
 	private VBox myInitialScene;
 	private VBox myScoreBoard;
+	private Scene mySettingsScene;
 	private Scene scoreScene;
 	private Scene myPopupScene;
 	private Scene myScene;
@@ -82,7 +80,6 @@ public class ViewController {
 	private Piece activePiece;
 	private Action activeAction;
 
-//	private AudioClip myAudio;
 	private Audio myAudio;
 	
 	
@@ -109,9 +106,7 @@ public class ViewController {
 
 	public ViewController(Stage s) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		myStage = s;
-		
-		
-		
+
 		openInitialMenu();
 		try {
 			newGame();
@@ -136,6 +131,7 @@ public class ViewController {
 	protected void openInitialMenu() throws UnsupportedAudioFileException, IOException, LineUnavailableException{
 	    myInitialScene = new VBox();
 	    myGameSpace = new BorderPane();
+	    mySettings = new BorderPane();
 	    myScoreBoard = new VBox();
 	    myPopup = new BorderPane();
 	    myJSONManager = new JSONManager();
@@ -144,9 +140,11 @@ public class ViewController {
 	    loadFXML(INITIALSCENE_FXML, myInitialScene);
 	    loadFXML(POPUP_FXML, myPopup);
 	    loadFXML(SCOREBOARD_FXML, myScoreBoard);
+//	    loadFXML(SETTINGS_FXML, mySettings);
 	    
 	    scoreScene = new Scene(myScoreBoard);
 	    myPopupScene = new Scene(myPopup);
+	    mySettingsScene = new Scene(mySettings);
 	    
 	    myStage.setScene(new Scene(myInitialScene));
 	    
@@ -238,6 +236,10 @@ public class ViewController {
 
 	@FXML
 	private void doSettings() {
+	    System.out.println("hihi");
+	    Stage stage = new Stage();
+	    stage.setScene(mySettingsScene);
+	    stage.show();	    
 	}
 
 	/**
@@ -275,7 +277,6 @@ public class ViewController {
 
 			throw new RuntimeException(exception);
 		}
-
 	}
 
 	/**
@@ -288,7 +289,7 @@ public class ViewController {
 	 * @throws UnsupportedAudioFileException
 	 */
 	protected void newGame() throws UnsupportedAudioFileException, IOException,
-			LineUnavailableException {
+		LineUnavailableException {
 
 		List<File> games = getGames();
 
@@ -309,7 +310,9 @@ public class ViewController {
 	 * Initializes grid and its effects manager (gamegrideffect)
 	 */
 	private void initializeGrid() {
-		
+		System.out.println("initialize grid");
+	    
+	        myAudio.playSelection();
 	        
 	        myGridPane = new ScrollPane();
 		Level currentLevel = myModel.getCurrentLevel();
@@ -322,9 +325,9 @@ public class ViewController {
 		setOnClick();
 
 		setGridState(new SelectState(this));
-		getGridPane().setOnMouseExited(event -> {
-			changeCursor(CURSOR_GLOVE_TEST);
-		});
+		changeCursor(CURSOR_GLOVE_TEST);
+
+		
 
 		keyControlOn = false;
 		myGameGridEffect = new GameGridEffect(this);
@@ -385,7 +388,9 @@ public class ViewController {
 	 * @param piece
 	 */
 	protected void updateActions(Piece piece) {
-		controlPane.getChildren().clear();
+//		System.out.println("UPDATE ACTIONS");
+//	        myAudio.playSelection();
+	        controlPane.getChildren().clear();
 		ArrayList<Label> actions = new ArrayList<Label>();
 		piece.getActions().forEach(action -> {
 			Label l = new Label(action.toString());
@@ -410,7 +415,7 @@ public class ViewController {
 	 * @param actions
 	 */
 	public void updateActionList(ArrayList<Label> actions) {
-		System.out.println("i use this");
+	        
 		controlPane.getChildren().clear();
 		controlPane.getChildren().addAll(actions);
 	}
@@ -421,6 +426,9 @@ public class ViewController {
 	 * @param action
 	 */
 	protected void bindAction(Action action) {
+	        System.out.println("BIND ACTION");
+	        myAudio.playSelection();
+	        
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
@@ -437,7 +445,7 @@ public class ViewController {
 	}
 
 	private void setOnClick() {
-		myGridPane.getContent().setOnMouseClicked(event -> {
+	    myGridPane.getContent().setOnMouseClicked(event -> {
 			Point2D loc = findPosition(event.getX(), event.getY());
 			performAction(loc);
 		});
@@ -451,7 +459,10 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(Point2D loc) {
-		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
+		System.out.println("PERFORM ACTION");
+	        myAudio.playSelection();
+	        
+	        gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
 		
 		if (keyControlOn) {
 			myKeyboardMovement = null;
@@ -494,8 +505,9 @@ public class ViewController {
 	 */
 	public void changeCursor(String filename) {
 		Image image = new Image(filename);
-		myScene.setCursor(new ImageCursor(image, image.getWidth() / CURSOR_RATIO, image
-				.getWidth() / CURSOR_RATIO));
+		
+		myScene.setCursor(new ImageCursor(image, image.getWidth() * CURSOR_RATIO, image
+				.getWidth() * CURSOR_RATIO));
 
 	}
 

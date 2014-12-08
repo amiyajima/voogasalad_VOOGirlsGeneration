@@ -5,34 +5,29 @@ import gamedata.gamecomponents.IHasStats;
 
 public class ConditionEquals extends Condition{
 	
-	protected IHasStats myReference1;
-	protected IHasStats myReference2;
-	protected String myStat1;
-	protected String myStat2;
-	
-	protected double myVal1;
-	protected double myVal2;
+	protected IHasStats myReference;
+	protected String myStat;
+	protected Double myConstant;
+
 	
 	//TODO: There might be an error with passing myDescription up the pipeline
-	public ConditionEquals(String description, IHasStats ref1, String stat1, IHasStats ref2, String stat2){
+	public ConditionEquals(String description, IHasStats ref1, String stat1, Double constant){
 		super(description);
-		myReference1 = ref1;
-		myReference2 = ref2;
-		
-		myStat1 = stat1;
-		myStat2 = stat2;
+		myReference = ref1;
+		myStat = stat1;
+		myConstant = constant;
 	}
 
 	@Override
-	public boolean evaluate() {
-		return myReference1.getStats().getValue(myStat1) == myReference2.getStats().getValue(myStat2);
+	public boolean evaluate(IHasStats source) {
+		return false;
 	}
 	
 	/**
 	 * For testing purposes
 	 */
 	public String printOut(){
-		String print = "IF " + myReference1 + ": " + myStat1 + " EQUALS " + myReference2 + ": " + myStat2;
+		String print = "IF " + myReference + ": " + myStat + " EQUALS " + myConstant;
 		return print;
 	}
 
