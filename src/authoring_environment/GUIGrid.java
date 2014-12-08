@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import javafx.event.EventHandler;
@@ -108,7 +109,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		return super.myNumCols;
 	}
 
-	public void addPiece (Piece pieceType, Point2D loc) {
+	public void addPieceAtLoc (Piece pieceType, Point2D loc) {
 		Piece clone = new Piece(pieceType, loc);
 		if (isPieceOccupied(loc)){
 			removePieceAtCoordinate(loc);
@@ -118,7 +119,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		myTile.setPieceImage(clone.getImageView());
 	}
 
-	public void addPatch (Patch patchType, Point2D loc) {
+	public void addPatchAtLoc (Patch patchType, Point2D loc) {
 		Patch clone = new Patch(patchType, loc);
 		if (isPatchOccupied(loc)){
 			removePatchAtCoordinate(loc);
@@ -355,13 +356,13 @@ public class GUIGrid extends SuperGrid implements Observer{
 		}
 	}
 
-	public void addPieceToTile (Piece pieceType, Point2D loc) {
+	private void addPieceToTile (Piece pieceType, Point2D loc) {
 		SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
 		myTile.setPieceImage(pieceType.getImageView());
 
 	}
 
-	public void addPatchToTile (Patch patchType, Point2D loc) {
+	private void addPatchToTile (Patch patchType, Point2D loc) {
 		SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
 		myTile.setPatchImage(patchType.getImageView());
 	}
@@ -375,11 +376,11 @@ public class GUIGrid extends SuperGrid implements Observer{
 		myPane.setOnMouseDragged(handler);
 	}
 
-	public void runEvent(Consumer<List<IHasStats>> eventFunc){
+	public void runEvent(BiConsumer<List<IHasStats>, GUIGrid> eventFunc){
 		List<IHasStats> allObjects = new ArrayList<>();
 		allObjects.addAll(myPieceData.getData());
 		allObjects.addAll(myPatchData.getData());
 		
-		eventFunc.accept(allObjects);
+		eventFunc.accept(allObjects, this);
 	}
 }

@@ -102,7 +102,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
                     public void handle (MouseEvent e) {
                         GUIGrid grid = myGridReference.getGrid();
                         Point2D coor = grid.findClickedCoordinate(e.getX(), e.getY());
-                        grid.addPiece(entry, coor);
+                        grid.addPieceAtLoc(entry, coor);
                     }
                 };
                 myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
