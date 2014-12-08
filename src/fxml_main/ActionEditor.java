@@ -5,7 +5,6 @@ import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
 import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
-import gamedata.gamecomponents.Patch;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,12 +36,11 @@ import authoring.data.ActionData;
 public class ActionEditor extends Pane {
 
     public static final int HEIGHT = 100;
-    public static final int WIDTH = 75;
+    public static final int WIDTH = 100;
     public static final String NAME = "Action Creator";
     private static final String STYLESHEET = "/resources/stylesheets/actioncreator_layout.css";
 
     private List<SingleMultiplierBox> operationsList;
-    private ActionData myActionData;
 
     private static final Insets MARGINS = new Insets(20, WIDTH / 8, 20, WIDTH / 8 - 10);
     private static final String LABEL_CSS = "-fx-font-size: 12pt;";
@@ -68,7 +66,6 @@ public class ActionEditor extends Pane {
      */
     public ActionEditor (ActionData actionData, Consumer<Action> okLambda) {
         operationsList = new ArrayList<>();
-        myActionData = actionData;
         myOkLambda = okLambda;
         myName = "";
         myAttackRange = new LinkedList<Point2D>();
@@ -127,10 +124,10 @@ public class ActionEditor extends Pane {
             public void handle (ActionEvent click) {
                 myName = nameField.getText();
                 myStatsLogics = getStatsLogics(targetChoice, moddedStat);
-                myActionData.add(new ConcreteAction(myName, myAttackRange,
-                                                    myEffectRange, myStatsLogics, myConclusion));
-                System.out.println("Created Action");
-                System.out.println(myActionData.getActionIDs().get(0));
+                Action action = new ConcreteAction (myName, myAttackRange,
+                                                    myEffectRange, myStatsLogics, myConclusion);
+                //TODO: 
+                myOkLambda.accept(action);
             }
         });
 
@@ -230,6 +227,7 @@ public class ActionEditor extends Pane {
             }
         });
         rangeBox.getChildren().addAll(rangeLabel, setRange);
+        
     }
 
     private void initStatsModifier (VBox targetVBox,
