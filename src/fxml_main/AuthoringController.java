@@ -14,13 +14,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import authoring.actionslogic.ActionLogicController;
+import authoring.concretefeatures.StatsTotalEditor;
 import authoring.createedit.GamePropertiesEditor;
 import authoring.data.ActionData;
 import authoring.data.GamePropertiesData;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
-import authoring.eventeditor.EventEditorController;
+
 
 
 public class AuthoringController implements Initializable {
@@ -50,6 +51,9 @@ public class AuthoringController implements Initializable {
 
     @FXML
     private MenuItem gameProperties;
+    
+    @FXML
+    private MenuItem playerEditor;
 
     private GUIGridReference myGridReference;
     private PieceController myPieceController;
@@ -84,7 +88,7 @@ public class AuthoringController implements Initializable {
     // TODO: [IMPORTANT] This method will need a List<String> or Set<String> that contains names of
     // Pieces
     // Also, need a list of existing actions
-    private void showActionslogicChartWindow () throws IOException {
+    private void showActionzlogicChartWindow () throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/authoring/actionslogic/ActionLogic.fxml"));
         Parent root = loader.load();
@@ -108,6 +112,16 @@ public class AuthoringController implements Initializable {
         gamePptEditor.setX(450);
         gamePptEditor.setY(200);
         gamePptEditor.show();
+
+    }
+
+    @FXML
+    private void showPlayerEditWindow () {
+        StatsTotalEditor statsEditor = new StatsTotalEditor();
+        statsEditor.setTitle("Player Editor");
+        statsEditor.setX(450);
+        statsEditor.setY(200);
+        statsEditor.show();
 
     }
 
