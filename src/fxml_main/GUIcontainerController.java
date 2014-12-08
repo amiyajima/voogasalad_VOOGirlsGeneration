@@ -32,27 +32,14 @@ public class GUIcontainerController implements Initializable{
 	private MenuItem gameProperties;
 	
 	@FXML
-	private BorderPane testauthor;
+	private Tab testauthor;
 	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		myGamePropertiesData=new GamePropertiesData();
 		LoadAuthoring();
-//		testauthor=new BorderPane();
-//		testauthor.setStyle("-fx-background-color: blue;");
-//		testauthor.setMinSize(100, 100);
-//		testauthor.setMaxSize(100, 100);
-//		testauthor.setPrefSize(100, 100);
-//
-//		
-//		System.out.println(testauthor.isVisible());
-//		System.out.println(testauthor.getWidth());
-//		System.out.println(testauthor.getHeight());
 
-//		testauthor=rootLayout;
-//		author1=new Tab("TEST");
-//        author1.setContent(rootLayout);
 	}
 
 	private void LoadAuthoring(){		
@@ -61,21 +48,8 @@ public class GUIcontainerController implements Initializable{
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(GUIcontainerController.class.getResource("Voogirls_Authoring.fxml"));
             rootLayout = (BorderPane) loader.load();
-            // Show the scene containing the root layout.
-//            rootLayout.setStyle("-fx-background-color: blue;");            
-//            author1.setContent(rootLayout);
-           
-//            author1.setContent(new Circle(5));
-//            author1.setStyle("-fx-background-color: #333333;");
-            
-              
-//            Stage actionLogicStage = new Stage();
-//    		actionLogicStage.setTitle("!!!");
-//    		actionLogicStage.initModality(Modality.WINDOW_MODAL);
-    		myScene = new Scene(rootLayout);
-    		testauthor.setCenter(rootLayout);
-//    		actionLogicStage.setScene(myScene);
-//    		actionLogicStage.showAndWait();
+//    		myScene = new Scene(rootLayout);
+    		testauthor.setContent(rootLayout);
 
         } catch (IOException e) {
             e.printStackTrace();
