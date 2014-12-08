@@ -109,7 +109,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
                     public void handle (MouseEvent e) {
                         GUIGrid grid = myGridReference.getGrid();
                         Point2D coor = grid.findClickedCoordinate(e.getX(), e.getY());
-                        grid.addPatch(entry, coor);
+                        grid.addPatchAtLoc(entry, coor);
                     }
                 };
                 myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
