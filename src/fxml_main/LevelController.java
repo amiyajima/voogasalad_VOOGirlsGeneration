@@ -18,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.data.EventsDataWrapper;
+import authoring.data.GamePropertiesData;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
@@ -32,15 +33,18 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 	private LevelData myLevelData;
 	private PieceTypeData myPieceTypes;
 	private PatchTypeData myPatchTypes;
+	private GamePropertiesData myGamePropertiesData;
 
 	protected LevelController (VBox vbox, ScrollPane propertiesSPane,
 			ScrollPane gridSPane, GUIGridReference gridRef, LevelData levels,
-			PieceTypeData pieceTypes, PatchTypeData patchTypes) {
+			PieceTypeData pieceTypes, PatchTypeData patchTypes, 
+			GamePropertiesData gamePropertiesData) {
 		super(vbox, propertiesSPane, gridRef);
 		myGridSPane = gridSPane;
 		myLevelData = levels;
 		myPieceTypes = pieceTypes;
 		myPatchTypes = patchTypes;
+		myGamePropertiesData = gamePropertiesData;
 	}
 
 	@Override
