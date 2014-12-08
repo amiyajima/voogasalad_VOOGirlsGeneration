@@ -81,7 +81,7 @@ public class JSONBobTester {
 
 		List<Event> myEvents = new ArrayList<Event>();
 		Event e = new Event("garbage collect");
-		e.getConditions().add(new IsDead("Duvall"));
+		e.getConditions().add(new IsDead("health"));
 		myEvents.add(e);
 		
 		List<Level> myLevels = new ArrayList<Level>();
