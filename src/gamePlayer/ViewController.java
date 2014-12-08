@@ -12,7 +12,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+<<<<<<< Updated upstream
 import java.util.Optional;
+=======
+import java.util.Locale;
+import java.util.ResourceBundle;
+>>>>>>> Stashed changes
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -22,7 +27,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+<<<<<<< Updated upstream
 import javafx.scene.control.TextField;
+=======
+>>>>>>> Stashed changes
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -48,6 +56,9 @@ public class ViewController {
 	public static final String GAME_LOCATION = "/src/resources/json";
 	public static final String POPUP_FXML = "popup.fxml";
 	public static final String SETTINGS_FXML = "settings.fxml";
+	
+	public static final String ENGLISH = "resources.languages.English";
+	public static final String CHINESE = "resources.languages.Chinese";
 
 	private Stage myStage;
 	private BorderPane myGameSpace;
@@ -59,6 +70,9 @@ public class ViewController {
 	private Scene scoreScene;
 	private Scene myPopupScene;
 	private Scene myScene;
+	
+	@FXML
+	private Button showScoreButton;
 
 	private Game myModel;
 	private GUIGrid myGrid;
@@ -78,6 +92,10 @@ public class ViewController {
 	private Action activeAction;
 
 	private Audio myAudio;
+	
+	Locale currentLocale;
+	ResourceBundle messages;
+	
 	
 	
 	@FXML
@@ -132,9 +150,8 @@ public class ViewController {
 	    myGameSpace = new BorderPane();
 	    myScoreBoard = new VBox();
 	    scores = new VBox();
+	    
 
-	    
-	    
 	    myPopup = new BorderPane();
 	    mySettings = new VBox();
 	    
@@ -156,6 +173,14 @@ public class ViewController {
 	    myAudio.playDefault();     //muting music for now...
 	    
 	    System.out.println("Opened initial menu");
+	}
+	
+	public void addLanguages() {
+	        messages = ResourceBundle.getBundle(ENGLISH);
+//	        System.out.println(messages.getString("SAVE"));
+	        
+	        showScoreButton.setText(messages.getString("SCORE"));
+	        
 	}
 	
 	
@@ -243,7 +268,10 @@ public class ViewController {
 		myModel = JSBTester.createNewGame();
 		System.out.println("model found in viewcontroller: " + myModel);
 		initializeGrid();
+//	        showScoreButton.setText("hihihi");
 	}
+	
+
 
 
 	/**
@@ -332,6 +360,8 @@ public class ViewController {
 		backgroundMusicOn = true;
 		clickSoundOn = true;
 		myGameGridEffect = new GameGridEffect(this);
+		
+		addLanguages();
 	}
 	
 
