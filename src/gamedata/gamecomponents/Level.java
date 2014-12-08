@@ -2,6 +2,7 @@ package gamedata.gamecomponents;
 
 import gamedata.events.Event;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;

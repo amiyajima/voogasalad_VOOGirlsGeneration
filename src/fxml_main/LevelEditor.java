@@ -1,6 +1,8 @@
 package fxml_main;
 
 import gamedata.events.Event;
+import gamedata.events.GameStateGlobalAction;
+import gamedata.events.GlobalAction;
 import gamedata.gamecomponents.Level;
 
 import java.io.IOException;
@@ -68,6 +70,7 @@ public class LevelEditor extends VBox {
         myGridCols = myGrid.getNumCols();
         myTileHeight = myGrid.getTileHeight();
         myEvents = (ObservableList<Event>) level.getEvents();
+        myLevel = level;
         initEditor(okLambda,data,gridShape);
     }
 
@@ -145,6 +148,15 @@ public class LevelEditor extends VBox {
                 GUIGrid grid = new GUIGrid(myGridCols, myGridRows, myTileHeight, myGridShape,
                 		myGrid);
                 Level level = new Level(grid, myEvents, myId, false);
+                
+                for(Event e: myEvents){
+                	for(GlobalAction g: e.getGlobalActions()){
+	                	if(GameStateGlobalAction.class.isAssignableFrom(g.getClass())){
+	                		((GameStateGlobalAction) g).reinject(level);
+	                	}
+                	}
+                }
+                
                 myOkLambda.accept(level);
             }
         });
