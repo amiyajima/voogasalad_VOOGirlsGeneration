@@ -98,7 +98,6 @@ public class AuthoringController implements Initializable {
 
                 ActionLogicController controller = loader.getController();
                 
-
                 eventEditorStage.showAndWait();
         }
 	
