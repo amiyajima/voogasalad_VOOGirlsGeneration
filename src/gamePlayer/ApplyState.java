@@ -62,7 +62,8 @@ public class ApplyState implements IGridState {
 //		myController.changeCursor(myController.CURSOR_GLOVE_TEST);
 		myController.setActivePiece(null);
 		myController.setActiveAction(null);
-		myGame.getCurrentLevel().runGameEvents();
+//		myGame.getCurrentLevel().runGameEvents();
+		myGame.getCurrentLevel();
 	}
 
 }
