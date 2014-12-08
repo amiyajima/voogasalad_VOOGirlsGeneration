@@ -154,6 +154,17 @@ public class Game implements IChangeGameState{
 	public void setPlayer(Player p, int pos) {
 		myPlayers.set(pos, p);
 	}
+	
+	public void nextPlayer() {
+		int next = myPlayers.indexOf(myCurrentPlayer)+1;
+		if(next == myPlayers.size()){
+			this.resetPlayer();
+		}
+		else{
+			myCurrentPlayer = myPlayers.get(next);
+		}
+	}
+
 
 	/**
 	 * Used by Global Actions. Set the current player to the player with a given
@@ -202,5 +213,17 @@ public class Game implements IChangeGameState{
 		} else {
 			myCurrentPlayer = myPlayers.get(next);
 		}
+	}
+
+	@Override
+	public void winGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void loseGame() {
+		// TODO Auto-generated method stub
+		
 	}
 }

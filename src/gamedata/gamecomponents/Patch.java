@@ -3,13 +3,17 @@ package gamedata.gamecomponents;
 import gamedata.stats.Stats;
 
 import java.awt.geom.Point2D;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * @author Sandy Lee
+ * @author Sandy Lee, Mengen Huang
  *
  */
 public class Patch extends GridComponent {
-
+	
+	private String myID;
+	
 	/**
 	 * Constructor
 	 * 
@@ -38,4 +42,6 @@ public class Patch extends GridComponent {
 	public Stats getStats() {
 		return null;
 	}
+	
+	
 }

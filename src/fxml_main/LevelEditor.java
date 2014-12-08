@@ -2,15 +2,14 @@ package fxml_main;
 
 import gamedata.events.Event;
 import gamedata.gamecomponents.Level;
+
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.function.Consumer;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -47,14 +46,15 @@ public class LevelEditor extends VBox {
     private String myEditorTitle;
 
 	private EventsDataWrapper myData;
+
     public LevelEditor (Consumer<Level> okLambda, EventsDataWrapper data) {
     	myEditorTitle = CREATOR_TITLE;
     	
     	myId = "";
-
         myGridRows = 0;
         myGridCols = 0;
         myTileHeight = 0;
+        myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
         myEvents = FXCollections.observableArrayList();
         myData = data;
         initEditor(okLambda);
@@ -68,7 +68,6 @@ public class LevelEditor extends VBox {
         myGridRows = myGrid.getRow();
         myGridCols = myGrid.getCol();
         myTileHeight = myGrid.getTileHeight();
-        myLevel = level;
         myEvents = (ObservableList<Event>) level.getEvents();
         myData = data;
 
@@ -116,8 +115,6 @@ public class LevelEditor extends VBox {
         TextField heightField = new TextField("" + myTileHeight);
         tileHeightHBox.getChildren().addAll(heightLabel, heightField);
 
-        myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
-
         Button eventBtn = new Button("Add Global Events...");
         eventBtn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -146,9 +143,9 @@ public class LevelEditor extends VBox {
                 myGridRows = Integer.parseInt(rowField.getText());
                 myGridCols = Integer.parseInt(colField.getText());
                 myTileHeight = Double.parseDouble(heightField.getText());
-
-                Level level = new Level(myGrid, myEvents, myId, false);
-
+                GUIGrid grid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid",
+                		myGrid);
+                Level level = new Level(grid, myEvents, myId, false);
                 myOkLambda.accept(level);
             }
         });

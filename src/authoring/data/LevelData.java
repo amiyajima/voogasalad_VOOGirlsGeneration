@@ -24,8 +24,12 @@ public class LevelData implements AuthoringData<Level> {
 
 	@Override
 	public boolean canAdd(Level element) {
-		// TODO Auto-generated method stub
-		return false;
+		for (Level level:myLevels){
+			if (element.getId().equals(level.getId())){
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	@Override
@@ -35,9 +39,8 @@ public class LevelData implements AuthoringData<Level> {
 
 	@Override
 	public void replace(Level origEl, Level newEl) {
-		newEl.getGrid().getRow();
-		newEl.getGrid().getCol();
-		// TODO: FINISH WRITING CODE
+		remove(origEl);
+		add(newEl);
 	}
 
 	@Override

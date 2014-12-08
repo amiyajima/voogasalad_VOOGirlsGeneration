@@ -8,26 +8,29 @@ import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
 import java.awt.geom.Point2D;
 import java.io.File;
-
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.ResourceBundle;
+import java.util.Optional;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -36,11 +39,6 @@ import tests.JSONBobTester;
 import authoring_environment.GUIGrid;
 import authoring_environment.SuperTile;
 
-/**
- * 
- * 
- *
- */
 public class ViewController {
 
 	public static final String GAMESPACE_FXML = "gameSpace.fxml";
@@ -51,14 +49,10 @@ public class ViewController {
 	public static final String POPUP_FXML = "popup.fxml";
 	public static final String SETTINGS_FXML = "settings.fxml";
 
-	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
-	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
-	public static final double CURSOR_RATIO = 0.25;
-	private ResourceBundle myLanguages;
 	private Stage myStage;
 	private BorderPane myGameSpace;
 	private BorderPane myPopup;
-	private BorderPane mySettings;
+	private VBox mySettings;
 	private VBox myInitialScene;
 	private VBox myScoreBoard;
 	private Scene mySettingsScene;
@@ -74,6 +68,9 @@ public class ViewController {
 	// private SampleListener myLeapListener;
 
 	private Boolean keyControlOn;
+	private Boolean clickSoundOn;
+	private Boolean backgroundMusicOn;
+	
 	private KeyboardAction myKeyboardAction;
 	private KeyboardMovement myKeyboardMovement;
 
@@ -91,6 +88,8 @@ public class ViewController {
 	private MenuButton newGameMenu;
 	@FXML
 	private Text gameName;
+	@FXML
+	private Text highestScore;
 	@FXML
 	private VBox scores;
 	@FXML
@@ -131,16 +130,21 @@ public class ViewController {
 	protected void openInitialMenu() throws UnsupportedAudioFileException, IOException, LineUnavailableException{
 	    myInitialScene = new VBox();
 	    myGameSpace = new BorderPane();
-	    mySettings = new BorderPane();
 	    myScoreBoard = new VBox();
+	    scores = new VBox();
+
+	    
+	    
 	    myPopup = new BorderPane();
+	    mySettings = new VBox();
+	    
 	    myJSONManager = new JSONManager();
 	    // myLeapController = new Controller();
 	    loadFXML(GAMESPACE_FXML, myGameSpace);
 	    loadFXML(INITIALSCENE_FXML, myInitialScene);
 	    loadFXML(POPUP_FXML, myPopup);
 	    loadFXML(SCOREBOARD_FXML, myScoreBoard);
-//	    loadFXML(SETTINGS_FXML, mySettings);
+	    loadFXML(SETTINGS_FXML, mySettings);
 	    
 	    scoreScene = new Scene(myScoreBoard);
 	    myPopupScene = new Scene(myPopup);
@@ -149,7 +153,7 @@ public class ViewController {
 	    myStage.setScene(new Scene(myInitialScene));
 	    
 	    myAudio = new Audio();
-	    myAudio.playDefault();
+	    myAudio.playDefault();     //muting music for now...
 	    
 	    System.out.println("Opened initial menu");
 	}
@@ -180,6 +184,13 @@ public class ViewController {
 
 	}
 	
+	@FXML
+	protected void openSettings() {
+	    System.out.println("opensettings");
+	    Stage stage = new Stage();
+	    stage.setScene(mySettingsScene);
+	    stage.show();
+	}
 	
 	/**
 	 * the method to restart the game; it asks the user whether to save the
@@ -234,13 +245,6 @@ public class ViewController {
 		initializeGrid();
 	}
 
-	@FXML
-	private void doSettings() {
-	    System.out.println("hihi");
-	    Stage stage = new Stage();
-	    stage.setScene(mySettingsScene);
-	    stage.show();	    
-	}
 
 	/**
 	 * loads the players and their scores of the current game; display the
@@ -309,7 +313,7 @@ public class ViewController {
 	/**
 	 * Initializes grid and its effects manager (gamegrideffect)
 	 */
-	private void initializeGrid() {
+	protected void initializeGrid() {
 		System.out.println("initialize grid");
 	    
 	        myAudio.playSelection();
@@ -323,13 +327,10 @@ public class ViewController {
 		myGameSpace.setCenter(myGridPane);
 
 		setOnClick();
-
-		setGridState(new SelectState(this));
-		changeCursor(CURSOR_GLOVE_TEST);
-
-		
-
+		setGridState(new SelectState(this));		
 		keyControlOn = false;
+		backgroundMusicOn = true;
+		clickSoundOn = true;
 		myGameGridEffect = new GameGridEffect(this);
 	}
 	
@@ -339,10 +340,20 @@ public class ViewController {
 	 * Loads the Score from a Player for Display
 	 */
 	protected void loadScores() {
-		gameName.setText(gameName.getText() + myModel.toString());
-		// TODO: add in scores
-		 myModel.getPlayers().forEach(player-> scores.getChildren().
-		 add(new Text(player.getID()+": ")));
+		List<Integer> scoreList = new ArrayList<Integer>();
+	        gameName.setText(myModel.toString());
+		scores.getChildren().clear();
+	        for (Player p: myModel.getPlayers()){
+		    int score = 0;    //0 for now. will get from Player later!!!!!
+		    scoreList.add(score);
+		    Text playerScore = new Text("Player " + p.getID()+": " + String.valueOf(score));
+		    playerScore.setFill(Color.WHITE);
+		    scores.getChildren().add(playerScore);
+		}
+	        highestScore.setText(String.valueOf(Collections.max(scoreList)));
+
+	        
+	        
 	}
 
 	/**
@@ -427,7 +438,9 @@ public class ViewController {
 	 */
 	protected void bindAction(Action action) {
 	        System.out.println("BIND ACTION");
-	        myAudio.playSelection();
+	        if (clickSoundOn){
+	            myAudio.playSelection();
+	        }
 	        
 		if (activePiece == null)
 			return;
@@ -460,10 +473,12 @@ public class ViewController {
 	 */
 	public void performAction(Point2D loc) {
 		System.out.println("PERFORM ACTION");
-	        myAudio.playSelection();
+	        
+		if (clickSoundOn){
+		    myAudio.playSelection();
+		}
 	        
 	        gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
-		
 		if (keyControlOn) {
 			myKeyboardMovement = null;
 			myKeyboardAction = new KeyboardAction();
@@ -498,19 +513,28 @@ public class ViewController {
 		return currentClick;
 	}
 
-	/**
-	 * Changes the image of the Cursor
-	 * 
-	 * @param filename
-	 */
-	public void changeCursor(String filename) {
-		Image image = new Image(filename);
-		
-		myScene.setCursor(new ImageCursor(image, image.getWidth() * CURSOR_RATIO, image
-				.getWidth() * CURSOR_RATIO));
-
+	public void toggleClickSound() {
+	    if (clickSoundOn){
+	        clickSoundOn = false;
+	    }
+	    else{
+	        clickSoundOn = true;
+	    }
 	}
-
+	
+	public void toggleBackgroundMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	    if (backgroundMusicOn){
+	        myAudio.muteDefault();
+	        backgroundMusicOn = false;
+	        System.out.println("BGMusic Off");
+	    }
+	    else{
+	        myAudio.playDefault();
+	        backgroundMusicOn = true;
+	        System.out.println("BGMusic On");
+	    }
+	}
+	
 	/**
 	 * Toggles whether the Keyboard Controls are active or inactive
 	 */
@@ -643,13 +667,64 @@ public class ViewController {
 	 *            the current state of the Grid, select/ apply action Mode
 	 */
 	public void setGridState(IGridState state) {
+	    // TODO add logic to check if a game/level has been won
+	    if (true) {
+	        // TODO assuming that the most recent currentPlayer won
+	        String highScorer = "Bob";
+	        int highScore = 0;
+	        for (Player p : myModel.getPlayers()) {
+	            /*
+	            if (p.getScore() > highScore) {
+	                highScorer = p.getID();
+	                highScore = p.getScore();
+	            }
+	            */
+	        }
+	        showHighScoreInfo(highScorer, highScore);
+                
+	    }
 		myCurrentPlayer = myModel.getCurrentPlayer();
 		setPlayerTurnDisplay();
 		gridState = state;
 	}
 
 	private void setPlayerTurnDisplay() {
-		playerTurn.setText("Turn: " + myCurrentPlayer.getID());
+		playerTurn.setText("Player " + myCurrentPlayer.getID() + "'s Move");
+	}
+	
+	private void showHighScoreInfo(String highScorer, int highScore) {
+	    final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner(myStage);
+            
+            Label congrats = new Label("Congratulations");
+            Label player = new Label("Player " + highScorer + " achieved a high score");
+            Label score = new Label(String.valueOf(highScore));
+            congrats.setId("congrats");
+            player.setId("highscorer");
+            score.setId("highscoredisplay");
+            HBox nameHBox = new HBox(5);
+            Text namePlease = new Text("Nickname: ");
+            TextField nickname = new TextField();
+            Button go = new Button("Enter the Hall of Fame");
+            go.setOnMouseClicked(event->addEntryToHallOfFame(dialog, nickname.getText(), score.getText()));
+            namePlease.setId("nameplease");
+            nickname.setId("nickname");
+            go.setId("highscorebutton");
+            nameHBox.getChildren().addAll(namePlease, nickname, go);
+            
+            VBox dialogVbox = new VBox(10);
+            dialogVbox.getChildren().addAll(congrats, player, score, nameHBox);
+            Scene dialogScene = new Scene(dialogVbox, 500, 300);
+            dialogScene.getStylesheets().add("/resources/stylesheets/stylesheet.css");
+            dialog.setScene(dialogScene);
+            dialog.show();
+	}
+	
+	private void addEntryToHallOfFame(Stage stage, String nickname, String score) {
+	    myScoreBoard.getChildren().add(1, new Label(nickname + ": " + score));
+	    stage.setScene(scoreScene);
+	    stage.show();
 	}
 
 	/**
@@ -664,4 +739,9 @@ public class ViewController {
 	public VBox getcontrolPane() {
 		return controlPane;
 	}
+	
+	public void setCurrentPlayer(Player p){
+		myCurrentPlayer=p;
+	}
 }
+
