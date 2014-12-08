@@ -18,7 +18,7 @@
           </Menu>
             <Menu fx:id="exit" mnemonicParsing="false" text="Game Properties">
               <items>
-                  <MenuItem fx:id="gameProperties" mnemonicParsing="false" onAction="#showGamePropertiesWindow" text="Game properties..." />
+                  <MenuItem fx:id="playerNumber" mnemonicParsing="false" onAction="#showGamePropertiesWindow" text="Edit Player Number..." />
                   <MenuItem fx:id="actonsLogicChart" mnemonicParsing="false" onAction="#showActionzlogicChartWindow" text="Actions Logic Chart..." />
               </items>
             </Menu>

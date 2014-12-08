@@ -25,6 +25,8 @@ import authoring.eventeditor.EventEditorController;
 
 public class AuthoringController implements Initializable {
 
+	
+	
 	@FXML
 	private ScrollPane myPropertiesSPane;
 	
@@ -49,7 +51,7 @@ public class AuthoringController implements Initializable {
     private MenuItem actonsLogicChart;
 	
 	@FXML
-	private MenuItem gameProperties;
+	private MenuItem playerNumber;
 	
 	private GUIGridReference myGridReference;
 	private PieceController myPieceController;
@@ -67,7 +69,8 @@ public class AuthoringController implements Initializable {
 		PieceTypeData myPieceTypes = new PieceTypeData();
 		PatchTypeData myPatchTypes = new PatchTypeData();
 		myGridReference = new GUIGridReference();
-		
+		myGamePropertiesData=new GamePropertiesData();
+
 		myPieceController = new PieceController(myPiecesVBox, myPropertiesSPane, myGridReference, 
 				myPieceTypes, actions);
 	    myPatchController = new PatchController(myPatchesVBox, myPropertiesSPane, myGridReference,
@@ -100,12 +103,8 @@ public class AuthoringController implements Initializable {
 	
 	@FXML
 	private void showGamePropertiesWindow(){
-			myGamePropertiesData=new GamePropertiesData();
 			GamePropertiesEditor gamePptEditor=new GamePropertiesEditor(myGamePropertiesData);
-			gamePptEditor.setTitle("Game Properties Editor");
-		 	gamePptEditor.setX(450);
-		 	gamePptEditor.setY(200);
-		 	gamePptEditor.show();
+			
 		 		
 	}
 	
