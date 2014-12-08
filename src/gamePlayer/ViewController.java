@@ -289,12 +289,13 @@ public class ViewController {
         @FXML
         private void testGame() {
 
-                myScene = new Scene(myGameSpace);
-                myStage.setScene(myScene);
+//                myScene = new Scene(myGameSpace);
+//                myStage.setScene(myScene);
                 JSONBobTester JSBTester = new JSONBobTester();
-                myModel = JSBTester.createNewGame();
-                System.out.println("model found in viewcontroller: " + myModel);
-                initializeGrid();
+//                myModel = JSBTester.createNewGame();
+                testPlayGame(JSBTester.createNewGame());
+//                System.out.println("model found in viewcontroller: " + myModel);
+//                initializeGrid();
                 // showScoreButton.setText("hihihi");
         }
 
@@ -917,4 +918,20 @@ public class ViewController {
                 }
                 scores.getChildren().clear();
         }
+        
+        
+        /**
+         * Test Method for backend
+         * @param testGame
+         */
+        public void testPlayGame(Game testGame) {
+            myScene = new Scene(myGameSpace);
+            myStage.setScene(myScene);
+            myModel = testGame;
+            System.out.println("model found in viewcontroller: " + myModel);
+            initializeGrid();
+        }
+
+
+        
 }
