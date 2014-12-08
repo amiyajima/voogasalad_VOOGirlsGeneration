@@ -39,9 +39,6 @@ public class ActionLogicController implements Initializable {
     private List<CheckBox> myCBList = new ArrayList<CheckBox>();
 
     @Override
-    // TODO: [IMPORTANT]
-    // This controller needs following:list of piece types, actions and a map, which contains a
-    // result of saveLogic.
     public void initialize (URL location, ResourceBundle resources) {
         myPieceTypes = new ArrayList<String>();
         myActionTypes= new ArrayList<String>();
