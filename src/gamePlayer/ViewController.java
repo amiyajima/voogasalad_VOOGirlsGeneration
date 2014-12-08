@@ -6,6 +6,7 @@ import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
+
 import java.awt.geom.Point2D;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -40,8 +42,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
 import tests.JSONBobTester;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
@@ -154,6 +158,7 @@ public class ViewController {
                 myScoreBoard = new VBox();
                 scores = new VBox();
                 
+                mySplashScreen = new SplashScreen().getScene();
                 
                 myPopup = new BorderPane();
                 mySettings = new VBox();
@@ -255,7 +260,6 @@ public class ViewController {
          */
         @FXML
         private void testGame() {
-            mySplashScreen = new SplashScreen().getScene();
             myStage.setScene(mySplashScreen);
                 JSONBobTester JSBTester = new JSONBobTester();
                 testPlayGame(JSBTester.createNewGame());
