@@ -154,9 +154,6 @@ public class PieceTypeEditor extends Pane {
         initStatButton(createStatButton);
         createStat.getChildren().addAll(createStatButton);
 
-        TableView<Stats> myStats = new TableView<Stats>();
-        availableStats.getChildren().addAll(myStats);
-
         Label idLabel = new Label(ID_LABEL);
         idLabel.setPadding(UIspecs.topRightPadding);
         TextField unitID = new TextField();
@@ -181,9 +178,7 @@ public class PieceTypeEditor extends Pane {
         initImageLoader(images);
         initGoBtn(goButton, unitID, unitName, modList);
 
-        box.getChildren().addAll(labelBox, ids, names, createStat, availableStats,
-                                 images, modList, goButton);
-
+        box.getChildren().addAll(labelBox, ids, names, createStat, images, modList, goButton);
         getChildren().add(box);
     }
 
@@ -197,10 +192,6 @@ public class PieceTypeEditor extends Pane {
     }
 
     private void showStatEditorWindow () {
-        Map<String, Double> sample = new HashMap<String, Double>();
-        sample.put("sample", 5.0);
-        Stats sampleStat = new Stats(sample);
-        
         StatsTotalEditor editor = new StatsTotalEditor(myStats);
         editor.show();
     }
