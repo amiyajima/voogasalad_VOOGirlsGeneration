@@ -11,20 +11,20 @@
         <tabs>
           <Tab text="Languages">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane fx:id="languagesPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <CheckBox fx:id="EnglishCheck" layoutX="14.0" layoutY="32.0" mnemonicParsing="false" selected="true" text="English">
+                        <CheckBox id="resources.languages.English" fx:id="EnglishCheck" layoutX="14.0" layoutY="32.0" mnemonicParsing="false" selected="true" text="English">
                            <font>
                               <Font name="Consolas" size="13.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox fx:id="FrenchCheck" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" text="French">
+                        <CheckBox id="resources.languages.French" fx:id="FrenchCheck" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" text="French">
                            <font>
                               <Font name="Consolas" size="13.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox fx:id="KoreanCheck" layoutX="14.0" layoutY="86.0" mnemonicParsing="false" text="Korean" />
-                        <CheckBox fx:id="ChineseCheck" layoutX="14.0" layoutY="115.0" mnemonicParsing="false" text="Chinese" />
+                        <CheckBox id="resources.languages.Korean" fx:id="KoreanCheck" layoutX="14.0" layoutY="86.0" mnemonicParsing="false" text="Korean" />
+                        <CheckBox id="resources.languages.Chinese" fx:id="ChineseCheck" layoutX="14.0" layoutY="115.0" mnemonicParsing="false" text="Chinese" />
                      </children></AnchorPane>
             </content>
           </Tab>
