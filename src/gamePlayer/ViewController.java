@@ -316,7 +316,7 @@ public class ViewController {
 	/**
 	 * Initializes grid and its effects manager (gamegrideffect)
 	 */
-	private void initializeGrid() {
+	protected void initializeGrid() {
 		System.out.println("initialize grid");
 	    
 	        myAudio.playSelection();
@@ -482,7 +482,6 @@ public class ViewController {
 		}
 	        
 	        gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
-		
 		if (keyControlOn) {
 			myKeyboardMovement = null;
 			myKeyboardAction = new KeyboardAction();
