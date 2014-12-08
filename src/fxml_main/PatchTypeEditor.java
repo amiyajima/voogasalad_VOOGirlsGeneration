@@ -1,13 +1,11 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Patch;
-
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -80,6 +78,7 @@ public class PatchTypeEditor extends Pane {
 	 */
 	public PatchTypeEditor (Consumer<Patch> okLambda, Patch patch) {
 		myEditorTitle = EDITOR_TITLE;
+		myIDSet = new HashSet<String>();
 		myID = patch.getID();
 		myName = patch.toString();
 		myImageLocation = patch.getImageLocation();
@@ -122,7 +121,6 @@ public class PatchTypeEditor extends Pane {
 		TextField terrainID = new TextField();
 		terrainID.setText(myID);
 		if(!myID.equals("")){
-			myIDSet = new HashSet<String>();
 			terrainID.setDisable(true);
 		}
 		terrainID.setPromptText(ID_PROMPT);
