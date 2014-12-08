@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import javafx.event.EventHandler;
@@ -108,7 +109,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		return super.myNumCols;
 	}
 
-	public void addPiece (Piece pieceType, Point2D loc) {
+	public void addPieceAtLoc (Piece pieceType, Point2D loc) {
 		Piece clone = new Piece(pieceType, loc);
 		if (isPieceOccupied(loc)){
 			removePieceAtCoordinate(loc);
@@ -118,7 +119,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		myTile.setPieceImage(clone.getImageView());
 	}
 
-	public void addPatch (Patch patchType, Point2D loc) {
+	public void addPatchAtLoc (Patch patchType, Point2D loc) {
 		Patch clone = new Patch(patchType, loc);
 		if (isPatchOccupied(loc)){
 			removePatchAtCoordinate(loc);
@@ -127,16 +128,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
 		myTile.setPatchImage(clone.getImageView());
 	}
-
-	public boolean isPatchOccupied (Point2D loc){
-		for (Patch p: myPatchData.getData()){
-			if (p.getLoc().equals(loc)){
-				return true;
-			}
-		}
-		return false;
-	}
-
+	
 	public boolean isPieceOccupied (Point2D loc){
 		for (Piece p: myPieceData.getData()){
 			if (p.getLoc().equals(loc)){
@@ -145,6 +137,16 @@ public class GUIGrid extends SuperGrid implements Observer{
 		}
 		return false;
 	}
+	
+	public boolean isPatchOccupied (Point2D loc){
+		for (Patch p: myPatchData.getData()){
+			if (p.getLoc().equals(loc)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * Removes a piece at the given coordinates.
 	 * NOTE: Point2D coordinates given as
@@ -155,7 +157,9 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 */
 	public void removePieceAtCoordinate (Point2D coor) {
 		Piece toRemove = getPiece(coor);
-		removePiece(toRemove);
+		if(isPieceOccupied(coor)){
+			removePiece(toRemove);
+		}
 	}
 
 	/**
@@ -170,7 +174,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		Patch toRemove = getPatch(coor);
 		//TODO: remove only if there is a patch to be removed
 		//to avoid nullerpt..
-		if (isPatchOccupied(coor)){
+		if(isPatchOccupied(coor)){
 			removePatch(toRemove);
 		}
 	}
@@ -215,7 +219,9 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 */
 	public Piece getPiece (Point2D loc) {
 		for (Piece p : myPieceData.getData()) {
-			if ((p.getLoc().equals(loc))) { return p; }
+			if ((p.getLoc().equals(loc))) {
+				return p;
+			}
 		}
 		return null;
 	}
@@ -228,14 +234,16 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 */
 	public Patch getPatch (Point2D loc) {
 		for (Patch p : myPatchData.getData()) {
-			if ((p.getLoc().equals(loc))) { return p; }
+			if ((p.getLoc().equals(loc))) {
+				return p;
+			}
 		}
 		return null;
 	}
 
 	public void removePiece (Piece p) {
-		SuperTile currentTile = findTile(p.getLoc());
 		myPieceData.remove(p);
+		SuperTile currentTile = findTile(p.getLoc());
 		currentTile.removePieceImage();
 	}
 
@@ -348,13 +356,13 @@ public class GUIGrid extends SuperGrid implements Observer{
 		}
 	}
 
-	public void addPieceToTile (Piece pieceType, Point2D loc) {
+	private void addPieceToTile (Piece pieceType, Point2D loc) {
 		SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
 		myTile.setPieceImage(pieceType.getImageView());
 
 	}
 
-	public void addPatchToTile (Patch patchType, Point2D loc) {
+	private void addPatchToTile (Patch patchType, Point2D loc) {
 		SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
 		myTile.setPatchImage(patchType.getImageView());
 	}
@@ -368,11 +376,11 @@ public class GUIGrid extends SuperGrid implements Observer{
 		myPane.setOnMouseDragged(handler);
 	}
 
-	public void runEvent(Consumer<List<IHasStats>> eventFunc){
+	public void runEvent(BiConsumer<List<IHasStats>, GUIGrid> eventFunc){
 		List<IHasStats> allObjects = new ArrayList<>();
 		allObjects.addAll(myPieceData.getData());
 		allObjects.addAll(myPatchData.getData());
 		
-		eventFunc.accept(allObjects);
+		eventFunc.accept(allObjects, this);
 	}
 }

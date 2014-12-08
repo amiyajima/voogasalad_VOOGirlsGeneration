@@ -1,5 +1,11 @@
 package gamedata.events;
 
+import gamedata.gamecomponents.IHasStats;
+
+import java.util.List;
+
+import authoring_environment.GUIGrid;
+
 /**
  * GlobalActions are a special type of action in which the Game operates on a target 
  * (a Piece, a Patch, a Player, the Game itself, etc.)
@@ -20,10 +26,11 @@ public abstract class GlobalAction {
 		myDescription = s;
 	}
 	
-	public abstract void doBehavior();
+	public abstract void doBehavior(GUIGrid grid);
 	
 	@Override
 	public String toString(){
 		return myDescription;
 	}
+
 }

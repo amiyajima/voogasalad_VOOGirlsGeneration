@@ -4,6 +4,7 @@ import gamedata.gamecomponents.IHasStats;
 
 import java.util.List;
 
+import authoring_environment.GUIGrid;
 import javafx.collections.FXCollections;
 
 
@@ -43,7 +44,7 @@ public class Event {
 	 * The list of Conditions is evaluated, and if all return true, the list of Actions
 	 * is run in order.
 	 */
-	public void runEvent (List<IHasStats> sources) {
+	public void runEvent (List<IHasStats> sources, GUIGrid grid) {
 		boolean allConditionsFulfilled = true;
 
 		for (Condition c : myConditions) {
@@ -51,10 +52,12 @@ public class Event {
 				allConditionsFulfilled = false;
 			}
 		}
+		
+		System.out.println("THE CONDITION EVALUATES TO: " + allConditionsFulfilled);
 
 		if (allConditionsFulfilled) {
 			for (GlobalAction a : myGlobalActions) {
-				a.doBehavior();
+				a.doBehavior(grid);
 			}
 		}
 	}

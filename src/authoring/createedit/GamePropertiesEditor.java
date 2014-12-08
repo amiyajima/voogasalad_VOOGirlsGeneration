@@ -1,7 +1,6 @@
 package authoring.createedit;
 
 import java.util.ResourceBundle;
-
 import authoring.abstractfeatures.PopupWindow;
 import authoring.data.GamePropertiesData;
 import javafx.event.ActionEvent;
@@ -97,5 +96,4 @@ public class GamePropertiesEditor extends PopupWindow{
 	public String getGridShape(){
 		return myGridShape;
 	}
-
 }

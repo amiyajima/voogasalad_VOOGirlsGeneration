@@ -14,6 +14,7 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import authoring.concretefeatures.ActionOperationEditor;
 import authoring.concretefeatures.RangeEditor;
 import authoring.concretefeatures.SingleMultiplierBox;
 import authoring.concretefeatures.StatsTotalEditor;
@@ -99,6 +100,7 @@ public class ActionEditor extends VBox {
         statsOperationBox.setPadding(UIspecs.allPadding);
         statsOperationBox.setSpacing(5);
         Button statsOperation = new Button(STATS_OPERATION_LABEL);
+        initOperationEditor(statsOperation);
         statsOperationBox.getChildren().addAll(statsOperation);
 
         Button okBtn = new Button("OK");
@@ -124,6 +126,20 @@ public class ActionEditor extends VBox {
 
     }
 
+    private void initOperationEditor (Button b) {
+        b.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent click) {
+                showOperationEditorWindow();
+            }
+        });
+    }
+
+    private void showOperationEditorWindow () {
+        ActionOperationEditor editor = new ActionOperationEditor();
+        editor.show();
+    }
+
     private void initRangeEditor (Button b) {
         b.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -131,7 +147,6 @@ public class ActionEditor extends VBox {
                 showRangeEditorWindow();
             }
         });
-
     }
 
     private void showRangeEditorWindow () {

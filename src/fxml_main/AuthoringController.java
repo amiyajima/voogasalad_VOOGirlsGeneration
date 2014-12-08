@@ -3,7 +3,6 @@ package fxml_main;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,13 +14,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import authoring.actionslogic.ActionLogicController;
+import authoring.concretefeatures.StatsTotalEditor;
 import authoring.createedit.GamePropertiesEditor;
 import authoring.data.ActionData;
 import authoring.data.GamePropertiesData;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
-import authoring.eventeditor.EventEditorController;
+
+
 
 public class AuthoringController implements Initializable {
 
