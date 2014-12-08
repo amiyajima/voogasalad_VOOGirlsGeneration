@@ -120,9 +120,8 @@ public class ActionLogicController implements Initializable {
     public void getData(ActionData actionData, PieceTypeData ptData){
         ActionData actData = actionData;
         PieceTypeData pieceData = ptData;
-        myPieceTypes = actData.getActionIDs();
-        myActionTypes = (List<String>) pieceData.getIdSet();
-        
+        myActionTypes = actData.getActionIDs();
+        myPieceTypes.addAll(pieceData.getIdSet());
         
     }
     
