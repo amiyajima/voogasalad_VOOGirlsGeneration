@@ -4,13 +4,16 @@ import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
 import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import java.awt.geom.Point2D;
+import utilities.ClassGrabber;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -31,7 +34,7 @@ import authoring.data.ActionData;
 /**
  * Opens a dialog for creating new Actions in the authoring environment
  * 
- * @author Mike Zhu, Rica Zhang, Jennie Ju
+ * @author Mike Zhu, Rica Zhang, Jennie Ju, annamiyajima
  *
  */
 public class ActionCreator extends PopupWindow {
@@ -47,6 +50,7 @@ public class ActionCreator extends PopupWindow {
     private static final Insets MARGINS = new Insets(20, WIDTH / 8, 20, WIDTH / 8 - 10);
     private static final String LABEL_CSS = "-fx-font-size: 12pt;";
     private static final String DEFAULT_IMAGE = "/resources/images/default_image.png";
+    private static final String CONCLUSION_LABEL = "Choose action conclusion";
 
     private String myName;
     private List<Point2D> myAttackRange;
@@ -54,10 +58,12 @@ public class ActionCreator extends PopupWindow {
     private List<StatsTotalLogic> myStatsLogics;
     private ActionConclusion myConclusion;
 
-    public ActionCreator(){
+    private List<Class> conclusionsList;
+
+    public ActionCreator () {
         this(new ActionData());
     }
-    
+
     /**
      * Constructor for an ActionCreator popup window
      * 
@@ -84,7 +90,7 @@ public class ActionCreator extends PopupWindow {
         ScrollPane root = new ScrollPane();
         Scene scene = new Scene(root);
         scene.getStylesheets().add(STYLESHEET);
-        
+
         VBox box = new VBox();
         box.setPadding(MARGINS);
         box.setSpacing(10);
@@ -116,6 +122,8 @@ public class ActionCreator extends PopupWindow {
         initStatsModifier(targetVBox, targetChoice, moddedStat);
         // Operations
         initOperationsBox(operationsVBox);
+        // conclusions
+        initConclusionsBox(conclusionVBox);
 
         Button createBtn = new Button("Create new action");
         createBtn.setMaxWidth(WIDTH - WIDTH / 4 - 10);
@@ -137,6 +145,58 @@ public class ActionCreator extends PopupWindow {
                                  new Separator(), createBtn);
         root.setContent(box);
         setScene(scene);
+    }
+
+    private void initConclusionsBox (VBox conclusionVBox) {
+        // TODO create label + choicebox populated with types of action conclusions
+        Label chooseConclusion = new Label(CONCLUSION_LABEL);
+        ChoiceBox conclusionChoiceBox = new ChoiceBox();
+
+        try {
+            conclusionsList = Arrays.asList(ClassGrabber.getClasses("gamedata.action.conclusions"));
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        List<String> displayList = new ArrayList<>();
+        for (Class<?> c : conclusionsList) {
+            displayList.add(c.toString());
+        }
+        displayList = trimClassList(displayList);
+
+        conclusionChoiceBox.getItems().addAll(displayList);
+
+        conclusionVBox.getChildren().addAll(chooseConclusion, conclusionChoiceBox);
+    }
+
+    private List<String> trimClassList (List<String> conclusionsList) {
+        List<String> displayList = new ArrayList<>();
+        for (String s : conclusionsList) {
+            String trimmed = trimClassPaths(s);
+            displayList.add(trimmed);
+        }
+        return displayList;
+    }
+
+    /**
+     * Removes the classpath prefixes for each Condition name
+     * 
+     * @param s
+     */
+    private String trimClassPaths (String s) {
+        int idx = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s.charAt(i) == '.') {
+                idx = i;
+                break;
+            }
+        }
+        String trimmed = s.substring(idx + 1);
+        return trimmed;
     }
 
     // TODO: really need to take in multiple stats
@@ -210,7 +270,7 @@ public class ActionCreator extends PopupWindow {
             }
         });
     }
-    
+
     private Button makeDeleteButton (VBox operationsBox, SingleMultiplierBox operation) {
         Button delBtn = new Button("-");
         delBtn.setOnAction(new EventHandler<ActionEvent>() {
