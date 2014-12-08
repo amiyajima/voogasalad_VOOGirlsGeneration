@@ -1,5 +1,6 @@
 package gamedata.events.globalaction;
 
+import java.awt.geom.Point2D;
 import java.util.List;
 
 import authoring_environment.GUIGrid;
@@ -13,9 +14,10 @@ import gamedata.gamecomponents.Piece;
  * @author Mike Zhu
  *
  */
-public class DeletePiece extends GlobalAction {	
-	private String myHealthName;
+public class DeletePieceAtLocation extends GlobalAction {	
     
+	Point2D myLoc;
+	
     /**
      * Make sure you construct this referring to the piece that you want to delete rather than 
      * creating a new piece because the grid will try to look for that piece to delete when the
@@ -23,18 +25,13 @@ public class DeletePiece extends GlobalAction {
      * @param game
      * @param name of type of piece to delete
      */
-    public DeletePiece(String name, String healthName) {
-        super(name);
-        myHealthName = healthName;
+    public DeletePieceAtLocation(Point2D point) {
+        super(String.format("Delete Piece at position %s", point));
+        myLoc = point;
     }
 
     @Override
-    public void doBehavior(List<IHasStats> objects) {
-       for(IHasStats obj : objects){
-    	   Piece p = (Piece) obj;
-    	   if(obj.getStats().getValue(myHealthName)<=0){
-    		   p.shouldRemove();
-    	   }
-       }
+    public void doBehavior(GUIGrid myGrid) {
+    	myGrid.removePieceAtCoordinate(myLoc);
     }
 }

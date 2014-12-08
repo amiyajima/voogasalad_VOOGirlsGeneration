@@ -3,6 +3,14 @@ package gamePlayer;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * Controls the languages used in the game
@@ -11,62 +19,51 @@ import javafx.fxml.FXML;
  */
 public class Languages {
     
-    public static final String ENGLISH = "resources.languages.English";
-    public static final String CHINESE = "resources.languages.Chinese";
-    public static final String KOREAN = "resources.languages.Korean";
-    public static final String FRENCH = "resources.languages.French";
+    public static final String DEFAULT_LANGUAGE = "resources.languages.English";
+//    public static final String CHINESE = "resources.languages.Chinese";
+//    public static final String KOREAN = "resources.languages.Korean";
+//    public static final String FRENCH = "resources.languages.French";
     
     private ResourceBundle messages;
     private String currentLanguage;
+    private Button showScoreButton;
+    private MenuButton gameMenu;
+    private TabPane tabPane;
+    private AnchorPane languagesPane;
+
     
-    public Languages() {
-        ResourceBundle messages = ResourceBundle.getBundle("MessagesBundle", currentLocale);
+    public Languages(AnchorPane  ap, TabPane tp, MenuButton mb, Button b) {
+        showScoreButton = b;
+        gameMenu = mb;
+        tabPane = tp;
+        languagesPane = ap;
+        currentLanguage = DEFAULT_LANGUAGE;
     }
     
     /**
      * Checks the currently selected language
      */
-    @FXML
-    public void checkLanguage() {
-            if (EnglishCheck.isSelected()) {
-                    currentLanguage = ENGLISH;
+    public void findCurrentLanguage() {
+        for (Node n: languagesPane.getChildren()){
+            if ( ((CheckBox)n).isSelected()){
+                currentLanguage = n.getId();
             }
-            if (FrenchCheck.isSelected()) {
-                    currentLanguage = FRENCH;
-            }
-            if (KoreanCheck.isSelected()) {
-                    currentLanguage = KOREAN;
-            }
-            if (ChineseCheck.isSelected()) {
-                    currentLanguage = CHINESE;
-            }
-            updateLanguages();
+        }
+            updateLabels();
     }
-    
+
     /**
      * Updates the game labels according to the selected language in settings
      */
-    public void updateLanguages() {
+    public void updateLabels() {
             messages = ResourceBundle.getBundle(currentLanguage);
-            showScoreButton.setText(messages.getString("SCORE"));
-            controlTab.setText(messages.getString("CONTROL"));
-            statsTab.setText(messages.getString("STATS"));
-            inventoryTab.setText(messages.getString("INVENTORY"));
-            gameMenu.setText(messages.getString("GAMEMENU"));
-            restartMenu.setText(messages.getString("RESTART"));
-            saveMenu.setText(messages.getString("SAVE"));
-            loadMenu.setText(messages.getString("LOAD"));
-            mainMenu.setText(messages.getString("MAIN"));
-            settingsMenu.setText(messages.getString("SETTINGS"));
-            exitMenu.setText(messages.getString("EXIT"));
+            showScoreButton.setText(messages.getString(showScoreButton.getId()));
+            gameMenu.setText(messages.getString(gameMenu.getId()));
+            for (Tab t: tabPane.getTabs()){
+                t.setText(messages.getString(t.getId()));
+            }
+            for (MenuItem i: gameMenu.getItems()){
+                i.setText(messages.getString(i.getId()));
+            }
     }
-    
-    
-    
-    
-    
-//    public void useChinese(){
-//        Locale cLocale = new Locale("cn","CN");
-//        
-//    }
 }
