@@ -150,7 +150,12 @@ public class RangeGrid extends SuperGrid{
 		}else{
 			for (int i=(centerX-radius);i<=(centerX+radius);i++){
 				for (int j=(centerY-radius);j<=(centerY+radius);j++){
-					findTile(i, j).selectTile(DEFAULT_HIGHLIGHT_COLOR);
+					if (toChoose){
+						findTile(i, j).selectTile(DEFAULT_HIGHLIGHT_COLOR);
+					}else{
+						findTile(i, j).deselectTile();
+					}
+						
 				}
 			}
 		}

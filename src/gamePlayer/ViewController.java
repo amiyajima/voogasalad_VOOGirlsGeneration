@@ -14,6 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,6 +28,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -67,6 +69,7 @@ public class ViewController {
 	public static final String ENGLISH = "resources.languages.English";
 	public static final String CHINESE = "resources.languages.Chinese";
 	public static final String KOREAN = "resources.languages.Korean";
+	public static final String FRENCH = "resources.languages.French";
 
 	private String currentLanguage;
 	private Stage myStage;
@@ -141,6 +144,15 @@ public class ViewController {
 	@FXML
 	private Tab inventoryTab;
 	
+	@FXML
+	private CheckBox EnglishCheck;
+	@FXML
+        private CheckBox FrenchCheck;
+	@FXML
+        private CheckBox KoreanCheck;
+	@FXML
+        private CheckBox ChineseCheck;
+	
 
 	private ScrollPane myGridPane;
 
@@ -151,10 +163,26 @@ public class ViewController {
 	private SuperTile keySelectedTile;
 	
 	private int tempMoveCount = 0;
+	
+	@FXML
+	public void checkLanguage(){
+	    if (EnglishCheck.isSelected()){
+	        currentLanguage = ENGLISH;
+	    }
+	    if (FrenchCheck.isSelected()){
+	        currentLanguage = FRENCH;
+	    }
+	    if (KoreanCheck.isSelected()){
+	        currentLanguage = KOREAN;
+	    }
+	    if (ChineseCheck.isSelected()){
+	        currentLanguage = CHINESE;
+	    }
+	    updateLanguages();
+	}
 
 	public ViewController(Stage s) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		myStage = s;
-
 		openInitialMenu();
 		try {
 			newGame();
@@ -181,7 +209,7 @@ public class ViewController {
 	    myGameSpace = new BorderPane();
 	    myScoreBoard = new VBox();
 	    scores = new VBox();
-	    
+	    currentLanguage = ENGLISH;
 
 	    myPopup = new BorderPane();
 	    mySettings = new VBox();
@@ -206,12 +234,9 @@ public class ViewController {
 	    System.out.println("Opened initial menu");
 	}
 	
-	public void changeLanguage(String lang) {
-	    currentLanguage = lang;
-	}
 	
-	public void addLanguages() {
-	        messages = ResourceBundle.getBundle(ENGLISH);
+	public void updateLanguages() {
+	        messages = ResourceBundle.getBundle(currentLanguage);
 	        showScoreButton.setText(messages.getString("SCORE"));
 	        controlTab.setText(messages.getString("CONTROL"));
 	        statsTab.setText(messages.getString("STATS"));
@@ -256,6 +281,7 @@ public class ViewController {
 	    System.out.println("opensettings");
 	    Stage stage = new Stage();
 	    stage.setScene(mySettingsScene);
+	    checkLanguage();
 	    stage.show();
 	}
 	
@@ -378,7 +404,6 @@ public class ViewController {
 			});
 		});
 		// initializeGrid();
-	        addLanguages();
 	}
 
 	/**
@@ -742,7 +767,7 @@ public class ViewController {
 	 */
 	public void setGridState(IGridState state) {    
 	    tempMoveCount++;
-	    if (myModel.getCurrentLevel().getGameWon() || tempMoveCount == 10) {
+	    if (myModel.getCurrentLevel().getGameWon() || tempMoveCount > 0) {
 	        // TODO assuming that the most recent currentPlayer won
 	        String highScorer = "Bob";
 	        int highScore = 10000;
@@ -798,21 +823,30 @@ public class ViewController {
 	
 	private void addEntryToHallOfFame(Stage stage, String nickname, String score) {
 	    try {
-	        File myScores = new File(getClass().getResource("/resources/highscore/highscore.txt").getPath());
-	        PrintWriter writer = new PrintWriter(myScores);
-	        writer.println(nickname + ": " + score);
-	        writer.flush();
-	        writer.close();
-	        
-	        System.out.println(myScores.getAbsolutePath());
-	        Scanner in = new Scanner(myScores);
+	        File myScores2 = new File(getClass().getResource("/resources/highscore/highscore.txt").getPath());
+	        Scanner in = new Scanner(myScores2);
+	        String content = "";
 	        ArrayList<List<String>> highScores = new ArrayList<List<String>>();
 	        while(in.hasNextLine()) {
-	            List<String> line = Arrays.asList(in.nextLine().split("\\s*: \\s*"));
-	            System.out.println(line.get(0) + line.get(1));
-	            highScores.add(line);
+	            String line = in.nextLine();
+	            content += line + "\n";
+	            List<String> listLine = Arrays.asList(line.split("\\s*: \\s*"));
+	            System.out.println(listLine.get(0) + listLine.get(1));
+	            highScores.add(listLine);
 	        }
 	        in.close();
+	        
+                File myScores = new File(getClass().getResource("/resources/highscore/highscore.txt").getPath());
+                BufferedWriter writer = new BufferedWriter(new FileWriter(myScores));
+                writer.write(content);
+                writer.write(nickname + ": " + score + "\n");
+                writer.flush();
+                writer.close();
+                List<String> currentScore = new ArrayList<String>();
+                currentScore.add(nickname);
+                currentScore.add(score);
+                highScores.add(currentScore);
+	        /*
 	        Collections.sort(highScores, new Comparator<List<String>> () {
 	            @Override
 	            public int compare(List<String> a, List<String> b) {
@@ -820,6 +854,7 @@ public class ViewController {
 	            }
 
 	        });
+	        */
 	        for (List<String> each : highScores) {
 	            myScoreBoard.getChildren().add(1, new Label(each.get(0) + ": " + each.get(1)));
 	        }
@@ -829,6 +864,10 @@ public class ViewController {
 	    catch (FileNotFoundException f)  {
 	        System.out.println("High scores file not found, sorry.");
 	    }
+	    catch (IOException i) {
+                System.out.println("Write failed");
+            }
+
 	}
 
 	/**

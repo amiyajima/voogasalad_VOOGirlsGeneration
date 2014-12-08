@@ -7,7 +7,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -26,6 +28,8 @@ public class PieceEditor extends Pane {
     private static final String EDITOR_TITLE = "Individual Unit Editor";
     private static final String ID_LABEL = "Unique ID: ";
     private static final String NAME_LABEL = "Name: ";
+    private static final String PLAYER_LABEL = "Player ID: ";
+    private static final String PLAYER_BUTTON = "Set Player";
     private static final String STAT_CREATE_LABEL = "Add stat";
     private static final Insets MARGINS = new Insets(20, WIDTH / 5, 20, WIDTH / 5 - 10);
     private static final String LABEL_CSS = "-fx-font-size: 14pt;";
@@ -37,6 +41,7 @@ public class PieceEditor extends Pane {
     private Stats myStats;
 
     public PieceEditor (Piece piece) {
+    	myPiece = piece;
         myID = piece.getID();
         myName = piece.toString();
         myStats = piece.getStats();
@@ -65,6 +70,10 @@ public class PieceEditor extends Pane {
         names.setPadding(UIspecs.allPadding);
         names.setSpacing(5);
         
+        HBox player = new HBox();
+        player.setPadding(UIspecs.allPadding);
+        player.setSpacing(5);
+        
         HBox createStat = new HBox();
         createStat.setPadding(UIspecs.allPadding);
         createStat.setSpacing(5);
@@ -88,15 +97,40 @@ public class PieceEditor extends Pane {
         Label nameLabel = new Label(NAME_LABEL + myName);
         nameLabel.setPadding(UIspecs.topRightPadding);
         names.getChildren().addAll(nameLabel);
-
+        
+        initPlayerChoice(player);
         VBox modList = initPseudoModList();
         initImageDisplay(images);
 
-        box.getChildren().addAll(labelBox, ids, names, createStat, images, modList);
+        box.getChildren().addAll(labelBox, ids, names, player, createStat, images, modList);
         getChildren().add(box);
     }
 
-    private void initStatButton (Button createStatButton) {
+    private void initPlayerChoice(HBox player) {
+    	Label playerLabel = new Label(PLAYER_LABEL);
+        playerLabel.setPadding(UIspecs.topRightPadding);
+        ChoiceBox<Integer> playerID = new ChoiceBox<Integer>();
+        SingleSelectionModel<Integer> selection = playerID.getSelectionModel();
+        
+        // TODO : This should not be hard-coded.
+        int numPlayers = 2;
+        
+        for(int i = 1; i <= numPlayers; i++){
+        	playerID.getItems().add(i);
+        }
+        selection.select(myPiece.getPlayerID() - 1);
+        
+        Button playerSet = new Button(PLAYER_BUTTON);
+        playerSet.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent select) {
+                myPiece.setPlayerID(selection.getSelectedItem());
+            }
+        });
+        player.getChildren().addAll(playerLabel, playerID, playerSet);
+	}
+
+	private void initStatButton (Button createStatButton) {
         createStatButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
