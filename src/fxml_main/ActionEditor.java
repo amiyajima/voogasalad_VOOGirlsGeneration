@@ -18,6 +18,7 @@ import authoring.concretefeatures.ActionOperationEditor;
 import authoring.concretefeatures.RangeEditor;
 import authoring.concretefeatures.SingleMultiplierBox;
 import authoring.concretefeatures.StatsTotalEditor;
+import authoring.createedit.ActionCreator;
 import authoring_environment.GUIGrid;
 import authoring_environment.UIspecs;
 
@@ -136,8 +137,10 @@ public class ActionEditor extends VBox {
     }
 
     private void showOperationEditorWindow () {
-        ActionOperationEditor editor = new ActionOperationEditor();
-        editor.show();
+        // ActionOperationEditor editor = new ActionOperationEditor();
+        // editor.show();
+        ActionCreator creator = new ActionCreator();
+        creator.show();
     }
 
     private void initRangeEditor (Button b) {

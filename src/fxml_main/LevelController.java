@@ -69,7 +69,7 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 		List<Player> playersRO = null;
 
 		EventsDataWrapper wrapper = new EventsDataWrapper(piecesRO, patchesRO, playersRO);
-		super.myPropertiesSPane.setContent(new LevelEditor(okLambda, wrapper));
+		myPropertiesSPane.setContent(new LevelEditor(okLambda, wrapper));
 	}
 
 	@Override
@@ -87,11 +87,11 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 		delBtn.setVisible(false);
 	}
 
-
 	@Override
 	protected HBox makeEntryBox(Level entry) {
 		HBox entryBox = new HBox();
 		Label nameLabel = new Label(entry.getId());
+		// sets the current grid reference
 		entryBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -104,10 +104,6 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 
 	@Override
 	protected void initEntryEditBtn(Level entry, Button editBtn) {
-
-		//TODO: THIS ONLY SORT OF WORKS
-		//WORKS WHEN YOU CLICK ON LHS PANE THEN RHS PANE THEN DONE. 
-		//ALSO LEVELS ARE SORTED IN ORDER OR MOST RECENTLY MODIFIED
 		editBtn.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent click) {
@@ -122,7 +118,7 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 					myPatchTypes.addObserver(level.getGrid());
 					myLevelData.replace(entry, level);
 					setAndDisplayGrid(level);
-
+					myPropertiesSPane.setContent(null);
 				};
 				List<Piece> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
 				List<Patch> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
@@ -131,9 +127,7 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 				EventsDataWrapper wrapper = new EventsDataWrapper(piecesRO, patchesRO, playersRO);
 
 				myPropertiesSPane.setContent(new LevelEditor(okLambda, entry, wrapper));
-
 			}
-
 		});
 	}
 
@@ -144,6 +138,11 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 			public void handle (ActionEvent event) {
 				myLevelData.remove(entry);
 				myVBox.getChildren().remove(myEntryMap.get(entry));
+				if (myGridReference.getGrid() == entry.getGrid()) {
+					myGridReference.resetGrid();
+					myGridReference.getGrid().displayPane(myGridSPane);
+				}
+				myPropertiesSPane.setContent(null);
 			}
 		});
 	}

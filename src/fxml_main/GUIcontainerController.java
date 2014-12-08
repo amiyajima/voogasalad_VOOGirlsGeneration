@@ -27,11 +27,6 @@ public class GUIcontainerController implements Initializable{
 	@FXML
 	private void showGamePropertiesWindow(){
 			GamePropertiesEditor gamePptEditor=new GamePropertiesEditor(myGamePropertiesData);
-			gamePptEditor.setTitle("Game Properties Editor");
-		 	gamePptEditor.setX(450);
-		 	gamePptEditor.setY(200);
-		 	gamePptEditor.show();
-		 		
 	}
 	
 

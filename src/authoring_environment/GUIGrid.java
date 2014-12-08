@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -89,24 +88,6 @@ public class GUIGrid extends SuperGrid implements Observer{
 		myPatchData = copyGrid.myPatchData;
 		removeRunOffData(cols, rows);
 		repopulate();
-	}
-
-	/**
-	 * Returns number of rows
-	 * 
-	 * @return int number of rows
-	 */
-	public int getNumRows () {
-		return super.myNumRows;
-	}
-
-	/**
-	 * Returns number of columns
-	 * 
-	 * @return int number of columns
-	 */
-	public int getNumCols () {
-		return super.myNumCols;
 	}
 
 	public void addPieceAtLoc (Piece pieceType, Point2D loc) {
