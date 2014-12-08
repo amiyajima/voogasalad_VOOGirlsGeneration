@@ -2,12 +2,10 @@ package fxml_main;
 
 import gamedata.events.Event;
 import gamedata.gamecomponents.Level;
-
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,26 +28,26 @@ import authoring_environment.GUIGrid;
 
 
 public class LevelEditor extends VBox {
-    private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
+	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 
-    private static final String CREATOR_TITLE = "Level Creator";
-    private static final String EDITOR_TITLE = "Level Editor";
-    private static final String LABEL_CSS = "-fx-font-size: 14pt;";
+	private static final String CREATOR_TITLE = "Level Creator";
+	private static final String EDITOR_TITLE = "Level Editor";
+	private static final String LABEL_CSS = "-fx-font-size: 14pt;";
 
-    private String myId;
-    private int myGridRows;
-    private int myGridCols;
-    private double myTileHeight;
-    private ObservableList<Event> myEvents;
-    private GUIGrid myGrid;
-    private Level myLevel;
+	private String myId;
+	private int myGridRows;
+	private int myGridCols;
+	private double myTileHeight;
+	private ObservableList<Event> myEvents;
+	private GUIGrid myGrid;
 
-    private Consumer<Level> myOkLambda;
+	private Consumer<Level> myOkLambda;
 
 	private String myEditorTitle;
-	
+
 	private EventsDataWrapper myData;
 
+<<<<<<< HEAD
     public LevelEditor (Consumer<Level> okLambda, EventsDataWrapper data) {
     	myEditorTitle = CREATOR_TITLE;
 
@@ -175,15 +173,10 @@ public class LevelEditor extends VBox {
 
         EventEditorController controller = loader.getController();
         controller.loadEvents(myEvents);
-        
-        /**
-         * Passing a lot of data around
-         */
-        myData.loadLevelPieces(myGrid.getReadOnlyPieceList());
-        myData.loadLevelPatches(myGrid.getReadOnlyPatchList());
         controller.loadData(myData);
 
         eventEditorStage.showAndWait();
     }
+
 
 }

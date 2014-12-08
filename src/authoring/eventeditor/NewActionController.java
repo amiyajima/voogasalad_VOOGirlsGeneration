@@ -90,10 +90,10 @@ public class NewActionController implements Initializable{
 
 		}
 		if(myGlobalAction==null){
-			editorScrollPane.setContent(new ActionEditorPane(myDoneLambda, myData));
+			editorScrollPane.setContent(new GlobalActionEditorPane(myDoneLambda, myData));
 		}
 		else{
-			editorScrollPane.setContent(new ActionEditorPane(myDoneLambda, myData));
+			editorScrollPane.setContent(new GlobalActionEditorPane(myDoneLambda, myData));
 		}
 	}
 
