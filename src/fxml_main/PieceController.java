@@ -67,7 +67,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 						grid.removePieceAtCoordinate(coor);
 					}
 				};
-				myGridReference.getGrid().paneSetOnMouseClicked(clickHandler);
+				myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
             }
         });
     }
@@ -91,7 +91,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 						grid.addPiece(entry, coor);
 					}
 				};
-				myGridReference.getGrid().paneSetOnMouseClicked(clickHandler);
+				myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
 			}
 		});
 		hb.getChildren().addAll(img, name);

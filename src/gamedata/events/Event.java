@@ -51,6 +51,8 @@ public class Event {
 				allConditionsFulfilled = false;
 			}
 		}
+		
+		System.out.println(allConditionsFulfilled);
 
 		if (allConditionsFulfilled) {
 			for (GlobalAction a : myGlobalActions) {

@@ -74,7 +74,12 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 
 	@Override
 	protected void initGlobalEditBtn(Button editBtn) {
-		editBtn.setVisible(false);
+		editBtn.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent arg0) {
+				myLevelData.getData().get(0).runGameEvents();
+			}
+		});
 	}
 
 	@Override
