@@ -36,6 +36,7 @@ import authoring.data.PieceTypeData;
 
 public class AuthoringController implements Initializable {
 
+
     @FXML
     private ScrollPane myPropertiesSPane;
 
@@ -141,6 +142,7 @@ public class AuthoringController implements Initializable {
     @FXML
     private void showGamePropertiesWindow () {
         GamePropertiesEditor gamePptEditor = new GamePropertiesEditor(myGamePropertiesData);
+        gamePptEditor.disableChangingGridShape();
     }
 
     @FXML
@@ -170,5 +172,12 @@ public class AuthoringController implements Initializable {
             System.out.println("Opening ViewController didn't work!");
         }
     }
+
+    
+    
+	public void initData(GamePropertiesData gamePropertiesData) {
+		myGamePropertiesData=gamePropertiesData;
+	}
+    
 
 }

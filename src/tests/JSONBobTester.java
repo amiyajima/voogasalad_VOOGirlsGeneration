@@ -83,14 +83,14 @@ public class JSONBobTester {
 		Event e = new Event("garbage collect");
 		e.getConditions().add(new IsDead("Duvall"));
 		
-		
 		/**
 		 * Event for garadage comllectin
 		 */
 		Event e1 = new Event("Garbate collectbaon");
-		e1.getConditions().add(new IsDead("health"));
-		myEvents.add(e1);
+
+		e1.getConditions().add(new IsDead("Health"));
 		
+
 		List<Level> myLevels = new ArrayList<Level>();
 		Level level1 = new Level(gridLevel1, myEvents, "Level 1", false);
 		Level level2 = new Level(gridLevel2, myEvents, "Level 2", true);

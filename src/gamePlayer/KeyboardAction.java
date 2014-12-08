@@ -3,6 +3,7 @@ package gamePlayer;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.HumanPlayer;
+import gameengine.player.Player;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +27,7 @@ import javafx.scene.input.KeyEvent;
  */
 public class KeyboardAction {
     private static final double ACTION_LABEL_SHADOW_OFFSET = 6.0;
-    HumanPlayer myCurrentPlayer;
+    Player myCurrentPlayer;
     Point2D myCurrentLocation;
     GameGridEffect myGameGridEffect;
     List<Action> myActions;
@@ -38,26 +39,27 @@ public class KeyboardAction {
         myActionIndex = 0;
         myActions = new ArrayList<Action>();
 
-        // using the movement key map to determine which keys=up&down
-        // // myCurrentPlayer = do something with p.getPlayerID() to get the HumanPlayer?;
-        // // movementKeyMap = myCurrentPlayer.getMovementKeyMap();
-
-        // for testing!!!
+//        //this is my default map...
         movementKeyMap = new HashMap<KeyCode, Point2D>();
-        movementKeyMap.put(KeyCode.A, new Point2D.Double(-1.0, 0.0));
-        movementKeyMap.put(KeyCode.D, new Point2D.Double(1.0, 0.0));
         movementKeyMap.put(KeyCode.W, new Point2D.Double(0.0, 1.0));
         movementKeyMap.put(KeyCode.S, new Point2D.Double(0.0, -1.0));
     }
 
     public void setActionKeyControl (ViewController vc) {
         System.out.println("KeyboardAction ON");
-
-        if (vc.getActivePiece() != null) {
+        
+        // using the movement key map to determine which keys=up&down
+//        myCurrentPlayer = vc.getGame().getCurrentPlayer();
+//       if (((HumanPlayer)myCurrentPlayer).getMovementKeyMap()!=null){
+//           movementKeyMap = 
+//       };
+        
+        if ((vc.getActivePiece() != null) && (vc.getGame().getCurrentPlayer().getType().equals("Human")))  {
             Piece activePiece = vc.getActivePiece();
             myActions = activePiece.getActions();
 
             vc.getGridPane().requestFocus();
+            
             vc.getGridPane().setOnKeyPressed(new EventHandler<KeyEvent>() {
                 Set<KeyCode> movementKeyList = movementKeyMap.keySet();
 
@@ -66,8 +68,8 @@ public class KeyboardAction {
 
                     // Do action here
                     if (key.getCode() == KeyCode.F) {
+                        System.out.println("Selected action with key");
                         vc.bindAction(myCurrentAction);
-//                        System.out.println("Selected action with key");
                     }
 
                     // Select action here
