@@ -11,7 +11,7 @@ import java.util.Map;
  * The play method in this class is called in every iteration of the game loop.
  *
  */
-public class Game implements IChangeGameState {
+public class Game {
 
 	/**
 	 * Contains player in order of their turns
@@ -184,15 +184,4 @@ public class Game implements IChangeGameState {
 		}
 	}
 
-	@Override
-	public void winGame() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void loseGame() {
-		// TODO Auto-generated method stub
-
-	}
 }
