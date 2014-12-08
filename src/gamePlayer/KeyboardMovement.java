@@ -49,15 +49,17 @@ public class KeyboardMovement {
         // use the default map when currentplayer has no movementkeymap
 
         useDefaultMap();
-        if (((HumanPlayer) vc.getGame().getCurrentPlayer()).getMovementKeyMap() != null){
-            myActiveHumanPlayer = (HumanPlayer) vc.getGame().getCurrentPlayer();
-            movementKeyMap = myActiveHumanPlayer.getMovementKeyMap();
-        }
+//        if (((HumanPlayer) vc.getGame().getCurrentPlayer()).getMovementKeyMap() != null){
+//            myActiveHumanPlayer = (HumanPlayer) vc.getGame().getCurrentPlayer();
+//            movementKeyMap = myActiveHumanPlayer.getMovementKeyMap();
+//        }
         
         //first highlight where the keyboard movement starts on the game grid.
         vc.getGrid().findTile(myCurrentLocation).selectTile(KEY_MOVEMENT_COLOR);
         
         vc.getGridPane().requestFocus();
+        
+        if (vc.getGame().getCurrentPlayer().getType().equals("Human")){
         vc.getGridPane().setOnKeyPressed(new EventHandler<KeyEvent>() {
 
             Set<KeyCode> movementKeyList = movementKeyMap.keySet();
@@ -93,6 +95,7 @@ public class KeyboardMovement {
                 }
             }
         });
+    }
     }
 
     /**

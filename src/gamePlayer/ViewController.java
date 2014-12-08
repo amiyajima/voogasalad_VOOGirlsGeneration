@@ -506,11 +506,22 @@ public class ViewController {
                     this.checkEndActions();
                 }
                 
+                
                 if (keyControlOn) {
+                        
+                    if (myKeyboardMovement != null){
                         myKeyboardMovement = null;
                         myKeyboardAction = new KeyboardAction();
                         myKeyboardAction.setActionKeyControl(this);
+                    }
+                    
+                    else{
+                        myKeyboardAction = null;
+                        myKeyboardMovement = new KeyboardMovement();
+                        myKeyboardMovement.setMovementKeyControl(this);
+                    }
                 }
+                    
         }
 
         /**
@@ -706,7 +717,7 @@ public class ViewController {
                                  * highScore = p.getScore(); }
                                  */
                         }
-                        showHighScoreInfo(highScorer, highScore);
+//                        showHighScoreInfo(highScorer, highScore);       //commenting this out for now!!!
 
                 }
 
