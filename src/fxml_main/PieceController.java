@@ -34,6 +34,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
         newBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
+            	// Adds piecetype to data and makes an entry box
                 Consumer<Piece> okLambda = (Piece piece) -> {
                     myPieceTypes.add(piece);
                     addEntry(piece);
@@ -46,12 +47,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 
     @Override
     protected void initGlobalEditBtn (Button editBtn) {
-        editBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                System.out.println("HI EDIT BUTTONFORPIECE HI");
-            }
-        });
+    	editBtn.setVisible(false);
     }
 
     @Override
@@ -59,6 +55,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
         delBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
+            	// Make a MouseEvent for clicking the grid
                 EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
                     @Override
                     public void handle (MouseEvent e) {
@@ -70,7 +67,6 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
                 myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
                 myGridReference.getGrid().paneSetOnMouseDragged(clickHandler);
             }
-
         });
     }
 
