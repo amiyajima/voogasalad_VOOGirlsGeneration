@@ -10,7 +10,7 @@ import gamedata.gamecomponents.Piece;
  * @author Mike Zhu
  *	
  */
-public class CreatePieceGlobalAction extends GlobalAction {
+public class CreatePiece extends GlobalAction {
 
     private Piece myPiece;
     private Point2D myLoc;
@@ -21,7 +21,7 @@ public class CreatePieceGlobalAction extends GlobalAction {
      * @param game
      * @param pieceToCreate
      */
-    public CreatePieceGlobalAction (String name, Game game, Piece pieceToCreate, Point2D loc) {
+    public CreatePiece (String name, Game game, Piece pieceToCreate, Point2D loc) {
     	super(name);
         myPiece = pieceToCreate;
         myLoc = loc;

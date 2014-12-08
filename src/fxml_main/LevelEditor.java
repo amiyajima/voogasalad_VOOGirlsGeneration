@@ -52,8 +52,9 @@ public class LevelEditor extends VBox {
 
     public LevelEditor (Consumer<Level> okLambda, EventsDataWrapper data) {
     	myEditorTitle = CREATOR_TITLE;
+
     	
-        myId = "";
+    	myId = "";
         myGridRows = 0;
         myGridCols = 0;
         myTileHeight = 0;
@@ -117,7 +118,9 @@ public class LevelEditor extends VBox {
         Label heightLabel = new Label("Tile Height: ");
         TextField heightField = new TextField("" + myTileHeight);
         tileHeightHBox.getChildren().addAll(heightLabel, heightField);
-
+        
+    	myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
+    	
         Button eventBtn = new Button("Add Global Events...");
         eventBtn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -146,10 +149,7 @@ public class LevelEditor extends VBox {
                 myGridRows = Integer.parseInt(rowField.getText());
                 myGridCols = Integer.parseInt(colField.getText());
                 myTileHeight = Double.parseDouble(heightField.getText());
-
-                if(myGrid==null){
-                	myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
-                }
+                
                 Level level = new Level(myGrid, myEvents, myId, false);
 
                 myOkLambda.accept(level);
@@ -176,12 +176,11 @@ public class LevelEditor extends VBox {
         EventEditorController controller = loader.getController();
         controller.loadEvents(myEvents);
         
-        
         /**
          * Passing a lot of data around
          */
-        myData.loadLevelPieces(myGrid.getPieces().getData());
-        myData.loadLevelPatches(myGrid.getPatches().getData());
+        myData.loadLevelPieces(myGrid.getReadOnlyPieceList());
+        myData.loadLevelPatches(myGrid.getReadOnlyPatchList());
         controller.loadData(myData);
 
         eventEditorStage.showAndWait();

@@ -2,18 +2,19 @@ package authoring_environment;
 
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
+
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import authoring.data.PatchData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceData;
 import authoring.data.PieceTypeData;
-
 
 // TODO: REMOVE THE DUPLICATED CODE. SO MUCH.
 /**
