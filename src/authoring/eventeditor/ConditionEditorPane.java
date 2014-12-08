@@ -31,12 +31,9 @@ public class ConditionEditorPane extends Pane{
 	private static final String NAME_LABEL = "Name";
 	private static final String NAME_PROMPT = "Enter Condition name...";
 	private static final String COMPONENTS_LABEL = "Expression";
-	private static final String EQUALS_LABEL = "EQUALS";
 	private static final String DONE_LABEL = "Done";
 	private static final Insets MARGINS = new Insets(5, WIDTH_OFFSET, 10, WIDTH_OFFSET);
 	private static final String LABEL_CSS = "-fx-font-size: 14pt;";
-
-	private TextField myNameField = new TextField();
 
 	private ChoiceBox<String> myRefType = new ChoiceBox<>();
 	private ChoiceBox<IHasStats> myRefName = new ChoiceBox<>();
@@ -74,7 +71,7 @@ public class ConditionEditorPane extends Pane{
 				String classPath = myClass.toString();
 				classPath = classPath.substring(6);
 				
-				myCondition = (Condition) Reflection.createInstance(classPath, myNameField.getText(), ref, stat, val);
+				myCondition = (Condition) Reflection.createInstance(classPath, ref, stat, val);
 				
 				myDoneLambda.accept(myCondition);
 			}
@@ -156,19 +153,11 @@ public class ConditionEditorPane extends Pane{
 			leftHandSide.setPadding(UIspecs.allPadding);
 			leftHandSide.setSpacing(5);
 
-			Label nameLabel = new Label(NAME_LABEL);
-			nameLabel.setPadding(UIspecs.topRightPadding);
-			myNameField = new TextField();
-			myNameField.setPromptText(NAME_PROMPT);
-			names.getChildren().addAll(nameLabel, myNameField);
-
 			Label componentsLabel = new Label(COMPONENTS_LABEL);
 
 			setUpComponents(myRefType, myRefName, myStat, myVal);
 
-			Label equalsLabel = new Label(EQUALS_LABEL);
-
-			leftHandSide.getChildren().addAll(myRefType, myRefName, myStat, equalsLabel, myVal);
+			leftHandSide.getChildren().addAll(myRefType, myRefName, myStat, myVal);
 
 			components.getChildren().addAll(componentsLabel, leftHandSide);
 

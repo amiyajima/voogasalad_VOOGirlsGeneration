@@ -29,7 +29,7 @@ public class DeletePiece extends GlobalAction {
     }
 
     @Override
-    public void doBehavior (List<IHasStats> objects) {
+    public void doBehavior(List<IHasStats> objects) {
        for(IHasStats obj : objects){
     	   Piece p = (Piece) obj;
     	   if(obj.getStats().getValue(myHealthName)<=0){

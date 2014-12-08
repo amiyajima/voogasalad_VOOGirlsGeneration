@@ -12,7 +12,6 @@ public class GUIcontainerMain extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("Voogirls_GUIcontainer.fxml"));
         Scene scene = new Scene(root, 1024, 706);
-
         primaryStage.setTitle("Girls GenerEditor");
         primaryStage.setScene(scene);
         primaryStage.show();
