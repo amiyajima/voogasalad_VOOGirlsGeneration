@@ -62,7 +62,8 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
                         GUIGrid grid = myGridReference.getGrid();
                         Point2D coor = grid.findClickedCoordinate(e.getX(), e.getY());
                         Piece piece = grid.getPiece(coor);
-                        myPropertiesSPane.setContent(new PieceEditor(piece));
+                        myPropertiesSPane.setContent(new PieceEditor(piece,
+                        		myGameProperties.getNumPlayers()));
                     }
                 };
                 myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
