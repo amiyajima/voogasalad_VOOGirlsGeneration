@@ -130,9 +130,8 @@ public class LevelEditor extends VBox {
 		});
 
 		Button okBtn = new Button("OK");
-		Button cancelBtn = new Button("Cancel");
 		HBox finalizeBtnsHBox = new HBox();
-		finalizeBtnsHBox.getChildren().addAll(okBtn, cancelBtn);
+		finalizeBtnsHBox.getChildren().addAll(okBtn);
 
 		okBtn.setOnAction(new EventHandler<ActionEvent>() {
 
