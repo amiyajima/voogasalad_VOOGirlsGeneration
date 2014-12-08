@@ -45,7 +45,7 @@ public class GameGridEffect {
         if (myActivePiece != null && myActiveAction != null) {
             //System.out.println("GameGridEffect: action ABOUT TO HIGHLIGHT\n\n");
         	//System.out.println("Size of Action Range:"+myActiveAction.getActionRange(myActivePiece.getLoc()));
-            myActiveAction.getActionRange(myActivePiece.getLoc())
+            myActiveAction.getSpecificActionRange(myActivePiece.getLoc())
                     .forEach(point -> { if (point.getX() < myGrid.getNumRows()
                                      && point.getY() < myGrid.getNumCols()
                                      && point.getX() >= 0 && point.getY() >= 0) {
@@ -76,7 +76,7 @@ public class GameGridEffect {
         myActiveAction = myViewController.getActiveAction();
         
         if (myActivePiece != null && myActiveAction != null) {
-            myActiveAction.getActionRange(myActivePiece.getLoc()).forEach(point -> {
+            myActiveAction.getSpecificActionRange(myActivePiece.getLoc()).forEach(point -> {
                 if (loc.equals(point)){
                     myActiveAction.getEffectRange().forEach(point2 -> {
                         SuperTile toHighlight = myGrid.findTile(point2);
@@ -98,7 +98,7 @@ public class GameGridEffect {
         clearAllActionHighlights();
         clearAllEffectHighlights();
         updateActives();
-        //System.out.println("GGE highlight location: " + loc.getX() + " " + loc.getY());
+//        System.out.println("GGE highlight location: " + loc.getX() + " " + loc.getY());
         SuperTile toHighlight = myGrid.findTile(loc);
         toHighlight.selectTile(DEFAULT_COLOR);
         myHighlightedPiece.add(toHighlight);
@@ -133,24 +133,6 @@ public class GameGridEffect {
     private void updateActives() {
         myActivePiece = myViewController.getActivePiece();
         myActiveAction = myViewController.getActiveAction();
-    }
-
-    private void printPieceHighlights() {
-        for (SuperTile st : myHighlightedPiece) {
-            System.out.println("Piece Highlights: " + st.getCoordinates().getX() + ", " + st.getCoordinates().getY());
-        }
-    }
-    
-    private void printEffectHighlights() {
-        for (SuperTile st : myHighlightedEffects) {
-            System.out.println("Effect Highlights: " + st.getCoordinates().getX() + ", " + st.getCoordinates().getY());
-        }
-    }
-    
-    private void printActionHighlights() {
-        for (SuperTile st : myHighlightedActions) {
-            System.out.println("Action Highlights: " + st.getCoordinates().getX() + ", " + st.getCoordinates().getY());
-        }
     }
     
     /**

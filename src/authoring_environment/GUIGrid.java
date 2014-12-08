@@ -20,7 +20,7 @@ import authoring.data.PieceTypeData;
 
 // TODO: REMOVE THE DUPLICATED CODE. SO MUCH.
 /**
- * Authoring, engine, and player may all use this grid!!
+ * Authoring and player both use this grid
  * 
  * @author Jennie Ju
  *

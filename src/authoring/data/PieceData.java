@@ -53,8 +53,8 @@ public class PieceData implements AuthoringData<Piece> {
     
 	@Override
 	public void replace(Piece origEl, Piece newEl) {
-		origEl.setName(newEl.toString());
-		origEl.setImageLocation(newEl.getImageLocation());
+		remove(origEl);
+		add(new Piece(newEl, origEl.getLoc()));
 	}
 
 	@Override

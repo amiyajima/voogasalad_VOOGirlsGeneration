@@ -1,9 +1,14 @@
 package fxml_main;
 
+import gamePlayer.ViewController;
 import gamedata.gamecomponents.Game;
+import gameengine.player.HumanPlayer;
+import gameengine.player.Player;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -16,6 +21,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import authoring.actionslogic.ActionLogicController;
 import authoring.concretefeatures.StatsTotalEditor;
 import authoring.createedit.GamePropertiesEditor;
@@ -66,7 +75,7 @@ public class AuthoringController implements Initializable {
 	private PatchController myPatchController;
 	private LevelController myLevelController;
 	private ActionController myActionController;
-
+	
 	// Authoring Data
 	private GameAuthoringData myTotalData;
 	private ActionData myActionData;
@@ -100,9 +109,6 @@ public class AuthoringController implements Initializable {
 	}
 
 	@FXML
-	// TODO: [IMPORTANT] This method will need a List<String> or Set<String> that contains names of
-	// Pieces
-	// Also, need a list of existing actions
 	private void showActionslogicChartWindow () throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/authoring/actionslogic/ActionLogic.fxml"));
@@ -114,6 +120,7 @@ public class AuthoringController implements Initializable {
 		actionLogicStage.setScene(scene);
 
 		ActionLogicController controller = loader.getController();
+		controller.getData(myActionData, myPieceTypes);
 
 		actionLogicStage.showAndWait();
 	}
@@ -135,6 +142,20 @@ public class AuthoringController implements Initializable {
 	@FXML
 	private void saveGame () {
 		Game game = myTotalData.createGame();
+		Player p1 = new HumanPlayer(1);
+		List<Player> players = new ArrayList<Player>();
+		players.add(p1);
+		game.addPlayers(players);
+		
+		
+		Stage s = new Stage();
+		try {
+			ViewController viewCtrl = new ViewController(s);
+			viewCtrl.testPlayGame(game);
+		} catch (UnsupportedAudioFileException | IOException
+				| LineUnavailableException e) {
+			System.out.println("Opening ViewController didn't work!");
+		}
 	}
 
 }

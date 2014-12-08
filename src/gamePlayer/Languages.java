@@ -1,8 +1,6 @@
 package gamePlayer;
 
-import java.util.Locale;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -20,9 +18,6 @@ import javafx.scene.layout.AnchorPane;
 public class Languages {
     
     public static final String DEFAULT_LANGUAGE = "resources.languages.English";
-//    public static final String CHINESE = "resources.languages.Chinese";
-//    public static final String KOREAN = "resources.languages.Korean";
-//    public static final String FRENCH = "resources.languages.French";
     
     private ResourceBundle messages;
     private String currentLanguage;

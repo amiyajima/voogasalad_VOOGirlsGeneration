@@ -12,34 +12,27 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -69,7 +62,6 @@ public class ViewController {
         public static final String POPUP_FXML = "popup.fxml";
         public static final String SETTINGS_FXML = "settings.fxml";
 
-        private String currentLanguage;
         private Stage myStage;
         private BorderPane myGameSpace;
         private BorderPane myPopup;
@@ -267,7 +259,7 @@ public class ViewController {
         }
 
         /**
-         * Checks the currently selected language
+         * Updates the current language of the game.
          */
         @FXML
         public void updateLanguage() {
@@ -734,7 +726,6 @@ public class ViewController {
                 TextField nickname = new TextField();
                 nickname.setTranslateY(5);
                 nickname.setMaxWidth(150);
-                //nickname.setMinWidth(49);
                 nickname.setText("Nickname");
                 Button go = new Button("Enter the Hall of Fame");
                 go.setOnMouseClicked(event -> addEntryToHallOfFame(dialog,
