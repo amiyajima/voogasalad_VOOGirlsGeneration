@@ -23,7 +23,6 @@ import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
 
 
-
 public class AuthoringController implements Initializable {
 
     @FXML
@@ -51,7 +50,7 @@ public class AuthoringController implements Initializable {
 
     @FXML
     private MenuItem gameProperties;
-    
+
     @FXML
     private MenuItem playerEditor;
 
