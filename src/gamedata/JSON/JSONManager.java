@@ -1,6 +1,7 @@
 package gamedata.JSON;
 
 import gamedata.action.Action;
+import gamedata.action.ActionConclusion;
 import gamedata.events.Event;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
@@ -8,16 +9,19 @@ import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import gamedata.goals.Goal;
 import gamedata.rules.Rule;
+import gamedata.wrappers.ActionData;
+import gamedata.wrappers.ActionDataIndividual;
 import gamedata.wrappers.GameData;
 import gamedata.wrappers.GoalData;
 import gamedata.wrappers.GridData;
 import gamedata.wrappers.LevelDataIndividual;
+import gamedata.wrappers.MovementData;
 import gamedata.wrappers.PatchData;
 import gamedata.wrappers.PatchDataIndividual;
 import gamedata.wrappers.PieceData;
 import gamedata.wrappers.PlayerDataIndividual;
+import gameengine.movement.Movement;
 import gameengine.player.Player;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -25,10 +29,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import authoring_environment.GUIGrid;
 import authoring_environment.SuperGrid;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -55,13 +57,13 @@ public class JSONManager {
     /**
      * Write a game and its contents into a JSON file.
      * 
-     * @param multiplePatches
+     * @param actions
      * 
      * @param grid
      */
-    public void writeToJSON (authoring.data.PatchData multiplePatches, String fileName) {
+    public void writeToJSON (List<Action> actions, String fileName) {
         System.out.println("JSONManager: write method called");
-        String json = myGson.toJson(multiplePatches);
+        String json = myGson.toJson(actions);
         System.out.println("JSONManager: game converted to json!");
 
         try {
@@ -82,11 +84,12 @@ public class JSONManager {
      * @param JSON file location
      * @throws FileNotFoundException
      */
-    public PatchData readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
+    public ActionData readFromJSONFile (String jsonFileLocation)
+                                                                          throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
-        PatchData myGameData = myGson.fromJson(br, PatchData.class);
+        ActionData myGameData = myGson.fromJson(br, ActionData.class);
         System.out.println(myGameData.toString());
 
         // JSONParseTester jpt = new JSONParseTester();
@@ -134,6 +137,8 @@ public class JSONManager {
 
     public void registerTypeAdapters (GsonBuilder builder) {
         builder.registerTypeAdapter(Event.class, new GenericTypeAdapter<Event>("gamedata.events"));
+        builder.registerTypeAdapter(Action.class, new GenericTypeAdapter<Action>("gamedata.action"));
+        builder.registerTypeAdapter(ActionConclusion.class, new ActionConclusionTypeAdapter<ActionConclusion>("gamedata.action"));
     }
 
 }

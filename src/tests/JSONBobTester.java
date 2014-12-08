@@ -8,7 +8,9 @@ import gamedata.action.StatsTotalLogic;
 import gamedata.action.conclusions.ReceiverToInventoryConclusion;
 import gamedata.events.Condition;
 import gamedata.events.Event;
+import gamedata.events.GlobalAction;
 import gamedata.events.conditions.IsDead;
+import gamedata.events.globalaction.DeletePieceAtLocation;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Level;
@@ -38,6 +40,7 @@ import authoring_environment.SuperGrid;
  *
  */
 public class JSONBobTester {
+
 	private static String DEFAULT_DUVALL = "/resources/images/rcd.png";
 	private static String DEFAULT_BUNNY = "/resources/images/bbybunny.jpeg";
 	private static String DEFAULT_RICA = "/resources/images/Rica.png";
@@ -72,7 +75,7 @@ public class JSONBobTester {
 		System.out.println("Bob Tester: Create new game");
 		List<Player> myPlayers = new ArrayList<Player>();
 		Player myPlayer1 = new HumanPlayer(1);
-		Player myPlayer2 = new HumanPlayer(2);
+		Player myPlayer2 = new SimpleAIPlayer(2);
 		myPlayers.add(myPlayer1);
 		myPlayers.add(myPlayer2);
 
@@ -80,15 +83,15 @@ public class JSONBobTester {
 		GUIGrid gridLevel2 = createNewGrid();
 
 		List<Event> myEvents = new ArrayList<Event>();
-		Event e = new Event("garbage collect");
-		e.getConditions().add(new IsDead("Duvall"));
-		
+
 		/**
 		 * Event for garadage comllectin
 		 */
 		Event e1 = new Event("Garbate collectbaon");
-
-		e1.getConditions().add(new IsDead("health"));
+		Condition c = new IsDead("Health");
+		GlobalAction gl = new DeletePieceAtLocation(new Point2D.Double(0, 0));
+		e1.getConditions().add(c);
+		e1.getGlobalActions().add(gl);
 		myEvents.add(e1);
 
 		List<Level> myLevels = new ArrayList<Level>();
@@ -106,29 +109,29 @@ public class JSONBobTester {
 	public GUIGrid createNewGrid() {
 		GUIGrid grid1 = new GUIGrid(5, 5, 75, "Square Grid");
 
-		Piece randomTemplate = createNewPiece(grid1, new Point2D.Double(0, 0), 0);
-		Piece duvallTemplate = createNewPiece(grid1, new Point2D.Double(0, 0), 1);
+		Piece randomTemplate = createNewPiece(grid1, new Point2D.Double(0, 0),
+				0);
+		Piece duvallTemplate = createNewPiece(grid1, new Point2D.Double(0, 0),
+				1);
 		Piece bunnyTemplate = createNewPiece(grid1, new Point2D.Double(0, 0), 2);
 		Piece ricaTemplate = createNewPiece(grid1, new Point2D.Double(0, 0), 3);
 		Patch templPatch = createNewPatch(new Point2D.Double(0, 0));
 
 		for (int x = 0; x < grid1.getNumCols(); x++) {
 			for (int y = 0; y < grid1.getNumRows(); y++) {
-			    Piece actual;
-			    if (x == y) {
-			        actual = new Piece(ricaTemplate, new Point2D.Double(x, y));
-			    }
-			    else {
-			        actual = new Piece(randomTemplate, new Point2D.Double(x, y));
-			    }
-			    if (x == 0) {
-			        actual.setPlayerID(2);
-			    }
-			    else {
-			        actual.setPlayerID(1);
-			    }
-			    grid1.addPieceAtLoc(actual, new Point2D.Double(x, y));
-			    grid1.addPatchAtLoc(templPatch, new Point2D.Double(x, y));
+				Piece actual;
+				if (x == y) {
+					actual = new Piece(ricaTemplate, new Point2D.Double(x, y));
+				} else {
+					actual = new Piece(randomTemplate, new Point2D.Double(x, y));
+				}
+				if (x == 0) {
+					actual.setPlayerID(2);
+				} else {
+					actual.setPlayerID(1);
+				}
+				grid1.addPieceAtLoc(actual, new Point2D.Double(x, y));
+				grid1.addPatchAtLoc(templPatch, new Point2D.Double(x, y));
 			}
 		}
 
@@ -175,21 +178,24 @@ public class JSONBobTester {
 
 		Piece piece = null;
 		if (type == 0) {
-		        if (randomInt % 2 == 1) {
-	                        piece = new Piece("ID", "Duvall", DEFAULT_DUVALL, actions, s, p, 1,
-	                                        i);
-	                } else {
-	                        piece = new Piece("ID", "Bunny", DEFAULT_BUNNY, actions, s, p, 1, i);
-	                }
-		}
-		else if (type == 1) {
-	              piece = new Piece("Duvall_ID", "Duvall", DEFAULT_DUVALL, actions, s, p, 1, i);
-		}
-		else if (type == 2) {
-		    piece = new Piece("Bunny_ID", "Bunny", DEFAULT_BUNNY, actions, s, p, 1, i);
-		}
-		else {
-		    piece = new Piece("Rica_ID", "Rica", DEFAULT_RICA, actions, s, p, 1, i);
+			if (randomInt % 2 == 1) {
+				piece = new Piece("ID", "Duvall", DEFAULT_DUVALL, actions, s,
+						p, 1, i);
+				System.out.println("ACTION IN PIECE TESTER: "
+						+ piece.getActions());
+			} else {
+				piece = new Piece("ID", "Bunny", DEFAULT_BUNNY, actions, s, p,
+						1, i);
+			}
+		} else if (type == 1) {
+			piece = new Piece("Duvall_ID", "Duvall", DEFAULT_DUVALL, actions,
+					s, p, 1, i);
+		} else if (type == 2) {
+			piece = new Piece("Bunny_ID", "Bunny", DEFAULT_BUNNY, actions, s,
+					p, 1, i);
+		} else {
+			piece = new Piece("Rica_ID", "Rica", DEFAULT_RICA, actions, s, p,
+					1, i);
 		}
 		return piece;
 	}
@@ -205,7 +211,8 @@ public class JSONBobTester {
 	}
 
 	public Action createNewAction(List<Point2D> pl1, List<Point2D> pl2) {
-		StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor", "health");
+		StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor",
+				"health");
 		List<StatsSingleMultiplier> ssmList = new ArrayList<StatsSingleMultiplier>();
 		ssmList.add(ssm1);
 
@@ -218,4 +225,5 @@ public class JSONBobTester {
 		Action a1 = new ConcreteAction("kill", pl1, pl2, stlList, ac);
 		return a1;
 	}
+
 }
