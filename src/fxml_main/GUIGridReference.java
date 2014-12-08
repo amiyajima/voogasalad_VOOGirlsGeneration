@@ -15,11 +15,16 @@ import authoring_environment.GUIGrid;
  *
  */
 public class GUIGridReference {
+	private static final GUIGrid DEFAULT_GRID = new GUIGrid(0,0,0,"Square Grid");
 	private GUIGrid myGrid;
 	
 	public GUIGridReference() {
-		//default grid
-		myGrid = new GUIGrid(0,0,0,"Square Grid");
+		// set to default grid
+		resetGrid();
+	}
+	
+	public void resetGrid() {
+		myGrid = DEFAULT_GRID;
 	}
 	
 	public GUIGrid getGrid() {

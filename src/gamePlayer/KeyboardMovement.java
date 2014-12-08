@@ -79,7 +79,7 @@ public class KeyboardMovement {
                                 new Point2D.Double(myCurrentLocation.getX() + movementKeyMap.get(kc).getX(),
                                                    myCurrentLocation.getY() - movementKeyMap.get(kc).getY());
 
-                        if ((newCurrentLocation.getX() > vc.getGrid().getRow() - 1) | (newCurrentLocation.getY() > vc.getGrid().getCol() - 1)
+                        if ((newCurrentLocation.getX() > vc.getGrid().getNumRows() - 1) | (newCurrentLocation.getY() > vc.getGrid().getNumCols() - 1)
                             | (newCurrentLocation.getX() < 0) | (newCurrentLocation.getY() < 0)) {
                             newCurrentLocation.setLocation(myCurrentLocation.getX(), myCurrentLocation.getY());
                         }
