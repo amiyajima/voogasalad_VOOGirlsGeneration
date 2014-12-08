@@ -11,8 +11,8 @@ public class LocationEquals extends Condition{
 	protected IHasStats myReference;
 	protected Point2D.Double myConstant;
 	
-	public LocationEquals(String description, IHasStats ref1, String stat1, String constant){
-		super(description);
+	public LocationEquals(IHasStats ref1, String stat1, String constant){
+		super(String.format("IF Piece is at location %s", constant));
 		myReference = ref1;
 		
 		String[] temp;
