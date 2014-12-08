@@ -36,7 +36,7 @@ public class LeapMotionListener extends Listener{
                 Class c = null;
                 try {
                     c = Class.forName(PACKAGE_FILEPATH+"mouseControl."+myGestures.getString(gestureName));
-                   
+
                     myLeapMouse = (ILeapMouse) c.newInstance();
                 } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | SecurityException e) {
 
@@ -73,14 +73,20 @@ public class LeapMotionListener extends Listener{
 
     private void performAction(String gestureName){
         //  int input = Integer.parseInt(myGestures.getString(gestureName));
-        int input = Character.toUpperCase(myGestures.getString(gestureName).charAt(0));
-        try {
-            myRobot.mousePress(input);
-        } catch (Exception e) {
-            myRobot.keyPress(input);
+        if(myGestures.getString(gestureName).length()>1){
+            int mouseInput = Integer.parseInt(myGestures.getString(gestureName));
+            myRobot.mousePress(mouseInput);
+            myRobot.mouseRelease(mouseInput);
         }
+        else{
+            int keyInput = Character.toUpperCase(myGestures.getString(gestureName).charAt(0));
 
 
+            myRobot.keyPress(keyInput);
+        }
     }
 
+
 }
+
+

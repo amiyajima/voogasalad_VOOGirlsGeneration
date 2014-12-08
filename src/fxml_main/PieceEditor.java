@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -99,10 +100,10 @@ public class PieceEditor extends Pane {
         names.getChildren().addAll(nameLabel);
         
         initPlayerChoice(player);
-        VBox modList = initPseudoModList();
+        ListView<String> pseudoModList = initPseudoModList();
         initImageDisplay(images);
 
-        box.getChildren().addAll(labelBox, ids, names, player, createStat, images, modList);
+        box.getChildren().addAll(labelBox, ids, names, images, player, createStat, pseudoModList);
         getChildren().add(box);
     }
 
@@ -144,8 +145,8 @@ public class PieceEditor extends Pane {
         editor.show();
     }
 
-    private VBox initPseudoModList () {
-    	VBox pseudoModList = new VBox();
+    private ListView<String> initPseudoModList () {
+    	ListView<String> pseudoModList = new ListView<String>();
 //        for(Action action : myPiece.getActions()){
 //        	pseudoModList.getChildren().add(new Label(action.toString()));
 //        }

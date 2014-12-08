@@ -90,7 +90,7 @@ public class ActionController extends GridComponentAbstCtrl<Action> {
 
                 List<Player> playersRO = null;
 
-                myPropertiesSPane.setContent(new ActionEditor(okLambda, entry));
+//                myPropertiesSPane.setContent(new ActionEditor(okLambda, entry));
 
             }
 
