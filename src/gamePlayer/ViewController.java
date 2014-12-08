@@ -55,7 +55,7 @@ public class ViewController {
 	private Stage myStage;
 	private BorderPane myGameSpace;
 	private BorderPane myPopup;
-	private BorderPane mySettings;
+	private VBox mySettings;
 	private VBox myInitialScene;
 	private VBox myScoreBoard;
 	private Scene mySettingsScene;
@@ -130,20 +130,21 @@ public class ViewController {
 	protected void openInitialMenu() throws UnsupportedAudioFileException, IOException, LineUnavailableException{
 	    myInitialScene = new VBox();
 	    myGameSpace = new BorderPane();
-	    mySettings = new BorderPane();
 	    myScoreBoard = new VBox();
 	    scores = new VBox();
 
 	    
 	    
 	    myPopup = new BorderPane();
+	    mySettings = new VBox();
+	    
 	    myJSONManager = new JSONManager();
 	    // myLeapController = new Controller();
 	    loadFXML(GAMESPACE_FXML, myGameSpace);
 	    loadFXML(INITIALSCENE_FXML, myInitialScene);
 	    loadFXML(POPUP_FXML, myPopup);
 	    loadFXML(SCOREBOARD_FXML, myScoreBoard);
-//	    loadFXML(SETTINGS_FXML, mySettings);
+	    loadFXML(SETTINGS_FXML, mySettings);
 	    
 	    scoreScene = new Scene(myScoreBoard);
 	    myPopupScene = new Scene(myPopup);
@@ -183,6 +184,13 @@ public class ViewController {
 
 	}
 	
+	@FXML
+	protected void openSettings() {
+	    System.out.println("opensettings");
+	    Stage stage = new Stage();
+	    stage.setScene(mySettingsScene);
+	    stage.show();
+	}
 	
 	/**
 	 * the method to restart the game; it asks the user whether to save the
@@ -237,13 +245,6 @@ public class ViewController {
 		initializeGrid();
 	}
 
-	@FXML
-	private void doSettings() {
-	    System.out.println("hihi");
-	    Stage stage = new Stage();
-	    stage.setScene(mySettingsScene);
-	    stage.show();	    
-	}
 
 	/**
 	 * loads the players and their scores of the current game; display the
