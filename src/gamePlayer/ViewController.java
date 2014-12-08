@@ -25,7 +25,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -39,7 +38,7 @@ import authoring_environment.SuperTile;
 
 /**
  * 
- * @author
+ * 
  *
  */
 public class ViewController {
@@ -51,10 +50,10 @@ public class ViewController {
 	public static final String GAME_LOCATION = "/src/resources/json";
 	public static final String POPUP_FXML = "popup.fxml";
 
-	private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
+//	private static final String DEFAULT_MUSIC = "/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
-
+	public static final double CURSOR_RATIO = 0.25;
 	private ResourceBundle myLanguages;
 	private Stage myStage;
 	private BorderPane myGameSpace;
@@ -79,7 +78,9 @@ public class ViewController {
 	private Piece activePiece;
 	private Action activeAction;
 
-	private AudioClip myAudio;
+	private Audio myAudio;
+	
+	
 	@FXML
 	protected VBox statsPane;
 	@FXML
@@ -101,14 +102,18 @@ public class ViewController {
 	private GameGridEffect myGameGridEffect;
 	private SuperTile keySelectedTile;
 
-	public ViewController(Stage s) {
+	public ViewController(Stage s) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		myStage = s;
+
 		openInitialMenu();
 		try {
 			newGame();
 		} catch (UnsupportedAudioFileException | IOException
 				| LineUnavailableException e) {
 		}
+		
+
+		
 		myStage.show();
 
 	}
@@ -116,9 +121,12 @@ public class ViewController {
 	
 	/**
 	 * Sets up and opens the initial scene
+	 * @throws LineUnavailableException 
+	 * @throws IOException 
+	 * @throws UnsupportedAudioFileException 
 	 */
 	@FXML
-	protected void openInitialMenu(){
+	protected void openInitialMenu() throws UnsupportedAudioFileException, IOException, LineUnavailableException{
 	    myInitialScene = new VBox();
 	    myGameSpace = new BorderPane();
 	    myScoreBoard = new VBox();
@@ -134,6 +142,10 @@ public class ViewController {
 	    myPopupScene = new Scene(myPopup);
 	    
 	    myStage.setScene(new Scene(myInitialScene));
+	    
+	    myAudio = new Audio();
+	    myAudio.playDefault();
+	    
 	    System.out.println("Opened initial menu");
 	}
 	
@@ -165,7 +177,7 @@ public class ViewController {
 	
 	
 	/**
-	 * the method to restart the game; it asks the use whether to save the
+	 * the method to restart the game; it asks the user whether to save the
 	 * current game
 	 * 
 	 */
@@ -236,7 +248,7 @@ public class ViewController {
 
 	@FXML
 	protected void cancelPopup() {
-
+	    System.out.println("cancel popup");
 	}
 
 	/**
@@ -290,7 +302,10 @@ public class ViewController {
 	 * Initializes grid and its effects manager (gamegrideffect)
 	 */
 	private void initializeGrid() {
-		myGridPane = new ScrollPane();
+		
+	        myAudio.playSelection();
+	        
+	        myGridPane = new ScrollPane();
 		Level currentLevel = myModel.getCurrentLevel();
 		myGrid = currentLevel.getGrid();
 		System.out.println("myGrid: " + myGrid);
@@ -308,6 +323,8 @@ public class ViewController {
 		keyControlOn = false;
 		myGameGridEffect = new GameGridEffect(this);
 	}
+	
+
 
 	/**
 	 * Loads the Score from a Player for Display
@@ -456,8 +473,8 @@ public class ViewController {
 	 * @return a Point2D representing tile coordinates
 	 */
 	public Point2D findPosition(double x, double y) {
-		double patchHeight = myGrid.getTileSize();
-		double patchWidth = myGrid.getTileSize();
+		double patchHeight = myGrid.getTileHeight();
+		double patchWidth = myGrid.getTileHeight();
 		int xCor = (int) (x / patchWidth);
 		int yCor = (int) (y / patchHeight);
 		currentClick = new Point2D.Double(xCor, yCor);
@@ -471,8 +488,8 @@ public class ViewController {
 	 */
 	public void changeCursor(String filename) {
 		Image image = new Image(filename);
-		myScene.setCursor(new ImageCursor(image, image.getWidth() / 4, image
-				.getWidth() / 4));
+		myScene.setCursor(new ImageCursor(image, image.getWidth() / CURSOR_RATIO, image
+				.getWidth() / CURSOR_RATIO));
 
 	}
 

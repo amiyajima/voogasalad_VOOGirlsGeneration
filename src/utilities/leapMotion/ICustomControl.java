@@ -4,7 +4,7 @@ import java.awt.Robot;
 
 import com.leapmotion.leap.Frame;
 
-public interface ILeapMouse {
+public interface ICustomControl {
 
-    public void mouseMove (Frame frame, Robot robot);
+    public void control (Frame frame, Robot robot);
 }

@@ -20,6 +20,12 @@ public class PieceTypeData extends Observable implements AuthoringData<Piece> {
 	public void add(Piece p) {
 		myPieces.add(p);
 	}
+    
+	@Override
+	public boolean canAdd(Piece element) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	@Override
 	public void remove(Piece p) {

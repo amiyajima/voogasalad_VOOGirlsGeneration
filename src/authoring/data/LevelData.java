@@ -23,6 +23,12 @@ public class LevelData implements AuthoringData<Level> {
 	}
 
 	@Override
+	public boolean canAdd(Level element) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
 	public void remove(Level p) {
 		myLevels.remove(p);
 	}
@@ -38,5 +44,4 @@ public class LevelData implements AuthoringData<Level> {
 	public List<Level> getData() {
 		return Collections.unmodifiableList(myLevels);
 	}
-
 }

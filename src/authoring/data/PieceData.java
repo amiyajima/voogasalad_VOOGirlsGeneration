@@ -33,6 +33,12 @@ public class PieceData implements AuthoringData<Piece> {
 	}
     
 	@Override
+	public boolean canAdd(Piece element) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+    
+	@Override
 	public void replace(Piece origEl, Piece newEl) {
 		origEl.setName(newEl.toString());
 		origEl.setImageLocation(newEl.getImageLocation());

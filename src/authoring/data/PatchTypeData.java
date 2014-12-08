@@ -22,6 +22,12 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 	}
 	
 	@Override
+	public boolean canAdd(Patch element) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
 	public void remove(Patch p) {
 		myPatches.remove(p);
 		setChanged();

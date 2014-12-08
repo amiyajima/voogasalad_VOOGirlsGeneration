@@ -7,13 +7,20 @@ import java.util.List;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 
+/**
+ * Superclass of grids with different behavior.
+ * Can use tiles of different shapes.
+ * 
+ * @author Meng'en Huang
+ *
+ */
 public class SuperGrid {
 	private static final String CIRCLE_GRID = "Circle Grid";
 	private static final String HEXAGON_GRID = "Hexagon Grid";
 	private static final String SQUARE_GRID = "Square Grid";
-	protected int myHeight;
-	protected int myWidth;
-	protected double myTileSize;
+	protected int myNumRows;
+	protected int myNumCols;
+	protected double myTileHeight;
 	protected String myShape;
 
 	protected Pane myPane;
@@ -23,26 +30,23 @@ public class SuperGrid {
 		this(1, 1, 40, SQUARE_GRID);
 	}
 
-	public SuperGrid(int width, int height, double tileSize, String shape) {
+	public SuperGrid(int cols, int rows, double tileHeight, String shape) {
 		myPane = new Pane();
-		myHeight = height;
-		myWidth = width;
-		myTileSize = tileSize;
+		myNumRows = rows;
+		myNumCols = cols;
+		myTileHeight = tileHeight;
 		myShape = shape;
 		initGridTiles(shape);
 	}
 
-	public void displayPane(ScrollPane parent) {
-		parent.setContent(myPane);
-	}
 
 	protected void initGridTiles(String shape) {
 		myGrid = new LinkedList<List<SuperTile>>();
-		for (int row = 0; row < myHeight; row++) {
+		for (int row = 0; row < myNumRows; row++) {
 			List<SuperTile> tileCol = new LinkedList<SuperTile>();
-			for (int col = 0; col < myWidth; col++) {
+			for (int col = 0; col < myNumCols; col++) {
 				Point2D location = new Point2D.Double(col,row);
-				SuperTile tile = makeShapeTile(shape, myTileSize, location);
+				SuperTile tile = makeShapeTile(shape, myTileHeight, location);
 				
 				tileCol.add(tile);
 				myPane.getChildren().add(tile);
@@ -50,7 +54,7 @@ public class SuperGrid {
 			myGrid.add(tileCol);
 		}
 	}
-
+	
 	private SuperTile makeShapeTile(String shape, double tileSize, Point2D location) {
 		switch (shape) {
 		case SQUARE_GRID:
@@ -64,26 +68,65 @@ public class SuperGrid {
 		}
 	}
 
+	/**
+	 * Returns the int number of rows in the grid
+	 * (Note: Row = Y dimension)
+	 */
 	public int getRow() {
-		return myHeight;
+		return myNumRows;
 	}
 
+	/**
+	 * Returns the int number of columns in the grid
+	 * (Note: Col = X dimension)
+	 */
 	public int getCol() {
-		return myWidth;
+		return myNumCols;
 	}
 	
 	/**
-	 * Use PIXELS to get a tile
-	 * @param xCoord
-	 * @param yCoord
-	 * @return
+	 * Return the height of the SuperTiles
+	 * @return double height of the SuperTiles
 	 */
-	public SuperTile findClickedTile(double xCoord, double yCoord){
-		for (List<SuperTile> rows:myGrid){
-			for (SuperTile tile:rows){
-				//System.out.println(tile.getLocation().getX());
-				if (tile.myShape.contains(xCoord,yCoord)){
-					//System.out.println("Here");
+	public double getTileHeight() {
+		return myTileHeight;
+	}
+	
+	/**
+	 * Sets the given ScrollPane as the parent
+	 * to myPane containing the grid SuperTiles
+	 * @param parent - ScrollPane parent of mypane
+	 */
+	public void displayPane(ScrollPane parent) {
+		parent.setContent(myPane);
+	}
+	
+	/**
+	 * Get the grid coordinate of the mouse click event
+	 * for x and y pixel locations
+	 * 
+	 * @param xLoc - x pixel location
+	 * @param yLoc - y pixel location
+	 * @return Point2D containing the grid coordinations of the mouse click
+	 * as (col, row) or (x, y)
+	 */
+	public Point2D findClickedCoordinate(double xLoc, double yLoc){
+		SuperTile tile = findClickedTile(xLoc, yLoc);
+		return tile.getCoordinates();
+	}
+	
+	/**
+	 * Uses PIXEL mouse location to find a SuperTile that was
+	 * clicked on
+	 * 
+	 * @param xLoc - x pixel location of click
+	 * @param yLoc - y pixel location of click
+	 * @return SuperTile that was clicked, null if none found
+	 */
+	public SuperTile findClickedTile(double xLoc, double yLoc){
+		for (List<SuperTile> rows : myGrid){
+			for (SuperTile tile  :rows){
+				if (tile.myShape.contains(xLoc,yLoc)){
 					return tile;
 				}
 			}
@@ -92,29 +135,18 @@ public class SuperGrid {
 	}
 
 	/**
-	 * Use GRID COORDINATE LOCATION to get a tile
-	 * @param loc
-	 * @return
+	 * Use GRID COORDINATE LOCATION to find a SuperTile
+	 * 
+	 * @param coor - Point2D storing the coordinate location
+	 * as (col, row) or (X,Y)
+	 * @return SuperTile at that coordinate
 	 */
-	public SuperTile findTile(Point2D loc){
-		int col = (int) loc.getX();
-		int row = (int) loc.getY();
+	public SuperTile findTile(Point2D coor){
+		int col = (int) coor.getX();
+		int row = (int) coor.getY();
 		return myGrid.get(row).get(col);
 	}
 	
-	public double getTileSize() {
-		return myTileSize;
-	}
 	
-	public Point2D findClickedCoordinate(double xCoord, double yCoord){
-		SuperTile tile = findClickedTile(xCoord, yCoord);
-		return tile.getLocation();
-	}
-	
-	public Point2D calculateClicked(double xLoc, double yLoc){
-		int xCoord = (int)(xLoc / myTileSize);
-		int yCoord = (int)(yLoc / myTileSize);
-	    Point2D coord = new Point2D.Double(xCoord, yCoord);
-	    return coord;
-	}
+
 }
