@@ -34,8 +34,15 @@ public class PieceData implements AuthoringData<Piece> {
     
 	@Override
 	public boolean canAdd(Piece element) {
-		// TODO Auto-generated method stub
-		return false;
+		String elementID=element.getID();
+		Point2D elementLoc=element.getLoc();
+		for (Piece piece:myPieces){
+			if ((piece.getID().equals(elementID)) && 
+				(piece.getLoc().equals(elementLoc))){
+				return false;
+			}
+		}
+		return true;
 	}
     
 	@Override

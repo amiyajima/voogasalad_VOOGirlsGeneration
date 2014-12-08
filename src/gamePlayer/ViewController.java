@@ -8,9 +8,9 @@ import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
 import java.awt.geom.Point2D;
 import java.io.File;
-
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -25,6 +25,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -51,10 +52,6 @@ public class ViewController {
 	public static final String POPUP_FXML = "popup.fxml";
 	public static final String SETTINGS_FXML = "settings.fxml";
 
-	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
-	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
-	public static final double CURSOR_RATIO = 0.25;
-	private ResourceBundle myLanguages;
 	private Stage myStage;
 	private BorderPane myGameSpace;
 	private BorderPane myPopup;
@@ -91,6 +88,8 @@ public class ViewController {
 	private MenuButton newGameMenu;
 	@FXML
 	private Text gameName;
+	@FXML
+	private Text highestScore;
 	@FXML
 	private VBox scores;
 	@FXML
@@ -133,6 +132,10 @@ public class ViewController {
 	    myGameSpace = new BorderPane();
 	    mySettings = new BorderPane();
 	    myScoreBoard = new VBox();
+	    scores = new VBox();
+
+	    
+	    
 	    myPopup = new BorderPane();
 	    myJSONManager = new JSONManager();
 	    // myLeapController = new Controller();
@@ -140,7 +143,7 @@ public class ViewController {
 	    loadFXML(INITIALSCENE_FXML, myInitialScene);
 	    loadFXML(POPUP_FXML, myPopup);
 	    loadFXML(SCOREBOARD_FXML, myScoreBoard);
-	    loadFXML(SETTINGS_FXML, mySettings);
+//	    loadFXML(SETTINGS_FXML, mySettings);
 	    
 	    scoreScene = new Scene(myScoreBoard);
 	    myPopupScene = new Scene(myPopup);
@@ -149,7 +152,7 @@ public class ViewController {
 	    myStage.setScene(new Scene(myInitialScene));
 	    
 	    myAudio = new Audio();
-	    myAudio.playDefault();
+//	    myAudio.playDefault();     //muting music for now...
 	    
 	    System.out.println("Opened initial menu");
 	}
@@ -323,12 +326,7 @@ public class ViewController {
 		myGameSpace.setCenter(myGridPane);
 
 		setOnClick();
-
-		setGridState(new SelectState(this));
-		changeCursor(CURSOR_GLOVE_TEST);
-
-		
-
+		setGridState(new SelectState(this));		
 		keyControlOn = false;
 		myGameGridEffect = new GameGridEffect(this);
 	}
@@ -339,10 +337,20 @@ public class ViewController {
 	 * Loads the Score from a Player for Display
 	 */
 	protected void loadScores() {
-		gameName.setText(gameName.getText() + myModel.toString());
-		// TODO: add in scores
-		 myModel.getPlayers().forEach(player-> scores.getChildren().
-		 add(new Text(player.getID()+": ")));
+		List<Integer> scoreList = new ArrayList<Integer>();
+	        gameName.setText(myModel.toString());
+		scores.getChildren().clear();
+	        for (Player p: myModel.getPlayers()){
+		    int score = 0;    //0 for now. will get from Player later!!!!!
+		    scoreList.add(score);
+		    Text playerScore = new Text("Player " + p.getID()+": " + String.valueOf(score));
+		    playerScore.setFill(Color.WHITE);
+		    scores.getChildren().add(playerScore);
+		}
+	        highestScore.setText(String.valueOf(Collections.max(scoreList)));
+
+	        
+	        
 	}
 
 	/**
@@ -499,19 +507,6 @@ public class ViewController {
 	}
 
 	/**
-	 * Changes the image of the Cursor
-	 * 
-	 * @param filename
-	 */
-	public void changeCursor(String filename) {
-		Image image = new Image(filename);
-		
-		myScene.setCursor(new ImageCursor(image, image.getWidth() * CURSOR_RATIO, image
-				.getWidth() * CURSOR_RATIO));
-
-	}
-
-	/**
 	 * Toggles whether the Keyboard Controls are active or inactive
 	 */
 	public void toggleKeyboardControl() {
@@ -643,17 +638,6 @@ public class ViewController {
 	 *            the current state of the Grid, select/ apply action Mode
 	 */
 	public void setGridState(IGridState state) {
-		myModel.getCurrentPlayer().playTurn();
-		if (myModel.getCurrentPlayer().getNumMovesPlayed() > 3) {
-			System.out.println("VC: NEXT PLAYER. MOVES:" + myModel.getCurrentPlayer().getNumMovesPlayed());
-			myModel.nextLevel();
-		}
-		if (myModel.getCurrentLevel().getGrid()
-				.getPiece(new Point2D.Double(0, 0)) == null) {
-			System.out.println("Next LEVEL");
-			myModel.nextLevel();
-		}
-		
 		myCurrentPlayer = myModel.getCurrentPlayer();
 		setPlayerTurnDisplay();
 		gridState = state;

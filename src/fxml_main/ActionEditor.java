@@ -14,8 +14,11 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import authoring.concretefeatures.RangeEditor;
 import authoring.concretefeatures.SingleMultiplierBox;
+import authoring.concretefeatures.StatsTotalEditor;
 import authoring_environment.GUIGrid;
+import authoring_environment.UIspecs;
 
 
 public class ActionEditor extends VBox {
@@ -24,6 +27,12 @@ public class ActionEditor extends VBox {
     private static final String CREATOR_TITLE = "Action Creator";
     private static final String EDITOR_TITLE = "Action Editor";
     private static final String LABEL_CSS = "-fx-font-size: 14pt;";
+
+    private static final String ATTACK_RANGE_LABEL = "Set attack range";
+
+    private static final String EFFECT_RANGE_LABEL = "Set effect range";
+
+    private static final String STATS_OPERATION_LABEL = "Define operation";
 
     private String myId;
     private int myGridRows;
@@ -72,28 +81,25 @@ public class ActionEditor extends VBox {
         TextField nameField = new TextField(myId);
         nameBox.getChildren().addAll(nameLabel, nameField);
 
-        HBox statsBox = new SingleMultiplierBox();
+        HBox attackRangeBox = new HBox();
+        attackRangeBox.setPadding(UIspecs.allPadding);
+        attackRangeBox.setSpacing(5);
+        Button attackRange = new Button(ATTACK_RANGE_LABEL);
+        initRangeEditor(attackRange);
+        attackRangeBox.getChildren().addAll(attackRange);
 
-        VBox gridSizeVBox = new VBox();
-        Label gridSizeLabel = new Label("Grid Size: ");
+        HBox effectRangeBox = new HBox();
+        effectRangeBox.setPadding(UIspecs.allPadding);
+        effectRangeBox.setSpacing(5);
+        Button effectRange = new Button(EFFECT_RANGE_LABEL);
+        initRangeEditor(effectRange);
+        effectRangeBox.getChildren().addAll(effectRange);
 
-        VBox rowVBox = new VBox();
-        Label rowLabel = new Label("Rows");
-        TextField rowField = new TextField("" + myGridRows);
-        rowVBox.getChildren().addAll(rowLabel, rowField);
-        VBox colVBox = new VBox();
-        Label colLabel = new Label("Columns");
-        TextField colField = new TextField("" + myGridCols);
-        colVBox.getChildren().addAll(colLabel, colField);
-
-        HBox gridSizeHBox = new HBox();
-        gridSizeHBox.getChildren().addAll(rowVBox, colVBox);
-        gridSizeVBox.getChildren().addAll(gridSizeLabel, gridSizeHBox);
-
-        HBox tileHeightHBox = new HBox();
-        Label heightLabel = new Label("Tile Height: ");
-        TextField heightField = new TextField("" + myTileHeight);
-        tileHeightHBox.getChildren().addAll(heightLabel, heightField);
+        HBox statsOperationBox = new HBox();
+        statsOperationBox.setPadding(UIspecs.allPadding);
+        statsOperationBox.setSpacing(5);
+        Button statsOperation = new Button(STATS_OPERATION_LABEL);
+        statsOperationBox.getChildren().addAll(statsOperation);
 
         Button okBtn = new Button("OK");
         HBox finalizeBtnsHBox = new HBox();
@@ -106,19 +112,31 @@ public class ActionEditor extends VBox {
             @Override
             public void handle (ActionEvent event) {
                 myId = nameField.getText();
-                myGridRows = Integer.parseInt(rowField.getText());
-                myGridCols = Integer.parseInt(colField.getText());
-                myTileHeight = Double.parseDouble(heightField.getText());
-                myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
 
                 Action action = new ConcreteAction(myEditorTitle, null, null, null, null);
                 myOkLambda.accept(action);
             }
         });
 
-        getChildren().addAll(labelBox, nameBox, new Separator(), statsBox, gridSizeVBox,
-                             new Separator(), tileHeightHBox, new Separator(),
+        getChildren().addAll(labelBox, nameBox, attackRangeBox, effectRangeBox,
+                             statsOperationBox,
                              finalizeBtnsHBox);
+
+    }
+
+    private void initRangeEditor (Button b) {
+        b.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent click) {
+                showRangeEditorWindow();
+            }
+        });
+
+    }
+
+    private void showRangeEditorWindow () {
+        RangeEditor editor = new RangeEditor();
+        editor.show();
 
     }
 
