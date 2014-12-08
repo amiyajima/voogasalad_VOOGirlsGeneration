@@ -32,9 +32,9 @@ public class ActionController extends GridComponentAbstCtrl<Action> {
     private ActionData myActionData;
 
     protected ActionController (VBox vbox,
-                             ScrollPane propertiesSPane,
-                             GUIGridReference gridRef,
-                             ActionData actions) {
+                                ScrollPane propertiesSPane,
+                                GUIGridReference gridRef,
+                                ActionData actions) {
         super(vbox, propertiesSPane, gridRef);
         myActionData = actions;
     }
@@ -53,15 +53,10 @@ public class ActionController extends GridComponentAbstCtrl<Action> {
         // TODO: Need to not hard-code square, have it passed through the constructor
         // as maybe a gridshapeproperty (new class?)
         Consumer<Action> okLambda = (Action action) -> {
+            globalNewBtnOnClickAction();
         };
 
         super.myPropertiesSPane.setContent(new ActionEditor(okLambda));
-    }
-
-    private void setAndDisplayGrid (Level level) {
-
-        myGridReference.setGrid(level.getGrid());
-        myGridReference.getGrid().displayPane(myGridSPane);
     }
 
     @Override
@@ -75,7 +70,7 @@ public class ActionController extends GridComponentAbstCtrl<Action> {
     }
 
     @Override
-    protected void initEntryEditBtn (Level entry, Button editBtn) {
+    protected void initEntryEditBtn (Action entry, Button editBtn) {
 
         // TODO: THIS ONLY SORT OF WORKS
         // WORKS WHEN YOU CLICK ON LHS PANE THEN RHS PANE THEN DONE.
@@ -83,73 +78,47 @@ public class ActionController extends GridComponentAbstCtrl<Action> {
         editBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
-                Consumer<Level> okLambda = (Level level) -> {
+                Consumer<Action> okLambda = (Action action) -> {
 
                     myVBox.getChildren().remove(entry);
-                    addEntry(level);
-
-                    myPieceTypes.addObserver(level.getGrid());
-                    myPatchTypes.addObserver(level.getGrid());
-                    myLevelData.replace(entry, level);
 
                     HBox entryHolderBox = myEntryMap.get(entry);
                     entryHolderBox.getChildren().clear();
 
-                    myLevelData.replace(entry, level);
-
                     myEntryMap.get(entry);
 
-                    setAndDisplayGrid(level);
-
                 };
-                List<Piece> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
-                List<Patch> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
+
                 List<Player> playersRO = null;
 
-                EventsDataContainer wrapper =
-                        new EventsDataContainer(piecesRO, patchesRO, playersRO);
-
-                myPropertiesSPane.setContent(new LevelEditor(okLambda, entry, wrapper));
+                myPropertiesSPane.setContent(new ActionEditor(okLambda, entry));
 
             }
 
-        });
-    }
-
-    @Override
-    protected void initEntryDelBtn (Level entry, Button delBtn) {
-        delBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                myLevelData.remove(entry);
-                myVBox.getChildren().remove(myEntryMap.get(entry));
-            }
         });
     }
 
     @Override
     protected HBox makeEntryBox (Action entry) {
         HBox entryBox = new HBox();
-        Label nameLabel = new Label(entry.getId());
+        //Label nameLabel = new Label(entry.getId());
         entryBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle (MouseEvent event) {
-                setAndDisplayGrid(entry);
+                //setAndDisplayGrid(entry);
             }
         });
-        entryBox.getChildren().add(nameLabel);
+        //entryBox.getChildren().add(nameLabel);
         return entryBox;
     }
 
     @Override
-    protected void initEntryEditBtn (Action entry, Button editBtn) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     protected void initEntryDelBtn (Action entry, Button delBtn) {
-        // TODO Auto-generated method stub
-
+        delBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                myVBox.getChildren().remove(myEntryMap.get(entry));
+            }
+        });
     }
 }

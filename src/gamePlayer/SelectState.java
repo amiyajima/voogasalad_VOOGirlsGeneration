@@ -8,17 +8,20 @@ import gamedata.gamecomponents.Piece;
  *
  */
 public class SelectState implements IGridState {
-	private ViewController myController;
+        private ViewController myController;
 
 	// private MouseController myMouseController;
+	
+	
+	
 
 	public SelectState(ViewController controller) {
 		//System.out.println("At Select State");
 		myController = controller;
-		myController.getGridPane().setOnMouseEntered(event -> {
-			myController.changeCursor(myController.CURSOR_GLOVE_TEST);
-			;
-		});
+//		myController.getGridPane().setOnMouseEntered(event -> {
+//			myController.changeCursor(myController.CURSOR_GLOVE_TEST);
+//			;
+//		});
 
 	}
 

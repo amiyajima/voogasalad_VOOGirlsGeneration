@@ -8,7 +8,7 @@ import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
 import java.awt.geom.Point2D;
 import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +49,8 @@ public class ViewController {
 	public static final String INITIALSCENE_TITLE = "VOOGASALAD!";
 	public static final String GAME_LOCATION = "/src/resources/json";
 	public static final String POPUP_FXML = "popup.fxml";
+	public static final String SETTINGS_FXML = "settings.fxml";
 
-//	private static final String DEFAULT_MUSIC = "/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
 	public static final double CURSOR_RATIO = 0.25;
@@ -58,8 +58,10 @@ public class ViewController {
 	private Stage myStage;
 	private BorderPane myGameSpace;
 	private BorderPane myPopup;
+	private BorderPane mySettings;
 	private VBox myInitialScene;
 	private VBox myScoreBoard;
+	private Scene mySettingsScene;
 	private Scene scoreScene;
 	private Scene myPopupScene;
 	private Scene myScene;
@@ -129,6 +131,7 @@ public class ViewController {
 	protected void openInitialMenu() throws UnsupportedAudioFileException, IOException, LineUnavailableException{
 	    myInitialScene = new VBox();
 	    myGameSpace = new BorderPane();
+	    mySettings = new BorderPane();
 	    myScoreBoard = new VBox();
 	    myPopup = new BorderPane();
 	    myJSONManager = new JSONManager();
@@ -137,9 +140,11 @@ public class ViewController {
 	    loadFXML(INITIALSCENE_FXML, myInitialScene);
 	    loadFXML(POPUP_FXML, myPopup);
 	    loadFXML(SCOREBOARD_FXML, myScoreBoard);
+//	    loadFXML(SETTINGS_FXML, mySettings);
 	    
 	    scoreScene = new Scene(myScoreBoard);
 	    myPopupScene = new Scene(myPopup);
+	    mySettingsScene = new Scene(mySettings);
 	    
 	    myStage.setScene(new Scene(myInitialScene));
 	    
@@ -231,6 +236,10 @@ public class ViewController {
 
 	@FXML
 	private void doSettings() {
+	    System.out.println("hihi");
+	    Stage stage = new Stage();
+	    stage.setScene(mySettingsScene);
+	    stage.show();	    
 	}
 
 	/**
@@ -301,7 +310,7 @@ public class ViewController {
 	 * Initializes grid and its effects manager (gamegrideffect)
 	 */
 	private void initializeGrid() {
-		
+		System.out.println("initialize grid");
 	    
 	        myAudio.playSelection();
 	        
@@ -316,9 +325,9 @@ public class ViewController {
 		setOnClick();
 
 		setGridState(new SelectState(this));
-		getGridPane().setOnMouseExited(event -> {
-			changeCursor(CURSOR_GLOVE_TEST);
-		});
+		changeCursor(CURSOR_GLOVE_TEST);
+
+		
 
 		keyControlOn = false;
 		myGameGridEffect = new GameGridEffect(this);
@@ -496,8 +505,9 @@ public class ViewController {
 	 */
 	public void changeCursor(String filename) {
 		Image image = new Image(filename);
-		myScene.setCursor(new ImageCursor(image, image.getWidth() / CURSOR_RATIO, image
-				.getWidth() / CURSOR_RATIO));
+		
+		myScene.setCursor(new ImageCursor(image, image.getWidth() * CURSOR_RATIO, image
+				.getWidth() * CURSOR_RATIO));
 
 	}
 
@@ -633,17 +643,6 @@ public class ViewController {
 	 *            the current state of the Grid, select/ apply action Mode
 	 */
 	public void setGridState(IGridState state) {
-		myModel.getCurrentPlayer().playTurn();
-		if (myModel.getCurrentPlayer().getNumMovesPlayed() > 3) {
-			System.out.println("VC: NEXT PLAYER. MOVES:" + myModel.getCurrentPlayer().getNumMovesPlayed());
-			myModel.nextLevel();
-		}
-		if (myModel.getCurrentLevel().getGrid()
-				.getPiece(new Point2D.Double(0, 0)) == null) {
-			System.out.println("Next LEVEL");
-			myModel.nextLevel();
-		}
-		
 		myCurrentPlayer = myModel.getCurrentPlayer();
 		setPlayerTurnDisplay();
 		gridState = state;

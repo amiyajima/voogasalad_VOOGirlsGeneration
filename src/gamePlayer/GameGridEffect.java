@@ -90,6 +90,8 @@ public class GameGridEffect {
      * Uses GRID COORDINATE LOCATION to highlight the current location on the grid
      */
     public void highlightCurrent(Point2D loc, Piece activeP){
+        System.out.println("highlight CURRENT");
+        
         clearAllPieceHighlights();
         clearAllActionHighlights();
         clearAllEffectHighlights();
