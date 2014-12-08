@@ -118,6 +118,7 @@ public class AuthoringController implements Initializable {
 		actionLogicStage.setScene(scene);
 
 		ActionLogicController controller = loader.getController();
+		controller.getData(myActionData, myPieceTypes);
 
 		actionLogicStage.showAndWait();
 	}

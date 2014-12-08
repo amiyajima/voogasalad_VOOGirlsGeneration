@@ -1,8 +1,8 @@
 package authoring.eventeditor;
 
 import gamedata.events.GlobalAction;
-import gamedata.events.globalaction.CreatePiece;
-import gamedata.events.globalaction.DeletePiece;
+import gamedata.events.globalaction.MakePieceAtLocation;
+import gamedata.events.globalaction.DeletePieceAtLocation;
 import gamedata.events.globalaction.LevelChange;
 import gamedata.events.globalaction.EndTurn;
 import gamedata.gamecomponents.IChangeGameState;
@@ -87,16 +87,20 @@ public class NewActionController implements Initializable{
 		int idx = actionChoiceBox.getSelectionModel().getSelectedIndex();
 		Class<?> c = actionList.get(idx);
 
-		if(c.equals(CreatePiece.class)){
+		if(c.equals(MakePieceAtLocation.class)){
 			Piece piece = (Piece) myRefNameBox.getSelectionModel().getSelectedItem();
 			double x = Double.parseDouble(myXField.getText());
 			double y = Double.parseDouble(myYField.getText());
 			Point2D.Double point = new Point2D.Double(x,y);
-			GlobalAction action = new CreatePiece(myNameField.getText(), piece, point);
+			GlobalAction action = new MakePieceAtLocation(myNameField.getText(), piece, point);
 			myDoneLambda.accept(action);
 		}
-		else if (c.equals(DeletePiece.class)){
-			
+		else if (c.equals(DeletePieceAtLocation.class)){
+			double x = Double.parseDouble(myXField.getText());
+			double y = Double.parseDouble(myYField.getText());
+			Point2D.Double point = new Point2D.Double(x,y);
+			GlobalAction action = new DeletePieceAtLocation(point);
+			myDoneLambda.accept(action);
 		}
 		else if (c.equals(LevelChange.class)){
 			GlobalAction action = new LevelChange(myNameField.getText(), myState, myNextLevelField.getText());
@@ -129,10 +133,10 @@ public class NewActionController implements Initializable{
 		/**
 		 * If statements to choose which Condition Editor to pull up
 		 */
-		if(c.equals(CreatePiece.class)){
+		if(c.equals(MakePieceAtLocation.class)){
 			myUnitActionsBox.setVisible(true);
 		}
-		else if (c.equals(DeletePiece.class)){
+		else if (c.equals(DeletePieceAtLocation.class)){
 			myUnitActionsBox.setVisible(true);
 		}
 		else if (c.equals(LevelChange.class)){

@@ -25,7 +25,7 @@
       </HBox>
    </bottom>
 	<center>
-      <Text fill="#f2efef" strokeType="OUTSIDE" strokeWidth="0.0" text="Save the current Game?" BorderPane.alignment="CENTER_LEFT">
+      <Text fill="#f2efef" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="plaintext" text="Save the current Game?" BorderPane.alignment="CENTER_LEFT">
          <font>
             <Font size="26.0" />
          </font>
