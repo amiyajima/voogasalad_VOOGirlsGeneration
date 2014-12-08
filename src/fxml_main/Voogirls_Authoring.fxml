@@ -20,6 +20,7 @@
               <items>
                   <MenuItem fx:id="gameProperties" mnemonicParsing="false" onAction="#showGamePropertiesWindow" text="Game properties..." />
                   <MenuItem fx:id="actonsLogicChart" mnemonicParsing="false" onAction="#showActionzlogicChartWindow" text="Actions Logic Chart..." />
+                  <MenuItem fx:id="playerEditor" mnemonicParsing="false" onAction="#showPlayerEditWindow" text="Player Editor..." />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -75,9 +76,9 @@
       </TitledPane>
    </left>
    <right>
-      <TitledPane animated="false" collapsible="false" prefHeight="677.0" text="Properties Editor" BorderPane.alignment="CENTER">
+      <TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="677.0" prefWidth="260.0" text="Properties Editor" BorderPane.alignment="CENTER">
          <content>
-            <ScrollPane fx:id="myPropertiesSPane" hbarPolicy="NEVER" />
+            <ScrollPane fx:id="myPropertiesSPane" hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="650.0" prefWidth="258.0" />
          </content>
       </TitledPane>
    </right>
