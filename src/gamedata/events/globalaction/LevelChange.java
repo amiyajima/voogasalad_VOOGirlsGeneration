@@ -2,6 +2,7 @@ package gamedata.events.globalaction;
 
 import java.util.List;
 
+import authoring_environment.GUIGrid;
 import gamedata.events.GameStateGlobalAction;
 import gamedata.events.GlobalAction;
 import gamedata.gamecomponents.Game;
@@ -20,14 +21,7 @@ public class LevelChange extends GameStateGlobalAction {
     }
 
     @Override
-    public void doBehavior () {
+    public void doBehavior(GUIGrid grid) {
     	myState.changeLevel(myNextLevelID);
     }
-
-	@Override
-	public void doBehavior(List<IHasStats> objects) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

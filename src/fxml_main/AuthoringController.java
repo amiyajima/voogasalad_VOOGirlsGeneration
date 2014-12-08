@@ -14,42 +14,47 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import authoring.actionslogic.ActionLogicController;
+import authoring.concretefeatures.StatsTotalEditor;
 import authoring.createedit.GamePropertiesEditor;
 import authoring.data.ActionData;
 import authoring.data.GamePropertiesData;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
-import authoring.eventeditor.EventEditorController;
 
 
 public class AuthoringController implements Initializable {
 
-    @FXML
-    private ScrollPane myPropertiesSPane;
-
-    @FXML
-    private VBox myLevelsVBox;
-
-    @FXML
-    private VBox myPiecesVBox;
-
-    @FXML
-    private VBox myPatchesVBox;
-
-    @FXML
-    private VBox myActionsVBox;
-
-    @FXML
-    private ScrollPane myGridSPane;
-
-    // Menu items
-
-    @FXML
+	
+	
+	@FXML
+	private ScrollPane myPropertiesSPane;
+	
+	@FXML
+	private VBox myLevelsVBox;
+	
+	@FXML
+	private VBox myPiecesVBox;
+	
+	@FXML
+	private VBox myPatchesVBox;
+	
+	@FXML
+	private VBox myActionsVBox;
+	
+	@FXML
+	private ScrollPane myGridSPane;
+	
+	//Menu items
+	
+	@FXML
     private MenuItem actonsLogicChart;
 
     @FXML
     private MenuItem gameProperties;
+
+    @FXML
+    private MenuItem playerEditor;
 
     private GUIGridReference myGridReference;
     private PieceController myPieceController;
@@ -110,5 +115,16 @@ public class AuthoringController implements Initializable {
         gamePptEditor.show();
 
     }
+
+    @FXML
+    private void showPlayerEditWindow () {
+        StatsTotalEditor statsEditor = new StatsTotalEditor();
+        statsEditor.setTitle("Player Editor");
+        statsEditor.setX(450);
+        statsEditor.setY(200);
+        statsEditor.show();
+
+    }
+
 
 }
