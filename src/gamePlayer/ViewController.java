@@ -19,8 +19,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -56,6 +57,9 @@ public class ViewController {
 	public static final String GAME_LOCATION = "/src/resources/json";
 	public static final String POPUP_FXML = "popup.fxml";
 	public static final String SETTINGS_FXML = "settings.fxml";
+	
+	public static final String ENGLISH = "resources.languages.English";
+	public static final String CHINESE = "resources.languages.Chinese";
 
 	private Stage myStage;
 	private BorderPane myGameSpace;
@@ -67,6 +71,9 @@ public class ViewController {
 	private Scene scoreScene;
 	private Scene myPopupScene;
 	private Scene myScene;
+	
+	@FXML
+	private Button showScoreButton;
 
 	private Game myModel;
 	private GUIGrid myGrid;
@@ -86,6 +93,10 @@ public class ViewController {
 	private Action activeAction;
 
 	private Audio myAudio;
+	
+	Locale currentLocale;
+	ResourceBundle messages;
+	
 	
 	
 	@FXML
@@ -142,9 +153,8 @@ public class ViewController {
 	    myGameSpace = new BorderPane();
 	    myScoreBoard = new VBox();
 	    scores = new VBox();
+	    
 
-	    
-	    
 	    myPopup = new BorderPane();
 	    mySettings = new VBox();
 	    
@@ -166,6 +176,14 @@ public class ViewController {
 	    myAudio.playDefault();     //muting music for now...
 	    
 	    System.out.println("Opened initial menu");
+	}
+	
+	public void addLanguages() {
+	        messages = ResourceBundle.getBundle(ENGLISH);
+//	        System.out.println(messages.getString("SAVE"));
+	        
+	        showScoreButton.setText(messages.getString("SCORE"));
+	        
 	}
 	
 	
@@ -253,7 +271,10 @@ public class ViewController {
 		myModel = JSBTester.createNewGame();
 		System.out.println("model found in viewcontroller: " + myModel);
 		initializeGrid();
+//	        showScoreButton.setText("hihihi");
 	}
+	
+
 
 
 	/**
@@ -342,6 +363,8 @@ public class ViewController {
 		backgroundMusicOn = true;
 		clickSoundOn = true;
 		myGameGridEffect = new GameGridEffect(this);
+		
+		addLanguages();
 	}
 	
 

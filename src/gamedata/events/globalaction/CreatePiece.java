@@ -1,6 +1,8 @@
 package gamedata.events.globalaction;
 
 import java.awt.geom.Point2D;
+
+import authoring_environment.GUIGrid;
 import gamedata.events.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
@@ -12,7 +14,7 @@ import gamedata.gamecomponents.Piece;
  */
 public class CreatePiece extends GlobalAction {
 
-    private Piece myPiece;
+    private Piece myPieceType;
     private Point2D myLoc;
     
     /**
@@ -21,14 +23,15 @@ public class CreatePiece extends GlobalAction {
      * @param game
      * @param pieceToCreate
      */
-    public CreatePiece (String name, Game game, Piece pieceToCreate, Point2D loc) {
+    public CreatePiece (String name, Piece pieceToCreate, Point2D loc) {
     	super(name);
-        myPiece = pieceToCreate;
+        myPieceType = pieceToCreate;
         myLoc = loc;
     }
     
     @Override
-    public void doBehavior () {
+    public void doBehavior(GUIGrid grid) {
+    	grid.addPieceAtLoc(myPieceType, myLoc);
     }
 
 }
