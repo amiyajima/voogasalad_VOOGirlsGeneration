@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import javafx.scene.control.ScrollPane;
@@ -59,7 +60,7 @@ public class Level extends Observable implements IChangeGameState {
 	 */
 	public void runGameEvents() {
 		for(Event e: myEvents){
-			Consumer<List<IHasStats>> eventFunc = (List<IHasStats> list) -> e.runEvent(list);
+			BiConsumer<List<IHasStats>, GUIGrid> eventFunc = (List<IHasStats> list, GUIGrid grid) -> e.runEvent(list, grid);
 			myGrid.runEvent(eventFunc);
 		}
 	}

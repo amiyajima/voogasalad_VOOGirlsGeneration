@@ -11,6 +11,4 @@ public abstract class GameStateGlobalAction extends GlobalAction{
 		myState = state;
 	}
 
-	public abstract void doBehavior();
-
 }
