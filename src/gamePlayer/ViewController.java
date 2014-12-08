@@ -316,9 +316,9 @@ public class ViewController {
 		setOnClick();
 
 		setGridState(new SelectState(this));
-		getGridPane().setOnMouseExited(event -> {
-			changeCursor(CURSOR_GLOVE_TEST);
-		});
+		changeCursor(CURSOR_GLOVE_TEST);
+
+		
 
 		keyControlOn = false;
 		myGameGridEffect = new GameGridEffect(this);
@@ -496,8 +496,8 @@ public class ViewController {
 	 */
 	public void changeCursor(String filename) {
 		Image image = new Image(filename);
-		myScene.setCursor(new ImageCursor(image, image.getWidth() / CURSOR_RATIO, image
-				.getWidth() / CURSOR_RATIO));
+		myScene.setCursor(new ImageCursor(image, image.getWidth() * CURSOR_RATIO, image
+				.getWidth() * CURSOR_RATIO));
 
 	}
 
