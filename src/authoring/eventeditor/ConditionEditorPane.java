@@ -1,9 +1,7 @@
 package authoring.eventeditor;
 
 import gamedata.events.Condition;
-import gamedata.events.StatComparison;
 import gamedata.events.conditions.IsDead;
-import gamedata.events.conditions.StatEquals;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
