@@ -104,8 +104,6 @@ public class ActionCreator extends PopupWindow {
         VBox rangeVBox = new VBox();
         rangeVBox.setSpacing(5);
         rangeVBox.getStyleClass().add("vbox");
-        VBox targetVBox = new VBox();
-        VBox operationsVBox = new VBox();
         VBox conclusionVBox = new VBox();
 
         // Action name
@@ -117,11 +115,8 @@ public class ActionCreator extends PopupWindow {
         // Set the Effect Range
         initSetRangeButton(rangeVBox, "Effect Range (Splashzone):", myEffectRange);
         // Target stat to be modified
-        ChoiceBox<String> targetChoice = new ChoiceBox<String>();
-        TextField moddedStat = new TextField();
-        initStatsModifier(targetVBox, targetChoice, moddedStat);
-        // Operations
-        initOperationsBox(operationsVBox);
+        VBox totalLogicVBox = new VBox();
+        
         // conclusions
         initConclusionsBox(conclusionVBox);
 
@@ -141,7 +136,7 @@ public class ActionCreator extends PopupWindow {
         });
 
         box.getChildren().addAll(labelBox, nameVBox, rangeVBox, new Separator(),
-                                 targetVBox, operationsVBox, new Separator(), conclusionVBox,
+                                 totalLogicVBox, new Separator(), conclusionVBox,
                                  new Separator(), createBtn);
         root.setContent(box);
         setScene(scene);
@@ -236,53 +231,6 @@ public class ActionCreator extends PopupWindow {
             }
         });
         rangeBox.getChildren().addAll(rangeLabel, setRange);
-    }
-
-    private void initStatsModifier (VBox targetVBox,
-                                    ChoiceBox<String> targetChoice, TextField moddedStat) {
-        // TODO: Need to make it so that we can take in multiple target stats
-        // Target whose stat will be modified
-        Label targetLabel = new Label("Action target");
-        targetChoice.getItems().addAll("Actor", "Receiver");
-
-        // Particular statistic modified
-        moddedStat.setPromptText("Stat to be modified");
-        HBox targetAndStatHBox = new HBox();
-        targetAndStatHBox.setSpacing(10);
-        targetAndStatHBox.getChildren().addAll(targetChoice, moddedStat);
-        targetVBox.getChildren().addAll(targetLabel, targetAndStatHBox);
-    }
-
-    private void initOperationsBox (VBox operationsBox) {
-        Label operationsLabel = new Label("Operations to be performed");
-        Button newOperation = new Button("New operation");
-        operationsBox.setSpacing(10);
-        operationsBox.getChildren().addAll(operationsLabel, newOperation);
-
-        newOperation.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent click) {
-                SingleMultiplierBox operation = new SingleMultiplierBox();
-                operation.setSpacing(5);
-                operationsList.add(operation);
-                Button delStatBtn = makeDeleteButton(operationsBox, operation);
-                operationsBox.getChildren().addAll(operation, delStatBtn);
-            }
-        });
-    }
-
-    private Button makeDeleteButton (VBox operationsBox, SingleMultiplierBox operation) {
-        Button delBtn = new Button("-");
-        delBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                System.out.println("ActionOperationEditor: delete button pressed");
-                operationsList.remove(operation);
-                operationsBox.getChildren().remove(operation);
-                operationsBox.getChildren().remove(delBtn);
-            }
-        });
-        return delBtn;
     }
 
     protected void setAttackRange (List<Point2D> attackRange) {

@@ -43,9 +43,6 @@ public class ActionEditor extends Pane {
     public static final int WIDTH = 100;
     public static final String NAME = "Action Creator";
     private static final String STYLESHEET = "/resources/stylesheets/actioncreator_layout.css";
-
-    private List<SingleMultiplierBox> operationsList;
-
     private static final Insets MARGINS = new Insets(20, WIDTH / 8, 20, WIDTH / 8 - 10);
     private static final String LABEL_CSS = "-fx-font-size: 12pt;";
     private static final String CONCLUSION_LABEL = "Choose action conclusion";
@@ -55,11 +52,18 @@ public class ActionEditor extends Pane {
     private List<Point2D> myEffectRange;
     private List<StatsTotalLogic> myStatsLogics;
     private ActionConclusion myConclusion;
-    private Consumer<Action> myOkLambda;
     private List<Class> conclusionsList;
+    
+    private Consumer<Action> myOkLambda;
+    private String myGridShape;
 
-    public ActionEditor (Consumer<Action> okLambda) {
-        this(new ActionData(), okLambda);
+    public ActionEditor (Consumer<Action> okLambda, String gridShape) {
+        myName = "";
+        myAttackRange = new LinkedList<Point2D>();
+        myEffectRange = new LinkedList<Point2D>();
+        myStatsLogics = new LinkedList<StatsTotalLogic>();
+        myConclusion = null;
+        initEditor(okLambda, gridShape);
     }
 
     /**
@@ -68,21 +72,22 @@ public class ActionEditor extends Pane {
      * @param actionData
      *        - class where user-created Actions are stored
      */
-    public ActionEditor (ActionData actionData, Consumer<Action> okLambda) {
-        operationsList = new ArrayList<>();
-        myOkLambda = okLambda;
-        myName = "";
-        myAttackRange = new LinkedList<Point2D>();
-        myEffectRange = new LinkedList<Point2D>();
-        myStatsLogics = new LinkedList<StatsTotalLogic>();
+    public ActionEditor (Action action, Consumer<Action> okLambda,
+                         String gridShape) {
+        myName = action.toString();
+        myAttackRange = action.getActionRange();
+        myEffectRange = action.getEffectRange();
+        myStatsLogics = new LinkedList<StatsTotalLogic>(); // should read in logics
         myConclusion = null; // should set to empty conclusion (not null)
 
         setHeight(HEIGHT);
         setWidth(WIDTH);
-        initialize();
+        initEditor(okLambda, gridShape);
     }
 
-    protected void initialize () {
+    protected void initEditor(Consumer<Action> okLambda, String gridShape) {
+        myOkLambda = okLambda;
+        
         ScrollPane root = new ScrollPane();
         Scene scene = new Scene(root);
         scene.getStylesheets().add(STYLESHEET);
@@ -100,7 +105,6 @@ public class ActionEditor extends Pane {
         VBox rangeVBox = new VBox();
         rangeVBox.setSpacing(5);
         rangeVBox.getStyleClass().add("vbox");
-        VBox targetVBox = new VBox();
         VBox operationsVBox = new VBox();
         VBox conclusionVBox = new VBox();
 
@@ -112,12 +116,8 @@ public class ActionEditor extends Pane {
         initSetRangeButton(rangeVBox, "Action Range:", myAttackRange);
         // Set the Effect Range
         initSetRangeButton(rangeVBox, "Effect Range (Splashzone):", myEffectRange);
-        // Target stat to be modified
-        ChoiceBox<String> targetChoice = new ChoiceBox<String>();
-        TextField moddedStat = new TextField();
-        initStatsModifier(targetVBox, targetChoice, moddedStat);
         // Operations
-        initOperationsBox(operationsVBox);
+        initStatsOperationsBox(operationsVBox);
         // conclusions
         initConclusionsBox(conclusionVBox);
 
@@ -140,6 +140,11 @@ public class ActionEditor extends Pane {
                                  new Separator(), createBtn);
         getChildren().add(box);
 
+    }
+
+    private void initStatsOperationsBox (VBox operationsVBox) {
+        // TODO Auto-generated method stub
+        
     }
 
     private void initConclusionsBox (VBox conclusionVBox) {
@@ -195,25 +200,16 @@ public class ActionEditor extends Pane {
     }
 
     // TODO: really need to take in multiple stats
-    private List<StatsTotalLogic> getStatsLogics (ChoiceBox<String> targetChoice,
-                                                  TextField moddedStat) {
-        String target = targetChoice.getValue();
-        String stat = moddedStat.getText();
+    public List<StatsTotalLogic> getStatsLogics (ChoiceBox<String> targetChoice,
+                                                 TextField moddedStat) {
+       String target = targetChoice.getValue();
+       String stat = moddedStat.getText();
 
-        List<StatsTotalLogic> stlList = new LinkedList<StatsTotalLogic>();
-        List<StatsSingleMultiplier> multiplierLogic = getSingleMultipliers(operationsList);
-        stlList.add(new StatsTotalLogic(target, stat, multiplierLogic));
-        return stlList;
-    }
-
-    private List<StatsSingleMultiplier> getSingleMultipliers (List<SingleMultiplierBox> smbList) {
-        List<StatsSingleMultiplier> ssmList = new LinkedList<StatsSingleMultiplier>();
-        for (SingleMultiplierBox smb : smbList) {
-            ssmList.add(smb.getSingleMultipler());
-        }
-        return ssmList;
-    }
-
+       List<StatsTotalLogic> stlList = new LinkedList<StatsTotalLogic>();
+       List<StatsSingleMultiplier> multiplierLogic = getSingleMultipliers(myOperationsList);
+       stlList.add(new StatsTotalLogic(target, stat, multiplierLogic));
+       return stlList;
+   }
     private void initNameField (VBox nameBox, TextField nameField) {
         Label nameLabel = new Label("Action name");
         nameField.setPromptText("Enter action name");
@@ -227,7 +223,7 @@ public class ActionEditor extends Pane {
         setRange.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                PopupWindow actionRangeEditor = new RangeEditor(range, "Square Grid");
+                PopupWindow actionRangeEditor = new RangeEditor(range, myGridShape);
                 actionRangeEditor.show();
             }
         });
@@ -235,59 +231,12 @@ public class ActionEditor extends Pane {
         
     }
 
-    private void initStatsModifier (VBox targetVBox,
-                                    ChoiceBox<String> targetChoice, TextField moddedStat) {
-        // TODO: Need to make it so that we can take in multiple target stats
-        // Target whose stat will be modified
-        Label targetLabel = new Label("Action target");
-        targetChoice.getItems().addAll("Actor", "Receiver");
-
-        // Particular statistic modified
-        moddedStat.setPromptText("Stat to be modified");
-        HBox targetAndStatHBox = new HBox();
-        targetAndStatHBox.setSpacing(10);
-        targetAndStatHBox.getChildren().addAll(targetChoice, moddedStat);
-        targetVBox.getChildren().addAll(targetLabel, targetAndStatHBox);
-    }
-
-    private void initOperationsBox (VBox operationsBox) {
-        Label operationsLabel = new Label("Operations to be performed");
-        Button newOperation = new Button("New operation");
-        operationsBox.setSpacing(10);
-        operationsBox.getChildren().addAll(operationsLabel, newOperation);
-
-        newOperation.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent click) {
-                SingleMultiplierBox operation = new SingleMultiplierBox();
-                operation.setSpacing(5);
-                operationsList.add(operation);
-                Button delStatBtn = makeDeleteButton(operationsBox, operation);
-                operationsBox.getChildren().addAll(operation, delStatBtn);
-            }
-        });
-    }
-
-    private Button makeDeleteButton (VBox operationsBox, SingleMultiplierBox operation) {
-        Button delBtn = new Button("-");
-        delBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                System.out.println("ActionOperationEditor: delete button pressed");
-                operationsList.remove(operation);
-                operationsBox.getChildren().remove(operation);
-                operationsBox.getChildren().remove(delBtn);
-            }
-        });
-        return delBtn;
-    }
-
-    protected void setAttackRange (List<Point2D> attackRange) {
-        myAttackRange = attackRange;
-    }
-
-    protected void setEffectRange (List<Point2D> effectRange) {
-        myEffectRange = effectRange;
-    }
+//    protected void setAttackRange (List<Point2D> attackRange) {
+//        myAttackRange = attackRange;
+//    }
+//
+//    protected void setEffectRange (List<Point2D> effectRange) {
+//        myEffectRange = effectRange;
+//    }
 }
 
