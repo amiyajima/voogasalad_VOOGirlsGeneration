@@ -85,7 +85,7 @@ public class ConcreteAction implements Action {
 
 	private void runConclusion(Piece actor, Piece[] receivers) {
 		if (myConclusion != null) {
-			myConclusion.runConclusion(actor, receivers);
+			myConclusion.runConclusion(null, actor, receivers);
 		}
 	}
 
