@@ -47,7 +47,6 @@ public class LevelEditor extends VBox {
 
 	private EventsDataWrapper myData;
 
-<<<<<<< HEAD
     public LevelEditor (Consumer<Level> okLambda, EventsDataWrapper data) {
     	myEditorTitle = CREATOR_TITLE;
 
@@ -69,7 +68,6 @@ public class LevelEditor extends VBox {
         myGridRows = myGrid.getRow();
         myGridCols = myGrid.getCol();
         myTileHeight = myGrid.getTileHeight();
-        myLevel = level;
         myEvents = (ObservableList<Event>) level.getEvents();
         myData = data;
 
@@ -116,9 +114,7 @@ public class LevelEditor extends VBox {
         Label heightLabel = new Label("Tile Height: ");
         TextField heightField = new TextField("" + myTileHeight);
         tileHeightHBox.getChildren().addAll(heightLabel, heightField);
-        
-    	myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
-    	
+            	
         Button eventBtn = new Button("Add Global Events...");
         eventBtn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -147,7 +143,7 @@ public class LevelEditor extends VBox {
                 myGridRows = Integer.parseInt(rowField.getText());
                 myGridCols = Integer.parseInt(colField.getText());
                 myTileHeight = Double.parseDouble(heightField.getText());
-                
+                myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
                 Level level = new Level(myGrid, myEvents, myId, false);
 
                 myOkLambda.accept(level);

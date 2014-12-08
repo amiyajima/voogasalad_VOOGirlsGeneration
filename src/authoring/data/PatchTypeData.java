@@ -31,6 +31,7 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 	public void remove(Patch p) {
 		myPatches.remove(p);
 		setChanged();
+		
 		notifyObservers();
 	}
 	
