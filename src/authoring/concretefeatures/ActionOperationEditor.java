@@ -88,17 +88,34 @@ public class ActionOperationEditor extends PopupWindow {
         addBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                StatsOperationBox scb = new StatsOperationBox();
-                myBoxes.add(scb);
-                addStatHBox(statsVBox, scb);
+                System.out.println("ActionOperationEditor: makeAddButton event called");
+                StatsOperationBox sob = new StatsOperationBox();
+                myBoxes.add(sob);
+                addStatHBox(statsVBox, sob);
             }
         });
         return addBtn;
     }
 
-    private void addStatHBox (VBox statsVBox, StatsOperationBox scb) {
-        // TODO Auto-generated method stub
+    private void addStatHBox (VBox statsVBox, StatsOperationBox sob) {
+        HBox statsHBox = new HBox();
+        statsHBox.getStyleClass().add("hbox");
+        Button delStatBtn = makeDeleteButton(statsVBox, statsHBox, sob);
+        statsHBox.getChildren().addAll(sob, delStatBtn);
+        statsVBox.getChildren().addAll(statsHBox);
+    }
 
+    private Button makeDeleteButton (VBox statsVBox, HBox statsHBox, StatsOperationBox sob) {
+        Button delBtn = new Button("-");
+        delBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                System.out.println("ActionOperationEditor: delete button pressed");
+                myBoxes.remove(sob);
+                statsVBox.getChildren().remove(statsHBox);
+            }
+        });
+        return delBtn;
     }
 
     private void initStatsEditorBox (VBox statsVBox) {
