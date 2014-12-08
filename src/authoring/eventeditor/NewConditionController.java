@@ -26,7 +26,6 @@ public class NewConditionController implements Initializable{
 	
 	private List<Class> conditionsList;
 	
-	private Condition myCondition;
 	private Consumer<Condition> myDoneLambda;
 	private EventsDataWrapper myData;
 	
@@ -91,15 +90,6 @@ public class NewConditionController implements Initializable{
 		myDoneLambda = okLambda;
 	}
 	
-	/**
-	 * Loads the data of a Condition into the editor.
-	 * Used when editing a previous condition, rather than creating a new one from scratch
-	 * @param entry
-	 */
-	public void loadEntryCondition(Condition entry){
-		myCondition = entry;
-	}
-
 	public void loadData(EventsDataWrapper data) {
 		myData = data;
 	}

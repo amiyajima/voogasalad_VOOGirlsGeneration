@@ -16,6 +16,12 @@ import gamedata.gamecomponents.IHasStats;
 public abstract class Condition {
 
 	protected String myDescription;
+	
+	protected static final String IF = "IF ";
+	protected static final String EQUALS = " EQUALS ";
+	protected static final String GREATER_THAN = " IS GREATER THAN ";
+	protected static final String LESS_THAN = " IS LESS THAN ";
+
 
 	/**
 	 * Protected constructor used to set the description

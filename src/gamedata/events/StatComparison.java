@@ -5,7 +5,7 @@ import java.util.List;
 import gamedata.gamecomponents.IHasStats;
 
 public abstract class StatComparison extends Condition{
-	
+			
 	protected IHasStats myReference;
 	protected String myStat;
 	protected Double myConstant;
@@ -21,11 +21,11 @@ public abstract class StatComparison extends Condition{
 	public boolean evaluate(List<IHasStats> objects) {
 		for(IHasStats source: objects){
 			if(myReference.getClass().equals(source.getClass())){
-				return comparison(source);
+				return compare(source);
 			}	
 		}
 		return false;
 	}
-
-	protected abstract boolean comparison(IHasStats source);
+	
+	protected abstract boolean compare(IHasStats source);
 }
