@@ -676,8 +676,8 @@ public class ViewController {
 		gridState = state;
 	}
 
-	private void setPlayerTurnDisplay() {
-		playerTurn.setText("Turn: " + myCurrentPlayer.getID());
+	public void setPlayerTurnDisplay() {
+		playerTurn.setText("Player ID: " + myCurrentPlayer.getID());
 	}
 
 	/**
@@ -692,4 +692,9 @@ public class ViewController {
 	public VBox getcontrolPane() {
 		return controlPane;
 	}
+	
+	public void setCurrentPlayer(Player p){
+		myCurrentPlayer=p;
+	}
 }
+

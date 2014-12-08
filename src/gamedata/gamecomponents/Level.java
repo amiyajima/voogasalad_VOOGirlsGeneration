@@ -62,6 +62,7 @@ public class Level extends Observable implements IChangeGameState {
 			Consumer<List<IHasStats>> eventFunc = (List<IHasStats> list) -> e.runEvent(list);
 			myGrid.runEvent(eventFunc);
 		}
+		this.garbageCollectPieces();
 	}
 
 	/**
