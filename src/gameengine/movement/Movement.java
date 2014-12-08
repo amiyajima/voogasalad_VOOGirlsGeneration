@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
-<<<<<<< HEAD
-=======
 
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
@@ -20,7 +18,6 @@ import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
->>>>>>> e39498b9f616cb47100c26d27093e3cad5b9005d
 import authoring_environment.GUIGrid;
 
 
@@ -147,20 +144,6 @@ public class Movement implements Action {
         return new ArrayList<Point2D>();
     }
 
-<<<<<<< HEAD
-    /**
-     * Contains the logic to execute the behavior of moving the piece
-     */
-    @Override
-    public void doBehavior (Piece actor, Piece ... receivers) {
-        Piece p = receivers[0];
-        Point2D point = p.getLoc();
-        if (isValidLocation((int) point.getX(), (int) point.getY())) {
-            // TODO: Implement Orientation Calculation Here
-            actor.setLoc(point);
-        }
-    }
-=======
 	/**
 	 * Contains the logic to execute the behavior of moving the piece
 	 */
@@ -190,7 +173,6 @@ public class Movement implements Action {
 			
 		}
 	}
->>>>>>> e39498b9f616cb47100c26d27093e3cad5b9005d
 
     @Override
     public String toString () {
