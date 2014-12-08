@@ -93,7 +93,8 @@ public class AuthoringController implements Initializable {
 		myPatchController = new PatchController(myPatchesVBox, myPropertiesSPane, myGridReference,
 				myPatchTypes);
 		myLevelController = new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
-				myGridReference, myLevelData, myPieceTypes, myPatchTypes, myGamePropertiesData);
+				myGridReference, myLevelData, myPieceTypes, myPatchTypes, 
+				myGamePropertiesData.getGridShape());
 
 		myActionController = new ActionController(myActionsVBox, myPropertiesSPane, myGridReference, myActionData);
 	}
