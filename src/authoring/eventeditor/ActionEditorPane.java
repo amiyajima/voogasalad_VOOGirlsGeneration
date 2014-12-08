@@ -1,14 +1,16 @@
 package authoring.eventeditor;
 
 import gamedata.events.GlobalAction;
-import gamedata.events.globalaction.CreatePieceGlobalAction;
+
+import gamedata.events.globalaction.CreatePiece;
 import gamedata.events.globalaction.LevelChangeGlobalAction;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
+import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.function.Consumer;
-import authoring.data.EventsDataContainer;
+import authoring.data.EventsDataWrapper;
 import authoring_environment.UIspecs;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -41,15 +43,15 @@ public class ActionEditorPane extends Pane {
 
     private Consumer<GlobalAction> myDoneLambda;
     private GlobalAction myGlobalAction;
-    private EventsDataContainer myData;
+    private EventsDataWrapper myData;
 
-    public ActionEditorPane (Consumer<GlobalAction> doneLambda, EventsDataContainer data) {
+    public ActionEditorPane (Consumer<GlobalAction> doneLambda, EventsDataWrapper data) {
         myDoneLambda = doneLambda;
         myData=data;
         initialize();
     }
 
-    public ActionEditorPane (Consumer<GlobalAction> doneLambda, GlobalAction globalAction, EventsDataContainer data) {
+    public ActionEditorPane (Consumer<GlobalAction> doneLambda, GlobalAction globalAction, EventsDataWrapper data) {
         myDoneLambda = doneLambda;
         myGlobalAction = globalAction;
         myData = data;
@@ -131,7 +133,7 @@ public class ActionEditorPane extends Pane {
                                 
                                 //specify which instance variable we're looking for, then the value we're changing it to.
                                 //the value is determined by the user
-                                myGlobalAction = new CreatePieceGlobalAction("Create ", null, null, null);
+                                myGlobalAction = new CreatePiece("Create ", null, null, null);
                                 myDoneLambda.accept(myGlobalAction);
                         }
 

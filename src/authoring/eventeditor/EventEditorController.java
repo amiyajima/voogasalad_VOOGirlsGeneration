@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
-import authoring.data.EventsDataContainer;
+import authoring.data.EventsDataWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -71,7 +71,7 @@ public class EventEditorController implements Initializable {
     private List<Event> myEvents;
     private List<Condition> myConditions;
     private List<GlobalAction> myActions;
-    private EventsDataContainer myData;
+    private EventsDataWrapper myData;
     
     private Stage myStage;
 
@@ -233,7 +233,7 @@ public class EventEditorController implements Initializable {
         loader.setLocation(getClass().getResource("/authoring/eventeditor/NewAction.fxml"));
         Parent root = loader.load();
 
-        Stage newActionStage = new Stage();
+        newActionStage = new Stage();
         newActionStage.setTitle("New Action");
         newActionStage.initModality(Modality.WINDOW_MODAL);
         Scene scene = new Scene(root);
@@ -244,7 +244,7 @@ public class EventEditorController implements Initializable {
         controller.loadLambda(okActionLambda);
         controller.loadEntryCondition(entry);
         controller.loadData(myData);
-
+        
         newActionStage.showAndWait();
     }
 
@@ -259,7 +259,7 @@ public class EventEditorController implements Initializable {
         eventsListView.setItems(events);
     }
 
-	public void loadData(EventsDataContainer data) {
+	public void loadData(EventsDataWrapper data) {
 		myData = data;
 	}
 

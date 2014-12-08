@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import authoring.actionslogic.ActionLogicController;
+import authoring.createedit.GamePropertiesEditor;
 import authoring.data.ActionData;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
@@ -45,6 +46,9 @@ public class AuthoringController implements Initializable {
 	
 	@FXML
     private MenuItem actonsLogicChart;
+	
+	@FXML
+	private MenuItem gameProperties;
 	
 	private GUIGridReference myGridReference;
 	private PieceController myPieceController;
@@ -87,4 +91,16 @@ public class AuthoringController implements Initializable {
 
                 eventEditorStage.showAndWait();
         }
+	
+	@FXML
+	private void showGamePropertiesWindow(){
+			GamePropertiesEditor gamePptEditor=new GamePropertiesEditor();
+			gamePptEditor.setTitle("Game Properties Editor");
+		 	gamePptEditor.setX(450);
+		 	gamePptEditor.setY(200);
+		 	gamePptEditor.show();
+		 		
+	}
+	
+	
 }

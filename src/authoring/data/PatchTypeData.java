@@ -30,7 +30,7 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 	
 	@Override
 	public void replace(Patch origEl, Patch newEl) {
-	    remove(origEl);
+	    myPatches.remove(origEl);
 	    add(newEl);
 		setChanged();
 		notifyObservers(newEl);
@@ -52,7 +52,7 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 	public boolean containsName(String name) {
 		Set<String> nameSet = new HashSet<String>();
 		for (Patch p : myPatches) {
-			nameSet.add(p.getName());
+			nameSet.add(p.toString());
 		}
 		return nameSet.contains(name);
 	}

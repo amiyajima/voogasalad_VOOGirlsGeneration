@@ -46,7 +46,6 @@ import authoring_environment.UIspecs;
  *
  */
 public class PieceTypeEditor extends Pane {
-
     private static final int HEIGHT = 150;
     private static final int WIDTH = 150;
     private static final String CREATOR_TITLE = "Unit Creator";
@@ -103,7 +102,7 @@ public class PieceTypeEditor extends Pane {
         myEditorTitle = EDITOR_TITLE;
         myAvailableActions = actions;
         myID = piece.getID();
-        myName = piece.getName();
+        myName = piece.toString();
         myImageLocation = piece.getImageLocation();
         myActions = piece.getActions();
         myStats = piece.getStats();

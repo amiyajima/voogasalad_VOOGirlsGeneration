@@ -49,7 +49,7 @@ public class GameGridEffect {
                                      && point.getY() < myGrid.getCol()
                                      && point.getX() > 0 && point.getY() > 0) {
                                      
-                                     SuperTile toHighlight = myGrid.findClickedTile(point);
+                                     SuperTile toHighlight = myGrid.findTile(point);
                                      toHighlight.selectTile(ACTION_RANGE_COLOR);
                                      myHighlightedActions.add(toHighlight);
                                      
@@ -77,7 +77,7 @@ public class GameGridEffect {
             myActiveAction.getActionRange(myActivePiece.getLoc()).forEach(point -> {
                 if (loc.equals(point)){
                     myActiveAction.getEffectRange().forEach(point2 -> {
-                        SuperTile toHighlight = myGrid.findClickedTile(point2);
+                        SuperTile toHighlight = myGrid.findTile(point2);
                         toHighlight.selectTile(EFFECT_RANGE_COLOR);
                         myHighlightedEffects.add(toHighlight);
                         });
@@ -95,7 +95,7 @@ public class GameGridEffect {
         clearAllEffectHighlights();
         updateActives();
         //System.out.println("GGE highlight location: " + loc.getX() + " " + loc.getY());
-        SuperTile toHighlight = myGrid.findClickedTile(loc);
+        SuperTile toHighlight = myGrid.findTile(loc);
         toHighlight.selectTile(DEFAULT_COLOR);
         myHighlightedPiece.add(toHighlight);
     }
@@ -107,21 +107,21 @@ public class GameGridEffect {
      */
     private void clearAllEffectHighlights(){
         for (SuperTile st : myHighlightedEffects) {
-            myGrid.findClickedTile(st.getPixelLocation()).deselectTile();
+            myGrid.findTile(st.getCoordinates()).deselectTile();
         }
         myHighlightedEffects.clear();
     }
     
     public void clearAllActionHighlights(){
         for (SuperTile st : myHighlightedActions) {
-            myGrid.findClickedTile(st.getPixelLocation()).deselectTile();
+            myGrid.findTile(st.getCoordinates()).deselectTile();
         }
         myHighlightedActions.clear();
     }
     
     public void clearAllPieceHighlights(){
         for (SuperTile st : myHighlightedPiece) {
-            myGrid.findClickedTile(st.getPixelLocation()).deselectTile();
+            myGrid.findTile(st.getCoordinates()).deselectTile();
         }
         myHighlightedPiece.clear();
     }
@@ -133,19 +133,19 @@ public class GameGridEffect {
 
     private void printPieceHighlights() {
         for (SuperTile st : myHighlightedPiece) {
-            System.out.println("Piece Highlights: " + st.getPixelLocation().getX() + ", " + st.getPixelLocation().getY());
+            System.out.println("Piece Highlights: " + st.getCoordinates().getX() + ", " + st.getCoordinates().getY());
         }
     }
     
     private void printEffectHighlights() {
         for (SuperTile st : myHighlightedEffects) {
-            System.out.println("Effect Highlights: " + st.getPixelLocation().getX() + ", " + st.getPixelLocation().getY());
+            System.out.println("Effect Highlights: " + st.getCoordinates().getX() + ", " + st.getCoordinates().getY());
         }
     }
     
     private void printActionHighlights() {
         for (SuperTile st : myHighlightedActions) {
-            System.out.println("Action Highlights: " + st.getPixelLocation().getX() + ", " + st.getPixelLocation().getY());
+            System.out.println("Action Highlights: " + st.getCoordinates().getX() + ", " + st.getCoordinates().getY());
         }
     }
     
@@ -160,7 +160,7 @@ public class GameGridEffect {
     public boolean isHoveringOverActionHighlight(double mouseX, double mouseY) {
             for (SuperTile st : myHighlightedActions) {
                     if (myViewController.getGrid().findClickedTile(mouseX, mouseY)
-                                    .getPixelLocation() == st.getPixelLocation()) {
+                                    .getCoordinates() == st.getCoordinates()) {
                             return true;
                     }
             }

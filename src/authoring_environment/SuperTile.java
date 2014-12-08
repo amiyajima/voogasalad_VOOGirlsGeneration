@@ -18,9 +18,9 @@ public abstract class SuperTile extends Group {
     protected Shape myShape;
     // private int mySize;
     private double myImageSize;
-    private Point2D myCoordinates;
     private Point2D myLocation;
-    private Point2D myImageCoord;
+    private Point2D myImageLocation;
+    private Point2D myCoordinates;
 
     protected transient ImageView myPieceImage;
     protected transient Shape myPatchImage;
@@ -33,31 +33,27 @@ public abstract class SuperTile extends Group {
      * @param loc Grid coordination
      */
     public SuperTile (double size, Point2D loc) {
-
-        myLocation = loc;
-
+        myCoordinates = loc;
         makeShapeTile(size, loc);
-
         setStyle("-fx-cursor: hand");
-
         super.getChildren().addAll(myShape, myPatchImage, myPieceImage, myHighlight);
     }
 
     protected void makeShapeTile (double size, Point2D loc) {
 
-        myCoordinates = calculateCoord(size, loc);
-        myImageCoord = calculateImageCoord(size, loc);
+        myLocation = calculatePixelLocation(size, loc);
+        myImageLocation = calculateImageLocation(size, loc);
         myImageSize = calculateImageSize(size);
 
-        myShape = makeShape(size, myCoordinates);
+        myShape = makeShape(size, myLocation);
         makeHighlight(size);
         setCheckeredColor((int) loc.getX(), (int) loc.getY(), myShape);
 
         myPieceImage = initImageView(myImageSize);
-        myPatchImage = makeShape(size, myCoordinates);
+        myPatchImage = makeShape(size, myLocation);
         myPatchImage.setFill(Color.TRANSPARENT);
 
-        alignNodes(myImageCoord, myPieceImage);
+        alignNodes(myImageLocation, myPieceImage);
     }
 
     /**
@@ -67,7 +63,7 @@ public abstract class SuperTile extends Group {
      */
 
     private void makeHighlight (double size) {
-        myHighlight = makeShape(size, myCoordinates);
+        myHighlight = makeShape(size, myLocation);
         myHighlight.setFill(DEFAULT_HIGHLIGHT_COLOR);
         myHighlight.setVisible(false);
     };
@@ -95,11 +91,12 @@ public abstract class SuperTile extends Group {
         return myHighlight.isVisible();
     }
 
-    public void addPieceImage (ImageView imageView) {
+    public void setPieceImage (ImageView imageView) {
         myPieceImage.setImage(imageView.getImage());
+        myPieceImage.setVisible(true);
     }
 
-    public void addPatchImage (ImageView imageView) {
+    public void setPatchImage (ImageView imageView) {
         myPatchImage.setFill(new ImagePattern(imageView.getImage()));
     }
     
@@ -113,12 +110,12 @@ public abstract class SuperTile extends Group {
 
     protected abstract Shape makeShape (double size, Point2D coordinates);
 
-    protected abstract Point2D calculateCoord (double size, Point2D loc);
-
-    protected abstract Point2D calculateImageCoord (double size, Point2D loc);
-
-    protected abstract double calculateImageSize (double size);
-
+    protected abstract Point2D calculatePixelLocation (double size, Point2D loc);
+    
+    protected abstract Point2D calculateImageLocation(double size, Point2D loc);
+    
+    protected abstract double calculateImageSize(double size);
+    
     private void setCheckeredColor (int row, int col, Shape shape) {
         if (((row % 2 == 0) && (col % 2 == 0)) || ((row % 2 == 1) && (col % 2 == 1))) {
             shape.setFill(Color.WHITESMOKE);
@@ -138,11 +135,6 @@ public abstract class SuperTile extends Group {
         return imgView;
     }
 
-    public void clearPieceImage () {
-        this.addPieceImage(this.initImageView(myImageSize));
-    }
-    
-
     private void alignNodes (Point2D coord, Node ... nodes) {
         for (Node node : nodes) {
             node.setLayoutX(coord.getX());
@@ -155,8 +147,8 @@ public abstract class SuperTile extends Group {
      * 
      * @return
      */
-    public Point2D getPixelLocation () {
-        return myLocation;
+    public Point2D getCoordinates () {
+        return myCoordinates;
     }
 
     /**
@@ -164,8 +156,7 @@ public abstract class SuperTile extends Group {
      * 
      * @return
      */
-    public Point2D getCoordinates () {
-        return myCoordinates;
+    public Point2D getLocation () {
+        return myLocation;
     }
-
 }

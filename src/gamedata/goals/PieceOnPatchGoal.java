@@ -32,7 +32,7 @@ public class PieceOnPatchGoal extends Goal {
 	@Override
 	public int checkGameState(Level l) {
 		Grid g = l.getGrid();
-		Piece p = g.getPiece(myPiece.getName());
+		Piece p = g.getPiece(myPiece.toString());
 		if ((p.getLoc().getX() == myPatch.getLoc().getX())
 				&& (p.getLoc().getY() == myPatch.getLoc().getY())) {
 			return 1;
