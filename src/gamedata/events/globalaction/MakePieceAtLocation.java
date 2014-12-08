@@ -23,7 +23,7 @@ public class MakePieceAtLocation extends GlobalAction {
      * @param game
      * @param pieceToCreate
      */
-    public MakePieceAtLocation (String name, Piece pieceToCreate, Point2D loc) {
+    public MakePieceAtLocation (Piece pieceToCreate, Point2D loc) {
     	super(String.format("Make %s at point %s", pieceToCreate, loc));
         myPieceType = pieceToCreate;
         myLoc = loc;

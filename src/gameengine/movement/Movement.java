@@ -125,7 +125,7 @@ public class Movement implements Action {
 	}
 
 	@Override
-	public List<Point2D> getActionRange(Point2D pieceLocation) {
+	public List<Point2D> getSpecificActionRange(Point2D pieceLocation) {
 		return this.getPossibleLocs((int) pieceLocation.getX(),
 				(int) pieceLocation.getY());
 	}
@@ -151,5 +151,11 @@ public class Movement implements Action {
 	@Override
 	public String toString() {
 		return "Movement";
+	}
+
+	@Override
+	public List<Point2D> getActionRange() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
