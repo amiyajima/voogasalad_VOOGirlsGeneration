@@ -23,8 +23,12 @@ public class PieceTypeData extends Observable implements AuthoringData<Piece> {
     
 	@Override
 	public boolean canAdd(Piece element) {
-		// TODO Auto-generated method stub
-		return false;
+		for (Piece piece:myPieces){
+			if (piece.getID().equals(element.getID())){
+				return false;
+			}
+		}
+		return true;
 	}
 
 	@Override

@@ -196,7 +196,7 @@ public class PieceTypeEditor extends Pane {
     }
 
     private ModulesList initModList () {
-        ObservableList<String> availableActions = myAvailableActions.getActionNames();
+        ObservableList<String> availableActions = myAvailableActions.getActionIDs();
         ObservableList<String> addedActions = FXCollections.observableArrayList();
         // TODO : Actions need to be properly implemented before this can work.
         // for(Action action : myActions){

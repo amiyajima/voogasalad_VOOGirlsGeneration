@@ -90,6 +90,7 @@ public class LeapUIController extends Application {
                 ((HBox)hbox).getChildren().add(tf);
                 tf.setOnKeyPressed(ke->{
                     if(ke.getCode().equals(KeyCode.ENTER)){
+                        tf.getParent().requestFocus();
                         myCurrentLabel = (Label) ((HBox)hbox).getChildren().get(0);
                         mapKey(tf);
                     }
@@ -133,10 +134,19 @@ public class LeapUIController extends Application {
             //TODO: fix this
             l.setText(file.getName().substring(0, file.getName().length()-5));
             MouseDropDown.getItems().add(l);
-            l.setOnMouseClicked(event->myControls.put(MOUSE_KEY, l.getText()));
+            //l.setOnMouseClicked(event->myControls.put(MOUSE_KEY, l.getText()));
 
         });
+        MouseDropDown.valueProperty().addListener(event->onSelect());
+//        
+//        System.out.println(((Label)(MouseDropDown.getSelectionModel().getSelectedItem())).getText());
+//        myControls.put(MOUSE_KEY, ((Label)(MouseDropDown.getSelectionModel().getSelectedItem())).getText());
 
+    }
+    
+    private void onSelect(){
+       Label l = ((Label)MouseDropDown.valueProperty().getValue());
+       myControls.put(MOUSE_KEY, l.getText());
     }
     @FXML
     private void okayAction() throws IOException{
@@ -145,6 +155,7 @@ public class LeapUIController extends Application {
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Properties", "*.properties"));
         File f = fc.showSaveDialog(myStage);
         storage.save(f);
+        myStage.close();
 
     }
 

@@ -59,6 +59,7 @@
 			   <MenuItem fx:id="saveMenu" mnemonicParsing="false" onAction="#saveGame" text="Save Game" />
 			   <MenuItem fx:id="loadMenu" mnemonicParsing="false" onAction="#loadGame" text="Load Another Game" />
 			   <MenuItem fx:id="mainMenu" mnemonicParsing="false" onAction="#openInitialMenu" text="Go to Main Menu" />
+			   <MenuItem fx:id="settingsMenu" mnemonicParsing="false" onAction="#openSettings" text="Settings" />
 			   <MenuItem fx:id="exitMenu" mnemonicParsing="false" onAction="#exitGame" text="Exit" />
 		   </items>
 		 </MenuButton>

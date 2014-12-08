@@ -4,7 +4,6 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -54,11 +53,16 @@ public class RangeEditor extends PopupWindow {
     private int myTileSize = DEFAULT_TILE_SIZE;
     private static final String STYLESHEET = "/resources/stylesheets/actioncreator_layout.css";
 
+    private static final String DEFAULT_SHAPE = "SQUARE_GRID";
+
     private int myGridWidthNumber;
     private int myGridHeightNumber;
     private RangeGridView rangeGridView;
     private List<Point2D> myRange;
     
+    public RangeEditor(){
+        this(new ArrayList<Point2D>(), DEFAULT_SHAPE);
+    }
 
     public RangeEditor (List<Point2D> range, String shape) {
          range.add(new Point2D.Double(1,0));

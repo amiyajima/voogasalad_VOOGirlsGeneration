@@ -33,12 +33,12 @@ public class ActionData implements AuthoringData<Action> {
 		myActionsMap = new HashMap<>();
 	}
 	
-	public ObservableList<String> getActionNames(){
-		ObservableList<String> names = FXCollections.observableArrayList();
+	public ObservableList<String> getActionIDs(){
+		ObservableList<String> ids = FXCollections.observableArrayList();
 		for(String s: myActionsMap.keySet()){
-			names.add(s);
+			ids.add(s);
 		}
-		return names;
+		return ids;
 	}
 
     public Action getAction (String s) {
@@ -53,8 +53,12 @@ public class ActionData implements AuthoringData<Action> {
 
 	@Override
 	public boolean canAdd(Action element) {
-		// TODO Auto-generated method stub
-		return false;
+		for (String id:myActionsMap.keySet()){
+			if (element.toString().equals(id)){
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	@Override

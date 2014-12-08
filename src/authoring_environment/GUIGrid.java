@@ -1,5 +1,6 @@
 package authoring_environment;
 
+import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.function.Consumer;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -358,13 +360,19 @@ public class GUIGrid extends SuperGrid implements Observer{
 	}
 
 	// TODO: separate the two types of mouse events (drag and click)
-	public void paneSetOnMouseClicked (EventHandler<MouseEvent> handler) {
-		myPane.setOnMouseClicked(handler);
+	public void paneSetOnMousePressed (EventHandler<MouseEvent> handler) {
+		myPane.setOnMousePressed(handler);
 	}
 
 	public void paneSetOnMouseDragged (EventHandler<MouseEvent> handler) {
 		myPane.setOnMouseDragged(handler);
 	}
 
-
+	public void runEvent(Consumer<List<IHasStats>> eventFunc){
+		List<IHasStats> allObjects = new ArrayList<>();
+		allObjects.addAll(myPieceData.getData());
+		allObjects.addAll(myPatchData.getData());
+		
+		eventFunc.accept(allObjects);
+	}
 }

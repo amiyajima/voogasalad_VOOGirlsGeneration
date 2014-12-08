@@ -5,8 +5,68 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="30.0" styleClass="root" stylesheets="@../resources/stylesheets/stylesheet.css" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../resources/stylesheets/stylesheet.css" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox fx:id="scores" prefHeight="200.0" prefWidth="100.0" />
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Languages">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <CheckBox layoutX="14.0" layoutY="32.0" mnemonicParsing="false" text="English">
+                           <font>
+                              <Font name="Consolas" size="13.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox layoutX="14.0" layoutY="59.0" mnemonicParsing="false" text="Chinese">
+                           <font>
+                              <Font name="Consolas" size="13.0" />
+                           </font>
+                        </CheckBox>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Controllers">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <CheckBox layoutX="14.0" layoutY="30.0" mnemonicParsing="false" text="Keyboard">
+                           <font>
+                              <Font name="Consolas" size="13.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox layoutX="14.0" layoutY="59.0" mnemonicParsing="false" text="Leap Motion">
+                           <font>
+                              <Font name="Consolas" size="13.0" />
+                           </font>
+                        </CheckBox>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab>
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab text="Sound">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <CheckBox layoutX="14.0" layoutY="34.0" mnemonicParsing="false" text="Background Music">
+                           <font>
+                              <Font name="Consolas" size="13.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox layoutX="14.0" layoutY="59.0" mnemonicParsing="false" text="Click Sound">
+                           <font>
+                              <Font name="Consolas" size="13.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </fx:root>
