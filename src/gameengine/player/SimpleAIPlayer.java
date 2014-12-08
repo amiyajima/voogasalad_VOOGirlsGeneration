@@ -33,15 +33,8 @@ public class SimpleAIPlayer extends Player {
 
 	public void play() {
 		System.out.println("AI PLAY RUNNING");
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		List<Piece> myPieces = myCurrentLevel.getGrid().getPlayerPieces(
 				this.myID);
-		// while (!myCurrentLevel.getTurnOver() && myPieces.size() > 0) {
 		for (Piece p : myPieces) {
 			List<Action> actions = p.getActions();
 			Random rand = new Random();
@@ -70,8 +63,8 @@ public class SimpleAIPlayer extends Player {
 
 			}
 			myCurrentLevel.getGrid().repopulateGrid();
+
 		}
-		// }
 	}
 
 	@Override
