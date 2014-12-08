@@ -58,6 +58,7 @@ public class LevelEditor extends VBox {
         myTileHeight = 0;
         myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
         myEvents = FXCollections.observableArrayList();
+        myLevel = new Level();
         initEditor(okLambda,data,gridShape);
     }
 
@@ -149,6 +150,9 @@ public class LevelEditor extends VBox {
                 		myGrid);
                 Level level = new Level(grid, myEvents, myId, false);
                 
+                /**
+                 * Inject the cloned Level into each Event's GameStateGlobalAction 
+                 */
                 for(Event e: myEvents){
                 	for(GlobalAction g: e.getGlobalActions()){
 	                	if(GameStateGlobalAction.class.isAssignableFrom(g.getClass())){
