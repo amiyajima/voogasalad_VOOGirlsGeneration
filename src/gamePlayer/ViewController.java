@@ -211,7 +211,7 @@ public class ViewController {
 	}
 	
 	public void addLanguages() {
-	        messages = ResourceBundle.getBundle(KOREAN);
+	        messages = ResourceBundle.getBundle(ENGLISH);
 	        showScoreButton.setText(messages.getString("SCORE"));
 	        controlTab.setText(messages.getString("CONTROL"));
 	        statsTab.setText(messages.getString("STATS"));
