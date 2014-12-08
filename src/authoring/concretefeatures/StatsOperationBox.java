@@ -12,7 +12,7 @@ import authoring.abstractfeatures.PopupWindow;
  * @author annamiyajima
  *
  */
-public class StatsOperationBox extends HBox{
+public class StatsOperationBox extends HBox {
 
     public StatsOperationBox () {
         initStatsOperationBox();
@@ -20,5 +20,9 @@ public class StatsOperationBox extends HBox{
 
     private void initStatsOperationBox () {
         HBox statsBox = new SingleMultiplierBox();
+    }
+
+    public boolean isEmpty () {
+        return myValueField.getText().isEmpty() || myStatField.getText().isEmpty();
     }
 }

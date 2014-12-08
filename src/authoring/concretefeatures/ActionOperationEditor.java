@@ -59,14 +59,28 @@ public class ActionOperationEditor extends PopupWindow {
         Button newStatBtn = makeAddButton(statsVBox);
         Button doneBtn = makeDoneButton(statsVBox);
 
-        //mainVBox.getChildren().addAll(newStatBtn, statsVBox, doneBtn);
+        mainVBox.getChildren().addAll(newStatBtn, statsVBox, doneBtn);
         root.setContent(mainVBox);
         setScene(scene);
     }
 
     private Button makeDoneButton (VBox statsVBox) {
-        // TODO Auto-generated method stub
-        return null;
+        Button doneButton = new Button("Done");
+        doneButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                //myStats.clear();
+                for (StatsOperationBox sbc : myBoxes) {
+                    if (!sbc.isEmpty()) {
+//                        String name = sbc.getStatName();
+//                        Double val = sbc.getStatValue();
+//                        myStats.add(name, val);
+                    }
+                }
+                close();
+            }
+        });
+        return doneButton;
     }
 
     private Button makeAddButton (VBox statsVBox) {
@@ -88,6 +102,11 @@ public class ActionOperationEditor extends PopupWindow {
     }
 
     private void initStatsEditorBox (VBox statsVBox) {
+        initStatsOperationBoxes(statsVBox);
+    }
+
+    private void initStatsOperationBoxes (VBox statsVBox) {
+        //repopulate with existing statsOperationBoxes
         
     }
 }
