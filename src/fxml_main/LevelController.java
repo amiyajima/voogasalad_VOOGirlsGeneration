@@ -21,7 +21,6 @@ import authoring.data.EventsDataWrapper;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
-import authoring_environment.GUIGrid;
 
 /**
  * 
@@ -58,9 +57,9 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 		//TODO: Need to not hard-code square, have it passed through the constructor
 		// as maybe a gridshapeproperty (new class?)
 		Consumer<Level> okLambda = (Level level) -> {
-						
+			myLevelData.add(level);			
 			addEntry(level);
-			myLevelData.add(level);
+			
 			myPieceTypes.addObserver(level.getGrid());
 			myPatchTypes.addObserver(level.getGrid());
 			setAndDisplayGrid(level);

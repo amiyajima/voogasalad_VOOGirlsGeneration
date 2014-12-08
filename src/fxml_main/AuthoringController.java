@@ -54,6 +54,7 @@ public class AuthoringController implements Initializable {
 	private PieceController myPieceController;
 	private PatchController myPatchController;
 	private LevelController myLevelController;
+	private ActionController myActionController;
 	
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -70,6 +71,8 @@ public class AuthoringController implements Initializable {
 	    		myPatchTypes);
 	    myLevelController = new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
 	    		myGridReference, myLevelData, myPieceTypes, myPatchTypes);
+	    
+	    myActionController = new ActionController(myActionsVBox, myPropertiesSPane, myGridReference, actions);
 	}
 	
 	@FXML
