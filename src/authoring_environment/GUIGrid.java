@@ -301,6 +301,11 @@ public class GUIGrid extends SuperGrid implements Observer {
         myPane.setOnMouseDragged(handler);
     }
 
+    /**
+     * Returns Read-Only lists of the Pieces and Patches local to a given level
+     * Used by Events
+     * @return
+     */
     public List<Piece> getReadOnlyPieceList () {
         return Collections.unmodifiableList(myPieceData.getData());
     }
