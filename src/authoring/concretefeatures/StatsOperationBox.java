@@ -1,24 +1,24 @@
 package authoring.concretefeatures;
 
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import authoring.abstractfeatures.PopupWindow;
 
 
 /**
- * Combines SingleMultiplierBoxes to allow definition of a stat operation.
- * Used to define actions
+ * Combination of StatsCreatorBoxes to define Stats Operations for actions
  * 
  * @author annamiyajima
  *
  */
-public class StatsOperationBox extends PopupWindow {
+public class StatsOperationBox extends HBox{
 
-    public StatsOperationBox(){
-        
+    public StatsOperationBox () {
+        initStatsOperationBox();
     }
 
-    @Override
-    protected void initialize () {
+    private void initStatsOperationBox () {
         HBox statsBox = new SingleMultiplierBox();
     }
 }
