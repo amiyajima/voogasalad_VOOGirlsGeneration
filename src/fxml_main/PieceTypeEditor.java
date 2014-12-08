@@ -201,7 +201,7 @@ public class PieceTypeEditor extends Pane {
         sample.put("sample", 5.0);
         Stats sampleStat = new Stats(sample);
         
-        StatsTotalEditor editor = new StatsTotalEditor(sampleStat);
+        StatsTotalEditor editor = new StatsTotalEditor(myStats);
         editor.show();
     }
 

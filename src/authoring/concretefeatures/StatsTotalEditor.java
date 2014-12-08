@@ -78,7 +78,6 @@ public class StatsTotalEditor extends PopupWindow {
     }
 
     private void initStatsCreatorBoxes (VBox statsVBox) {
-        System.out.println(myStats.getStatNames());
         Set<String> statNames = new HashSet(myStats.getStatNames());
         for (String name : statNames) {
             double val = myStats.getValue(name);
@@ -117,6 +116,7 @@ public class StatsTotalEditor extends PopupWindow {
             public void handle (ActionEvent event) {
                 myBoxes.remove(scb);
                 statsVBox.getChildren().remove(statsHBox);
+                myStats.remove(scb.getStatName());
             }
         });
         return delBtn;
@@ -127,7 +127,7 @@ public class StatsTotalEditor extends PopupWindow {
         doneButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                myStats.clear();
+                //myStats.clear();
                 for (StatsCreatorBox sbc : myBoxes) {
                     if (!sbc.isEmpty()) {
                         String name = sbc.getStatName();
