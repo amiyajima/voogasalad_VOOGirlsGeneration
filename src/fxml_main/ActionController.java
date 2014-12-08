@@ -1,25 +1,18 @@
 package fxml_main;
 
 import gamedata.action.Action;
-import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
-import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.data.ActionData;
-import authoring.data.LevelData;
-import authoring.data.PatchTypeData;
-import authoring.data.PieceTypeData;
 
 
 /**
@@ -38,26 +31,22 @@ public class ActionController extends GridComponentAbstCtrl<Action> {
         myActionData = actions;
     }
 
+
     @Override
     protected void initGlobalNewBtn (Button newBtn) {
+        // TODO: Need to not hard-code square, have it passed through the constructor
+        // as maybe a gridshapeproperty (new class?)
         newBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
-                globalNewBtnOnClickAction();
+                Consumer<Action> okLambda = (Action action) -> {
+                   //TODO: create an action
+                };
+                myPropertiesSPane.setContent(new ActionEditor(okLambda));
             }
         });
     }
-
-    private void globalNewBtnOnClickAction () {
-        // TODO: Need to not hard-code square, have it passed through the constructor
-        // as maybe a gridshapeproperty (new class?)
-        Consumer<Action> okLambda = (Action action) -> {
-            globalNewBtnOnClickAction();
-        };
-
-        super.myPropertiesSPane.setContent(new ActionEditor(okLambda));
-    }
-
+    
     @Override
     protected void initGlobalEditBtn (Button editBtn) {
         // do nothing

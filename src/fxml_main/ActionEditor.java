@@ -37,7 +37,7 @@ import authoring.data.ActionData;
 public class ActionEditor extends Pane {
 
     public static final int HEIGHT = 100;
-    public static final int WIDTH = 75;
+    public static final int WIDTH = 100;
     public static final String NAME = "Action Creator";
     private static final String STYLESHEET = "/resources/stylesheets/actioncreator_layout.css";
 
@@ -129,6 +129,8 @@ public class ActionEditor extends Pane {
                 myStatsLogics = getStatsLogics(targetChoice, moddedStat);
                 myActionData.add(new ConcreteAction(myName, myAttackRange,
                                                     myEffectRange, myStatsLogics, myConclusion));
+                //TODO: 
+                myOkLambda.accept(myActionData.getData().get(0));
                 System.out.println("Created Action");
                 System.out.println(myActionData.getActionIDs().get(0));
             }
