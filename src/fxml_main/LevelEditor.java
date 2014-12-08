@@ -116,8 +116,6 @@ public class LevelEditor extends VBox {
         TextField heightField = new TextField("" + myTileHeight);
         tileHeightHBox.getChildren().addAll(heightLabel, heightField);
 
-        myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
-
         Button eventBtn = new Button("Add Global Events...");
         eventBtn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -147,6 +145,7 @@ public class LevelEditor extends VBox {
                 myGridCols = Integer.parseInt(colField.getText());
                 myTileHeight = Double.parseDouble(heightField.getText());
 
+                myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
                 Level level = new Level(myGrid, myEvents, myId, false);
 
                 myOkLambda.accept(level);

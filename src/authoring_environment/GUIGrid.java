@@ -1,5 +1,6 @@
 package authoring_environment;
 
+import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 
@@ -10,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.function.Consumer;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -337,5 +339,11 @@ public class GUIGrid extends SuperGrid implements Observer{
 		myPane.setOnMouseDragged(handler);
 	}
 
-
+	public void runEvent(Consumer<List<IHasStats>> eventFunc){
+		List<IHasStats> allObjects = new ArrayList<>();
+		allObjects.addAll(myPieceData.getData());
+		allObjects.addAll(myPatchData.getData());
+		
+		eventFunc.accept(allObjects);
+	}
 }

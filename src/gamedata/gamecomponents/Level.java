@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.function.Consumer;
 
 import javafx.scene.control.ScrollPane;
 import authoring_environment.GUIGrid;
@@ -50,15 +51,15 @@ public class Level extends Observable implements IChangeGameState{
 		// winningLevel = isWinningLevel;
 	}
 
-	//TODO: Send all Pieces, Patches, etc. into the Events
-//	public void runGameEvents() {
-//		List<Piece> levelPieces = myGrid.get 
-//		
-//		for (Event e : myEvents) {
-//			e.runEvent();
-//		}
-//		this.garbageCollectPieces();
-//	}
+	/**
+	 * Runs events using the magic of laaaaaaaaaaambda
+	 */
+	public void runGameEvents() {
+		for(Event e: myEvents){
+			Consumer<List<IHasStats>> eventFunc = (List<IHasStats> list) -> e.runEvent(list);
+			myGrid.runEvent(eventFunc);
+		}
+	}
 
 	/**
 	 * Returns the grid contained in this level.
