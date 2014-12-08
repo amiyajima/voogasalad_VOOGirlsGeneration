@@ -19,7 +19,7 @@
             <Menu fx:id="exit" mnemonicParsing="false" text="Game Properties">
               <items>
                   <MenuItem fx:id="gameProperties" mnemonicParsing="false" onAction="#showGamePropertiesWindow" text="Game properties..." />
-                  <MenuItem fx:id="actonsLogicChart" mnemonicParsing="false" onAction="#showActionzlogicChartWindow" text="Actions Logic Chart..." />
+                  <MenuItem fx:id="actonsLogicChart" mnemonicParsing="false" onAction="#showActionslogicChartWindow" text="Actions Logic Chart..." />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">

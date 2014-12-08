@@ -32,7 +32,7 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 	private LevelData myLevelData;
 	private PieceTypeData myPieceTypes;
 	private PatchTypeData myPatchTypes;
-	
+
 	protected LevelController (VBox vbox, ScrollPane propertiesSPane,
 			ScrollPane gridSPane, GUIGridReference gridRef, LevelData levels,
 			PieceTypeData pieceTypes, PatchTypeData patchTypes) {
@@ -52,18 +52,18 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 			}
 		});
 	}
-	
+
 	private void globalNewBtnOnClickAction() {
 		//TODO: Need to not hard-code square, have it passed through the constructor
 		// as maybe a gridshapeproperty (new class?)
 		Consumer<Level> okLambda = (Level level) -> {
 			myLevelData.add(level);			
 			addEntry(level);
-			
+
 			addComponentObservingLevel(level);
 			setAndDisplayGrid(level);
-			};
-			
+		};
+
 		List<Piece> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
 		List<Patch> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
 		List<Player> playersRO = null;
@@ -74,7 +74,12 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 
 	@Override
 	protected void initGlobalEditBtn(Button editBtn) {
-		editBtn.setVisible(false);
+		editBtn.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent arg0) {
+				myLevelData.getData().get(0).runGameEvents();
+			}
+		});
 	}
 
 	@Override
@@ -99,10 +104,18 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 
 	@Override
 	protected void initEntryEditBtn(Level entry, Button editBtn) {
+<<<<<<< HEAD
+=======
+
+		//TODO: THIS ONLY SORT OF WORKS
+		//WORKS WHEN YOU CLICK ON LHS PANE THEN RHS PANE THEN DONE. 
+		//ALSO LEVELS ARE SORTED IN ORDER OR MOST RECENTLY MODIFIED
+>>>>>>> 3395b425fde41f062a45c0d8126864fb0f55f324
 		editBtn.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent click) {
 				Consumer<Level> okLambda = (Level level) -> {
+
 					HBox entryBox = makeCompleteEntryBox(level);
 					HBox entryHolderBox = myEntryMap.get(entry);
 					entryHolderBox.getChildren().clear();
@@ -119,9 +132,15 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 				List<Player> playersRO = null;
 
 				EventsDataWrapper wrapper = new EventsDataWrapper(piecesRO, patchesRO, playersRO);
-				
+
 				myPropertiesSPane.setContent(new LevelEditor(okLambda, entry, wrapper));
+<<<<<<< HEAD
 			}
+=======
+
+			}
+
+>>>>>>> 3395b425fde41f062a45c0d8126864fb0f55f324
 		});
 	}
 

@@ -72,6 +72,24 @@
     -fx-background-color: linear-gradient(#ffffff, #bababa);
 }
 
+#gameName{
+    -fx-background-color: white;
+    -fx-font-family: "Consolas";
+    -fx-font-size: 20px;
+}
+
+#highestScore{
+    -fx-background-color: white;
+    -fx-font-family: "Consolas";
+    -fx-font-size: 16px;
+}
+
+.text{
+    -fx-background-color: white;
+    -fx-font-family: "Consolas";
+    -fx-font-size: 14px;
+}
+
 .button:hover{
     -fx-background-color: #add8e6;
 }
@@ -95,4 +113,30 @@
      -fx-padding: 4;
 }
 
+#nameplease{
+    -fx-font-family: "Consolas";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
 
+#congrats #highscorer #highscoredisplay {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+
+#congrats:hover #highscorer:hover #highscoredisplay:hover {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
