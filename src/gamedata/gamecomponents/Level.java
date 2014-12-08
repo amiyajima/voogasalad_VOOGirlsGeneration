@@ -39,6 +39,7 @@ public class Level extends Observable {
 		// winningLevel = isWinningLevel;
 	}
 
+	//TODO: Send all Pieces, Patches, etc. into the Events
 	public void runGameEvents() {
 		for (Event e : myEvents) {
 			e.runEvent();

@@ -1,5 +1,7 @@
 package gamedata.events;
 
+import gamedata.gamecomponents.IHasStats;
+
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -41,11 +43,11 @@ public class Event {
 	 * The list of Conditions is evaluated, and if all return true, the list of Actions
 	 * is run in order.
 	 */
-	public void runEvent () {
+	public void runEvent (IHasStats source) {
 		boolean allConditionsFulfilled = true;
 
 		for (Condition c : myConditions) {
-			if (!c.evaluate()) {
+			if (!c.evaluate(source)) {
 				allConditionsFulfilled = false;
 			}
 		}
