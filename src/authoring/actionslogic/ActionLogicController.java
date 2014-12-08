@@ -34,7 +34,7 @@ public class ActionLogicController implements Initializable {
     private Button saveButton;
 
     private List<String> myPieceTypes = new ArrayList<String>();
-    private Map<String, Map> myLogicMap = new HashMap<String, Map>();
+    private Map<String, Map<String,List<String>>> myLogicMap = new HashMap<String, Map<String,List<String>>>();
     private List<CheckBox> myCBList = new ArrayList<CheckBox>();
 
     @Override
@@ -82,18 +82,24 @@ public class ActionLogicController implements Initializable {
     private void saveLogic () {
         String currAction = actionsListView.getSelectionModel().getSelectedItem();
         String currActor = actorsChoiceBox.getSelectionModel().getSelectedItem();
+        Map<String,List<String>> actionReceiver = myLogicMap.get(currActor);
         List<String> receiverList = new ArrayList<String>();
+        
         for (CheckBox cb : myCBList) {
             if(cb.isSelected()){
                 receiverList.add(cb.getText());
             }
         }
-        Map<String,List<String>> actionReceiver = myLogicMap.get(currActor);
+        if(actionReceiver == null){
+            actionReceiver = new HashMap<String,List<String>>();
+        }
         actionReceiver.put(currAction, receiverList);
         myLogicMap.put(currActor, actionReceiver);
         System.out.println(myLogicMap);
         
 
     }
+    
+    
 
 }
