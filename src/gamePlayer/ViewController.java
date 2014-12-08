@@ -8,9 +8,9 @@ import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
 import java.awt.geom.Point2D;
 import java.io.File;
-
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -25,6 +25,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -88,6 +89,8 @@ public class ViewController {
 	@FXML
 	private Text gameName;
 	@FXML
+	private Text highestScore;
+	@FXML
 	private VBox scores;
 	@FXML
 	private Label playerTurn;
@@ -129,6 +132,10 @@ public class ViewController {
 	    myGameSpace = new BorderPane();
 	    mySettings = new BorderPane();
 	    myScoreBoard = new VBox();
+	    scores = new VBox();
+
+	    
+	    
 	    myPopup = new BorderPane();
 	    myJSONManager = new JSONManager();
 	    // myLeapController = new Controller();
@@ -145,7 +152,7 @@ public class ViewController {
 	    myStage.setScene(new Scene(myInitialScene));
 	    
 	    myAudio = new Audio();
-	    myAudio.playDefault();
+//	    myAudio.playDefault();     //muting music for now...
 	    
 	    System.out.println("Opened initial menu");
 	}
@@ -319,12 +326,7 @@ public class ViewController {
 		myGameSpace.setCenter(myGridPane);
 
 		setOnClick();
-
-		setGridState(new SelectState(this));
-		changeCursor(CURSOR_GLOVE_TEST);
-
-		
-
+		setGridState(new SelectState(this));		
 		keyControlOn = false;
 		myGameGridEffect = new GameGridEffect(this);
 	}
@@ -335,10 +337,20 @@ public class ViewController {
 	 * Loads the Score from a Player for Display
 	 */
 	protected void loadScores() {
-		gameName.setText(gameName.getText() + myModel.toString());
-		// TODO: add in scores
-		 myModel.getPlayers().forEach(player-> scores.getChildren().
-		 add(new Text(player.getID()+": ")));
+		List<Integer> scoreList = new ArrayList<Integer>();
+	        gameName.setText(myModel.toString());
+		scores.getChildren().clear();
+	        for (Player p: myModel.getPlayers()){
+		    int score = 0;    //0 for now. will get from Player later!!!!!
+		    scoreList.add(score);
+		    Text playerScore = new Text("Player " + p.getID()+": " + String.valueOf(score));
+		    playerScore.setFill(Color.WHITE);
+		    scores.getChildren().add(playerScore);
+		}
+	        highestScore.setText(String.valueOf(Collections.max(scoreList)));
+
+	        
+	        
 	}
 
 	/**
@@ -492,19 +504,6 @@ public class ViewController {
 		int yCor = (int) (y / patchHeight);
 		currentClick = new Point2D.Double(xCor, yCor);
 		return currentClick;
-	}
-
-	/**
-	 * Changes the image of the Cursor
-	 * 
-	 * @param filename
-	 */
-	public void changeCursor(String filename) {
-		Image image = new Image(filename);
-		
-		myScene.setCursor(new ImageCursor(image, image.getWidth() * CURSOR_RATIO, image
-				.getWidth() * CURSOR_RATIO));
-
 	}
 
 	/**

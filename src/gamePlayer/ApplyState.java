@@ -59,6 +59,10 @@ public class ApplyState implements IGridState {
 		myController.setActivePiece(null);
 		myController.setActiveAction(null);
 //		myGame.getCurrentLevel().runGameEvents();
+<<<<<<< HEAD
+=======
+		myGame.getCurrentLevel();
+>>>>>>> 4fcd3affd66d0273068f3146c7438daacb00e081
 	}
 
 }
