@@ -49,12 +49,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 
     @Override
     protected void initGlobalEditBtn (Button editBtn) {
-        editBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                editBtn.setVisible(false);
-            }
-        });
+        editBtn.setVisible(false);
     }
 
     /**
