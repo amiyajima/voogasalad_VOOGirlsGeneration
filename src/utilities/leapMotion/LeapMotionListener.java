@@ -13,18 +13,31 @@ import com.leapmotion.leap.Listener;
 public class LeapMotionListener extends Listener{
     private ResourceBundle myGestures;
     private Robot myRobot;
-    private ICustomControl myLeapMouse;
+    private ILeapMouse myLeapMouse;
     public static final String GESTURES_FILEPATH = "";
+    public static final String MOUSE_MOVE_FLAG = "mouse";
     
     
     public void onConnect (Controller controller){
     
         initializeRobot();
         myGestures = ResourceBundle.getBundle(GESTURES_FILEPATH);
-        enableGestures();
-    }
-    private void enableGestures(){
         
+        enableGestures(controller);
+    }
+   
+    private void enableGestures(Controller controller){
+        for(String gestureName : myGestures.keySet()){
+            if(gestureName.equals(MOUSE_MOVE_FLAG)){
+               // myLeapMouse = ;
+            }
+            for (Gesture.Type type: Gesture.Type.values()){
+                if(type.toString().equals(gestureName)){
+                    controller.enableGesture(type);
+                }
+            }
+           
+        }
     }
     private void initializeRobot () {
         try {
@@ -35,10 +48,10 @@ public class LeapMotionListener extends Listener{
     }
     public void onFrame (Controller controller) {
         Frame frame = controller.frame();
-        myLeapMouse.control(frame, myRobot);
+        myLeapMouse.moveMouse(frame, myRobot);
         for(Gesture gesture: frame.gestures()){
             for(String gestureName : myGestures.keySet()){
-                if(gesture.type()==Enum.valueOf(Gesture.Type.class, gestureName)){
+                if(gesture.type().toString().equals(gestureName)){
                     performAction(gestureName);
                 }
             }
