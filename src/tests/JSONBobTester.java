@@ -3,9 +3,9 @@ package tests;
 import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
-import gamedata.action.ReceiverToInventoryConclusion;
 import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
+import gamedata.action.conclusions.ReceiverToInventoryConclusion;
 import gamedata.events.Event;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Inventory;
@@ -102,8 +102,8 @@ public class JSONBobTester {
 		Piece ricaTemplate = createNewPiece(grid1, new Point2D.Double(0, 0), 3);
 		Patch templPatch = createNewPatch(new Point2D.Double(0, 0));
 
-		for (int x = 0; x < grid1.getCol(); x++) {
-			for (int y = 0; y < grid1.getRow(); y++) {
+		for (int x = 0; x < grid1.getNumCols(); x++) {
+			for (int y = 0; y < grid1.getNumRows(); y++) {
 			    Piece actual;
 			    if (x == y) {
 			        actual = new Piece(ricaTemplate, new Point2D.Double(x, y));
@@ -117,8 +117,8 @@ public class JSONBobTester {
 			    else {
 			        actual.setPlayerID(1);
 			    }
-			    grid1.addPiece(actual, new Point2D.Double(x, y));
-			    grid1.addPatch(templPatch, new Point2D.Double(x, y));
+			    grid1.addPieceAtLoc(actual, new Point2D.Double(x, y));
+			    grid1.addPatchAtLoc(templPatch, new Point2D.Double(x, y));
 			}
 		}
 

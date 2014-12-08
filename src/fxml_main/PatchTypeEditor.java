@@ -1,13 +1,11 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Patch;
-
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -80,6 +78,7 @@ public class PatchTypeEditor extends Pane {
 	 */
 	public PatchTypeEditor (Consumer<Patch> okLambda, Patch patch) {
 		myEditorTitle = EDITOR_TITLE;
+		myIDSet = new HashSet<String>();
 		myID = patch.getID();
 		myName = patch.toString();
 		myImageLocation = patch.getImageLocation();
@@ -122,7 +121,6 @@ public class PatchTypeEditor extends Pane {
 		TextField terrainID = new TextField();
 		terrainID.setText(myID);
 		if(!myID.equals("")){
-			myIDSet = new HashSet<String>();
 			terrainID.setDisable(true);
 		}
 		terrainID.setPromptText(ID_PROMPT);
@@ -150,7 +148,7 @@ public class PatchTypeEditor extends Pane {
 	 * @param images - HBox
 	 */
 	 private void initImageLoader (HBox images) {
-		 ImageView icon = setImageView(myImageLocation);
+		 ImageView icon = setImageView();
 		 icon.setFitHeight(40);
 		 icon.setFitWidth(40);
 		 Button loadImage = new Button(LOADIMAGE_LABEL);
@@ -172,12 +170,12 @@ public class PatchTypeEditor extends Pane {
 		 images.getChildren().addAll(icon, loadImage);
 	 }
 	 
-	 private ImageView setImageView(String imageLocation) {
+	 private ImageView setImageView() {
 		 if(myImageLocation.startsWith("/")){
-			 return new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+			 return new ImageView(new Image(getClass().getResourceAsStream(myImageLocation)));
 		 }
 		 else{
-			 return new ImageView(new Image(imageLocation));
+			 return new ImageView(new Image(myImageLocation));
 		 }
 	 }
 

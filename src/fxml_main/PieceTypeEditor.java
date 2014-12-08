@@ -4,25 +4,22 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
+
 import java.awt.geom.Point2D;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,15 +28,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import authoring.concretefeatures.StatsCreatorBox;
 import authoring.concretefeatures.StatsTotalEditor;
 import authoring.createedit.ModulesList;
 import authoring.data.ActionData;
 import authoring.data.PieceTypeData;
 import authoring_environment.UIspecs;
-
 
 /**
  * @author Mike Zhu, Jennie Ju
@@ -93,13 +86,14 @@ public class PieceTypeEditor extends Pane {
         myImageLocation = DEFAULT_IMAGE_LOC;
         myActions = new ArrayList<Action>();
         myStats = new Stats();
-        myPlayerID = 0;
+        myPlayerID = 1;
         myInventory = new Inventory();
         constructor(okLambda);
     }
 
     public PieceTypeEditor (Consumer<Piece> okLambda, Piece piece, ActionData actions) {
         myEditorTitle = EDITOR_TITLE;
+        myIDSet = new HashSet<String>();
         myAvailableActions = actions;
         myID = piece.getID();
         myName = piece.toString();
@@ -158,7 +152,6 @@ public class PieceTypeEditor extends Pane {
         TextField unitID = new TextField();
         unitID.setText(myID);
         if (!myID.equals("")) {
-            myIDSet = new HashSet<String>();
             unitID.setDisable(true);
         }
         unitID.setPromptText(ID_PROMPT);
@@ -208,7 +201,7 @@ public class PieceTypeEditor extends Pane {
     }
 
     private void initImageLoader (HBox images) {
-        ImageView icon = setImageView(myImageLocation);
+        ImageView icon = setImageView();
         icon.setFitHeight(40);
         icon.setFitWidth(40);
         Button loadImage = new Button(LOADIMAGE_LABEL);
@@ -230,12 +223,12 @@ public class PieceTypeEditor extends Pane {
         images.getChildren().addAll(icon, loadImage);
     }
 
-    private ImageView setImageView (String imageLocation) {
+    private ImageView setImageView() {
         if (myImageLocation.startsWith("/")) {
-            return new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+            return new ImageView(new Image(getClass().getResourceAsStream(myImageLocation)));
         }
         else {
-            return new ImageView(new Image(imageLocation));
+            return new ImageView(new Image(myImageLocation));
         }
     }
 

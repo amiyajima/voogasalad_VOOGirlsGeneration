@@ -23,7 +23,6 @@ import authoring.data.PieceTypeData;
 
 
 /**
- * 
  * @author annamiyajima
  *
  */
@@ -101,14 +100,14 @@ public class ActionController extends GridComponentAbstCtrl<Action> {
     @Override
     protected HBox makeEntryBox (Action entry) {
         HBox entryBox = new HBox();
-        //Label nameLabel = new Label(entry.getId());
+        // Label nameLabel = new Label(entry.getId());
         entryBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle (MouseEvent event) {
-                //setAndDisplayGrid(entry);
+                // setAndDisplayGrid(entry);
             }
         });
-        //entryBox.getChildren().add(nameLabel);
+        // entryBox.getChildren().add(nameLabel);
         return entryBox;
     }
 

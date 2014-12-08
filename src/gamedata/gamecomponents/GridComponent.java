@@ -38,8 +38,7 @@ public abstract class GridComponent implements IHasStats{
 		myName = name;
 		myLoc = point;
 		myImageLocation = imageLocation;
-		setImageView(imageLocation);
-		
+		setImageView();
 	}
 	
 	/**
@@ -55,7 +54,7 @@ public abstract class GridComponent implements IHasStats{
 		myName = clone.myName;
 		myLoc = new Point2D.Double(placeHere.getX(),placeHere.getY());
 		myImageLocation = clone.myImageLocation;
-		setImageView(myImageLocation);
+		setImageView();
 	}
 	
 	/**
@@ -124,7 +123,7 @@ public abstract class GridComponent implements IHasStats{
 	 */
 	public void setImageLocation(String imageLocation) {
 		myImageLocation = imageLocation;
-		setImageView(imageLocation);
+		setImageView();
 	}
 	
 	/**
@@ -144,12 +143,12 @@ public abstract class GridComponent implements IHasStats{
 	 * 
 	 * @param imageLocation : String path to image on file.
 	 */
-	private void setImageView(String imageLocation) {
+	private void setImageView() {
     	if(myImageLocation.startsWith("/")){
-        	myImageView = new ImageView(new Image(getClass().getResourceAsStream(imageLocation)));
+        	myImageView = new ImageView(new Image(getClass().getResourceAsStream(myImageLocation)));
         }
         else{
-        	myImageView = new ImageView(new Image(imageLocation));
+        	myImageView = new ImageView(new Image(myImageLocation));
         }
     }
 }
