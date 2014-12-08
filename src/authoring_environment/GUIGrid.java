@@ -128,16 +128,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
 		myTile.setPatchImage(clone.getImageView());
 	}
-
-	public boolean isPatchOccupied (Point2D loc){
-		for (Patch p: myPatchData.getData()){
-			if (p.getLoc().equals(loc)){
-				return true;
-			}
-		}
-		return false;
-	}
-
+	
 	public boolean isPieceOccupied (Point2D loc){
 		for (Piece p: myPieceData.getData()){
 			if (p.getLoc().equals(loc)){
@@ -146,6 +137,16 @@ public class GUIGrid extends SuperGrid implements Observer{
 		}
 		return false;
 	}
+	
+	public boolean isPatchOccupied (Point2D loc){
+		for (Patch p: myPatchData.getData()){
+			if (p.getLoc().equals(loc)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * Removes a piece at the given coordinates.
 	 * NOTE: Point2D coordinates given as
@@ -156,7 +157,9 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 */
 	public void removePieceAtCoordinate (Point2D coor) {
 		Piece toRemove = getPiece(coor);
-		removePiece(toRemove);
+		if(isPieceOccupied(coor)){
+			removePiece(toRemove);
+		}
 	}
 
 	/**
@@ -171,7 +174,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		Patch toRemove = getPatch(coor);
 		//TODO: remove only if there is a patch to be removed
 		//to avoid nullerpt..
-		if (isPatchOccupied(coor)){
+		if(isPatchOccupied(coor)){
 			removePatch(toRemove);
 		}
 	}
@@ -216,7 +219,9 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 */
 	public Piece getPiece (Point2D loc) {
 		for (Piece p : myPieceData.getData()) {
-			if ((p.getLoc().equals(loc))) { return p; }
+			if ((p.getLoc().equals(loc))) {
+				return p;
+			}
 		}
 		return null;
 	}
@@ -229,14 +234,16 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 */
 	public Patch getPatch (Point2D loc) {
 		for (Patch p : myPatchData.getData()) {
-			if ((p.getLoc().equals(loc))) { return p; }
+			if ((p.getLoc().equals(loc))) {
+				return p;
+			}
 		}
 		return null;
 	}
 
 	public void removePiece (Piece p) {
-		SuperTile currentTile = findTile(p.getLoc());
 		myPieceData.remove(p);
+		SuperTile currentTile = findTile(p.getLoc());
 		currentTile.removePieceImage();
 	}
 
