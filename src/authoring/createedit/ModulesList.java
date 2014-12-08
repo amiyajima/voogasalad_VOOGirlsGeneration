@@ -33,10 +33,8 @@ public class ModulesList extends VBox {
 		 */
 		availableActions.removeAll(addedActions);
 
-
 		Label availableModsLabel = new Label(AVAILABLE_MODULES_LABEL);
 		ObservableList<String> availableModules = availableActions;
-		availableModules.addAll("Blah", "one", "lsdkfjdsf");
 		ListView<String> mods = new ListView<String>(availableModules);
 		mods.setMaxHeight(400);
 		Collections.sort(availableModules);

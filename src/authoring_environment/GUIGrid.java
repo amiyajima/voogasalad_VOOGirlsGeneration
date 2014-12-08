@@ -242,6 +242,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 	public List<Piece> getRemovedPieces () {
 		List<Piece> l = new ArrayList<Piece>();
 		for (Piece p : myPieceData.getData()) {
+	
 			if (p.shouldRemove()) {
 				l.add(p);
 			}
@@ -346,11 +347,11 @@ public class GUIGrid extends SuperGrid implements Observer{
 	public void paneSetOnMousePressed (EventHandler<MouseEvent> handler) {
 		myPane.setOnMousePressed(handler);
 	}
-
+	
 	public void paneSetOnMouseDragged (EventHandler<MouseEvent> handler) {
 		myPane.setOnMouseDragged(handler);
 	}
-
+	
 	public void runEvent(BiConsumer<List<IHasStats>, GUIGrid> eventFunc){
 		List<IHasStats> allObjects = new ArrayList<>();
 		allObjects.addAll(myPieceData.getData());
