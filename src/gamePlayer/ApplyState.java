@@ -84,8 +84,11 @@ public class ApplyState implements IGridState {
 			myController.setCurrentPlayer(myController.getGame().getCurrentPlayer());
 			myController.setPlayerTurnDisplay();
 		}
-		if(currentLevel.getNextLevelID()!=null){
-			myController.getGame().changeLevel(currentLevel.getNextLevelID());
+		if(currentLevel.getNextLevelID()==null){
+			System.out.println("NEXT LEVEL");
+			//myController.getGame().changeLevel(currentLevel.getNextLevelID());
+			myController.getGame().changeLevel("Level 2");
+			myController.getGame().getCurrentLevel().getGrid().displayPane(myController.getGridPane());
 		}
 	}
 

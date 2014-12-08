@@ -156,14 +156,11 @@ public class Game implements IChangeGameState{
 	}
 	
 	public void nextPlayer() {
-		System.out.println("Entering next player");
 		int next = myPlayers.indexOf(myCurrentPlayer)+1;
 		if(next == myPlayers.size()){
-			System.out.println("Player Reset");
 			this.resetPlayer();
 		}
 		else{
-			System.out.println("Next Player");
 			myCurrentPlayer = myPlayers.get(next);
 		}
 	}
