@@ -1,12 +1,26 @@
 package gameengine.movement;
 
-import gamedata.action.Action;
+import gamedata.action.Action; 
 import gamedata.gamecomponents.Piece;
 import gamedata.rules.Rule;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
+<<<<<<< HEAD
+=======
+
+import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
+import javafx.animation.Transition;
+import javafx.scene.Group;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
+>>>>>>> e39498b9f616cb47100c26d27093e3cad5b9005d
 import authoring_environment.GUIGrid;
 
 
@@ -133,6 +147,7 @@ public class Movement implements Action {
         return new ArrayList<Point2D>();
     }
 
+<<<<<<< HEAD
     /**
      * Contains the logic to execute the behavior of moving the piece
      */
@@ -145,6 +160,37 @@ public class Movement implements Action {
             actor.setLoc(point);
         }
     }
+=======
+	/**
+	 * Contains the logic to execute the behavior of moving the piece
+	 */
+	@Override
+	public void doBehavior(GUIGrid grid, Piece actor, Piece... receivers) {
+		Transition t = new PathTransition();
+		Piece p = receivers[0]; 
+		Point2D point = p.getLoc();
+		if (isValidLocation((int) point.getX(), (int) point.getY())) {
+			// TODO: Implement Orientation Calculation Here
+			
+			PathTransition pathTransition = new PathTransition();
+			Path path = new Path();
+			path.getElements().add (new MoveTo (actor.getLoc().getX()*grid.getTileHeight(),actor.getLoc().getY()*grid.getTileHeight()));
+			path.getElements().add (new LineTo (point.getX()*grid.getTileHeight(),point.getY()*grid.getTileHeight()));
+			pathTransition.setDuration(Duration.millis(4000));
+			pathTransition.setPath(path);
+			Group root = new Group();
+			root.getChildren().add(grid.findTile(actor.getLoc()).getPieceImage());
+			pathTransition.setNode(grid.findTile(actor.getLoc()).getPieceImage());
+
+			pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+			pathTransition.setCycleCount(Timeline.INDEFINITE);
+			pathTransition.play();
+			
+			actor.setLoc(point);
+			
+		}
+	}
+>>>>>>> e39498b9f616cb47100c26d27093e3cad5b9005d
 
     @Override
     public String toString () {

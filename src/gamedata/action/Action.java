@@ -2,6 +2,8 @@ package gamedata.action;
 
 import java.util.List; 
 import java.awt.geom.Point2D;
+
+import authoring_environment.GUIGrid;
 import gamedata.gamecomponents.Piece;
 
 /**
@@ -44,6 +46,6 @@ public interface Action {
 	 * Executes an action on a component of
 	 * the game (i.e. a piece, patch, or other module)
 	 */
-	public void doBehavior(Piece actor, Piece... receivers);
+	public void doBehavior(GUIGrid grid, Piece actor, Piece... receivers);
 
 }

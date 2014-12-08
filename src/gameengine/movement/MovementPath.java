@@ -12,7 +12,7 @@ import java.util.List;
  * @author Jesse, Rica
  *
  */
-public class Path {
+public class MovementPath {
 	/**
 	 * Contains respective positions for possible path.
 	 */
@@ -21,7 +21,7 @@ public class Path {
 	/**
 	 * Default Constructor
 	 */
-	public Path() {
+	public MovementPath() {
 
 	}
 
@@ -31,7 +31,7 @@ public class Path {
 	 * @param myPath
 	 *            List of Point2D containing ordered relative points of movement
 	 */
-	public Path(List<Point2D> myPath) {
+	public MovementPath(List<Point2D> myPath) {
 		myCoords = myPath;
 	}
 
