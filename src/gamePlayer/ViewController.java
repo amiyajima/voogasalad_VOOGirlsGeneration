@@ -643,17 +643,6 @@ public class ViewController {
 	 *            the current state of the Grid, select/ apply action Mode
 	 */
 	public void setGridState(IGridState state) {
-		myModel.getCurrentPlayer().playTurn();
-		if (myModel.getCurrentPlayer().getNumMovesPlayed() > 3) {
-			System.out.println("VC: NEXT PLAYER. MOVES:" + myModel.getCurrentPlayer().getNumMovesPlayed());
-			myModel.nextLevel();
-		}
-		if (myModel.getCurrentLevel().getGrid()
-				.getPiece(new Point2D.Double(0, 0)) == null) {
-			System.out.println("Next LEVEL");
-			myModel.nextLevel();
-		}
-		
 		myCurrentPlayer = myModel.getCurrentPlayer();
 		setPlayerTurnDisplay();
 		gridState = state;
