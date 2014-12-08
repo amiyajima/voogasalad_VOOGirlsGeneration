@@ -112,5 +112,7 @@ public class ActionLogicController implements Initializable {
     public Map<String, Map<String, List<String>>> getActionLogic(){
         return myLogicMap;
     }
+    
+    
 
 }
