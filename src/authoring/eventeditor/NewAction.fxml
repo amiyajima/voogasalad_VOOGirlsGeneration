@@ -12,10 +12,12 @@
             <ChoiceBox fx:id="actionChoiceBox" />
          </children>
       </HBox>
-      <ScrollPane fx:id="editorScrollPane">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" />
-         </content>
-      </ScrollPane>
+      <TextField fx:id="myNameField" promptText="Enter GlobalAction name" />
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <TextField fx:id="myNextLevelField" promptText="Enter next level name" visible="false" />
+         </children>
+      </VBox>
+      <Button fx:id="myDoneButton" mnemonicParsing="false" onAction="#handleDoneButton" text="Done" />
    </children>
 </VBox>

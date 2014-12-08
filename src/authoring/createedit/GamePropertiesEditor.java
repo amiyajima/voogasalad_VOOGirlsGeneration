@@ -1,6 +1,9 @@
 package authoring.createedit;
 
+import java.util.ResourceBundle;
+
 import authoring.abstractfeatures.PopupWindow;
+import authoring.data.GamePropertiesData;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -13,17 +16,24 @@ import javafx.scene.layout.VBox;
 
 public class GamePropertiesEditor extends PopupWindow{
 
-	private static final int DEFAULT_PLAYER_NUMBER = 1;
-	private static final String DEFAULT_GRID_SHAPE = "Square Grid";
+	private static final String RESOURCES_PROPERTIES_GRID_SHAPE = "resources.properties/gridShape";
+
+	GamePropertiesData myGameProperties;
 	
-	private int myNumPlayer=DEFAULT_PLAYER_NUMBER;
-	private String myGridShape=DEFAULT_GRID_SHAPE;
+	private int myNumPlayer;
+	private String myGridShape;
+	private ResourceBundle gridShapeBundle;
+
 	
-	public GamePropertiesEditor(){
+	public GamePropertiesEditor(GamePropertiesData gamePropertiesData){
+		myGameProperties=gamePropertiesData;
+		myNumPlayer=myGameProperties.getNumPlayers();
+		myGridShape=myGameProperties.getGridShape();
 		initialize();
 	}
 
 	protected void initialize() {
+		 gridShapeBundle=ResourceBundle.getBundle(RESOURCES_PROPERTIES_GRID_SHAPE);
 		 VBox box = new VBox();
 		 Scene scene = new Scene(box,300,300);
 		 
@@ -33,7 +43,9 @@ public class GamePropertiesEditor extends PopupWindow{
 		 
 		 Label gridShape=new Label("Grid Shape:");
 		 ChoiceBox<String> shape=new ChoiceBox<String>();
-		 shape.getItems().addAll(DEFAULT_GRID_SHAPE,"Hexagon Grid","Circle Grid");
+		 shape.getItems().addAll(gridShapeBundle.getString("Square"),
+				 				 gridShapeBundle.getString("Hexagon"),
+				 				 gridShapeBundle.getString("Circle"));
 		 
 		 Button select=new Button("Select");
 		 select.setOnAction(new selectHandler(this,number,shape));
@@ -57,15 +69,15 @@ public class GamePropertiesEditor extends PopupWindow{
 		public void handle(ActionEvent event) {
 			try { 
 				myNumPlayer=Integer.parseInt(numPlayer.getText()); 
-				
+				myGameProperties.setNumPlayers(myNumPlayer);
 				System.out.println(myNumPlayer);
 				
 		    } catch(NumberFormatException e) { 
-		        System.out.println("Type in an integer please:) "
-		        					+ "Or you will play alone :("); 
+//				System.out.println(myNumPlayer); 
+		        System.out.println("Type in an integer please:) "); 
 		    }
 			myGridShape=gridShape.getValue().toString();
-			
+			myGameProperties.setGridShape(myGridShape);
 			System.out.println(myGridShape);
 			
 			editorWindow.close();

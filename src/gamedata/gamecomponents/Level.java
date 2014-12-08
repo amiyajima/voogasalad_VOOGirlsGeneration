@@ -1,10 +1,12 @@
 package gamedata.gamecomponents;
 
 import gamedata.events.Event;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+
 import javafx.scene.control.ScrollPane;
 import authoring_environment.GUIGrid;
 
@@ -13,7 +15,7 @@ import authoring_environment.GUIGrid;
  * has been won
  *
  */
-public class Level extends Observable {
+public class Level extends Observable implements IChangeGameState{
 	private static final String DEFAULT_ID = "Default";
 
 	private GUIGrid myGrid;
@@ -23,6 +25,15 @@ public class Level extends Observable {
 	private List<Event> myEvents;
 	private String myId;
 
+	
+	/**
+	 * Global Action flags
+	 */
+	private boolean gameWon;
+	private boolean gameLost;
+	private String nextLevelID;
+	private boolean turnOver;
+	
 	/**
 	 * Constructs a default level with a default ID and sets it as NOT the
 	 * winning level
@@ -40,12 +51,14 @@ public class Level extends Observable {
 	}
 
 	//TODO: Send all Pieces, Patches, etc. into the Events
-	public void runGameEvents() {
-		for (Event e : myEvents) {
-			e.runEvent();
-		}
-		this.garbageCollectPieces();
-	}
+//	public void runGameEvents() {
+//		List<Piece> levelPieces = myGrid.get 
+//		
+//		for (Event e : myEvents) {
+//			e.runEvent();
+//		}
+//		this.garbageCollectPieces();
+//	}
 
 	/**
 	 * Returns the grid contained in this level.
@@ -113,8 +126,27 @@ public class Level extends Observable {
 		return myId;
 	}
 
-	/*
-	 * public boolean isWinningLevel() { return winningLevel; }
+	/**
+	 * IChangeGameState interface methods
 	 */
+	@Override
+	public void winGame() {
+		gameWon=true;
+	}
+
+	@Override
+	public void loseGame() {
+		gameLost=true;
+	}
+
+	@Override
+	public void endTurn() {
+		turnOver=true;
+	}
+
+	@Override
+	public void changeLevel(String name) {
+		nextLevelID=name;
+	}
 
 }

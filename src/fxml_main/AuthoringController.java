@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import authoring.actionslogic.ActionLogicController;
 import authoring.createedit.GamePropertiesEditor;
 import authoring.data.ActionData;
+import authoring.data.GamePropertiesData;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
@@ -54,7 +55,9 @@ public class AuthoringController implements Initializable {
 	private PieceController myPieceController;
 	private PatchController myPatchController;
 	private LevelController myLevelController;
+	private GamePropertiesData myGamePropertiesData;
 	private ActionController myActionController;
+
 	
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -97,7 +100,8 @@ public class AuthoringController implements Initializable {
 	
 	@FXML
 	private void showGamePropertiesWindow(){
-			GamePropertiesEditor gamePptEditor=new GamePropertiesEditor();
+			myGamePropertiesData=new GamePropertiesData();
+			GamePropertiesEditor gamePptEditor=new GamePropertiesEditor(myGamePropertiesData);
 			gamePptEditor.setTitle("Game Properties Editor");
 		 	gamePptEditor.setX(450);
 		 	gamePptEditor.setY(200);

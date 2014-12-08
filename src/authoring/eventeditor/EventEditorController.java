@@ -4,6 +4,8 @@ import gamedata.events.Condition;
 import gamedata.events.Event;
 import gamedata.events.GlobalAction;
 import gamedata.events.conditions.ConditionEquals;
+import gamedata.gamecomponents.IChangeGameState;
+import gamedata.gamecomponents.Level;
 
 import java.io.IOException;
 import java.net.URL;
@@ -74,6 +76,7 @@ public class EventEditorController implements Initializable {
     private EventsDataWrapper myData;
     
     private Stage myStage;
+	private IChangeGameState myState;
 
     @Override
     // This method is called by the FXMLLoader when initialization is complete
@@ -242,7 +245,7 @@ public class EventEditorController implements Initializable {
         NewActionController controller = loader.getController();
 
         controller.loadLambda(okActionLambda);
-        controller.loadEntryCondition(entry);
+        controller.loadState(myState);
         controller.loadData(myData);
         
         newActionStage.showAndWait();
@@ -261,6 +264,10 @@ public class EventEditorController implements Initializable {
 
 	public void loadData(EventsDataWrapper data) {
 		myData = data;
+	}
+
+	public void loadGameState(IChangeGameState state) {
+		myState = state;
 	}
 
 }
