@@ -62,7 +62,6 @@ public class ViewController {
         public static final String POPUP_FXML = "popup.fxml";
         public static final String SETTINGS_FXML = "settings.fxml";
 
-        private String currentLanguage;
         private Stage myStage;
         private BorderPane myGameSpace;
         private BorderPane myPopup;
@@ -260,7 +259,7 @@ public class ViewController {
         }
 
         /**
-         * Checks the currently selected language
+         * Updates the current language of the game.
          */
         @FXML
         public void updateLanguage() {
