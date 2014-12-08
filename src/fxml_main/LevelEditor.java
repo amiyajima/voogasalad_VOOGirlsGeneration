@@ -37,6 +37,7 @@ public class LevelEditor extends VBox {
     private int myGridRows;
     private int myGridCols;
     private double myTileHeight;
+    private String myGridShape;
     private ObservableList<Event> myEvents;
     private GUIGrid myGrid;
 
@@ -47,35 +48,33 @@ public class LevelEditor extends VBox {
 
 	private EventsDataWrapper myData;
 
-    public LevelEditor (Consumer<Level> okLambda, EventsDataWrapper data) {
+    public LevelEditor (Consumer<Level> okLambda, EventsDataWrapper data, String gridShape) {
     	myEditorTitle = CREATOR_TITLE;
-    	
     	myId = "";
         myGridRows = 0;
         myGridCols = 0;
         myTileHeight = 0;
         myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
         myEvents = FXCollections.observableArrayList();
-        myData = data;
-        initEditor(okLambda);
+        initEditor(okLambda,data,gridShape);
     }
 
-    public LevelEditor (Consumer<Level> okLambda, Level level, EventsDataWrapper data) {
+    public LevelEditor (Consumer<Level> okLambda, EventsDataWrapper data,
+    		String gridShape,  Level level) {
         myEditorTitle = EDITOR_TITLE;
-
         myGrid = level.getGrid();
         myId = level.getId();
         myGridRows = myGrid.getNumRows();
         myGridCols = myGrid.getNumCols();
         myTileHeight = myGrid.getTileHeight();
         myEvents = (ObservableList<Event>) level.getEvents();
-        myData = data;
-
-        initEditor(okLambda);
+        initEditor(okLambda,data,gridShape);
     }
 
-    public void initEditor (Consumer<Level> okLambda) {
+    public void initEditor (Consumer<Level> okLambda, EventsDataWrapper data, String gridShape) {
         myOkLambda = okLambda;
+        myData = data;
+        myGridShape = gridShape;
         initialize();
     }
 
@@ -143,7 +142,7 @@ public class LevelEditor extends VBox {
                 myGridRows = Integer.parseInt(rowField.getText());
                 myGridCols = Integer.parseInt(colField.getText());
                 myTileHeight = Double.parseDouble(heightField.getText());
-                GUIGrid grid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid",
+                GUIGrid grid = new GUIGrid(myGridCols, myGridRows, myTileHeight, myGridShape,
                 		myGrid);
                 Level level = new Level(grid, myEvents, myId, false);
                 myOkLambda.accept(level);

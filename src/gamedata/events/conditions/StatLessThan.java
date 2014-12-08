@@ -5,7 +5,7 @@ import gamedata.gamecomponents.IHasStats;
 
 public class StatLessThan extends StatComparison{
 
-	public StatLessThan(String description, IHasStats ref1, String stat1, String constant){
+	public StatLessThan(IHasStats ref1, String stat1, String constant){
 		super(String.format("IF %s %s < %s", ref1, stat1, constant), ref1, stat1, constant);
 	}
 

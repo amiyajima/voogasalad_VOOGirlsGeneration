@@ -41,13 +41,15 @@ public class PieceEditor extends Pane {
     private String myImageLocation;
     private Piece myPiece;
     private Stats myStats;
+    private int myNumPlayers;
 
-    public PieceEditor (Piece piece) {
+    public PieceEditor (Piece piece, int numPlayers) {
     	myPiece = piece;
         myID = piece.getID();
         myName = piece.toString();
         myStats = piece.getStats();
         myImageLocation = piece.getImageLocation();
+        myNumPlayers = numPlayers;
         setHeight(HEIGHT);
         setWidth(WIDTH);
         initialize();
@@ -119,15 +121,10 @@ public class PieceEditor extends Pane {
         playerLabel.setPadding(UIspecs.topRightPadding);
         ChoiceBox<Integer> playerID = new ChoiceBox<Integer>();
         SingleSelectionModel<Integer> selection = playerID.getSelectionModel();
-        
-        // TODO : This should not be hard-coded.
-        int numPlayers = 2;
-        
-        for(int i = 1; i <= numPlayers; i++){
+        for(int i = 1; i <= myNumPlayers; i++){
         	playerID.getItems().add(i);
         }
         selection.select(myPiece.getPlayerID() - 1);
-        
         Button playerSet = new Button(PLAYER_BUTTON);
         playerSet.setOnAction(new EventHandler<ActionEvent>() {
             @Override

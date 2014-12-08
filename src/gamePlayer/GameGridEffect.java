@@ -134,24 +134,6 @@ public class GameGridEffect {
         myActivePiece = myViewController.getActivePiece();
         myActiveAction = myViewController.getActiveAction();
     }
-
-    private void printPieceHighlights() {
-        for (SuperTile st : myHighlightedPiece) {
-            System.out.println("Piece Highlights: " + st.getCoordinates().getX() + ", " + st.getCoordinates().getY());
-        }
-    }
-    
-    private void printEffectHighlights() {
-        for (SuperTile st : myHighlightedEffects) {
-            System.out.println("Effect Highlights: " + st.getCoordinates().getX() + ", " + st.getCoordinates().getY());
-        }
-    }
-    
-    private void printActionHighlights() {
-        for (SuperTile st : myHighlightedActions) {
-            System.out.println("Action Highlights: " + st.getCoordinates().getX() + ", " + st.getCoordinates().getY());
-        }
-    }
     
     /**
      * Checks if the mouse movement has it hovering over an action tile Only
