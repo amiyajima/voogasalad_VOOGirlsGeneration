@@ -263,7 +263,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		for (Piece p : myPieceData.getData()) {
 
 			// TODO: FOR TESTING ONLY
-			if (p.getStats().getValue("health") <= 0) {
+			if (p.getStats().getValue("Health") <= 0) {
 				p.markForRemoval();
 			}
 
