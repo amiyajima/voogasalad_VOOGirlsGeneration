@@ -1,4 +1,4 @@
-package utilities.leapMotion.customControl;
+package utilities.leapMotion.mouseControl;
 
 import java.awt.Dimension;
 import java.awt.Robot;
@@ -10,9 +10,9 @@ import com.leapmotion.leap.Vector;
 
 import java.awt.Toolkit;
 
-import utilities.leapMotion.ICustomControl;
+import utilities.leapMotion.ILeapMouse;
 
-public class FingerTipMouse implements ICustomControl{
+public class FingerTipMouse implements ILeapMouse{
     
 <<<<<<< HEAD:src/utilities/leapMotion/mouseControl/FingerTipMouse.java
 =======
@@ -22,7 +22,7 @@ public class FingerTipMouse implements ICustomControl{
 
 >>>>>>> a0815b4e93ca0c0b1e799d46a1461c54670d2513:src/utilities/leapMotion/customControl/FingerTipMouse.java
     @Override
-    public void control (Frame frame, Robot robot) {
+    public void moveMouse (Frame frame, Robot robot) {
         InteractionBox box = frame.interactionBox();
         for(Finger finger: frame.fingers()){
             if(finger.type() ==Finger.Type.TYPE_INDEX){
