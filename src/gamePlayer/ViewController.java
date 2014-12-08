@@ -71,6 +71,9 @@ public class ViewController {
 	// private SampleListener myLeapListener;
 
 	private Boolean keyControlOn;
+	private Boolean clickSoundOn;
+	private Boolean backgroundMusicOn;
+	
 	private KeyboardAction myKeyboardAction;
 	private KeyboardMovement myKeyboardMovement;
 
@@ -153,7 +156,7 @@ public class ViewController {
 	    myStage.setScene(new Scene(myInitialScene));
 	    
 	    myAudio = new Audio();
-//	    myAudio.playDefault();     //muting music for now...
+	    myAudio.playDefault();     //muting music for now...
 	    
 	    System.out.println("Opened initial menu");
 	}
@@ -329,6 +332,7 @@ public class ViewController {
 		setOnClick();
 		setGridState(new SelectState(this));		
 		keyControlOn = false;
+		backgroundMusicOn = true;
 		myGameGridEffect = new GameGridEffect(this);
 	}
 	
@@ -507,6 +511,24 @@ public class ViewController {
 		return currentClick;
 	}
 
+	
+	public void toggleClickSound() {
+	    
+	}
+	
+	public void toggleBackgroundMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	    if (backgroundMusicOn){
+	        myAudio.muteDefault();
+	        backgroundMusicOn = false;
+	        System.out.println("BGMusic Off");
+	    }
+	    else{
+	        myAudio.playDefault();
+	        backgroundMusicOn = true;
+	        System.out.println("BGMusic On");
+	    }
+	}
+	
 	/**
 	 * Toggles whether the Keyboard Controls are active or inactive
 	 */
