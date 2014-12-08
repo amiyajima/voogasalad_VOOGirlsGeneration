@@ -38,7 +38,7 @@
          <center>
             <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
-                <Tab text="New Game Author 1" />
+                <Tab fx:id="author1" text="New Game Author 1" />
                 <Tab text="New Game Player 1" />
               </tabs>
             </TabPane>

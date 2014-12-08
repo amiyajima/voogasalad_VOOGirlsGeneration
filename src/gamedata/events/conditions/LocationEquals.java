@@ -16,10 +16,10 @@ public class LocationEquals extends Condition{
 		myReference = ref1;
 		
 		String[] temp;
-		temp = constant.split(";");
+		temp = constant.split(",");
 		
 		double x = Double.parseDouble(temp[0]);
-		double y = Double.parseDouble(temp[0]);
+		double y = Double.parseDouble(temp[1]);
 
 		myConstant = new Point2D.Double(x,y);
 	}
