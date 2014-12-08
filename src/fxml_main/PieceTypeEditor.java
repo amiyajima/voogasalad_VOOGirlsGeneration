@@ -86,7 +86,7 @@ public class PieceTypeEditor extends Pane {
         myImageLocation = DEFAULT_IMAGE_LOC;
         myActions = new ArrayList<Action>();
         myStats = new Stats();
-        myPlayerID = 0;
+        myPlayerID = 1;
         myInventory = new Inventory();
         constructor(okLambda);
     }

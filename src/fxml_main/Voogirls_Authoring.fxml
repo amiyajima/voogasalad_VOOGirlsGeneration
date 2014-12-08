@@ -20,6 +20,7 @@
               <items>
                   <MenuItem fx:id="playerNumber" mnemonicParsing="false" onAction="#showGamePropertiesWindow" text="Edit Player Number..." />
                   <MenuItem fx:id="actonsLogicChart" mnemonicParsing="false" onAction="#showActionslogicChartWindow" text="Actions Logic Chart..." />
+                  <MenuItem fx:id="playerEditor" mnemonicParsing="false" onAction="#showPlayerEditWindow" text="Player Editor..." />
 
               </items>
             </Menu>

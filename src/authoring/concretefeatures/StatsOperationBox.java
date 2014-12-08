@@ -33,8 +33,8 @@ public class StatsOperationBox extends HBox {
         getStyleClass().add("hbox");
         Label equalsLabel = new Label(EQUALS_LABEL);
         myModifiedStat = new ModifiedStat();
-        mySingleMultiplier = new SingleMultiplierBox();
-        getChildren().addAll(equalsLabel, mySingleMultiplier);
+ 
+        getChildren().addAll(myModifiedStat, equalsLabel, mySingleMultiplier);
     }
 
     public boolean isEmpty () {

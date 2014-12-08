@@ -27,11 +27,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -48,6 +50,11 @@ import tests.JSONBobTester;
 import authoring_environment.GUIGrid;
 import authoring_environment.SuperTile;
 
+/**
+ * 
+ * 
+ *
+ */
 public class ViewController {
 
 	public static final String GAMESPACE_FXML = "gameSpace.fxml";
@@ -60,7 +67,10 @@ public class ViewController {
 	
 	public static final String ENGLISH = "resources.languages.English";
 	public static final String CHINESE = "resources.languages.Chinese";
+	public static final String KOREAN = "resources.languages.Korean";
+	public static final String FRENCH = "resources.languages.French";
 
+	private String currentLanguage;
 	private Stage myStage;
 	private BorderPane myGameSpace;
 	private BorderPane myPopup;
@@ -71,10 +81,6 @@ public class ViewController {
 	private Scene scoreScene;
 	private Scene myPopupScene;
 	private Scene myScene;
-	
-	@FXML
-	private Button showScoreButton;
-
 	private Game myModel;
 	private GUIGrid myGrid;
 
@@ -113,6 +119,39 @@ public class ViewController {
 	private VBox scores;
 	@FXML
 	private Label playerTurn;
+	@FXML
+	private Button showScoreButton;
+	
+	@FXML
+	private MenuButton gameMenu;
+	@FXML
+	private MenuItem restartMenu;
+	@FXML
+	private MenuItem saveMenu;
+	@FXML
+	private MenuItem loadMenu;
+	@FXML
+	private MenuItem mainMenu;
+	@FXML
+	private MenuItem settingsMenu;
+	@FXML
+	private MenuItem exitMenu;
+	@FXML
+	private Tab controlTab;
+	@FXML
+	private Tab statsTab;
+	@FXML
+	private Tab inventoryTab;
+	
+	@FXML
+	private CheckBox EnglishCheck;
+	@FXML
+        private CheckBox FrenchCheck;
+	@FXML
+        private CheckBox KoreanCheck;
+	@FXML
+        private CheckBox ChineseCheck;
+	
 
 	private ScrollPane myGridPane;
 
@@ -123,10 +162,26 @@ public class ViewController {
 	private SuperTile keySelectedTile;
 	
 	private int tempMoveCount = 0;
+	
+	@FXML
+	public void checkLanguage(){
+	    if (EnglishCheck.isSelected()){
+	        currentLanguage = ENGLISH;
+	    }
+	    if (FrenchCheck.isSelected()){
+	        currentLanguage = FRENCH;
+	    }
+	    if (KoreanCheck.isSelected()){
+	        currentLanguage = KOREAN;
+	    }
+	    if (ChineseCheck.isSelected()){
+	        currentLanguage = CHINESE;
+	    }
+	    updateLanguages();
+	}
 
 	public ViewController(Stage s) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		myStage = s;
-
 		openInitialMenu();
 		try {
 			newGame();
@@ -153,7 +208,7 @@ public class ViewController {
 	    myGameSpace = new BorderPane();
 	    myScoreBoard = new VBox();
 	    scores = new VBox();
-	    
+	    currentLanguage = ENGLISH;
 
 	    myPopup = new BorderPane();
 	    mySettings = new VBox();
@@ -178,12 +233,20 @@ public class ViewController {
 	    System.out.println("Opened initial menu");
 	}
 	
-	public void addLanguages() {
-	        messages = ResourceBundle.getBundle(ENGLISH);
-//	        System.out.println(messages.getString("SAVE"));
-	        
+	
+	public void updateLanguages() {
+	        messages = ResourceBundle.getBundle(currentLanguage);
 	        showScoreButton.setText(messages.getString("SCORE"));
-	        
+	        controlTab.setText(messages.getString("CONTROL"));
+	        statsTab.setText(messages.getString("STATS"));
+	        inventoryTab.setText(messages.getString("INVENTORY"));
+	        gameMenu.setText(messages.getString("GAMEMENU"));
+	        restartMenu.setText(messages.getString("RESTART"));
+	        saveMenu.setText(messages.getString("SAVE"));
+	        loadMenu.setText(messages.getString("LOAD"));
+	        mainMenu.setText(messages.getString("MAIN"));
+	        settingsMenu.setText(messages.getString("SETTINGS"));
+	        exitMenu.setText(messages.getString("EXIT"));
 	}
 	
 	
@@ -217,6 +280,7 @@ public class ViewController {
 	    System.out.println("opensettings");
 	    Stage stage = new Stage();
 	    stage.setScene(mySettingsScene);
+	    checkLanguage();
 	    stage.show();
 	}
 	
@@ -344,7 +408,7 @@ public class ViewController {
 	/**
 	 * Initializes grid and its effects manager (gamegrideffect)
 	 */
-	protected void initializeGrid() {
+	private void initializeGrid() {
 		System.out.println("initialize grid");
 	    
 	        myAudio.playSelection();
@@ -364,7 +428,7 @@ public class ViewController {
 		clickSoundOn = true;
 		myGameGridEffect = new GameGridEffect(this);
 		
-		addLanguages();
+//		addLanguages();
 	}
 	
 
@@ -512,6 +576,7 @@ public class ViewController {
 		}
 	        
 	        gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
+		
 		if (keyControlOn) {
 			myKeyboardMovement = null;
 			myKeyboardAction = new KeyboardAction();
@@ -716,6 +781,7 @@ public class ViewController {
 	        showHighScoreInfo(highScorer, highScore);
                 
 	    }
+
 		myCurrentPlayer = myModel.getCurrentPlayer();
 		setPlayerTurnDisplay();
 		gridState = state;
@@ -801,9 +867,4 @@ public class ViewController {
 	public VBox getcontrolPane() {
 		return controlPane;
 	}
-	
-	public void setCurrentPlayer(Player p){
-		myCurrentPlayer=p;
-	}
 }
-
