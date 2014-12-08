@@ -1,6 +1,5 @@
 package gamePlayer;
 
-import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
 import javafx.scene.input.MouseEvent;
 import authoring_environment.SuperTile;
@@ -19,13 +18,11 @@ public class ApplyState implements IGridState {
 	
         private ViewController myController;
 	private GameGridEffect myGameGridEffect;
-	private Game myGame;
 	private SuperTile activeTile;
 
 	public ApplyState(ViewController controller) {
 		myController = controller;
 		myGameGridEffect = controller.getGameGridEffect();
-		myGame = controller.getGame();
 		myController.getGridPane().setOnMouseMoved(
 				event -> handleMouseMove(event));
 	}
@@ -59,10 +56,9 @@ public class ApplyState implements IGridState {
 		myGameGridEffect.clearAllActionHighlights();
 		myController.clearActions();
 		myController.setGridState(new SelectState(myController));
-//		myController.changeCursor(myController.CURSOR_GLOVE_TEST);
 		myController.setActivePiece(null);
 		myController.setActiveAction(null);
-		myGame.getCurrentLevel().runGameEvents();
+//		myGame.getCurrentLevel().runGameEvents();
 	}
 
 }

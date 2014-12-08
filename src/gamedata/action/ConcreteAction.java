@@ -17,7 +17,7 @@ import java.awt.geom.Point2D;
  *
  */
 public class ConcreteAction implements Action {
-	private String myName;
+	private String myID;
 	private List<Point2D> myAttackRange;
 	private List<Point2D> myEffectRange;
 	private List<StatsTotalLogic> myStatsLogics;
@@ -28,10 +28,10 @@ public class ConcreteAction implements Action {
 	 * Called when a new Action is made and
 	 * its behavior is already defined
 	 */
-	public ConcreteAction(String name, List<Point2D> attackRange, 
+	public ConcreteAction(String id, List<Point2D> attackRange, 
 			List<Point2D> effectRange, List<StatsTotalLogic> statsLogics,
 			ActionConclusion conclusion) {
-		myName = name;
+		myID = id;
 		myAttackRange = attackRange;
 		myEffectRange = effectRange;
 		myStatsLogics = statsLogics;
@@ -40,7 +40,7 @@ public class ConcreteAction implements Action {
 	
 	@Override
 	public String toString() {
-		return myName;
+		return myID;
 	}
 
 	@Override

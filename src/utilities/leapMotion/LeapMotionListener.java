@@ -3,6 +3,7 @@ package utilities.leapMotion;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
 import com.leapmotion.leap.Controller;
@@ -14,14 +15,15 @@ public class LeapMotionListener extends Listener{
     private ResourceBundle myGestures;
     private Robot myRobot;
     private ILeapMouse myLeapMouse;
-    public static final String GESTURES_FILEPATH = "";
+    public static final String PACKAGE_FILEPATH = "";
+    public static final String GESTURE_BUNDLE = "Untitled.properties";
     public static final String MOUSE_MOVE_FLAG = "mouse";
     
     
     public void onConnect (Controller controller){
     
         initializeRobot();
-        myGestures = ResourceBundle.getBundle(GESTURES_FILEPATH);
+        myGestures = ResourceBundle.getBundle(PACKAGE_FILEPATH+GESTURE_BUNDLE);
         
         enableGestures(controller);
     }
@@ -29,7 +31,13 @@ public class LeapMotionListener extends Listener{
     private void enableGestures(Controller controller){
         for(String gestureName : myGestures.keySet()){
             if(gestureName.equals(MOUSE_MOVE_FLAG)){
-               // myLeapMouse = ;
+               try {
+                Class c = Class.forName(PACKAGE_FILEPATH+myGestures.getString(gestureName));
+                myLeapMouse = (ILeapMouse) c.getDeclaredConstructor().newInstance();
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+                
+            }
+                
             }
             for (Gesture.Type type: Gesture.Type.values()){
                 if(type.toString().equals(gestureName)){
@@ -59,13 +67,15 @@ public class LeapMotionListener extends Listener{
     }
    
     private void performAction(String gestureName){
-        int input = Integer.parseInt(myGestures.getString(gestureName));
-        if(input==InputEvent.BUTTON1_DOWN_MASK){
-        myRobot.mousePress(input);
-        }
-        else{
+      //  int input = Integer.parseInt(myGestures.getString(gestureName));
+       int input = gestureName.charAt(0);
+        try {
+            myRobot.mousePress(input);
+        } catch (Exception e) {
             myRobot.keyPress(input);
         }
+        
+      
     }
 
 }

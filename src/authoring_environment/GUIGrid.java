@@ -6,6 +6,7 @@ import gamedata.gamecomponents.Piece;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -25,7 +26,7 @@ import authoring.data.PieceTypeData;
  *
  */
 
-public class GUIGrid extends SuperGrid implements Observer {
+public class GUIGrid extends SuperGrid implements Observer{
 
 	private PieceData myPieceData;
 	private PatchData myPatchData;
@@ -106,7 +107,6 @@ public class GUIGrid extends SuperGrid implements Observer {
 	public int getNumCols () {
 		return super.myNumCols;
 	}
-
 
 	public void addPiece (Piece pieceType, Point2D loc) {
 		Piece clone = new Piece(pieceType, loc);
@@ -337,17 +337,5 @@ public class GUIGrid extends SuperGrid implements Observer {
 		myPane.setOnMouseDragged(handler);
 	}
 
-	/**
-	 * Get the whole list of Pieces and Patches in this level. Read by Conditions and
-	 * modified by Global Actions (e.g., adding/removing Pieces).
-	 * @author MIKE ZHU
-	 * @return
-	 */
-	public List<Piece> getReadOnlyPieceList () {
-		return Collections.unmodifiableList(myPieceData.getData());
-	}
 
-	public List<Patch> getReadOnlyPatchList () {
-		return Collections.unmodifiableList(myPatchData.getData());
-	}
 }

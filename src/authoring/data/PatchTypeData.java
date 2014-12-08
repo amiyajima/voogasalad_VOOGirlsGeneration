@@ -23,8 +23,12 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 	
 	@Override
 	public boolean canAdd(Patch element) {
-		// TODO Auto-generated method stub
-		return false;
+		for (Patch patch:myPatches){
+			if (patch.getID().equals(element.getID())){
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	@Override
