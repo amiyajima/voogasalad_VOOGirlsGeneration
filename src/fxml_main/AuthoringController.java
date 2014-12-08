@@ -25,27 +25,29 @@ import authoring.data.PieceTypeData;
 
 public class AuthoringController implements Initializable {
 
-    @FXML
-    private ScrollPane myPropertiesSPane;
-
-    @FXML
-    private VBox myLevelsVBox;
-
-    @FXML
-    private VBox myPiecesVBox;
-
-    @FXML
-    private VBox myPatchesVBox;
-
-    @FXML
-    private VBox myActionsVBox;
-
-    @FXML
-    private ScrollPane myGridSPane;
-
-    // Menu items
-
-    @FXML
+	
+	
+	@FXML
+	private ScrollPane myPropertiesSPane;
+	
+	@FXML
+	private VBox myLevelsVBox;
+	
+	@FXML
+	private VBox myPiecesVBox;
+	
+	@FXML
+	private VBox myPatchesVBox;
+	
+	@FXML
+	private VBox myActionsVBox;
+	
+	@FXML
+	private ScrollPane myGridSPane;
+	
+	//Menu items
+	
+	@FXML
     private MenuItem actonsLogicChart;
 
     @FXML
@@ -123,5 +125,6 @@ public class AuthoringController implements Initializable {
         statsEditor.show();
 
     }
+
 
 }
