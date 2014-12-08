@@ -33,18 +33,18 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 	private LevelData myLevelData;
 	private PieceTypeData myPieceTypes;
 	private PatchTypeData myPatchTypes;
-	private GamePropertiesData myGamePropertiesData;
+	private String myGridShape;
 
 	protected LevelController (VBox vbox, ScrollPane propertiesSPane,
 			ScrollPane gridSPane, GUIGridReference gridRef, LevelData levels,
 			PieceTypeData pieceTypes, PatchTypeData patchTypes, 
-			GamePropertiesData gamePropertiesData) {
+			String gridShape) {
 		super(vbox, propertiesSPane, gridRef);
 		myGridSPane = gridSPane;
 		myLevelData = levels;
 		myPieceTypes = pieceTypes;
 		myPatchTypes = patchTypes;
-		myGamePropertiesData = gamePropertiesData;
+		myGridShape = gridShape;
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 		List<Player> playersRO = null;
 
 		EventsDataWrapper wrapper = new EventsDataWrapper(piecesRO, patchesRO, playersRO);
-		myPropertiesSPane.setContent(new LevelEditor(okLambda, wrapper));
+		myPropertiesSPane.setContent(new LevelEditor(okLambda, wrapper, myGridShape));
 	}
 
 	@Override
@@ -130,7 +130,8 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 
 				EventsDataWrapper wrapper = new EventsDataWrapper(piecesRO, patchesRO, playersRO);
 
-				myPropertiesSPane.setContent(new LevelEditor(okLambda, entry, wrapper));
+				myPropertiesSPane.setContent(new LevelEditor(
+						okLambda, wrapper, myGridShape, entry));
 			}
 		});
 	}
