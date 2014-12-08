@@ -83,7 +83,7 @@ public class PieceData implements AuthoringData<Piece> {
     			pointsToRemove.add(piece.getLoc());
     		}
 		}
-		myPieces.remove(piecesToRemove);
+		myPieces.removeAll(piecesToRemove);
 		return pointsToRemove;
 	}
 	
