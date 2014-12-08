@@ -88,7 +88,7 @@ public class JSONBobTester {
 		 * Event for garadage comllectin
 		 */
 		Event e1 = new Event("Garbate collectbaon");
-		Condition c = new IsDead("Health");
+		Condition c = new IsDead("health");
 		GlobalAction gl = new DeletePieceAtLocation(new Point2D.Double(0, 0));
 		e1.getConditions().add(c);
 		e1.getGlobalActions().add(gl);
