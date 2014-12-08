@@ -38,11 +38,11 @@ public class VoogaMain {
 
         // POINT
         Point2D point = new Point2D.Double(0, 0);
-        
-        //GAME
+
+        // GAME
         Game g = jb.createNewGame();
-        
-        //LEVEL AND LEVEL COMPONENTS
+
+        // LEVEL AND LEVEL COMPONENTS
         List<Level> levels = g.getLevels();
         Level l = g.getCurrentLevel();
         GUIGrid grid = l.getGrid();
@@ -55,32 +55,35 @@ public class VoogaMain {
         List<GlobalAction> globalActions = e.getGlobalActions();
         GlobalAction gl = globalActions.get(0);
 
-        // PIECE AND COMPONENTS
+        // PIECE
         Piece piece = grid.getPiece(point);
+        System.out.println("Piece is: " + piece);
         PieceData multiplePieces = new PieceData();
         multiplePieces.add(piece);
-        
+
+        // PIECE COMPONENTS
         List<Action> actions = piece.getActions();
         Action a = actions.get(0);
-        Movement m = piece.getMovement();
+        Movement m = piece.getMovement(); // DOES NOT EXIST
         Stats stats = piece.getStats();
         Inventory inventory = piece.getInventory();
 
-        //PATCH AND COMPONENTS
-        Patch patch = grid.getPatch(point);
-        PatchData multiplePatches = new PatchData();
+        // PATCH AND COMPONENTS -- DONE
+        Patch patch = grid.getPatch(point); // WORKS
+        PatchData multiplePatches = new PatchData(); // WORKS
         multiplePatches.add(patch);
 
         // System.out.println("things still work");
         // myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
         // myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
-        myJSONmanager.writeToJSON(multiplePatches, "src/resources/json/MultiplePatches.json");
+        System.out.println(a);
+        myJSONmanager.writeToJSON(a, "src/resources/json/IndividualActionData.json");
     }
 
     public static void testJSONload () {
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("src/resources/json/MultiplePatches.json");
+            jsonManager.readFromJSONFile("src/resources/json/IndividualActionData.json");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -89,7 +92,7 @@ public class VoogaMain {
 
     public static void main (String[] args) {
         System.out.println("main is running");
-        // testJSONwrite();
+        //testJSONwrite();
         testJSONload();
     }
 }

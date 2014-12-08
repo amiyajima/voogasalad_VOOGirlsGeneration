@@ -11,13 +11,13 @@ import java.util.List;
  */
 public class ActionDataIndividual {
     private String myName;
-    private List<Point2D> myAttackRange;
-    private List<Point2D> myEffectRange;
+    private List<Point2D.Double> myAttackRange;
+    private List<Point2D.Double> myEffectRange;
     private List<StatsTotalLogicData> myStatsLogic;
     private ActionConclusion myConclusion;
     
-    public ActionDataIndividual(String name, List<Point2D> attackRange, 
-                                List<Point2D> effectRange, List<StatsTotalLogicData> statsLogic, 
+    public ActionDataIndividual(String name, List<Point2D.Double> attackRange, 
+                                List<Point2D.Double> effectRange, List<StatsTotalLogicData> statsLogic, 
                                 ActionConclusion conclusion) {
         myName = name;
         myAttackRange = attackRange;
@@ -30,11 +30,11 @@ public class ActionDataIndividual {
         return myName;
     }
     
-    public List<Point2D> getAttackRange() {
+    public List<Point2D.Double> getAttackRange() {
         return myAttackRange;
     }
     
-    public List<Point2D> getEffectRange() {
+    public List<Point2D.Double> getEffectRange() {
         return myEffectRange;
     }
     
