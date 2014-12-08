@@ -19,8 +19,12 @@
             <Menu fx:id="exit" mnemonicParsing="false" text="Game Properties">
               <items>
                   <MenuItem fx:id="gameProperties" mnemonicParsing="false" onAction="#showGamePropertiesWindow" text="Game properties..." />
+<<<<<<< HEAD
                   <MenuItem fx:id="actonsLogicChart" mnemonicParsing="false" onAction="#showActionzlogicChartWindow" text="Actions Logic Chart..." />
                   <MenuItem fx:id="playerEditor" mnemonicParsing="false" onAction="#showPlayerEditWindow" text="Player Editor..." />
+=======
+                  <MenuItem fx:id="actonsLogicChart" mnemonicParsing="false" onAction="#showActionslogicChartWindow" text="Actions Logic Chart..." />
+>>>>>>> 4b34d2e8534a3383cda9a4228b69029052f729cf
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">

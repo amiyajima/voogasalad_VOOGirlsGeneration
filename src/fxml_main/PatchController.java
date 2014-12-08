@@ -72,7 +72,6 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
                 };
                 myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
                 myGridReference.getGrid().paneSetOnMouseDragged(clickHandler);
-
             }
         });
     }
