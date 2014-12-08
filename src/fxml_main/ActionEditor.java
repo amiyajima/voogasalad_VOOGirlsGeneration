@@ -114,7 +114,7 @@ public class ActionEditor extends VBox {
             }
         });
 
-        getChildren().addAll(labelBox, nameBox, new Separator(), attackRangeBox, effectRangeBox,
+        getChildren().addAll(labelBox, nameBox, attackRangeBox, effectRangeBox,
                              statsOperationBox,
                              finalizeBtnsHBox);
 
