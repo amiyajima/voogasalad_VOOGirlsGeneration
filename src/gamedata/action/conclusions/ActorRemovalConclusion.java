@@ -1,5 +1,6 @@
-package gamedata.action;
+package gamedata.action.conclusions;
 
+import gamedata.action.ActionConclusion;
 import gamedata.gamecomponents.Piece;
 
 public class ActorRemovalConclusion implements ActionConclusion {

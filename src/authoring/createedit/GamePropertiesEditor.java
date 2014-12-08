@@ -27,8 +27,7 @@ public class GamePropertiesEditor extends PopupWindow {
 
     public GamePropertiesEditor (GamePropertiesData gamePropertiesData) {
         setTitle("Game Properties Editor");
-        setX(450);
-        setY(200);
+        centerOnScreen();
         myGameProperties = gamePropertiesData;
         myNumPlayer = myGameProperties.getNumPlayers();
         myGridShape = myGameProperties.getGridShape();
@@ -44,9 +43,8 @@ public class GamePropertiesEditor extends PopupWindow {
 
 
         Label numPlayer = new Label("Number of Player:");
-        // numPlayer.setCenterShape(true);
         TextField number = new TextField();
-
+        number.setMaxWidth(80);
         Label gridShape = new Label("Grid Shape:");
         ChoiceBox<String> shape = new ChoiceBox<String>();
         shape.getItems().addAll(gridShapeBundle.getString("Square"),
