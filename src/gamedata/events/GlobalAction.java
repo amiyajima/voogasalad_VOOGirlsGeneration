@@ -1,9 +1,5 @@
 package gamedata.events;
 
-import gamedata.gamecomponents.IHasStats;
-
-import java.util.List;
-
 import authoring_environment.GUIGrid;
 
 /**

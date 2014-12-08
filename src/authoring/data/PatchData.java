@@ -74,16 +74,16 @@ public class PatchData implements AuthoringData<Patch> {
     }
 	
 	public List<Point2D> removeUnknown(Set<String> idSet) {
-		List<Patch> patchToRemove = new ArrayList<Patch>();
+		List<Patch> patchesToRemove = new ArrayList<Patch>();
 		List<Point2D> pointsToRemove = new ArrayList<Point2D>();
 		for (Patch patch : myPatches) {
     		if (!idSet.contains(patch.getID())) {
-				patchToRemove.add(patch);
+				patchesToRemove.add(patch);
 				patch.getImageView().setImage(null);
     			pointsToRemove.add(patch.getLoc());
     		}
 		}
-		myPatches.remove(patchToRemove);
+		myPatches.removeAll(patchesToRemove);
 		return pointsToRemove;
 	}
 

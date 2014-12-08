@@ -1,8 +1,7 @@
 package authoring.eventeditor;
 
 import gamedata.events.Condition;
-import gamedata.events.StatComparison;
-import gamedata.events.conditions.StatEquals;
+import gamedata.events.conditions.IsDead;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
@@ -28,15 +27,10 @@ import javafx.scene.layout.VBox;
 public class ConditionEditorPane extends Pane{
 
 	private static final int WIDTH_OFFSET = 30;
-	private static final String NAME_LABEL = "Name";
-	private static final String NAME_PROMPT = "Enter Condition name...";
 	private static final String COMPONENTS_LABEL = "Expression";
-	private static final String EQUALS_LABEL = "EQUALS";
 	private static final String DONE_LABEL = "Done";
 	private static final Insets MARGINS = new Insets(5, WIDTH_OFFSET, 10, WIDTH_OFFSET);
 	private static final String LABEL_CSS = "-fx-font-size: 14pt;";
-
-	private TextField myNameField = new TextField();
 
 	private ChoiceBox<String> myRefType = new ChoiceBox<>();
 	private ChoiceBox<IHasStats> myRefName = new ChoiceBox<>();
@@ -62,7 +56,7 @@ public class ConditionEditorPane extends Pane{
 	 * Constructs the Condition using REFLECTION
 	 * @param doneButton
 	 */
-	 private void initDoneButton(Button doneButton) {
+	private void initDoneButton(Button doneButton) {
 		doneButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent click) {
@@ -70,73 +64,91 @@ public class ConditionEditorPane extends Pane{
 				IHasStats ref = myRefName.getSelectionModel().getSelectedItem();
 				String stat = myStat.getSelectionModel().getSelectedItem();
 				String val = myVal.getText();
-				
+
 				String classPath = myClass.toString();
 				classPath = classPath.substring(6);
-				
-				myCondition = (Condition) Reflection.createInstance(classPath, myNameField.getText(), ref, stat, val);
-				
+
+				if("gamedata.events.conditions.IsDead".equals(classPath)){
+					myCondition = new IsDead(val);
+				}
+				else{
+					myCondition = (Condition) Reflection.createInstance(classPath, ref, stat, val);
+				}
+
 				myDoneLambda.accept(myCondition);
 			}
 
 		});
-	 }
+	}
 
-	 private void setUpComponents(ChoiceBox<String> typeBox,
-			 ChoiceBox<IHasStats> componentBox, ChoiceBox<String> statBox, TextField valueField) {
-		 typeBox.getItems().addAll("Piece", "Patch", "Player");
-		 typeBox.getSelectionModel().selectedItemProperty().addListener(
-				 (observable, oldValue, selectedType) -> setupEditor(oldValue, selectedType, componentBox, statBox, valueField));
-		 componentBox.getSelectionModel().selectedItemProperty().addListener(
-				 (observable, oldValue, selectedComponent) -> setupStatsBox(selectedComponent, statBox));
-	 }
+	private void setUpComponents(ChoiceBox<String> typeBox,
+			ChoiceBox<IHasStats> componentBox, ChoiceBox<String> statBox, TextField valueField) {
+		typeBox.getItems().addAll("Piece", "Patch", "Player");
+		typeBox.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, selectedType) -> setupEditor(oldValue, selectedType, componentBox, statBox, valueField));
+		componentBox.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, selectedComponent) -> setupStatsBox(selectedComponent, statBox));
+	}
 
-	 /**
-	  * 
-	  * @param oldType
-	  * @param type
-	  * @param refName
-	  * @param statName
-	  * @param value
-	  */
-	 private void setupEditor(String oldType, String type, ChoiceBox<IHasStats> refName, ChoiceBox<String> statName, TextField value) {
-		 value.setPromptText("Enter constant value");
+	/**
+	 * 
+	 * @param oldType
+	 * @param type
+	 * @param refName
+	 * @param statName
+	 * @param value
+	 */
+	private void setupEditor(String oldType, String type, ChoiceBox<IHasStats> refName, ChoiceBox<String> statName, TextField value) {
+			/**
+			 * Selects between the three types of input into this Condition
+			 */
+			switch(type){
+				case "Piece": 
+				{
+					List<Piece> pieceTypes = myData.getPieceTypes();
+					refName.getItems().addAll(pieceTypes);
+					break;
+				}
+				case "Patch":
+				{
+					List<Patch> patchTypes = myData.getPatchTypes();
+					refName.getItems().addAll(patchTypes);
+					break;  
+				}
+				case "Player":
+				{
+					List<Player> players = myData.getPlayers();
+					refName.getItems().addAll();
+					break;
+				}
 
-		 /**
-		  * Selects between the three types of input into this Condition
-		  */
-		 switch(type){
-			 case "Piece": 
-			 {
-				 List<Piece> pieceTypes = myData.getPieceTypes();
-				 refName.getItems().addAll(pieceTypes);
-				 break;
-			 }
-			 case "Patch":
-			 {
-				 List<Patch> patchTypes = myData.getPatchTypes();
-				 refName.getItems().addAll(patchTypes);
-				 break;  
-			 }
-			 case "Player":
-			 {
-				 List<Player> players = myData.getPlayers();
-				 refName.getItems().addAll();
-				 break;
-			 }
+			}
+		}
 
-		 }
-	 }
-	 
-	 private void setupStatsBox(IHasStats source, ChoiceBox<String> box){
-		 box.getItems().addAll(source.getStats().getStatNames());
-		 box.getItems().addAll("Location");
-	 }
-	 
-	 /**
-	  * Initialize all the GUI nonsense. Please ignore this for masterpiece. 
-	  */
-	 private void initialize(){
+		private void setupStatsBox(IHasStats source, ChoiceBox<String> box){
+			box.getItems().addAll(source.getStats().getStatNames());
+			box.getItems().addAll("Location");
+		}
+
+		/**
+		 * Initialize all the GUI nonsense. Please ignore this for masterpiece. 
+		 */
+		private void initialize(){
+			myRefType.setVisible(true);
+			myRefName.setVisible(true);
+			myStat.setVisible(true);
+			myVal.setPromptText("Enter constant value");
+
+			String classPath = myClass.toString();
+			classPath = classPath.substring(6);
+						
+			if("gamedata.events.conditions.IsDead".equals(classPath)){
+				myRefType.setVisible(false);
+				myRefName.setVisible(false);
+				myStat.setVisible(false);
+				myVal.setPromptText("Enter name of health stat");
+			}
+			
 			VBox box = new VBox();
 			box.setPadding(MARGINS);
 			box.setSpacing(10);
@@ -156,19 +168,11 @@ public class ConditionEditorPane extends Pane{
 			leftHandSide.setPadding(UIspecs.allPadding);
 			leftHandSide.setSpacing(5);
 
-			Label nameLabel = new Label(NAME_LABEL);
-			nameLabel.setPadding(UIspecs.topRightPadding);
-			myNameField = new TextField();
-			myNameField.setPromptText(NAME_PROMPT);
-			names.getChildren().addAll(nameLabel, myNameField);
-
 			Label componentsLabel = new Label(COMPONENTS_LABEL);
 
 			setUpComponents(myRefType, myRefName, myStat, myVal);
 
-			Label equalsLabel = new Label(EQUALS_LABEL);
-
-			leftHandSide.getChildren().addAll(myRefType, myRefName, myStat, equalsLabel, myVal);
+			leftHandSide.getChildren().addAll(myRefType, myRefName, myStat, myVal);
 
 			components.getChildren().addAll(componentsLabel, leftHandSide);
 
@@ -179,4 +183,4 @@ public class ConditionEditorPane extends Pane{
 
 			getChildren().add(box);
 		}
-}
+	}

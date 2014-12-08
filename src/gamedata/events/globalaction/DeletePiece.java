@@ -9,8 +9,8 @@ import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Piece;
 
 /**
- * Deletes all pieces with less than 0 HP
- * @author Rica, Mike Zhu
+ * Deletes a piece at a specified point
+ * @author Mike Zhu
  *
  */
 public class DeletePiece extends GlobalAction {	
@@ -29,7 +29,7 @@ public class DeletePiece extends GlobalAction {
     }
 
     @Override
-    public void doBehavior (List<IHasStats> objects) {
+    public void doBehavior(List<IHasStats> objects) {
        for(IHasStats obj : objects){
     	   Piece p = (Piece) obj;
     	   if(obj.getStats().getValue(myHealthName)<=0){
