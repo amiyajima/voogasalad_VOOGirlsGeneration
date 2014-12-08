@@ -26,7 +26,6 @@ public class NewConditionController implements Initializable{
 	
 	private List<Class> conditionsList;
 	
-	private Condition myCondition;
 	private Consumer<Condition> myDoneLambda;
 	private EventsDataWrapper myData;
 	
@@ -67,19 +66,8 @@ public class NewConditionController implements Initializable{
 	private void showConditionEditorPane(){
 		int idx = conditionChoiceBox.getSelectionModel().getSelectedIndex();
 		Class<?> c = conditionsList.get(idx);
-		
-		/**
-		 * If statements to choose which Condition Editor to pull up
-		 */
-		if("class gamedata.events.ConditionEquals".equals(c.getSuperclass().toString())){
-		}
-		
-		if(myCondition==null){
-			editorScrollPane.setContent(new ConditionEditorPane(myDoneLambda, myData));
-		}
-//		else{
-//			editorScrollPane.setContent(new ConditionEditorPane(myDoneLambda, myCondition, myData));
-//		}
+			
+		editorScrollPane.setContent(new ConditionEditorPane(myDoneLambda, myData, c));
 	}
 	
 	/**
@@ -102,15 +90,6 @@ public class NewConditionController implements Initializable{
 		myDoneLambda = okLambda;
 	}
 	
-	/**
-	 * Loads the data of a Condition into the editor.
-	 * Used when editing a previous condition, rather than creating a new one from scratch
-	 * @param entry
-	 */
-	public void loadEntryCondition(Condition entry){
-		myCondition = entry;
-	}
-
 	public void loadData(EventsDataWrapper data) {
 		myData = data;
 	}

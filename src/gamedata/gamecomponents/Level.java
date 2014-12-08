@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import javafx.scene.control.ScrollPane;
@@ -16,7 +17,7 @@ import authoring_environment.GUIGrid;
  * has been won
  *
  */
-public class Level extends Observable implements IChangeGameState{
+public class Level extends Observable implements IChangeGameState {
 	private static final String DEFAULT_ID = "Default";
 
 	private GUIGrid myGrid;
@@ -26,15 +27,18 @@ public class Level extends Observable implements IChangeGameState{
 	private List<Event> myEvents;
 	private String myId;
 
-	
 	/**
 	 * Global Action flags
 	 */
+	// GameWin
 	private boolean gameWon;
+	// GameLost
 	private boolean gameLost;
+	// Next Level
 	private String nextLevelID;
+	// Next Turn
 	private boolean turnOver;
-	
+
 	/**
 	 * Constructs a default level with a default ID and sets it as NOT the
 	 * winning level
@@ -48,7 +52,13 @@ public class Level extends Observable implements IChangeGameState{
 		myGrid = gr;
 		myEvents = events;
 		myId = id;
-		// winningLevel = isWinningLevel;
+		initializeDefaultEvents();
+	}
+
+	private void initializeDefaultEvents() {
+		Event die = new Event(myId);
+
+		
 	}
 
 	/**
@@ -56,9 +66,10 @@ public class Level extends Observable implements IChangeGameState{
 	 */
 	public void runGameEvents() {
 		for(Event e: myEvents){
-			Consumer<List<IHasStats>> eventFunc = (List<IHasStats> list) -> e.runEvent(list);
+			BiConsumer<List<IHasStats>, GUIGrid> eventFunc = (List<IHasStats> list, GUIGrid grid) -> e.runEvent(list, grid);
 			myGrid.runEvent(eventFunc);
 		}
+		this.garbageCollectPieces();
 	}
 
 	/**
@@ -69,16 +80,16 @@ public class Level extends Observable implements IChangeGameState{
 	public GUIGrid getGrid() {
 		return myGrid;
 	}
-	
+
 	/**
 	 * Returns the List of Events contained in this level.
 	 *
 	 * @return
 	 */
-	public List<Event> getEvents(){
+	public List<Event> getEvents() {
 		return myEvents;
 	}
-	
+
 	/**
 	 * toString method used to test JSON read/write
 	 */
@@ -98,15 +109,12 @@ public class Level extends Observable implements IChangeGameState{
 		List<Piece> toRemove = new ArrayList<Piece>();
 		for (Piece p : pieces) {
 
-			/*Inventory i = p.getInventory();
-			List<Piece> list = i.getAllInventory();
-			// Removes Items
-			for (Piece p2 : list) {
-				if (p2.shouldRemove()) {
-					i.removeItem(p2);
-				}
-			}*/
-			
+			/*
+			 * Inventory i = p.getInventory(); List<Piece> list =
+			 * i.getAllInventory(); // Removes Items for (Piece p2 : list) { if
+			 * (p2.shouldRemove()) { i.removeItem(p2); } }
+			 */
+
 			// Removes Pieces (Tagging)
 			if (p.shouldRemove()) {
 				toRemove.add(p);
@@ -127,27 +135,49 @@ public class Level extends Observable implements IChangeGameState{
 		return myId;
 	}
 
+	public void setTurnFalse() {
+		turnOver = false;
+	}
+	
+	public boolean getGameWon(){
+		return this.gameWon;
+	}
+	
+	public boolean getGameLost(){
+		return this.gameLost;
+	}
+
+	public boolean getTurnOver(){
+		return this.turnOver;
+	}
+	
+	public String getNextLevelID(){
+		return this.nextLevelID;
+	}
+
+
+
 	/**
 	 * IChangeGameState interface methods
 	 */
 	@Override
 	public void winGame() {
-		gameWon=true;
+		gameWon = true;
 	}
 
 	@Override
 	public void loseGame() {
-		gameLost=true;
+		gameLost = true;
 	}
 
 	@Override
 	public void endTurn() {
-		turnOver=true;
+		turnOver = true;
 	}
 
 	@Override
 	public void changeLevel(String name) {
-		nextLevelID=name;
+		nextLevelID = name;
 	}
 
 }

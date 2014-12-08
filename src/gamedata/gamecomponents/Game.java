@@ -11,7 +11,7 @@ import java.util.Map;
  * The play method in this class is called in every iteration of the game loop.
  *
  */
-public class Game implements IChangeGameState{
+public class Game implements IChangeGameState {
 
 	/**
 	 * Contains player in order of their turns
@@ -54,47 +54,17 @@ public class Game implements IChangeGameState{
 		myCurrentPlayer = null;
 	}
 
+	public void startGame() {
+		System.out.println("Starting the Game");
+		myCurrentPlayer.startTurn(myCurrentLevel);
+	}
+
 	public void addPlayers(List<Player> p) {
 		myPlayers = p;
 		if (myPlayers.size() > 0) {
 			myCurrentPlayer = myPlayers.get(0);
 		}
 	}
-
-	/**
-	 * Iterates the Current Level to the Next Level If no more levels, game is
-	 * won.
-	 */
-	public void nextLevel() {
-		if (!isWin()) {
-			myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel) + 1);
-		} else {
-			myGameWon = 1;
-		}
-	}
-
-	/**
-	 * Checks to see if game has been beaten
-	 * 
-	 * @return True is game has been won. False otherwise
-	 */
-	private boolean isWin() {
-		if (myLevels.indexOf(myCurrentLevel) == myLevels.size() - 1) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Jumps to the level specified by looking it up using the ID
-	 * 
-	 * @param levelToJumpTo
-	 */
-	/*
-	 * public void jumpToLevel(String levelToJumpTo) { for (Level level :
-	 * myLevels) { if (level.getId().equals(levelToJumpTo)) { myCurrentLevel =
-	 * level; if (level.isWinningLevel()) { myGameWon = true; } break; } } }
-	 */
 
 	public void changeTurn(int playerToChangeTo) {
 		for (Player player : myPlayers) {
@@ -104,13 +74,12 @@ public class Game implements IChangeGameState{
 		}
 	}
 
-
 	/**
 	 * Resets the active player to be the first player who has played
 	 */
 	private void resetPlayer() {
 		myCurrentPlayer = myPlayers.get(0);
-		myCurrentPlayer.resetMovesPlayed();
+		myCurrentPlayer.startTurn(myCurrentLevel);
 	}
 
 	/**
@@ -155,6 +124,16 @@ public class Game implements IChangeGameState{
 		myPlayers.set(pos, p);
 	}
 
+	public void nextPlayer() {
+		int next = myPlayers.indexOf(myCurrentPlayer) + 1;
+		if (next == myPlayers.size()) {
+			this.resetPlayer();
+		} else {
+			myCurrentPlayer = myPlayers.get(next);
+			myCurrentPlayer.startTurn(myCurrentLevel);
+		}
+	}
+
 	/**
 	 * Used by Global Actions. Set the current player to the player with a given
 	 * ID
@@ -181,17 +160,18 @@ public class Game implements IChangeGameState{
 	}
 
 	/**
-	 * Used by global action. 
+	 * Used by global action.
+	 * 
 	 * @param name
 	 */
-	public void changeLevel(String name){
-		for (Level level :myLevels) { 
-			if (level.getId().equals(name)) { 
-				myCurrentLevel = level; 
+	public void changeLevel(String name) {
+		for (Level level : myLevels) {
+			if (level.getId().equals(name)) {
+				myCurrentLevel = level;
 			}
 		}
 	}
-	
+
 	/**
 	 * Used by global action.
 	 */
@@ -207,12 +187,12 @@ public class Game implements IChangeGameState{
 	@Override
 	public void winGame() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void loseGame() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

@@ -44,14 +44,16 @@ public class GameGridEffect {
         
         if (myActivePiece != null && myActiveAction != null) {
             //System.out.println("GameGridEffect: action ABOUT TO HIGHLIGHT\n\n");
+        	//System.out.println("Size of Action Range:"+myActiveAction.getActionRange(myActivePiece.getLoc()));
             myActiveAction.getActionRange(myActivePiece.getLoc())
-                    .forEach(point -> { if (point.getX() < myGrid.getRow()
-                                     && point.getY() < myGrid.getCol()
-                                     && point.getX() > 0 && point.getY() > 0) {
+                    .forEach(point -> { if (point.getX() < myGrid.getNumRows()
+                                     && point.getY() < myGrid.getNumCols()
+                                     && point.getX() >= 0 && point.getY() >= 0) {
                                      
                                      SuperTile toHighlight = myGrid.findTile(point);
                                      toHighlight.selectTile(ACTION_RANGE_COLOR);
                                      myHighlightedActions.add(toHighlight);
+                                     //System.out.println("EFFECT LOCATION X:"+point.getX()+" Y:"+point.getY());
                                      
                                  }
                              });

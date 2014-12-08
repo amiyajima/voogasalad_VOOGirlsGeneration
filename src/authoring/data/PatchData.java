@@ -34,11 +34,11 @@ public class PatchData implements AuthoringData<Patch> {
 	
 	@Override
 	public boolean canAdd(Patch element) {
-		String elementID=element.getID();
-		Point2D elementLoc=element.getLoc();
-		for (Patch patch:myPatches){
-			String id=patch.getID();
-			Point2D loc=patch.getLoc();
+		String elementID = element.getID();
+		Point2D elementLoc = element.getLoc();
+		for (Patch patch : myPatches){
+			String id = patch.getID();
+			Point2D loc = patch.getLoc();
 			if ((elementID.equals(id)) && (elementLoc.equals(loc))){
 				return false;
 			}
