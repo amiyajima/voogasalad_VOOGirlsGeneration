@@ -81,7 +81,7 @@ public class PatchTypeEditor extends Pane {
 	public PatchTypeEditor (Consumer<Patch> okLambda, Patch patch) {
 		myEditorTitle = EDITOR_TITLE;
 		myID = patch.getID();
-		myName = patch.getName();
+		myName = patch.toString();
 		myImageLocation = patch.getImageLocation();
 		myPatch = patch;   
 		constructor(okLambda);
@@ -195,7 +195,9 @@ public class PatchTypeEditor extends Pane {
 				 if(myIDSet.contains(myID)){
 					 return;
 				 }
-				 myIDSet.add(myID);
+				 if(!terrainID.isDisabled()){
+					 myIDSet.add(myID);
+				 }
 				 myName = terrainName.getText();
 				 myPatch = new Patch(myID, myName, myImageLocation, DEFAULT_LOC);
 				 myOkLambda.accept(myPatch);

@@ -1,7 +1,7 @@
 package authoring.data;
 
 import gamedata.gamecomponents.Level;
-
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,6 +23,12 @@ public class LevelData implements AuthoringData<Level> {
 	}
 
 	@Override
+	public boolean canAdd(Level element) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
 	public void remove(Level p) {
 		myLevels.remove(p);
 	}
@@ -36,8 +42,6 @@ public class LevelData implements AuthoringData<Level> {
 
 	@Override
 	public List<Level> getData() {
-		// TODO Auto-generated method stub
-		return null;
+		return Collections.unmodifiableList(myLevels);
 	}
-
 }

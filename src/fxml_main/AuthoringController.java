@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import authoring.actionslogic.ActionLogicController;
+import authoring.createedit.GamePropertiesEditor;
 import authoring.data.ActionData;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
@@ -46,10 +47,14 @@ public class AuthoringController implements Initializable {
 	@FXML
     private MenuItem actonsLogicChart;
 	
+	@FXML
+	private MenuItem gameProperties;
+	
 	private GUIGridReference myGridReference;
 	private PieceController myPieceController;
 	private PatchController myPatchController;
 	private LevelController myLevelController;
+	private ActionController myActionController;
 	
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -66,6 +71,8 @@ public class AuthoringController implements Initializable {
 	    		myPatchTypes);
 	    myLevelController = new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
 	    		myGridReference, myLevelData, myPieceTypes, myPatchTypes);
+	    
+	    myActionController = new ActionController(myActionsVBox, myPropertiesSPane, myGridReference, actions);
 	}
 	
 	@FXML
@@ -87,4 +94,16 @@ public class AuthoringController implements Initializable {
 
                 eventEditorStage.showAndWait();
         }
+	
+	@FXML
+	private void showGamePropertiesWindow(){
+			GamePropertiesEditor gamePptEditor=new GamePropertiesEditor();
+			gamePptEditor.setTitle("Game Properties Editor");
+		 	gamePptEditor.setX(450);
+		 	gamePptEditor.setY(200);
+		 	gamePptEditor.show();
+		 		
+	}
+	
+	
 }

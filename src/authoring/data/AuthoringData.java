@@ -14,12 +14,17 @@ public interface AuthoringData<T> {
 	/**
 	 * Adds an object of type T to data
 	 */
-	public void add(T p);
+	public void add(T element);
+	
+	/**
+	 * Determine if you can add this element to the data
+	 */
+	public boolean canAdd(T element);
 	
 	/**
 	 * Removes an object of type T from data
 	 */
-	public void remove(T p);
+	public void remove(T element);
 	
 	/**
 	 * Replaces an object of type T in data

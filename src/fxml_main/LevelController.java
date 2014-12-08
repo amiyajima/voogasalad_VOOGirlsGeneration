@@ -1,7 +1,12 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Level;
+import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Piece;
+import gameengine.player.Player;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Consumer;
 
 import javafx.event.ActionEvent;
@@ -12,10 +17,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import authoring.data.EventsDataWrapper;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
-import authoring_environment.GUIGrid;
 
 /**
  * 
@@ -52,14 +57,20 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 		//TODO: Need to not hard-code square, have it passed through the constructor
 		// as maybe a gridshapeproperty (new class?)
 		Consumer<Level> okLambda = (Level level) -> {
-						
+			myLevelData.add(level);			
 			addEntry(level);
-			myLevelData.add(level);
+			
 			myPieceTypes.addObserver(level.getGrid());
 			myPatchTypes.addObserver(level.getGrid());
 			setAndDisplayGrid(level);
 			};
-		super.myPropertiesSPane.setContent(new LevelEditor(okLambda));
+			
+		List<Piece> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
+		List<Patch> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
+		List<Player> playersRO = null;
+
+		EventsDataWrapper wrapper = new EventsDataWrapper(piecesRO, patchesRO, playersRO);
+		super.myPropertiesSPane.setContent(new LevelEditor(okLambda, wrapper));
 	}
 	
 	private void setAndDisplayGrid(Level level) {
@@ -121,7 +132,13 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 					setAndDisplayGrid(level);
 
 				};
-				myPropertiesSPane.setContent(new LevelEditor(okLambda, entry));
+				List<Piece> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
+				List<Patch> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
+				List<Player> playersRO = null;
+
+				EventsDataWrapper wrapper = new EventsDataWrapper(piecesRO, patchesRO, playersRO);
+				
+				myPropertiesSPane.setContent(new LevelEditor(okLambda, entry, wrapper));
 				
 			}
 			

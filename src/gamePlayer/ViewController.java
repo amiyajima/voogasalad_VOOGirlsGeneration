@@ -25,7 +25,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -39,7 +38,7 @@ import authoring_environment.SuperTile;
 
 /**
  * 
- * @author
+ * 
  *
  */
 public class ViewController {
@@ -51,10 +50,10 @@ public class ViewController {
 	public static final String GAME_LOCATION = "/src/resources/json";
 	public static final String POPUP_FXML = "popup.fxml";
 
-	private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
+//	private static final String DEFAULT_MUSIC = "/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
-
+	public static final double CURSOR_RATIO = 0.25;
 	private ResourceBundle myLanguages;
 	private Stage myStage;
 	private BorderPane myGameSpace;
@@ -79,7 +78,9 @@ public class ViewController {
 	private Piece activePiece;
 	private Action activeAction;
 
-	private AudioClip myAudio;
+	private Audio myAudio;
+	
+	
 	@FXML
 	protected VBox statsPane;
 	@FXML
@@ -101,34 +102,54 @@ public class ViewController {
 	private GameGridEffect myGameGridEffect;
 	private SuperTile keySelectedTile;
 
-	public ViewController(Stage s) {
+	public ViewController(Stage s) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		myStage = s;
-		myInitialScene = new VBox();
-		myGameSpace = new BorderPane();
-		myScoreBoard = new VBox();
-		myPopup = new BorderPane();
-		myJSONManager = new JSONManager();
-		// myLeapController = new Controller();
-		loadFXML(GAMESPACE_FXML, myGameSpace);
-		loadFXML(INITIALSCENE_FXML, myInitialScene);
-		loadFXML(POPUP_FXML, myPopup);
-		loadFXML(SCOREBOARD_FXML, myScoreBoard);
 
-		scoreScene = new Scene(myScoreBoard);
-		myPopupScene = new Scene(myPopup);
-
-		myStage.setScene(new Scene(myInitialScene));
-
+		openInitialMenu();
 		try {
 			newGame();
 		} catch (UnsupportedAudioFileException | IOException
 				| LineUnavailableException e) {
 		}
+		
 
+		
 		myStage.show();
 
 	}
 
+	
+	/**
+	 * Sets up and opens the initial scene
+	 * @throws LineUnavailableException 
+	 * @throws IOException 
+	 * @throws UnsupportedAudioFileException 
+	 */
+	@FXML
+	protected void openInitialMenu() throws UnsupportedAudioFileException, IOException, LineUnavailableException{
+	    myInitialScene = new VBox();
+	    myGameSpace = new BorderPane();
+	    myScoreBoard = new VBox();
+	    myPopup = new BorderPane();
+	    myJSONManager = new JSONManager();
+	    // myLeapController = new Controller();
+	    loadFXML(GAMESPACE_FXML, myGameSpace);
+	    loadFXML(INITIALSCENE_FXML, myInitialScene);
+	    loadFXML(POPUP_FXML, myPopup);
+	    loadFXML(SCOREBOARD_FXML, myScoreBoard);
+	    
+	    scoreScene = new Scene(myScoreBoard);
+	    myPopupScene = new Scene(myPopup);
+	    
+	    myStage.setScene(new Scene(myInitialScene));
+	    
+	    myAudio = new Audio();
+	    myAudio.playDefault();
+	    
+	    System.out.println("Opened initial menu");
+	}
+	
+	
 	/**
 	 * the method allows user to load the previously saved json representation
 	 * of the game and uses JSON reader from Game Data to generate an instance
@@ -142,17 +163,21 @@ public class ViewController {
 		fc.setInitialDirectory(new File("src/resources/json"));
 		File f = fc.showOpenDialog(myStage);
 
-		try {
-			myModel = myJSONManager.readFromJSONFile(f.getPath());
-			initializeGrid();
-		} catch (FileNotFoundException e) {
-			System.out.println("Could not find JSON: " + "f.getPath()");
-		}
+		//commented out for now.... (will work on it when myJSONManager is finished)
+//		try {
+			myScene = new Scene(myGameSpace);
+			myStage.setScene(myScene);
+//			myModel = myJSONManager.readFromJSONFile(f.getPath());
+//			initializeGrid();
+//		} catch (FileNotFoundException e) {
+//			System.out.println("Could not find JSON: " + "f.getPath()");
+//		}
 
 	}
-
+	
+	
 	/**
-	 * the method to restart the game; it asks the use whether to save the
+	 * the method to restart the game; it asks the user whether to save the
 	 * current game
 	 * 
 	 */
@@ -161,8 +186,8 @@ public class ViewController {
 		initializeGrid();
 		statsPane.getChildren().clear();
 		controlPane.getChildren().clear();
-
 	}
+	
 
 	@FXML
 	protected void exitGame() {
@@ -223,7 +248,7 @@ public class ViewController {
 
 	@FXML
 	protected void cancelPopup() {
-
+	    System.out.println("cancel popup");
 	}
 
 	/**
@@ -243,7 +268,6 @@ public class ViewController {
 
 			throw new RuntimeException(exception);
 		}
-
 	}
 
 	/**
@@ -256,7 +280,7 @@ public class ViewController {
 	 * @throws UnsupportedAudioFileException
 	 */
 	protected void newGame() throws UnsupportedAudioFileException, IOException,
-			LineUnavailableException {
+		LineUnavailableException {
 
 		List<File> games = getGames();
 
@@ -277,7 +301,11 @@ public class ViewController {
 	 * Initializes grid and its effects manager (gamegrideffect)
 	 */
 	private void initializeGrid() {
-		myGridPane = new ScrollPane();
+		
+	    
+	        myAudio.playSelection();
+	        
+	        myGridPane = new ScrollPane();
 		Level currentLevel = myModel.getCurrentLevel();
 		myGrid = currentLevel.getGrid();
 		System.out.println("myGrid: " + myGrid);
@@ -295,6 +323,8 @@ public class ViewController {
 		keyControlOn = false;
 		myGameGridEffect = new GameGridEffect(this);
 	}
+	
+
 
 	/**
 	 * Loads the Score from a Player for Display
@@ -302,8 +332,8 @@ public class ViewController {
 	protected void loadScores() {
 		gameName.setText(gameName.getText() + myModel.toString());
 		// TODO: add in scores
-		// myModel.getPlayers().forEach(player-> scores.getChildren().
-		// add(new Text(player.getID()+": ")));
+		 myModel.getPlayers().forEach(player-> scores.getChildren().
+		 add(new Text(player.getID()+": ")));
 	}
 
 	/**
@@ -349,7 +379,9 @@ public class ViewController {
 	 * @param piece
 	 */
 	protected void updateActions(Piece piece) {
-		controlPane.getChildren().clear();
+//		System.out.println("UPDATE ACTIONS");
+//	        myAudio.playSelection();
+	        controlPane.getChildren().clear();
 		ArrayList<Label> actions = new ArrayList<Label>();
 		piece.getActions().forEach(action -> {
 			Label l = new Label(action.toString());
@@ -374,7 +406,7 @@ public class ViewController {
 	 * @param actions
 	 */
 	public void updateActionList(ArrayList<Label> actions) {
-		System.out.println("i use this");
+	        
 		controlPane.getChildren().clear();
 		controlPane.getChildren().addAll(actions);
 	}
@@ -385,6 +417,9 @@ public class ViewController {
 	 * @param action
 	 */
 	protected void bindAction(Action action) {
+	        System.out.println("BIND ACTION");
+	        myAudio.playSelection();
+	        
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
@@ -401,7 +436,7 @@ public class ViewController {
 	}
 
 	private void setOnClick() {
-		myGridPane.getContent().setOnMouseClicked(event -> {
+	    myGridPane.getContent().setOnMouseClicked(event -> {
 			Point2D loc = findPosition(event.getX(), event.getY());
 			performAction(loc);
 		});
@@ -415,7 +450,10 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(Point2D loc) {
-		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
+		System.out.println("PERFORM ACTION");
+	        myAudio.playSelection();
+	        
+	        gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
 		
 		if (keyControlOn) {
 			myKeyboardMovement = null;
@@ -443,8 +481,8 @@ public class ViewController {
 	 * @return a Point2D representing tile coordinates
 	 */
 	public Point2D findPosition(double x, double y) {
-		double patchHeight = myGrid.getTileSize();
-		double patchWidth = myGrid.getTileSize();
+		double patchHeight = myGrid.getTileHeight();
+		double patchWidth = myGrid.getTileHeight();
 		int xCor = (int) (x / patchWidth);
 		int yCor = (int) (y / patchHeight);
 		currentClick = new Point2D.Double(xCor, yCor);
@@ -458,8 +496,8 @@ public class ViewController {
 	 */
 	public void changeCursor(String filename) {
 		Image image = new Image(filename);
-		myScene.setCursor(new ImageCursor(image, image.getWidth() / 4, image
-				.getWidth() / 4));
+		myScene.setCursor(new ImageCursor(image, image.getWidth() / CURSOR_RATIO, image
+				.getWidth() / CURSOR_RATIO));
 
 	}
 
@@ -472,7 +510,7 @@ public class ViewController {
 
 			// dehighlighting the tile the keyboard is currently highlighting
 			if (myKeyboardMovement != null) {
-				keySelectedTile = myGrid.findClickedTile(myKeyboardMovement
+				keySelectedTile = myGrid.findTile(myKeyboardMovement
 						.getCurrentLocation());
 				keySelectedTile.deselectTile();
 			}
@@ -483,7 +521,7 @@ public class ViewController {
 
 			// dehighlighting the tile the mouse click is currently highlighting
 			if (currentClick != null) {
-				SuperTile selectedTile = myGrid.findClickedTile(currentClick);
+				SuperTile selectedTile = myGrid.findTile(currentClick);
 				selectedTile.deselectTile();
 			}
 

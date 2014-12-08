@@ -1,7 +1,5 @@
 package authoring.actionslogic;
 
-import gamedata.action.Action;
-import gamedata.action.ConcreteAction;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +15,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 
 
+/**
+ * Controller for Action Logic Chart in Authoring Environment
+ *
+ */
 public class ActionLogicController implements Initializable {
 
     @FXML
@@ -32,7 +34,8 @@ public class ActionLogicController implements Initializable {
     private Button saveButton;
 
     private List<String> myPieceTypes = new ArrayList<String>();
-    private Map<String,Map> myLogicMap = new HashMap<String,Map>();
+    private Map<String, Map> myLogicMap = new HashMap<String, Map>();
+    private List<CheckBox> myCBList = new ArrayList<CheckBox>();
 
     @Override
     // TODO: [IMPORTANT] This constructor will need a List<String> or Set<String> that contains
@@ -58,12 +61,11 @@ public class ActionLogicController implements Initializable {
 
     private void updatePossibleReceivers (String selectedActor) {
         List<String> myPosReceivers = getReceivers(myPieceTypes, selectedActor);
-        ChoiceBox<String> cb = new ChoiceBox<String>();
-        cb.getItems().addAll(myPosReceivers);
-        myReceiversVBox.getChildren().add(cb);
-//        for (String p : myPosReceivers) {
-//            myReceiversVBox.getChildren().add(new CheckBox(p));
-//        }
+        for (String p : myPosReceivers) {
+            CheckBox receiverCB = new CheckBox(p);
+            myCBList.add(receiverCB);
+            myReceiversVBox.getChildren().add(receiverCB);
+        }
     }
 
     private List<String> getReceivers (List<String> myPieceTypes, String actor) {
@@ -75,14 +77,23 @@ public class ActionLogicController implements Initializable {
         }
         return receivers;
     }
-    
+
     @FXML
-    private void saveLogic(){
+    private void saveLogic () {
         String currAction = actionsListView.getSelectionModel().getSelectedItem();
-        System.out.println(currAction);
         String currActor = actorsChoiceBox.getSelectionModel().getSelectedItem();
-        System.out.println(currActor);
+        List<String> receiverList = new ArrayList<String>();
+        for (CheckBox cb : myCBList) {
+            if(cb.isSelected()){
+                receiverList.add(cb.getText());
+            }
+        }
+        Map<String,List<String>> actionReceiver = myLogicMap.get(currActor);
+        actionReceiver.put(currAction, receiverList);
+        myLogicMap.put(currActor, actionReceiver);
+        System.out.println(myLogicMap);
         
+
     }
 
 }

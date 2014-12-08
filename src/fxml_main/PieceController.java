@@ -63,11 +63,11 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 					@Override
 					public void handle (MouseEvent e) {
 						GUIGrid grid = myGridReference.getGrid();
-						Point2D coor = grid.calculateClicked(e.getX(), e.getY());
-						grid.removePatch(coor);
+						Point2D coor = grid.findClickedCoordinate(e.getX(), e.getY());
+						grid.removePieceAtCoordinate(coor);
 					}
 				};
-				myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
+				myGridReference.getGrid().paneSetOnMouseClicked(clickHandler);
             }
         });
     }
@@ -75,7 +75,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 	@Override
 	protected HBox makeEntryBox(Piece entry) {
 		HBox hb = new HBox();
-		Label name = new Label(entry.getName());
+		Label name = new Label(entry.toString());
 		name.setTranslateY(7.5);
 		ImageView img = entry.getImageView();
 		img.setFitHeight(40);
@@ -87,11 +87,11 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 					@Override
 					public void handle (MouseEvent e) {
 						GUIGrid grid = myGridReference.getGrid();
-						Point2D coor = grid.calculateClicked(e.getX(), e.getY());
+						Point2D coor = grid.findClickedCoordinate(e.getX(), e.getY());
 						grid.addPiece(entry, coor);
 					}
 				};
-				myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
+				myGridReference.getGrid().paneSetOnMouseClicked(clickHandler);
 			}
 		});
 		hb.getChildren().addAll(img, name);
@@ -105,10 +105,11 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 			public void handle (ActionEvent e) {
 				Consumer<Piece> okLambda = (Piece piece) -> {
 					HBox entryBox = makeCompleteEntryBox(piece);
-
+					
 					HBox entryHolderBox = myEntryMap.get(entry);
 					entryHolderBox.getChildren().clear();
 					entryHolderBox.getChildren().add(entryBox);
+					myEntryMap.put(piece, entryHolderBox);
 
 					myPieceTypes.replace(entry, piece);
 				};

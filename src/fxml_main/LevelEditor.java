@@ -2,12 +2,10 @@ package fxml_main;
 
 import gamedata.events.Event;
 import gamedata.gamecomponents.Level;
-
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,50 +22,56 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import authoring.data.EventsDataWrapper;
 import authoring.eventeditor.EventEditorController;
 import authoring_environment.GUIGrid;
 
 
 public class LevelEditor extends VBox {
-    private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
+	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 
-    private static final String CREATOR_TITLE = "Level Creator";
-    private static final String EDITOR_TITLE = "Level Editor";
-    private static final String LABEL_CSS = "-fx-font-size: 14pt;";
+	private static final String CREATOR_TITLE = "Level Creator";
+	private static final String EDITOR_TITLE = "Level Editor";
+	private static final String LABEL_CSS = "-fx-font-size: 14pt;";
 
-    private String myId;
-    private int myGridRows;
-    private int myGridCols;
-    private double myTileHeight;
-    private ObservableList<Event> myEvents;
-    private GUIGrid myGrid;
-    private Level myLevel;
+	private String myId;
+	private int myGridRows;
+	private int myGridCols;
+	private double myTileHeight;
+	private ObservableList<Event> myEvents;
+	private GUIGrid myGrid;
 
-    private Consumer<Level> myOkLambda;
+	private Consumer<Level> myOkLambda;
 
 	private String myEditorTitle;
 
-    public LevelEditor (Consumer<Level> okLambda) {
+	private EventsDataWrapper myData;
+
+<<<<<<< HEAD
+    public LevelEditor (Consumer<Level> okLambda, EventsDataWrapper data) {
     	myEditorTitle = CREATOR_TITLE;
+
     	
-        myId = "";
+    	myId = "";
         myGridRows = 0;
         myGridCols = 0;
         myTileHeight = 0;
         myEvents = FXCollections.observableArrayList();
+        myData = data;
         initEditor(okLambda);
     }
 
-    public LevelEditor (Consumer<Level> okLambda, Level level) {
+    public LevelEditor (Consumer<Level> okLambda, Level level, EventsDataWrapper data) {
     	myEditorTitle = EDITOR_TITLE;
     	
         myGrid = level.getGrid();
         myId = level.getId();
         myGridRows = myGrid.getRow();
         myGridCols = myGrid.getCol();
-        myTileHeight = myGrid.getTileSize();
+        myTileHeight = myGrid.getTileHeight();
         myLevel = level;
         myEvents = (ObservableList<Event>) level.getEvents();
+        myData = data;
 
         initEditor(okLambda);
     }
@@ -112,7 +116,9 @@ public class LevelEditor extends VBox {
         Label heightLabel = new Label("Tile Height: ");
         TextField heightField = new TextField("" + myTileHeight);
         tileHeightHBox.getChildren().addAll(heightLabel, heightField);
-
+        
+    	myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
+    	
         Button eventBtn = new Button("Add Global Events...");
         eventBtn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -141,10 +147,7 @@ public class LevelEditor extends VBox {
                 myGridRows = Integer.parseInt(rowField.getText());
                 myGridCols = Integer.parseInt(colField.getText());
                 myTileHeight = Double.parseDouble(heightField.getText());
-
-                if(myGrid==null){
-                	myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
-                }
+                
                 Level level = new Level(myGrid, myEvents, myId, false);
 
                 myOkLambda.accept(level);
@@ -170,8 +173,10 @@ public class LevelEditor extends VBox {
 
         EventEditorController controller = loader.getController();
         controller.loadEvents(myEvents);
+        controller.loadData(myData);
 
         eventEditorStage.showAndWait();
     }
+
 
 }

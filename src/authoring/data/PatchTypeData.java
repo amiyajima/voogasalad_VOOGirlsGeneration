@@ -22,6 +22,12 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 	}
 	
 	@Override
+	public boolean canAdd(Patch element) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
 	public void remove(Patch p) {
 		myPatches.remove(p);
 		setChanged();
@@ -30,7 +36,7 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 	
 	@Override
 	public void replace(Patch origEl, Patch newEl) {
-	    remove(origEl);
+	    myPatches.remove(origEl);
 	    add(newEl);
 		setChanged();
 		notifyObservers(newEl);
@@ -52,7 +58,7 @@ public class PatchTypeData extends Observable implements AuthoringData<Patch> {
 	public boolean containsName(String name) {
 		Set<String> nameSet = new HashSet<String>();
 		for (Patch p : myPatches) {
-			nameSet.add(p.getName());
+			nameSet.add(p.toString());
 		}
 		return nameSet.contains(name);
 	}

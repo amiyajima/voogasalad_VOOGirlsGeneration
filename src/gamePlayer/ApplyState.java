@@ -6,10 +6,11 @@ import javafx.scene.input.MouseEvent;
 import authoring_environment.SuperTile;
 
 /**
- * Class representing the state of the grid when a particular action has been
- * selected and is ready to be applied on the grid
- * 
- * @author Yoon, Rica
+
+ * Class representing the state of the grid when a particular action
+ * has been selected and is ready to be applied on the grid
+ * @author Eric, Yiran, Yoon, Rica
+
  *
  */
 public class ApplyState implements IGridState {
@@ -39,7 +40,7 @@ public class ApplyState implements IGridState {
 			activeTile = myController.getGrid().findClickedTile(event.getX(),
 					event.getY());
 			myController.getGameGridEffect().highlightEffectRange(
-					activeTile.getPixelLocation());
+					activeTile.getCoordinates());
 		}
 	}
 

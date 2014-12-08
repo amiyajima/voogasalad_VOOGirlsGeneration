@@ -1,5 +1,7 @@
 package gamedata.events;
 
+import gamedata.gamecomponents.IHasStats;
+
 /**
  * Simple interface defining behavior of Condition classes.
  * 
@@ -36,10 +38,11 @@ public abstract class Condition {
      * @return
      */
 
-    public abstract boolean evaluate();
+    public abstract boolean evaluate(IHasStats source);
     
     @Override
     public String toString(){
     	return myDescription;
     }
+
 }

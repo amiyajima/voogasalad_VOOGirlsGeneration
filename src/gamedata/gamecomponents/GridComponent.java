@@ -39,6 +39,7 @@ public abstract class GridComponent implements IHasStats{
 		myLoc = point;
 		myImageLocation = imageLocation;
 		setImageView(imageLocation);
+		
 	}
 	
 	/**
@@ -71,9 +72,8 @@ public abstract class GridComponent implements IHasStats{
 	 * 
 	 * @return myName : String name describing the piece or patch.
 	 */
-	public String getName() {
-//		Note from Martin: Do not change method names without using "Refactor".
-//							One method name change can break everything.
+	@Override
+	public String toString() {
 		return myName;
 	}
 	

@@ -2,12 +2,15 @@ package authoring.eventeditor;
 
 import gamedata.events.Condition;
 import gamedata.events.conditions.ConditionEquals;
-import gamedata.gamecomponents.Constant;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Piece;
+import gameengine.player.Player;
 
+import java.util.List;
 import java.util.function.Consumer;
 
+import authoring.data.EventsDataWrapper;
 import authoring_environment.UIspecs;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -33,34 +36,19 @@ public class ConditionEditorPane extends Pane{
 
 	private TextField myNameField = new TextField();
 
-	private ChoiceBox<String> myRefType1 = new ChoiceBox<>();
-	private ChoiceBox<IHasStats> myRefName1 = new ChoiceBox<>();
-	private ChoiceBox<String> myStat1 = new ChoiceBox<>();
-	private TextField myVal1 = new TextField();
-
-	private ChoiceBox<String> myRefType2 = new ChoiceBox<>();
-	private ChoiceBox<IHasStats> myRefName2 = new ChoiceBox<>();
-	private ChoiceBox<String> myStat2 = new ChoiceBox<>();
-	private TextField myVal2 = new TextField();
+	private ChoiceBox<String> myRefType = new ChoiceBox<>();
+	private ChoiceBox<IHasStats> myRefName = new ChoiceBox<>();
+	private ChoiceBox<String> myStat = new ChoiceBox<>();
+	private TextField myVal = new TextField();
 
 	private Consumer<Condition> myDoneLambda;
 	private Condition myCondition;
+	private EventsDataWrapper myData;
 
-	public ConditionEditorPane(Consumer<Condition> doneLambda){
+	public ConditionEditorPane(Consumer<Condition> doneLambda, EventsDataWrapper data){
 		myDoneLambda = doneLambda;
+		myData = data;
 		initialize();
-	}
-
-	public ConditionEditorPane (Consumer<Condition> doneLambda, Condition condition) {
-		myDoneLambda = doneLambda;
-		myCondition = condition;
-		initialize();
-		updateFields(condition);
-	}
-
-	//TODO: Implement this so we can UPDATE Conditions, in addition to creating and deleting them
-	private void updateFields(Condition condition) {
-
 	}
 
 	/**
@@ -73,30 +61,12 @@ public class ConditionEditorPane extends Pane{
 			@Override
 			public void handle (ActionEvent click) {
 
-				String type1 = myRefType1.getSelectionModel().getSelectedItem();
-				IHasStats ref1 = myRefName1.getSelectionModel().getSelectedItem();
-				String stat1 = myStat1.getSelectionModel().getSelectedItem();
-				Double value1 = Double.parseDouble(myVal1.getText());
-
-				String type2 = myRefType2.getSelectionModel().getSelectedItem();
-				IHasStats ref2 = myRefName2.getSelectionModel().getSelectedItem();
-				String stat2 = myStat2.getSelectionModel().getSelectedItem();
-				Double value2 = Double.parseDouble(myVal2.getText());
+				String type = myRefType.getSelectionModel().getSelectedItem();
+				IHasStats ref = myRefName.getSelectionModel().getSelectedItem();
+				String stat = myStat.getSelectionModel().getSelectedItem();
+				Double val = Double.parseDouble(myVal.getText());
 				
-				/**
-				 * Code below is repeated, but cannot be extracted into a method as it 
-				 * modifies both ref1 and stat1
-				 */
-				if("Constant".equals(type1)){
-					ref1 = new Constant(value1);
-					stat1 = "Value";
-				}
-				if("Constant".equals(type2)){
-					ref2 = new Constant(value2);
-					stat2 = "Value";
-				}
-				
-				myCondition = new ConditionEquals(myNameField.getText(), ref1, stat1, ref2, stat2);
+				myCondition = new ConditionEquals(myNameField.getText(), ref, stat, val);
 				myDoneLambda.accept(myCondition);
 			}
 
@@ -106,7 +76,7 @@ public class ConditionEditorPane extends Pane{
 
 	 private void setUpComponents(ChoiceBox<String> typeBox,
 			 ChoiceBox<IHasStats> componentBox, ChoiceBox<String> statBox, TextField valueField) {
-		 typeBox.getItems().addAll("Piece", "Patch", "Player", "Constant");
+		 typeBox.getItems().addAll("Piece", "Patch", "Player");
 		 typeBox.getSelectionModel().selectedItemProperty().addListener(
 				 (observable, oldValue, selectedType) -> setupEditor(oldValue, selectedType, componentBox, statBox, valueField));
 		 componentBox.getSelectionModel().selectedItemProperty().addListener(
@@ -122,39 +92,31 @@ public class ConditionEditorPane extends Pane{
 	  * @param value
 	  */
 	 private void setupEditor(String oldType, String type, ChoiceBox<IHasStats> refName, ChoiceBox<String> statName, TextField value) {
-		 value.setVisible(false);
-		 if("Constant".equals(oldType)){
-			 refName.setVisible(true);
-			 statName.setVisible(true);
-		 }
+		 value.setPromptText("Enter constant value");
 
-		 //TODO: IMPLEMENT THIS SHIT. instead of the switch statement can we get all of the piece's instance variables or something?
-		 //or like each thing can have a list of stats and we display each of the things contained in stats regardless of what it is.
-		 //and if its a constant, its stat is just its value. 
 		 /**
-		  * Selects between the four types of input into this Condition
+		  * Selects between the three types of input into this Condition
 		  */
 		 switch(type){
 			 case "Piece": 
 			 {
+				 List<Piece> pieceTypes = myData.getPieceTypes();
+				 refName.getItems().addAll(pieceTypes);
 				 break;
 			 }
 			 case "Patch":
 			 {
+				 List<Patch> patchTypes = myData.getPatchTypes();
+				 refName.getItems().addAll(patchTypes);
 				 break;  
 			 }
 			 case "Player":
 			 {
+				 List<Player> players = myData.getPlayers();
+				 refName.getItems().addAll();
 				 break;
 			 }
-			 case "Constant": 
-			 {
-				 refName.setVisible(false);
-				 statName.setVisible(false);
-				 value.setVisible(true);
-				 value.setPromptText("Enter constant value");
-				 break;
-			 }
+
 		 }
 	 }
 	 
@@ -185,10 +147,6 @@ public class ConditionEditorPane extends Pane{
 			leftHandSide.setPadding(UIspecs.allPadding);
 			leftHandSide.setSpacing(5);
 
-			HBox rightHandSide = new HBox();
-			rightHandSide.setPadding(UIspecs.allPadding);
-			rightHandSide.setSpacing(5);
-
 			Label nameLabel = new Label(NAME_LABEL);
 			nameLabel.setPadding(UIspecs.topRightPadding);
 			myNameField = new TextField();
@@ -197,15 +155,13 @@ public class ConditionEditorPane extends Pane{
 
 			Label componentsLabel = new Label(COMPONENTS_LABEL);
 
-			setUpComponents(myRefType1, myRefName1, myStat1, myVal1);
-			setUpComponents(myRefType2, myRefName2, myStat2, myVal2);
+			setUpComponents(myRefType, myRefName, myStat, myVal);
 
 			Label equalsLabel = new Label(EQUALS_LABEL);
 
-			leftHandSide.getChildren().addAll(myRefType1, myRefName1, myStat1, myVal1);
-			rightHandSide.getChildren().addAll(myRefType2, myRefName2, myStat2, myVal2);
+			leftHandSide.getChildren().addAll(myRefType, myRefName, myStat, equalsLabel, myVal);
 
-			components.getChildren().addAll(componentsLabel, leftHandSide, equalsLabel, rightHandSide);
+			components.getChildren().addAll(componentsLabel, leftHandSide);
 
 			Button doneButton = new Button(DONE_LABEL);
 			initDoneButton(doneButton);

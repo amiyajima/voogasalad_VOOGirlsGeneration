@@ -52,6 +52,12 @@ public class ActionData implements AuthoringData<Action> {
 	}
 
 	@Override
+	public boolean canAdd(Action element) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
 	public void remove(Action a) {
 		myActions.remove(a);
         myActionsMap.remove(a.toString());

@@ -1,7 +1,6 @@
 package authoring.eventeditor;
 
 import gamedata.events.Condition;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
-
+import authoring.data.EventsDataWrapper;
 import utilities.ClassGrabber;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,6 +28,7 @@ public class NewConditionController implements Initializable{
 	
 	private Condition myCondition;
 	private Consumer<Condition> myDoneLambda;
+	private EventsDataWrapper myData;
 	
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -75,11 +75,11 @@ public class NewConditionController implements Initializable{
 		}
 		
 		if(myCondition==null){
-			editorScrollPane.setContent(new ConditionEditorPane(myDoneLambda));
+			editorScrollPane.setContent(new ConditionEditorPane(myDoneLambda, myData));
 		}
-		else{
-			editorScrollPane.setContent(new ConditionEditorPane(myDoneLambda, myCondition));
-		}
+//		else{
+//			editorScrollPane.setContent(new ConditionEditorPane(myDoneLambda, myCondition, myData));
+//		}
 	}
 	
 	/**
@@ -109,5 +109,9 @@ public class NewConditionController implements Initializable{
 	 */
 	public void loadEntryCondition(Condition entry){
 		myCondition = entry;
+	}
+
+	public void loadData(EventsDataWrapper data) {
+		myData = data;
 	}
 }

@@ -1,10 +1,16 @@
 package authoring.eventeditor;
 
 import gamedata.events.GlobalAction;
+
+import gamedata.events.globalaction.CreatePiece;
 import gamedata.events.globalaction.LevelChangeGlobalAction;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Piece;
+import java.awt.geom.Point2D;
+import java.util.List;
 import java.util.function.Consumer;
+import authoring.data.EventsDataWrapper;
 import authoring_environment.UIspecs;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,7 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 
-public class ActionEditorPane extends Pane {
+public class GlobalActionEditorPane extends Pane {
 
     private static final int WIDTH_OFFSET = 30;
     private static final String NAME_LABEL = "Name";
@@ -37,15 +43,18 @@ public class ActionEditorPane extends Pane {
 
     private Consumer<GlobalAction> myDoneLambda;
     private GlobalAction myGlobalAction;
+    private EventsDataWrapper myData;
 
-    public ActionEditorPane (Consumer<GlobalAction> doneLambda) {
+    public GlobalActionEditorPane (Consumer<GlobalAction> doneLambda, EventsDataWrapper data) {
         myDoneLambda = doneLambda;
+        myData=data;
         initialize();
     }
 
-    public ActionEditorPane (Consumer<GlobalAction> doneLambda, GlobalAction globalAction) {
+    public GlobalActionEditorPane (Consumer<GlobalAction> doneLambda, GlobalAction globalAction, EventsDataWrapper data) {
         myDoneLambda = doneLambda;
         myGlobalAction = globalAction;
+        myData = data;
         initialize();
         updateFields(globalAction);
     }
@@ -121,11 +130,10 @@ public class ActionEditorPane extends Pane {
                                 String type2 = refType1.getSelectionModel().getSelectedItem();
 
                                 double val1 = getTargetValue(type1, ref1, stat1);
-                                double val2 = getTargetValue(type2, ref2, stat2);
                                 
                                 //specify which instance variable we're looking for, then the value we're changing it to.
                                 //the value is determined by the user
-                                myGlobalAction = new LevelChangeGlobalAction(, null);
+                                myGlobalAction = new CreatePiece("Create ", null, null, null);
                                 myDoneLambda.accept(myGlobalAction);
                         }
 
@@ -186,6 +194,8 @@ public class ActionEditorPane extends Pane {
          */
         switch (type) {
             case "Piece": {
+                List<Piece> pieceTypes = myData.getPieceTypes();
+                refName.getItems().addAll(pieceTypes);
                 break;
             }
             case "Patch": {
