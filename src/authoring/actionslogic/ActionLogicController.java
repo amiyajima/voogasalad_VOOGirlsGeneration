@@ -36,9 +36,9 @@ public class ActionLogicController implements Initializable {
     private List<CheckBox> myCBList = new ArrayList<CheckBox>();
 
     @Override
-    // TODO: [IMPORTANT] This constructor will need a List<String> or Set<String> that contains
-    // names of Pieces as its argument
-    // also, need a list of existing actions(or names of actions)
+    // TODO: [IMPORTANT]
+    // This controller needs following:list of piece types, actions and a map, which contains a
+    // result of saveLogic.
     public void initialize (URL location, ResourceBundle resources) {
 
         // for testing
@@ -55,6 +55,16 @@ public class ActionLogicController implements Initializable {
                 .selectedItemProperty()
                 .addListener(
                              (observable, oldValue, selectedActor) -> updatePossibleReceivers(selectedActor));
+    }
+
+    // will need to be used in initialize method, so that it removes all the pieces, according to
+    // given list of piece types
+    private void updateLogicMap () {
+        for (String actor : myLogicMap.keySet()) {
+            if (!myPieceTypes.contains(actor)) {
+                myLogicMap.remove(actor);
+            }
+        }
     }
 
     private void updatePossibleReceivers (String selectedActor) {
