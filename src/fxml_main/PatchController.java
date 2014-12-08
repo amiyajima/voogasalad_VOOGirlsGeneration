@@ -51,12 +51,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 	// the patch (like rotation?) but who actually has time for that...
 	@Override
 	protected void initGlobalEditBtn (Button editBtn) {
-		editBtn.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle (ActionEvent event) {
-				System.out.println("I'm not needed. :(");
-			}
-		});
+		editBtn.setVisible(false);
 	}
 
 	/**
