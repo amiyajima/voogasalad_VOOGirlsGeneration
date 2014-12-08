@@ -78,7 +78,7 @@ public class StatsTotalEditor extends PopupWindow {
     }
 
     private void initStatsCreatorBoxes (VBox statsVBox) {
-        Set<String> statNames = new HashSet(myStats.getStatNames());
+        Set<String> statNames = new HashSet<String>(myStats.getStatNames());
         for (String name : statNames) {
             double val = myStats.getValue(name);
             StatsCreatorBox scb = new StatsCreatorBox(name, val);

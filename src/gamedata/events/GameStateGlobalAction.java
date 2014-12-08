@@ -10,5 +10,9 @@ public abstract class GameStateGlobalAction extends GlobalAction{
 		super(s);
 		myState = state;
 	}
+	
+	public void reinject(IChangeGameState target){
+		myState = target;
+	}
 
 }

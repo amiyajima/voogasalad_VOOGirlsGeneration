@@ -62,7 +62,6 @@ public class ViewController {
         public static final String POPUP_FXML = "popup.fxml";
         public static final String SETTINGS_FXML = "settings.fxml";
 
-        private String currentLanguage;
         private Stage myStage;
         private BorderPane myGameSpace;
         private BorderPane myPopup;
@@ -75,6 +74,7 @@ public class ViewController {
         private Scene myScene;
         private Game myModel;
         private GUIGrid myGrid;
+        private Scene mySplashScreen;
 
         private Player myCurrentPlayer;
 
@@ -255,12 +255,14 @@ public class ViewController {
          */
         @FXML
         private void testGame() {
+            mySplashScreen = new SplashScreen().getScene();
+            myStage.setScene(mySplashScreen);
                 JSONBobTester JSBTester = new JSONBobTester();
                 testPlayGame(JSBTester.createNewGame());
         }
 
         /**
-         * Checks the currently selected language
+         * Updates the current language of the game.
          */
         @FXML
         public void updateLanguage() {
@@ -499,6 +501,11 @@ public class ViewController {
 
                 gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
 
+                while (myCurrentPlayer.getType().equals("AI")) {
+                    myCurrentPlayer.play();
+                    this.checkEndActions();
+                }
+                
                 if (keyControlOn) {
                         myKeyboardMovement = null;
                         myKeyboardAction = new KeyboardAction();
@@ -687,7 +694,8 @@ public class ViewController {
          */
         public void setGridState(IGridState state) {
                 tempMoveCount++;
-                if (myModel.getCurrentLevel().getGameWon() || tempMoveCount > 0) {
+
+                if (myModel.getCurrentLevel().getGameWon() || tempMoveCount == 10) {
                         // TODO assuming that the most recent currentPlayer won
                         String highScorer = "Bob";
                         Random randy = new Random();
@@ -807,10 +815,6 @@ public class ViewController {
         protected void endAction() {
                 System.out.println("Ending Action");
                 this.checkEndActions();
-                while (myCurrentPlayer.getType().equals("AI")) {
-                        myCurrentPlayer.play();
-                        this.checkEndActions();
-                }
         }
 
         public void checkEndActions() {
@@ -865,11 +869,11 @@ public class ViewController {
          * @param testGame
          */
         public void testPlayGame(Game testGame) {
-            myScene = new Scene(myGameSpace);
-            myStage.setScene(myScene);
             myModel = testGame;
             System.out.println("model found in viewcontroller: " + myModel);
             initializeGrid();
+            myScene = new Scene(myGameSpace);
+            myStage.setScene(myScene);
         }
 
 

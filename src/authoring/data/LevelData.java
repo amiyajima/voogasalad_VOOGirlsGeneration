@@ -57,6 +57,6 @@ public class LevelData implements AuthoringData<Level> {
 	 * @return Game
 	 */
 	public Game createGame(int numPlayers) {
-		return new Game(numPlayers, myLevels);
+		return new Game(numPlayers, myLevels, myLevels.get(0));
 	}
 }

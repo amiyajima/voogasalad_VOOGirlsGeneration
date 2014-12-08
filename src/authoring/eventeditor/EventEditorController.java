@@ -234,9 +234,9 @@ public class EventEditorController implements Initializable {
         newActionStage.setScene(scene);
         
         NewActionController controller = loader.getController();
-
+        
         controller.loadLambda(okActionLambda);
-        controller.loadState(myState);
+        controller.loadState(myState);        
         controller.loadData(myData);
         
         newActionStage.showAndWait();
