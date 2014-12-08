@@ -16,6 +16,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import authoring.data.ActionData;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
@@ -28,18 +29,14 @@ import authoring.data.PieceTypeData;
  */
 public class ActionController extends GridComponentAbstCtrl<Action> {
     private ScrollPane myGridSPane;
-    private LevelData myLevelData;
-    private PieceTypeData myPieceTypes;
-    private PatchTypeData myPatchTypes;
+    private ActionData myActionData;
 
-    protected ActionController (VBox vbox, ScrollPane propertiesSPane,
-                                ScrollPane gridSPane, GUIGridReference gridRef, LevelData levels,
-                                PieceTypeData pieceTypes, PatchTypeData patchTypes) {
+    protected ActionController (VBox vbox,
+                             ScrollPane propertiesSPane,
+                             GUIGridReference gridRef,
+                             ActionData actions) {
         super(vbox, propertiesSPane, gridRef);
-        myGridSPane = gridSPane;
-        myLevelData = levels;
-        myPieceTypes = pieceTypes;
-        myPatchTypes = patchTypes;
+        myActionData = actions;
     }
 
     @Override
@@ -55,21 +52,10 @@ public class ActionController extends GridComponentAbstCtrl<Action> {
     private void globalNewBtnOnClickAction () {
         // TODO: Need to not hard-code square, have it passed through the constructor
         // as maybe a gridshapeproperty (new class?)
-        Consumer<Level> okLambda = (Level level) -> {
-
-            addEntry(level);
-            myLevelData.add(level);
-            myPieceTypes.addObserver(level.getGrid());
-            myPatchTypes.addObserver(level.getGrid());
-            setAndDisplayGrid(level);
+        Consumer<Action> okLambda = (Action action) -> {
         };
 
-        List<Piece> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
-        List<Patch> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
-        List<Player> playersRO = null;
-
-        EventsDataContainer wrapper = new EventsDataContainer(piecesRO, patchesRO, playersRO);
-        super.myPropertiesSPane.setContent(new LevelEditor(okLambda, wrapper));
+        super.myPropertiesSPane.setContent(new ActionEditor(okLambda));
     }
 
     private void setAndDisplayGrid (Level level) {
