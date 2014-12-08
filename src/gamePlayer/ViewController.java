@@ -71,6 +71,9 @@ public class ViewController {
 	// private SampleListener myLeapListener;
 
 	private Boolean keyControlOn;
+	private Boolean clickSoundOn;
+	private Boolean backgroundMusicOn;
+	
 	private KeyboardAction myKeyboardAction;
 	private KeyboardMovement myKeyboardMovement;
 
@@ -153,7 +156,7 @@ public class ViewController {
 	    myStage.setScene(new Scene(myInitialScene));
 	    
 	    myAudio = new Audio();
-//	    myAudio.playDefault();     //muting music for now...
+	    myAudio.playDefault();     //muting music for now...
 	    
 	    System.out.println("Opened initial menu");
 	}
@@ -329,6 +332,8 @@ public class ViewController {
 		setOnClick();
 		setGridState(new SelectState(this));		
 		keyControlOn = false;
+		backgroundMusicOn = true;
+		clickSoundOn = true;
 		myGameGridEffect = new GameGridEffect(this);
 	}
 	
@@ -436,7 +441,9 @@ public class ViewController {
 	 */
 	protected void bindAction(Action action) {
 	        System.out.println("BIND ACTION");
-	        myAudio.playSelection();
+	        if (clickSoundOn){
+	            myAudio.playSelection();
+	        }
 	        
 		if (activePiece == null)
 			return;
@@ -469,7 +476,10 @@ public class ViewController {
 	 */
 	public void performAction(Point2D loc) {
 		System.out.println("PERFORM ACTION");
-	        myAudio.playSelection();
+	        
+		if (clickSoundOn){
+		    myAudio.playSelection();
+		}
 	        
 	        gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
 		
@@ -507,6 +517,28 @@ public class ViewController {
 		return currentClick;
 	}
 
+	public void toggleClickSound() {
+	    if (clickSoundOn){
+	        clickSoundOn = false;
+	    }
+	    else{
+	        clickSoundOn = true;
+	    }
+	}
+	
+	public void toggleBackgroundMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	    if (backgroundMusicOn){
+	        myAudio.muteDefault();
+	        backgroundMusicOn = false;
+	        System.out.println("BGMusic Off");
+	    }
+	    else{
+	        myAudio.playDefault();
+	        backgroundMusicOn = true;
+	        System.out.println("BGMusic On");
+	    }
+	}
+	
 	/**
 	 * Toggles whether the Keyboard Controls are active or inactive
 	 */
@@ -644,8 +676,8 @@ public class ViewController {
 		gridState = state;
 	}
 
-	private void setPlayerTurnDisplay() {
-		playerTurn.setText("Turn: " + myCurrentPlayer.getID());
+	public void setPlayerTurnDisplay() {
+		playerTurn.setText("Player ID: " + myCurrentPlayer.getID());
 	}
 
 	/**
@@ -660,4 +692,9 @@ public class ViewController {
 	public VBox getcontrolPane() {
 		return controlPane;
 	}
+	
+	public void setCurrentPlayer(Player p){
+		myCurrentPlayer=p;
+	}
 }
+

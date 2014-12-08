@@ -154,6 +154,20 @@ public class Game implements IChangeGameState{
 	public void setPlayer(Player p, int pos) {
 		myPlayers.set(pos, p);
 	}
+	
+	public void nextPlayer() {
+		System.out.println("Entering next player");
+		int next = myPlayers.indexOf(myCurrentPlayer)+1;
+		if(next == myPlayers.size()){
+			System.out.println("Player Reset");
+			this.resetPlayer();
+		}
+		else{
+			System.out.println("Next Player");
+			myCurrentPlayer = myPlayers.get(next);
+		}
+	}
+
 
 	/**
 	 * Used by Global Actions. Set the current player to the player with a given
