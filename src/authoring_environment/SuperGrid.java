@@ -80,7 +80,7 @@ public class SuperGrid {
 	 * Returns the int number of rows in the grid
 	 * (Note: Row = Y dimension)
 	 */
-	public int getRow() {
+	public int getNumRows() {
 		return myNumRows;
 	}
 
@@ -88,7 +88,7 @@ public class SuperGrid {
 	 * Returns the int number of columns in the grid
 	 * (Note: Col = X dimension)
 	 */
-	public int getCol() {
+	public int getNumCols() {
 		return myNumCols;
 	}
 	

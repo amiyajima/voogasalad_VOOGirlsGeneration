@@ -49,7 +49,7 @@ public class AuthoringController implements Initializable {
 	
 	@FXML
     private MenuItem actonsLogicChart;
-
+	
     @FXML
     private MenuItem gameProperties;
 
@@ -63,59 +63,54 @@ public class AuthoringController implements Initializable {
     private GamePropertiesData myGamePropertiesData;
     private ActionController myActionController;
 
-    @Override
-    // This method is called by the FXMLLoader when initialization is complete
-    public void initialize (URL fxmlFileLocation, ResourceBundle resources) {
 
-        ActionData actions = new ActionData();
-        LevelData myLevelData = new LevelData();
-        PieceTypeData myPieceTypes = new PieceTypeData();
-        PatchTypeData myPatchTypes = new PatchTypeData();
-        myGridReference = new GUIGridReference();
+	
+	@Override // This method is called by the FXMLLoader when initialization is complete
+	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
+		
+		ActionData actions = new ActionData();
+		LevelData myLevelData = new LevelData();
+		PieceTypeData myPieceTypes = new PieceTypeData();
+		PatchTypeData myPatchTypes = new PatchTypeData();
+		myGridReference = new GUIGridReference();
+		myGamePropertiesData=new GamePropertiesData();
 
-        myPieceController = new PieceController(myPiecesVBox, myPropertiesSPane, myGridReference,
-                                                myPieceTypes, actions);
-        myPatchController = new PatchController(myPatchesVBox, myPropertiesSPane, myGridReference,
-                                                myPatchTypes);
-        myLevelController =
-                new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
-                                    myGridReference, myLevelData, myPieceTypes, myPatchTypes);
+		myPieceController = new PieceController(myPiecesVBox, myPropertiesSPane, myGridReference, 
+				myPieceTypes, actions);
+	    myPatchController = new PatchController(myPatchesVBox, myPropertiesSPane, myGridReference,
+	    		myPatchTypes);
+	    myLevelController = new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
+	    		myGridReference, myLevelData, myPieceTypes, myPatchTypes);
+	    
+	    myActionController = new ActionController(myActionsVBox, myPropertiesSPane, myGridReference, actions);
+	}
+	
+	@FXML
+	//TODO: [IMPORTANT] This method will need a List<String> or Set<String> that contains names of Pieces
+	//Also, need a list of existing actions
+        private void showActionslogicChartWindow() throws IOException{
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/authoring/actionslogic/ActionLogic.fxml"));
+                Parent root = loader.load();
 
-        myActionController =
-                new ActionController(myActionsVBox, myPropertiesSPane, myGridReference, actions);
-    }
+                Stage eventEditorStage  = new Stage();
+                eventEditorStage.setTitle("Actions Logic Chart");
+                eventEditorStage.initModality(Modality.WINDOW_MODAL);
+                Scene scene = new Scene(root);
+                eventEditorStage.setScene(scene);
 
-    @FXML
-    // TODO: [IMPORTANT] This method will need a List<String> or Set<String> that contains names of
-    // Pieces
-    // Also, need a list of existing actions
-    private void showActionzlogicChartWindow () throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/authoring/actionslogic/ActionLogic.fxml"));
-        Parent root = loader.load();
-
-        Stage eventEditorStage = new Stage();
-        eventEditorStage.setTitle("Actions Logic Chart");
-        eventEditorStage.initModality(Modality.WINDOW_MODAL);
-        Scene scene = new Scene(root);
-        eventEditorStage.setScene(scene);
-
-        ActionLogicController controller = loader.getController();
-
-        eventEditorStage.showAndWait();
-    }
-
-    @FXML
-    private void showGamePropertiesWindow () {
-        myGamePropertiesData = new GamePropertiesData();
-        GamePropertiesEditor gamePptEditor = new GamePropertiesEditor(myGamePropertiesData);
-        gamePptEditor.setTitle("Game Properties Editor");
-        gamePptEditor.setX(450);
-        gamePptEditor.setY(200);
-        gamePptEditor.show();
-
-    }
-
+                ActionLogicController controller = loader.getController();
+                
+                eventEditorStage.showAndWait();
+        }
+	
+	@FXML
+	private void showGamePropertiesWindow(){
+			GamePropertiesEditor gamePptEditor=new GamePropertiesEditor(myGamePropertiesData);
+			
+		 		
+	}
+	
     @FXML
     private void showPlayerEditWindow () {
         StatsTotalEditor statsEditor = new StatsTotalEditor();
@@ -125,6 +120,6 @@ public class AuthoringController implements Initializable {
         statsEditor.show();
 
     }
-
+    
 
 }

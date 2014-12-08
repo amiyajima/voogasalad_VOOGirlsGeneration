@@ -16,10 +16,6 @@ import gamedata.gamecomponents.IHasStats;
 public abstract class Condition {
 
 	protected String myDescription;
-	
-	//Constant strings used to construct the dynamic title
-	protected final static String IF = "IF ";
-	protected final static String EQUALS = " = ";
 
 	/**
 	 * Protected constructor used to set the description

@@ -23,7 +23,6 @@ import authoring.data.PieceTypeData;
 
 
 /**
- * 
  * @author annamiyajima
  *
  */

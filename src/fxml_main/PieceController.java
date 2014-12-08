@@ -47,7 +47,23 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 
     @Override
     protected void initGlobalEditBtn (Button editBtn) {
-    	editBtn.setVisible(false);
+    	editBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+            	// Make a MouseEvent for clicking the grid
+                EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle (MouseEvent e) {
+                        GUIGrid grid = myGridReference.getGrid();
+                        Point2D coor = grid.findClickedCoordinate(e.getX(), e.getY());
+                        Piece piece = grid.getPiece(coor);
+                        myPropertiesSPane.setContent(new PieceEditor(piece));
+                    }
+                };
+                myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
+                myGridReference.getGrid().paneSetOnMouseDragged(clickHandler);
+            }
+    	});
     }
 
     @Override
