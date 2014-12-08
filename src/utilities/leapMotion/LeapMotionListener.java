@@ -15,14 +15,15 @@ public class LeapMotionListener extends Listener{
     private ResourceBundle myGestures;
     private Robot myRobot;
     private ILeapMouse myLeapMouse;
-    public static final String GESTURES_FILEPATH = "";
+    public static final String PACKAGE_FILEPATH = "";
+    public static final String GESTURE_BUNDLE = "Untitled.properties";
     public static final String MOUSE_MOVE_FLAG = "mouse";
     
     
     public void onConnect (Controller controller){
     
         initializeRobot();
-        myGestures = ResourceBundle.getBundle(GESTURES_FILEPATH);
+        myGestures = ResourceBundle.getBundle(PACKAGE_FILEPATH+GESTURE_BUNDLE);
         
         enableGestures(controller);
     }
@@ -31,7 +32,7 @@ public class LeapMotionListener extends Listener{
         for(String gestureName : myGestures.keySet()){
             if(gestureName.equals(MOUSE_MOVE_FLAG)){
                try {
-                Class c = Class.forName("utilities.leapMotion."+myGestures.getString(gestureName));
+                Class c = Class.forName(PACKAGE_FILEPATH+myGestures.getString(gestureName));
                 myLeapMouse = (ILeapMouse) c.getDeclaredConstructor().newInstance();
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
                 
