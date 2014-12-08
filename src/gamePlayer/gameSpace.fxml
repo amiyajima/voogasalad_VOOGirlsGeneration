@@ -65,7 +65,6 @@
 		 </MenuButton>
          <Button fx:id="showScoreButton" mnemonicParsing="false" onAction="#showScore" style="-fx-padding: 10;" styleClass="button" text="Score Board">
 		</Button>
-		<Button mnemonicParsing="false" onAction="#toggleKeyboardControl" style="-fx-padding: 10;" text="Keyboard Control ON/OFF" />
 		<Label fx:id="playerTurn" style="-fx-background-color: transparent;;" text="Turn: ">
 		</Label>
 	  </children>
