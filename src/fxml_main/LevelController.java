@@ -120,7 +120,7 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 					
 					myPieceTypes.addObserver(level.getGrid());
 					myPatchTypes.addObserver(level.getGrid());
-					myLevelData.replace(entry, 	level);
+					myLevelData.replace(entry, level);
 					
 				    HBox entryHolderBox = myEntryMap.get(entry);
 					entryHolderBox.getChildren().clear();

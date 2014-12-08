@@ -1,6 +1,7 @@
 package gamePlayer;
 
 import java.io.IOException;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.media.AudioClip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -14,9 +15,10 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  *
  */
 public class Audio {
+    
     private static final String DEFAULT_MUSIC = "/resources/music/Cut_Gee_VooGirls.mp3";
-    private AudioClip myClip;
-
+    private static final String SELECTION_MUSIC = "/resources/music/select.mp3";
+    
     // public Audio(String audioFileAddress) throws UnsupportedAudioFileException,
     // IOException, LineUnavailableException {
     // File audioFile = new File(audioFileAddress);
@@ -27,8 +29,16 @@ public class Audio {
     // }
 
     public void playDefault() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        myClip = new AudioClip(this.getClass().getResource(DEFAULT_MUSIC).toString());
-        myClip.play();        
+        playAudio(DEFAULT_MUSIC);
+    }
+    
+    public void playSelection(){
+        playAudio(SELECTION_MUSIC);
+    }
+    
+    public void playAudio(String s){
+        AudioClip defaultclip = new AudioClip(this.getClass().getResource(s).toString());
+        defaultclip.play();
     }
     
 //    public void play (int count) {

@@ -1,4 +1,4 @@
-package utilities.leapMotion.customControl;
+package utilities.leapMotion.mouseControl;
 
 import java.awt.Dimension;
 import java.awt.Robot;
@@ -10,16 +10,12 @@ import com.leapmotion.leap.Vector;
 
 import java.awt.Toolkit;
 
-import utilities.leapMotion.ICustomControl;
+import utilities.leapMotion.ILeapMouse;
 
-public class FingerTipMouse implements ICustomControl{
-    
-    public static final String FINGER_TIP_MOUSE = "Finger Tip Tracking";
-
-   
+public class FingerTipMouse implements ILeapMouse{
 
     @Override
-    public void control (Frame frame, Robot robot) {
+    public void moveMouse (Frame frame, Robot robot) {
         InteractionBox box = frame.interactionBox();
         for(Finger finger: frame.fingers()){
             if(finger.type() ==Finger.Type.TYPE_INDEX){

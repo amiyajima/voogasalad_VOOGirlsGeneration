@@ -24,7 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 
-public class ActionEditorPane extends Pane {
+public class GlobalActionEditorPane extends Pane {
 
     private static final int WIDTH_OFFSET = 30;
     private static final String NAME_LABEL = "Name";
@@ -45,13 +45,13 @@ public class ActionEditorPane extends Pane {
     private GlobalAction myGlobalAction;
     private EventsDataWrapper myData;
 
-    public ActionEditorPane (Consumer<GlobalAction> doneLambda, EventsDataWrapper data) {
+    public GlobalActionEditorPane (Consumer<GlobalAction> doneLambda, EventsDataWrapper data) {
         myDoneLambda = doneLambda;
         myData=data;
         initialize();
     }
 
-    public ActionEditorPane (Consumer<GlobalAction> doneLambda, GlobalAction globalAction, EventsDataWrapper data) {
+    public GlobalActionEditorPane (Consumer<GlobalAction> doneLambda, GlobalAction globalAction, EventsDataWrapper data) {
         myDoneLambda = doneLambda;
         myGlobalAction = globalAction;
         myData = data;
