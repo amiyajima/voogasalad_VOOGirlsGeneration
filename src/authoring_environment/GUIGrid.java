@@ -5,8 +5,6 @@ import gamedata.gamecomponents.Piece;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -79,15 +77,15 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 * @param rows - number of rows (NOTE: rows = Y direction)
 	 * @param tileHeight - height of tiles in pixels
 	 * @param shape - shape of the grid given as string identifier in properties
-	 * @param pieceData - saved pieceData
-	 * @param patchData - saved patchData
+	 * @param copyGrid - Grid whose data needs to be copied in
 	 */
 	public GUIGrid (int cols, int rows, double tileHeight, String shape,
 			GUIGrid copyGrid) {
 		super(cols, rows, tileHeight, shape);
 		myPieceData = copyGrid.myPieceData;
 		myPatchData = copyGrid.myPatchData;
-		//TODO: repopulate grid and remove runoff pieces/patches
+		removeRunOffData(cols, rows);
+		repopulate();
 	}
 
 	/**
@@ -293,23 +291,36 @@ public class GUIGrid extends SuperGrid implements Observer{
 		}
 	}
 	
-	public void repopulateComponent() {
-		
+	//CHANGE THESE
+	public void repopulate() {
+		for (Patch p : myPatchData.getData()) {
+			this.addPatchToTile(p, p.getLoc());
+		}
+		for (Piece p : myPieceData.getData()) {
+			this.addPieceToTile(p, p.getLoc());
+		}
 	}
 	
 	public void removeRunOffData(int numCols, int numRows) {
-		for (Patch p : myPatchData.getData()) {
-			if (p.getLoc().getX() > numCols 
-					|| p.getLoc().getY() > numRows)
-			myPatchData.remove(p);
+		List<Piece> piecesToRemove = new ArrayList<Piece>();
+		for (Piece piece : myPieceData.getData()) {
+			if (piece.getLoc().getX() > numCols - 1 
+					|| piece.getLoc().getY() > numRows - 1) {
+				piecesToRemove.add(piece);
+			}
 		}
-		for (Patch p : myPatchData.getData()) {
-			if (p.getLoc().getX() > numCols 
-					|| p.getLoc().getY() > numRows)
-			myPatchData.remove(p);
+		
+		myPieceData.getData().removeAll(piecesToRemove);
+		
+		List<Patch> patchesToRemove = new ArrayList<Patch>();
+		for (Patch patch : myPatchData.getData()) {
+			if ((patch.getLoc().getX() > numCols - 1 )
+					|| (patch.getLoc().getY() > numRows - 1)) {
+				patchesToRemove.add(patch);
+			}
 		}
+		myPatchData.getData().removeAll(patchesToRemove);
 	}
-	
 
 	@Override
 	public void update (Observable o, Object arg) {
@@ -351,7 +362,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		myPane.setOnMouseClicked(handler);
 	}
 
-	public void paneSetOnMouseDragged(EventHandler<MouseEvent> handler) {
+	public void paneSetOnMouseDragged (EventHandler<MouseEvent> handler) {
 		myPane.setOnMouseDragged(handler);
 	}
 
