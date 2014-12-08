@@ -23,7 +23,6 @@ import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
 
 
-
 public class AuthoringController implements Initializable {
 
 	
@@ -51,15 +50,19 @@ public class AuthoringController implements Initializable {
 	@FXML
     private MenuItem actonsLogicChart;
 	
-	@FXML
-	private MenuItem playerNumber;
-	
-	private GUIGridReference myGridReference;
-	private PieceController myPieceController;
-	private PatchController myPatchController;
-	private LevelController myLevelController;
-	private GamePropertiesData myGamePropertiesData;
-	private ActionController myActionController;
+    @FXML
+    private MenuItem gameProperties;
+
+    @FXML
+    private MenuItem playerEditor;
+
+    private GUIGridReference myGridReference;
+    private PieceController myPieceController;
+    private PatchController myPatchController;
+    private LevelController myLevelController;
+    private GamePropertiesData myGamePropertiesData;
+    private ActionController myActionController;
+
 
 	
 	@Override // This method is called by the FXMLLoader when initialization is complete
@@ -108,5 +111,15 @@ public class AuthoringController implements Initializable {
 		 		
 	}
 	
-	
+    @FXML
+    private void showPlayerEditWindow () {
+        StatsTotalEditor statsEditor = new StatsTotalEditor();
+        statsEditor.setTitle("Player Editor");
+        statsEditor.setX(450);
+        statsEditor.setY(200);
+        statsEditor.show();
+
+    }
+    
+
 }

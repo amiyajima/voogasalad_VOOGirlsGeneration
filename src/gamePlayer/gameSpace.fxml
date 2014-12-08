@@ -15,7 +15,7 @@
          <items>
             <TabPane stylesheets="@../resources/stylesheets/stylesheet.css" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Controls">
+                <Tab fx:id="controlTab" text="Controls">
                   <content>
                     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="500.0" prefHeight="472.0" prefWidth="500.0">
                            <children>
@@ -28,7 +28,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Stats">
+                <Tab fx:id="statsTab" text="Stats">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -37,7 +37,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                  <Tab text="Inventory">
+                  <Tab fx:id="inventoryTab" text="Inventory">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                     </content>

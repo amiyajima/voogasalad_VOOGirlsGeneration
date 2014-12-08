@@ -10,6 +10,7 @@ import gameengine.player.Player;
 import java.util.List;
 import java.util.function.Consumer;
 
+import utilities.reflection.Reflection;
 import authoring.data.EventsDataWrapper;
 import authoring_environment.UIspecs;
 import javafx.event.ActionEvent;
@@ -44,16 +45,20 @@ public class ConditionEditorPane extends Pane{
 	private Consumer<Condition> myDoneLambda;
 	private Condition myCondition;
 	private EventsDataWrapper myData;
+	private Class<?> myClass;
 
-	public ConditionEditorPane(Consumer<Condition> doneLambda, EventsDataWrapper data){
+	public ConditionEditorPane(Consumer<Condition> doneLambda, EventsDataWrapper data, Class<?> c){
 		myDoneLambda = doneLambda;
 		myData = data;
+		myClass = c;
 		initialize();
 	}
 
 	/**
 	 * References the specific values specified by the ChoiceBox and TextField. Then 
 	 * constructs a Condition object from those values.
+	 * 
+	 * Constructs the Condition using REFLECTION
 	 * @param doneButton
 	 */
 	 private void initDoneButton(Button doneButton) {
@@ -61,15 +66,16 @@ public class ConditionEditorPane extends Pane{
 			@Override
 			public void handle (ActionEvent click) {
 
-				String type = myRefType.getSelectionModel().getSelectedItem();
 				IHasStats ref = myRefName.getSelectionModel().getSelectedItem();
 				String stat = myStat.getSelectionModel().getSelectedItem();
-				Double val = Double.parseDouble(myVal.getText());
+				String val = myVal.getText();
 				
-				myCondition = new ConditionEquals(myNameField.getText(), ref, stat, val);
+				String classPath = myClass.toString();
+				classPath = classPath.substring(6);
+				myCondition = (Condition) Reflection.createInstance(classPath, myNameField.getText(), ref, stat, val);
+				
 				myDoneLambda.accept(myCondition);
 			}
-
 
 		});
 	 }
@@ -122,6 +128,7 @@ public class ConditionEditorPane extends Pane{
 	 
 	 private void setupStatsBox(IHasStats source, ChoiceBox<String> box){
 		 box.getItems().addAll(source.getStats().getStatNames());
+		 box.getItems().addAll("Location");
 	 }
 	 
 	 /**

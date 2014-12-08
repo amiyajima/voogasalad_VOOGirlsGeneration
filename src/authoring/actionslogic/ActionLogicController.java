@@ -108,5 +108,9 @@ public class ActionLogicController implements Initializable {
         System.out.println(myLogicMap);
 
     }
+    
+    public Map<String, Map<String, List<String>>> getActionLogic(){
+        return myLogicMap;
+    }
 
 }
