@@ -52,7 +52,13 @@ public class Level extends Observable implements IChangeGameState {
 		myGrid = gr;
 		myEvents = events;
 		myId = id;
-		// winningLevel = isWinningLevel;
+		initializeDefaultEvents();
+	}
+
+	private void initializeDefaultEvents() {
+		Event die = new Event(myId);
+
+		
 	}
 
 	/**

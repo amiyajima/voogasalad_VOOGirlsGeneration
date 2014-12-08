@@ -216,7 +216,6 @@ public class EventEditorController implements Initializable {
         NewConditionController controller = loader.getController();
 
         controller.loadLambda(okLambda);
-        controller.loadEntryCondition(entry);
         controller.loadData(myData);
 
         newConditionStage.showAndWait();
