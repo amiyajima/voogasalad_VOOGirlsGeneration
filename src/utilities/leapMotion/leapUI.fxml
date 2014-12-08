@@ -29,26 +29,21 @@
             <HBox alignment="CENTER" prefHeight="225.0" prefWidth="600.0" spacing="20.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="key and Mouse Control" />
-                  <VBox prefHeight="225.0" prefWidth="273.0">
+                  <VBox fx:id="gesturesVBox" prefHeight="225.0" prefWidth="273.0">
                      <children>
                         <HBox fx:id="screenTap" prefHeight="52.0" prefWidth="273.0">
                            <children>
-                              <Label fx:id="screenTapLabel" text="Screen Tap" />
+                              <Label fx:id="screenTapLabel" text="TYPE_SCREEN_TAP" />
                            </children>
                         </HBox>
                         <HBox fx:id="swipe" prefHeight="59.0" prefWidth="273.0">
                            <children>
-                              <Label fx:id="swipeLabel" text="Swipe" />
+                              <Label fx:id="swipeLabel" text="TYPE_SWIPE" />
                            </children>
                         </HBox>
                         <HBox fx:id="circle" prefHeight="55.0" prefWidth="273.0">
                            <children>
-                              <Label fx:id="circleLabel" text="Circle" />
-                           </children>
-                        </HBox>
-                        <HBox fx:id="customerized" prefHeight="50.0" prefWidth="273.0">
-                           <children>
-                              <Label fx:id="customerLabel" text="Customized control ..." />
+                              <Label fx:id="circleLabel" text="TYPE_CIRCLE" />
                            </children>
                         </HBox>
                      </children>
@@ -58,6 +53,8 @@
          </children>
       </VBox>
    </center>
-   <right/>
+   <right>
+   		<Button mnemonicParsing="false" onAction="#okayAction" text="Okay" BorderPane.alignment="CENTER"/>
+   </right>
    <bottom/>
 </BorderPane>
