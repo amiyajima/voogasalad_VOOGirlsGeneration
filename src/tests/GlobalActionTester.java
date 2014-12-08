@@ -3,7 +3,7 @@ package tests;
 import static org.junit.Assert.*;
 import java.awt.geom.Point2D;
 import org.junit.Test;
-import gamedata.events.globalaction.CreatePiece;
+import gamedata.events.globalaction.MakePieceAtLocation;
 import gamedata.events.globalaction.DeletePieceGlobalAction;
 import gamedata.events.globalaction.LevelChange;
 import gamedata.events.globalaction.EndTurn;
@@ -13,7 +13,7 @@ import gamedata.gamecomponents.Piece;
 public class GlobalActionTester {
     private JSONBobTester myBob = new JSONBobTester();
     private Game myGame;
-    private CreatePiece myCreatePiece;
+    private MakePieceAtLocation myCreatePiece;
     private DeletePieceGlobalAction myDeletePiece;
     private EndTurn myEndTurn;
     private LevelChange myLevelChange;
@@ -26,7 +26,7 @@ public class GlobalActionTester {
     public GlobalActionTester() {
         myGame = myBob.createNewGame();
         pieceToCreate = myBob.createNewPiece(myGame.getCurrentLevel().getGrid(), DEFAULT_PIECE_LOCATION);
-        myCreatePiece = new CreatePiece(myGame, pieceToCreate);
+        myCreatePiece = new MakePieceAtLocation(myGame, pieceToCreate);
         myDeletePiece = new DeletePieceGlobalAction(myGame, pieceToCreate);
         myEndTurn = new EndTurn(myGame, DEFAULT_TURN_CHANGE);
         myLevelChange = new LevelChange(myGame, DEFAULT_LEVEL_JUMP);
