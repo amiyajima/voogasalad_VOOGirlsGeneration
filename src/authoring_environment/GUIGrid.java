@@ -242,6 +242,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 	public List<Piece> getRemovedPieces () {
 		List<Piece> l = new ArrayList<Piece>();
 		for (Piece p : myPieceData.getData()) {
+	
 			if (p.shouldRemove()) {
 				l.add(p);
 			}
