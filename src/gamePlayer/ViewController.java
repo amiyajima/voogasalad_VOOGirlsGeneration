@@ -51,10 +51,6 @@ public class ViewController {
 	public static final String POPUP_FXML = "popup.fxml";
 	public static final String SETTINGS_FXML = "settings.fxml";
 
-	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
-	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
-	public static final double CURSOR_RATIO = 0.25;
-	private ResourceBundle myLanguages;
 	private Stage myStage;
 	private BorderPane myGameSpace;
 	private BorderPane myPopup;
