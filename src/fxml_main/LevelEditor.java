@@ -28,29 +28,30 @@ import authoring_environment.GUIGrid;
 
 
 public class LevelEditor extends VBox {
-	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
+    private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 
-	private static final String CREATOR_TITLE = "Level Creator";
-	private static final String EDITOR_TITLE = "Level Editor";
-	private static final String LABEL_CSS = "-fx-font-size: 14pt;";
+    private static final String CREATOR_TITLE = "Level Creator";
+    private static final String EDITOR_TITLE = "Level Editor";
+    private static final String LABEL_CSS = "-fx-font-size: 14pt;";
 
-	private String myId;
-	private int myGridRows;
-	private int myGridCols;
-	private double myTileHeight;
-	private ObservableList<Event> myEvents;
-	private GUIGrid myGrid;
-	private Level myLevel;
-	
-	private Consumer<Level> myOkLambda;
+    private String myId;
+    private int myGridRows;
+    private int myGridCols;
+    private double myTileHeight;
+    private ObservableList<Event> myEvents;
+    private GUIGrid myGrid;
 
-	private String myEditorTitle;
+    private Consumer<Level> myOkLambda;
+
+    private Level myLevel;
+    private String myEditorTitle;
 
 	private EventsDataWrapper myData;
     public LevelEditor (Consumer<Level> okLambda, EventsDataWrapper data) {
     	myEditorTitle = CREATOR_TITLE;
     	
     	myId = "";
+
         myGridRows = 0;
         myGridCols = 0;
         myTileHeight = 0;
@@ -60,8 +61,8 @@ public class LevelEditor extends VBox {
     }
 
     public LevelEditor (Consumer<Level> okLambda, Level level, EventsDataWrapper data) {
-    	myEditorTitle = EDITOR_TITLE;
-    	
+        myEditorTitle = EDITOR_TITLE;
+
         myGrid = level.getGrid();
         myId = level.getId();
         myGridRows = myGrid.getRow();
@@ -88,7 +89,7 @@ public class LevelEditor extends VBox {
         Label eventsLabel = new Label(myEditorTitle);
         eventsLabel.setStyle(LABEL_CSS);
         labelBox.getChildren().add(eventsLabel);
-        
+
         HBox idHBox = new HBox();
         Label idLabel = new Label("ID: ");
         TextField idField = new TextField(myId);
@@ -114,9 +115,9 @@ public class LevelEditor extends VBox {
         Label heightLabel = new Label("Tile Height: ");
         TextField heightField = new TextField("" + myTileHeight);
         tileHeightHBox.getChildren().addAll(heightLabel, heightField);
-        
-    	myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
-    	
+
+        myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
+
         Button eventBtn = new Button("Add Global Events...");
         eventBtn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -145,7 +146,7 @@ public class LevelEditor extends VBox {
                 myGridRows = Integer.parseInt(rowField.getText());
                 myGridCols = Integer.parseInt(colField.getText());
                 myTileHeight = Double.parseDouble(heightField.getText());
-                
+
                 Level level = new Level(myGrid, myEvents, myId, false);
 
                 myOkLambda.accept(level);
@@ -176,6 +177,5 @@ public class LevelEditor extends VBox {
 
         eventEditorStage.showAndWait();
     }
-
 
 }

@@ -14,8 +14,10 @@ import authoring_environment.SuperTile;
  *
  */
 public class ApplyState implements IGridState {
-
-	private ViewController myController;
+//        public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
+//        public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
+	
+        private ViewController myController;
 	private GameGridEffect myGameGridEffect;
 	private Game myGame;
 	private SuperTile activeTile;
@@ -57,7 +59,7 @@ public class ApplyState implements IGridState {
 		myGameGridEffect.clearAllActionHighlights();
 		myController.clearActions();
 		myController.setGridState(new SelectState(myController));
-		myController.changeCursor(myController.CURSOR_GLOVE_TEST);
+//		myController.changeCursor(myController.CURSOR_GLOVE_TEST);
 		myController.setActivePiece(null);
 		myController.setActiveAction(null);
 		myGame.getCurrentLevel().runGameEvents();

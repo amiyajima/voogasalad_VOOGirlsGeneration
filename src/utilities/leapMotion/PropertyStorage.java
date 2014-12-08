@@ -23,7 +23,7 @@ public class PropertyStorage{
         FileOutputStream os = new FileOutputStream(f);
         
         myProperties.store(os, "gesture and mouse binding");
-        
+        os.close();
     }
     
 
