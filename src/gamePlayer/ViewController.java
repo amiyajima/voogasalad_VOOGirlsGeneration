@@ -27,6 +27,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -67,6 +68,7 @@ public class ViewController {
 	public static final String ENGLISH = "resources.languages.English";
 	public static final String CHINESE = "resources.languages.Chinese";
 	public static final String KOREAN = "resources.languages.Korean";
+	public static final String FRENCH = "resources.languages.French";
 
 	private String currentLanguage;
 	private Stage myStage;
@@ -141,6 +143,15 @@ public class ViewController {
 	@FXML
 	private Tab inventoryTab;
 	
+	@FXML
+	private CheckBox EnglishCheck;
+	@FXML
+        private CheckBox FrenchCheck;
+	@FXML
+        private CheckBox KoreanCheck;
+	@FXML
+        private CheckBox ChineseCheck;
+	
 
 	private ScrollPane myGridPane;
 
@@ -151,10 +162,26 @@ public class ViewController {
 	private SuperTile keySelectedTile;
 	
 	private int tempMoveCount = 0;
+	
+	@FXML
+	public void checkLanguage(){
+	    if (EnglishCheck.isSelected()){
+	        currentLanguage = ENGLISH;
+	    }
+	    if (FrenchCheck.isSelected()){
+	        currentLanguage = FRENCH;
+	    }
+	    if (KoreanCheck.isSelected()){
+	        currentLanguage = KOREAN;
+	    }
+	    if (ChineseCheck.isSelected()){
+	        currentLanguage = CHINESE;
+	    }
+	    updateLanguages();
+	}
 
 	public ViewController(Stage s) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		myStage = s;
-
 		openInitialMenu();
 		try {
 			newGame();
@@ -181,7 +208,7 @@ public class ViewController {
 	    myGameSpace = new BorderPane();
 	    myScoreBoard = new VBox();
 	    scores = new VBox();
-	    
+	    currentLanguage = ENGLISH;
 
 	    myPopup = new BorderPane();
 	    mySettings = new VBox();
@@ -206,12 +233,9 @@ public class ViewController {
 	    System.out.println("Opened initial menu");
 	}
 	
-	public void changeLanguage(String lang) {
-	    currentLanguage = lang;
-	}
 	
-	public void addLanguages() {
-	        messages = ResourceBundle.getBundle(ENGLISH);
+	public void updateLanguages() {
+	        messages = ResourceBundle.getBundle(currentLanguage);
 	        showScoreButton.setText(messages.getString("SCORE"));
 	        controlTab.setText(messages.getString("CONTROL"));
 	        statsTab.setText(messages.getString("STATS"));
@@ -256,6 +280,7 @@ public class ViewController {
 	    System.out.println("opensettings");
 	    Stage stage = new Stage();
 	    stage.setScene(mySettingsScene);
+	    checkLanguage();
 	    stage.show();
 	}
 	
@@ -378,7 +403,6 @@ public class ViewController {
 			});
 		});
 		// initializeGrid();
-	        addLanguages();
 	}
 
 	/**
