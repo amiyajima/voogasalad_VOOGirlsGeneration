@@ -292,6 +292,24 @@ public class GUIGrid extends SuperGrid implements Observer {
 			this.addPieceToTile(p, p.getLoc());
 		}
 	}
+	
+	public void repopulateComponent() {
+		
+	}
+	
+	public void removeRunOffData(int numCols, int numRows) {
+		for (Patch p : myPatchData.getData()) {
+			if (p.getLoc().getX() > numCols 
+					|| p.getLoc().getY() > numRows)
+			myPatchData.remove(p);
+		}
+		for (Patch p : myPatchData.getData()) {
+			if (p.getLoc().getX() > numCols 
+					|| p.getLoc().getY() > numRows)
+			myPatchData.remove(p);
+		}
+	}
+	
 
 	@Override
 	public void update (Observable o, Object arg) {

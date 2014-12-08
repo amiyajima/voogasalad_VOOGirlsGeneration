@@ -60,8 +60,7 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 			myLevelData.add(level);			
 			addEntry(level);
 			
-			myPieceTypes.addObserver(level.getGrid());
-			myPatchTypes.addObserver(level.getGrid());
+			addComponentObservingLevel(level);
 			setAndDisplayGrid(level);
 			};
 			
@@ -71,12 +70,6 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 
 		EventsDataWrapper wrapper = new EventsDataWrapper(piecesRO, patchesRO, playersRO);
 		super.myPropertiesSPane.setContent(new LevelEditor(okLambda, wrapper));
-	}
-	
-	private void setAndDisplayGrid(Level level) {
-		
-		myGridReference.setGrid(level.getGrid());
-		myGridReference.getGrid().displayPane(myGridSPane);
 	}
 
 	@Override
@@ -154,5 +147,15 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 				myVBox.getChildren().remove(myEntryMap.get(entry));
 			}
 		});
+	}
+	
+	private void setAndDisplayGrid(Level level) {
+		myGridReference.setGrid(level.getGrid());
+		myGridReference.getGrid().displayPane(myGridSPane);
+	}
+	
+	private void addComponentObservingLevel(Level level) {
+		myPieceTypes.addObserver(level.getGrid());
+		myPatchTypes.addObserver(level.getGrid());
 	}
 }
