@@ -19,27 +19,32 @@ public class Audio {
     private static final String DEFAULT_MUSIC = "/resources/music/Cut_Gee_VooGirls.mp3";
     private static final String SELECTION_MUSIC = "/resources/music/select.mp3";
     
-    // public Audio(String audioFileAddress) throws UnsupportedAudioFileException,
-    // IOException, LineUnavailableException {
-    // File audioFile = new File(audioFileAddress);
-    // AudioInputStream audioStream = AudioSystem
-    // .getAudioInputStream(audioFile);
-    // myClip = AudioSystem.getClip();
-    // myClip.open(audioStream);
-    // }
+    private AudioClip myDefault;
+    
 
     public void playDefault() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        playAudio(DEFAULT_MUSIC);
+        myDefault = playAudio(DEFAULT_MUSIC);
     }
     
     public void playSelection(){
         playAudio(SELECTION_MUSIC);
     }
     
-    public void playAudio(String s){
-        AudioClip defaultclip = new AudioClip(this.getClass().getResource(s).toString());
-        defaultclip.play();
+    public void muteDefault(){
+        System.out.println("mute default");
+        myDefault.stop();
     }
+    
+//    public void resumeDefault(){
+//        myDefault.setVolume(1.0);
+//    }
+    
+    public AudioClip playAudio(String s){
+        AudioClip clip = new AudioClip(this.getClass().getResource(s).toString());
+        clip.play();
+        return clip;
+    }
+    
     
 //    public void play (int count) {
 //        myClip.loop(count);
