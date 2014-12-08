@@ -1,7 +1,8 @@
 package authoring.eventeditor;
 
 import gamedata.events.Condition;
-import gamedata.events.conditions.ConditionEquals;
+import gamedata.events.StatComparison;
+import gamedata.events.conditions.StatEquals;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
@@ -72,6 +73,7 @@ public class ConditionEditorPane extends Pane{
 				
 				String classPath = myClass.toString();
 				classPath = classPath.substring(6);
+				
 				myCondition = (Condition) Reflection.createInstance(classPath, myNameField.getText(), ref, stat, val);
 				
 				myDoneLambda.accept(myCondition);

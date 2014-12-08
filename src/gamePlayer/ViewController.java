@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -54,6 +55,7 @@ import authoring_environment.SuperTile;
  *
  */
 public class ViewController {
+
 
     public static final String GAMESPACE_FXML = "gameSpace.fxml";
     public static final String INITIALSCENE_FXML = "initialScene.fxml";
