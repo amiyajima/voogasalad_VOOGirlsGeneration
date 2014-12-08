@@ -5,6 +5,7 @@ import gamedata.gamecomponents.Piece;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -106,7 +107,7 @@ public class GUIGrid extends SuperGrid implements Observer {
 		return super.myNumCols;
 	}
 
-	
+
 	public void addPiece (Piece pieceType, Point2D loc) {
 		Piece clone = new Piece(pieceType, loc);
 		if (isPieceOccupied(loc)){
@@ -212,141 +213,141 @@ public class GUIGrid extends SuperGrid implements Observer {
 	 * @param loc
 	 * @return
 	 */
-	 public Piece getPiece (Point2D loc) {
+	public Piece getPiece (Point2D loc) {
 		for (Piece p : myPieceData.getData()) {
 			if ((p.getLoc().equals(loc))) { return p; }
 		}
 		return null;
-	 }
+	}
 
-	 /**
-	  * Returns the patch at loc
-	  * 
-	  * @param loc
-	  * @return
-	  */
-	 public Patch getPatch (Point2D loc) {
-		 for (Patch p : myPatchData.getData()) {
-			 if ((p.getLoc().equals(loc))) { return p; }
-		 }
-		 return null;
-	 }
+	/**
+	 * Returns the patch at loc
+	 * 
+	 * @param loc
+	 * @return
+	 */
+	public Patch getPatch (Point2D loc) {
+		for (Patch p : myPatchData.getData()) {
+			if ((p.getLoc().equals(loc))) { return p; }
+		}
+		return null;
+	}
 
-	 public void removePiece (Piece p) {
-		 SuperTile currentTile = findTile(p.getLoc());
-		 myPieceData.remove(p);
-		 currentTile.removePieceImage();
-	 }
+	public void removePiece (Piece p) {
+		SuperTile currentTile = findTile(p.getLoc());
+		myPieceData.remove(p);
+		currentTile.removePieceImage();
+	}
 
-	 public void removePatch (Patch p) {
-		 myPatchData.remove(p);
-		 SuperTile currentTile = findTile(p.getLoc());
-		 currentTile.removePatchImage();
-	 }
+	public void removePatch (Patch p) {
+		myPatchData.remove(p);
+		SuperTile currentTile = findTile(p.getLoc());
+		currentTile.removePatchImage();
+	}
 
-	 /**
-	  * Gets Pieces that have been tagged for removal
-	  * 
-	  * @return
-	  */
-	 public List<Piece> getRemovedPieces () {
-		 List<Piece> l = new ArrayList<Piece>();
-		 for (Piece p : myPieceData.getData()) {
+	/**
+	 * Gets Pieces that have been tagged for removal
+	 * 
+	 * @return
+	 */
+	public List<Piece> getRemovedPieces () {
+		List<Piece> l = new ArrayList<Piece>();
+		for (Piece p : myPieceData.getData()) {
 
-			 // TODO: FOR TESTING ONLY
-			 if (p.getStats().getValue("health") <= 0) {
-				 p.markForRemoval();
-			 }
+			// TODO: FOR TESTING ONLY
+			if (p.getStats().getValue("health") <= 0) {
+				p.markForRemoval();
+			}
 
-			 if (p.shouldRemove()) {
-				 l.add(p);
-			 }
-		 }
-		 return l;
-	 }
+			if (p.shouldRemove()) {
+				l.add(p);
+			}
+		}
+		return l;
+	}
 
-	 /**
-	  * Returns all pieces that belong to a given player
-	  * 
-	  * @param playerId
-	  *        - ID of player
-	  * @return List of pieces belonging to the player
-	  */
-	 public List<Piece> getPlayerPieces (int playerId) {
-		 List<Piece> l = new ArrayList<Piece>();
-		 for (Piece p : myPieceData.getData()) {
-			 if (p.getPlayerID() == playerId) {
-				 l.add(p);
-			 }
-		 }
-		 return l;
-	 }
- 
-	 public void repopulateGrid () {
-		 this.initGridTiles(this.myShape);
-		 for (Patch p : myPatchData.getData()) {
-			 this.addPatchToTile(p, p.getLoc());
-		 }
-		 for (Piece p : myPieceData.getData()) {
-			 this.addPieceToTile(p, p.getLoc());
-		 }
-	 }
+	/**
+	 * Returns all pieces that belong to a given player
+	 * 
+	 * @param playerId
+	 *        - ID of player
+	 * @return List of pieces belonging to the player
+	 */
+	public List<Piece> getPlayerPieces (int playerId) {
+		List<Piece> l = new ArrayList<Piece>();
+		for (Piece p : myPieceData.getData()) {
+			if (p.getPlayerID() == playerId) {
+				l.add(p);
+			}
+		}
+		return l;
+	}
 
-	 @Override
-	 public void update (Observable o, Object arg) {
-		 if (o instanceof PieceTypeData) {
-			 PieceTypeData typeData = (PieceTypeData) o;
-			 if (arg == null) {
-				 removePieceType(typeData);
-			 }
-			 if (arg instanceof Piece) {
-				 Piece pieceType = (Piece) arg;
-				 replacePieceType(pieceType);
-			 }
-		 }
-		 if (o instanceof PatchTypeData) {
-			 PatchTypeData typeData = (PatchTypeData) o;
-			 if (arg == null) {
-				 removePatchType(typeData);
-			 }
-			 if (arg instanceof Patch) {
-				 Patch patchType = (Patch) arg;
-				 replacePatchType(patchType);
-			 }
-		 }
-	 }
+	public void repopulateGrid () {
+		this.initGridTiles(this.myShape);
+		for (Patch p : myPatchData.getData()) {
+			this.addPatchToTile(p, p.getLoc());
+		}
+		for (Piece p : myPieceData.getData()) {
+			this.addPieceToTile(p, p.getLoc());
+		}
+	}
 
-	 public void addPieceToTile (Piece pieceType, Point2D loc) {
-		 SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
-		 myTile.setPieceImage(pieceType.getImageView());
+	@Override
+	public void update (Observable o, Object arg) {
+		if (o instanceof PieceTypeData) {
+			PieceTypeData typeData = (PieceTypeData) o;
+			if (arg == null) {
+				removePieceType(typeData);
+			}
+			if (arg instanceof Piece) {
+				Piece pieceType = (Piece) arg;
+				replacePieceType(pieceType);
+			}
+		}
+		if (o instanceof PatchTypeData) {
+			PatchTypeData typeData = (PatchTypeData) o;
+			if (arg == null) {
+				removePatchType(typeData);
+			}
+			if (arg instanceof Patch) {
+				Patch patchType = (Patch) arg;
+				replacePatchType(patchType);
+			}
+		}
+	}
 
-	 }
+	public void addPieceToTile (Piece pieceType, Point2D loc) {
+		SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
+		myTile.setPieceImage(pieceType.getImageView());
 
-	 public void addPatchToTile (Patch patchType, Point2D loc) {
-		 SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
-		 myTile.setPatchImage(patchType.getImageView());
-	 }
+	}
 
-	 // TODO: separate the two types of mouse events (drag and click)
-	 public void paneSetOnMouseClicked (EventHandler<MouseEvent> handler) {
-		 myPane.setOnMouseClicked(handler);
-	 }
-	 
-	 public void paneSetOnMouseDragged(EventHandler<MouseEvent> handler) {
-		 myPane.setOnMouseDragged(handler);
-	 }
+	public void addPatchToTile (Patch patchType, Point2D loc) {
+		SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
+		myTile.setPatchImage(patchType.getImageView());
+	}
 
-	 /**
-	  * Get the whole list of Pieces and Patches in this level. Read by Conditions and
-	  * modified by Global Actions (e.g., adding/removing Pieces).
-	  * @author MIKE ZHU
-	  * @return
-	  */
-	 public PieceData getPieces () {
-		 return myPieceData;
-	 }
+	// TODO: separate the two types of mouse events (drag and click)
+	public void paneSetOnMouseClicked (EventHandler<MouseEvent> handler) {
+		myPane.setOnMouseClicked(handler);
+	}
 
-	 public PatchData getPatches () {
-		 return myPatchData;
-	 }
+	public void paneSetOnMouseDragged(EventHandler<MouseEvent> handler) {
+		myPane.setOnMouseDragged(handler);
+	}
+
+	/**
+	 * Get the whole list of Pieces and Patches in this level. Read by Conditions and
+	 * modified by Global Actions (e.g., adding/removing Pieces).
+	 * @author MIKE ZHU
+	 * @return
+	 */
+	public List<Piece> getReadOnlyPieceList () {
+		return Collections.unmodifiableList(myPieceData.getData());
+	}
+
+	public List<Patch> getReadOnlyPatchList () {
+		return Collections.unmodifiableList(myPatchData.getData());
+	}
 }
