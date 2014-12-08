@@ -30,3 +30,21 @@ public class testingGPdata implements Initializable {
         fillGridShapeBox();
 
     }
+    private void fillGridShapeBox () {
+        myGridShapeBundle = ResourceBundle.getBundle(RESOURCES_PROPERTIES_GRID_SHAPE);
+        myGridShapeBox.getItems().addAll(myGridShapeBundle.getString("Square"),
+                                         myGridShapeBundle.getString("Hexagon"),
+                                         myGridShapeBundle.getString("Circle"));
+    }
+
+    @FXML
+    private void saveInput () {
+        myGameProperties.setNumPlayers(Integer.parseInt(myNumPlayersField.getText()));
+        myGameProperties.setGridShape(myGridShapeBox.getValue().toString());
+    }
+
+    public void addDataContainer (GamePropertiesData d) {
+        myGameProperties = d;
+    }
+
+}
