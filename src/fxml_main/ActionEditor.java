@@ -25,6 +25,8 @@ public class ActionEditor extends VBox {
     private static final String EDITOR_TITLE = "Action Editor";
     private static final String LABEL_CSS = "-fx-font-size: 14pt;";
 
+    private static final String ATTACK_RANGE_LABEL = "Set attack range";
+
     private String myId;
     private int myGridRows;
     private int myGridCols;
@@ -72,6 +74,10 @@ public class ActionEditor extends VBox {
         TextField nameField = new TextField(myId);
         nameBox.getChildren().addAll(nameLabel, nameField);
 
+        HBox attackRangeBox = new HBox();
+        Button attackRange = new Button(ATTACK_RANGE_LABEL);
+        attackRangeBox.getChildren().addAll(attackRange);
+
         HBox statsBox = new SingleMultiplierBox();
 
         VBox gridSizeVBox = new VBox();
@@ -116,7 +122,8 @@ public class ActionEditor extends VBox {
             }
         });
 
-        getChildren().addAll(labelBox, nameBox, new Separator(), statsBox, gridSizeVBox,
+        getChildren().addAll(labelBox, nameBox, new Separator(), attackRangeBox, statsBox,
+                             gridSizeVBox,
                              new Separator(), tileHeightHBox, new Separator(),
                              finalizeBtnsHBox);
 
