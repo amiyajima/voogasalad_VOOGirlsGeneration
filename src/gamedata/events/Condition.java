@@ -1,5 +1,7 @@
 package gamedata.events;
 
+import java.util.List;
+
 import gamedata.gamecomponents.IHasStats;
 
 /**
@@ -38,7 +40,7 @@ public abstract class Condition {
      * @return
      */
 
-    public abstract boolean evaluate(IHasStats source);
+    public abstract boolean evaluate(List<IHasStats> objects);
     
     @Override
     public String toString(){

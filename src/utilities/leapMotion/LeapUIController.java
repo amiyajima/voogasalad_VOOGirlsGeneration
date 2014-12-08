@@ -90,6 +90,7 @@ public class LeapUIController extends Application {
                 ((HBox)hbox).getChildren().add(tf);
                 tf.setOnKeyPressed(ke->{
                     if(ke.getCode().equals(KeyCode.ENTER)){
+                        tf.getParent().requestFocus();
                         myCurrentLabel = (Label) ((HBox)hbox).getChildren().get(0);
                         mapKey(tf);
                     }

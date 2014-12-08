@@ -39,9 +39,8 @@ public class LevelData implements AuthoringData<Level> {
 
 	@Override
 	public void replace(Level origEl, Level newEl) {
-		newEl.getGrid().getRow();
-		newEl.getGrid().getCol();
-		// TODO: FINISH WRITING CODE
+		remove(origEl);
+		add(newEl);
 	}
 
 	@Override

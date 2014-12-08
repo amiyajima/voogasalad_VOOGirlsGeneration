@@ -32,7 +32,7 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 	private LevelData myLevelData;
 	private PieceTypeData myPieceTypes;
 	private PatchTypeData myPatchTypes;
-	
+
 	protected LevelController (VBox vbox, ScrollPane propertiesSPane,
 			ScrollPane gridSPane, GUIGridReference gridRef, LevelData levels,
 			PieceTypeData pieceTypes, PatchTypeData patchTypes) {
@@ -52,19 +52,18 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 			}
 		});
 	}
-	
+
 	private void globalNewBtnOnClickAction() {
 		//TODO: Need to not hard-code square, have it passed through the constructor
 		// as maybe a gridshapeproperty (new class?)
 		Consumer<Level> okLambda = (Level level) -> {
 			myLevelData.add(level);			
 			addEntry(level);
-			
-			myPieceTypes.addObserver(level.getGrid());
-			myPatchTypes.addObserver(level.getGrid());
+
+			addComponentObservingLevel(level);
 			setAndDisplayGrid(level);
-			};
-			
+		};
+
 		List<Piece> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
 		List<Patch> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
 		List<Player> playersRO = null;
@@ -72,21 +71,15 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 		EventsDataWrapper wrapper = new EventsDataWrapper(piecesRO, patchesRO, playersRO);
 		super.myPropertiesSPane.setContent(new LevelEditor(okLambda, wrapper));
 	}
-	
-	private void setAndDisplayGrid(Level level) {
-		
-		myGridReference.setGrid(level.getGrid());
-		myGridReference.getGrid().displayPane(myGridSPane);
-	}
 
 	@Override
 	protected void initGlobalEditBtn(Button editBtn) {
-		//do nothing
+		editBtn.setVisible(false);
 	}
 
 	@Override
 	protected void initGlobalDelBtn(Button delBtn) {
-		//do nothing
+		delBtn.setVisible(false);
 	}
 
 
@@ -106,29 +99,23 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 
 	@Override
 	protected void initEntryEditBtn(Level entry, Button editBtn) {
-		
+
 		//TODO: THIS ONLY SORT OF WORKS
-			//WORKS WHEN YOU CLICK ON LHS PANE THEN RHS PANE THEN DONE. 
-			//ALSO LEVELS ARE SORTED IN ORDER OR MOST RECENTLY MODIFIED
+		//WORKS WHEN YOU CLICK ON LHS PANE THEN RHS PANE THEN DONE. 
+		//ALSO LEVELS ARE SORTED IN ORDER OR MOST RECENTLY MODIFIED
 		editBtn.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent click) {
 				Consumer<Level> okLambda = (Level level) -> {
-					
-				    myVBox.getChildren().remove(entry);
-					addEntry(level);
-					
+
+					HBox entryBox = makeCompleteEntryBox(level);
+					HBox entryHolderBox = myEntryMap.get(entry);
+					entryHolderBox.getChildren().clear();
+					entryHolderBox.getChildren().add(entryBox);
+					myEntryMap.put(level, entryHolderBox);
 					myPieceTypes.addObserver(level.getGrid());
 					myPatchTypes.addObserver(level.getGrid());
 					myLevelData.replace(entry, level);
-					
-				    HBox entryHolderBox = myEntryMap.get(entry);
-					entryHolderBox.getChildren().clear();
-				   				    			    				    
-				    myLevelData.replace(entry, level);
-				    
-				    myEntryMap.get(entry);
-				    
 					setAndDisplayGrid(level);
 
 				};
@@ -137,11 +124,11 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 				List<Player> playersRO = null;
 
 				EventsDataWrapper wrapper = new EventsDataWrapper(piecesRO, patchesRO, playersRO);
-				
+
 				myPropertiesSPane.setContent(new LevelEditor(okLambda, entry, wrapper));
-				
+
 			}
-			
+
 		});
 	}
 
@@ -154,5 +141,15 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 				myVBox.getChildren().remove(myEntryMap.get(entry));
 			}
 		});
+	}
+	
+	private void setAndDisplayGrid(Level level) {
+		myGridReference.setGrid(level.getGrid());
+		myGridReference.getGrid().displayPane(myGridSPane);
+	}
+	
+	private void addComponentObservingLevel(Level level) {
+		myPieceTypes.addObserver(level.getGrid());
+		myPatchTypes.addObserver(level.getGrid());
 	}
 }

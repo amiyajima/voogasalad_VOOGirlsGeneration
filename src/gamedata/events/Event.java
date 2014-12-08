@@ -43,18 +43,18 @@ public class Event {
 	 * The list of Conditions is evaluated, and if all return true, the list of Actions
 	 * is run in order.
 	 */
-	public void runEvent (IHasStats source) {
+	public void runEvent (List<IHasStats> sources) {
 		boolean allConditionsFulfilled = true;
 
 		for (Condition c : myConditions) {
-			if (!c.evaluate(source)) {
+			if (!c.evaluate(sources)) {
 				allConditionsFulfilled = false;
 			}
 		}
 
 		if (allConditionsFulfilled) {
 			for (GlobalAction a : myGlobalActions) {
-				a.doBehavior();
+				a.doBehavior(sources);
 			}
 		}
 	}
