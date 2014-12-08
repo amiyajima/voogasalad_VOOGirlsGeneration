@@ -79,7 +79,10 @@ public class AuthoringController implements Initializable {
 	private PatchTypeData myPatchTypes;
 	private GamePropertiesData myGamePropertiesData;
 
-
+//	protected AuthoringController(GamePropertiesData gamePropertiesData){
+//		myGamePropertiesData=gamePropertiesData;
+//	}
+	
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		myActionData = new ActionData();
@@ -99,7 +102,7 @@ public class AuthoringController implements Initializable {
 		myLevelController = new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
 				myGridReference, myLevelData, myPieceTypes, myPatchTypes, 
 				myGamePropertiesData.getGridShape());
-
+		
 		myActionController = new ActionController(myActionsVBox, myPropertiesSPane, myGridReference, myActionData);
 	}
 
@@ -126,6 +129,7 @@ public class AuthoringController implements Initializable {
 	@FXML
 	private void showGamePropertiesWindow () {
 		GamePropertiesEditor gamePptEditor = new GamePropertiesEditor(myGamePropertiesData);
+		gamePptEditor.disableChangingGridShape();
 	}
 
 	@FXML
@@ -146,8 +150,12 @@ public class AuthoringController implements Initializable {
 			viewCtrl.testPlayGame(game);
 		} catch (UnsupportedAudioFileException | IOException
 				| LineUnavailableException e) {
-			System.out.println("Opening ViewController didn't work!");
+			System.out.println("Opening ViewController doesn't work!");
 		}
+	}
+
+	public void initData(GamePropertiesData gamePropertiesData) {
+		myGamePropertiesData=gamePropertiesData;
 	}
 
 }
