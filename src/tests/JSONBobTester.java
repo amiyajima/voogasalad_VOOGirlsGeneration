@@ -3,9 +3,9 @@ package tests;
 import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
-import gamedata.action.ReceiverToInventoryConclusion;
 import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
+import gamedata.action.conclusions.ReceiverToInventoryConclusion;
 import gamedata.events.Event;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Inventory;
@@ -20,11 +20,14 @@ import gamedata.stats.Stats;
 import gameengine.movement.Movement;
 import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
+import gameengine.player.SimpleAIPlayer;
+
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import authoring_environment.GUIGrid;
 import authoring_environment.SuperGrid;
 
@@ -69,7 +72,7 @@ public class JSONBobTester {
 		System.out.println("Bob Tester: Create new game");
 		List<Player> myPlayers = new ArrayList<Player>();
 		Player myPlayer1 = new HumanPlayer(1);
-		Player myPlayer2 = new HumanPlayer(2);
+		Player myPlayer2 = new SimpleAIPlayer(2);
 		myPlayers.add(myPlayer1);
 		myPlayers.add(myPlayer2);
 
@@ -77,7 +80,7 @@ public class JSONBobTester {
 		GUIGrid gridLevel2 = createNewGrid();
 
 		List<Event> myEvents = new ArrayList<Event>();
-
+		
 		List<Level> myLevels = new ArrayList<Level>();
 		Level level1 = new Level(gridLevel1, myEvents, "Level 1", false);
 		Level level2 = new Level(gridLevel2, myEvents, "Level 2", true);
