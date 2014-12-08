@@ -20,6 +20,7 @@ public class Audio {
     private static final String SELECTION_MUSIC = "/resources/music/select.mp3";
     
     private AudioClip myDefault;
+    private AudioClip myClick;
     
 
     public void playDefault() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
@@ -27,13 +28,18 @@ public class Audio {
     }
     
     public void playSelection(){
-        playAudio(SELECTION_MUSIC);
+        myClick = playAudio(SELECTION_MUSIC);
     }
     
     public void muteDefault(){
         System.out.println("mute default");
         myDefault.stop();
     }
+    
+//    public void muteClick(){
+//        System.out.println("mute click");
+//        myClick.setVolume(0.0);
+//    }
     
 //    public void resumeDefault(){
 //        myDefault.setVolume(1.0);

@@ -52,12 +52,12 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <CheckBox layoutX="14.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#toggleBackgroundMusic" text="Background Music">
+                        <CheckBox layoutX="14.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#toggleBackgroundMusic" selected="true" text="Background Music">
                            <font>
                               <Font name="Consolas" size="13.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox layoutX="14.0" layoutY="59.0" mnemonicParsing="false" text="Click Sound">
+                        <CheckBox layoutX="14.0" layoutY="59.0" mnemonicParsing="false" onAction="#toggleClickSound" selected="true" text="Click Sound">
                            <font>
                               <Font name="Consolas" size="13.0" />
                            </font>

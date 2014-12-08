@@ -333,6 +333,7 @@ public class ViewController {
 		setGridState(new SelectState(this));		
 		keyControlOn = false;
 		backgroundMusicOn = true;
+		clickSoundOn = true;
 		myGameGridEffect = new GameGridEffect(this);
 	}
 	
@@ -440,7 +441,9 @@ public class ViewController {
 	 */
 	protected void bindAction(Action action) {
 	        System.out.println("BIND ACTION");
-	        myAudio.playSelection();
+	        if (clickSoundOn){
+	            myAudio.playSelection();
+	        }
 	        
 		if (activePiece == null)
 			return;
@@ -473,7 +476,10 @@ public class ViewController {
 	 */
 	public void performAction(Point2D loc) {
 		System.out.println("PERFORM ACTION");
-	        myAudio.playSelection();
+	        
+		if (clickSoundOn){
+		    myAudio.playSelection();
+		}
 	        
 	        gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
 		
@@ -511,9 +517,13 @@ public class ViewController {
 		return currentClick;
 	}
 
-	
 	public void toggleClickSound() {
-	    
+	    if (clickSoundOn){
+	        clickSoundOn = false;
+	    }
+	    else{
+	        clickSoundOn = true;
+	    }
 	}
 	
 	public void toggleBackgroundMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
