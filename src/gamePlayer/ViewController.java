@@ -140,7 +140,7 @@ public class ViewController {
 	    loadFXML(INITIALSCENE_FXML, myInitialScene);
 	    loadFXML(POPUP_FXML, myPopup);
 	    loadFXML(SCOREBOARD_FXML, myScoreBoard);
-	    loadFXML(SETTINGS_FXML, mySettings);
+//	    loadFXML(SETTINGS_FXML, mySettings);
 	    
 	    scoreScene = new Scene(myScoreBoard);
 	    myPopupScene = new Scene(myPopup);
