@@ -21,7 +21,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,8 +68,6 @@ public class ViewController {
         public static final String GAME_LOCATION = "/src/resources/json";
         public static final String POPUP_FXML = "popup.fxml";
         public static final String SETTINGS_FXML = "settings.fxml";
-
-        public static final String DEFAULT_LANGUAGE = "resources.languages.English";
 
         private String currentLanguage;
         private Stage myStage;
@@ -135,6 +132,7 @@ public class ViewController {
         private GameGridEffect myGameGridEffect;
         private SuperTile keySelectedTile;
         private int tempMoveCount = 0;
+        private Languages myLanguages;
 
         public ViewController(Stage s) throws UnsupportedAudioFileException,
                         IOException, LineUnavailableException {
@@ -162,8 +160,8 @@ public class ViewController {
                 myGameSpace = new BorderPane();
                 myScoreBoard = new VBox();
                 scores = new VBox();
-                currentLanguage = DEFAULT_LANGUAGE;
-
+                
+                
                 myPopup = new BorderPane();
                 mySettings = new VBox();
 
@@ -183,6 +181,8 @@ public class ViewController {
 
                 myAudio = new Audio();
                 myAudio.playBackground();
+                
+                myLanguages = new Languages(languagesPane, tabPane, gameMenu, showScoreButton);
         }
 
         /**
@@ -216,7 +216,6 @@ public class ViewController {
                 System.out.println("opensettings");
                 Stage stage = new Stage();
                 stage.setScene(mySettingsScene);
-                checkLanguage();
                 stage.show();
         }
 
@@ -263,43 +262,16 @@ public class ViewController {
          */
         @FXML
         private void testGame() {
-
-//                myScene = new Scene(myGameSpace);
-//                myStage.setScene(myScene);
                 JSONBobTester JSBTester = new JSONBobTester();
-//                myModel = JSBTester.createNewGame();
                 testPlayGame(JSBTester.createNewGame());
-//                System.out.println("model found in viewcontroller: " + myModel);
-//                initializeGrid();
-                // showScoreButton.setText("hihihi");
         }
 
         /**
          * Checks the currently selected language
          */
         @FXML
-        public void checkLanguage() {
-            for (Node n: languagesPane.getChildren()){
-                if ( ((CheckBox)n).isSelected()){
-                    currentLanguage = n.getId();
-                }
-            }
-                updateLanguages();
-        }
-
-        /**
-         * Updates the game labels according to the selected language in settings
-         */
-        public void updateLanguages() {
-                messages = ResourceBundle.getBundle(currentLanguage);
-                showScoreButton.setText(messages.getString(showScoreButton.getId()));
-                gameMenu.setText(messages.getString(gameMenu.getId()));
-                for (Tab t: tabPane.getTabs()){
-                    t.setText(messages.getString(t.getId()));
-                }
-                for (MenuItem i: gameMenu.getItems()){
-                    i.setText(messages.getString(i.getId()));
-                }
+        public void updateLanguage() {
+            myLanguages.findCurrentLanguage();
         }
 
         /**
