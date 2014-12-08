@@ -498,6 +498,11 @@ public class ViewController {
 
                 gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
 
+                while (myCurrentPlayer.getType().equals("AI")) {
+                    myCurrentPlayer.play();
+                    this.checkEndActions();
+                }
+                
                 if (keyControlOn) {
                         myKeyboardMovement = null;
                         myKeyboardAction = new KeyboardAction();
@@ -686,7 +691,7 @@ public class ViewController {
          */
         public void setGridState(IGridState state) {
                 tempMoveCount++;
-                if (myModel.getCurrentLevel().getGameWon() || tempMoveCount > 0) {
+                if (myModel.getCurrentLevel().getGameWon() || tempMoveCount > 10) {
                         // TODO assuming that the most recent currentPlayer won
                         String highScorer = "Bob";
                         Random randy = new Random();
@@ -806,10 +811,6 @@ public class ViewController {
         protected void endAction() {
                 System.out.println("Ending Action");
                 this.checkEndActions();
-                while (myCurrentPlayer.getType().equals("AI")) {
-                        myCurrentPlayer.play();
-                        this.checkEndActions();
-                }
         }
 
         public void checkEndActions() {
