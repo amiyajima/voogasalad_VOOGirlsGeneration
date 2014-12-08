@@ -6,7 +6,6 @@ import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
-
 import java.awt.geom.Point2D;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -24,9 +23,10 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -46,10 +46,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 import tests.JSONBobTester;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
@@ -777,6 +775,9 @@ public class ViewController {
                 gridState = state;
         }
 
+        /**
+         * Changes the player turn label to show current turn
+         */
         void setPlayerTurnDisplay() {
                 playerTurn.setText("Player " + myCurrentPlayer.getID() + "'s Move");
         }
@@ -786,68 +787,77 @@ public class ViewController {
                 dialog.initModality(Modality.APPLICATION_MODAL);
                 dialog.initOwner(myStage);
 
-                Label congrats = new Label("Congratulations");
-                Label player = new Label("Player " + highScorer
+                Text congrats = new Text("Congratulations, Player " + highScorer
                                 + " achieved a high score");
-                Label score = new Label(String.valueOf(highScore));
-                congrats.setId("congrats");
-                player.setId("highscorer");
-                score.setId("highscoredisplay");
-                HBox nameHBox = new HBox(5);
-                Text namePlease = new Text("Nickname: ");
+                Text score = new Text(String.valueOf(highScore));
+                congrats.getStyleClass().add("plaintext");
+                score.getStyleClass().add("plaintext");
                 TextField nickname = new TextField();
+                nickname.setTranslateY(5);
+                nickname.setMaxWidth(150);
+                //nickname.setMinWidth(49);
+                nickname.setText("Nickname");
                 Button go = new Button("Enter the Hall of Fame");
                 go.setOnMouseClicked(event -> addEntryToHallOfFame(dialog,
                                 nickname.getText(), score.getText()));
-                namePlease.setId("nameplease");
                 nickname.setId("nickname");
                 go.setId("highscorebutton");
-                nameHBox.getChildren().addAll(namePlease, nickname, go);
 
                 VBox dialogVbox = new VBox(10);
-                dialogVbox.getChildren().addAll(congrats, player, score, nameHBox);
-                Scene dialogScene = new Scene(dialogVbox, 500, 300);
-                dialogScene.getStylesheets().add(
-                                "/resources/stylesheets/stylesheet.css");
+                dialogVbox.setPadding(new Insets(10,10,10,10));
+                dialogVbox.getChildren().addAll(congrats, score, nickname, go);
+                Scene dialogScene = new Scene(dialogVbox, 600, 250);
+                dialogScene.getStylesheets().add("/resources/stylesheets/stylesheet.css");
                 dialog.setScene(dialogScene);
                 dialog.show();
         }
 
         private void addEntryToHallOfFame(Stage stage, String nickname, String score) {
-                try {
-                        File myScores = new File(getClass().getResource(
-                                        "/resources/highscore/highscore.txt").getPath());
-                        PrintWriter writer = new PrintWriter(myScores);
-                        writer.println(nickname + ": " + score);
-                        writer.flush();
-                        writer.close();
-
-                        System.out.println(myScores.getAbsolutePath());
-                        Scanner in = new Scanner(myScores);
-                        ArrayList<List<String>> highScores = new ArrayList<List<String>>();
-                        while (in.hasNextLine()) {
-                                List<String> line = Arrays.asList(in.nextLine().split(
-                                                "\\s*: \\s*"));
-                                System.out.println(line.get(0) + line.get(1));
-                                highScores.add(line);
-                        }
-                        in.close();
-                        Collections.sort(highScores, new Comparator<List<String>>() {
-                                @Override
-                                public int compare(List<String> a, List<String> b) {
-                                        return String.valueOf(a.get(1)).compareTo(
-                                                        String.valueOf(b.get(1)));
-                                }
-
-                        });
-                        for (List<String> each : highScores) {
-                                scores.getChildren().add(new Label(each.get(0) + ": " + each.get(1)));
-                        }
-                        stage.setScene(scoreScene);
-                        stage.show();
-                } catch (FileNotFoundException f) {
-                        System.out.println("High scores file not found, sorry.");
+            try {
+                File myScores2 = new File(getClass().getResource("/resources/highscore/highscore.txt").getPath());
+                Scanner in = new Scanner(myScores2);
+                String content = "";
+                ArrayList<List<String>> highScores = new ArrayList<List<String>>();
+                while(in.hasNextLine()) {
+                    String line = in.nextLine();
+                    content += line + "\n";
+                    List<String> listLine = Arrays.asList(line.split("\\s*: \\s*"));
+                    System.out.println(listLine.get(0) + listLine.get(1));
+                    highScores.add(listLine);
                 }
+                in.close();
+                
+                File myScores = new File(getClass().getResource("/resources/highscore/highscore.txt").getPath());
+                BufferedWriter writer = new BufferedWriter(new FileWriter(myScores));
+                //writer.write(content);
+                writer.write(nickname + ": " + score + "\n");
+                writer.flush();
+                writer.close();
+                List<String> currentScore = new ArrayList<String>();
+                currentScore.add(nickname);
+                currentScore.add(score);
+                highScores.add(currentScore);
+                /*
+                Collections.sort(highScores, new Comparator<List<String>> () {
+                    @Override
+                    public int compare(List<String> a, List<String> b) {
+                        return String.valueOf(a.get(1)).compareTo(String.valueOf(b.get(1)));
+                    }
+                });
+                */
+                for (List<String> each : highScores) {
+                    myScoreBoard.getChildren().add(1, new Label(each.get(0) + ": " + each.get(1)));
+                }
+                stage.setScene(scoreScene);
+                stage.show();
+            }
+            catch (FileNotFoundException f)  {
+                System.out.println("High scores file not found, sorry.");
+            }
+            catch (IOException i) {
+                System.out.println("Write failed");
+            }
+
         }
 
         /**
