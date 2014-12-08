@@ -17,7 +17,7 @@ public class PlayerData implements AuthoringData<Player> {
     }
     
     @Override
-    public void add (Player...players) {
+    public void add(Player...players) {
         for (Player p: players) {
             myPlayers.add(p);
         }

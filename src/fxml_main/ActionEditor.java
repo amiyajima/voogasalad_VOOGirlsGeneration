@@ -14,7 +14,9 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import authoring.concretefeatures.RangeEditor;
 import authoring.concretefeatures.SingleMultiplierBox;
+import authoring.concretefeatures.StatsTotalEditor;
 import authoring_environment.GUIGrid;
 import authoring_environment.UIspecs;
 
@@ -83,12 +85,14 @@ public class ActionEditor extends VBox {
         attackRangeBox.setPadding(UIspecs.allPadding);
         attackRangeBox.setSpacing(5);
         Button attackRange = new Button(ATTACK_RANGE_LABEL);
+        initRangeEditor(attackRange);
         attackRangeBox.getChildren().addAll(attackRange);
 
         HBox effectRangeBox = new HBox();
         effectRangeBox.setPadding(UIspecs.allPadding);
         effectRangeBox.setSpacing(5);
         Button effectRange = new Button(EFFECT_RANGE_LABEL);
+        initRangeEditor(effectRange);
         effectRangeBox.getChildren().addAll(effectRange);
 
         HBox statsOperationBox = new HBox();
@@ -117,6 +121,22 @@ public class ActionEditor extends VBox {
         getChildren().addAll(labelBox, nameBox, attackRangeBox, effectRangeBox,
                              statsOperationBox,
                              finalizeBtnsHBox);
+
+    }
+
+    private void initRangeEditor (Button b) {
+        b.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent click) {
+                showRangeEditorWindow();
+            }
+        });
+
+    }
+
+    private void showRangeEditorWindow () {
+        RangeEditor editor = new RangeEditor();
+        editor.show();
 
     }
 

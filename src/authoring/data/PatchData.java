@@ -34,8 +34,16 @@ public class PatchData implements AuthoringData<Patch> {
 	
 	@Override
 	public boolean canAdd(Patch element) {
-		// TODO Auto-generated method stub
-		return false;
+		String elementID=element.getID();
+		Point2D elementLoc=element.getLoc();
+		for (Patch patch:myPatches){
+			String id=patch.getID();
+			Point2D loc=patch.getLoc();
+			if ((elementID.equals(id)) && (elementLoc.equals(loc))){
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	@Override
