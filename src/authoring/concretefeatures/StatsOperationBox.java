@@ -8,6 +8,7 @@ import authoring.abstractfeatures.PopupWindow;
 
 
 /**
+ * DEPRICATED: DO NOT USE
  * Combination of StatsCreatorBoxes to define Stats Operations for actions
  * 
  * @author annamiyajima

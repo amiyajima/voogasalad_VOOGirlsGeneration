@@ -1,6 +1,6 @@
 package gameengine.player;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -17,87 +17,78 @@ import java.awt.geom.Point2D;
 
 import authoring_environment.GUIGrid;
 
-
 /**
  * A player object that contains the logic for playing each level. This object
  * requires no parameters for initialization.
  *
- * @Author Jesse, Sandy
+ * @Author Jesse, Rica, Sandy
  */
 
 public abstract class Player {
 
-    protected int myNumMovesPlayed;
-    protected int myID;
+	protected int myNumMovesPlayed;
+	protected int myID;
 
-    /**
-     * Default constructor
-     */
-    public Player () {
-        this(0);
-    }
+	/**
+	 * Default constructor
+	 */
+	public Player() {
+		this(0);
+	}
 
-    /**
-     * Constructs a player with a specific ID
-     * 
-     * @param id
-     *        int ID corresponding to the Player
-     * @param
-     */
-    public Player (int id) {
-        myNumMovesPlayed = 0;
-        myID = id;
-    }
+	/**
+	 * Constructs a player with a specific ID
+	 * 
+	 * @param id
+	 *            int ID corresponding to the Player
+	 * @param
+	 */
+	public Player(int id) {
+		myNumMovesPlayed = 0;
+		myID = id;
+	}
 
-    /* *//**
-     * Iterate through the list of pieces available on the grid.
-     * 
-     * @param g
-     * @return
-     *         TODO: itereate through pieces in grid, determine which ones have corresponding Player
-     *         ID
-     */
-    private List<Piece> populatePieces (GUIGrid g) {
-        // Set allPieces = g.get
-        return null;
-    }
+	public abstract void startTurn(Level l);
 
-    public abstract void startTurn (Level l);
+	/**
+	 * Resets number of moves played for the player
+	 */
+	public void resetMovesPlayed() {
+		myNumMovesPlayed = 0;
+	}
 
-    /**
-     * Resets number of moves played for the player
-     */
-    public void resetMovesPlayed () {
-        myNumMovesPlayed = 0;
-    }
+	/**
+	 * Getter to return the ID of the player
+	 * 
+	 * @return int ID of the player
+	 */
+	public int getID() {
+		return myID;
+	}
 
-    /**
-     * Getter to return the ID of the player
-     * 
-     * @return int ID of the player
-     */
-    public int getID () {
-        return myID;
-    }
-    
-    public void playTurn(){
-    	myNumMovesPlayed++;
-    }
+	public abstract void play();
 
-    /**
-     * Getter for Number of Moves Played
-     * 
-     * @return
-     */
-    public int getNumMovesPlayed () {
-        return myNumMovesPlayed;
-    }
+	public void playTurn() {
+		myNumMovesPlayed++;
+	}
 
-    /**
-     * ToString Method for Player Information. For debugging purposes.
-     */
-    public String toString () {
-        return "ID:" + myID + " NumMovesPlayed:" + myNumMovesPlayed;
-    }
+	/**
+	 * Getter for Number of Moves Played
+	 * 
+	 * @return
+	 */
+	public int getNumMovesPlayed() {
+		return myNumMovesPlayed;
+	}
+
+	/**
+	 * ToString Method for Player Information. For debugging purposes.
+	 */
+	public String toString() {
+		return "Type:" + this.getClass().getName() + " ID:" + myID
+				+ " NumMovesPlayed:" + myNumMovesPlayed;
+	}
+	
+	public abstract String getType();
 
 }
