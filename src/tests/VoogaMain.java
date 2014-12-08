@@ -10,6 +10,7 @@ import gamedata.rules.Rule;
 import java.awt.geom.Point2D;
 import java.io.FileNotFoundException;
 import java.util.List;
+import authoring.data.PatchData;
 import authoring_environment.GUIGrid;
 
 
@@ -34,16 +35,19 @@ public class VoogaMain {
         Piece piece = grid.getPiece(point);
         Patch patch = grid.getPatch(point);
         
+        PatchData multiplePatches = new PatchData();
+        multiplePatches.add(patch);
+        
         //System.out.println("things still work");
         //myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
         //myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
-        myJSONmanager.writeToJSON(patch, "src/resources/json/Patch.json");
+        myJSONmanager.writeToJSON(multiplePatches, "src/resources/json/MultiplePatches.json");
     }
 
     public static void testJSONload () {
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("src/resources/json/Patch.json");
+            jsonManager.readFromJSONFile("src/resources/json/MultiplePatches.json");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
