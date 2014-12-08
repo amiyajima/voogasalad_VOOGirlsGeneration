@@ -7,12 +7,20 @@ import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
 import java.awt.geom.Point2D;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -102,6 +110,8 @@ public class ViewController {
 	private JSONManager myJSONManager;
 	private GameGridEffect myGameGridEffect;
 	private SuperTile keySelectedTile;
+	
+	private int tempMoveCount = 0;
 
 	public ViewController(Stage s) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		myStage = s;
@@ -666,12 +676,12 @@ public class ViewController {
 	 * @param state
 	 *            the current state of the Grid, select/ apply action Mode
 	 */
-	public void setGridState(IGridState state) {
-	    // TODO add logic to check if a game/level has been won
-	    if (true) {
+	public void setGridState(IGridState state) {    
+	    tempMoveCount++;
+	    if (myModel.getCurrentLevel().getGameWon() || tempMoveCount == 10) {
 	        // TODO assuming that the most recent currentPlayer won
 	        String highScorer = "Bob";
-	        int highScore = 0;
+	        int highScore = 10000;
 	        for (Player p : myModel.getPlayers()) {
 	            /*
 	            if (p.getScore() > highScore) {
@@ -688,7 +698,7 @@ public class ViewController {
 		gridState = state;
 	}
 
-	private void setPlayerTurnDisplay() {
+	void setPlayerTurnDisplay() {
 		playerTurn.setText("Player " + myCurrentPlayer.getID() + "'s Move");
 	}
 	
@@ -722,9 +732,38 @@ public class ViewController {
 	}
 	
 	private void addEntryToHallOfFame(Stage stage, String nickname, String score) {
-	    myScoreBoard.getChildren().add(1, new Label(nickname + ": " + score));
-	    stage.setScene(scoreScene);
-	    stage.show();
+	    try {
+	        File myScores = new File(getClass().getResource("/resources/highscore/highscore.txt").getPath());
+	        PrintWriter writer = new PrintWriter(myScores);
+	        writer.println(nickname + ": " + score);
+	        writer.flush();
+	        writer.close();
+	        
+	        System.out.println(myScores.getAbsolutePath());
+	        Scanner in = new Scanner(myScores);
+	        ArrayList<List<String>> highScores = new ArrayList<List<String>>();
+	        while(in.hasNextLine()) {
+	            List<String> line = Arrays.asList(in.nextLine().split("\\s*: \\s*"));
+	            System.out.println(line.get(0) + line.get(1));
+	            highScores.add(line);
+	        }
+	        in.close();
+	        Collections.sort(highScores, new Comparator<List<String>> () {
+	            @Override
+	            public int compare(List<String> a, List<String> b) {
+	                return String.valueOf(a.get(1)).compareTo(String.valueOf(b.get(1)));
+	            }
+
+	        });
+	        for (List<String> each : highScores) {
+	            myScoreBoard.getChildren().add(1, new Label(each.get(0) + ": " + each.get(1)));
+	        }
+	        stage.setScene(scoreScene);
+	        stage.show();
+	    }
+	    catch (FileNotFoundException f)  {
+	        System.out.println("High scores file not found, sorry.");
+	    }
 	}
 
 	/**
