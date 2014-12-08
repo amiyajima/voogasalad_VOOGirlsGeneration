@@ -12,23 +12,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.ResourceBundle;
+import java.util.Optional;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -37,11 +39,6 @@ import tests.JSONBobTester;
 import authoring_environment.GUIGrid;
 import authoring_environment.SuperTile;
 
-/**
- * 
- * 
- *
- */
 public class ViewController {
 
 	public static final String GAMESPACE_FXML = "gameSpace.fxml";
@@ -670,13 +667,64 @@ public class ViewController {
 	 *            the current state of the Grid, select/ apply action Mode
 	 */
 	public void setGridState(IGridState state) {
+	    // TODO add logic to check if a game/level has been won
+	    if (true) {
+	        // TODO assuming that the most recent currentPlayer won
+	        String highScorer = "Bob";
+	        int highScore = 0;
+	        for (Player p : myModel.getPlayers()) {
+	            /*
+	            if (p.getScore() > highScore) {
+	                highScorer = p.getID();
+	                highScore = p.getScore();
+	            }
+	            */
+	        }
+	        showHighScoreInfo(highScorer, highScore);
+                
+	    }
 		myCurrentPlayer = myModel.getCurrentPlayer();
 		setPlayerTurnDisplay();
 		gridState = state;
 	}
 
-	public void setPlayerTurnDisplay() {
-		playerTurn.setText("Player ID: " + myCurrentPlayer.getID());
+	private void setPlayerTurnDisplay() {
+		playerTurn.setText("Player " + myCurrentPlayer.getID() + "'s Move");
+	}
+	
+	private void showHighScoreInfo(String highScorer, int highScore) {
+	    final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner(myStage);
+            
+            Label congrats = new Label("Congratulations");
+            Label player = new Label("Player " + highScorer + " achieved a high score");
+            Label score = new Label(String.valueOf(highScore));
+            congrats.setId("congrats");
+            player.setId("highscorer");
+            score.setId("highscoredisplay");
+            HBox nameHBox = new HBox(5);
+            Text namePlease = new Text("Nickname: ");
+            TextField nickname = new TextField();
+            Button go = new Button("Enter the Hall of Fame");
+            go.setOnMouseClicked(event->addEntryToHallOfFame(dialog, nickname.getText(), score.getText()));
+            namePlease.setId("nameplease");
+            nickname.setId("nickname");
+            go.setId("highscorebutton");
+            nameHBox.getChildren().addAll(namePlease, nickname, go);
+            
+            VBox dialogVbox = new VBox(10);
+            dialogVbox.getChildren().addAll(congrats, player, score, nameHBox);
+            Scene dialogScene = new Scene(dialogVbox, 500, 300);
+            dialogScene.getStylesheets().add("/resources/stylesheets/stylesheet.css");
+            dialog.setScene(dialogScene);
+            dialog.show();
+	}
+	
+	private void addEntryToHallOfFame(Stage stage, String nickname, String score) {
+	    myScoreBoard.getChildren().add(1, new Label(nickname + ": " + score));
+	    stage.setScene(scoreScene);
+	    stage.show();
 	}
 
 	/**
