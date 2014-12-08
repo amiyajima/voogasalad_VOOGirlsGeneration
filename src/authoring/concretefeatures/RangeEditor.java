@@ -220,9 +220,7 @@ public class RangeEditor extends PopupWindow {
         @Override
         public void handle (ActionEvent event) {
             myRange = rangeGridView.returnSelectedList();
-            for (Point2D p : myRange) {
-                System.out.println(p.getX() + "," + p.getY());
-            }
+  
             current.close();
         }
     }

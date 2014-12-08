@@ -58,6 +58,7 @@ public class ActionController extends GridComponentAbstCtrl<Action> {
         // do nothing
     }
 
+    
     @Override
     protected void initGlobalDelBtn (Button delBtn) {
         // do nothing
@@ -100,14 +101,14 @@ public class ActionController extends GridComponentAbstCtrl<Action> {
         hb.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle (MouseEvent e) {
-                // TODO: do you want anything to happen when the action name is clicked?
-                // display its info?
+                myPropertiesSPane.setContent(new ActionViewer(entry));
             }
             
         });
         hb.getChildren().addAll(name);
         return hb;
     }
+    
 
     @Override
     protected void initEntryDelBtn (Action entry, Button delBtn) {

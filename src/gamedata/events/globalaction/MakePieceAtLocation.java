@@ -12,7 +12,7 @@ import gamedata.gamecomponents.Piece;
  * @author Mike Zhu
  *	
  */
-public class CreatePiece extends GlobalAction {
+public class MakePieceAtLocation extends GlobalAction {
 
     private Piece myPieceType;
     private Point2D myLoc;
@@ -23,8 +23,8 @@ public class CreatePiece extends GlobalAction {
      * @param game
      * @param pieceToCreate
      */
-    public CreatePiece (String name, Piece pieceToCreate, Point2D loc) {
-    	super(name);
+    public MakePieceAtLocation (String name, Piece pieceToCreate, Point2D loc) {
+    	super(String.format("Make %s at point %s", pieceToCreate, loc));
         myPieceType = pieceToCreate;
         myLoc = loc;
     }

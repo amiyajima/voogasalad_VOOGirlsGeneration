@@ -33,6 +33,10 @@ import authoring.data.ActionData;
 
 
 
+/**
+ * @author seungwonlee
+ *
+ */
 public class ActionEditor extends Pane {
 
     public static final int HEIGHT = 100;
@@ -216,13 +220,14 @@ public class ActionEditor extends Pane {
         nameBox.getChildren().addAll(nameLabel, nameField);
     }
 
+    //TODO: shape should be passed in
     private void initSetRangeButton (VBox rangeBox, String label, List<Point2D> range) {
         Label rangeLabel = new Label(label);
         Button setRange = new Button("Set Range...");
         setRange.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                PopupWindow actionRangeEditor = new RangeEditor(range, "Hexagon Grid");
+                PopupWindow actionRangeEditor = new RangeEditor(range, "Square Grid");
                 actionRangeEditor.show();
             }
         });

@@ -1,6 +1,5 @@
 package gamePlayer;
 
-import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
 import javafx.scene.input.MouseEvent;
 import authoring_environment.SuperTile;
@@ -15,10 +14,6 @@ import authoring_environment.SuperTile;
  *
  */
 public class ApplyState implements IGridState {
-	// public static final String CURSOR_ATTACK_TEST =
-	// "resources/images/Cursor_attack.png";
-	// public static final String CURSOR_GLOVE_TEST =
-	// "resources/images/pointer-glove.png";
 
 	private ViewController myController;
 	private GameGridEffect myGameGridEffect;

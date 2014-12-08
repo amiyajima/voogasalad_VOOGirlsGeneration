@@ -1,10 +1,14 @@
 package fxml_main;
 
+import gamePlayer.ViewController;
 import gamedata.gamecomponents.Game;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,7 +70,7 @@ public class AuthoringController implements Initializable {
 	private PatchController myPatchController;
 	private LevelController myLevelController;
 	private ActionController myActionController;
-
+	
 	// Authoring Data
 	private GameAuthoringData myTotalData;
 	private ActionData myActionData;
@@ -93,7 +97,8 @@ public class AuthoringController implements Initializable {
 		myPatchController = new PatchController(myPatchesVBox, myPropertiesSPane, myGridReference,
 				myPatchTypes);
 		myLevelController = new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
-				myGridReference, myLevelData, myPieceTypes, myPatchTypes, myGamePropertiesData);
+				myGridReference, myLevelData, myPieceTypes, myPatchTypes, 
+				myGamePropertiesData.getGridShape());
 
 		myActionController = new ActionController(myActionsVBox, myPropertiesSPane, myGridReference, myActionData);
 	}
@@ -113,6 +118,7 @@ public class AuthoringController implements Initializable {
 		actionLogicStage.setScene(scene);
 
 		ActionLogicController controller = loader.getController();
+		controller.getData(myActionData, myPieceTypes);
 
 		actionLogicStage.showAndWait();
 	}
@@ -134,6 +140,14 @@ public class AuthoringController implements Initializable {
 	@FXML
 	private void saveGame () {
 		Game game = myTotalData.createGame();
+		Stage s = new Stage();
+		try {
+			ViewController viewCtrl = new ViewController(s);
+			viewCtrl.testPlayGame(game);
+		} catch (UnsupportedAudioFileException | IOException
+				| LineUnavailableException e) {
+			System.out.println("Opening ViewController didn't work!");
+		}
 	}
 
 }
