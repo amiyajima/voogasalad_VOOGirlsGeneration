@@ -291,7 +291,7 @@ public class ViewController {
         public void updateLanguages() {
                 messages = ResourceBundle.getBundle(currentLanguage);
                 showScoreButton.setText(messages.getString(showScoreButton.getId()));
-                gameMenu.setText(messages.getString(messages.getString(gameMenu.getId())));
+                gameMenu.setText(messages.getString(gameMenu.getId()));
                 for (Tab t: tabPane.getTabs()){
                     t.setText(messages.getString(t.getId()));
                 }
