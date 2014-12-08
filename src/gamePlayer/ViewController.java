@@ -25,16 +25,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayerBuilder;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import com.sun.media.jfxmedia.MediaPlayer;
 import tests.JSONBobTester;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
@@ -82,7 +78,6 @@ public class ViewController {
 	private Piece activePiece;
 	private Action activeAction;
 
-//	private AudioClip myAudio;
 	private Audio myAudio;
 	
 	
@@ -109,9 +104,7 @@ public class ViewController {
 
 	public ViewController(Stage s) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		myStage = s;
-		
-		
-		
+
 		openInitialMenu();
 		try {
 			newGame();
@@ -310,6 +303,7 @@ public class ViewController {
 	 */
 	private void initializeGrid() {
 		
+	        myAudio.playSelection();
 	        
 	        myGridPane = new ScrollPane();
 		Level currentLevel = myModel.getCurrentLevel();
