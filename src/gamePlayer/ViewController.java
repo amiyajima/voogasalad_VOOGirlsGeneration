@@ -26,12 +26,15 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayerBuilder;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import com.sun.media.jfxmedia.MediaPlayer;
 import tests.JSONBobTester;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
@@ -51,7 +54,7 @@ public class ViewController {
 	public static final String GAME_LOCATION = "/src/resources/json";
 	public static final String POPUP_FXML = "popup.fxml";
 
-	private static final String DEFAULT_MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
+//	private static final String DEFAULT_MUSIC = "/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
 	public static final double CURSOR_RATIO = 0.25;
@@ -107,8 +110,7 @@ public class ViewController {
 	public ViewController(Stage s) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		myStage = s;
 		
-//	        myAudio = new Audio(DEFAULT_MUSIC);
-//	        myAudio.play();
+		
 		
 		openInitialMenu();
 		try {
@@ -116,6 +118,9 @@ public class ViewController {
 		} catch (UnsupportedAudioFileException | IOException
 				| LineUnavailableException e) {
 		}
+		
+
+		
 		myStage.show();
 
 	}
@@ -123,9 +128,12 @@ public class ViewController {
 	
 	/**
 	 * Sets up and opens the initial scene
+	 * @throws LineUnavailableException 
+	 * @throws IOException 
+	 * @throws UnsupportedAudioFileException 
 	 */
 	@FXML
-	protected void openInitialMenu(){
+	protected void openInitialMenu() throws UnsupportedAudioFileException, IOException, LineUnavailableException{
 	    myInitialScene = new VBox();
 	    myGameSpace = new BorderPane();
 	    myScoreBoard = new VBox();
@@ -141,6 +149,10 @@ public class ViewController {
 	    myPopupScene = new Scene(myPopup);
 	    
 	    myStage.setScene(new Scene(myInitialScene));
+	    
+	    myAudio = new Audio();
+	    myAudio.playDefault();
+	    
 	    System.out.println("Opened initial menu");
 	}
 	
