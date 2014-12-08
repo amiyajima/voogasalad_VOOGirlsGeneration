@@ -1,8 +1,11 @@
 package fxml_main;
 
+import gamedata.gamecomponents.Game;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,6 +20,7 @@ import authoring.actionslogic.ActionLogicController;
 import authoring.concretefeatures.StatsTotalEditor;
 import authoring.createedit.GamePropertiesEditor;
 import authoring.data.ActionData;
+import authoring.data.GameAuthoringData;
 import authoring.data.GamePropertiesData;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
@@ -55,34 +59,45 @@ public class AuthoringController implements Initializable {
 
     @FXML
     private MenuItem playerEditor;
+    
+    @FXML
+    private MenuItem mySaveBtn;
 
     private GUIGridReference myGridReference;
     private PieceController myPieceController;
     private PatchController myPatchController;
     private LevelController myLevelController;
-    private GamePropertiesData myGamePropertiesData;
     private ActionController myActionController;
+    
+    
+    // Authoring Data
+    private GameAuthoringData myTotalData;
+    private GamePropertiesData myGamePropertiesData;
 
 
 	
 	@Override // This method is called by the FXMLLoader when initialization is complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
+		ActionData actionData = null;
+		LevelData levelData = null;
+		PieceTypeData pieceTypes = null;
+		PatchTypeData patchTypes = null;
+		myGamePropertiesData = null;
 		
-		ActionData actions = new ActionData();
-		LevelData myLevelData = new LevelData();
-		PieceTypeData myPieceTypes = new PieceTypeData();
-		PatchTypeData myPatchTypes = new PatchTypeData();
-		myGridReference = new GUIGridReference();
-		myGamePropertiesData=new GamePropertiesData();
+		myTotalData = new GameAuthoringData();
+		myTotalData.initDataPointers(levelData, pieceTypes, patchTypes,
+				actionData, myGamePropertiesData);
+		
+		GUIGridReference myGridReference = new GUIGridReference();
 
 		myPieceController = new PieceController(myPiecesVBox, myPropertiesSPane, myGridReference, 
-				myPieceTypes, actions);
+				pieceTypes, actionData);
 	    myPatchController = new PatchController(myPatchesVBox, myPropertiesSPane, myGridReference,
-	    		myPatchTypes);
+	    		patchTypes);
 	    myLevelController = new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
-	    		myGridReference, myLevelData, myPieceTypes, myPatchTypes);
+	    		myGridReference, levelData, pieceTypes, patchTypes);
 	    
-	    myActionController = new ActionController(myActionsVBox, myPropertiesSPane, myGridReference, actions);
+	    myActionController = new ActionController(myActionsVBox, myPropertiesSPane, myGridReference, actionData);
 	}
 	
 	@FXML
@@ -107,8 +122,6 @@ public class AuthoringController implements Initializable {
 	@FXML
 	private void showGamePropertiesWindow(){
 			GamePropertiesEditor gamePptEditor=new GamePropertiesEditor(myGamePropertiesData);
-			
-		 		
 	}
 	
     @FXML
@@ -118,7 +131,11 @@ public class AuthoringController implements Initializable {
         statsEditor.setX(450);
         statsEditor.setY(200);
         statsEditor.show();
-
+    }
+    
+    @FXML
+    private void saveGame() {
+    	Game game = myTotalData.createGame();
     }
     
 

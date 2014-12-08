@@ -12,7 +12,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Save" />
+              <MenuItem fx:id="mySaveBtn" mnemonicParsing="false" onAction="#saveGame" text="Save" />
               <MenuItem mnemonicParsing="false" text="Save As..." />
             </items>
           </Menu>
@@ -41,7 +41,7 @@
                      <content>
                         <ScrollPane prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <VBox fx:id="myLevelsVBox" prefHeight="551.0" prefWidth="226.0" />
+                              <VBox fx:id="myLevelsVBox" prefHeight="551.0" prefWidth="207.0" />
                            </content>
                         </ScrollPane>
                      </content>
@@ -50,7 +50,7 @@
                      <content>
                         <ScrollPane prefHeight="545.0" prefWidth="226.0">
                            <content>
-                              <VBox fx:id="myPiecesVBox" prefHeight="552.0" prefWidth="226.0" />
+                              <VBox fx:id="myPiecesVBox" prefHeight="552.0" prefWidth="207.0" />
                            </content>
                         </ScrollPane>
                      </content></TitledPane>
@@ -58,7 +58,7 @@
                      <content>
                         <ScrollPane prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <VBox fx:id="myPatchesVBox" prefHeight="552.0" prefWidth="226.0" />
+                              <VBox fx:id="myPatchesVBox" prefHeight="552.0" prefWidth="207.0" />
                            </content>
                         </ScrollPane>
                      </content></TitledPane>
@@ -66,7 +66,7 @@
                      <content>
                         <ScrollPane prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <VBox fx:id="myActionsVBox" prefHeight="550.0" prefWidth="226.0" />
+                              <VBox fx:id="myActionsVBox" prefHeight="550.0" prefWidth="207.0" />
                            </content>
                         </ScrollPane>
                      </content>
