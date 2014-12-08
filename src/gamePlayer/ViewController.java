@@ -51,7 +51,7 @@ public class ViewController {
 	public static final String GAME_LOCATION = "/src/resources/json";
 	public static final String POPUP_FXML = "popup.fxml";
 
-	private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
+	private static final String DEFAULT_MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
 
@@ -79,7 +79,10 @@ public class ViewController {
 	private Piece activePiece;
 	private Action activeAction;
 
-	private AudioClip myAudio;
+//	private AudioClip myAudio;
+	private Audio myAudio;
+	
+	
 	@FXML
 	protected VBox statsPane;
 	@FXML
@@ -101,34 +104,47 @@ public class ViewController {
 	private GameGridEffect myGameGridEffect;
 	private SuperTile keySelectedTile;
 
-	public ViewController(Stage s) {
+	public ViewController(Stage s) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		myStage = s;
-		myInitialScene = new VBox();
-		myGameSpace = new BorderPane();
-		myScoreBoard = new VBox();
-		myPopup = new BorderPane();
-		myJSONManager = new JSONManager();
-		// myLeapController = new Controller();
-		loadFXML(GAMESPACE_FXML, myGameSpace);
-		loadFXML(INITIALSCENE_FXML, myInitialScene);
-		loadFXML(POPUP_FXML, myPopup);
-		loadFXML(SCOREBOARD_FXML, myScoreBoard);
-
-		scoreScene = new Scene(myScoreBoard);
-		myPopupScene = new Scene(myPopup);
-
-		myStage.setScene(new Scene(myInitialScene));
-
+		
+//	        myAudio = new Audio(DEFAULT_MUSIC);
+//	        myAudio.play();
+		
+		openInitialMenu();
 		try {
 			newGame();
 		} catch (UnsupportedAudioFileException | IOException
 				| LineUnavailableException e) {
 		}
-
 		myStage.show();
 
 	}
 
+	
+	/**
+	 * Sets up and opens the initial scene
+	 */
+	@FXML
+	protected void openInitialMenu(){
+	    myInitialScene = new VBox();
+	    myGameSpace = new BorderPane();
+	    myScoreBoard = new VBox();
+	    myPopup = new BorderPane();
+	    myJSONManager = new JSONManager();
+	    // myLeapController = new Controller();
+	    loadFXML(GAMESPACE_FXML, myGameSpace);
+	    loadFXML(INITIALSCENE_FXML, myInitialScene);
+	    loadFXML(POPUP_FXML, myPopup);
+	    loadFXML(SCOREBOARD_FXML, myScoreBoard);
+	    
+	    scoreScene = new Scene(myScoreBoard);
+	    myPopupScene = new Scene(myPopup);
+	    
+	    myStage.setScene(new Scene(myInitialScene));
+	    System.out.println("Opened initial menu");
+	}
+	
+	
 	/**
 	 * the method allows user to load the previously saved json representation
 	 * of the game and uses JSON reader from Game Data to generate an instance
@@ -142,17 +158,21 @@ public class ViewController {
 		fc.setInitialDirectory(new File("src/resources/json"));
 		File f = fc.showOpenDialog(myStage);
 
-		try {
-			myModel = myJSONManager.readFromJSONFile(f.getPath());
-			initializeGrid();
-		} catch (FileNotFoundException e) {
-			System.out.println("Could not find JSON: " + "f.getPath()");
-		}
+		//commented out for now.... (will work on it when myJSONManager is finished)
+//		try {
+			myScene = new Scene(myGameSpace);
+			myStage.setScene(myScene);
+//			myModel = myJSONManager.readFromJSONFile(f.getPath());
+//			initializeGrid();
+//		} catch (FileNotFoundException e) {
+//			System.out.println("Could not find JSON: " + "f.getPath()");
+//		}
 
 	}
-
+	
+	
 	/**
-	 * the method to restart the game; it asks the use whether to save the
+	 * the method to restart the game; it asks the user whether to save the
 	 * current game
 	 * 
 	 */
@@ -161,8 +181,8 @@ public class ViewController {
 		initializeGrid();
 		statsPane.getChildren().clear();
 		controlPane.getChildren().clear();
-
 	}
+	
 
 	@FXML
 	protected void exitGame() {
@@ -223,7 +243,7 @@ public class ViewController {
 
 	@FXML
 	protected void cancelPopup() {
-
+	    System.out.println("cancel popup");
 	}
 
 	/**
@@ -277,7 +297,9 @@ public class ViewController {
 	 * Initializes grid and its effects manager (gamegrideffect)
 	 */
 	private void initializeGrid() {
-		myGridPane = new ScrollPane();
+		
+	        
+	        myGridPane = new ScrollPane();
 		Level currentLevel = myModel.getCurrentLevel();
 		myGrid = currentLevel.getGrid();
 		System.out.println("myGrid: " + myGrid);
@@ -295,6 +317,8 @@ public class ViewController {
 		keyControlOn = false;
 		myGameGridEffect = new GameGridEffect(this);
 	}
+	
+
 
 	/**
 	 * Loads the Score from a Player for Display
@@ -302,8 +326,8 @@ public class ViewController {
 	protected void loadScores() {
 		gameName.setText(gameName.getText() + myModel.toString());
 		// TODO: add in scores
-		// myModel.getPlayers().forEach(player-> scores.getChildren().
-		// add(new Text(player.getID()+": ")));
+		 myModel.getPlayers().forEach(player-> scores.getChildren().
+		 add(new Text(player.getID()+": ")));
 	}
 
 	/**
