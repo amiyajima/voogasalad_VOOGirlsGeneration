@@ -2,11 +2,16 @@ package authoring.eventeditor;
 
 import gamedata.events.Condition;
 import gamedata.events.conditions.ConditionEquals;
+import gamedata.gamecomponents.Constant;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Patch;
+import gamedata.gamecomponents.Piece;
+import gameengine.player.Player;
 
+import java.util.List;
 import java.util.function.Consumer;
 
+import authoring.data.EventsDataWrapper;
 import authoring_environment.UIspecs;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -44,9 +49,11 @@ public class ConditionEditorPane extends Pane{
 
 	private Consumer<Condition> myDoneLambda;
 	private Condition myCondition;
+	private EventsDataWrapper myData;
 
-	public ConditionEditorPane(Consumer<Condition> doneLambda){
+	public ConditionEditorPane(Consumer<Condition> doneLambda, EventsDataWrapper data){
 		myDoneLambda = doneLambda;
+		myData = data;
 		initialize();
 	}
 
@@ -75,43 +82,32 @@ public class ConditionEditorPane extends Pane{
 				String type1 = myRefType1.getSelectionModel().getSelectedItem();
 				IHasStats ref1 = myRefName1.getSelectionModel().getSelectedItem();
 				String stat1 = myStat1.getSelectionModel().getSelectedItem();
-				String value1 = myVal1.getText();
+				Double value1 = Double.parseDouble(myVal1.getText());
 
-				String type2 = myRefType1.getSelectionModel().getSelectedItem();
+				String type2 = myRefType2.getSelectionModel().getSelectedItem();
 				IHasStats ref2 = myRefName2.getSelectionModel().getSelectedItem();
 				String stat2 = myStat2.getSelectionModel().getSelectedItem();
-				String value2 = myVal2.getText();
-
-				double referenceVal1 = getTargetValue(type1, ref1, stat1, value1);
-				double referenceVal2 = getTargetValue(type2, ref2, stat2, value2);
+				Double value2 = Double.parseDouble(myVal2.getText());
 				
-				myCondition = new ConditionEquals(myNameField.getText(), referenceVal1, referenceVal2);
+				/**
+				 * Code below is repeated, but cannot be extracted into a method as it 
+				 * modifies both ref1 and stat1
+				 */
+				if("Constant".equals(type1)){
+					ref1 = new Constant(value1);
+					stat1 = "Value";
+				}
+				if("Constant".equals(type2)){
+					ref2 = new Constant(value2);
+					stat2 = "Value";
+				}
+				
+				myCondition = new ConditionEquals(myNameField.getText(), ref1, stat1, ref2, stat2);
 				myDoneLambda.accept(myCondition);
 			}
 
 
 		});
-	 }
-
-	/**
-	 * Extracts a double from the given source. Handles two input cases:
-	 * 1) Type equals Piece, Patch, or Player, and Source equals Stat name. References 
-	 * the given stat by name.
-	 * 2) Type equals Constant, and Source equals a numerical value. Returns the number.
-	 * @param type = Piece, Patch, Player, or Constant
-	 * @param ref = Specific IHasStats object that contains target stat
-	 * @param source = Name of target stat
-	 * @return
-	 */
-	 private double getTargetValue(String type, IHasStats ref, String source, String value){
-		 double val;
-		 if("Constant".equals(type)){
-			 val = Double.parseDouble(value);    	
-		 }
-		 else{
-			 val = ref.getStats().getValue(source);
-		 }
-		 return val;
 	 }
 
 	 private void setUpComponents(ChoiceBox<String> typeBox,
@@ -147,14 +143,20 @@ public class ConditionEditorPane extends Pane{
 		 switch(type){
 			 case "Piece": 
 			 {
+				 List<Piece> levelPieces = myData.getLevelPieces();
+				 refName.getItems().addAll(levelPieces);
 				 break;
 			 }
 			 case "Patch":
 			 {
+				 List<Patch> levelPatches = myData.getLevelPatches();
+				 refName.getItems().addAll(levelPatches);
 				 break;  
 			 }
 			 case "Player":
 			 {
+				 List<Player> players = myData.getPlayers();
+				 refName.getItems().addAll();
 				 break;
 			 }
 			 case "Constant": 

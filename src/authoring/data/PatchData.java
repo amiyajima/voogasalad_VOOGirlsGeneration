@@ -6,8 +6,6 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Set;
 
 /**
@@ -30,12 +28,13 @@ public class PatchData implements AuthoringData<Patch> {
 
 	@Override
 	public void add(Patch p) {
+		removePatchAtLoc(p.getLoc());
 		myPatches.add(p);
 	}
 	
 	@Override
 	public void replace(Patch origEl, Patch newEl) {
-		origEl.setName(newEl.getName());
+		origEl.setName(newEl.toString());
 		origEl.setImageLocation(newEl.getImageLocation());
 	}
 
@@ -47,6 +46,31 @@ public class PatchData implements AuthoringData<Patch> {
 	@Override
 	public List<Patch> getData() {
 		return myPatches;
+	}
+	
+	public List<Point2D> replace(Patch patchType) {
+    	List<Point2D> pointsToReplace = new ArrayList<Point2D>();
+    	myPatches.forEach(patch -> {
+    		if (patch.getID().equals(patchType.getID())) {
+    			replace(patch, patchType);
+    			pointsToReplace.add(patch.getLoc());
+    		}
+    	});
+    	return pointsToReplace;
+    }
+	
+	public List<Point2D> removeUnknown(Set<String> idSet) {
+		List<Patch> patchToRemove = new ArrayList<Patch>();
+		List<Point2D> pointsToRemove = new ArrayList<Point2D>();
+		for (Patch patch : myPatches) {
+    		if (!idSet.contains(patch.getID())) {
+				patchToRemove.add(patch);
+				patch.getImageView().setImage(null);
+    			pointsToRemove.add(patch.getLoc());
+    		}
+		}
+		myPatches.remove(patchToRemove);
+		return pointsToRemove;
 	}
 
 	public void removePatchAtLoc(Point2D location){
@@ -62,37 +86,11 @@ public class PatchData implements AuthoringData<Patch> {
 	public boolean terrainAtLoc(Patch terrain, int x, int y){
 		Point2D location = new Point2D.Double(x, y);
 		for(Patch patch : myPatches){
-			if(location.equals(patch.getLoc()) && terrain.getName().equals(patch.getName())){
+			if(location.equals(patch.getLoc()) && terrain.toString().equals(patch.toString())){
 				myPatches.remove(patch);
 				return true;
 			}
 		}
 		return false;
 	}
-	
-	public List<Point2D> removeUnknown(Set<String> idSet) {
-		List<Patch> patchToRemove = new ArrayList<Patch>();
-		List<Point2D> pointsToRemove = new ArrayList<Point2D>();
-		for (Patch patch : myPatches) {
-    		if (!idSet.contains(patch.getID())) {
-				patchToRemove.add(patch);
-				patch.getImageView().setImage(null);
-    			pointsToRemove.add(patch.getLoc());
-    		}
-		}
-		myPatches.remove(patchToRemove);
-		return pointsToRemove;
-	}
-	
-	public List<Point2D> replace(Patch patchType) {
-    	List<Point2D> pointsToReplace = new ArrayList<Point2D>();
-    	System.out.println(pointsToReplace.toString());
-    	myPatches.forEach(patch -> {
-    		if (patch.getID().equals(patchType.getID())) {
-    			replace(patch, patchType);
-    			pointsToReplace.add(patch.getLoc());
-    		}
-    	});
-    	return pointsToReplace;
-    }
 }

@@ -7,8 +7,8 @@
 
 .vbox{
 	-fx-padding: 10;
-		-fx-spacing: 10;
-		-fx-alignment: center
+	-fx-spacing: 10;
+	-fx-alignment: center
 }
 
 .gridpane{
@@ -24,9 +24,9 @@
 
 .tab-content-area 
 {
-	-fx-border-color:#82878c;
-	-fx-background-color: linear-gradient(#ffffff, #82878c);
-	-fx-border-radius: 2;
+    -fx-border-color:#82878c;
+    -fx-background-color: linear-gradient(#ffffff, #82878c);
+    -fx-border-radius: 2;
     -fx-padding: 3 6 6 6;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 ); 
 }
@@ -41,7 +41,7 @@
 }
 
 .tab:selected {
--fx-border-color:#82878c;
+    -fx-border-color:#82878c;
 }
 
 .tab .tab-label { 
@@ -49,12 +49,12 @@
     -fx-text-fill: white;
     -fx-font-size: 13px;
     -fx-font-family: Consolas;
-    -fx-font-weight: bold;
 }
 
 .tab:selected .tab-label { 
     -fx-alignment: CENTER;
     -fx-text-fill: #add8e6;
+    -fx-border-radius: 2;
 }
 
 #gameMenu {
@@ -73,7 +73,7 @@
 }
 
 .button:hover{
-	-fx-background-color: #add8e6;
+    -fx-background-color: #add8e6;
 }
 
 .label{

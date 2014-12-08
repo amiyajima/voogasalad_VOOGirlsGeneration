@@ -90,10 +90,10 @@ public class RangeGrid extends SuperGrid{
 		SuperTile centerTile=findCenterTile(columns,rows);
 		Image centerImage=new Image(getClass().getResourceAsStream(DEFAULT_CENTRAL_IMAGE));
 		ImageView centerPatrick=new ImageView(centerImage);
-		centerTile.addPatchImage(centerPatrick);
+		centerTile.setPatchImage(centerPatrick);
 
 	}
-
+ 
 	private SuperTile findCenterTile(int rows,int columns) {
 		SuperTile centerTile=findTile(centerX,centerY);
 		return centerTile;
@@ -171,7 +171,6 @@ public class RangeGrid extends SuperGrid{
 	public List<Point2D> getRange(){
 		return myRange;
 	}
-
 
 	
 }

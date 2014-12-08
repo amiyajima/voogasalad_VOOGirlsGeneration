@@ -2,6 +2,7 @@ package fxml_main;
 
 import gamedata.gamecomponents.Piece;
 
+import java.awt.geom.Point2D;
 import java.util.function.Consumer;
 
 import javafx.event.ActionEvent;
@@ -10,10 +11,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.data.ActionData;
 import authoring.data.PieceTypeData;
+import authoring_environment.GUIGrid;
 
 public class PieceController extends GridComponentAbstCtrl<Piece> {
 	
@@ -33,9 +36,10 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 			@Override
 			public void handle (ActionEvent event) {
 				Consumer<Piece> okLambda = (Piece piece) -> {
+					myPieceTypes.add(piece);
 					addEntry(piece);
 				};
-				myPropertiesSPane.setContent(new PieceTypeEditor(okLambda, myActionData));
+				myPropertiesSPane.setContent(new PieceTypeEditor(okLambda, myPieceTypes, myActionData));
 			}
 		});
     }
@@ -55,20 +59,41 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
     	delBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                System.out.println("HI DELETE BUTTONFORPIECE HI");
+            	EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
+					@Override
+					public void handle (MouseEvent e) {
+						GUIGrid grid = myGridReference.getGrid();
+						Point2D coor = grid.calculateClicked(e.getX(), e.getY());
+						grid.removePieceAtCoordinate(coor);
+					}
+				};
+				myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
             }
         });
     }
 
 	@Override
 	protected HBox makeEntryBox(Piece entry) {
-		myPieceTypes.add(entry);
 		HBox hb = new HBox();
-		Label name = new Label(entry.getName());
+		Label name = new Label(entry.toString());
 		name.setTranslateY(7.5);
 		ImageView img = entry.getImageView();
 		img.setFitHeight(40);
 		img.setFitWidth(40);
+		hb.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle (MouseEvent event) {
+				EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
+					@Override
+					public void handle (MouseEvent e) {
+						GUIGrid grid = myGridReference.getGrid();
+						Point2D coor = grid.calculateClicked(e.getX(), e.getY());
+						grid.addPiece(entry, coor);
+					}
+				};
+				myGridReference.getGrid().paneSetOnMouseEvent(clickHandler);
+			}
+		});
 		hb.getChildren().addAll(img, name);
 		return hb;
 	}
@@ -79,18 +104,14 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 			@Override
 			public void handle (ActionEvent e) {
 				Consumer<Piece> okLambda = (Piece piece) -> {
-					//TODO: Use observables to make all the pieces and
-					// patches in the grid change to fit the updated patch
-					HBox entryBox = myEntryMap.get(entry);
-				    HBox imgNameBox = myIndivEntMap.get(entryBox);
-				    
-				    entryBox.getChildren().remove(imgNameBox);
-				    HBox newImgNameBox = makeEntryBox(piece);	
-				    
-				    entryBox.getChildren().add(newImgNameBox);
-				    myIndivEntMap.replace(entryBox, newImgNameBox);
-				    
-				    myPieceTypes.replace(entry, piece);
+					HBox entryBox = makeCompleteEntryBox(piece);
+					
+					HBox entryHolderBox = myEntryMap.get(entry);
+					entryHolderBox.getChildren().clear();
+					entryHolderBox.getChildren().add(entryBox);
+					myEntryMap.put(piece, entryHolderBox);
+
+					myPieceTypes.replace(entry, piece);
 				};
 				myPropertiesSPane.setContent(new PieceTypeEditor(okLambda, entry, myActionData));
 			}
@@ -103,8 +124,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 			@Override
 			public void handle (ActionEvent event) {
 				myPieceTypes.remove(entry);
-				HBox entryBox = myEntryMap.get(entry);
-				myVBox.getChildren().remove(entryBox);
+				myVBox.getChildren().remove(myEntryMap.get(entry));
 			}
 		});
 	}

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="myRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mouse and Key Control" wrappingWidth="330.58984375" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cursor Tracking" />
+                  <ComboBox fx:id="MouseDropDown" prefHeight="26.0" prefWidth="201.0" promptText="Choose Mouse Control" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="225.0" prefWidth="600.0" spacing="20.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="key and Mouse Control" />
+                  <VBox prefHeight="225.0" prefWidth="273.0">
+                     <children>
+                        <HBox fx:id="screenTap" prefHeight="52.0" prefWidth="273.0">
+                           <children>
+                              <Label fx:id="screenTapLabel" text="Screen Tap" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="swipe" prefHeight="59.0" prefWidth="273.0">
+                           <children>
+                              <Label fx:id="swipeLabel" text="Swipe" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="circle" prefHeight="55.0" prefWidth="273.0">
+                           <children>
+                              <Label fx:id="circleLabel" text="Circle" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="customerized" prefHeight="50.0" prefWidth="273.0">
+                           <children>
+                              <Label fx:id="customerLabel" text="Customized control ..." />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <right/>
+   <bottom/>
+</BorderPane>

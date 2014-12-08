@@ -5,6 +5,7 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
+import gameengine.player.Player;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -50,7 +51,7 @@ public class ViewController {
 	public static final String GAME_LOCATION = "/src/resources/json";
 	public static final String POPUP_FXML = "popup.fxml";
 
-	private static final String MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
+	private static final String DEFAULT_MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
 	public static final double CURSOR_RATIO = 0.25;
@@ -67,6 +68,8 @@ public class ViewController {
 	private Game myModel;
 	private GUIGrid myGrid;
 
+	private Player myCurrentPlayer;
+
 	// private SampleListener myLeapListener;
 
 	private Boolean keyControlOn;
@@ -76,7 +79,10 @@ public class ViewController {
 	private Piece activePiece;
 	private Action activeAction;
 
-	private AudioClip myAudio;
+//	private AudioClip myAudio;
+	private Audio myAudio;
+	
+	
 	@FXML
 	protected VBox statsPane;
 	@FXML
@@ -87,6 +93,8 @@ public class ViewController {
 	private Text gameName;
 	@FXML
 	private VBox scores;
+	@FXML
+	private Label playerTurn;
 
 	private ScrollPane myGridPane;
 
@@ -96,34 +104,47 @@ public class ViewController {
 	private GameGridEffect myGameGridEffect;
 	private SuperTile keySelectedTile;
 
-	public ViewController(Stage s) {
+	public ViewController(Stage s) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		myStage = s;
-		myInitialScene = new VBox();
-		myGameSpace = new BorderPane();
-		myScoreBoard = new VBox();
-		myPopup = new BorderPane();
-		myJSONManager = new JSONManager();
-		// myLeapController = new Controller();
-		loadFXML(GAMESPACE_FXML, myGameSpace);
-		loadFXML(INITIALSCENE_FXML, myInitialScene);
-		loadFXML(POPUP_FXML, myPopup);
-		loadFXML(SCOREBOARD_FXML, myScoreBoard);
-
-		scoreScene = new Scene(myScoreBoard);
-		myPopupScene = new Scene(myPopup);
-
-		myStage.setScene(new Scene(myInitialScene));
-
+		
+//	        myAudio = new Audio(DEFAULT_MUSIC);
+//	        myAudio.play();
+		
+		openInitialMenu();
 		try {
 			newGame();
 		} catch (UnsupportedAudioFileException | IOException
 				| LineUnavailableException e) {
 		}
-
 		myStage.show();
 
 	}
 
+	
+	/**
+	 * Sets up and opens the initial scene
+	 */
+	@FXML
+	protected void openInitialMenu(){
+	    myInitialScene = new VBox();
+	    myGameSpace = new BorderPane();
+	    myScoreBoard = new VBox();
+	    myPopup = new BorderPane();
+	    myJSONManager = new JSONManager();
+	    // myLeapController = new Controller();
+	    loadFXML(GAMESPACE_FXML, myGameSpace);
+	    loadFXML(INITIALSCENE_FXML, myInitialScene);
+	    loadFXML(POPUP_FXML, myPopup);
+	    loadFXML(SCOREBOARD_FXML, myScoreBoard);
+	    
+	    scoreScene = new Scene(myScoreBoard);
+	    myPopupScene = new Scene(myPopup);
+	    
+	    myStage.setScene(new Scene(myInitialScene));
+	    System.out.println("Opened initial menu");
+	}
+	
+	
 	/**
 	 * the method allows user to load the previously saved json representation
 	 * of the game and uses JSON reader from Game Data to generate an instance
@@ -137,17 +158,21 @@ public class ViewController {
 		fc.setInitialDirectory(new File("src/resources/json"));
 		File f = fc.showOpenDialog(myStage);
 
-		try {
-			myModel = myJSONManager.readFromJSONFile(f.getPath());
-			initializeGrid();
-		} catch (FileNotFoundException e) {
-			System.out.println("Could not find JSON: " + "f.getPath()");
-		}
+		//commented out for now.... (will work on it when myJSONManager is finished)
+//		try {
+			myScene = new Scene(myGameSpace);
+			myStage.setScene(myScene);
+//			myModel = myJSONManager.readFromJSONFile(f.getPath());
+//			initializeGrid();
+//		} catch (FileNotFoundException e) {
+//			System.out.println("Could not find JSON: " + "f.getPath()");
+//		}
 
 	}
-
+	
+	
 	/**
-	 * the method to restart the game; it asks the use whether to save the
+	 * the method to restart the game; it asks the user whether to save the
 	 * current game
 	 * 
 	 */
@@ -156,8 +181,8 @@ public class ViewController {
 		initializeGrid();
 		statsPane.getChildren().clear();
 		controlPane.getChildren().clear();
-
 	}
+	
 
 	@FXML
 	protected void exitGame() {
@@ -218,7 +243,7 @@ public class ViewController {
 
 	@FXML
 	protected void cancelPopup() {
-
+	    System.out.println("cancel popup");
 	}
 
 	/**
@@ -251,7 +276,7 @@ public class ViewController {
 	 * @throws UnsupportedAudioFileException
 	 */
 	protected void newGame() throws UnsupportedAudioFileException, IOException,
-	LineUnavailableException {
+			LineUnavailableException {
 
 		List<File> games = getGames();
 
@@ -272,7 +297,9 @@ public class ViewController {
 	 * Initializes grid and its effects manager (gamegrideffect)
 	 */
 	private void initializeGrid() {
-		myGridPane = new ScrollPane();
+		
+	        
+	        myGridPane = new ScrollPane();
 		Level currentLevel = myModel.getCurrentLevel();
 		myGrid = currentLevel.getGrid();
 		System.out.println("myGrid: " + myGrid);
@@ -290,6 +317,8 @@ public class ViewController {
 		keyControlOn = false;
 		myGameGridEffect = new GameGridEffect(this);
 	}
+	
+
 
 	/**
 	 * Loads the Score from a Player for Display
@@ -297,8 +326,8 @@ public class ViewController {
 	protected void loadScores() {
 		gameName.setText(gameName.getText() + myModel.toString());
 		// TODO: add in scores
-		// myModel.getPlayers().forEach(player-> scores.getChildren().
-		// add(new Text(player.getID()+": ")));
+		 myModel.getPlayers().forEach(player-> scores.getChildren().
+		 add(new Text(player.getID()+": ")));
 	}
 
 	/**
@@ -330,8 +359,9 @@ public class ViewController {
 
 		piece.getStats()
 				.getStatNames()
-				.forEach(key -> stats.add(new Text(key + ":  "
-					+ piece.getStats().getValue(key))));
+				.forEach(
+						key -> stats.add(new Text(key + ":  "
+								+ piece.getStats().getValue(key))));
 
 		statsPane.getChildren().addAll(stats);
 
@@ -354,12 +384,12 @@ public class ViewController {
 		controlPane.getChildren().addAll(actions);
 
 	}
-	
+
 	/**
 	 * Clears control pane of actions after you've selected one to do
 	 */
 	public void clearActions() {
-	    controlPane.getChildren().clear();
+		controlPane.getChildren().clear();
 	}
 
 	/**
@@ -382,28 +412,28 @@ public class ViewController {
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
-	        myGameGridEffect.highlightActionRange();
+		myGameGridEffect.highlightActionRange();
 		setGridState(new ApplyState(this));
-		if (keyControlOn){
-		    
-		    //after i click action button, i need to go back to KeyboardMovement
-		    myKeyboardAction = null;
-		    myKeyboardMovement = new KeyboardMovement();
-		    myKeyboardMovement.setMovementKeyControl(this, myGridPane, myModel);
+		if (keyControlOn) {
+
+			// after i click action button, i need to go back to
+			// KeyboardMovement
+			myKeyboardAction = null;
+			myKeyboardMovement = new KeyboardMovement();
+			myKeyboardMovement.setMovementKeyControl(this);
 		}
 	}
 
 	private void setOnClick() {
-	    myGridPane.getContent().setOnMouseClicked(event -> {
-		Point2D loc = findPosition(event.getX(), event.getY());
-		performAction(loc);
+		myGridPane.getContent().setOnMouseClicked(event -> {
+			Point2D loc = findPosition(event.getX(), event.getY());
+			performAction(loc);
 		});
 	}
-        
 
 	/**
-	 * Perform the actions of a click at position (x,y) on game grid
-	 * and highlights the piece that was clicked
+	 * Perform the actions of a click at position (x,y) on game grid and
+	 * highlights the piece that was clicked
 	 * 
 	 * @param x
 	 * @param y
@@ -411,20 +441,21 @@ public class ViewController {
 	public void performAction(Point2D loc) {
 		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
 		
-		if (keyControlOn){
-                  myKeyboardMovement = null;
-		  myKeyboardAction = new KeyboardAction();
-                  myKeyboardAction.setActionKeyControl(this, myGridPane); 
+		if (keyControlOn) {
+			myKeyboardMovement = null;
+			myKeyboardAction = new KeyboardAction();
+			myKeyboardAction.setActionKeyControl(this);
 		}
 	}
-	
-	
+
 	/**
 	 * Select state tells VC to highlight the selected piece
+	 * 
 	 * @param p
 	 */
 	public void highlightSelected(Piece p) {
-	           myGameGridEffect.highlightCurrent(p.getLoc(), myModel.getCurrentLevel().getGrid().getPiece(p.getLoc()));
+		myGameGridEffect.highlightCurrent(p.getLoc(), myModel.getCurrentLevel()
+				.getGrid().getPiece(p.getLoc()));
 
 	}
 
@@ -462,27 +493,27 @@ public class ViewController {
 	public void toggleKeyboardControl() {
 		if (keyControlOn) {
 			keyControlOn = false;
-			
-			//dehighlighting the tile the keyboard is currently highlighting
-	                if(myKeyboardMovement!=null){
-	                    keySelectedTile = myGrid.findClickedTile(myKeyboardMovement.getCurrentLocation());
-	                    keySelectedTile.deselectTile();
-	                }
+
+			// dehighlighting the tile the keyboard is currently highlighting
+			if (myKeyboardMovement != null) {
+				keySelectedTile = myGrid.findTile(myKeyboardMovement
+						.getCurrentLocation());
+				keySelectedTile.deselectTile();
+			}
 			myKeyboardMovement = null;
 			myKeyboardAction = null;
 			System.out.println("Keyboard OFF");
 		} else {
-			
-			//dehighlighting the tile the mouse click is currently highlighting
-			if (currentClick != null){
-			    SuperTile selectedTile =
-			            myGrid.findClickedTile(currentClick);
-			    selectedTile.deselectTile();			    
+
+			// dehighlighting the tile the mouse click is currently highlighting
+			if (currentClick != null) {
+				SuperTile selectedTile = myGrid.findTile(currentClick);
+				selectedTile.deselectTile();
 			}
-			
-                      myKeyboardMovement = new KeyboardMovement();
-                      myKeyboardMovement.setMovementKeyControl(this, myGridPane, myModel);
-			
+
+			myKeyboardMovement = new KeyboardMovement();
+			myKeyboardMovement.setMovementKeyControl(this);
+
 			keyControlOn = true;
 		}
 	}
@@ -588,7 +619,24 @@ public class ViewController {
 	 *            the current state of the Grid, select/ apply action Mode
 	 */
 	public void setGridState(IGridState state) {
+		myModel.getCurrentPlayer().playTurn();
+		if (myModel.getCurrentPlayer().getNumMovesPlayed() > 3) {
+			System.out.println("VC: NEXT PLAYER. MOVES:" + myModel.getCurrentPlayer().getNumMovesPlayed());
+			myModel.nextLevel();
+		}
+		if (myModel.getCurrentLevel().getGrid()
+				.getPiece(new Point2D.Double(0, 0)) == null) {
+			System.out.println("Next LEVEL");
+			myModel.nextLevel();
+		}
+		
+		myCurrentPlayer = myModel.getCurrentPlayer();
+		setPlayerTurnDisplay();
 		gridState = state;
+	}
+
+	private void setPlayerTurnDisplay() {
+		playerTurn.setText("Turn: " + myCurrentPlayer.getID());
 	}
 
 	/**
@@ -598,5 +646,9 @@ public class ViewController {
 	 */
 	protected GameGridEffect getGameGridEffect() {
 		return myGameGridEffect;
+	}
+
+	public VBox getcontrolPane() {
+		return controlPane;
 	}
 }

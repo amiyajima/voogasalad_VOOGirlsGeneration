@@ -16,7 +16,7 @@
             <VBox fx:id="myReceiversVBox" prefHeight="200.0" prefWidth="100.0" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="save" mnemonicParsing="false" text="Save" />
+                  <Button fx:id="save" mnemonicParsing="false" onAction="#saveLogic" text="Save" />
                </children>
             </HBox>
          </children>
