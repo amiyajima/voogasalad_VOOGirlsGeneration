@@ -2,9 +2,12 @@ package gamedata.action;
 
 import gamedata.gamecomponents.Piece; 
 import gamedata.stats.Stats;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.geom.Point2D;
+
+import authoring_environment.GUIGrid;
 
 /**
  * A concrete instance of an Action.
@@ -70,9 +73,9 @@ public class ConcreteAction implements Action {
 	 * the conclusion
 	 */
 	@Override
-	public void doBehavior(Piece actor, Piece... receivers) {
+	public void doBehavior(GUIGrid grid, Piece actor, Piece... receivers) {
 		modifyStats(actor, receivers);
-		runConclusion(actor, receivers);
+		runConclusion(grid, actor, receivers);
 	}
 
 	private void modifyStats(Piece actor, Piece[] receivers) {
@@ -83,9 +86,9 @@ public class ConcreteAction implements Action {
 		}
 	}
 
-	private void runConclusion(Piece actor, Piece[] receivers) {
+	private void runConclusion(GUIGrid grid, Piece actor, Piece[] receivers) {
 		if (myConclusion != null) {
-			myConclusion.runConclusion(null, actor, receivers);
+			myConclusion.runConclusion(grid, actor, receivers);
 		}
 	}
 

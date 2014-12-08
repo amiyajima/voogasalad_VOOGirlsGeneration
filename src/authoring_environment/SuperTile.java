@@ -159,4 +159,8 @@ public abstract class SuperTile extends Group {
     public Point2D getLocation () {
         return myLocation;
     }
+    
+    public ImageView getPieceImage(){
+    	return myPieceImage;
+    }
 }

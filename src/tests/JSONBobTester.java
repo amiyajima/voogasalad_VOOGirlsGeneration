@@ -72,7 +72,7 @@ public class JSONBobTester {
 		System.out.println("Bob Tester: Create new game");
 		List<Player> myPlayers = new ArrayList<Player>();
 		Player myPlayer1 = new HumanPlayer(1);
-		Player myPlayer2 = new SimpleAIPlayer(2);
+		Player myPlayer2 = new HumanPlayer(2);
 		myPlayers.add(myPlayer1);
 		myPlayers.add(myPlayer2);
 

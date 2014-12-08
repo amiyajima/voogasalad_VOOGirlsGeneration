@@ -9,7 +9,7 @@ import authoring_environment.SuperTile;
  * Class representing the state of the grid when a particular action has been
  * selected and is ready to be applied on the grid
  * 
- * @author Eric, Yiran, Yoon, Rica
+ * @author Eric, Yiran, Yoon, Rica, Jesse
  * 
  *
  */
@@ -53,8 +53,8 @@ public class ApplyState implements IGridState {
 		}
 		// System.out.println("ACTION RUNNING:" +
 		// myController.getActiveAction().toString());
-		myController.getActiveAction().doBehavior(actor, piece);
-		myController.getGrid().repopulateGrid();
+		myController.getActiveAction().doBehavior(myController.getGrid(),actor, piece);
+		//myController.getGrid().repopulateGrid();
 		myGameGridEffect.clearAllPieceHighlights();
 		myGameGridEffect.clearAllActionHighlights();
 		myController.clearActions();

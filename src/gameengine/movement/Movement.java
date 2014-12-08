@@ -1,6 +1,6 @@
 package gameengine.movement;
 
-import gamedata.action.Action;
+import gamedata.action.Action; 
 import gamedata.gamecomponents.Piece;
 import gamedata.rules.Rule;
 
@@ -9,6 +9,16 @@ import java.util.List;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 
+import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
+import javafx.animation.Transition;
+import javafx.scene.Group;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import authoring_environment.GUIGrid;
 
 /**
@@ -139,12 +149,29 @@ public class Movement implements Action {
 	 * Contains the logic to execute the behavior of moving the piece
 	 */
 	@Override
-	public void doBehavior(Piece actor, Piece... receivers) {
-		Piece p = receivers[0];
+	public void doBehavior(GUIGrid grid, Piece actor, Piece... receivers) {
+		Transition t = new PathTransition();
+		Piece p = receivers[0]; 
 		Point2D point = p.getLoc();
 		if (isValidLocation((int) point.getX(), (int) point.getY())) {
 			// TODO: Implement Orientation Calculation Here
+			
+			PathTransition pathTransition = new PathTransition();
+			Path path = new Path();
+			path.getElements().add (new MoveTo (actor.getLoc().getX()*grid.getTileHeight(),actor.getLoc().getY()*grid.getTileHeight()));
+			path.getElements().add (new LineTo (point.getX()*grid.getTileHeight(),point.getY()*grid.getTileHeight()));
+			pathTransition.setDuration(Duration.millis(4000));
+			pathTransition.setPath(path);
+			Group root = new Group();
+			root.getChildren().add(grid.findTile(actor.getLoc()).getPieceImage());
+			pathTransition.setNode(grid.findTile(actor.getLoc()).getPieceImage());
+
+			pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+			pathTransition.setCycleCount(Timeline.INDEFINITE);
+			pathTransition.play();
+			
 			actor.setLoc(point);
+			
 		}
 	}
 
