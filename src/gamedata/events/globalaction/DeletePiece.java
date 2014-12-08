@@ -10,7 +10,7 @@ import gamedata.gamecomponents.Piece;
  * @author Rica, Mike Zhu
  *
  */
-public class DeletePieceGlobalAction extends GlobalAction {
+public class DeletePiece extends GlobalAction {
 	public static final String DESCRIPTION = "Delete ";
     private Game myGame;
     private String myName;
@@ -22,7 +22,7 @@ public class DeletePieceGlobalAction extends GlobalAction {
      * @param game
      * @param name of type of piece to delete
      */
-    public DeletePieceGlobalAction(String name, Game game) {
+    public DeletePiece(String name, Game game) {
         super(name);
         myGame = game;
         myName = name;

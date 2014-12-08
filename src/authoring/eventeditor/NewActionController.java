@@ -2,7 +2,7 @@ package authoring.eventeditor;
 
 import gamedata.events.Condition;
 import gamedata.events.GlobalAction;
-import gamedata.events.globalaction.CreatePieceGlobalAction;
+import gamedata.events.globalaction.CreatePiece;
 import gamedata.events.globalaction.DeletePieceGlobalAction;
 import gamedata.events.globalaction.LevelChangeGlobalAction;
 import gamedata.events.globalaction.SwitchPlayerGlobalAction;
@@ -79,7 +79,7 @@ public class NewActionController implements Initializable{
 		/**
 		 * If statements to choose which Condition Editor to pull up
 		 */
-		if(c.equals(CreatePieceGlobalAction.class)){
+		if(c.equals(CreatePiece.class)){
 
 		}
 		else if (c.equals(DeletePieceGlobalAction.class)){
