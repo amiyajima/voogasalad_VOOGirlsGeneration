@@ -268,7 +268,6 @@ public class ViewController {
 
 			throw new RuntimeException(exception);
 		}
-
 	}
 
 	/**
@@ -281,7 +280,7 @@ public class ViewController {
 	 * @throws UnsupportedAudioFileException
 	 */
 	protected void newGame() throws UnsupportedAudioFileException, IOException,
-			LineUnavailableException {
+		LineUnavailableException {
 
 		List<File> games = getGames();
 
@@ -303,6 +302,7 @@ public class ViewController {
 	 */
 	private void initializeGrid() {
 		
+	    
 	        myAudio.playSelection();
 	        
 	        myGridPane = new ScrollPane();
@@ -316,9 +316,9 @@ public class ViewController {
 		setOnClick();
 
 		setGridState(new SelectState(this));
-		getGridPane().setOnMouseExited(event -> {
-			changeCursor(CURSOR_GLOVE_TEST);
-		});
+		changeCursor(CURSOR_GLOVE_TEST);
+
+		
 
 		keyControlOn = false;
 		myGameGridEffect = new GameGridEffect(this);
@@ -379,7 +379,9 @@ public class ViewController {
 	 * @param piece
 	 */
 	protected void updateActions(Piece piece) {
-		controlPane.getChildren().clear();
+//		System.out.println("UPDATE ACTIONS");
+//	        myAudio.playSelection();
+	        controlPane.getChildren().clear();
 		ArrayList<Label> actions = new ArrayList<Label>();
 		piece.getActions().forEach(action -> {
 			Label l = new Label(action.toString());
@@ -404,7 +406,7 @@ public class ViewController {
 	 * @param actions
 	 */
 	public void updateActionList(ArrayList<Label> actions) {
-		System.out.println("i use this");
+	        
 		controlPane.getChildren().clear();
 		controlPane.getChildren().addAll(actions);
 	}
@@ -415,6 +417,9 @@ public class ViewController {
 	 * @param action
 	 */
 	protected void bindAction(Action action) {
+	        System.out.println("BIND ACTION");
+	        myAudio.playSelection();
+	        
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
@@ -431,7 +436,7 @@ public class ViewController {
 	}
 
 	private void setOnClick() {
-		myGridPane.getContent().setOnMouseClicked(event -> {
+	    myGridPane.getContent().setOnMouseClicked(event -> {
 			Point2D loc = findPosition(event.getX(), event.getY());
 			performAction(loc);
 		});
@@ -445,7 +450,10 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(Point2D loc) {
-		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
+		System.out.println("PERFORM ACTION");
+	        myAudio.playSelection();
+	        
+	        gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
 		
 		if (keyControlOn) {
 			myKeyboardMovement = null;
@@ -488,8 +496,8 @@ public class ViewController {
 	 */
 	public void changeCursor(String filename) {
 		Image image = new Image(filename);
-		myScene.setCursor(new ImageCursor(image, image.getWidth() / CURSOR_RATIO, image
-				.getWidth() / CURSOR_RATIO));
+		myScene.setCursor(new ImageCursor(image, image.getWidth() * CURSOR_RATIO, image
+				.getWidth() * CURSOR_RATIO));
 
 	}
 

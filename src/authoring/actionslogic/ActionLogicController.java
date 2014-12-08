@@ -34,7 +34,8 @@ public class ActionLogicController implements Initializable {
     private Button saveButton;
 
     private List<String> myPieceTypes = new ArrayList<String>();
-    private Map<String, Map> myLogicMap = new HashMap<String, Map>();
+    private Map<String, Map<String,List<String>>> myLogicMap = new HashMap<String, Map<String,List<String>>>();
+    private List<CheckBox> myCBList = new ArrayList<CheckBox>();
 
     @Override
     // TODO: [IMPORTANT] This constructor will need a List<String> or Set<String> that contains
@@ -60,9 +61,11 @@ public class ActionLogicController implements Initializable {
 
     private void updatePossibleReceivers (String selectedActor) {
         List<String> myPosReceivers = getReceivers(myPieceTypes, selectedActor);
-         for (String p : myPosReceivers) {
-         myReceiversVBox.getChildren().add(new CheckBox(p));
-         }
+        for (String p : myPosReceivers) {
+            CheckBox receiverCB = new CheckBox(p);
+            myCBList.add(receiverCB);
+            myReceiversVBox.getChildren().add(receiverCB);
+        }
     }
 
     private List<String> getReceivers (List<String> myPieceTypes, String actor) {
@@ -78,10 +81,25 @@ public class ActionLogicController implements Initializable {
     @FXML
     private void saveLogic () {
         String currAction = actionsListView.getSelectionModel().getSelectedItem();
-        System.out.println(currAction);
         String currActor = actorsChoiceBox.getSelectionModel().getSelectedItem();
-        System.out.println(currActor);
+        Map<String,List<String>> actionReceiver = myLogicMap.get(currActor);
+        List<String> receiverList = new ArrayList<String>();
+        
+        for (CheckBox cb : myCBList) {
+            if(cb.isSelected()){
+                receiverList.add(cb.getText());
+            }
+        }
+        if(actionReceiver == null){
+            actionReceiver = new HashMap<String,List<String>>();
+        }
+        actionReceiver.put(currAction, receiverList);
+        myLogicMap.put(currActor, actionReceiver);
+        System.out.println(myLogicMap);
+        
 
     }
+    
+    
 
 }
