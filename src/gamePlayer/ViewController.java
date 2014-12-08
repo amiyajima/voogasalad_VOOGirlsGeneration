@@ -6,6 +6,7 @@ import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
+
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
@@ -30,8 +32,10 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
 import tests.JSONBobTester;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
@@ -73,7 +77,7 @@ public class ViewController {
 	private Boolean keyControlOn;
 	private Boolean clickSoundOn;
 	private Boolean backgroundMusicOn;
-	
+
 	private KeyboardAction myKeyboardAction;
 	private KeyboardMovement myKeyboardMovement;
 
@@ -81,8 +85,7 @@ public class ViewController {
 	private Action activeAction;
 
 	private Audio myAudio;
-	
-	
+
 	@FXML
 	protected VBox statsPane;
 	@FXML
@@ -106,7 +109,8 @@ public class ViewController {
 	private GameGridEffect myGameGridEffect;
 	private SuperTile keySelectedTile;
 
-	public ViewController(Stage s) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	public ViewController(Stage s) throws UnsupportedAudioFileException,
+			IOException, LineUnavailableException {
 		myStage = s;
 
 		openInitialMenu();
@@ -115,53 +119,49 @@ public class ViewController {
 		} catch (UnsupportedAudioFileException | IOException
 				| LineUnavailableException e) {
 		}
-		
 
-		
 		myStage.show();
 
 	}
 
-	
 	/**
 	 * Sets up and opens the initial scene
-	 * @throws LineUnavailableException 
-	 * @throws IOException 
-	 * @throws UnsupportedAudioFileException 
+	 * 
+	 * @throws LineUnavailableException
+	 * @throws IOException
+	 * @throws UnsupportedAudioFileException
 	 */
 	@FXML
-	protected void openInitialMenu() throws UnsupportedAudioFileException, IOException, LineUnavailableException{
-	    myInitialScene = new VBox();
-	    myGameSpace = new BorderPane();
-	    myScoreBoard = new VBox();
-	    scores = new VBox();
+	protected void openInitialMenu() throws UnsupportedAudioFileException,
+			IOException, LineUnavailableException {
+		myInitialScene = new VBox();
+		myGameSpace = new BorderPane();
+		myScoreBoard = new VBox();
+		scores = new VBox();
 
-	    
-	    
-	    myPopup = new BorderPane();
-	    mySettings = new VBox();
-	    
-	    myJSONManager = new JSONManager();
-	    // myLeapController = new Controller();
-	    loadFXML(GAMESPACE_FXML, myGameSpace);
-	    loadFXML(INITIALSCENE_FXML, myInitialScene);
-	    loadFXML(POPUP_FXML, myPopup);
-	    loadFXML(SCOREBOARD_FXML, myScoreBoard);
-	    loadFXML(SETTINGS_FXML, mySettings);
-	    
-	    scoreScene = new Scene(myScoreBoard);
-	    myPopupScene = new Scene(myPopup);
-	    mySettingsScene = new Scene(mySettings);
-	    
-	    myStage.setScene(new Scene(myInitialScene));
-	    
-	    myAudio = new Audio();
-	    myAudio.playDefault();     //muting music for now...
-	    
-	    System.out.println("Opened initial menu");
+		myPopup = new BorderPane();
+		mySettings = new VBox();
+
+		myJSONManager = new JSONManager();
+		// myLeapController = new Controller();
+		loadFXML(GAMESPACE_FXML, myGameSpace);
+		loadFXML(INITIALSCENE_FXML, myInitialScene);
+		loadFXML(POPUP_FXML, myPopup);
+		loadFXML(SCOREBOARD_FXML, myScoreBoard);
+		loadFXML(SETTINGS_FXML, mySettings);
+
+		scoreScene = new Scene(myScoreBoard);
+		myPopupScene = new Scene(myPopup);
+		mySettingsScene = new Scene(mySettings);
+
+		myStage.setScene(new Scene(myInitialScene));
+
+		myAudio = new Audio();
+		myAudio.playDefault(); // muting music for now...
+
+		// System.out.println("Opened initial menu");
 	}
-	
-	
+
 	/**
 	 * the method allows user to load the previously saved json representation
 	 * of the game and uses JSON reader from Game Data to generate an instance
@@ -175,26 +175,27 @@ public class ViewController {
 		fc.setInitialDirectory(new File("src/resources/json"));
 		File f = fc.showOpenDialog(myStage);
 
-		//commented out for now.... (will work on it when myJSONManager is finished)
-//		try {
-			myScene = new Scene(myGameSpace);
-			myStage.setScene(myScene);
-//			myModel = myJSONManager.readFromJSONFile(f.getPath());
-//			initializeGrid();
-//		} catch (FileNotFoundException e) {
-//			System.out.println("Could not find JSON: " + "f.getPath()");
-//		}
+		// commented out for now.... (will work on it when myJSONManager is
+		// finished)
+		// try {
+		myScene = new Scene(myGameSpace);
+		myStage.setScene(myScene);
+		// myModel = myJSONManager.readFromJSONFile(f.getPath());
+		// initializeGrid();
+		// } catch (FileNotFoundException e) {
+		// System.out.println("Could not find JSON: " + "f.getPath()");
+		// }
 
 	}
-	
+
 	@FXML
 	protected void openSettings() {
-	    System.out.println("opensettings");
-	    Stage stage = new Stage();
-	    stage.setScene(mySettingsScene);
-	    stage.show();
+		// System.out.println("opensettings");
+		Stage stage = new Stage();
+		stage.setScene(mySettingsScene);
+		stage.show();
 	}
-	
+
 	/**
 	 * the method to restart the game; it asks the user whether to save the
 	 * current game
@@ -206,7 +207,6 @@ public class ViewController {
 		statsPane.getChildren().clear();
 		controlPane.getChildren().clear();
 	}
-	
 
 	@FXML
 	protected void exitGame() {
@@ -244,10 +244,10 @@ public class ViewController {
 		myStage.setScene(myScene);
 		JSONBobTester JSBTester = new JSONBobTester();
 		myModel = JSBTester.createNewGame();
-		System.out.println("model found in viewcontroller: " + myModel);
+		// System.out.println("model found in viewcontroller: " + myModel);
 		initializeGrid();
+		myModel.startGame();
 	}
-
 
 	/**
 	 * loads the players and their scores of the current game; display the
@@ -264,7 +264,7 @@ public class ViewController {
 
 	@FXML
 	protected void cancelPopup() {
-	    System.out.println("cancel popup");
+		// System.out.println("cancel popup");
 	}
 
 	/**
@@ -296,7 +296,7 @@ public class ViewController {
 	 * @throws UnsupportedAudioFileException
 	 */
 	protected void newGame() throws UnsupportedAudioFileException, IOException,
-		LineUnavailableException {
+			LineUnavailableException {
 
 		List<File> games = getGames();
 
@@ -318,45 +318,42 @@ public class ViewController {
 	 */
 	protected void initializeGrid() {
 		System.out.println("initialize grid");
-	    
-	        myAudio.playSelection();
-	        
-	        myGridPane = new ScrollPane();
+
+		myAudio.playSelection();
+
+		myGridPane = new ScrollPane();
 		Level currentLevel = myModel.getCurrentLevel();
 		myGrid = currentLevel.getGrid();
-		System.out.println("myGrid: " + myGrid);
+		// System.out.println("myGrid: " + myGrid);
 		myGrid.displayPane(myGridPane);
 
 		myGameSpace.setCenter(myGridPane);
 
 		setOnClick();
-		setGridState(new SelectState(this));		
+		setGridState(new SelectState(this));
 		keyControlOn = false;
 		backgroundMusicOn = true;
 		clickSoundOn = true;
 		myGameGridEffect = new GameGridEffect(this);
 	}
-	
-
 
 	/**
 	 * Loads the Score from a Player for Display
 	 */
 	protected void loadScores() {
 		List<Integer> scoreList = new ArrayList<Integer>();
-	        gameName.setText(myModel.toString());
+		gameName.setText(myModel.toString());
 		scores.getChildren().clear();
-	        for (Player p: myModel.getPlayers()){
-		    int score = 0;    //0 for now. will get from Player later!!!!!
-		    scoreList.add(score);
-		    Text playerScore = new Text("Player " + p.getID()+": " + String.valueOf(score));
-		    playerScore.setFill(Color.WHITE);
-		    scores.getChildren().add(playerScore);
+		for (Player p : myModel.getPlayers()) {
+			int score = 0; // 0 for now. will get from Player later!!!!!
+			scoreList.add(score);
+			Text playerScore = new Text("Player " + p.getID() + ": "
+					+ String.valueOf(score));
+			playerScore.setFill(Color.WHITE);
+			scores.getChildren().add(playerScore);
 		}
-	        highestScore.setText(String.valueOf(Collections.max(scoreList)));
+		highestScore.setText(String.valueOf(Collections.max(scoreList)));
 
-	        
-	        
 	}
 
 	/**
@@ -402,9 +399,9 @@ public class ViewController {
 	 * @param piece
 	 */
 	protected void updateActions(Piece piece) {
-//		System.out.println("UPDATE ACTIONS");
-//	        myAudio.playSelection();
-	        controlPane.getChildren().clear();
+		// System.out.println("UPDATE ACTIONS");
+		// myAudio.playSelection();
+		controlPane.getChildren().clear();
 		ArrayList<Label> actions = new ArrayList<Label>();
 		piece.getActions().forEach(action -> {
 			Label l = new Label(action.toString());
@@ -429,7 +426,7 @@ public class ViewController {
 	 * @param actions
 	 */
 	public void updateActionList(ArrayList<Label> actions) {
-	        
+
 		controlPane.getChildren().clear();
 		controlPane.getChildren().addAll(actions);
 	}
@@ -440,11 +437,11 @@ public class ViewController {
 	 * @param action
 	 */
 	protected void bindAction(Action action) {
-	        System.out.println("BIND ACTION");
-	        if (clickSoundOn){
-	            myAudio.playSelection();
-	        }
-	        
+		// System.out.println("BIND ACTION");
+		if (clickSoundOn) {
+			myAudio.playSelection();
+		}
+
 		if (activePiece == null)
 			return;
 		setActiveAction(action);
@@ -461,7 +458,7 @@ public class ViewController {
 	}
 
 	private void setOnClick() {
-	    myGridPane.getContent().setOnMouseClicked(event -> {
+		myGridPane.getContent().setOnMouseClicked(event -> {
 			Point2D loc = findPosition(event.getX(), event.getY());
 			performAction(loc);
 		});
@@ -476,12 +473,12 @@ public class ViewController {
 	 */
 	public void performAction(Point2D loc) {
 		System.out.println("PERFORM ACTION");
-	        
-		if (clickSoundOn){
-		    myAudio.playSelection();
+
+		if (clickSoundOn) {
+			myAudio.playSelection();
 		}
-	        
-	        gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
+
+		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
 		if (keyControlOn) {
 			myKeyboardMovement = null;
 			myKeyboardAction = new KeyboardAction();
@@ -517,27 +514,26 @@ public class ViewController {
 	}
 
 	public void toggleClickSound() {
-	    if (clickSoundOn){
-	        clickSoundOn = false;
-	    }
-	    else{
-	        clickSoundOn = true;
-	    }
+		if (clickSoundOn) {
+			clickSoundOn = false;
+		} else {
+			clickSoundOn = true;
+		}
 	}
-	
-	public void toggleBackgroundMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-	    if (backgroundMusicOn){
-	        myAudio.muteDefault();
-	        backgroundMusicOn = false;
-	        System.out.println("BGMusic Off");
-	    }
-	    else{
-	        myAudio.playDefault();
-	        backgroundMusicOn = true;
-	        System.out.println("BGMusic On");
-	    }
+
+	public void toggleBackgroundMusic() throws UnsupportedAudioFileException,
+			IOException, LineUnavailableException {
+		if (backgroundMusicOn) {
+			myAudio.muteDefault();
+			backgroundMusicOn = false;
+			// System.out.println("BGMusic Off");
+		} else {
+			myAudio.playDefault();
+			backgroundMusicOn = true;
+			// System.out.println("BGMusic On");
+		}
 	}
-	
+
 	/**
 	 * Toggles whether the Keyboard Controls are active or inactive
 	 */
@@ -553,7 +549,7 @@ public class ViewController {
 			}
 			myKeyboardMovement = null;
 			myKeyboardAction = null;
-			System.out.println("Keyboard OFF");
+			// System.out.println("Keyboard OFF");
 		} else {
 
 			// dehighlighting the tile the mouse click is currently highlighting
@@ -671,6 +667,7 @@ public class ViewController {
 	 */
 	public void setGridState(IGridState state) {
 		myCurrentPlayer = myModel.getCurrentPlayer();
+		System.out.println(myCurrentPlayer);
 		setPlayerTurnDisplay();
 		gridState = state;
 	}
@@ -691,9 +688,49 @@ public class ViewController {
 	public VBox getcontrolPane() {
 		return controlPane;
 	}
-	
-	public void setCurrentPlayer(Player p){
-		myCurrentPlayer=p;
+
+	public void setCurrentPlayer(Player p) {
+		myCurrentPlayer = p;
+	}
+
+	protected void endAction() {
+		System.out.println("Ending Action");
+		this.checkEndActions();
+		while (myCurrentPlayer.getType().equals("AI")) {
+			myCurrentPlayer.play();
+			this.checkEndActions();
+		}
+	}
+
+	public void checkEndActions() {
+		Level currentLevel = myModel.getCurrentLevel();
+		myModel.getCurrentPlayer().playTurn();
+		currentLevel.runGameEvents();
+		if (currentLevel.getGameWon()) {
+			// GAMEWON
+		}
+		if (currentLevel.getGameLost()) {
+			// GAMELOST
+		}
+		if (currentLevel.getTurnOver()) {
+			currentLevel.setTurnFalse();
+			myModel.nextPlayer();
+			myCurrentPlayer = myModel.getCurrentPlayer();
+			setPlayerTurnDisplay();
+		}
+
+		if (currentLevel.getNextLevelID() != null) {
+			System.out.println("NEXT LEVEL");
+			// myController.getGame().changeLevel(currentLevel.getNextLevelID());
+			myModel.changeLevel("Level 2");
+			// myController.getGame().getCurrentLevel().getGrid().displayPane(myController.getGridPane());
+			initializeGrid();
+		}
+		if (myModel.getCurrentPlayer().getNumMovesPlayed() > 2) {
+			System.out.println("NEXT PLAYER HARD CODE");
+			myModel.nextPlayer();
+			myCurrentPlayer = myModel.getCurrentPlayer();
+			setPlayerTurnDisplay();
+		}
 	}
 }
-

@@ -1,5 +1,6 @@
 package gameengine.player;
 
+import gamePlayer.ViewController;
 import gamedata.action.Action; 
 import gamedata.gamecomponents.Level;
 
@@ -13,7 +14,7 @@ import javafx.scene.input.KeyCode;
 /**
  * Defines a Human Player
  * 
- * @author Jesse, Sandy
+ * @author Jesse, Sandy, Rica
  *
  */
 public class HumanPlayer extends Player {
@@ -71,5 +72,15 @@ public class HumanPlayer extends Player {
     public void setMovementKeyMap (Map<KeyCode, Point2D> myMovementKeyMap2) {
         myMovementKeyMap2 = new HashMap<KeyCode, Point2D>();
     }
+
+	@Override
+	public void play() {
+		
+	}
+
+	@Override
+	public String getType() {
+		return "Human";
+	}
 
 }
