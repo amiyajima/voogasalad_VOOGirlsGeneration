@@ -8,7 +8,6 @@ import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
 import java.awt.geom.Point2D;
 import java.io.File;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +24,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -133,6 +133,10 @@ public class ViewController {
 	    myGameSpace = new BorderPane();
 	    mySettings = new BorderPane();
 	    myScoreBoard = new VBox();
+	    scores = new VBox();
+
+	    
+	    
 	    myPopup = new BorderPane();
 	    myJSONManager = new JSONManager();
 	    // myLeapController = new Controller();
@@ -149,7 +153,7 @@ public class ViewController {
 	    myStage.setScene(new Scene(myInitialScene));
 	    
 	    myAudio = new Audio();
-	    myAudio.playDefault();
+//	    myAudio.playDefault();     //muting music for now...
 	    
 	    System.out.println("Opened initial menu");
 	}
@@ -339,10 +343,19 @@ public class ViewController {
 	 * Loads the Score from a Player for Display
 	 */
 	protected void loadScores() {
-		gameName.setText(gameName.getText() + myModel.toString());
+		
+	        gameName.setText(myModel.toString());
+
 		// TODO: add in scores
-		 myModel.getPlayers().forEach(player-> scores.getChildren().
-		 add(new Text(player.getID()+": ")));
+//		 myModel.getPlayers().forEach(player-> scores.getChildren().
+//		 add(new Text(player.getID()+": ")));
+		scores.getChildren().clear();
+	        for (Player p: myModel.getPlayers()){
+		    String score = "";
+		    Text playerScore = new Text("Player " + p.getID()+": " + score);
+		    playerScore.setFill(Color.WHITE);
+		    scores.getChildren().add(playerScore);
+		}
 	}
 
 	/**
