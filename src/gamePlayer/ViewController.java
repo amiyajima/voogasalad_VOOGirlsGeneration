@@ -66,6 +66,7 @@ public class ViewController {
 	
 	public static final String ENGLISH = "resources.languages.English";
 	public static final String CHINESE = "resources.languages.Chinese";
+	public static final String KOREAN = "resources.languages.Korean";
 
 	private String currentLanguage;
 	private Stage myStage;
@@ -210,7 +211,7 @@ public class ViewController {
 	}
 	
 	public void addLanguages() {
-	        messages = ResourceBundle.getBundle(ENGLISH);
+	        messages = ResourceBundle.getBundle(KOREAN);
 	        showScoreButton.setText(messages.getString("SCORE"));
 	        controlTab.setText(messages.getString("CONTROL"));
 	        statsTab.setText(messages.getString("STATS"));
