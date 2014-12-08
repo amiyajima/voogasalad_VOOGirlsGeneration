@@ -7,6 +7,7 @@ import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
 import gamedata.action.conclusions.ReceiverToInventoryConclusion;
 import gamedata.events.Event;
+import gamedata.events.conditions.IsDead;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Level;
@@ -80,6 +81,12 @@ public class JSONBobTester {
 		GUIGrid gridLevel2 = createNewGrid();
 
 		List<Event> myEvents = new ArrayList<Event>();
+		
+		/**
+		 * Event for garadage comllectin
+		 */
+		Event e = new Event("Garbate collectbaon");
+		e.getConditions().add(new IsDead("Health"));
 		
 		List<Level> myLevels = new ArrayList<Level>();
 		Level level1 = new Level(gridLevel1, myEvents, "Level 1", false);
