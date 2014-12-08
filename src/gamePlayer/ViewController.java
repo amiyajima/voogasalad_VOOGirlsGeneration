@@ -6,7 +6,6 @@ import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
-
 import java.awt.geom.Point2D;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -24,7 +23,6 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -35,8 +33,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tab;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -46,10 +46,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 import tests.JSONBobTester;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
@@ -70,10 +68,7 @@ public class ViewController {
         public static final String POPUP_FXML = "popup.fxml";
         public static final String SETTINGS_FXML = "settings.fxml";
 
-        public static final String ENGLISH = "resources.languages.English";
-        public static final String CHINESE = "resources.languages.Chinese";
-        public static final String KOREAN = "resources.languages.Korean";
-        public static final String FRENCH = "resources.languages.French";
+        public static final String DEFAULT_LANGUAGE = "resources.languages.English";
 
         private String currentLanguage;
         private Stage myStage;
@@ -125,31 +120,9 @@ public class ViewController {
         @FXML
         private MenuButton gameMenu;
         @FXML
-        private MenuItem restartMenu;
+        private TabPane tabPane;
         @FXML
-        private MenuItem saveMenu;
-        @FXML
-        private MenuItem loadMenu;
-        @FXML
-        private MenuItem mainMenu;
-        @FXML
-        private MenuItem settingsMenu;
-        @FXML
-        private MenuItem exitMenu;
-        @FXML
-        private Tab controlTab;
-        @FXML
-        private Tab statsTab;
-        @FXML
-        private Tab inventoryTab;
-        @FXML
-        private CheckBox EnglishCheck;
-        @FXML
-        private CheckBox FrenchCheck;
-        @FXML
-        private CheckBox KoreanCheck;
-        @FXML
-        private CheckBox ChineseCheck;
+        private AnchorPane languagesPane;
         @FXML
         private Button clearHighScores;
 
@@ -187,7 +160,7 @@ public class ViewController {
                 myGameSpace = new BorderPane();
                 myScoreBoard = new VBox();
                 scores = new VBox();
-                currentLanguage = ENGLISH;
+                currentLanguage = DEFAULT_LANGUAGE;
 
                 myPopup = new BorderPane();
                 mySettings = new VBox();
@@ -304,18 +277,11 @@ public class ViewController {
          */
         @FXML
         public void checkLanguage() {
-                if (EnglishCheck.isSelected()) {
-                        currentLanguage = ENGLISH;
+            for (Node n: languagesPane.getChildren()){
+                if ( ((CheckBox)n).isSelected()){
+                    currentLanguage = n.getId();
                 }
-                if (FrenchCheck.isSelected()) {
-                        currentLanguage = FRENCH;
-                }
-                if (KoreanCheck.isSelected()) {
-                        currentLanguage = KOREAN;
-                }
-                if (ChineseCheck.isSelected()) {
-                        currentLanguage = CHINESE;
-                }
+            }
                 updateLanguages();
         }
 
@@ -324,17 +290,14 @@ public class ViewController {
          */
         public void updateLanguages() {
                 messages = ResourceBundle.getBundle(currentLanguage);
-                showScoreButton.setText(messages.getString("SCORE"));
-                controlTab.setText(messages.getString("CONTROL"));
-                statsTab.setText(messages.getString("STATS"));
-                inventoryTab.setText(messages.getString("INVENTORY"));
-                gameMenu.setText(messages.getString("GAMEMENU"));
-                restartMenu.setText(messages.getString("RESTART"));
-                saveMenu.setText(messages.getString("SAVE"));
-                loadMenu.setText(messages.getString("LOAD"));
-                mainMenu.setText(messages.getString("MAIN"));
-                settingsMenu.setText(messages.getString("SETTINGS"));
-                exitMenu.setText(messages.getString("EXIT"));
+                showScoreButton.setText(messages.getString(showScoreButton.getId()));
+                gameMenu.setText(messages.getString(messages.getString(gameMenu.getId())));
+                for (Tab t: tabPane.getTabs()){
+                    t.setText(messages.getString(t.getId()));
+                }
+                for (MenuItem i: gameMenu.getItems()){
+                    i.setText(messages.getString(i.getId()));
+                }
         }
 
         /**
