@@ -36,10 +36,9 @@
             </MenuBar>
          </top>
          <center>
-            <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <TabPane prefHeight="0.0" prefWidth="1024.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
-                <Tab fx:id="author1" text="New Game Author 1" />
-                <Tab text="New Game Player 1" />
+                <Tab fx:id="testauthor" text="Tab 1" />
               </tabs>
             </TabPane>
          </center>

@@ -17,6 +17,10 @@ import javafx.scene.layout.VBox;
 import authoring.data.PatchTypeData;
 import authoring_environment.GUIGrid;
 
+/**
+ * @author sandy lee
+ *
+ */
 public class PatchController extends GridComponentAbstCtrl<Patch> {
 
     private PatchTypeData myPatchTypes;

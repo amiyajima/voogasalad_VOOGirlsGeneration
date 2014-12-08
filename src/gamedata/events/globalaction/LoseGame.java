@@ -9,15 +9,15 @@ import gamedata.gamecomponents.IChangeGameState;
  * Win the game
  *
  */
-public class WinGame extends GameStateGlobalAction {
+public class LoseGame extends GameStateGlobalAction {
 
-    public WinGame (IChangeGameState state) {
-        super("Win the game", state);
+    public LoseGame (IChangeGameState state) {
+        super("Lose the game", state);
     }
 
     @Override
     public void doBehavior(GUIGrid grid) {
-    	myState.winGame();
+    	myState.loseGame();
     }
 
 }

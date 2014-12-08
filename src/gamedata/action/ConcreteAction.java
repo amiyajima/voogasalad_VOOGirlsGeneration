@@ -44,7 +44,7 @@ public class ConcreteAction implements Action {
 	}
 
 	@Override
-	public List<Point2D> getActionRange(Point2D pieceLoc) {
+	public List<Point2D> getSpecificActionRange(Point2D pieceLoc) {
 		List<Point2D> absoluteRange = new ArrayList<Point2D>();
 		for (Point2D relativeLoc : myAttackRange) {
 			double absX = pieceLoc.getX() + relativeLoc.getX();
@@ -54,6 +54,11 @@ public class ConcreteAction implements Action {
 		return absoluteRange;
 	}
 
+	@Override
+        public List<Point2D> getActionRange() {
+                return myAttackRange;
+        }
+	
 	@Override
 	public List<Point2D> getEffectRange() {
 		return myEffectRange;
