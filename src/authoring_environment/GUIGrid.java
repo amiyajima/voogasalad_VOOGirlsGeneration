@@ -1,15 +1,15 @@
 package authoring_environment;
 
+import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.function.Consumer;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -79,15 +79,15 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 * @param rows - number of rows (NOTE: rows = Y direction)
 	 * @param tileHeight - height of tiles in pixels
 	 * @param shape - shape of the grid given as string identifier in properties
-	 * @param pieceData - saved pieceData
-	 * @param patchData - saved patchData
+	 * @param copyGrid - Grid whose data needs to be copied in
 	 */
 	public GUIGrid (int cols, int rows, double tileHeight, String shape,
 			GUIGrid copyGrid) {
 		super(cols, rows, tileHeight, shape);
 		myPieceData = copyGrid.myPieceData;
 		myPatchData = copyGrid.myPatchData;
-		//TODO: repopulate grid and remove runoff pieces/patches
+		removeRunOffData(cols, rows);
+		repopulate();
 	}
 
 	/**
@@ -127,16 +127,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
 		myTile.setPatchImage(clone.getImageView());
 	}
-
-	public boolean isPatchOccupied (Point2D loc){
-		for (Patch p: myPatchData.getData()){
-			if (p.getLoc().equals(loc)){
-				return true;
-			}
-		}
-		return false;
-	}
-
+	
 	public boolean isPieceOccupied (Point2D loc){
 		for (Piece p: myPieceData.getData()){
 			if (p.getLoc().equals(loc)){
@@ -145,6 +136,16 @@ public class GUIGrid extends SuperGrid implements Observer{
 		}
 		return false;
 	}
+	
+	public boolean isPatchOccupied (Point2D loc){
+		for (Patch p: myPatchData.getData()){
+			if (p.getLoc().equals(loc)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * Removes a piece at the given coordinates.
 	 * NOTE: Point2D coordinates given as
@@ -155,7 +156,9 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 */
 	public void removePieceAtCoordinate (Point2D coor) {
 		Piece toRemove = getPiece(coor);
-		removePiece(toRemove);
+		if(isPieceOccupied(coor)){
+			removePiece(toRemove);
+		}
 	}
 
 	/**
@@ -170,7 +173,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		Patch toRemove = getPatch(coor);
 		//TODO: remove only if there is a patch to be removed
 		//to avoid nullerpt..
-		if (isPatchOccupied(coor)){
+		if(isPatchOccupied(coor)){
 			removePatch(toRemove);
 		}
 	}
@@ -215,7 +218,9 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 */
 	public Piece getPiece (Point2D loc) {
 		for (Piece p : myPieceData.getData()) {
-			if ((p.getLoc().equals(loc))) { return p; }
+			if ((p.getLoc().equals(loc))) {
+				return p;
+			}
 		}
 		return null;
 	}
@@ -228,14 +233,16 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 */
 	public Patch getPatch (Point2D loc) {
 		for (Patch p : myPatchData.getData()) {
-			if ((p.getLoc().equals(loc))) { return p; }
+			if ((p.getLoc().equals(loc))) {
+				return p;
+			}
 		}
 		return null;
 	}
 
 	public void removePiece (Piece p) {
-		SuperTile currentTile = findTile(p.getLoc());
 		myPieceData.remove(p);
+		SuperTile currentTile = findTile(p.getLoc());
 		currentTile.removePieceImage();
 	}
 
@@ -292,6 +299,37 @@ public class GUIGrid extends SuperGrid implements Observer{
 			this.addPieceToTile(p, p.getLoc());
 		}
 	}
+	
+	//CHANGE THESE
+	public void repopulate() {
+		for (Patch p : myPatchData.getData()) {
+			this.addPatchToTile(p, p.getLoc());
+		}
+		for (Piece p : myPieceData.getData()) {
+			this.addPieceToTile(p, p.getLoc());
+		}
+	}
+	
+	public void removeRunOffData(int numCols, int numRows) {
+		List<Piece> piecesToRemove = new ArrayList<Piece>();
+		for (Piece piece : myPieceData.getData()) {
+			if (piece.getLoc().getX() > numCols - 1 
+					|| piece.getLoc().getY() > numRows - 1) {
+				piecesToRemove.add(piece);
+			}
+		}
+		
+		myPieceData.getData().removeAll(piecesToRemove);
+		
+		List<Patch> patchesToRemove = new ArrayList<Patch>();
+		for (Patch patch : myPatchData.getData()) {
+			if ((patch.getLoc().getX() > numCols - 1 )
+					|| (patch.getLoc().getY() > numRows - 1)) {
+				patchesToRemove.add(patch);
+			}
+		}
+		myPatchData.getData().removeAll(patchesToRemove);
+	}
 
 	@Override
 	public void update (Observable o, Object arg) {
@@ -333,9 +371,15 @@ public class GUIGrid extends SuperGrid implements Observer{
 		myPane.setOnMousePressed(handler);
 	}
 
-	public void paneSetOnMouseDragged(EventHandler<MouseEvent> handler) {
+	public void paneSetOnMouseDragged (EventHandler<MouseEvent> handler) {
 		myPane.setOnMouseDragged(handler);
 	}
 
-
+	public void runEvent(Consumer<List<IHasStats>> eventFunc){
+		List<IHasStats> allObjects = new ArrayList<>();
+		allObjects.addAll(myPieceData.getData());
+		allObjects.addAll(myPatchData.getData());
+		
+		eventFunc.accept(allObjects);
+	}
 }

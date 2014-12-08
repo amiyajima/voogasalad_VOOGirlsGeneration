@@ -108,12 +108,6 @@ public class EventEditorController implements Initializable {
         //TODO: Remove below line. Used for testing
         System.out.println(((ConditionEquals) entry).printOut());
 
-        Consumer<Condition> doneLambda = (Condition condition) -> {
-            conditionsListView.getItems().remove(entry);
-            conditionsListView.getItems().add(condition);
-            newConditionStage.close();
-        };
-        showNewConditionWindow(doneLambda, entry);
     }
 
     @FXML
@@ -195,11 +189,9 @@ public class EventEditorController implements Initializable {
          * To avoid null-pointer exceptions.
          */
         if (event == null) { return; }
-        myConditions = event.getConditions();
-        myActions = event.getGlobalActions();
 
-        conditionsListView.setItems((ObservableList<Condition>) myConditions);
-        actionsListView.setItems((ObservableList<GlobalAction>) myActions);
+        conditionsListView.setItems((ObservableList<Condition>) event.getConditions());
+        actionsListView.setItems((ObservableList<GlobalAction>) event.getGlobalActions());
 
         newCondition.setDisable(false);
         editCondition.setDisable(false);

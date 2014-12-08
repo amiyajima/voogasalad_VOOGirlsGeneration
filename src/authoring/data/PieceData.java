@@ -34,26 +34,27 @@ public class PieceData implements AuthoringData<Piece> {
     
 	@Override
 	public boolean canAdd(Piece element) {
-		String elementID=element.getID();
-		Point2D elementLoc=element.getLoc();
-		for (Piece piece:myPieces){
-			if ((piece.getID().equals(elementID)) && 
-				(piece.getLoc().equals(elementLoc))){
+		String elementID = element.getID();
+		Point2D elementLoc = element.getLoc();
+		for (Piece piece : myPieces){
+			String id = piece.getID();
+			Point2D loc = piece.getLoc();
+			if ((elementID.equals(id)) && (elementLoc.equals(loc))){
 				return false;
 			}
 		}
 		return true;
+	}
+	
+	@Override
+	public void remove(Piece p) {
+		myPieces.remove(p);
 	}
     
 	@Override
 	public void replace(Piece origEl, Piece newEl) {
 		origEl.setName(newEl.toString());
 		origEl.setImageLocation(newEl.getImageLocation());
-	}
-    
-	@Override
-	public void remove(Piece p) {
-		myPieces.remove(p);
 	}
 
 	@Override

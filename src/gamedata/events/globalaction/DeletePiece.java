@@ -1,19 +1,20 @@
 package gamedata.events.globalaction;
 
+import java.util.List;
+
 import authoring_environment.GUIGrid;
 import gamedata.events.GlobalAction;
 import gamedata.gamecomponents.Game;
+import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Piece;
 
 /**
- * Deletes a specified piece off the grid
+ * Deletes all pieces with less than 0 HP
  * @author Rica, Mike Zhu
  *
  */
-public class DeletePiece extends GlobalAction {
-	public static final String DESCRIPTION = "Delete ";
-    private Game myGame;
-    private String myName;
+public class DeletePiece extends GlobalAction {	
+	private String myHealthName;
     
     /**
      * Make sure you construct this referring to the piece that you want to delete rather than 
@@ -22,20 +23,18 @@ public class DeletePiece extends GlobalAction {
      * @param game
      * @param name of type of piece to delete
      */
-    public DeletePiece(String name, Game game) {
+    public DeletePiece(String name, String healthName) {
         super(name);
-        myGame = game;
-        myName = name;
+        myHealthName = healthName;
     }
 
     @Override
-    public void doBehavior () {
-       GUIGrid grid =  myGame.getCurrentLevel().getGrid();
-       //currently needs to get all pieces and iterate through them
-       for(Piece p : grid.){
-           if(p.getName().equals(myName)){
-               grid.removePiece(p);
-           }
+    public void doBehavior (List<IHasStats> objects) {
+       for(IHasStats obj : objects){
+    	   Piece p = (Piece) obj;
+    	   if(obj.getStats().getValue(myHealthName)<=0){
+    		   p.shouldRemove();
+    	   }
        }
     }
 }
