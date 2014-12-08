@@ -67,19 +67,8 @@ public class NewConditionController implements Initializable{
 	private void showConditionEditorPane(){
 		int idx = conditionChoiceBox.getSelectionModel().getSelectedIndex();
 		Class<?> c = conditionsList.get(idx);
-		
-		/**
-		 * If statements to choose which Condition Editor to pull up
-		 */
-		if("class gamedata.events.ConditionEquals".equals(c.getSuperclass().toString())){
-		}
-		
-		if(myCondition==null){
-			editorScrollPane.setContent(new ConditionEditorPane(myDoneLambda, myData));
-		}
-//		else{
-//			editorScrollPane.setContent(new ConditionEditorPane(myDoneLambda, myCondition, myData));
-//		}
+			
+		editorScrollPane.setContent(new ConditionEditorPane(myDoneLambda, myData, c));
 	}
 	
 	/**
