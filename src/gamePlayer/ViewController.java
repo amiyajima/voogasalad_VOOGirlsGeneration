@@ -6,6 +6,7 @@ import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
+
 import java.awt.geom.Point2D;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -40,8 +42,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
 import tests.JSONBobTester;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
@@ -74,6 +78,7 @@ public class ViewController {
         private Scene myScene;
         private Game myModel;
         private GUIGrid myGrid;
+        private Scene mySplashScreen;
 
         private Player myCurrentPlayer;
 
@@ -153,6 +158,7 @@ public class ViewController {
                 myScoreBoard = new VBox();
                 scores = new VBox();
                 
+                mySplashScreen = new SplashScreen().getScene();
                 
                 myPopup = new BorderPane();
                 mySettings = new VBox();
@@ -254,6 +260,7 @@ public class ViewController {
          */
         @FXML
         private void testGame() {
+            myStage.setScene(mySplashScreen);
                 JSONBobTester JSBTester = new JSONBobTester();
                 testPlayGame(JSBTester.createNewGame());
         }
@@ -498,11 +505,27 @@ public class ViewController {
 
                 gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
 
+                while (myCurrentPlayer.getType().equals("AI")) {
+                    myCurrentPlayer.play();
+                    this.checkEndActions();
+                }
+                
+                
                 if (keyControlOn) {
+                        
+                    if (myKeyboardMovement != null){
                         myKeyboardMovement = null;
                         myKeyboardAction = new KeyboardAction();
                         myKeyboardAction.setActionKeyControl(this);
+                    }
+                    
+                    else{
+                        myKeyboardAction = null;
+                        myKeyboardMovement = new KeyboardMovement();
+                        myKeyboardMovement.setMovementKeyControl(this);
+                    }
                 }
+                    
         }
 
         /**
@@ -686,7 +709,8 @@ public class ViewController {
          */
         public void setGridState(IGridState state) {
                 tempMoveCount++;
-                if (myModel.getCurrentLevel().getGameWon() || tempMoveCount > 0) {
+
+                if (myModel.getCurrentLevel().getGameWon() || tempMoveCount == 10) {
                         // TODO assuming that the most recent currentPlayer won
                         String highScorer = "Bob";
                         Random randy = new Random();
@@ -697,7 +721,7 @@ public class ViewController {
                                  * highScore = p.getScore(); }
                                  */
                         }
-                        showHighScoreInfo(highScorer, highScore);
+//                        showHighScoreInfo(highScorer, highScore);       //commenting this out for now!!!
 
                 }
 
@@ -806,10 +830,6 @@ public class ViewController {
         protected void endAction() {
                 System.out.println("Ending Action");
                 this.checkEndActions();
-                while (myCurrentPlayer.getType().equals("AI")) {
-                        myCurrentPlayer.play();
-                        this.checkEndActions();
-                }
         }
 
         public void checkEndActions() {
@@ -864,11 +884,11 @@ public class ViewController {
          * @param testGame
          */
         public void testPlayGame(Game testGame) {
-            myScene = new Scene(myGameSpace);
-            myStage.setScene(myScene);
             myModel = testGame;
             System.out.println("model found in viewcontroller: " + myModel);
             initializeGrid();
+            myScene = new Scene(myGameSpace);
+            myStage.setScene(myScene);
         }
 
 

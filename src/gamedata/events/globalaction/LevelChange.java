@@ -15,8 +15,8 @@ public class LevelChange extends GameStateGlobalAction {
     public static final String DESCRIPTION = "Change level";
     private String myNextLevelID;
     
-    public LevelChange (String name, IChangeGameState state, String levelID) {
-        super(name, state);
+    public LevelChange (IChangeGameState state, String levelID) {
+        super(String.format("Change level to %s", levelID), state);
         myNextLevelID = levelID;
     }
 

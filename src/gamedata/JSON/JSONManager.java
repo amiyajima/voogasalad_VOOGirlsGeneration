@@ -1,6 +1,7 @@
 package gamedata.JSON;
 
 import gamedata.action.Action;
+import gamedata.events.Event;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
@@ -12,9 +13,11 @@ import gamedata.wrappers.GoalData;
 import gamedata.wrappers.GridData;
 import gamedata.wrappers.LevelDataIndividual;
 import gamedata.wrappers.PatchData;
+import gamedata.wrappers.PatchDataIndividual;
 import gamedata.wrappers.PieceData;
 import gamedata.wrappers.PlayerDataIndividual;
 import gameengine.player.Player;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -22,8 +25,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import authoring_environment.GUIGrid;
 import authoring_environment.SuperGrid;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -50,13 +55,13 @@ public class JSONManager {
     /**
      * Write a game and its contents into a JSON file.
      * 
-     * @param myModel
+     * @param multiplePatches
      * 
      * @param grid
      */
-    public void writeToJSON (Game myModel, String fileName) {
+    public void writeToJSON (authoring.data.PatchData multiplePatches, String fileName) {
         System.out.println("JSONManager: write method called");
-        String json = myGson.toJson(myModel);
+        String json = myGson.toJson(multiplePatches);
         System.out.println("JSONManager: game converted to json!");
 
         try {
@@ -77,11 +82,11 @@ public class JSONManager {
      * @param JSON file location
      * @throws FileNotFoundException
      */
-    public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
+    public PatchData readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
-        Game myGameData = myGson.fromJson(br, Game.class);
+        PatchData myGameData = myGson.fromJson(br, PatchData.class);
         System.out.println(myGameData.toString());
 
         // JSONParseTester jpt = new JSONParseTester();
@@ -128,9 +133,7 @@ public class JSONManager {
     }
 
     public void registerTypeAdapters (GsonBuilder builder) {
-        builder.registerTypeAdapter(Goal.class, new GenericTypeAdapter<Goal>("gamedata.goals"));
-        builder.registerTypeAdapter(Rule.class, new GenericTypeAdapter<Rule>("gamedata.rules"));
-        builder.registerTypeAdapter(Action.class, new GenericTypeAdapter<Action>("gamedata.action"));
+        builder.registerTypeAdapter(Event.class, new GenericTypeAdapter<Event>("gamedata.events"));
     }
 
 }
