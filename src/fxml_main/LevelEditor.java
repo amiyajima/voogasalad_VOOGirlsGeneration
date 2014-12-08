@@ -40,17 +40,15 @@ public class LevelEditor extends VBox {
 	private double myTileHeight;
 	private ObservableList<Event> myEvents;
 	private GUIGrid myGrid;
-
+	private Level myLevel;
+	
 	private Consumer<Level> myOkLambda;
 
 	private String myEditorTitle;
 
 	private EventsDataWrapper myData;
-
-<<<<<<< HEAD
     public LevelEditor (Consumer<Level> okLambda, EventsDataWrapper data) {
     	myEditorTitle = CREATOR_TITLE;
-
     	
     	myId = "";
         myGridRows = 0;
@@ -173,6 +171,7 @@ public class LevelEditor extends VBox {
 
         EventEditorController controller = loader.getController();
         controller.loadEvents(myEvents);
+        controller.loadGameState(myLevel);
         controller.loadData(myData);
 
         eventEditorStage.showAndWait();
