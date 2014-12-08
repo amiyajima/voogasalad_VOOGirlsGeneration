@@ -104,13 +104,6 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 
 	@Override
 	protected void initEntryEditBtn(Level entry, Button editBtn) {
-<<<<<<< HEAD
-=======
-
-		//TODO: THIS ONLY SORT OF WORKS
-		//WORKS WHEN YOU CLICK ON LHS PANE THEN RHS PANE THEN DONE. 
-		//ALSO LEVELS ARE SORTED IN ORDER OR MOST RECENTLY MODIFIED
->>>>>>> 3395b425fde41f062a45c0d8126864fb0f55f324
 		editBtn.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent click) {
@@ -134,13 +127,7 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 				EventsDataWrapper wrapper = new EventsDataWrapper(piecesRO, patchesRO, playersRO);
 
 				myPropertiesSPane.setContent(new LevelEditor(okLambda, entry, wrapper));
-<<<<<<< HEAD
 			}
-=======
-
-			}
-
->>>>>>> 3395b425fde41f062a45c0d8126864fb0f55f324
 		});
 	}
 

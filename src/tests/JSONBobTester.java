@@ -115,7 +115,7 @@ public class JSONBobTester {
 			        actual.setPlayerID(1);
 			    }
 			    grid1.addPieceAtLoc(actual, new Point2D.Double(x, y));
-			    grid1.addPatch(templPatch, new Point2D.Double(x, y));
+			    grid1.addPatchAtLoc(templPatch, new Point2D.Double(x, y));
 			}
 		}
 

@@ -90,7 +90,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		repopulate();
 	}
 
-	public void addPiece (Piece pieceType, Point2D loc) {
+	public void addPieceAtLoc (Piece pieceType, Point2D loc) {
 		Piece clone = new Piece(pieceType, loc);
 		if (isPieceOccupied(loc)){
 			removePieceAtCoordinate(loc);
