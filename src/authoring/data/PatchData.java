@@ -33,16 +33,22 @@ public class PatchData implements AuthoringData<Patch> {
 	}
 	
 	@Override
-	public void replace(Patch origEl, Patch newEl) {
-		origEl.setName(newEl.toString());
-		origEl.setImageLocation(newEl.getImageLocation());
+	public boolean canAdd(Patch element) {
+		// TODO Auto-generated method stub
+		return false;
 	}
-
+	
 	@Override
 	public void remove(Patch p) {
 		myPatches.remove(p);
 	}
 
+	@Override
+	public void replace(Patch origEl, Patch newEl) {
+		origEl.setName(newEl.toString());
+		origEl.setImageLocation(newEl.getImageLocation());
+	}
+	
 	@Override
 	public List<Patch> getData() {
 		return myPatches;

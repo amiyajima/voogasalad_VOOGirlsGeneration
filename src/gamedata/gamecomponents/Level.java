@@ -18,12 +18,10 @@ public class Level extends Observable {
 
 	private GUIGrid myGrid;
 	/**
-	 * Goals defining how to win the level
+	 * Goals defining how to win the level, how to react to changes
 	 */
 	private List<Event> myEvents;
 	private String myId;
-
-	// private boolean winningLevel;
 
 	/**
 	 * Constructs a default level with a default ID and sets it as NOT the
