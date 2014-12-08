@@ -756,7 +756,7 @@ public class ViewController {
          */
         public void setGridState(IGridState state) {
                 tempMoveCount++;
-                if (myModel.getCurrentLevel().getGameWon() || tempMoveCount == 10) {
+                if (myModel.getCurrentLevel().getGameWon() || tempMoveCount > 0) {
                         // TODO assuming that the most recent currentPlayer won
                         String highScorer = "Bob";
                         Random randy = new Random();
@@ -840,8 +840,7 @@ public class ViewController {
 
                         });
                         for (List<String> each : highScores) {
-                                scores.getChildren().add(1,
-                                                new Label(each.get(0) + ": " + each.get(1)));
+                                scores.getChildren().add(new Label(each.get(0) + ": " + each.get(1)));
                         }
                         stage.setScene(scoreScene);
                         stage.show();
