@@ -40,7 +40,7 @@ public class SimpleAIPlayer extends Player {
 			Random rand = new Random();
 			int randomNum = rand.nextInt((actions.size()));
 			if (actions.size() != 0) {
-				Action chosenAction = actions.get(randomNum);
+				Action chosenAction = actions.get(1);
 				List<Point2D> locs = chosenAction.getSpecificActionRange(p
 						.getLoc());
 				List<Piece> recievers = new ArrayList<Piece>();
@@ -64,12 +64,12 @@ public class SimpleAIPlayer extends Player {
 
 			}
 			myCurrentLevel.getGrid().repopulateGrid();
-			try {
+		/*	try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 
 		}
 	}
