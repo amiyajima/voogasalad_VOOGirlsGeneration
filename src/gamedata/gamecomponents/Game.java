@@ -203,4 +203,16 @@ public class Game implements IChangeGameState{
 			myCurrentPlayer = myPlayers.get(next);
 		}
 	}
+
+	@Override
+	public void winGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void loseGame() {
+		// TODO Auto-generated method stub
+		
+	}
 }
