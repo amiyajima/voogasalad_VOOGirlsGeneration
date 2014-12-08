@@ -10,8 +10,6 @@ import java.awt.Toolkit;
 import utilities.leapMotion.ILeapMouse;
 public class FingerTipMouse implements ILeapMouse{
     
-    public static final String FINGER_TIP_MOUSE = "Finger Tip Tracking";
-
     @Override
     public void mouseMove (Frame frame, Robot robot) {
         InteractionBox box = frame.interactionBox();
