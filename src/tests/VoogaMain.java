@@ -63,10 +63,10 @@ public class VoogaMain {
 
         // PIECE COMPONENTS
         List<Action> actions = piece.getActions();
-        Action a = actions.get(0);
+        Action a = actions.get(0); // WORKS
         Movement m = piece.getMovement(); // DOES NOT EXIST
         Stats stats = piece.getStats();
-        Inventory inventory = piece.getInventory();
+        Inventory inventory = piece.getInventory(); // DOES NOT EXIST
 
         // PATCH AND COMPONENTS -- DONE
         Patch patch = grid.getPatch(point); // WORKS
@@ -76,14 +76,14 @@ public class VoogaMain {
         // System.out.println("things still work");
         // myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
         // myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
-        System.out.println(a);
-        myJSONmanager.writeToJSON(a, "src/resources/json/IndividualActionData.json");
+        System.out.println(actions);
+        myJSONmanager.writeToJSON(actions, "src/resources/json/MultipleActionData.json");
     }
 
     public static void testJSONload () {
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("src/resources/json/IndividualActionData.json");
+            jsonManager.readFromJSONFile("src/resources/json/MultipleActionData.json");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -92,7 +92,7 @@ public class VoogaMain {
 
     public static void main (String[] args) {
         System.out.println("main is running");
-        //testJSONwrite();
-        testJSONload();
+        testJSONwrite();
+        //testJSONload();
     }
 }

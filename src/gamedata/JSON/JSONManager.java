@@ -9,6 +9,7 @@ import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import gamedata.goals.Goal;
 import gamedata.rules.Rule;
+import gamedata.wrappers.ActionData;
 import gamedata.wrappers.ActionDataIndividual;
 import gamedata.wrappers.GameData;
 import gamedata.wrappers.GoalData;
@@ -56,13 +57,13 @@ public class JSONManager {
     /**
      * Write a game and its contents into a JSON file.
      * 
-     * @param a
+     * @param actions
      * 
      * @param grid
      */
-    public void writeToJSON (Action a, String fileName) {
+    public void writeToJSON (List<Action> actions, String fileName) {
         System.out.println("JSONManager: write method called");
-        String json = myGson.toJson(a);
+        String json = myGson.toJson(actions);
         System.out.println("JSONManager: game converted to json!");
 
         try {
@@ -83,12 +84,12 @@ public class JSONManager {
      * @param JSON file location
      * @throws FileNotFoundException
      */
-    public ActionDataIndividual readFromJSONFile (String jsonFileLocation)
+    public ActionData readFromJSONFile (String jsonFileLocation)
                                                                           throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
-        ActionDataIndividual myGameData = myGson.fromJson(br, ActionDataIndividual.class);
+        ActionData myGameData = myGson.fromJson(br, ActionData.class);
         System.out.println(myGameData.toString());
 
         // JSONParseTester jpt = new JSONParseTester();
