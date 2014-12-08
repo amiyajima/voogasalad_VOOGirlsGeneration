@@ -233,7 +233,7 @@ public class EventEditorController implements Initializable {
         loader.setLocation(getClass().getResource("/authoring/eventeditor/NewAction.fxml"));
         Parent root = loader.load();
 
-        Stage newActionStage = new Stage();
+        newActionStage = new Stage();
         newActionStage.setTitle("New Action");
         newActionStage.initModality(Modality.WINDOW_MODAL);
         Scene scene = new Scene(root);
@@ -244,7 +244,6 @@ public class EventEditorController implements Initializable {
         controller.loadLambda(okActionLambda);
         controller.loadEntryCondition(entry);
         controller.loadData(myData);
-
         
         newActionStage.showAndWait();
     }

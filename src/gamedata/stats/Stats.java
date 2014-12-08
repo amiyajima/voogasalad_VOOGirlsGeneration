@@ -82,7 +82,7 @@ public class Stats {
 	 * Returns a set of all the stat names
 	 */
 	public List<String> getStatNames() {
-		return FXCollections.observableArrayList(myStats.keySet());
+	    return FXCollections.observableArrayList(myStats.keySet());
 	}
 
 
