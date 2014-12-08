@@ -39,7 +39,7 @@ import authoring_environment.SuperTile;
 
 /**
  * 
- * @author
+ * 
  *
  */
 public class ViewController {
@@ -54,7 +54,7 @@ public class ViewController {
 	private static final String DEFAULT_MUSIC = "/src/resources/music/Cut_Gee_VooGirls.mp3";
 	public static final String CURSOR_ATTACK_TEST = "resources/images/Cursor_attack.png";
 	public static final String CURSOR_GLOVE_TEST = "resources/images/pointer-glove.png";
-
+	public static final double CURSOR_RATIO = 0.25;
 	private ResourceBundle myLanguages;
 	private Stage myStage;
 	private BorderPane myGameSpace;
@@ -482,8 +482,8 @@ public class ViewController {
 	 */
 	public void changeCursor(String filename) {
 		Image image = new Image(filename);
-		myScene.setCursor(new ImageCursor(image, image.getWidth() / 4, image
-				.getWidth() / 4));
+		myScene.setCursor(new ImageCursor(image, image.getWidth() / CURSOR_RATIO, image
+				.getWidth() / CURSOR_RATIO));
 
 	}
 

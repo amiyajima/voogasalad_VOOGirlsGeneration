@@ -2,7 +2,9 @@ package utilities.leapMotion;
 
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.event.InputEvent;
 import java.util.ResourceBundle;
+
 import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Gesture;
@@ -11,9 +13,9 @@ import com.leapmotion.leap.Listener;
 public class LeapMotionListener extends Listener{
     private ResourceBundle myGestures;
     private Robot myRobot;
-    private ILeapMouse myLeapMouse;
+    private ICustomControl myLeapMouse;
     public static final String GESTURES_FILEPATH = "";
-    public static final int MOUSE_CLICK_KEY = 1;
+    
     
     public void onConnect (Controller controller){
     
@@ -33,7 +35,7 @@ public class LeapMotionListener extends Listener{
     }
     public void onFrame (Controller controller) {
         Frame frame = controller.frame();
-        myLeapMouse.mouseMove(frame, myRobot);
+        myLeapMouse.control(frame, myRobot);
         for(Gesture gesture: frame.gestures()){
             for(String gestureName : myGestures.keySet()){
                 if(gesture.type()==Enum.valueOf(Gesture.Type.class, gestureName)){
@@ -45,7 +47,7 @@ public class LeapMotionListener extends Listener{
    
     private void performAction(String gestureName){
         int input = Integer.parseInt(myGestures.getString(gestureName));
-        if(input==MOUSE_CLICK_KEY){
+        if(input==InputEvent.BUTTON1_DOWN_MASK){
         myRobot.mousePress(input);
         }
         else{
