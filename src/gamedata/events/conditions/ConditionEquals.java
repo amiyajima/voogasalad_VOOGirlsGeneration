@@ -1,5 +1,7 @@
 package gamedata.events.conditions;
 
+import java.util.List;
+
 import gamedata.events.Condition;
 import gamedata.gamecomponents.IHasStats;
 
@@ -9,7 +11,6 @@ public class ConditionEquals extends Condition{
 	protected String myStat;
 	protected Double myConstant;
 
-	
 	//TODO: There might be an error with passing myDescription up the pipeline
 	public ConditionEquals(String description, IHasStats ref1, String stat1, Double constant){
 		super(description);
@@ -19,7 +20,12 @@ public class ConditionEquals extends Condition{
 	}
 
 	@Override
-	public boolean evaluate(IHasStats source) {
+	public boolean evaluate(List<IHasStats> objects) {
+		for(IHasStats source: objects){
+			if(myReference.getClass().equals(source.getClass())){
+				return myConstant.equals(source.getStats().getValue(myStat));
+			}	
+		}
 		return false;
 	}
 	

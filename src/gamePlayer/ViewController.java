@@ -52,7 +52,7 @@ public class ViewController {
 	private Stage myStage;
 	private BorderPane myGameSpace;
 	private BorderPane myPopup;
-	private BorderPane mySettings;
+	private VBox mySettings;
 	private VBox myInitialScene;
 	private VBox myScoreBoard;
 	private Scene mySettingsScene;
@@ -68,6 +68,9 @@ public class ViewController {
 	// private SampleListener myLeapListener;
 
 	private Boolean keyControlOn;
+	private Boolean clickSoundOn;
+	private Boolean backgroundMusicOn;
+	
 	private KeyboardAction myKeyboardAction;
 	private KeyboardMovement myKeyboardMovement;
 
@@ -127,20 +130,21 @@ public class ViewController {
 	protected void openInitialMenu() throws UnsupportedAudioFileException, IOException, LineUnavailableException{
 	    myInitialScene = new VBox();
 	    myGameSpace = new BorderPane();
-	    mySettings = new BorderPane();
 	    myScoreBoard = new VBox();
 	    scores = new VBox();
 
 	    
 	    
 	    myPopup = new BorderPane();
+	    mySettings = new VBox();
+	    
 	    myJSONManager = new JSONManager();
 	    // myLeapController = new Controller();
 	    loadFXML(GAMESPACE_FXML, myGameSpace);
 	    loadFXML(INITIALSCENE_FXML, myInitialScene);
 	    loadFXML(POPUP_FXML, myPopup);
 	    loadFXML(SCOREBOARD_FXML, myScoreBoard);
-//	    loadFXML(SETTINGS_FXML, mySettings);
+	    loadFXML(SETTINGS_FXML, mySettings);
 	    
 	    scoreScene = new Scene(myScoreBoard);
 	    myPopupScene = new Scene(myPopup);
@@ -149,7 +153,7 @@ public class ViewController {
 	    myStage.setScene(new Scene(myInitialScene));
 	    
 	    myAudio = new Audio();
-//	    myAudio.playDefault();     //muting music for now...
+	    myAudio.playDefault();     //muting music for now...
 	    
 	    System.out.println("Opened initial menu");
 	}
@@ -180,6 +184,13 @@ public class ViewController {
 
 	}
 	
+	@FXML
+	protected void openSettings() {
+	    System.out.println("opensettings");
+	    Stage stage = new Stage();
+	    stage.setScene(mySettingsScene);
+	    stage.show();
+	}
 	
 	/**
 	 * the method to restart the game; it asks the user whether to save the
@@ -234,13 +245,6 @@ public class ViewController {
 		initializeGrid();
 	}
 
-	@FXML
-	private void doSettings() {
-	    System.out.println("hihi");
-	    Stage stage = new Stage();
-	    stage.setScene(mySettingsScene);
-	    stage.show();	    
-	}
 
 	/**
 	 * loads the players and their scores of the current game; display the
@@ -309,7 +313,7 @@ public class ViewController {
 	/**
 	 * Initializes grid and its effects manager (gamegrideffect)
 	 */
-	private void initializeGrid() {
+	protected void initializeGrid() {
 		System.out.println("initialize grid");
 	    
 	        myAudio.playSelection();
@@ -325,6 +329,8 @@ public class ViewController {
 		setOnClick();
 		setGridState(new SelectState(this));		
 		keyControlOn = false;
+		backgroundMusicOn = true;
+		clickSoundOn = true;
 		myGameGridEffect = new GameGridEffect(this);
 	}
 	
@@ -432,7 +438,9 @@ public class ViewController {
 	 */
 	protected void bindAction(Action action) {
 	        System.out.println("BIND ACTION");
-	        myAudio.playSelection();
+	        if (clickSoundOn){
+	            myAudio.playSelection();
+	        }
 	        
 		if (activePiece == null)
 			return;
@@ -465,10 +473,12 @@ public class ViewController {
 	 */
 	public void performAction(Point2D loc) {
 		System.out.println("PERFORM ACTION");
-	        myAudio.playSelection();
+	        
+		if (clickSoundOn){
+		    myAudio.playSelection();
+		}
 	        
 	        gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
-		
 		if (keyControlOn) {
 			myKeyboardMovement = null;
 			myKeyboardAction = new KeyboardAction();
@@ -503,6 +513,28 @@ public class ViewController {
 		return currentClick;
 	}
 
+	public void toggleClickSound() {
+	    if (clickSoundOn){
+	        clickSoundOn = false;
+	    }
+	    else{
+	        clickSoundOn = true;
+	    }
+	}
+	
+	public void toggleBackgroundMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	    if (backgroundMusicOn){
+	        myAudio.muteDefault();
+	        backgroundMusicOn = false;
+	        System.out.println("BGMusic Off");
+	    }
+	    else{
+	        myAudio.playDefault();
+	        backgroundMusicOn = true;
+	        System.out.println("BGMusic On");
+	    }
+	}
+	
 	/**
 	 * Toggles whether the Keyboard Controls are active or inactive
 	 */
@@ -707,4 +739,9 @@ public class ViewController {
 	public VBox getcontrolPane() {
 		return controlPane;
 	}
+	
+	public void setCurrentPlayer(Player p){
+		myCurrentPlayer=p;
+	}
 }
+
