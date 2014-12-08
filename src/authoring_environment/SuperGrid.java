@@ -39,6 +39,14 @@ public class SuperGrid {
 		initGridTiles(shape);
 	}
 
+	protected void clearGridImages() {
+		for (List<SuperTile> row : myGrid) {
+			for (SuperTile tile : row) {
+				tile.removePieceImage();
+				tile.removePatchImage();
+			}
+		}
+	}
 
 	protected void initGridTiles(String shape) {
 		myGrid = new LinkedList<List<SuperTile>>();

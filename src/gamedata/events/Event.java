@@ -54,7 +54,7 @@ public class Event {
 
 		if (allConditionsFulfilled) {
 			for (GlobalAction a : myGlobalActions) {
-				a.doBehavior();
+				a.doBehavior(sources);
 			}
 		}
 	}
