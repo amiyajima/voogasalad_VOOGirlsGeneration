@@ -10,6 +10,7 @@ import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -91,6 +92,8 @@ public class ViewController {
 	private MenuButton newGameMenu;
 	@FXML
 	private Text gameName;
+	@FXML
+	private Text highestScore;
 	@FXML
 	private VBox scores;
 	@FXML
@@ -343,19 +346,20 @@ public class ViewController {
 	 * Loads the Score from a Player for Display
 	 */
 	protected void loadScores() {
-		
+		List<Integer> scoreList = new ArrayList<Integer>();
 	        gameName.setText(myModel.toString());
-
-		// TODO: add in scores
-//		 myModel.getPlayers().forEach(player-> scores.getChildren().
-//		 add(new Text(player.getID()+": ")));
 		scores.getChildren().clear();
 	        for (Player p: myModel.getPlayers()){
-		    String score = "";
-		    Text playerScore = new Text("Player " + p.getID()+": " + score);
+		    int score = 0;    //0 for now. will get from Player later!!!!!
+		    scoreList.add(score);
+		    Text playerScore = new Text("Player " + p.getID()+": " + String.valueOf(score));
 		    playerScore.setFill(Color.WHITE);
 		    scores.getChildren().add(playerScore);
 		}
+	        highestScore.setText(String.valueOf(Collections.max(scoreList)));
+
+	        
+	        
 	}
 
 	/**
