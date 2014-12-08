@@ -27,6 +27,7 @@ public class PieceEditor extends Pane {
     private static final int HEIGHT = 150;
     private static final int WIDTH = 150;
     private static final String EDITOR_TITLE = "Individual Unit Editor";
+    private static final String ACTIONS_LIST = "Actions";
     private static final String ID_LABEL = "Unique ID: ";
     private static final String NAME_LABEL = "Name: ";
     private static final String PLAYER_LABEL = "Player ID: ";
@@ -87,6 +88,10 @@ public class PieceEditor extends Pane {
         images.setPadding(UIspecs.allPadding);
         images.setSpacing(5);
         
+        VBox actions = new VBox();
+        actions.setPadding(UIspecs.allPadding);
+        actions.setSpacing(5);
+        
         Button createStatButton = new Button(STAT_CREATE_LABEL);
         initStatButton(createStatButton);
         createStat.getChildren().addAll(createStatButton);
@@ -100,10 +105,12 @@ public class PieceEditor extends Pane {
         names.getChildren().addAll(nameLabel);
         
         initPlayerChoice(player);
+        Label actionLabel = new Label(ACTIONS_LIST);
         ListView<String> pseudoModList = initPseudoModList();
+        actions.getChildren().addAll(actionLabel, pseudoModList);
         initImageDisplay(images);
 
-        box.getChildren().addAll(labelBox, ids, names, images, player, createStat, pseudoModList);
+        box.getChildren().addAll(labelBox, ids, names, images, player, createStat, actions);
         getChildren().add(box);
     }
 
