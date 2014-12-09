@@ -13,6 +13,8 @@ import gamedata.gamecomponents.Piece;
 import gamedata.rules.MoveCountRule;
 import gamedata.rules.Rule;
 import gamedata.stats.Stats;
+import gamedata.wrappers.ActionData;
+import gamedata.wrappers.ActionDataIndividual;
 import gameengine.movement.Movement;
 import java.awt.geom.Point2D;
 import java.io.FileNotFoundException;
@@ -62,8 +64,10 @@ public class VoogaMain {
         multiplePieces.add(piece);
 
         // PIECE COMPONENTS
-        List<Action> actions = piece.getActions();
-        Action a = actions.get(0); // WORKS
+        List<Action> actionList = piece.getActions();
+        Action a = actionList.get(0); // WORKS
+        actionList.add(a);
+        ActionData actionData = new ActionData(actions);
         Movement m = piece.getMovement(); // DOES NOT EXIST
         Stats stats = piece.getStats();
         Inventory inventory = piece.getInventory(); // DOES NOT EXIST
@@ -77,13 +81,13 @@ public class VoogaMain {
         // myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
         // myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
         System.out.println(actions);
-        myJSONmanager.writeToJSON(actions, "src/resources/json/MultipleActionData.json");
+        myJSONmanager.writeToJSON(actionData, "src/resources/json/ActionData.json");
     }
 
     public static void testJSONload () {
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("src/resources/json/MultipleActionData.json");
+            jsonManager.readFromJSONFile("src/resources/json/ActionData.json");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -92,7 +96,7 @@ public class VoogaMain {
 
     public static void main (String[] args) {
         System.out.println("main is running");
-        testJSONwrite();
-        //testJSONload();
+        //testJSONwrite();
+        testJSONload();
     }
 }

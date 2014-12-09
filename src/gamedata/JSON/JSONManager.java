@@ -57,13 +57,13 @@ public class JSONManager {
     /**
      * Write a game and its contents into a JSON file.
      * 
-     * @param actions
+     * @param actionData
      * 
      * @param grid
      */
-    public void writeToJSON (List<Action> actions, String fileName) {
+    public void writeToJSON (ActionData actionData, String fileName) {
         System.out.println("JSONManager: write method called");
-        String json = myGson.toJson(actions);
+        String json = myGson.toJson(actionData);
         System.out.println("JSONManager: game converted to json!");
 
         try {
