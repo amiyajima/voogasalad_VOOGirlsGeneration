@@ -13,12 +13,11 @@ import gamedata.gamecomponents.Piece;
 import gamedata.rules.MoveCountRule;
 import gamedata.rules.Rule;
 import gamedata.stats.Stats;
-import gamedata.wrappers.ActionData;
-import gamedata.wrappers.ActionDataIndividual;
 import gameengine.movement.Movement;
 import java.awt.geom.Point2D;
 import java.io.FileNotFoundException;
 import java.util.List;
+import authoring.data.ActionData;
 import authoring.data.PatchData;
 import authoring.data.PieceData;
 import authoring_environment.GUIGrid;
@@ -33,7 +32,7 @@ import authoring_environment.GUIGrid;
 public class VoogaMain {
     public static void testJSONwrite () {
         System.out.println("this should print");
-        String saveTo = "src/resources/json/Patch.json";
+        String saveTo = "src/resources/json/Piece.json";
         // String saveTo = "src/resources/json/RicaSample.json";
         JSONManager myJSONmanager = new JSONManager();
         JSONBobTester jb = new JSONBobTester();
@@ -57,20 +56,19 @@ public class VoogaMain {
         List<GlobalAction> globalActions = e.getGlobalActions();
         GlobalAction gl = globalActions.get(0);
 
-        // PIECE
-        Piece piece = grid.getPiece(point);
+        // PIECE and PIECE COMPONENTS -- DONE
+        Piece piece = grid.getPiece(point); 
         System.out.println("Piece is: " + piece);
         PieceData multiplePieces = new PieceData();
         multiplePieces.add(piece);
 
         // PIECE COMPONENTS
-        List<Action> actionList = piece.getActions();
-        Action a = actionList.get(0); // WORKS
-        actionList.add(a);
-        ActionData actionData = new ActionData(actions);
-        Movement m = piece.getMovement(); // DOES NOT EXIST
-        Stats stats = piece.getStats();
-        Inventory inventory = piece.getInventory(); // DOES NOT EXIST
+        List<Action> actionList = piece.getActions(); 
+        Action a = actionList.get(0); 
+        ActionData actionData = new ActionData(actionList); 
+        Movement m = piece.getMovement(); 
+        Stats stats = piece.getStats(); 
+        Inventory inventory = piece.getInventory(); 
 
         // PATCH AND COMPONENTS -- DONE
         Patch patch = grid.getPatch(point); // WORKS
@@ -80,14 +78,14 @@ public class VoogaMain {
         // System.out.println("things still work");
         // myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
         // myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
-        System.out.println(actions);
-        myJSONmanager.writeToJSON(actionData, "src/resources/json/ActionData.json");
+        System.out.println(multiplePieces);
+        myJSONmanager.writeToJSON(multiplePieces, "src/resources/json/MultiplePieces.json");
     }
 
     public static void testJSONload () {
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("src/resources/json/ActionData.json");
+            jsonManager.readFromJSONFile("src/resources/json/MultiplePieces.json");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();

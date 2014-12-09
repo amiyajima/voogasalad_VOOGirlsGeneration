@@ -176,7 +176,7 @@ public class Movement implements Action {
 
     @Override
     public String toString () {
-        return "Movement with move " + myMoves;
+        return "Movement";
     }
 
     @Override
