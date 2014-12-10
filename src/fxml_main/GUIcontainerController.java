@@ -52,14 +52,13 @@ public class GUIcontainerController implements Initializable{
 
             authorController.initData(myGamePropertiesData);
             
-//            rootLayout = (BorderPane) loader.load();
+//          rootLayout = (BorderPane) loader.load();
 //    		myScene = new Scene(rootLayout);
     		testauthor.setContent(rootLayout);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-		
 	}
 	
 	

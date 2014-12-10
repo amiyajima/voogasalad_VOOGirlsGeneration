@@ -9,7 +9,8 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
 
 /**
- * Tile of different shapes
+ * Super class of tile of different shapes. Contains all the methods related
+ * to operation on the tile.
  * 
  * @author Mengen Huang, Jennie Ju
  */
@@ -27,10 +28,10 @@ public abstract class SuperTile extends Group {
     private Shape myHighlight;
 
     /**
+     * Define the tile of shape and group all the elements in the tile.
      * 
-     * @param bgShape Tile shape
-     * @param size Tile size
-     * @param loc Grid coordination
+     * @param size: The side length/height of the shape.
+     * @param loc: Grid location of the tile.
      */
     public SuperTile (double size, Point2D loc) {
         myCoordinates = loc;
@@ -39,6 +40,17 @@ public abstract class SuperTile extends Group {
         super.getChildren().addAll(myShape, myPatchImage, myPieceImage, myHighlight);
     }
 
+    /**
+     * Make the tile of the specific shape and align the shape, the patch, the piece,
+     * and the highlight shape on it. Set the color of background shape 
+     * color and highlight color. The patch is a shape so that patch image will 
+     * fill in the shape. The piece only takes the space of the biggeset square
+     * inside the tile. 
+     * 
+     * @param size: The side length or height of the shape.
+     * @param loc: Grid location of the tile.
+     * 
+     */
     protected void makeShapeTile (double size, Point2D loc) {
 
         myLocation = calculatePixelLocation(size, loc);
@@ -57,9 +69,11 @@ public abstract class SuperTile extends Group {
     }
 
     /**
-     * Creates the highlight settings for this tile
+     * Creates the highlight shape the same as the tile 
+     * and define the default settings for this tile.
      * 
-     * @param size
+     * @param size: The side length or height of the shape.
+     * 
      */
 
     private void makeHighlight (double size) {
@@ -69,9 +83,9 @@ public abstract class SuperTile extends Group {
     };
 
     /**
-     * Select a tile to highlight, passing in a hex color
+     *Highlight the tile and pass in a hex color of the highlight.
      * 
-     * @param color
+     * @param color: The color of the highlight.
      */
     public void selectTile (String color) {
         myHighlight.setFill(Color.web(color, 0.3));
@@ -79,43 +93,98 @@ public abstract class SuperTile extends Group {
     }
 
     /**
-     * De-highlight something
+     * De-highlight the tile.
      */
     public void deselectTile () {
-        // System.out.println("De-highlighting tile at " + myLocation.getX() + ", " +
-        // myLocation.getY());
         myHighlight.setVisible(false);
     }
 
+    /**
+     * Return a boolean value indicating if the tile is highlighted.
+     * @return If the tile is highlighted.
+     */
     public boolean ifSelected () {
         return myHighlight.isVisible();
     }
 
+    /**
+     * Show an image inside the tile which takes the place of the 
+     * biggest square inside the shape.
+     * 
+     * @param imageView: The imageView which contains the image to put on the 
+     * tile as a piece.
+     */
     public void setPieceImage (ImageView imageView) {
         myPieceImage.setImage(imageView.getImage());
         myPieceImage.setVisible(true);
     }
 
+    /**
+     * Set the Image of the Patch on the tile.
+     * @param imageView: The imageView which contains the image to fill the 
+     * tile as a patch.
+     */
     public void setPatchImage (ImageView imageView) {
         myPatchImage.setFill(new ImagePattern(imageView.getImage()));
     }
     
+    /**
+     * Remove the piece image on the tile by setting it invisible.
+     * 
+     */
     public void removePieceImage () {
     	myPieceImage.setVisible(false);
     }
     
+    /**
+     * Remove the patch image on the tile by setting the patch a transparent shape.
+     * 
+     */
     public void removePatchImage () {
         myPatchImage.setFill(Color.TRANSPARENT);
     }
 
+    /**
+     * Make the tile of a specific shape.
+     * @param size: The side length/height of the shape.
+     * @param coordinates: The pixel coordinate of the tile.
+     * @return The tile of a shape with its location and its size defined.
+     */
     protected abstract Shape makeShape (double size, Point2D coordinates);
 
+    /**
+     * Calculate the pixel location of the tile.
+     * @param size: The height or side length of the shape.
+     * @param loc: The grid location of the tile with the top left as (0,0).
+     * @return The pixel location of the tile.
+     */
     protected abstract Point2D calculatePixelLocation (double size, Point2D loc);
     
+    /**
+     * Calculate the location of the image inside the tile that the image takes 
+     * the place of the biggest square inside the tile.
+     *
+     * @param size: The height or side length of the shape.
+     * @param loc: The grid location of the tile with the top left as (0,0).
+     * @return The pixel location of the image.
+     */
     protected abstract Point2D calculateImageLocation(double size, Point2D loc);
     
+    /**
+     * 
+     * @param size: The height or side length of the tile.
+     * @return The side length of the biggest square in the tile.
+     */
     protected abstract double calculateImageSize(double size);
     
+    
+    /**
+     * Set the background shape color as white or whitesmoke and the edge of the 
+     * tile as gray.
+     * @param row: The row the tile is on. (The y grid location of the tile).
+     * @param col: The column the tile is on. (The x grid location of the tile).
+     * @param shape: The shape of the tile.
+     */
     private void setCheckeredColor (int row, int col, Shape shape) {
         if (((row % 2 == 0) && (col % 2 == 0)) || ((row % 2 == 1) && (col % 2 == 1))) {
             shape.setFill(Color.WHITESMOKE);
@@ -127,6 +196,11 @@ public abstract class SuperTile extends Group {
         shape.setStrokeWidth(0.75);
     }
 
+    /**
+     * Initiate ImageView as a square and visible at default.
+     * @param size: The side length of the biggest square inside the tile.
+     * @return The square imageView of the size passed in.
+     */
     private ImageView initImageView (double size) {
         ImageView imgView = new ImageView();
         imgView.setFitHeight(size);
@@ -135,6 +209,11 @@ public abstract class SuperTile extends Group {
         return imgView;
     }
 
+    /**
+     * Align the passed in node at the same pixel location.
+     * @param coord: The pixel location of the nodes.
+     * @param nodes: The node to be aligned. 
+     */
     private void alignNodes (Point2D coord, Node ... nodes) {
         for (Node node : nodes) {
             node.setLayoutX(coord.getX());
@@ -143,23 +222,27 @@ public abstract class SuperTile extends Group {
     }
 
     /**
-     * Pixel location
+     * Get the grid location of the tile.
      * 
-     * @return
+     * @return The grid location of the tile.
      */
     public Point2D getCoordinates () {
         return myCoordinates;
     }
 
     /**
-     * Grid coordinate location
+     * Get the pixel location of the tile.
      * 
-     * @return
+     * @return The pixel location of the tile.
      */
     public Point2D getLocation () {
         return myLocation;
     }
     
+    /**
+     * Get the imageView of the piece.
+     * @return The imageView of the piece.
+     */
     public ImageView getPieceImage(){
     	return myPieceImage;
     }
