@@ -25,7 +25,7 @@ public abstract class SuperTile extends Group {
 
     protected transient ImageView myPieceImage;
     protected transient Shape myPatchImage;
-    private Shape myHighlight;
+    private transient Shape myHighlight;
 
     /**
      * Define the tile of shape and group all the elements in the tile.

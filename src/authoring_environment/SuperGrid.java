@@ -23,8 +23,8 @@ public class SuperGrid {
 	protected double myTileHeight;
 	protected String myShape;
 
-	protected Pane myPane;
-	protected List<List<SuperTile>> myGrid;
+	protected transient Pane myPane;
+	protected transient List<List<SuperTile>> myGrid;
 
 	public SuperGrid() {
 		this(1, 1, 40, SQUARE_GRID);

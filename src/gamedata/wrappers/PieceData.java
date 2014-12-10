@@ -1,23 +1,27 @@
 package gamedata.wrappers;
 
-import gamedata.gamecomponents.Piece;
-import java.awt.geom.Point2D;
-import java.util.Map;
+import java.util.List;
 
 /**
- * Wrapper for PieceData in GridData
- * @author Rica
+ * Data object representing a list of piece data objects.
+ * 
+ * Used in JSON deserialization
+ * @author annamiyajima
  *
  */
 public class PieceData {
-    private Map<Point2D, Piece> myPieces;
+        private List<PieceDataIndividual> myPieces;
 
-    public PieceData (Map<Point2D, Piece> pieces) {
-        myPieces = pieces;
-    }
+        public PieceData (List<PieceDataIndividual> pieces) {
+            myPieces = pieces;
+        }
 
-    public Map<Point2D, Piece> getPieces () {
-        return myPieces;
-    }
-
+        public List<PieceDataIndividual> getPieces () {
+            return myPieces;
+        }
+        
+        public String toString(){
+            return myPieces.toString();
+        }
+    
 }

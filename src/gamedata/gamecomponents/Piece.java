@@ -16,11 +16,11 @@ import java.awt.geom.Point2D;
 public class Piece extends GridComponent {
 
 	private List<Action> myActions;
-	private Movement myMove;
+	private transient Movement myMove;//INCLUDED IN ACTIONS
 	private Stats myStats;
 	private int myPlayerID;
 	private boolean myShouldRemove;
-	private Inventory myInventory;
+	private transient Inventory myInventory;
 
 	/**
 	 * Piece constructor
