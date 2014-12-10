@@ -66,7 +66,7 @@ public class VoogaMain {
         List<Action> actionList = piece.getActions(); 
         Action a = actionList.get(0); 
         ActionData actionData = new ActionData(actionList); 
-        Movement m = piece.getMovement(); 
+        Movement m = piece.getMovement(); //INCLUDED IN ACTIONS
         Stats stats = piece.getStats(); 
         Inventory inventory = piece.getInventory(); 
 
@@ -78,7 +78,7 @@ public class VoogaMain {
         // System.out.println("things still work");
         // myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
         // myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
-        System.out.println(multiplePieces);
+        System.out.println();
         myJSONmanager.writeToJSON(multiplePieces, "src/resources/json/MultiplePieces.json");
     }
 

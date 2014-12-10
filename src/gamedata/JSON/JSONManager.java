@@ -17,7 +17,6 @@ import gamedata.wrappers.GameData;
 import gamedata.wrappers.GoalData;
 import gamedata.wrappers.GridData;
 import gamedata.wrappers.LevelDataIndividual;
-import gamedata.wrappers.MovementData;
 import gamedata.wrappers.PatchData;
 import gamedata.wrappers.PatchDataIndividual;
 import gamedata.wrappers.PieceDataIndividual;
@@ -62,7 +61,7 @@ public class JSONManager {
      * 
      * @param multiplePieces
      * 
-     * @param grid
+     * @param multiplePieces
      */
     public void writeToJSON (PieceData multiplePieces, String fileName) {
         System.out.println("JSONManager: write method called");
@@ -92,7 +91,7 @@ public class JSONManager {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
-        gamedata.wrappers.PieceData myGameData = myGson.fromJson(br, gamedata.wrappers.PieceData.class);
+        gamedata.wrappers.PieceData myGameData = myGson.fromJson(br,gamedata.wrappers.PieceData.class);
         System.out.println(myGameData.toString());
 
         // JSONParseTester jpt = new JSONParseTester();
@@ -143,6 +142,7 @@ public class JSONManager {
         builder.registerTypeAdapter(Action.class, new GenericTypeAdapter<Action>("gamedata.action"));
         builder.registerTypeAdapter(ActionConclusion.class, new ActionConclusionTypeAdapter<ActionConclusion>("gamedata.action"));
         builder.registerTypeAdapter(GridComponent.class, new GenericTypeAdapter<GridComponent>("gamedata.gamecomponent"));
+        builder.registerTypeAdapter(SuperGrid.class, new GenericTypeAdapter<SuperGrid>("authoring_environment"));
     }
 
 }

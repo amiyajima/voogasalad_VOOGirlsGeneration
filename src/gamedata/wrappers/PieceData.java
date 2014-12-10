@@ -19,6 +19,9 @@ public class PieceData {
         public List<PieceDataIndividual> getPieces () {
             return myPieces;
         }
-
+        
+        public String toString(){
+            return myPieces.toString();
+        }
     
 }

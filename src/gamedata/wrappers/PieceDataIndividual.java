@@ -14,23 +14,28 @@ import java.util.List;
  *
  */
 public class PieceDataIndividual {
-    private ActionData myActions;
-    //private Movement myMove;
+   // private ActionData myActions;
+    private List<ActionDataIndividual> myActions;
     private int myPlayerID;
     private boolean myShouldRemove;
-    
-    //from GridComponent
+
+    // from GridComponent
     private String myID;
     private String myName;
     private Point2D.Double myLoc;
     private String myImageLocation;
 
-    public PieceDataIndividual (ActionData actions, int playerID, boolean shouldRemove,String ID, String name, String imageLocation, Point2D p) {
+    public PieceDataIndividual (List<ActionDataIndividual> actions, 
+                                int playerID,
+                                boolean shouldRemove,
+                                String ID,
+                                String name,
+                                String imageLocation,
+                                Point2D p) {
         myActions = actions;
-        // myMove = move;
         myPlayerID = playerID;
         myShouldRemove = shouldRemove;
-        myID=ID;
+        myID = ID;
         myName = name;
         myImageLocation = imageLocation;
         myLoc = (Double) p;
@@ -43,8 +48,8 @@ public class PieceDataIndividual {
     public boolean isMyShouldRemove () {
         return myShouldRemove;
     }
-    
-    public String toString(){
+
+    public String toString () {
         return "PieceDataIndividual: ID = " + myID + "myLoc = " + myLoc;
     }
 
