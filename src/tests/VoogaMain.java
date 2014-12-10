@@ -67,7 +67,7 @@ public class VoogaMain {
         Action a = actionList.get(0); 
         ActionData actionData = new ActionData(actionList); 
         Movement m = piece.getMovement(); //INCLUDED IN ACTIONS
-        Stats stats = piece.getStats(); 
+        Stats stats = piece.getStats(); //WHY IS THIS TRANSIENT?
         Inventory inventory = piece.getInventory(); 
 
         // PATCH AND COMPONENTS -- DONE
@@ -79,13 +79,13 @@ public class VoogaMain {
         // myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
         // myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
         System.out.println();
-        myJSONmanager.writeToJSON(multiplePieces, "src/resources/json/MultiplePieces.json");
+        myJSONmanager.writeToJSON(piece, "src/resources/json/Piece.json");
     }
 
     public static void testJSONload () {
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("src/resources/json/MultiplePieces.json");
+            jsonManager.readFromJSONFile("src/resources/json/Piece.json");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();

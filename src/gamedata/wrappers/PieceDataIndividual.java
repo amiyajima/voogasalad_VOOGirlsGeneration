@@ -14,8 +14,9 @@ import java.util.List;
  *
  */
 public class PieceDataIndividual {
-   // private ActionData myActions;
+    // private ActionData myActions;
     private List<ActionDataIndividual> myActions;
+    private StatsData myStats;
     private int myPlayerID;
     private boolean myShouldRemove;
 
@@ -25,7 +26,7 @@ public class PieceDataIndividual {
     private Point2D.Double myLoc;
     private String myImageLocation;
 
-    public PieceDataIndividual (List<ActionDataIndividual> actions, 
+    public PieceDataIndividual (List<ActionDataIndividual> actions, StatsData stats,
                                 int playerID,
                                 boolean shouldRemove,
                                 String ID,
@@ -33,6 +34,7 @@ public class PieceDataIndividual {
                                 String imageLocation,
                                 Point2D p) {
         myActions = actions;
+        myStats = stats;
         myPlayerID = playerID;
         myShouldRemove = shouldRemove;
         myID = ID;
@@ -50,7 +52,7 @@ public class PieceDataIndividual {
     }
 
     public String toString () {
-        return "PieceDataIndividual: ID = " + myID + "myLoc = " + myLoc;
+        return "PieceDataIndividual: ID = " + myID + "myLoc = " + myLoc + " stats = " + myStats;
     }
 
 }
