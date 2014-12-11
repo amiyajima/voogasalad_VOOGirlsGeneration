@@ -5,7 +5,7 @@ import java.awt.geom.Point2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
-import authoring.data.PatchData;
+import authoring.data.AuthoringPatchData;
 import authoring.data.PieceData;
 
 /**
@@ -16,7 +16,7 @@ import authoring.data.PieceData;
  */
 public class JennieGrid extends ShapeGrid {
 	
-	public JennieGrid(int cols, int rows, int tileSize, PieceData pieceData, PatchData patchData,
+	public JennieGrid(int cols, int rows, int tileSize, PieceData pieceData, AuthoringPatchData patchData,
 			String id) {
 		super(cols, rows, tileSize, pieceData, patchData, id);
 	}

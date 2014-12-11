@@ -48,19 +48,19 @@ public class JSONParseTester {
         // works using SinglePiece.json
         PieceDataIndividual pieceData = myGson.fromJson(br, PieceDataIndividual.class);
         System.out.println(pieceData.getMyTypeID());
-
+        
         // map of patches
         PatchData myPatches = myGson.fromJson(br, PatchData.class);
         System.out.println(myPatches);
 
         // goal data is created, but contains no goals. does not work if it is called after rule
         // data
-        GoalData myGoals = myGson.fromJson(br, GoalData.class);
-        System.out.println(myGoals.toString());
+//        GoalData myGoals = myGson.fromJson(br, GoalData.class);
+//        System.out.println(myGoals.toString());
 
         // ruledata exists but contains no rules. does not work if it is called after goal data
-        RuleData ruledata = myGson.fromJson(br, RuleData.class);
-        System.out.println(ruledata);
+//        RuleData ruledata = myGson.fromJson(br, RuleData.class);
+//        System.out.println(ruledata);
         // issue = how to represent "properties" and put it in the IndividualRuleData super class
         // same results whether rule data uses RuleDataIndividual or MoveCountRuleData. seems like
         // the constructor within isn't called.
@@ -70,8 +70,8 @@ public class JSONParseTester {
         System.out.println(rule.toString());
 
         // when tested with the SingleGoal json, creates a PlayerPiecesRemovedGoal
-        Goal g = myGson.fromJson(br, Goal.class);
-        System.out.println(g.toString());
+//        Goal g = myGson.fromJson(br, Goal.class);
+//        System.out.println(g.toString());
 
         PlayerData myPlayers = myGson.fromJson(br, PlayerData.class);
         System.out.println(myPlayers.getPlayers().get(0).getID());

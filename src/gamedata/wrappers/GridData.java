@@ -1,13 +1,5 @@
 package gamedata.wrappers;
 
-import gamedata.gamecomponents.Patch;
-import gamedata.gamecomponents.Piece;
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-
 /**
  * Wrapper for the Grid in LevelsData
  * 
@@ -16,35 +8,25 @@ import java.util.Map;
  */
 
 public class GridData {
-    private int myRow;
-    private int myColumn;
-    private PatchData myPatches;
-    private PieceData myPieces;
+    private PieceData myPieceData;
+    private PatchData myPatchData;
 
-    public GridData (int row, int column, PatchData patches, PieceData pieces) {
-        myRow = row;
-        myColumn = column;
-        myPatches = patches;
-        myPieces = pieces;
-    }
-
-    public int getRow () {
-        return myRow;
-    }
-
-    public int getColumn () {
-        return myColumn;
+    public GridData (PieceData pieces, PatchData patches) {
+        myPieceData = pieces;
+        myPatchData = patches;
     }
 
     public PatchData getPatches () {
-        return myPatches;
+        return myPatchData;
     }
 
     public PieceData getPieces () {
-        return myPieces;
+        return myPieceData;
     }
 
     public String toString () {
-        return "GridData: # pieces = " + myPieces.getPieces().size() + " # patches " + myPatches.getPatches().size();
+        String myString = "GridData: # pieces = " + myPieceData.getPieces().size();
+        String string2 =  " # patches " + myPatchData.getPatches().size();
+        return myString + string2;
     }
 }

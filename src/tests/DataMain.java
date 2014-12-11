@@ -18,7 +18,7 @@ import java.awt.geom.Point2D;
 import java.io.FileNotFoundException;
 import java.util.List;
 import authoring.data.ActionData;
-import authoring.data.PatchData;
+import authoring.data.AuthoringPatchData;
 import authoring.data.PieceData;
 import authoring_environment.GUIGrid;
 
@@ -29,15 +29,16 @@ import authoring_environment.GUIGrid;
  * @author annamiyajima, Rica Zhang
  *
  */
-public class VoogaMain {
+public class DataMain {
     public static void testJSONwrite () {
-        String saveTo = "src/resources/json/Action.json";
+        String saveTo = "src/resources/json/Patch-Rica.json";
         JSONManager myJSONmanager = new JSONManager();
         JSONBobTester jb = new JSONBobTester();
 
         // POINT
         Point2D point = new Point2D.Double(0, 0);
-
+        Point2D point2 = new Point2D.Double(3,3);
+                
         // GAME
         Game g = jb.createNewGame();
 
@@ -69,21 +70,21 @@ public class VoogaMain {
         Inventory inventory = piece.getInventory(); 
 
         // PATCH AND COMPONENTS -- DONE
-        Patch patch = grid.getPatch(point); // WORKS
-        PatchData multiplePatches = new PatchData(); // WORKS
-        multiplePatches.add(patch);
+        //Patch patch = grid.getPatch(point); // WORKS
+        //Patch patch2 = grid.getPatch(point2);
+        //PatchData multiplePatches = grid.getPatchData(); // WORKS
 
         // System.out.println("things still work");
         // myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
         // myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
         System.out.println();
-        myJSONmanager.writeToJSON(a, "src/resources/json/Rica-Action.json");
+        myJSONmanager.writeToJSON(grid, "src/resources/json/Rica-Grid.json");
     }
 
     public static void testJSONload () {
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("src/resources/json/Piece.json");
+            jsonManager.readFromJSONFile("src/resources/json/Rica-Grid.json");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -91,7 +92,7 @@ public class VoogaMain {
     }
 
     public static void main (String[] args) {
-        testJSONwrite();
-        //testJSONload();
+        //testJSONwrite();
+        testJSONload();
     }
 }

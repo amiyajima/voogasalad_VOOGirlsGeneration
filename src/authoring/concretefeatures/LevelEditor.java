@@ -3,7 +3,7 @@ package authoring.concretefeatures;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
-import authoring.data.PatchData;
+import authoring.data.AuthoringPatchData;
 import authoring.data.PieceData;
 import authoring_environment.GridView;
 import authoring_environment.JennieGrid;
@@ -34,7 +34,7 @@ public class LevelEditor {
     private int tileSize;
     
     private PieceData pieceData = new PieceData();
-    private PatchData patchData = new PatchData();
+    private AuthoringPatchData patchData = new AuthoringPatchData();
     
     /**
      * Upon construction, makes a grid of the specified type and adds it to the Workspace Tab

@@ -13,14 +13,10 @@ public class Patch extends GridComponent {
 	/**
 	 * Constructor
 	 * 
-	 * @param id
-	 * 			  Unique string ID for the piece or patch.
-	 * @param typeID
-	 *            ID for this type of patch
-	 * @param imageLocation
-	 *            imageLocation of patch(form like "images/myImage.jpg")
-	 * @param p
-	 *            coordinate of patch
+	 * @param id Unique string ID for the piece or patch.
+	 * @param typeID ID for this type of patch
+	 * @param imageLocation imageLocation of patch(form like "images/myImage.jpg")
+	 * @param p coordinate of patch
 	 */
 	public Patch(String id, String name, String imageLocation, Point2D p) {
 		super(id, name, imageLocation, p);

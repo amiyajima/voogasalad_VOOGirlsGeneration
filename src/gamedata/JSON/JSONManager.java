@@ -30,6 +30,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import authoring.data.AuthoringPatchData;
 import authoring.data.PieceData;
 import authoring_environment.GUIGrid;
 import authoring_environment.SuperGrid;
@@ -63,8 +64,8 @@ public class JSONManager {
      * 
      * @param piece
      */
-    public void writeToJSON (Action action, String fileName) {
-        String json = myGson.toJson(action);
+    public void writeToJSON (Object thing, String fileName) {
+        String json = myGson.toJson(thing);
         System.out.println("JSONManager: game converted to json!");
 
         try {
@@ -85,19 +86,20 @@ public class JSONManager {
      * @param JSON file location
      * @throws FileNotFoundException
      */
-    public PieceDataIndividual readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
+    public GridData readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
-        PieceDataIndividual myGameData = myGson.fromJson(br,PieceDataIndividual.class);
-        System.out.println(myGameData.toString());
+        GridData thing = myGson.fromJson(br, GridData.class);
+        System.out.println(thing.toString());
+        System.out.println(thing.getPatches().getPatches().get(4).toString());
 
         // JSONParseTester jpt = new JSONParseTester();
         // jpt.testRead(myGson, br);
 
         // Game myGame = convertToGame(myGameData);
 
-        return myGameData;
+        return thing;
     }
 
     /**
@@ -135,6 +137,7 @@ public class JSONManager {
         return null;
     }
 */
+    
     public void registerTypeAdapters (GsonBuilder builder) {
         builder.registerTypeAdapter(Event.class, new GenericTypeAdapter<Event>("gamedata.events"));
         builder.registerTypeAdapter(Action.class, new GenericTypeAdapter<Action>("gamedata.action"));

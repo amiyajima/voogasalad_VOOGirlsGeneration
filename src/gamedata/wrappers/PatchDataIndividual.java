@@ -32,5 +32,10 @@ public class PatchDataIndividual {
     public String getMyTypeID () {
         return myID;
     }
+    
+    public String toString() {
+        return "Patch - ID: " + myID + "Name: " + myName + " Location: " + myLoc.x + ", "
+                + myLoc.y + " myImage: " + myImageLocation;
+    }
 
 }
