@@ -14,7 +14,7 @@ import java.util.Set;
  * 
  * @author Sandy Lee
  */
-public class AuthoringPatchData implements AuthoringData<Patch> {
+public class PatchInstanceData implements AuthoringData<Patch> {
 
 	private List<Patch> myPatches;
 
@@ -22,7 +22,7 @@ public class AuthoringPatchData implements AuthoringData<Patch> {
 	 * Constructor for new PatchData,
 	 * initializes empty list of Patch
 	 */
-	public AuthoringPatchData () {
+	public PatchInstanceData () {
 		myPatches = new LinkedList<Patch>();
 	}
 

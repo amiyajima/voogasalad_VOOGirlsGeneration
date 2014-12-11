@@ -30,7 +30,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import authoring.data.AuthoringPatchData;
+import authoring.data.PatchInstanceData;
 import authoring.data.PieceData;
 import authoring_environment.GUIGrid;
 import authoring_environment.SuperGrid;
@@ -64,7 +64,7 @@ public class JSONManager {
      * 
      * @param piece
      */
-    public void writeToJSON (Object thing, String fileName) {
+      public void writeToJSON (Object thing, String fileName) {
         String json = myGson.toJson(thing);
         System.out.println("JSONManager: game converted to json!");
 
@@ -86,19 +86,13 @@ public class JSONManager {
      * @param JSON file location
      * @throws FileNotFoundException
      */
-    public GridData readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
+
+    public GameData readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
-        GridData thing = myGson.fromJson(br, GridData.class);
+        GameData thing = myGson.fromJson(br, GameData.class);
         System.out.println(thing.toString());
-        System.out.println(thing.getPatches().getPatches().get(4).toString());
-
-        // JSONParseTester jpt = new JSONParseTester();
-        // jpt.testRead(myGson, br);
-
-        // Game myGame = convertToGame(myGameData);
-
         return thing;
     }
 
@@ -136,10 +130,10 @@ public class JSONManager {
 
         return null;
     }
-*/
+     */
     
     public void registerTypeAdapters (GsonBuilder builder) {
-        builder.registerTypeAdapter(Event.class, new GenericTypeAdapter<Event>("gamedata.events"));
+        //builder.registerTypeAdapter(Event.class, new GenericTypeAdapter<Event>("gamedata.events"));
         builder.registerTypeAdapter(Action.class, new GenericTypeAdapter<Action>("gamedata.action"));
         builder.registerTypeAdapter(ActionConclusion.class, new ActionConclusionTypeAdapter<ActionConclusion>("gamedata.action"));
         builder.registerTypeAdapter(GridComponent.class, new GenericTypeAdapter<GridComponent>("gamedata.gamecomponent"));

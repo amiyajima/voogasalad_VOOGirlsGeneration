@@ -18,7 +18,7 @@ import java.awt.geom.Point2D;
 import java.io.FileNotFoundException;
 import java.util.List;
 import authoring.data.ActionData;
-import authoring.data.AuthoringPatchData;
+import authoring.data.PatchInstanceData;
 import authoring.data.PieceData;
 import authoring_environment.GUIGrid;
 
@@ -78,13 +78,13 @@ public class DataMain {
         // myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
         // myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
         System.out.println();
-        myJSONmanager.writeToJSON(grid, "src/resources/json/Rica-Grid.json");
+        myJSONmanager.writeToJSON(g, "src/resources/json/Rica-Game.json");
     }
 
     public static void testJSONload () {
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("src/resources/json/Rica-Grid.json");
+            jsonManager.readFromJSONFile("src/resources/json/Rica-Game.json");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -13,29 +13,61 @@ import gamedata.rules.Rule;
  */
 public class LevelDataIndividual {
     private GridData myGrid;
-    private List<GoalData> myGoals;
-    private List<RuleData> myRules;
+    private EventData myEventData;
+    private String myId;
+    private boolean myGameWon;
+    private boolean myGameLost;
+    private String myNextLevelID;
+    private boolean myTurnOver;
 
-    public LevelDataIndividual (GridData grid, List<GoalData> goals, List<RuleData> rules) {
+    public LevelDataIndividual (GridData grid, EventData eventData, String id, boolean gameWon, 
+                                boolean gameLost, String nextLevelID, boolean turnOver) {
         myGrid = grid;
-        myGoals = goals;
-        myRules = rules;
+        myEventData = eventData;
+        myId = id;
+        myGameWon = gameWon;
+        myGameLost = gameLost;
+        myNextLevelID = nextLevelID;
+        myTurnOver = turnOver;
+        
+    }
+
+    public GridData getMyGrid () {
+        return myGrid;
+    }
+
+    public EventData getMyEventData () {
+        return myEventData;
+    }
+
+    public String getMyId () {
+        return myId;
+    }
+
+    public boolean isMyGameWon () {
+        return myGameWon;
+    }
+
+    public boolean isMyGameLost () {
+        return myGameLost;
+    }
+
+    public String getMyNextLevelID () {
+        return myNextLevelID;
+    }
+
+    public boolean isMyTurnOver () {
+        return myTurnOver;
     }
 
     public GridData getGrid () {
         return myGrid;
     }
 
-    public List<GoalData> getGoals () {
-        return myGoals;
-    }
-
-    public List<RuleData> getRules () {
-        return myRules;
-    }
-
+    /*
     public String toString () {
         return "LevelDataIndividual: goals are " + myGoals + " myRules are " + myRules;
     }
+    */
 
 }

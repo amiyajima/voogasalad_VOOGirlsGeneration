@@ -13,7 +13,7 @@ import java.util.function.BiConsumer;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import authoring.data.AuthoringPatchData;
+import authoring.data.PatchInstanceData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceData;
 import authoring.data.PieceTypeData;
@@ -29,7 +29,7 @@ import authoring.data.PieceTypeData;
 public class GUIGrid extends SuperGrid implements Observer{
 
 	private PieceData myPieceData;
-	private AuthoringPatchData myPatchData;
+	private PatchInstanceData myPatchData;
 
 	/**
 	 * Default constructor for GUIGrid. Only for testing purposes.
@@ -49,7 +49,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 	public GUIGrid (int cols, int rows, double tileHeight, String shape) {
 		super(cols, rows, tileHeight, shape);
 		myPieceData = new PieceData();
-		myPatchData = new AuthoringPatchData();
+		myPatchData = new PatchInstanceData();
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 * @param patchData - saved patchData
 	 */
 	public GUIGrid (int cols, int rows, double tileHeight, String shape,
-			PieceData pieceData, AuthoringPatchData patchData) {
+			PieceData pieceData, PatchInstanceData patchData) {
 		super(cols, rows, tileHeight, shape);
 		myPieceData = pieceData;
 		myPatchData = patchData;
@@ -360,7 +360,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		eventFunc.accept(allObjects, this);
 	}
 	
-	public AuthoringPatchData getPatchData() {
+	public PatchInstanceData getPatchData() {
 	    return myPatchData;
 	}
 }
