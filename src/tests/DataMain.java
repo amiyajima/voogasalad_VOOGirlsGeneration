@@ -78,7 +78,7 @@ public class DataMain {
         // myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
         // myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
         System.out.println();
-        myJSONmanager.writeToJSON(grid, "src/resources/json/Rica-Grid.json");
+        myJSONmanager.writeToJSON(l, "src/resources/json/Rica-Level.json");
     }
 
     public static void testJSONload () {
@@ -92,7 +92,7 @@ public class DataMain {
     }
 
     public static void main (String[] args) {
-        //testJSONwrite();
-        testJSONload();
+        testJSONwrite();
+        //testJSONload();
     }
 }

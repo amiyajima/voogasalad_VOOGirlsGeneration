@@ -1,9 +1,8 @@
 package gamedata.events;
 
 import gamedata.gamecomponents.IHasStats;
-
+import java.util.ArrayList;
 import java.util.List;
-
 import authoring_environment.GUIGrid;
 import javafx.collections.FXCollections;
 
@@ -23,12 +22,18 @@ import javafx.collections.FXCollections;
  */
 public class Event {
 	private String myName;
+	private List<Condition> myConditionsObservable;
+	private List<GlobalAction> myGlobalActionsObservable;
 	private List<Condition> myConditions;
 	private List<GlobalAction> myGlobalActions;
 
+
 	public Event (String name) {
-		myConditions = FXCollections.observableArrayList();
-		myGlobalActions = FXCollections.observableArrayList();
+		myConditionsObservable = FXCollections.observableArrayList();
+		myGlobalActionsObservable = FXCollections.observableArrayList();
+		myConditions = new ArrayList<Condition>();
+		myGlobalActions = new ArrayList<GlobalAction>();
+		
 		if(name.equals("") || name==null){
 			myName = "Nameless Event";
 		}
@@ -47,7 +52,7 @@ public class Event {
 	public void runEvent (List<IHasStats> sources, GUIGrid grid) {
 		boolean allConditionsFulfilled = true;
 
-		for (Condition c : myConditions) {
+		for (Condition c : myConditionsObservable) {
 			if (!c.evaluate(sources)) {
 				allConditionsFulfilled = false;
 			}
@@ -56,7 +61,7 @@ public class Event {
 		System.out.println("THE CONDITION EVALUATES TO: " + allConditionsFulfilled);
 
 		if (allConditionsFulfilled) {
-			for (GlobalAction a : myGlobalActions) {
+			for (GlobalAction a : myGlobalActionsObservable) {
 				a.doBehavior(grid);
 			}
 		}
@@ -69,10 +74,10 @@ public class Event {
 
 
 	public List<Condition> getConditions(){
-		return myConditions;
+		return myConditionsObservable;
 	}
 
 	public List<GlobalAction> getGlobalActions(){
-		return myGlobalActions;
+		return myGlobalActionsObservable;
 	}
 }

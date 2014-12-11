@@ -64,7 +64,7 @@ public class JSONManager {
      * 
      * @param piece
      */
-    public void writeToJSON (Object thing, String fileName) {
+      public void writeToJSON (Object thing, String fileName) {
         String json = myGson.toJson(thing);
         System.out.println("JSONManager: game converted to json!");
 
@@ -86,19 +86,12 @@ public class JSONManager {
      * @param JSON file location
      * @throws FileNotFoundException
      */
+
     public GridData readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
         GridData thing = myGson.fromJson(br, GridData.class);
-        System.out.println(thing.toString());
-        System.out.println(thing.getPatches().getPatches().get(4).toString());
-
-        // JSONParseTester jpt = new JSONParseTester();
-        // jpt.testRead(myGson, br);
-
-        // Game myGame = convertToGame(myGameData);
-
         return thing;
     }
 
@@ -136,7 +129,7 @@ public class JSONManager {
 
         return null;
     }
-*/
+     */
     
     public void registerTypeAdapters (GsonBuilder builder) {
         builder.registerTypeAdapter(Event.class, new GenericTypeAdapter<Event>("gamedata.events"));
