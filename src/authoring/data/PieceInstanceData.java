@@ -14,7 +14,7 @@ import java.util.Set;
  * 
  * @author Martin Tamayo
  */
-public class PieceData implements AuthoringData<Piece> {
+public class PieceInstanceData implements AuthoringData<Piece> {
 	
     private List<Piece> myPieces;
     
@@ -22,8 +22,16 @@ public class PieceData implements AuthoringData<Piece> {
      * Constructor for new PieceData,
      * initializes empty list of Pieces.
      */
-    public PieceData() {
+    public PieceInstanceData() {
         myPieces = new LinkedList<Piece>();
+    }
+    
+    /**
+     * Constructor for piece from already existent data, aka for game data
+     * @param pieces
+     */
+    public PieceInstanceData(List<Piece> pieces) {
+        myPieces = pieces;
     }
     
     @Override

@@ -46,7 +46,7 @@ import javafx.stage.Stage;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import tests.JSONBobTester;
+import tests.TestGameCreator;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
 import authoring_environment.SuperTile;
@@ -261,7 +261,7 @@ public class ViewController {
         @FXML
         private void testGame() {
             myStage.setScene(mySplashScreen);
-                JSONBobTester JSBTester = new JSONBobTester();
+                TestGameCreator JSBTester = new TestGameCreator();
                 testPlayGame(JSBTester.createNewGame());
         }
 

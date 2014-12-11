@@ -11,7 +11,7 @@ import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
 
 public class GlobalActionTester {
-    private JSONBobTester myBob = new JSONBobTester();
+    private TestGameCreator myBob = new TestGameCreator();
     private Game myGame;
     private MakePieceAtLocation myCreatePiece;
     private DeletePieceGlobalAction myDeletePiece;

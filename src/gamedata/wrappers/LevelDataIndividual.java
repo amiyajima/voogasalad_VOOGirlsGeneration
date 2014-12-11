@@ -1,6 +1,10 @@
 package gamedata.wrappers;
 
+import java.util.ArrayList;
 import java.util.List; 
+import authoring_environment.GUIGrid;
+import gamedata.events.Event;
+import gamedata.gamecomponents.Level;
 import gamedata.goals.Goal;
 import gamedata.rules.Rule;
 
@@ -13,17 +17,18 @@ import gamedata.rules.Rule;
  */
 public class LevelDataIndividual {
     private GridData myGrid;
-    private EventData myEventData;
+    private List<EventDataIndividual> myEvents;
     private String myId;
     private boolean myGameWon;
     private boolean myGameLost;
     private String myNextLevelID;
     private boolean myTurnOver;
+    private boolean isWinningLevel;
 
-    public LevelDataIndividual (GridData grid, EventData eventData, String id, boolean gameWon, 
+    public LevelDataIndividual (GridData grid, List<EventDataIndividual> events, String id, boolean gameWon, 
                                 boolean gameLost, String nextLevelID, boolean turnOver) {
         myGrid = grid;
-        myEventData = eventData;
+        myEvents = events;
         myId = id;
         myGameWon = gameWon;
         myGameLost = gameLost;
@@ -36,8 +41,8 @@ public class LevelDataIndividual {
         return myGrid;
     }
 
-    public EventData getMyEventData () {
-        return myEventData;
+    public List<EventDataIndividual> getMyEventData () {
+        return myEvents;
     }
 
     public String getMyId () {
@@ -62,6 +67,24 @@ public class LevelDataIndividual {
 
     public GridData getGrid () {
         return myGrid;
+    }
+    
+    public boolean getIsWinningLevel() {
+        return isWinningLevel;
+    }
+
+    /**
+     * Parses my class's content to create a level
+     * @return Level
+     */
+    public Level getLevelFromData () {
+        List<Event> myEventsFromData = new ArrayList<Event>();
+        for (EventDataIndividual edi : myEvents) {
+            myEventsFromData.add(edi.getEventFromData());
+        }
+        Level myLevel = new Level(myGrid.getGridFromData(), myEventsFromData, 
+                                  myId, isWinningLevel);
+        return myLevel;
     }
 
     /*

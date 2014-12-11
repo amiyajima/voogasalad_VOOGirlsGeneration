@@ -1,7 +1,11 @@
 package gamedata.wrappers;
 
+import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
+import gamedata.action.ConcreteAction;
+import gamedata.action.StatsTotalLogic;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,16 +14,16 @@ import java.util.List;
  *
  */
 public class ActionDataIndividual {
-    private String myName;
-    private List<Point2D.Double> myAttackRange;
-    private List<Point2D.Double> myEffectRange;
+    private String myID;
+    private List<Point2D> myAttackRange;
+    private List<Point2D> myEffectRange;
     private List<StatsTotalLogicData> myStatsLogic;
     private ActionConclusion myConclusion;
     
-    public ActionDataIndividual(String name, List<Point2D.Double> attackRange, 
-                                List<Point2D.Double> effectRange, List<StatsTotalLogicData> statsLogic, 
+    public ActionDataIndividual(String name, List<Point2D> attackRange, 
+                                List<Point2D> effectRange, List<StatsTotalLogicData> statsLogic, 
                                 ActionConclusion conclusion) {
-        myName = name;
+        myID = name;
         myAttackRange = attackRange;
         myEffectRange = effectRange;
         myStatsLogic = statsLogic;
@@ -27,22 +31,39 @@ public class ActionDataIndividual {
     }
     
     public String getName() {
-        return myName;
+        return myID;
     }
     
-    public List<Point2D.Double> getAttackRange() {
+    public List<Point2D> getAttackRange() {
         return myAttackRange;
     }
     
-    public List<Point2D.Double> getEffectRange() {
+    public List<Point2D> getEffectRange() {
         return myEffectRange;
     }
     
-    public List<StatsTotalLogicData> getActions() {
+    public List<StatsTotalLogicData> getStatsLogic() {
         return myStatsLogic;
     }
     
     public ActionConclusion getConclusion() {
         return myConclusion;
+    }
+    
+    /**
+     * Will use reflection to figure out what type of action it is and create
+     * an instance
+     * @return
+     */
+    public Action getActionFromData() {
+        // TODO currently these variables assume ConcreteAction and constructs
+        // it as such
+        List<StatsTotalLogic> myStatsLogicFromData = new ArrayList<StatsTotalLogic>();
+        for (StatsTotalLogicData stld : myStatsLogic) {
+            myStatsLogicFromData.add(stld.getStatsTotalLogicFromData());
+        }
+        Action myAction = new ConcreteAction(myID, myAttackRange, myEffectRange, 
+                                     myStatsLogicFromData, myConclusion);
+        return myAction;
     }
 }

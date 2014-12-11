@@ -41,6 +41,18 @@ public class Event {
 			myName = name;
 		}
 	}
+	
+	/**
+	 * Constructor for event with existing data, aka from game data unwrapping
+	 * @param name
+	 * @param conditions
+	 * @param globalActions
+	 */
+	public Event(String name, List<Condition> conditions, List<GlobalAction> globalActions) {
+	    myName = name;
+	    myConditions = conditions;
+	    myGlobalActions = globalActions;
+	}
 
 	/**
 	 * Method called by an external Event manager during each "event running" cycle

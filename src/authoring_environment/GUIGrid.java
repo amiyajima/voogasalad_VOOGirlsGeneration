@@ -15,7 +15,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import authoring.data.PatchInstanceData;
 import authoring.data.PatchTypeData;
-import authoring.data.PieceData;
+import authoring.data.PieceInstanceData;
 import authoring.data.PieceTypeData;
 
 // TODO: REMOVE THE DUPLICATED CODE. SO MUCH.
@@ -28,7 +28,7 @@ import authoring.data.PieceTypeData;
 
 public class GUIGrid extends SuperGrid implements Observer{
 
-	private PieceData myPieceData;
+	private PieceInstanceData myPieceData;
 	private PatchInstanceData myPatchData;
 
 	/**
@@ -48,7 +48,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 */
 	public GUIGrid (int cols, int rows, double tileHeight, String shape) {
 		super(cols, rows, tileHeight, shape);
-		myPieceData = new PieceData();
+		myPieceData = new PieceInstanceData();
 		myPatchData = new PatchInstanceData();
 	}
 
@@ -64,7 +64,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 * @param patchData - saved patchData
 	 */
 	public GUIGrid (int cols, int rows, double tileHeight, String shape,
-			PieceData pieceData, PatchInstanceData patchData) {
+			PieceInstanceData pieceData, PatchInstanceData patchData) {
 		super(cols, rows, tileHeight, shape);
 		myPieceData = pieceData;
 		myPatchData = patchData;

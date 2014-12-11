@@ -1,7 +1,12 @@
 package gamedata.wrappers;
 
+import gamedata.action.Action;
+import gamedata.gamecomponents.Inventory;
+import gamedata.gamecomponents.Piece;
+import gamedata.stats.Stats;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,6 +44,14 @@ public class PieceDataIndividual {
         myLoc = (Double) p;
     }
 
+    public List<ActionDataIndividual> getMyActions () {
+        return myActions;
+    }
+
+    public StatsData getMyStats () {
+        return myStats;
+    }
+
     public int getMyPlayerID () {
         return myPlayerID;
     }
@@ -47,12 +60,35 @@ public class PieceDataIndividual {
         return myShouldRemove;
     }
 
-    public String toString () {
-        return "PieceDataIndividual: ID = " + myID + "myLoc = " + myLoc + " stats = " + myStats;
-    }
-
-    public String getMyTypeID () {
+    public String getMyID () {
         return myID;
     }
 
+    public String getMyName () {
+        return myName;
+    }
+
+    public Point2D.Double getMyLoc () {
+        return myLoc;
+    }
+
+    public String getMyImageLocation () {
+        return myImageLocation;
+    }
+    
+    public Piece getPieceFromData() {
+        List<Action> myActionsFromData = new ArrayList<Action>();
+        for (ActionDataIndividual adi : myActions) {
+            myActionsFromData.add(adi.getActionFromData());
+        }
+        Stats myStatsFromData = new Stats(myStats.getStats());
+        // TODO Inventory is not implemented yet, so making an empty one
+        Piece myPiece = new Piece(myID, myName, myImageLocation, myActionsFromData,
+                                  myStatsFromData, myLoc, myPlayerID, new Inventory());
+        return myPiece;
+    }
+
+    public String toString () {
+        return "PieceDataIndividual: ID = " + myID + "myLoc = " + myLoc + " stats = " + myStats;
+    }
 }

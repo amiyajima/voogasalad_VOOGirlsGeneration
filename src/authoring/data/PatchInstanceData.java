@@ -25,6 +25,14 @@ public class PatchInstanceData implements AuthoringData<Patch> {
 	public PatchInstanceData () {
 		myPatches = new LinkedList<Patch>();
 	}
+	
+	/**
+	 * Constructor for patch from game data, aka with already existent data
+	 * @param patches
+	 */
+	public PatchInstanceData (List<Patch> patches) {
+	    myPatches = patches;
+	}
 
 	@Override
 	public void add(Patch p) {

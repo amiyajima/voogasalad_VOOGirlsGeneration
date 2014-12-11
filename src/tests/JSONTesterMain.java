@@ -19,7 +19,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import authoring.data.ActionData;
 import authoring.data.PatchInstanceData;
-import authoring.data.PieceData;
+import authoring.data.PieceInstanceData;
 import authoring_environment.GUIGrid;
 
 
@@ -29,11 +29,11 @@ import authoring_environment.GUIGrid;
  * @author annamiyajima, Rica Zhang
  *
  */
-public class DataMain {
+public class JSONTesterMain {
     public static void testJSONwrite () {
         String saveTo = "src/resources/json/Patch-Rica.json";
         JSONManager myJSONmanager = new JSONManager();
-        JSONBobTester jb = new JSONBobTester();
+        TestGameCreator jb = new TestGameCreator();
 
         // POINT
         Point2D point = new Point2D.Double(0, 0);
@@ -58,7 +58,7 @@ public class DataMain {
         // PIECE and PIECE COMPONENTS -- DONE
         Piece piece = grid.getPiece(point); 
         System.out.println("Piece is: " + piece);
-        PieceData multiplePieces = new PieceData();
+        PieceInstanceData multiplePieces = new PieceInstanceData();
         multiplePieces.add(piece);
 
         // PIECE COMPONENTS
@@ -78,13 +78,13 @@ public class DataMain {
         // myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
         // myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
         System.out.println();
-        myJSONmanager.writeToJSON(g, "src/resources/json/Rica-Game.json");
+        myJSONmanager.writeToJSON(g, "src/resources/json/Rica-Game2.json");
     }
 
     public static void testJSONload () {
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("src/resources/json/Rica-Game.json");
+            jsonManager.readFromJSONFile("src/resources/json/Rica-Game2.json");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -1,5 +1,7 @@
 package gamedata.wrappers;
 
+import gamedata.events.GlobalAction;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +18,18 @@ public class GlobalActionData {
 
     public List<GlobalActionDataIndividual> getMyGlobalActions () {
         return myGlobalActions;
+    }
+
+    /**
+     * Unwrapper for global action data structure
+     * @return
+     */
+    public List<GlobalAction> getGlobalActionsFromData () {
+        List<GlobalAction> myGlobalActionsFromData = new ArrayList<GlobalAction>();
+        for (GlobalActionDataIndividual gadi : myGlobalActions) {
+            myGlobalActionsFromData.add(gadi.getGlobalActionFromData());
+        }
+        return myGlobalActionsFromData;
     }
 
 }

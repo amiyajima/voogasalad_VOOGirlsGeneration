@@ -1,6 +1,7 @@
 package gamedata.wrappers;
 
 import gamedata.action.StatsSingleMultiplier;
+import gamedata.action.StatsTotalLogic;
 import java.util.List;
 
 /**
@@ -29,6 +30,15 @@ public class StatsTotalLogicData {
 
     public List<StatsSingleMultiplier> getMyLogic () {
         return myLogic;
+    }
+
+    /**
+     * Data unwrapper
+     * @return StatsTotalLogic
+     */
+    public StatsTotalLogic getStatsTotalLogicFromData () {
+        StatsTotalLogic myStatsTotalLogic = new StatsTotalLogic(myTarget, myStat, myLogic);
+        return myStatsTotalLogic;
     }
 
 }

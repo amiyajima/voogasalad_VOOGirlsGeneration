@@ -1,5 +1,8 @@
 package gamedata.wrappers;
 
+import gamedata.events.Condition;
+import gamedata.events.conditions.IsDead;
+
 /**
  * Wrapper for individual conditions
  * @author Rica
@@ -14,6 +17,16 @@ public class ConditionDataIndividual {
 
     public String getMyDescription () {
         return myDescription;
+    }
+
+    /**
+     * Condition unwrapper, uses reflection to construct the appropriate one
+     * @return
+     */
+    public Condition getConditionFromData () {
+        // TODO for now this assumes that the condition is isDead
+        Condition myConditionFromData = new IsDead(myDescription);
+        return myConditionFromData;
     }
    
 

@@ -38,7 +38,7 @@ import authoring_environment.SuperGrid;
  * @author Rica
  *
  */
-public class JSONBobTester {
+public class TestGameCreator {
 
 	private static String DEFAULT_DUVALL = "/resources/images/rcd.png";
 	private static String DEFAULT_BUNNY = "/resources/images/bbybunny.jpeg";
@@ -49,7 +49,7 @@ public class JSONBobTester {
 	private static int BUNNY = 2;
 	private static int RICA = 3;
 
-	public JSONBobTester() {
+	public TestGameCreator() {
 
 	}
 
@@ -198,6 +198,15 @@ public class JSONBobTester {
 		}
 		return piece;
 	}
+	
+	/*
+	public Inventory createNewInventory(Piece item) {
+	     Inventory i = new Inventory();
+	     i.addItem(item);
+	     return i;
+
+	}
+	*/
 
 	public Patch createNewPatch(Point2D p) {
 		Patch patch = new Patch("ID", "land", DEFAULT_LAND, p);

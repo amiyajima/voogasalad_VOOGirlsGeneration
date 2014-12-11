@@ -1,5 +1,6 @@
 package gamedata.wrappers;
 
+import gamedata.gamecomponents.Patch;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 
@@ -11,7 +12,7 @@ import java.awt.geom.Point2D.Double;
 public class PatchDataIndividual {
     private String myID; 
     private String myName;
-    private Point2D.Double myLoc;
+    private Point2D myLoc;
     private String myImageLocation;
     
     public PatchDataIndividual(String typeID, String name,String imageLocation, Point2D p) {
@@ -19,6 +20,10 @@ public class PatchDataIndividual {
         myName = name;
         myImageLocation = imageLocation;
         myLoc = (Double) p;
+    }
+    
+    public String getName() {
+        return myName;
     }
 
     public Point2D getMyLoc () {
@@ -34,8 +39,17 @@ public class PatchDataIndividual {
     }
     
     public String toString() {
-        return "Patch - ID: " + myID + "Name: " + myName + " Location: " + myLoc.x + ", "
-                + myLoc.y + " myImage: " + myImageLocation;
+        return "Patch - ID: " + myID + "Name: " + myName + " Location: " + myLoc.getX() + ", "
+                + myLoc.getY() + " myImage: " + myImageLocation;
+    }
+
+    /**
+     * Patch unwrapper
+     * @return
+     */
+    public Patch getPatchFromData () {
+        Patch myPatchFromData = new Patch(myID, myName, myImageLocation, myLoc);
+        return myPatchFromData;
     }
 
 }

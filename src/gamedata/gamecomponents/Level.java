@@ -39,6 +39,8 @@ public class Level extends Observable implements IChangeGameState {
 	private String nextLevelID;
 	// Next Turn
 	private boolean turnOver;
+	
+	private boolean isWinningLevel;
 
 	/**
 	 * Constructs a default level with a default ID and sets it as NOT the
@@ -53,6 +55,7 @@ public class Level extends Observable implements IChangeGameState {
 		myGrid = gr;
 		myEvents = events;
 		myId = id;
+		this.isWinningLevel = isWinningLevel;
 		initializeDefaultEvents();
 	}
 

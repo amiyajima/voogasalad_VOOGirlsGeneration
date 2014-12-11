@@ -1,5 +1,7 @@
 package gamedata.wrappers;
 
+import gamedata.gamecomponents.Piece;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,6 +20,14 @@ public class PieceData {
 
         public List<PieceDataIndividual> getPieces () {
             return myPieces;
+        }
+        
+        public List<Piece> getPiecesFromData() {
+            List<Piece> myPiecesFromData = new LinkedList<Piece>();
+            for (PieceDataIndividual pdi : myPieces) {
+                myPiecesFromData.add(pdi.getPieceFromData());
+            }
+            return myPiecesFromData;
         }
         
         public String toString(){

@@ -1,5 +1,7 @@
 package gamedata.wrappers;
 
+import gamedata.events.Condition;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +18,18 @@ public class ConditionData {
 
     public List<ConditionDataIndividual> getMyConditionData () {
         return myConditionData;
+    }
+
+    /**
+     * Conditions data structure unwrapper
+     * @return
+     */
+    public List<Condition> getConditionsFromData () {
+        List<Condition> myConditionsFromData = new ArrayList<Condition>();
+        for (ConditionDataIndividual cdi : myConditionData) {
+            myConditionsFromData.add(cdi.getConditionFromData());
+        }
+        return myConditionsFromData;
     }
 
 }
