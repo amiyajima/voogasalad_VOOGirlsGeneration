@@ -699,6 +699,7 @@ public class ViewController {
         protected void setActiveAction(Action action) {
                 activeAction = action;
         }
+        
 
         /**
          * Method to switch the state of the game grid between select mode and apply
