@@ -72,7 +72,7 @@ public class Event {
 		return myName;
 	}
 
-    public List<Condition> getConditions(){
+        public List<Condition> getConditions(){
 		return myConditions;
 	}
 

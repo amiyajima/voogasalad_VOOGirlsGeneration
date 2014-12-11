@@ -87,11 +87,12 @@ public class JSONManager {
      * @throws FileNotFoundException
      */
 
-    public GridData readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
+    public GameData readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
-        GridData thing = myGson.fromJson(br, GridData.class);
+        GameData thing = myGson.fromJson(br, GameData.class);
+        System.out.println(thing.toString());
         return thing;
     }
 
@@ -132,7 +133,7 @@ public class JSONManager {
      */
     
     public void registerTypeAdapters (GsonBuilder builder) {
-        builder.registerTypeAdapter(Event.class, new GenericTypeAdapter<Event>("gamedata.events"));
+        //builder.registerTypeAdapter(Event.class, new GenericTypeAdapter<Event>("gamedata.events"));
         builder.registerTypeAdapter(Action.class, new GenericTypeAdapter<Action>("gamedata.action"));
         builder.registerTypeAdapter(ActionConclusion.class, new ActionConclusionTypeAdapter<ActionConclusion>("gamedata.action"));
         builder.registerTypeAdapter(GridComponent.class, new GenericTypeAdapter<GridComponent>("gamedata.gamecomponent"));

@@ -78,13 +78,13 @@ public class DataMain {
         // myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
         // myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
         System.out.println();
-        myJSONmanager.writeToJSON(l, "src/resources/json/Rica-Level.json");
+        myJSONmanager.writeToJSON(g, "src/resources/json/Rica-Game.json");
     }
 
     public static void testJSONload () {
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("src/resources/json/Rica-Grid.json");
+            jsonManager.readFromJSONFile("src/resources/json/Rica-Game.json");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -92,7 +92,7 @@ public class DataMain {
     }
 
     public static void main (String[] args) {
-        testJSONwrite();
-        //testJSONload();
+        //testJSONwrite();
+        testJSONload();
     }
 }

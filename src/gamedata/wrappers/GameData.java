@@ -13,18 +13,21 @@ public class GameData {
     private List<LevelDataIndividual> myLevels;
     private LevelDataIndividual myCurrentLevel;
     private PlayerDataIndividual myCurrentPlayer;
-    private boolean myGameWon;
+    private int myGameWon;
+    private int myNumPlayers;
 
     public GameData (List<PlayerDataIndividual> players,
                      List<LevelDataIndividual> level,
                      LevelDataIndividual currentLevel,
                      PlayerDataIndividual currentplayer,
-                     boolean gamewon) {
+                     int gameWon,
+                     int numPlayers) {
         myPlayers = players;
         myLevels = level;
         myCurrentLevel = currentLevel;
         myCurrentPlayer = currentplayer;
-        myGameWon = gamewon;
+        myGameWon = gameWon;
+        myNumPlayers = numPlayers;
     }
     
     public List<PlayerDataIndividual> getPlayerData(){
