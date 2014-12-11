@@ -134,7 +134,7 @@ public class Game {
 	 * Formats the information regarding a game to a string output
 	 */
 	public String toString() {
-		return "game with " + myPlayers.size() + " players and "
+		return "game with " + myNumPlayers + " players and "
 				+ myLevels.size() + " levels";
 	}
 

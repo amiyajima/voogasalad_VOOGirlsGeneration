@@ -2,6 +2,7 @@ package gamedata.wrappers;
 
 import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,11 +11,11 @@ import java.util.List;
  *
  */
 public class StatsTotalLogicData {
+    private List<StatsSingleMultiplierData> myLogic;
     private String myTarget;
     private String myStat;
-    private List<StatsSingleMultiplier> myLogic;
     
-    public StatsTotalLogicData(String target, String stat, List<StatsSingleMultiplier> logic) {
+    public StatsTotalLogicData(String target, String stat, List<StatsSingleMultiplierData> logic) {
         myTarget = target;
         myStat = stat;
         myLogic = logic;
@@ -28,7 +29,7 @@ public class StatsTotalLogicData {
         return myStat;
     }
 
-    public List<StatsSingleMultiplier> getMyLogic () {
+    public List<StatsSingleMultiplierData> getMyLogic () {
         return myLogic;
     }
 
@@ -37,7 +38,11 @@ public class StatsTotalLogicData {
      * @return StatsTotalLogic
      */
     public StatsTotalLogic getStatsTotalLogicFromData () {
-        StatsTotalLogic myStatsTotalLogic = new StatsTotalLogic(myTarget, myStat, myLogic);
+        List<StatsSingleMultiplier>  myStatsSingleMultiplerFromData = new ArrayList<StatsSingleMultiplier>();
+        for (StatsSingleMultiplierData ssmd : myLogic) {
+            myStatsSingleMultiplerFromData.add(ssmd.getStatsSingleMultiplierFromData());
+        }
+        StatsTotalLogic myStatsTotalLogic = new StatsTotalLogic(myTarget, myStat, myStatsSingleMultiplerFromData);
         return myStatsTotalLogic;
     }
 

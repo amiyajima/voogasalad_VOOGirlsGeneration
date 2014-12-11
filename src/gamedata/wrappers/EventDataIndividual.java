@@ -13,25 +13,25 @@ import java.util.List;
  */
 public class EventDataIndividual {
     private String myName;
-    private ConditionData myConditionData;
-    private GlobalActionData myGlobalActionData;
+    private List<ConditionDataIndividual> myConditions;
+    private List<GlobalActionDataIndividual> myGlobalActions;
     
-    public EventDataIndividual(String name, ConditionData conditionData, GlobalActionData globalActionData) {
+    public EventDataIndividual(String name, List<ConditionDataIndividual> conditionData, List<GlobalActionDataIndividual> globalActionData) {
         myName = name;
-        myConditionData = conditionData;
-        myGlobalActionData = globalActionData;
+        myConditions = conditionData;
+        myGlobalActions = globalActionData;
     }
 
     public String getMyName () {
         return myName;
     }
 
-    public ConditionData getMyConditionData () {
-        return myConditionData;
+    public List<ConditionDataIndividual> getMyConditionData () {
+        return myConditions;
     }
 
-    public GlobalActionData getMyGlobalActionData () {
-        return myGlobalActionData;
+    public List<GlobalActionDataIndividual> getMyGlobalActionData () {
+        return myGlobalActions;
     }
 
     /**
@@ -39,8 +39,14 @@ public class EventDataIndividual {
      * @return
      */
     public Event getEventFromData () {
-        List<Condition> myConditionsFromData = myConditionData.getConditionsFromData();
-        List<GlobalAction> myGlobalActionsFromData = myGlobalActionData.getGlobalActionsFromData();
+        List<Condition> myConditionsFromData = new ArrayList<Condition>();
+        for (ConditionDataIndividual cdi : myConditions) {
+            myConditionsFromData.add(cdi.getConditionFromData());
+        }
+        List<GlobalAction> myGlobalActionsFromData = new ArrayList<GlobalAction>();
+        for (GlobalActionDataIndividual gadi : myGlobalActions) {
+            myGlobalActionsFromData.add(gadi.getGlobalActionFromData());
+        }
         Event myEventFromData = new Event(myName, myConditionsFromData, myGlobalActionsFromData);
         return myEventFromData;
     }

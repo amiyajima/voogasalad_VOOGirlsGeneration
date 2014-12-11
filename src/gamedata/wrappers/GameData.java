@@ -2,6 +2,7 @@ package gamedata.wrappers;
 
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
+import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,6 @@ import java.util.List;
 public class GameData {
     private List<PlayerDataIndividual> myPlayers;
     private List<LevelDataIndividual> myLevels;
-    //private LevelData myLevels;
     private LevelDataIndividual myCurrentLevel;
     private PlayerDataIndividual myCurrentPlayer;
     private int myGameWon;
@@ -65,6 +65,14 @@ public class GameData {
         }
         Game myGame = new Game(myNumPlayers, myLevelsFromData, 
                                myCurrentLevel.getLevelFromData());
+        List<Player> myPlayersFromData = new ArrayList<Player>();
+        for (int i = 1; i < myNumPlayers; i++) {
+        //for (PlayerDataIndividual pdi : myPlayers) {
+            //myPlayersFromData.add(pdi.getPlayerFromData());
+            myPlayersFromData.add(new HumanPlayer(i));
+        }
+        myGame.addPlayers(myPlayersFromData);
+        myGame.setCurrentPlayer(myGame.getPlayers().get(0));
         return myGame;
     }
 
@@ -74,6 +82,6 @@ public class GameData {
                "\nmy second player's ID is " + myPlayers.get(1).getID() + 
                " \n# pieces in grid = " + myLevels.get(0).getGrid().getPieces().getPieces().size() +
                "\n# patches in grid = " + myLevels.get(0).getGrid().getPatches().getPatches().size() +
-               "\nmyGameWon = " + myGameWon + "\nmyNumPlayers";
+               "\nmyGameWon = " + myGameWon + "\nmyNumPlayers " + myNumPlayers;
     }
 }

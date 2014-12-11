@@ -2,11 +2,10 @@ package gamedata.action;
 
 import gamedata.gamecomponents.Piece; 
 import gamedata.stats.Stats;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.geom.Point2D;
-
+import java.awt.geom.Point2D.Double;
 import authoring_environment.GUIGrid;
 
 /**
@@ -21,8 +20,8 @@ import authoring_environment.GUIGrid;
  */
 public class ConcreteAction implements Action {
 	private String myID;
-	private List<Point2D> myAttackRange;
-	private List<Point2D> myEffectRange;
+	private List<Point2D.Double> myAttackRange;
+	private List<Point2D.Double> myEffectRange;
 	private List<StatsTotalLogic> myStatsLogics;
 	private ActionConclusion myConclusion;
 
@@ -31,8 +30,8 @@ public class ConcreteAction implements Action {
 	 * Called when a new Action is made and
 	 * its behavior is already defined
 	 */
-	public ConcreteAction(String id, List<Point2D> attackRange, 
-			List<Point2D> effectRange, List<StatsTotalLogic> statsLogics,
+	public ConcreteAction(String id, List<Point2D.Double> attackRange, 
+			List<Point2D.Double> effectRange, List<StatsTotalLogic> statsLogics,
 			ActionConclusion conclusion) {
 		myID = id;
 		myAttackRange = attackRange;
@@ -47,8 +46,8 @@ public class ConcreteAction implements Action {
 	}
 
 	@Override
-	public List<Point2D> getSpecificActionRange(Point2D pieceLoc) {
-		List<Point2D> absoluteRange = new ArrayList<Point2D>();
+	public List<Point2D.Double> getSpecificActionRange(Point2D pieceLoc) {
+		List<Point2D.Double> absoluteRange = new ArrayList<Point2D.Double>();
 		for (Point2D relativeLoc : myAttackRange) {
 			double absX = pieceLoc.getX() + relativeLoc.getX();
 			double absY = pieceLoc.getY() + relativeLoc.getY();
@@ -58,12 +57,12 @@ public class ConcreteAction implements Action {
 	}
 
 	@Override
-        public List<Point2D> getActionRange() {
+        public List<Point2D.Double> getActionRange() {
                 return myAttackRange;
         }
 	
 	@Override
-	public List<Point2D> getEffectRange() {
+	public List<Point2D.Double> getEffectRange() {
 		return myEffectRange;
 	}
 

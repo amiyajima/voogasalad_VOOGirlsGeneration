@@ -1,6 +1,8 @@
 package gamedata.wrappers;
 
 import gamedata.action.Action;
+import gameengine.player.HumanPlayer;
+import gameengine.player.Player;
 import java.awt.geom.Point2D;
 import java.util.Map;
 import javafx.scene.input.KeyCode;
@@ -31,5 +33,11 @@ public class PlayerDataIndividual {
      */
     public int getID(){
         return myID;
+    }
+
+    public Player getPlayerFromData () {
+        System.out.println("PDI Creating player: moves " + myNumMovesPlayed + " id " + myID);
+        Player myPlayerFromData = new HumanPlayer(myID);
+        return myPlayerFromData;
     }
 }

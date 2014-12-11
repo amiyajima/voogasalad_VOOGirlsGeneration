@@ -10,14 +10,14 @@ import java.util.List;
  *
  */
 public class ConditionData {
-    private List<ConditionDataIndividual> myConditionData;
+    private List<ConditionDataIndividual> myConditions;
     
     public ConditionData(List<ConditionDataIndividual> conditions) {
-        myConditionData = conditions;
+        myConditions = conditions;
     }
 
     public List<ConditionDataIndividual> getMyConditionData () {
-        return myConditionData;
+        return myConditions;
     }
 
     /**
@@ -26,7 +26,7 @@ public class ConditionData {
      */
     public List<Condition> getConditionsFromData () {
         List<Condition> myConditionsFromData = new ArrayList<Condition>();
-        for (ConditionDataIndividual cdi : myConditionData) {
+        for (ConditionDataIndividual cdi : myConditions) {
             myConditionsFromData.add(cdi.getConditionFromData());
         }
         return myConditionsFromData;

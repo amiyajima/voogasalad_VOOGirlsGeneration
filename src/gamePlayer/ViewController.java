@@ -196,16 +196,20 @@ public class ViewController {
                 fc.setInitialDirectory(new File("src/resources/json"));
                 File f = fc.showOpenDialog(myStage);
 
-                // commented out for now.... (will work on it when myJSONManager is
-                // finished)
-                // try {
-                myScene = new Scene(myGameSpace);
-                myStage.setScene(myScene);
-                // myModel = myJSONManager.readFromJSONFile(f.getPath());
-                // initializeGrid();
-                // } catch (FileNotFoundException e) {
-                // System.out.println("Could not find JSON: " + "f.getPath()");
-                // }
+                try {
+                    JSONManager myJM = new JSONManager();
+                    myModel = myJM.readFromJSONFile(f.getAbsolutePath());
+                    initializeGrid();
+                    myScene = new Scene(myGameSpace);
+                    myStage.setScene(myScene);
+                }
+                catch (FileNotFoundException fnfe) {
+                    System.out.println("Could not find the file at - " + f.getAbsolutePath());
+                }
+                catch (Exception e) {
+                    System.out.println("Other exception occured.");
+                    e.printStackTrace();
+                }
 
         }
 
@@ -248,9 +252,6 @@ public class ViewController {
                 if (absolutePath.startsWith(basePath)) {
                         relativePath = absolutePath.substring(basePath.length() + 1);
                 }
-                // myModel.getLevels().forEach(level ->
-                // level.deleteObserver(this.myGrid));
-
                 myJSONManager.writeToJSON(myModel, f.getPath());
 
         }

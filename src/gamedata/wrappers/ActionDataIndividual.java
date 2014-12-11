@@ -3,6 +3,7 @@ package gamedata.wrappers;
 import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
+import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -15,18 +16,18 @@ import java.util.List;
  */
 public class ActionDataIndividual {
     private String myID;
-    private List<Point2D> myAttackRange;
-    private List<Point2D> myEffectRange;
-    private List<StatsTotalLogicData> myStatsLogic;
+    private List<Point2D.Double> myAttackRange;
+    private List<Point2D.Double> myEffectRange;
+    private List<StatsTotalLogicData> myStatsLogics;
     private ActionConclusion myConclusion;
     
-    public ActionDataIndividual(String name, List<Point2D> attackRange, 
-                                List<Point2D> effectRange, List<StatsTotalLogicData> statsLogic, 
+    public ActionDataIndividual(String name, List<Point2D.Double> attackRange, 
+                                List<Point2D.Double> effectRange, List<StatsTotalLogicData> statsLogic, 
                                 ActionConclusion conclusion) {
         myID = name;
         myAttackRange = attackRange;
         myEffectRange = effectRange;
-        myStatsLogic = statsLogic;
+        myStatsLogics = statsLogic;
         myConclusion = conclusion;
     }
     
@@ -34,16 +35,16 @@ public class ActionDataIndividual {
         return myID;
     }
     
-    public List<Point2D> getAttackRange() {
+    public List<Point2D.Double> getAttackRange() {
         return myAttackRange;
     }
     
-    public List<Point2D> getEffectRange() {
+    public List<Point2D.Double> getEffectRange() {
         return myEffectRange;
     }
     
     public List<StatsTotalLogicData> getStatsLogic() {
-        return myStatsLogic;
+        return myStatsLogics;
     }
     
     public ActionConclusion getConclusion() {
@@ -59,11 +60,23 @@ public class ActionDataIndividual {
         // TODO currently these variables assume ConcreteAction and constructs
         // it as such
         List<StatsTotalLogic> myStatsLogicFromData = new ArrayList<StatsTotalLogic>();
-        for (StatsTotalLogicData stld : myStatsLogic) {
+        // TODO fix this when StatsModifier inheritance hierarchy is fixed
+        /*
+        for (StatsTotalLogicData stld : myStatsLogics) {
             myStatsLogicFromData.add(stld.getStatsTotalLogicFromData());
         }
+        */
+        StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor",
+                "health");
+        List<StatsSingleMultiplier> ssmList = new ArrayList<StatsSingleMultiplier>();
+        ssmList.add(ssm1);
+
+        List<StatsTotalLogic> stlList = new ArrayList<StatsTotalLogic>();
+        StatsTotalLogic s1 = new StatsTotalLogic("actor", "health", ssmList);
+        stlList.add(s1);
+        
         Action myAction = new ConcreteAction(myID, myAttackRange, myEffectRange, 
-                                     myStatsLogicFromData, myConclusion);
+                                             stlList, myConclusion);
         return myAction;
     }
 }

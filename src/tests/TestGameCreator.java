@@ -139,33 +139,34 @@ public class TestGameCreator {
 	}
 
 	public Piece createNewPiece(GUIGrid g, Point2D p, int type) {
-		Point2D p1 = new Point2D.Double(1, 1);
-		Point2D p4 = new Point2D.Double(1, 0);
-		Point2D p5 = new Point2D.Double(-1, 0);
+		Point2D.Double p1 = new Point2D.Double(1, 1);
+		Point2D.Double p4 = new Point2D.Double(1, 0);
+		Point2D.Double p5 = new Point2D.Double(-1, 0);
 
-		Point2D p2 = new Point2D.Double(2, 2);
-		Point2D p3 = new Point2D.Double(3, 3);
+		Point2D.Double p2 = new Point2D.Double(2, 2);
+		Point2D.Double p3 = new Point2D.Double(3, 3);
 
-		List<Point2D> pl1 = new ArrayList<Point2D>();
+		List<Point2D.Double> pl1 = new ArrayList<Point2D.Double>();
 		pl1.add(new Point2D.Double(-1, 0));
 		pl1.add(new Point2D.Double(1, 0));
 		pl1.add(new Point2D.Double(0, 1));
 		pl1.add(new Point2D.Double(0, -1));
 
-		List<Point2D> pl2 = new ArrayList<Point2D>();
+		List<Point2D.Double> pl2 = new ArrayList<Point2D.Double>();
 		pl2.add(p4);
 
-		List<Point2D> pl3 = new ArrayList<Point2D>();
+		List<Point2D.Double> pl3 = new ArrayList<Point2D.Double>();
 		pl3.add(p2);
 		pl3.add(p3);
 
-		List<Point2D> pl4 = new ArrayList<Point2D>();
+		List<Point2D.Double> pl4 = new ArrayList<Point2D.Double>();
 
-		Movement move = new Movement(g, pl1);
+		//Movement move = new Movement(g, pl1);
 
 		List<Action> actions = new ArrayList<Action>();
 		actions.add(createNewAction(pl2, pl4));
-		actions.add(move);
+		actions.add(createNewAction(pl1, pl3));
+		//actions.add(move);
 
 		Stats s = new Stats();
 		s.add("health", 20);
@@ -218,7 +219,7 @@ public class TestGameCreator {
 		return m1;
 	}
 
-	public Action createNewAction(List<Point2D> pl1, List<Point2D> pl2) {
+	public Action createNewAction(List<Point2D.Double> pl1, List<Point2D.Double> pl2) {
 		StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor",
 				"health");
 		List<StatsSingleMultiplier> ssmList = new ArrayList<StatsSingleMultiplier>();

@@ -12,14 +12,18 @@ import java.awt.geom.Point2D.Double;
 public class PatchDataIndividual {
     private String myID; 
     private String myName;
-    private Point2D myLoc;
+    private Point2D.Double myLoc;
     private String myImageLocation;
     
-    public PatchDataIndividual(String typeID, String name,String imageLocation, Point2D p) {
+    public PatchDataIndividual(String typeID, String name, Point2D.Double p, String imageLocation) {
+        System.out.println(typeID);
         myID = typeID;
+        System.out.println(name);
         myName = name;
-        myImageLocation = imageLocation;
+        System.out.println(p.getX() + " " + p.getY());
         myLoc = (Double) p;
+        System.out.println(imageLocation);
+        myImageLocation = imageLocation;
     }
     
     public String getName() {

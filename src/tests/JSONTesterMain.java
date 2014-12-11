@@ -65,7 +65,7 @@ public class JSONTesterMain {
         List<Action> actionList = piece.getActions(); 
         Action a = actionList.get(0); 
         ActionData actionData = new ActionData(actionList); 
-        Movement m = piece.getMovement(); //INCLUDED IN ACTIONS
+        //Movement m = piece.getMovement(); //INCLUDED IN ACTIONS
         Stats stats = piece.getStats(); //WHY IS THIS TRANSIENT?
         Inventory inventory = piece.getInventory(); 
 
@@ -78,13 +78,16 @@ public class JSONTesterMain {
         // myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
         // myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
         System.out.println();
-        myJSONmanager.writeToJSON(g, "src/resources/json/Rica-Game2.json");
+        //myJSONmanager.writeToJSON(g, "src/resources/json/Rica-Game-Doubles.json");
+        myJSONmanager.writeToJSON(g, "C:\\Users\\Rica\\Desktop\\Rica-GamePlayer.json");        
     }
 
     public static void testJSONload () {
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("src/resources/json/Rica-Game2.json");
+            //jsonManager.readFromJSONFile("src/resources/json/Rica-Game-Doubles.json");
+            jsonManager.readFromJSONFile("C:\\Users\\Rica\\Desktop\\Rica-GamePlayer.json");        
+
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -2,6 +2,7 @@ package gamedata.JSON;
 
 import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
+import gamedata.action.StatsModifier;
 import gamedata.events.Event;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.GridComponent;
@@ -14,6 +15,7 @@ import gamedata.rules.Rule;
 import gamedata.stats.Stats;
 import gamedata.wrappers.ActionData;
 import gamedata.wrappers.ActionDataIndividual;
+import gamedata.wrappers.EventDataIndividual;
 import gamedata.wrappers.GameData;
 import gamedata.wrappers.GoalData;
 import gamedata.wrappers.GridData;
@@ -96,10 +98,29 @@ public class JSONManager {
 
         GameData gameData = myGson.fromJson(br, GameData.class);
         System.out.println(gameData.toString());
-
-       //public Game(int numPlayers, List<Level> levels, Level currentLevel) {
         
-        Game myGame = convertToGame(gameData);
+        PatchData patchData = gameData.getMyLevels().get(0).getGrid().getPatches();
+        System.out.println(patchData.toString());
+        List<Patch> myPatches = patchData.getPatchesFromData();
+        System.out.println("Patch #1: " + myPatches.get(0));
+        
+        EventDataIndividual edi = gameData.getMyLevels().get(0).getMyEventData().get(0);
+        System.out.println(edi.toString());
+        Event myEvent = edi.getEventFromData();
+        System.out.println("Event: " + myEvent);
+        
+        ActionDataIndividual adi = gameData.getMyLevels().get(0).getGrid().getPieces().getPieces().get(0).getMyActions().get(0);
+        System.out.println(adi.toString());
+        Action myAction = adi.getActionFromData();
+        System.out.println("Action: " + myAction);
+        
+        Player humanPlayer = gameData.getMyPlayers().get(0).getPlayerFromData();
+        System.out.println("Human Player: " + humanPlayer.getID() + " " + humanPlayer.getNumMovesPlayed());
+        Player aiPlayer = gameData.getMyPlayers().get(1).getPlayerFromData();
+        System.out.println("Supposed AI Player: " + aiPlayer.getID() + " " + humanPlayer.getNumMovesPlayed());
+        
+        Game myGame = gameData.getGameFromData();
+        System.out.println("Game: " + myGame.toString());
         return myGame;
     }
 
@@ -155,6 +176,8 @@ public class JSONManager {
     
     public void registerTypeAdapters (GsonBuilder builder) {
         //builder.registerTypeAdapter(Event.class, new GenericTypeAdapter<Event>("gamedata.events"));
+        builder.registerTypeAdapter(StatsModifier.class, new GenericTypeAdapter<StatsModifier>("gamedata.action"));
+        builder.registerTypeAdapter(Player.class, new GenericTypeAdapter<StatsModifier>("gameengine.player"));
         builder.registerTypeAdapter(Action.class, new GenericTypeAdapter<Action>("gamedata.action"));
         builder.registerTypeAdapter(ActionConclusion.class, new ActionConclusionTypeAdapter<ActionConclusion>("gamedata.action"));
         builder.registerTypeAdapter(GridComponent.class, new GenericTypeAdapter<GridComponent>("gamedata.gamecomponent"));

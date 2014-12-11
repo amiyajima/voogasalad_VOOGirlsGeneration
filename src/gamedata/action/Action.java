@@ -26,21 +26,21 @@ public interface Action {
 	 * locations for the action range
 	 * @return list of absolute locations in Point2D
 	 */
-	public List<Point2D> getSpecificActionRange(Point2D pieceLocation);
+	public List<Point2D.Double> getSpecificActionRange(Point2D pieceLocation);
 	
 	       /**
          * Gives back a list of Point2D of absolute
          * locations for the action range
          * @return list of absolute locations in Point2D
          */
-        public List<Point2D> getActionRange();
+        public List<Point2D.Double> getActionRange();
         
 	/**
 	 * Gives back a list of Point2D of relative locations
 	 * for the effect range of the action (splashzone)
 	 * @return list of relative locations in Point2D
 	 */
-	public List<Point2D> getEffectRange();
+	public List<Point2D.Double> getEffectRange();
 	
 	/**
 	 * Executes an action on a component of
