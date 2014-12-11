@@ -15,11 +15,25 @@ import java.awt.geom.Point2D;
  */
 public class Piece extends GridComponent {
 
+	/**
+	 * List containing the Actions a piece can execute
+	 */
 	private List<Action> myActions;
-	private transient Movement myMove;//INCLUDED IN ACTIONS
+	/**
+	 * Contains the stats for a piece
+	 */
 	private Stats myStats;
+	/**
+	 * ID of the player whom owns the piece
+	 */
 	private int myPlayerID;
+	/**
+	 * Tag for garbage collection to remove the piece
+	 */
 	private boolean myShouldRemove;
+	/**
+	 * Inventory of the piece
+	 */
 	private transient Inventory myInventory;
 
 	/**
@@ -51,7 +65,6 @@ public class Piece extends GridComponent {
 	 *            - Piece's inventory if the user chooses to use an inventory
 	 */
 
-	// TODO: Think about playerID concept
 	public Piece(String id, String name, String imageLoc, List<Action> actions,
 			Stats stats, Point2D loc, int playerID, Inventory inventory) {
 		super(id, name, imageLoc, loc);
@@ -70,7 +83,6 @@ public class Piece extends GridComponent {
 	 */
 	public Piece(Piece clone, Point2D placeHere) {
 		super(clone, placeHere);
-		myMove = clone.myMove;
 		myActions = new LinkedList<Action>(clone.myActions);
 		myStats = new Stats(clone.myStats);
 		myPlayerID = clone.myPlayerID;
@@ -91,12 +103,6 @@ public class Piece extends GridComponent {
 	public Stats getStats() {
 		return myStats;
 	}
-
-	// public double getStat (String s) {
-	// if (myStats.getStatsMap().containsKey(s)) { return
-	// myStats.getStatsMap().get(s); }
-	// return 0;
-	// }
 
 	/**
 	 * Adds an Action to the piece's list of Actions
@@ -126,10 +132,6 @@ public class Piece extends GridComponent {
 			actions.addAll(myInventory.getItemActions());
 		}
 		return actions;
-	}
-
-	public Movement getMovement() {
-		return myMove;
 	}
 
 	/**
@@ -178,15 +180,30 @@ public class Piece extends GridComponent {
 		}
 	}
 
+	/**
+	 * Returns the inventory that the piece contains
+	 * 
+	 * @return Inventory of the Piece
+	 */
 	public Inventory getInventory() {
 		return myInventory;
 	}
 
-	// TODO this was throwing an error, temporary fix
+	/**
+	 * returns a uniqueID identifier
+	 * 
+	 * @return
+	 */
 	public Object getUniqueID() {
 		return myName.hashCode();
 	}
 
+	/**
+	 * Setter to set the player ID who owns the piece
+	 * 
+	 * @param id
+	 *            int representing player ID
+	 */
 	public void setPlayerID(int id) {
 		myPlayerID = id;
 	}

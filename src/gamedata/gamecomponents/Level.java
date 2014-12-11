@@ -16,16 +16,24 @@ import authoring_environment.GUIGrid;
 /**
  * Rules define how a player's turn ends Goals define whether or not the level
  * has been won
+ * 
+ * @author Jesse, Mike
  *
  */
 public class Level extends Observable implements IChangeGameState {
 	private static final String DEFAULT_ID = "Default";
 
+	/**
+	 * GUIGrid containing the state of the level
+	 */
 	private GUIGrid myGrid;
 	/**
 	 * Goals defining how to win the level, how to react to changes
 	 */
 	private List<Event> myEvents;
+	/**
+	 * ID Identifier for the Level
+	 */
 	private String myId;
 
 	/**
@@ -48,6 +56,19 @@ public class Level extends Observable implements IChangeGameState {
 		this(new GUIGrid(), new ArrayList<Event>(), DEFAULT_ID, false);
 	}
 
+	/**
+	 * Constructor to create a level
+	 * 
+	 * @param gr
+	 *            GUIGrid Containing the Grid
+	 * @param events
+	 *            List of events to be applied to the level
+	 * @param id
+	 *            ID identifier for the Level
+	 * @param isWinningLevel
+	 *            Boolean indication whether winning the level triggers a win
+	 *            clause
+	 */
 	public Level(GUIGrid gr, List<Event> events, String id,
 			boolean isWinningLevel) {
 		myGrid = gr;
@@ -56,18 +77,21 @@ public class Level extends Observable implements IChangeGameState {
 		initializeDefaultEvents();
 	}
 
+	/**
+	 * Initiates a default event for testing purposes.
+	 */
 	private void initializeDefaultEvents() {
 		Event die = new Event(myId);
-
-		
 	}
 
 	/**
 	 * Runs events using the magic of laaaaaaaaaaambda
 	 */
 	public void runGameEvents() {
-		for(Event e: myEvents){
-			BiConsumer<List<IHasStats>, GUIGrid> eventFunc = (List<IHasStats> list, GUIGrid grid) -> e.runEvent(list, grid);
+		for (Event e : myEvents) {
+			BiConsumer<List<IHasStats>, GUIGrid> eventFunc = (
+					List<IHasStats> list, GUIGrid grid) -> e.runEvent(list,
+					grid);
 			myGrid.runEvent(eventFunc);
 		}
 		this.garbageCollectPieces();
@@ -98,6 +122,12 @@ public class Level extends Observable implements IChangeGameState {
 		return "grid:" + myGrid.toString() + " myEvents" + myEvents.toString();
 	}
 
+	/**
+	 * Adds an observer to the level
+	 * 
+	 * @param o
+	 *            Observer to be added to the level
+	 */
 	public void addObserverTo(Observer o) {
 		addObserver(o);
 	}
@@ -128,35 +158,64 @@ public class Level extends Observable implements IChangeGameState {
 		}
 	}
 
+	/**
+	 * Restarts the level
+	 */
 	public void restart() {
 		// TODO restarts level
 	}
 
+	/**
+	 * Getter to get the ID representing the level
+	 * 
+	 * @return String containing the ID of the level
+	 */
 	public String getId() {
 		return myId;
 	}
 
+	/**
+	 * Set the turn end trigger to false
+	 */
 	public void setTurnFalse() {
 		turnOver = false;
 	}
-	
-	public boolean getGameWon(){
+
+	/**
+	 * Getter to get the game won state of the level
+	 * 
+	 * @return boolean of if the level has been won or not
+	 */
+	public boolean getGameWon() {
 		return this.gameWon;
 	}
-	
-	public boolean getGameLost(){
+
+	/**
+	 * Getter to get the game lost state of the level
+	 * 
+	 * @return boolean of if the level has been lost
+	 */
+	public boolean getGameLost() {
 		return this.gameLost;
 	}
 
-	public boolean getTurnOver(){
+	/**
+	 * Getter to get the turn over state
+	 * 
+	 * @return boolean of if the player turn has ended
+	 */
+	public boolean getTurnOver() {
 		return this.turnOver;
 	}
-	
-	public String getNextLevelID(){
+
+	/**
+	 * Getter to get the int id of the next level to be played
+	 * 
+	 * @return int ID of the next level to be played
+	 */
+	public String getNextLevelID() {
 		return this.nextLevelID;
 	}
-
-
 
 	/**
 	 * IChangeGameState interface methods

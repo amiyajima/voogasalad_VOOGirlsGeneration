@@ -9,6 +9,8 @@ import java.util.Map;
  * A game that contains a list of players and the levels that players can play
  * 
  * The play method in this class is called in every iteration of the game loop.
+ * 
+ * @author Jesse, Jennie
  *
  */
 public class Game {
@@ -21,9 +23,21 @@ public class Game {
 	 * Contains ordered list of levels that compose the game
 	 */
 	private List<Level> myLevels;
+	/**
+	 * Current Level being Player
+	 */
 	private Level myCurrentLevel;
+	/**
+	 * Current Player Making Plays
+	 */
 	private Player myCurrentPlayer;
+	/**
+	 * Integer representing the win state of the game
+	 */
 	private int myGameWon;
+	/**
+	 * Number of players in the game
+	 */
 	private int myNumPlayers;
 
 	/**
@@ -36,8 +50,8 @@ public class Game {
 	/**
 	 * Instantiate a new Game given a list of players and levels that exist.
 	 * 
-	 * @param players
-	 *            List of players
+	 * @param numPlayers
+	 *            Number of Players
 	 * @param levels
 	 *            List of levels that compose the game
 	 */
@@ -45,6 +59,17 @@ public class Game {
 		this(numPlayers, levels, null);
 	}
 
+	/**
+	 * Instantiate a new Game given a list of players and levels that exist and
+	 * a specific currentLevel
+	 * 
+	 * @param numPlayers
+	 *            Number of Players
+	 * @param levels
+	 *            List of levels that compose the game
+	 * @param currentLevel
+	 *            Current Level that the game starts on
+	 */
 	public Game(int numPlayers, List<Level> levels, Level currentLevel) {
 		myGameWon = 0;
 		myNumPlayers = numPlayers;
@@ -54,11 +79,20 @@ public class Game {
 		myCurrentPlayer = null;
 	}
 
+	/**
+	 * Starts the game by calling on the current player to start the turn
+	 */
 	public void startGame() {
-		System.out.println("Starting the Game");
+		// System.out.println("Starting the Game");
 		myCurrentPlayer.startTurn(myCurrentLevel);
 	}
 
+	/**
+	 * Adds the list of players whom will by playing the game in order
+	 * 
+	 * @param p
+	 *            List of Players
+	 */
 	public void addPlayers(List<Player> p) {
 		myPlayers = p;
 		if (myPlayers.size() > 0) {
@@ -66,6 +100,13 @@ public class Game {
 		}
 	}
 
+	/**
+	 * Changes the player to the player with the int position in the list of
+	 * players
+	 * 
+	 * @param playerToChangeTo
+	 *            Integer to change the current player to
+	 */
 	public void changeTurn(int playerToChangeTo) {
 		for (Player player : myPlayers) {
 			if (player.getID() == playerToChangeTo) {
@@ -89,6 +130,9 @@ public class Game {
 		myCurrentLevel.restart();
 	}
 
+	/**
+	 * Formats the information regarding a game to a string output
+	 */
 	public String toString() {
 		return "game with " + myPlayers.size() + " players and "
 				+ myLevels.size() + " levels";
@@ -112,18 +156,40 @@ public class Game {
 		return myCurrentPlayer;
 	}
 
+	/**
+	 * Getter for the list of players
+	 * 
+	 * @return Returns the list of players
+	 */
 	public List<Player> getPlayers() {
 		return myPlayers;
 	}
 
+	/**
+	 * Getter for the list of levels
+	 * 
+	 * @return Returns the list of levels
+	 */
 	public List<Level> getLevels() {
 		return myLevels;
 	}
 
+	/**
+	 * Setter for the player to set a player to a specific position in the list
+	 * 
+	 * @param p
+	 *            Player to set
+	 * @param pos
+	 *            Int Position to set the player in the list
+	 */
 	public void setPlayer(Player p, int pos) {
 		myPlayers.set(pos, p);
 	}
 
+	/**
+	 * Iterates the current player to the next chronological player in the list
+	 * of players
+	 */
 	public void nextPlayer() {
 		int next = myPlayers.indexOf(myCurrentPlayer) + 1;
 		if (next == myPlayers.size()) {
@@ -144,6 +210,12 @@ public class Game {
 		myCurrentLevel = l;
 	}
 
+	/**
+	 * Sets the current player to a specific player p
+	 * 
+	 * @param p
+	 *            Player p to set as the current player
+	 */
 	public void setCurrentPlayer(Player p) {
 		myCurrentPlayer = p;
 		p.startTurn(myCurrentLevel);

@@ -830,6 +830,7 @@ public class ViewController {
         protected void endAction() {
                 System.out.println("Ending Action");
                 this.checkEndActions();
+                this.getGrid().repopulateGrid();
         }
 
         public void checkEndActions() {
