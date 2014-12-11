@@ -1,9 +1,5 @@
 package gamedata.wrappers;
 
-import gamedata.action.Action;
-import gamedata.gamecomponents.Inventory;
-import gamedata.stats.Stats;
-import gameengine.movement.Movement;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 import java.util.List;
@@ -53,6 +49,10 @@ public class PieceDataIndividual {
 
     public String toString () {
         return "PieceDataIndividual: ID = " + myID + "myLoc = " + myLoc + " stats = " + myStats;
+    }
+
+    public String getMyTypeID () {
+        return myID;
     }
 
 }

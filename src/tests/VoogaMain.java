@@ -31,9 +31,7 @@ import authoring_environment.GUIGrid;
  */
 public class VoogaMain {
     public static void testJSONwrite () {
-        System.out.println("this should print");
-        String saveTo = "src/resources/json/Piece.json";
-        // String saveTo = "src/resources/json/RicaSample.json";
+        String saveTo = "src/resources/json/Action.json";
         JSONManager myJSONmanager = new JSONManager();
         JSONBobTester jb = new JSONBobTester();
 
@@ -79,7 +77,7 @@ public class VoogaMain {
         // myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
         // myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
         System.out.println();
-        myJSONmanager.writeToJSON(piece, "src/resources/json/Piece.json");
+        myJSONmanager.writeToJSON(a, "src/resources/json/Rica-Action.json");
     }
 
     public static void testJSONload () {
@@ -93,8 +91,7 @@ public class VoogaMain {
     }
 
     public static void main (String[] args) {
-        System.out.println("main is running");
-        //testJSONwrite();
-        testJSONload();
+        testJSONwrite();
+        //testJSONload();
     }
 }

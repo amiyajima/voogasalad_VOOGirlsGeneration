@@ -34,9 +34,8 @@ import authoring_environment.GUIGrid;
 import authoring_environment.SuperGrid;
 
 /**
- * JSON Write Tester
- * 
- * @author Rica Zhang, Anna Miyajima
+ * Creates a test game and various game components
+ * @author Rica
  *
  */
 public class JSONBobTester {

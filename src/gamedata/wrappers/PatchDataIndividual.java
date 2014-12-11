@@ -29,4 +29,8 @@ public class PatchDataIndividual {
         return myImageLocation;
     }
 
+    public String getMyTypeID () {
+        return myID;
+    }
+
 }
