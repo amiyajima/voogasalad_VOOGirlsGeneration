@@ -30,7 +30,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import authoring.data.AuthoringPatchData;
+import authoring.data.PatchInstanceData;
 import authoring.data.PieceData;
 import authoring_environment.GUIGrid;
 import authoring_environment.SuperGrid;

@@ -18,7 +18,7 @@ import java.awt.geom.Point2D;
 import java.io.FileNotFoundException;
 import java.util.List;
 import authoring.data.ActionData;
-import authoring.data.AuthoringPatchData;
+import authoring.data.PatchInstanceData;
 import authoring.data.PieceData;
 import authoring_environment.GUIGrid;
 
