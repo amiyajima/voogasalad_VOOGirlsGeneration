@@ -78,8 +78,8 @@ public class JSONTesterMain {
         // myJSONmanager.writeToJSON(jb.createNewGame(), saveTo);
         // myJSONmanager.writeToJSON(jb.createSuperGrid(), saveTo);
         System.out.println();
-        //myJSONmanager.writeToJSON(g, "src/resources/json/Rica-Game-Doubles.json");
-        myJSONmanager.writeToJSON(g, "C:\\Users\\Rica\\Desktop\\Rica-GamePlayer.json");        
+        myJSONmanager.writeToJSON(g, "src/resources/json/Rica-Game-No-Inheritance.json");
+        //myJSONmanager.writeToJSON(g, "C:\\Users\\Rica\\Desktop\\Rica-GamePlayer.json");        
     }
 
     public static void testJSONload () {
@@ -95,7 +95,7 @@ public class JSONTesterMain {
     }
 
     public static void main (String[] args) {
-        //testJSONwrite();
-        testJSONload();
+        testJSONwrite();
+        //testJSONload();
     }
 }
