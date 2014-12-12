@@ -47,5 +47,4 @@ public interface Action {
 	 * the game (i.e. a piece, patch, or other module)
 	 */
 	public void doBehavior(GUIGrid grid, Piece actor, Piece... receivers);
-
 }

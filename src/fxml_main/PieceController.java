@@ -19,6 +19,10 @@ import authoring.data.GamePropertiesData;
 import authoring.data.PieceTypeData;
 import authoring_environment.GUIGrid;
 
+/**
+ * @author Martin Tamayo
+ *
+ */
 public class PieceController extends GridComponentAbstCtrl<Piece> {
 
     private PieceTypeData myPieceTypes;
@@ -45,7 +49,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
                     addEntry(piece);
                 };
                 myPropertiesSPane.setContent(new PieceTypeEditor(okLambda, myPieceTypes,
-                                                                 myActionData));
+                		myActionData, myGameProperties.getGridShape()));
             }
         });
     }
@@ -134,7 +138,8 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 
                     myPieceTypes.replace(entry, piece);
                 };
-                myPropertiesSPane.setContent(new PieceTypeEditor(okLambda, entry, myActionData));
+                myPropertiesSPane.setContent(new PieceTypeEditor(okLambda, entry,
+                		myActionData, myGameProperties.getGridShape()));
             }
         });
     }

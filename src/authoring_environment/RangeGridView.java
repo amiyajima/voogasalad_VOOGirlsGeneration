@@ -14,7 +14,7 @@ public class RangeGridView extends ScrollPane{
 	private RangeGrid myGrid;
 	
 	public RangeGridView(int viewWidth, int viewHeight, double tileSize,
-			String shape, List<Point2D> range) {
+			String shape, List<Point2D.Double> range) {
 		myViewWidth=viewWidth;
 		myViewHeight=viewHeight;
 		myTileSize=tileSize;
@@ -39,7 +39,7 @@ public class RangeGridView extends ScrollPane{
 			myGrid.displayPane(this);
 	}
 
-	public void update(int width, int height,List<Point2D> range){
+	public void update(int width, int height,List<Point2D.Double> range){
 		this.setContent(null);
 		Point2D minGridSize=cacluateGridSize(range);
 		int minX=(int) minGridSize.getX();
@@ -60,7 +60,7 @@ public class RangeGridView extends ScrollPane{
         return tileSize;
     }
     
-    private Point2D cacluateGridSize (List<Point2D> range) {
+    private Point2D cacluateGridSize (List<Point2D.Double> range) {
         double maxX = 0;
         double maxY = 0;
         for (Point2D point : range) {
@@ -74,8 +74,8 @@ public class RangeGridView extends ScrollPane{
         return new Point2D.Double(maxX, maxY);
     }
 
-	public List<Point2D> returnSelectedList() {
-		return  myGrid.rangeSelectedList();
+	public List<Point2D.Double> returnSelectedList() {
+		return myGrid.rangeSelectedList();
 	}
 	
 	public RangeGrid getGrid(){

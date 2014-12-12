@@ -26,7 +26,7 @@ import authoring_environment.UIspecs;
  * GUI element used to create new Patch objects and add them to the library. Allows users
  * to specify the name and image of the patch.
  * 
- * @author Sandy Lee
+ * @author Sandy Lee, Martin Tamayo
  */
 public class PatchTypeEditor extends Pane {
 
