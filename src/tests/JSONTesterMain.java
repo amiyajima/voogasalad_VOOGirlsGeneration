@@ -80,6 +80,7 @@ public class JSONTesterMain {
     }
 
     public static void testJSONload () {
+        System.out.println("\n\n Loading...");
         JSONManager jsonManager = new JSONManager();
         try {
             jsonManager.readFromJSONFile("src/resources/json/Rica-Piece.json");
@@ -92,7 +93,7 @@ public class JSONTesterMain {
     }
 
     public static void main (String[] args) {
-        //testJSONwrite();
+        testJSONwrite();
         testJSONload();
     }
 }

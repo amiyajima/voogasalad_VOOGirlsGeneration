@@ -160,8 +160,12 @@ public class TestGameCreator {
 		pl3.add(p3);
 
 		List<Point2D.Double> pl4 = new ArrayList<Point2D.Double>();
-
-		Movement move = new Movement(pl1);
+		pl4.add(p5);
+		pl4.add(p3);
+		
+		List<List<Point2D.Double>> paths = new ArrayList<List<Point2D.Double>>();
+		paths.add(pl3);
+		Movement move = new Movement(pl1, paths);
 
 		List<Action> actions = new ArrayList<Action>();
 		actions.add(createNewAction(pl2, pl4));
@@ -214,9 +218,24 @@ public class TestGameCreator {
 		return patch;
 	}
 
-	public Movement createNewMovement(List<Point2D.Double> pl1) {
-		Movement m1 = new Movement(pl1);
-		return m1;
+	public Movement createNewMovement() {
+	    Point2D.Double p2 = new Point2D.Double(2, 2);
+	    Point2D.Double p3 = new Point2D.Double(3, 3);
+
+            List<Point2D.Double> pl1 = new ArrayList<Point2D.Double>();
+            pl1.add(new Point2D.Double(-1, 0));
+            pl1.add(new Point2D.Double(1, 0));
+            pl1.add(new Point2D.Double(0, 1));
+            pl1.add(new Point2D.Double(0, -1));
+
+            List<Point2D.Double> pl3 = new ArrayList<Point2D.Double>();
+            pl3.add(p2);
+            pl3.add(p3);
+
+            List<List<Point2D.Double>> paths = new ArrayList<List<Point2D.Double>>();
+            paths.add(pl3);
+            Movement move = new Movement(pl1, paths);
+            return move;
 	}
 
 	public Action createNewAction(List<Point2D.Double> pl1, List<Point2D.Double> pl2) {

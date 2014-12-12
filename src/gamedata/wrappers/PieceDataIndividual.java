@@ -21,7 +21,7 @@ public class PieceDataIndividual {
     private StatsData myStats;
     private int myPlayerID;
     private boolean myShouldRemove;
-    private MovementData myMoves;
+    private MovementData myMovement;
 
     // from GridComponent
     private String myID;
@@ -85,14 +85,16 @@ public class PieceDataIndividual {
             myActionsFromData.add(adi.getActionFromData());
         }
         Stats myStatsFromData = new Stats(myStats.getStats());
-        Movement myMovement = myMoves.getMovementFromData();
+        Movement myMoves = myMovement.getMovementFromData();
         // TODO Inventory is not implemented yet, so making an empty one
-        Piece myPiece = new Piece(myID, myName, myImageLocation, myMovement, myActionsFromData,
+        Piece myPiece = new Piece(myID, myName, myImageLocation, myMoves, myActionsFromData,
                                   myStatsFromData, myLoc, myPlayerID, new Inventory());
         return myPiece;
     }
 
     public String toString () {
-        return "PieceDataIndividual: ID = " + myID + "myLoc = " + myLoc + " stats = " + myStats;
+        return "PieceDataIndividual: ID = " + myID + "myLoc = " + myLoc 
+                + "myMoves = " + myMovement.getMovementFromData().toString()
+                + " stats = " + myStats;
     }
 }
