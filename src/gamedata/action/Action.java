@@ -1,6 +1,6 @@
 package gamedata.action;
 
-import java.util.List; 
+import java.util.List;
 import java.awt.geom.Point2D;
 
 import authoring_environment.GUIGrid;
@@ -28,12 +28,12 @@ public interface Action {
 	 */
 	public List<Point2D.Double> getSpecificActionRange(Point2D pieceLocation);
 	
-	       /**
-         * Gives back a list of Point2D of absolute
-         * locations for the action range
-         * @return list of absolute locations in Point2D
-         */
-        public List<Point2D.Double> getActionRange();
+	/**
+	 * Gives back a list of Point2D of absolute
+	 * locations for the action range
+	 * @return list of absolute locations in Point2D
+	 */
+	public List<Point2D.Double> getActionRange();
         
 	/**
 	 * Gives back a list of Point2D of relative locations

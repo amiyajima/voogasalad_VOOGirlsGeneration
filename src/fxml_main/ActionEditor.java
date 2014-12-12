@@ -31,8 +31,6 @@ import authoring.concretefeatures.RangeEditor;
 import authoring.concretefeatures.SingleMultiplierBox;
 import authoring.data.ActionData;
 
-
-
 /**
  * @author seungwonlee
  *
