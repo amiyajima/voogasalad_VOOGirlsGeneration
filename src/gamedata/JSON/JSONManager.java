@@ -95,7 +95,10 @@ public class JSONManager {
     public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
-
+        
+        PieceData pieceData = myGson.fromJson(br, PieceData.class);
+        System.out.println(pieceData.toString());
+        /*
         GameData gameData = myGson.fromJson(br, GameData.class);
         System.out.println(gameData.toString());
         
@@ -121,58 +124,9 @@ public class JSONManager {
         
         Game myGame = gameData.getGameFromData();
         System.out.println("Game: " + myGame.toString());
+        */
         return myGame;
-    }
-
-    /**
-     * Method that converts a game data object into a game object. may be an issue as every aspect
-     * of it is in a data wrapper
-     * 
-     * @param myGameData
-     * @return
-     */
-    private Game convertToGame (GameData gameData) {
-        /*
-        List<PlayerDataIndividual> myPlayerData = gameData.getMyPlayers();
-        List<LevelDataIndividual> myLevelData = gameData.getMyLevels();
-        PlayerDataIndividual myCurrentPlayerData = gameData.getMyCurrentPlayer();
-        LevelDataIndividual myCurentLevelData = gameData.getMyCurrentLevel();
-        
-        for(LevelDataIndividual l : myLevelData){
-            GridData gridData = l.getGrid();
-            PieceData pieceData = gridData.getPieces();
-            PatchData patchData = gridData.getPatches();
-            
-            List<Piece> pieces = new ArrayList<Piece>();
-            for(PieceDataIndividual pd : pieceData.getPieces()){
-                // TODO Since inventory is not implemented, we pass in an empty inventory
-                Inventory emptyInventory = new Inventory();
-                //Piece(String id, String name, String imageLoc, List<Action> actions,
-                //Stats stats, Point2D loc, int playerID, Inventory inventory)
-                Stats myStats = new Stats(pd.getMyStats().getStats());
-                List<ActionDataIndividual> myActionData = pd.getMyActions();
-                for (ActionDataIndividual actionData : myActionData) {
-                    
-                }
-                //Piece myPiece = new Piece(...
-            }
-            List<Patch> patches = new ArrayList<Patch>();
-            for(PatchDataIndividual pd : patchData.getPatches()){
-                Patch myPatch = new Patch(pd.getMyTypeID(), pd.getName(), pd.getMyImageLocation(), pd.getMyLoc());
-                patches.add(myPatch);
-            }
-            
-            GUIGrid grid = new Grid(gridData.getRow(), gridData.getColumn(), pieces, patches);
-            
-            Level currentLevel = new Level(grid,l.getGoals(), l.getRules());
-            
-        }
-         */
-        //Game newGame = new Game(myPlayerData.size(), );
-
-        return null;
-    }
-    
+    }    
     
     public void registerTypeAdapters (GsonBuilder builder) {
         //builder.registerTypeAdapter(Event.class, new GenericTypeAdapter<Event>("gamedata.events"));

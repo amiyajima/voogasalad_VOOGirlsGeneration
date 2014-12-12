@@ -4,6 +4,7 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
+import gameengine.movement.Movement;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class PieceDataIndividual {
     private StatsData myStats;
     private int myPlayerID;
     private boolean myShouldRemove;
+    private MovementData myMoves;
 
     // from GridComponent
     private String myID;
@@ -33,6 +35,7 @@ public class PieceDataIndividual {
                                 String ID,
                                 String name,
                                 String imageLocation,
+                                MovementData myMoves, 
                                 Point2D p) {
         myActions = actions;
         myStats = stats;
@@ -82,8 +85,9 @@ public class PieceDataIndividual {
             myActionsFromData.add(adi.getActionFromData());
         }
         Stats myStatsFromData = new Stats(myStats.getStats());
+        Movement myMovement = myMoves.getMovementFromData();
         // TODO Inventory is not implemented yet, so making an empty one
-        Piece myPiece = new Piece(myID, myName, myImageLocation, myActionsFromData,
+        Piece myPiece = new Piece(myID, myName, myImageLocation, myMovement, myActionsFromData,
                                   myStatsFromData, myLoc, myPlayerID, new Inventory());
         return myPiece;
     }

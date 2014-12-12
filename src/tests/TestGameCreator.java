@@ -161,7 +161,7 @@ public class TestGameCreator {
 
 		List<Point2D.Double> pl4 = new ArrayList<Point2D.Double>();
 
-		//Movement move = new Movement(g, pl1);
+		Movement move = new Movement(pl1);
 
 		List<Action> actions = new ArrayList<Action>();
 		actions.add(createNewAction(pl2, pl4));
@@ -179,22 +179,22 @@ public class TestGameCreator {
 		Piece piece = null;
 		if (type == 0) {
 			if (randomInt % 2 == 1) {
-				piece = new Piece("ID", "Duvall", DEFAULT_DUVALL, actions, s,
+				piece = new Piece("ID", "Duvall", DEFAULT_DUVALL, move, actions, s,
 						p, 1, i);
 				System.out.println("ACTION IN PIECE TESTER: "
 						+ piece.getActions());
 			} else {
-				piece = new Piece("ID", "Bunny", DEFAULT_BUNNY, actions, s, p,
+				piece = new Piece("ID", "Bunny", DEFAULT_BUNNY, move, actions, s, p,
 						1, i);
 			}
 		} else if (type == 1) {
-			piece = new Piece("Duvall_ID", "Duvall", DEFAULT_DUVALL, actions,
+			piece = new Piece("Duvall_ID", "Duvall", DEFAULT_DUVALL, move, actions,
 					s, p, 1, i);
 		} else if (type == 2) {
-			piece = new Piece("Bunny_ID", "Bunny", DEFAULT_BUNNY, actions, s,
+			piece = new Piece("Bunny_ID", "Bunny", DEFAULT_BUNNY, move, actions, s,
 					p, 1, i);
 		} else {
-			piece = new Piece("Rica_ID", "Rica", DEFAULT_RICA, actions, s, p,
+			piece = new Piece("Rica_ID", "Rica", DEFAULT_RICA, move, actions, s, p,
 					1, i);
 		}
 		return piece;
@@ -214,8 +214,8 @@ public class TestGameCreator {
 		return patch;
 	}
 
-	public Movement createNewMovement(GUIGrid g, List<Point2D> pl2) {
-		Movement m1 = new Movement(g, pl2);
+	public Movement createNewMovement(List<Point2D.Double> pl1) {
+		Movement m1 = new Movement(pl1);
 		return m1;
 	}
 

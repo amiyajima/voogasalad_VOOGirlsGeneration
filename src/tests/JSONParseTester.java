@@ -47,7 +47,7 @@ public class JSONParseTester {
 
         // works using SinglePiece.json
         PieceDataIndividual pieceData = myGson.fromJson(br, PieceDataIndividual.class);
-        System.out.println(pieceData.getMyTypeID());
+//        System.out.println(pieceData.getMyTypeID());
         
         // map of patches
         PatchData myPatches = myGson.fromJson(br, PatchData.class);

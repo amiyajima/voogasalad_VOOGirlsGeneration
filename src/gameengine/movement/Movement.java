@@ -39,7 +39,7 @@ public class Movement implements Action {
 	/**
 	 * Orientator resonsible for calculating orientations
 	 */
-	private Orientator myOrientator;
+	private transient Orientator myOrientator;
 	
 	/**
 	 * Orientation of the piece (depending on last movement made)
