@@ -12,6 +12,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * GUI element used in ActionEditor. This allows a user to specify a whole 
+ * stat modifying operation. In a stats-modifying action, each operation adds to the target stat the value
+ * from a reference, scaled by a positive or negative number. This GUI element allows the
+ * user to which stat to edit and who the stat belongs to (actor or receiver).
+ * 
+ * @author Mike Zhu, Jennie Ju
+ *
+ */
+
 public class TotalLogicBox extends VBox {
 
 	public static final int MULTIPLIER_BOX_WIDTH = 75;
@@ -91,7 +101,7 @@ public class TotalLogicBox extends VBox {
 		Button newMultiplierBtn = new Button("+");
 		initNewButton(newMultiplierBtn);
 		//        mySingleMultiplierVBox.setSpacing(10);
-		mySingleMultiplierVBox.getChildren().addAll(newMultiplierBtn);
+		mySingleMultiplierVBox.getChildren().add(newMultiplierBtn);
 
 	}
 
@@ -99,7 +109,9 @@ public class TotalLogicBox extends VBox {
 		newBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent click) {
+				mySingleMultiplierVBox.getChildren().remove(newBtn);
 				addSingleMultiplierBox(new StatsSingleMultiplier());
+				mySingleMultiplierVBox.getChildren().add(newBtn);
 			}
 		});
 	}

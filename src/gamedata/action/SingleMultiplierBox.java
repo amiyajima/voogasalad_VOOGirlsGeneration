@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 /**
- * GUI element used in ActionCreator. This allows a user to specify a single "operation"
+ * GUI element used in ActionEditor. This allows a user to specify a single "operation"
  * on stats. In a stats-modifying action, each operation adds to the target stat the value
  * from a reference, scaled by a positive or negative number. This GUI element allows the
  * user to specify the scalar and reference stat (or constant).

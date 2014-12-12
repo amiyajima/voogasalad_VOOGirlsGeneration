@@ -1,5 +1,6 @@
 package gamedata.action;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -11,6 +12,12 @@ import java.util.List;
  */
 public class StatsTotalLogic extends StatsModifier{
 	private List<StatsSingleMultiplier> myLogic;
+	
+	
+	public StatsTotalLogic() {
+		super ("","");
+		myLogic = new LinkedList<StatsSingleMultiplier>();
+	}
 	
 	/**
 	 * Constructor for StatsTotalLogic
