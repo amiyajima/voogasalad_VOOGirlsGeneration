@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class AuthoringMain extends Application{
+public class DeprecatedAuthoringMain extends Application{
 	
 	private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 	private final String MAIN_TITLE = "Girls GenerEditor";
