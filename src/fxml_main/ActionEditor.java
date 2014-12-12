@@ -3,7 +3,9 @@ package fxml_main;
 import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
+import gamedata.action.SingleMultiplierBox;
 import gamedata.action.StatsTotalLogic;
+import gamedata.action.TotalLogicBox;
 
 import java.awt.geom.Point2D;
 import java.io.IOException;
@@ -29,7 +31,8 @@ import javafx.scene.layout.VBox;
 import utilities.ClassGrabber;
 import authoring.abstractfeatures.PopupWindow;
 import authoring.concretefeatures.RangeEditor;
-import authoring.concretefeatures.TotalLogicBox;
+import authoring.data.ActionData;
+
 
 /**
  * @author seungwonlee, Jennie JU

@@ -14,8 +14,7 @@ public class GUIcontainerMain extends Application{
         Scene scene = new Scene(root, 1024, 706);
         primaryStage.setTitle("Girls GenerEditor");
         primaryStage.setScene(scene);
-        primaryStage.show();
-        
+        primaryStage.show();      
 	}
 	
 	public static void main (String[] args) {

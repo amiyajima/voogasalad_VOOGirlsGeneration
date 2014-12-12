@@ -14,7 +14,7 @@ import java.util.Set;
  * 
  * @author Sandy Lee
  */
-public class PatchData implements AuthoringData<Patch> {
+public class PatchInstanceData implements AuthoringData<Patch> {
 
 	private List<Patch> myPatches;
 
@@ -22,8 +22,16 @@ public class PatchData implements AuthoringData<Patch> {
 	 * Constructor for new PatchData,
 	 * initializes empty list of Patch
 	 */
-	public PatchData () {
+	public PatchInstanceData () {
 		myPatches = new LinkedList<Patch>();
+	}
+	
+	/**
+	 * Constructor for patch from game data, aka with already existent data
+	 * @param patches
+	 */
+	public PatchInstanceData (List<Patch> patches) {
+	    myPatches = patches;
 	}
 
 	@Override

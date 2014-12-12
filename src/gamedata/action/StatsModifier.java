@@ -9,11 +9,11 @@ package gamedata.action;
  *
  */
 public abstract class StatsModifier {
-	protected String myTarget;
+	protected String myStatRef;
 	protected String myStat;
 	
 	protected StatsModifier(String target, String stat) {
-		myTarget = target;
+		myStatRef = target;
 		myStat = stat;
 	}
 	
@@ -24,7 +24,7 @@ public abstract class StatsModifier {
 	 * @return boolean of target checking
 	 */
 	protected boolean checkTarget(String targetToCheck) {
-		return targetToCheck.equals(myTarget);
+		return targetToCheck.equals(myStatRef);
 	}
 	
 	/**
@@ -32,6 +32,14 @@ public abstract class StatsModifier {
 	 */
 	protected String getStatName() {
 		return myStat;
+	}
+	
+	/**
+	 * Returns the name of the reference whose stat will be modified
+	 * (actor or receiver)
+	 */
+	protected String getStatRef() {
+		return myStatRef;
 	}
 	
 }

@@ -6,13 +6,12 @@ import java.util.List;
 
 /**
  * Defines a path(An arrangement of Points that must be traversed during a
- * movement) for movement. 
- * TODO: Decide if paths will be implemented or not.
+ * movement) for movement. TODO: Decide if paths will be implemented or not.
  * 
  * @author Jesse, Rica
  *
  */
-public class Path {
+public class MovementPath {
 	/**
 	 * Contains respective positions for possible path.
 	 */
@@ -21,7 +20,7 @@ public class Path {
 	/**
 	 * Default Constructor
 	 */
-	public Path() {
+	public MovementPath() {
 
 	}
 
@@ -31,7 +30,7 @@ public class Path {
 	 * @param myPath
 	 *            List of Point2D containing ordered relative points of movement
 	 */
-	public Path(List<Point2D> myPath) {
+	public MovementPath(List<Point2D> myPath) {
 		myCoords = myPath;
 	}
 

@@ -1,80 +1,94 @@
 package gamedata.wrappers;
 
+import gamedata.action.Action;
+import gamedata.gamecomponents.Inventory;
+import gamedata.gamecomponents.Piece;
+import gamedata.stats.Stats;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
+import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Wrapper for individual pieces in PieceData in GridData
- * @author Rica
  *
  */
 public class PieceDataIndividual {
-    private int myTypeID;
-    private int myUniqueID;
+    // private ActionData myActions;
+    private List<ActionDataIndividual> myActions;
+    private StatsData myStats;
     private int myPlayerID;
+    private boolean myShouldRemove;
+
+    // from GridComponent
+    private String myID;
+    private String myName;
+    private Point2D.Double myLoc;
     private String myImageLocation;
 
-    private Point2D myLocation;
-    private StatsData myStats;
-    private List<ActionData> myActions;
-    private List<MovementData> myPath;
-    private boolean myShouldRemove;
-    private InventoryData myInventory;
-    
-    public PieceDataIndividual (String imageLocation, List<MovementData> m, 
-                                List<ActionData> a, StatsData stats, Point2D location, 
-                                int tid, int uid, int pid, InventoryData inventory) {
-       myImageLocation = imageLocation;
-       myPath = m;
-       myActions = a;
-       myStats = stats;
-       myLocation = location;
-       myTypeID = tid;
-       myUniqueID = uid;
-       myPlayerID = pid;
-       myShouldRemove = false;
-       myInventory = inventory;
-   }
-
-    public int getMyTypeID () {
-        return myTypeID;
+    public PieceDataIndividual (List<ActionDataIndividual> actions, StatsData stats,
+                                int playerID,
+                                boolean shouldRemove,
+                                String ID,
+                                String name,
+                                String imageLocation,
+                                Point2D p) {
+        myActions = actions;
+        myStats = stats;
+        myPlayerID = playerID;
+        myShouldRemove = shouldRemove;
+        myID = ID;
+        myName = name;
+        myImageLocation = imageLocation;
+        myLoc = (Double) p;
     }
 
-    public int getMyUniqueID () {
-        return myUniqueID;
-    }
-
-    public int getMyPlayerID () {
-        return myPlayerID;
-    }
-
-    public String getMyImageLocation () {
-        return myImageLocation;
-    }
-
-    public Point2D getMyLocation () {
-        return myLocation;
+    public List<ActionDataIndividual> getMyActions () {
+        return myActions;
     }
 
     public StatsData getMyStats () {
         return myStats;
     }
 
-    public List<ActionData> getMyActions () {
-        return myActions;
-    }
-
-    public List<MovementData> getMyPath () {
-        return myPath;
+    public int getMyPlayerID () {
+        return myPlayerID;
     }
 
     public boolean isMyShouldRemove () {
         return myShouldRemove;
     }
 
-    public InventoryData getMyInventory () {
-        return myInventory;
+    public String getMyID () {
+        return myID;
     }
 
+    public String getMyName () {
+        return myName;
+    }
+
+    public Point2D.Double getMyLoc () {
+        return myLoc;
+    }
+
+    public String getMyImageLocation () {
+        return myImageLocation;
+    }
+    
+    public Piece getPieceFromData() {
+        List<Action> myActionsFromData = new ArrayList<Action>();
+        for (ActionDataIndividual adi : myActions) {
+            myActionsFromData.add(adi.getActionFromData());
+        }
+        Stats myStatsFromData = new Stats(myStats.getStats());
+        // TODO Inventory is not implemented yet, so making an empty one
+        Piece myPiece = new Piece(myID, myName, myImageLocation, myActionsFromData,
+                                  myStatsFromData, myLoc, myPlayerID, new Inventory());
+        return myPiece;
+    }
+
+    public String toString () {
+        return "PieceDataIndividual: ID = " + myID + "myLoc = " + myLoc + " stats = " + myStats;
+    }
 }

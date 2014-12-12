@@ -1,6 +1,5 @@
-package authoring.concretefeatures;
+package gamedata.action;
 
-import gamedata.action.StatsSingleMultiplier;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -22,10 +21,25 @@ public class SingleMultiplierBox extends HBox{
 	private static final String STYLESHEET = "resources/stylesheets/singlemultiplierbox_layout.css";
 
 	private ChoiceBox<String> myStatRef;
-	private TextField myScale;
-	private TextField myStat;
+	private TextField myMultiplier;
+	private TextField myStatName;
 
+	/**
+	 * Creates a new empty SingleMultiplierBox
+	 */
 	public SingleMultiplierBox(){
+		initSingleMultiplierBox();
+	}
+	
+	/**
+	 * Creates a SingleMultiplierBox from an existing StatsSingleMultiplier
+	 */
+	public SingleMultiplierBox(StatsSingleMultiplier ssm) {
+		initSingleMultiplierBox();
+		setSingleMultiplier(ssm);
+	}
+	
+	private void initSingleMultiplierBox() {
 		getStylesheets().add(STYLESHEET);
 
 		Label x = new Label("x");
@@ -33,20 +47,20 @@ public class SingleMultiplierBox extends HBox{
 		myStatRef.setPrefWidth(MULTIPLIER_BOX_WIDTH);
 		myStatRef.getItems().addAll("actor", "receiver", "constant");
 
-		myScale = new TextField();
-		myStat = new TextField();
+		myMultiplier = new TextField();
+		myStatName = new TextField();
 
-		myScale.setPrefWidth(MULTIPLIER_BOX_WIDTH);
-		myStat.setPrefWidth(STATS_BOX_WIDTH);
+		myMultiplier.setPrefWidth(MULTIPLIER_BOX_WIDTH);
+		myStatName.setPrefWidth(STATS_BOX_WIDTH);
 
-		myScale.setPromptText("Multiplier");
-		myStat.setPromptText("Reference stat or constant");
+		myMultiplier.setPromptText("Multiplier");
+		myStatName.setPromptText("Reference stat or constant");
 
-		getChildren().addAll(myScale, x, myStatRef, myStat);
+		getChildren().addAll(myMultiplier, x, myStatRef, myStatName);
 	}
 
 	/**
-	 * Gets the StatsSingleMultiplier class from the view
+	 * Gets the StatsSingleMultiplier associated with this SingleMultiplierBox
 	 * (connects this view to the data)
 	 * @return StatsSingleMultiplier - explains how to modify
 	 * the stat
@@ -54,11 +68,23 @@ public class SingleMultiplierBox extends HBox{
 	public StatsSingleMultiplier getSingleMultipler() {
 		//TODO: error checking to make sure this is a double
 		double multiplier = 0;
-		if (!myScale.getText().equals("")) {
-			multiplier = Double.parseDouble(myScale.getText());
+		if (!myMultiplier.getText().equals("")) {
+			multiplier = Double.parseDouble(myMultiplier.getText());
 		}
 		String statRef = myStatRef.getValue();
-		String stat = myStat.getText();
+		String stat = myStatName.getText();
 		return new StatsSingleMultiplier(multiplier, statRef, stat);
+	}
+	
+	
+	/**
+	 * Takes in a StatsSingleMultipler and repopulates the textfields
+	 * in view
+	 * @param ssm - StatsSingleMultiplier to view
+	 */
+	private void setSingleMultiplier(StatsSingleMultiplier ssm) {
+		myMultiplier.setText(""+ssm.getMultiplier());
+		myStatRef.setValue(ssm.getStatRef());
+		myStatName.setText(ssm.getStatName());
 	}
 }

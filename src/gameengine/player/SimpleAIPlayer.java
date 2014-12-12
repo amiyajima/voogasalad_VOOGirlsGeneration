@@ -20,6 +20,10 @@ public class SimpleAIPlayer extends Player {
 
 	private Level myCurrentLevel;
 
+	/**
+	 * Constructor
+	 * @param id
+	 */
 	public SimpleAIPlayer(int id) {
 		super(id);
 	}
@@ -31,6 +35,7 @@ public class SimpleAIPlayer extends Player {
 		this.play();
 	}
 
+	@Override
 	public void play() {
 		System.out.println("AI PLAY RUNNING");
 		List<Piece> myPieces = myCurrentLevel.getGrid().getPlayerPieces(
@@ -58,12 +63,13 @@ public class SimpleAIPlayer extends Player {
 				}
 				if (recievers.size() != 0) {
 					Piece rec = recievers.get(randomNum);
-					chosenAction.doBehavior(p, rec);
+					chosenAction.doBehavior(null,p, rec);
 
 				}
 
 			}
 			myCurrentLevel.getGrid().repopulateGrid();
+			//Trying to slow down AI operation...
 		/*	try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {

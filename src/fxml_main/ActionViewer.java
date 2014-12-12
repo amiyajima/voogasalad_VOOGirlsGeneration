@@ -27,8 +27,8 @@ public class ActionViewer extends Pane {
     private static final Insets MARGINS = new Insets(20, WIDTH / 5, 20, WIDTH / 5 - 10);
 
     private String myName;
-    private List<Point2D> myEffectRange;
-    private List<Point2D> myActionRange;
+    private List<Point2D.Double> myEffectRange;
+    private List<Point2D.Double> myActionRange;
 
     public ActionViewer (Action action) {
         myName = action.toString();

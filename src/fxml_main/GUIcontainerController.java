@@ -39,7 +39,6 @@ public class GUIcontainerController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		myGamePropertiesData=new GamePropertiesData();
 		LoadAuthoring();
-
 	}
 
 	private void LoadAuthoring(){		
@@ -48,13 +47,18 @@ public class GUIcontainerController implements Initializable{
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(GUIcontainerController.class.getResource("Voogirls_Authoring.fxml"));
             rootLayout = (BorderPane) loader.load();
+
+            AuthoringController authorController = loader.getController();
+
+            authorController.initData(myGamePropertiesData);
+            
+//          rootLayout = (BorderPane) loader.load();
 //    		myScene = new Scene(rootLayout);
     		testauthor.setContent(rootLayout);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-		
 	}
 	
 	

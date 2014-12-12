@@ -7,8 +7,8 @@ import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
 
-import authoring.data.PatchData;
-import authoring.data.PieceData;
+import authoring.data.PatchInstanceData;
+import authoring.data.PieceInstanceData;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -19,14 +19,14 @@ public abstract class ShapeGrid extends Pane {
 	protected int myCols;
 	protected int myTileSize;
 	
-	private PieceData myPieceData;
-	private PatchData myPatchData;
+	private PieceInstanceData myPieceData;
+	private PatchInstanceData myPatchData;
 	protected String myID;
 	
 	protected List<List<SandyTile>> myGrid;
 	
 	protected ShapeGrid(int cols, int rows, int tileSize,
-			PieceData pieceData, PatchData patchData, String myID) {
+			PieceInstanceData pieceData, PatchInstanceData patchData, String myID) {
 		
 		myRows = rows;
 		myCols = cols;

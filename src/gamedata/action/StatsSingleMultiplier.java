@@ -15,6 +15,14 @@ public class StatsSingleMultiplier extends StatsModifier {
 	private double myModifier;
 	
 	/**
+	 * Default constructor for an empty StatsSingleMultiplier
+	 */
+	public StatsSingleMultiplier() {
+		super("","");
+		myModifier = 1;
+	}
+	
+	/**
 	 * Constructor for StatsSingleMultiplier
 	 * @param modifier - double containing scale factor of stat
 	 * @param target
@@ -22,13 +30,13 @@ public class StatsSingleMultiplier extends StatsModifier {
 	 */
 	public StatsSingleMultiplier(double modifier, String target, String stat) {
 		super(target,stat);
-		super.myStat = stat;
+		myModifier = modifier;
 	}
 	
 	/**
 	 * Returns the double that will scale the stat
 	 */
-	protected double getModifier() {
+	protected double getMultiplier() {
 		return myModifier;
 	}
 	

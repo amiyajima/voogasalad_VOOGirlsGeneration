@@ -2,17 +2,22 @@ package authoring.createedit;
 
 import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
+import gamedata.action.SingleMultiplierBox;
 import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+
 import java.awt.geom.Point2D;
+
 import utilities.ClassGrabber;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -26,7 +31,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
 import authoring.concretefeatures.RangeEditor;
-import authoring.concretefeatures.SingleMultiplierBox;
 import authoring.concretefeatures.StatsOperationBox;
 import authoring.data.ActionData;
 

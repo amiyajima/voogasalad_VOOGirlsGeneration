@@ -9,14 +9,39 @@ import java.util.List;
  *
  */
 public class StatsSingleMultiplierData {
-    List<StatsSingleMultiplier> myStats;
+    private double myModifier;
+    private String myTarget;
+    private String myStat;
     
-    public StatsSingleMultiplierData(List<StatsSingleMultiplier> stats) {
-        myStats = stats;
+    public StatsSingleMultiplierData(double modifier, String target, String stat) {
+        myModifier = modifier;
+        myTarget = target;
+        myStat = stat;
     }
-    
-    public List<StatsSingleMultiplier> getStats() {
-        return myStats;
+
+
+    public double getMyModifier () {
+        return myModifier;
+    }
+
+
+    public String getMyTarget () {
+        return myTarget;
+    }
+
+
+    public String getMyStat () {
+        return myStat;
+    }
+
+
+    /**
+     * Unwrapper
+     * @return
+     */
+    public StatsSingleMultiplier getStatsSingleMultiplierFromData () {
+        StatsSingleMultiplier mySSMD = new StatsSingleMultiplier(myModifier, myTarget, myStat);
+        return mySSMD;
     }
 
 }

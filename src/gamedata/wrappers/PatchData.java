@@ -1,5 +1,7 @@
 package gamedata.wrappers;
 
+import gamedata.gamecomponents.Patch;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +18,18 @@ public class PatchData {
 
     public List<PatchDataIndividual> getPatches () {
         return myPatches;
+    }
+
+    /**
+     * Patch data structure unwrapper
+     * @return
+     */
+    public List<Patch> getPatchesFromData () {
+        List<Patch> myPatchesFromData = new ArrayList<Patch>();
+        for (PatchDataIndividual pdi : myPatches) {
+            myPatchesFromData.add(pdi.getPatchFromData());
+        }
+        return myPatchesFromData;
     }
 
 }

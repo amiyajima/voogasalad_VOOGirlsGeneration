@@ -3,12 +3,10 @@ package gameengine.movement;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
 import gamedata.rules.Rule;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
-
 import authoring_environment.GUIGrid;
 
 /**
@@ -48,6 +46,8 @@ public class Movement implements Action {
 	/**
 	 * Constructor
 	 * 
+	 * @param g
+	 *            The GUIGrid that the piece containing this movement exists on
 	 * @param endPoints
 	 *            Point2Ds representing all possible relative locations of
 	 *            movement
@@ -73,8 +73,8 @@ public class Movement implements Action {
 	 * Return absolute possible x,y coordinates of movement based on current
 	 * location x,y
 	 * 
-	 * @param x
-	 * @param y
+	 * @param x Current x coordinate
+	 * @param y Current y coordinate
 	 * @return List of Point2D corresponding to absolute locations of movement
 	 */
 	public List<Point2D> getPossibleLocs(int x, int y) {
@@ -89,8 +89,8 @@ public class Movement implements Action {
 	 * Checks to see if an absolute location (x,y) is a valid location for
 	 * movement and that the destination is empty (no pieces overlapping)
 	 * 
-	 * @param x
-	 * @param y
+	 * @param x Absolute coordinate x
+	 * @param y Absolute coordinate y
 	 * @return
 	 */
 	public boolean isValidLocation(int x, int y) {
@@ -107,7 +107,7 @@ public class Movement implements Action {
 	 * Checks the collisions in the currently defined path. Checks with piece
 	 * and patch collisions.
 	 * 
-	 * @return true or false
+	 * @return true or false depending on whether a collision is detected on a path
 	 */
 	private boolean checkPathCollision(GUIGrid myGrid, Point2D endPoint) {
 		List<Point2D> path;
@@ -139,12 +139,13 @@ public class Movement implements Action {
 	 * Contains the logic to execute the behavior of moving the piece
 	 */
 	@Override
-	public void doBehavior(Piece actor, Piece... receivers) {
+	public void doBehavior(GUIGrid grid, Piece actor, Piece... receivers) {
 		Piece p = receivers[0];
 		Point2D point = p.getLoc();
 		if (isValidLocation((int) point.getX(), (int) point.getY())) {
 			// TODO: Implement Orientation Calculation Here
 			actor.setLoc(point);
+
 		}
 	}
 

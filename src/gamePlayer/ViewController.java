@@ -46,7 +46,7 @@ import javafx.stage.Stage;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import tests.JSONBobTester;
+import tests.TestGameCreator;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
 import authoring_environment.SuperTile;
@@ -196,16 +196,20 @@ public class ViewController {
                 fc.setInitialDirectory(new File("src/resources/json"));
                 File f = fc.showOpenDialog(myStage);
 
-                // commented out for now.... (will work on it when myJSONManager is
-                // finished)
-                // try {
-                myScene = new Scene(myGameSpace);
-                myStage.setScene(myScene);
-                // myModel = myJSONManager.readFromJSONFile(f.getPath());
-                // initializeGrid();
-                // } catch (FileNotFoundException e) {
-                // System.out.println("Could not find JSON: " + "f.getPath()");
-                // }
+                try {
+                    JSONManager myJM = new JSONManager();
+                    myModel = myJM.readFromJSONFile(f.getAbsolutePath());
+                    initializeGrid();
+                    myScene = new Scene(myGameSpace);
+                    myStage.setScene(myScene);
+                }
+                catch (FileNotFoundException fnfe) {
+                    System.out.println("Could not find the file at - " + f.getAbsolutePath());
+                }
+                catch (Exception e) {
+                    System.out.println("Other exception occured.");
+                    e.printStackTrace();
+                }
 
         }
 
@@ -248,9 +252,6 @@ public class ViewController {
                 if (absolutePath.startsWith(basePath)) {
                         relativePath = absolutePath.substring(basePath.length() + 1);
                 }
-                // myModel.getLevels().forEach(level ->
-                // level.deleteObserver(this.myGrid));
-
                 myJSONManager.writeToJSON(myModel, f.getPath());
 
         }
@@ -261,7 +262,7 @@ public class ViewController {
         @FXML
         private void testGame() {
             myStage.setScene(mySplashScreen);
-                JSONBobTester JSBTester = new JSONBobTester();
+                TestGameCreator JSBTester = new TestGameCreator();
                 testPlayGame(JSBTester.createNewGame());
         }
 
@@ -698,6 +699,7 @@ public class ViewController {
         protected void setActiveAction(Action action) {
                 activeAction = action;
         }
+        
 
         /**
          * Method to switch the state of the game grid between select mode and apply
@@ -830,6 +832,7 @@ public class ViewController {
         protected void endAction() {
                 System.out.println("Ending Action");
                 this.checkEndActions();
+                this.getGrid().repopulateGrid();
         }
 
         public void checkEndActions() {
