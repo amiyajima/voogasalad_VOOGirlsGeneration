@@ -13,18 +13,14 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem fx:id="mySaveBtn" mnemonicParsing="false" onAction="#saveGame" text="Save" />
-              <MenuItem mnemonicParsing="false" text="Save As..." />
+              <MenuItem fx:id="mySaveAsBtn" mnemonicParsing="false" onAction="#saveAsGame" text="Save As..." />
             </items>
           </Menu>
             <Menu fx:id="exit" mnemonicParsing="false" text="Game Properties">
               <items>
-<<<<<<< HEAD
-                  <MenuItem fx:id="gameProperties" mnemonicParsing="false" onAction="#showGamePropertiesWindow" text="Game properties..." />
-                  <MenuItem fx:id="actonsLogicChart" mnemonicParsing="false" onAction="#showActionzlogicChartWindow" text="Actions Logic Chart..." />
-=======
+
                   <MenuItem fx:id="playerNumber" mnemonicParsing="false" onAction="#showGamePropertiesWindow" text="Edit Player Number..." />
                   <MenuItem fx:id="actonsLogicChart" mnemonicParsing="false" onAction="#showActionslogicChartWindow" text="Actions Logic Chart..." />
->>>>>>> 0cddeb6efa662897ab24acfa3f77dc72fa15ba78
                   <MenuItem fx:id="playerEditor" mnemonicParsing="false" onAction="#showPlayerEditWindow" text="Player Editor..." />
 
               </items>
