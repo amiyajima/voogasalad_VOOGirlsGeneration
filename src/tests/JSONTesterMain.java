@@ -30,8 +30,7 @@ import authoring_environment.GUIGrid;
  *
  */
 public class JSONTesterMain {
-    public static void testJSONwrite () {
-        String saveTo = "src/resources/json/Patch-Rica.json";
+    public static void testJSONwrite (String saveTo) {
         JSONManager myJSONmanager = new JSONManager();
         TestGameCreator jb = new TestGameCreator();
 
@@ -41,7 +40,6 @@ public class JSONTesterMain {
                 
         // GAME
         Game g = jb.createNewGame();
-        
 
         // LEVEL AND LEVEL COMPONENTS
         List<Level> levels = g.getLevels();
@@ -58,7 +56,6 @@ public class JSONTesterMain {
 
         // PIECE and PIECE COMPONENTS -- DONE
         Piece piece = grid.getPiece(point); 
-        System.out.println("Piece is: " + piece);
         PieceInstanceData multiplePieces = new PieceInstanceData();
         multiplePieces.add(piece);
 
@@ -75,16 +72,14 @@ public class JSONTesterMain {
         //Patch patch2 = grid.getPatch(point2);
         //PatchData multiplePatches = grid.getPatchData(); // WORKS
 
-        myJSONmanager.writeToJSON(piece, "src/resources/json/Rica-Piece.json");
-        //myJSONmanager.writeToJSON(g, "C:\\Users\\Rica\\Desktop\\Rica-GamePlayer.json");        
+        myJSONmanager.writeToJSON(piece, saveTo);
     }
 
-    public static void testJSONload () {
-        System.out.println("\n\n Loading...");
+    public static void testJSONload (String loadFrom) {
+        System.out.println("\n\nLoading...");
         JSONManager jsonManager = new JSONManager();
         try {
-            jsonManager.readFromJSONFile("src/resources/json/Rica-Piece.json");
-            //jsonManager.readFromJSONFile("C:\\Users\\Rica\\Desktop\\Rica-GamePlayer.json");        
+            jsonManager.readFromJSONFile(loadFrom);
 
         }
         catch (FileNotFoundException e) {
@@ -93,7 +88,9 @@ public class JSONTesterMain {
     }
 
     public static void main (String[] args) {
-        testJSONwrite();
-        testJSONload();
+        String link = "src/resources/json/Patch-Rica.json";
+        //String localLink = "C:\\Users\\Rica\\Desktop\\Rica-GamePlayer.json";
+        testJSONwrite(link);
+        testJSONload(link);
     }
 }

@@ -1,7 +1,6 @@
 package gamedata.gamecomponents;
 
 import gamedata.stats.Stats;
-
 import java.awt.geom.Point2D;
 
 /**
@@ -43,4 +42,11 @@ public class Patch extends GridComponent {
 	public Stats getStats() {
 		return null;
 	}
+	
+	public String getID() {
+            String myString = "Patch #" + myID + " " + myName;
+            myString += "loc:(" + myLoc.getX() + " " + myLoc.getY() + ") ";
+            myString += myImageLocation;
+            return myString;
+    }
 }

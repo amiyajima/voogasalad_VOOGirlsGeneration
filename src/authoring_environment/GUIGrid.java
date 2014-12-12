@@ -364,4 +364,19 @@ public class GUIGrid extends SuperGrid implements Observer{
 	public PatchInstanceData getPatchData() {
 	    return myPatchData;
 	}
+	
+	public String toString() {
+	    List<Patch> myPatches = myPatchData.getData();
+	    List<Piece> myPieces = myPieceData.getData();
+	    String myString = "\nGrid\n";
+	    int size = myPatches.size();
+	    if (myPieces.size() < myPatches.size()) {
+	        size = myPieces.size();
+	    }
+	    for (int i = 0; i < size; i++) {
+	        myString += myPatches.get(i).toString() + "\n";
+	        myString += myPieces.get(i).toString() + "\n";
+	    }
+	    return myString;
+	}
 }

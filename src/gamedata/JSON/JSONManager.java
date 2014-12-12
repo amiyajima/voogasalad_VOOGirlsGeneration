@@ -3,6 +3,7 @@ package gamedata.JSON;
 import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
 import gamedata.action.StatsModifier;
+import gamedata.adapters.ActionDeserializer;
 import gamedata.events.Event;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.GridComponent;
@@ -92,15 +93,21 @@ public class JSONManager {
      * @throws FileNotFoundException
      */
 
-    public Piece readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
+    public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
         
-        PieceDataIndividual pieceData = myGson.fromJson(br, PieceDataIndividual.class);
-        System.out.println(pieceData.toString());
+        PieceDataIndividual piece = myGson.fromJson(br, PieceDataIndividual.class);
+        System.out.println(piece.toString());
+        for (ActionDataIndividual adi : piece.getMyActions()) {
+            //System.out.println(adi.getType());
+        }
+        ActionDataIndividual action = piece.getMyActions().get(0);
+        System.out.println(action);
         
-        Piece myPiece = pieceData.getPieceFromData();
-        System.out.println(myPiece.toString());
+        Piece myPiece = piece.getPieceFromData();
+        System.out.println(myPiece);
+
         /*
         GameData gameData = myGson.fromJson(br, GameData.class);
         System.out.println(gameData.toString());
@@ -128,14 +135,13 @@ public class JSONManager {
         Game myGame = gameData.getGameFromData();
         System.out.println("Game: " + myGame.toString());
         */
-        return myPiece;
+        return null;
     }    
     
     public void registerTypeAdapters (GsonBuilder builder) {
-        //builder.registerTypeAdapter(Event.class, new GenericTypeAdapter<Event>("gamedata.events"));
         builder.registerTypeAdapter(StatsModifier.class, new GenericTypeAdapter<StatsModifier>("gamedata.action"));
-        builder.registerTypeAdapter(Player.class, new GenericTypeAdapter<StatsModifier>("gameengine.player"));
-        builder.registerTypeAdapter(Action.class, new GenericTypeAdapter<Action>("gamedata.action"));
+        builder.registerTypeAdapter(Player.class, new GenericTypeAdapter<Player>("gameengine.player"));
+        builder.registerTypeAdapter(Action.class, new ActionDeserializer());
         builder.registerTypeAdapter(ActionConclusion.class, new ActionConclusionTypeAdapter<ActionConclusion>("gamedata.action"));
         builder.registerTypeAdapter(GridComponent.class, new GenericTypeAdapter<GridComponent>("gamedata.gamecomponent"));
         builder.registerTypeAdapter(SuperGrid.class, new GenericTypeAdapter<SuperGrid>("authoring_environment"));

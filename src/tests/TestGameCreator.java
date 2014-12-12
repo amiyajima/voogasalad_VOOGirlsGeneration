@@ -71,7 +71,7 @@ public class TestGameCreator {
 	 * @return a new default game
 	 */
 	public Game createNewGame() {
-		System.out.println("Bob Tester: Create new game");
+		System.out.println("TCG: Create new game");
 		List<Player> myPlayers = new ArrayList<Player>();
 		Player myPlayer1 = new HumanPlayer(1);
 		Player myPlayer2 = new SimpleAIPlayer(2);
@@ -83,10 +83,7 @@ public class TestGameCreator {
 
 		List<Event> myEvents = new ArrayList<Event>();
 
-		/**
-		 * Event for garadage comllectin
-		 */
-		Event e1 = new Event("Garbate collectbaon");
+		Event e1 = new Event("Garbage Collection Event");
 		Condition c = new IsDead("health");
 		GlobalAction gl = new DeletePieceAtLocation(new Point2D.Double(0, 0));
 		e1.getConditions().add(c);
@@ -101,7 +98,7 @@ public class TestGameCreator {
 
 		Game myGame = new Game(2, myLevels, myLevels.get(0));
 		myGame.addPlayers(myPlayers);
-		System.out.println(myGame);
+		System.out.println("TGC: Game Created " + myGame);
 		return myGame;
 	}
 
@@ -133,8 +130,6 @@ public class TestGameCreator {
 				grid1.addPatchAtLoc(templPatch, new Point2D.Double(x, y));
 			}
 		}
-
-		System.out.println("Grid created: " + grid1.toString());
 		return grid1;
 	}
 
@@ -185,8 +180,6 @@ public class TestGameCreator {
 			if (randomInt % 2 == 1) {
 				piece = new Piece("ID", "Duvall", DEFAULT_DUVALL, move, actions, s,
 						p, 1, i);
-				System.out.println("ACTION IN PIECE TESTER: "
-						+ piece.getActions());
 			} else {
 				piece = new Piece("ID", "Bunny", DEFAULT_BUNNY, move, actions, s, p,
 						1, i);

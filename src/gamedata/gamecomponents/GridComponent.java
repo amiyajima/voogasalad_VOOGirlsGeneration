@@ -63,17 +63,10 @@ public abstract class GridComponent implements IHasStats{
 	 * @return : Unique string ID for the piece or patch.
 	 */
 	public String getID() {
-		return myID;
-	}
-	
-	/**
-	 * Getter method for the name of the GridComponent.
-	 * 
-	 * @return myName : String name describing the piece or patch.
-	 */
-	@Override
-	public String toString() {
-		return myName;
+		String myString = "Grid Compenent #" + myID + " " + myName;
+		myString += "loc:(" + myLoc.getX() + " " + myLoc.getY() + ") ";
+		myString += myImageLocation;
+		return myString;
 	}
 	
 	/**

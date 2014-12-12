@@ -9,21 +9,16 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Wrapper for individual actions in ActionData
- * @author Rica
- *
- */
-public class ActionDataIndividual {
+public class ConcreteActionData {
     private String myID;
     private List<Point2D.Double> myAttackRange;
     private List<Point2D.Double> myEffectRange;
     private List<StatsTotalLogicData> myStatsLogics;
-    private ActionConclusionData myConclusion;
+    private ActionConclusion myConclusion;
     
-    public ActionDataIndividual(String name, List<Point2D.Double> attackRange, 
+    public ConcreteActionData(String name, List<Point2D.Double> attackRange, 
                                 List<Point2D.Double> effectRange, List<StatsTotalLogicData> statsLogic, 
-                                ActionConclusionData conclusion) {
+                                ActionConclusion conclusion) {
         myID = name;
         myAttackRange = attackRange;
         myEffectRange = effectRange;
@@ -47,33 +42,8 @@ public class ActionDataIndividual {
         return myStatsLogics;
     }
     
-    public ActionConclusionData getConclusion() {
+    public ActionConclusion getConclusion() {
         return myConclusion;
-    }
-    
-    @Override
-    public String toString() {
-        String myString = "actionid:" + myID;
-        myString += " attack: ";
-        /*
-        for (Point2D.Double pt : myAttackRange) {
-            myString += "(" + pt.getX() + " " + pt.getY() + ") ";
-        }
-        myString += " effect: ";
-        for (Point2D.Double pt : myEffectRange) {
-            myString += "(" + pt.getX() + " " + pt.getY() + ") ";
-        }
-        myString += " statslogic: ";
-        for (StatsTotalLogicData stat : myStatsLogics) {
-            myString += "(" + stat.toString() + ") ";
-        }
-        myString += " effect: ";
-        for (Point2D.Double pt : myEffectRange) {
-            myString += "(" + pt.getX() + " " + pt.getY() + ") ";
-        }
-        myString += " conclusion: " + myConclusion.toString();
-        */
-        return myString;
     }
     
     /**
@@ -82,7 +52,8 @@ public class ActionDataIndividual {
      * @return
      */
     public Action getActionFromData() {
-        // TODO currently these variables assume ConcreteAction and constructs it as such
+        // TODO currently these variables assume ConcreteAction and constructs
+        // it as such
         List<StatsTotalLogic> myStatsLogicFromData = new ArrayList<StatsTotalLogic>();
         // TODO fix this when StatsModifier inheritance hierarchy is fixed
         /*
@@ -100,7 +71,7 @@ public class ActionDataIndividual {
         stlList.add(s1);
         
         Action myAction = new ConcreteAction(myID, myAttackRange, myEffectRange, 
-                                             stlList, myConclusion.getConclusionFromData());
+                                             stlList, myConclusion);
         return myAction;
     }
 }
