@@ -23,8 +23,8 @@ public class SuperGrid {
 	protected double myTileHeight;
 	protected String myShape;
 
-	protected Pane myPane;
-	protected List<List<SuperTile>> myGrid;
+	protected transient Pane myPane;
+	protected transient List<List<SuperTile>> myGrid;
 
 	public SuperGrid() {
 		this(1, 1, 40, SQUARE_GRID);
@@ -80,7 +80,7 @@ public class SuperGrid {
 	 * Returns the int number of rows in the grid
 	 * (Note: Row = Y dimension)
 	 */
-	public int getRow() {
+	public int getNumRows() {
 		return myNumRows;
 	}
 
@@ -88,7 +88,7 @@ public class SuperGrid {
 	 * Returns the int number of columns in the grid
 	 * (Note: Col = X dimension)
 	 */
-	public int getCol() {
+	public int getNumCols() {
 		return myNumCols;
 	}
 	

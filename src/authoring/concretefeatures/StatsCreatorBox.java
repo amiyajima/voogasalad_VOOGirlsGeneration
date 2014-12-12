@@ -30,8 +30,7 @@ public class StatsCreatorBox extends HBox {
 	 * Constructor for a new empty StatsCreatorBox
 	 */
 	public StatsCreatorBox() {
-		initStatsCreatorBox();
-		
+		initStatsCreatorBox();	
 	}
 	
 	/**

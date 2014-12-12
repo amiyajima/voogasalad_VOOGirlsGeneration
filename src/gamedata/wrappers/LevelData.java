@@ -1,6 +1,7 @@
 package gamedata.wrappers;
 
 import gamedata.gamecomponents.Level;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,6 +20,18 @@ public class LevelData {
 
     public List<LevelDataIndividual> getLevels () {
         return myLevels;
+    }
+    
+    /**
+     * Returns a list of levels parsed from the data
+     * @return
+     */
+    public List<Level> getLevelsFromData() {
+        List<Level> myLevelsFromData = new ArrayList<Level>();
+        for (LevelDataIndividual ldi : myLevels) {
+           // myLevelsFromData.add(ldi.getLevel());
+        }
+        return myLevelsFromData;
     }
 
     public String toString () {

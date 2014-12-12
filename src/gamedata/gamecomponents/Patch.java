@@ -3,22 +3,21 @@ package gamedata.gamecomponents;
 import gamedata.stats.Stats;
 
 import java.awt.geom.Point2D;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
- * @author Sandy Lee, Mengen Huang
+ * Class for Patches. Represents a given patch at a given (x,y) position within
+ * the grid.
+ * 
+ * @author Jesse, Sandy Lee, Mengen Huang, Martin Tamayo
  *
  */
 public class Patch extends GridComponent {
-	
-	private String myID;
-	
+
 	/**
 	 * Constructor
 	 * 
 	 * @param id
-	 * 			  Unique string ID for the piece or patch.
+	 *            Unique string ID for the piece or patch.
 	 * @param typeID
 	 *            ID for this type of patch
 	 * @param imageLocation
@@ -29,10 +28,12 @@ public class Patch extends GridComponent {
 	public Patch(String id, String name, String imageLocation, Point2D p) {
 		super(id, name, imageLocation, p);
 	}
-	
+
 	/**
 	 * Deep cloning constructor for a Patch
-	 * @param clone - Patch instance to be cloned
+	 * 
+	 * @param clone
+	 *            - Patch instance to be cloned
 	 */
 	public Patch(Patch clone, Point2D placeHere) {
 		super(clone, placeHere);
@@ -42,6 +43,4 @@ public class Patch extends GridComponent {
 	public Stats getStats() {
 		return null;
 	}
-	
-	
 }

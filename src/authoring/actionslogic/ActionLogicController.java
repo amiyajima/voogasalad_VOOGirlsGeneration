@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import authoring.data.ActionData;
+import authoring.data.PieceTypeData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -30,24 +32,25 @@ public class ActionLogicController implements Initializable {
     @FXML
     private Button saveButton;
 
-    private List<String> myPieceTypes = new ArrayList<String>();
+    private List<String> myPieceTypes;
+    private List<String> myActionTypes;
     private Map<String, Map<String, List<String>>> myLogicMap =
             new HashMap<String, Map<String, List<String>>>();
     private List<CheckBox> myCBList = new ArrayList<CheckBox>();
 
     @Override
-    // TODO: [IMPORTANT]
-    // This controller needs following:list of piece types, actions and a map, which contains a
-    // result of saveLogic.
     public void initialize (URL location, ResourceBundle resources) {
-
+        myPieceTypes = new ArrayList<String>();
+//        myActionTypes= new ArrayList<String>();
         // for testing
-        actionsListView.getItems().addAll("Attack");
-        actionsListView.getItems().addAll("Heal");
-        actionsListView.getItems().addAll("Run");
-        myPieceTypes.add("Piece A");
-        myPieceTypes.add("Piece B");
-        myPieceTypes.add("Piece C");
+//        actionsListView.getItems().addAll("Attack");
+//        actionsListView.getItems().addAll("Heal");
+//        actionsListView.getItems().addAll("Run");
+//        myPieceTypes.add("Piece A");
+//        myPieceTypes.add("Piece B");
+//        myPieceTypes.add("Piece C");
+        System.out.println("initialzing");
+        System.out.println(myPieceTypes);
         actorsChoiceBox.getItems().addAll(myPieceTypes);
 
         actorsChoiceBox
@@ -108,5 +111,24 @@ public class ActionLogicController implements Initializable {
         System.out.println(myLogicMap);
 
     }
+    
+    public Map<String, Map<String, List<String>>> getActionLogic(){
+        return myLogicMap;
+    }
+    
+//    public void getData(ActionData actionData, PieceTypeData ptData){
+//        ActionData actData = actionData;
+//        PieceTypeData pieceData = ptData;
+//        myActionTypes = actData.getActionIDs();
+//        myPieceTypes.addAll(pieceData.getIdSet());
+//        
+//    }
+    
+    public void getData(List<String> aa, List<String> bb){
+        myActionTypes = aa;
+        myPieceTypes = bb;
+    }
+    
+    
 
 }

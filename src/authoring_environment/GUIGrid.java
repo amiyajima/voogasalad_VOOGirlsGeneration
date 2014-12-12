@@ -10,18 +10,17 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import authoring.data.PatchData;
+import authoring.data.PatchInstanceData;
 import authoring.data.PatchTypeData;
-import authoring.data.PieceData;
+import authoring.data.PieceInstanceData;
 import authoring.data.PieceTypeData;
 
 // TODO: REMOVE THE DUPLICATED CODE. SO MUCH.
 /**
- * Authoring, engine, and player may all use this grid!!
+ * Authoring and player both use this grid
  * 
  * @author Jennie Ju
  *
@@ -29,8 +28,8 @@ import authoring.data.PieceTypeData;
 
 public class GUIGrid extends SuperGrid implements Observer{
 
-	private PieceData myPieceData;
-	private PatchData myPatchData;
+	private PieceInstanceData myPieceData;
+	private PatchInstanceData myPatchData;
 
 	/**
 	 * Default constructor for GUIGrid. Only for testing purposes.
@@ -49,8 +48,8 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 */
 	public GUIGrid (int cols, int rows, double tileHeight, String shape) {
 		super(cols, rows, tileHeight, shape);
-		myPieceData = new PieceData();
-		myPatchData = new PatchData();
+		myPieceData = new PieceInstanceData();
+		myPatchData = new PatchInstanceData();
 	}
 
 	/**
@@ -65,7 +64,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 * @param patchData - saved patchData
 	 */
 	public GUIGrid (int cols, int rows, double tileHeight, String shape,
-			PieceData pieceData, PatchData patchData) {
+			PieceInstanceData pieceData, PatchInstanceData patchData) {
 		super(cols, rows, tileHeight, shape);
 		myPieceData = pieceData;
 		myPatchData = patchData;
@@ -89,24 +88,6 @@ public class GUIGrid extends SuperGrid implements Observer{
 		myPatchData = copyGrid.myPatchData;
 		removeRunOffData(cols, rows);
 		repopulate();
-	}
-
-	/**
-	 * Returns number of rows
-	 * 
-	 * @return int number of rows
-	 */
-	public int getNumRows () {
-		return super.myNumRows;
-	}
-
-	/**
-	 * Returns number of columns
-	 * 
-	 * @return int number of columns
-	 */
-	public int getNumCols () {
-		return super.myNumCols;
 	}
 
 	public void addPieceAtLoc (Piece pieceType, Point2D loc) {
@@ -261,12 +242,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 	public List<Piece> getRemovedPieces () {
 		List<Piece> l = new ArrayList<Piece>();
 		for (Piece p : myPieceData.getData()) {
-
-			// TODO: FOR TESTING ONLY
-			if (p.getStats().getValue("health") <= 0) {
-				p.markForRemoval();
-			}
-
+	
 			if (p.shouldRemove()) {
 				l.add(p);
 			}
@@ -371,16 +347,20 @@ public class GUIGrid extends SuperGrid implements Observer{
 	public void paneSetOnMousePressed (EventHandler<MouseEvent> handler) {
 		myPane.setOnMousePressed(handler);
 	}
-
+	
 	public void paneSetOnMouseDragged (EventHandler<MouseEvent> handler) {
 		myPane.setOnMouseDragged(handler);
 	}
-
+	
 	public void runEvent(BiConsumer<List<IHasStats>, GUIGrid> eventFunc){
 		List<IHasStats> allObjects = new ArrayList<>();
 		allObjects.addAll(myPieceData.getData());
 		allObjects.addAll(myPatchData.getData());
 		
 		eventFunc.accept(allObjects, this);
+	}
+	
+	public PatchInstanceData getPatchData() {
+	    return myPatchData;
 	}
 }

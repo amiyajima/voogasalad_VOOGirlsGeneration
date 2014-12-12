@@ -1,8 +1,10 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Patch;
+
 import java.awt.geom.Point2D;
 import java.util.function.Consumer;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -15,7 +17,10 @@ import javafx.scene.layout.VBox;
 import authoring.data.PatchTypeData;
 import authoring_environment.GUIGrid;
 
-
+/**
+ * @author sandy lee, Martin Tamayo
+ *
+ */
 public class PatchController extends GridComponentAbstCtrl<Patch> {
 
     private PatchTypeData myPatchTypes;
@@ -49,7 +54,23 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
 
     @Override
     protected void initGlobalEditBtn (Button editBtn) {
-        editBtn.setVisible(false);
+    	editBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+            	// Make a MouseEvent for clicking the grid
+                EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle (MouseEvent e) {
+                        GUIGrid grid = myGridReference.getGrid();
+                        Point2D coor = grid.findClickedCoordinate(e.getX(), e.getY());
+                        Patch patch = grid.getPatch(coor);
+                        myPropertiesSPane.setContent(new PatchViewer(patch));
+                    }
+                };
+                myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
+                myGridReference.getGrid().paneSetOnMouseDragged(clickHandler);
+            }
+    	});
     }
 
     /**
@@ -92,7 +113,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
                     public void handle (MouseEvent e) {
                         GUIGrid grid = myGridReference.getGrid();
                         Point2D coor = grid.findClickedCoordinate(e.getX(), e.getY());
-                        grid.addPatch(entry, coor);
+                        grid.addPatchAtLoc(entry, coor);
                     }
                 };
                 myGridReference.getGrid().paneSetOnMousePressed(clickHandler);

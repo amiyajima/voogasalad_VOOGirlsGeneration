@@ -58,13 +58,13 @@ public class RangeEditor extends PopupWindow {
     private int myGridWidthNumber;
     private int myGridHeightNumber;
     private RangeGridView rangeGridView;
-    private List<Point2D> myRange;
+    private List<Point2D.Double> myRange;
 
     public RangeEditor () {
-        this(new ArrayList<Point2D>(), DEFAULT_SHAPE);
+        this(new ArrayList<Point2D.Double>(), DEFAULT_SHAPE);
     }
 
-    public RangeEditor (List<Point2D> range, String shape) {
+    public RangeEditor (List<Point2D.Double> range, String shape) {
         // range.add(new Point2D.Double(1,0));
         // range.add(new Point2D.Double(-1,2));
 
@@ -220,9 +220,7 @@ public class RangeEditor extends PopupWindow {
         @Override
         public void handle (ActionEvent event) {
             myRange = rangeGridView.returnSelectedList();
-            for (Point2D p : myRange) {
-                System.out.println(p.getX() + "," + p.getY());
-            }
+  
             current.close();
         }
     }

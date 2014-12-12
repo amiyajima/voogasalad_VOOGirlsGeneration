@@ -6,8 +6,8 @@ public class GamePropertiesData {
 	private String myGridShape;
 	
 	public GamePropertiesData(){
-		myNumPlayers=1;
-		myGridShape="Square Grid";
+		myNumPlayers = 1;
+		myGridShape = "Square Grid";
 	}
 	
 	public int getNumPlayers(){
@@ -19,11 +19,11 @@ public class GamePropertiesData {
 	}
 	
 	public void setNumPlayers(int numPlayers){
-		myNumPlayers=numPlayers;
+		myNumPlayers = numPlayers;
 	}
 	
 	public void setGridShape(String gridShape){
-		myGridShape=gridShape;
+		myGridShape = gridShape;
 	}
 	
 }

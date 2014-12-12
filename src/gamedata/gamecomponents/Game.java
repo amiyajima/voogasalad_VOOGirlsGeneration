@@ -9,9 +9,11 @@ import java.util.Map;
  * A game that contains a list of players and the levels that players can play
  * 
  * The play method in this class is called in every iteration of the game loop.
+ * 
+ * @author Jesse, Jennie
  *
  */
-public class Game implements IChangeGameState{
+public class Game {
 
 	/**
 	 * Contains player in order of their turns
@@ -21,9 +23,21 @@ public class Game implements IChangeGameState{
 	 * Contains ordered list of levels that compose the game
 	 */
 	private List<Level> myLevels;
+	/**
+	 * Current Level being Player
+	 */
 	private Level myCurrentLevel;
+	/**
+	 * Current Player Making Plays
+	 */
 	private Player myCurrentPlayer;
+	/**
+	 * Integer representing the win state of the game
+	 */
 	private int myGameWon;
+	/**
+	 * Number of players in the game
+	 */
 	private int myNumPlayers;
 
 	/**
@@ -36,8 +50,8 @@ public class Game implements IChangeGameState{
 	/**
 	 * Instantiate a new Game given a list of players and levels that exist.
 	 * 
-	 * @param players
-	 *            List of players
+	 * @param numPlayers
+	 *            Number of Players
 	 * @param levels
 	 *            List of levels that compose the game
 	 */
@@ -45,6 +59,17 @@ public class Game implements IChangeGameState{
 		this(numPlayers, levels, null);
 	}
 
+	/**
+	 * Instantiate a new Game given a list of players and levels that exist and
+	 * a specific currentLevel
+	 * 
+	 * @param numPlayers
+	 *            Number of Players
+	 * @param levels
+	 *            List of levels that compose the game
+	 * @param currentLevel
+	 *            Current Level that the game starts on
+	 */
 	public Game(int numPlayers, List<Level> levels, Level currentLevel) {
 		myGameWon = 0;
 		myNumPlayers = numPlayers;
@@ -54,6 +79,20 @@ public class Game implements IChangeGameState{
 		myCurrentPlayer = null;
 	}
 
+	/**
+	 * Starts the game by calling on the current player to start the turn
+	 */
+	public void startGame() {
+		// System.out.println("Starting the Game");
+		myCurrentPlayer.startTurn(myCurrentLevel);
+	}
+
+	/**
+	 * Adds the list of players whom will by playing the game in order
+	 * 
+	 * @param p
+	 *            List of Players
+	 */
 	public void addPlayers(List<Player> p) {
 		myPlayers = p;
 		if (myPlayers.size() > 0) {
@@ -62,40 +101,12 @@ public class Game implements IChangeGameState{
 	}
 
 	/**
-	 * Iterates the Current Level to the Next Level If no more levels, game is
-	 * won.
-	 */
-	public void nextLevel() {
-		if (!isWin()) {
-			myCurrentLevel = myLevels.get(myLevels.indexOf(myCurrentLevel) + 1);
-		} else {
-			myGameWon = 1;
-		}
-	}
-
-	/**
-	 * Checks to see if game has been beaten
+	 * Changes the player to the player with the int position in the list of
+	 * players
 	 * 
-	 * @return True is game has been won. False otherwise
+	 * @param playerToChangeTo
+	 *            Integer to change the current player to
 	 */
-	private boolean isWin() {
-		if (myLevels.indexOf(myCurrentLevel) == myLevels.size() - 1) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Jumps to the level specified by looking it up using the ID
-	 * 
-	 * @param levelToJumpTo
-	 */
-	/*
-	 * public void jumpToLevel(String levelToJumpTo) { for (Level level :
-	 * myLevels) { if (level.getId().equals(levelToJumpTo)) { myCurrentLevel =
-	 * level; if (level.isWinningLevel()) { myGameWon = true; } break; } } }
-	 */
-
 	public void changeTurn(int playerToChangeTo) {
 		for (Player player : myPlayers) {
 			if (player.getID() == playerToChangeTo) {
@@ -104,13 +115,12 @@ public class Game implements IChangeGameState{
 		}
 	}
 
-
 	/**
 	 * Resets the active player to be the first player who has played
 	 */
 	private void resetPlayer() {
 		myCurrentPlayer = myPlayers.get(0);
-		myCurrentPlayer.resetMovesPlayed();
+		myCurrentPlayer.startTurn(myCurrentLevel);
 	}
 
 	/**
@@ -120,8 +130,11 @@ public class Game implements IChangeGameState{
 		myCurrentLevel.restart();
 	}
 
+	/**
+	 * Formats the information regarding a game to a string output
+	 */
 	public String toString() {
-		return "game with " + myPlayers.size() + " players and "
+		return "game with " + myNumPlayers + " players and "
 				+ myLevels.size() + " levels";
 	}
 
@@ -143,28 +156,49 @@ public class Game implements IChangeGameState{
 		return myCurrentPlayer;
 	}
 
+	/**
+	 * Getter for the list of players
+	 * 
+	 * @return Returns the list of players
+	 */
 	public List<Player> getPlayers() {
 		return myPlayers;
 	}
 
+	/**
+	 * Getter for the list of levels
+	 * 
+	 * @return Returns the list of levels
+	 */
 	public List<Level> getLevels() {
 		return myLevels;
 	}
 
+	/**
+	 * Setter for the player to set a player to a specific position in the list
+	 * 
+	 * @param p
+	 *            Player to set
+	 * @param pos
+	 *            Int Position to set the player in the list
+	 */
 	public void setPlayer(Player p, int pos) {
 		myPlayers.set(pos, p);
 	}
-	
+
+	/**
+	 * Iterates the current player to the next chronological player in the list
+	 * of players
+	 */
 	public void nextPlayer() {
-		int next = myPlayers.indexOf(myCurrentPlayer)+1;
-		if(next == myPlayers.size()){
+		int next = myPlayers.indexOf(myCurrentPlayer) + 1;
+		if (next == myPlayers.size()) {
 			this.resetPlayer();
-		}
-		else{
+		} else {
 			myCurrentPlayer = myPlayers.get(next);
+			myCurrentPlayer.startTurn(myCurrentLevel);
 		}
 	}
-
 
 	/**
 	 * Used by Global Actions. Set the current player to the player with a given
@@ -176,6 +210,12 @@ public class Game implements IChangeGameState{
 		myCurrentLevel = l;
 	}
 
+	/**
+	 * Sets the current player to a specific player p
+	 * 
+	 * @param p
+	 *            Player p to set as the current player
+	 */
 	public void setCurrentPlayer(Player p) {
 		myCurrentPlayer = p;
 		p.startTurn(myCurrentLevel);
@@ -192,17 +232,18 @@ public class Game implements IChangeGameState{
 	}
 
 	/**
-	 * Used by global action. 
+	 * Used by global action.
+	 * 
 	 * @param name
 	 */
-	public void changeLevel(String name){
-		for (Level level :myLevels) { 
-			if (level.getId().equals(name)) { 
-				myCurrentLevel = level; 
+	public void changeLevel(String name) {
+		for (Level level : myLevels) {
+			if (level.getId().equals(name)) {
+				myCurrentLevel = level;
 			}
 		}
 	}
-	
+
 	/**
 	 * Used by global action.
 	 */
@@ -215,15 +256,4 @@ public class Game implements IChangeGameState{
 		}
 	}
 
-	@Override
-	public void winGame() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void loseGame() {
-		// TODO Auto-generated method stub
-		
-	}
 }

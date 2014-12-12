@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_main.GUIcontainerController">
    <children>
       <BorderPane prefHeight="768.0" prefWidth="1024.0">
          <top>
@@ -22,6 +22,11 @@
                         <MenuItem mnemonicParsing="false" text="Exit" />
                   </items>
                 </Menu>
+                  <Menu fx:id="gameProperties" mnemonicParsing="false" text="Game Properties">
+                    <items>
+                      <MenuItem fx:id="gameProperties" mnemonicParsing="false" onAction="#showGamePropertiesWindow" text="Game Properties..." />
+                    </items>
+                  </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
                     <MenuItem mnemonicParsing="false" text="About" />
@@ -31,10 +36,9 @@
             </MenuBar>
          </top>
          <center>
-            <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <TabPane prefHeight="0.0" prefWidth="1024.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
-                <Tab text="New Game Author 1" />
-                <Tab text="New Game Player 1" />
+                <Tab fx:id="testauthor" text="Tab 1" />
               </tabs>
             </TabPane>
          </center>

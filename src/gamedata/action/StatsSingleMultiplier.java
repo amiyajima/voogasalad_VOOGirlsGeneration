@@ -22,7 +22,7 @@ public class StatsSingleMultiplier extends StatsModifier {
 	 */
 	public StatsSingleMultiplier(double modifier, String target, String stat) {
 		super(target,stat);
-		super.myStat = stat;
+		myModifier = modifier;
 	}
 	
 	/**

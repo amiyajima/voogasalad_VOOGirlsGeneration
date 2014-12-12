@@ -6,20 +6,25 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="706.0" prefWidth="1024.0" stylesheets="@../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_main.AuthoringController">
+<BorderPane maxHeight="2000.0" maxWidth="2000.0" minHeight="50.0" minWidth="50.0" prefHeight="706.0" prefWidth="1024.0" stylesheets="@../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_main.AuthoringController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Save" />
+              <MenuItem fx:id="mySaveBtn" mnemonicParsing="false" onAction="#saveGame" text="Save" />
               <MenuItem mnemonicParsing="false" text="Save As..." />
             </items>
           </Menu>
             <Menu fx:id="exit" mnemonicParsing="false" text="Game Properties">
               <items>
+<<<<<<< HEAD
                   <MenuItem fx:id="gameProperties" mnemonicParsing="false" onAction="#showGamePropertiesWindow" text="Game properties..." />
                   <MenuItem fx:id="actonsLogicChart" mnemonicParsing="false" onAction="#showActionzlogicChartWindow" text="Actions Logic Chart..." />
+=======
+                  <MenuItem fx:id="playerNumber" mnemonicParsing="false" onAction="#showGamePropertiesWindow" text="Edit Player Number..." />
+                  <MenuItem fx:id="actonsLogicChart" mnemonicParsing="false" onAction="#showActionslogicChartWindow" text="Actions Logic Chart..." />
+>>>>>>> 0cddeb6efa662897ab24acfa3f77dc72fa15ba78
                   <MenuItem fx:id="playerEditor" mnemonicParsing="false" onAction="#showPlayerEditWindow" text="Player Editor..." />
 
               </items>
@@ -41,7 +46,7 @@
                      <content>
                         <ScrollPane prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <VBox fx:id="myLevelsVBox" prefHeight="551.0" prefWidth="226.0" />
+                              <VBox fx:id="myLevelsVBox" prefHeight="551.0" prefWidth="207.0" />
                            </content>
                         </ScrollPane>
                      </content>
@@ -50,7 +55,7 @@
                      <content>
                         <ScrollPane prefHeight="545.0" prefWidth="226.0">
                            <content>
-                              <VBox fx:id="myPiecesVBox" prefHeight="552.0" prefWidth="226.0" />
+                              <VBox fx:id="myPiecesVBox" prefHeight="552.0" prefWidth="207.0" />
                            </content>
                         </ScrollPane>
                      </content></TitledPane>
@@ -58,7 +63,7 @@
                      <content>
                         <ScrollPane prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <VBox fx:id="myPatchesVBox" prefHeight="552.0" prefWidth="226.0" />
+                              <VBox fx:id="myPatchesVBox" prefHeight="552.0" prefWidth="207.0" />
                            </content>
                         </ScrollPane>
                      </content></TitledPane>
@@ -66,7 +71,7 @@
                      <content>
                         <ScrollPane prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <VBox fx:id="myActionsVBox" prefHeight="550.0" prefWidth="226.0" />
+                              <VBox fx:id="myActionsVBox" prefHeight="550.0" prefWidth="207.0" />
                            </content>
                         </ScrollPane>
                      </content>
@@ -77,7 +82,7 @@
       </TitledPane>
    </left>
    <right>
-      <TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="677.0" prefWidth="260.0" text="Properties Editor" BorderPane.alignment="CENTER">
+      <TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" text="Properties Editor" BorderPane.alignment="CENTER">
          <content>
             <ScrollPane fx:id="myPropertiesSPane" hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="650.0" prefWidth="258.0" />
          </content>

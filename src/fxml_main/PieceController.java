@@ -1,8 +1,10 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Piece;
+
 import java.awt.geom.Point2D;
 import java.util.function.Consumer;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -13,20 +15,27 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.data.ActionData;
+import authoring.data.GamePropertiesData;
 import authoring.data.PieceTypeData;
 import authoring_environment.GUIGrid;
 
-
+/**
+ * @author Martin Tamayo
+ *
+ */
 public class PieceController extends GridComponentAbstCtrl<Piece> {
 
     private PieceTypeData myPieceTypes;
     private ActionData myActionData;
+    private GamePropertiesData myGameProperties;
 
     public PieceController (VBox vbox, ScrollPane propertiesSPane, GUIGridReference gridRef,
-                            PieceTypeData pieceTypes, ActionData actions) {
+                            PieceTypeData pieceTypes, ActionData actions,
+                            GamePropertiesData gamePropertiesData) {
         super(vbox, propertiesSPane, gridRef);
         myActionData = actions;
         myPieceTypes = pieceTypes;
+        myGameProperties = gamePropertiesData;
     }
 
     @Override
@@ -40,14 +49,31 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
                     addEntry(piece);
                 };
                 myPropertiesSPane.setContent(new PieceTypeEditor(okLambda, myPieceTypes,
-                                                                 myActionData));
+                		myActionData, myGameProperties.getGridShape()));
             }
         });
     }
 
     @Override
     protected void initGlobalEditBtn (Button editBtn) {
-    	editBtn.setVisible(false);
+    	editBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+            	// Make a MouseEvent for clicking the grid
+                EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle (MouseEvent e) {
+                        GUIGrid grid = myGridReference.getGrid();
+                        Point2D coor = grid.findClickedCoordinate(e.getX(), e.getY());
+                        Piece piece = grid.getPiece(coor);
+                        myPropertiesSPane.setContent(new PieceEditor(piece,
+                        		myGameProperties.getNumPlayers()));
+                    }
+                };
+                myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
+                myGridReference.getGrid().paneSetOnMouseDragged(clickHandler);
+            }
+    	});
     }
 
     @Override
@@ -112,7 +138,8 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
 
                     myPieceTypes.replace(entry, piece);
                 };
-                myPropertiesSPane.setContent(new PieceTypeEditor(okLambda, entry, myActionData));
+                myPropertiesSPane.setContent(new PieceTypeEditor(okLambda, entry,
+                		myActionData, myGameProperties.getGridShape()));
             }
         });
     }

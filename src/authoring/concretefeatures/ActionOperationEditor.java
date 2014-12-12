@@ -1,8 +1,12 @@
 package authoring.concretefeatures;
 
+import gamedata.action.ActionConclusion;
+import gamedata.action.StatsTotalLogic;
 import gamedata.stats.Stats;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import javafx.event.ActionEvent;
@@ -13,9 +17,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
+import authoring.data.ActionData;
 
 
 /**
+ * DEPRICATED BECASUE ITS JUST A REDO OF ACTIONCREATOR
  * Combines SingleMultiplierBoxes to allow definition of a stat operation.
  * Used to define actions
  * 
@@ -23,25 +29,37 @@ import authoring.abstractfeatures.PopupWindow;
  *
  */
 public class ActionOperationEditor extends PopupWindow {
-    private static final int WINDOW_HEIGHT = 400;
-    private static final int WINDOW_WIDTH = 420;
-    private static final String WINDOW_TITLE = "Action Operation Editor";
+    private static final int HEIGHT = 400;
+    private static final int WIDTH = 550;
+    private static final String NAME = "Action Operation Editor";
     private static final String STYLESHEET = "/resources/stylesheets/slategray_layout.css";
 
-    private Stats myStats;
-    private List<StatsOperationBox> myBoxes;
+    private List<StatsOperationBox> operationsList;
+    private ActionData myActionData;
+    
+    private String myName;
+    private List<Point2D> myAttackRange;
+    private List<Point2D> myEffectRange;
+    private List<StatsTotalLogic> myStatsLogics;
+    private ActionConclusion myConclusion;
 
     public ActionOperationEditor () {
-        this(new Stats());
+        this(new ActionData());
     }
 
-    public ActionOperationEditor (Stats stats) {
-        myStats = stats;
-        System.out.println("ActionOperationEditor stats are " + stats);
-        setHeight(WINDOW_HEIGHT);
-        setWidth(WINDOW_WIDTH);
-        setTitle(WINDOW_TITLE);
-        myBoxes = new ArrayList<StatsOperationBox>();
+    public ActionOperationEditor (ActionData actionData) {
+        operationsList = new ArrayList<>();
+        myActionData = actionData;
+
+        myName = "";
+        myAttackRange = new LinkedList<Point2D>();
+        myEffectRange = new LinkedList<Point2D>();
+        myStatsLogics = new LinkedList<StatsTotalLogic>();
+        myConclusion = null; // should set to empty conclusion (not null)
+
+        setHeight(HEIGHT);
+        setWidth(WIDTH);
+        setTitle(NAME);
         initialize();
     }
 
@@ -88,17 +106,34 @@ public class ActionOperationEditor extends PopupWindow {
         addBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                StatsOperationBox scb = new StatsOperationBox();
-                myBoxes.add(scb);
-                addStatHBox(statsVBox, scb);
+                System.out.println("ActionOperationEditor: makeAddButton event called");
+                StatsOperationBox sob = new StatsOperationBox();
+                myBoxes.add(sob);
+                addStatHBox(statsVBox, sob);
             }
         });
         return addBtn;
     }
 
-    private void addStatHBox (VBox statsVBox, StatsOperationBox scb) {
-        // TODO Auto-generated method stub
+    private void addStatHBox (VBox statsVBox, StatsOperationBox sob) {
+        HBox statsHBox = new HBox();
+        statsHBox.getStyleClass().add("hbox");
+        Button delStatBtn = makeDeleteButton(statsVBox, statsHBox, sob);
+        statsHBox.getChildren().addAll(sob, delStatBtn);
+        statsVBox.getChildren().addAll(statsHBox);
+    }
 
+    private Button makeDeleteButton (VBox statsVBox, HBox statsHBox, StatsOperationBox sob) {
+        Button delBtn = new Button("-");
+        delBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                System.out.println("ActionOperationEditor: delete button pressed");
+                myBoxes.remove(sob);
+                statsVBox.getChildren().remove(statsHBox);
+            }
+        });
+        return delBtn;
     }
 
     private void initStatsEditorBox (VBox statsVBox) {

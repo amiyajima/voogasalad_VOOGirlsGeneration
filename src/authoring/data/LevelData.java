@@ -1,6 +1,8 @@
 package authoring.data;
 
+import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Level;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -46,5 +48,15 @@ public class LevelData implements AuthoringData<Level> {
 	@Override
 	public List<Level> getData() {
 		return Collections.unmodifiableList(myLevels);
+	}
+	
+	/**
+	 * Creates a game with the stored List<Level>
+	 * 
+	 * @param numPlayers - number of players in the game
+	 * @return Game
+	 */
+	public Game createGame(int numPlayers) {
+		return new Game(numPlayers, myLevels, myLevels.get(0));
 	}
 }

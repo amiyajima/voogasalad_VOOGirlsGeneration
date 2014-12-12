@@ -1,6 +1,5 @@
 package gamePlayer;
 
-import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
 import javafx.scene.input.MouseEvent;
 import authoring_environment.SuperTile;
@@ -10,15 +9,11 @@ import authoring_environment.SuperTile;
  * Class representing the state of the grid when a particular action has been
  * selected and is ready to be applied on the grid
  * 
- * @author Eric, Yiran, Yoon, Rica
+ * @author Eric, Yiran, Yoon, Rica, Jesse
  * 
  *
  */
 public class ApplyState implements IGridState {
-	// public static final String CURSOR_ATTACK_TEST =
-	// "resources/images/Cursor_attack.png";
-	// public static final String CURSOR_GLOVE_TEST =
-	// "resources/images/pointer-glove.png";
 
 	private ViewController myController;
 	private GameGridEffect myGameGridEffect;
@@ -58,39 +53,17 @@ public class ApplyState implements IGridState {
 		}
 		// System.out.println("ACTION RUNNING:" +
 		// myController.getActiveAction().toString());
-		myController.getActiveAction().doBehavior(actor, piece);
-		myController.getGrid().repopulateGrid();
+
+		myController.getActiveAction().doBehavior(myController.getGrid(),actor, piece);
+		//myController.getGrid().repopulateGrid();
+
 		myGameGridEffect.clearAllPieceHighlights();
 		myGameGridEffect.clearAllActionHighlights();
 		myController.clearActions();
 		myController.setGridState(new SelectState(myController));
 		myController.setActivePiece(null);
 		myController.setActiveAction(null);
-		this.endAction();
-	}
-
-	private void endAction() {
-		Level currentLevel = myController.getGame().getCurrentLevel();
-		currentLevel.runGameEvents();
-		if (currentLevel.getGameWon()) {
-			// GAMEWON
-		}
-		if (currentLevel.getGameLost()) {
-			// GAMELOST
-		}
-		if (!currentLevel.getTurnOver()) {
-			currentLevel.setTurnFalse();
-			myController.getGame().nextPlayer();
-			myController.setCurrentPlayer(myController.getGame().getCurrentPlayer());
-			myController.setPlayerTurnDisplay();
-		}
-		if(currentLevel.getNextLevelID()==null){
-			System.out.println("NEXT LEVEL");
-			//myController.getGame().changeLevel(currentLevel.getNextLevelID());
-			myController.getGame().changeLevel("Level 2");
-			//myController.getGame().getCurrentLevel().getGrid().displayPane(myController.getGridPane());
-			myController.initializeGrid();
-		}
+		myController.endAction();
 	}
 
 }

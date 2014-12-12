@@ -18,17 +18,22 @@ public class GamePropertiesEditor extends PopupWindow {
     private static final String RESOURCES_PROPERTIES_GRID_SHAPE = "resources.properties/gridShape";
     private static final String STYLESHEET = "/resources/stylesheets/actioncreator_layout.css";
 
+
     GamePropertiesData myGameProperties;
 
     private int myNumPlayer;
     private String myGridShape;
     private ResourceBundle gridShapeBundle;
+    private ChoiceBox<String> myShapeChoice;
 
     public GamePropertiesEditor (GamePropertiesData gamePropertiesData) {
+        setTitle("Game Properties Editor");
+        centerOnScreen();
         myGameProperties = gamePropertiesData;
         myNumPlayer = myGameProperties.getNumPlayers();
         myGridShape = myGameProperties.getGridShape();
         initialize();
+        show();
     }
 
     protected void initialize () {
@@ -38,19 +43,22 @@ public class GamePropertiesEditor extends PopupWindow {
         scene.getStylesheets().add(STYLESHEET);
 
         Label numPlayer = new Label("Number of Player:");
-        // numPlayer.setCenterShape(true);
         TextField number = new TextField();
-
+        number.setText(""+myNumPlayer);
+        number.setMaxWidth(80);
         Label gridShape = new Label("Grid Shape:");
-        ChoiceBox<String> shape = new ChoiceBox<String>();
-        shape.getItems().addAll(gridShapeBundle.getString("Square"),
+        myShapeChoice = new ChoiceBox<String>();
+        myShapeChoice.getItems().addAll(gridShapeBundle.getString("Square"),
                                 gridShapeBundle.getString("Hexagon"),
                                 gridShapeBundle.getString("Circle"));
-
+        
+        myShapeChoice.getSelectionModel().select(myGridShape);
+        myShapeChoice.show();
+        
         Button select = new Button("Select");
-        select.setOnAction(new selectHandler(this, number, shape));
+        select.setOnAction(new selectHandler(this, number, myShapeChoice));
 
-        box.getChildren().addAll(numPlayer, number, gridShape, shape, select);
+        box.getChildren().addAll(numPlayer, number, gridShape, myShapeChoice, select);
 
         this.setScene(scene);
 
@@ -74,7 +82,7 @@ public class GamePropertiesEditor extends PopupWindow {
             try {
                 myNumPlayer = Integer.parseInt(numPlayer.getText());
                 myGameProperties.setNumPlayers(myNumPlayer);
-                System.out.println(myNumPlayer);
+//                System.out.println(myNumPlayer);
 
             }
             catch (NumberFormatException e) {
@@ -83,10 +91,9 @@ public class GamePropertiesEditor extends PopupWindow {
             }
             myGridShape = gridShape.getValue().toString();
             myGameProperties.setGridShape(myGridShape);
-            System.out.println(myGridShape);
+//            System.out.println(myGridShape);
 
             editorWindow.close();
-
         }
 
     }
@@ -98,5 +105,10 @@ public class GamePropertiesEditor extends PopupWindow {
     public String getGridShape () {
         return myGridShape;
     }
-
+    
+    public void disableChangingGridShape(){
+    	myShapeChoice.getItems().clear();
+    	myShapeChoice.getItems().add(myGridShape);
+    	myShapeChoice.getSelectionModel().select(myGridShape);
+    }
 }

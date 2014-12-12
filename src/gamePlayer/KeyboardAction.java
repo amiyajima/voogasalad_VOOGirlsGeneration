@@ -3,6 +3,7 @@ package gamePlayer;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.HumanPlayer;
+import gameengine.player.Player;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,60 +27,58 @@ import javafx.scene.input.KeyEvent;
  */
 public class KeyboardAction {
     private static final double ACTION_LABEL_SHADOW_OFFSET = 6.0;
-    HumanPlayer myCurrentPlayer;
+    Player myCurrentPlayer;
     Point2D myCurrentLocation;
     GameGridEffect myGameGridEffect;
     List<Action> myActions;
     Action myCurrentAction;
     int myActionIndex;
-    Map<KeyCode, Point2D> movementKeyMap;
+    Map<KeyCode, Point2D> myKeyMap;
 
     public KeyboardAction () {
         myActionIndex = 0;
         myActions = new ArrayList<Action>();
-
-        // using the movement key map to determine which keys=up&down
-        // // myCurrentPlayer = do something with p.getPlayerID() to get the HumanPlayer?;
-        // // movementKeyMap = myCurrentPlayer.getMovementKeyMap();
-
-        // for testing!!!
-        movementKeyMap = new HashMap<KeyCode, Point2D>();
-        movementKeyMap.put(KeyCode.A, new Point2D.Double(-1.0, 0.0));
-        movementKeyMap.put(KeyCode.D, new Point2D.Double(1.0, 0.0));
-        movementKeyMap.put(KeyCode.W, new Point2D.Double(0.0, 1.0));
-        movementKeyMap.put(KeyCode.S, new Point2D.Double(0.0, -1.0));
+        myKeyMap = new HashMap<KeyCode, Point2D>();
     }
 
     public void setActionKeyControl (ViewController vc) {
         System.out.println("KeyboardAction ON");
 
-        if (vc.getActivePiece() != null) {
-            Piece activePiece = vc.getActivePiece();
-            myActions = activePiece.getActions();
+        useDefaultMap();
 
+        if ((vc.getActivePiece() != null) &&
+            (vc.getGame().getCurrentPlayer().getType().equals("Human"))) {
+
+            // the if statement will go away when we actually run a real game!
+            if (((HumanPlayer) vc.getGame().getCurrentPlayer()).getMovementKeyMap() != null) {
+                myKeyMap = ((HumanPlayer) vc.getGame().getCurrentPlayer()).getMovementKeyMap();
+            }
+
+            myActions = vc.getActivePiece().getActions();
             vc.getGridPane().requestFocus();
             vc.getGridPane().setOnKeyPressed(new EventHandler<KeyEvent>() {
-                Set<KeyCode> movementKeyList = movementKeyMap.keySet();
 
                 @Override
                 public void handle (KeyEvent key) {
 
-                    // Do action here
-                    if (key.getCode() == KeyCode.F) {
-                        vc.bindAction(myCurrentAction);
-//                        System.out.println("Selected action with key");
-                    }
-
-                    // Select action here
-                    for (KeyCode kc : movementKeyList) {
-                        if (key.getCode() == kc) {
-                            int newActionIndex = myActionIndex - (int) movementKeyMap.get(kc).getY();
-                            if ((newActionIndex >= 0) & (newActionIndex < myActions.size())) {
-                                myActionIndex = newActionIndex;
+                    for (KeyCode mkc : myKeyMap.keySet()) {
+                        if (key.getCode() == mkc) {
+                            // Do action here
+                            if (myKeyMap.get(mkc).equals(new Point2D.Double(1.0, 1.0))) {
+                                System.out.println("Selected action with key");
+                                vc.bindAction(myCurrentAction);
                             }
 
-                            myCurrentAction = myActions.get(myActionIndex);
-                            System.out.println("myActionIndex: " + myActionIndex);
+                            else {
+                                // Select action here
+                                int newActionIndex = myActionIndex - (int) myKeyMap.get(mkc).getY();
+                                if ((newActionIndex >= 0) & (newActionIndex < myActions.size())) {
+                                    myActionIndex = newActionIndex;
+                                }
+
+                                myCurrentAction = myActions.get(myActionIndex);
+                                System.out.println("myActionIndex: " + myActionIndex);
+                            }
                         }
                     }
 
@@ -90,8 +89,9 @@ public class KeyboardAction {
     }
 
     public void markAction (ViewController vc) {
-        unmarkAction(vc);
+//        unmarkAction(vc);
         vc.getcontrolPane().getChildren().forEach(label -> {
+            label.setEffect(null);
             Label l = (Label) label;
             if (l.getText() == myCurrentAction.toString()) {
                 InnerShadow is = new InnerShadow();
@@ -102,9 +102,17 @@ public class KeyboardAction {
         });
     }
 
-    public void unmarkAction (ViewController vc) {
-        vc.getcontrolPane().getChildren().forEach(label -> {
-            label.setEffect(null);
-        });
+//    public void unmarkAction (ViewController vc) {
+//        vc.getcontrolPane().getChildren().forEach(label -> {
+//            label.setEffect(null);
+//        });
+//    }
+
+    public void useDefaultMap () {
+        // this is just for testing
+        myKeyMap.put(KeyCode.W, new Point2D.Double(0.0, 1.0));
+        myKeyMap.put(KeyCode.S, new Point2D.Double(0.0, -1.0));
+        myKeyMap.put(KeyCode.F, new Point2D.Double(1.0, 1.0));
+        System.out.println("Using Default Keyboard Map");
     }
 }

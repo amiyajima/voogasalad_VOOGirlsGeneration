@@ -2,11 +2,10 @@ package authoring.data;
 
 import gamedata.action.Action;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 
 /**
  * Class for storing the actions created by the user
@@ -15,66 +14,72 @@ import javafx.collections.ObservableList;
  * @author Jennie Ju
  */
 
-/* TODO: Remove the duplicated code that simultaneously modifies the map and list.
+/*
+ * TODO: Remove the duplicated code that simultaneously modifies the map and list.
  * There should be an easier way to do this.
  */
 
 public class ActionData implements AuthoringData<Action> {
-	
-	private List<Action> myActions;
-	private transient Map<String, Action> myActionsMap;
-	
-	/**
-	 * Constructor for new ActionData,
-	 * initializes empty list of Actions
-	 */
-	public ActionData() {
-		myActions = new ArrayList<>();
-		myActionsMap = new HashMap<>();
-	}
-	
-	public ObservableList<String> getActionIDs(){
-		ObservableList<String> ids = FXCollections.observableArrayList();
-		for(String s: myActionsMap.keySet()){
-			ids.add(s);
-		}
-		return ids;
-	}
 
-    public Action getAction (String s) {
-        return myActionsMap.get(s);
+    private List<Action> myActions;
+
+    /**
+     * Constructor for new ActionData,
+     * initializes empty list of Actions
+     */
+    public ActionData () {
+        myActions = new ArrayList<>();
     }
 
-	@Override
-	public void add(Action a) {
-		myActions.add(a);
-        myActionsMap.put(a.toString(),  a);
-	}
+    public ActionData (List<Action> actions) {
+        myActions = actions;
+    }
 
-	@Override
-	public boolean canAdd(Action element) {
-		for (String id:myActionsMap.keySet()){
-			if (element.toString().equals(id)){
-				return false;
-			}
-		}
-		return true;
-	}
-	
-	@Override
-	public void remove(Action a) {
-		myActions.remove(a);
-        myActionsMap.remove(a.toString());
-	}
+    public ObservableList<String> getActionIDs () {
+        ObservableList<String> ids = FXCollections.observableArrayList();
+        for (Action a : myActions) {
+            ids.add(a.toString());
+        }
+        return ids;
+    }
 
-	@Override
-	public void replace(Action origEl, Action newEl) {
-		// TODO : Does ActionData need this method?
-		return;
-	}
+    /**
+     * Returns the Action with the given String id.
+     * Returns null if not found.
+     */
+    public Action getAction (String id) {
+        for (Action a : myActions) {
+            if (a.toString().equals(id)) { return a; }
+        }
+        return null;
+    }
 
-	@Override
-	public List<Action> getData() {
-		return myActions;
-	}
+    @Override
+    public void add (Action a) {
+        myActions.add(a);
+    }
+
+    @Override
+    public boolean canAdd (Action element) {
+        for (Action a : myActions) {
+            if (element.toString().equals(a.toString())) { return false; }
+        }
+        return true;
+    }
+
+    @Override
+    public void remove (Action a) {
+        myActions.remove(a);
+    }
+
+    @Override
+    public void replace (Action origEl, Action newEl) {
+        remove(origEl);
+        add(newEl);
+    }
+
+    @Override
+    public List<Action> getData () {
+        return myActions;
+    }
 }

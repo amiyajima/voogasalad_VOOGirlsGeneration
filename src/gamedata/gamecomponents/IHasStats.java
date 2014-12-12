@@ -1,5 +1,7 @@
 package gamedata.gamecomponents;
 
+import java.awt.geom.Point2D;
+
 import gamedata.stats.Stats;
 
 /**
@@ -13,6 +15,8 @@ import gamedata.stats.Stats;
 public interface IHasStats {
 		
 	public abstract Stats getStats();
+	
+	public abstract Point2D getLoc();
 	
 	@Override
 	public abstract String toString();

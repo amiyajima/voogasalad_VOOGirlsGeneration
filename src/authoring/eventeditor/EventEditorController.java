@@ -3,7 +3,7 @@ package authoring.eventeditor;
 import gamedata.events.Condition;
 import gamedata.events.Event;
 import gamedata.events.GlobalAction;
-import gamedata.events.conditions.ConditionEquals;
+import gamedata.events.conditions.StatEquals;
 import gamedata.gamecomponents.IChangeGameState;
 import gamedata.gamecomponents.Level;
 
@@ -106,7 +106,7 @@ public class EventEditorController implements Initializable {
         
         if (entry == null) { return; }
         //TODO: Remove below line. Used for testing
-        System.out.println(((ConditionEquals) entry).printOut());
+        System.out.println(((StatEquals) entry).printOut());
 
     }
 
@@ -216,7 +216,6 @@ public class EventEditorController implements Initializable {
         NewConditionController controller = loader.getController();
 
         controller.loadLambda(okLambda);
-        controller.loadEntryCondition(entry);
         controller.loadData(myData);
 
         newConditionStage.showAndWait();
@@ -235,9 +234,9 @@ public class EventEditorController implements Initializable {
         newActionStage.setScene(scene);
         
         NewActionController controller = loader.getController();
-
+        
         controller.loadLambda(okActionLambda);
-        controller.loadState(myState);
+        controller.loadState(myState);        
         controller.loadData(myData);
         
         newActionStage.showAndWait();

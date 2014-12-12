@@ -1,8 +1,8 @@
 package gamePlayer;
 
 import java.io.IOException;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -16,51 +16,46 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class Audio {
     
-    private static final String DEFAULT_MUSIC = "/resources/music/Cut_Gee_VooGirls.mp3";
-    private static final String SELECTION_MUSIC = "/resources/music/select.mp3";
+    private static final String DEFAULT_BACKGROUND_MUSIC = "/resources/music/Cut_Gee_VooGirls.mp3";
+    private static final String DEFAULT_SELECTION_MUSIC = "/resources/music/select.mp3";
     
-    private AudioClip myDefault;
-    private AudioClip myClick;
     
-
-    public void playDefault() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        myDefault = playAudio(DEFAULT_MUSIC);
-    }
+    private MediaPlayer myBGM;
     
+    /**
+     * Plays background music
+     * @throws UnsupportedAudioFileException
+     * @throws IOException
+     * @throws LineUnavailableException
+     */
+  public void playBackground() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+      myBGM = playAudio(DEFAULT_BACKGROUND_MUSIC);
+      myBGM.setCycleCount(MediaPlayer.INDEFINITE);
+}
+    
+    /**
+     * Plays "click" sound when valid items in the game are selected
+     */
     public void playSelection(){
-        myClick = playAudio(SELECTION_MUSIC);
+       playAudio(DEFAULT_SELECTION_MUSIC);
     }
     
+    /**
+     * Mutes background music
+     */
     public void muteDefault(){
-        System.out.println("mute default");
-        myDefault.stop();
+        myBGM.stop();
     }
     
-//    public void muteClick(){
-//        System.out.println("mute click");
-//        myClick.setVolume(0.0);
-//    }
-    
-//    public void resumeDefault(){
-//        myDefault.setVolume(1.0);
-//    }
-    
-    public AudioClip playAudio(String s){
-        AudioClip clip = new AudioClip(this.getClass().getResource(s).toString());
-        clip.play();
-        return clip;
+    /**
+     * Plays specified audio
+     * @param s Audio file location
+     * @return AudioClip
+     */
+    public MediaPlayer playAudio(String s){
+        Media sound = new Media(this.getClass().getResource(s).toString());
+        MediaPlayer player = new MediaPlayer(sound);
+        player.play();
+        return player;
     }
-    
-    
-//    public void play (int count) {
-//        myClip.loop(count);
-//    }
-//
-//    public void play () {
-//        myClip.loop(Clip.LOOP_CONTINUOUSLY);
-//    }
-//
-//    public void stop () {
-//        myClip.stop();
-//    }
 }

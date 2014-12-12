@@ -13,9 +13,9 @@
    <right>
       <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="250.0" BorderPane.alignment="CENTER">
          <items>
-            <TabPane stylesheets="@../resources/stylesheets/stylesheet.css" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="tabPane" stylesheets="@../resources/stylesheets/stylesheet.css" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Controls">
+                <Tab id="CONTROL" fx:id="controlTab" text="Controls">
                   <content>
                     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="500.0" prefHeight="472.0" prefWidth="500.0">
                            <children>
@@ -28,7 +28,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Stats">
+                <Tab id="STATS" fx:id="statsTab" text="Stats">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -37,7 +37,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                  <Tab text="Inventory">
+                  <Tab id="INVENTORY" fx:id="inventoryTab" text="Inventory">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                     </content>
@@ -51,21 +51,21 @@
       <HBox fx:id="console" prefHeight="54.0" prefWidth="536.0" style="-fx-spacing: 5;" BorderPane.alignment="CENTER" />
    </bottom>
    <top>
-   	<HBox style="-fx-spacing: 5; -fx-padding: 10;">
+   	<HBox fx:id="topMenu" style="-fx-spacing: 5; -fx-padding: 10;">
       <children>
-		 <MenuButton fx:id="gameMenu" mnemonicParsing="false" styleClass="button" stylesheets="@../resources/stylesheets/stylesheet_label.css" text="Game Menu" BorderPane.alignment="CENTER_LEFT">
+		 <MenuButton id="GAMEMENU" fx:id="gameMenu" mnemonicParsing="false" styleClass="button" stylesheets="@../resources/stylesheets/stylesheet_label.css" text="Game Menu" BorderPane.alignment="CENTER_LEFT">
 		   <items>
-			   <MenuItem fx:id="restartMenu" mnemonicParsing="false" onAction="#restartGame" text="Restart" />
-			   <MenuItem fx:id="saveMenu" mnemonicParsing="false" onAction="#saveGame" text="Save Game" />
-			   <MenuItem fx:id="loadMenu" mnemonicParsing="false" onAction="#loadGame" text="Load Another Game" />
-			   <MenuItem fx:id="mainMenu" mnemonicParsing="false" onAction="#openInitialMenu" text="Go to Main Menu" />
-			   <MenuItem fx:id="settingsMenu" mnemonicParsing="false" onAction="#openSettings" text="Settings" />
-			   <MenuItem fx:id="exitMenu" mnemonicParsing="false" onAction="#exitGame" text="Exit" />
+			   <MenuItem id="RESTART" fx:id="restartMenu" mnemonicParsing="false" onAction="#restartGame" text="Restart" />
+			   <MenuItem id="SAVE" fx:id="saveMenu" mnemonicParsing="false" onAction="#saveGame" text="Save Game" />
+			   <MenuItem id="LOAD" fx:id="loadMenu" mnemonicParsing="false" onAction="#loadGame" text="Load Another Game" />
+			   <MenuItem id="MAIN" fx:id="mainMenu" mnemonicParsing="false" onAction="#openInitialMenu" text="Go to Main Menu" />
+			   <MenuItem id="SETTINGS" fx:id="settingsMenu" mnemonicParsing="false" onAction="#openSettings" text="Settings" />
+			   <MenuItem id="EXIT" fx:id="exitMenu" mnemonicParsing="false" onAction="#exitGame" text="Exit" />
 		   </items>
 		 </MenuButton>
-         <Button fx:id="showScoreButton" mnemonicParsing="false" onAction="#showScore" style="-fx-padding: 10;" styleClass="button" text="Score Board">
+         <Button id="SCORE" fx:id="showScoreButton" mnemonicParsing="false" onAction="#showScore" style="-fx-padding: 10;" styleClass="button" text="Score Board">
 		</Button>
-		<Label fx:id="playerTurn" style="-fx-background-color: transparent;;" text="Turn: ">
+		<Label id="TURN" fx:id="playerTurn" style="-fx-background-color: transparent;;" text="Turn: ">
 		</Label>
 	  </children>
       </HBox>

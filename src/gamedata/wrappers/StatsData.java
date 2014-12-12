@@ -17,4 +17,8 @@ public class StatsData {
     public Map<String, Double> getStats() {
         return myStats;
     }
+    
+    public String toString(){
+        return myStats.toString();
+    }
 }

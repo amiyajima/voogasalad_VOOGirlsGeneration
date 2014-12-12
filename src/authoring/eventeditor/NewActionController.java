@@ -1,8 +1,9 @@
 package authoring.eventeditor;
 
+import gamedata.events.GameStateGlobalAction;
 import gamedata.events.GlobalAction;
-import gamedata.events.globalaction.CreatePiece;
-import gamedata.events.globalaction.DeletePiece;
+import gamedata.events.globalaction.MakePieceAtLocation;
+import gamedata.events.globalaction.DeletePieceAtLocation;
 import gamedata.events.globalaction.LevelChange;
 import gamedata.events.globalaction.EndTurn;
 import gamedata.gamecomponents.IChangeGameState;
@@ -20,6 +21,7 @@ import java.util.function.Consumer;
 
 import authoring.data.EventsDataWrapper;
 import utilities.ClassGrabber;
+import utilities.reflection.Reflection;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -38,15 +40,13 @@ public class NewActionController implements Initializable{
     @FXML
     private ChoiceBox<String> myRefTypeBox;
     @FXML
-    private ChoiceBox<String> actionChoiceBox;
+    private ChoiceBox<String> myTypeChoiceBox;
     @FXML
     private TextField myNextLevelField;
     @FXML
     private TextField myXField;
     @FXML
     private Button myDoneButton;
-    @FXML
-    private TextField myNameField;
     @FXML
     private ChoiceBox<IHasStats> myRefNameBox;
 	
@@ -75,37 +75,44 @@ public class NewActionController implements Initializable{
 		}
 		displayList = trimClassList(displayList);
 
-		actionChoiceBox.getItems().addAll(displayList);
+		myTypeChoiceBox.getItems().addAll(displayList);
 
-		actionChoiceBox.getSelectionModel().selectedItemProperty().addListener(
+		myTypeChoiceBox.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, selectedType) -> showActionEditorPane());
 	}
 	
 	//TODO: Refactor this to be less gross. SO MUCH REPEATED CODE
 	@FXML
 	private void handleDoneButton(){
-		int idx = actionChoiceBox.getSelectionModel().getSelectedIndex();
+		int idx = myTypeChoiceBox.getSelectionModel().getSelectedIndex();
 		Class<?> c = actionList.get(idx);
 
-		if(c.equals(CreatePiece.class)){
+		if(c.equals(MakePieceAtLocation.class)){
 			Piece piece = (Piece) myRefNameBox.getSelectionModel().getSelectedItem();
 			double x = Double.parseDouble(myXField.getText());
 			double y = Double.parseDouble(myYField.getText());
 			Point2D.Double point = new Point2D.Double(x,y);
-			GlobalAction action = new CreatePiece(myNameField.getText(), piece, point);
+			GlobalAction action = new MakePieceAtLocation(piece, point);
 			myDoneLambda.accept(action);
 		}
-		else if (c.equals(DeletePiece.class)){
-			
+		else if (c.equals(DeletePieceAtLocation.class)){
+			double x = Double.parseDouble(myXField.getText());
+			double y = Double.parseDouble(myYField.getText());
+			Point2D.Double point = new Point2D.Double(x,y);
+			GlobalAction action = new DeletePieceAtLocation(point);
+			myDoneLambda.accept(action);
 		}
 		else if (c.equals(LevelChange.class)){
-			GlobalAction action = new LevelChange(myNameField.getText(), myState, myNextLevelField.getText());
+			GlobalAction action = new LevelChange(myState, myNextLevelField.getText());
 			myDoneLambda.accept(action);
 		}
-		else if (c.equals(EndTurn.class)){
-			GlobalAction action = new EndTurn(myNameField.getText(), myState);
-			myDoneLambda.accept(action);
-		}
+		
+		String classPath = c.toString();
+		classPath = classPath.substring(6);
+		
+		System.out.println(myState);
+		GlobalAction action = (GlobalAction) Reflection.createInstance(classPath, myState);
+		myDoneLambda.accept(action);
 	}
 
 	private List<String> trimClassList(List<String> actionList) {
@@ -122,25 +129,20 @@ public class NewActionController implements Initializable{
 		myNextLevelField.setVisible(false);
 		myUnitActionsBox.setVisible(false);
 		
-		int idx = actionChoiceBox.getSelectionModel().getSelectedIndex();
+		int idx = myTypeChoiceBox.getSelectionModel().getSelectedIndex();
 		Class<?> c = actionList.get(idx);
 
-		
-		/**
-		 * If statements to choose which Condition Editor to pull up
-		 */
-		if(c.equals(CreatePiece.class)){
+
+		if(c.equals(MakePieceAtLocation.class)){
 			myUnitActionsBox.setVisible(true);
 		}
-		else if (c.equals(DeletePiece.class)){
+		else if (c.equals(DeletePieceAtLocation.class)){
 			myUnitActionsBox.setVisible(true);
 		}
-		else if (c.equals(LevelChange.class)){
+		else if (GameStateGlobalAction.class.isAssignableFrom(c.getClass())){
 			myNextLevelField.setVisible(true);
 		}
-		else if (c.equals(EndTurn.class)){
 
-		}
 	}
 
 	/**

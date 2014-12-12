@@ -1,5 +1,7 @@
 package utilities.leapMotion;
 
+import java.awt.Event;
+import java.awt.event.InputEvent;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -7,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.leapmotion.leap.Gesture;
+import com.leapmotion.leap.Gesture.Type;
 import gamePlayer.ViewController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -17,6 +21,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -32,22 +37,14 @@ public class LeapUIController extends Application {
     public static final String LEAP_UI= "leapUI.fxml";
     public static final String MOUSE_OPTIONS = "/src/utilities/leapMotion/mouseControl";
     public static final String MOUSE_KEY = "mouse";
+    public static final String CLICK_KEY = "click";
 
-//    @FXML
-//    protected HBox screenTap;
-//    @FXML 
-//    private HBox circle;
+
     @FXML
     private VBox gesturesVBox;
-//
-//    @FXML
-//    private HBox mySwipe;
-//    @FXML
-//    private Label screeTapLabel;
-//
-//    @FXML
-//    private HBox myCustomerized;
 
+    @FXML
+    private ComboBox ClickDropDown;
     @FXML 
     private ComboBox MouseDropDown;
     @FXML
@@ -75,44 +72,64 @@ public class LeapUIController extends Application {
         myControls= new HashMap<String, String>();
         setUpDropDown();
         setUpGesture();
+       
+
         stage.setScene(scene);
         stage.show();
 
     }
 
     protected void setUpGesture(){
-        
+        Type t = (Type) ClickDropDown.valueProperty().getValue();
 
-        gesturesVBox.getChildren().forEach(hbox-> hbox.setOnMouseClicked(event->{  
-            TextField tf = new TextField();
-            tf.setPromptText("> enter the Key");
-            if(((HBox)hbox).getChildren().size()<2){
-                ((HBox)hbox).getChildren().add(tf);
-                tf.setOnKeyPressed(ke->{
-                    if(ke.getCode().equals(KeyCode.ENTER)){
-                        tf.getParent().requestFocus();
-                        myCurrentLabel = (Label) ((HBox)hbox).getChildren().get(0);
-                        mapKey(tf);
+        gesturesVBox.getChildren().forEach(hbox-> {
+
+           
+            Label l = (Label) ((HBox)hbox).getChildren().get(0);
+            if(! t.toString().equals(l.getText())){
+
+
+                hbox.setVisible(true);
+
+                hbox.setOnMouseClicked(event->{ 
+
+
+
+                    TextField tf = new TextField();
+                    tf.setPromptText("> enter the Key");
+                    if(((HBox)hbox).getChildren().size()<2){
+                        ((HBox)hbox).getChildren().add(tf);
+                        tf.setOnKeyPressed(ke->{
+                            if(ke.getCode().equals(KeyCode.ENTER)){
+                                tf.getParent().requestFocus();
+                                myCurrentLabel = l;
+                                mapKey(tf);
+                            }
+                        });
                     }
+
+
                 });
             }
-
-        }));
+            else{
+                hbox.setVisible(false);
+            }
+        });
     }
 
 
     private void mapKey(TextField tf){
         if(tf.getText().length()==1){
             myControls.put(myCurrentLabel.getText(), tf.getText());
-           // System.out.println(myControls.entrySet().toArray().toString());
+            // System.out.println(myControls.entrySet().toArray().toString());
         }
         else{
             tf.clear();
-            
+
             tf.setPromptText(">enter single key");
             tf.getParent().requestFocus();
         }
-        
+
     }
 
 
@@ -137,16 +154,37 @@ public class LeapUIController extends Application {
             //l.setOnMouseClicked(event->myControls.put(MOUSE_KEY, l.getText()));
 
         });
+        ClickDropDown.getItems().addAll(Gesture.Type.values());
+        ClickDropDown.valueProperty().setValue(Gesture.Type.TYPE_SCREEN_TAP);
+        ClickDropDown.valueProperty().addListener(event->{setUpGesture();
+                                                            onSelect();});
+
+     //   MouseDropDown.valueProperty().setValue(MouseDropDown.getItems().get(0));
         MouseDropDown.valueProperty().addListener(event->onSelect());
-//        
-//        System.out.println(((Label)(MouseDropDown.getSelectionModel().getSelectedItem())).getText());
-//        myControls.put(MOUSE_KEY, ((Label)(MouseDropDown.getSelectionModel().getSelectedItem())).getText());
+        //        
+        //        System.out.println(((Label)(MouseDropDown.getSelectionModel().getSelectedItem())).getText());
+        //        myControls.put(MOUSE_KEY, ((Label)(MouseDropDown.getSelectionModel().getSelectedItem())).getText());
 
     }
-    
+
     private void onSelect(){
-       Label l = ((Label)MouseDropDown.valueProperty().getValue());
-       myControls.put(MOUSE_KEY, l.getText());
+        Label l = ((Label)MouseDropDown.valueProperty().getValue());
+        Type t = (Type) ClickDropDown.valueProperty().getValue();
+        myControls.put(MOUSE_KEY, l.getText());
+        myControls.put(t.toString(), ""+InputEvent.BUTTON1_DOWN_MASK);
+    }
+
+    private void disableGesture(){
+        Type t = (Type) ClickDropDown.valueProperty().getValue();
+        System.out.println(t.toString());
+        gesturesVBox.getChildren().forEach(hbox->{
+            String gesture = ((Label) ((HBox)hbox).getChildren().get(0)).getText();
+            System.out.println(gesture);
+
+            if(t.toString().equals(gesture)){
+                hbox.removeEventHandler(MouseEvent.MOUSE_CLICKED, hbox.getOnMouseClicked());
+            }
+        });
     }
     @FXML
     private void okayAction() throws IOException{
