@@ -3,8 +3,8 @@ package fxml_main;
 import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
 import gamedata.action.ConcreteAction;
-import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
+
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -28,13 +29,10 @@ import javafx.scene.layout.VBox;
 import utilities.ClassGrabber;
 import authoring.abstractfeatures.PopupWindow;
 import authoring.concretefeatures.RangeEditor;
-import authoring.concretefeatures.SingleMultiplierBox;
-import authoring.data.ActionData;
-
-
+import authoring.concretefeatures.TotalLogicBox;
 
 /**
- * @author seungwonlee
+ * @author seungwonlee, Jennie JU
  *
  */
 public class ActionEditor extends Pane {
@@ -56,6 +54,7 @@ public class ActionEditor extends Pane {
     
     private Consumer<Action> myOkLambda;
     private String myGridShape;
+    private List<TotalLogicBox> myTotalLogicBoxes;
 
     public ActionEditor (Consumer<Action> okLambda, String gridShape) {
         myName = "";
@@ -72,8 +71,7 @@ public class ActionEditor extends Pane {
      * @param actionData
      *        - class where user-created Actions are stored
      */
-    public ActionEditor (Action action, Consumer<Action> okLambda,
-                         String gridShape) {
+    public ActionEditor (Consumer<Action> okLambda, Action action, String gridShape) {
         myName = action.toString();
         myAttackRange = action.getActionRange();
         myEffectRange = action.getEffectRange();
@@ -127,25 +125,44 @@ public class ActionEditor extends Pane {
             @Override
             public void handle (ActionEvent click) {
                 myName = nameField.getText();
-                myStatsLogics = getStatsLogics(targetChoice, moddedStat);
-                Action action = new ConcreteAction (myName, myAttackRange,
-                                                    myEffectRange, myStatsLogics, myConclusion);
-                //TODO: 
+                myStatsLogics = getStatsLogics(myTotalLogicBoxes);
+                Action action = new ConcreteAction 
+                		(myName, myAttackRange, myEffectRange, myStatsLogics, myConclusion);
                 myOkLambda.accept(action);
             }
         });
 
         box.getChildren().addAll(labelBox, nameVBox, rangeVBox, new Separator(),
-                                 targetVBox, operationsVBox, new Separator(), conclusionVBox,
+                                 operationsVBox, new Separator(), conclusionVBox,
                                  new Separator(), createBtn);
         getChildren().add(box);
 
     }
-
-    private void initStatsOperationsBox (VBox operationsVBox) {
-        // TODO Auto-generated method stub
-        
+    
+    public List<StatsTotalLogic> getStatsLogics (List<TotalLogicBox> totalLogic) {
+        List<StatsTotalLogic> stlList = new LinkedList<StatsTotalLogic>();
+        for (TotalLogicBox tlb : totalLogic) {
+     	   stlList.add(tlb.getStatsLogic());
+        }
+        return stlList;
     }
+    
+    private void initStatsOperationsBox (VBox operationsVBox) {
+    	
+    	
+    	
+    	Button addOpBtn = new Button ("Add new operation");
+    	addOpBtn.setOnAction(new EventHandler<ActionEvent>() {
+    		
+			@Override
+			public void handle(ActionEvent event) {
+				TotalLogicBox tlb = new TotalLogicBox();
+	    		Button delOpBtn = new Button ("Delete operation");
+			}
+        	
+    	});
+    }
+    
 
     private void initConclusionsBox (VBox conclusionVBox) {
         // TODO create label + choicebox populated with types of action conclusions
@@ -199,17 +216,7 @@ public class ActionEditor extends Pane {
         return trimmed;
     }
 
-    // TODO: really need to take in multiple stats
-    public List<StatsTotalLogic> getStatsLogics (ChoiceBox<String> targetChoice,
-                                                 TextField moddedStat) {
-       String target = targetChoice.getValue();
-       String stat = moddedStat.getText();
 
-       List<StatsTotalLogic> stlList = new LinkedList<StatsTotalLogic>();
-       List<StatsSingleMultiplier> multiplierLogic = getSingleMultipliers(myOperationsList);
-       stlList.add(new StatsTotalLogic(target, stat, multiplierLogic));
-       return stlList;
-   }
     private void initNameField (VBox nameBox, TextField nameField) {
         Label nameLabel = new Label("Action name");
         nameField.setPromptText("Enter action name");

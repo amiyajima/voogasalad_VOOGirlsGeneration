@@ -2,8 +2,10 @@ package authoring.concretefeatures;
 
 import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
+
 import java.util.LinkedList;
 import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -39,6 +41,13 @@ public class TotalLogicBox extends VBox {
         initOperationsBox(myOperationsVBox);
     }
     
+    public StatsTotalLogic getStatsLogic () {
+        String target = myTargetChoice.getValue();
+        String stat = myStat.getText();
+        List<StatsSingleMultiplier> multiplierLogic = getSingleMultipliers(myOperationsList);
+        return new StatsTotalLogic(target, stat, multiplierLogic);
+    }
+    
     private void initStatsModifier (VBox targetVBox,
                                     ChoiceBox<String> targetChoice, TextField moddedStat) {
         Label targetLabel = new Label("Action target");
@@ -65,7 +74,10 @@ public class TotalLogicBox extends VBox {
                 operation.setSpacing(5);
                 myOperationsList.add(operation);
                 Button delStatBtn = makeDeleteButton(operationsBox, operation);
-                operationsBox.getChildren().addAll(operation, delStatBtn);
+                
+                HBox opEntryBox = new HBox();
+                opEntryBox.getChildren().addAll(operation, delStatBtn);
+                operationsBox.getChildren().addAll(opEntryBox);
             }
         });
     }
@@ -75,7 +87,6 @@ public class TotalLogicBox extends VBox {
         delBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                System.out.println("ActionOperationEditor: delete button pressed");
                 myOperationsList.remove(operation);
                 operationsBox.getChildren().remove(operation);
                 operationsBox.getChildren().remove(delBtn);
@@ -84,7 +95,7 @@ public class TotalLogicBox extends VBox {
         return delBtn;
     }
 
-    public List<StatsSingleMultiplier> getSingleMultipliers (List<SingleMultiplierBox> smbList) {
+    private List<StatsSingleMultiplier> getSingleMultipliers (List<SingleMultiplierBox> smbList) {
         List<StatsSingleMultiplier> ssmList = new LinkedList<StatsSingleMultiplier>();
         for (SingleMultiplierBox smb : smbList) {
             ssmList.add(smb.getSingleMultipler());
