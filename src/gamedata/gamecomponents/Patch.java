@@ -8,7 +8,7 @@ import java.awt.geom.Point2D;
  * Class for Patches. Represents a given patch at a given (x,y) position within
  * the grid.
  * 
- * @author Jesse, Sandy Lee, Mengen Huang
+ * @author Jesse, Sandy Lee, Mengen Huang, Martin Tamayo
  *
  */
 public class Patch extends GridComponent {

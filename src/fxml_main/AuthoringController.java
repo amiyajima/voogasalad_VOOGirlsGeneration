@@ -69,9 +69,12 @@ public class AuthoringController implements Initializable {
 
     @FXML
     private MenuItem playerEditor;
-
+    
     @FXML
     private MenuItem mySaveBtn;
+
+    @FXML
+    private MenuItem mySaveAsBtn;
 
     private GUIGridReference myGridReference;
     private PieceController myPieceController;
@@ -158,8 +161,14 @@ public class AuthoringController implements Initializable {
         statsEditor.show();
     }
 
+    
     @FXML
     private void saveGame () {
+    
+    }
+    
+    @FXML
+    private void saveAsGame () {
         Game game = myTotalData.createGame();
         Player p1 = new HumanPlayer(1);
         List<Player> players = new ArrayList<Player>();

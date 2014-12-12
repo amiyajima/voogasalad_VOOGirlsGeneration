@@ -24,9 +24,9 @@ public class RangeGrid extends SuperGrid{
 	private int myHeight;
 	private int centerX;
 	private int centerY;
-	private List<Point2D> myRange;
+	private List<Point2D.Double> myRange;
 
-	public RangeGrid(int width, int height, double tileSize, String shape, List<Point2D> range) {
+	public RangeGrid(int width, int height, double tileSize, String shape, List<Point2D.Double> range) {
 		super(width, height, tileSize, shape);	
 		myRange=range;
 		myWidth=width;
@@ -67,7 +67,7 @@ public class RangeGrid extends SuperGrid{
 			tile.selectTile(DEFAULT_HIGHLIGHT_COLOR);
 	}
 	
-	private void highlightRange(List<Point2D> range) {
+	private void highlightRange(List<Point2D.Double> range) {
 		if ((range!=null) && (range.size()>0)){
 			for (Point2D loc: range){
 				int col=(int) (loc.getX()+centerX);
@@ -105,8 +105,8 @@ public class RangeGrid extends SuperGrid{
 	 * as Point2D in a list.
 	 * @return The list of relative coordination relative to the center tile. 
 	 */
-	public List<Point2D> rangeSelectedList(){
-		List<Point2D> selectedList=new ArrayList<Point2D>();
+	public List<Point2D.Double> rangeSelectedList(){
+		List<Point2D.Double> selectedList=new ArrayList<Point2D.Double>();
 		
 		for (int i=0;i<myHeight;i++) {
 			for (int j=0;j<myWidth;j++) {
@@ -173,7 +173,7 @@ public class RangeGrid extends SuperGrid{
 	}
 
 	
-	public List<Point2D> getRange(){
+	public List<Point2D.Double> getRange(){
 		return myRange;
 	}
 

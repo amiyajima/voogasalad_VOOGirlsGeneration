@@ -18,7 +18,7 @@ import authoring.data.PatchTypeData;
 import authoring_environment.GUIGrid;
 
 /**
- * @author sandy lee
+ * @author sandy lee, Martin Tamayo
  *
  */
 public class PatchController extends GridComponentAbstCtrl<Patch> {
