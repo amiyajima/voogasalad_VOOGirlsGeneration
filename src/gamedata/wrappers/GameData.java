@@ -67,9 +67,10 @@ public class GameData {
                                myCurrentLevel.getLevelFromData());
         List<Player> myPlayersFromData = new ArrayList<Player>();
         for (int i = 1; i < myNumPlayers; i++) {
-        //for (PlayerDataIndividual pdi : myPlayers) {
-            //myPlayersFromData.add(pdi.getPlayerFromData());
+        for (PlayerDataIndividual pdi : myPlayers) {
+            myPlayersFromData.add(pdi.getPlayerFromData());
             myPlayersFromData.add(new HumanPlayer(i));
+        }
         }
         myGame.addPlayers(myPlayersFromData);
         myGame.setCurrentPlayer(myGame.getPlayers().get(0));
@@ -79,7 +80,7 @@ public class GameData {
     public String toString () {
         return "GAMEDATA: # players = " + myPlayers.size() + " # levels " +
                myLevels.size() + "\nmy first player's ID is " + myPlayers.get(0).getID() +
-               "\nmy second player's ID is " + myPlayers.get(1).getID() + 
+               "\nmy second player's ID is " + myPlayers.get(0).getID() + 
                " \n# pieces in grid = " + myLevels.get(0).getGrid().getPieces().getPieces().size() +
                "\n# patches in grid = " + myLevels.get(0).getGrid().getPatches().getPatches().size() +
                "\nmyGameWon = " + myGameWon + "\nmyNumPlayers " + myNumPlayers;

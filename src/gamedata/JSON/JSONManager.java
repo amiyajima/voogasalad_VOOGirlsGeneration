@@ -104,20 +104,20 @@ public class JSONManager {
         List<Patch> myPatches = patchData.getPatchesFromData();
         System.out.println("Patch #1: " + myPatches.get(0));
         
-        EventDataIndividual edi = gameData.getMyLevels().get(0).getMyEventData().get(0);
-        System.out.println(edi.toString());
-        Event myEvent = edi.getEventFromData();
-        System.out.println("Event: " + myEvent);
+//        EventDataIndividual edi = gameData.getMyLevels().get(0).getMyEventData().get(0);
+//        System.out.println(edi.toString());
+//        Event myEvent = edi.getEventFromData();
+//        System.out.println("Event: " + myEvent);
         
-        ActionDataIndividual adi = gameData.getMyLevels().get(0).getGrid().getPieces().getPieces().get(0).getMyActions().get(0);
-        System.out.println(adi.toString());
-        Action myAction = adi.getActionFromData();
-        System.out.println("Action: " + myAction);
+//        ActionDataIndividual adi = gameData.getMyLevels().get(0).getGrid().getPieces().getPieces().get(0).getMyActions().get(0);
+//        System.out.println(adi.toString());
+//        Action myAction = adi.getActionFromData();
+//        System.out.println("Action: " + myAction);
         
         Player humanPlayer = gameData.getMyPlayers().get(0).getPlayerFromData();
         System.out.println("Human Player: " + humanPlayer.getID() + " " + humanPlayer.getNumMovesPlayed());
-        Player aiPlayer = gameData.getMyPlayers().get(1).getPlayerFromData();
-        System.out.println("Supposed AI Player: " + aiPlayer.getID() + " " + humanPlayer.getNumMovesPlayed());
+//        Player aiPlayer = gameData.getMyPlayers().get(1).getPlayerFromData();
+//        System.out.println("Supposed AI Player: " + aiPlayer.getID() + " " + humanPlayer.getNumMovesPlayed());
         
         Game myGame = gameData.getGameFromData();
         System.out.println("Game: " + myGame.toString());

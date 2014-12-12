@@ -83,7 +83,7 @@ public class PieceDataIndividual {
         }
         Stats myStatsFromData = new Stats(myStats.getStats());
         // TODO Inventory is not implemented yet, so making an empty one
-        Piece myPiece = new Piece(myID, myName, myImageLocation, myActionsFromData,
+        Piece myPiece = new Piece(myID, myName, myImageLocation, null, myActionsFromData,
                                   myStatsFromData, myLoc, myPlayerID, new Inventory());
         return myPiece;
     }

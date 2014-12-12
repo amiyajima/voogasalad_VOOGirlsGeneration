@@ -1,11 +1,14 @@
 package fxml_main;
 
 import gamePlayer.ViewController;
+import gamedata.JSON.JSONManager;
 import gamedata.action.Action;
 import gamedata.action.ConcreteAction;
 import gamedata.gamecomponents.Game;
 import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.sound.sampled.LineUnavailableException;
@@ -160,10 +164,27 @@ public class AuthoringController implements Initializable {
     
     @FXML
     private void saveGame () {
-    
+        JSONManager json = new JSONManager();
+        Game game = myTotalData.createGame();
+        Player p1 = new HumanPlayer(1);
+        List<Player> players = new ArrayList<Player>();
+        players.add(p1);
+        game.addPlayers(players);
+
+        FileChooser fileChooser = new FileChooser();
+        File f = fileChooser.showSaveDialog(null);
+        String basePath = System.getProperty("user.dir");
+        String absolutePath = f.getPath();
+        String relativePath = "";
+        if (absolutePath.startsWith(basePath)) {
+                relativePath = absolutePath.substring(basePath.length() + 1);
+        }
+        json.writeToJSON(game, f.getPath());    
     }
+
     
     @FXML
+    
     private void saveAsGame () {
         Game game = myTotalData.createGame();
         Player p1 = new HumanPlayer(1);
