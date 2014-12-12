@@ -29,7 +29,7 @@ public class MovementData {
     
     public Movement getMovementFromData () {
         // TODO this may not work, but generic initialization doesn't work either
-        List<Point2D.Double>[] myPathsToData = null;
+        List<Point2D.Double>[] myPathsToData = new List<Point2D.Double>[]{myMoves};
         for (int i = 0; i < myPathsToData.length; i++) {
             myPathsToData[i] = new ArrayList<Point2D.Double>();
         }

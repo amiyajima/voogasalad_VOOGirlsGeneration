@@ -92,12 +92,15 @@ public class JSONManager {
      * @throws FileNotFoundException
      */
 
-    public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
+    public Piece readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
         
-        PieceData pieceData = myGson.fromJson(br, PieceData.class);
+        PieceDataIndividual pieceData = myGson.fromJson(br, PieceDataIndividual.class);
         System.out.println(pieceData.toString());
+        
+        Piece myPiece = pieceData.getPieceFromData();
+        System.out.println(myPiece.toString());
         /*
         GameData gameData = myGson.fromJson(br, GameData.class);
         System.out.println(gameData.toString());
@@ -125,7 +128,7 @@ public class JSONManager {
         Game myGame = gameData.getGameFromData();
         System.out.println("Game: " + myGame.toString());
         */
-        return myGame;
+        return myPiece;
     }    
     
     public void registerTypeAdapters (GsonBuilder builder) {
