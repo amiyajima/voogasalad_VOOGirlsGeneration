@@ -40,7 +40,14 @@
             <TabPane fx:id="displayedTabs" prefHeight="800.0" prefWidth="1024.0" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER">
                <effect>
                   <Glow />
-               </effect></TabPane>
+               </effect>
+               <tabs>
+                  <Tab fx:id="testauthor" text="Untitled Tab">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+               </tabs></TabPane>
          </center>
       </BorderPane>
    </children>

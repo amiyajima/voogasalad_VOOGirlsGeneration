@@ -40,8 +40,8 @@ public class GUIcontainerController implements Initializable{
 	@FXML
 	private MenuItem newAuthor;
 	
-//	@FXML
-//	private Tab testauthor;
+	@FXML
+	private Tab testauthor;
 	
 	@FXML
 	private TabPane displayedTabs;
@@ -53,14 +53,14 @@ public class GUIcontainerController implements Initializable{
 //		BackgroundFill backgroundFill = 
 //                new BackgroundFill(null, null, null);
 //		displayedTabs.setBackground(new Background(backgroundFill));
-//		LoadNewAuthoring();
+		LoadNewAuthoring();
 		
-     		displayedTabs=new TabPane();
-        	 Tab tab=new Tab("test");
-             tab.setContent(rootLayout);
-             displayedTabs.getTabs().add(tab);
-             displayedTabs.getSelectionModel().select(tab);
-             System.out.println(displayedTabs.getTabs().size());
+//     		displayedTabs=new TabPane();
+//        	 Tab tab=new Tab("test");
+//             tab.setContent(rootLayout);
+//             displayedTabs.getTabs().add(tab);
+//             displayedTabs.getSelectionModel().select(tab);
+//             System.out.println(displayedTabs.getTabs().size());
 
 
          
@@ -82,14 +82,14 @@ public class GUIcontainerController implements Initializable{
             
 //            tab.setText("First Tab");
             
-//            testauthor.setContent(rootLayout);
+            testauthor.setContent(rootLayout);
             
-    		Tab tab=new Tab("Authoring"+ myTabCount++);
-			tab.setStyle("-fx-background-color: blue;");
-            tab.setContent(rootLayout);
-            displayedTabs.getTabs().add(tab);
-            displayedTabs.getSelectionModel().select(tab);
-            System.out.println(displayedTabs.getTabs().size());
+//    		Tab tab=new Tab("Authoring"+ myTabCount++);
+//			tab.setStyle("-fx-background-color: blue;");
+//            tab.setContent(rootLayout);
+//            displayedTabs.getTabs().add(tab);
+//            displayedTabs.getSelectionModel().select(tab);
+//            System.out.println(displayedTabs.getTabs().size());
 
 
         } catch (IOException e) {
