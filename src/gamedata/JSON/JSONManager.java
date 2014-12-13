@@ -7,7 +7,6 @@ import gamedata.events.conditions.Condition;
 import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.GridComponent;
-import gamedata.wrappers.ActionDataIndividual;
 import gameengine.player.Player;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -72,14 +71,14 @@ public class JSONManager {
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
         
         Game pi = myGson.fromJson(br, Game.class);
-        System.out.println("Level 1: " + pi.getLevels().get(0).getGrid().toString());
+//        System.out.println("Level 1: " + pi.getLevels().get(0).getGrid().toString());
         return pi;
     }    
     
     public void registerTypeAdapters (GsonBuilder builder) {
         builder.registerTypeAdapter(StatsModifier.class, new GenericTypeAdapter<StatsModifier>("gamedata.action"));
         builder.registerTypeAdapter(Player.class, new GenericTypeAdapter<Player>("gameengine.player"));
-        builder.registerTypeAdapter(Action.class, new GenericTypeAdapter<ActionDataIndividual>("gamedata.action"));
+        builder.registerTypeAdapter(Action.class, new GenericTypeAdapter<Action>("gamedata.action"));
         builder.registerTypeAdapter(ActionConclusion.class, new ActionConclusionTypeAdapter<ActionConclusion>("gamedata.action"));
         builder.registerTypeAdapter(GridComponent.class, new GenericTypeAdapter<GridComponent>("gamedata.gamecomponent"));
         builder.registerTypeAdapter(Condition.class, new GenericTypeAdapter<Condition>("gamedata.events.conditions"));

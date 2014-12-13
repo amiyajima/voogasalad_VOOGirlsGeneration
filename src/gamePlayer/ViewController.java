@@ -192,11 +192,12 @@ public class ViewController {
                 File f = fc.showOpenDialog(myStage);
 
                 try {
+                    System.out.println("VC: loading game... ");
                     JSONManager myJM = new JSONManager();
-                    myModel = myJM.readFromJSONFile(f.getAbsolutePath());
-                    initializeGrid();
-                    myScene = new Scene(myGameSpace);
-                    myStage.setScene(myScene);
+                    myStage.setScene(mySplashScreen);
+                    TestGameCreator JSBTester = new TestGameCreator();
+                    testPlayGame(myJM.readFromJSONFile(f.getAbsolutePath()));
+                    System.out.println("VC: game loaded... ");
                 }
                 catch (FileNotFoundException fnfe) {
                     System.out.println("Could not find the file at - " + f.getAbsolutePath());
@@ -344,7 +345,7 @@ public class ViewController {
                 myGridPane = new ScrollPane();
                 Level currentLevel = myModel.getCurrentLevel();
                 myGrid = currentLevel.getGrid();
-                System.out.println("myGrid: " + myGrid);
+//                System.out.println("myGrid: " + myGrid);
                 myGrid.displayPane(myGridPane);
 
                 myGameSpace.setCenter(myGridPane);
@@ -887,6 +888,8 @@ public class ViewController {
             initializeGrid();
             myScene = new Scene(myGameSpace);
             myStage.setScene(myScene);
+//            System.out.println("VC: Current Level: " + myModel.getCurrentLevel().getId());
+//            System.out.println(myModel.getCurrentLevel().getGrid().toString());
         }
 
 
