@@ -1,15 +1,12 @@
 package gamePlayer;
 
 import gamedata.action.Action;
-import gamedata.gamecomponents.Piece;
 import gameengine.player.HumanPlayer;
-import gameengine.player.Player;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.effect.InnerShadow;
@@ -22,18 +19,16 @@ import javafx.scene.input.KeyEvent;
  * Controls panel.
  * KeyboardAction is strictly used for selecting actions in the Controls.
  * 
- * @author Yoonhyung
+ * @author Yoonhyung Choi
  *
  */
 public class KeyboardAction {
     private static final double ACTION_LABEL_SHADOW_OFFSET = 6.0;
-    Player myCurrentPlayer;
-    Point2D myCurrentLocation;
-    GameGridEffect myGameGridEffect;
-    List<Action> myActions;
-    Action myCurrentAction;
-    int myActionIndex;
-    Map<KeyCode, Point2D> myKeyMap;
+    private static final String TYPE_HUMAN = "Human";
+    private List<Action> myActions;
+    private Action myCurrentAction;
+    private int myActionIndex;
+    private Map<KeyCode, Point2D> myKeyMap;
 
     public KeyboardAction () {
         myActionIndex = 0;
@@ -41,31 +36,34 @@ public class KeyboardAction {
         myKeyMap = new HashMap<KeyCode, Point2D>();
     }
 
+    /**
+     * 
+     * myKeyMap (which maps up,down,left,right,select movements to keycodes) is passed by the game
+     * engine. This method creates key event handlers so that when such a keycode is
+     * pressed, its corresponding movement is implemented within the Control Tab.
+     * Movement is "moving the cursor" and "selecting with cursor" with the keyboard.
+     * Here, the selection is defined as Point2D Double (1.0,1.0).
+     * 
+     * @param myKeyMap
+     * @param gameScene
+     */
     public void setActionKeyControl (ViewController vc) {
-        System.out.println("KeyboardAction ON");
-
-        useDefaultMap();
 
         if ((vc.getActivePiece() != null) &&
-            (vc.getGame().getCurrentPlayer().getType().equals("Human"))) {
+            (vc.getGame().getCurrentPlayer().getType().equals(TYPE_HUMAN))) {
 
-            // the if statement will go away when we actually run a real game!
-            if (((HumanPlayer) vc.getGame().getCurrentPlayer()).getMovementKeyMap() != null) {
-                myKeyMap = ((HumanPlayer) vc.getGame().getCurrentPlayer()).getMovementKeyMap();
-            }
-
+            myKeyMap = ((HumanPlayer) vc.getGame().getCurrentPlayer()).getMovementKeyMap();
             myActions = vc.getActivePiece().getActions();
+
             vc.getGridPane().requestFocus();
             vc.getGridPane().setOnKeyPressed(new EventHandler<KeyEvent>() {
-
                 @Override
                 public void handle (KeyEvent key) {
-
                     for (KeyCode mkc : myKeyMap.keySet()) {
                         if (key.getCode() == mkc) {
-                            // Do action here
+
                             if (myKeyMap.get(mkc).equals(new Point2D.Double(1.0, 1.0))) {
-                                System.out.println("Selected action with key");
+                                // Do action here
                                 vc.bindAction(myCurrentAction);
                             }
 
@@ -77,42 +75,26 @@ public class KeyboardAction {
                                 }
 
                                 myCurrentAction = myActions.get(myActionIndex);
-                                System.out.println("myActionIndex: " + myActionIndex);
                             }
                         }
                     }
-
                     markAction(vc);
                 }
             });
         }
     }
 
-    public void markAction (ViewController vc) {
-//        unmarkAction(vc);
+    private void markAction (ViewController vc) {
         vc.getcontrolPane().getChildren().forEach(label -> {
+            // first, unmark previous action
             label.setEffect(null);
-            Label l = (Label) label;
-            if (l.getText() == myCurrentAction.toString()) {
-                InnerShadow is = new InnerShadow();
-                is.setOffsetX(ACTION_LABEL_SHADOW_OFFSET);
-                is.setOffsetY(ACTION_LABEL_SHADOW_OFFSET);
-                l.setEffect(is);
+            if (((Label) label).getText() == myCurrentAction.toString()) {
+                // now, mark currently selected action
+                InnerShadow mark = new InnerShadow();
+                mark.setOffsetX(ACTION_LABEL_SHADOW_OFFSET);
+                mark.setOffsetY(ACTION_LABEL_SHADOW_OFFSET);
+                label.setEffect(mark);
             }
         });
-    }
-
-//    public void unmarkAction (ViewController vc) {
-//        vc.getcontrolPane().getChildren().forEach(label -> {
-//            label.setEffect(null);
-//        });
-//    }
-
-    public void useDefaultMap () {
-        // this is just for testing
-        myKeyMap.put(KeyCode.W, new Point2D.Double(0.0, 1.0));
-        myKeyMap.put(KeyCode.S, new Point2D.Double(0.0, -1.0));
-        myKeyMap.put(KeyCode.F, new Point2D.Double(1.0, 1.0));
-        System.out.println("Using Default Keyboard Map");
     }
 }
