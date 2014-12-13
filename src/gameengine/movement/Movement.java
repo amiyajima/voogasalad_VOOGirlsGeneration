@@ -55,12 +55,9 @@ public class Movement implements Action {
 	 *            Point2Ds representing all possible relative locations of
 	 *            movement
 	 */
-	public Movement(List<Point2D.Double> moves, List<List<Point2D.Double>> paths) {
+	public Movement(List<Point2D.Double>... endPoints) {
 		myOrientation = 0;
 		myOrientator = new Orientator();
-		myMoves = moves;
-		myPaths = paths;
-		/*
 		boolean first = true;
 		myPaths = new ArrayList<List<Point2D.Double>>();
 		for (List<Point2D.Double> p : endPoints) {
@@ -71,7 +68,6 @@ public class Movement implements Action {
 				myPaths.add(p);
 			}
 		}
-		*/
 	}
 
 	/**
