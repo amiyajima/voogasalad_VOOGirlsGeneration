@@ -1,11 +1,13 @@
 package gamedata.action;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class ActionStatsEditor extends VBox {
@@ -18,12 +20,12 @@ public class ActionStatsEditor extends VBox {
 	 * @param stlList
 	 */
 	public ActionStatsEditor(List<StatsTotalLogic> stlList) {
+		myTotalLogicList = new LinkedList<TotalLogicBox>();
 		Button newOpBtn = makeNewOpButton();
+		getChildren().addAll(newOpBtn);
 		for (StatsTotalLogic stl : stlList) {
 			addTotalLogicBox(stl);
 		}
-		
-		getChildren().addAll(newOpBtn);
 	}
 
 	private Button makeNewOpButton() {
@@ -31,18 +33,31 @@ public class ActionStatsEditor extends VBox {
 		newBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent click) {
-				getChildren().remove(newBtn);
 				addTotalLogicBox(new StatsTotalLogic());
-				getChildren().add(newBtn);
 			}
 		});
 		return newBtn;
 	}
 
 	private void addTotalLogicBox(StatsTotalLogic stl) {
+		HBox deletableHBox = new HBox();
 		TotalLogicBox stlBox = new TotalLogicBox(stl);
+		Button delBtn = makeDeleteButton(deletableHBox,stlBox);
 		myTotalLogicList.add(stlBox);
-		getChildren().add(stlBox);
+		deletableHBox.getChildren().addAll(delBtn, stlBox);
+		getChildren().add(deletableHBox);
+	}
+	
+	private Button makeDeleteButton(HBox deletableHBox, TotalLogicBox stlBox) {
+		Button delBtn = new Button("-");
+		delBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle (ActionEvent event) {
+				myTotalLogicList.remove(stlBox);
+				getChildren().remove(deletableHBox);
+			}
+		});
+		return delBtn;
 	}
 	
 	/**

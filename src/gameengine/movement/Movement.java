@@ -2,9 +2,11 @@ package gameengine.movement;
 
 import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.geom.Point2D;
+
 import authoring_environment.GUIGrid;
 
 /**
@@ -45,6 +47,11 @@ public class Movement implements Action {
 	 * Orientation of the piece (depending on last movement made)
 	 */
 	private double myOrientation;
+	
+	/**
+	 * Name of the action for display in the Player
+	 */
+	private String myName;
 
 	/**
 	 * Constructor
@@ -60,6 +67,7 @@ public class Movement implements Action {
 		myOrientator = new Orientator();
 		myMoves = moves;
 		myPaths = paths;
+		myName = "Move";
 		/*
 		boolean first = true;
 		myPaths = new ArrayList<List<Point2D.Double>>();
@@ -130,7 +138,7 @@ public class Movement implements Action {
 	}
 
 	@Override
-	public List<Point2D.Double> getSpecificActionRange(Point2D pieceLocation) {
+	public List<Point2D.Double> getAbsoluteActionRange(Point2D pieceLocation) {
 		return this.getPossibleLocs((int) pieceLocation.getX(),
 				(int) pieceLocation.getY());
 	}
@@ -185,5 +193,10 @@ public class Movement implements Action {
 	 */
 	public List<Point2D.Double> getRelativeMoves() {
 		return myMoves;
+	}
+
+	@Override
+	public String getName() {
+		return myName;
 	}
 }

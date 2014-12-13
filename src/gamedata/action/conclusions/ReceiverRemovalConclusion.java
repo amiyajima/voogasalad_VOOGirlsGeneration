@@ -12,5 +12,10 @@ public class ReceiverRemovalConclusion implements ActionConclusion {
 			receiver.markForRemoval();
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return "Receiver Removal";
+	}
 
 }

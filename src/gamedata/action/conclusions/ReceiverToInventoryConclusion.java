@@ -12,5 +12,10 @@ public class ReceiverToInventoryConclusion implements ActionConclusion {
 			actor.addToInventory(receiver);
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return "Receiver to Inventory";
+	}
 
 }

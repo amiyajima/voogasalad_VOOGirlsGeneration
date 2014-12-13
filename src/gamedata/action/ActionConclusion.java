@@ -14,4 +14,11 @@ public interface ActionConclusion {
 	 * @param receivers - Pieces that receive the action
 	 */
 	public void runConclusion(GUIGrid grid, Piece actor, Piece... receivers);
+	
+	/**
+	 * Gets a title for the conclusion for authoring environment
+	 * display purposes
+	 */
+	public String toString();
+
 }

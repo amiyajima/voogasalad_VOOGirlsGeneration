@@ -16,20 +16,26 @@ import gamedata.gamecomponents.Piece;
 public interface Action {
 	
 	/**
-	 * Returns the name of the Action for display
+	 * Returns the information about the Action for display
 	 * @return name of Action
 	 */
 	public String toString();
+	
+	/**
+	 * Returns the name of the Action for display
+	 * @return name of Action
+	 */
+	public String getName();
 	
 	/**
 	 * Gives back a list of Point2D of absolute
 	 * locations for the action range
 	 * @return list of absolute locations in Point2D
 	 */
-	public List<Point2D.Double> getSpecificActionRange(Point2D pieceLocation);
+	public List<Point2D.Double> getAbsoluteActionRange(Point2D pieceLocation);
 	
 	/**
-	 * Gives back a list of Point2D of absolute
+	 * Gives back a list of Point2D of relative
 	 * locations for the action range
 	 * @return list of absolute locations in Point2D
 	 */
