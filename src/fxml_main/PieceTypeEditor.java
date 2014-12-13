@@ -10,6 +10,7 @@ import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -93,7 +94,8 @@ public class PieceTypeEditor extends Pane {
         myID = "";
         myName = "";
         myImageLocation = DEFAULT_IMAGE_LOC;
-        myMovement = new Movement();
+        myMovement = new Movement(new LinkedList<Point2D.Double>(),
+        		new ArrayList<List<Point2D.Double>>());
         myActions = new ArrayList<Action>();
         myStats = new Stats();
         myPlayerID = 1;
@@ -160,10 +162,6 @@ public class PieceTypeEditor extends Pane {
         initRangeEditorButton(rangeEditorBtn);
         movements.getChildren().addAll(rangeEditorBtn);
         
-        
-        
- 
-
         Button createStatButton = new Button(STAT_CREATE_LABEL);
         initStatButton(createStatButton);
         createStat.getChildren().addAll(createStatButton);
