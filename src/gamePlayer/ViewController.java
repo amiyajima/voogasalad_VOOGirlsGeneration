@@ -257,7 +257,7 @@ public class ViewController {
          */
         @FXML
         private void testGame() {
-            myStage.setScene(mySplashScreen);
+                myStage.setScene(mySplashScreen);
                 TestGameCreator JSBTester = new TestGameCreator();
                 testPlayGame(JSBTester.createNewGame());
         }
@@ -493,14 +493,14 @@ public class ViewController {
          * @param x
          * @param y
          */
-        public void performAction(Point2D.Double loc) {
+        public void performAction(Point2D.Double myCurrentLocation) {
                 System.out.println("PERFORM ACTION");
 
                 if (clickSoundOn) {
                         myAudio.playSelection();
                 }
 
-                gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
+                gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(myCurrentLocation));
 
                 while (myCurrentPlayer.getType().equals("AI")) {
                     myCurrentPlayer.play();
@@ -888,9 +888,17 @@ public class ViewController {
             initializeGrid();
             myScene = new Scene(myGameSpace);
             myStage.setScene(myScene);
+
 //            System.out.println("VC: Current Level: " + myModel.getCurrentLevel().getId());
 //            System.out.println(myModel.getCurrentLevel().getGrid().toString());
             myModel.getCurrentLevel().getGrid().repopulateGrid();
+
+           // System.out.println("VC: Current Level - " + myModel.getCurrentLevel().getId() + " " + "Current Player" + myCurrentPlayer.getID());
+           /* for (Level l : myModel.getLevels()) {
+                System.out.println("Level #" + l.getId());
+                System.out.println(l.toString());
+            }*/
+            //System.out.println("VC: Current Level: " + myModel.getCurrentLevel().getId());
         }
 
 

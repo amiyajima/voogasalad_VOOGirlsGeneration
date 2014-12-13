@@ -69,7 +69,7 @@ public class GameGridEffect {
      * @param n
      * @param red
      */
-    public void highlightEffectRange (Point2D loc) {
+    public void highlightEffectRange (Point2D.Double loc) {
         clearAllEffectHighlights();
         
         myActivePiece = myViewController.getActivePiece();
@@ -91,7 +91,7 @@ public class GameGridEffect {
     /**
      * Uses GRID COORDINATE LOCATION to highlight the current location on the grid
      */
-    public void highlightCurrent(Point2D loc, Piece activeP){
+    public void highlightCurrent(Point2D.Double loc, Piece activeP){
         System.out.println("highlight CURRENT");
         
         clearAllPieceHighlights();

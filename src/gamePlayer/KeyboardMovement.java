@@ -22,7 +22,7 @@ import javafx.scene.input.KeyEvent;
 public class KeyboardMovement {
     private static final String KEY_MOVEMENT_COLOR = "#AC58FA";
 
-    private Point2D myCurrentLocation;
+    private Point2D.Double myCurrentLocation;
     private Map<KeyCode, Point2D> myKeyMap;
     private SuperTile currentTile;
 
@@ -83,7 +83,7 @@ public class KeyboardMovement {
                                 currentTile = vc.getGrid().findTile(myCurrentLocation);
                                 currentTile.deselectTile();
 
-                                Point2D newCurrentLocation =
+                                Point2D.Double newCurrentLocation =
                                         new Point2D.Double(myCurrentLocation.getX() +
                                                            myKeyMap.get(kc).getX(),
                                                            myCurrentLocation.getY() -
@@ -115,7 +115,7 @@ public class KeyboardMovement {
      * 
      * @return current keyboard control location on the game grid
      */
-    public Point2D getCurrentLocation () {
+    public Point2D.Double getCurrentLocation () {
         return myCurrentLocation;
     }
 
