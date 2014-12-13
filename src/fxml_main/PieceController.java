@@ -100,7 +100,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
     @Override
     protected HBox makeEntryBox (Piece entry) {
         HBox hb = new HBox();
-        Label name = new Label(entry.toString());
+        Label name = new Label(entry.getName());
         name.setTranslateY(7.5);
         ImageView img = entry.getImageView();
         img.setFitHeight(40);
