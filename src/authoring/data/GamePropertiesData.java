@@ -5,9 +5,9 @@ public class GamePropertiesData {
 	private int myNumPlayers;
 	private String myGridShape;
 	
-	public GamePropertiesData(){
-		myNumPlayers = 1;
-		myGridShape = "Square Grid";
+	public GamePropertiesData(int numPlayers, String gridShape){
+		myNumPlayers = numPlayers;
+		myGridShape = gridShape;
 	}
 	
 	public int getNumPlayers(){
@@ -18,12 +18,12 @@ public class GamePropertiesData {
 		return myGridShape;
 	}
 	
-	public void setNumPlayers(int numPlayers){
-		myNumPlayers = numPlayers;
-	}
-	
-	public void setGridShape(String gridShape){
-		myGridShape = gridShape;
-	}
+//	public void setNumPlayers(int numPlayers){
+//		myNumPlayers = numPlayers;
+//	}
+//	
+//	public void setGridShape(String gridShape){
+//		myGridShape = gridShape;
+//	}
 	
 }
