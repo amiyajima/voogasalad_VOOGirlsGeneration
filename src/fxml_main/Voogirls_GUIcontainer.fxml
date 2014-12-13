@@ -18,7 +18,7 @@
                         <MenuItem mnemonicParsing="false" text="Open Existing..." />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem disable="true" mnemonicParsing="false" text="Game Player" />
-                        <MenuItem mnemonicParsing="false" text="New" />
+                        <MenuItem fx:id="newPlayer" mnemonicParsing="false" text="New" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="Exit" />
                   </items>
@@ -37,17 +37,10 @@
             </MenuBar>
          </top>
          <center>
-            <TabPane fx:id="displayedTabs" prefHeight="800.0" prefWidth="1024.0" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER">
+            <TabPane fx:id="displayedTabs" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER">
                <effect>
                   <Glow />
-               </effect>
-               <tabs>
-                  <Tab fx:id="testauthor" text="Untitled Tab">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                  </Tab>
-               </tabs></TabPane>
+               </effect></TabPane>
          </center>
       </BorderPane>
    </children>
