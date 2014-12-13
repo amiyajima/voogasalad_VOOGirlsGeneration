@@ -7,18 +7,13 @@ import gamedata.action.ConcreteAction;
 import gamedata.gamecomponents.Game;
 import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
-<<<<<<< HEAD
-import java.io.File;
-import java.io.FileWriter;
-=======
 
->>>>>>> a4c452332a2eec24af9729475a8f22a7408fff0f
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,12 +23,12 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 import authoring.actionslogic.ActionLogicController;
 import authoring.concretefeatures.StatsTotalEditor;
 import authoring.createedit.GamePropertiesEditor;
@@ -104,24 +99,9 @@ public class AuthoringController implements Initializable {
         myLevelData = new LevelData();
         myPieceTypes = new PieceTypeData();
         myPatchTypes = new PatchTypeData();
-        myGamePropertiesData = new GamePropertiesData();
+//        myGamePropertiesData = new GamePropertiesData();
 
-        myTotalData = new GameAuthoringData(myLevelData, myPieceTypes, myPatchTypes,
-                                            myActionData, myGamePropertiesData);
-        GUIGridReference myGridReference = new GUIGridReference();
-
-        myPieceController = new PieceController(myPiecesVBox, myPropertiesSPane, myGridReference,
-                                                myPieceTypes, myActionData, myGamePropertiesData);
-        myPatchController = new PatchController(myPatchesVBox, myPropertiesSPane, myGridReference,
-                                                myPatchTypes);
-        myLevelController =
-                new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
-                                    myGridReference, myLevelData, myPieceTypes, myPatchTypes,
-                                    myGamePropertiesData.getGridShape());
-
-        myActionController =
-                new ActionController(myActionsVBox, myPropertiesSPane, myGridReference,
-                                     myActionData, myGamePropertiesData.getGridShape());
+        
     }
 
     @FXML
@@ -171,22 +151,20 @@ public class AuthoringController implements Initializable {
     
     @FXML
     private void saveGame () {
-        JSONManager json = new JSONManager();
+
         Game game = myTotalData.createGame();
         Player p1 = new HumanPlayer(1);
         List<Player> players = new ArrayList<Player>();
         players.add(p1);
         game.addPlayers(players);
 
-        FileChooser fileChooser = new FileChooser();
-        File f = fileChooser.showSaveDialog(null);
-        String basePath = System.getProperty("user.dir");
-        String absolutePath = f.getPath();
-        String relativePath = "";
-        if (absolutePath.startsWith(basePath)) {
-                relativePath = absolutePath.substring(basePath.length() + 1);
-        }
-        json.writeToJSON(game, f.getPath());    
+        JSONManager myJM = new JSONManager();
+        
+        FileChooser myFC = new FileChooser();
+        myFC.getExtensionFilters().add(new ExtensionFilter("JSON", "*.json"));
+        myFC.setInitialDirectory(new File("src/resources/json"));
+        File file = myFC.showOpenDialog(new Stage());
+        myJM.writeToJSON(game, file.getAbsolutePath());
     }
 
     
@@ -214,6 +192,23 @@ public class AuthoringController implements Initializable {
     
 	public void initData(GamePropertiesData gamePropertiesData) {
 		myGamePropertiesData=gamePropertiesData;
+		
+		myTotalData = new GameAuthoringData(myLevelData, myPieceTypes, myPatchTypes,
+                myActionData, myGamePropertiesData);
+GUIGridReference myGridReference = new GUIGridReference();
+
+myPieceController = new PieceController(myPiecesVBox, myPropertiesSPane, myGridReference,
+                    myPieceTypes, myActionData, myGamePropertiesData);
+myPatchController = new PatchController(myPatchesVBox, myPropertiesSPane, myGridReference,
+                    myPatchTypes);
+myLevelController =
+new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
+        myGridReference, myLevelData, myPieceTypes, myPatchTypes,
+        myGamePropertiesData.getGridShape());
+
+myActionController =
+new ActionController(myActionsVBox, myPropertiesSPane, myGridReference,
+         myActionData, myGamePropertiesData.getGridShape());
 	}
     
 

@@ -1,9 +1,7 @@
 package fxml_main;
 
-import gamedata.action.Action;
-import gameengine.player.Player;
+import gamedata.action.ConcreteAction;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 import javafx.event.ActionEvent;
@@ -21,7 +19,7 @@ import authoring.data.ActionData;
  * @author annamiyajima
  *
  */
-public class ActionController extends GridComponentAbstCtrl<Action> {
+public class ActionController extends GridComponentAbstCtrl<ConcreteAction> {
 	private ActionData myActionData;
 	private String myGridShape;
 
@@ -34,16 +32,11 @@ public class ActionController extends GridComponentAbstCtrl<Action> {
 
 	@Override
 	protected void initGlobalNewBtn (Button newBtn) {
-		// TODO: Need to not hard-code square, have it passed through the constructor
-		// as maybe a gridshapeproperty (new class?)
 		newBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent click) {
-				Consumer<Action> okLambda = (Action action) -> {
+				Consumer<ConcreteAction> okLambda = (ConcreteAction action) -> {
 					myActionData.add(action);
-					System.out.println(myActionData.getActionIDs().get(0));
-					System.out.println("Created Action");
-					System.out.println(action.getActionRange().toString());
 					addEntry(action);
 				};
 				myPropertiesSPane.setContent(new ActionEditor(okLambda, myGridShape));
@@ -53,44 +46,40 @@ public class ActionController extends GridComponentAbstCtrl<Action> {
 
 	@Override
 	protected void initGlobalEditBtn (Button editBtn) {
+		editBtn.setVisible(false);
 		// do nothing
 	}
 
 
 	@Override
 	protected void initGlobalDelBtn (Button delBtn) {
+		delBtn.setVisible(false);
 		// do nothing
 	}
 
 	@Override
-	protected void initEntryEditBtn (Action entry, Button editBtn) {
+	protected void initEntryEditBtn (ConcreteAction entry, Button editBtn) {
 		editBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent click) {
-				Consumer<Action> okLambda = (Action action) -> {
-
-					myVBox.getChildren().remove(entry);
-
+				Consumer<ConcreteAction> okLambda = (ConcreteAction action) -> {
+					HBox entryBox = makeCompleteEntryBox(action);
 					HBox entryHolderBox = myEntryMap.get(entry);
 					entryHolderBox.getChildren().clear();
-
-					myEntryMap.get(entry);
-
+					entryHolderBox.getChildren().add(entryBox);
+					myEntryMap.put(action, entryHolderBox);
+					myActionData.replace(entry, action);
 				};
-
-				List<Player> playersRO = null;
-
 				myPropertiesSPane.setContent(new ActionEditor(okLambda, entry, myGridShape));
-
 			}
 
 		});
 	}
 
 	@Override
-	protected HBox makeEntryBox (Action entry) {
+	protected HBox makeEntryBox (ConcreteAction entry) {
 		HBox hb = new HBox();
-		Label name = new Label(entry.toString());
+		Label name = new Label(entry.getName());
 		name.setTranslateY(7.5);
 		hb.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -103,12 +92,12 @@ public class ActionController extends GridComponentAbstCtrl<Action> {
 		return hb;
 	}
 
-
 	@Override
-	protected void initEntryDelBtn (Action entry, Button delBtn) {
+	protected void initEntryDelBtn (ConcreteAction entry, Button delBtn) {
 		delBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent event) {
+				myActionData.remove(entry);
 				myVBox.getChildren().remove(myEntryMap.get(entry));
 			}
 		});

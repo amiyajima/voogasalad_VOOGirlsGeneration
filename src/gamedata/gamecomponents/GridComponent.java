@@ -126,6 +126,7 @@ public abstract class GridComponent implements IHasStats{
 	 * @return myImageView : Image for the GridComponent.
 	 */
     public ImageView getImageView() {
+    	this.setImageView();
         return myImageView;
     }
     

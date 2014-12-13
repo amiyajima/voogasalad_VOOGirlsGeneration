@@ -6,8 +6,6 @@ import java.io.FileReader;
 import gamedata.action.Action;
 import gamedata.action.ConcreteAction;
 import gamedata.adapters.ActionDeserializer;
-import gamedata.wrappers.ActionDataIndividual;
-import gamedata.wrappers.ConcreteActionData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -31,10 +29,13 @@ public class TypeAdapterTester {
         try {
             String link = "src/resources/json/Patch-Rica.json";
             BufferedReader br = new BufferedReader(new FileReader(link));
+            /*
             ActionDataIndividual adi = myGson.fromJson(br, ConcreteActionData.class);
             ConcreteActionData cad = (ConcreteActionData) adi;
+            
             System.out.println(cad.getName());
             System.out.println(adi);
+            */
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -1,6 +1,7 @@
 package fxml_main;
 
 import gamedata.action.Action;
+
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
@@ -59,7 +60,7 @@ public class PieceTypeEditor extends Pane {
     private static final String LABEL_CSS = "-fx-font-size: 14pt;";
 
     private static final String DEFAULT_IMAGE_LOC = "/resources/images/default_image.png";
-    private static final Point2D DEFAULT_LOC = new Point2D.Double(0, 0);
+    private static final Point2D.Double DEFAULT_LOC = new Point2D.Double(0, 0);
 
     private String myEditorTitle;
     private Consumer<Piece> myOkLambda;
@@ -160,10 +161,6 @@ public class PieceTypeEditor extends Pane {
         initRangeEditorButton(rangeEditorBtn);
         movements.getChildren().addAll(rangeEditorBtn);
         
-        
-        
- 
-
         Button createStatButton = new Button(STAT_CREATE_LABEL);
         initStatButton(createStatButton);
         createStat.getChildren().addAll(createStatButton);

@@ -64,7 +64,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
                     @Override
                     public void handle (MouseEvent e) {
                         GUIGrid grid = myGridReference.getGrid();
-                        Point2D coor = grid.findClickedCoordinate(e.getX(), e.getY());
+                        Point2D.Double coor = grid.findClickedCoordinate(e.getX(), e.getY());
                         Piece piece = grid.getPiece(coor);
                         myPropertiesSPane.setContent(new PieceEditor(piece,
                         		myGameProperties.getNumPlayers()));
@@ -86,7 +86,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
                     @Override
                     public void handle (MouseEvent e) {
                         GUIGrid grid = myGridReference.getGrid();
-                        Point2D coor = grid.findClickedCoordinate(e.getX(), e.getY());
+                        Point2D.Double coor = grid.findClickedCoordinate(e.getX(), e.getY());
                         grid.removePieceAtCoordinate(coor);
                     }
                 };
@@ -111,7 +111,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
                     @Override
                     public void handle (MouseEvent e) {
                         GUIGrid grid = myGridReference.getGrid();
-                        Point2D coor = grid.findClickedCoordinate(e.getX(), e.getY());
+                        Point2D.Double coor = grid.findClickedCoordinate(e.getX(), e.getY());
                         grid.addPieceAtLoc(entry, coor);
                     }
                 };

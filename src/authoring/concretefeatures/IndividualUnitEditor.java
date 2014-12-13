@@ -15,7 +15,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
-import authoring.datawrappers.GridPieceWrapper;
 import authoring_environment.UIspecs;
 
 

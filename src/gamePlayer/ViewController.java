@@ -257,7 +257,7 @@ public class ViewController {
          */
         @FXML
         private void testGame() {
-            myStage.setScene(mySplashScreen);
+                myStage.setScene(mySplashScreen);
                 TestGameCreator JSBTester = new TestGameCreator();
                 testPlayGame(JSBTester.createNewGame());
         }
@@ -319,7 +319,7 @@ public class ViewController {
         protected void newGame() throws UnsupportedAudioFileException, IOException,
                         LineUnavailableException {
 
-                List<File> games = getGames();
+                List<File> games = getResourceGames();
 
                 games.forEach(file -> {
                         MenuItem l = new MenuItem();
@@ -327,11 +327,21 @@ public class ViewController {
                         l.getStyleClass().add("button");
                         newGameMenu.getItems().add(l);
                         l.setOnAction(event -> {
-                                myScene = new Scene(myGameSpace);
-                                myStage.setScene(myScene);
+                                try {
+                                    System.out.println("VC: loading game... ");
+                                    JSONManager myJM = new JSONManager();
+                                    myStage.setScene(mySplashScreen);
+                                    String gameLoc = GAME_LOCATION + l.getText() + ".json";
+                                    testPlayGame(myJM.readFromJSONFile(gameLoc));
+                                    System.out.println("VC: game loaded... ");
+                                }
+                                catch (FileNotFoundException e) {
+                                    String gameLoc = GAME_LOCATION  + "/" + l.getText() + ".json";
+                                    System.out.println("Could not find file: " + gameLoc);
+                                }
                         });
                 });
-                // initializeGrid();
+                
         }
 
         /**
@@ -382,7 +392,7 @@ public class ViewController {
          * The method to get all json files from the resources directory that stores
          * all the games user has defined from the authoring environment
          */
-        private List<File> getGames() {
+        private List<File> getResourceGames() {
 
                 List<File> gameList = new ArrayList<File>();
                 File files = new File(System.getProperty("user.dir") + GAME_LOCATION);
@@ -493,14 +503,14 @@ public class ViewController {
          * @param x
          * @param y
          */
-        public void performAction(Point2D.Double loc) {
+        public void performAction(Point2D.Double myCurrentLocation) {
                 System.out.println("PERFORM ACTION");
 
                 if (clickSoundOn) {
                         myAudio.playSelection();
                 }
 
-                gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
+                gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(myCurrentLocation));
 
                 while (myCurrentPlayer.getType().equals("AI")) {
                     myCurrentPlayer.play();
@@ -884,12 +894,25 @@ public class ViewController {
          */
         public void testPlayGame(Game testGame) {
             myModel = testGame;
+            TestGameCreator tgc = new TestGameCreator();
+            tgc.createNewGame();
+            tgc.createNewGame();
+            tgc.createNewGame();
             System.out.println("model found in viewcontroller: " + myModel);
             initializeGrid();
             myScene = new Scene(myGameSpace);
             myStage.setScene(myScene);
+
 //            System.out.println("VC: Current Level: " + myModel.getCurrentLevel().getId());
 //            System.out.println(myModel.getCurrentLevel().getGrid().toString());
+            myModel.getCurrentLevel().getGrid().repopulateGrid();
+
+           // System.out.println("VC: Current Level - " + myModel.getCurrentLevel().getId() + " " + "Current Player" + myCurrentPlayer.getID());
+           /* for (Level l : myModel.getLevels()) {
+                System.out.println("Level #" + l.getId());
+                System.out.println(l.toString());
+            }*/
+            //System.out.println("VC: Current Level: " + myModel.getCurrentLevel().getId());
         }
 
 

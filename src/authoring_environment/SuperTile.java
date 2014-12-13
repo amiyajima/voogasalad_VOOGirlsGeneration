@@ -19,9 +19,9 @@ public abstract class SuperTile extends Group {
     protected Shape myShape;
     // private int mySize;
     private double myImageSize;
-    private Point2D myLocation;
-    private Point2D myImageLocation;
-    private Point2D myCoordinates;
+    private Point2D.Double myLocation;
+    private Point2D.Double myImageLocation;
+    private Point2D.Double myCoordinates;
 
     protected transient ImageView myPieceImage;
     protected transient Shape myPatchImage;
@@ -33,7 +33,7 @@ public abstract class SuperTile extends Group {
      * @param size: The side length/height of the shape.
      * @param loc: Grid location of the tile.
      */
-    public SuperTile (double size, Point2D loc) {
+    public SuperTile (double size, Point2D.Double loc) {
         myCoordinates = loc;
         makeShapeTile(size, loc);
         setStyle("-fx-cursor: hand");
@@ -51,7 +51,7 @@ public abstract class SuperTile extends Group {
      * @param loc: Grid location of the tile.
      * 
      */
-    protected void makeShapeTile (double size, Point2D loc) {
+    protected void makeShapeTile (double size, Point2D.Double loc) {
 
         myLocation = calculatePixelLocation(size, loc);
         myImageLocation = calculateImageLocation(size, loc);
@@ -150,7 +150,7 @@ public abstract class SuperTile extends Group {
      * @param coordinates: The pixel coordinate of the tile.
      * @return The tile of a shape with its location and its size defined.
      */
-    protected abstract Shape makeShape (double size, Point2D coordinates);
+    protected abstract Shape makeShape (double size, Point2D.Double coordinates);
 
     /**
      * Calculate the pixel location of the tile.
@@ -158,7 +158,7 @@ public abstract class SuperTile extends Group {
      * @param loc: The grid location of the tile with the top left as (0,0).
      * @return The pixel location of the tile.
      */
-    protected abstract Point2D calculatePixelLocation (double size, Point2D loc);
+    protected abstract Point2D.Double calculatePixelLocation (double size, Point2D.Double loc);
     
     /**
      * Calculate the location of the image inside the tile that the image takes 
@@ -168,7 +168,7 @@ public abstract class SuperTile extends Group {
      * @param loc: The grid location of the tile with the top left as (0,0).
      * @return The pixel location of the image.
      */
-    protected abstract Point2D calculateImageLocation(double size, Point2D loc);
+    protected abstract Point2D.Double calculateImageLocation(double size, Point2D.Double loc);
     
     /**
      * 
@@ -214,7 +214,7 @@ public abstract class SuperTile extends Group {
      * @param coord: The pixel location of the nodes.
      * @param nodes: The node to be aligned. 
      */
-    private void alignNodes (Point2D coord, Node ... nodes) {
+    private void alignNodes (Point2D.Double coord, Node ... nodes) {
         for (Node node : nodes) {
             node.setLayoutX(coord.getX());
             node.setLayoutY(coord.getY());
@@ -226,7 +226,7 @@ public abstract class SuperTile extends Group {
      * 
      * @return The grid location of the tile.
      */
-    public Point2D getCoordinates () {
+    public Point2D.Double getCoordinates () {
         return myCoordinates;
     }
 
@@ -235,7 +235,7 @@ public abstract class SuperTile extends Group {
      * 
      * @return The pixel location of the tile.
      */
-    public Point2D getLocation () {
+    public Point2D.Double getLocation () {
         return myLocation;
     }
     

@@ -19,7 +19,7 @@ public class HexagonTile extends SuperTile{
 	 * @param size: The height of the hexagon.
 	 * @param loc: The grid location of the tile.
 	 */
-	public HexagonTile(double size, Point2D loc) {
+	public HexagonTile(double size, Point2D.Double loc) {
 		super(size, loc);
 	}
 
@@ -29,7 +29,7 @@ public class HexagonTile extends SuperTile{
 	 * @return The hexagon with its size and hexagon vertexes position defined.
 	 */
 	@Override
-	protected Shape makeShape(double size,Point2D centerCoord) {
+	protected Shape makeShape(double size,Point2D.Double centerCoord) {
 		double radius = size/Math.sqrt(3);
 		double centerX=centerCoord.getX();
 		double centerY=centerCoord.getY();
@@ -50,7 +50,7 @@ public class HexagonTile extends SuperTile{
 	 * @return The pixel coordinate of the leftmost vertex of the hexagon.
 	 */
 	@Override
-	protected Point2D calculatePixelLocation(double size, Point2D loc) {
+	protected Point2D.Double calculatePixelLocation(double size, Point2D.Double loc) {
 		double radius = size/Math.sqrt(3);
 		double xCoord = loc.getY()*1.5*radius + radius;
 		double yCoord = loc.getX()*size + (loc.getY()%2)*0.5*size+size/2;
@@ -64,7 +64,7 @@ public class HexagonTile extends SuperTile{
 	 * @return The pixel location of the image.
 	 */
 	@Override
-	protected Point2D calculateImageLocation(double size, Point2D loc) {
+	protected Point2D.Double calculateImageLocation(double size, Point2D.Double loc) {
 		Point2D layoutCoord = calculatePixelLocation(size,loc);
 		double radius = size/Math.sqrt(3);
 		double imageX = layoutCoord.getX()-radius/2;

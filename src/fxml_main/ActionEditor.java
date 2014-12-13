@@ -1,11 +1,9 @@
 package fxml_main;
 
-import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
+import gamedata.action.ActionStatsEditor;
 import gamedata.action.ConcreteAction;
-import gamedata.action.SingleMultiplierBox;
 import gamedata.action.StatsTotalLogic;
-import gamedata.action.TotalLogicBox;
 
 import java.awt.geom.Point2D;
 import java.io.IOException;
@@ -29,9 +27,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import utilities.ClassGrabber;
+import utilities.Reflection;
 import authoring.abstractfeatures.PopupWindow;
 import authoring.concretefeatures.RangeEditor;
-import authoring.data.ActionData;
 
 
 /**
@@ -40,213 +38,162 @@ import authoring.data.ActionData;
  */
 public class ActionEditor extends Pane {
 
-    public static final int HEIGHT = 100;
-    public static final int WIDTH = 100;
-    public static final String NAME = "Action Creator";
-    private static final String STYLESHEET = "/resources/stylesheets/actioncreator_layout.css";
-    private static final Insets MARGINS = new Insets(20, WIDTH / 8, 20, WIDTH / 8 - 10);
-    private static final String LABEL_CSS = "-fx-font-size: 12pt;";
-    private static final String CONCLUSION_LABEL = "Choose action conclusion";
+	private static final int HEIGHT = 100;
+	private static final int WIDTH = 100;
+	
+	private static final String STYLESHEET = "/resources/stylesheets/actioncreator_layout.css";
+	private static final Insets MARGINS = new Insets(20, WIDTH / 8, 20, WIDTH / 8 - 10);
+	private static final String LABEL_CSS = "-fx-font-size: 12pt;";
+	private static final String CONCLUSION_LABEL = "Choose action conclusion";
 
-    private String myName;
-    private List<Point2D> myAttackRange;
-    private List<Point2D> myEffectRange;
-    private List<StatsTotalLogic> myStatsLogics;
-    private ActionConclusion myConclusion;
-    private List<Class> conclusionsList;
-    
-    private Consumer<Action> myOkLambda;
-    private String myGridShape;
-    private List<TotalLogicBox> myTotalLogicBoxes;
+	private String mySceneTitle;
+	
+	private String myName;
+	private List<Point2D.Double> myAttackRange;
+	private List<Point2D.Double> myEffectRange;
+	private List<StatsTotalLogic> myStatsLogics;
+	private ActionConclusion myConclusion;
 
-    public ActionEditor (Consumer<Action> okLambda, String gridShape) {
-        myName = "";
-        myAttackRange = new LinkedList<Point2D>();
-        myEffectRange = new LinkedList<Point2D>();
-        myStatsLogics = new LinkedList<StatsTotalLogic>();
-        myConclusion = null;
-        initEditor(okLambda, gridShape);
-    }
+	private Consumer<ConcreteAction> myOkLambda;
+	private String myGridShape;
 
-    /**
-     * Constructor for an ActionCreator popup window
-     * 
-     * @param actionData
-     *        - class where user-created Actions are stored
-     */
-    public ActionEditor (Consumer<Action> okLambda, Action action, String gridShape) {
-        myName = action.toString();
-        myAttackRange = action.getActionRange();
-        myEffectRange = action.getEffectRange();
-        myStatsLogics = new LinkedList<StatsTotalLogic>(); // should read in logics
-        myConclusion = null; // should set to empty conclusion (not null)
+	public ActionEditor (Consumer<ConcreteAction> okLambda, String gridShape) {
+		myName = "";
+		myAttackRange = new LinkedList<Point2D.Double>();
+		myEffectRange = new LinkedList<Point2D.Double>();
+		myStatsLogics = new LinkedList<StatsTotalLogic>();
+		myConclusion = null;
+		
+		mySceneTitle = "Action Creator";
+		initEditor(okLambda, gridShape);
+	}
 
-        setHeight(HEIGHT);
-        setWidth(WIDTH);
-        initEditor(okLambda, gridShape);
-    }
+	/**
+	 * Constructor for an ActionCreator popup window
+	 * 
+	 * @param actionData
+	 *        - class where user-created Actions are stored
+	 */
+	public ActionEditor (Consumer<ConcreteAction> okLambda, ConcreteAction action, String gridShape) {
+		myName = action.getName();
+		myAttackRange = action.getActionRange();
+		myEffectRange = action.getEffectRange();
+		myStatsLogics = action.getStatsLogics(); // should read in logics
+		myConclusion = null; // should set to empty conclusion (not null)
+		mySceneTitle = "Action Editor";
+		initEditor(okLambda, gridShape);
+	}
 
-    protected void initEditor(Consumer<Action> okLambda, String gridShape) {
-        myOkLambda = okLambda;
-        
-        ScrollPane root = new ScrollPane();
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(STYLESHEET);
+	protected void initEditor(Consumer<ConcreteAction> okLambda, String gridShape) {
+		myOkLambda = okLambda;
+		myGridShape = gridShape;
+		setHeight(HEIGHT);
+		setWidth(WIDTH);
+		ScrollPane root = new ScrollPane();
+		Scene scene = new Scene(root);
+		scene.getStylesheets().add(STYLESHEET);
 
-        VBox box = new VBox();
-        box.setPadding(MARGINS);
-        box.setSpacing(10);
+		VBox box = new VBox();
+		box.setPadding(MARGINS);
+		box.setSpacing(10);
 
-        HBox labelBox = new HBox();
-        Label label = new Label(NAME);
-        label.setStyle(LABEL_CSS);
-        labelBox.getChildren().add(label);
+		HBox labelBox = new HBox();
+		Label label = new Label(mySceneTitle);
+		label.setStyle(LABEL_CSS);
+		labelBox.getChildren().add(label);
 
-        VBox nameVBox = new VBox();
-        VBox rangeVBox = new VBox();
-        rangeVBox.setSpacing(5);
-        rangeVBox.getStyleClass().add("vbox");
-        VBox operationsVBox = new VBox();
-        VBox conclusionVBox = new VBox();
+		VBox nameVBox = new VBox();
+		VBox rangeVBox = new VBox();
+		rangeVBox.setSpacing(5);
+		rangeVBox.getStyleClass().add("vbox");
+		VBox conclusionVBox = new VBox();
+		ChoiceBox<ActionConclusion> conclusionChoiceBox = new ChoiceBox<ActionConclusion>();
 
-        // Action name
-        TextField nameField = new TextField();
-        nameField.setMaxWidth(WIDTH - WIDTH / 4 - 10);
-        initNameField(nameVBox, nameField);
-        // Set the Action Range
-        initSetRangeButton(rangeVBox, "Action Range:", myAttackRange);
-        // Set the Effect Range
-        initSetRangeButton(rangeVBox, "Effect Range (Splashzone):", myEffectRange);
-        // Operations
-        initStatsOperationsBox(operationsVBox);
-        // conclusions
-        initConclusionsBox(conclusionVBox);
+		// Action name
+		TextField nameField = new TextField();
+		nameField.setText(myName);
+		nameField.setMaxWidth(WIDTH - WIDTH / 4 - 10);
+		initNameField(nameVBox, nameField);
+		// Set the Action Range
+		initSetRangeButton(rangeVBox, "Action Range:", myAttackRange);
+		// Set the Effect Range
+		initSetRangeButton(rangeVBox, "Effect Range (Splashzone):", myEffectRange);
+		// Operations
+		ActionStatsEditor statsEditor = new ActionStatsEditor(myStatsLogics);
+		// conclusions
+		initConclusionsBox(conclusionVBox,conclusionChoiceBox);
 
-        Button createBtn = new Button("Create new action");
-        createBtn.setMaxWidth(WIDTH - WIDTH / 4 - 10);
-        createBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent click) {
-                myName = nameField.getText();
-                myStatsLogics = getStatsLogics(myTotalLogicBoxes);
-                Action action = new ConcreteAction 
-                		(myName, myAttackRange, myEffectRange, myStatsLogics, myConclusion);
-                myOkLambda.accept(action);
-            }
-        });
-
-        box.getChildren().addAll(labelBox, nameVBox, rangeVBox, new Separator(),
-                                 operationsVBox, new Separator(), conclusionVBox,
-                                 new Separator(), createBtn);
-        getChildren().add(box);
-
-    }
-    
-    public List<StatsTotalLogic> getStatsLogics (List<TotalLogicBox> totalLogic) {
-        List<StatsTotalLogic> stlList = new LinkedList<StatsTotalLogic>();
-        for (TotalLogicBox tlb : totalLogic) {
-     	   stlList.add(tlb.getStatsLogic());
-        }
-        return stlList;
-    }
-    
-    private void initStatsOperationsBox (VBox operationsVBox) {
-    	
-    	
-    	
-    	Button addOpBtn = new Button ("Add new operation");
-    	addOpBtn.setOnAction(new EventHandler<ActionEvent>() {
-    		
+		Button createBtn = new Button("Create new action");
+		createBtn.setMaxWidth(WIDTH - WIDTH / 4 - 10);
+		createBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent event) {
-				TotalLogicBox tlb = new TotalLogicBox();
-	    		Button delOpBtn = new Button ("Delete operation");
+			public void handle (ActionEvent click) {
+				myName = nameField.getText();
+				myStatsLogics = statsEditor.getStatsTotalLogics();
+				myConclusion = conclusionChoiceBox.getValue();
+				ConcreteAction action = new ConcreteAction 
+						(myName, myAttackRange, myEffectRange, myStatsLogics, myConclusion);
+				myOkLambda.accept(action);
 			}
-        	
-    	});
-    }
-    
+		});
 
-    private void initConclusionsBox (VBox conclusionVBox) {
-        // TODO create label + choicebox populated with types of action conclusions
-        Label chooseConclusion = new Label(CONCLUSION_LABEL);
-        ChoiceBox conclusionChoiceBox = new ChoiceBox();
+		box.getChildren().addAll(labelBox, nameVBox, rangeVBox, new Separator(),
+				statsEditor, new Separator(), conclusionVBox,
+				new Separator(), createBtn);
+		getChildren().add(box);
 
-        try {
-            conclusionsList = Arrays.asList(ClassGrabber.getClasses("gamedata.action.conclusions"));
-        }
-        catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        List<String> displayList = new ArrayList<>();
-        for (Class<?> c : conclusionsList) {
-            displayList.add(c.toString());
-        }
-        displayList = trimClassList(displayList);
-
-        conclusionChoiceBox.getItems().addAll(displayList);
-
-        conclusionVBox.getChildren().addAll(chooseConclusion, conclusionChoiceBox);
-    }
-
-    private List<String> trimClassList (List<String> conclusionsList) {
-        List<String> displayList = new ArrayList<>();
-        for (String s : conclusionsList) {
-            String trimmed = trimClassPaths(s);
-            displayList.add(trimmed);
-        }
-        return displayList;
-    }
-
-    /**
-     * Removes the classpath prefixes for each Condition name
-     * 
-     * @param s
-     */
-    private String trimClassPaths (String s) {
-        int idx = 0;
-        for (int i = s.length() - 1; i >= 0; i--) {
-            if (s.charAt(i) == '.') {
-                idx = i;
-                break;
-            }
-        }
-        String trimmed = s.substring(idx + 1);
-        return trimmed;
-    }
+	}
 
 
-    private void initNameField (VBox nameBox, TextField nameField) {
-        Label nameLabel = new Label("Action name");
-        nameField.setPromptText("Enter action name");
-        nameBox.getChildren().addAll(nameLabel, nameField);
-    }
+	private void initNameField (VBox nameBox, TextField nameField) {
+		Label nameLabel = new Label("Action name");
+		nameField.setPromptText("Enter action name");
+		nameBox.getChildren().addAll(nameLabel, nameField);
+	}
 
-    //TODO: shape should be passed in
-    private void initSetRangeButton (VBox rangeBox, String label, List<Point2D> range) {
-        Label rangeLabel = new Label(label);
-        Button setRange = new Button("Set Range...");
-        setRange.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                PopupWindow actionRangeEditor = new RangeEditor(range, myGridShape);
-                actionRangeEditor.show();
-            }
-        });
-        rangeBox.getChildren().addAll(rangeLabel, setRange);
-        
-    }
+	//TODO: shape should be passed in
+	private void initSetRangeButton (VBox rangeBox, String label, List<Point2D.Double> range) {
+		Label rangeLabel = new Label(label);
+		Button setRange = new Button("Set Range...");
+		setRange.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle (ActionEvent event) {
+				PopupWindow actionRangeEditor = new RangeEditor(range, myGridShape);
+				actionRangeEditor.show();
+			}
+		});
+		rangeBox.getChildren().addAll(rangeLabel, setRange);
+	}
 
-//    protected void setAttackRange (List<Point2D> attackRange) {
-//        myAttackRange = attackRange;
-//    }
-//
-//    protected void setEffectRange (List<Point2D> effectRange) {
-//        myEffectRange = effectRange;
-//    }
+	private void initConclusionsBox (VBox conclusionVBox, ChoiceBox<ActionConclusion> choiceBox) {
+		Label conclusionLabel = new Label(CONCLUSION_LABEL);
+		List<String> conclusionClassNames;
+		try {
+			conclusionClassNames = Arrays.asList(ClassGrabber.getClassNames("gamedata.action.conclusions"));
+		}
+		catch (ClassNotFoundException | IOException e) {
+			//TODO: Display error
+			conclusionClassNames = new ArrayList<String>();
+		}
+		conclusionClassNames = trimClassList(conclusionClassNames);
+		for (String c : conclusionClassNames) {
+			ActionConclusion conclusion = (ActionConclusion) Reflection.createInstance(c);
+			choiceBox.getItems().addAll(conclusion);
+		}
+		conclusionVBox.getChildren().addAll(conclusionLabel, choiceBox);
+	}
+
+	private List<String> trimClassList (List<String> conclusionNames) {
+		List<String> displayList = new ArrayList<>();
+		String prefix = "class ";
+		for (String s : conclusionNames) {
+			if (s.startsWith(prefix)) {
+				String trimmed = s.substring(prefix.length());
+				displayList.add(trimmed);
+			}
+		}
+		return displayList;
+	}
 }
+
 

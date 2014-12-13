@@ -1,6 +1,5 @@
 package authoring_environment;
 
-import authoring.createedit.CreatorEditor;
 import authoring.data.ActionData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;

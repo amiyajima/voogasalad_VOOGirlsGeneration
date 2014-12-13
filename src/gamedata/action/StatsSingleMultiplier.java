@@ -18,7 +18,7 @@ public class StatsSingleMultiplier extends StatsModifier {
 	 * Default constructor for an empty StatsSingleMultiplier
 	 */
 	public StatsSingleMultiplier() {
-		super("default ssm","default");
+		super("","");
 		myModifier = 1;
 	}
 	

@@ -33,12 +33,12 @@ public class KeyboardAction {
     List<Action> myActions;
     Action myCurrentAction;
     int myActionIndex;
-    Map<KeyCode, Point2D> myKeyMap;
+    Map<KeyCode, Point2D.Double> myKeyMap;
 
     public KeyboardAction () {
         myActionIndex = 0;
         myActions = new ArrayList<Action>();
-        myKeyMap = new HashMap<KeyCode, Point2D>();
+        myKeyMap = new HashMap<KeyCode, Point2D.Double>();
     }
 
     public void setActionKeyControl (ViewController vc) {
