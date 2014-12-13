@@ -47,7 +47,7 @@ public class GenericTypeAdapter<T> implements JsonSerializer<T>, JsonDeserialize
     @Override
     public JsonElement serialize (T src, Type typeOfSrc,
                                   JsonSerializationContext context) {
-        System.out.println("serialize called in " + typeOfSrc + " adapter");
+//        System.out.println("serialize called in " + typeOfSrc + " adapter");
         JsonObject result = new JsonObject();
         result.add("type", new JsonPrimitive(src.getClass().getSimpleName()));
         result.add("properties", context.serialize(src, src.getClass()));
@@ -62,9 +62,9 @@ public class GenericTypeAdapter<T> implements JsonSerializer<T>, JsonDeserialize
                           JsonDeserializationContext context) throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
         String type = jsonObject.get("type").getAsString();
-        System.out.println("type " + type + " detected");
+//        System.out.println("type " + type + " detected");
         JsonElement element = jsonObject.get("properties");
-        System.out.println("element " + element + " retrieved");
+//        System.out.println("element " + element + " retrieved");
         //System.out.println(PlayerPiecesRemovedGoal.class);
         try {
             return context.deserialize(element, Class.forName(myPackageName + "." + type));

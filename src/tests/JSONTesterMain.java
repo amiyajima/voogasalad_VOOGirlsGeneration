@@ -108,7 +108,7 @@ public class JSONTesterMain {
     }
 
     public static void main (String[] args) {
-        String link = "src/resources/json/Rica-Game.json";
+        String link = "src/resources/json/THEGAME.json";
         //String localLink = "C:\\Users\\Rica\\Desktop\\Rica-GamePlayer.json";
         testJSONwrite(link);
         testJSONload(link);
