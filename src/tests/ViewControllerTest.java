@@ -1,13 +1,14 @@
 package tests;
 
 import static org.junit.Assert.*;
-
 import java.awt.geom.Point2D;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javafx.stage.Stage;
 import gamePlayer.ViewController;
 import gamedata.action.Action;
@@ -17,7 +18,6 @@ import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
 import javafx.scene.text.Text;
-
 import org.junit.Test;
 
 
@@ -39,10 +39,18 @@ public class ViewControllerTest {
     }
     @Test
     public void findPositionTest () {
-        ViewController controller = new ViewController(new Stage ());
-        Point2D point = controller.findPosition (450.0,120.0);
-        assertEquals(5,point.getX(),0.001);
-        assertEquals(2,point.getY(),0.001);
+        ViewController controller;
+        try {
+            controller = new ViewController(new Stage ());
+            Point2D point = controller.findPosition (450.0,120.0);
+            assertEquals(5,point.getX(),0.001);
+            assertEquals(2,point.getY(),0.001);
+        }
+        catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
         
     }
     @Test 

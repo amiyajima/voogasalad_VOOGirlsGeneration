@@ -115,7 +115,7 @@ public class KeyboardMovement {
      * 
      * @return current keyboard control location on the game grid
      */
-    public Point2D getCurrentLocation () {
+    public Point2D.Double getCurrentLocation () {
         return myCurrentLocation;
     }
 

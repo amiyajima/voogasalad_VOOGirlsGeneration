@@ -1,0 +1,317 @@
+VC: loading game... 
+JSONManager: read method called
+Game initialized
+model found in viewcontroller: game with 2 players and 2 levels
+initialize grid
+VC: Current Level - Level 1 Current Player1
+Level #Level 1
+Level: Level #Level 1 gamewon false gamelost false nextlevel = #null turnover false iswinning false
+grid:
+Grid
+gamedata.gamecomponents.Patch@7e70c0
+Piece #Rica_ID Rica Location: (0.0 0.0)
+  Image: /resources/images/Rica.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1c4a1ce, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@c79c5b]
+gamedata.gamecomponents.Patch@cdf5d6
+Piece #ID Duvall Location: (0.0 1.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1fa703f, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1d47f9f]
+gamedata.gamecomponents.Patch@1e316ba
+Piece #ID Duvall Location: (0.0 2.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@853a55, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@88c332]
+gamedata.gamecomponents.Patch@42683b
+Piece #ID Duvall Location: (0.0 3.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@15fe00f, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@7734e3]
+gamedata.gamecomponents.Patch@80e84c
+Piece #ID Duvall Location: (0.0 4.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@15249d7, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@17b866a]
+gamedata.gamecomponents.Patch@e47c4a
+Piece #ID Duvall Location: (1.0 0.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1b13992, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@7ec942]
+gamedata.gamecomponents.Patch@1dd5071
+Piece #Rica_ID Rica Location: (1.0 1.0)
+  Image: /resources/images/Rica.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@8060ec, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@9ba547]
+gamedata.gamecomponents.Patch@65558f
+Piece #ID Duvall Location: (1.0 2.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@106d72a, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@e5366]
+gamedata.gamecomponents.Patch@1886dfd
+Piece #ID Duvall Location: (1.0 3.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@14b9dee, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@dfb0aa]
+gamedata.gamecomponents.Patch@aa5634
+Piece #ID Duvall Location: (1.0 4.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@ab38d9, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1fc618f]
+gamedata.gamecomponents.Patch@dfd5fa
+Piece #ID Duvall Location: (2.0 0.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@f23923, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@144a3d4]
+gamedata.gamecomponents.Patch@12656ea
+Piece #ID Duvall Location: (2.0 1.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1a02df1, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@3427c7]
+gamedata.gamecomponents.Patch@ae7bd6
+Piece #Rica_ID Rica Location: (2.0 2.0)
+  Image: /resources/images/Rica.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@17af1ef, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1358ed4]
+gamedata.gamecomponents.Patch@b09e6a
+Piece #ID Duvall Location: (2.0 3.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@15d31e1, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1d44aac]
+gamedata.gamecomponents.Patch@102fec
+Piece #ID Duvall Location: (2.0 4.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@73ba0a, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@714d9c]
+gamedata.gamecomponents.Patch@117e054
+Piece #ID Duvall Location: (3.0 0.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@3bda55, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1e78172]
+gamedata.gamecomponents.Patch@1422c7f
+Piece #ID Duvall Location: (3.0 1.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@13d7343, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@19cef03]
+gamedata.gamecomponents.Patch@a51c13
+Piece #ID Duvall Location: (3.0 2.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@c4fd6c, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@b32d9c]
+gamedata.gamecomponents.Patch@c338be
+Piece #Rica_ID Rica Location: (3.0 3.0)
+  Image: /resources/images/Rica.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@8ed71, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1e65a01]
+gamedata.gamecomponents.Patch@9655ec
+Piece #ID Duvall Location: (3.0 4.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@12b93c8, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@238af9]
+gamedata.gamecomponents.Patch@1cafcee
+Piece #ID Duvall Location: (4.0 0.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@103f98e, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@138835]
+gamedata.gamecomponents.Patch@e9bd8c
+Piece #ID Duvall Location: (4.0 1.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@de0e33, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@b359af]
+gamedata.gamecomponents.Patch@652e6c
+Piece #ID Duvall Location: (4.0 2.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1bbe371, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@168d4e3]
+gamedata.gamecomponents.Patch@1a28ac0
+Piece #ID Duvall Location: (4.0 3.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@37c5d6, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@39098a]
+gamedata.gamecomponents.Patch@1bd1822
+Piece #Rica_ID Rica Location: (4.0 4.0)
+  Image: /resources/images/Rica.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@e47d9f, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@791f60]
+ myEvents[Event Garbage Collection Event: conditions - SPECIAL CONDITION: Pieces with health <=0 are dead.  globalactions - Delete Piece at position Point2D.Double[0.0, 0.0] ]
+Level #Level 2
+Level: Level #Level 2 gamewon false gamelost false nextlevel = #null turnover false iswinning true
+grid:
+Grid
+gamedata.gamecomponents.Patch@502d7c
+Piece #Rica_ID Rica Location: (0.0 0.0)
+  Image: /resources/images/Rica.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@11b4c1c, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@42d2a5]
+gamedata.gamecomponents.Patch@fe5652
+Piece #ID Duvall Location: (0.0 1.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1eebebc, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@d27231]
+gamedata.gamecomponents.Patch@df4cb4
+Piece #ID Duvall Location: (0.0 2.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@93cebb, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@2483cb]
+gamedata.gamecomponents.Patch@16a2704
+Piece #ID Duvall Location: (0.0 3.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@16e6df1, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1529631]
+gamedata.gamecomponents.Patch@1a4670b
+Piece #ID Duvall Location: (0.0 4.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1423bbc, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@16bc080]
+gamedata.gamecomponents.Patch@9d2782
+Piece #ID Duvall Location: (1.0 0.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@6f9c25, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@18cd0f]
+gamedata.gamecomponents.Patch@1f86a0c
+Piece #Rica_ID Rica Location: (1.0 1.0)
+  Image: /resources/images/Rica.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@74e506, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@2cc399]
+gamedata.gamecomponents.Patch@d800e6
+Piece #ID Duvall Location: (1.0 2.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@7eb4bb, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1652ae7]
+gamedata.gamecomponents.Patch@1050e19
+Piece #ID Duvall Location: (1.0 3.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1a8f4af, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@3a584d]
+gamedata.gamecomponents.Patch@da6abf
+Piece #ID Duvall Location: (1.0 4.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@12cd13b, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1bf483d]
+gamedata.gamecomponents.Patch@1058bb7
+Piece #ID Duvall Location: (2.0 0.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1b953a, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@119288b]
+gamedata.gamecomponents.Patch@427375
+Piece #ID Duvall Location: (2.0 1.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@12b0939, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1c9e9a3]
+gamedata.gamecomponents.Patch@176d9a1
+Piece #Rica_ID Rica Location: (2.0 2.0)
+  Image: /resources/images/Rica.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@32daa1, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1b76b5f]
+gamedata.gamecomponents.Patch@19310fb
+Piece #ID Duvall Location: (2.0 3.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@936079, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@725898]
+gamedata.gamecomponents.Patch@532b1a
+Piece #ID Duvall Location: (2.0 4.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@108e3e3, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@6fc613]
+gamedata.gamecomponents.Patch@21ebde
+Piece #ID Duvall Location: (3.0 0.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@11507fb, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1acf0c1]
+gamedata.gamecomponents.Patch@193ff79
+Piece #ID Duvall Location: (3.0 1.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@5994e, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@15e73aa]
+gamedata.gamecomponents.Patch@164b078
+Piece #ID Duvall Location: (3.0 2.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@184fcda, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@199d88d]
+gamedata.gamecomponents.Patch@12620b7
+Piece #Rica_ID Rica Location: (3.0 3.0)
+  Image: /resources/images/Rica.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@17ba09b, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@129ee02]
+gamedata.gamecomponents.Patch@7f055a
+Piece #ID Duvall Location: (3.0 4.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@d4b97a, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@75a883]
+gamedata.gamecomponents.Patch@5002b1
+Piece #ID Duvall Location: (4.0 0.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@c58074, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1cfec3f]
+gamedata.gamecomponents.Patch@3d75f5
+Piece #ID Duvall Location: (4.0 1.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@eaba49, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@d24ec0]
+gamedata.gamecomponents.Patch@c4f9f1
+Piece #ID Duvall Location: (4.0 2.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1b9acc1, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@42618d]
+gamedata.gamecomponents.Patch@1c948b
+Piece #ID Duvall Location: (4.0 3.0)
+  Image: /resources/images/rcd.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1e0eec8, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@1cd8b91]
+gamedata.gamecomponents.Patch@6ccc6c
+Piece #Rica_ID Rica Location: (4.0 4.0)
+  Image: /resources/images/Rica.png Movement: MOVEMENT: moves - (-1.0,0.0)(1.0,0.0)(0.0,1.0)(0.0,-1.0) paths - [(2.0,2.0)(3.0,3.0)]
+  Actions: [actionid:kill attack: (1.0 0.0)  effect: (-1.0 0.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (-1.0 0.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@36a5a6, actionid:kill attack: (-1.0 0.0) (1.0 0.0) (0.0 1.0) (0.0 -1.0)  effect: (2.0 2.0) (3.0 3.0)  statslogic: (StatsTotalLogic - My Logics: StatRef: actor Stat: health
+SSM: Modifier: 0.0 StatRef: actor Stat: health // SSM: Modifier: 20.0 StatRef: actor Stat: health // )  effect: (2.0 2.0) (3.0 3.0)  conclusion: gamedata.action.conclusions.ReceiverToInventoryConclusion@569c06]
+ myEvents[Event Garbage Collection Event: conditions - SPECIAL CONDITION: Pieces with health <=0 are dead.  globalactions - Delete Piece at position Point2D.Double[0.0, 0.0] ]
+VC: game loaded... 

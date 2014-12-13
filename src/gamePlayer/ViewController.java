@@ -257,7 +257,7 @@ public class ViewController {
          */
         @FXML
         private void testGame() {
-            myStage.setScene(mySplashScreen);
+                myStage.setScene(mySplashScreen);
                 TestGameCreator JSBTester = new TestGameCreator();
                 testPlayGame(JSBTester.createNewGame());
         }
@@ -888,8 +888,12 @@ public class ViewController {
             initializeGrid();
             myScene = new Scene(myGameSpace);
             myStage.setScene(myScene);
-//            System.out.println("VC: Current Level: " + myModel.getCurrentLevel().getId());
-//            System.out.println(myModel.getCurrentLevel().getGrid().toString());
+            System.out.println("VC: Current Level - " + myModel.getCurrentLevel().getId() + " " + "Current Player" + myCurrentPlayer.getID());
+            for (Level l : myModel.getLevels()) {
+                System.out.println("Level #" + l.getId());
+                System.out.println(l.toString());
+            }
+            //System.out.println("VC: Current Level: " + myModel.getCurrentLevel().getId());
         }
 
 
