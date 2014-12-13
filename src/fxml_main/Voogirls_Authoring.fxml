@@ -78,9 +78,9 @@
       </TitledPane>
    </left>
    <right>
-      <TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="677.0" prefWidth="280.0" text="Properties Editor" BorderPane.alignment="CENTER">
+      <TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="679.0" prefWidth="280.0" text="Properties Editor" BorderPane.alignment="CENTER">
          <content>
-            <ScrollPane fx:id="myPropertiesSPane" hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="669.0" prefWidth="278.0" />
+            <ScrollPane fx:id="myPropertiesSPane" hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="590.0" prefWidth="278.0" translateY="-30.0" />
          </content>
       </TitledPane>
    </right>
