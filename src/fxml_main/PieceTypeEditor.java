@@ -1,6 +1,7 @@
 package fxml_main;
 
 import gamedata.action.Action;
+
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
@@ -160,10 +161,6 @@ public class PieceTypeEditor extends Pane {
         initRangeEditorButton(rangeEditorBtn);
         movements.getChildren().addAll(rangeEditorBtn);
         
-        
-        
- 
-
         Button createStatButton = new Button(STAT_CREATE_LABEL);
         initStatButton(createStatButton);
         createStat.getChildren().addAll(createStatButton);

@@ -46,7 +46,7 @@ public class SimpleAIPlayer extends Player {
 			int randomNum = rand.nextInt((actions.size()));
 			if (actions.size() != 0) {
 				Action chosenAction = actions.get(1);
-				List<Point2D.Double> locs = chosenAction.getSpecificActionRange(p
+				List<Point2D.Double> locs = chosenAction.getAbsoluteActionRange(p
 						.getLoc());
 				List<Piece> recievers = new ArrayList<Piece>();
 				for (Point2D.Double point : locs) {

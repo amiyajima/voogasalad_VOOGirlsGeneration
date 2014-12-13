@@ -2,9 +2,11 @@ package gameengine.movement;
 
 import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.geom.Point2D;
+
 import authoring_environment.GUIGrid;
 
 /**
@@ -45,6 +47,11 @@ public class Movement implements Action {
 	 * Orientation of the piece (depending on last movement made)
 	 */
 	private double myOrientation;
+	
+	/**
+	 * Name of the action for display in the Player
+	 */
+	private String myName;
 
 	/**
 	 * Constructor
@@ -55,12 +62,12 @@ public class Movement implements Action {
 	 *            Point2Ds representing all possible relative locations of
 	 *            movement
 	 */
-	public Movement(List<Point2D.Double> moves, List<List<Point2D.Double>> paths) {
+	@SafeVarargs
+	public Movement(List<Point2D.Double>... endPoints) {
 		myOrientation = 0;
 		myOrientator = new Orientator();
-		myMoves = moves;
-		myPaths = paths;
-		/*
+		myName = "Move";
+
 		boolean first = true;
 		myPaths = new ArrayList<List<Point2D.Double>>();
 		for (List<Point2D.Double> p : endPoints) {
@@ -71,7 +78,6 @@ public class Movement implements Action {
 				myPaths.add(p);
 			}
 		}
-		*/
 	}
 
 	/**
@@ -130,7 +136,7 @@ public class Movement implements Action {
 	}
 
 	@Override
-	public List<Point2D.Double> getSpecificActionRange(Point2D pieceLocation) {
+	public List<Point2D.Double> getAbsoluteActionRange(Point2D pieceLocation) {
 		return this.getPossibleLocs((int) pieceLocation.getX(),
 				(int) pieceLocation.getY());
 	}
@@ -146,7 +152,7 @@ public class Movement implements Action {
 	@Override
 	public void doBehavior(GUIGrid grid, Piece actor, Piece... receivers) {
 		Piece p = receivers[0];
-		Point2D point = p.getLoc();
+		Point2D.Double point = p.getLoc();
 		if (isValidLocation((int) point.getX(), (int) point.getY())) {
 			// TODO: Implement Orientation Calculation Here
 			actor.setLoc(point);
@@ -185,5 +191,10 @@ public class Movement implements Action {
 	 */
 	public List<Point2D.Double> getRelativeMoves() {
 		return myMoves;
+	}
+
+	@Override
+	public String getName() {
+		return myName;
 	}
 }
