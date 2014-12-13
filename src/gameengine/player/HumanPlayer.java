@@ -26,7 +26,7 @@ public class HumanPlayer extends Player {
 	/**
 	 * Maps Movement Keys
 	 */
-	private Map<KeyCode, Point2D> myMovementKeyMap;
+	private Map<KeyCode, Point2D.Double> myMovementKeyMap;
 
 	/**
 	 * Constructor
@@ -62,7 +62,7 @@ public class HumanPlayer extends Player {
 	 * 
 	 * @return
 	 */
-	public Map<KeyCode, Point2D> getMovementKeyMap() {
+	public Map<KeyCode, Point2D.Double> getMovementKeyMap() {
 		return myMovementKeyMap;
 	}
 
@@ -80,8 +80,8 @@ public class HumanPlayer extends Player {
 	 * 
 	 * @param myMovementKeyMap2
 	 */
-	public void setMovementKeyMap(Map<KeyCode, Point2D> myMovementKeyMap2) {
-		myMovementKeyMap2 = new HashMap<KeyCode, Point2D>();
+	public void setMovementKeyMap(Map<KeyCode, Point2D.Double> myMovementKeyMap2) {
+		myMovementKeyMap2 = new HashMap<KeyCode, Point2D.Double>();
 	}
 
 	@Override

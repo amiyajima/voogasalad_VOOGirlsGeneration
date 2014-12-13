@@ -122,7 +122,11 @@ public class Level extends Observable implements IChangeGameState {
 	 * toString method used to test JSON read/write
 	 */
 	public String toString() {
-		return "grid:" + myGrid.toString() + " myEvents" + myEvents.toString();
+	    String myString = "Level: Level #" + myId + " gamewon " + gameWon 
+	            + " gamelost " + gameLost + " nextlevel = #" + nextLevelID 
+	            + " turnover " + turnOver + " iswinning " + isWinningLevel;
+	    myString += "\ngrid:" + myGrid.toString() + " myEvents" + myEvents.toString();
+	    return myString;
 	}
 
 	/**

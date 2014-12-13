@@ -46,10 +46,10 @@ public class SimpleAIPlayer extends Player {
 			int randomNum = rand.nextInt((actions.size()));
 			if (actions.size() != 0) {
 				Action chosenAction = actions.get(1);
-				List<Point2D> locs = chosenAction.getSpecificActionRange(p
+				List<Point2D.Double> locs = chosenAction.getSpecificActionRange(p
 						.getLoc());
 				List<Piece> recievers = new ArrayList<Piece>();
-				for (Point2D point : locs) {
+				for (Point2D.Double point : locs) {
 					Piece rec = myCurrentLevel.getGrid().getPiece(point);
 					if (rec != null) {
 						recievers.add(rec);

@@ -5,16 +5,6 @@ import com.google.gson.Gson;
 import gamedata.goals.Goal;
 import gamedata.rules.MoveCountRule;
 import gamedata.rules.Rule;
-import gamedata.wrappers.GoalData;
-import gamedata.wrappers.GridData;
-import gamedata.wrappers.LevelData;
-import gamedata.wrappers.LevelDataIndividual;
-import gamedata.wrappers.PatchData;
-import gamedata.wrappers.PatchDataIndividual;
-import gamedata.wrappers.PieceDataIndividual;
-import gamedata.wrappers.PlayerData;
-import gamedata.wrappers.PlayerDataIndividual;
-import gamedata.wrappers.RuleData;
 import gameengine.player.Player;
 
 /**
@@ -23,7 +13,7 @@ import gameengine.player.Player;
  *
  */
 public class JSONParseTester {
-    
+    /*
     public void testRead(Gson myGson, BufferedReader br) {
         // need to add {myLevels: before and } after list
         LevelData myLevels = myGson.fromJson(br, LevelData.class);
@@ -81,5 +71,6 @@ public class JSONParseTester {
         System.out.println(player.toString());
 
     }
+    */
 
 }
