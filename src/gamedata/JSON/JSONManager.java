@@ -3,41 +3,16 @@ package gamedata.JSON;
 import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
 import gamedata.action.StatsModifier;
-import gamedata.events.Event;
+import gamedata.events.conditions.Condition;
+import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.GridComponent;
-import gamedata.gamecomponents.Inventory;
-import gamedata.gamecomponents.Level;
-import gamedata.gamecomponents.Patch;
-import gamedata.gamecomponents.Piece;
-import gamedata.goals.Goal;
-import gamedata.rules.Rule;
-import gamedata.stats.Stats;
-import gamedata.wrappers.ActionData;
-import gamedata.wrappers.ActionDataIndividual;
-import gamedata.wrappers.EventDataIndividual;
-import gamedata.wrappers.GameData;
-import gamedata.wrappers.GoalData;
-import gamedata.wrappers.GridData;
-import gamedata.wrappers.LevelDataIndividual;
-import gamedata.wrappers.PatchData;
-import gamedata.wrappers.PatchDataIndividual;
-import gamedata.wrappers.PieceData;
-import gamedata.wrappers.PieceDataIndividual;
-import gamedata.wrappers.PlayerDataIndividual;
-import gamedata.wrappers.StatsData;
-import gameengine.movement.Movement;
 import gameengine.player.Player;
-import java.awt.geom.Point2D;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import authoring.data.PatchInstanceData;
-import authoring_environment.GUIGrid;
 import authoring_environment.SuperGrid;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -80,7 +55,6 @@ public class JSONManager {
         }
         catch (IOException e) {
             System.out.println("could not write to: " + fileName);
-            // e.printStackTrace();
         }
 
     }
@@ -95,6 +69,7 @@ public class JSONManager {
     public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
+<<<<<<< HEAD
 
         GameData gameData = myGson.fromJson(br, GameData.class);
         System.out.println(gameData.toString());
@@ -173,14 +148,22 @@ public class JSONManager {
         return null;
     }
     
+=======
+        
+        Game pi = myGson.fromJson(br, Game.class);
+//        System.out.println("Level 1: " + pi.getLevels().get(0).getGrid().toString());
+        return pi;
+    }    
+>>>>>>> a4c452332a2eec24af9729475a8f22a7408fff0f
     
     public void registerTypeAdapters (GsonBuilder builder) {
-        //builder.registerTypeAdapter(Event.class, new GenericTypeAdapter<Event>("gamedata.events"));
         builder.registerTypeAdapter(StatsModifier.class, new GenericTypeAdapter<StatsModifier>("gamedata.action"));
-        builder.registerTypeAdapter(Player.class, new GenericTypeAdapter<StatsModifier>("gameengine.player"));
+        builder.registerTypeAdapter(Player.class, new GenericTypeAdapter<Player>("gameengine.player"));
         builder.registerTypeAdapter(Action.class, new GenericTypeAdapter<Action>("gamedata.action"));
         builder.registerTypeAdapter(ActionConclusion.class, new ActionConclusionTypeAdapter<ActionConclusion>("gamedata.action"));
         builder.registerTypeAdapter(GridComponent.class, new GenericTypeAdapter<GridComponent>("gamedata.gamecomponent"));
+        builder.registerTypeAdapter(Condition.class, new GenericTypeAdapter<Condition>("gamedata.events.conditions"));
+        builder.registerTypeAdapter(GlobalAction.class, new GenericTypeAdapter<GlobalAction>("gamedata.events.globalaction"));
         builder.registerTypeAdapter(SuperGrid.class, new GenericTypeAdapter<SuperGrid>("authoring_environment"));
     }
 

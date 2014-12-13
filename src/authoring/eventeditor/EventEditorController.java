@@ -1,19 +1,17 @@
 package authoring.eventeditor;
 
-import gamedata.events.Condition;
 import gamedata.events.Event;
-import gamedata.events.GlobalAction;
+import gamedata.events.conditions.Condition;
 import gamedata.events.conditions.StatEquals;
+import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.IChangeGameState;
 import gamedata.gamecomponents.Level;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
-
 import authoring.data.EventsDataWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

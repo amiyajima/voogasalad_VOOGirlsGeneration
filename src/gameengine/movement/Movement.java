@@ -39,7 +39,7 @@ public class Movement implements Action {
 	/**
 	 * Orientator resonsible for calculating orientations
 	 */
-	private Orientator myOrientator;
+	private transient Orientator myOrientator;
 	
 	/**
 	 * Orientation of the piece (depending on last movement made)
@@ -55,10 +55,12 @@ public class Movement implements Action {
 	 *            Point2Ds representing all possible relative locations of
 	 *            movement
 	 */
-	@SafeVarargs
-	public Movement(List<Point2D.Double>... endPoints) {
+	public Movement(List<Point2D.Double> moves, List<List<Point2D.Double>> paths) {
 		myOrientation = 0;
 		myOrientator = new Orientator();
+		myMoves = moves;
+		myPaths = paths;
+		/*
 		boolean first = true;
 		myPaths = new ArrayList<List<Point2D.Double>>();
 		for (List<Point2D.Double> p : endPoints) {
@@ -69,6 +71,7 @@ public class Movement implements Action {
 				myPaths.add(p);
 			}
 		}
+		*/
 	}
 
 	/**
@@ -152,7 +155,19 @@ public class Movement implements Action {
 
 	@Override
 	public String toString() {
-		return "Movement";
+	    String str = "MOVEMENT: moves - ";
+	    for (Point2D.Double pt : myMoves) {
+	        str += "(" + pt.getX() + ","  + pt.getY() + ")";
+	    }
+	    str += " paths - ";
+	    for (List<Point2D.Double> ptlst : myPaths) {
+	        str += "[";
+	        for (Point2D.Double pt : ptlst) {
+	            str += "(" + pt.getX() + ","  + pt.getY() + ")";
+	        }
+	        str += "]";
+	    }
+	    return str;
 	}
 
 	@Override

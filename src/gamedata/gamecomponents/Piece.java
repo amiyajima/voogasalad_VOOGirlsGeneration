@@ -3,10 +3,10 @@ package gamedata.gamecomponents;
 import gamedata.action.Action;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.geom.Point2D;
+import javafx.scene.image.ImageView;
 
 /**
  * Class for pieces. Pieces are the primary unit for game play. They have
@@ -75,7 +75,7 @@ public class Piece extends GridComponent {
 	 *            - Piece's inventory if the user chooses to use an inventory
 	 */
 	public Piece(String id, String name, String imageLoc, Movement movement, List<Action> actions,
-			Stats stats, Point2D loc, int playerID, Inventory inventory) {
+			Stats stats, Point2D.Double loc, int playerID, Inventory inventory) {
 		super(id, name, imageLoc, loc);
 		myMovement = movement;
 		myActions = actions;
@@ -91,7 +91,7 @@ public class Piece extends GridComponent {
 	 * @param clone
 	 *            - Piece instance to be cloned
 	 */
-	public Piece(Piece clone, Point2D placeHere) {
+	public Piece(Piece clone, Point2D.Double placeHere) {
 		super(clone, placeHere);
 		myMovement = clone.myMovement;
 		myActions = new LinkedList<Action>(clone.myActions);
@@ -225,5 +225,12 @@ public class Piece extends GridComponent {
 	 */
 	public void setPlayerID(int id) {
 		myPlayerID = id;
+	}
+	
+	public String toString() {
+	    String myString = "Piece #" + myID + " " + myName + " Location: " + "(" + myLoc.getX() + " " + myLoc.getY() + ")" 
+	+ "\n  Image: " + myImageLocation + " Movement: " + myMovement.toString() 
+	+ "\n  Actions: " + myActions.toString();
+	    return myString;
 	}
 }

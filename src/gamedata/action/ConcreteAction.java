@@ -39,11 +39,6 @@ public class ConcreteAction implements Action {
 		myStatsLogics = statsLogics;
 		myConclusion  = conclusion;
 	}
-	
-	@Override
-	public String toString() {
-		return myID;
-	}
 
 	@Override
 	public List<Point2D.Double> getSpecificActionRange(Point2D pieceLoc) {
@@ -123,5 +118,28 @@ public class ConcreteAction implements Action {
 			result += ssm.getModifier()*doubleValue;
 		}
 		return result;
+	}
+	
+	@Override
+	public String toString() {
+	    String myString = "actionid:" + myID;
+	    myString += " attack: ";
+	    for (Point2D.Double pt : myAttackRange) {
+	        myString += "(" + pt.getX() + " " + pt.getY() + ") ";
+	    }
+	    myString += " effect: ";
+            for (Point2D.Double pt : myEffectRange) {
+                myString += "(" + pt.getX() + " " + pt.getY() + ") ";
+            }
+            myString += " statslogic: ";
+            for (StatsTotalLogic stat : myStatsLogics) {
+                myString += "(" + stat.toString() + ") ";
+            }
+            myString += " effect: ";
+            for (Point2D.Double pt : myEffectRange) {
+                myString += "(" + pt.getX() + " " + pt.getY() + ") ";
+            }
+            myString += " conclusion: " + myConclusion.toString();
+            return myString;
 	}
 }

@@ -51,11 +51,6 @@ import tests.TestGameCreator;
 import authoring_environment.GUIGrid;
 import authoring_environment.SuperTile;
 
-/**
- * 
- * 
- *
- */
 public class ViewController {
 
         public static final String GAMESPACE_FXML = "gameSpace.fxml";
@@ -123,7 +118,7 @@ public class ViewController {
         private Button clearHighScores;
 
         private ScrollPane myGridPane;
-        private Point2D currentClick;
+        private Point2D.Double currentClick;
         private IGridState gridState;
         private JSONManager myJSONManager;
         private GameGridEffect myGameGridEffect;
@@ -197,11 +192,12 @@ public class ViewController {
                 File f = fc.showOpenDialog(myStage);
 
                 try {
+                    System.out.println("VC: loading game... ");
                     JSONManager myJM = new JSONManager();
-                    myModel = myJM.readFromJSONFile(f.getAbsolutePath());
-                    initializeGrid();
-                    myScene = new Scene(myGameSpace);
-                    myStage.setScene(myScene);
+                    myStage.setScene(mySplashScreen);
+                    TestGameCreator JSBTester = new TestGameCreator();
+                    testPlayGame(myJM.readFromJSONFile(f.getAbsolutePath()));
+                    System.out.println("VC: game loaded... ");
                 }
                 catch (FileNotFoundException fnfe) {
                     System.out.println("Could not find the file at - " + f.getAbsolutePath());
@@ -349,7 +345,7 @@ public class ViewController {
                 myGridPane = new ScrollPane();
                 Level currentLevel = myModel.getCurrentLevel();
                 myGrid = currentLevel.getGrid();
-                System.out.println("myGrid: " + myGrid);
+//                System.out.println("myGrid: " + myGrid);
                 myGrid.displayPane(myGridPane);
 
                 myGameSpace.setCenter(myGridPane);
@@ -485,7 +481,7 @@ public class ViewController {
 
         private void setOnClick() {
                 myGridPane.getContent().setOnMouseClicked(event -> {
-                        Point2D loc = findPosition(event.getX(), event.getY());
+                        Point2D.Double loc = findPosition(event.getX(), event.getY());
                         performAction(loc);
                 });
         }
@@ -497,7 +493,7 @@ public class ViewController {
          * @param x
          * @param y
          */
-        public void performAction(Point2D loc) {
+        public void performAction(Point2D.Double loc) {
                 System.out.println("PERFORM ACTION");
 
                 if (clickSoundOn) {
@@ -545,9 +541,9 @@ public class ViewController {
          * 
          * @param x
          * @param y
-         * @return a Point2D representing tile coordinates
+         * @return a Point2D.Double representing tile coordinates
          */
-        public Point2D findPosition(double x, double y) {
+        public Point2D.Double findPosition(double x, double y) {
                 double patchHeight = myGrid.getTileHeight();
                 double patchWidth = myGrid.getTileHeight();
                 int xCor = (int) (x / patchWidth);
@@ -609,11 +605,11 @@ public class ViewController {
         }
 
         /**
-         * Returns a Point2D representing the Location of a Click
+         * Returns a Point2D.Double representing the Location of a Click
          * 
          * @return
          */
-        public Point2D getCurrentClick() {
+        public Point2D.Double getCurrentClick() {
                 return currentClick;
         }
 
@@ -892,6 +888,8 @@ public class ViewController {
             initializeGrid();
             myScene = new Scene(myGameSpace);
             myStage.setScene(myScene);
+//            System.out.println("VC: Current Level: " + myModel.getCurrentLevel().getId());
+//            System.out.println(myModel.getCurrentLevel().getGrid().toString());
         }
 
 

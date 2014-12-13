@@ -1,7 +1,6 @@
 package gamedata.gamecomponents;
 
 import gamedata.stats.Stats;
-
 import java.awt.geom.Point2D;
 
 /**
@@ -25,7 +24,7 @@ public class Patch extends GridComponent {
 	 * @param p
 	 *            coordinate of patch
 	 */
-	public Patch(String id, String name, String imageLocation, Point2D p) {
+	public Patch(String id, String name, String imageLocation, Point2D.Double p) {
 		super(id, name, imageLocation, p);
 	}
 
@@ -35,7 +34,7 @@ public class Patch extends GridComponent {
 	 * @param clone
 	 *            - Patch instance to be cloned
 	 */
-	public Patch(Patch clone, Point2D placeHere) {
+	public Patch(Patch clone, Point2D.Double placeHere) {
 		super(clone, placeHere);
 	}
 
@@ -43,4 +42,11 @@ public class Patch extends GridComponent {
 	public Stats getStats() {
 		return null;
 	}
+	
+	public String getID() {
+            String myString = "Patch #" + myID + " " + myName;
+            myString += "loc:(" + myLoc.getX() + " " + myLoc.getY() + ") ";
+            myString += myImageLocation;
+            return myString;
+    }
 }

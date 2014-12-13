@@ -77,6 +77,8 @@ public class Game {
 		myLevels = levels;
 		myCurrentLevel = currentLevel;
 		myCurrentPlayer = null;
+	          System.out.println("Game initialized");
+
 	}
 
 	/**

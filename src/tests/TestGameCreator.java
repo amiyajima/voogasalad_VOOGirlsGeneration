@@ -6,11 +6,11 @@ import gamedata.action.ConcreteAction;
 import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
 import gamedata.action.conclusions.ReceiverToInventoryConclusion;
-import gamedata.events.Condition;
 import gamedata.events.Event;
-import gamedata.events.GlobalAction;
+import gamedata.events.conditions.Condition;
 import gamedata.events.conditions.IsDead;
 import gamedata.events.globalaction.DeletePieceAtLocation;
+import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Level;
@@ -71,7 +71,7 @@ public class TestGameCreator {
 	 * @return a new default game
 	 */
 	public Game createNewGame() {
-		System.out.println("Bob Tester: Create new game");
+		System.out.println("TCG: Create new game");
 		List<Player> myPlayers = new ArrayList<Player>();
 		Player myPlayer1 = new HumanPlayer(1);
 		Player myPlayer2 = new SimpleAIPlayer(2);
@@ -83,10 +83,7 @@ public class TestGameCreator {
 
 		List<Event> myEvents = new ArrayList<Event>();
 
-		/**
-		 * Event for garadage comllectin
-		 */
-		Event e1 = new Event("Garbate collectbaon");
+		Event e1 = new Event("Garbage Collection Event");
 		Condition c = new IsDead("health");
 		GlobalAction gl = new DeletePieceAtLocation(new Point2D.Double(0, 0));
 		e1.getConditions().add(c);
@@ -101,7 +98,7 @@ public class TestGameCreator {
 
 		Game myGame = new Game(2, myLevels, myLevels.get(0));
 		myGame.addPlayers(myPlayers);
-		System.out.println(myGame);
+		System.out.println("TGC: Game Created " + myGame);
 		return myGame;
 	}
 
@@ -133,12 +130,10 @@ public class TestGameCreator {
 				grid1.addPatchAtLoc(templPatch, new Point2D.Double(x, y));
 			}
 		}
-
-		System.out.println("Grid created: " + grid1.toString());
 		return grid1;
 	}
 
-	public Piece createNewPiece(GUIGrid g, Point2D p, int type) {
+	public Piece createNewPiece(GUIGrid g, Point2D.Double p, int type) {
 		Point2D.Double p1 = new Point2D.Double(1, 1);
 		Point2D.Double p4 = new Point2D.Double(1, 0);
 		Point2D.Double p5 = new Point2D.Double(-1, 0);
@@ -160,8 +155,12 @@ public class TestGameCreator {
 		pl3.add(p3);
 
 		List<Point2D.Double> pl4 = new ArrayList<Point2D.Double>();
-
-		//Movement move = new Movement(g, pl1);
+		pl4.add(p5);
+		pl4.add(p3);
+		
+		List<List<Point2D.Double>> paths = new ArrayList<List<Point2D.Double>>();
+		paths.add(pl3);
+		Movement move = new Movement(pl1, paths);
 
 		List<Action> actions = new ArrayList<Action>();
 		actions.add(createNewAction(pl2, pl4));
@@ -179,22 +178,20 @@ public class TestGameCreator {
 		Piece piece = null;
 		if (type == 0) {
 			if (randomInt % 2 == 1) {
-				piece = new Piece("ID", "Duvall", DEFAULT_DUVALL, actions, s,
+				piece = new Piece("ID", "Duvall", DEFAULT_DUVALL, move, actions, s,
 						p, 1, i);
-				System.out.println("ACTION IN PIECE TESTER: "
-						+ piece.getActions());
 			} else {
-				piece = new Piece("ID", "Bunny", DEFAULT_BUNNY, actions, s, p,
+				piece = new Piece("ID", "Bunny", DEFAULT_BUNNY, move, actions, s, p,
 						1, i);
 			}
 		} else if (type == 1) {
-			piece = new Piece("Duvall_ID", "Duvall", DEFAULT_DUVALL, actions,
+			piece = new Piece("Duvall_ID", "Duvall", DEFAULT_DUVALL, move, actions,
 					s, p, 1, i);
 		} else if (type == 2) {
-			piece = new Piece("Bunny_ID", "Bunny", DEFAULT_BUNNY, actions, s,
+			piece = new Piece("Bunny_ID", "Bunny", DEFAULT_BUNNY, move, actions, s,
 					p, 1, i);
 		} else {
-			piece = new Piece("Rica_ID", "Rica", DEFAULT_RICA, actions, s, p,
+			piece = new Piece("Rica_ID", "Rica", DEFAULT_RICA, move, actions, s, p,
 					1, i);
 		}
 		return piece;
@@ -209,30 +206,64 @@ public class TestGameCreator {
 	}
 	*/
 
-	public Patch createNewPatch(Point2D p) {
+	public Patch createNewPatch(Point2D.Double p) {
 		Patch patch = new Patch("ID", "land", DEFAULT_LAND, p);
 		return patch;
 	}
 
-	public Movement createNewMovement(GUIGrid g, List<Point2D> pl2) {
-		Movement m1 = new Movement(g, pl2);
-		return m1;
+	public Movement createNewMovement() {
+	    Point2D.Double p2 = new Point2D.Double(2, 2);
+	    Point2D.Double p3 = new Point2D.Double(3, 3);
+
+            List<Point2D.Double> pl1 = new ArrayList<Point2D.Double>();
+            pl1.add(new Point2D.Double(-1, 0));
+            pl1.add(new Point2D.Double(1, 0));
+            pl1.add(new Point2D.Double(0, 1));
+            pl1.add(new Point2D.Double(0, -1));
+
+            List<Point2D.Double> pl3 = new ArrayList<Point2D.Double>();
+            pl3.add(p2);
+            pl3.add(p3);
+
+            List<List<Point2D.Double>> paths = new ArrayList<List<Point2D.Double>>();
+            paths.add(pl3);
+            Movement move = new Movement(pl1, paths);
+            return move;
 	}
 
 	public Action createNewAction(List<Point2D.Double> pl1, List<Point2D.Double> pl2) {
-		StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor",
-				"health");
-		List<StatsSingleMultiplier> ssmList = new ArrayList<StatsSingleMultiplier>();
-		ssmList.add(ssm1);
-
 		List<StatsTotalLogic> stlList = new ArrayList<StatsTotalLogic>();
-		StatsTotalLogic s1 = new StatsTotalLogic("actor", "health", ssmList);
-		stlList.add(s1);
-
+		stlList.add(createNewStatsTotalLogic());
 		ActionConclusion ac = new ReceiverToInventoryConclusion();
-
 		Action a1 = new ConcreteAction("kill", pl1, pl2, stlList, ac);
 		return a1;
+	}
+	
+	public StatsSingleMultiplier createStatsSingleMultiplier() {
+               return new StatsSingleMultiplier(10, "actor", "health");
+	}
+	
+	public StatsTotalLogic createNewStatsTotalLogic() {
+	   StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor", "health");
+	   StatsSingleMultiplier ssm2 = new StatsSingleMultiplier(20, "actor", "health");
+	   List<StatsSingleMultiplier> ssmList = new ArrayList<StatsSingleMultiplier>();
+           ssmList.add(ssm1);
+           ssmList.add(ssm2);
+           
+           List<StatsTotalLogic> stlList = new ArrayList<StatsTotalLogic>();
+           StatsTotalLogic s1 = new StatsTotalLogic("actor", "health", ssmList);
+           stlList.add(s1);
+
+           return s1;
+	}
+	
+	public Event createNewEvent() {
+	    Event e1 = new Event("Garbage Collection Event");
+            Condition c = new IsDead("health");
+            GlobalAction gl = new DeletePieceAtLocation(new Point2D.Double(0, 0));
+            e1.getConditions().add(c);
+            e1.getGlobalActions().add(gl);
+            return e1;
 	}
 
 

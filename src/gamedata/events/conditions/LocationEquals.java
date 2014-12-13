@@ -2,8 +2,6 @@ package gamedata.events.conditions;
 
 import java.awt.geom.Point2D;
 import java.util.List;
-
-import gamedata.events.Condition;
 import gamedata.gamecomponents.IHasStats;
 
 public class LocationEquals extends Condition{

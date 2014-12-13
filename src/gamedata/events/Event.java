@@ -1,5 +1,7 @@
 package gamedata.events;
 
+import gamedata.events.conditions.Condition;
+import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.IHasStats;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +83,15 @@ public class Event {
 
 	@Override
 	public String toString(){
-		return myName;
+		String myString = "Event " + myName + ": conditions - ";
+		for (Condition c : myConditions) {
+		    myString += c.toString() + " ";
+		}
+		myString += " globalactions - ";
+		for (GlobalAction g : myGlobalActions) {
+		    myString += g.toString() + " ";
+		}
+		return myString;
 	}
 
         public List<Condition> getConditions(){
