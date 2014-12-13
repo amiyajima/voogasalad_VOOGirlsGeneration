@@ -43,7 +43,6 @@ import authoring.data.PieceTypeData;
 
 public class AuthoringController implements Initializable {
 
-
 	@FXML
 	private ScrollPane myPropertiesSPane;
 
@@ -213,6 +212,4 @@ public class AuthoringController implements Initializable {
 				new ActionController(myActionsVBox, myPropertiesSPane, myGridReference,
 						myActionData, myGamePropertiesData.getGridShape());
 	}
-
-
 }

@@ -31,31 +31,31 @@ public class GUIcontainerController implements Initializable{
 
 	@FXML
 	private MenuItem gameProperties;
-	
+
 	@FXML
 	private MenuItem newAuthor;
-	
+
 	@FXML
 	private MenuItem newPlayer;
-	
+
 	@FXML
 	private Tab testauthor;
-	
+
 	@FXML
 	private TabPane displayedTabs;
-	
-	
+
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		newAuthor.setOnAction(event->LoadNewAuthoring());
-		
+
 		newPlayer.setOnAction(event->loadNewPlayer());
-		
-		
-		
-//		String authorName="11111";
-//		LoadNewAuthoring(authorName);
-   
+
+
+
+		//		String authorName="11111";
+		//		LoadNewAuthoring(authorName);
+
 	}
 
 	private void loadNewPlayer() {
@@ -66,7 +66,7 @@ public class GUIcontainerController implements Initializable{
 				| LineUnavailableException e) {
 			e.printStackTrace();
 		}
-		
+
 		player.show();
 	}
 
@@ -91,12 +91,11 @@ public class GUIcontainerController implements Initializable{
             e.printStackTrace();
         }
 	}
-	
-	
+
+
 	@FXML
 	private void showGamePropertiesWindow(){
-//			GamePropertiesEditor gamePptEditor=new GamePropertiesEditor(myGamePropertiesData);
 	}
-	
+
 
 }
