@@ -23,12 +23,12 @@ public class KeyboardMovement {
     private static final String KEY_MOVEMENT_COLOR = "#AC58FA";
 
     private Point2D.Double myCurrentLocation;
-    private Map<KeyCode, Point2D> myKeyMap;
+    private Map<KeyCode, Point2D.Double> myKeyMap;
     private SuperTile currentTile;
 
     public KeyboardMovement () {
         myCurrentLocation = new Point2D.Double(0.0, 0.0);
-        myKeyMap = new HashMap<KeyCode, Point2D>();
+        myKeyMap = new HashMap<KeyCode, Point2D.Double>();
         System.out.println("Keyboard Movement ON");
     }
 

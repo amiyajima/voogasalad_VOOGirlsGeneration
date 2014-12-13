@@ -49,8 +49,8 @@ public class ActionEditor extends Pane {
     private static final String CONCLUSION_LABEL = "Choose action conclusion";
 
     private String myName;
-    private List<Point2D> myAttackRange;
-    private List<Point2D> myEffectRange;
+    private List<Point2D.Double> myAttackRange;
+    private List<Point2D.Double> myEffectRange;
     private List<StatsTotalLogic> myStatsLogics;
     private ActionConclusion myConclusion;
     private List<Class> conclusionsList;
@@ -61,8 +61,8 @@ public class ActionEditor extends Pane {
 
     public ActionEditor (Consumer<Action> okLambda, String gridShape) {
         myName = "";
-        myAttackRange = new LinkedList<Point2D>();
-        myEffectRange = new LinkedList<Point2D>();
+        myAttackRange = new LinkedList<Point2D.Double>();
+        myEffectRange = new LinkedList<Point2D.Double>();
         myStatsLogics = new LinkedList<StatsTotalLogic>();
         myConclusion = null;
         initEditor(okLambda, gridShape);
@@ -227,7 +227,7 @@ public class ActionEditor extends Pane {
     }
 
     //TODO: shape should be passed in
-    private void initSetRangeButton (VBox rangeBox, String label, List<Point2D> range) {
+    private void initSetRangeButton (VBox rangeBox, String label, List<Point2D.Double> range) {
         Label rangeLabel = new Label(label);
         Button setRange = new Button("Set Range...");
         setRange.setOnAction(new EventHandler<ActionEvent>() {

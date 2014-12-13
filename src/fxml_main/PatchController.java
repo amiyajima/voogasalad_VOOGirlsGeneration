@@ -62,7 +62,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
                     @Override
                     public void handle (MouseEvent e) {
                         GUIGrid grid = myGridReference.getGrid();
-                        Point2D coor = grid.findClickedCoordinate(e.getX(), e.getY());
+                        Point2D.Double coor = grid.findClickedCoordinate(e.getX(), e.getY());
                         Patch patch = grid.getPatch(coor);
                         myPropertiesSPane.setContent(new PatchViewer(patch));
                     }
@@ -87,7 +87,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
                     @Override
                     public void handle (MouseEvent e) {
                         GUIGrid grid = myGridReference.getGrid();
-                        Point2D coor = grid.findClickedCoordinate(e.getX(), e.getY());
+                        Point2D.Double coor = grid.findClickedCoordinate(e.getX(), e.getY());
                         grid.removePatchAtCoordinate(coor);
                     }
                 };
@@ -112,7 +112,7 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
                     @Override
                     public void handle (MouseEvent e) {
                         GUIGrid grid = myGridReference.getGrid();
-                        Point2D coor = grid.findClickedCoordinate(e.getX(), e.getY());
+                        Point2D.Double coor = grid.findClickedCoordinate(e.getX(), e.getY());
                         grid.addPatchAtLoc(entry, coor);
                     }
                 };

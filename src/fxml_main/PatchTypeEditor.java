@@ -44,7 +44,7 @@ public class PatchTypeEditor extends Pane {
 	private static final String LABEL_CSS = "-fx-font-size: 14pt;";
 
 	private static final String DEFAULT_IMAGE_LOC = "/resources/images/default_image.png";
-	private static final Point2D DEFAULT_LOC = new Point2D.Double(0,0);
+	private static final Point2D.Double DEFAULT_LOC = new Point2D.Double(0,0);
 
 	private String myEditorTitle;
 	private Consumer<Patch> myOkLambda;

@@ -17,7 +17,7 @@ public class SquareTile extends SuperTile{
 	 * @param size: The side length of the square.
 	 * @param loc: The grid coordinate of the tile.
 	 */
-	public SquareTile(double size, Point2D loc) {
+	public SquareTile(double size, Point2D.Double loc) {
 		super(size, loc);
 	}
 
@@ -26,7 +26,7 @@ public class SquareTile extends SuperTile{
 	 * @param coord: The pixel location of the top left vertex.
 	 */
 	@Override
-	protected Shape makeShape(double size, Point2D coord) {
+	protected Shape makeShape(double size, Point2D.Double coord) {
 		return new Rectangle(coord.getX(),coord.getY(),size, size);
 	}
 	
@@ -36,8 +36,8 @@ public class SquareTile extends SuperTile{
 	 * @return The pixel location of the top left vertex.
 	 */
 	@Override
-	protected Point2D calculatePixelLocation(double size, Point2D loc) {
-		Point2D coord = new Point2D.Double(loc.getX()*size, loc.getY()*size);
+	protected Point2D.Double calculatePixelLocation(double size, Point2D.Double loc) {
+		Point2D.Double coord = new Point2D.Double(loc.getX()*size, loc.getY()*size);
 		return coord;
 	}
 	
@@ -47,7 +47,7 @@ public class SquareTile extends SuperTile{
 	 * @return The pixel location of the image.
 	 */
 	@Override
-	protected Point2D calculateImageLocation(double size, Point2D loc) {
+	protected Point2D.Double calculateImageLocation(double size, Point2D.Double loc) {
 		return calculatePixelLocation(size, loc);
 	}
 	
