@@ -160,7 +160,7 @@ public class TestGameCreator {
 		
 		List<List<Point2D.Double>> paths = new ArrayList<List<Point2D.Double>>();
 		paths.add(pl3);
-		Movement move = new Movement(pl1, paths);
+		Movement move = new Movement();
 
 		List<Action> actions = new ArrayList<Action>();
 		actions.add(createNewAction(pl2, pl4));
