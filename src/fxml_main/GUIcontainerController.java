@@ -1,13 +1,20 @@
 package fxml_main;
 
+import gamePlayer.ViewController;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import com.sun.prism.paint.Color;
 
 import authoring.createedit.GamePropertiesEditor;
 import authoring.data.GamePropertiesData;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,6 +48,9 @@ public class GUIcontainerController implements Initializable{
 	private MenuItem newAuthor;
 	
 	@FXML
+	private MenuItem newPlayer;
+	
+	@FXML
 	private Tab testauthor;
 	
 	@FXML
@@ -50,20 +60,28 @@ public class GUIcontainerController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		myGamePropertiesData=new GamePropertiesData();
-//		BackgroundFill backgroundFill = 
-//                new BackgroundFill(null, null, null);
-//		displayedTabs.setBackground(new Background(backgroundFill));
-		LoadNewAuthoring();
 		
-//     		displayedTabs=new TabPane();
-//        	 Tab tab=new Tab("test");
-//             tab.setContent(rootLayout);
-//             displayedTabs.getTabs().add(tab);
-//             displayedTabs.getSelectionModel().select(tab);
-//             System.out.println(displayedTabs.getTabs().size());
+		newAuthor.setOnAction(event->LoadNewAuthoring());
+		
+		newPlayer.setOnAction(event->loadNewPlayer());
+		
+		
+		
+//		String authorName="11111";
+//		LoadNewAuthoring(authorName);
+   
+	}
 
-
-         
+	private void loadNewPlayer() {
+		Stage player=new Stage();
+		try {
+			new ViewController(player);
+		} catch (UnsupportedAudioFileException | IOException
+				| LineUnavailableException e) {
+			e.printStackTrace();
+		}
+		
+		player.show();
 	}
 
 	private void LoadNewAuthoring(){		
@@ -77,18 +95,12 @@ public class GUIcontainerController implements Initializable{
 
             authorController.initData(myGamePropertiesData);
             
-//          rootLayout = (BorderPane) loader.load();
-//    		myScene = new Scene(rootLayout);
-            
-//            tab.setText("First Tab");
-            
-            testauthor.setContent(rootLayout);
-            
-//    		Tab tab=new Tab("Authoring"+ myTabCount++);
+//            Tab tab=new Tab(name);
+    		Tab tab=new Tab("Authoring"+ ++myTabCount);
 //			tab.setStyle("-fx-background-color: blue;");
-//            tab.setContent(rootLayout);
-//            displayedTabs.getTabs().add(tab);
-//            displayedTabs.getSelectionModel().select(tab);
+            tab.setContent(rootLayout);
+            displayedTabs.getTabs().add(tab);
+            displayedTabs.getSelectionModel().select(tab);
 //            System.out.println(displayedTabs.getTabs().size());
 
 

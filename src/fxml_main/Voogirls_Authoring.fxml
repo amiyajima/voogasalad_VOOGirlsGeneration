@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="2000.0" maxWidth="2000.0" minHeight="50.0" minWidth="50.0" prefHeight="706.0" prefWidth="1024.0" stylesheets="@../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_main.AuthoringController">
+<BorderPane prefHeight="706.0" prefWidth="1024.0" stylesheets="@../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_main.AuthoringController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -36,7 +36,7 @@
    <left>
       <TitledPane animated="false" collapsible="false" prefHeight="677.0" prefWidth="230.0" text="Game Components" BorderPane.alignment="CENTER">
          <content>
-            <Accordion>
+            <Accordion prefHeight="643.0" prefWidth="228.0">
               <panes>
                   <TitledPane animated="false" prefHeight="572.0" prefWidth="228.0" text="Levels">
                      <content>
@@ -80,7 +80,7 @@
    <right>
       <TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" text="Properties Editor" BorderPane.alignment="CENTER">
          <content>
-            <ScrollPane fx:id="myPropertiesSPane" hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="650.0" prefWidth="258.0" />
+            <ScrollPane fx:id="myPropertiesSPane" hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="620.0" prefWidth="258.0" />
          </content>
       </TitledPane>
    </right>
