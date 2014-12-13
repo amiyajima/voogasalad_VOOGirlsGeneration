@@ -62,13 +62,12 @@ public class Movement implements Action {
 	 *            Point2Ds representing all possible relative locations of
 	 *            movement
 	 */
-	public Movement(List<Point2D.Double> moves, List<List<Point2D.Double>> paths) {
+	@SafeVarargs
+	public Movement(List<Point2D.Double>... endPoints) {
 		myOrientation = 0;
 		myOrientator = new Orientator();
-		myMoves = moves;
-		myPaths = paths;
 		myName = "Move";
-		/*
+
 		boolean first = true;
 		myPaths = new ArrayList<List<Point2D.Double>>();
 		for (List<Point2D.Double> p : endPoints) {
@@ -79,7 +78,6 @@ public class Movement implements Action {
 				myPaths.add(p);
 			}
 		}
-		*/
 	}
 
 	/**
@@ -154,7 +152,7 @@ public class Movement implements Action {
 	@Override
 	public void doBehavior(GUIGrid grid, Piece actor, Piece... receivers) {
 		Piece p = receivers[0];
-		Point2D point = p.getLoc();
+		Point2D.Double point = p.getLoc();
 		if (isValidLocation((int) point.getX(), (int) point.getY())) {
 			// TODO: Implement Orientation Calculation Here
 			actor.setLoc(point);

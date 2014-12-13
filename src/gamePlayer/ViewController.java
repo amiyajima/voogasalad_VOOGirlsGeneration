@@ -894,6 +894,10 @@ public class ViewController {
          */
         public void testPlayGame(Game testGame) {
             myModel = testGame;
+            TestGameCreator tgc = new TestGameCreator();
+            tgc.createNewGame();
+            tgc.createNewGame();
+            tgc.createNewGame();
             System.out.println("model found in viewcontroller: " + myModel);
             initializeGrid();
             myScene = new Scene(myGameSpace);
