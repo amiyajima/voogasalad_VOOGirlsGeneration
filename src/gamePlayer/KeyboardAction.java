@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Yoon Choi
+
 package gamePlayer;
 
 import gamedata.action.Action;
