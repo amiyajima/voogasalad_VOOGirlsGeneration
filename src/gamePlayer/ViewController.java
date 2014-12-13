@@ -493,14 +493,14 @@ public class ViewController {
          * @param x
          * @param y
          */
-        public void performAction(Point2D.Double loc) {
+        public void performAction(Point2D.Double myCurrentLocation) {
                 System.out.println("PERFORM ACTION");
 
                 if (clickSoundOn) {
                         myAudio.playSelection();
                 }
 
-                gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(loc));
+                gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(myCurrentLocation));
 
                 while (myCurrentPlayer.getType().equals("AI")) {
                     myCurrentPlayer.play();
