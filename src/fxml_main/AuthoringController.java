@@ -7,7 +7,6 @@ import gamedata.action.ConcreteAction;
 import gamedata.gamecomponents.Game;
 import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -23,7 +22,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -158,16 +156,21 @@ public class AuthoringController implements Initializable {
     	players.add(p1);
     	game.addPlayers(players);
 
-    	JSONManager myJM = new JSONManager();
 
-    	FileChooser myFC = new FileChooser();
-    	myFC.getExtensionFilters().add(new ExtensionFilter("JSON", "*.json"));
-    	myFC.setInitialDirectory(new File("src/resources/json"));
-    	File file = myFC.showOpenDialog(new Stage());
-    	myJM.writeToJSON(game, file.getAbsolutePath());
+        JSONManager myJM = new JSONManager();
+        
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File("src/resources/json"));
+        File f = fc.showSaveDialog(null);
+        String basePath = System.getProperty("user.dir");
+        String absolutePath = f.getPath();
+        String relativePath = "";
+        if (absolutePath.startsWith(basePath)) {
+                relativePath = absolutePath.substring(basePath.length() + 1);
+        }
+        myJM.writeToJSON(game, f.getPath());
     }
-
-
+    
     @FXML
 
     private void saveAsGame () {
