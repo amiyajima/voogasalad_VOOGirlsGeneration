@@ -890,6 +890,7 @@ public class ViewController {
             myStage.setScene(myScene);
 //            System.out.println("VC: Current Level: " + myModel.getCurrentLevel().getId());
 //            System.out.println(myModel.getCurrentLevel().getGrid().toString());
+            myModel.getCurrentLevel().getGrid().repopulateGrid();
         }
 
 
