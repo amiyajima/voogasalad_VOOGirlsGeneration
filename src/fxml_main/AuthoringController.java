@@ -126,90 +126,90 @@ public class AuthoringController implements Initializable {
         actionLogicStage.initModality(Modality.WINDOW_MODAL);
         Scene scene = new Scene(root);
         actionLogicStage.setScene(scene);
-        
+
         System.out.println("done");
-        
+
 
         actionLogicStage.showAndWait();
     }
 
     @FXML
     private void showGamePropertiesWindow () {
-        GamePropertiesEditor gamePptEditor = new GamePropertiesEditor(myGamePropertiesData);
-        gamePptEditor.disableChangingGridShape();
+    	GamePropertiesEditor gamePptEditor = new GamePropertiesEditor(myGamePropertiesData);
+    	gamePptEditor.disableChangingGridShape();
     }
 
     @FXML
     private void showPlayerEditWindow () {
-        StatsTotalEditor statsEditor = new StatsTotalEditor();
-        statsEditor.setTitle("Player Editor");
-        statsEditor.setX(450);
-        statsEditor.setY(200);
-        statsEditor.show();
+    	StatsTotalEditor statsEditor = new StatsTotalEditor();
+    	statsEditor.setTitle("Player Editor");
+    	statsEditor.setX(450);
+    	statsEditor.setY(200);
+    	statsEditor.show();
     }
 
-    
+
     @FXML
     private void saveGame () {
 
-        Game game = myTotalData.createGame();
-        Player p1 = new HumanPlayer(1);
-        List<Player> players = new ArrayList<Player>();
-        players.add(p1);
-        game.addPlayers(players);
+    	Game game = myTotalData.createGame();
+    	Player p1 = new HumanPlayer(1);
+    	List<Player> players = new ArrayList<Player>();
+    	players.add(p1);
+    	game.addPlayers(players);
 
-        JSONManager myJM = new JSONManager();
-        
-        FileChooser myFC = new FileChooser();
-        myFC.getExtensionFilters().add(new ExtensionFilter("JSON", "*.json"));
-        myFC.setInitialDirectory(new File("src/resources/json"));
-        File file = myFC.showOpenDialog(new Stage());
-        myJM.writeToJSON(game, file.getAbsolutePath());
+    	JSONManager myJM = new JSONManager();
+
+    	FileChooser myFC = new FileChooser();
+    	myFC.getExtensionFilters().add(new ExtensionFilter("JSON", "*.json"));
+    	myFC.setInitialDirectory(new File("src/resources/json"));
+    	File file = myFC.showOpenDialog(new Stage());
+    	myJM.writeToJSON(game, file.getAbsolutePath());
     }
 
-    
+
     @FXML
-    
-    private void saveAsGame () {
-        Game game = myTotalData.createGame();
-        Player p1 = new HumanPlayer(1);
-        List<Player> players = new ArrayList<Player>();
-        players.add(p1);
-        game.addPlayers(players);
 
-        Stage s = new Stage();
-        try {
-            ViewController viewCtrl = new ViewController(s);
-            viewCtrl.testPlayGame(game);
-        }
-        catch (UnsupportedAudioFileException | IOException
-                | LineUnavailableException e) {
-            System.out.println("Opening ViewController didn't work!");
-        }
+    private void saveAsGame () {
+    	Game game = myTotalData.createGame();
+    	Player p1 = new HumanPlayer(1);
+    	List<Player> players = new ArrayList<Player>();
+    	players.add(p1);
+    	game.addPlayers(players);
+
+    	Stage s = new Stage();
+    	try {
+    		ViewController viewCtrl = new ViewController(s);
+    		viewCtrl.testPlayGame(game);
+    	}
+    	catch (UnsupportedAudioFileException | IOException
+    			| LineUnavailableException e) {
+    		System.out.println("Opening ViewController didn't work!");
+    	}
     }
 
-    
-    
-	public void initData(GamePropertiesData gamePropertiesData) {
-		myGamePropertiesData=gamePropertiesData;
-		
-		myTotalData = new GameAuthoringData(myLevelData, myPieceTypes, myPatchTypes,
-                myActionData, myGamePropertiesData);
-GUIGridReference myGridReference = new GUIGridReference();
 
-myPieceController = new PieceController(myPiecesVBox, myPropertiesSPane, myGridReference,
-                    myPieceTypes, myActionData, myGamePropertiesData);
-myPatchController = new PatchController(myPatchesVBox, myPropertiesSPane, myGridReference,
-                    myPatchTypes);
-myLevelController =
-new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
-        myGridReference, myLevelData, myPieceTypes, myPatchTypes,
-        myGamePropertiesData.getGridShape());
 
-myActionController =
-new ActionController(myActionsVBox, myPropertiesSPane, myGridReference,
-         myActionData, myGamePropertiesData.getGridShape());
-	}
-    
+    public void initData(GamePropertiesData gamePropertiesData) {
+    	myGamePropertiesData=gamePropertiesData;
+
+    	myTotalData = new GameAuthoringData(myLevelData, myPieceTypes, myPatchTypes,
+    			myActionData, myGamePropertiesData);
+    	GUIGridReference myGridReference = new GUIGridReference();
+
+    	myPieceController = new PieceController(myPiecesVBox, myPropertiesSPane, myGridReference,
+    			myPieceTypes, myActionData, myGamePropertiesData);
+    	myPatchController = new PatchController(myPatchesVBox, myPropertiesSPane, myGridReference,
+    			myPatchTypes);
+    	myLevelController =
+    			new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
+    					myGridReference, myLevelData, myPieceTypes, myPatchTypes,
+    					myGamePropertiesData.getGridShape());
+
+    	myActionController =
+    			new ActionController(myActionsVBox, myPropertiesSPane, myGridReference,
+    					myActionData, myGamePropertiesData.getGridShape());
+    }
+
 
 }

@@ -43,33 +43,33 @@ public class GUIcontainerController implements Initializable{
 
 	@FXML
 	private MenuItem gameProperties;
-	
+
 	@FXML
 	private MenuItem newAuthor;
-	
+
 	@FXML
 	private MenuItem newPlayer;
-	
+
 	@FXML
 	private Tab testauthor;
-	
+
 	@FXML
 	private TabPane displayedTabs;
-	
-	
+
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		myGamePropertiesData=new GamePropertiesData();
-		
+
 		newAuthor.setOnAction(event->LoadNewAuthoring());
-		
+
 		newPlayer.setOnAction(event->loadNewPlayer());
-		
-		
-		
-//		String authorName="11111";
-//		LoadNewAuthoring(authorName);
-   
+
+
+
+		//		String authorName="11111";
+		//		LoadNewAuthoring(authorName);
+
 	}
 
 	private void loadNewPlayer() {
@@ -80,40 +80,40 @@ public class GUIcontainerController implements Initializable{
 				| LineUnavailableException e) {
 			e.printStackTrace();
 		}
-		
+
 		player.show();
 	}
 
 	private void LoadNewAuthoring(){		
 		try {
-            // Load root layout from fxml file.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(GUIcontainerController.class.getResource("Voogirls_Authoring.fxml"));
-            rootLayout = (BorderPane) loader.load();
+			// Load root layout from fxml file.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(GUIcontainerController.class.getResource("Voogirls_Authoring.fxml"));
+			rootLayout = (BorderPane) loader.load();
 
-            AuthoringController authorController = loader.getController();
+			AuthoringController authorController = loader.getController();
 
-            authorController.initData(myGamePropertiesData);
-            
-//            Tab tab=new Tab(name);
-    		Tab tab=new Tab("Authoring"+ ++myTabCount);
-//			tab.setStyle("-fx-background-color: blue;");
-            tab.setContent(rootLayout);
-            displayedTabs.getTabs().add(tab);
-            displayedTabs.getSelectionModel().select(tab);
-//            System.out.println(displayedTabs.getTabs().size());
+			authorController.initData(myGamePropertiesData);
+
+			//            Tab tab=new Tab(name);
+			Tab tab=new Tab("Authoring"+ ++myTabCount);
+			//			tab.setStyle("-fx-background-color: blue;");
+			tab.setContent(rootLayout);
+			displayedTabs.getTabs().add(tab);
+			displayedTabs.getSelectionModel().select(tab);
+			//            System.out.println(displayedTabs.getTabs().size());
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	
+
+
 	@FXML
 	private void showGamePropertiesWindow(){
-			GamePropertiesEditor gamePptEditor=new GamePropertiesEditor(myGamePropertiesData);
+		GamePropertiesEditor gamePptEditor=new GamePropertiesEditor(myGamePropertiesData);
 	}
-	
+
 
 }
