@@ -1,10 +1,8 @@
 package fxml_main;
 
 import gamedata.gamecomponents.Piece;
-
 import java.awt.geom.Point2D;
 import java.util.function.Consumer;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -18,6 +16,7 @@ import authoring.data.ActionData;
 import authoring.data.GamePropertiesData;
 import authoring.data.PieceTypeData;
 import authoring_environment.GUIGrid;
+
 
 /**
  * @author Martin Tamayo
@@ -43,23 +42,24 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
         newBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-            	// Adds piecetype to data and makes an entry box
+                // Adds piecetype to data and makes an entry box
                 Consumer<Piece> okLambda = (Piece piece) -> {
                     myPieceTypes.add(piece);
                     addEntry(piece);
                 };
                 myPropertiesSPane.setContent(new PieceTypeEditor(okLambda, myPieceTypes,
-                		myActionData, myGameProperties.getGridShape()));
+                                                                 myActionData, myGameProperties
+                                                                         .getGridShape()));
             }
         });
     }
 
     @Override
     protected void initGlobalEditBtn (Button editBtn) {
-    	editBtn.setOnAction(new EventHandler<ActionEvent>() {
+        editBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-            	// Make a MouseEvent for clicking the grid
+                // Make a MouseEvent for clicking the grid
                 EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
                     @Override
                     public void handle (MouseEvent e) {
@@ -67,13 +67,14 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
                         Point2D.Double coor = grid.findClickedCoordinate(e.getX(), e.getY());
                         Piece piece = grid.getPiece(coor);
                         myPropertiesSPane.setContent(new PieceEditor(piece,
-                        		myGameProperties.getNumPlayers()));
+                                                                     myGameProperties
+                                                                             .getNumPlayers()));
                     }
                 };
                 myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
                 myGridReference.getGrid().paneSetOnMouseDragged(clickHandler);
             }
-    	});
+        });
     }
 
     @Override
@@ -81,7 +82,7 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
         delBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-            	// Make a MouseEvent for clicking the grid
+                // Make a MouseEvent for clicking the grid
                 EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
                     @Override
                     public void handle (MouseEvent e) {
@@ -139,7 +140,8 @@ public class PieceController extends GridComponentAbstCtrl<Piece> {
                     myPieceTypes.replace(entry, piece);
                 };
                 myPropertiesSPane.setContent(new PieceTypeEditor(okLambda, entry,
-                		myActionData, myGameProperties.getGridShape()));
+                                                                 myActionData, myGameProperties
+                                                                         .getGridShape()));
             }
         });
     }
