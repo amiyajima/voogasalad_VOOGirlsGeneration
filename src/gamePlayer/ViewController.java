@@ -319,7 +319,7 @@ public class ViewController {
         protected void newGame() throws UnsupportedAudioFileException, IOException,
                         LineUnavailableException {
 
-                List<File> games = getGames();
+                List<File> games = getResourceGames();
 
                 games.forEach(file -> {
                         MenuItem l = new MenuItem();
@@ -327,11 +327,21 @@ public class ViewController {
                         l.getStyleClass().add("button");
                         newGameMenu.getItems().add(l);
                         l.setOnAction(event -> {
-                                myScene = new Scene(myGameSpace);
-                                myStage.setScene(myScene);
+                                try {
+                                    System.out.println("VC: loading game... ");
+                                    JSONManager myJM = new JSONManager();
+                                    myStage.setScene(mySplashScreen);
+                                    String gameLoc = GAME_LOCATION + l.getText() + ".json";
+                                    testPlayGame(myJM.readFromJSONFile(gameLoc));
+                                    System.out.println("VC: game loaded... ");
+                                }
+                                catch (FileNotFoundException e) {
+                                    String gameLoc = GAME_LOCATION  + "/" + l.getText() + ".json";
+                                    System.out.println("Could not find file: " + gameLoc);
+                                }
                         });
                 });
-                // initializeGrid();
+                
         }
 
         /**
@@ -382,7 +392,7 @@ public class ViewController {
          * The method to get all json files from the resources directory that stores
          * all the games user has defined from the authoring environment
          */
-        private List<File> getGames() {
+        private List<File> getResourceGames() {
 
                 List<File> gameList = new ArrayList<File>();
                 File files = new File(System.getProperty("user.dir") + GAME_LOCATION);
