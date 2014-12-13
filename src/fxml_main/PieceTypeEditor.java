@@ -1,6 +1,7 @@
 package fxml_main;
 
 import gamedata.action.Action;
+
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
@@ -10,7 +11,6 @@ import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -94,8 +94,7 @@ public class PieceTypeEditor extends Pane {
         myID = "";
         myName = "";
         myImageLocation = DEFAULT_IMAGE_LOC;
-        myMovement = new Movement(new LinkedList<Point2D.Double>(),
-        		new ArrayList<List<Point2D.Double>>());
+        myMovement = new Movement();
         myActions = new ArrayList<Action>();
         myStats = new Stats();
         myPlayerID = 1;

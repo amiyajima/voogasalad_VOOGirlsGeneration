@@ -2,9 +2,11 @@ package gameengine.movement;
 
 import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.geom.Point2D;
+
 import authoring_environment.GUIGrid;
 
 /**
@@ -55,6 +57,7 @@ public class Movement implements Action {
 	 *            Point2Ds representing all possible relative locations of
 	 *            movement
 	 */
+	@SafeVarargs
 	public Movement(List<Point2D.Double>... endPoints) {
 		myOrientation = 0;
 		myOrientator = new Orientator();
