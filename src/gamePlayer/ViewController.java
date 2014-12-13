@@ -436,7 +436,7 @@ public class ViewController {
                 controlPane.getChildren().clear();
                 ArrayList<Label> actions = new ArrayList<Label>();
                 piece.getActions().forEach(action -> {
-                        Label l = new Label(action.toString());
+                        Label l = new Label(action.getName());
                         l.setOnMouseClicked(event -> bindAction(action));
                         actions.add(l);
                 });

@@ -151,6 +151,7 @@ public class Movement implements Action {
 	 */
 	@Override
 	public void doBehavior(GUIGrid grid, Piece actor, Piece... receivers) {
+		myGrid = grid;
 		Piece p = receivers[0];
 		Point2D.Double point = p.getLoc();
 		if (isValidLocation((int) point.getX(), (int) point.getY())) {
