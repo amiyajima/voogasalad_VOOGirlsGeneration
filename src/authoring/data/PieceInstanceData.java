@@ -43,10 +43,10 @@ public class PieceInstanceData implements AuthoringData<Piece> {
 	@Override
 	public boolean canAdd(Piece element) {
 		String elementID = element.getID();
-		Point2D elementLoc = element.getLoc();
+		Point2D.Double elementLoc = element.getLoc();
 		for (Piece piece : myPieces){
 			String id = piece.getID();
-			Point2D loc = piece.getLoc();
+			Point2D.Double loc = piece.getLoc();
 			if ((elementID.equals(id)) && (elementLoc.equals(loc))){
 				return false;
 			}
@@ -70,8 +70,8 @@ public class PieceInstanceData implements AuthoringData<Piece> {
 		return myPieces;
 	}
     
-    public List<Point2D> replace(Piece pieceType) {
-    	List<Point2D> pointsToReplace = new ArrayList<Point2D>();
+    public List<Point2D.Double> replace(Piece pieceType) {
+    	List<Point2D.Double> pointsToReplace = new ArrayList<Point2D.Double>();
     	myPieces.forEach(piece -> {
     		if (piece.getID().equals(pieceType.getID())) {
     			replace(piece, pieceType);
@@ -81,9 +81,9 @@ public class PieceInstanceData implements AuthoringData<Piece> {
     	return pointsToReplace;
     }
 	
-	public List<Point2D> removeUnknown(Set<String> idSet) {
+	public List<Point2D.Double> removeUnknown(Set<String> idSet) {
 		List<Piece> piecesToRemove = new ArrayList<Piece>();
-		List<Point2D> pointsToRemove = new ArrayList<Point2D>();
+		List<Point2D.Double> pointsToRemove = new ArrayList<Point2D.Double>();
 		for (Piece piece : myPieces) {
     		if (!idSet.contains(piece.getID())) {
 				piecesToRemove.add(piece);
@@ -95,7 +95,7 @@ public class PieceInstanceData implements AuthoringData<Piece> {
 		return pointsToRemove;
 	}
 	
-	public void removePieceAtLoc(Point2D location){
+	public void removePieceAtLoc(Point2D.Double location){
 		for(Piece piece : myPieces){
 			if(location.equals(piece.getLoc())){
 				myPieces.remove(piece);
@@ -106,7 +106,7 @@ public class PieceInstanceData implements AuthoringData<Piece> {
 	
 	// Can we also rename this?
 	public boolean unitAtLoc(Piece unit, int x, int y){
-		Point2D location = new Point2D.Double(x, y);
+		Point2D.Double location = new Point2D.Double(x, y);
 		for(Piece piece : myPieces){
 			if(location.equals(piece.getLoc()) && unit.toString().equals(piece.toString())){
 				myPieces.remove(piece);

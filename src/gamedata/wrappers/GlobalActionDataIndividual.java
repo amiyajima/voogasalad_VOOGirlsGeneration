@@ -1,8 +1,8 @@
 package gamedata.wrappers;
 
 import java.awt.geom.Point2D;
-import gamedata.events.GlobalAction;
 import gamedata.events.globalaction.DeletePieceAtLocation;
+import gamedata.events.globalaction.GlobalAction;
 
 /**
  * Wrapper for each global action

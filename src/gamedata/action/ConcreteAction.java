@@ -115,7 +115,7 @@ public class ConcreteAction implements Action {
 			} else if (ssm.checkTarget("constant")) {
 				doubleValue = Integer.parseInt(multiplierValue);
 			}
-			result += ssm.getMultiplier()*doubleValue;
+			result += ssm.getModifier()*doubleValue;
 		}
 		return result;
 	}

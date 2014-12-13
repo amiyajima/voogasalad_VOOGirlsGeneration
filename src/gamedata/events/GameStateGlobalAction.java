@@ -1,5 +1,6 @@
 package gamedata.events;
 
+import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.IChangeGameState;
 
 public abstract class GameStateGlobalAction extends GlobalAction{

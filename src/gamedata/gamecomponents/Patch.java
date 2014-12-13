@@ -24,7 +24,7 @@ public class Patch extends GridComponent {
 	 * @param p
 	 *            coordinate of patch
 	 */
-	public Patch(String id, String name, String imageLocation, Point2D p) {
+	public Patch(String id, String name, String imageLocation, Point2D.Double p) {
 		super(id, name, imageLocation, p);
 	}
 
@@ -34,7 +34,7 @@ public class Patch extends GridComponent {
 	 * @param clone
 	 *            - Patch instance to be cloned
 	 */
-	public Patch(Patch clone, Point2D placeHere) {
+	public Patch(Patch clone, Point2D.Double placeHere) {
 		super(clone, placeHere);
 	}
 

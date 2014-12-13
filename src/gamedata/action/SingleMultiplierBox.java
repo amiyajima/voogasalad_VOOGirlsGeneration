@@ -83,7 +83,7 @@ public class SingleMultiplierBox extends HBox{
 	 * @param ssm - StatsSingleMultiplier to view
 	 */
 	private void setSingleMultiplier(StatsSingleMultiplier ssm) {
-		myMultiplier.setText(""+ssm.getMultiplier());
+		myMultiplier.setText(""+ssm.getModifier());
 		myStatRef.setValue(ssm.getStatRef());
 		myStatName.setText(ssm.getStatName());
 	}

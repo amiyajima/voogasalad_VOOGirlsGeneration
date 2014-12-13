@@ -1,6 +1,6 @@
 package gamedata.wrappers;
 
-import gamedata.events.GlobalAction;
+import gamedata.events.globalaction.GlobalAction;
 import java.util.ArrayList;
 import java.util.List;
 

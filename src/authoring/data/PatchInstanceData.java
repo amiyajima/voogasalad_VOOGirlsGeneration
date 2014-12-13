@@ -43,10 +43,10 @@ public class PatchInstanceData implements AuthoringData<Patch> {
 	@Override
 	public boolean canAdd(Patch element) {
 		String elementID = element.getID();
-		Point2D elementLoc = element.getLoc();
+		Point2D.Double elementLoc = element.getLoc();
 		for (Patch patch : myPatches){
 			String id = patch.getID();
-			Point2D loc = patch.getLoc();
+			Point2D.Double loc = patch.getLoc();
 			if ((elementID.equals(id)) && (elementLoc.equals(loc))){
 				return false;
 			}
@@ -70,8 +70,8 @@ public class PatchInstanceData implements AuthoringData<Patch> {
 		return myPatches;
 	}
 	
-	public List<Point2D> replace(Patch patchType) {
-    	List<Point2D> pointsToReplace = new ArrayList<Point2D>();
+	public List<Point2D.Double> replace(Patch patchType) {
+    	List<Point2D.Double> pointsToReplace = new ArrayList<Point2D.Double>();
     	myPatches.forEach(patch -> {
     		if (patch.getID().equals(patchType.getID())) {
     			replace(patch, patchType);
@@ -81,9 +81,9 @@ public class PatchInstanceData implements AuthoringData<Patch> {
     	return pointsToReplace;
     }
 	
-	public List<Point2D> removeUnknown(Set<String> idSet) {
+	public List<Point2D.Double> removeUnknown(Set<String> idSet) {
 		List<Patch> patchesToRemove = new ArrayList<Patch>();
-		List<Point2D> pointsToRemove = new ArrayList<Point2D>();
+		List<Point2D.Double> pointsToRemove = new ArrayList<Point2D.Double>();
 		for (Patch patch : myPatches) {
     		if (!idSet.contains(patch.getID())) {
 				patchesToRemove.add(patch);
@@ -95,7 +95,7 @@ public class PatchInstanceData implements AuthoringData<Patch> {
 		return pointsToRemove;
 	}
 
-	public void removePatchAtLoc(Point2D location){
+	public void removePatchAtLoc(Point2D.Double location){
 		for(Patch patch : myPatches){
 			if(location.equals(patch.getLoc())){
 				myPatches.remove(patch);
@@ -106,7 +106,7 @@ public class PatchInstanceData implements AuthoringData<Patch> {
 
 	// Can we rename this?
 	public boolean terrainAtLoc(Patch terrain, int x, int y){
-		Point2D location = new Point2D.Double(x, y);
+		Point2D.Double location = new Point2D.Double(x, y);
 		for(Patch patch : myPatches){
 			if(location.equals(patch.getLoc()) && terrain.toString().equals(patch.toString())){
 				myPatches.remove(patch);

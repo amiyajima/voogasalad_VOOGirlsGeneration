@@ -2,9 +2,11 @@ package tests;
 
 import gamedata.JSON.JSONManager;
 import gamedata.action.Action;
-import gamedata.events.Condition;
 import gamedata.events.Event;
-import gamedata.events.GlobalAction;
+import gamedata.events.conditions.Condition;
+import gamedata.events.conditions.IsDead;
+import gamedata.events.globalaction.DeletePieceAtLocation;
+import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Level;
@@ -16,6 +18,7 @@ import gamedata.stats.Stats;
 import gameengine.movement.Movement;
 import java.awt.geom.Point2D;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import authoring.data.ActionData;
 import authoring.data.PatchInstanceData;
@@ -35,8 +38,8 @@ public class JSONTesterMain {
         TestGameCreator jb = new TestGameCreator();
 
         // POINT
-        Point2D point = new Point2D.Double(0, 0);
-        Point2D point2 = new Point2D.Double(3,3);
+        Point2D.Double point = new Point2D.Double(0, 0);
+        Point2D.Double point2 = new Point2D.Double(3,3);
                 
         // GAME
         Game g = jb.createNewGame();
@@ -66,13 +69,30 @@ public class JSONTesterMain {
         Movement m = piece.getMovement(); //INCLUDED IN ACTIONS
         Stats stats = piece.getStats(); //WHY IS THIS TRANSIENT?
         Inventory inventory = piece.getInventory(); 
+        
+        Point2D.Double p1 = new Point2D.Double(1, 1);
+        Point2D.Double p4 = new Point2D.Double(1, 0);
+        Point2D.Double p5 = new Point2D.Double(-1, 0);
+
+        Point2D.Double p2 = new Point2D.Double(2, 2);
+        Point2D.Double p3 = new Point2D.Double(3, 3);
+
+        List<Point2D.Double> pl1 = new ArrayList<Point2D.Double>();
+        pl1.add(new Point2D.Double(-1, 0));
+        pl1.add(new Point2D.Double(1, 0));
+        pl1.add(new Point2D.Double(0, 1));
+        pl1.add(new Point2D.Double(0, -1));
+
+        List<Point2D.Double> pl2 = new ArrayList<Point2D.Double>();
+        pl2.add(p4);
+
 
         // PATCH AND COMPONENTS -- DONE
         //Patch patch = grid.getPatch(point); // WORKS
         //Patch patch2 = grid.getPatch(point2);
         //PatchData multiplePatches = grid.getPatchData(); // WORKS
-
-        myJSONmanager.writeToJSON(piece, saveTo);
+        GlobalAction gl2 = new DeletePieceAtLocation(new Point2D.Double(0, 0));
+        myJSONmanager.writeToJSON(g, saveTo);
     }
 
     public static void testJSONload (String loadFrom) {
@@ -88,7 +108,7 @@ public class JSONTesterMain {
     }
 
     public static void main (String[] args) {
-        String link = "src/resources/json/Patch-Rica.json";
+        String link = "src/resources/json/Rica-Game.json";
         //String localLink = "C:\\Users\\Rica\\Desktop\\Rica-GamePlayer.json";
         testJSONwrite(link);
         testJSONload(link);

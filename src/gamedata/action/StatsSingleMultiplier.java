@@ -18,7 +18,7 @@ public class StatsSingleMultiplier extends StatsModifier {
 	 * Default constructor for an empty StatsSingleMultiplier
 	 */
 	public StatsSingleMultiplier() {
-		super("","");
+		super("default ssm","default");
 		myModifier = 1;
 	}
 	
@@ -36,8 +36,15 @@ public class StatsSingleMultiplier extends StatsModifier {
 	/**
 	 * Returns the double that will scale the stat
 	 */
-	protected double getMultiplier() {
+	protected double getModifier() {
 		return myModifier;
+	}
+
+	@Override
+	public String toString() {
+	    String myString = "SSM: " + "Modifier: " + myModifier;
+	    myString += " StatRef: " + myStatRef + " Stat: " + myStat;
+	    return myString;
 	}
 	
 }

@@ -2,9 +2,17 @@ package gamedata.JSON;
 
 import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
+import gamedata.action.ConcreteAction;
 import gamedata.action.StatsModifier;
+import gamedata.action.StatsSingleMultiplier;
+import gamedata.action.StatsTotalLogic;
+import gamedata.action.conclusions.ReceiverToInventoryConclusion;
 import gamedata.adapters.ActionDeserializer;
 import gamedata.events.Event;
+import gamedata.events.conditions.Condition;
+import gamedata.events.conditions.IsDead;
+import gamedata.events.globalaction.DeletePieceAtLocation;
+import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.GridComponent;
 import gamedata.gamecomponents.Inventory;
@@ -18,7 +26,6 @@ import gamedata.wrappers.ActionData;
 import gamedata.wrappers.ActionDataIndividual;
 import gamedata.wrappers.EventDataIndividual;
 import gamedata.wrappers.GameData;
-import gamedata.wrappers.GoalData;
 import gamedata.wrappers.GridData;
 import gamedata.wrappers.LevelDataIndividual;
 import gamedata.wrappers.PatchData;
@@ -42,6 +49,8 @@ import authoring_environment.GUIGrid;
 import authoring_environment.SuperGrid;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonSerializer;
 
 
 /**
@@ -97,16 +106,8 @@ public class JSONManager {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
         
-        PieceDataIndividual piece = myGson.fromJson(br, PieceDataIndividual.class);
-        System.out.println(piece.toString());
-        for (ActionDataIndividual adi : piece.getMyActions()) {
-            //System.out.println(adi.getType());
-        }
-        ActionDataIndividual action = piece.getMyActions().get(0);
-        System.out.println(action);
-        
-        Piece myPiece = piece.getPieceFromData();
-        System.out.println(myPiece);
+        Game pi = myGson.fromJson(br, Game.class);
+        System.out.println(pi.toString());
 
         /*
         GameData gameData = myGson.fromJson(br, GameData.class);
@@ -135,15 +136,17 @@ public class JSONManager {
         Game myGame = gameData.getGameFromData();
         System.out.println("Game: " + myGame.toString());
         */
-        return null;
+        return pi;
     }    
     
     public void registerTypeAdapters (GsonBuilder builder) {
         builder.registerTypeAdapter(StatsModifier.class, new GenericTypeAdapter<StatsModifier>("gamedata.action"));
         builder.registerTypeAdapter(Player.class, new GenericTypeAdapter<Player>("gameengine.player"));
-        builder.registerTypeAdapter(Action.class, new ActionDeserializer());
+        builder.registerTypeAdapter(Action.class, new GenericTypeAdapter<ActionDataIndividual>("gamedata.action"));
         builder.registerTypeAdapter(ActionConclusion.class, new ActionConclusionTypeAdapter<ActionConclusion>("gamedata.action"));
         builder.registerTypeAdapter(GridComponent.class, new GenericTypeAdapter<GridComponent>("gamedata.gamecomponent"));
+        builder.registerTypeAdapter(Condition.class, new GenericTypeAdapter<Condition>("gamedata.events.conditions"));
+        builder.registerTypeAdapter(GlobalAction.class, new GenericTypeAdapter<GlobalAction>("gamedata.events.globalaction"));
         builder.registerTypeAdapter(SuperGrid.class, new GenericTypeAdapter<SuperGrid>("authoring_environment"));
     }
 

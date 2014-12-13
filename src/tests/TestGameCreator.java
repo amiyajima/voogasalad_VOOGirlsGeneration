@@ -6,11 +6,11 @@ import gamedata.action.ConcreteAction;
 import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
 import gamedata.action.conclusions.ReceiverToInventoryConclusion;
-import gamedata.events.Condition;
 import gamedata.events.Event;
-import gamedata.events.GlobalAction;
+import gamedata.events.conditions.Condition;
 import gamedata.events.conditions.IsDead;
 import gamedata.events.globalaction.DeletePieceAtLocation;
+import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Level;
@@ -133,7 +133,7 @@ public class TestGameCreator {
 		return grid1;
 	}
 
-	public Piece createNewPiece(GUIGrid g, Point2D p, int type) {
+	public Piece createNewPiece(GUIGrid g, Point2D.Double p, int type) {
 		Point2D.Double p1 = new Point2D.Double(1, 1);
 		Point2D.Double p4 = new Point2D.Double(1, 0);
 		Point2D.Double p5 = new Point2D.Double(-1, 0);
@@ -206,7 +206,7 @@ public class TestGameCreator {
 	}
 	*/
 
-	public Patch createNewPatch(Point2D p) {
+	public Patch createNewPatch(Point2D.Double p) {
 		Patch patch = new Patch("ID", "land", DEFAULT_LAND, p);
 		return patch;
 	}
@@ -232,19 +232,38 @@ public class TestGameCreator {
 	}
 
 	public Action createNewAction(List<Point2D.Double> pl1, List<Point2D.Double> pl2) {
-		StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor",
-				"health");
-		List<StatsSingleMultiplier> ssmList = new ArrayList<StatsSingleMultiplier>();
-		ssmList.add(ssm1);
-
 		List<StatsTotalLogic> stlList = new ArrayList<StatsTotalLogic>();
-		StatsTotalLogic s1 = new StatsTotalLogic("actor", "health", ssmList);
-		stlList.add(s1);
-
+		stlList.add(createNewStatsTotalLogic());
 		ActionConclusion ac = new ReceiverToInventoryConclusion();
-
 		Action a1 = new ConcreteAction("kill", pl1, pl2, stlList, ac);
 		return a1;
+	}
+	
+	public StatsSingleMultiplier createStatsSingleMultiplier() {
+               return new StatsSingleMultiplier(10, "actor", "health");
+	}
+	
+	public StatsTotalLogic createNewStatsTotalLogic() {
+	   StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor", "health");
+	   StatsSingleMultiplier ssm2 = new StatsSingleMultiplier(20, "actor", "health");
+	   List<StatsSingleMultiplier> ssmList = new ArrayList<StatsSingleMultiplier>();
+           ssmList.add(ssm1);
+           ssmList.add(ssm2);
+           
+           List<StatsTotalLogic> stlList = new ArrayList<StatsTotalLogic>();
+           StatsTotalLogic s1 = new StatsTotalLogic("actor", "health", ssmList);
+           stlList.add(s1);
+
+           return s1;
+	}
+	
+	public Event createNewEvent() {
+	    Event e1 = new Event("Garbage Collection Event");
+            Condition c = new IsDead("health");
+            GlobalAction gl = new DeletePieceAtLocation(new Point2D.Double(0, 0));
+            e1.getConditions().add(c);
+            e1.getGlobalActions().add(gl);
+            return e1;
 	}
 
 

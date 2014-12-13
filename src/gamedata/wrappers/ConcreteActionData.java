@@ -9,16 +9,16 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConcreteActionData {
+public class ConcreteActionData implements ActionDataIndividual {
     private String myID;
     private List<Point2D.Double> myAttackRange;
     private List<Point2D.Double> myEffectRange;
     private List<StatsTotalLogicData> myStatsLogics;
-    private ActionConclusion myConclusion;
+    private ActionConclusionData myConclusion;
     
     public ConcreteActionData(String name, List<Point2D.Double> attackRange, 
                                 List<Point2D.Double> effectRange, List<StatsTotalLogicData> statsLogic, 
-                                ActionConclusion conclusion) {
+                                ActionConclusionData conclusion) {
         myID = name;
         myAttackRange = attackRange;
         myEffectRange = effectRange;
@@ -42,10 +42,32 @@ public class ConcreteActionData {
         return myStatsLogics;
     }
     
-    public ActionConclusion getConclusion() {
+    public ActionConclusionData getConclusion() {
         return myConclusion;
     }
     
+    @Override
+    public String toString() {
+        String myString = "actionid:" + myID;
+        myString += " attack: ";
+        for (Point2D.Double pt : myAttackRange) {
+            myString += "(" + pt.getX() + " " + pt.getY() + ") ";
+        }
+        myString += " effect: ";
+        for (Point2D.Double pt : myEffectRange) {
+            myString += "(" + pt.getX() + " " + pt.getY() + ") ";
+        }
+        myString += " statslogic: ";
+        for (StatsTotalLogicData stat : myStatsLogics) {
+            myString += "(" + stat.toString() + ") ";
+        }
+        myString += " effect: ";
+        for (Point2D.Double pt : myEffectRange) {
+            myString += "(" + pt.getX() + " " + pt.getY() + ") ";
+        }
+        myString += " conclusion: " + myConclusion.toString();
+        return myString;
+    }
     /**
      * Will use reflection to figure out what type of action it is and create
      * an instance
@@ -70,8 +92,9 @@ public class ConcreteActionData {
         StatsTotalLogic s1 = new StatsTotalLogic("actor", "health", ssmList);
         stlList.add(s1);
         
+        
         Action myAction = new ConcreteAction(myID, myAttackRange, myEffectRange, 
-                                             stlList, myConclusion);
+                                             stlList, myConclusion.getConclusionFromData());
         return myAction;
     }
 }

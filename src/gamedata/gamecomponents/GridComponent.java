@@ -18,7 +18,7 @@ public abstract class GridComponent implements IHasStats{
 	
 	protected String myID;
 	protected String myName;
-	protected Point2D myLoc;
+	protected Point2D.Double myLoc;
 	protected String myImageLocation;
 	protected transient ImageView myImageView;
 	
@@ -31,9 +31,9 @@ public abstract class GridComponent implements IHasStats{
 	 * @param id : Unique string ID for the piece or patch.
 	 * @param name : String name describing the piece or patch.
 	 * @param imageLocation : String path to image on file.
-	 * @param point : Point2D location of piece or patch on grid.
+	 * @param point : Point2D.Double location of piece or patch on grid.
 	 */
-	public GridComponent(String id, String name, String imageLocation, Point2D point) {
+	public GridComponent(String id, String name, String imageLocation, Point2D.Double point) {
 		myID = id;
 		myName = name;
 		myLoc = point;
@@ -49,7 +49,7 @@ public abstract class GridComponent implements IHasStats{
 	 * 
 	 * @param clone : Piece or patch class to copy over.
 	 */
-	public GridComponent(GridComponent clone, Point2D placeHere){
+	public GridComponent(GridComponent clone, Point2D.Double placeHere){
 		myID = clone.myID;
 		myName = clone.myName;
 		myLoc = new Point2D.Double(placeHere.getX(),placeHere.getY());
@@ -82,9 +82,9 @@ public abstract class GridComponent implements IHasStats{
 	 * Getter method for the location of the GridComponent
 	 * on the grid.
 	 * 
-	 * @return myLoc : Point2D location of piece or patch on grid.
+	 * @return myLoc : Point2D.Double location of piece or patch on grid.
 	 */
-    public Point2D getLoc() {
+    public Point2D.Double getLoc() {
         return myLoc;
     }
     
@@ -92,9 +92,9 @@ public abstract class GridComponent implements IHasStats{
 	 * Setter method for the location of the GridComponent
 	 * on the grid.
 	 * 
-	 * @param loc : Point2D location of piece or patch on grid.
+	 * @param loc : Point2D.Double location of piece or patch on grid.
 	 */
-	public void setLoc(Point2D loc) {
+	public void setLoc(Point2D.Double loc) {
 		myLoc = loc;
 	}
 	

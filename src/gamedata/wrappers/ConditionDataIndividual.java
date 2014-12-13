@@ -1,6 +1,6 @@
 package gamedata.wrappers;
 
-import gamedata.events.Condition;
+import gamedata.events.conditions.Condition;
 import gamedata.events.conditions.IsDead;
 
 /**

@@ -155,9 +155,17 @@ public class Movement implements Action {
 
 	@Override
 	public String toString() {
-	    String str = "Movement: ";
+	    String str = "MOVEMENT: moves - ";
 	    for (Point2D.Double pt : myMoves) {
 	        str += "(" + pt.getX() + ","  + pt.getY() + ")";
+	    }
+	    str += " paths - ";
+	    for (List<Point2D.Double> ptlst : myPaths) {
+	        str += "[";
+	        for (Point2D.Double pt : ptlst) {
+	            str += "(" + pt.getX() + ","  + pt.getY() + ")";
+	        }
+	        str += "]";
 	    }
 	    return str;
 	}

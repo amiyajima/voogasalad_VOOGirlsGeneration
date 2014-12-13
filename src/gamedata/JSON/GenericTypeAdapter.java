@@ -1,6 +1,5 @@
 package gamedata.JSON;
 
-import gamedata.goals.PlayerPiecesRemovedGoal;
 import java.lang.reflect.Type;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

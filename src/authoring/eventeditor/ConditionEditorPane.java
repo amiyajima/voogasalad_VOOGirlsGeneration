@@ -1,15 +1,13 @@
 package authoring.eventeditor;
 
-import gamedata.events.Condition;
+import gamedata.events.conditions.Condition;
 import gamedata.events.conditions.IsDead;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
-
 import java.util.List;
 import java.util.function.Consumer;
-
 import utilities.reflection.Reflection;
 import authoring.data.EventsDataWrapper;
 import authoring_environment.UIspecs;

@@ -1,8 +1,8 @@
 package gamedata.wrappers;
 
-import gamedata.events.Condition;
 import gamedata.events.Event;
-import gamedata.events.GlobalAction;
+import gamedata.events.conditions.Condition;
+import gamedata.events.globalaction.GlobalAction;
 import java.util.ArrayList;
 import java.util.List;
 

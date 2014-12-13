@@ -4,7 +4,7 @@ import gamedata.action.ActionConclusion;
 
 public class ActionConclusionData {
     
-    public ActionConclusion() {
+    public ActionConclusionData() {
         
     }
 
