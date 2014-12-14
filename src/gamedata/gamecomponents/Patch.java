@@ -42,11 +42,4 @@ public class Patch extends GridComponent {
 	public Stats getStats() {
 		return null;
 	}
-	
-	public String getID() {
-            String myString = "Patch #" + myID + " " + myName;
-            myString += "loc:(" + myLoc.getX() + " " + myLoc.getY() + ") ";
-            myString += myImageLocation;
-            return myString;
-    }
 }

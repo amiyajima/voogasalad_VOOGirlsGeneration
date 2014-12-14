@@ -54,7 +54,7 @@ public class PieceTypeEditor extends Pane {
     private static final String ID_PROMPT = "Enter piece ID...";
     private static final String NAME_PROMPT = "Enter piece name...";
     private static final String STAT_CREATE_LABEL = "Add stat";
-    private static final String MOVE_RANGE_LABEL = "Set Range...";
+    private static final String MOVE_RANGE_LABEL = "Set Movement Range...";
     private static final String MOVEMENT_RANGE = "Movement Range:";
     private static final Insets MARGINS = new Insets(20, WIDTH / 5, 20, WIDTH / 5 - 10);
     private static final String LABEL_CSS = "-fx-font-size: 14pt;";
@@ -109,7 +109,7 @@ public class PieceTypeEditor extends Pane {
         myIDSet = new HashSet<String>();
         myAvailableActions = actions;
         myID = piece.getID();
-        myName = piece.toString();
+        myName = piece.getName();
         myImageLocation = piece.getImageLocation();
         myMovement = piece.getMovement();
         myActions = piece.getActions();
@@ -157,7 +157,7 @@ public class PieceTypeEditor extends Pane {
         movements.setPadding(UIspecs.allPadding);
         movements.setSpacing(5);
 
-        Button rangeEditorBtn = new Button ("Range Editor");
+        Button rangeEditorBtn = new Button (MOVE_RANGE_LABEL);
         initRangeEditorButton(rangeEditorBtn);
         movements.getChildren().addAll(rangeEditorBtn);
         
@@ -165,10 +165,10 @@ public class PieceTypeEditor extends Pane {
         initStatButton(createStatButton);
         createStat.getChildren().addAll(createStatButton);
         
-        VBox rangeVBox = new VBox();
-        rangeVBox.setSpacing(5);
-        rangeVBox.getStyleClass().add("vbox");
-        initSetRangeButton(rangeVBox, MOVEMENT_RANGE, myMovement.getRelativeMoves());
+//        VBox rangeVBox = new VBox();
+//        rangeVBox.setSpacing(5);
+//        rangeVBox.getStyleClass().add("vbox");
+//        initSetRangeButton(rangeVBox, MOVEMENT_RANGE, myMovement.getRelativeMoves());
 
         Label idLabel = new Label(ID_LABEL);
         idLabel.setPadding(UIspecs.topRightPadding);
@@ -196,17 +196,7 @@ public class PieceTypeEditor extends Pane {
         box.getChildren().addAll(labelBox, ids, names, images, movements, createStat, modList, goButton);
         getChildren().add(box);
     }
-
-    private void initRangeEditorButton (Button rangeEditorButton){
-    	rangeEditorButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent click) {
-                RangeEditor rEditor = new RangeEditor();
-                rEditor.show();
-            }
-        });
-    	
-    }
+    
     private void initStatButton (Button createStatButton) {
         createStatButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -254,6 +244,16 @@ public class PieceTypeEditor extends Pane {
             }
         });
         images.getChildren().addAll(icon, loadImage);
+    }
+    
+    private void initRangeEditorButton (Button rangeEditorButton){
+    	rangeEditorButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent click) {
+                RangeEditor rEditor = new RangeEditor();
+                rEditor.show();
+            }
+        });
     }
     
     private void initSetRangeButton (VBox rangeBox, String label, List<Point2D.Double> range) {

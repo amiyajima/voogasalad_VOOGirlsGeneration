@@ -6,7 +6,6 @@ import gameengine.movement.Movement;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.geom.Point2D;
-import javafx.scene.image.ImageView;
 
 /**
  * Class for pieces. Pieces are the primary unit for game play. They have
@@ -225,12 +224,5 @@ public class Piece extends GridComponent {
 	 */
 	public void setPlayerID(int id) {
 		myPlayerID = id;
-	}
-	
-	public String toString() {
-	    String myString = "Piece #" + myID + " " + myName + " Location: " + "(" + myLoc.getX() + " " + myLoc.getY() + ")" 
-	+ "\n  Image: " + myImageLocation + " Movement: " + myMovement.toString() 
-	+ "\n  Actions: " + myActions.toString();
-	    return myString;
 	}
 }
