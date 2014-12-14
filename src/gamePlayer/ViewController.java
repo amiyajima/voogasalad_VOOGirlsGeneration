@@ -687,13 +687,14 @@ public class ViewController {
 	 * @param action
 	 */
 	protected void bindAction(Action action) {
-		System.out.println("BIND ACTION");
+//		System.out.println(String.format("BIND %s", action));
 		if (clickSoundOn) {
 			myAudio.playSelection();
 		}
 
 		if (activePiece == null)
 			return;
+		System.out.println("SETTING ACTIVE ACTION " + action);
 		setActiveAction(action);
 		myGameGridEffect.highlightActionRange();
 		setGridState(new ApplyState(this));
@@ -949,6 +950,8 @@ public class ViewController {
 	 * @param action
 	 */
 	protected void setActiveAction(Action action) {
+		System.out.println("SETTING ACTIVE ACTION METHOD " + action);
+
 		activeAction = action;
 	}
 

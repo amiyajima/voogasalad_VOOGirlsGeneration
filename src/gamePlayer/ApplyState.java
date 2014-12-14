@@ -54,6 +54,7 @@ public class ApplyState implements IGridState {
 			piece = new Piece(actor, myController.getCurrentClick());
 			piece.setLoc(myController.getCurrentClick());
 		}
+
 		// System.out.println("ACTION RUNNING:" +
 		// myController.getActiveAction().toString());
 		myController.getActiveAction().doBehavior(myController.getGrid(),
