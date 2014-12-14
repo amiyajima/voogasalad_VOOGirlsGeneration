@@ -628,7 +628,6 @@ public class ViewController {
 		clickSoundOn = true;
 		myGameGridEffect = new GameGridEffect(this);
 		clearHighScores.setOnMouseClicked(event -> handleClearHighScores());
-		soundToggle.setOnMouseClicked(event -> toggleSound());
 	}
 
 	/**
