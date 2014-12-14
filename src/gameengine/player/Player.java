@@ -128,7 +128,8 @@ public abstract class Player implements IHasStats {
     /**
      * ToString Method for Player Information. For debugging purposes.
      */
-    public String toString () {
+    
+    public String printString () {
         return "Type:" + this.getClass().getName() + " ID:" + myID
                + " NumMovesPlayed:" + myNumMovesPlayed;
     }

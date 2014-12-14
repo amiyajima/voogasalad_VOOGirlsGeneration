@@ -1,8 +1,10 @@
 package gamedata.gamecomponents;
 
+import gamedata.stats.Stats;
 import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
 import gameengine.player.SimpleAIPlayer;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -265,13 +267,23 @@ public class Game {
 	 * @param playerID
 	 * @param newPlayer
 	 */
-	public void replacePlayer(int playerID, Player newPlayer) {
+	public void replacePlayer(int playerID, String playerType) {
 	    
             for (int i = 0; i < myPlayers.size(); i++) {
                 
                 if (myPlayers.get(i).getID() == playerID) {
+                    Stats statsToSave = myPlayers.get(i).getStats();
+                    double scoreToSave = myPlayers.get(i).getScore();
                     myPlayers.remove(i);
-                    myPlayers.add(i, newPlayer);
+                    try {
+                        Class<?> clazz = Class.forName(playerType);
+                        Constructor<?> ctor = clazz.getConstructor(String.class);
+                        Player player = (Player) ctor.newInstance(new Object[] { playerID, statsToSave, scoreToSave });
+                        myPlayers.add(i, player);
+                    }
+                    catch (Exception e) {
+                        System.out.println("Game: Creating correct version of player failed");
+                    }
                 }
             }
 	}
