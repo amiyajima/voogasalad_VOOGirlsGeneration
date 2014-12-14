@@ -73,7 +73,9 @@ public class ViewController {
 	public static final String POPUP_FXML = "popup.fxml";
 	public static final String SETTINGS_FXML = "settings.fxml";
 	private static final String HIGH_SCORE_FILE = "/resources/highscore/highscore.txt";
-
+	private static final String WIN_SCREEN = "winLoseScreen.fxml";
+	private static final String YOU_LOSE = "You Lose :(";
+	
 	private Stage myStage;
 	private BorderPane myGameSpace;
 	private BorderPane myPopup;
@@ -87,6 +89,7 @@ public class ViewController {
 	private Scene myPlayerScene;
 	private Scene myScene;
 	private Scene newHighScoreScene;
+	private Scene winLoseScene;
 	private Game myModel;
 	private GUIGrid myGrid;
 	private Stage mySplashStage;
@@ -154,6 +157,10 @@ public class ViewController {
 	private Button highScoreOK;
 	@FXML
 	private ToggleButton soundToggle;
+	@FXML
+	private BorderPane myWinLoseScreen;
+	@FXML
+	private Label winLose;
 
 	private ScrollPane myGridPane;
 	private Point2D.Double currentClick;
@@ -212,12 +219,14 @@ public class ViewController {
 		loadFXML(SETTINGS_FXML, mySettings);
 		loadFXML(PLAYER_FXML,myPlayerEditor);
 		loadFXML(ADD_HIGH_SCORE_FXML, newHighScoreRoot);
+		loadFXML(WIN_SCREEN, myWinLoseScreen);
 
 		scoreScene = new Scene(myScoreBoard);
 		myPopupScene = new Scene(myPopup);
 		mySettingsScene = new Scene(mySettings);
 		myPlayerScene=new Scene(myPlayerEditor);
 		newHighScoreScene = new Scene(newHighScoreRoot);
+		winLoseScene = new Scene(myWinLoseScreen);
 
 		myStage.setScene(new Scene(myInitialScene));
 
@@ -876,7 +885,7 @@ public class ViewController {
 		tempMoveCount++;
 		
 
-		if (myModel.getCurrentLevel().getGameWon() || tempMoveCount % 8 == 0) {
+		if (myModel.getCurrentLevel().getGameWon() /*|| tempMoveCount % 8 == 0*/) {
 			// TODO this assumes that the most recent player is the one that won
 		        // also chooses a random score
 			String highScorer = "Bob";
@@ -1006,9 +1015,15 @@ public class ViewController {
 		currentLevel.runGameEvents();
 		if (currentLevel.getGameWon()) {
 			// GAMEWON
+		    Stage newStage = new Stage();
+		    newStage.setScene(winLoseScene);
+		    newStage.show();
 		}
 		if (currentLevel.getGameLost()) {
-			// GAMELOST
+		    winLose.setText(YOU_LOSE);
+		    Stage newStage = new Stage();
+                    newStage.setScene(winLoseScene);
+                    newStage.show();
 		}
 		if (currentLevel.getTurnOver()) {
 			currentLevel.setTurnFalse();
