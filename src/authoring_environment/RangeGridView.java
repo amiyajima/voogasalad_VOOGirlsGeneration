@@ -5,6 +5,12 @@ import java.util.List;
 
 import javafx.scene.control.ScrollPane;
 
+/**
+ * The ScrollPane which contains any size of RangeGrid.
+ * 
+ * @author Mengen Huang
+ *
+ */
 public class RangeGridView extends ScrollPane{
 	private static final int MIN_TILESIZE = 50;
 	private int myViewWidth;
@@ -13,6 +19,14 @@ public class RangeGridView extends ScrollPane{
 	private String myShape;
 	private RangeGrid myGrid;
 	
+	/**
+	 * The RangeGridView constructor. 
+	 * @param viewWidth: The pixel width of the GridView
+	 * @param viewHeight: The pixel height of the GridView
+	 * @param tileSize: The size of the tile in the RangeGrid
+	 * @param shape: The shape of the tile in the RnageGrid
+	 * @param range: The previously set range or a new instantiated Point2D.Double List
+	 */
 	public RangeGridView(int viewWidth, int viewHeight, double tileSize,
 			String shape, List<Point2D.Double> range) {
 		myViewWidth=viewWidth;
