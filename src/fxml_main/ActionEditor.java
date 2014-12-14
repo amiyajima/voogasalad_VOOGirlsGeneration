@@ -34,7 +34,7 @@ import authoring.concretefeatures.RangeEditor;
 
 
 /**
- * @author seungwonlee, Jennie JU
+ * @author seungwonlee, Jennie Ju
  *
  */
 public class ActionEditor extends Pane {
