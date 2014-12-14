@@ -1,9 +1,7 @@
 package gamePlayer;
 
-import gameengine.player.HumanPlayer;
 import java.awt.geom.Point2D;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import authoring_environment.SuperTile;
