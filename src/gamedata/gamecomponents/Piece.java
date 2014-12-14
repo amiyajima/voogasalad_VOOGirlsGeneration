@@ -3,9 +3,11 @@ package gamedata.gamecomponents;
 import gamedata.action.Action;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
+
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.awt.geom.Point2D;
 
 /**
  * Class for pieces. Pieces are the primary unit for game play. They have
@@ -166,6 +168,19 @@ public class Piece extends GridComponent {
 			actions.addAll(myInventory.getItemActions());
 		}
 		return actions;
+	}
+	
+	/**
+	 * Returns a list of Strings containing the name of the Actions
+	 * contained in the piece for display purposes in the Game Player
+	 * @return List<String> of Action Names
+	 */
+	public List<String> getActionNames() {
+		List<String> names = new ArrayList<String>();
+		for (Action action : myActions) {
+			names.add(action.getName());
+		}
+		return names;
 	}
 
 	/**
