@@ -258,7 +258,13 @@ public class PieceTypeEditor extends Pane {
             @Override
             public void handle (ActionEvent click) {
             	List<Point2D.Double> range = myMovement.getRelativeMoves();
-                RangeEditor rEditor = new RangeEditor(range, myGridShape);
+            	
+            	Consumer<List<Point2D.Double>> consumer=(List<Point2D.Double> rg)->{
+					range.clear();
+					range.addAll(rg);
+				};
+				
+                RangeEditor rEditor = new RangeEditor(range, consumer,myGridShape);
                 rEditor.show();
             }
         });
