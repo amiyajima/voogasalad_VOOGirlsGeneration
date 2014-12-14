@@ -3,11 +3,13 @@ package gamePlayer;
 import gamedata.JSON.JSONManager;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
+import gamedata.gamecomponents.GameState;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
 import gameengine.player.SimpleAIPlayer;
+
 import java.awt.geom.Point2D;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -26,6 +28,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,8 +57,10 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
 import tests.TestGameCreator;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
@@ -1076,7 +1081,7 @@ public class ViewController {
 		Level currentLevel = myModel.getCurrentLevel();
 		myModel.getCurrentPlayer().playTurn();
 		currentLevel.runGameEvents();
-		if (currentLevel.getGameWon()) {
+		if (GameState.getGameWon()) {
 			// GAMEWON
 		    Stage newStage = new Stage();
 		    newStage.setScene(winLoseScene);
@@ -1094,28 +1099,28 @@ public class ViewController {
                     }
                     enterHighScoreInfo(highScorer, highScore);
 		}
-		if (currentLevel.getGameLost()) {
+		if (GameState.getGameLost()) {
 		    winLose.setText(YOU_LOSE);
 		    Stage newStage = new Stage();
                     newStage.setScene(winLoseScene);
                     newStage.show();
 		}
-		if (currentLevel.getTurnOver()) {
-			currentLevel.setTurnFalse();
+		if (GameState.getTurnOver()) {
+			GameState.setTurnFalse();
 			myModel.nextPlayer();
 			myCurrentPlayer = myModel.getCurrentPlayer();
 			setPlayerTurnDisplay();
 		}
 
-		if (currentLevel.getNextLevelID() != null) {
+		if (GameState.getNextLevelID() != null) {
 			System.out.println("NEXT LEVEL");
 			// myController.getGame().changeLevel(currentLevel.getNextLevelID());
 			myModel.changeLevel("Level 2");
 			// myController.getGame().getCurrentLevel().getGrid().displayPane(myController.getGridPane());
 			initializeGrid();
 		}
-		if (myModel.getCurrentPlayer().getNumMovesPlayed() > 2) {
-			System.out.println("NEXT PLAYER HARD CODE");
+		if (myModel.getCurrentPlayer().getNumMovesPlayed() > 4) {
+			//System.out.println("NEXT PLAYER HARD CODE");
 			myModel.nextPlayer();
 			myCurrentPlayer = myModel.getCurrentPlayer();
 			setPlayerTurnDisplay();

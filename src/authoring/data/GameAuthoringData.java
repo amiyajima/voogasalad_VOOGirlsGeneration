@@ -1,6 +1,9 @@
 package authoring.data;
 
 import gamedata.gamecomponents.Game;
+import gameengine.player.Player;
+
+import java.util.List;
 
 /**
  * Stores all the data use in the Authoring environment
@@ -13,15 +16,17 @@ public class GameAuthoringData {
 	private PatchTypeData myPatchTypeData;
 	private ActionData myActionData;
 	private GamePropertiesData myGamePropertiesData;
+	private PlayerStatData myPlayerStatData;
 
 	public GameAuthoringData(LevelData levelData, PieceTypeData pieceTypeData,
 			PatchTypeData patchTypeData, ActionData actionData,
-			GamePropertiesData gamePropertiesData) {
+			GamePropertiesData gamePropertiesData, PlayerStatData playerStatData) {
 		myLevelData = levelData;
 		myPieceTypeData = pieceTypeData;
 		myPatchTypeData = patchTypeData;
 		myActionData = actionData;
 		myGamePropertiesData = gamePropertiesData;
+		myPlayerStatData = playerStatData;
 	}
 
 	/**
@@ -31,6 +36,9 @@ public class GameAuthoringData {
 	 */
 	public Game createGame() {
 		int numPlayers = myGamePropertiesData.getNumPlayers();
-		return myLevelData.createGame(numPlayers);
+		Game game = myLevelData.createGame(numPlayers);
+		List<Player> players = myPlayerStatData.makePlayers(numPlayers);
+		game.addPlayers(players);
+		return game;
 	}
 }

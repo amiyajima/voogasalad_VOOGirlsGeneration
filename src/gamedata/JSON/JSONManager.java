@@ -38,7 +38,6 @@ public class JSONManager {
     public JSONManager () {
         GsonBuilder builder = new GsonBuilder();
         registerTypeAdapters(builder);
-     
         myGson = builder.create();
     }
 
