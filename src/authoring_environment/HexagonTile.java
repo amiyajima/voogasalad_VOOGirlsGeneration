@@ -52,8 +52,8 @@ public class HexagonTile extends SuperTile{
 	@Override
 	protected Point2D.Double calculatePixelLocation(double size, Point2D.Double loc) {
 		double radius = size/Math.sqrt(3);
-		double xCoord = loc.getY()*1.5*radius + radius;
-		double yCoord = loc.getX()*size + (loc.getY()%2)*0.5*size+size/2;
+		double xCoord = loc.getX()*1.5*radius + radius;
+		double yCoord = loc.getY()*size + (loc.getX()%2)*0.5*size+size/2;
 		return new Point2D.Double(xCoord, yCoord);
 		
 	}
