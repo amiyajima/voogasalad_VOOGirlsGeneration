@@ -36,6 +36,7 @@ public class GameAuthoringData {
 	 */
 	public Game createGame() {
 		int numPlayers = myGamePropertiesData.getNumPlayers();
+		System.out.println(numPlayers);
 		Game game = myLevelData.createGame(numPlayers);
 		List<Player> players = myPlayerStatData.makePlayers(numPlayers);
 		game.addPlayers(players);
