@@ -1,10 +1,10 @@
 package authoring.eventeditor;
 
+import fxml_main.ErrorPopUp;
 import gamedata.action.StatsTotalLogic;
 import gamedata.action.TotalLogicBox;
 import gamedata.events.globalaction.GameStateGlobalAction;
 import gamedata.events.globalaction.GlobalAction;
-
 import gamedata.events.globalaction.ChangePlayerStats;
 import gamedata.events.globalaction.MakePieceAtLocation;
 import gamedata.events.globalaction.DeletePieceAtLocation;
@@ -13,7 +13,6 @@ import gamedata.events.globalaction.EndTurn;
 import gamedata.gamecomponents.IChangeGameState;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Piece;
-
 import gameengine.player.Player;
 import java.awt.geom.Point2D;
 import java.io.IOException;
@@ -23,7 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
-
 import authoring.data.EventsDataWrapper;
 import authoring.data.PlayerData;
 import utilities.ClassGrabber;
@@ -44,8 +42,8 @@ public class NewActionController implements Initializable {
     private TextField myYField;
     @FXML
     private HBox myUnitActionsBox;
-    @FXML
-    private ChoiceBox<String> myRefTypeBox;
+    // @FXML
+    // private ChoiceBox<String> myRefTypeBox;
     @FXML
     private ChoiceBox<String> myTypeChoiceBox;
     @FXML
@@ -74,7 +72,7 @@ public class NewActionController implements Initializable {
 
     private TextField myStatString;
     private TextField myIDField;
-    private  TextField myConstantField;
+    private TextField myConstantField;
 
     @Override
     public void initialize (URL fxmlFileLocation, ResourceBundle resources) {
@@ -85,10 +83,12 @@ public class NewActionController implements Initializable {
             actionList = Arrays.asList(ClassGrabber.getClasses("gamedata.events.globalaction"));
         }
         catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            ErrorPopUp myError = new ErrorPopUp(e.toString());
+            myError.show();
         }
         catch (IOException e) {
-            e.printStackTrace();
+            ErrorPopUp myError = new ErrorPopUp(e.toString());
+            myError.show();
         }
 
         List<String> displayList = new ArrayList<>();
@@ -104,16 +104,19 @@ public class NewActionController implements Initializable {
                              (observable, oldValue, selectedType) -> showActionEditorPane());
 
         // make statsHBox have 3 text fields
-        myIDField= new TextField();
+        myIDField = new TextField();
         myIDField.setPromptText("Enter player ID");
-        
+
         myStatString = new TextField();
         myStatString.setPromptText("Enter stat string");
 
         myConstantField = new TextField();
         myConstantField.setPromptText("Enter constant");
-        
-        myStatsHBox.getChildren().addAll(myIDField, myStatString,myConstantField);
+
+        myStatsHBox.getChildren().addAll(myIDField, myStatString, myConstantField);
+        myNextLevelField.setVisible(false);
+        myUnitActionsBox.setVisible(false);
+        myStatsHBox.setVisible(false);
     }
 
     // TODO: Refactor this to be less gross. SO MUCH REPEATED CODE
@@ -151,13 +154,13 @@ public class NewActionController implements Initializable {
                                myPlayerID);
             myDoneLambda.accept(action);
         }
-        else{
-        String classPath = c.toString();
-        System.out.println("classpath: " + classPath);
-        classPath = classPath.substring(6);
-        System.out.println(myState);
-        GlobalAction action = (GlobalAction) Reflection.createInstance(classPath);
-        myDoneLambda.accept(action);
+        else {
+            String classPath = c.toString();
+            System.out.println("classpath: " + classPath);
+            classPath = classPath.substring(6);
+            System.out.println(myState);
+            GlobalAction action = (GlobalAction) Reflection.createInstance(classPath);
+            myDoneLambda.accept(action);
         }
     }
 
@@ -175,7 +178,7 @@ public class NewActionController implements Initializable {
         myNextLevelField.setVisible(false);
         myUnitActionsBox.setVisible(false);
         myStatsHBox.setVisible(false);
-
+        
         int idx = myTypeChoiceBox.getSelectionModel().getSelectedIndex();
         Class<?> c = actionList.get(idx);
 
