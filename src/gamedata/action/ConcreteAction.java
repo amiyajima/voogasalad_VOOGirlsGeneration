@@ -101,25 +101,7 @@ public class ConcreteAction implements Action {
    
     @Override
     public String toString () {
-        String myString = "actionid:" + myName;
-        myString += " attack: ";
-        for (Point2D.Double pt : myAttackRange) {
-            myString += "(" + pt.getX() + " " + pt.getY() + ") ";
-        }
-        myString += " effect: ";
-        for (Point2D.Double pt : myEffectRange) {
-            myString += "(" + pt.getX() + " " + pt.getY() + ") ";
-        }
-        myString += " statslogic: ";
-        for (StatsTotalLogic stat : myStatsLogics) {
-            myString += "(" + stat.toString() + ") ";
-        }
-        myString += " effect: ";
-        for (Point2D.Double pt : myEffectRange) {
-            myString += "(" + pt.getX() + " " + pt.getY() + ") ";
-        }
-        myString += " conclusion: " + myConclusion.toString();
-        return myString;
+        return myName;
     }
 
     @Override

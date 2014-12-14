@@ -39,9 +39,9 @@ public class NewConditionController implements Initializable{
 		try {
 			conditionsList = Arrays.asList(ClassGrabber.getClasses("gamedata.events.conditions"));
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 			
 		List<String> displayList = new ArrayList<>();

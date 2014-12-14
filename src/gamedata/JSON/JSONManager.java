@@ -75,7 +75,14 @@ public class JSONManager {
         Game pi = myGson.fromJson(br, Game.class);
 //        System.out.println("Level 1: " + pi.getLevels().get(0).getGrid().toString());
         return pi;
-    }    
+    }
+    
+    public Object readSpecificFromJSONFile (Class<?> c, String jsonFileLocation) throws FileNotFoundException {
+        System.out.println("JSONManager: read method called");
+        BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
+        Object pi = myGson.fromJson(br, Class.class);
+        return pi;
+    }
     
     public void registerTypeAdapters (GsonBuilder builder) {
         builder.registerTypeAdapter(StatsModifier.class, new GenericTypeAdapter<StatsModifier>("gamedata.action"));

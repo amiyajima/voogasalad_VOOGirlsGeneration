@@ -101,10 +101,12 @@ public class LevelEditor extends VBox {
         VBox rowVBox = new VBox();
         Label rowLabel = new Label("Rows");
         TextField rowField = new TextField("" + myGridRows);
+        rowField.setMaxWidth(80);
         rowVBox.getChildren().addAll(rowLabel, rowField);
         VBox colVBox = new VBox();
         Label colLabel = new Label("Columns");
         TextField colField = new TextField("" + myGridCols);
+        colField.setMaxWidth(80);
         colVBox.getChildren().addAll(colLabel, colField);
 
         HBox gridSizeHBox = new HBox();

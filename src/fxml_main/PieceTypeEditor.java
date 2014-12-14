@@ -114,7 +114,7 @@ public class PieceTypeEditor extends Pane {
         myName = piece.getName();
         myImageLocation = piece.getImageLocation();
         myMovement = piece.getMovement();
-        myActions = piece.getActions();
+        myActions = piece.getOriginalActions();
         myStats = piece.getStats();
         myPlayerID = piece.getPlayerID();
         myInventory = piece.getInventory();
@@ -223,12 +223,10 @@ public class PieceTypeEditor extends Pane {
     private ModulesList initModList () {
         ObservableList<String> availableActions = myAvailableActions.getActionNames();
         ObservableList<String> addedActions = FXCollections.observableArrayList();
-        // TODO : Actions need to be properly implemented before this can work.
-//        for(Action action : myActions){
-//        	System.out.println(myActions.size());
-//        	availableActions.remove(action);
-//        	addedActions.add(action);
-//        }
+        for(Action action : myActions){
+//        	availableActions.remove(action.getName());
+        	addedActions.add(action.getName());
+        }
         return new ModulesList(availableActions, addedActions);
     }
 
@@ -260,13 +258,12 @@ public class PieceTypeEditor extends Pane {
             @Override
             public void handle (ActionEvent click) {
             	List<Point2D.Double> range = myMovement.getRelativeMoves();
-            	
             	Consumer<List<Point2D.Double>> consumer=(List<Point2D.Double> rg)->{
 					range.clear();
 					range.addAll(rg);
 				};
 				
-                RangeEditor rEditor = new RangeEditor(range, consumer,myGridShape);
+                RangeEditor rEditor = new RangeEditor(range, consumer, myGridShape);
                 rEditor.show();
             }
         });
