@@ -135,11 +135,13 @@ public class Level extends Observable {
 		List<Piece> toRemove = new ArrayList<Piece>();
 		for (Piece p : pieces) {
 
-			/*
-			 * Inventory i = p.getInventory(); List<Piece> list =
-			 * i.getAllInventory(); // Removes Items for (Piece p2 : list) { if
-			 * (p2.shouldRemove()) { i.removeItem(p2); } }
-			 */
+			Inventory i = p.getInventory();
+			List<Piece> list = i.getAllInventory(); // Removes Items
+			for (Piece p2 : list) {
+				if (p2.shouldRemove()) {
+					i.removeItem(p2);
+				}
+			}
 
 			// Removes Pieces (Tagging)
 			if (p.shouldRemove()) {

@@ -54,19 +54,23 @@ public class ApplyState implements IGridState {
 			piece = new Piece(actor, myController.getCurrentClick());
 			piece.setLoc(myController.getCurrentClick());
 		}
-
-		// System.out.println("ACTION RUNNING:" +
-		// myController.getActiveAction().toString());
-		myController.getActiveAction().doBehavior(myController.getGrid(),
-				actor, piece);
-		// myController.getGrid().repopulateGrid();
-		myGameGridEffect.clearAllPieceHighlights();
-		myGameGridEffect.clearAllActionHighlights();
-		myController.clearActions();
-		myController.setGridState(new SelectState(myController));
-		myController.setActivePiece(null);
-		myController.setActiveAction(null);
-		myController.endAction();
+		
+		List<Point2D.Double> validRange =
+		myController.getActiveAction().getAbsoluteActionRange(actor.getLoc());
+		if (piece != null && validRange.contains(piece.getLoc())) {
+    		
+        		myController.getActiveAction().doBehavior(myController.getGrid(),
+        				actor, piece);
+        		// myController.getGrid().repopulateGrid();
+		}
+        		myController.getActiveAction();
+        		myGameGridEffect.clearAllPieceHighlights();
+        		myGameGridEffect.clearAllActionHighlights();
+        		myController.clearActions();
+        		myController.setGridState(new SelectState(myController));
+        		myController.setActivePiece(null);
+        		myController.setActiveAction(null);
+        		myController.endAction();
 	}
 
 }

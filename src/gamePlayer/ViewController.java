@@ -851,11 +851,7 @@ public class ViewController {
 	 * @return a Point2D.Double representing tile coordinates
 	 */
 	public Point2D.Double findPosition(double x, double y) {
-		double patchHeight = myGrid.getTileHeight();
-		double patchWidth = myGrid.getTileHeight();
-		int xCor = (int) (x / patchWidth);
-		int yCor = (int) (y / patchHeight);
-		currentClick = new Point2D.Double(xCor, yCor);
+	    currentClick = myGrid.findClickedCoordinate(x, y);
 		return currentClick;
 	}
 	
