@@ -59,9 +59,9 @@ public class RangeEditor extends PopupWindow {
 	private Button mySelect;
 	private Consumer<List<Point2D.Double>> myConsumer;
 
-//	public RangeEditor () {
-//		this(new ArrayList<Point2D.Double>(), DEFAULT_SHAPE);
-//	}
+	//	public RangeEditor () {
+	//		this(new ArrayList<Point2D.Double>(), DEFAULT_SHAPE);
+	//	}
 
 	public RangeEditor (List<Point2D.Double> range, 
 			Consumer<List<Point2D.Double>> consumer, String shape) {
@@ -78,8 +78,8 @@ public class RangeEditor extends PopupWindow {
 				myTileSize, shape, range);
 		initialize();
 	}
-	
-	
+
+
 	@Override
 	protected void initialize () {
 		VBox box = new VBox();
@@ -110,17 +110,18 @@ public class RangeEditor extends PopupWindow {
 
 		// Select Button
 		mySelect = new Button("Select");
-		mySelect.setOnAction(new EventHandler<ActionEvent>(){
-
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				myRange = rangeGridView.returnSelectedList();
-				myConsumer.accept(myRange);
-//				this.close();
-			}
-			
-		});
+		mySelect.setOnAction(new SelectHandler(this));
+//		mySelect.setOnAction(new EventHandler<ActionEvent>(){
+//
+//			@Override
+//			public void handle(ActionEvent event) {
+//				// TODO Auto-generated method stub
+//				myRange = rangeGridView.returnSelectedList();
+//				myConsumer.accept(myRange);
+//				//				this.close();
+//			}
+//
+//		});
 
 		// Choose the Size
 		VBox horizontal = new VBox();
@@ -159,7 +160,7 @@ public class RangeEditor extends PopupWindow {
 			}
 		});
 
-		
+
 
 		sizeChooser.getChildren().addAll(horizontal, times, vertical);
 
@@ -213,37 +214,37 @@ public class RangeEditor extends PopupWindow {
 				rangeGridView.getGrid().rangeAll(toChoose);
 				break;
 				// case CUSTOM:
-					// rangeGridView.getGrid().rangeSelectedList();
-					// break;
-					// default:
-						// mySampleGridView.rangeCenterColumn();
+				// rangeGridView.getGrid().rangeSelectedList();
+				// break;
+				// default:
+				// mySampleGridView.rangeCenterColumn();
 			}
 		}
 
 	}
 
-//	/**
-//	 * Event Handler that Sends the Selected and then Closes the Popup
-//	 */
-//	private class SelectHandler implements EventHandler<ActionEvent> {
-//		RangeEditor current;
-//
-//		public SelectHandler (RangeEditor re) {
-//			current = re;
-//		}
-//
-//		@Override
-//		public void handle (ActionEvent event) {
-//			myRange = rangeGridView.returnSelectedList();
-//			myConsumer=myRange;
-//			for (Point2D.Double point:myRange){
-//				System.out.println("dfas");
-//				System.out.println(point.getX()+","+point.getY());
-//			}
-//
-//			current.close();
-//		}
-//	}
+		/**
+		 * Event Handler that Sends the Selected and then Closes the Popup
+		 */
+		private class SelectHandler implements EventHandler<ActionEvent> {
+			RangeEditor current;
+	
+			public SelectHandler (RangeEditor re) {
+				current = re;
+			}
+	
+			@Override
+			public void handle (ActionEvent event) {
+				myRange = rangeGridView.returnSelectedList();
+				myConsumer.accept(myRange);
+//				for (Point2D.Double point:myRange){
+//					System.out.println("dfas");
+//					System.out.println(point.getX()+","+point.getY());
+//				}
+	
+				current.close();
+			}
+		}
 
 	// Can't use this function to create all the vbox containing one label and
 	// a textfiled because it makes impossible to get the content of the textfield.
