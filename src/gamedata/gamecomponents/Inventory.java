@@ -70,7 +70,7 @@ public class Inventory {
 	public List<Action> getItemActions() {
 		List<Action> itemActions = new LinkedList<Action>();
 		for (Piece item : myInventory) {
-			itemActions.addAll(item.getActions());
+			itemActions.addAll(item.getOriginalActions());
 		}
 		return itemActions;
 	}

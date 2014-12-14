@@ -1172,10 +1172,11 @@ public class ViewController {
 		currentLevel.runGameEvents();
 		if (GameState.getGameWon()) {
 			// GAMEWON
+		    System.out.println("VC: Won the game");
 		    Stage newStage = new Stage();
 		    newStage.setScene(winLoseScene);
 		    newStage.show();
-		    
+		    System.out.println("Loading high scores");
                     String highScorer = "Bob";
                     //Random randy = new Random();
                     //int highScore = randy.nextInt(100000);
@@ -1188,14 +1189,17 @@ public class ViewController {
                              }
                     }
                     enterHighScoreInfo(highScorer, highScore);
+                    System.out.println("VC: Showed high scores");
 		}
 		if (GameState.getGameLost()) {
+		    System.out.println("VC:You lost");
 		    winLose.setText(YOU_LOSE);
 		    Stage newStage = new Stage();
                     newStage.setScene(winLoseScene);
                     newStage.show();
 		}
 		if (GameState.getTurnOver()) {
+		    System.out.println("VC: turn over");
 			GameState.setTurnFalse();
 			myModel.nextPlayer();
 			myCurrentPlayer = myModel.getCurrentPlayer();
@@ -1203,6 +1207,7 @@ public class ViewController {
 		}
 
 		if (GameState.getNextLevelID() != null) {
+		    
 			System.out.println("NEXT LEVEL");
 			// myController.getGame().changeLevel(currentLevel.getNextLevelID());
 			myModel.changeLevel("Level 2");
