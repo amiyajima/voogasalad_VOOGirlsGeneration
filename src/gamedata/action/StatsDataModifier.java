@@ -14,8 +14,8 @@ public class StatsDataModifier {
    
     private List<StatsTotalLogic> myStatsLogics;
     
-    public StatsDataModifier (List<StatsTotalLogic> myStatsLogics2) {
-        myStatsLogics = myStatsLogics2;
+    public StatsDataModifier (List<StatsTotalLogic> statsLogics) {
+        myStatsLogics = statsLogics;
     }
     /**
      * Takes in two objects that impelment IHasStats(piece,patch,player) and changes receiver's stat

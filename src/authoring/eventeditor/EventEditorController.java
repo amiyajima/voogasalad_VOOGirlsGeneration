@@ -6,15 +6,14 @@ import gamedata.events.GlobalAction;
 import gamedata.events.conditions.StatEquals;
 import gamedata.gamecomponents.IChangeGameState;
 import gamedata.gamecomponents.Level;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
-
 import authoring.data.EventsDataWrapper;
+import authoring.data.PlayerData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -75,6 +74,7 @@ public class EventEditorController implements Initializable {
     private List<Condition> myConditions;
     private List<GlobalAction> myActions;
     private EventsDataWrapper myData;
+    private PlayerData myPlayerData;
     
     private Stage myStage;
 	private IChangeGameState myState;
@@ -250,6 +250,7 @@ public class EventEditorController implements Initializable {
         controller.loadLambda(okActionLambda);
         controller.loadState(myState);        
         controller.loadData(myData);
+        //controller.loadPlayerData(myPlayerData);
         
         newActionStage.showAndWait();
     }
@@ -274,5 +275,9 @@ public class EventEditorController implements Initializable {
 	public void loadGameState(IChangeGameState state) {
 		myState = state;
 	}
+
+    public void loadPlayerData (PlayerData playerData) {
+       myPlayerData = playerData;
+    }
 
 }
