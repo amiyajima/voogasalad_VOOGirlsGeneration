@@ -4,9 +4,10 @@ import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
 import gamedata.action.StatsModifier;
 import gamedata.events.Condition;
-import gamedata.events.globalaction.GlobalAction;
+import gamedata.events.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.GridComponent;
+import gamedata.gamecomponents.IHasStats;
 import gameengine.player.Player;
 
 import java.io.BufferedReader;
@@ -88,6 +89,7 @@ public class JSONManager {
         builder.registerTypeAdapter(Condition.class, new GenericTypeAdapter<Condition>("gamedata.events.conditions"));
         builder.registerTypeAdapter(GlobalAction.class, new GenericTypeAdapter<GlobalAction>("gamedata.events.globalaction"));
         builder.registerTypeAdapter(SuperGrid.class, new GenericTypeAdapter<SuperGrid>("authoring_environment"));
+        builder.registerTypeAdapter(IHasStats.class, new GenericTypeAdapter<IHasStats>("gamedata.gamecomponent"));
     }
 
 }
