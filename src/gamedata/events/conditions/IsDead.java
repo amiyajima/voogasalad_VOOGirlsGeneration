@@ -2,6 +2,8 @@ package gamedata.events.conditions;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import gamedata.events.Condition;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Piece;
 

@@ -6,8 +6,8 @@ import gamedata.action.ConcreteAction;
 import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
 import gamedata.action.conclusions.ReceiverToInventoryConclusion;
+import gamedata.events.Condition;
 import gamedata.events.Event;
-import gamedata.events.conditions.Condition;
 import gamedata.events.conditions.IsDead;
 import gamedata.events.globalaction.DeletePieceAtLocation;
 import gamedata.events.globalaction.GlobalAction;
@@ -25,11 +25,13 @@ import gameengine.movement.Movement;
 import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
 import gameengine.player.SimpleAIPlayer;
+
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import authoring_environment.GUIGrid;
 import authoring_environment.SuperGrid;
 

@@ -32,7 +32,7 @@ public class LeapMotionListener extends Listener{
         for(String gestureName : myGestures.keySet()){
             // System.out.println(gestureName+" mapped to"+ myGestures.getString(gestureName));
             if(gestureName.equals(MOUSE_MOVE_FLAG)){
-                System.out.println("STARTING REFLECTION");
+                //System.out.println("STARTING REFLECTION");
                 Class c = null;
                 try {
                     c = Class.forName(PACKAGE_FILEPATH+"mouseControl."+myGestures.getString(gestureName));
@@ -45,7 +45,21 @@ public class LeapMotionListener extends Listener{
             }
             for (Gesture.Type type: Gesture.Type.values()){
                 if(type.toString().equals(gestureName)){
+                    
                     controller.enableGesture(type);
+                    if(gestureName.equals("TYPE_SCREEN_TAP")){
+                        
+                        controller.config().setFloat("Gesture.ScreenTap.MinForwardVelocity", (float) 30.0);
+                        
+                       // controller.config().setFloat("Gesture.ScreenTap.MinForwardVelocity", 30.0);
+                        controller.config().setFloat("Gesture.ScreenTap.HistorySeconds", (float) .5);
+                        controller.config().setFloat("Gesture.ScreenTap.MinDistance", (float) 1.0);
+                        
+                    }
+                    controller.config().setFloat("Gesture.Circle.MinRadius", 100.0f);
+                    
+                    controller.config().save();
+                    
                     System.out.println(type.toString()+"  enabled");
                 }
             }
