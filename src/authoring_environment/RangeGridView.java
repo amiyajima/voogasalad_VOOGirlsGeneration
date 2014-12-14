@@ -38,17 +38,17 @@ public class RangeGridView extends ScrollPane{
 		this.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		
-		if ((range==null) || (range.size()==0)){
-			myGrid = new RangeGrid((int)Math.round(myViewWidth/myTileSize),
-					(int)Math.round(myViewHeight/myTileSize),
-					myTileSize,shape,range);
-		}else{
+//		if ((range==null) || (range.size()==0)){
+//			myGrid = new RangeGrid((int)Math.round(myViewWidth/myTileSize),
+//					(int)Math.round(myViewHeight/myTileSize),
+//					myTileSize,shape,range);
+//		}else{
 			Point2D minGridSize=cacluateGridSize(range);
 			myTileSize=getPrefTileSize((int)minGridSize.getX(),(int)minGridSize.getY(),
 										myTileSize);
 			myGrid = new RangeGrid((int)minGridSize.getX(),(int)minGridSize.getY(),
 					myTileSize,shape,range);
-		}
+//		}
 			myGrid.displayPane(this);
 	}
 
@@ -85,8 +85,8 @@ public class RangeGridView extends ScrollPane{
             }
         }
         
-        if (maxX==1) maxX=3;
-        if (maxY==1) maxY=3;
+        if (maxX<=1) maxX=3;
+        if (maxY<=1) maxY=3;
         return new Point2D.Double(maxX, maxY);
     }
 

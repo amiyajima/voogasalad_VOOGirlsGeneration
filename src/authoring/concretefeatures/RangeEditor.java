@@ -63,8 +63,8 @@ public class RangeEditor extends PopupWindow {
 	
 	public RangeEditor (List<Point2D.Double> range, 
 			Consumer<List<Point2D.Double>> consumer, String shape) {
-		// range.add(new Point2D.Double(1,0));
-		// range.add(new Point2D.Double(-1,2));
+//		 range.add(new Point2D.Double(1,0));
+//		 range.add(new Point2D.Double(-1,2));
 
 		myRange = range;
 		myConsumer = consumer;
@@ -109,17 +109,7 @@ public class RangeEditor extends PopupWindow {
 		// Select Button
 		mySelect = new Button("Select");
 		mySelect.setOnAction(new SelectHandler(this));
-//		mySelect.setOnAction(new EventHandler<ActionEvent>(){
-//
-//			@Override
-//			public void handle(ActionEvent event) {
-//				// TODO Auto-generated method stub
-//				myRange = rangeGridView.returnSelectedList();
-//				myConsumer.accept(myRange);
-//				//				this.close();
-//			}
-//
-//		});
+
 
 		// Choose the Size
 		VBox horizontal = new VBox();
@@ -236,11 +226,10 @@ public class RangeEditor extends PopupWindow {
 			public void handle (ActionEvent event) {
 				myRange = rangeGridView.returnSelectedList();
 				myConsumer.accept(myRange);
-//				for (Point2D.Double point:myRange){
-//					System.out.println("dfas");
-//					System.out.println(point.getX()+","+point.getY());
-//				}
-	
+				for (Point2D.Double point:myRange){
+					System.out.println("dfas");
+					System.out.println(point.getX()+","+point.getY());
+				}
 				current.close();
 			}
 		}
