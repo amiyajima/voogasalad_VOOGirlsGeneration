@@ -1,4 +1,4 @@
-package gamedata.events;
+package gamedata.events.globalaction;
 
 import authoring_environment.GUIGrid;
 

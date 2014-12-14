@@ -1,4 +1,4 @@
-package gamedata.events;
+package gamedata.events.conditions;
 
 import java.util.List;
 
@@ -13,11 +13,11 @@ import gamedata.gamecomponents.IHasStats;
  */
 public abstract class StatComparison extends Condition{
 			
-	protected IHasStats myReference;
+	protected String myReference;
 	protected String myStat;
 	protected Double myConstant;
 
-	public StatComparison(String description, IHasStats ref1, String stat1, String constant){
+	public StatComparison(String description, String ref1, String stat1, String constant){
 		super(description);
 		myReference = ref1;
 		myStat = stat1;
@@ -27,7 +27,7 @@ public abstract class StatComparison extends Condition{
 	@Override
 	public boolean evaluate(List<IHasStats> objects) {
 		for(IHasStats source: objects){
-			if(myReference.getClass().equals(source.getClass())){
+			if(myReference.equals(source.getClass().toString())){
 				return compare(source);
 			}	
 		}

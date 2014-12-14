@@ -1,4 +1,4 @@
-package gamedata.events;
+package gamedata.events.globalaction;
 
 import gamedata.gamecomponents.IChangeGameState;
 
@@ -12,16 +12,8 @@ import gamedata.gamecomponents.IChangeGameState;
  *
  */
 public abstract class GameStateGlobalAction extends GlobalAction{
-
-	protected IChangeGameState myState;
 	
-	protected GameStateGlobalAction(String s, IChangeGameState state) {
+	protected GameStateGlobalAction(String s) {
 		super(s);
-		myState = state;
 	}
-	
-	public void reinject(IChangeGameState target){
-		myState = target;
-	}
-
 }
