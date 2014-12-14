@@ -17,7 +17,7 @@ import authoring_environment.GUIGrid;
  * 
  * See Action interface for descriptions of public methods
  * 
- * @author Jennie Ju, annamiyajima
+ * @author Jennie Ju, annamiyajima, Sandy Lee
  */
 public class ConcreteAction implements Action {
     private String myName;
@@ -122,8 +122,13 @@ public class ConcreteAction implements Action {
     }
 
     @Override
-    public List<Double> getAbsoluteEffectRange (Point2D pieceLocation) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Point2D.Double> getAbsoluteEffectRange (Point2D pieceLoc) {
+        List<Point2D.Double> absoluteRange = new ArrayList<Point2D.Double>();
+        for (Point2D relativeLoc : myEffectRange) {
+            double absX = pieceLoc.getX() + relativeLoc.getX();
+            double absY = pieceLoc.getY() + relativeLoc.getY();
+            absoluteRange.add(new Point2D.Double(absX, absY));
+        }
+        return absoluteRange;
     }
 }
