@@ -69,6 +69,7 @@ public class JSONManager {
     public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
+
         
         Game pi = myGson.fromJson(br, Game.class);
 //        System.out.println("Level 1: " + pi.getLevels().get(0).getGrid().toString());

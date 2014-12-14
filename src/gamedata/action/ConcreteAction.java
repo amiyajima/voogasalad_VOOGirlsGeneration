@@ -1,11 +1,12 @@
 package gamedata.action;
 
-import gamedata.gamecomponents.Piece; 
+import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
+
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Double;
+
 import authoring_environment.GUIGrid;
 
 /**
@@ -16,10 +17,9 @@ import authoring_environment.GUIGrid;
  * See Action interface for descriptions of public methods
  * 
  * @author Jennie Ju
- *
  */
 public class ConcreteAction implements Action {
-	private String myID;
+	private String myName;
 	private List<Point2D.Double> myAttackRange;
 	private List<Point2D.Double> myEffectRange;
 	private List<StatsTotalLogic> myStatsLogics;
@@ -33,7 +33,7 @@ public class ConcreteAction implements Action {
 	public ConcreteAction(String id, List<Point2D.Double> attackRange, 
 			List<Point2D.Double> effectRange, List<StatsTotalLogic> statsLogics,
 			ActionConclusion conclusion) {
-		myID = id;
+		myName = id;
 		myAttackRange = attackRange;
 		myEffectRange = effectRange;
 		myStatsLogics = statsLogics;
@@ -41,7 +41,7 @@ public class ConcreteAction implements Action {
 	}
 
 	@Override
-	public List<Point2D.Double> getSpecificActionRange(Point2D pieceLoc) {
+	public List<Point2D.Double> getAbsoluteActionRange(Point2D pieceLoc) {
 		List<Point2D.Double> absoluteRange = new ArrayList<Point2D.Double>();
 		for (Point2D relativeLoc : myAttackRange) {
 			double absX = pieceLoc.getX() + relativeLoc.getX();
@@ -70,6 +70,15 @@ public class ConcreteAction implements Action {
 	public void doBehavior(GUIGrid grid, Piece actor, Piece... receivers) {
 		modifyStats(actor, receivers);
 		runConclusion(grid, actor, receivers);
+	}
+	
+	/**
+	 * Returns the logic contained in the ConcreteAction for 
+	 * editing in the Authoring Environment
+	 * @return
+	 */
+	public List<StatsTotalLogic> getStatsLogics() {
+		return myStatsLogics;
 	}
 
 	private void modifyStats(Piece actor, Piece[] receivers) {
@@ -122,7 +131,7 @@ public class ConcreteAction implements Action {
 	
 	@Override
 	public String toString() {
-	    String myString = "actionid:" + myID;
+	    String myString = "actionid:" + myName;
 	    myString += " attack: ";
 	    for (Point2D.Double pt : myAttackRange) {
 	        myString += "(" + pt.getX() + " " + pt.getY() + ") ";
@@ -141,5 +150,14 @@ public class ConcreteAction implements Action {
             }
             myString += " conclusion: " + myConclusion.toString();
             return myString;
+	}
+	
+	@Override
+	public String getName() {
+		return myName;
+	}
+	
+	public ActionConclusion getConclusion() {
+		return myConclusion;
 	}
 }

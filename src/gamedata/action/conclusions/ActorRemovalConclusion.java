@@ -10,5 +10,10 @@ public class ActorRemovalConclusion implements ActionConclusion {
 	public void runConclusion(GUIGrid grid, Piece actor, Piece... receivers) {
 		actor.markForRemoval();
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Actor Removal";
+	}
+	
 }

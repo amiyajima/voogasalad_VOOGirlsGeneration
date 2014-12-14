@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane fx:id="newHighScoreRoot" hgap="14.0" maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-padding: 30;" styleClass="root" vgap="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <VBox maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" prefWidth="400.0" spacing="7.0" style="-fx-spacing: 10;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+      <children>
+        <Label fx:id="messageLabel" styleClass="largetext" text="Congratulations, you got a new high score!" textAlignment="LEFT" textFill="WHITE" wrapText="true">
+          <font>
+            <Font name="Consolas Bold" size="20.0" />
+          </font>
+        </Label>
+            <HBox prefHeight="30.0" prefWidth="200.0" style="-fx-spacing: 10;" styleClass="mediumtext">
+               <children>
+              <Label fx:id="detailsLabel" styleClass="mediumtext" text="Name: " textAlignment="LEFT" textFill="WHITE" translateY="5.0" wrapText="true">
+                <font>
+                  <Font name="Consolas" size="14.0" />
+                </font>
+              </Label>
+                  <TextField fx:id="highScoreName" />
+               </children>
+            </HBox>
+            <Label fx:id="playerHighScore" layoutX="10.0" layoutY="10.0" styleClass="largetext" text="Score: " textAlignment="LEFT" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Consolas Bold" size="16.0" />
+               </font>
+            </Label>
+      </children>
+    </VBox>
+    <HBox maxHeight="-Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <children>
+        <HBox fx:id="actionParent" alignment="CENTER">
+          <HBox.margin>
+            <Insets />
+          </HBox.margin>
+        </HBox>
+        <Pane maxWidth="+Infinity" HBox.hgrow="ALWAYS" />
+        <HBox fx:id="okParent" alignment="CENTER">
+          <children>
+            <Button fx:id="highScoreOK" minWidth="80.0" mnemonicParsing="false" text="GO" HBox.hgrow="NEVER">
+              <HBox.margin>
+                <Insets left="14.0" />
+              </HBox.margin>
+                     <font>
+                        <Font name="Consolas" size="14.0" />
+                     </font>
+            </Button>
+          </children>
+        </HBox>
+      </children>
+    </HBox>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" />
+    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="+Infinity" minWidth="-Infinity" />
+  </columnConstraints>
+  <padding>
+    <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
+  </padding>
+  <rowConstraints>
+    <RowConstraints maxHeight="+Infinity" minHeight="-Infinity" valignment="CENTER" vgrow="ALWAYS" />
+    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="NEVER" />
+  </rowConstraints>
+   <stylesheets>
+      <URL value="@AlertDialog.css" />
+      <URL value="@../resources/stylesheets/newhighscore.css" />
+   </stylesheets>
+</GridPane>

@@ -35,6 +35,7 @@ public class TotalLogicBox extends VBox {
 
 	public TotalLogicBox(StatsTotalLogic stl) {
 		getStylesheets().add(STYLESHEET);
+		mySingleMultiplierList = new LinkedList<SingleMultiplierBox>();
 		myStatsRefChoice = new ChoiceBox<String>();
 		myStatsRefChoice.setPrefWidth(MULTIPLIER_BOX_WIDTH);
 
@@ -45,6 +46,7 @@ public class TotalLogicBox extends VBox {
 		// Operations
 		mySingleMultiplierVBox = new VBox();
 		initSingleMultiplierVBox(stl.getMultiplierLogic());
+		getChildren().add(mySingleMultiplierVBox);
 	}
 
 	/**
@@ -79,14 +81,14 @@ public class TotalLogicBox extends VBox {
 	 */
 	private void initStatsModifier (StatsTotalLogic stl) {
 		Label targetLabel = new Label("Action target");
-
+		Label equalLabel = new Label("=");
 		myStatsRefChoice.getItems().addAll("actor", "receiver");
 		myStatsRefChoice.setValue(stl.getStatRef());
 		// Particular stat modified
 		myStatName.setText(stl.getStatName());
 		myStatName.setPromptText("Stat to be modified");
 		HBox targetAndStatHBox = new HBox();
-		targetAndStatHBox.getChildren().addAll(myStatsRefChoice, myStatName);
+		targetAndStatHBox.getChildren().addAll(myStatsRefChoice, myStatName,equalLabel);
 		//        targetAndStatHBox.setSpacing(10);
 
 		getChildren().addAll(targetLabel, targetAndStatHBox);
@@ -123,7 +125,7 @@ public class TotalLogicBox extends VBox {
 		deletableSsmHBox.getChildren().addAll(ssmBox,delSsmBtn);
 
 		mySingleMultiplierList.add(ssmBox);
-		mySingleMultiplierVBox.getChildren().add(ssmBox);
+		mySingleMultiplierVBox.getChildren().add(deletableSsmHBox);
 	}
 	
 	private Button makeDeleteButton(HBox deletableSsmHBox, SingleMultiplierBox ssmBox) {

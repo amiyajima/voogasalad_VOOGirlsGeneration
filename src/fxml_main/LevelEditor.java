@@ -54,7 +54,8 @@ public class LevelEditor extends VBox {
         myGridRows = 0;
         myGridCols = 0;
         myTileHeight = 0;
-        myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, "Square Grid");
+        myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, gridShape);
+//        System.out.println(gridShape);
         myEvents = FXCollections.observableArrayList();
         myLevel = new Level();
         initEditor(okLambda,data,gridShape);
@@ -146,6 +147,7 @@ public class LevelEditor extends VBox {
                 myTileHeight = Double.parseDouble(heightField.getText());
                 GUIGrid grid = new GUIGrid(myGridCols, myGridRows, myTileHeight, myGridShape,
                 		myGrid);
+//                System.out.println(myGridShape);
                 Level level = new Level(grid, myEvents, myId, false);
                 
                 /**
