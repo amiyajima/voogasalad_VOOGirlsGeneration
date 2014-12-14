@@ -31,6 +31,8 @@ public class ActionLogicController implements Initializable {
     private VBox myReceiversVBox;
     @FXML
     private Button saveButton;
+    @FXML
+    private Button getDataButton;
 
     private List<String> myPieceTypes;
     private List<String> myActionTypes;
@@ -41,9 +43,7 @@ public class ActionLogicController implements Initializable {
     @Override
     public void initialize (URL location, ResourceBundle resources) {
         myPieceTypes = new ArrayList<String>();
-        System.out.println("initialzing");
-        System.out.println(myPieceTypes);
-        actorsChoiceBox.getItems().addAll(myPieceTypes);
+//        System.out.println("initialzing");
 
         actorsChoiceBox
                 .getSelectionModel()
@@ -52,8 +52,6 @@ public class ActionLogicController implements Initializable {
                              (observable, oldValue, selectedActor) -> updatePossibleReceivers(selectedActor));
     }
 
-    // will need to be used in initialize method, so that it removes all the pieces, according to
-    // given list of piece types
     private void updateLogicMap () {
         for (String actor : myLogicMap.keySet()) {
             if (!myPieceTypes.contains(actor)) {
@@ -100,28 +98,27 @@ public class ActionLogicController implements Initializable {
         }
         actionReceiver.put(currAction, receiverList);
         myLogicMap.put(currActor, actionReceiver);
-        System.out.println(myLogicMap);
 
     }
-    
-    public Map<String, Map<String, List<String>>> getActionLogic(){
+
+    public Map<String, Map<String, List<String>>> getActionLogic () {
         return myLogicMap;
     }
-    
-    public void getData(ActionData actionData, PieceTypeData ptData){
+
+    public void getData (ActionData actionData, PieceTypeData ptData) {
         ActionData actData = actionData;
         PieceTypeData pieceData = ptData;
         myActionTypes = actData.getActionIDs();
         myPieceTypes.addAll(pieceData.getIdSet());
-        
     }
-    
-//    public void getData(List<String> aa, List<String> bb){
-//        myActionTypes = aa;
-//        myPieceTypes = bb;
-//    }
-    
-    
-    
+
+    @FXML
+    private void loadData () {
+        actorsChoiceBox.getItems().addAll(myPieceTypes);
+        actionsListView.getItems().addAll(myActionTypes);
+        System.out.println("whatwhatwhat");
+        System.out.println("loading");
+
+    }
 
 }
