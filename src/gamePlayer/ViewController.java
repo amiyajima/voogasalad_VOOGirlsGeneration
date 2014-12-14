@@ -292,7 +292,7 @@ public class ViewController {
 		newHighScoreScene = new Scene(newHighScoreRoot);
 		winLoseScene = new Scene(myWinLoseScreen);
 
-		myStage.setScene(new Scene(myInitialScene));
+//		myStage.setScene(new Scene(myInitialScene));
 
 		myAudio = new Audio();
 		myAudio.playBackground();
@@ -1167,8 +1167,9 @@ public class ViewController {
 	        mySplashStage.show();
 		System.out.println("model found in viewcontroller: " + myModel);
 		initializeGrid();
-		myScene = new Scene(myGameSpace);
-		myStage.setScene(myScene);
+//		myScene = new Scene(myGameSpace);
+//		myStage.setScene(myScene);
+		myTab.setContent(myGameSpace);
 		mySplashStage.close();
 
 		//System.out.println("VC: Current Level: " + myModel.getCurrentLevel().getId());
