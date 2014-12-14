@@ -167,6 +167,7 @@ public class EventEditorController implements Initializable {
 
     @FXML
     private void handleSaveEvents () {
+    	
         Stage stage = (Stage) saveEvents.getScene().getWindow();
         stage.close();
     }
