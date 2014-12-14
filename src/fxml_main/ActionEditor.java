@@ -4,6 +4,7 @@ import gamedata.action.ActionConclusion;
 import gamedata.action.ActionStatsEditor;
 import gamedata.action.ConcreteAction;
 import gamedata.action.StatsTotalLogic;
+import gamedata.action.conclusions.DoNothingConclusion;
 
 import java.awt.geom.Point2D;
 import java.io.IOException;
@@ -62,7 +63,7 @@ public class ActionEditor extends Pane {
 		myAttackRange = new LinkedList<Point2D.Double>();
 		myEffectRange = new LinkedList<Point2D.Double>();
 		myStatsLogics = new LinkedList<StatsTotalLogic>();
-		myConclusion = null;
+		myConclusion = new DoNothingConclusion();
 		
 		mySceneTitle = "Action Creator";
 		initEditor(okLambda, gridShape);
@@ -79,7 +80,7 @@ public class ActionEditor extends Pane {
 		myAttackRange = action.getActionRange();
 		myEffectRange = action.getEffectRange();
 		myStatsLogics = action.getStatsLogics(); // should read in logics
-		myConclusion = null; // should set to empty conclusion (not null)
+		myConclusion = action.getConclusion(); // should set to empty conclusion (not null)
 		mySceneTitle = "Action Editor";
 		initEditor(okLambda, gridShape);
 	}

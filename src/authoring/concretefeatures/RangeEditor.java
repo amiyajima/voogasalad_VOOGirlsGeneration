@@ -1,24 +1,19 @@
 package authoring.concretefeatures;
 
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.abstractfeatures.PopupWindow;
-import authoring_environment.RangeGrid;
 import authoring_environment.RangeGridView;
 
 
@@ -135,7 +130,9 @@ public class RangeEditor extends PopupWindow {
                 myGridHeightNumber = Integer.parseInt(VRadius.getText()) * 2 + 1;
                 myTileSize = getPrefTileSize(myGridWidthNumber, myGridHeightNumber);
                 box.getChildren().clear();
-                myRange = rangeGridView.returnSelectedList();
+                List<Point2D.Double> newRange = rangeGridView.returnSelectedList();
+                myRange.clear();
+                myRange.addAll(newRange);
 
                 rangeGridView.update(myGridWidthNumber, myGridHeightNumber,
                                      myRange);
@@ -219,8 +216,8 @@ public class RangeEditor extends PopupWindow {
 
         @Override
         public void handle (ActionEvent event) {
-            myRange = rangeGridView.returnSelectedList();
-  
+//            myRange = rangeGridView.returnSelectedList();
+//  
             current.close();
         }
     }
