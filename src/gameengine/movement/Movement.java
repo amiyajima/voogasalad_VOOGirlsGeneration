@@ -8,6 +8,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.awt.geom.Point2D;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.CubicCurveTo;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.StrokeType;
+import javafx.util.Duration;
 import authoring_environment.GUIGrid;
 
 /**
@@ -158,6 +169,37 @@ public class Movement implements Action {
 		Point2D.Double point = p.getLoc();
 		if (isValidLocation((int) point.getX(), (int) point.getY())) {
 			// TODO: Implement Orientation Calculation Here
+			
+			Path path = new Path();
+			path.getElements().add(new MoveTo((actor.getLoc().getX()*grid.getTileHeight())-(grid.getTileHeight()/2),(actor.getLoc().getY()*grid.getTileHeight())+(grid.getTileHeight()/2)));
+			path.getElements().add(new LineTo((point.getX()*grid.getTileHeight())-(grid.getTileHeight()/2),(point.getY()*grid.getTileHeight())+(grid.getTileHeight()/2)));
+			
+			//path.getElements().add(new MoveTo(0,0));
+			//path.getElements().add(new LineTo(5,0));
+			
+			PathTransition pathTransition = new PathTransition();
+			pathTransition.setDuration(Duration.millis(4000));
+			pathTransition.setPath(path);
+			pathTransition.setNode(grid.findTile(actor.getLoc()).getPieceImage());
+			pathTransition.setOrientation(PathTransition.OrientationType.NONE);
+			pathTransition.setCycleCount(1);
+			pathTransition.setAutoReverse(false);
+			pathTransition.play();
+			
+			
+			/*Path path = new Path();
+			path.getElements().add(new MoveTo(20,20));
+			//path.getElements().add(new CubicCurveTo(380, 0, 380, 120, 200, 120));
+			//path.getElements().add(new CubicCurveTo(0, 120, 0, 240, 380, 240));
+			PathTransition pathTransition = new PathTransition();
+			pathTransition.setDuration(Duration.millis(4000));
+			pathTransition.setPath(path);
+			pathTransition.setNode(grid.findTile(actor.getLoc()).getPieceImage());
+			pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+			pathTransition.setCycleCount(Timeline.INDEFINITE);
+			pathTransition.setAutoReverse(true);
+			pathTransition.play();*/
+			
 			actor.setLoc(point);
 		}
 	}
