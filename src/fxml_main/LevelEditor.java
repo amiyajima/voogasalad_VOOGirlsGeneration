@@ -179,7 +179,6 @@ public class LevelEditor extends VBox {
 
         EventEditorController controller = loader.getController();
         controller.loadEvents(myEvents);
-        controller.loadGameState(myLevel);
         controller.loadData(myData);
         //controller.loadPlayerData(myPlayerData);
 
