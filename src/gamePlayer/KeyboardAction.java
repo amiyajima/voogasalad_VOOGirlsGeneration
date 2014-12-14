@@ -46,13 +46,9 @@ public class KeyboardAction {
 
         useDefaultMap();
 
-        if ((vc.getActivePiece() != null) &&
-            (vc.getGame().getCurrentPlayer().getType().equals("Human"))) {
-
-            // the if statement will go away when we actually run a real game!
-            if (((HumanPlayer) vc.getGame().getCurrentPlayer()).getMovementKeyMap() != null) {
-                myKeyMap = ((HumanPlayer) vc.getGame().getCurrentPlayer()).getMovementKeyMap();
-            }
+//        if ((vc.getActivePiece() != null) &&
+//            (vc.getGame().getCurrentPlayer().getType().equals("Human"))) {
+        if ((vc.getActivePiece() != null)) {
 
             myActions = vc.getActivePiece().getActions();
             vc.getGridPane().requestFocus();
@@ -89,11 +85,10 @@ public class KeyboardAction {
     }
 
     public void markAction (ViewController vc) {
-//        unmarkAction(vc);
         vc.getcontrolPane().getChildren().forEach(label -> {
             label.setEffect(null);
             Label l = (Label) label;
-            if (l.getText() == myCurrentAction.toString()) {
+            if (l.getText() == myCurrentAction.getName()) {
                 InnerShadow is = new InnerShadow();
                 is.setOffsetX(ACTION_LABEL_SHADOW_OFFSET);
                 is.setOffsetY(ACTION_LABEL_SHADOW_OFFSET);
@@ -102,14 +97,11 @@ public class KeyboardAction {
         });
     }
 
-//    public void unmarkAction (ViewController vc) {
-//        vc.getcontrolPane().getChildren().forEach(label -> {
-//            label.setEffect(null);
-//        });
-//    }
 
     public void useDefaultMap () {
         // this is just for testing
+        myKeyMap.put(KeyCode.A, new Point2D.Double(-1.0, 0.0));
+        myKeyMap.put(KeyCode.D, new Point2D.Double(1.0, 0.0));
         myKeyMap.put(KeyCode.W, new Point2D.Double(0.0, 1.0));
         myKeyMap.put(KeyCode.S, new Point2D.Double(0.0, -1.0));
         myKeyMap.put(KeyCode.F, new Point2D.Double(1.0, 1.0));

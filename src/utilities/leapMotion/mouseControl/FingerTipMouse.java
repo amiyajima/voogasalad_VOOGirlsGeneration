@@ -24,6 +24,7 @@ public class FingerTipMouse implements ILeapMouse{
                 Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
                 robot.mouseMove((int) (screen.getWidth()*boxPos.getX()), 
                         (int) (screen.getHeight()-boxPos.getY()*screen.getHeight()));
+               // System.out.println("mouse tracking");
             }
         }
         
