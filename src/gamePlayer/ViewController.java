@@ -8,7 +8,6 @@ import gamedata.gamecomponents.Piece;
 import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
 import gameengine.player.SimpleAIPlayer;
-
 import java.awt.geom.Point2D;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,7 +21,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -36,8 +34,10 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -45,10 +45,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 import tests.TestGameCreator;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
@@ -58,6 +56,7 @@ public class ViewController {
 
 	private static final String SIMPLE_AI_PLAYER = "Simple AI player";
 	private static final String HUMAN_PLAYER = "Human Player";
+	public static final String ADD_HIGH_SCORE_FXML = "newHighScore.fxml";
 	public static final String GAMESPACE_FXML = "gameSpace.fxml";
 	public static final String INITIALSCENE_FXML = "initialScene.fxml";
 	public static final String SCOREBOARD_FXML = "scoreBoard.fxml";
@@ -79,6 +78,7 @@ public class ViewController {
 	private Scene myPopupScene;
 	private Scene myPlayerScene;
 	private Scene myScene;
+	private Scene newHighScoreScene;
 	private Game myModel;
 	private GUIGrid myGrid;
 	private Scene mySplashScreen;
@@ -134,6 +134,16 @@ public class ViewController {
 	private ChoiceBox playerType;
 	@FXML
 	private TextField playerName;
+	@FXML
+	private GridPane newHighScoreRoot;
+	@FXML
+	private TextField highScoreName;
+	@FXML
+	private Label playerHighScore;
+	@FXML
+	private Button highScoreOK;
+	@FXML
+	private ToggleButton soundToggle;
 
 	private ScrollPane myGridPane;
 	private Point2D.Double currentClick;
@@ -141,6 +151,7 @@ public class ViewController {
 	private JSONManager myJSONManager;
 	private GameGridEffect myGameGridEffect;
 	private SuperTile keySelectedTile;
+	// Temporary variable to end the game after a certain amount of moves
 	private int tempMoveCount = 0;
 	private Languages myLanguages;
 
@@ -190,11 +201,13 @@ public class ViewController {
 		loadFXML(SCOREBOARD_FXML, myScoreBoard);
 		loadFXML(SETTINGS_FXML, mySettings);
 		loadFXML(PLAYER_FXML,myPlayerEditor);
+		loadFXML(ADD_HIGH_SCORE_FXML, newHighScoreRoot);
 
 		scoreScene = new Scene(myScoreBoard);
 		myPopupScene = new Scene(myPopup);
 		mySettingsScene = new Scene(mySettings);
 		myPlayerScene=new Scene(myPlayerEditor);
+		newHighScoreScene = new Scene(newHighScoreRoot);
 
 		myStage.setScene(new Scene(myInitialScene));
 
@@ -221,7 +234,6 @@ public class ViewController {
 			System.out.println("VC: loading game... ");
 			JSONManager myJM = new JSONManager();
 			myStage.setScene(mySplashScreen);
-			TestGameCreator JSBTester = new TestGameCreator();
 			testPlayGame(myJM.readFromJSONFile(f.getAbsolutePath()));
 			System.out.println("VC: game loaded... ");
 		}
@@ -274,6 +286,7 @@ public class ViewController {
 		if (absolutePath.startsWith(basePath)) {
 			relativePath = absolutePath.substring(basePath.length() + 1);
 		}
+		myModel.setCurrentPlayer(myCurrentPlayer);
 		myJSONManager.writeToJSON(myModel, f.getPath());
 
 	}
@@ -427,7 +440,6 @@ public class ViewController {
 		myGridPane = new ScrollPane();
 		Level currentLevel = myModel.getCurrentLevel();
 		myGrid = currentLevel.getGrid();
-		//                System.out.println("myGrid: " + myGrid);
 		myGrid.displayPane(myGridPane);
 
 		myGameSpace.setCenter(myGridPane);
@@ -439,6 +451,7 @@ public class ViewController {
 		clickSoundOn = true;
 		myGameGridEffect = new GameGridEffect(this);
 		clearHighScores.setOnMouseClicked(event -> handleClearHighScores());
+		soundToggle.setOnMouseClicked(event -> toggleSound());
 	}
 
 	/**
@@ -457,7 +470,6 @@ public class ViewController {
 			scores.getChildren().add(playerScore);
 		}
 		highestScore.setText(String.valueOf(Collections.max(scoreList)));
-
 	}
 
 	/**
@@ -503,7 +515,6 @@ public class ViewController {
 	 * @param piece
 	 */
 	protected void updateActions(Piece piece) {
-		// System.out.println("UPDATE ACTIONS");
 		// myAudio.playSelection();
 		controlPane.getChildren().clear();
 		ArrayList<Label> actions = new ArrayList<Label>();
@@ -553,8 +564,7 @@ public class ViewController {
 		setGridState(new ApplyState(this));
 		if (keyControlOn) {
 
-			// after i click action button, i need to go back to
-			// KeyboardMovement
+			// after i click action button, i need to go back to KeyboardMovement
 			myKeyboardAction = null;
 			myKeyboardMovement = new KeyboardMovement();
 			myKeyboardMovement.setMovementKeyControl(this);
@@ -632,6 +642,17 @@ public class ViewController {
 		int yCor = (int) (y / patchHeight);
 		currentClick = new Point2D.Double(xCor, yCor);
 		return currentClick;
+	}
+	
+	@FXML
+	private void toggleSound() {
+	    try {
+	        toggleClickSound();
+	        toggleBackgroundMusic();
+	    }
+	    catch (Exception e) {
+	        System.out.println("Audio related exception");
+	    }
 	}
 
 	public void toggleClickSound() {
@@ -784,14 +805,18 @@ public class ViewController {
 	 * mode Method to switch the state of the game grid between select mode and
 	 * apply mode
 	 * 
+	 * Also checks if the game has been won
+	 * 
 	 * @param state
 	 *            the current state of the Grid, select/ apply action Mode
 	 */
 	public void setGridState(IGridState state) {
 		tempMoveCount++;
+		
 
-		if (myModel.getCurrentLevel().getGameWon() || tempMoveCount == 10) {
-			// TODO assuming that the most recent currentPlayer won
+		if (myModel.getCurrentLevel().getGameWon() || tempMoveCount >= 0) {
+			// TODO this assumes that the most recent player is the one that won
+		        // also chooses a random score
 			String highScorer = "Bob";
 			Random randy = new Random();
 			int highScore = randy.nextInt(100000);
@@ -801,8 +826,7 @@ public class ViewController {
 				 * highScore = p.getScore(); }
 				 */
 			}
-			//                        showHighScoreInfo(highScorer, highScore);       //commenting this out for now!!!
-
+			showHighScoreInfo(highScorer, highScore);
 		}
 
 		myCurrentPlayer = myModel.getCurrentPlayer();
@@ -818,6 +842,7 @@ public class ViewController {
 	}
 
 	private void showHighScoreInfo(String highScorer, int highScore) {
+	    /*
 		final Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
 		dialog.initOwner(myStage);
@@ -844,14 +869,22 @@ public class ViewController {
 		dialogScene.getStylesheets().add("/resources/stylesheets/stylesheet.css");
 		dialog.setScene(dialogScene);
 		dialog.show();
+		*/
+	        Stage newScore = new Stage();
+	        newScore.setScene(newHighScoreScene);
+	        playerHighScore.setText(playerHighScore.getText() + " " + highScore);
+	        highScoreOK.setOnMouseClicked(event -> 
+	            addEntryToHallOfFame(newScore, highScoreName.getText(), highScore));
+	        newScore.show();
+	    
 	}
 
-	private void addEntryToHallOfFame(Stage stage, String nickname, String score) {
+	private void addEntryToHallOfFame(Stage stage, String nickname, int score) {
 		try {
 			File myScores2 = new File(getClass().getResource("/resources/highscore/highscore.txt").getPath());
 			Scanner in = new Scanner(myScores2);
 			String content = "";
-			ArrayList<List<String>> highScores = new ArrayList<List<String>>();
+			List<List<String>> highScores = new ArrayList<List<String>>();
 			while(in.hasNextLine()) {
 				String line = in.nextLine();
 				content += line + "\n";
@@ -869,7 +902,7 @@ public class ViewController {
 			writer.close();
 			List<String> currentScore = new ArrayList<String>();
 			currentScore.add(nickname);
-			currentScore.add(score);
+			currentScore.add(String.valueOf(score));
 			highScores.add(currentScore);
 			/*
                 Collections.sort(highScores, new Comparator<List<String>> () {
@@ -880,7 +913,7 @@ public class ViewController {
                 });
 			 */
 			for (List<String> each : highScores) {
-				myScoreBoard.getChildren().add(1, new Label(each.get(0) + ": " + each.get(1)));
+			        myScoreBoard.getChildren().add(1, new Label(each.get(0) + ": " + each.get(1)));				
 			}
 			stage.setScene(scoreScene);
 			stage.show();
@@ -967,24 +1000,17 @@ public class ViewController {
 	public void testPlayGame(Game testGame) {
 		myModel = testGame;
 		TestGameCreator tgc = new TestGameCreator();
-		tgc.createNewGame();
-		tgc.createNewGame();
-		tgc.createNewGame();
+		//tgc.createNewGame();
+		//tgc.createNewGame();
+		//tgc.createNewGame();
 		System.out.println("model found in viewcontroller: " + myModel);
 		initializeGrid();
 		myScene = new Scene(myGameSpace);
 		myStage.setScene(myScene);
 
-		//            System.out.println("VC: Current Level: " + myModel.getCurrentLevel().getId());
-		//            System.out.println(myModel.getCurrentLevel().getGrid().toString());
-		myModel.getCurrentLevel().getGrid().repopulateGrid();
-
-		// System.out.println("VC: Current Level - " + myModel.getCurrentLevel().getId() + " " + "Current Player" + myCurrentPlayer.getID());
-		/* for (Level l : myModel.getLevels()) {
-                System.out.println("Level #" + l.getId());
-                System.out.println(l.toString());
-            }*/
 		//System.out.println("VC: Current Level: " + myModel.getCurrentLevel().getId());
+		//System.out.println(myModel.getCurrentLevel().getGrid().toString());
+		myModel.getCurrentLevel().getGrid().repopulateGrid();
 	}
 
 
