@@ -179,6 +179,9 @@ public class ActionEditor extends Pane {
 		conclusionClassNames = trimClassList(conclusionClassNames);
 		for (String c : conclusionClassNames) {
 			ActionConclusion conclusion = (ActionConclusion) Reflection.createInstance(c);
+			if (conclusion.toString().equals(myConclusion.toString())) {
+				choiceBox.getSelectionModel().select(conclusion);
+			}
 			choiceBox.getItems().addAll(conclusion);
 		}
 		conclusionVBox.getChildren().addAll(conclusionLabel, choiceBox);
