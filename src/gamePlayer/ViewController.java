@@ -12,8 +12,10 @@ import java.awt.geom.Point2D;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -65,6 +67,7 @@ public class ViewController {
 	public static final String GAME_LOCATION = "/src/resources/json";
 	public static final String POPUP_FXML = "popup.fxml";
 	public static final String SETTINGS_FXML = "settings.fxml";
+	private static final String HIGH_SCORE_FILE = "/resources/highscore/highscore.txt";
 
 	private Stage myStage;
 	private BorderPane myGameSpace;
@@ -455,7 +458,7 @@ public class ViewController {
 	}
 
 	/**
-	 * Loads the Score from a Player for Display
+	 * Loads the scores from the current game
 	 */
 	protected void loadScores() {
 		List<Integer> scoreList = new ArrayList<Integer>();
@@ -644,6 +647,9 @@ public class ViewController {
 		return currentClick;
 	}
 	
+	/**
+	 * Toggle sound button on main screen turns both sounds on or off
+	 */
 	@FXML
 	private void toggleSound() {
 	    try {
@@ -655,6 +661,9 @@ public class ViewController {
 	    }
 	}
 
+	/**
+	 * Toggles clicking sound
+	 */
 	public void toggleClickSound() {
 		if (clickSoundOn) {
 			clickSoundOn = false;
@@ -663,6 +672,12 @@ public class ViewController {
 		}
 	}
 
+	/**
+	 * Toggles background music sound
+	 * @throws UnsupportedAudioFileException
+	 * @throws IOException
+	 * @throws LineUnavailableException
+	 */
 	public void toggleBackgroundMusic() throws UnsupportedAudioFileException,
 	IOException, LineUnavailableException {
 		if (backgroundMusicOn) {
@@ -805,7 +820,7 @@ public class ViewController {
 	 * mode Method to switch the state of the game grid between select mode and
 	 * apply mode
 	 * 
-	 * Also checks if the game has been won
+	 * Also checks if the game has been won to show high score
 	 * 
 	 * @param state
 	 *            the current state of the Grid, select/ apply action Mode
@@ -814,7 +829,7 @@ public class ViewController {
 		tempMoveCount++;
 		
 
-		if (myModel.getCurrentLevel().getGameWon() || tempMoveCount >= 0) {
+		if (myModel.getCurrentLevel().getGameWon() || tempMoveCount >= 2) {
 			// TODO this assumes that the most recent player is the one that won
 		        // also chooses a random score
 			String highScorer = "Bob";
@@ -826,7 +841,7 @@ public class ViewController {
 				 * highScore = p.getScore(); }
 				 */
 			}
-			showHighScoreInfo(highScorer, highScore);
+			enterHighScoreInfo(highScorer, highScore);
 		}
 
 		myCurrentPlayer = myModel.getCurrentPlayer();
@@ -841,48 +856,30 @@ public class ViewController {
 		playerTurn.setText("Player " + myCurrentPlayer.getID() + "'s Move");
 	}
 
-	private void showHighScoreInfo(String highScorer, int highScore) {
-	    /*
-		final Stage dialog = new Stage();
-		dialog.initModality(Modality.APPLICATION_MODAL);
-		dialog.initOwner(myStage);
-
-		Text congrats = new Text("Congratulations, Player " + highScorer
-				+ " achieved a high score");
-		Text score = new Text(String.valueOf(highScore));
-		congrats.getStyleClass().add("plaintext");
-		score.getStyleClass().add("plaintext");
-		TextField nickname = new TextField();
-		nickname.setTranslateY(5);
-		nickname.setMaxWidth(150);
-		nickname.setText("Nickname");
-		Button go = new Button("Enter the Hall of Fame");
-		go.setOnMouseClicked(event -> addEntryToHallOfFame(dialog,
-				nickname.getText(), score.getText()));
-		nickname.setId("nickname");
-		go.setId("highscorebutton");
-
-		VBox dialogVbox = new VBox(10);
-		dialogVbox.setPadding(new Insets(10,10,10,10));
-		dialogVbox.getChildren().addAll(congrats, score, nickname, go);
-		Scene dialogScene = new Scene(dialogVbox, 600, 250);
-		dialogScene.getStylesheets().add("/resources/stylesheets/stylesheet.css");
-		dialog.setScene(dialogScene);
-		dialog.show();
-		*/
+	/**
+	 * Allows winning player to enter their information
+	 * @param highScorer
+	 * @param highScore
+	 */
+	private void enterHighScoreInfo(String highScorer, int highScore) {
 	        Stage newScore = new Stage();
 	        newScore.setScene(newHighScoreScene);
 	        playerHighScore.setText(playerHighScore.getText() + " " + highScore);
 	        highScoreOK.setOnMouseClicked(event -> 
 	            addEntryToHallOfFame(newScore, highScoreName.getText(), highScore));
 	        newScore.show();
-	    
 	}
 
+	/**
+	 * Adds new high score to the hall of fame
+	 * @param stage
+	 * @param nickname
+	 * @param score
+	 */
 	private void addEntryToHallOfFame(Stage stage, String nickname, int score) {
 		try {
-			File myScores2 = new File(getClass().getResource("/resources/highscore/highscore.txt").getPath());
-			Scanner in = new Scanner(myScores2);
+			File myScores = new File(getClass().getResource(HIGH_SCORE_FILE).getPath());
+			Scanner in = new Scanner(myScores);
 			String content = "";
 			List<List<String>> highScores = new ArrayList<List<String>>();
 			while(in.hasNextLine()) {
@@ -893,12 +890,10 @@ public class ViewController {
 				highScores.add(listLine);
 			}
 			in.close();
-
-			File myScores = new File(getClass().getResource("/resources/highscore/highscore.txt").getPath());
-			BufferedWriter writer = new BufferedWriter(new FileWriter(myScores));
-			//writer.write(content);
+			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+			      new FileOutputStream(myScores, true)));
+			writer.write(content);
 			writer.write(nickname + ": " + score + "\n");
-			writer.flush();
 			writer.close();
 			List<String> currentScore = new ArrayList<String>();
 			currentScore.add(nickname);
@@ -912,9 +907,12 @@ public class ViewController {
                     }
                 });
 			 */
+			/*
 			for (List<String> each : highScores) {
 			        myScoreBoard.getChildren().add(1, new Label(each.get(0) + ": " + each.get(1)));				
 			}
+			*/
+			myScoreBoard.getChildren().add(1, new Label(nickname + ": " + currentScore));
 			stage.setScene(scoreScene);
 			stage.show();
 		}
