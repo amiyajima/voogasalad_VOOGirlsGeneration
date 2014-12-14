@@ -175,18 +175,18 @@ public class LeapUIController extends Application {
         myControls.put(t.toString(), ""+InputEvent.BUTTON1_DOWN_MASK);
     }
 
-    private void disableGesture(){
-        Type t = (Type) ClickDropDown.valueProperty().getValue();
-        System.out.println(t.toString());
-        gesturesVBox.getChildren().forEach(hbox->{
-            String gesture = ((Label) ((HBox)hbox).getChildren().get(0)).getText();
-            System.out.println(gesture);
-
-            if(t.toString().equals(gesture)){
-                hbox.removeEventHandler(MouseEvent.MOUSE_CLICKED, hbox.getOnMouseClicked());
-            }
-        });
-    }
+//    private void disableGesture(){
+//        Type t = (Type) ClickDropDown.valueProperty().getValue();
+//        System.out.println(t.toString());
+//        gesturesVBox.getChildren().forEach(hbox->{
+//            String gesture = ((Label) ((HBox)hbox).getChildren().get(0)).getText();
+//            System.out.println(gesture);
+//
+//            if(t.toString().equals(gesture)){
+//                hbox.removeEventHandler(MouseEvent.MOUSE_CLICKED, hbox.getOnMouseClicked());
+//            }
+//        });
+//    }
     @FXML
     private void okayAction() throws IOException{
         
