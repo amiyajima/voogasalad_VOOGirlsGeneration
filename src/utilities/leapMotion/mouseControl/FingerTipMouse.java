@@ -19,7 +19,7 @@ public class FingerTipMouse implements ILeapMouse{
         InteractionBox box = frame.interactionBox();
         for(Finger finger: frame.fingers()){
             if(finger.type() ==Finger.Type.TYPE_INDEX){
-                Vector pos = finger.tipPosition();
+                Vector pos = finger.stabilizedTipPosition();
                 Vector boxPos = box.normalizePoint(pos);
                 Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
                 robot.mouseMove((int) (screen.getWidth()*boxPos.getX()), 

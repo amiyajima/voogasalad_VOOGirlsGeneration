@@ -5,11 +5,11 @@ import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
-
 import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Gesture;
 import com.leapmotion.leap.Listener;
+import com.leapmotion.leap.SwipeGesture;
 
 public class LeapMotionListener extends Listener{
     private ResourceBundle myGestures;
@@ -54,12 +54,9 @@ public class LeapMotionListener extends Listener{
                        // controller.config().setFloat("Gesture.ScreenTap.MinForwardVelocity", 30.0);
                         controller.config().setFloat("Gesture.ScreenTap.HistorySeconds", (float) .5);
                         controller.config().setFloat("Gesture.ScreenTap.MinDistance", (float) 1.0);
-                        
+                        controller.config().save();
                     }
-                    controller.config().setFloat("Gesture.Circle.MinRadius", 100.0f);
-                    
-                    controller.config().save();
-                    
+                   
                     System.out.println(type.toString()+"  enabled");
                 }
             }
@@ -80,6 +77,7 @@ public class LeapMotionListener extends Listener{
             for(String gestureName : myGestures.keySet()){
                 if(gesture.type().toString().equals(gestureName)){
                     performAction(gestureName);
+
                 }
             }
         }
