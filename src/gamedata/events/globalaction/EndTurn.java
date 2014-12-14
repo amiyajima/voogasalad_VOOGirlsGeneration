@@ -21,7 +21,8 @@ public class EndTurn extends GameStateGlobalAction {
 
     @Override
     public void doBehavior(GUIGrid grid) {
-    	GameState.endTurn();
+			GameState.resetMoves();
+		    GameState.endTurn();
     }
 
 }
