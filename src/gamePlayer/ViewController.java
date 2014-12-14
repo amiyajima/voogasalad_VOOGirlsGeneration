@@ -8,6 +8,7 @@ import gamedata.gamecomponents.Piece;
 import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
 import gameengine.player.SimpleAIPlayer;
+
 import java.awt.geom.Point2D;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,6 +26,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -35,6 +37,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -49,8 +52,10 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
 import tests.TestGameCreator;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
@@ -73,7 +78,9 @@ public class ViewController {
 	public static final String POPUP_FXML = "popup.fxml";
 	public static final String SETTINGS_FXML = "settings.fxml";
 	private static final String HIGH_SCORE_FILE = "/resources/highscore/highscore.txt";
-
+	private static final String WIN_SCREEN = "winLoseScreen.fxml";
+	private static final String YOU_LOSE = "You Lose :(";
+	
 	private Stage myStage;
 	private BorderPane myGameSpace;
 	private BorderPane myPopup;
@@ -87,6 +94,7 @@ public class ViewController {
 	private Scene myPlayerScene;
 	private Scene myScene;
 	private Scene newHighScoreScene;
+	private Scene winLoseScene;
 	private Game myModel;
 	private GUIGrid myGrid;
 	private Stage mySplashStage;
@@ -109,6 +117,7 @@ public class ViewController {
 	private Audio myAudio;
 
 	private List<Player> myPlayerList;
+	private Tab myTab;
 
 	@FXML
 	protected VBox statsPane;
@@ -154,6 +163,10 @@ public class ViewController {
 	private Button highScoreOK;
 	@FXML
 	private ToggleButton soundToggle;
+	@FXML
+	private BorderPane myWinLoseScreen;
+	@FXML
+	private Label winLose;
 
 	private ScrollPane myGridPane;
 	private Point2D.Double currentClick;
@@ -180,6 +193,54 @@ public class ViewController {
 				| LineUnavailableException e) {
 		}
 		myStage.show();
+	}
+	
+	public ViewController(Tab tab) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
+		myTab=tab;	
+		openInitialMenu();
+		loadGameInTab();
+		
+	}
+
+	private void loadGameInTab() {
+		Stage fileDialog=new Stage();
+		FileChooser fc = new FileChooser();
+		fc.getExtensionFilters().add(new ExtensionFilter("JSON", "*.json"));
+		fc.setInitialDirectory(new File("src/resources/json"));
+		File f = fc.showOpenDialog(fileDialog);
+
+		try {
+			System.out.println("VC: loading game... ");
+			JSONManager myJM = new JSONManager();
+//			mySplashStage.show();
+			testPlayGameInTab(myJM.readFromJSONFile(f.getAbsolutePath()));
+			System.out.println("VC: game loaded... ");
+		}
+		catch (FileNotFoundException fnfe) {
+			System.out.println("Could not find the file at - " + f.getAbsolutePath());
+//			loadGameInTab();	
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Other exception occured.");
+//			loadGameInTab();	
+		}
+				
+	}
+
+	private void testPlayGameInTab(Game readFromJSONFile) {
+		myModel = readFromJSONFile;
+		TestGameCreator tgc = new TestGameCreator();
+		System.out.println("model found in viewcontroller: " + myModel);
+		initializeGrid();
+		myTab.setContent(myGameSpace);
+//		myScene = new Scene(myGameSpace);
+//		myStage.setScene(myScene);
+//		mySplashStage.close();
+
+		//System.out.println("VC: Current Level: " + myModel.getCurrentLevel().getId());
+		//System.out.println(myModel.getCurrentLevel().getGrid().toString());
+		myModel.getCurrentLevel().getGrid().repopulateGrid();
 	}
 
 	/**
@@ -212,12 +273,14 @@ public class ViewController {
 		loadFXML(SETTINGS_FXML, mySettings);
 		loadFXML(PLAYER_FXML,myPlayerEditor);
 		loadFXML(ADD_HIGH_SCORE_FXML, newHighScoreRoot);
+		loadFXML(WIN_SCREEN, myWinLoseScreen);
 
 		scoreScene = new Scene(myScoreBoard);
 		myPopupScene = new Scene(myPopup);
 		mySettingsScene = new Scene(mySettings);
 		myPlayerScene=new Scene(myPlayerEditor);
 		newHighScoreScene = new Scene(newHighScoreRoot);
+		winLoseScene = new Scene(myWinLoseScreen);
 
 		myStage.setScene(new Scene(myInitialScene));
 
@@ -277,6 +340,8 @@ public class ViewController {
 		statsPane.getChildren().clear();
 		controlPane.getChildren().clear();
 	}
+	
+	
 
 	@FXML
 	protected void exitGame() {
@@ -876,7 +941,7 @@ public class ViewController {
 		tempMoveCount++;
 		
 
-		if (myModel.getCurrentLevel().getGameWon() || tempMoveCount % 8 == 0) {
+		if (myModel.getCurrentLevel().getGameWon() /*|| tempMoveCount % 8 == 0*/) {
 			// TODO this assumes that the most recent player is the one that won
 		        // also chooses a random score
 			String highScorer = "Bob";
@@ -1006,9 +1071,15 @@ public class ViewController {
 		currentLevel.runGameEvents();
 		if (currentLevel.getGameWon()) {
 			// GAMEWON
+		    Stage newStage = new Stage();
+		    newStage.setScene(winLoseScene);
+		    newStage.show();
 		}
 		if (currentLevel.getGameLost()) {
-			// GAMELOST
+		    winLose.setText(YOU_LOSE);
+		    Stage newStage = new Stage();
+                    newStage.setScene(winLoseScene);
+                    newStage.show();
 		}
 		if (currentLevel.getTurnOver()) {
 			currentLevel.setTurnFalse();
