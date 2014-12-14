@@ -2,8 +2,6 @@ package fxml_main;
 
 import gamePlayer.ViewController;
 import gamedata.JSON.JSONManager;
-import gamedata.action.Action;
-import gamedata.action.ConcreteAction;
 import gamedata.gamecomponents.Game;
 import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
@@ -39,6 +37,7 @@ import authoring.data.GamePropertiesData;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
+import authoring.data.PlayerStatData;
 
 
 public class AuthoringController implements Initializable {
@@ -91,6 +90,7 @@ public class AuthoringController implements Initializable {
 	private PieceTypeData myPieceTypes;
 	private PatchTypeData myPatchTypes;
 	private GamePropertiesData myGamePropertiesData;
+	private PlayerStatData myPlayerStatData;
 
 	@Override
 	// This method is called by the FXMLLoader when initialization is complete
@@ -100,6 +100,7 @@ public class AuthoringController implements Initializable {
 		myPieceTypes = new PieceTypeData();
 		myPatchTypes = new PatchTypeData();
 		myGridReference = new GUIGridReference();
+		myPlayerStatData = new PlayerStatData();
 		//        myGamePropertiesData = new GamePropertiesData();
 
 
@@ -127,7 +128,7 @@ public class AuthoringController implements Initializable {
 
 	@FXML
 	private void showPlayerEditWindow(){
-		StatsTotalEditor statsEditor = new StatsTotalEditor();
+		PlayerStatEditor statsEditor = new PlayerStatEditor(myPlayerStatData);
 		statsEditor.setTitle("Player Editor");
 		statsEditor.setX(450);
 		statsEditor.setY(200);
@@ -185,7 +186,7 @@ public class AuthoringController implements Initializable {
 		myGamePropertiesData=gamePropertiesData;
 
 		myTotalData = new GameAuthoringData(myLevelData, myPieceTypes, myPatchTypes,
-				myActionData, myGamePropertiesData);
+				myActionData, myGamePropertiesData, myPlayerStatData);
 		myPieceController = new PieceController(myPiecesVBox, myPropertiesSPane, myGridReference,
 				myPieceTypes, myActionData, myGamePropertiesData);
 		myPatchController = new PatchController(myPatchesVBox, myPropertiesSPane, myGridReference,

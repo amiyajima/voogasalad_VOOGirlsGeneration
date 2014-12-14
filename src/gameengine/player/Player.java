@@ -1,20 +1,10 @@
 package gameengine.player;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import javafx.scene.input.KeyCode;
-import gamedata.action.Action;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Level;
-import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
-import gameengine.movement.Movement;
+
 import java.awt.geom.Point2D;
-import authoring_environment.GUIGrid;
 
 
 /**
@@ -36,6 +26,8 @@ public abstract class Player implements IHasStats {
     protected int myID;
 
     protected Stats myStats;
+    
+    protected String myScoreStat;
 
     /**
      * Default constructor
@@ -54,10 +46,21 @@ public abstract class Player implements IHasStats {
         myNumMovesPlayed = 0;
         myID = id;
     }
+   
+    protected Player (int id, Stats stats, String scoreStat) {
+        myNumMovesPlayed = 0;
+        myID = id;
+        myStats = stats;
+        myScoreStat = scoreStat;
+    }
 
     public Stats getStats () {
         return myStats;
 
+    }
+    
+    public double getScore() {
+    	return myStats.getValue(myScoreStat);
     }
 
     public Point2D getLoc () {

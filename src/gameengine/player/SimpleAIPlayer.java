@@ -3,12 +3,12 @@ package gameengine.player;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
+import gamedata.stats.Stats;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * Defines a simple AI for playing turn-based strategy games
@@ -26,6 +26,10 @@ public class SimpleAIPlayer extends Player {
 	 */
 	public SimpleAIPlayer(int id) {
 		super(id);
+	}
+	
+	public SimpleAIPlayer(int id, Stats stats, String scoreStat) {
+		super(id, stats, scoreStat);
 	}
 
 	@Override
