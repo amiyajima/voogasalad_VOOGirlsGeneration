@@ -81,7 +81,7 @@ public class PatchTypeEditor extends Pane {
         myEditorTitle = EDITOR_TITLE;
         myIDSet = new HashSet<String>();
         myID = patch.getID();
-        myName = patch.toString();
+        myName = patch.getName();
         myImageLocation = patch.getImageLocation();
         myPatch = patch;
         constructor(okLambda);

@@ -4,6 +4,7 @@ import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.awt.geom.Point2D;
 
@@ -69,6 +70,7 @@ public class Movement implements Action {
 		myName = "Move";
 
 		boolean first = true;
+		myMoves = new LinkedList<Point2D.Double>();
 		myPaths = new ArrayList<List<Point2D.Double>>();
 		for (List<Point2D.Double> p : endPoints) {
 			if (first) {
