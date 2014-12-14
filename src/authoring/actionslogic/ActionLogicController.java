@@ -108,18 +108,19 @@ public class ActionLogicController implements Initializable {
         return myLogicMap;
     }
     
-//    public void getData(ActionData actionData, PieceTypeData ptData){
-//        ActionData actData = actionData;
-//        PieceTypeData pieceData = ptData;
-//        myActionTypes = actData.getActionIDs();
-//        myPieceTypes.addAll(pieceData.getIdSet());
-//        
+    public void getData(ActionData actionData, PieceTypeData ptData){
+        ActionData actData = actionData;
+        PieceTypeData pieceData = ptData;
+        myActionTypes = actData.getActionIDs();
+        myPieceTypes.addAll(pieceData.getIdSet());
+        
+    }
+    
+//    public void getData(List<String> aa, List<String> bb){
+//        myActionTypes = aa;
+//        myPieceTypes = bb;
 //    }
     
-    public void getData(List<String> aa, List<String> bb){
-        myActionTypes = aa;
-        myPieceTypes = bb;
-    }
     
     
 

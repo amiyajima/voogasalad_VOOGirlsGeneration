@@ -191,8 +191,8 @@ public class PatchTypeEditor extends Pane {
             @Override
             public void handle (ActionEvent click) {
                 myID = terrainID.getText();
-                if (myIDSet.contains(myID)) {
-                return;
+                if (myIDSet.contains(myID) || myID.equals("")) {
+                	return;
                 }
                 if (!terrainID.isDisabled()) {
                     myIDSet.add(myID);
