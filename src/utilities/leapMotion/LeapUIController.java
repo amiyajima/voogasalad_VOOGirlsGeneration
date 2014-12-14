@@ -42,6 +42,11 @@ public class LeapUIController extends Application {
     public static final String MOUSE_OPTIONS = "/src/utilities/leapMotion/mouseControl";
     public static final String MOUSE_KEY = "mouse";
     public static final String CLICK_KEY = "click";
+    public static final String DEFAULT_MOUSE ="FingerTipMouse";
+    public static final String PROMPT_STRING = "> enter the Key";
+    public static final String PROMPT_STRING_2=">Enter Single Key";
+    
+    
 
 
     @FXML
@@ -103,7 +108,7 @@ public class LeapUIController extends Application {
 
 
                     TextField tf = new TextField();
-                    tf.setPromptText("> enter the Key");
+                    tf.setPromptText(PROMPT_STRING);
                     if(((HBox)hbox).getChildren().size()<2){
                         ((HBox)hbox).getChildren().add(tf);
                         tf.setOnKeyPressed(ke->{
@@ -132,7 +137,7 @@ public class LeapUIController extends Application {
         else{
             tf.clear();
 
-            tf.setPromptText(">enter single key");
+            tf.setPromptText(PROMPT_STRING_2);
             tf.getParent().requestFocus();
         }
 
@@ -176,7 +181,7 @@ public class LeapUIController extends Application {
      * opens a file saver; saves the map to a properties file and exits upon clicking the button
      **/
     @FXML
-    private void okayAction() throws IOException{
+    private void okayAction(){
         
         
         Label l = ((Label)MouseDropDown.valueProperty().getValue());
@@ -184,7 +189,7 @@ public class LeapUIController extends Application {
             myControls.put(MOUSE_KEY, l.getText());
         }
         else{
-            myControls.put(MOUSE_KEY, "FingerTipMouse");
+            myControls.put(MOUSE_KEY, DEFAULT_MOUSE);
         }
       
         PropertyStorage storage = new PropertyStorage(myControls);

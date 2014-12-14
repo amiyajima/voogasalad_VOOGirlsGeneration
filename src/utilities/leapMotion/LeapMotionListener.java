@@ -26,6 +26,11 @@ public class LeapMotionListener extends Listener{
     public static final String GESTURE_BUNDLE = "Untitled";
     public static final String MOUSE_MOVE_FLAG = "mouse";
     public static final String MOUSE_FOLDER = "mouseControl.";
+    public static final String DEFAULT_MOUSE = "TYPE_SCREEN_TAP";
+    public static final String TAP_MIN_V = "Gesture.ScreenTap.MinForwardVelocity";
+    public static final String TAP_HIST_TIME = "Gesture.ScreenTap.HistorySeconds";
+    public static final String TAP_MIN_DIST = "Gesture.ScreenTap.MinDistance";
+    
     public static final double MIN_FORWARD_VELOCITY = 30.0;
     public static final double HISTORY_SECONDS = .5;
     public static final double MIN_DISTANCE = 1.0;
@@ -64,7 +69,7 @@ public class LeapMotionListener extends Listener{
                 if(type.toString().equals(gestureName)){
                     
                     controller.enableGesture(type);
-                    if(gestureName.equals("TYPE_SCREEN_TAP")){
+                    if(gestureName.equals(DEFAULT_MOUSE)){
                         
                         configScreenTap(controller);
                     }
@@ -81,10 +86,10 @@ public class LeapMotionListener extends Listener{
      * @param controller
      */
     private void configScreenTap (Controller controller) {
-        controller.config().setFloat("Gesture.ScreenTap.MinForwardVelocity", (float) MIN_FORWARD_VELOCITY);
+        controller.config().setFloat(TAP_MIN_V, (float) MIN_FORWARD_VELOCITY);
             
-        controller.config().setFloat("Gesture.ScreenTap.HistorySeconds", (float) HISTORY_SECONDS);
-        controller.config().setFloat("Gesture.ScreenTap.MinDistance", (float) MIN_DISTANCE);
+        controller.config().setFloat(TAP_HIST_TIME, (float) HISTORY_SECONDS);
+        controller.config().setFloat(TAP_MIN_DIST, (float) MIN_DISTANCE);
         controller.config().save();
     }
     /**

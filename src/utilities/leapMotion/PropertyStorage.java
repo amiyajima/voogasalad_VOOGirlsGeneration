@@ -8,7 +8,11 @@ import java.util.Map;
 import java.util.Properties;
 
 public class PropertyStorage{
-    Properties myProperties;
+    
+    public static final String ERROR_MESSAGE = "error saving file";
+    public static final String COMMENT_STRING= "gesture and mouse binding";
+    
+    private Properties myProperties;
 
     public PropertyStorage(Map<String, String> ... propertyArr){
         myProperties = new Properties();
@@ -17,19 +21,21 @@ public class PropertyStorage{
         }
 
     }
-    
+
     public void save(File f){
         FileOutputStream os;
-        try {
-            os = new FileOutputStream(f);
-            myProperties.store(os, "gesture and mouse binding");
-            os.close();
-        }
-        catch (IOException e) {
-           System.out.println("error saving file");
+        if(!(f == null)){
+            try {
+                os = new FileOutputStream(f);
+                myProperties.store(os, COMMENT_STRING);
+                os.close();
+            }
+            catch (IOException e) {
+                System.out.println(ERROR_MESSAGE);
+            }
         }
 
     }
-    
+
 
 }
