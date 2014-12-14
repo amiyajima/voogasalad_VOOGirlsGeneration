@@ -3,6 +3,7 @@ package gamedata.events.globalaction;
 import gamedata.action.StatsDataModifier;
 import gamedata.action.StatsTotalLogic;
 import gamedata.events.GameStateGlobalAction;
+import gamedata.events.GlobalAction;
 import gamedata.gamecomponents.IHasStats;
 import gameengine.player.Player;
 import java.util.ArrayList;
