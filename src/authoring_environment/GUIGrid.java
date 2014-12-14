@@ -18,12 +18,11 @@ import authoring.data.PatchTypeData;
 import authoring.data.PieceInstanceData;
 import authoring.data.PieceTypeData;
 
-// TODO: REMOVE THE DUPLICATED CODE. SO MUCH.
+// THIS CLASS IS BEYOND SAVING.
 /**
  * Authoring and player both use this grid
  * 
- * @author Jennie Ju
- *
+ * @author VOOGirls Generation
  */
 
 public class GUIGrid extends SuperGrid implements Observer{
@@ -360,10 +359,15 @@ public class GUIGrid extends SuperGrid implements Observer{
 		eventFunc.accept(allObjects, this);
 	}
 	
+	public PieceInstanceData getPieceData() {
+		return myPieceData;
+	}
+	
 	public PatchInstanceData getPatchData() {
 	    return myPatchData;
 	}
 	
+	@Override
 	public String toString() {
 	    List<Patch> myPatches = myPatchData.getData();
 	    List<Piece> myPieces = myPieceData.getData();
