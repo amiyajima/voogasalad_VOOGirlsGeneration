@@ -121,7 +121,6 @@ public class LeapUIController extends Application {
     private void mapKey(TextField tf){
         if(tf.getText().length()==1){
             myControls.put(myCurrentLabel.getText(), tf.getText());
-            // System.out.println(myControls.entrySet().toArray().toString());
         }
         else{
             tf.clear();
@@ -147,51 +146,38 @@ public class LeapUIController extends Application {
             }
         }
         options.forEach(file->{
-            Text l=new Text();
-            //TODO: fix this
+            Label l=new Label();
             l.setText(file.getName().substring(0, file.getName().length()-5));
             MouseDropDown.getItems().add(l);
-            //l.setOnMouseClicked(event->myControls.put(MOUSE_KEY, l.getText()));
 
         });
-        MouseDropDown.valueProperty().setValue(MouseDropDown.getItems().get(0));
+       
         ClickDropDown.getItems().addAll(Gesture.Type.values());
         ClickDropDown.valueProperty().setValue(Gesture.Type.TYPE_SCREEN_TAP);
+        
         ClickDropDown.valueProperty().addListener(event->{setUpGesture();
                                                             onSelect();});
-
-     //   MouseDropDown.valueProperty().setValue(MouseDropDown.getItems().get(0));
-        MouseDropDown.valueProperty().addListener(event->onSelect());
-        //        
-        //        System.out.println(((Label)(MouseDropDown.getSelectionModel().getSelectedItem())).getText());
-        //        myControls.put(MOUSE_KEY, ((Label)(MouseDropDown.getSelectionModel().getSelectedItem())).getText());
 
     }
 
     private void onSelect(){
-//        Label l = ((Label)MouseDropDown.valueProperty().getValue());
         Type t = (Type) ClickDropDown.valueProperty().getValue();
-//        myControls.put(MOUSE_KEY, l.getText());
         myControls.put(t.toString(), ""+InputEvent.BUTTON1_DOWN_MASK);
     }
 
-//    private void disableGesture(){
-//        Type t = (Type) ClickDropDown.valueProperty().getValue();
-//        System.out.println(t.toString());
-//        gesturesVBox.getChildren().forEach(hbox->{
-//            String gesture = ((Label) ((HBox)hbox).getChildren().get(0)).getText();
-//            System.out.println(gesture);
-//
-//            if(t.toString().equals(gesture)){
-//                hbox.removeEventHandler(MouseEvent.MOUSE_CLICKED, hbox.getOnMouseClicked());
-//            }
-//        });
-//    }
+
     @FXML
     private void okayAction() throws IOException{
         
+        
         Label l = ((Label)MouseDropDown.valueProperty().getValue());
-        myControls.put(MOUSE_KEY, l.getText());
+        if(! (l == null)){
+            myControls.put(MOUSE_KEY, l.getText());
+        }
+        else{
+            myControls.put(MOUSE_KEY, "FingerTipMouse");
+        }
+      
         PropertyStorage storage = new PropertyStorage(myControls);
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Properties", "*.properties"));
