@@ -1114,12 +1114,12 @@ public class ViewController {
 			// myController.getGame().getCurrentLevel().getGrid().displayPane(myController.getGridPane());
 			initializeGrid();
 		}
-		if (myModel.getCurrentPlayer().getNumMovesPlayed() > 4) {
+/*		if (myModel.getCurrentPlayer().getNumMovesPlayed() > 4) {
 			//System.out.println("NEXT PLAYER HARD CODE");
 			myModel.nextPlayer();
 			myCurrentPlayer = myModel.getCurrentPlayer();
 			setPlayerTurnDisplay();
-		}
+		}*/
 	}
 
 	private void handleClearHighScores() {
