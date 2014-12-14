@@ -116,7 +116,9 @@ public abstract class SuperTile extends Group {
      * tile as a piece.
      */
     public void setPieceImage (ImageView imageView) {
-        myPieceImage.setFill(new ImagePattern(imageView.getImage()));
+
+    	myPieceImage.setFill(new ImagePattern(imageView.getImage()));
+
     }
 
     /**
