@@ -19,6 +19,7 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -949,19 +950,14 @@ public class ViewController {
 			currentScore.add(nickname);
 			currentScore.add(String.valueOf(score));
 			highScores.add(currentScore);
-			/*
-                Collections.sort(highScores, new Comparator<List<String>> () {
-                    @Override
-                    public int compare(List<String> a, List<String> b) {
-                        return String.valueOf(a.get(1)).compareTo(String.valueOf(b.get(1)));
-                    }
-                });
-			 */
-			/*
-			for (List<String> each : highScores) {
-			        myScoreBoard.getChildren().add(1, new Label(each.get(0) + ": " + each.get(1)));				
-			}
-			*/
+			
+                        Collections.sort(highScores, new Comparator<List<String>> () {
+                            @Override
+                            public int compare(List<String> a, List<String> b) {
+                                return String.valueOf(a.get(1)).compareTo(String.valueOf(b.get(1)));
+                            }
+                        });
+			
 			myScoreBoard.getChildren().add(1, new Label(nickname + ": " + currentScore));
 			stage.setScene(scoreScene);
 			stage.show();
@@ -1008,10 +1004,11 @@ public class ViewController {
                     Random randy = new Random();
                     int highScore = randy.nextInt(100000);
                     for (Player p : myModel.getPlayers()) {
-                            /*
-                             * if (p.getScore() > highScore) { highScorer = p.getID();
-                             * highScore = p.getScore(); }
-                             */
+                        
+                             if (p.getStats().getValue("score") > highScore) { 
+                                 highScorer = "Player" + p.getID();
+                                 highScore = (int) p.getStats().getValue("score"); 
+                             }
                     }
                     enterHighScoreInfo(highScorer, highScore);
 		}
@@ -1060,11 +1057,11 @@ public class ViewController {
 
 
 	/**
-	 * Test Method for backend
-	 * @param testGame
+	 * Loads a Game into gamePlayer GUI
+	 * @param gameToLoad
 	 */
-	public void testPlayGame(Game testGame) {
-		myModel = testGame;
+	public void testPlayGame(Game gameToLoad) {
+		myModel = gameToLoad;
 		TestGameCreator tgc = new TestGameCreator();
 		System.out.println("model found in viewcontroller: " + myModel);
 		initializeGrid();
