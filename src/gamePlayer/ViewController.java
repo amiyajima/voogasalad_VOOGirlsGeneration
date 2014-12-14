@@ -1179,7 +1179,6 @@ public class ViewController {
 		    Stage newStage = new Stage();
 		    newStage.setScene(winLoseScene);
 		    newStage.show();
-		    
                     String highScorer = "Bob";
                     //Random randy = new Random();
                     //int highScore = randy.nextInt(100000);
