@@ -20,7 +20,7 @@ import authoring_environment.GUIGrid;
  * @author Jesse, Mike
  *
  */
-public class Level extends Observable implements IChangeGameState {
+public class Level extends Observable {
 	private static final String DEFAULT_ID = "Default";
 
 	/**
@@ -36,18 +36,6 @@ public class Level extends Observable implements IChangeGameState {
 	 */
 	private String myId;
 
-	/**
-	 * Global Action flags
-	 */
-	// GameWin
-	private boolean gameWon;
-	// GameLost
-	private boolean gameLost;
-	// Next Level
-	private String nextLevelID;
-	// Next Turn
-	private boolean turnOver;
-	
 	private boolean isWinningLevel;
 
 	/**
@@ -92,8 +80,8 @@ public class Level extends Observable implements IChangeGameState {
 	 */
 	public void runGameEvents() {
 		for (Event e : myEvents) {
-			BiConsumer<List<IHasStats>, GUIGrid> eventFunc = 
-					(List<IHasStats> list, GUIGrid grid) -> e.runEvent(list,
+			BiConsumer<List<IHasStats>, GUIGrid> eventFunc = (
+					List<IHasStats> list, GUIGrid grid) -> e.runEvent(list,
 					grid);
 			myGrid.runEvents(eventFunc);
 		}
@@ -122,11 +110,11 @@ public class Level extends Observable implements IChangeGameState {
 	 * toString method used to test JSON read/write
 	 */
 	public String toString() {
-	    String myString = "Level: Level #" + myId + " gamewon " + gameWon 
-	            + " gamelost " + gameLost + " nextlevel = #" + nextLevelID 
-	            + " turnover " + turnOver + " iswinning " + isWinningLevel;
-	    myString += "\ngrid:" + myGrid.toString() + " myEvents" + myEvents.toString();
-	    return myString;
+		String myString = "Level: Level #" + myId + " gamelost "
+				+ " iswinning " + isWinningLevel;
+		myString += "\ngrid:" + myGrid.toString() + " myEvents"
+				+ myEvents.toString();
+		return myString;
 	}
 
 	/**
@@ -179,72 +167,6 @@ public class Level extends Observable implements IChangeGameState {
 	 */
 	public String getId() {
 		return myId;
-	}
-
-	/**
-	 * Set the turn end trigger to false
-	 */
-	public void setTurnFalse() {
-		turnOver = false;
-	}
-
-	/**
-	 * Getter to get the game won state of the level
-	 * 
-	 * @return boolean of if the level has been won or not
-	 */
-	public boolean getGameWon() {
-		return this.gameWon;
-	}
-
-	/**
-	 * Getter to get the game lost state of the level
-	 * 
-	 * @return boolean of if the level has been lost
-	 */
-	public boolean getGameLost() {
-		return this.gameLost;
-	}
-
-	/**
-	 * Getter to get the turn over state
-	 * 
-	 * @return boolean of if the player turn has ended
-	 */
-	public boolean getTurnOver() {
-		return this.turnOver;
-	}
-
-	/**
-	 * Getter to get the int id of the next level to be played
-	 * 
-	 * @return int ID of the next level to be played
-	 */
-	public String getNextLevelID() {
-		return this.nextLevelID;
-	}
-
-	/**
-	 * IChangeGameState interface methods
-	 */
-	@Override
-	public void winGame() {
-		gameWon = true;
-	}
-
-	@Override
-	public void loseGame() {
-		gameLost = true;
-	}
-
-	@Override
-	public void endTurn() {
-		turnOver = true;
-	}
-
-	@Override
-	public void changeLevel(String name) {
-		nextLevelID = name;
 	}
 
 }
