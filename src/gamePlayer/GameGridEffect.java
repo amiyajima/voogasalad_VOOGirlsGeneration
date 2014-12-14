@@ -45,7 +45,7 @@ public class GameGridEffect {
         if (myActivePiece != null && myActiveAction != null) {
             //System.out.println("GameGridEffect: action ABOUT TO HIGHLIGHT\n\n");
         	//System.out.println("Size of Action Range:"+myActiveAction.getActionRange(myActivePiece.getLoc()));
-            myActiveAction.getSpecificActionRange(myActivePiece.getLoc())
+            myActiveAction.getAbsoluteActionRange(myActivePiece.getLoc())
                     .forEach(point -> { if (point.getX() < myGrid.getNumRows()
                                      && point.getY() < myGrid.getNumCols()
                                      && point.getX() >= 0 && point.getY() >= 0) {
@@ -69,19 +69,22 @@ public class GameGridEffect {
      * @param n
      * @param red
      */
-    public void highlightEffectRange (Point2D loc) {
+    public void highlightEffectRange (Point2D.Double loc) {
         clearAllEffectHighlights();
         
         myActivePiece = myViewController.getActivePiece();
         myActiveAction = myViewController.getActiveAction();
         
         if (myActivePiece != null && myActiveAction != null) {
-            myActiveAction.getSpecificActionRange(myActivePiece.getLoc()).forEach(point -> {
+            myActiveAction.getAbsoluteActionRange(myActivePiece.getLoc()).forEach(point -> {
                 if (loc.equals(point)){
                     myActiveAction.getEffectRange().forEach(point2 -> {
-                        SuperTile toHighlight = myGrid.findTile(point2);
-                        toHighlight.selectTile(EFFECT_RANGE_COLOR);
-                        myHighlightedEffects.add(toHighlight);
+                    	if(point2.getX()>=0 && point2.getY()>=0 && point2.getX()<= myGrid.getNumCols() &&
+                    			point2.getY()<= myGrid.getNumRows()	){
+                    	    SuperTile toHighlight = myGrid.findTile(point2);
+                            toHighlight.selectTile(EFFECT_RANGE_COLOR);
+                            myHighlightedEffects.add(toHighlight);
+                    	}
                         });
                     }
                 });
@@ -91,7 +94,7 @@ public class GameGridEffect {
     /**
      * Uses GRID COORDINATE LOCATION to highlight the current location on the grid
      */
-    public void highlightCurrent(Point2D loc, Piece activeP){
+    public void highlightCurrent(Point2D.Double loc, Piece activeP){
         System.out.println("highlight CURRENT");
         
         clearAllPieceHighlights();

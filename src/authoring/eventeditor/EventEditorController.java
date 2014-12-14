@@ -2,8 +2,8 @@ package authoring.eventeditor;
 
 import gamedata.events.Condition;
 import gamedata.events.Event;
-import gamedata.events.GlobalAction;
 import gamedata.events.conditions.StatEquals;
+import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.IChangeGameState;
 import gamedata.gamecomponents.Level;
 
@@ -190,8 +190,8 @@ public class EventEditorController implements Initializable {
          */
         if (event == null) { return; }
 
-        conditionsListView.setItems((ObservableList<Condition>) event.getConditions());
-        actionsListView.setItems((ObservableList<GlobalAction>) event.getGlobalActions());
+        conditionsListView.setItems(FXCollections.observableArrayList(event.getConditions()));
+        actionsListView.setItems(FXCollections.observableArrayList(event.getGlobalActions()));
 
         newCondition.setDisable(false);
         editCondition.setDisable(false);

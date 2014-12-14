@@ -1,6 +1,9 @@
 package authoring.concretefeatures;
 
+import gamedata.action.SingleMultiplierBox;
+
 import java.util.List;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;

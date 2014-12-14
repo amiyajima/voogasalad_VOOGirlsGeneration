@@ -27,4 +27,9 @@ public class IsDead extends Condition{
 		}
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+	    return myDescription;
+	}
 }

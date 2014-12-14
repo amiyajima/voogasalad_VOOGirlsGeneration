@@ -1,10 +1,13 @@
 package gamedata.action;
 
-import gamedata.gamecomponents.Piece; 
+import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
+
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.geom.Point2D;
+
+import authoring_environment.GUIGrid;
 
 /**
  * A concrete instance of an Action.
@@ -14,12 +17,11 @@ import java.awt.geom.Point2D;
  * See Action interface for descriptions of public methods
  * 
  * @author Jennie Ju
- *
  */
 public class ConcreteAction implements Action {
-	private String myID;
-	private List<Point2D> myAttackRange;
-	private List<Point2D> myEffectRange;
+	private String myName;
+	private List<Point2D.Double> myAttackRange;
+	private List<Point2D.Double> myEffectRange;
 	private List<StatsTotalLogic> myStatsLogics;
 	private ActionConclusion myConclusion;
 
@@ -28,24 +30,19 @@ public class ConcreteAction implements Action {
 	 * Called when a new Action is made and
 	 * its behavior is already defined
 	 */
-	public ConcreteAction(String id, List<Point2D> attackRange, 
-			List<Point2D> effectRange, List<StatsTotalLogic> statsLogics,
+	public ConcreteAction(String id, List<Point2D.Double> attackRange, 
+			List<Point2D.Double> effectRange, List<StatsTotalLogic> statsLogics,
 			ActionConclusion conclusion) {
-		myID = id;
+		myName = id;
 		myAttackRange = attackRange;
 		myEffectRange = effectRange;
 		myStatsLogics = statsLogics;
 		myConclusion  = conclusion;
 	}
-	
-	@Override
-	public String toString() {
-		return myID;
-	}
 
 	@Override
-	public List<Point2D> getSpecificActionRange(Point2D pieceLoc) {
-		List<Point2D> absoluteRange = new ArrayList<Point2D>();
+	public List<Point2D.Double> getAbsoluteActionRange(Point2D pieceLoc) {
+		List<Point2D.Double> absoluteRange = new ArrayList<Point2D.Double>();
 		for (Point2D relativeLoc : myAttackRange) {
 			double absX = pieceLoc.getX() + relativeLoc.getX();
 			double absY = pieceLoc.getY() + relativeLoc.getY();
@@ -55,12 +52,12 @@ public class ConcreteAction implements Action {
 	}
 
 	@Override
-        public List<Point2D> getActionRange() {
+        public List<Point2D.Double> getActionRange() {
                 return myAttackRange;
         }
 	
 	@Override
-	public List<Point2D> getEffectRange() {
+	public List<Point2D.Double> getEffectRange() {
 		return myEffectRange;
 	}
 
@@ -70,9 +67,18 @@ public class ConcreteAction implements Action {
 	 * the conclusion
 	 */
 	@Override
-	public void doBehavior(Piece actor, Piece... receivers) {
+	public void doBehavior(GUIGrid grid, Piece actor, Piece... receivers) {
 		modifyStats(actor, receivers);
-		runConclusion(actor, receivers);
+		runConclusion(grid, actor, receivers);
+	}
+	
+	/**
+	 * Returns the logic contained in the ConcreteAction for 
+	 * editing in the Authoring Environment
+	 * @return
+	 */
+	public List<StatsTotalLogic> getStatsLogics() {
+		return myStatsLogics;
 	}
 
 	private void modifyStats(Piece actor, Piece[] receivers) {
@@ -83,9 +89,9 @@ public class ConcreteAction implements Action {
 		}
 	}
 
-	private void runConclusion(Piece actor, Piece[] receivers) {
+	private void runConclusion(GUIGrid grid, Piece actor, Piece[] receivers) {
 		if (myConclusion != null) {
-			myConclusion.runConclusion(actor, receivers);
+			myConclusion.runConclusion(grid, actor, receivers);
 		}
 	}
 
@@ -121,5 +127,37 @@ public class ConcreteAction implements Action {
 			result += ssm.getModifier()*doubleValue;
 		}
 		return result;
+	}
+	
+	@Override
+	public String toString() {
+	    String myString = "actionid:" + myName;
+	    myString += " attack: ";
+	    for (Point2D.Double pt : myAttackRange) {
+	        myString += "(" + pt.getX() + " " + pt.getY() + ") ";
+	    }
+	    myString += " effect: ";
+            for (Point2D.Double pt : myEffectRange) {
+                myString += "(" + pt.getX() + " " + pt.getY() + ") ";
+            }
+            myString += " statslogic: ";
+            for (StatsTotalLogic stat : myStatsLogics) {
+                myString += "(" + stat.toString() + ") ";
+            }
+            myString += " effect: ";
+            for (Point2D.Double pt : myEffectRange) {
+                myString += "(" + pt.getX() + " " + pt.getY() + ") ";
+            }
+            myString += " conclusion: " + myConclusion.toString();
+            return myString;
+	}
+	
+	@Override
+	public String getName() {
+		return myName;
+	}
+	
+	public ActionConclusion getConclusion() {
+		return myConclusion;
 	}
 }

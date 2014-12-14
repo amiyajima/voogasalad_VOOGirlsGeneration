@@ -2,12 +2,11 @@ package gameengine.movement;
 
 import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
-import gamedata.rules.Rule;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Double;
 
 import authoring_environment.GUIGrid;
 
@@ -19,18 +18,22 @@ import authoring_environment.GUIGrid;
  *
  */
 public class Movement implements Action {
+	
 	/**
 	 * Point2Ds referring to relative positions of movement
 	 */
-	private List<Point2D> myMoves;
+	private List<Point2D.Double> myMoves;
+	
 	/**
 	 * Point2Ds referring to currently calculated absolute positions of movement
 	 */
-	private List<Point2D> myAbsoluteMoves;
+	private List<Point2D.Double> myAbsoluteMoves;
+	
 	/**
 	 * List of Point2Ds referring to relative paths of movement
 	 */
-	private List<List<Point2D>> myPaths;
+	private List<List<Point2D.Double>> myPaths;
+	
 	/**
 	 * Grid the Piece is on and movement will be execute on
 	 */
@@ -39,27 +42,37 @@ public class Movement implements Action {
 	/**
 	 * Orientator resonsible for calculating orientations
 	 */
-	private Orientator myOrientator;
+	private transient Orientator myOrientator;
+	
 	/**
 	 * Orientation of the piece (depending on last movement made)
 	 */
 	private double myOrientation;
+	
+	/**
+	 * Name of the action for display in the Player
+	 */
+	private String myName;
 
 	/**
 	 * Constructor
 	 * 
+	 * @param g
+	 *            The GUIGrid that the piece containing this movement exists on
 	 * @param endPoints
 	 *            Point2Ds representing all possible relative locations of
 	 *            movement
 	 */
 	@SafeVarargs
-	public Movement(GUIGrid g, List<Point2D>... endPoints) {
+	public Movement(List<Point2D.Double>... endPoints) {
 		myOrientation = 0;
 		myOrientator = new Orientator();
-		myGrid = g;
+		myName = "Move";
+
 		boolean first = true;
-		myPaths = new ArrayList<List<Point2D>>();
-		for (List<Point2D> p : endPoints) {
+		myMoves = new LinkedList<Point2D.Double>();
+		myPaths = new ArrayList<List<Point2D.Double>>();
+		for (List<Point2D.Double> p : endPoints) {
 			if (first) {
 				myMoves = p;
 				first = false;
@@ -73,13 +86,13 @@ public class Movement implements Action {
 	 * Return absolute possible x,y coordinates of movement based on current
 	 * location x,y
 	 * 
-	 * @param x
-	 * @param y
+	 * @param x Current x coordinate
+	 * @param y Current y coordinate
 	 * @return List of Point2D corresponding to absolute locations of movement
 	 */
-	public List<Point2D> getPossibleLocs(int x, int y) {
-		myAbsoluteMoves = new ArrayList<Point2D>();
-		for (Point2D a : myMoves) {
+	public List<Point2D.Double> getPossibleLocs(int x, int y) {
+		myAbsoluteMoves = new ArrayList<Point2D.Double>();
+		for (Point2D.Double a : myMoves) {
 			myAbsoluteMoves.add(new Point2D.Double(a.getX() + x, a.getY() + y));
 		}
 		return myAbsoluteMoves;
@@ -89,8 +102,8 @@ public class Movement implements Action {
 	 * Checks to see if an absolute location (x,y) is a valid location for
 	 * movement and that the destination is empty (no pieces overlapping)
 	 * 
-	 * @param x
-	 * @param y
+	 * @param x Absolute coordinate x
+	 * @param y Absolute coordinate y
 	 * @return
 	 */
 	public boolean isValidLocation(int x, int y) {
@@ -107,10 +120,10 @@ public class Movement implements Action {
 	 * Checks the collisions in the currently defined path. Checks with piece
 	 * and patch collisions.
 	 * 
-	 * @return true or false
+	 * @return true or false depending on whether a collision is detected on a path
 	 */
 	private boolean checkPathCollision(GUIGrid myGrid, Point2D endPoint) {
-		List<Point2D> path;
+		List<Point2D.Double> path;
 		boolean b = true;
 		// TODO: Implement Path Collision Once Constraints are Implemented
 		// Needs to find path with correct endpoint. Then check collision at
@@ -125,23 +138,24 @@ public class Movement implements Action {
 	}
 
 	@Override
-	public List<Point2D> getSpecificActionRange(Point2D pieceLocation) {
+	public List<Point2D.Double> getAbsoluteActionRange(Point2D pieceLocation) {
 		return this.getPossibleLocs((int) pieceLocation.getX(),
 				(int) pieceLocation.getY());
 	}
 
 	@Override
-	public List<Point2D> getEffectRange() {
-		return new ArrayList<Point2D>();
+	public List<Point2D.Double> getEffectRange() {
+		return new ArrayList<Point2D.Double>();
 	}
 
 	/**
 	 * Contains the logic to execute the behavior of moving the piece
 	 */
 	@Override
-	public void doBehavior(Piece actor, Piece... receivers) {
+	public void doBehavior(GUIGrid grid, Piece actor, Piece... receivers) {
+		myGrid = grid;
 		Piece p = receivers[0];
-		Point2D point = p.getLoc();
+		Point2D.Double point = p.getLoc();
 		if (isValidLocation((int) point.getX(), (int) point.getY())) {
 			// TODO: Implement Orientation Calculation Here
 			actor.setLoc(point);
@@ -150,12 +164,40 @@ public class Movement implements Action {
 
 	@Override
 	public String toString() {
-		return "Movement";
+	    String str = "MOVEMENT: moves - ";
+	    for (Point2D.Double pt : myMoves) {
+	        str += "(" + pt.getX() + ","  + pt.getY() + ")";
+	    }
+	    str += " paths - ";
+	    for (List<Point2D.Double> ptlst : myPaths) {
+	        str += "[";
+	        for (Point2D.Double pt : ptlst) {
+	            str += "(" + pt.getX() + ","  + pt.getY() + ")";
+	        }
+	        str += "]";
+	    }
+	    return str;
 	}
 
 	@Override
-	public List<Point2D> getActionRange() {
+	public List<Point2D.Double> getActionRange() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	/**
+	 * Getter method for the list of relative moves. This method
+	 * is needed by the PieceTypeEditor, so do not delete it!
+	 * 
+	 * @return : List of locations a piece can move to relative
+	 * 				to its current location.
+	 */
+	public List<Point2D.Double> getRelativeMoves() {
+		return myMoves;
+	}
+
+	@Override
+	public String getName() {
+		return myName;
 	}
 }

@@ -1,9 +1,7 @@
 package gamedata.events.globalaction;
 
 import java.awt.geom.Point2D;
-
 import authoring_environment.GUIGrid;
-import gamedata.events.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
 
@@ -15,8 +13,9 @@ import gamedata.gamecomponents.Piece;
 public class MakePieceAtLocation extends GlobalAction {
 
     private Piece myPieceType;
-    private Point2D myLoc;
+    private Point2D.Double myLoc;
     private int myPlayerID;
+
     
     /**
      * Create this global action with a piece that stores the location it should be placed
@@ -24,7 +23,7 @@ public class MakePieceAtLocation extends GlobalAction {
      * @param game
      * @param pieceToCreate
      */
-    public MakePieceAtLocation (Piece pieceToCreate, Point2D loc, int PlayerID) {
+    public MakePieceAtLocation (Piece pieceToCreate, Point2D.Double loc, int PlayerID) {
     	super(String.format("Make %s at point %s", pieceToCreate, loc));
         myPieceType = pieceToCreate;
         myLoc = loc;

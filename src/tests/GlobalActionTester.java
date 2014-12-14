@@ -3,18 +3,18 @@ package tests;
 import static org.junit.Assert.*;
 import java.awt.geom.Point2D;
 import org.junit.Test;
+import gamedata.events.globalaction.DeletePieceAtLocation;
 import gamedata.events.globalaction.MakePieceAtLocation;
-import gamedata.events.globalaction.DeletePieceGlobalAction;
 import gamedata.events.globalaction.LevelChange;
 import gamedata.events.globalaction.EndTurn;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Piece;
 
 public class GlobalActionTester {
-    private JSONBobTester myBob = new JSONBobTester();
+    private TestGameCreator myBob = new TestGameCreator();
     private Game myGame;
     private MakePieceAtLocation myCreatePiece;
-    private DeletePieceGlobalAction myDeletePiece;
+    private DeletePieceAtLocation myDeletePiece;
     private EndTurn myEndTurn;
     private LevelChange myLevelChange;
     

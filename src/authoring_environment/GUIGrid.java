@@ -13,23 +13,22 @@ import java.util.function.BiConsumer;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import authoring.data.PatchData;
+import authoring.data.PatchInstanceData;
 import authoring.data.PatchTypeData;
-import authoring.data.PieceData;
+import authoring.data.PieceInstanceData;
 import authoring.data.PieceTypeData;
 
-// TODO: REMOVE THE DUPLICATED CODE. SO MUCH.
+// THIS CLASS IS BEYOND SAVING.
 /**
  * Authoring and player both use this grid
  * 
- * @author Jennie Ju
- *
+ * @author VOOGirls Generation
  */
 
 public class GUIGrid extends SuperGrid implements Observer{
 
-	private PieceData myPieceData;
-	private PatchData myPatchData;
+	private PieceInstanceData myPieceData;
+	private PatchInstanceData myPatchData;
 
 	/**
 	 * Default constructor for GUIGrid. Only for testing purposes.
@@ -48,8 +47,8 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 */
 	public GUIGrid (int cols, int rows, double tileHeight, String shape) {
 		super(cols, rows, tileHeight, shape);
-		myPieceData = new PieceData();
-		myPatchData = new PatchData();
+		myPieceData = new PieceInstanceData();
+		myPatchData = new PatchInstanceData();
 	}
 
 	/**
@@ -64,7 +63,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 * @param patchData - saved patchData
 	 */
 	public GUIGrid (int cols, int rows, double tileHeight, String shape,
-			PieceData pieceData, PatchData patchData) {
+			PieceInstanceData pieceData, PatchInstanceData patchData) {
 		super(cols, rows, tileHeight, shape);
 		myPieceData = pieceData;
 		myPatchData = patchData;
@@ -90,7 +89,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		repopulate();
 	}
 
-	public void addPieceAtLoc (Piece pieceType, Point2D loc) {
+	public void addPieceAtLoc (Piece pieceType, Point2D.Double loc) {
 		Piece clone = new Piece(pieceType, loc);
 		if (isPieceOccupied(loc)){
 			removePieceAtCoordinate(loc);
@@ -100,7 +99,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		myTile.setPieceImage(clone.getImageView());
 	}
 
-	public void addPatchAtLoc (Patch patchType, Point2D loc) {
+	public void addPatchAtLoc (Patch patchType, Point2D.Double loc) {
 		Patch clone = new Patch(patchType, loc);
 		if (isPatchOccupied(loc)){
 			removePatchAtCoordinate(loc);
@@ -110,7 +109,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		myTile.setPatchImage(clone.getImageView());
 	}
 	
-	public boolean isPieceOccupied (Point2D loc){
+	public boolean isPieceOccupied (Point2D.Double loc){
 		for (Piece p: myPieceData.getData()){
 			if (p.getLoc().equals(loc)){
 				return true;
@@ -119,7 +118,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 		return false;
 	}
 	
-	public boolean isPatchOccupied (Point2D loc){
+	public boolean isPatchOccupied (Point2D.Double loc){
 		for (Patch p: myPatchData.getData()){
 			if (p.getLoc().equals(loc)){
 				return true;
@@ -130,13 +129,13 @@ public class GUIGrid extends SuperGrid implements Observer{
 	
 	/**
 	 * Removes a piece at the given coordinates.
-	 * NOTE: Point2D coordinates given as
+	 * NOTE: Point2D.Double coordinates given as
 	 * X = column number, Y = row number
 	 * 
-	 * @param coor - Point2D containing coordinates of
+	 * @param coor - Point2D.Double containing coordinates of
 	 *        the piece to remove given as [Col, Row]
 	 */
-	public void removePieceAtCoordinate (Point2D coor) {
+	public void removePieceAtCoordinate (Point2D.Double coor) {
 		Piece toRemove = getPiece(coor);
 		if(isPieceOccupied(coor)){
 			removePiece(toRemove);
@@ -145,13 +144,13 @@ public class GUIGrid extends SuperGrid implements Observer{
 
 	/**
 	 * Removes a piece at the given coordinates.
-	 * NOTE: Point2D coordinates given as
+	 * NOTE: Point2D.Double coordinates given as
 	 * X = column number, Y = row number
 	 * 
-	 * @param coor - Point2D containing coordinates of
+	 * @param coor - Point2D.Double containing coordinates of
 	 *        the piece to remove given as [Col, Row]
 	 */
-	public void removePatchAtCoordinate (Point2D coor) {
+	public void removePatchAtCoordinate (Point2D.Double coor) {
 		Patch toRemove = getPatch(coor);
 		//TODO: remove only if there is a patch to be removed
 		//to avoid nullerpt..
@@ -161,32 +160,32 @@ public class GUIGrid extends SuperGrid implements Observer{
 	}
 
 	private void replacePieceType (Piece pieceType) {
-		List<Point2D> pointsToReplace = myPieceData.replace(pieceType);
-		for (Point2D loc : pointsToReplace) {
+		List<Point2D.Double> pointsToReplace = myPieceData.replace(pieceType);
+		for (Point2D.Double loc : pointsToReplace) {
 			SuperTile tile = super.findTile(loc);
 			tile.setPieceImage(pieceType.getImageView());
 		}
 	}
 
 	private void replacePatchType (Patch patchType) {
-		List<Point2D> pointsToReplace = myPatchData.replace(patchType);
-		for (Point2D loc : pointsToReplace) {
+		List<Point2D.Double> pointsToReplace = myPatchData.replace(patchType);
+		for (Point2D.Double loc : pointsToReplace) {
 			SuperTile tile = super.findTile(loc);
 			tile.setPatchImage(patchType.getImageView());
 		}
 	}
 
 	private void removePieceType (PieceTypeData typeData) {
-		List<Point2D> pointsToRemove = myPieceData.removeUnknown(typeData.getIdSet());
-		for (Point2D loc : pointsToRemove) {
+		List<Point2D.Double> pointsToRemove = myPieceData.removeUnknown(typeData.getIdSet());
+		for (Point2D.Double loc : pointsToRemove) {
 			SuperTile tile = super.findTile(loc);
 			tile.removePieceImage();
 		}
 	}
 
 	private void removePatchType (PatchTypeData typeData) {
-		List<Point2D> pointsToRemove = myPatchData.removeUnknown(typeData.getIdSet());
-		for (Point2D loc : pointsToRemove) {
+		List<Point2D.Double> pointsToRemove = myPatchData.removeUnknown(typeData.getIdSet());
+		for (Point2D.Double loc : pointsToRemove) {
 			SuperTile tile = super.findTile(loc);
 			tile.removePatchImage();
 		}
@@ -198,7 +197,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 * @param loc
 	 * @return
 	 */
-	public Piece getPiece (Point2D loc) {
+	public Piece getPiece (Point2D.Double loc) {
 		for (Piece p : myPieceData.getData()) {
 			if ((p.getLoc().equals(loc))) {
 				return p;
@@ -213,7 +212,7 @@ public class GUIGrid extends SuperGrid implements Observer{
 	 * @param loc
 	 * @return
 	 */
-	public Patch getPatch (Point2D loc) {
+	public Patch getPatch (Point2D.Double loc) {
 		for (Patch p : myPatchData.getData()) {
 			if ((p.getLoc().equals(loc))) {
 				return p;
@@ -332,13 +331,13 @@ public class GUIGrid extends SuperGrid implements Observer{
 		}
 	}
 
-	private void addPieceToTile (Piece pieceType, Point2D loc) {
+	private void addPieceToTile (Piece pieceType, Point2D.Double loc) {
 		SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
 		myTile.setPieceImage(pieceType.getImageView());
 
 	}
 
-	private void addPatchToTile (Patch patchType, Point2D loc) {
+	private void addPatchToTile (Patch patchType, Point2D.Double loc) {
 		SuperTile myTile = myGrid.get((int) loc.getY()).get((int) loc.getX());
 		myTile.setPatchImage(patchType.getImageView());
 	}
@@ -358,5 +357,29 @@ public class GUIGrid extends SuperGrid implements Observer{
 		allObjects.addAll(myPatchData.getData());
 		
 		eventFunc.accept(allObjects, this);
+	}
+	
+	public PieceInstanceData getPieceData() {
+		return myPieceData;
+	}
+	
+	public PatchInstanceData getPatchData() {
+	    return myPatchData;
+	}
+	
+	@Override
+	public String toString() {
+	    List<Patch> myPatches = myPatchData.getData();
+	    List<Piece> myPieces = myPieceData.getData();
+	    String myString = "\nGrid\n";
+	    int size = myPatches.size();
+	    if (myPieces.size() < myPatches.size()) {
+	        size = myPieces.size();
+	    }
+	    for (int i = 0; i < size; i++) {
+	        myString += myPatches.get(i).toString() + "\n";
+	        myString += myPieces.get(i).toString() + "\n";
+	    }
+	    return myString;
 	}
 }

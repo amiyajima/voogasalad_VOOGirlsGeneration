@@ -1,9 +1,11 @@
 package fxml_main;
 
 import gamedata.action.Action;
+
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
+import gameengine.movement.Movement;
 
 import java.awt.geom.Point2D;
 import java.io.File;
@@ -28,6 +30,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import authoring.concretefeatures.RangeEditor;
 import authoring.concretefeatures.StatsTotalEditor;
 import authoring.createedit.ModulesList;
 import authoring.data.ActionData;
@@ -35,14 +38,14 @@ import authoring.data.PieceTypeData;
 import authoring_environment.UIspecs;
 
 /**
- * @author Mike Zhu, Jennie Ju
+ * @author Mike Zhu, Jennie Ju, Martin Tamayo
  *
  */
 public class PieceTypeEditor extends Pane {
     private static final int HEIGHT = 150;
     private static final int WIDTH = 150;
-    private static final String CREATOR_TITLE = "Unit Creator";
-    private static final String EDITOR_TITLE = "Unit Editor";
+    private static final String CREATOR_TITLE = "Piece Creator";
+    private static final String EDITOR_TITLE = "Piece Editor";
     private static final String ID_LABEL = "Unique ID";
     private static final String NAME_LABEL = "Name";
     private static final String LOADIMAGE_LABEL = "Load Unit Image";
@@ -50,11 +53,12 @@ public class PieceTypeEditor extends Pane {
     private static final String ID_PROMPT = "Enter piece ID...";
     private static final String NAME_PROMPT = "Enter piece name...";
     private static final String STAT_CREATE_LABEL = "Add stat";
+    private static final String MOVE_RANGE_LABEL = "Set Movement Range...";
     private static final Insets MARGINS = new Insets(20, WIDTH / 5, 20, WIDTH / 5 - 10);
     private static final String LABEL_CSS = "-fx-font-size: 14pt;";
 
     private static final String DEFAULT_IMAGE_LOC = "/resources/images/default_image.png";
-    private static final Point2D DEFAULT_LOC = new Point2D.Double(0, 0);
+    private static final Point2D.Double DEFAULT_LOC = new Point2D.Double(0, 0);
 
     private String myEditorTitle;
     private Consumer<Piece> myOkLambda;
@@ -63,12 +67,14 @@ public class PieceTypeEditor extends Pane {
     private String myName;
     private String myImageLocation;
     private Piece myPiece;
-
+    
+    private String myGridShape;
     private ActionData myAvailableActions;
     private Set<String> myIDSet;
 
     private int myPlayerID;
     private Stats myStats;
+    private Movement myMovement;
     private List<Action> myActions;
     private Inventory myInventory;
 
@@ -77,13 +83,16 @@ public class PieceTypeEditor extends Pane {
      * 
      * @param pieceController
      */
-    public PieceTypeEditor (Consumer<Piece> okLambda, PieceTypeData pieceTypes, ActionData actions) {
+    public PieceTypeEditor (Consumer<Piece> okLambda, PieceTypeData pieceTypes,
+    		ActionData actions, String gridShape) {
         myEditorTitle = CREATOR_TITLE;
+        myGridShape = gridShape;
         myIDSet = pieceTypes.getIdSet();
         myAvailableActions = actions;
         myID = "";
         myName = "";
         myImageLocation = DEFAULT_IMAGE_LOC;
+        myMovement = new Movement();
         myActions = new ArrayList<Action>();
         myStats = new Stats();
         myPlayerID = 1;
@@ -91,13 +100,16 @@ public class PieceTypeEditor extends Pane {
         constructor(okLambda);
     }
 
-    public PieceTypeEditor (Consumer<Piece> okLambda, Piece piece, ActionData actions) {
+    public PieceTypeEditor (Consumer<Piece> okLambda, Piece piece,
+    		ActionData actions, String gridShape) {
         myEditorTitle = EDITOR_TITLE;
+        myGridShape = gridShape;
         myIDSet = new HashSet<String>();
         myAvailableActions = actions;
         myID = piece.getID();
-        myName = piece.toString();
+        myName = piece.getName();
         myImageLocation = piece.getImageLocation();
+        myMovement = piece.getMovement();
         myActions = piece.getActions();
         myStats = piece.getStats();
         myPlayerID = piece.getPlayerID();
@@ -131,18 +143,22 @@ public class PieceTypeEditor extends Pane {
         names.setPadding(UIspecs.allPadding);
         names.setSpacing(5);
 
+        HBox images = new HBox();
+        images.setPadding(UIspecs.allPadding);
+        images.setSpacing(5);
+        
         HBox createStat = new HBox();
         createStat.setPadding(UIspecs.allPadding);
         createStat.setSpacing(5);
 
-        HBox availableStats = new HBox();
-        availableStats.setPadding(UIspecs.allPadding);
-        availableStats.setSpacing(5);
+        HBox movements = new HBox();
+        movements.setPadding(UIspecs.allPadding);
+        movements.setSpacing(5);
 
-        HBox images = new HBox();
-        images.setPadding(UIspecs.allPadding);
-        images.setSpacing(5);
-
+        Button rangeEditorBtn = new Button (MOVE_RANGE_LABEL);
+        initRangeEditorButton(rangeEditorBtn);
+        movements.getChildren().addAll(rangeEditorBtn);
+        
         Button createStatButton = new Button(STAT_CREATE_LABEL);
         initStatButton(createStatButton);
         createStat.getChildren().addAll(createStatButton);
@@ -170,10 +186,10 @@ public class PieceTypeEditor extends Pane {
         initImageLoader(images);
         initGoBtn(goButton, unitID, unitName, modList);
 
-        box.getChildren().addAll(labelBox, ids, names, createStat, images, modList, goButton);
+        box.getChildren().addAll(labelBox, ids, names, images, movements, createStat, modList, goButton);
         getChildren().add(box);
     }
-
+    
     private void initStatButton (Button createStatButton) {
         createStatButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -222,6 +238,17 @@ public class PieceTypeEditor extends Pane {
         });
         images.getChildren().addAll(icon, loadImage);
     }
+    
+    private void initRangeEditorButton (Button rangeEditorButton){
+    	rangeEditorButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent click) {
+            	List<Point2D.Double> range = myMovement.getRelativeMoves();
+                RangeEditor rEditor = new RangeEditor(range, myGridShape);
+                rEditor.show();
+            }
+        });
+    }
 
     private ImageView setImageView() {
         if (myImageLocation.startsWith("/")) {
@@ -246,8 +273,9 @@ public class PieceTypeEditor extends Pane {
                 myIDSet.add(myID);
                 myName = unitName.getText();
                 myActions = addSelectedActions(modList.getSelectedActions());
-                myPiece = new Piece(myID, myName, myImageLocation, myActions,
+                myPiece = new Piece(myID, myName, myImageLocation, myMovement, myActions,
                                     myStats, DEFAULT_LOC, myPlayerID, myInventory);
+                System.out.println(myMovement.toString());
                 myOkLambda.accept(myPiece);
             }
         });
@@ -260,18 +288,4 @@ public class PieceTypeEditor extends Pane {
         }
         return list;
     }
-
-    // protected void initSetRangeButton(VBox rangeBox, String label, List<Point2D> range) {
-    // Label rangeLabel = new Label(label);
-    // Button setRange = new Button("Set Range...");
-    // setRange.setOnAction(new EventHandler<ActionEvent>() {
-    // @Override
-    // public void handle(ActionEvent event) {
-    // //PopupWindow actionRangeEditor = new RangeEditor(range, label);
-    // //actionRangeEditor.show();
-    // // TODO: set myRange in here somewhere (within RangeEditor?)
-    // }
-    // });
-    // rangeBox.getChildren().addAll(rangeLabel, setRange);
-    // }
 }

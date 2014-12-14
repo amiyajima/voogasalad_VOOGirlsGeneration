@@ -1,6 +1,5 @@
 package fxml_main;
 
-import gamedata.action.Action;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import javafx.event.ActionEvent;
@@ -46,7 +45,7 @@ public class PieceEditor extends Pane {
     public PieceEditor (Piece piece, int numPlayers) {
     	myPiece = piece;
         myID = piece.getID();
-        myName = piece.toString();
+        myName = piece.getName();
         myStats = piece.getStats();
         myImageLocation = piece.getImageLocation();
         myNumPlayers = numPlayers;

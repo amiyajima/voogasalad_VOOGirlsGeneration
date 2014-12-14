@@ -2,9 +2,7 @@ package gamedata.events.globalaction;
 
 import java.awt.geom.Point2D;
 import java.util.List;
-
 import authoring_environment.GUIGrid;
-import gamedata.events.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Piece;
@@ -16,7 +14,7 @@ import gamedata.gamecomponents.Piece;
  */
 public class DeletePieceAtLocation extends GlobalAction {	
     
-	Point2D myLoc;
+    private Point2D.Double myLoc;
 	
     /**
      * Make sure you construct this referring to the piece that you want to delete rather than 
@@ -25,7 +23,7 @@ public class DeletePieceAtLocation extends GlobalAction {
      * @param game
      * @param name of type of piece to delete
      */
-    public DeletePieceAtLocation(Point2D point) {
+    public DeletePieceAtLocation(Point2D.Double point) {
         super(String.format("Delete Piece at position %s", point));
         myLoc = point;
     }

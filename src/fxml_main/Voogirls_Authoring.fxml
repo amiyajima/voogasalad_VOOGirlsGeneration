@@ -6,18 +6,19 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="2000.0" maxWidth="2000.0" minHeight="50.0" minWidth="50.0" prefHeight="706.0" prefWidth="1024.0" stylesheets="@../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_main.AuthoringController">
+<BorderPane prefHeight="706.0" prefWidth="1024.0" stylesheets="@../resources/stylesheets/slategray_layout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_main.AuthoringController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem fx:id="mySaveBtn" mnemonicParsing="false" onAction="#saveGame" text="Save" />
-              <MenuItem mnemonicParsing="false" text="Save As..." />
+              <MenuItem fx:id="mySaveAsBtn" mnemonicParsing="false" onAction="#saveAsGame" text="Save As..." />
             </items>
           </Menu>
             <Menu fx:id="exit" mnemonicParsing="false" text="Game Properties">
               <items>
+
                   <MenuItem fx:id="playerNumber" mnemonicParsing="false" onAction="#showGamePropertiesWindow" text="Edit Player Number..." />
                   <MenuItem fx:id="actonsLogicChart" mnemonicParsing="false" onAction="#showActionslogicChartWindow" text="Actions Logic Chart..." />
                   <MenuItem fx:id="playerEditor" mnemonicParsing="false" onAction="#showPlayerEditWindow" text="Player Editor..." />
@@ -35,7 +36,7 @@
    <left>
       <TitledPane animated="false" collapsible="false" prefHeight="677.0" prefWidth="230.0" text="Game Components" BorderPane.alignment="CENTER">
          <content>
-            <Accordion>
+            <Accordion prefHeight="643.0" prefWidth="228.0">
               <panes>
                   <TitledPane animated="false" prefHeight="572.0" prefWidth="228.0" text="Levels">
                      <content>
@@ -77,9 +78,9 @@
       </TitledPane>
    </left>
    <right>
-      <TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" text="Properties Editor" BorderPane.alignment="CENTER">
+      <TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="679.0" prefWidth="280.0" text="Properties Editor" BorderPane.alignment="CENTER">
          <content>
-            <ScrollPane fx:id="myPropertiesSPane" hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="650.0" prefWidth="258.0" />
+            <ScrollPane fx:id="myPropertiesSPane" hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="590.0" prefWidth="278.0" translateY="-30.0" />
          </content>
       </TitledPane>
    </right>

@@ -30,7 +30,7 @@ public class PatchViewer extends Pane {
 	
 	public PatchViewer (Patch patch) {
 		myID = patch.getID();
-		myName = patch.toString();
+		myName = patch.getName();
 		myImageLocation = patch.getImageLocation();
 		setHeight(HEIGHT);
 		setWidth(WIDTH);

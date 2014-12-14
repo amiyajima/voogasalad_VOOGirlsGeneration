@@ -23,8 +23,8 @@ public class SuperGrid {
 	protected double myTileHeight;
 	protected String myShape;
 
-	protected Pane myPane;
-	protected List<List<SuperTile>> myGrid;
+	protected transient Pane myPane;
+	protected transient List<List<SuperTile>> myGrid;
 
 	public SuperGrid() {
 		this(1, 1, 40, SQUARE_GRID);
@@ -53,7 +53,7 @@ public class SuperGrid {
 		for (int row = 0; row < myNumRows; row++) {
 			List<SuperTile> tileCol = new LinkedList<SuperTile>();
 			for (int col = 0; col < myNumCols; col++) {
-				Point2D location = new Point2D.Double(col,row);
+				Point2D.Double location = new Point2D.Double(col,row);
 				SuperTile tile = makeShapeTile(shape, myTileHeight, location);
 				
 				tileCol.add(tile);
@@ -63,7 +63,7 @@ public class SuperGrid {
 		}
 	}
 	
-	private SuperTile makeShapeTile(String shape, double tileSize, Point2D location) {
+	private SuperTile makeShapeTile(String shape, double tileSize, Point2D.Double location) {
 		switch (shape) {
 		case SQUARE_GRID:
 			return new SquareTile(tileSize, location);
@@ -118,7 +118,7 @@ public class SuperGrid {
 	 * @return Point2D containing the grid coordinations of the mouse click
 	 * as (col, row) or (x, y)
 	 */
-	public Point2D findClickedCoordinate(double xLoc, double yLoc){
+	public Point2D.Double findClickedCoordinate(double xLoc, double yLoc){
 		SuperTile tile = findClickedTile(xLoc, yLoc);
 		return tile.getCoordinates();
 	}

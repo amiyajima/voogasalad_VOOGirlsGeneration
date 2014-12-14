@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -13,11 +14,11 @@
                 <Menu mnemonicParsing="false" text="File">
                   <items>
                         <MenuItem disable="true" mnemonicParsing="false" text="Authoring Environment" />
-                        <MenuItem mnemonicParsing="false" text="New" />
+                        <MenuItem fx:id="newAuthor" mnemonicParsing="false" text="New" />
                         <MenuItem mnemonicParsing="false" text="Open Existing..." />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem disable="true" mnemonicParsing="false" text="Game Player" />
-                        <MenuItem mnemonicParsing="false" text="New" />
+                        <MenuItem fx:id="newPlayer" mnemonicParsing="false" text="New" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="Exit" />
                   </items>
@@ -36,11 +37,10 @@
             </MenuBar>
          </top>
          <center>
-            <TabPane prefHeight="0.0" prefWidth="1024.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-              <tabs>
-                <Tab fx:id="testauthor" text="Tab 1" />
-              </tabs>
-            </TabPane>
+            <TabPane fx:id="displayedTabs" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER">
+               <effect>
+                  <Glow />
+               </effect></TabPane>
          </center>
       </BorderPane>
    </children>

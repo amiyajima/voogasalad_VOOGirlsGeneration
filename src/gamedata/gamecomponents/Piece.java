@@ -11,16 +11,39 @@ import java.awt.geom.Point2D;
  * Class for pieces. Pieces are the primary unit for game play. They have
  * movement and can carry out various actions during the game.
  * 
- * @authors Sandy Lee, Jesse Ling, Jennie Ju
+ * @authors Sandy Lee, Jesse Ling, Jennie Ju, Martin Tamayo
  */
 public class Piece extends GridComponent {
-
+	
+	/**
+	 * The unit's movement range.
+	 */
+	private Movement myMovement;
+	
+	/**
+	 * List containing the Actions a piece can execute
+	 */
 	private List<Action> myActions;
-	private Movement myMove;
+	
+	/**
+	 * Contains the stats for a piece
+	 */
 	private Stats myStats;
+	
+	/**
+	 * ID of the player whom owns the piece
+	 */
 	private int myPlayerID;
+	
+	/**
+	 * Tag for garbage collection to remove the piece
+	 */
 	private boolean myShouldRemove;
-	private Inventory myInventory;
+	
+	/**
+	 * Inventory of the piece
+	 */
+	private transient Inventory myInventory;
 
 	/**
 	 * Piece constructor
@@ -50,11 +73,10 @@ public class Piece extends GridComponent {
 	 * @param inventory
 	 *            - Piece's inventory if the user chooses to use an inventory
 	 */
-
-	// TODO: Think about playerID concept
-	public Piece(String id, String name, String imageLoc, List<Action> actions,
-			Stats stats, Point2D loc, int playerID, Inventory inventory) {
+	public Piece(String id, String name, String imageLoc, Movement movement, List<Action> actions,
+			Stats stats, Point2D.Double loc, int playerID, Inventory inventory) {
 		super(id, name, imageLoc, loc);
+		myMovement = movement;
 		myActions = actions;
 		myStats = stats;
 		myPlayerID = playerID;
@@ -68,9 +90,9 @@ public class Piece extends GridComponent {
 	 * @param clone
 	 *            - Piece instance to be cloned
 	 */
-	public Piece(Piece clone, Point2D placeHere) {
+	public Piece(Piece clone, Point2D.Double placeHere) {
 		super(clone, placeHere);
-		myMove = clone.myMove;
+		myMovement = clone.myMovement;
 		myActions = new LinkedList<Action>(clone.myActions);
 		myStats = new Stats(clone.myStats);
 		myPlayerID = clone.myPlayerID;
@@ -91,13 +113,14 @@ public class Piece extends GridComponent {
 	public Stats getStats() {
 		return myStats;
 	}
-
-	// public double getStat (String s) {
-	// if (myStats.getStatsMap().containsKey(s)) { return
-	// myStats.getStatsMap().get(s); }
-	// return 0;
-	// }
-
+	
+	/**
+	 * Getter method for unit's Movement
+	 */
+	public Movement getMovement() {
+		return myMovement;
+	}
+	
 	/**
 	 * Adds an Action to the piece's list of Actions
 	 */
@@ -122,14 +145,11 @@ public class Piece extends GridComponent {
 	 */
 	public List<Action> getActions() {
 		List<Action> actions = new LinkedList<Action>(myActions);
+		actions.add(0, myMovement);
 		if (myInventory != null) {
 			actions.addAll(myInventory.getItemActions());
 		}
 		return actions;
-	}
-
-	public Movement getMovement() {
-		return myMove;
 	}
 
 	/**
@@ -178,16 +198,39 @@ public class Piece extends GridComponent {
 		}
 	}
 
+	/**
+	 * Returns the inventory that the piece contains
+	 * 
+	 * @return Inventory of the Piece
+	 */
 	public Inventory getInventory() {
 		return myInventory;
 	}
 
-	// TODO this was throwing an error, temporary fix
+	/**
+	 * returns a uniqueID identifier
+	 * 
+	 * @return
+	 */
 	public Object getUniqueID() {
 		return myName.hashCode();
 	}
 
+	/**
+	 * Setter to set the player ID who owns the piece
+	 * 
+	 * @param id
+	 *            int representing player ID
+	 */
 	public void setPlayerID(int id) {
 		myPlayerID = id;
+	}
+	
+	@Override
+	public String toString() {
+		String myString = "Piece #" + myID + " " + myName + " Location: " + "(" + myLoc.getX() + " " + myLoc.getY() + ")" 
+				+ "\n  Image: " + myImageLocation + " Movement: " + myMovement.toString() 
+				+ "\n  Actions: " + myActions.toString();
+		return myString;
 	}
 }

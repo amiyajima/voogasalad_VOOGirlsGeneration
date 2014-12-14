@@ -73,6 +73,7 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 		List<Player> playersRO = null;
 
 		EventsDataWrapper wrapper = new EventsDataWrapper(piecesRO, patchesRO, playersRO);
+//		System.out.println(myGridShape);
 		myPropertiesSPane.setContent(new LevelEditor(okLambda, wrapper, myGridShape));
 	}
 

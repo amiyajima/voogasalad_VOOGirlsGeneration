@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import gamedata.JSON.JSONManager;
 import gamedata.gamecomponents.Game;
-import tests.JSONBobTester;
+import tests.TestGameCreator;
 import authoring.abstractfeatures.PopupWindow;
 import authoring.concretefeatures.GameCreator;
 import authoring.concretefeatures.LevelEditor;
@@ -80,7 +80,7 @@ public class FileX extends Menu {
         java.io.File file = fileChooser.showSaveDialog(myStage);
         JSONManager myJSONmanager = new JSONManager();
         // TODO for now this creates a default game using the JSONBobTester
-        JSONBobTester jb = new JSONBobTester();
+        TestGameCreator jb = new TestGameCreator();
         myJSONmanager.writeToJSON(jb.createNewGame(), file.getAbsolutePath());
     }
     

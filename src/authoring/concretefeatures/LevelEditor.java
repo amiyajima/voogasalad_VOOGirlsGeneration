@@ -3,8 +3,8 @@ package authoring.concretefeatures;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
-import authoring.data.PatchData;
-import authoring.data.PieceData;
+import authoring.data.PatchInstanceData;
+import authoring.data.PieceInstanceData;
 import authoring_environment.GridView;
 import authoring_environment.JennieGrid;
 import authoring_environment.SandyGrid;
@@ -33,8 +33,8 @@ public class LevelEditor {
     private SuperGrid shapeGrid;
     private int tileSize;
     
-    private PieceData pieceData = new PieceData();
-    private PatchData patchData = new PatchData();
+    private PieceInstanceData pieceData = new PieceInstanceData();
+    private PatchInstanceData patchData = new PatchInstanceData();
     
     /**
      * Upon construction, makes a grid of the specified type and adds it to the Workspace Tab

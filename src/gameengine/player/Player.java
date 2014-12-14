@@ -26,7 +26,13 @@ import authoring_environment.GUIGrid;
 
 public abstract class Player {
 
+	/**
+	 * Number of moves a player has made in a given turn
+	 */
 	protected int myNumMovesPlayed;
+	/**
+	 * ID representing the player
+	 */
 	protected int myID;
 
 	/**
@@ -41,13 +47,17 @@ public abstract class Player {
 	 * 
 	 * @param id
 	 *            int ID corresponding to the Player
-	 * @param
 	 */
 	public Player(int id) {
 		myNumMovesPlayed = 0;
 		myID = id;
 	}
 
+	/**
+	 * Sets the player to start a turn on a level
+	 * 
+	 * @param l
+	 */
 	public abstract void startTurn(Level l);
 
 	/**
@@ -66,8 +76,15 @@ public abstract class Player {
 		return myID;
 	}
 
+	/**
+	 * Implements the play behavior of the player (allowing the user to become
+	 * active and play)
+	 */
 	public abstract void play();
 
+	/**
+	 * Increments the number moves played during a turn
+	 */
 	public void playTurn() {
 		myNumMovesPlayed++;
 	}
@@ -88,7 +105,11 @@ public abstract class Player {
 		return "Type:" + this.getClass().getName() + " ID:" + myID
 				+ " NumMovesPlayed:" + myNumMovesPlayed;
 	}
-	
+
+	/**
+	 * Returns the type of the player
+	 * @return String representing the type of the player
+	 */
 	public abstract String getType();
 
 }

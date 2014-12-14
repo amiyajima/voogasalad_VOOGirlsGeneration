@@ -5,8 +5,8 @@ import java.awt.geom.Point2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
-import authoring.data.PatchData;
-import authoring.data.PieceData;
+import authoring.data.PatchInstanceData;
+import authoring.data.PieceInstanceData;
 
 /**
  * The SandyGrid is a square grid.
@@ -15,7 +15,7 @@ import authoring.data.PieceData;
  */
 public class SandyGrid extends ShapeGrid {
 	
-	public SandyGrid(int cols, int rows, int tileSize, PieceData pieceData, PatchData patchData,
+	public SandyGrid(int cols, int rows, int tileSize, PieceInstanceData pieceData, PatchInstanceData patchData,
 			String id) {
 		super(cols, rows, tileSize, pieceData, patchData, id);
 	}

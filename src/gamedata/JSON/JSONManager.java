@@ -1,20 +1,12 @@
 package gamedata.JSON;
 
 import gamedata.action.Action;
-import gamedata.events.Event;
+import gamedata.action.ActionConclusion;
+import gamedata.action.StatsModifier;
+import gamedata.events.Condition;
+import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.Game;
-import gamedata.gamecomponents.Level;
-import gamedata.gamecomponents.Patch;
-import gamedata.gamecomponents.Piece;
-import gamedata.goals.Goal;
-import gamedata.rules.Rule;
-import gamedata.wrappers.GameData;
-import gamedata.wrappers.GoalData;
-import gamedata.wrappers.GridData;
-import gamedata.wrappers.LevelDataIndividual;
-import gamedata.wrappers.PatchData;
-import gamedata.wrappers.PieceData;
-import gamedata.wrappers.PlayerDataIndividual;
+import gamedata.gamecomponents.GridComponent;
 import gameengine.player.Player;
 
 import java.io.BufferedReader;
@@ -22,10 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import authoring_environment.GUIGrid;
 import authoring_environment.SuperGrid;
 
 import com.google.gson.Gson;
@@ -54,13 +43,12 @@ public class JSONManager {
     /**
      * Write a game and its contents into a JSON file.
      * 
-     * @param myModel
+     * @param piece
      * 
-     * @param grid
+     * @param piece
      */
-    public void writeToJSON (Game myModel, String fileName) {
-        System.out.println("JSONManager: write method called");
-        String json = myGson.toJson(myModel);
+      public void writeToJSON (Object thing, String fileName) {
+        String json = myGson.toJson(thing);
         System.out.println("JSONManager: game converted to json!");
 
         try {
@@ -70,7 +58,6 @@ public class JSONManager {
         }
         catch (IOException e) {
             System.out.println("could not write to: " + fileName);
-            // e.printStackTrace();
         }
 
     }
@@ -81,58 +68,26 @@ public class JSONManager {
      * @param JSON file location
      * @throws FileNotFoundException
      */
+
     public Game readFromJSONFile (String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
 
-        Game myGameData = myGson.fromJson(br, Game.class);
-        System.out.println(myGameData.toString());
-
-        // JSONParseTester jpt = new JSONParseTester();
-        // jpt.testRead(myGson, br);
-
-        // Game myGame = convertToGame(myGameData);
-
-        return myGameData;
-    }
-
-    /**
-     * Method that converts a game data object into a game object. may be an issue as every aspect
-     * of it is in a data wrapper
-     * 
-     * @param myGameData
-     * @return
-     */
-    private Game convertToGame (GameData gameData) {
-        List<PlayerDataIndividual> myPlayerData = gameData.getPlayerData();
-        List<LevelDataIndividual> myLevelData = gameData.getLevelData();
-        PlayerDataIndividual myCurrentPlayerData = gameData.getCurrentPlayerData();
-        LevelDataIndividual myCurentLevelData = gameData.getCurrentLevelData();
         
-        for(LevelDataIndividual l : myLevelData){
-            GridData gridData = l.getGrid();
-            
-            List<Patch> patches = new ArrayList<Patch>();
-            for(PatchData pd : gridData.getPatches()){
-                
-            }
-            List<Piece> pieces = new ArrayList<Piece>();
-            for(PieceData pd : gridData.getPieces()){
-                
-            }
-            
-            Grid grid = new Grid(gridData.getRow(), gridData.getColumn(), pieces, patches);
-            
-            Level currentLevel = new Level(grid,l.getGoals(), l.getRules());
-        }
-
-        Game newGame = new Game(myPlayerData.size(), );
-
-        return null;
-    }
-
+        Game pi = myGson.fromJson(br, Game.class);
+//        System.out.println("Level 1: " + pi.getLevels().get(0).getGrid().toString());
+        return pi;
+    }    
+    
     public void registerTypeAdapters (GsonBuilder builder) {
-        builder.registerTypeAdapter(Event.class, new GenericTypeAdapter<Event>("gamedata.events"));
+        builder.registerTypeAdapter(StatsModifier.class, new GenericTypeAdapter<StatsModifier>("gamedata.action"));
+        builder.registerTypeAdapter(Player.class, new GenericTypeAdapter<Player>("gameengine.player"));
+        builder.registerTypeAdapter(Action.class, new GenericTypeAdapter<Action>("gamedata.action"));
+        builder.registerTypeAdapter(ActionConclusion.class, new ActionConclusionTypeAdapter<ActionConclusion>("gamedata.action"));
+        builder.registerTypeAdapter(GridComponent.class, new GenericTypeAdapter<GridComponent>("gamedata.gamecomponent"));
+        builder.registerTypeAdapter(Condition.class, new GenericTypeAdapter<Condition>("gamedata.events.conditions"));
+        builder.registerTypeAdapter(GlobalAction.class, new GenericTypeAdapter<GlobalAction>("gamedata.events.globalaction"));
+        builder.registerTypeAdapter(SuperGrid.class, new GenericTypeAdapter<SuperGrid>("authoring_environment"));
     }
 
 }
