@@ -45,6 +45,12 @@ public class HumanPlayer extends Player {
 		setActionKeyMap(myActionKeyMap);
 		setMovementKeyMap(myMovementKeyMap);
 	}
+	
+	public HumanPlayer(Player player) {
+	    super(player);
+	    setActionKeyMap(myActionKeyMap);
+            setMovementKeyMap(myMovementKeyMap);
+	}
 
 	@Override
 	public void startTurn(Level l) {

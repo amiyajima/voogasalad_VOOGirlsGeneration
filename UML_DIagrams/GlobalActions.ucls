@@ -1,52 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.7" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="gameengine.player.Player" project="voogasalad_VOOGirlsGeneration" 
-    file="/voogasalad_VOOGirlsGeneration/src/gameengine/player/Player.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="432" y="197"/>    
+  <class id="1" language="java" name="gamedata.events.globalaction.GlobalAction" project="voogasalad_VOOGirlsGeneration" 
+    file="/voogasalad_VOOGirlsGeneration/src/gamedata/events/globalaction/GlobalAction.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="386" y="73"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="gameengine.player.HumanPlayer" project="voogasalad_VOOGirlsGeneration" 
-    file="/voogasalad_VOOGirlsGeneration/src/gameengine/player/HumanPlayer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="168" y="417"/>    
+  <class id="2" language="java" name="gamedata.events.globalaction.GameStateGlobalAction" 
+    project="voogasalad_VOOGirlsGeneration" 
+    file="/voogasalad_VOOGirlsGeneration/src/gamedata/events/globalaction/GameStateGlobalAction.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="189" y="184"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="gameengine.player.DerpPlayer" project="voogasalad_VOOGirlsGeneration" 
-    file="/voogasalad_VOOGirlsGeneration/src/gameengine/player/DerpPlayer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="134" width="174" x="358" y="420"/>    
+  <class id="3" language="java" name="gamedata.events.globalaction.ChangePlayerStats" 
+    project="voogasalad_VOOGirlsGeneration" 
+    file="/voogasalad_VOOGirlsGeneration/src/gamedata/events/globalaction/ChangePlayerStats.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="655" y="201"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="gameengine.player.SimpleAIPlayer" project="voogasalad_VOOGirlsGeneration" 
-    file="/voogasalad_VOOGirlsGeneration/src/gameengine/player/SimpleAIPlayer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="686" y="374"/>    
+  <class id="4" language="java" name="gamedata.events.globalaction.WinGame" project="voogasalad_VOOGirlsGeneration" 
+    file="/voogasalad_VOOGirlsGeneration/src/gamedata/events/globalaction/WinGame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="92" y="305"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="5">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
+  <class id="5" language="java" name="gamedata.events.globalaction.MakePieceAtLocation" 
+    project="voogasalad_VOOGirlsGeneration" 
+    file="/voogasalad_VOOGirlsGeneration/src/gamedata/events/globalaction/MakePieceAtLocation.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="417" y="285"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
   <generalization id="6">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="7">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
-  <generalization id="7">    
-    <end type="SOURCE" refId="4"/>    
+  <generalization id="8">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="9">    
+    <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
