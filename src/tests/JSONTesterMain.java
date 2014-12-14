@@ -103,7 +103,6 @@ public class JSONTesterMain {
         JSONManager jsonManager = new JSONManager();
         try {
             jsonManager.readFromJSONFile(loadFrom);
-            GUIGrid answer = (GUIGrid) jsonManager.readSpecificFromJSONFile(GUIGrid.class, loadFrom);
 
         }
         catch (FileNotFoundException e) {
@@ -112,9 +111,9 @@ public class JSONTesterMain {
     }
 
     public static void main (String[] args) {
-        String link = "src/resources/json/Specific-Grid.json";
+        String link = "src/resources/json/tester_2P_actions_events_location.JSON";
         //String localLink = "C:\\Users\\Rica\\Desktop\\Rica-GamePlayer.json";
-        testJSONwrite(link);
+        //testJSONwrite(link);
         testJSONload(link);
     }
 }

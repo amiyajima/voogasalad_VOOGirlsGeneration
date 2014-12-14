@@ -33,7 +33,7 @@ public class SplashScreen extends Stage {
         myGrid.getChildren().add(myV);
         myScene = new Scene(myGrid);
         this.setScene(myScene);
-        this.setFullScreen(true);
+//        this.setFullScreen(true);
     }
     
     public void close() {
