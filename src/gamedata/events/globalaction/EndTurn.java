@@ -15,7 +15,7 @@ import gamedata.gamecomponents.IHasStats;
  */
 public class EndTurn extends GameStateGlobalAction {
 
-    public EndTurn (IChangeGameState state) {
+    public EndTurn () {
         super("End current turn");
     }
 

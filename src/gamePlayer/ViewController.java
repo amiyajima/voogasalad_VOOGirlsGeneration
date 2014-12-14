@@ -694,7 +694,7 @@ public class ViewController {
 
 		if (activePiece == null)
 			return;
-		System.out.println("SETTING ACTIVE ACTION " + action);
+//		System.out.println("SETTING ACTIVE ACTION " + action);
 		setActiveAction(action);
 		myGameGridEffect.highlightActionRange();
 		setGridState(new ApplyState(this));
@@ -724,7 +724,7 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(Point2D.Double myCurrentLocation) {
-		System.out.println("PERFORM ACTION");
+//		System.out.println("PERFORM ACTION");
 
 		if (clickSoundOn) {
 			myAudio.playSelection();
@@ -950,7 +950,7 @@ public class ViewController {
 	 * @param action
 	 */
 	protected void setActiveAction(Action action) {
-		System.out.println("SETTING ACTIVE ACTION METHOD " + action);
+//		System.out.println("SETTING ACTIVE ACTION METHOD " + action);
 
 		activeAction = action;
 	}
@@ -1067,7 +1067,7 @@ public class ViewController {
 	}
 
 	protected void endAction() {
-		System.out.println("Ending Action");
+//		System.out.println("Ending Action");
 		this.checkEndActions();
 		//this.getGrid().repopulateGrid();
 	}

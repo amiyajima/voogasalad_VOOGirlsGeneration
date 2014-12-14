@@ -38,10 +38,7 @@ public class JSONManager {
     public JSONManager () {
         GsonBuilder builder = new GsonBuilder();
         registerTypeAdapters(builder);
-        new GraphAdapterBuilder()
-        .addType(Company.class)
-        .addType(Employee.class)
-        .registerOn(builder);
+     
         myGson = builder.create();
     }
 
