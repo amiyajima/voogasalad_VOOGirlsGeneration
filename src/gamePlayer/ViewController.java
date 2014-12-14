@@ -1075,6 +1075,8 @@ public class ViewController {
 	public void checkEndActions() {
 		Level currentLevel = myModel.getCurrentLevel();
 		myModel.getCurrentPlayer().playTurn();
+		GameState.movesMade++;
+		System.out.println(GameState.movesMade);
 		currentLevel.runGameEvents();
 		if (GameState.getGameWon()) {
 			// GAMEWON

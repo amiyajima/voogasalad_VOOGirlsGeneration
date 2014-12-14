@@ -138,10 +138,6 @@ public class AuthoringController implements Initializable {
 	private void saveGame () {
 
 		Game game = myTotalData.createGame();
-		Player p1 = new HumanPlayer(1);
-		List<Player> players = new ArrayList<Player>();
-		players.add(p1);
-		game.addPlayers(players);
 
 		JSONManager myJM = new JSONManager();
 
