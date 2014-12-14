@@ -164,8 +164,6 @@ public class ViewController {
 	@FXML
 	private Button highScoreOK;
 	@FXML
-	private ToggleButton soundToggle;
-	@FXML
 	private BorderPane myWinLoseScreen;
 	@FXML
 	private Label winLose;
@@ -628,7 +626,7 @@ public class ViewController {
 		clickSoundOn = true;
 		myGameGridEffect = new GameGridEffect(this);
 		clearHighScores.setOnMouseClicked(event -> handleClearHighScores());
-		soundToggle.setOnMouseClicked(event -> toggleSound());
+//		soundToggle.setOnMouseClicked(event -> toggleSound());
 	}
 
 	/**
@@ -851,27 +849,11 @@ public class ViewController {
 	 * @return a Point2D.Double representing tile coordinates
 	 */
 	public Point2D.Double findPosition(double x, double y) {
-		double patchHeight = myGrid.getTileHeight();
-		double patchWidth = myGrid.getTileHeight();
-		int xCor = (int) (x / patchWidth);
-		int yCor = (int) (y / patchHeight);
-		currentClick = new Point2D.Double(xCor, yCor);
+	    currentClick = myGrid.findClickedCoordinate(x, y);
 		return currentClick;
 	}
 	
-	/**
-	 * Toggle sound button on main screen turns both sounds on or off
-	 */
-	@FXML
-	private void toggleSound() {
-	    try {
-	        toggleClickSound();
-	        toggleBackgroundMusic();
-	    }
-	    catch (Exception e) {
-	        System.out.println("Audio related exception");
-	    }
-	}
+
 
 	/**
 	 * Toggles clicking sound
@@ -1180,7 +1162,6 @@ public class ViewController {
 		    Stage newStage = new Stage();
 		    newStage.setScene(winLoseScene);
 		    newStage.show();
-		    
                     String highScorer = "Bob";
                     //Random randy = new Random();
                     //int highScore = randy.nextInt(100000);
@@ -1210,9 +1191,10 @@ public class ViewController {
 		if (GameState.getNextLevelID() != null) {
 			System.out.println("NEXT LEVEL");
 			// myController.getGame().changeLevel(currentLevel.getNextLevelID());
-			myModel.changeLevel("Level 2");
+			myModel.changeLevel(GameState.getNextLevelID());
 			// myController.getGame().getCurrentLevel().getGrid().displayPane(myController.getGridPane());
 			initializeGrid();
+			myGrid.repopulateGrid();
 		}
 /*		if (myModel.getCurrentPlayer().getNumMovesPlayed() > 4) {
 			//System.out.println("NEXT PLAYER HARD CODE");

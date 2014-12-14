@@ -33,7 +33,9 @@ public class ChangePlayerStats extends GlobalAction {
         List<Player> playerList = GameState.playersList;
         for(Player p : playerList){
             if (p.getID()==myPlayerID){
+                System.out.println("ChangerPlayerStat: before = " + p.getStats().getValue(myStatName));
                 p.changeStat(myStatName, p.getStats().getValue(myStatName)+myStatValue);
+                System.out.println("ChangerPlayerStat: before = " + p.getStats().getValue(myStatName));
             }
         }
     }

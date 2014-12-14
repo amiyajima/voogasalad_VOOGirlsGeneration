@@ -6,6 +6,11 @@ import java.util.List;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Piece;
 
+/**
+ * Condition met when a specified stat is < 0 
+ * @author Mike Zhu
+ *
+ */
 public class DefineWhenUnitIsDead extends Condition{
 
 	String myHealthName;
@@ -19,7 +24,7 @@ public class DefineWhenUnitIsDead extends Condition{
 	public boolean evaluate(List<IHasStats> objects) {
 		for(IHasStats source : objects){
 			if(Piece.class.equals(source.getClass())){
-				if(source.getStats().getValue(myHealthName)<=0){
+				if(source.getStats().contains(myHealthName) && source.getStats().getValue(myHealthName)<=0){
 					((Piece) source).markForRemoval();
 				}
 			}
