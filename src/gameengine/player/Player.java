@@ -49,6 +49,13 @@ public abstract class Player implements IHasStats {
         myNumMovesPlayed = 0;
         myID = id;
     }
+    
+    public Player (Player player) {
+        myID = player.myID;
+        myNumMovesPlayed = 0;
+        myStats = player.myStats;
+        myScoreStat = player.myScoreStat;
+    }
    
     protected Player (int id, Stats stats, String scoreStat) {
         myNumMovesPlayed = 0;

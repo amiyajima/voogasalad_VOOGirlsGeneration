@@ -43,6 +43,8 @@ public class Game {
 	 * Number of players in the game
 	 */
 	private int myNumPlayers;
+        private static final String SIMPLE_AI_PLAYER = "Simple AI player";
+        private static final String HUMAN_PLAYER = "Human Player";
 
 	/**
 	 * Default Constructor
@@ -268,22 +270,22 @@ public class Game {
 	 * @param newPlayer
 	 */
 	public void replacePlayer(int playerID, String playerType) {
-	    
+	    System.out.println("Game Players size " + myPlayers.size());
+	    for (Player p : myPlayers) {
+	        System.out.println("Player " + p.getID() + " " + p.getClass() + ", ");
+	    }
+	    //List<Player> players = new ArrayList<Player>();
             for (int i = 0; i < myPlayers.size(); i++) {
                 
                 if (myPlayers.get(i).getID() == playerID) {
-                    Stats statsToSave = myPlayers.get(i).getStats();
-                    double scoreToSave = myPlayers.get(i).getScore();
-                    myPlayers.remove(i);
-                    try {
-                        Class<?> clazz = Class.forName(playerType);
-                        Constructor<?> ctor = clazz.getConstructor(String.class);
-                        Player player = (Player) ctor.newInstance(new Object[] { playerID, statsToSave, scoreToSave });
-                        myPlayers.add(i, player);
+                    
+                    if (playerType.equals(HUMAN_PLAYER)) {
+                        myPlayers.add(i, new HumanPlayer(myPlayers.get(i)));
                     }
-                    catch (Exception e) {
-                        System.out.println("Game: Creating correct version of player failed");
+                    else {
+                        myPlayers.add(i, new SimpleAIPlayer(myPlayers.get(i)));
                     }
+                    myPlayers.remove(i+1);
                 }
             }
 	}

@@ -31,6 +31,10 @@ public class SimpleAIPlayer extends Player {
 	public SimpleAIPlayer(int id, Stats stats, String scoreStat) {
 		super(id, stats, scoreStat);
 	}
+	
+	public SimpleAIPlayer(Player player) {
+	    super(player);
+	}
 
 	@Override
 	public void startTurn(Level l) {
