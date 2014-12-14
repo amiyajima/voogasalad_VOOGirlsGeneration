@@ -968,6 +968,23 @@ public class ViewController {
 	 */
 	public void setGridState(IGridState state) {
 		tempMoveCount++;
+		
+		/*
+		if (tempMoveCount % 4 == 0) {
+		    String highScorer = "Bob";
+                    //Random randy = new Random();
+                    //int highScore = randy.nextInt(100000);
+                    int highScore = 0;
+                    for (Player p : myModel.getPlayers()) {
+                        
+                             if (p.getScore() > highScore) { 
+                                 highScorer = "Player" + p.getID();
+                                 highScore = (int) p.getScore(); 
+                             }
+                    }
+                    enterHighScoreInfo(highScorer, highScore);
+		}
+		*/
 		myCurrentPlayer = myModel.getCurrentPlayer();
 //		setPlayerTurnDisplay();
 		gridState = state;
@@ -1085,13 +1102,14 @@ public class ViewController {
 		    newStage.show();
 		    
                     String highScorer = "Bob";
-                    Random randy = new Random();
-                    int highScore = randy.nextInt(100000);
+                    //Random randy = new Random();
+                    //int highScore = randy.nextInt(100000);
+                    int highScore = 0;
                     for (Player p : myModel.getPlayers()) {
                         
-                             if (p.getStats().getValue("score") > highScore) { 
+                             if (p.getScore() > highScore) { 
                                  highScorer = "Player" + p.getID();
-                                 highScore = (int) p.getStats().getValue("score"); 
+                                 highScore = (int) p.getScore(); 
                              }
                     }
                     enterHighScoreInfo(highScorer, highScore);
