@@ -503,6 +503,8 @@ public class ViewController {
 	    inventoryPane.getChildren().clear();
 	    System.out.println("update inv");
 	    ArrayList<Text> inv = new ArrayList<Text>();
+	    
+	    if (piece.getInventory() != null){
 	    Map<String, List<String>> invMap = piece.getInventory().getStringDisplay();
 	    
 	    //this is for testing
@@ -524,6 +526,7 @@ public class ViewController {
 	    }
 	    
 	    inventoryPane.getChildren().addAll(inv);
+	    }
 	}
 	
 
