@@ -1,10 +1,8 @@
 package gamedata.stats;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javafx.collections.FXCollections;
 /**
@@ -76,6 +74,13 @@ public class Stats {
 	 */
 	public void clear() {
 		myStats.clear();
+	}
+	
+	/**
+	 * Checks if the stats contain the specified stat
+	 */
+	public boolean contains(String statName) {
+		return myStats.containsKey(statName);
 	}
 
 	/**

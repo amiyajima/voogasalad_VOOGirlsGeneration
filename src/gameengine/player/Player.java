@@ -1,20 +1,10 @@
 package gameengine.player;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import javafx.scene.input.KeyCode;
-import gamedata.action.Action;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Level;
-import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
-import gameengine.movement.Movement;
+
 import java.awt.geom.Point2D;
-import authoring_environment.GUIGrid;
 
 
 /**
@@ -35,7 +25,12 @@ public abstract class Player implements IHasStats {
      */
     protected int myID;
 
+    /**
+     * Stats ranging from score to gold
+     */
     protected Stats myStats;
+    
+    protected String myScoreStat;
 
     /**
      * Default constructor
@@ -54,16 +49,37 @@ public abstract class Player implements IHasStats {
         myNumMovesPlayed = 0;
         myID = id;
     }
+   
+    protected Player (int id, Stats stats, String scoreStat) {
+        myNumMovesPlayed = 0;
+        myID = id;
+        myStats = stats;
+        myScoreStat = scoreStat;
+    }
 
     public Stats getStats () {
         return myStats;
 
+    }
+    
+    public double getScore() {
+    	return myStats.getValue(myScoreStat);
     }
 
     public Point2D getLoc () {
         return null;
     }
 
+    /**
+     * Modify a stat of the player based on info from a global action
+     * @param statName
+     * @param value
+     */
+    public void changeStat(String statName, double value){
+        double curVal = myStats.getValue(statName);
+        myStats.setValue(statName, curVal + value);
+    }
+    
     /**
      * Sets the player to start a turn on a level
      * 
@@ -112,9 +128,15 @@ public abstract class Player implements IHasStats {
     /**
      * ToString Method for Player Information. For debugging purposes.
      */
-    public String toString () {
+    
+    public String printString () {
         return "Type:" + this.getClass().getName() + " ID:" + myID
                + " NumMovesPlayed:" + myNumMovesPlayed;
+    }
+    
+    @Override
+    public String toString() {
+        return "Player " + myID;
     }
 
     /**

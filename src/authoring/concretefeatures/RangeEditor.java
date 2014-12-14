@@ -60,11 +60,11 @@ public class RangeEditor extends PopupWindow {
 	private Consumer<List<Point2D.Double>> myConsumer;
 
 
-	
+
 	public RangeEditor (List<Point2D.Double> range, 
 			Consumer<List<Point2D.Double>> consumer, String shape) {
-//		 range.add(new Point2D.Double(1,0));
-//		 range.add(new Point2D.Double(-1,2));
+		//		 range.add(new Point2D.Double(1,0));
+		//		 range.add(new Point2D.Double(-1,2));
 
 		myRange = range;
 		myConsumer = consumer;
@@ -137,9 +137,9 @@ public class RangeEditor extends PopupWindow {
 				myGridHeightNumber = Integer.parseInt(VRadius.getText()) * 2 + 1;
 				myTileSize = getPrefTileSize(myGridWidthNumber, myGridHeightNumber);
 				box.getChildren().clear();
-//				List<Point2D.Double> newRange = rangeGridView.returnSelectedList();
-//				myRange.clear();
-//				myRange.addAll(newRange);
+				//				List<Point2D.Double> newRange = rangeGridView.returnSelectedList();
+				//				myRange.clear();
+				//				myRange.addAll(newRange);
 				myRange=rangeGridView.returnSelectedList();
 
 				rangeGridView.update(myGridWidthNumber, myGridHeightNumber,
@@ -212,27 +212,27 @@ public class RangeEditor extends PopupWindow {
 
 	}
 
-		/**
-		 * Event Handler that Sends the Selected and then Closes the Popup
-		 */
-		private class SelectHandler implements EventHandler<ActionEvent> {
-			RangeEditor current;
-	
-			public SelectHandler (RangeEditor re) {
-				current = re;
-			}
-	
-			@Override
-			public void handle (ActionEvent event) {
-				myRange = rangeGridView.returnSelectedList();
-				myConsumer.accept(myRange);
-				for (Point2D.Double point:myRange){
-					System.out.println("dfas");
-					System.out.println(point.getX()+","+point.getY());
-				}
-				current.close();
-			}
+	/**
+	 * Event Handler that Sends the Selected and then Closes the Popup
+	 */
+	private class SelectHandler implements EventHandler<ActionEvent> {
+		RangeEditor current;
+
+		public SelectHandler (RangeEditor re) {
+			current = re;
 		}
+
+		@Override
+		public void handle (ActionEvent event) {
+			myRange = rangeGridView.returnSelectedList();
+			myConsumer.accept(myRange);
+			for (Point2D.Double point:myRange){
+				System.out.println("dfas");
+				System.out.println(point.getX()+","+point.getY());
+			}
+			current.close();
+		}
+	}
 
 	// Can't use this function to create all the vbox containing one label and
 	// a textfiled because it makes impossible to get the content of the textfield.

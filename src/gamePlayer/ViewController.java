@@ -3,6 +3,7 @@ package gamePlayer;
 import gamedata.JSON.JSONManager;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
+import gamedata.gamecomponents.GameState;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.HumanPlayer;
@@ -28,12 +29,14 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -42,6 +45,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -65,9 +69,9 @@ import authoring_environment.SuperTile;
 public class ViewController {
 
 	private static final String INVENTORY_FONT_NAME = "Consolas";
-    private static final int ACTIONNAME_FONT_SIZE = 16;
-    private static final int ITEMNAME_FONT_SIZE = 24;
-    private static final String SIMPLE_AI_PLAYER = "Simple AI player";
+        private static final int ACTIONNAME_FONT_SIZE = 16;
+        private static final int ITEMNAME_FONT_SIZE = 24;
+        private static final String SIMPLE_AI_PLAYER = "Simple AI player";
 	private static final String HUMAN_PLAYER = "Human Player";
 	public static final String ADD_HIGH_SCORE_FXML = "newHighScore.fxml";
 	public static final String GAMESPACE_FXML = "gameSpace.fxml";
@@ -83,12 +87,14 @@ public class ViewController {
 	private static final String YOU_LOSE = "You Lose :(";
 	
 	private Stage myStage;
+
 	private BorderPane myGameSpace;
 	private BorderPane myPopup;
 	private VBox mySettings;
 	private VBox myInitialScene;
 	private VBox myScoreBoard;
-	private VBox myPlayerEditor;
+	@FXML
+	private BorderPane editPlayerRoot;
 	private Scene mySettingsScene;
 	private Scene scoreScene;
 	private Scene myPopupScene;
@@ -139,8 +145,6 @@ public class ViewController {
 	@FXML
 	private Button showScoreButton;
 	@FXML
-	private Button playerEditButton;
-	@FXML
 	private MenuButton gameMenu;
 	@FXML
 	private TabPane tabPane;
@@ -168,6 +172,16 @@ public class ViewController {
 	private BorderPane myWinLoseScreen;
 	@FXML
 	private Label winLose;
+	@FXML
+	private VBox playersList;
+	@FXML
+	private TextField editPlayerName;
+	@FXML
+	private ComboBox<String> playerTypeCombo;
+	@FXML
+	private Button startGameButton;
+	@FXML
+	private Button setPlayerButton;
 
 	private ScrollPane myGridPane;
 	private Point2D.Double currentClick;
@@ -213,8 +227,9 @@ public class ViewController {
 		try {
 			System.out.println("VC: loading game... ");
 			JSONManager myJM = new JSONManager();
+			editPlayers(myJM.readFromJSONFile(f.getAbsolutePath()));
 //			mySplashStage.show();
-			testPlayGameInTab(myJM.readFromJSONFile(f.getAbsolutePath()));
+//			testPlayGameInTab(myJM.readFromJSONFile(f.getAbsolutePath()));
 			System.out.println("VC: game loaded... ");
 		}
 		catch (FileNotFoundException fnfe) {
@@ -258,7 +273,6 @@ public class ViewController {
 
 		myPopup = new BorderPane();
 		mySettings = new VBox();
-		myPlayerEditor=new VBox();
 
 		myJSONManager = new JSONManager();
 		// myLeapController = new Controller();
@@ -267,18 +281,18 @@ public class ViewController {
 		loadFXML(POPUP_FXML, myPopup);
 		loadFXML(SCOREBOARD_FXML, myScoreBoard);
 		loadFXML(SETTINGS_FXML, mySettings);
-		loadFXML(PLAYER_FXML,myPlayerEditor);
+		loadFXML(PLAYER_FXML,editPlayerRoot);
 		loadFXML(ADD_HIGH_SCORE_FXML, newHighScoreRoot);
 		loadFXML(WIN_SCREEN, myWinLoseScreen);
 
 		scoreScene = new Scene(myScoreBoard);
 		myPopupScene = new Scene(myPopup);
 		mySettingsScene = new Scene(mySettings);
-		myPlayerScene=new Scene(myPlayerEditor);
+		myPlayerScene=new Scene(editPlayerRoot);
 		newHighScoreScene = new Scene(newHighScoreRoot);
 		winLoseScene = new Scene(myWinLoseScreen);
 
-//		myStage.setScene(new Scene(myInitialScene));
+		myStage.setScene(new Scene(myInitialScene));
 
 		myAudio = new Audio();
 		myAudio.playBackground();
@@ -302,8 +316,10 @@ public class ViewController {
 		try {
 			System.out.println("VC: loading game... ");
 			JSONManager myJM = new JSONManager();
-			mySplashStage.show();
-			testPlayGame(myJM.readFromJSONFile(f.getAbsolutePath()));
+//			mySplashStage.show();
+	                editPlayers(myJM.readFromJSONFile(f.getAbsolutePath()));
+
+//			testPlayGame(myJM.readFromJSONFile(f.getAbsolutePath()));
 			System.out.println("VC: game loaded... ");
 		}
 		catch (FileNotFoundException fnfe) {
@@ -364,9 +380,11 @@ public class ViewController {
 	 */
 	@FXML
 	private void testGame() {
-		mySplashStage.show();
+//		mySplashStage.show();
 		TestGameCreator JSBTester = new TestGameCreator();
-		testPlayGame(JSBTester.createNewGame());
+//		testPlayGame(JSBTester.createNewGame());
+                editPlayers(JSBTester.createNewGame());
+
 	}
 
 	/**
@@ -395,18 +413,35 @@ public class ViewController {
 		System.out.println("cancel popup");
 	}
 
-	@FXML
-	protected void editPlayers(){
+	/**
+	 * Starts screen to choose the type of players
+	 */
+	protected void editPlayers(Game myGame){
+	    myModel = myGame;
 		Stage stage=new Stage();
 		stage.setScene(myPlayerScene);
 		stage.show();
-		players.getItems().clear();
-		playerType.getItems().clear();
-
-		for (int i=0;i<myPlayerList.size();i++){
-			players.getItems().add("Player"+myPlayerList.get(i).getID());
+		for (Player p : myModel.getPlayers()) {
+		    Label playerLabel = new Label("Player: " + p.toString());
+		    playerLabel.setOnMouseClicked(event -> editSpecificPlayer(p.getID()));
+		    playersList.getChildren().add(playerLabel);
 		}
-		playerType.getItems().addAll(HUMAN_PLAYER, SIMPLE_AI_PLAYER);
+		playerTypeCombo.getItems().addAll(HUMAN_PLAYER, SIMPLE_AI_PLAYER);
+		playerTypeCombo.setValue(HUMAN_PLAYER);
+		
+		startGameButton.setOnMouseClicked(event->testPlayGame(myGame));
+	}
+	
+	private void editSpecificPlayer(int playerID) {
+	    editPlayerName.setText(String.valueOf(playerID));
+	    setPlayerButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle (MouseEvent arg0) {
+                myModel.replacePlayer(playerID, playerTypeCombo.getValue());
+            }
+	        
+	    });
 	}
 
 	@FXML
@@ -653,13 +688,14 @@ public class ViewController {
 	 * @param action
 	 */
 	protected void bindAction(Action action) {
-		System.out.println("BIND ACTION");
+//		System.out.println(String.format("BIND %s", action));
 		if (clickSoundOn) {
 			myAudio.playSelection();
 		}
 
 		if (activePiece == null)
 			return;
+//		System.out.println("SETTING ACTIVE ACTION " + action);
 		setActiveAction(action);
 		myGameGridEffect.highlightActionRange();
 		setGridState(new ApplyState(this));
@@ -689,14 +725,13 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(Point2D.Double myCurrentLocation) {
-		System.out.println("PERFORM ACTION");
+//		System.out.println("PERFORM ACTION");
 
 		if (clickSoundOn) {
 			myAudio.playSelection();
 		}
 
 		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(myCurrentLocation));
-
 		while (myCurrentPlayer.getType().equals("AI")) {
 			myCurrentPlayer.play();
 			this.checkEndActions();
@@ -915,6 +950,8 @@ public class ViewController {
 	 * @param action
 	 */
 	protected void setActiveAction(Action action) {
+//		System.out.println("SETTING ACTIVE ACTION METHOD " + action);
+
 		activeAction = action;
 	}
 
@@ -1030,16 +1067,16 @@ public class ViewController {
 	}
 
 	protected void endAction() {
-		System.out.println("Ending Action");
+//		System.out.println("Ending Action");
 		this.checkEndActions();
-		this.getGrid().repopulateGrid();
+		//this.getGrid().repopulateGrid();
 	}
 
 	public void checkEndActions() {
 		Level currentLevel = myModel.getCurrentLevel();
 		myModel.getCurrentPlayer().playTurn();
 		currentLevel.runGameEvents();
-		if (currentLevel.getGameWon()) {
+		if (GameState.getGameWon()) {
 			// GAMEWON
 		    Stage newStage = new Stage();
 		    newStage.setScene(winLoseScene);
@@ -1057,32 +1094,32 @@ public class ViewController {
                     }
                     enterHighScoreInfo(highScorer, highScore);
 		}
-		if (currentLevel.getGameLost()) {
+		if (GameState.getGameLost()) {
 		    winLose.setText(YOU_LOSE);
 		    Stage newStage = new Stage();
                     newStage.setScene(winLoseScene);
                     newStage.show();
 		}
-		if (currentLevel.getTurnOver()) {
-			currentLevel.setTurnFalse();
+		if (GameState.getTurnOver()) {
+			GameState.setTurnFalse();
 			myModel.nextPlayer();
 			myCurrentPlayer = myModel.getCurrentPlayer();
 			setPlayerTurnDisplay();
 		}
 
-		if (currentLevel.getNextLevelID() != null) {
+		if (GameState.getNextLevelID() != null) {
 			System.out.println("NEXT LEVEL");
 			// myController.getGame().changeLevel(currentLevel.getNextLevelID());
 			myModel.changeLevel("Level 2");
 			// myController.getGame().getCurrentLevel().getGrid().displayPane(myController.getGridPane());
 			initializeGrid();
 		}
-		if (myModel.getCurrentPlayer().getNumMovesPlayed() > 2) {
-			System.out.println("NEXT PLAYER HARD CODE");
+/*		if (myModel.getCurrentPlayer().getNumMovesPlayed() > 4) {
+			//System.out.println("NEXT PLAYER HARD CODE");
 			myModel.nextPlayer();
 			myCurrentPlayer = myModel.getCurrentPlayer();
 			setPlayerTurnDisplay();
-		}
+		}*/
 	}
 
 	private void handleClearHighScores() {
@@ -1106,8 +1143,8 @@ public class ViewController {
 	 * @param gameToLoad
 	 */
 	public void testPlayGame(Game gameToLoad) {
-		myModel = gameToLoad;
-		TestGameCreator tgc = new TestGameCreator();
+//		myModel = gameToLoad;
+	        mySplashStage.show();
 		System.out.println("model found in viewcontroller: " + myModel);
 		initializeGrid();
 		myScene = new Scene(myGameSpace);
@@ -1118,4 +1155,5 @@ public class ViewController {
 		//System.out.println(myModel.getCurrentLevel().getGrid().toString());
 		myModel.getCurrentLevel().getGrid().repopulateGrid();
 	}
+	
 }

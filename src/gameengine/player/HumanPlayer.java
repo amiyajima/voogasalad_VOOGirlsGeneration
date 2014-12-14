@@ -1,8 +1,8 @@
 package gameengine.player;
 
-import gamePlayer.ViewController;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Level;
+import gamedata.stats.Stats;
 
 import java.awt.geom.Point2D;
 import java.util.HashMap;
@@ -36,6 +36,12 @@ public class HumanPlayer extends Player {
 	 */
 	public HumanPlayer(int id) {
 		super(id);
+		setActionKeyMap(myActionKeyMap);
+		setMovementKeyMap(myMovementKeyMap);
+	}
+	
+	public HumanPlayer(int id, Stats stats, String scoreStat) {
+		super(id, stats, scoreStat);
 		setActionKeyMap(myActionKeyMap);
 		setMovementKeyMap(myMovementKeyMap);
 	}

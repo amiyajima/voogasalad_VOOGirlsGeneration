@@ -1,6 +1,5 @@
 package gamedata.events.conditions;
 
-import gamedata.events.Condition;
 import gamedata.gamecomponents.IHasStats;
 
 import java.util.List;
@@ -12,10 +11,10 @@ import java.util.List;
  */
 public class NumberOfPiecesEquals extends Condition{
 
-	protected IHasStats myReference;
+	protected String myReference;
 	protected Double myConstant;
 	
-	public NumberOfPiecesEquals(IHasStats ref1, String stat1, String constant){
+	public NumberOfPiecesEquals(String ref1, String stat1, String constant){
 		super(String.format("IF number of Piece: %s on the grid equals %s", ref1.toString(), constant));
 		myReference = ref1;
 		myConstant = Double.parseDouble(constant);
@@ -25,7 +24,7 @@ public class NumberOfPiecesEquals extends Condition{
 	public boolean evaluate(List<IHasStats> objects) {
 		int count = 0;
 		for(IHasStats source: objects){
-			if(myReference.getClass().equals(source.getClass())){
+			if(myReference.equals(source.getClass().toString())){
 				count++;
 			}	
 		}

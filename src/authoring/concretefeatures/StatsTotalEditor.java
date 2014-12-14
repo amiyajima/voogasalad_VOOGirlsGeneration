@@ -127,7 +127,7 @@ public class StatsTotalEditor extends PopupWindow {
         doneButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                //myStats.clear();
+//                myStats.clear();
                 for (StatsCreatorBox sbc : myBoxes) {
                     if (!sbc.isEmpty()) {
                         String name = sbc.getStatName();
