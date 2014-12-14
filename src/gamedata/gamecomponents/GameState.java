@@ -11,9 +11,14 @@ public class GameState {
 	public static boolean turnOver;
 	public static String nextLevelID;
 	public static List<Player> playersList;
+	public static int movesMade;
 
 	public static boolean getGameWon() {
 		return gameWon;
+	}
+	
+	public static int getMoves(){
+		return movesMade;
 	}
 
 	public static boolean getGameLost() {
