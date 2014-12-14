@@ -17,7 +17,6 @@ import authoring_environment.GUIGrid;
  * See Action interface for descriptions of public methods
  * 
  * @author Jennie Ju
- *
  */
 public class ConcreteAction implements Action {
 	private String myName;

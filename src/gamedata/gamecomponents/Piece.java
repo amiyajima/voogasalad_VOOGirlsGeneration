@@ -225,4 +225,12 @@ public class Piece extends GridComponent {
 	public void setPlayerID(int id) {
 		myPlayerID = id;
 	}
+	
+	@Override
+	public String toString() {
+		String myString = "Piece #" + myID + " " + myName + " Location: " + "(" + myLoc.getX() + " " + myLoc.getY() + ")" 
+				+ "\n  Image: " + myImageLocation + " Movement: " + myMovement.toString() 
+				+ "\n  Actions: " + myActions.toString();
+		return myString;
+	}
 }
