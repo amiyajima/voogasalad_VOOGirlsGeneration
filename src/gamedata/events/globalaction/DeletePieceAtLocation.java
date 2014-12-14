@@ -2,7 +2,9 @@ package gamedata.events.globalaction;
 
 import java.awt.geom.Point2D;
 import java.util.List;
+
 import authoring_environment.GUIGrid;
+import gamedata.events.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Piece;
