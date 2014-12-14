@@ -30,7 +30,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import authoring.abstractfeatures.PopupWindow;
 import authoring.concretefeatures.RangeEditor;
 import authoring.concretefeatures.StatsTotalEditor;
 import authoring.createedit.ModulesList;
@@ -55,7 +54,6 @@ public class PieceTypeEditor extends Pane {
     private static final String NAME_PROMPT = "Enter piece name...";
     private static final String STAT_CREATE_LABEL = "Add stat";
     private static final String MOVE_RANGE_LABEL = "Set Movement Range...";
-    private static final String MOVEMENT_RANGE = "Movement Range:";
     private static final Insets MARGINS = new Insets(20, WIDTH / 5, 20, WIDTH / 5 - 10);
     private static final String LABEL_CSS = "-fx-font-size: 14pt;";
 
@@ -164,11 +162,6 @@ public class PieceTypeEditor extends Pane {
         Button createStatButton = new Button(STAT_CREATE_LABEL);
         initStatButton(createStatButton);
         createStat.getChildren().addAll(createStatButton);
-        
-//        VBox rangeVBox = new VBox();
-//        rangeVBox.setSpacing(5);
-//        rangeVBox.getStyleClass().add("vbox");
-//        initSetRangeButton(rangeVBox, MOVEMENT_RANGE, myMovement.getRelativeMoves());
 
         Label idLabel = new Label(ID_LABEL);
         idLabel.setPadding(UIspecs.topRightPadding);
@@ -250,23 +243,11 @@ public class PieceTypeEditor extends Pane {
     	rangeEditorButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
-                RangeEditor rEditor = new RangeEditor();
+            	List<Point2D.Double> range = myMovement.getRelativeMoves();
+                RangeEditor rEditor = new RangeEditor(range, myGridShape);
                 rEditor.show();
             }
         });
-    }
-    
-    private void initSetRangeButton (VBox rangeBox, String label, List<Point2D.Double> range) {
-        Label rangeLabel = new Label(label);
-        Button setRange = new Button(MOVE_RANGE_LABEL);
-        setRange.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                PopupWindow actionRangeEditor = new RangeEditor(range, myGridShape);
-                actionRangeEditor.show();
-            }
-        });
-        rangeBox.getChildren().addAll(rangeLabel, setRange);
     }
 
     private ImageView setImageView() {
@@ -294,6 +275,7 @@ public class PieceTypeEditor extends Pane {
                 myActions = addSelectedActions(modList.getSelectedActions());
                 myPiece = new Piece(myID, myName, myImageLocation, myMovement, myActions,
                                     myStats, DEFAULT_LOC, myPlayerID, myInventory);
+                System.out.println(myMovement.toString());
                 myOkLambda.accept(myPiece);
             }
         });

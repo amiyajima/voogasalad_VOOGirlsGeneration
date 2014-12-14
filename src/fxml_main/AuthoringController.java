@@ -140,7 +140,7 @@ public class AuthoringController implements Initializable {
 	}
 
 	@FXML
-	private void showPlayerEditWindow () {
+	private void showPlayerEditWindow(){
 		StatsTotalEditor statsEditor = new StatsTotalEditor();
 		statsEditor.setTitle("Player Editor");
 		statsEditor.setX(450);

@@ -803,7 +803,6 @@ public class ViewController {
            // showHighScoreInfo(highScorer, highScore);       // commenting this out for now!!!
 
         }
-
         myCurrentPlayer = myModel.getCurrentPlayer();
         setPlayerTurnDisplay();
         gridState = state;

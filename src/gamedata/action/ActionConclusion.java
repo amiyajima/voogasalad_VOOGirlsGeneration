@@ -20,5 +20,5 @@ public interface ActionConclusion {
 	 * display purposes
 	 */
 	public String toString();
-
+	
 }

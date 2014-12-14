@@ -1,6 +1,7 @@
 package authoring.eventeditor;
 
-import gamedata.events.conditions.Condition;
+import gamedata.events.Condition;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+
 import authoring.data.EventsDataWrapper;
 import utilities.ClassGrabber;
 import javafx.fxml.FXML;

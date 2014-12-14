@@ -1,10 +1,11 @@
 package gamedata.events;
 
-import gamedata.events.conditions.Condition;
 import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.IHasStats;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import authoring_environment.GUIGrid;
 import javafx.collections.FXCollections;
 

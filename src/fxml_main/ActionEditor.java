@@ -4,6 +4,7 @@ import gamedata.action.ActionConclusion;
 import gamedata.action.ActionStatsEditor;
 import gamedata.action.ConcreteAction;
 import gamedata.action.StatsTotalLogic;
+import gamedata.action.conclusions.DoNothingConclusion;
 
 import java.awt.geom.Point2D;
 import java.io.IOException;
@@ -33,7 +34,7 @@ import authoring.concretefeatures.RangeEditor;
 
 
 /**
- * @author seungwonlee, Jennie JU
+ * @author seungwonlee, Jennie Ju
  *
  */
 public class ActionEditor extends Pane {
@@ -62,7 +63,7 @@ public class ActionEditor extends Pane {
 		myAttackRange = new LinkedList<Point2D.Double>();
 		myEffectRange = new LinkedList<Point2D.Double>();
 		myStatsLogics = new LinkedList<StatsTotalLogic>();
-		myConclusion = null;
+		myConclusion = new DoNothingConclusion();
 		
 		mySceneTitle = "Action Creator";
 		initEditor(okLambda, gridShape);
@@ -79,7 +80,7 @@ public class ActionEditor extends Pane {
 		myAttackRange = action.getActionRange();
 		myEffectRange = action.getEffectRange();
 		myStatsLogics = action.getStatsLogics(); // should read in logics
-		myConclusion = null; // should set to empty conclusion (not null)
+		myConclusion = action.getConclusion(); // should set to empty conclusion (not null)
 		mySceneTitle = "Action Editor";
 		initEditor(okLambda, gridShape);
 	}
@@ -178,6 +179,9 @@ public class ActionEditor extends Pane {
 		conclusionClassNames = trimClassList(conclusionClassNames);
 		for (String c : conclusionClassNames) {
 			ActionConclusion conclusion = (ActionConclusion) Reflection.createInstance(c);
+			if (conclusion.toString().equals(myConclusion.toString())) {
+				choiceBox.getSelectionModel().select(conclusion);
+			}
 			choiceBox.getItems().addAll(conclusion);
 		}
 		conclusionVBox.getChildren().addAll(conclusionLabel, choiceBox);

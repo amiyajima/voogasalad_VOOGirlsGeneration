@@ -17,7 +17,6 @@ import authoring_environment.GUIGrid;
  * See Action interface for descriptions of public methods
  * 
  * @author Jennie Ju
- *
  */
 public class ConcreteAction implements Action {
 	private String myName;
@@ -156,5 +155,9 @@ public class ConcreteAction implements Action {
 	@Override
 	public String getName() {
 		return myName;
+	}
+	
+	public ActionConclusion getConclusion() {
+		return myConclusion;
 	}
 }
