@@ -4,6 +4,7 @@ import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
 import java.util.List;
 import authoring_environment.GUIGrid;
@@ -87,7 +88,14 @@ public class ConcreteAction implements Action {
     private void modifyStats (Piece actor, Piece[] receivers) {
         if (myStatsLogics != null) {
             for (Piece receiver : receivers) {
-                myDataModifier.modifyStats(actor, receiver);
+                for (Point2D l : myAttackRange){
+                    if ((actor.getLoc().getX() + l.getX()) == receiver.getLoc().getX()){
+                        if ((actor.getLoc().getY() + l.getY()) == receiver.getLoc().getY()){
+                            myDataModifier.modifyStats(actor, receiver);
+
+                        }
+                    }
+                }
             }
         }
     }
@@ -101,25 +109,7 @@ public class ConcreteAction implements Action {
    
     @Override
     public String toString () {
-        String myString = "actionid:" + myName;
-        myString += " attack: ";
-        for (Point2D.Double pt : myAttackRange) {
-            myString += "(" + pt.getX() + " " + pt.getY() + ") ";
-        }
-        myString += " effect: ";
-        for (Point2D.Double pt : myEffectRange) {
-            myString += "(" + pt.getX() + " " + pt.getY() + ") ";
-        }
-        myString += " statslogic: ";
-        for (StatsTotalLogic stat : myStatsLogics) {
-            myString += "(" + stat.toString() + ") ";
-        }
-        myString += " effect: ";
-        for (Point2D.Double pt : myEffectRange) {
-            myString += "(" + pt.getX() + " " + pt.getY() + ") ";
-        }
-        myString += " conclusion: " + myConclusion.toString();
-        return myString;
+        return myName;
     }
 
     @Override
@@ -129,5 +119,11 @@ public class ConcreteAction implements Action {
 
     public ActionConclusion getConclusion () {
         return myConclusion;
+    }
+
+    @Override
+    public List<Double> getAbsoluteEffectRange (Point2D pieceLocation) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_main.GUIcontainerController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_main.GUIcontainerController">
    <children>
-      <BorderPane prefHeight="768.0" prefWidth="1024.0">
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <MenuBar BorderPane.alignment="CENTER">
+            <MenuBar maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
@@ -34,10 +35,13 @@
                   </items>
                 </Menu>
               </menus>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
             </MenuBar>
          </top>
          <center>
-            <TabPane fx:id="displayedTabs" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER">
+            <TabPane fx:id="displayedTabs" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER">
                <effect>
                   <Glow />
                </effect></TabPane>

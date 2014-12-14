@@ -35,6 +35,13 @@ public interface Action {
 	public List<Point2D.Double> getAbsoluteActionRange(Point2D pieceLocation);
 	
 	/**
+	 * Gives back a list of Point2D of absolute
+	 * locations for the effect range
+	 * @return list of absolute locations in Point2D
+	 */
+	public List<Point2D.Double> getAbsoluteEffectRange(Point2D pieceLocation);
+	
+	/**
 	 * Gives back a list of Point2D of relative
 	 * locations for the action range
 	 * @return list of absolute locations in Point2D

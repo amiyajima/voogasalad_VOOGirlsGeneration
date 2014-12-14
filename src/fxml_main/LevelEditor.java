@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -106,10 +104,12 @@ public class LevelEditor extends VBox {
         VBox rowVBox = new VBox();
         Label rowLabel = new Label("Rows");
         TextField rowField = new TextField("" + myGridRows);
+        rowField.setMaxWidth(80);
         rowVBox.getChildren().addAll(rowLabel, rowField);
         VBox colVBox = new VBox();
         Label colLabel = new Label("Columns");
         TextField colField = new TextField("" + myGridCols);
+        colField.setMaxWidth(80);
         colVBox.getChildren().addAll(colLabel, colField);
 
         HBox gridSizeHBox = new HBox();

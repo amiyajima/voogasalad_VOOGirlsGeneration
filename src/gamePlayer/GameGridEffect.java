@@ -22,6 +22,7 @@ public class GameGridEffect {
     public static final String ACTION_RANGE_COLOR = "#FFBF00";
     public static final String EFFECT_RANGE_COLOR = "#DF0101";
     private static final String DEFAULT_COLOR = "#0000FF";
+    private static final String GREY_OUT = "#000000";
      
     public GameGridEffect(ViewController vc){
         myViewController = vc;
@@ -45,6 +46,7 @@ public class GameGridEffect {
         if (myActivePiece != null && myActiveAction != null) {
             //System.out.println("GameGridEffect: action ABOUT TO HIGHLIGHT\n\n");
         	//System.out.println("Size of Action Range:"+myActiveAction.getActionRange(myActivePiece.getLoc()));
+            
             myActiveAction.getAbsoluteActionRange(myActivePiece.getLoc())
                     .forEach(point -> { if (point.getX() < myGrid.getNumRows()
                                      && point.getY() < myGrid.getNumCols()
@@ -76,17 +78,28 @@ public class GameGridEffect {
         myActiveAction = myViewController.getActiveAction();
         
         if (myActivePiece != null && myActiveAction != null) {
-            myActiveAction.getAbsoluteActionRange(myActivePiece.getLoc()).forEach(point -> {
+            
+            myActiveAction.getAbsoluteEffectRange(myActivePiece.getLoc()).forEach(point -> {
+                
                 if (loc.equals(point)){
-                    myActiveAction.getEffectRange().forEach(point2 -> {
-                    	if(point2.getX()>=0 && point2.getY()>=0 && point2.getX()<= myGrid.getNumCols() &&
-                    			point2.getY()<= myGrid.getNumRows()	){
-                    	    SuperTile toHighlight = myGrid.findTile(point2);
+                        if(point.getX()>=0 && point.getY()>=0 && point.getX()<= myGrid.getNumCols() &&
+                                        point.getY()<= myGrid.getNumRows()     ){
+                            SuperTile toHighlight = myGrid.findTile(point);
                             toHighlight.selectTile(EFFECT_RANGE_COLOR);
                             myHighlightedEffects.add(toHighlight);
-                    	}
-                        });
+                        }
                     }
+                
+//                if (loc.equals(point)){
+//                    myActiveAction.getEffectRange().forEach(point2 -> {
+//                    	if(point2.getX()>=0 && point2.getY()>=0 && point2.getX()<= myGrid.getNumCols() &&
+//                    			point2.getY()<= myGrid.getNumRows()	){
+//                    	    SuperTile toHighlight = myGrid.findTile(point2);
+//                            toHighlight.selectTile(EFFECT_RANGE_COLOR);
+//                            myHighlightedEffects.add(toHighlight);
+//                    	}
+//                        });
+//                    }
                 });
             }
     }
@@ -107,7 +120,16 @@ public class GameGridEffect {
         myHighlightedPiece.add(toHighlight);
     }
     
-
+    public void greyOutPiece(Point2D.Double loc, Piece p) {
+        clearAllPieceHighlights();
+        clearAllActionHighlights();
+        clearAllEffectHighlights();
+        updateActives();
+        SuperTile toHighlight = myGrid.findTile(loc);
+        toHighlight.selectTile(GREY_OUT);
+        myHighlightedPiece.add(toHighlight);
+    }
+    
     /**
      * Clear all effects in grid, currently only clears highlights
      * @param grid
