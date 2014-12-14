@@ -47,7 +47,7 @@ public class ApplyState implements IGridState {
 	public void onClick(Piece piece) {
 		Piece actor = myController.getActivePiece();
 		if (piece == null
-				&& myController.getActiveAction().toString().equals("Movement")) {
+				&& myController.getActiveAction().getName().equals("Move")) {
 			piece = new Piece(actor, myController.getCurrentClick());
 			piece.setLoc(myController.getCurrentClick());
 		}

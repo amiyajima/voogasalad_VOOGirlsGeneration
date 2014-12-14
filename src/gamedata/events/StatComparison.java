@@ -1,7 +1,7 @@
 package gamedata.events;
 
 import java.util.List;
-import gamedata.events.conditions.Condition;
+
 import gamedata.gamecomponents.IHasStats;
 
 public abstract class StatComparison extends Condition{

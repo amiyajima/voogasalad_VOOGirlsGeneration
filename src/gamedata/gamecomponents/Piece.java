@@ -279,8 +279,7 @@ public class Piece extends GridComponent {
 		return myIsItem;
 	}
 	
-	@Override
-	public String toString() {
+	public String printString() {
 		String myString = "Piece #" + myID + " " + myName + " Location: " + "(" + myLoc.getX() + " " + myLoc.getY() + ")" 
 				+ "\n  Image: " + myImageLocation + " Movement: " + myMovement.toString() 
 				+ "\n  Actions: " + myActions.toString();

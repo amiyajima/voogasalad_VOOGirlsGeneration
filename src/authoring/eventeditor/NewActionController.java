@@ -44,6 +44,8 @@ public class NewActionController implements Initializable{
     @FXML
     private TextField myXField;
     @FXML
+    private TextField myPlayerIDField;
+    @FXML
     private Button myDoneButton;
     @FXML
     private ChoiceBox<IHasStats> myRefNameBox;
@@ -90,7 +92,8 @@ public class NewActionController implements Initializable{
 			double x = Double.parseDouble(myXField.getText());
 			double y = Double.parseDouble(myYField.getText());
 			Point2D.Double point = new Point2D.Double(x,y);
-			GlobalAction action = new MakePieceAtLocation(piece, point);
+			int playerID = Integer.parseInt(myPlayerIDField.getText());
+			GlobalAction action = new MakePieceAtLocation(piece, point, playerID);
 			myDoneLambda.accept(action);
 		}
 		else if (c.equals(DeletePieceAtLocation.class)){
@@ -129,7 +132,6 @@ public class NewActionController implements Initializable{
 		
 		int idx = myTypeChoiceBox.getSelectionModel().getSelectedIndex();
 		Class<?> c = actionList.get(idx);
-
 
 		if(c.equals(MakePieceAtLocation.class)){
 			myUnitActionsBox.setVisible(true);

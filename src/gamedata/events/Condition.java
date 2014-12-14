@@ -1,4 +1,4 @@
-package gamedata.events.conditions;
+package gamedata.events;
 
 import java.util.List;
 

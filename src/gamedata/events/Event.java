@@ -1,10 +1,11 @@
 package gamedata.events;
 
-import gamedata.events.conditions.Condition;
 import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.IHasStats;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import authoring_environment.GUIGrid;
 import javafx.collections.FXCollections;
 
@@ -24,18 +25,14 @@ import javafx.collections.FXCollections;
  */
 public class Event {
 	private String myName;
-//	private List<Condition> myConditionsObservable;
-//	private List<GlobalAction> myGlobalActionsObservable;
 	private List<Condition> myConditions;
 	private List<GlobalAction> myGlobalActions;
 
 
 	public Event (String name) {
-//		myConditionsObservable = FXCollections.observableArrayList();
-//		myGlobalActionsObservable = FXCollections.observableArrayList();
 		myConditions = new ArrayList<Condition>();
 		myGlobalActions = new ArrayList<GlobalAction>();
-		
+
 		if(name.equals("") || name==null){
 			myName = "Nameless Event";
 		}
@@ -43,7 +40,7 @@ public class Event {
 			myName = name;
 		}
 	}
-	
+
 	/**
 	 * Constructor for event with existing data, aka from game data unwrapping
 	 * @param name
@@ -51,9 +48,9 @@ public class Event {
 	 * @param globalActions
 	 */
 	public Event(String name, List<Condition> conditions, List<GlobalAction> globalActions) {
-	    myName = name;
-	    myConditions = conditions;
-	    myGlobalActions = globalActions;
+		myName = name;
+		myConditions = conditions;
+		myGlobalActions = globalActions;
 	}
 
 	/**
@@ -71,7 +68,7 @@ public class Event {
 				allConditionsFulfilled = false;
 			}
 		}
-		
+
 		System.out.println("THE CONDITION EVALUATES TO: " + allConditionsFulfilled);
 
 		if (allConditionsFulfilled) {
@@ -83,18 +80,10 @@ public class Event {
 
 	@Override
 	public String toString(){
-		String myString = "Event " + myName + ": conditions - ";
-		for (Condition c : myConditions) {
-		    myString += c.toString() + " ";
-		}
-		myString += " globalactions - ";
-		for (GlobalAction g : myGlobalActions) {
-		    myString += g.toString() + " ";
-		}
-		return myString;
+		return myName;
 	}
 
-        public List<Condition> getConditions(){
+	public List<Condition> getConditions(){
 		return myConditions;
 	}
 
