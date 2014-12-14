@@ -4,11 +4,9 @@ import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -22,6 +20,7 @@ import authoring.data.GamePropertiesData;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
+import authoring.data.PlayerData;
 
 /**
  * 
@@ -34,17 +33,19 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 	private PieceTypeData myPieceTypes;
 	private PatchTypeData myPatchTypes;
 	private String myGridShape;
+	private PlayerData myPlayerData;
 
 	protected LevelController (VBox vbox, ScrollPane propertiesSPane,
 			ScrollPane gridSPane, GUIGridReference gridRef, LevelData levels,
 			PieceTypeData pieceTypes, PatchTypeData patchTypes, 
-			String gridShape) {
+			String gridShape, PlayerData playerData) {
 		super(vbox, propertiesSPane, gridRef);
 		myGridSPane = gridSPane;
 		myLevelData = levels;
 		myPieceTypes = pieceTypes;
 		myPatchTypes = patchTypes;
 		myGridShape = gridShape;
+		myPlayerData = playerData;
 	}
 
 	@Override
@@ -74,7 +75,7 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 
 		EventsDataWrapper wrapper = new EventsDataWrapper(piecesRO, patchesRO, playersRO);
 //		System.out.println(myGridShape);
-		myPropertiesSPane.setContent(new LevelEditor(okLambda, wrapper, myGridShape));
+		myPropertiesSPane.setContent(new LevelEditor(okLambda, wrapper, myGridShape, myPlayerData));
 	}
 
 	@Override

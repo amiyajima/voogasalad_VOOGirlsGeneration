@@ -17,13 +17,13 @@ import authoring_environment.GUIGrid;
  * @author annamiyajima
  *
  */
-public class ChangePlayerStat extends GlobalAction {
+public class ChangePlayerStats extends GlobalAction {
     private List<StatsTotalLogic> myStatsLogics;
     private StatsDataModifier myStatsModifier;
     private IHasStats myActor;
     private Player myReceiver;
 
-    public ChangePlayerStat (List<StatsTotalLogic> statsLogics, IHasStats actor, Player receiver) {
+    public ChangePlayerStats (List<StatsTotalLogic> statsLogics, IHasStats actor, Player receiver) {
         super("Change player stat");
         myStatsLogics = statsLogics;
         myStatsModifier = new StatsDataModifier(myStatsLogics);

@@ -24,6 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import authoring.data.EventsDataWrapper;
+import authoring.data.PlayerData;
 import authoring.eventeditor.EventEditorController;
 import authoring_environment.GUIGrid;
 
@@ -49,9 +50,11 @@ public class LevelEditor extends VBox {
     private String myEditorTitle;
 
 	private EventsDataWrapper myData;
+	private PlayerData myPlayerData;
 
-    public LevelEditor (Consumer<Level> okLambda, EventsDataWrapper data, String gridShape) {
-    	myEditorTitle = CREATOR_TITLE;
+    public LevelEditor (Consumer<Level> okLambda, EventsDataWrapper data, String gridShape, PlayerData playerData) {
+        myPlayerData = playerData;
+        myEditorTitle = CREATOR_TITLE;
     	myId = "";
         myGridRows = 0;
         myGridCols = 0;
@@ -187,6 +190,7 @@ public class LevelEditor extends VBox {
         controller.loadEvents(myEvents);
         controller.loadGameState(myLevel);
         controller.loadData(myData);
+        controller.loadPlayerData(myPlayerData);
 
         eventEditorStage.showAndWait();
     }

@@ -82,6 +82,8 @@ public class GUIcontainerController implements Initializable{
             };
             
             GamePropertiesEditor gpEditor = new GamePropertiesEditor(c);
+            int numPlayers = gpEditor.getNumPlayer();
+            authorController.initPlayerData(numPlayers);
             
         } catch (IOException e) {
             e.printStackTrace();

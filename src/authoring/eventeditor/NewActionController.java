@@ -4,7 +4,8 @@ import gamedata.action.StatsTotalLogic;
 import gamedata.action.TotalLogicBox;
 import gamedata.events.GameStateGlobalAction;
 import gamedata.events.GlobalAction;
-import gamedata.events.globalaction.ChangePlayerStat;
+import gamedata.events.GlobalStatLogicBox;
+import gamedata.events.globalaction.ChangePlayerStats;
 import gamedata.events.globalaction.MakePieceAtLocation;
 import gamedata.events.globalaction.DeletePieceAtLocation;
 import gamedata.events.globalaction.LevelChange;
@@ -12,6 +13,7 @@ import gamedata.events.globalaction.EndTurn;
 import gamedata.gamecomponents.IChangeGameState;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Piece;
+import gameengine.player.Player;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +23,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 import authoring.data.EventsDataWrapper;
+import authoring.data.PlayerData;
 import utilities.ClassGrabber;
 import utilities.reflection.Reflection;
 import javafx.fxml.FXML;
@@ -62,6 +65,7 @@ public class NewActionController implements Initializable {
     private Consumer<GlobalAction> myDoneLambda;
     private EventsDataWrapper myData;
     private IChangeGameState myState;
+    private PlayerData myPlayerData;
 
     @Override
     public void initialize (URL fxmlFileLocation, ResourceBundle resources) {
@@ -90,7 +94,7 @@ public class NewActionController implements Initializable {
                 .addListener(
                              (observable, oldValue, selectedType) -> showActionEditorPane());
         StatsTotalLogic stl = new StatsTotalLogic();
-        TotalLogicBox statsLogic = new TotalLogicBox(stl);
+        GlobalStatLogicBox statsLogic = new GlobalStatLogicBox(stl, myPlayerData);
         myStatsHBox.getChildren().add(statsLogic);
     }
 
@@ -120,11 +124,9 @@ public class NewActionController implements Initializable {
             GlobalAction action = new LevelChange(myState, myNextLevelField.getText());
             myDoneLambda.accept(action);
         }
-        else if (c.equals(ChangePlayerStat.class)) {
-            // list<statstotallogic>, actor, receiver
-            myTotalLogic.getStatsLogic();
-            // GlobalAction action = new ChangePlayerStat();
-            // myDoneLambda.accept(action);
+        else if (c.equals(ChangePlayerStats.class)) {
+            //need List<StatsTotalLogic> statsLogics, IHasStats actor, Player receiver
+          // GlobalAction action = new ChangePlayersStats();
         }
 
         String classPath = c.toString();
@@ -162,8 +164,8 @@ public class NewActionController implements Initializable {
         else if (GameStateGlobalAction.class.isAssignableFrom(c.getClass())) {
             myNextLevelField.setVisible(true);
         }
-        else if (c.equals(ChangePlayerStat.class)) {
-            System.out.println("ChangePlayerStat class detected");
+        else if (c.equals(ChangePlayerStats.class)) {
+            //stats box needs 
             myStatsHBox.setVisible(true);
         }
 
@@ -198,5 +200,10 @@ public class NewActionController implements Initializable {
 
     public void loadState (IChangeGameState state) {
         myState = state;
+    }
+
+    public void loadPlayerData (PlayerData playerData) {
+       myPlayerData = playerData;
+        
     }
 }
