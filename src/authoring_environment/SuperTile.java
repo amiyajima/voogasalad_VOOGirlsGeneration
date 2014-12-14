@@ -23,7 +23,7 @@ public abstract class SuperTile extends Group {
     private Point2D.Double myImageLocation;
     private Point2D.Double myCoordinates;
 
-    protected transient ImageView myPieceImage;
+    protected transient Shape myPieceImage;
     protected transient Shape myPatchImage;
     private transient Shape myHighlight;
 
@@ -61,11 +61,12 @@ public abstract class SuperTile extends Group {
         makeHighlight(size);
         setCheckeredColor((int) loc.getX(), (int) loc.getY(), myShape);
 
-        myPieceImage = initImageView(myImageSize);
+        myPieceImage = makeShape(size, myLocation);
         myPatchImage = makeShape(size, myLocation);
+        myPieceImage.setFill(Color.TRANSPARENT);
         myPatchImage.setFill(Color.TRANSPARENT);
 
-        alignNodes(myImageLocation, myPieceImage);
+        //alignNodes(myImageLocation, myPieceImage);
     }
 
     /**
@@ -115,8 +116,7 @@ public abstract class SuperTile extends Group {
      * tile as a piece.
      */
     public void setPieceImage (ImageView imageView) {
-        myPieceImage.setImage(imageView.getImage());
-        myPieceImage.setVisible(true);
+    	myPieceImage.setFill(new ImagePattern(imageView.getImage()));
     }
 
     /**
@@ -133,7 +133,7 @@ public abstract class SuperTile extends Group {
      * 
      */
     public void removePieceImage () {
-    	myPieceImage.setVisible(false);
+    	myPieceImage.setFill(Color.TRANSPARENT);
     }
     
     /**
@@ -243,7 +243,7 @@ public abstract class SuperTile extends Group {
      * Get the imageView of the piece.
      * @return The imageView of the piece.
      */
-    public ImageView getPieceImage(){
+    public Shape getPieceImage(){
     	return myPieceImage;
     }
 }
