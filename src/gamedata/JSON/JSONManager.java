@@ -8,15 +8,12 @@ import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.GridComponent;
 import gameengine.player.Player;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import authoring_environment.SuperGrid;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
