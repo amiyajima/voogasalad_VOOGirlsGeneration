@@ -35,10 +35,10 @@ public class ActionData implements AuthoringData<Action> {
         myActions = actions;
     }
 
-    public ObservableList<String> getActionIDs () {
+    public ObservableList<String> getActionNames () {
         ObservableList<String> ids = FXCollections.observableArrayList();
         for (Action a : myActions) {
-            ids.add(a.toString());
+            ids.add(a.getName());
         }
         return ids;
     }

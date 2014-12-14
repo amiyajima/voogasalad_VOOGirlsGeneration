@@ -1,7 +1,7 @@
 package authoring.eventeditor;
 
 import gamedata.events.Condition;
-import gamedata.events.conditions.IsDead;
+import gamedata.events.conditions.DefineWhenUnitIsDead;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
@@ -68,8 +68,8 @@ public class ConditionEditorPane extends Pane{
 				String classPath = myClass.toString();
 				classPath = classPath.substring(6);
 
-				if("gamedata.events.conditions.IsDead".equals(classPath)){
-					myCondition = new IsDead(val);
+				if("gamedata.events.conditions.DefineWhenUnitIsDead".equals(classPath)){
+					myCondition = new DefineWhenUnitIsDead(val);
 				}
 				else{
 					myCondition = (Condition) Reflection.createInstance(classPath, ref, stat, val);
@@ -142,7 +142,7 @@ public class ConditionEditorPane extends Pane{
 			String classPath = myClass.toString();
 			classPath = classPath.substring(6);
 						
-			if("gamedata.events.conditions.IsDead".equals(classPath)){
+			if("gamedata.events.conditions.DefineWhenUnitIsDead".equals(classPath)){
 				myRefType.setVisible(false);
 				myRefName.setVisible(false);
 				myStat.setVisible(false);

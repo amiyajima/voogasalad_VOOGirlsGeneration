@@ -19,13 +19,14 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -42,10 +43,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -56,7 +58,10 @@ import authoring_environment.SuperTile;
 
 public class ViewController {
 
-	private static final String SIMPLE_AI_PLAYER = "Simple AI player";
+	private static final String INVENTORY_FONT_NAME = "Consolas";
+    private static final int ACTIONNAME_FONT_SIZE = 16;
+    private static final int ITEMNAME_FONT_SIZE = 24;
+    private static final String SIMPLE_AI_PLAYER = "Simple AI player";
 	private static final String HUMAN_PLAYER = "Human Player";
 	public static final String ADD_HIGH_SCORE_FXML = "newHighScore.fxml";
 	public static final String GAMESPACE_FXML = "gameSpace.fxml";
@@ -102,12 +107,13 @@ public class ViewController {
 	private Action activeAction;
 
 	private Audio myAudio;
-	private ResourceBundle messages;
 
 	private List<Player> myPlayerList;
 
 	@FXML
 	protected VBox statsPane;
+	@FXML
+	protected VBox inventoryPane;
 	@FXML
 	protected VBox controlPane;
 	@FXML
@@ -367,13 +373,13 @@ public class ViewController {
 	}
 
 	private void removePreviousPlayer(int playerID) {
-		int romoveIndex=-1;
+		int removeIndex=-1;
 		for (int i=0;i<myPlayerList.size();i++){
 			if (myPlayerList.get(i).getID()==playerID){
-				romoveIndex=i;
+				removeIndex=i;
 			}
 		}
-		if (romoveIndex>-1) myPlayerList.remove(romoveIndex);
+		if (removeIndex>-1) myPlayerList.remove(removeIndex);
 	}
 
 
@@ -493,6 +499,37 @@ public class ViewController {
 		}
 		return gameList;
 	}
+	
+	protected void updateInventory(Piece piece) {
+	    inventoryPane.getChildren().clear();
+	    System.out.println("update inv");
+	    ArrayList<Text> inv = new ArrayList<Text>();
+	    
+	    if (piece.getInventory() != null){
+	    Map<String, List<String>> invMap = piece.getInventory().getStringDisplay();
+	    
+	    //this is for testing
+//	    Map<String, List<String>> invMap = new HashMap<String, List<String>>();
+//	    List<String> test = new ArrayList<String>();
+//	    test.add("kill");
+//	    test.add("improve");
+//	    invMap.put("Potion", test);
+
+	    for (String item: invMap.keySet()){
+	        Text itemName = new Text("\n" + item + ": ");
+	        itemName.setFont(Font.font(INVENTORY_FONT_NAME, FontWeight.BOLD, ITEMNAME_FONT_SIZE));
+	        inv.add(itemName);
+	        for (String action: invMap.get(item)){
+	            Text actionName = new Text(action);
+	            actionName.setFont(Font.font(INVENTORY_FONT_NAME, ACTIONNAME_FONT_SIZE));
+	            inv.add(actionName);
+	        }
+	    }
+	    
+	    inventoryPane.getChildren().addAll(inv);
+	    }
+	}
+	
 
 	/**
 	 * Update the stats panel with stats from the selected piece
@@ -500,9 +537,11 @@ public class ViewController {
 	 * @param piece
 	 */
 	protected void updateStats(Piece piece) {
+	    System.out.println("udpate stats");
 
 		statsPane.getChildren().clear();
 		ArrayList<Text> stats = new ArrayList<Text>();
+		
 
 		piece.getStats()
 		.getStatNames()
