@@ -159,7 +159,7 @@ public class NewActionController implements Initializable {
         else if (c.equals(DeletePieceAtLocation.class)) {
             myUnitActionsBox.setVisible(true);
         }
-        else if (GameStateGlobalAction.class.isAssignableFrom(c.getClass())) {
+        else if (c.equals(LevelChange.class)) {
             myNextLevelField.setVisible(true);
         }
         else if (c.equals(ChangePlayerStat.class)) {
