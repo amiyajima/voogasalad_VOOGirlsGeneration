@@ -16,7 +16,6 @@
             <VBox fx:id="myReceiversVBox" prefHeight="200.0" prefWidth="100.0" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="getDataButton" mnemonicParsing="false" onAction="#loadData" text="Load Data" />
                   <Button fx:id="save" mnemonicParsing="false" onAction="#saveLogic" text="Save" />
                </children>
             </HBox>
@@ -28,7 +27,7 @@
          <children>
             <VBox prefHeight="400.0" prefWidth="267.0" styleClass="vbox" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Please first press &quot;Load Data&quot; Button" />
+                  <Button fx:id="getDataButton" mnemonicParsing="false" onAction="#loadData" text="Please press this button to load data" />
                   <Separator prefWidth="200.0" />
                   <Label text="Available Actions" />
                   <ListView fx:id="actionsListView" prefHeight="473.0" prefWidth="267.0" />

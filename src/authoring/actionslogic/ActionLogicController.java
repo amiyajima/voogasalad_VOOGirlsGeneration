@@ -101,7 +101,8 @@ public class ActionLogicController implements Initializable {
     }
 
     /**
-     * @return a map that contains actors as keys and maps that relates actions and receivers as values
+     * @return a map that contains actors as keys and maps that relates actions and receivers as
+     *         values
      */
     public Map<String, Map<String, List<String>>> getActionLogic () {
         return myLogicMap;

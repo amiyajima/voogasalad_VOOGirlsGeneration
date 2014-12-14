@@ -1,6 +1,8 @@
 package gamedata.gamecomponents;
 
+import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
+import gameengine.player.SimpleAIPlayer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -85,7 +87,6 @@ public class Game {
 	 * Starts the game by calling on the current player to start the turn
 	 */
 	public void startGame() {
-		// System.out.println("Starting the Game");
 		myCurrentPlayer.startTurn(myCurrentLevel);
 	}
 
@@ -258,4 +259,20 @@ public class Game {
 		}
 	}
 
+	/**
+	 * Game player initializes players to a specific type, needs to replace
+	 * each player with the appropriate type
+	 * @param playerID
+	 * @param newPlayer
+	 */
+	public void replacePlayer(int playerID, Player newPlayer) {
+	    
+            for (int i = 0; i < myPlayers.size(); i++) {
+                
+                if (myPlayers.get(i).getID() == playerID) {
+                    myPlayers.remove(i);
+                    myPlayers.add(i, newPlayer);
+                }
+            }
+	}
 }

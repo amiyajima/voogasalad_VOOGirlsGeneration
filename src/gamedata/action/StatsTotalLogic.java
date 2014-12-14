@@ -32,8 +32,10 @@ public class StatsTotalLogic extends StatsModifier{
 
 	/**
 	 * Returns the list of multiplier logics 
+	 * 
+	 * made public for GlobalStatLogicBox
 	 */
-	protected List<StatsSingleMultiplier> getMultiplierLogic() {
+	public List<StatsSingleMultiplier> getMultiplierLogic() {
 		return myLogic;
 	}
 	

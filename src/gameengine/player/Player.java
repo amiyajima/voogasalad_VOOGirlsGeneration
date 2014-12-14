@@ -25,6 +25,9 @@ public abstract class Player implements IHasStats {
      */
     protected int myID;
 
+    /**
+     * Stats ranging from score to gold
+     */
     protected Stats myStats;
     
     protected String myScoreStat;
@@ -67,6 +70,16 @@ public abstract class Player implements IHasStats {
         return null;
     }
 
+    /**
+     * Modify a stat of the player based on info from a global action
+     * @param statName
+     * @param value
+     */
+    public void changeStat(String statName, double value){
+        double curVal = myStats.getValue(statName);
+        myStats.setValue(statName, curVal + value);
+    }
+    
     /**
      * Sets the player to start a turn on a level
      * 

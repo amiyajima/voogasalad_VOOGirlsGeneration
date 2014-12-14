@@ -2,11 +2,11 @@ package tests;
 
 import gamedata.JSON.JSONManager;
 import gamedata.action.Action;
-import gamedata.events.Condition;
 import gamedata.events.Event;
-import gamedata.events.GlobalAction;
+import gamedata.events.conditions.Condition;
 import gamedata.events.conditions.DefineWhenUnitIsDead;
 import gamedata.events.globalaction.DeletePieceAtLocation;
+import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Level;
@@ -103,7 +103,6 @@ public class JSONTesterMain {
         JSONManager jsonManager = new JSONManager();
         try {
             jsonManager.readFromJSONFile(loadFrom);
-            GUIGrid answer = (GUIGrid) jsonManager.readSpecificFromJSONFile(GUIGrid.class, loadFrom);
 
         }
         catch (FileNotFoundException e) {
@@ -112,9 +111,9 @@ public class JSONTesterMain {
     }
 
     public static void main (String[] args) {
-        String link = "src/resources/json/Specific-Grid.json";
+        String link = "src/resources/json/tester_2P_actions_events_location.JSON";
         //String localLink = "C:\\Users\\Rica\\Desktop\\Rica-GamePlayer.json";
-        testJSONwrite(link);
+        //testJSONwrite(link);
         testJSONload(link);
     }
 }

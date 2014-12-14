@@ -1,5 +1,8 @@
 package gamedata.events;
 
+import gamedata.events.conditions.Condition;
+import gamedata.events.globalaction.GlobalAction;
+import gamedata.gamecomponents.GameState;
 import gamedata.gamecomponents.IHasStats;
 
 import java.util.ArrayList;
@@ -79,6 +82,7 @@ public class Event {
 		}
 
 		System.out.println("THE CONDITION EVALUATES TO: " + allConditionsFulfilled);
+		GameState.printState();
 
 		if (allConditionsFulfilled) {
 			for (GlobalAction a : myGlobalActions) {

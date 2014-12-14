@@ -5,14 +5,12 @@ import gamedata.JSON.JSONManager;
 import gamedata.gamecomponents.Game;
 import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,10 +22,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 import authoring.actionslogic.ActionLogicController;
 import authoring.concretefeatures.StatsTotalEditor;
 import authoring.createedit.GamePropertiesEditor;
@@ -40,7 +36,9 @@ import authoring.data.PieceTypeData;
 import authoring.data.PlayerStatData;
 
 
+
 public class AuthoringController implements Initializable {
+
 
 	@FXML
 	private ScrollPane myPropertiesSPane;
