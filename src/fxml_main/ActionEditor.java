@@ -7,6 +7,7 @@ import gamedata.action.StatsTotalLogic;
 import gamedata.action.conclusions.DoNothingConclusion;
 
 import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +32,7 @@ import utilities.ClassGrabber;
 import utilities.Reflection;
 import authoring.abstractfeatures.PopupWindow;
 import authoring.concretefeatures.RangeEditor;
+import authoring.data.GamePropertiesData;
 
 
 /**
@@ -117,7 +119,7 @@ public class ActionEditor extends Pane {
 		initNameField(nameVBox, nameField);
 		// Set the Action Range
 		initSetRangeButton(rangeVBox, "Action Range:", myAttackRange);
-		// Set the Effect Range
+		// Set the Effect Range	
 		initSetRangeButton(rangeVBox, "Effect Range (Splashzone):", myEffectRange);
 		// Operations
 		ActionStatsEditor statsEditor = new ActionStatsEditor(myStatsLogics);
@@ -135,6 +137,12 @@ public class ActionEditor extends Pane {
 				ConcreteAction action = new ConcreteAction 
 						(myName, myAttackRange, myEffectRange, myStatsLogics, myConclusion);
 				myOkLambda.accept(action);
+				
+				for (Point2D.Double point: myAttackRange){
+					System.out.println("dfasd");
+					System.out.println(point.getX()+","+point.getY());
+				}
+				
 			}
 		});
 
@@ -142,9 +150,7 @@ public class ActionEditor extends Pane {
 				statsEditor, new Separator(), conclusionVBox,
 				new Separator(), createBtn);
 		getChildren().add(box);
-
 	}
-
 
 	private void initNameField (VBox nameBox, TextField nameField) {
 		Label nameLabel = new Label("Action name");
@@ -159,7 +165,15 @@ public class ActionEditor extends Pane {
 		setRange.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent event) {
-				PopupWindow actionRangeEditor = new RangeEditor(range, myGridShape);
+				
+//				Point2D.Double p=new Point2D.Double(1.0,1.0);
+//				range.add(p);
+				Consumer<List<Point2D.Double>> consumer=(List<Point2D.Double> rg)->{
+					range.clear();
+					range.addAll(rg);
+				};
+				
+				RangeEditor actionRangeEditor = new RangeEditor(range, consumer, myGridShape);
 				actionRangeEditor.show();
 			}
 		});
