@@ -114,7 +114,7 @@ public class PieceTypeEditor extends Pane {
         myName = piece.getName();
         myImageLocation = piece.getImageLocation();
         myMovement = piece.getMovement();
-        myActions = piece.getActions();
+        myActions = piece.getOriginalActions();
         myStats = piece.getStats();
         myPlayerID = piece.getPlayerID();
         myInventory = piece.getInventory();
@@ -224,7 +224,7 @@ public class PieceTypeEditor extends Pane {
         ObservableList<String> availableActions = myAvailableActions.getActionNames();
         ObservableList<String> addedActions = FXCollections.observableArrayList();
         for(Action action : myActions){
-        	availableActions.remove(action.getName());
+//        	availableActions.remove(action.getName());
         	addedActions.add(action.getName());
         }
         return new ModulesList(availableActions, addedActions);
