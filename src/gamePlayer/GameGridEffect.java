@@ -76,12 +76,27 @@ public class GameGridEffect {
         
         myActiveAction = myViewController.getActiveAction();
         
+<<<<<<< Updated upstream
         if (myActiveAction != null){
             List<Point2D.Double> effectRange = myActiveAction.getAbsoluteEffectRange(loc);
             for (Point2D.Double coord: effectRange) {
                 SuperTile toHighlight = myGrid.findTile(coord);
                 toHighlight.selectTile(EFFECT_RANGE_COLOR);
                 myHighlightedEffects.add(toHighlight);
+=======
+        if (myActivePiece != null && myActiveAction != null) {
+            
+            myActiveAction.getAbsoluteEffectRange(myActivePiece.getLoc()).forEach(point -> {
+//                
+                if (loc.equals(point)){
+                        if(point.getX()>=0 && point.getY()>=0 && point.getX()<= myGrid.getNumCols() &&
+                                        point.getY()<= myGrid.getNumRows()     ){
+                            SuperTile toHighlight = myGrid.findTile(point);
+                            toHighlight.selectTile(EFFECT_RANGE_COLOR);
+                            myHighlightedEffects.add(toHighlight);
+                        }
+                    }
+>>>>>>> Stashed changes
                 
             }
             
