@@ -1,5 +1,6 @@
 package gamePlayer;
 
+import fxml_main.ErrorPopUp;
 import gamedata.JSON.JSONManager;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
@@ -9,7 +10,6 @@ import gamedata.gamecomponents.Piece;
 import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
 import gameengine.player.SimpleAIPlayer;
-
 import java.awt.geom.Point2D;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -28,7 +28,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -57,10 +56,8 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 import tests.TestGameCreator;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
@@ -206,6 +203,8 @@ public class ViewController {
 			newGame();
 		} catch (UnsupportedAudioFileException | IOException
 				| LineUnavailableException e) {
+		    ErrorPopUp myError = new ErrorPopUp(e.toString());
+		    myError.show();
 		}
 		myStage.show();
 	}
@@ -233,8 +232,9 @@ public class ViewController {
 			System.out.println("VC: game loaded... ");
 		}
 		catch (FileNotFoundException fnfe) {
-			System.out.println("Could not find the file at - " + f.getAbsolutePath());
-//			loadGameInTab();	
+//			loadGameInTab();
+			ErrorPopUp myError = new ErrorPopUp(fnfe.toString());
+	                myError.show();
 		}
 	
 	}
@@ -363,8 +363,15 @@ public class ViewController {
 			System.out.println("VC: game loaded... ");
 		}
 		catch (FileNotFoundException fnfe) {
-			System.out.println("Could not find the file at - " + f.getAbsolutePath());
+		    ErrorPopUp myError = new ErrorPopUp("Could not find the file at - " + f.getAbsolutePath()
+		                                        + "\n\n" + fnfe.toString());
+                    myError.show();
+			//System.out.println("Could not find the file at - " + f.getAbsolutePath());
 			loadGame();
+		}
+		catch (Exception e) {
+		    ErrorPopUp myError = new ErrorPopUp(e.toString());
+                    myError.show();
 		}
 
 	}
@@ -473,7 +480,8 @@ public class ViewController {
 	}
 	
 	       protected void editPlayers(Game myGame){
-	            myModel = myGame;
+	           try {
+	               myModel = myGame;
 	                Stage stage=new Stage();
 	                stage.setScene(myPlayerScene);
 	                stage.show();
@@ -486,6 +494,12 @@ public class ViewController {
 	                playerTypeCombo.setValue(HUMAN_PLAYER);
 	                
 	                startGameButton.setOnMouseClicked(event->testPlayGame(myGame));
+	           }
+	           catch (Exception e) {
+	               ErrorPopUp myError = new ErrorPopUp(e.toString());
+	               myError.show();
+	           }
+	            
 	        }
 	
 	private void editSpecificPlayer(int playerID) {
@@ -546,7 +560,8 @@ public class ViewController {
 			fxmlLoader.load();
 
 		} catch (IOException exception) {
-
+		    ErrorPopUp myError = new ErrorPopUp(exception.toString());
+                    myError.show();
 			throw new RuntimeException(exception);
 		}
 	}
@@ -582,6 +597,9 @@ public class ViewController {
 				catch (FileNotFoundException e) {
 					String gameLoc = GAME_LOCATION  + "/" + l.getText() + ".json";
 					System.out.println("Could not find file: " + gameLoc);
+					ErrorPopUp myError = new ErrorPopUp("Could not find file: " + gameLoc
+					                                    + "\n\n" + e.toString());
+			                myError.show();
 				}
 			});
 		});
@@ -1038,7 +1056,7 @@ public class ViewController {
 		}
 		*/
 		myCurrentPlayer = myModel.getCurrentPlayer();
-//		setPlayerTurnDisplay();
+		setPlayerTurnDisplay();
 		gridState = state;
 	}
 
@@ -1114,10 +1132,15 @@ public class ViewController {
 			stage.show();
 		}
 		catch (FileNotFoundException f)  {
+		    ErrorPopUp myError = new ErrorPopUp(f.toString());
+                    myError.show();
 			System.out.println("High scores file not found, sorry.");
 		}
 		catch (IOException i) {
+		    ErrorPopUp myError = new ErrorPopUp(i.toString());
+                    myError.show();
 			System.out.println("Write failed");
+			
 		}
 
 	}
@@ -1203,6 +1226,8 @@ public class ViewController {
 			writer.write("");
 
 		} catch (IOException io) {
+		    ErrorPopUp myError = new ErrorPopUp(io.toString());
+                    myError.show();
 			System.out.println("IO Excpetion Occured in high scores");
 
 		}
