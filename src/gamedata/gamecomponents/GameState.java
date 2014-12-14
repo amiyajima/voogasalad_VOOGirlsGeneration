@@ -21,6 +21,9 @@ public class GameState {
 		return movesMade;
 	}
 
+	public static void resetMoves(){
+		movesMade=0;
+	}
 	public static boolean getGameLost() {
 		return gameLost;
 	}

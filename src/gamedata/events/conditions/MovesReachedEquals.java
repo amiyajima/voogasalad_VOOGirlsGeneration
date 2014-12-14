@@ -15,6 +15,9 @@ public class MovesReachedEquals extends Condition{
 
 	@Override
 	public boolean evaluate(List<IHasStats> objects) {
+		if(GameState.getMoves()==myConstant){
+			GameState.resetMoves();
+		}
 		return GameState.getMoves()==myConstant;
 	}
 
