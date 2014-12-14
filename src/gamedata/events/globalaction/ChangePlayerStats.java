@@ -2,8 +2,7 @@ package gamedata.events.globalaction;
 
 import gamedata.action.StatsDataModifier;
 import gamedata.action.StatsTotalLogic;
-import gamedata.events.GameStateGlobalAction;
-import gamedata.events.GlobalAction;
+import gamedata.gamecomponents.GameState;
 import gamedata.gamecomponents.IHasStats;
 import gameengine.player.Player;
 import java.util.ArrayList;
@@ -28,12 +27,15 @@ public class ChangePlayerStats extends GlobalAction {
         myStatName = statName;
         myPlayerID = ID;
     }
-
+    
     @Override
     public void doBehavior (GUIGrid grid) {
-        //check IDs against all existing players
-//        grid.get
-//        myReceiver.changeStat(myStatName, myStatValue);
+        List<Player> playerList = GameState.playersList;
+        for(Player p : playerList){
+            if (p.getID()==myPlayerID){
+                p.changeStat(myStatName, p.getStats().getValue(myStatName)+myStatValue);
+            }
+        }
     }
 
 }

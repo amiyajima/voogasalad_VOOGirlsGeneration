@@ -41,8 +41,8 @@ public class ApplyState implements IGridState {
 						event.getY())) {
 			activeTile = myController.getGrid().findClickedTile(event.getX(),
 					event.getY());
-			myController.getGameGridEffect().highlightEffectRange(
-					activeTile.getCoordinates());
+			// myController.getGameGridEffect().highlightEffectRange(
+			// activeTile.getCoordinates());
 		}
 	}
 
@@ -55,26 +55,18 @@ public class ApplyState implements IGridState {
 			piece.setLoc(myController.getCurrentClick());
 		}
 
-		//do action IFF the piece is part of the highlighted action range
-		for (Point2D point:myController.getActiveAction().getAbsoluteActionRange(myController.getActivePiece().getLoc())){
-			System.out.println(myController.getActiveAction());
-			if (piece.getLoc().equals(point)){
-		        myController.getActiveAction().doBehavior(myController.getGrid(),actor, piece);
-		    }
-		    else{
-		        System.out.println("NOPE NOT HERE");
-		    }
-		    myGameGridEffect.clearAllPieceHighlights();
-		    myGameGridEffect.clearAllActionHighlights();
-		    myController.clearActions();
-		    myController.setGridState(new SelectState(myController));
-		    myController.setActivePiece(null);
-		    myController.setActiveAction(null);
-		    myController.endAction();
-		}
-		
-		//myController.getGrid().repopulateGrid();
-
+		// System.out.println("ACTION RUNNING:" +
+		// myController.getActiveAction().toString());
+		myController.getActiveAction().doBehavior(myController.getGrid(),
+				actor, piece);
+		// myController.getGrid().repopulateGrid();
+		myGameGridEffect.clearAllPieceHighlights();
+		myGameGridEffect.clearAllActionHighlights();
+		myController.clearActions();
+		myController.setGridState(new SelectState(myController));
+		myController.setActivePiece(null);
+		myController.setActiveAction(null);
+		myController.endAction();
 	}
 
 }
