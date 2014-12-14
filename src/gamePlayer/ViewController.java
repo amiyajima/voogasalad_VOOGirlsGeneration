@@ -232,8 +232,9 @@ public class ViewController {
 			System.out.println("VC: game loaded... ");
 		}
 		catch (FileNotFoundException fnfe) {
-			System.out.println("Could not find the file at - " + f.getAbsolutePath());
-//			loadGameInTab();	
+//			loadGameInTab();
+			ErrorPopUp myError = new ErrorPopUp(fnfe.toString());
+	                myError.show();
 		}
 	
 	}
@@ -559,7 +560,8 @@ public class ViewController {
 			fxmlLoader.load();
 
 		} catch (IOException exception) {
-
+		    ErrorPopUp myError = new ErrorPopUp(exception.toString());
+                    myError.show();
 			throw new RuntimeException(exception);
 		}
 	}
@@ -595,6 +597,9 @@ public class ViewController {
 				catch (FileNotFoundException e) {
 					String gameLoc = GAME_LOCATION  + "/" + l.getText() + ".json";
 					System.out.println("Could not find file: " + gameLoc);
+					ErrorPopUp myError = new ErrorPopUp("Could not find file: " + gameLoc
+					                                    + "\n\n" + e.toString());
+			                myError.show();
 				}
 			});
 		});
@@ -1131,10 +1136,15 @@ public class ViewController {
 			stage.show();
 		}
 		catch (FileNotFoundException f)  {
+		    ErrorPopUp myError = new ErrorPopUp(f.toString());
+                    myError.show();
 			System.out.println("High scores file not found, sorry.");
 		}
 		catch (IOException i) {
+		    ErrorPopUp myError = new ErrorPopUp(i.toString());
+                    myError.show();
 			System.out.println("Write failed");
+			
 		}
 
 	}
@@ -1220,6 +1230,8 @@ public class ViewController {
 			writer.write("");
 
 		} catch (IOException io) {
+		    ErrorPopUp myError = new ErrorPopUp(io.toString());
+                    myError.show();
 			System.out.println("IO Excpetion Occured in high scores");
 
 		}
