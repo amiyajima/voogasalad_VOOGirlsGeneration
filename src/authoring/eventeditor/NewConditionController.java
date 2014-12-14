@@ -43,7 +43,7 @@ public class NewConditionController implements Initializable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+			
 		List<String> displayList = new ArrayList<>();
 		for(Class<?> c: conditionsList){
 			displayList.add(c.toString());
