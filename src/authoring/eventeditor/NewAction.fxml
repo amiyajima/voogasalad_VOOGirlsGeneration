@@ -17,7 +17,6 @@
             <TextField fx:id="myNextLevelField" promptText="Enter next level name" visible="false" />
             <HBox fx:id="myUnitActionsBox" styleClass="hbox">
                <children>
-                  <ChoiceBox fx:id="myRefTypeBox" prefWidth="150.0" />
                   <ChoiceBox fx:id="myRefNameBox" prefWidth="150.0" />
                   <Label text="\@" />
                   <TextField fx:id="myXField" promptText="X coord" />

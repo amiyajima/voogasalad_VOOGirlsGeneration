@@ -5,17 +5,19 @@ import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
-
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
-
+import javax.imageio.ImageIO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -36,6 +38,7 @@ import authoring.createedit.ModulesList;
 import authoring.data.ActionData;
 import authoring.data.PieceTypeData;
 import authoring_environment.UIspecs;
+
 
 /**
  * @author Mike Zhu, Jennie Ju, Martin Tamayo
@@ -58,6 +61,7 @@ public class PieceTypeEditor extends Pane {
     private static final String LABEL_CSS = "-fx-font-size: 14pt;";
 
     private static final String DEFAULT_IMAGE_LOC = "/resources/images/default_image.png";
+    private static final String IMAGE_LOC = "/resources/images";
     private static final Point2D.Double DEFAULT_LOC = new Point2D.Double(0, 0);
 
     private String myEditorTitle;
@@ -67,7 +71,7 @@ public class PieceTypeEditor extends Pane {
     private String myName;
     private String myImageLocation;
     private Piece myPiece;
-    
+
     private String myGridShape;
     private ActionData myAvailableActions;
     private Set<String> myIDSet;
@@ -86,7 +90,7 @@ public class PieceTypeEditor extends Pane {
      * @param pieceController
      */
     public PieceTypeEditor (Consumer<Piece> okLambda, PieceTypeData pieceTypes,
-    		ActionData actions, String gridShape) {
+                            ActionData actions, String gridShape) {
         myEditorTitle = CREATOR_TITLE;
         myGridShape = gridShape;
         myIDSet = pieceTypes.getIdSet();
@@ -105,7 +109,7 @@ public class PieceTypeEditor extends Pane {
     }
 
     public PieceTypeEditor (Consumer<Piece> okLambda, Piece piece,
-    		ActionData actions, String gridShape) {
+                            ActionData actions, String gridShape) {
         myEditorTitle = EDITOR_TITLE;
         myGridShape = gridShape;
         myIDSet = new HashSet<String>();
@@ -152,7 +156,7 @@ public class PieceTypeEditor extends Pane {
         HBox images = new HBox();
         images.setPadding(UIspecs.allPadding);
         images.setSpacing(5);
-        
+
         HBox createStat = new HBox();
         createStat.setPadding(UIspecs.allPadding);
         createStat.setSpacing(5);
@@ -161,10 +165,10 @@ public class PieceTypeEditor extends Pane {
         movements.setPadding(UIspecs.allPadding);
         movements.setSpacing(5);
 
-        Button rangeEditorBtn = new Button (MOVE_RANGE_LABEL);
+        Button rangeEditorBtn = new Button(MOVE_RANGE_LABEL);
         initRangeEditorButton(rangeEditorBtn);
         movements.getChildren().addAll(rangeEditorBtn);
-        
+
         Button createStatButton = new Button(STAT_CREATE_LABEL);
         initStatButton(createStatButton);
         createStat.getChildren().addAll(createStatButton);
@@ -187,11 +191,11 @@ public class PieceTypeEditor extends Pane {
         names.getChildren().addAll(nameLabel, unitName);
 
         ModulesList modList = initModList();
-        
+
         CheckBox cbInventory = new CheckBox("Has an inventory");
         cbInventory.setAllowIndeterminate(false);
         cbInventory.setSelected(myHasInventory);
-        
+
         CheckBox cbItem = new CheckBox("Is an item");
         cbInventory.setAllowIndeterminate(false);
         cbItem.setSelected(myIsItem);
@@ -199,13 +203,13 @@ public class PieceTypeEditor extends Pane {
         Button goButton = new Button(TEMPLATE_LABEL);
         initImageLoader(images);
         initGoBtn(goButton, unitID, unitName, modList,
-        		cbInventory, cbItem);
+                  cbInventory, cbItem);
 
         box.getChildren().addAll(labelBox, ids, names, images, movements,
-        		createStat, modList, cbInventory, cbItem, goButton);
+                                 createStat, modList, cbInventory, cbItem, goButton);
         getChildren().add(box);
     }
-    
+
     private void initStatButton (Button createStatButton) {
         createStatButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -223,9 +227,9 @@ public class PieceTypeEditor extends Pane {
     private ModulesList initModList () {
         ObservableList<String> availableActions = myAvailableActions.getActionNames();
         ObservableList<String> addedActions = FXCollections.observableArrayList();
-        for(Action action : myActions){
-//        	availableActions.remove(action.getName());
-        	addedActions.add(action.getName());
+        for (Action action : myActions) {
+            // availableActions.remove(action.getName());
+            addedActions.add(action.getName());
         }
         return new ModulesList(availableActions, addedActions);
     }
@@ -244,38 +248,42 @@ public class PieceTypeEditor extends Pane {
                                                                          "*.gif"));
                 File selectedFile = fileChoice.showOpenDialog(null);
                 if (selectedFile != null) {
+
                     myImageLocation = selectedFile.toURI().toString();
+                    System.out.println("PieceTypeEditor: image location = " + myImageLocation);
                     Image image = new Image(myImageLocation);
                     icon.setImage(image);
+
                 }
             }
         });
         images.getChildren().addAll(icon, loadImage);
     }
-    
-    private void initRangeEditorButton (Button rangeEditorButton){
-    	rangeEditorButton.setOnAction(new EventHandler<ActionEvent>() {
+
+    private void initRangeEditorButton (Button rangeEditorButton) {
+        rangeEditorButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
-            	List<Point2D.Double> range = myMovement.getRelativeMoves();
-            	Consumer<List<Point2D.Double>> consumer=(List<Point2D.Double> rg)->{
-					range.clear();
-					range.addAll(rg);
-				};
-				
+                List<Point2D.Double> range = myMovement.getRelativeMoves();
+                Consumer<List<Point2D.Double>> consumer = (List<Point2D.Double> rg) -> {
+                    range.clear();
+                    range.addAll(rg);
+                };
+
                 RangeEditor rEditor = new RangeEditor(range, consumer, myGridShape);
                 rEditor.show();
             }
         });
     }
 
-    private ImageView setImageView() {
+    private ImageView setImageView () {
         if (myImageLocation.startsWith("/")) {
             return new ImageView(new Image(getClass().getResourceAsStream(myImageLocation)));
         }
         else {
             return new ImageView(new Image(myImageLocation));
         }
+
     }
 
     private void initGoBtn (Button goButton,
@@ -289,17 +297,18 @@ public class PieceTypeEditor extends Pane {
             public void handle (ActionEvent click) {
                 myID = unitID.getText();
                 if (myIDSet.contains(myID) || (myID.equals(""))) {
-                	return;
+                return;
                 }
                 if (!unitID.isDisabled()) {
                     myIDSet.add(myID);
                 }
                 myName = unitName.getText();
                 myActions = addSelectedActions(modList.getSelectedActions());
+
                 myHasInventory = cbInventory.isSelected();
                 myIsItem = cbItem.isSelected();
                 myPiece = new Piece(myID, myName, myImageLocation, myMovement, myActions,
-                                myStats, DEFAULT_LOC, myPlayerID, myHasInventory, myIsItem);
+                                    myStats, DEFAULT_LOC, myPlayerID, myHasInventory, myIsItem);
                 System.out.println(myMovement.toString());
                 myOkLambda.accept(myPiece);
             }

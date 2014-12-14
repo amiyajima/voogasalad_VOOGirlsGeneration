@@ -6,6 +6,11 @@ import java.util.List;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Piece;
 
+/**
+ * Condition met when a specified stat is < 0 
+ * @author Mike Zhu
+ *
+ */
 public class DefineWhenUnitIsDead extends Condition{
 
 	String myHealthName;
