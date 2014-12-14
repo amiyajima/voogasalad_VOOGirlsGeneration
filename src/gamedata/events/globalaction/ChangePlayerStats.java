@@ -18,22 +18,20 @@ import authoring_environment.GUIGrid;
  *
  */
 public class ChangePlayerStats extends GlobalAction {
-    private List<StatsTotalLogic> myStatsLogics;
-    private StatsDataModifier myStatsModifier;
-    private IHasStats myActor;
-    private Player myReceiver;
+    private int myPlayerID;
+    private String myStatName;
+    private int myConstant;
 
-    public ChangePlayerStats (List<StatsTotalLogic> statsLogics, IHasStats actor, Player receiver) {
+    public ChangePlayerStats (int ID, String statName, int constant) {
         super("Change player stat");
-        myStatsLogics = statsLogics;
-        myStatsModifier = new StatsDataModifier(myStatsLogics);
-        myActor = actor;
-        myReceiver = receiver;
+        myPlayerID = ID;
+        myStatName = statName;
+        myConstant = constant;
     }
 
     @Override
     public void doBehavior (GUIGrid grid) {
-        myStatsModifier.modifyStats(myActor, myReceiver);
+        
     }
 
 }

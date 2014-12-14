@@ -66,6 +66,10 @@ public class NewActionController implements Initializable {
     private EventsDataWrapper myData;
     private IChangeGameState myState;
     private PlayerData myPlayerData;
+    
+    private TextField myPlayerField;
+    private TextField myStatNameField;
+    private TextField myStatConstantField;
 
     @Override
     public void initialize (URL fxmlFileLocation, ResourceBundle resources) {
@@ -93,9 +97,13 @@ public class NewActionController implements Initializable {
         myTypeChoiceBox.getSelectionModel().selectedItemProperty()
                 .addListener(
                              (observable, oldValue, selectedType) -> showActionEditorPane());
-        StatsTotalLogic stl = new StatsTotalLogic();
-        GlobalStatLogicBox statsLogic = new GlobalStatLogicBox(stl, myPlayerData);
-        myStatsHBox.getChildren().add(statsLogic);
+        myPlayerField = new TextField();
+        myPlayerField.setPromptText("Enter Player ID");
+        myStatNameField = new TextField();
+        myStatNameField.setPromptText("Enter stat name");
+        myStatConstantField = new TextField();
+        myStatConstantField.setPromptText("Enter constant");
+        myStatsHBox.getChildren().addAll(myPlayerField, myStatNameField, myStatConstantField);
     }
 
     // TODO: Refactor this to be less gross. SO MUCH REPEATED CODE
@@ -125,8 +133,11 @@ public class NewActionController implements Initializable {
             myDoneLambda.accept(action);
         }
         else if (c.equals(ChangePlayerStats.class)) {
-            //need List<StatsTotalLogic> statsLogics, IHasStats actor, Player receiver
-          // GlobalAction action = new ChangePlayersStats();
+           int playerID = Integer.parseInt(myPlayerField.getText());
+           String statString = myStatNameField.getText();
+           int constant = Integer.parseInt(myStatConstantField.getText());
+           GlobalAction action = new ChangePlayerStats(playerID, statString, constant);
+           myDoneLambda.accept(action);
         }
 
         String classPath = c.toString();
@@ -165,7 +176,6 @@ public class NewActionController implements Initializable {
             myNextLevelField.setVisible(true);
         }
         else if (c.equals(ChangePlayerStats.class)) {
-            //stats box needs 
             myStatsHBox.setVisible(true);
         }
 
