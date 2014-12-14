@@ -1,7 +1,7 @@
 package authoring.eventeditor;
 
 import gamedata.events.GameStateGlobalAction;
-import gamedata.events.globalaction.GlobalAction;
+import gamedata.events.GlobalAction;
 import gamedata.events.globalaction.MakePieceAtLocation;
 import gamedata.events.globalaction.DeletePieceAtLocation;
 import gamedata.events.globalaction.LevelChange;
@@ -9,6 +9,7 @@ import gamedata.events.globalaction.EndTurn;
 import gamedata.gamecomponents.IChangeGameState;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Piece;
+
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+
 import authoring.data.EventsDataWrapper;
 import utilities.ClassGrabber;
 import utilities.reflection.Reflection;
