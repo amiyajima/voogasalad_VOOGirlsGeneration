@@ -16,6 +16,7 @@ public class MakePieceAtLocation extends GlobalAction {
 
     private Piece myPieceType;
     private Point2D myLoc;
+    private int myPlayerID;
     
     /**
      * Create this global action with a piece that stores the location it should be placed
@@ -23,15 +24,17 @@ public class MakePieceAtLocation extends GlobalAction {
      * @param game
      * @param pieceToCreate
      */
-    public MakePieceAtLocation (Piece pieceToCreate, Point2D loc) {
+    public MakePieceAtLocation (Piece pieceToCreate, Point2D loc, int PlayerID) {
     	super(String.format("Make %s at point %s", pieceToCreate, loc));
         myPieceType = pieceToCreate;
         myLoc = loc;
+        myPlayerID = PlayerID;
     }
     
     @Override
     public void doBehavior(GUIGrid grid) {
     	grid.addPieceAtLoc(myPieceType, myLoc);
+    	grid.getPiece(myLoc).setPlayerID(myPlayerID);
     }
 
 }

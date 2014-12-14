@@ -26,12 +26,15 @@ public class LocationEquals extends Condition{
 
 	@Override
 	public boolean evaluate(List<IHasStats> objects) {
+		boolean onGrid = false;
 		for(IHasStats source: objects){
 			if(myReference.getClass().equals(source.getClass())){
-				return myConstant.equals(source.getLoc());
+				if(myConstant.equals(source.getLoc())){
+					onGrid = true;
+				}
 			}	
 		}
-		return false;
+		return onGrid;
 	}
 
 }
