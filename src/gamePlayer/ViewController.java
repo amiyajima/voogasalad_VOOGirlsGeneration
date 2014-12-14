@@ -221,12 +221,7 @@ public class ViewController {
 			System.out.println("Could not find the file at - " + f.getAbsolutePath());
 //			loadGameInTab();	
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Other exception occured.");
-//			loadGameInTab();	
-		}
-				
+	
 	}
 
 	private void testPlayGameInTab(Game readFromJSONFile) {
@@ -313,10 +308,6 @@ public class ViewController {
 		}
 		catch (FileNotFoundException fnfe) {
 			System.out.println("Could not find the file at - " + f.getAbsolutePath());
-			loadGame();
-		}
-		catch (Exception e) {
-			System.out.println("Other exception occured.");
 			loadGame();
 		}
 
