@@ -29,22 +29,22 @@ import authoring_environment.GUIGrid;
  *
  */
 public class Movement implements Action {
-	
+
 	/**
 	 * Point2Ds referring to relative positions of movement
 	 */
 	private List<Point2D.Double> myMoves;
-	
+
 	/**
 	 * Point2Ds referring to currently calculated absolute positions of movement
 	 */
 	private List<Point2D.Double> myAbsoluteMoves;
-	
+
 	/**
 	 * List of Point2Ds referring to relative paths of movement
 	 */
 	private List<List<Point2D.Double>> myPaths;
-	
+
 	/**
 	 * Grid the Piece is on and movement will be execute on
 	 */
@@ -54,12 +54,12 @@ public class Movement implements Action {
 	 * Orientator resonsible for calculating orientations
 	 */
 	private transient Orientator myOrientator;
-	
+
 	/**
 	 * Orientation of the piece (depending on last movement made)
 	 */
 	private double myOrientation;
-	
+
 	/**
 	 * Name of the action for display in the Player
 	 */
@@ -97,8 +97,10 @@ public class Movement implements Action {
 	 * Return absolute possible x,y coordinates of movement based on current
 	 * location x,y
 	 * 
-	 * @param x Current x coordinate
-	 * @param y Current y coordinate
+	 * @param x
+	 *            Current x coordinate
+	 * @param y
+	 *            Current y coordinate
 	 * @return List of Point2D corresponding to absolute locations of movement
 	 */
 	public List<Point2D.Double> getPossibleLocs(int x, int y) {
@@ -113,8 +115,10 @@ public class Movement implements Action {
 	 * Checks to see if an absolute location (x,y) is a valid location for
 	 * movement and that the destination is empty (no pieces overlapping)
 	 * 
-	 * @param x Absolute coordinate x
-	 * @param y Absolute coordinate y
+	 * @param x
+	 *            Absolute coordinate x
+	 * @param y
+	 *            Absolute coordinate y
 	 * @return
 	 */
 	public boolean isValidLocation(int x, int y) {
@@ -131,7 +135,8 @@ public class Movement implements Action {
 	 * Checks the collisions in the currently defined path. Checks with piece
 	 * and patch collisions.
 	 * 
-	 * @return true or false depending on whether a collision is detected on a path
+	 * @return true or false depending on whether a collision is detected on a
+	 *         path
 	 */
 	private boolean checkPathCollision(GUIGrid myGrid, Point2D endPoint) {
 		List<Point2D.Double> path;
@@ -170,12 +175,22 @@ public class Movement implements Action {
 		if (isValidLocation((int) point.getX(), (int) point.getY())) {
 			// TODO: Implement Orientation Calculation Here
 			
-			Path path = new Path();
-			path.getElements().add(new MoveTo((actor.getLoc().getX()*grid.getTileHeight())-(grid.getTileHeight()/2),(actor.getLoc().getY()*grid.getTileHeight())+(grid.getTileHeight()/2)));
-			path.getElements().add(new LineTo((point.getX()*grid.getTileHeight())-(grid.getTileHeight()/2),(point.getY()*grid.getTileHeight())+(grid.getTileHeight()/2)));
+		/*	Path path = new Path();
+			double oldX = grid.findTile(point).calculatePixelLocation(grid.getTileHeight(), actor.getLoc()).getX();
+			double oldY = grid.findTile(point).calculatePixelLocation(grid.getTileHeight(), actor.getLoc()).getY();
+			double newX = grid.findTile(point).calculatePixelLocation(grid.getTileHeight(), point).getX();
+			double newY = grid.findTile(point).calculatePixelLocation(grid.getTileHeight(), point).getY();
 			
-			//path.getElements().add(new MoveTo(0,0));
-			//path.getElements().add(new LineTo(5,0));
+	
+			double oldX = actor.getLoc().getX()*grid.getTileHeight()-(grid.getTileHeight()/2);
+			double oldY = actor.getLoc().getY()*grid.getTileHeight()+(grid.getTileHeight()/2);
+			double newX = point.getX()*grid.getTileHeight()-(grid.getTileHeight()/2);
+			double newY = point.getY()*grid.getTileHeight()+(grid.getTileHeight()/2);
+			
+			System.out.println("MOVING FROM X:"+oldX + " Y:"+oldY);
+			System.out.println("MOVING TO X:" + newY + " Y" + newY);
+			path.getElements().add(new MoveTo(oldX,oldY));
+			path.getElements().add(new LineTo(newX,newY));
 			
 			PathTransition pathTransition = new PathTransition();
 			pathTransition.setDuration(Duration.millis(4000));
@@ -183,42 +198,29 @@ public class Movement implements Action {
 			pathTransition.setNode(grid.findTile(actor.getLoc()).getPieceImage());
 			pathTransition.setOrientation(PathTransition.OrientationType.NONE);
 			pathTransition.setCycleCount(1);
-			pathTransition.setAutoReverse(false);
-			pathTransition.play();
-			
-			
-			/*Path path = new Path();
-			path.getElements().add(new MoveTo(20,20));
-			//path.getElements().add(new CubicCurveTo(380, 0, 380, 120, 200, 120));
-			//path.getElements().add(new CubicCurveTo(0, 120, 0, 240, 380, 240));
-			PathTransition pathTransition = new PathTransition();
-			pathTransition.setDuration(Duration.millis(4000));
-			pathTransition.setPath(path);
-			pathTransition.setNode(grid.findTile(actor.getLoc()).getPieceImage());
-			pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-			pathTransition.setCycleCount(Timeline.INDEFINITE);
 			pathTransition.setAutoReverse(true);
 			pathTransition.play();*/
 			
 			actor.setLoc(point);
+			grid.repopulateGrid();
 		}
 	}
 
 	@Override
 	public String toString() {
-	    String str = "MOVEMENT: moves - ";
-	    for (Point2D.Double pt : myMoves) {
-	        str += "(" + pt.getX() + ","  + pt.getY() + ")";
-	    }
-	    str += " paths - ";
-	    for (List<Point2D.Double> ptlst : myPaths) {
-	        str += "[";
-	        for (Point2D.Double pt : ptlst) {
-	            str += "(" + pt.getX() + ","  + pt.getY() + ")";
-	        }
-	        str += "]";
-	    }
-	    return str;
+		String str = "MOVEMENT: moves - ";
+		for (Point2D.Double pt : myMoves) {
+			str += "(" + pt.getX() + "," + pt.getY() + ")";
+		}
+		str += " paths - ";
+		for (List<Point2D.Double> ptlst : myPaths) {
+			str += "[";
+			for (Point2D.Double pt : ptlst) {
+				str += "(" + pt.getX() + "," + pt.getY() + ")";
+			}
+			str += "]";
+		}
+		return str;
 	}
 
 	@Override
@@ -226,13 +228,13 @@ public class Movement implements Action {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	/**
-	 * Getter method for the list of relative moves. This method
-	 * is needed by the PieceTypeEditor, so do not delete it!
+	 * Getter method for the list of relative moves. This method is needed by
+	 * the PieceTypeEditor, so do not delete it!
 	 * 
-	 * @return : List of locations a piece can move to relative
-	 * 				to its current location.
+	 * @return : List of locations a piece can move to relative to its current
+	 *         location.
 	 */
 	public List<Point2D.Double> getRelativeMoves() {
 		return myMoves;
