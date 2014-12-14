@@ -133,6 +133,11 @@ public abstract class Player implements IHasStats {
         return "Type:" + this.getClass().getName() + " ID:" + myID
                + " NumMovesPlayed:" + myNumMovesPlayed;
     }
+    
+    @Override
+    public String toString() {
+        return "Player " + myID;
+    }
 
     /**
      * Returns the type of the player

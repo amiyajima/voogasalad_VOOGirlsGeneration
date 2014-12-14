@@ -71,8 +71,10 @@ public class TestGameCreator {
 	public Game createNewGame() {
 		System.out.println("TCG: Create new game");
 		List<Player> myPlayers = new ArrayList<Player>();
-		Player myPlayer1 = new HumanPlayer(1);
-		Player myPlayer2 = new HumanPlayer(2);
+		Stats stats = new Stats();
+		stats.add("Score", 20);
+		Player myPlayer1 = new HumanPlayer(1, new Stats(stats), "Score");
+		Player myPlayer2 = new HumanPlayer(2, new Stats(stats), "Score");
 		myPlayers.add(myPlayer1);
 		myPlayers.add(myPlayer2);
 

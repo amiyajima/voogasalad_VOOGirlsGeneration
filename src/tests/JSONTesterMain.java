@@ -95,7 +95,7 @@ public class JSONTesterMain {
         //PatchData multiplePatches = grid.getPatchData(); // WORKS
         GlobalAction gl2 = new DeletePieceAtLocation(new Point2D.Double(0, 0));
         //myJSONmanager.writeToJSON(g, saveTo);
-        myJSONmanager.writeToJSON(grid, saveTo);
+        myJSONmanager.writeToJSON(g, saveTo);
     }
 
     public static void testJSONload (String loadFrom) {
@@ -111,9 +111,9 @@ public class JSONTesterMain {
     }
 
     public static void main (String[] args) {
-        String link = "src/resources/json/tester_2P_actions_events_location.JSON";
+        String link = "src/resources/json/Game-Player-Game.JSON";
         //String localLink = "C:\\Users\\Rica\\Desktop\\Rica-GamePlayer.json";
-        //testJSONwrite(link);
-        testJSONload(link);
+        testJSONwrite(link);
+        //testJSONload(link);
     }
 }
