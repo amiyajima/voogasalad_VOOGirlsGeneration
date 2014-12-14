@@ -109,28 +109,14 @@ public class AuthoringController implements Initializable {
 	private void showActionslogicChartWindow () throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/authoring/actionslogic/ActionLogic.fxml"));
-		ActionLogicController controller = loader.getController();
-		Action actionA = new ConcreteAction("Attack", null, null, null, null);
-		myActionData.add(actionA);
-		myPieceTypes.add(null);
-		List<String> test1 = new ArrayList<String>();
-		test1.add("Attack");
-		test1.add("Heal");
-		List<String> test2 = new ArrayList<String>();
-		test2.add("PieceA");
-		test2.add("PieceB");
-		controller.getData(test1, test2);
-		System.out.println("not yet");
 		Parent root = loader.load();
+	        ActionLogicController controller = loader.getController();
+	        controller.getData(myActionData, myPieceTypes);
 		Stage actionLogicStage = new Stage();
 		actionLogicStage.setTitle("Actions Logic Chart");
 		actionLogicStage.initModality(Modality.WINDOW_MODAL);
 		Scene scene = new Scene(root);
 		actionLogicStage.setScene(scene);
-
-		System.out.println("done");
-
-
 		actionLogicStage.showAndWait();
 	}
 
@@ -140,7 +126,7 @@ public class AuthoringController implements Initializable {
 	}
 
 	@FXML
-	private void showPlayerEditWindow () {
+	private void showPlayerEditWindow(){
 		StatsTotalEditor statsEditor = new StatsTotalEditor();
 		statsEditor.setTitle("Player Editor");
 		statsEditor.setX(450);

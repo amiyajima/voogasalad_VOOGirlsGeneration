@@ -2,11 +2,11 @@ package tests;
 
 import gamedata.JSON.JSONManager;
 import gamedata.action.Action;
+import gamedata.events.Condition;
 import gamedata.events.Event;
-import gamedata.events.conditions.Condition;
+import gamedata.events.GlobalAction;
 import gamedata.events.conditions.IsDead;
 import gamedata.events.globalaction.DeletePieceAtLocation;
-import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Level;
@@ -16,10 +16,12 @@ import gamedata.rules.MoveCountRule;
 import gamedata.rules.Rule;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
+
 import java.awt.geom.Point2D;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+
 import authoring.data.ActionData;
 import authoring.data.PatchInstanceData;
 import authoring.data.PieceInstanceData;

@@ -1,9 +1,16 @@
 package gamedata.events;
 
 import java.util.List;
-import gamedata.events.conditions.Condition;
+
 import gamedata.gamecomponents.IHasStats;
 
+/**
+ * A subset of Conditions in which a Stat from an all objects of a given IHasStats ckass 
+ * (Piece, Patch, or Player) are compared against a constant Double. 
+ * 
+ * @author Mike Zhu
+ *
+ */
 public abstract class StatComparison extends Condition{
 			
 	protected IHasStats myReference;

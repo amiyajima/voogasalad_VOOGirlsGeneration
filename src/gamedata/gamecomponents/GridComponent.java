@@ -151,4 +151,13 @@ public abstract class GridComponent implements IHasStats {
             myImageView = new ImageView(new Image(myImageLocation));
         }
     }
+    
+    /**
+     * Returns the name of the GridComponent for display purposes
+     */
+    @Override
+    public String toString() {
+    	return myName;
+    }
 }
+

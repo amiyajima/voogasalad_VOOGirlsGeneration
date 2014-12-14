@@ -2,9 +2,11 @@ package fxml_main;
 
 import gamedata.events.Event;
 import gamedata.events.GameStateGlobalAction;
-import gamedata.events.globalaction.GlobalAction;
+import gamedata.events.GlobalAction;
 import gamedata.gamecomponents.Level;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,7 +40,7 @@ public class LevelEditor extends VBox {
     private int myGridCols;
     private double myTileHeight;
     private String myGridShape;
-    private ObservableList<Event> myEvents;
+    private List<Event> myEvents;
     private GUIGrid myGrid;
 
     private Consumer<Level> myOkLambda;
@@ -55,8 +57,7 @@ public class LevelEditor extends VBox {
         myGridCols = 0;
         myTileHeight = 0;
         myGrid = new GUIGrid(myGridCols, myGridRows, myTileHeight, gridShape);
-//        System.out.println(gridShape);
-        myEvents = FXCollections.observableArrayList();
+        myEvents = new ArrayList<>();
         myLevel = new Level();
         initEditor(okLambda,data,gridShape);
     }
@@ -69,7 +70,7 @@ public class LevelEditor extends VBox {
         myGridRows = myGrid.getNumRows();
         myGridCols = myGrid.getNumCols();
         myTileHeight = myGrid.getTileHeight();
-        myEvents = (ObservableList<Event>) level.getEvents();
+        myEvents = level.getEvents();
         myLevel = level;
         initEditor(okLambda,data,gridShape);
     }
