@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
 
 import authoring_environment.GUIGrid;
 
@@ -199,5 +200,10 @@ public class Movement implements Action {
 	@Override
 	public String getName() {
 		return myName;
+	}
+
+	@Override
+	public List<Double> getAbsoluteEffectRange(Point2D pieceLocation) {
+		return new ArrayList<Point2D.Double>();
 	}
 }
