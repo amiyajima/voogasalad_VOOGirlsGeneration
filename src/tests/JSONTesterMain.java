@@ -94,7 +94,8 @@ public class JSONTesterMain {
         //Patch patch2 = grid.getPatch(point2);
         //PatchData multiplePatches = grid.getPatchData(); // WORKS
         GlobalAction gl2 = new DeletePieceAtLocation(new Point2D.Double(0, 0));
-        myJSONmanager.writeToJSON(g, saveTo);
+        //myJSONmanager.writeToJSON(g, saveTo);
+        myJSONmanager.writeToJSON(grid, saveTo);
     }
 
     public static void testJSONload (String loadFrom) {
@@ -102,6 +103,7 @@ public class JSONTesterMain {
         JSONManager jsonManager = new JSONManager();
         try {
             jsonManager.readFromJSONFile(loadFrom);
+            GUIGrid answer = (GUIGrid) jsonManager.readSpecificFromJSONFile(GUIGrid.class, loadFrom);
 
         }
         catch (FileNotFoundException e) {
@@ -110,7 +112,7 @@ public class JSONTesterMain {
     }
 
     public static void main (String[] args) {
-        String link = "src/resources/json/THEGAME.json";
+        String link = "src/resources/json/Specific-Grid.json";
         //String localLink = "C:\\Users\\Rica\\Desktop\\Rica-GamePlayer.json";
         testJSONwrite(link);
         testJSONload(link);
