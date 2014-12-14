@@ -190,6 +190,7 @@ public class ActionEditor extends Pane {
 			//TODO: Display error
 			conclusionClassNames = new ArrayList<String>();
 		}
+		
 		conclusionClassNames = trimClassList(conclusionClassNames);
 		for (String c : conclusionClassNames) {
 			ActionConclusion conclusion = (ActionConclusion) Reflection.createInstance(c);
@@ -213,5 +214,4 @@ public class ActionEditor extends Pane {
 		return displayList;
 	}
 }
-
 
