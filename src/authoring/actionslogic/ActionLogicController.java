@@ -43,8 +43,6 @@ public class ActionLogicController implements Initializable {
     @Override
     public void initialize (URL location, ResourceBundle resources) {
         myPieceTypes = new ArrayList<String>();
-//        System.out.println("initialzing");
-
         actorsChoiceBox
                 .getSelectionModel()
                 .selectedItemProperty()
@@ -98,6 +96,7 @@ public class ActionLogicController implements Initializable {
         }
         actionReceiver.put(currAction, receiverList);
         myLogicMap.put(currActor, actionReceiver);
+        System.out.println(myLogicMap);
 
     }
 
@@ -108,7 +107,7 @@ public class ActionLogicController implements Initializable {
     public void getData (ActionData actionData, PieceTypeData ptData) {
         ActionData actData = actionData;
         PieceTypeData pieceData = ptData;
-        myActionTypes = actData.getActionIDs();
+        myActionTypes = actData.getActionNames();
         myPieceTypes.addAll(pieceData.getIdSet());
     }
 
@@ -116,9 +115,6 @@ public class ActionLogicController implements Initializable {
     private void loadData () {
         actorsChoiceBox.getItems().addAll(myPieceTypes);
         actionsListView.getItems().addAll(myActionTypes);
-        System.out.println("whatwhatwhat");
-        System.out.println("loading");
-
     }
 
 }

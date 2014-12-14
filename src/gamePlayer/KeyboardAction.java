@@ -1,15 +1,12 @@
 package gamePlayer;
 
 import gamedata.action.Action;
-import gamedata.gamecomponents.Piece;
-import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.effect.InnerShadow;

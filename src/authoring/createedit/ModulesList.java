@@ -46,7 +46,7 @@ public class ModulesList extends VBox {
 			@Override
 			public void handle(MouseEvent click) {
 				if(click.getClickCount() == 2) {
-					String s = mods.getSelectionModel().getSelectedItem();
+					String s = mods.getSelectionModel().getSelectedItem ();
 					availableModules.remove(s);
 					addedModules.add(s);
 					//TODO removed this check because unnecessary, is that okay?

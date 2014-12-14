@@ -134,7 +134,7 @@ public class ActionCreator extends PopupWindow {
                 myActionData.add(new ConcreteAction(myName, myAttackRange,
                                                     myEffectRange, myStatsLogics, myConclusion));
                 System.out.println("Created Action");
-                System.out.println(myActionData.getActionIDs().get(0));
+                System.out.println(myActionData.getActionNames().get(0));
                 close(); // close window once action is made
             }
         });

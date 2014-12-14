@@ -1,14 +1,15 @@
 package gamedata.events.globalaction;
 
-import java.util.List;
 import authoring_environment.GUIGrid;
 import gamedata.events.GameStateGlobalAction;
-import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.IChangeGameState;
-import gamedata.gamecomponents.IHasStats;
-import gamedata.gamecomponents.Level;
 
-
+/**
+ * Takes in a Level object wrapped in the IChangeGameState interface. This doBehavior 
+ * method marks the Level as complete and sets the next level target. 
+ * @author Mike Zhu
+ *
+ */
 public class LevelChange extends GameStateGlobalAction {
     public static final String DESCRIPTION = "Change level";
     private String myNextLevelID;
