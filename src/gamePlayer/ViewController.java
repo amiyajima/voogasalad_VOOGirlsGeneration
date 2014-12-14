@@ -1042,7 +1042,7 @@ public class ViewController {
 		}
 		*/
 		myCurrentPlayer = myModel.getCurrentPlayer();
-//		setPlayerTurnDisplay();
+		setPlayerTurnDisplay();
 		gridState = state;
 	}
 
