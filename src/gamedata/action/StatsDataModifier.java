@@ -24,7 +24,7 @@ public class StatsDataModifier {
      * @param actor
      * @param receiver
      */
-    void modifyStats (IHasStats actor, IHasStats receiver) {
+    public void modifyStats (IHasStats actor, IHasStats receiver) {
         Stats actorStats = actor.getStats();
         Stats receiverStats = receiver.getStats();
         for (StatsTotalLogic stl : myStatsLogics) {
@@ -40,6 +40,7 @@ public class StatsDataModifier {
         }
     }
 
+    
     private double evaluateMultiplierLogic (Stats actorStats,
                                             Stats receiverStats,
                                             List<StatsSingleMultiplier> multiplierLogic) {
