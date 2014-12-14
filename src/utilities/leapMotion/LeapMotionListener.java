@@ -12,6 +12,11 @@ import com.leapmotion.leap.Gesture;
 import com.leapmotion.leap.Listener;
 import com.leapmotion.leap.SwipeGesture;
 
+/**
+ * LeapMotionListener is the class that configures and executes user-defined input actions from the leap motion controller.
+ * It translates leap motion gestures into mouse and keyboard actions according to gesture/action mappings read from a properties file. 
+ *
+ */
 public class LeapMotionListener extends Listener{
     
     private ResourceBundle myGestures;
@@ -25,6 +30,9 @@ public class LeapMotionListener extends Listener{
     public static final double HISTORY_SECONDS = .5;
     public static final double MIN_DISTANCE = 1.0;
 
+    /* (non-Javadoc)
+     * @see com.leapmotion.leap.Listener#onConnect(com.leapmotion.leap.Controller)
+     */
     public void onConnect (Controller controller){
 
         initializeRobot();
@@ -33,6 +41,10 @@ public class LeapMotionListener extends Listener{
         enableGestures(controller);
     }
 
+    /**
+     * Enable all gestures that are specified in the properties file. Configure gestures when necessary.
+     * @param controller
+     */
     private void enableGestures(Controller controller){
         for(String gestureName : myGestures.keySet()){
          
@@ -64,6 +76,10 @@ public class LeapMotionListener extends Listener{
         }
     }
 
+    /**
+     * Set parameters for the screen tap gesture to allow better performance.
+     * @param controller
+     */
     private void configScreenTap (Controller controller) {
         controller.config().setFloat("Gesture.ScreenTap.MinForwardVelocity", (float) MIN_FORWARD_VELOCITY);
             
@@ -71,6 +87,9 @@ public class LeapMotionListener extends Listener{
         controller.config().setFloat("Gesture.ScreenTap.MinDistance", (float) MIN_DISTANCE);
         controller.config().save();
     }
+    /**
+     * Create a robot to execute mouse and keyboard actions.
+     */
     private void initializeRobot ()  {
     
             try {
@@ -80,6 +99,9 @@ public class LeapMotionListener extends Listener{
             }
         
     }
+    /* (non-Javadoc)
+     * @see com.leapmotion.leap.Listener#onFrame(com.leapmotion.leap.Controller)
+     */
     public void onFrame (Controller controller) {
         Frame frame = controller.frame();
         myLeapMouse.moveMouse(frame, myRobot);
@@ -93,6 +115,10 @@ public class LeapMotionListener extends Listener{
         }
     }
 
+    /**
+     * Perform the mouse or keyboard action that the gesture is mapped to.
+     * @param gestureName
+     */
     private void performAction(String gestureName){
         
         if(myGestures.getString(gestureName).length()>1){

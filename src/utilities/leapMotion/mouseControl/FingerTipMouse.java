@@ -12,6 +12,10 @@ import java.awt.Toolkit;
 
 import utilities.leapMotion.ILeapMouse;
 
+/**
+ * This class implements a simple leap motion mouse. The position of the cursor is set to the position of the finger tip.
+ *
+ */
 public class FingerTipMouse implements ILeapMouse{
 
     @Override
