@@ -1,7 +1,7 @@
 package authoring.eventeditor;
 
 import gamedata.events.Condition;
-import gamedata.events.conditions.IsDead;
+import gamedata.events.conditions.DefineWhenUnitIsDead;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
@@ -69,7 +69,7 @@ public class ConditionEditorPane extends Pane{
 				classPath = classPath.substring(6);
 
 				if("gamedata.events.conditions.IsDead".equals(classPath)){
-					myCondition = new IsDead(val);
+					myCondition = new DefineWhenUnitIsDead(val);
 				}
 				else{
 					myCondition = (Condition) Reflection.createInstance(classPath, ref, stat, val);

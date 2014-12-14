@@ -2,7 +2,7 @@ package fxml_main;
 
 import gamedata.events.Event;
 import gamedata.events.GameStateGlobalAction;
-import gamedata.events.globalaction.GlobalAction;
+import gamedata.events.GlobalAction;
 import gamedata.gamecomponents.Level;
 
 import java.io.IOException;
@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;

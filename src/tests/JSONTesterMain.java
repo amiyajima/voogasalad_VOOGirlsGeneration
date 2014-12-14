@@ -5,7 +5,7 @@ import gamedata.action.Action;
 import gamedata.events.Condition;
 import gamedata.events.Event;
 import gamedata.events.GlobalAction;
-import gamedata.events.conditions.IsDead;
+import gamedata.events.conditions.DefineWhenUnitIsDead;
 import gamedata.events.globalaction.DeletePieceAtLocation;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Inventory;

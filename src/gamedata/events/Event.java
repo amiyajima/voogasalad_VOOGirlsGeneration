@@ -92,6 +92,13 @@ public class Event {
 		return myName;
 	}
 
+	/**
+	 * Getters for the list of Conditions and GlobalActions. The getter is needed to pass 
+	 * Conditions and GlobalActions into the EventEditor GUI, in order to populate 
+	 * ListViews. This allows the user to see and modify the Event's Condition and 
+	 * GlobalAction lists.
+	 * @return
+	 */
 	public List<Condition> getConditions(){
 		return myConditions;
 	}
