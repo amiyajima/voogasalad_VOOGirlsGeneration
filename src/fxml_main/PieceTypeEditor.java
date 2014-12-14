@@ -276,7 +276,7 @@ public class PieceTypeEditor extends Pane {
                 myName = unitName.getText();
                 myActions = addSelectedActions(modList.getSelectedActions());
                 myPiece = new Piece(myID, myName, myImageLocation, myMovement, myActions,
-                                    myStats, DEFAULT_LOC, myPlayerID, myInventory);
+                                    myStats, DEFAULT_LOC, myPlayerID, false, false);
                 System.out.println(myMovement.toString());
                 myOkLambda.accept(myPiece);
             }

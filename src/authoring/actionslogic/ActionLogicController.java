@@ -41,14 +41,6 @@ public class ActionLogicController implements Initializable {
     @Override
     public void initialize (URL location, ResourceBundle resources) {
         myPieceTypes = new ArrayList<String>();
-//        myActionTypes= new ArrayList<String>();
-        // for testing
-//        actionsListView.getItems().addAll("Attack");
-//        actionsListView.getItems().addAll("Heal");
-//        actionsListView.getItems().addAll("Run");
-//        myPieceTypes.add("Piece A");
-//        myPieceTypes.add("Piece B");
-//        myPieceTypes.add("Piece C");
         System.out.println("initialzing");
         System.out.println(myPieceTypes);
         actorsChoiceBox.getItems().addAll(myPieceTypes);
@@ -116,18 +108,19 @@ public class ActionLogicController implements Initializable {
         return myLogicMap;
     }
     
-//    public void getData(ActionData actionData, PieceTypeData ptData){
-//        ActionData actData = actionData;
-//        PieceTypeData pieceData = ptData;
-//        myActionTypes = actData.getActionIDs();
-//        myPieceTypes.addAll(pieceData.getIdSet());
-//        
+    public void getData(ActionData actionData, PieceTypeData ptData){
+        ActionData actData = actionData;
+        PieceTypeData pieceData = ptData;
+        myActionTypes = actData.getActionIDs();
+        myPieceTypes.addAll(pieceData.getIdSet());
+        
+    }
+    
+//    public void getData(List<String> aa, List<String> bb){
+//        myActionTypes = aa;
+//        myPieceTypes = bb;
 //    }
     
-    public void getData(List<String> aa, List<String> bb){
-        myActionTypes = aa;
-        myPieceTypes = bb;
-    }
     
     
 

@@ -1,9 +1,9 @@
 package gamedata.wrappers;
 
 import gamedata.action.Action;
-import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
+
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
@@ -84,7 +84,7 @@ public class PieceDataIndividual {
         Stats myStatsFromData = new Stats(myStats.getStats());
         // TODO Inventory is not implemented yet, so making an empty one
         Piece myPiece = new Piece(myID, myName, myImageLocation, null, myActionsFromData,
-                                  myStatsFromData, myLoc, myPlayerID, new Inventory());
+                                  myStatsFromData, myLoc, myPlayerID, false, false);
         return myPiece;
     }
 
