@@ -1,12 +1,10 @@
 package fxml_main;
 
 import gamePlayer.ViewController;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,10 +14,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 import authoring.createedit.GamePropertiesEditor;
 import authoring.data.GamePropertiesData;
 
@@ -72,8 +68,8 @@ public class GUIcontainerController implements Initializable{
 			new ViewController(playerTab);
 		} catch (UnsupportedAudioFileException | IOException
 				| LineUnavailableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		    ErrorPopUp myError = new ErrorPopUp(e.toString());
+                    myError.show();
 		}
 		displayedTabs.getTabs().add(playerTab);
 		displayedTabs.getSelectionModel().select(playerTab);
@@ -99,7 +95,8 @@ public class GUIcontainerController implements Initializable{
 			GamePropertiesEditor gpEditor = new GamePropertiesEditor(c);
 
 		} catch (IOException e) {
-			e.printStackTrace();
+		    ErrorPopUp myError = new ErrorPopUp(e.toString());
+                    myError.show();
 		}
 	}
 
