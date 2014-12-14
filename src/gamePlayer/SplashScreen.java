@@ -1,15 +1,11 @@
 package gamePlayer;
 
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 /**
@@ -18,7 +14,6 @@ import javafx.stage.Stage;
  *
  */
 public class SplashScreen extends Stage {
-    private Stage myStage;
     private static final String DUVALL_DANCES = "/resources/images/duvall_gif.gif"; 
     private Scene myScene;
     private GridPane myGrid;
