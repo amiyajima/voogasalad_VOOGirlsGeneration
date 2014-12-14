@@ -3,9 +3,12 @@ package gamedata.action;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
+
 import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
 import java.util.List;
+
 import authoring_environment.GUIGrid;
 
 
@@ -44,14 +47,24 @@ public class ConcreteAction implements Action {
 
     @Override
     public List<Point2D.Double> getAbsoluteActionRange (Point2D pieceLoc) {
-        List<Point2D.Double> absoluteRange = new ArrayList<Point2D.Double>();
-        for (Point2D relativeLoc : myAttackRange) {
+    	return getAbsoluteRange(pieceLoc, myAttackRange);
+    }
+    
+	@Override
+	public List<Point2D.Double> getAbsoluteEffectRange(Point2D pieceLoc) {
+		return getAbsoluteRange(pieceLoc, myEffectRange);
+	}
+	
+	private List<Point2D.Double> getAbsoluteRange(Point2D pieceLoc, 
+			List<Point2D.Double> range) {
+		List<Point2D.Double> absoluteRange = new ArrayList<Point2D.Double>();
+        for (Point2D relativeLoc : range) {
             double absX = pieceLoc.getX() + relativeLoc.getX();
             double absY = pieceLoc.getY() + relativeLoc.getY();
             absoluteRange.add(new Point2D.Double(absX, absY));
         }
         return absoluteRange;
-    }
+	}
 
     @Override
     public List<Point2D.Double> getActionRange () {
@@ -112,4 +125,5 @@ public class ConcreteAction implements Action {
     public ActionConclusion getConclusion () {
         return myConclusion;
     }
+
 }
