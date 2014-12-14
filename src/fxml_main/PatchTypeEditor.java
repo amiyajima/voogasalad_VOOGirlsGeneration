@@ -37,7 +37,7 @@ public class PatchTypeEditor extends Pane {
     private static final String EDITOR_TITLE = "Patch Editor";
     private static final String ID_LABEL = "Unique ID";
     private static final String NAME_LABEL = "Name";
-    private static final String LOADIMAGE_LABEL = "Load Terrain Image";
+    private static final String LOADIMAGE_LABEL = "Load Patch Image";
     private static final String TEMPLATE_LABEL = "OK";
     private static final String ID_PROMPT = "Enter patch ID...";
     private static final String NAME_PROMPT = "Enter patch name...";
