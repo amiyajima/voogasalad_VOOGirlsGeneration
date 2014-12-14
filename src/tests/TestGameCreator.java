@@ -6,9 +6,9 @@ import gamedata.action.ConcreteAction;
 import gamedata.action.StatsSingleMultiplier;
 import gamedata.action.StatsTotalLogic;
 import gamedata.action.conclusions.ReceiverToInventoryConclusion;
-import gamedata.events.Condition;
 import gamedata.events.Event;
-import gamedata.events.conditions.IsDead;
+import gamedata.events.conditions.Condition;
+import gamedata.events.conditions.DefineWhenUnitIsDead;
 import gamedata.events.globalaction.DeletePieceAtLocation;
 import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.Game;
@@ -16,10 +16,6 @@ import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
-import gamedata.goals.Goal;
-import gamedata.goals.PlayerPiecesRemovedGoal;
-import gamedata.rules.MoveCountRule;
-import gamedata.rules.Rule;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
 import gameengine.player.HumanPlayer;
@@ -75,8 +71,10 @@ public class TestGameCreator {
 	public Game createNewGame() {
 		System.out.println("TCG: Create new game");
 		List<Player> myPlayers = new ArrayList<Player>();
-		Player myPlayer1 = new HumanPlayer(1);
-		Player myPlayer2 = new SimpleAIPlayer(2);
+		Stats stats = new Stats();
+		stats.add("Score", 20);
+		Player myPlayer1 = new HumanPlayer(1, new Stats(stats), "Score");
+		Player myPlayer2 = new HumanPlayer(2, new Stats(stats), "Score");
 		myPlayers.add(myPlayer1);
 		myPlayers.add(myPlayer2);
 
@@ -86,7 +84,7 @@ public class TestGameCreator {
 		List<Event> myEvents = new ArrayList<Event>();
 
 		Event e1 = new Event("Garbage Collection Event");
-		Condition c = new IsDead("health");
+		Condition c = new DefineWhenUnitIsDead("health");
 		GlobalAction gl = new DeletePieceAtLocation(new Point2D.Double(0, 0));
 		e1.getConditions().add(c);
 		e1.getGlobalActions().add(gl);
@@ -162,7 +160,7 @@ public class TestGameCreator {
 		
 		List<List<Point2D.Double>> paths = new ArrayList<List<Point2D.Double>>();
 		paths.add(pl3);
-		Movement move = new Movement();
+		Movement move = new Movement(pl1);
 
 		List<Action> actions = new ArrayList<Action>();
 		actions.add(createNewAction(pl2, pl4));
@@ -246,14 +244,14 @@ public class TestGameCreator {
 	}
 	
 	public StatsTotalLogic createNewStatsTotalLogic() {
-	   StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor", "health");
-	   StatsSingleMultiplier ssm2 = new StatsSingleMultiplier(20, "actor", "health");
+	   StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "receiver", "health");
+	   StatsSingleMultiplier ssm2 = new StatsSingleMultiplier(0, "receiver", "health");
 	   List<StatsSingleMultiplier> ssmList = new ArrayList<StatsSingleMultiplier>();
            ssmList.add(ssm1);
            ssmList.add(ssm2);
            
            List<StatsTotalLogic> stlList = new ArrayList<StatsTotalLogic>();
-           StatsTotalLogic s1 = new StatsTotalLogic("actor", "health", ssmList);
+           StatsTotalLogic s1 = new StatsTotalLogic("receiver", "health", ssmList);
            stlList.add(s1);
 
            return s1;
@@ -261,7 +259,7 @@ public class TestGameCreator {
 	
 	public Event createNewEvent() {
 	    Event e1 = new Event("Garbage Collection Event");
-            Condition c = new IsDead("health");
+            Condition c = new DefineWhenUnitIsDead("health");
             GlobalAction gl = new DeletePieceAtLocation(new Point2D.Double(0, 0));
             e1.getConditions().add(c);
             e1.getGlobalActions().add(gl);

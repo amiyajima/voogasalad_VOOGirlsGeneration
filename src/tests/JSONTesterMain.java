@@ -2,9 +2,9 @@ package tests;
 
 import gamedata.JSON.JSONManager;
 import gamedata.action.Action;
-import gamedata.events.Condition;
 import gamedata.events.Event;
-import gamedata.events.conditions.IsDead;
+import gamedata.events.conditions.Condition;
+import gamedata.events.conditions.DefineWhenUnitIsDead;
 import gamedata.events.globalaction.DeletePieceAtLocation;
 import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.Game;
@@ -94,6 +94,7 @@ public class JSONTesterMain {
         //Patch patch2 = grid.getPatch(point2);
         //PatchData multiplePatches = grid.getPatchData(); // WORKS
         GlobalAction gl2 = new DeletePieceAtLocation(new Point2D.Double(0, 0));
+        //myJSONmanager.writeToJSON(g, saveTo);
         myJSONmanager.writeToJSON(g, saveTo);
     }
 
@@ -110,9 +111,9 @@ public class JSONTesterMain {
     }
 
     public static void main (String[] args) {
-        String link = "src/resources/json/THEGAME.json";
+        String link = "src/resources/json/Game-Player-Game.JSON";
         //String localLink = "C:\\Users\\Rica\\Desktop\\Rica-GamePlayer.json";
         testJSONwrite(link);
-        testJSONload(link);
+        //testJSONload(link);
     }
 }

@@ -75,6 +75,12 @@ public class Inventory {
 		return itemActions;
 	}
 	
+	/**
+	 * Returns a Map of Piece item name to List of Action names for displaying
+	 * the inventory in the Game Player
+	 * @return Map<String,List<String>> with Piece item name keys and
+	 * Action name values
+	 */
 	public Map<String,List<String>> getStringDisplay() {
 		Map<String,List<String>> strDisp = new HashMap<String,List<String>>();
 		for (Piece item : myInventory) {

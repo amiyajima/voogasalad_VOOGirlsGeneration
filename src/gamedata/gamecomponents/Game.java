@@ -1,6 +1,10 @@
 package gamedata.gamecomponents;
 
+import gamedata.stats.Stats;
+import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
+import gameengine.player.SimpleAIPlayer;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +43,8 @@ public class Game {
 	 * Number of players in the game
 	 */
 	private int myNumPlayers;
+        private static final String SIMPLE_AI_PLAYER = "Simple AI player";
+        private static final String HUMAN_PLAYER = "Human Player";
 
 	/**
 	 * Default Constructor
@@ -85,7 +91,6 @@ public class Game {
 	 * Starts the game by calling on the current player to start the turn
 	 */
 	public void startGame() {
-		// System.out.println("Starting the Game");
 		myCurrentPlayer.startTurn(myCurrentLevel);
 	}
 
@@ -258,4 +263,30 @@ public class Game {
 		}
 	}
 
+	/**
+	 * Game player initializes players to a specific type, needs to replace
+	 * each player with the appropriate type
+	 * @param playerID
+	 * @param newPlayer
+	 */
+	public void replacePlayer(int playerID, String playerType) {
+	    System.out.println("Game Players size " + myPlayers.size());
+	    for (Player p : myPlayers) {
+	        System.out.println("Player " + p.getID() + " " + p.getClass() + ", ");
+	    }
+	    //List<Player> players = new ArrayList<Player>();
+            for (int i = 0; i < myPlayers.size(); i++) {
+                
+                if (myPlayers.get(i).getID() == playerID) {
+                    
+                    if (playerType.equals(HUMAN_PLAYER)) {
+                        myPlayers.add(i, new HumanPlayer(myPlayers.get(i)));
+                    }
+                    else {
+                        myPlayers.add(i, new SimpleAIPlayer(myPlayers.get(i)));
+                    }
+                    myPlayers.remove(i+1);
+                }
+            }
+	}
 }

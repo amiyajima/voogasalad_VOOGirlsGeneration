@@ -29,8 +29,10 @@ public abstract class StatsModifier {
 	
 	/**
 	 * Returns the name of the stat to be modified 
+	 * 
+	 * made public so GlobalStatLogicBox can access it
 	 */
-	protected String getStatName() {
+	public String getStatName() {
 		return myStat;
 	}
 	
@@ -38,7 +40,7 @@ public abstract class StatsModifier {
 	 * Returns the name of the reference whose stat will be modified
 	 * (actor or receiver)
 	 */
-	protected String getStatRef() {
+	public String getStatRef() {
 		return myStatRef;
 	}
 	

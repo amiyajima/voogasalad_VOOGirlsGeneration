@@ -2,19 +2,15 @@ package fxml_main;
 
 import gamePlayer.ViewController;
 import gamedata.JSON.JSONManager;
-import gamedata.action.Action;
-import gamedata.action.ConcreteAction;
 import gamedata.gamecomponents.Game;
 import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,10 +22,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 import authoring.actionslogic.ActionLogicController;
 import authoring.concretefeatures.StatsTotalEditor;
 import authoring.createedit.GamePropertiesEditor;
@@ -39,9 +33,12 @@ import authoring.data.GamePropertiesData;
 import authoring.data.LevelData;
 import authoring.data.PatchTypeData;
 import authoring.data.PieceTypeData;
+import authoring.data.PlayerStatData;
+
 
 
 public class AuthoringController implements Initializable {
+
 
 	@FXML
 	private ScrollPane myPropertiesSPane;
@@ -91,6 +88,7 @@ public class AuthoringController implements Initializable {
 	private PieceTypeData myPieceTypes;
 	private PatchTypeData myPatchTypes;
 	private GamePropertiesData myGamePropertiesData;
+	private PlayerStatData myPlayerStatData;
 
 	@Override
 	// This method is called by the FXMLLoader when initialization is complete
@@ -100,6 +98,7 @@ public class AuthoringController implements Initializable {
 		myPieceTypes = new PieceTypeData();
 		myPatchTypes = new PatchTypeData();
 		myGridReference = new GUIGridReference();
+		myPlayerStatData = new PlayerStatData();
 		//        myGamePropertiesData = new GamePropertiesData();
 
 
@@ -111,9 +110,6 @@ public class AuthoringController implements Initializable {
 		loader.setLocation(getClass().getResource("/authoring/actionslogic/ActionLogic.fxml"));
 		Parent root = loader.load();
 	        ActionLogicController controller = loader.getController();
-	        if (controller == null) {
-	            System.out.println("I'M NULL");
-	            }
 	        controller.getData(myActionData, myPieceTypes);
 		Stage actionLogicStage = new Stage();
 		actionLogicStage.setTitle("Actions Logic Chart");
@@ -130,7 +126,7 @@ public class AuthoringController implements Initializable {
 
 	@FXML
 	private void showPlayerEditWindow(){
-		StatsTotalEditor statsEditor = new StatsTotalEditor();
+		PlayerStatEditor statsEditor = new PlayerStatEditor(myPlayerStatData);
 		statsEditor.setTitle("Player Editor");
 		statsEditor.setX(450);
 		statsEditor.setY(200);
@@ -142,10 +138,6 @@ public class AuthoringController implements Initializable {
 	private void saveGame () {
 
 		Game game = myTotalData.createGame();
-		Player p1 = new HumanPlayer(1);
-		List<Player> players = new ArrayList<Player>();
-		players.add(p1);
-		game.addPlayers(players);
 
 		JSONManager myJM = new JSONManager();
 
@@ -188,7 +180,7 @@ public class AuthoringController implements Initializable {
 		myGamePropertiesData=gamePropertiesData;
 
 		myTotalData = new GameAuthoringData(myLevelData, myPieceTypes, myPatchTypes,
-				myActionData, myGamePropertiesData);
+				myActionData, myGamePropertiesData, myPlayerStatData);
 		myPieceController = new PieceController(myPiecesVBox, myPropertiesSPane, myGridReference,
 				myPieceTypes, myActionData, myGamePropertiesData);
 		myPatchController = new PatchController(myPatchesVBox, myPropertiesSPane, myGridReference,

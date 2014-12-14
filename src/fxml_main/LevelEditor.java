@@ -1,7 +1,7 @@
 package fxml_main;
 
 import gamedata.events.Event;
-import gamedata.events.GameStateGlobalAction;
+import gamedata.events.globalaction.GameStateGlobalAction;
 import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.Level;
 
@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import authoring.data.EventsDataWrapper;
+import authoring.data.PlayerData;
 import authoring.eventeditor.EventEditorController;
 import authoring_environment.GUIGrid;
 
@@ -51,9 +50,11 @@ public class LevelEditor extends VBox {
     private String myEditorTitle;
 
 	private EventsDataWrapper myData;
+	private PlayerData myPlayerData;
 
-    public LevelEditor (Consumer<Level> okLambda, EventsDataWrapper data, String gridShape) {
-    	myEditorTitle = CREATOR_TITLE;
+    public LevelEditor (Consumer<Level> okLambda, EventsDataWrapper data, String gridShape, PlayerData playerData) {
+        myPlayerData = playerData;
+        myEditorTitle = CREATOR_TITLE;
     	myId = "";
         myGridRows = 0;
         myGridCols = 0;
@@ -105,10 +106,12 @@ public class LevelEditor extends VBox {
         VBox rowVBox = new VBox();
         Label rowLabel = new Label("Rows");
         TextField rowField = new TextField("" + myGridRows);
+        rowField.setMaxWidth(80);
         rowVBox.getChildren().addAll(rowLabel, rowField);
         VBox colVBox = new VBox();
         Label colLabel = new Label("Columns");
         TextField colField = new TextField("" + myGridCols);
+        colField.setMaxWidth(80);
         colVBox.getChildren().addAll(colLabel, colField);
 
         HBox gridSizeHBox = new HBox();
@@ -153,17 +156,6 @@ public class LevelEditor extends VBox {
 //                System.out.println(myGridShape);
                 Level level = new Level(grid, myEvents, myId, false);
                 
-                /**
-                 * Inject the cloned Level into each Event's GameStateGlobalAction 
-                 */
-                for(Event e: myEvents){
-                	for(GlobalAction g: e.getGlobalActions()){
-	                	if(GameStateGlobalAction.class.isAssignableFrom(g.getClass())){
-	                		((GameStateGlobalAction) g).reinject(level);
-	                	}
-                	}
-                }
-                
                 myOkLambda.accept(level);
             }
         });
@@ -187,8 +179,8 @@ public class LevelEditor extends VBox {
 
         EventEditorController controller = loader.getController();
         controller.loadEvents(myEvents);
-        controller.loadGameState(myLevel);
         controller.loadData(myData);
+        //controller.loadPlayerData(myPlayerData);
 
         eventEditorStage.showAndWait();
     }

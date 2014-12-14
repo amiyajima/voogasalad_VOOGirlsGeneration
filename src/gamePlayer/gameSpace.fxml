@@ -9,7 +9,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="871.0" styleClass="root" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="myGameSpace" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="871.0" styleClass="root" type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <right>
       <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="250.0" BorderPane.alignment="CENTER">
          <items>
@@ -39,7 +39,10 @@
                 </Tab>
                   <Tab id="INVENTORY" fx:id="inventoryTab" text="Inventory">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox fx:id="inventoryPane" prefHeight="200.0" prefWidth="100.0" />
+                           </children></AnchorPane>
                     </content>
                   </Tab>
               </tabs>
@@ -58,14 +61,12 @@
 			   <MenuItem id="RESTART" fx:id="restartMenu" mnemonicParsing="false" onAction="#restartGame" text="Restart" />
 			   <MenuItem id="SAVE" fx:id="saveMenu" mnemonicParsing="false" onAction="#saveGame" text="Save Game" />
 			   <MenuItem id="LOAD" fx:id="loadMenu" mnemonicParsing="false" onAction="#loadGame" text="Load Another Game" />
-			   <MenuItem id="MAIN" fx:id="mainMenu" mnemonicParsing="false" onAction="#openInitialMenu" text="Go to Main Menu" />
 			   <MenuItem id="SETTINGS" fx:id="settingsMenu" mnemonicParsing="false" onAction="#openSettings" text="Settings" />
 			   <MenuItem id="EXIT" fx:id="exitMenu" mnemonicParsing="false" onAction="#exitGame" text="Exit" />
 		   </items>
 		 </MenuButton>
          <Button id="SCORE" fx:id="showScoreButton" mnemonicParsing="false" onAction="#showScore" style="-fx-padding: 10;" styleClass="button" text="Score Board">
 		</Button>
-            <Button id="SCORE" fx:id="playerEditButton" layoutX="147.0" layoutY="20.0" mnemonicParsing="false" onAction="#editPlayers" style="-fx-padding: 10;" styleClass="button" text="Players..." />
 		<Label id="TURN" fx:id="playerTurn" style="-fx-background-color: transparent;;" text="Turn: ">
 		</Label>
             <ToggleButton fx:id="soundToggle" mnemonicParsing="false" styleClass="button" text="Sound" />

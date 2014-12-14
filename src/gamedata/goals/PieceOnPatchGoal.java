@@ -1,6 +1,5 @@
 package gamedata.goals;
 
-import gamedata.gamecomponents.Grid;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
