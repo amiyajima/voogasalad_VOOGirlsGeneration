@@ -836,7 +836,7 @@ public class ViewController {
 		tempMoveCount++;
 		
 
-		if (myModel.getCurrentLevel().getGameWon() || tempMoveCount >= 2) {
+		if (myModel.getCurrentLevel().getGameWon() || tempMoveCount % 4 == 0) {
 			// TODO this assumes that the most recent player is the one that won
 		        // also chooses a random score
 			String highScorer = "Bob";
