@@ -24,7 +24,7 @@ public class SplashScreen extends Stage {
         myV = new VBox();
         for (int i = 0; i < 3; i++) {
             HBox box = new HBox();
-            for (int j = 0; j < 15; j++) {
+            for (int j = 0; j < 10; j++) {
                 ImageView myImageView = new ImageView(new Image(getClass().getResourceAsStream(DUVALL_DANCES)));
                 box.getChildren().add(myImageView);
             }

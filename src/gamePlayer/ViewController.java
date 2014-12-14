@@ -730,7 +730,6 @@ public class ViewController {
 		}
 
 		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(myCurrentLocation));
-
 		while (myCurrentPlayer.getType().equals("AI")) {
 			myCurrentPlayer.play();
 			this.checkEndActions();
