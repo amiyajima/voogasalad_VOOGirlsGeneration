@@ -82,6 +82,7 @@ public class GUIcontainerController implements Initializable{
 
 	private void LoadNewAuthoring(){		
 		try {
+
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(GUIcontainerController.class.getResource("Voogirls_Authoring.fxml"));
 			Parent root = loader.load();

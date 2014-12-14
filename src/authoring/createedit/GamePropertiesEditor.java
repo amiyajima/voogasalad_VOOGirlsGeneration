@@ -120,10 +120,10 @@ public class GamePropertiesEditor extends PopupWindow {
 //
 //	}
 
-//	public int getNumPlayer () {
-//		return myNumPlayer;
-//	}
-//
+	public int getNumPlayer () {
+		return myNumPlayers;
+	}
+
 //	public String getGridShape () {
 //		return myGridShape;
 //	}

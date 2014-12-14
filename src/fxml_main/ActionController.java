@@ -1,9 +1,7 @@
 package fxml_main;
 
 import gamedata.action.ConcreteAction;
-
 import java.util.function.Consumer;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -13,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.data.ActionData;
+import authoring.data.PlayerData;
 
 
 /**

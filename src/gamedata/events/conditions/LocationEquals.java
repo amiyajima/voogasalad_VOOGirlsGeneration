@@ -3,15 +3,14 @@ package gamedata.events.conditions;
 import java.awt.geom.Point2D;
 import java.util.List;
 
-import gamedata.events.Condition;
 import gamedata.gamecomponents.IHasStats;
 
 public class LocationEquals extends Condition{
 
-	protected IHasStats myReference;
+	protected String myReference;
 	protected Point2D.Double myConstant;
 	
-	public LocationEquals(IHasStats ref1, String stat1, String constant){
+	public LocationEquals(String ref1, String stat1, String constant){
 		super(String.format("IF Piece is at location %s", constant));
 		myReference = ref1;
 		
@@ -28,7 +27,7 @@ public class LocationEquals extends Condition{
 	public boolean evaluate(List<IHasStats> objects) {
 		boolean onGrid = false;
 		for(IHasStats source: objects){
-			if(myReference.getClass().equals(source.getClass())){
+			if(myReference.equals(source.getClass().toString())){
 				if(myConstant.equals(source.getLoc())){
 					onGrid = true;
 				}

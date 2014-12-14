@@ -87,7 +87,6 @@ public class Game {
 	 * Starts the game by calling on the current player to start the turn
 	 */
 	public void startGame() {
-		// System.out.println("Starting the Game");
 		myCurrentPlayer.startTurn(myCurrentLevel);
 	}
 

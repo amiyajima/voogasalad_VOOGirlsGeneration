@@ -3,12 +3,10 @@ package gamedata.action;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
-
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 import java.util.ArrayList;
 import java.util.List;
-
 import authoring_environment.GUIGrid;
 
 
@@ -19,7 +17,7 @@ import authoring_environment.GUIGrid;
  * 
  * See Action interface for descriptions of public methods
  * 
- * @author Jennie Ju, annamiyajima
+ * @author Jennie Ju, annamiyajima, Sandy Lee
  */
 public class ConcreteAction implements Action {
     private String myName;
@@ -47,24 +45,14 @@ public class ConcreteAction implements Action {
 
     @Override
     public List<Point2D.Double> getAbsoluteActionRange (Point2D pieceLoc) {
-    	return getAbsoluteRange(pieceLoc, myAttackRange);
-    }
-    
-	@Override
-	public List<Point2D.Double> getAbsoluteEffectRange(Point2D pieceLoc) {
-		return getAbsoluteRange(pieceLoc, myEffectRange);
-	}
-	
-	private List<Point2D.Double> getAbsoluteRange(Point2D pieceLoc, 
-			List<Point2D.Double> range) {
-		List<Point2D.Double> absoluteRange = new ArrayList<Point2D.Double>();
-        for (Point2D relativeLoc : range) {
+        List<Point2D.Double> absoluteRange = new ArrayList<Point2D.Double>();
+        for (Point2D relativeLoc : myAttackRange) {
             double absX = pieceLoc.getX() + relativeLoc.getX();
             double absY = pieceLoc.getY() + relativeLoc.getY();
             absoluteRange.add(new Point2D.Double(absX, absY));
         }
         return absoluteRange;
-	}
+    }
 
     @Override
     public List<Point2D.Double> getActionRange () {
@@ -100,7 +88,14 @@ public class ConcreteAction implements Action {
     private void modifyStats (Piece actor, Piece[] receivers) {
         if (myStatsLogics != null) {
             for (Piece receiver : receivers) {
-                myDataModifier.modifyStats(actor, receiver);
+                for (Point2D l : myAttackRange){
+                    if ((actor.getLoc().getX() + l.getX()) == receiver.getLoc().getX()){
+                        if ((actor.getLoc().getY() + l.getY()) == receiver.getLoc().getY()){
+                            myDataModifier.modifyStats(actor, receiver);
+
+                        }
+                    }
+                }
             }
         }
     }
@@ -126,4 +121,14 @@ public class ConcreteAction implements Action {
         return myConclusion;
     }
 
+    @Override
+    public List<Point2D.Double> getAbsoluteEffectRange (Point2D pieceLoc) {
+        List<Point2D.Double> absoluteRange = new ArrayList<Point2D.Double>();
+        for (Point2D relativeLoc : myEffectRange) {
+            double absX = pieceLoc.getX() + relativeLoc.getX();
+            double absY = pieceLoc.getY() + relativeLoc.getY();
+            absoluteRange.add(new Point2D.Double(absX, absY));
+        }
+        return absoluteRange;
+    }
 }

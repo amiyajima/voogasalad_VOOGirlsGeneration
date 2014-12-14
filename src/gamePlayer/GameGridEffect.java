@@ -46,6 +46,7 @@ public class GameGridEffect {
         if (myActivePiece != null && myActiveAction != null) {
             //System.out.println("GameGridEffect: action ABOUT TO HIGHLIGHT\n\n");
         	//System.out.println("Size of Action Range:"+myActiveAction.getActionRange(myActivePiece.getLoc()));
+            
             myActiveAction.getAbsoluteActionRange(myActivePiece.getLoc())
                     .forEach(point -> { if (point.getX() < myGrid.getNumRows()
                                      && point.getY() < myGrid.getNumCols()
@@ -73,22 +74,20 @@ public class GameGridEffect {
     public void highlightEffectRange (Point2D.Double loc) {
         clearAllEffectHighlights();
         
-        myActivePiece = myViewController.getActivePiece();
         myActiveAction = myViewController.getActiveAction();
         
-        if (myActivePiece != null && myActiveAction != null) {
-            myActiveAction.getAbsoluteActionRange(myActivePiece.getLoc()).forEach(point -> {
-                if (loc.equals(point)){
-                    myActiveAction.getEffectRange().forEach(point2 -> {
-                    	if(point2.getX()>=0 && point2.getY()>=0 && point2.getX()<= myGrid.getNumCols() &&
-                    			point2.getY()<= myGrid.getNumRows()	){
-                    	    SuperTile toHighlight = myGrid.findTile(point2);
-                            toHighlight.selectTile(EFFECT_RANGE_COLOR);
-                            myHighlightedEffects.add(toHighlight);
-                    	}
-                        });
-                    }
-                });
+
+        if (myActiveAction != null){
+            List<Point2D.Double> effectRange = myActiveAction.getAbsoluteEffectRange(loc);
+            for (Point2D.Double coord: effectRange) {
+                SuperTile toHighlight = myGrid.findTile(coord);
+                toHighlight.selectTile(EFFECT_RANGE_COLOR);
+                myHighlightedEffects.add(toHighlight);
+
+                
+            }
+            
+            
             }
     }
     
