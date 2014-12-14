@@ -26,7 +26,8 @@ import authoring.data.GamePropertiesData;
 public class GUIcontainerController implements Initializable{
 
 	private Scene myScene;
-	private int myTabCount=0;
+	private int myAuthorTabCount=0;
+	private int myPlayerTabCount=0;
 
 
 	@FXML
@@ -55,27 +56,27 @@ public class GUIcontainerController implements Initializable{
 	}
 
 	private void loadNewPlayer() {
-		Stage player=new Stage();
-		try {
-			new ViewController(player);
-		} catch (UnsupportedAudioFileException | IOException
-				| LineUnavailableException e) {
-			e.printStackTrace();
-		}
-
-		player.show();
-
-
-		//		Tab playerTab=new Tab("newPlayer");
+		//		Stage player=new Stage();
 		//		try {
-		//			new ViewController(playerTab);
+		//			new ViewController(player);
 		//		} catch (UnsupportedAudioFileException | IOException
 		//				| LineUnavailableException e) {
-		//			// TODO Auto-generated catch block
 		//			e.printStackTrace();
 		//		}
-		//		displayedTabs.getTabs().add(playerTab);
-		//        displayedTabs.getSelectionModel().select(playerTab);
+		//
+		//		player.show();
+
+
+		Tab playerTab=new Tab("Player"+ ++myPlayerTabCount);
+		try {
+			new ViewController(playerTab);
+		} catch (UnsupportedAudioFileException | IOException
+				| LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		displayedTabs.getTabs().add(playerTab);
+		displayedTabs.getSelectionModel().select(playerTab);
 
 	}
 
@@ -88,7 +89,7 @@ public class GUIcontainerController implements Initializable{
 
 			Consumer<GamePropertiesData> c = (GamePropertiesData gpd) -> {
 				authorController.initData(gpd);
-				Tab tab=new Tab("Authoring"+ ++myTabCount);
+				Tab tab=new Tab("Authoring"+ ++myAuthorTabCount);
 				tab.setContent(root);
 				displayedTabs.getTabs().add(tab);
 				displayedTabs.getSelectionModel().select(tab);

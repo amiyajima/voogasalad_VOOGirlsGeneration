@@ -278,7 +278,7 @@ public class ViewController {
 		newHighScoreScene = new Scene(newHighScoreRoot);
 		winLoseScene = new Scene(myWinLoseScreen);
 
-		myStage.setScene(new Scene(myInitialScene));
+//		myStage.setScene(new Scene(myInitialScene));
 
 		myAudio = new Audio();
 		myAudio.playBackground();
