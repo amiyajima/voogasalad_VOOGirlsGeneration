@@ -164,7 +164,7 @@ public class Piece extends GridComponent {
 	public List<Action> getActions() {
 		List<Action> actions = new LinkedList<Action>(myActions);
 		actions.add(0, myMovement);
-		if (myInventory != null) {
+		if (myHasInventory) {
 			actions.addAll(myInventory.getItemActions());
 		}
 		return actions;
@@ -277,6 +277,15 @@ public class Piece extends GridComponent {
 	 */
 	public boolean isItem() {
 		return myIsItem;
+	}
+	
+	/**
+	 * Returns the original actions contained in the piece
+	 * (without
+	 * @return
+	 */
+	public List<Action> getOriginalActions() {
+		return myActions;
 	}
 	
 	public String printString() {
