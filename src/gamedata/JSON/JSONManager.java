@@ -75,7 +75,22 @@ public class JSONManager {
         Game pi = myGson.fromJson(br, Game.class);
 //        System.out.println("Level 1: " + pi.getLevels().get(0).getGrid().toString());
         return pi;
-    }    
+    }
+    
+    /**
+     * Pass in the class of the object you would like to read and it will return you that object
+     * you just need to cast it upon getting the return
+     * @param c
+     * @param jsonFileLocation
+     * @return
+     * @throws FileNotFoundException
+     */
+    public Object readSpecificFromJSONFile (Class<?> c, String jsonFileLocation) throws FileNotFoundException {
+        System.out.println("JSONManager: read method called");
+        BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
+        Object pi = myGson.fromJson(br, c);
+        return pi;
+    }
     
     public void registerTypeAdapters (GsonBuilder builder) {
         builder.registerTypeAdapter(StatsModifier.class, new GenericTypeAdapter<StatsModifier>("gamedata.action"));

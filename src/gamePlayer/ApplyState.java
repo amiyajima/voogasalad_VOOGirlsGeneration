@@ -3,6 +3,9 @@ package gamePlayer;
 import gamedata.gamecomponents.Piece;
 import javafx.scene.input.MouseEvent;
 import authoring_environment.SuperTile;
+import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
+import java.util.List;
 
 /**
  * 
@@ -53,17 +56,26 @@ public class ApplyState implements IGridState {
 		}
 		// System.out.println("ACTION RUNNING:" +
 		// myController.getActiveAction().toString());
-
-		myController.getActiveAction().doBehavior(myController.getGrid(),actor, piece);
+		
+		//do action IFF the piece is part of the highlighted action range
+		for (Point2D point:myController.getActiveAction().getAbsoluteActionRange(myController.getActivePiece().getLoc())){
+		    if (piece.getLoc().equals(point)){
+		        myController.getActiveAction().doBehavior(myController.getGrid(),actor, piece);
+		    }
+		    else{
+		        System.out.println("NOPE NOT HERE");
+		    }
+		    myGameGridEffect.clearAllPieceHighlights();
+		    myGameGridEffect.clearAllActionHighlights();
+		    myController.clearActions();
+		    myController.setGridState(new SelectState(myController));
+		    myController.setActivePiece(null);
+		    myController.setActiveAction(null);
+		    myController.endAction();
+		}
+		
 		//myController.getGrid().repopulateGrid();
 
-		myGameGridEffect.clearAllPieceHighlights();
-		myGameGridEffect.clearAllActionHighlights();
-		myController.clearActions();
-		myController.setGridState(new SelectState(myController));
-		myController.setActivePiece(null);
-		myController.setActiveAction(null);
-		myController.endAction();
 	}
 
 }

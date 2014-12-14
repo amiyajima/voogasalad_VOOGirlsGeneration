@@ -28,6 +28,8 @@
          <children>
             <VBox prefHeight="400.0" prefWidth="267.0" styleClass="vbox" BorderPane.alignment="CENTER">
                <children>
+                  <Label text="Please first press &quot;Load Data&quot; Button" />
+                  <Separator prefWidth="200.0" />
                   <Label text="Available Actions" />
                   <ListView fx:id="actionsListView" prefHeight="473.0" prefWidth="267.0" />
                </children>

@@ -39,7 +39,10 @@
                 </Tab>
                   <Tab id="INVENTORY" fx:id="inventoryTab" text="Inventory">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox fx:id="inventoryPane" prefHeight="200.0" prefWidth="100.0" />
+                           </children></AnchorPane>
                     </content>
                   </Tab>
               </tabs>
@@ -58,7 +61,6 @@
 			   <MenuItem id="RESTART" fx:id="restartMenu" mnemonicParsing="false" onAction="#restartGame" text="Restart" />
 			   <MenuItem id="SAVE" fx:id="saveMenu" mnemonicParsing="false" onAction="#saveGame" text="Save Game" />
 			   <MenuItem id="LOAD" fx:id="loadMenu" mnemonicParsing="false" onAction="#loadGame" text="Load Another Game" />
-			   <MenuItem id="MAIN" fx:id="mainMenu" mnemonicParsing="false" onAction="#openInitialMenu" text="Go to Main Menu" />
 			   <MenuItem id="SETTINGS" fx:id="settingsMenu" mnemonicParsing="false" onAction="#openSettings" text="Settings" />
 			   <MenuItem id="EXIT" fx:id="exitMenu" mnemonicParsing="false" onAction="#exitGame" text="Exit" />
 		   </items>

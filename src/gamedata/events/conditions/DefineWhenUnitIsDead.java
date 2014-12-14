@@ -7,12 +7,12 @@ import gamedata.events.Condition;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Piece;
 
-public class IsDead extends Condition{
+public class DefineWhenUnitIsDead extends Condition{
 
 	String myHealthName;
 	
-	public IsDead(String name) {
-		super(String.format("SPECIAL CONDITION: Pieces with %s <=0 are dead.", name));
+	public DefineWhenUnitIsDead(String name) {
+		super(String.format("SPECIAL CONDITION: Pieces with %s <=0 are dead", name));
 		myHealthName = name;
 	}
 
