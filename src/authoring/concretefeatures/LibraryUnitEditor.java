@@ -80,7 +80,7 @@ public class LibraryUnitEditor extends TitledPane {
 			addedActionNames.add(a.toString());
 		}
 
-		ModulesList modList = new ModulesList(myAvailableActions.getActionIDs(), addedActionNames);
+		ModulesList modList = new ModulesList(myAvailableActions.getActionNames(), addedActionNames);
 
 		Button goButton = new Button(TEMPLATE_LABEL);
 		goButton.setOnAction(new EventHandler<ActionEvent>() {

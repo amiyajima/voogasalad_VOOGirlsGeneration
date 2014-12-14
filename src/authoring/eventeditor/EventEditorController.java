@@ -1,17 +1,19 @@
 package authoring.eventeditor;
 
+import gamedata.events.Condition;
 import gamedata.events.Event;
-import gamedata.events.conditions.Condition;
+import gamedata.events.GlobalAction;
 import gamedata.events.conditions.StatEquals;
-import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.IChangeGameState;
 import gamedata.gamecomponents.Level;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+
 import authoring.data.EventsDataWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -69,6 +71,7 @@ public class EventEditorController implements Initializable {
     private Stage newActionStage;
     
     private List<Event> myEvents;
+    private ObservableList<Event> myObservableEventsList;
     private List<Condition> myConditions;
     private List<GlobalAction> myActions;
     private EventsDataWrapper myData;
@@ -79,14 +82,14 @@ public class EventEditorController implements Initializable {
     @Override
     // This method is called by the FXMLLoader when initialization is complete
     public void initialize (URL fxmlFileLocation, ResourceBundle resources) {
-
+    	myObservableEventsList = FXCollections.observableArrayList();
         // Makes it so that the right-hand Editor updates with respect to the selected
         // Event on the left side
         eventsListView
                 .getSelectionModel()
                 .selectedItemProperty()
                 .addListener(
-                             (observable, oldValue, selectedEvent) -> showEventInEditor(selectedEvent));
+                             (observable, oldValue, selectedEvent) -> showEventInEditor(oldValue, selectedEvent));
     }
 
     @FXML
@@ -154,7 +157,7 @@ public class EventEditorController implements Initializable {
 
             @Override
             public void handle (ActionEvent click) {
-                myEvents.add(new Event(eventName.getText()));
+                myObservableEventsList.add(new Event(eventName.getText()));
                 newEventStage.close();
             }
         });
@@ -165,6 +168,11 @@ public class EventEditorController implements Initializable {
 
     @FXML
     private void handleSaveEvents () {
+    	eventsListView.getSelectionModel().getSelectedItem().getConditions().clear();
+    	eventsListView.getSelectionModel().getSelectedItem().getConditions().addAll(conditionsListView.getItems());
+    	eventsListView.getSelectionModel().getSelectedItem().getGlobalActions().addAll(actionsListView.getItems());
+    	myEvents.clear();
+    	myEvents.addAll(eventsListView.getItems());
         Stage stage = (Stage) saveEvents.getScene().getWindow();
         stage.close();
     }
@@ -180,16 +188,22 @@ public class EventEditorController implements Initializable {
      * and GlobalActions lists on the right-hand side. Also enables all Buttons allowing
      * interaction with those objects.
      * 
-     * @param event
+     * @param newEvent
      */
-    private void showEventInEditor (Event event) {
+    private void showEventInEditor (Event oldEvent, Event newEvent) {
+    	
+    	if(oldEvent!=null){
+	    	oldEvent.getConditions().clear();
+	    	oldEvent.getConditions().addAll(conditionsListView.getItems());
+	    	oldEvent.getGlobalActions().addAll(actionsListView.getItems());
+    	}
         /**
          * To avoid null-pointer exceptions.
          */
-        if (event == null) { return; }
+        if (newEvent == null) { return; }
 
-        conditionsListView.setItems((ObservableList<Condition>) event.getConditions());
-        actionsListView.setItems((ObservableList<GlobalAction>) event.getGlobalActions());
+        conditionsListView.setItems(FXCollections.observableArrayList(newEvent.getConditions()));
+        actionsListView.setItems(FXCollections.observableArrayList(newEvent.getGlobalActions()));
 
         newCondition.setDisable(false);
         editCondition.setDisable(false);
@@ -246,9 +260,11 @@ public class EventEditorController implements Initializable {
      * 
      * @param myEvents - an ObservableList to interface with the ListView
      */
-    public void loadEvents (ObservableList<Event> events) {
+    
+    public void loadEvents (List<Event> events) {
         myEvents = events;
-        eventsListView.setItems(events);
+        myObservableEventsList.addAll(events);
+        eventsListView.setItems(myObservableEventsList);
     }
 
 	public void loadData(EventsDataWrapper data) {

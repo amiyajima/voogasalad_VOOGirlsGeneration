@@ -39,7 +39,10 @@
                 </Tab>
                   <Tab id="INVENTORY" fx:id="inventoryTab" text="Inventory">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox fx:id="inventoryPane" prefHeight="200.0" prefWidth="100.0" />
+                           </children></AnchorPane>
                     </content>
                   </Tab>
               </tabs>
@@ -68,6 +71,7 @@
             <Button id="SCORE" fx:id="playerEditButton" layoutX="147.0" layoutY="20.0" mnemonicParsing="false" onAction="#editPlayers" style="-fx-padding: 10;" styleClass="button" text="Players..." />
 		<Label id="TURN" fx:id="playerTurn" style="-fx-background-color: transparent;;" text="Turn: ">
 		</Label>
+            <ToggleButton fx:id="soundToggle" mnemonicParsing="false" styleClass="button" text="Sound" />
 	  </children>
       </HBox>
    </top>

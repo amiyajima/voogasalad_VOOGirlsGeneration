@@ -1,7 +1,6 @@
 package fxml_main;
 
 import gamedata.action.Action;
-
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
@@ -21,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -48,7 +48,7 @@ public class PieceTypeEditor extends Pane {
     private static final String EDITOR_TITLE = "Piece Editor";
     private static final String ID_LABEL = "Unique ID";
     private static final String NAME_LABEL = "Name";
-    private static final String LOADIMAGE_LABEL = "Load Unit Image";
+    private static final String LOADIMAGE_LABEL = "Load Piece Image";
     private static final String TEMPLATE_LABEL = "OK";
     private static final String ID_PROMPT = "Enter piece ID...";
     private static final String NAME_PROMPT = "Enter piece name...";
@@ -77,6 +77,8 @@ public class PieceTypeEditor extends Pane {
     private Movement myMovement;
     private List<Action> myActions;
     private Inventory myInventory;
+    private boolean myHasInventory;
+    private boolean myIsItem;
 
     /**
      * Called when creating a new Piece
@@ -97,6 +99,8 @@ public class PieceTypeEditor extends Pane {
         myStats = new Stats();
         myPlayerID = 1;
         myInventory = new Inventory();
+        myHasInventory = false;
+        myIsItem = false;
         constructor(okLambda);
     }
 
@@ -114,6 +118,8 @@ public class PieceTypeEditor extends Pane {
         myStats = piece.getStats();
         myPlayerID = piece.getPlayerID();
         myInventory = piece.getInventory();
+        myHasInventory = piece.hasInventory();
+        myIsItem = piece.isItem();
         constructor(okLambda);
     }
 
@@ -181,12 +187,22 @@ public class PieceTypeEditor extends Pane {
         names.getChildren().addAll(nameLabel, unitName);
 
         ModulesList modList = initModList();
+        
+        CheckBox cbInventory = new CheckBox("Has an inventory");
+        cbInventory.setAllowIndeterminate(false);
+        cbInventory.setSelected(myHasInventory);
+        
+        CheckBox cbItem = new CheckBox("Is an item");
+        cbInventory.setAllowIndeterminate(false);
+        cbItem.setSelected(myIsItem);
 
         Button goButton = new Button(TEMPLATE_LABEL);
         initImageLoader(images);
-        initGoBtn(goButton, unitID, unitName, modList);
+        initGoBtn(goButton, unitID, unitName, modList,
+        		cbInventory, cbItem);
 
-        box.getChildren().addAll(labelBox, ids, names, images, movements, createStat, modList, goButton);
+        box.getChildren().addAll(labelBox, ids, names, images, movements,
+        		createStat, modList, cbInventory, cbItem, goButton);
         getChildren().add(box);
     }
     
@@ -205,14 +221,14 @@ public class PieceTypeEditor extends Pane {
     }
 
     private ModulesList initModList () {
-        ObservableList<String> availableActions = myAvailableActions.getActionIDs();
+        ObservableList<String> availableActions = myAvailableActions.getActionNames();
         ObservableList<String> addedActions = FXCollections.observableArrayList();
         // TODO : Actions need to be properly implemented before this can work.
-        // for(Action action : myActions){
-        // System.out.println(myActions.size());
-        // availableActions.remove(action);
-        // addedActions.add(action);
-        // }
+//        for(Action action : myActions){
+//        	System.out.println(myActions.size());
+//        	availableActions.remove(action);
+//        	addedActions.add(action);
+//        }
         return new ModulesList(availableActions, addedActions);
     }
 
@@ -262,19 +278,25 @@ public class PieceTypeEditor extends Pane {
     private void initGoBtn (Button goButton,
                             TextField unitID,
                             TextField unitName,
-                            ModulesList modList) {
+                            ModulesList modList,
+                            CheckBox cbInventory,
+                            CheckBox cbItem) {
         goButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent click) {
                 myID = unitID.getText();
-                if (myIDSet.contains(myID)) {
-                return;
+                if (myIDSet.contains(myID) || (myID.equals(""))) {
+                	return;
                 }
-                myIDSet.add(myID);
+                if (!unitID.isDisabled()) {
+                    myIDSet.add(myID);
+                }
                 myName = unitName.getText();
                 myActions = addSelectedActions(modList.getSelectedActions());
+                myHasInventory = cbInventory.isSelected();
+                myIsItem = cbItem.isSelected();
                 myPiece = new Piece(myID, myName, myImageLocation, myMovement, myActions,
-                                    myStats, DEFAULT_LOC, myPlayerID, myInventory);
+                                myStats, DEFAULT_LOC, myPlayerID, myHasInventory, myIsItem);
                 System.out.println(myMovement.toString());
                 myOkLambda.accept(myPiece);
             }

@@ -2,6 +2,8 @@ package gamedata.events.conditions;
 
 import java.awt.geom.Point2D;
 import java.util.List;
+
+import gamedata.events.Condition;
 import gamedata.gamecomponents.IHasStats;
 
 public class LocationEquals extends Condition{
@@ -24,12 +26,15 @@ public class LocationEquals extends Condition{
 
 	@Override
 	public boolean evaluate(List<IHasStats> objects) {
+		boolean onGrid = false;
 		for(IHasStats source: objects){
 			if(myReference.getClass().equals(source.getClass())){
-				return myConstant.equals(source.getLoc());
+				if(myConstant.equals(source.getLoc())){
+					onGrid = true;
+				}
 			}	
 		}
-		return false;
+		return onGrid;
 	}
 
 }

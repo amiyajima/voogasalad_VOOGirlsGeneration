@@ -1,9 +1,7 @@
 package gamePlayer;
 
-import gameengine.player.HumanPlayer;
 import java.awt.geom.Point2D;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import authoring_environment.SuperTile;
@@ -48,34 +46,24 @@ public class KeyboardMovement {
         
         if ((vc.getGame().getCurrentPlayer().getType().equals("Human"))) {
 
-            // the if statement will go away when we actually run a real game!
-            if (((HumanPlayer) vc.getGame().getCurrentPlayer()).getMovementKeyMap() != null) {
-                myKeyMap = ((HumanPlayer) vc.getGame().getCurrentPlayer()).getMovementKeyMap();
-            }
-
             // first highlight where the keyboard movement starts on the game grid.
             vc.getGrid().findTile(myCurrentLocation).selectTile(KEY_MOVEMENT_COLOR);
 
             vc.getGridPane().requestFocus();
-
             if (vc.getGame().getCurrentPlayer().getType().equals("Human")) {
                 vc.getGridPane().setOnKeyPressed(new EventHandler<KeyEvent>() {
-
                     Set<KeyCode> movementKeyList = myKeyMap.keySet();
 
                     @Override
                     public void handle (KeyEvent key) {
-                        // if (key.getCode() == KeyCode.F) {
-                        // System.out.println("Selected with key: " + myCurrentLocation);
-                        // vc.performAction(myCurrentLocation);
-                        // }
-
                         for (KeyCode kc : movementKeyList) {
 
                             if (key.getCode() == kc) {
 
                                 if (myKeyMap.get(kc).equals(new Point2D.Double(1.0, 1.0))) {
-                                    System.out.println("Selected action with key");
+                                    System.out.println("this piece!");
+                                    currentTile = vc.getGrid().findTile(myCurrentLocation);
+                                    currentTile.deselectTile();
                                     vc.performAction(myCurrentLocation);
                                 }
 
@@ -84,15 +72,12 @@ public class KeyboardMovement {
                                 currentTile.deselectTile();
 
                                 Point2D.Double newCurrentLocation =
-                                        new Point2D.Double(myCurrentLocation.getX() +
-                                                           myKeyMap.get(kc).getX(),
-                                                           myCurrentLocation.getY() -
-                                                                   myKeyMap.get(kc).getY());
+                                        new Point2D.Double(myCurrentLocation.getX() + myKeyMap.get(kc).getX(),
+                                                           myCurrentLocation.getY() - myKeyMap.get(kc).getY());
 
                                 if ((newCurrentLocation.getX() > vc.getGrid().getNumRows() - 1) |
                                     (newCurrentLocation.getY() > vc.getGrid().getNumCols() - 1)
-                                    | (newCurrentLocation.getX() < 0) |
-                                    (newCurrentLocation.getY() < 0)) {
+                                    | (newCurrentLocation.getX() < 0) | (newCurrentLocation.getY() < 0)) {
                                     newCurrentLocation.setLocation(myCurrentLocation.getX(),
                                                                    myCurrentLocation.getY());
                                 }
@@ -123,7 +108,6 @@ public class KeyboardMovement {
      * Uses the default keyboard movement map if it is not specified for the active human player.
      */
     public void useDefaultMap () {
-        // this is just for testing
         myKeyMap.put(KeyCode.A, new Point2D.Double(-1.0, 0.0));
         myKeyMap.put(KeyCode.D, new Point2D.Double(1.0, 0.0));
         myKeyMap.put(KeyCode.W, new Point2D.Double(0.0, 1.0));

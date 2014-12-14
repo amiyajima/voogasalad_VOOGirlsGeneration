@@ -36,7 +36,7 @@ import authoring.data.GamePropertiesData;
 
 
 /**
- * @author seungwonlee, Jennie JU
+ * @author seungwonlee, Jennie Ju
  *
  */
 public class ActionEditor extends Pane {
@@ -193,6 +193,9 @@ public class ActionEditor extends Pane {
 		conclusionClassNames = trimClassList(conclusionClassNames);
 		for (String c : conclusionClassNames) {
 			ActionConclusion conclusion = (ActionConclusion) Reflection.createInstance(c);
+			if (conclusion.toString().equals(myConclusion.toString())) {
+				choiceBox.getSelectionModel().select(conclusion);
+			}
 			choiceBox.getItems().addAll(conclusion);
 		}
 		conclusionVBox.getChildren().addAll(conclusionLabel, choiceBox);
