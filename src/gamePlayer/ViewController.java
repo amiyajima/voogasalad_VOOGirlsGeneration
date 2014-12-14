@@ -277,6 +277,8 @@ public class ViewController {
 		statsPane.getChildren().clear();
 		controlPane.getChildren().clear();
 	}
+	
+	
 
 	@FXML
 	protected void exitGame() {
