@@ -77,6 +77,14 @@ public class JSONManager {
         return pi;
     }
     
+    /**
+     * Pass in the class of the object you would like to read and it will return you that object
+     * you just need to cast it upon getting the return
+     * @param c
+     * @param jsonFileLocation
+     * @return
+     * @throws FileNotFoundException
+     */
     public Object readSpecificFromJSONFile (Class<?> c, String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
