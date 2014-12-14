@@ -157,4 +157,8 @@ public class ConcreteAction implements Action {
 	public String getName() {
 		return myName;
 	}
+	
+	public ActionConclusion getConclusion() {
+		return myConclusion;
+	}
 }
