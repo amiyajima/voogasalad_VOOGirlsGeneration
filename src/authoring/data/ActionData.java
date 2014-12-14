@@ -49,7 +49,7 @@ public class ActionData implements AuthoringData<Action> {
      */
     public Action getAction (String id) {
         for (Action a : myActions) {
-            if (a.toString().equals(id)) { return a; }
+            if (a.getName().equals(id)) { return a; }
         }
         return null;
     }
