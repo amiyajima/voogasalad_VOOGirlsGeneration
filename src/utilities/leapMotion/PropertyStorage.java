@@ -7,35 +7,34 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 
-public class PropertyStorage{
-    
+public class PropertyStorage {
+
     public static final String ERROR_MESSAGE = "error saving file";
-    public static final String COMMENT_STRING= "gesture and mouse binding";
-    
+    public static final String COMMENT_STRING = "gesture and mouse binding";
+
     private Properties myProperties;
 
-    public PropertyStorage(Map<String, String> ... propertyArr){
+    public PropertyStorage (Map<String, String>... propertyArr) {
         myProperties = new Properties();
-        for(Map<String, String> propertyMap : propertyArr){
-            propertyMap.keySet().forEach(string->myProperties.setProperty(string, propertyMap.get(string)));
+        for (Map<String, String> propertyMap : propertyArr) {
+            propertyMap.keySet().forEach(
+                    string -> myProperties.setProperty(string, propertyMap.get(string)));
         }
 
     }
 
-    public void save(File f){
+    public void save (File f) {
         FileOutputStream os;
-        if(!(f == null)){
+        if (!(f == null)) {
             try {
                 os = new FileOutputStream(f);
                 myProperties.store(os, COMMENT_STRING);
                 os.close();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 System.out.println(ERROR_MESSAGE);
             }
         }
 
     }
-
 
 }
