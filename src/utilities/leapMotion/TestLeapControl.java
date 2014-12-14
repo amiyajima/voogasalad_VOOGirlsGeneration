@@ -21,8 +21,6 @@ public class TestLeapControl extends Application{
         Scene s= new Scene(new TextField());
         arg0.setScene(s);
         arg0.show();
-        
-        
     }
 
 }

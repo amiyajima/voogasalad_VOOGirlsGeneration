@@ -147,13 +147,14 @@ public class LeapUIController extends Application {
             }
         }
         options.forEach(file->{
-            Label l=new Label();
+            Text l=new Text();
             //TODO: fix this
             l.setText(file.getName().substring(0, file.getName().length()-5));
             MouseDropDown.getItems().add(l);
             //l.setOnMouseClicked(event->myControls.put(MOUSE_KEY, l.getText()));
 
         });
+        MouseDropDown.valueProperty().setValue(MouseDropDown.getItems().get(0));
         ClickDropDown.getItems().addAll(Gesture.Type.values());
         ClickDropDown.valueProperty().setValue(Gesture.Type.TYPE_SCREEN_TAP);
         ClickDropDown.valueProperty().addListener(event->{setUpGesture();
@@ -168,9 +169,9 @@ public class LeapUIController extends Application {
     }
 
     private void onSelect(){
-        Label l = ((Label)MouseDropDown.valueProperty().getValue());
+//        Label l = ((Label)MouseDropDown.valueProperty().getValue());
         Type t = (Type) ClickDropDown.valueProperty().getValue();
-        myControls.put(MOUSE_KEY, l.getText());
+//        myControls.put(MOUSE_KEY, l.getText());
         myControls.put(t.toString(), ""+InputEvent.BUTTON1_DOWN_MASK);
     }
 
@@ -188,6 +189,9 @@ public class LeapUIController extends Application {
     }
     @FXML
     private void okayAction() throws IOException{
+        
+        Label l = ((Label)MouseDropDown.valueProperty().getValue());
+        myControls.put(MOUSE_KEY, l.getText());
         PropertyStorage storage = new PropertyStorage(myControls);
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Properties", "*.properties"));
