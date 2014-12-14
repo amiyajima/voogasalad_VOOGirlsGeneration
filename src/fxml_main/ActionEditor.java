@@ -115,7 +115,6 @@ public class ActionEditor extends Pane {
 		// Action name
 		TextField nameField = new TextField();
 		nameField.setText(myName);
-		nameField.setMaxWidth(WIDTH - WIDTH / 4 - 10);
 		initNameField(nameVBox, nameField);
 		// Set the Action Range
 		initSetRangeButton(rangeVBox, "Action Range:", myAttackRange);
@@ -127,7 +126,6 @@ public class ActionEditor extends Pane {
 		initConclusionsBox(conclusionVBox,conclusionChoiceBox);
 
 		Button createBtn = new Button("Create new action");
-		createBtn.setMaxWidth(WIDTH - WIDTH / 4 - 10);
 		createBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent click) {
@@ -154,7 +152,7 @@ public class ActionEditor extends Pane {
 
 	private void initNameField (VBox nameBox, TextField nameField) {
 		Label nameLabel = new Label("Action name");
-		nameField.setPromptText("Enter action name");
+		nameField.setPromptText("Enter action name...");
 		nameBox.getChildren().addAll(nameLabel, nameField);
 	}
 
