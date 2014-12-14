@@ -1,9 +1,9 @@
 package authoring.eventeditor;
 
-import gamedata.events.Condition;
 import gamedata.events.Event;
-import gamedata.events.GlobalAction;
+import gamedata.events.conditions.Condition;
 import gamedata.events.conditions.StatEquals;
+import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.IChangeGameState;
 import gamedata.gamecomponents.Level;
 import java.io.IOException;

@@ -1,7 +1,7 @@
 package gamedata.events.globalaction;
 
 import authoring_environment.GUIGrid;
-import gamedata.events.GameStateGlobalAction;
+import gamedata.gamecomponents.GameState;
 import gamedata.gamecomponents.IChangeGameState;
 
 
@@ -11,13 +11,13 @@ import gamedata.gamecomponents.IChangeGameState;
  */
 public class LoseGame extends GameStateGlobalAction {
 
-    public LoseGame (IChangeGameState state) {
-        super("Lose the game", state);
+    public LoseGame () {
+        super("Lose the game");
     }
 
     @Override
     public void doBehavior(GUIGrid grid) {
-    	myState.loseGame();
+    	GameState.loseGame();
     }
 
 }
