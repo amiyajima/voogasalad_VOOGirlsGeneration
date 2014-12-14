@@ -48,7 +48,7 @@ public class PieceTypeEditor extends Pane {
     private static final String EDITOR_TITLE = "Piece Editor";
     private static final String ID_LABEL = "Unique ID";
     private static final String NAME_LABEL = "Name";
-    private static final String LOADIMAGE_LABEL = "Load Unit Image";
+    private static final String LOADIMAGE_LABEL = "Load Piece Image";
     private static final String TEMPLATE_LABEL = "OK";
     private static final String ID_PROMPT = "Enter piece ID...";
     private static final String NAME_PROMPT = "Enter piece name...";
@@ -224,11 +224,11 @@ public class PieceTypeEditor extends Pane {
         ObservableList<String> availableActions = myAvailableActions.getActionNames();
         ObservableList<String> addedActions = FXCollections.observableArrayList();
         // TODO : Actions need to be properly implemented before this can work.
-        // for(Action action : myActions){
-        // System.out.println(myActions.size());
-        // availableActions.remove(action);
-        // addedActions.add(action);
-        // }
+//        for(Action action : myActions){
+//        	System.out.println(myActions.size());
+//        	availableActions.remove(action);
+//        	addedActions.add(action);
+//        }
         return new ModulesList(availableActions, addedActions);
     }
 

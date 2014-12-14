@@ -33,8 +33,8 @@ public class PatchTypeEditor extends Pane {
 
     private static final int HEIGHT = 150;
     private static final int WIDTH = 150;
-    private static final String CREATOR_TITLE = "Terrain Creator";
-    private static final String EDITOR_TITLE = "Terrain Editor";
+    private static final String CREATOR_TITLE = "Patch Creator";
+    private static final String EDITOR_TITLE = "Patch Editor";
     private static final String ID_LABEL = "Unique ID";
     private static final String NAME_LABEL = "Name";
     private static final String LOADIMAGE_LABEL = "Load Terrain Image";
