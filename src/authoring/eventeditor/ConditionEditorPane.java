@@ -1,6 +1,6 @@
 package authoring.eventeditor;
 
-import gamedata.events.Condition;
+import gamedata.events.conditions.Condition;
 import gamedata.events.conditions.DefineWhenUnitIsDead;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Patch;
@@ -61,9 +61,13 @@ public class ConditionEditorPane extends Pane{
 			@Override
 			public void handle (ActionEvent click) {
 
-				IHasStats ref = myRefName.getSelectionModel().getSelectedItem();
+				String ref = "";
+				if(myRefName.getSelectionModel().getSelectedItem()!=null){
+					ref = myRefName.getSelectionModel().getSelectedItem().getClass().toString();
+				}
 				String stat = myStat.getSelectionModel().getSelectedItem();
 				String val = myVal.getText();
+				
 
 				String classPath = myClass.toString();
 				classPath = classPath.substring(6);

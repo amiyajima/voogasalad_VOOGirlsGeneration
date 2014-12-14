@@ -1,6 +1,6 @@
 package authoring.eventeditor;
 
-import gamedata.events.Condition;
+import gamedata.events.conditions.Condition;
 
 import java.io.IOException;
 import java.net.URL;

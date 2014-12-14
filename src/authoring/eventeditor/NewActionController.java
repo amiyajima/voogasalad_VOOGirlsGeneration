@@ -2,9 +2,9 @@ package authoring.eventeditor;
 
 import gamedata.action.StatsTotalLogic;
 import gamedata.action.TotalLogicBox;
-import gamedata.events.GameStateGlobalAction;
-import gamedata.events.GlobalAction;
 import gamedata.events.globalaction.ChangePlayerStat;
+import gamedata.events.globalaction.GameStateGlobalAction;
+import gamedata.events.globalaction.GlobalAction;
 import gamedata.events.globalaction.MakePieceAtLocation;
 import gamedata.events.globalaction.DeletePieceAtLocation;
 import gamedata.events.globalaction.LevelChange;
@@ -12,6 +12,7 @@ import gamedata.events.globalaction.EndTurn;
 import gamedata.gamecomponents.IChangeGameState;
 import gamedata.gamecomponents.IHasStats;
 import gamedata.gamecomponents.Piece;
+
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+
 import authoring.data.EventsDataWrapper;
 import utilities.ClassGrabber;
 import utilities.reflection.Reflection;
@@ -117,7 +119,7 @@ public class NewActionController implements Initializable {
             myDoneLambda.accept(action);
         }
         else if (c.equals(LevelChange.class)) {
-            GlobalAction action = new LevelChange(myState, myNextLevelField.getText());
+            GlobalAction action = new LevelChange(myNextLevelField.getText());
             myDoneLambda.accept(action);
         }
         else if (c.equals(ChangePlayerStat.class)) {
@@ -131,7 +133,7 @@ public class NewActionController implements Initializable {
         classPath = classPath.substring(6);
 
         System.out.println(myState);
-        GlobalAction action = (GlobalAction) Reflection.createInstance(classPath, myState);
+        GlobalAction action = (GlobalAction) Reflection.createInstance(classPath);
         myDoneLambda.accept(action);
     }
 

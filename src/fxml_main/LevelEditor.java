@@ -1,13 +1,15 @@
 package fxml_main;
 
 import gamedata.events.Event;
-import gamedata.events.GameStateGlobalAction;
-import gamedata.events.GlobalAction;
+import gamedata.events.globalaction.GameStateGlobalAction;
+import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.Level;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -150,17 +152,6 @@ public class LevelEditor extends VBox {
                 		myGrid);
 //                System.out.println(myGridShape);
                 Level level = new Level(grid, myEvents, myId, false);
-                
-                /**
-                 * Inject the cloned Level into each Event's GameStateGlobalAction 
-                 */
-                for(Event e: myEvents){
-                	for(GlobalAction g: e.getGlobalActions()){
-	                	if(GameStateGlobalAction.class.isAssignableFrom(g.getClass())){
-	                		((GameStateGlobalAction) g).reinject(level);
-	                	}
-                	}
-                }
                 
                 myOkLambda.accept(level);
             }

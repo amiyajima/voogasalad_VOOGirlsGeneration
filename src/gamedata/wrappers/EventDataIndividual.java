@@ -1,7 +1,8 @@
 package gamedata.wrappers;
 
-import gamedata.events.Condition;
-import gamedata.events.GlobalAction;
+import gamedata.events.conditions.Condition;
+import gamedata.events.globalaction.GlobalAction;
+
 import java.util.List;
 
 //TODO: remove hard coded condition/global action type

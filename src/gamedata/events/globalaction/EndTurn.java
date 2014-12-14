@@ -1,9 +1,10 @@
 package gamedata.events.globalaction;
 
 import java.util.List;
+
 import authoring_environment.GUIGrid;
-import gamedata.events.GameStateGlobalAction;
 import gamedata.gamecomponents.Game;
+import gamedata.gamecomponents.GameState;
 import gamedata.gamecomponents.IChangeGameState;
 import gamedata.gamecomponents.IHasStats;
 
@@ -15,12 +16,12 @@ import gamedata.gamecomponents.IHasStats;
 public class EndTurn extends GameStateGlobalAction {
 
     public EndTurn (IChangeGameState state) {
-        super("End current turn", state);
+        super("End current turn");
     }
 
     @Override
     public void doBehavior(GUIGrid grid) {
-    	myState.endTurn();
+    	GameState.endTurn();
     }
 
 }
