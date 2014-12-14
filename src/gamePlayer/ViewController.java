@@ -885,25 +885,8 @@ public class ViewController {
 	 */
 	public void setGridState(IGridState state) {
 		tempMoveCount++;
-		
-
-		if (myModel.getCurrentLevel().getGameWon() /*|| tempMoveCount % 8 == 0*/) {
-			// TODO this assumes that the most recent player is the one that won
-		        // also chooses a random score
-			String highScorer = "Bob";
-			Random randy = new Random();
-			int highScore = randy.nextInt(100000);
-			for (Player p : myModel.getPlayers()) {
-				/*
-				 * if (p.getScore() > highScore) { highScorer = p.getID();
-				 * highScore = p.getScore(); }
-				 */
-			}
-			enterHighScoreInfo(highScorer, highScore);
-		}
-
 		myCurrentPlayer = myModel.getCurrentPlayer();
-		setPlayerTurnDisplay();
+//		setPlayerTurnDisplay();
 		gridState = state;
 	}
 
@@ -1020,6 +1003,17 @@ public class ViewController {
 		    Stage newStage = new Stage();
 		    newStage.setScene(winLoseScene);
 		    newStage.show();
+		    
+                    String highScorer = "Bob";
+                    Random randy = new Random();
+                    int highScore = randy.nextInt(100000);
+                    for (Player p : myModel.getPlayers()) {
+                            /*
+                             * if (p.getScore() > highScore) { highScorer = p.getID();
+                             * highScore = p.getScore(); }
+                             */
+                    }
+                    enterHighScoreInfo(highScorer, highScore);
 		}
 		if (currentLevel.getGameLost()) {
 		    winLose.setText(YOU_LOSE);
