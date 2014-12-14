@@ -63,9 +63,10 @@ public abstract class SuperTile extends Group {
 
         myPieceImage = makeShape(size, myLocation);
         myPatchImage = makeShape(size, myLocation);
+        myPieceImage.setFill(Color.TRANSPARENT);
         myPatchImage.setFill(Color.TRANSPARENT);
 
-        alignNodes(myImageLocation, myPieceImage);
+        //alignNodes(myImageLocation, myPieceImage);
     }
 
     /**
@@ -115,7 +116,11 @@ public abstract class SuperTile extends Group {
      * tile as a piece.
      */
     public void setPieceImage (ImageView imageView) {
+<<<<<<< HEAD
         myPieceImage.setFill(new ImagePattern(imageView.getImage()));
+=======
+    	myPieceImage.setFill(new ImagePattern(imageView.getImage()));
+>>>>>>> 4d39091db79b1c42b629abc36628fc593ab504d4
     }
 
     /**
@@ -132,7 +137,7 @@ public abstract class SuperTile extends Group {
      * 
      */
     public void removePieceImage () {
-    	myPieceImage.setVisible(false);
+    	myPieceImage.setFill(Color.TRANSPARENT);
     }
     
     /**
