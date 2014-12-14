@@ -4,19 +4,17 @@ import gamedata.action.Action;
 import gamedata.action.ActionConclusion;
 import gamedata.action.StatsModifier;
 import gamedata.events.Condition;
-import gamedata.events.globalaction.GlobalAction;
+import gamedata.events.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.GridComponent;
+import gamedata.gamecomponents.IHasStats;
 import gameengine.player.Player;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import authoring_environment.SuperGrid;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -88,6 +86,7 @@ public class JSONManager {
         builder.registerTypeAdapter(Condition.class, new GenericTypeAdapter<Condition>("gamedata.events.conditions"));
         builder.registerTypeAdapter(GlobalAction.class, new GenericTypeAdapter<GlobalAction>("gamedata.events.globalaction"));
         builder.registerTypeAdapter(SuperGrid.class, new GenericTypeAdapter<SuperGrid>("authoring_environment"));
+        builder.registerTypeAdapter(IHasStats.class, new GenericTypeAdapter<IHasStats>("gamedata.gamecomponent"));
     }
 
 }

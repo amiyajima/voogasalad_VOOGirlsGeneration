@@ -2,8 +2,10 @@ package gamedata.gamecomponents;
 
 import gamedata.action.Action;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 // MIGHT WANT TO ADD MAX CAPACITY OR SOMETHING
 
@@ -71,7 +73,16 @@ public class Inventory {
 			itemActions.addAll(item.getActions());
 		}
 		return itemActions;
-
+	}
+	
+	public Map<String,List<String>> getStringDisplay() {
+		Map<String,List<String>> strDisp = new HashMap<String,List<String>>();
+		for (Piece item : myInventory) {
+			String itemName = item.getName();
+			List<String> actionNames = item.getActionNames();
+			strDisp.put(itemName, actionNames);
+		}
+		return strDisp;
 	}
 	
 	public List<Piece> getAllInventory(){

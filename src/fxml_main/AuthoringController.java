@@ -109,17 +109,17 @@ public class AuthoringController implements Initializable {
 	private void showActionslogicChartWindow () throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/authoring/actionslogic/ActionLogic.fxml"));
-		ActionLogicController controller = loader.getController();
 		Parent root = loader.load();
+	        ActionLogicController controller = loader.getController();
+	        if (controller == null) {
+	            System.out.println("I'M NULL");
+	            }
+	        controller.getData(myActionData, myPieceTypes);
 		Stage actionLogicStage = new Stage();
 		actionLogicStage.setTitle("Actions Logic Chart");
 		actionLogicStage.initModality(Modality.WINDOW_MODAL);
 		Scene scene = new Scene(root);
 		actionLogicStage.setScene(scene);
-
-		System.out.println("done");
-
-
 		actionLogicStage.showAndWait();
 	}
 

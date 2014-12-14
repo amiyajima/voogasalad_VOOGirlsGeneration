@@ -8,9 +8,9 @@ import gamedata.action.StatsTotalLogic;
 import gamedata.action.conclusions.ReceiverToInventoryConclusion;
 import gamedata.events.Condition;
 import gamedata.events.Event;
+import gamedata.events.GlobalAction;
 import gamedata.events.conditions.IsDead;
 import gamedata.events.globalaction.DeletePieceAtLocation;
-import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Level;
@@ -181,20 +181,20 @@ public class TestGameCreator {
 		if (type == 0) {
 			if (randomInt % 2 == 1) {
 				piece = new Piece("ID", "Duvall", DEFAULT_DUVALL, move, actions, s,
-						p, 1, i);
+						p, 1, false, false);
 			} else {
 				piece = new Piece("ID", "Bunny", DEFAULT_BUNNY, move, actions, s, p,
-						1, i);
+						1, false, false);
 			}
 		} else if (type == 1) {
 			piece = new Piece("Duvall_ID", "Duvall", DEFAULT_DUVALL, move, actions,
-					s, p, 1, i);
+					s, p, 1, false, false);
 		} else if (type == 2) {
 			piece = new Piece("Bunny_ID", "Bunny", DEFAULT_BUNNY, move, actions, s,
-					p, 1, i);
+					p, 1, false, false);
 		} else {
 			piece = new Piece("Rica_ID", "Rica", DEFAULT_RICA, move, actions, s, p,
-					1, i);
+					1, false, false);
 		}
 		return piece;
 	}
