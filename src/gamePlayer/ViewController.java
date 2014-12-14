@@ -212,7 +212,7 @@ public class ViewController {
 	
 	public ViewController(Tab tab) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
 		myTab=tab;	
-		openInitialMenu();
+		openInitialGUIMenu();
 		loadGameInTab();
 		
 	}
@@ -227,7 +227,7 @@ public class ViewController {
 		try {
 			System.out.println("VC: loading game... ");
 			JSONManager myJM = new JSONManager();
-			editPlayers(myJM.readFromJSONFile(f.getAbsolutePath()));
+			editGUIPlayers(myJM.readFromJSONFile(f.getAbsolutePath()));
 //			mySplashStage.show();
 //			testPlayGameInTab(myJM.readFromJSONFile(f.getAbsolutePath()));
 			System.out.println("VC: game loaded... ");
@@ -253,6 +253,46 @@ public class ViewController {
 		//System.out.println(myModel.getCurrentLevel().getGrid().toString());
 		myModel.getCurrentLevel().getGrid().repopulateGrid();
 	}
+	
+        @FXML
+        protected void openInitialGUIMenu() throws UnsupportedAudioFileException,
+        IOException, LineUnavailableException {
+                myInitialScene = new VBox();
+                myGameSpace = new BorderPane();
+                myScoreBoard = new VBox();
+                scores = new VBox();
+
+                mySplashStage = new SplashScreen();
+
+                myPopup = new BorderPane();
+                mySettings = new VBox();
+
+                myJSONManager = new JSONManager();
+                // myLeapController = new Controller();
+                loadFXML(GAMESPACE_FXML, myGameSpace);
+                loadFXML(INITIALSCENE_FXML, myInitialScene);
+                loadFXML(POPUP_FXML, myPopup);
+                loadFXML(SCOREBOARD_FXML, myScoreBoard);
+                loadFXML(SETTINGS_FXML, mySettings);
+                loadFXML(PLAYER_FXML,editPlayerRoot);
+                loadFXML(ADD_HIGH_SCORE_FXML, newHighScoreRoot);
+                loadFXML(WIN_SCREEN, myWinLoseScreen);
+
+                scoreScene = new Scene(myScoreBoard);
+                myPopupScene = new Scene(myPopup);
+                mySettingsScene = new Scene(mySettings);
+                myPlayerScene=new Scene(editPlayerRoot);
+                newHighScoreScene = new Scene(newHighScoreRoot);
+                winLoseScene = new Scene(myWinLoseScreen);
+
+//              myStage.setScene(new Scene(myInitialScene));
+
+                myAudio = new Audio();
+                myAudio.playBackground();
+
+                myLanguages = new Languages(languagesPane, tabPane, gameMenu, showScoreButton);
+        }
+	
 
 	/**
 	 * Sets up and opens the initial scene
@@ -292,7 +332,7 @@ public class ViewController {
 		newHighScoreScene = new Scene(newHighScoreRoot);
 		winLoseScene = new Scene(myWinLoseScreen);
 
-//		myStage.setScene(new Scene(myInitialScene));
+		myStage.setScene(new Scene(myInitialScene));
 
 		myAudio = new Audio();
 		myAudio.playBackground();
@@ -416,7 +456,7 @@ public class ViewController {
 	/**
 	 * Starts screen to choose the type of players
 	 */
-	protected void editPlayers(Game myGame){
+	protected void editGUIPlayers(Game myGame){
 	    myModel = myGame;
 		Stage stage=new Stage();
 		stage.setScene(myPlayerScene);
@@ -429,8 +469,24 @@ public class ViewController {
 		playerTypeCombo.getItems().addAll(HUMAN_PLAYER, SIMPLE_AI_PLAYER);
 		playerTypeCombo.setValue(HUMAN_PLAYER);
 		
-		startGameButton.setOnMouseClicked(event->testPlayGame(myGame));
+		startGameButton.setOnMouseClicked(event->testPlayGUIGame(myGame));
 	}
+	
+	       protected void editPlayers(Game myGame){
+	            myModel = myGame;
+	                Stage stage=new Stage();
+	                stage.setScene(myPlayerScene);
+	                stage.show();
+	                for (Player p : myModel.getPlayers()) {
+	                    Label playerLabel = new Label("Player: " + p.toString());
+	                    playerLabel.setOnMouseClicked(event -> editSpecificPlayer(p.getID()));
+	                    playersList.getChildren().add(playerLabel);
+	                }
+	                playerTypeCombo.getItems().addAll(HUMAN_PLAYER, SIMPLE_AI_PLAYER);
+	                playerTypeCombo.setValue(HUMAN_PLAYER);
+	                
+	                startGameButton.setOnMouseClicked(event->testPlayGame(myGame));
+	        }
 	
 	private void editSpecificPlayer(int playerID) {
 	    editPlayerName.setText(String.valueOf(playerID));
@@ -1162,7 +1218,7 @@ public class ViewController {
 	 * Loads a Game into gamePlayer GUI
 	 * @param gameToLoad
 	 */
-	public void testPlayGame(Game gameToLoad) {
+	public void testPlayGUIGame(Game gameToLoad) {
 //		myModel = gameToLoad;
 	        mySplashStage.show();
 		System.out.println("model found in viewcontroller: " + myModel);
@@ -1176,5 +1232,25 @@ public class ViewController {
 		//System.out.println(myModel.getCurrentLevel().getGrid().toString());
 		myModel.getCurrentLevel().getGrid().repopulateGrid();
 	}
+	
+	       /**
+         * Loads a Game into gamePlayer GUI
+         * @param gameToLoad
+         */
+        public void testPlayGame(Game gameToLoad) {
+//              myModel = gameToLoad;
+                mySplashStage.show();
+                System.out.println("model found in viewcontroller: " + myModel);
+                initializeGrid();
+              myScene = new Scene(myGameSpace);
+              myStage.setScene(myScene);
+//                myTab.setContent(myGameSpace);
+                mySplashStage.close();
+
+                //System.out.println("VC: Current Level: " + myModel.getCurrentLevel().getId());
+                //System.out.println(myModel.getCurrentLevel().getGrid().toString());
+                myModel.getCurrentLevel().getGrid().repopulateGrid();
+        }
+        
 	
 }
