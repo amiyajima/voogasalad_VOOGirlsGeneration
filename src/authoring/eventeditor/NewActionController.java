@@ -2,7 +2,6 @@ package authoring.eventeditor;
 
 import gamedata.action.StatsTotalLogic;
 import gamedata.action.TotalLogicBox;
-import gamedata.events.globalaction.ChangePlayerStat;
 import gamedata.events.globalaction.GameStateGlobalAction;
 import gamedata.events.globalaction.GlobalAction;
 
@@ -152,13 +151,14 @@ public class NewActionController implements Initializable {
                                myPlayerID);
             myDoneLambda.accept(action);
         }
-
+        else{
         String classPath = c.toString();
+        System.out.println("classpath: " + classPath);
         classPath = classPath.substring(6);
-
         System.out.println(myState);
         GlobalAction action = (GlobalAction) Reflection.createInstance(classPath);
         myDoneLambda.accept(action);
+        }
     }
 
     private List<String> trimClassList (List<String> actionList) {
