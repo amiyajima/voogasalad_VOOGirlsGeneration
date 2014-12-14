@@ -362,13 +362,13 @@ public class ViewController {
 	}
 
 	private void removePreviousPlayer(int playerID) {
-		int romoveIndex=-1;
+		int removeIndex=-1;
 		for (int i=0;i<myPlayerList.size();i++){
 			if (myPlayerList.get(i).getID()==playerID){
-				romoveIndex=i;
+				removeIndex=i;
 			}
 		}
-		if (romoveIndex>-1) myPlayerList.remove(romoveIndex);
+		if (removeIndex>-1) myPlayerList.remove(removeIndex);
 	}
 
 
