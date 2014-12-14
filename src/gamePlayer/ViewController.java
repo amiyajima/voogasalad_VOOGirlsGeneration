@@ -1176,6 +1176,7 @@ public class ViewController {
 		currentLevel.runGameEvents();
 		if (GameState.getGameWon()) {
 			// GAMEWON
+		    winLose.setText("You Win!");
 		    Stage newStage = new Stage();
 		    newStage.setScene(winLoseScene);
 		    newStage.show();
