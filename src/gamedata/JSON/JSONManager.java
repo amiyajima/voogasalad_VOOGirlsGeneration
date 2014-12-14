@@ -80,7 +80,7 @@ public class JSONManager {
     public Object readSpecificFromJSONFile (Class<?> c, String jsonFileLocation) throws FileNotFoundException {
         System.out.println("JSONManager: read method called");
         BufferedReader br = new BufferedReader(new FileReader(jsonFileLocation));
-        Object pi = myGson.fromJson(br, Class.class);
+        Object pi = myGson.fromJson(br, c);
         return pi;
     }
     

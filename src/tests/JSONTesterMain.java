@@ -103,7 +103,7 @@ public class JSONTesterMain {
         JSONManager jsonManager = new JSONManager();
         try {
             jsonManager.readFromJSONFile(loadFrom);
-            jsonManager.readSpecificFromJSONFile(GUIGrid.class, loadFrom);
+            GUIGrid answer = (GUIGrid) jsonManager.readSpecificFromJSONFile(GUIGrid.class, loadFrom);
 
         }
         catch (FileNotFoundException e) {
