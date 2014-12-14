@@ -111,9 +111,6 @@ public class AuthoringController implements Initializable {
 		loader.setLocation(getClass().getResource("/authoring/actionslogic/ActionLogic.fxml"));
 		Parent root = loader.load();
 	        ActionLogicController controller = loader.getController();
-	        if (controller == null) {
-	            System.out.println("I'M NULL");
-	            }
 	        controller.getData(myActionData, myPieceTypes);
 		Stage actionLogicStage = new Stage();
 		actionLogicStage.setTitle("Actions Logic Chart");

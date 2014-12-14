@@ -25,6 +25,7 @@
                   <TextField fx:id="myPlayerIDField" prefHeight="39.0" prefWidth="294.0" promptText="Player ID" />
                </children>
             </HBox>
+            <HBox fx:id="myStatsHBox" prefHeight="100.0" prefWidth="200.0" />
          </children>
       </VBox>
       <Button fx:id="myDoneButton" mnemonicParsing="false" onAction="#handleDoneButton" text="Done" />

@@ -8,9 +8,9 @@ import gamedata.action.StatsTotalLogic;
 import gamedata.action.conclusions.ReceiverToInventoryConclusion;
 import gamedata.events.Condition;
 import gamedata.events.Event;
+import gamedata.events.GlobalAction;
 import gamedata.events.conditions.IsDead;
 import gamedata.events.globalaction.DeletePieceAtLocation;
-import gamedata.events.globalaction.GlobalAction;
 import gamedata.gamecomponents.Game;
 import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Level;
@@ -162,7 +162,7 @@ public class TestGameCreator {
 		
 		List<List<Point2D.Double>> paths = new ArrayList<List<Point2D.Double>>();
 		paths.add(pl3);
-		Movement move = new Movement();
+		Movement move = new Movement(pl1);
 
 		List<Action> actions = new ArrayList<Action>();
 		actions.add(createNewAction(pl2, pl4));

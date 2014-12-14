@@ -39,6 +39,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -83,7 +84,7 @@ public class ViewController {
 	private Scene newHighScoreScene;
 	private Game myModel;
 	private GUIGrid myGrid;
-	private Scene mySplashScreen;
+	private Stage mySplashStage;
 
 	private Player myCurrentPlayer;
 
@@ -92,6 +93,7 @@ public class ViewController {
 	private Boolean keyControlOn;
 	private Boolean clickSoundOn;
 	private Boolean backgroundMusicOn;
+	private Boolean actionActiveOn;
 
 	private KeyboardAction myKeyboardAction;
 	private KeyboardMovement myKeyboardMovement;
@@ -189,7 +191,7 @@ public class ViewController {
 		myScoreBoard = new VBox();
 		scores = new VBox();
 
-		mySplashScreen = new SplashScreen().getScene();
+		mySplashStage = new SplashScreen();
 
 		myPopup = new BorderPane();
 		mySettings = new VBox();
@@ -235,7 +237,7 @@ public class ViewController {
 		try {
 			System.out.println("VC: loading game... ");
 			JSONManager myJM = new JSONManager();
-			myStage.setScene(mySplashScreen);
+			mySplashStage.show();
 			testPlayGame(myJM.readFromJSONFile(f.getAbsolutePath()));
 			System.out.println("VC: game loaded... ");
 		}
@@ -298,7 +300,7 @@ public class ViewController {
 	 */
 	@FXML
 	private void testGame() {
-		myStage.setScene(mySplashScreen);
+		mySplashStage.show();
 		TestGameCreator JSBTester = new TestGameCreator();
 		testPlayGame(JSBTester.createNewGame());
 	}
@@ -364,13 +366,13 @@ public class ViewController {
 	}
 
 	private void removePreviousPlayer(int playerID) {
-		int romoveIndex=-1;
+		int removeIndex=-1;
 		for (int i=0;i<myPlayerList.size();i++){
 			if (myPlayerList.get(i).getID()==playerID){
-				romoveIndex=i;
+				removeIndex=i;
 			}
 		}
-		if (romoveIndex>-1) myPlayerList.remove(romoveIndex);
+		if (removeIndex>-1) myPlayerList.remove(removeIndex);
 	}
 
 
@@ -417,7 +419,7 @@ public class ViewController {
 				try {
 					System.out.println("VC: loading game... ");
 					JSONManager myJM = new JSONManager();
-					myStage.setScene(mySplashScreen);
+					mySplashStage.show();
 					String gameLoc = GAME_LOCATION + l.getText() + ".json";
 					testPlayGame(myJM.readFromJSONFile(gameLoc));
 					System.out.println("VC: game loaded... ");
@@ -570,6 +572,8 @@ public class ViewController {
 			myKeyboardAction = null;
 			myKeyboardMovement = new KeyboardMovement();
 			myKeyboardMovement.setMovementKeyControl(this);
+			
+			actionActiveOn = true;
 		}
 	}
 
@@ -604,19 +608,22 @@ public class ViewController {
 
 		if (keyControlOn) {
 
-			if (myKeyboardMovement != null){
+			if ((myKeyboardMovement != null) & (!actionActiveOn)){
 				myKeyboardMovement = null;
 				myKeyboardAction = new KeyboardAction();
 				myKeyboardAction.setActionKeyControl(this);
 			}
-
-			else{
+			
+                        if ((myKeyboardMovement == null) & (actionActiveOn)){
 				myKeyboardAction = null;
 				myKeyboardMovement = new KeyboardMovement();
 				myKeyboardMovement.setMovementKeyControl(this);
 			}
+                        
+                        if (actionActiveOn){
+                            actionActiveOn = false;
+                        }
 		}
-
 	}
 
 	/**
@@ -714,9 +721,10 @@ public class ViewController {
 				selectedTile.deselectTile();
 			}
 
+			actionActiveOn = false;
 			myKeyboardMovement = new KeyboardMovement();
 			myKeyboardMovement.setMovementKeyControl(this);
-
+			
 			keyControlOn = true;
 		}
 	}
@@ -828,7 +836,7 @@ public class ViewController {
 		tempMoveCount++;
 		
 
-		if (myModel.getCurrentLevel().getGameWon() || tempMoveCount >= 2) {
+		if (myModel.getCurrentLevel().getGameWon() || tempMoveCount % 4 == 0) {
 			// TODO this assumes that the most recent player is the one that won
 		        // also chooses a random score
 			String highScorer = "Bob";
@@ -997,13 +1005,11 @@ public class ViewController {
 	public void testPlayGame(Game testGame) {
 		myModel = testGame;
 		TestGameCreator tgc = new TestGameCreator();
-		//tgc.createNewGame();
-		//tgc.createNewGame();
-		//tgc.createNewGame();
 		System.out.println("model found in viewcontroller: " + myModel);
 		initializeGrid();
 		myScene = new Scene(myGameSpace);
 		myStage.setScene(myScene);
+		mySplashStage.close();
 
 		//System.out.println("VC: Current Level: " + myModel.getCurrentLevel().getId());
 		//System.out.println(myModel.getCurrentLevel().getGrid().toString());
