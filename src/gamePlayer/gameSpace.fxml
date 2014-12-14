@@ -65,6 +65,7 @@
 		 </MenuButton>
          <Button id="SCORE" fx:id="showScoreButton" mnemonicParsing="false" onAction="#showScore" style="-fx-padding: 10;" styleClass="button" text="Score Board">
 		</Button>
+            <Button id="SCORE" fx:id="playerEditButton" layoutX="147.0" layoutY="20.0" mnemonicParsing="false" onAction="#editPlayers" style="-fx-padding: 10;" styleClass="button" text="Players..." />
 		<Label id="TURN" fx:id="playerTurn" style="-fx-background-color: transparent;;" text="Turn: ">
 		</Label>
 	  </children>

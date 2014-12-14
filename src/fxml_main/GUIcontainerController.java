@@ -52,10 +52,6 @@ public class GUIcontainerController implements Initializable{
 		newPlayer.setOnAction(event->loadNewPlayer());
 
 
-
-		//		String authorName="11111";
-		//		LoadNewAuthoring(authorName);
-
 	}
 
 	private void loadNewPlayer() {
