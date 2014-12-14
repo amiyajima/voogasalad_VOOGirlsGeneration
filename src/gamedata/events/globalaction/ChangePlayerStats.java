@@ -28,12 +28,15 @@ public class ChangePlayerStats extends GlobalAction {
         myStatName = statName;
         myPlayerID = ID;
     }
-
+    
     @Override
     public void doBehavior (GUIGrid grid) {
-        //check IDs against all existing players
-//        grid.get
-//        myReceiver.changeStat(myStatName, myStatValue);
+        List<Player> playerList = getPlayers();
+        for(Player p : playerList){
+            if (p.getID()==myPlayerID){
+                p.changeStat(myStatName, p.getStats().getValue(myStatName)+myStatValue);
+            }
+        }
     }
 
 }
