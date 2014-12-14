@@ -32,7 +32,7 @@ public class PlayerStatData {
 		List<Player> players = new ArrayList<Player>();
 		for (int i = 0; i < numPlayers; i++) {
 			Stats statsCopy = new Stats(myStats);
-			players.add(new HumanPlayer(i,statsCopy,myScoreStat));
+			players.add(new HumanPlayer(i+1,statsCopy,myScoreStat));
 		}
 		return players;
 	}
