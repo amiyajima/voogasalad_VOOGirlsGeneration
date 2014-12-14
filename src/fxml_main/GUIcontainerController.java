@@ -24,7 +24,7 @@ import authoring.createedit.GamePropertiesEditor;
 import authoring.data.GamePropertiesData;
 
 public class GUIcontainerController implements Initializable{
-	
+
 	private Scene myScene;
 	private int myTabCount=0;
 
@@ -64,28 +64,41 @@ public class GUIcontainerController implements Initializable{
 		}
 
 		player.show();
+
+
+		//		Tab playerTab=new Tab("newPlayer");
+		//		try {
+		//			new ViewController(playerTab);
+		//		} catch (UnsupportedAudioFileException | IOException
+		//				| LineUnavailableException e) {
+		//			// TODO Auto-generated catch block
+		//			e.printStackTrace();
+		//		}
+		//		displayedTabs.getTabs().add(playerTab);
+		//        displayedTabs.getSelectionModel().select(playerTab);
+
 	}
 
 	private void LoadNewAuthoring(){		
 		try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(GUIcontainerController.class.getResource("Voogirls_Authoring.fxml"));
-            Parent root = loader.load();
-            AuthoringController authorController = loader.getController();
-            
-            Consumer<GamePropertiesData> c = (GamePropertiesData gpd) -> {
-            	authorController.initData(gpd);
-            	Tab tab=new Tab("Authoring"+ ++myTabCount);
-                tab.setContent(root);
-                displayedTabs.getTabs().add(tab);
-                displayedTabs.getSelectionModel().select(tab);
-            };
-            
-            GamePropertiesEditor gpEditor = new GamePropertiesEditor(c);
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(GUIcontainerController.class.getResource("Voogirls_Authoring.fxml"));
+			Parent root = loader.load();
+			AuthoringController authorController = loader.getController();
+
+			Consumer<GamePropertiesData> c = (GamePropertiesData gpd) -> {
+				authorController.initData(gpd);
+				Tab tab=new Tab("Authoring"+ ++myTabCount);
+				tab.setContent(root);
+				displayedTabs.getTabs().add(tab);
+				displayedTabs.getSelectionModel().select(tab);
+			};
+
+			GamePropertiesEditor gpEditor = new GamePropertiesEditor(c);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 

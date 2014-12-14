@@ -8,6 +8,7 @@ import gamedata.gamecomponents.Piece;
 import gameengine.player.HumanPlayer;
 import gameengine.player.Player;
 import gameengine.player.SimpleAIPlayer;
+
 import java.awt.geom.Point2D;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,6 +26,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -35,6 +37,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -49,8 +52,10 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
 import tests.TestGameCreator;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
@@ -109,6 +114,7 @@ public class ViewController {
 	private Audio myAudio;
 
 	private List<Player> myPlayerList;
+	private Tab myTab;
 
 	@FXML
 	protected VBox statsPane;
@@ -180,6 +186,54 @@ public class ViewController {
 				| LineUnavailableException e) {
 		}
 		myStage.show();
+	}
+	
+	public ViewController(Tab tab) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
+		myTab=tab;	
+		openInitialMenu();
+		loadGameInTab();
+		
+	}
+
+	private void loadGameInTab() {
+		Stage fileDialog=new Stage();
+		FileChooser fc = new FileChooser();
+		fc.getExtensionFilters().add(new ExtensionFilter("JSON", "*.json"));
+		fc.setInitialDirectory(new File("src/resources/json"));
+		File f = fc.showOpenDialog(fileDialog);
+
+		try {
+			System.out.println("VC: loading game... ");
+			JSONManager myJM = new JSONManager();
+//			mySplashStage.show();
+			testPlayGameInTab(myJM.readFromJSONFile(f.getAbsolutePath()));
+			System.out.println("VC: game loaded... ");
+		}
+		catch (FileNotFoundException fnfe) {
+			System.out.println("Could not find the file at - " + f.getAbsolutePath());
+//			loadGameInTab();	
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Other exception occured.");
+//			loadGameInTab();	
+		}
+				
+	}
+
+	private void testPlayGameInTab(Game readFromJSONFile) {
+		myModel = readFromJSONFile;
+		TestGameCreator tgc = new TestGameCreator();
+		System.out.println("model found in viewcontroller: " + myModel);
+		initializeGrid();
+		myTab.setContent(myGameSpace);
+//		myScene = new Scene(myGameSpace);
+//		myStage.setScene(myScene);
+//		mySplashStage.close();
+
+		//System.out.println("VC: Current Level: " + myModel.getCurrentLevel().getId());
+		//System.out.println(myModel.getCurrentLevel().getGrid().toString());
+		myModel.getCurrentLevel().getGrid().repopulateGrid();
 	}
 
 	/**
