@@ -93,6 +93,7 @@ public class ViewController {
 	private Boolean keyControlOn;
 	private Boolean clickSoundOn;
 	private Boolean backgroundMusicOn;
+	private Boolean actionActiveOn;
 
 	private KeyboardAction myKeyboardAction;
 	private KeyboardMovement myKeyboardMovement;
@@ -571,6 +572,8 @@ public class ViewController {
 			myKeyboardAction = null;
 			myKeyboardMovement = new KeyboardMovement();
 			myKeyboardMovement.setMovementKeyControl(this);
+			
+			actionActiveOn = true;
 		}
 	}
 
@@ -605,19 +608,22 @@ public class ViewController {
 
 		if (keyControlOn) {
 
-			if (myKeyboardMovement != null){
+			if ((myKeyboardMovement != null) & (!actionActiveOn)){
 				myKeyboardMovement = null;
 				myKeyboardAction = new KeyboardAction();
 				myKeyboardAction.setActionKeyControl(this);
 			}
-
-			else{
+			
+                        if ((myKeyboardMovement == null) & (actionActiveOn)){
 				myKeyboardAction = null;
 				myKeyboardMovement = new KeyboardMovement();
 				myKeyboardMovement.setMovementKeyControl(this);
 			}
+                        
+                        if (actionActiveOn){
+                            actionActiveOn = false;
+                        }
 		}
-
 	}
 
 	/**
@@ -715,9 +721,10 @@ public class ViewController {
 				selectedTile.deselectTile();
 			}
 
+			actionActiveOn = false;
 			myKeyboardMovement = new KeyboardMovement();
 			myKeyboardMovement.setMovementKeyControl(this);
-
+			
 			keyControlOn = true;
 		}
 	}

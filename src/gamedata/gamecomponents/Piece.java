@@ -3,9 +3,11 @@ package gamedata.gamecomponents;
 import gamedata.action.Action;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
+
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.awt.geom.Point2D;
 
 /**
  * Class for pieces. Pieces are the primary unit for game play. They have
@@ -41,9 +43,21 @@ public class Piece extends GridComponent {
 	private boolean myShouldRemove;
 	
 	/**
-	 * Inventory of the piece
+	 * Inventory of item pieces that add extra actions to a piece
 	 */
-	private transient Inventory myInventory;
+	private Inventory myInventory;
+	
+	/**
+	 * Boolean stating whether the piece has an inventory
+	 */
+	private boolean myHasInventory;
+	
+	/**
+	 * Boolean stating whether the piece is an item
+	 * (can be added into an inventory)
+	 */
+	private boolean myIsItem;
+	
 
 	/**
 	 * Piece constructor
@@ -62,26 +76,28 @@ public class Piece extends GridComponent {
 	 *            - the Piece's stats, already defined
 	 * @param loc
 	 *            - Point2D containing the piece's current coordinates
+	 * @param playerID
+	 *            - Piece's player ID, serves as a reference to which player
+	 *            this piece belongs to
+	 * @param hasInventory TODO
+	 * @param isItem TODO
 	 * @param tid
 	 *            - Piece's type ID, serves as a reference to this type of piece
 	 * @param uid
 	 *            - Piece's unique ID, serves as a reference to this specific
 	 *            instance of piece
-	 * @param playerID
-	 *            - Piece's player ID, serves as a reference to which player
-	 *            this piece belongs to
-	 * @param inventory
-	 *            - Piece's inventory if the user chooses to use an inventory
 	 */
 	public Piece(String id, String name, String imageLoc, Movement movement, List<Action> actions,
-			Stats stats, Point2D.Double loc, int playerID, Inventory inventory) {
+			Stats stats, Point2D.Double loc, int playerID, boolean hasInventory, boolean isItem) {
 		super(id, name, imageLoc, loc);
 		myMovement = movement;
 		myActions = actions;
 		myStats = stats;
 		myPlayerID = playerID;
 		myShouldRemove = false;
-		myInventory = inventory;
+		myInventory = new Inventory();
+		myHasInventory = hasInventory;
+		myIsItem = isItem;
 	}
 
 	/**
@@ -97,7 +113,9 @@ public class Piece extends GridComponent {
 		myStats = new Stats(clone.myStats);
 		myPlayerID = clone.myPlayerID;
 		myShouldRemove = false;
-		myInventory = null; // TODO: NOPE. NO INVENTORY.
+		myInventory = clone.myInventory;
+		myHasInventory = clone.myHasInventory;
+		myIsItem = clone.myIsItem;
 	}
 
 	/**
@@ -151,6 +169,19 @@ public class Piece extends GridComponent {
 		}
 		return actions;
 	}
+	
+	/**
+	 * Returns a list of Strings containing the name of the Actions
+	 * contained in the piece for display purposes in the Game Player
+	 * @return List<String> of Action Names
+	 */
+	public List<String> getActionNames() {
+		List<String> names = new ArrayList<String>();
+		for (Action action : myActions) {
+			names.add(action.getName());
+		}
+		return names;
+	}
 
 	/**
 	 * Marks the myShouldRemove boolean to true to flag for piece removal from
@@ -178,24 +209,30 @@ public class Piece extends GridComponent {
 	 * @return boolean stating whether item was added
 	 */
 	public boolean addToInventory(Piece item) {
-		if (myInventory != null && item != this) {
+		if (inventoryValid(item)) {
 			myInventory.addItem(item);
-			return true;
+			return true;	
 		}
+		//TODO: add popup saying piece was not added
+		System.out.println("Cannot add piece to inventory.");
 		return false;
 	}
 
 	/**
-	 * Removes an item form the inventory as long as there is an inventory and
+	 * Removes an item from the inventory as long as there is an inventory and
 	 * the item added is not the piece holding the inventory.
 	 * 
 	 * @param item
 	 *            - piece to be removed from the inventory
 	 */
 	public void removeFromInventory(Piece item) {
-		if (myInventory != null && item != this) {
+		if (inventoryValid(item)) {
 			myInventory.removeItem(item);
 		}
+	}
+	
+	private boolean inventoryValid(Piece item) {
+		return myHasInventory && item != this && item.isItem();
 	}
 
 	/**
@@ -224,6 +261,22 @@ public class Piece extends GridComponent {
 	 */
 	public void setPlayerID(int id) {
 		myPlayerID = id;
+	}
+	
+	/**
+	 * Returns whether the piece is able to use an inventory
+	 * @return boolean stating if the piece has an inventory
+	 */
+	public boolean hasInventory() {
+		return myHasInventory;
+	}
+	
+	/**
+	 * Returns whether the piece is an item (can be added to inventory)
+	 * @return boolean stating if the piece is an item
+	 */
+	public boolean isItem() {
+		return myIsItem;
 	}
 	
 	public String printString() {
