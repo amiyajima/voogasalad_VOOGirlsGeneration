@@ -267,10 +267,12 @@ public class PieceTypeEditor extends Pane {
             @Override
             public void handle (ActionEvent click) {
                 myID = unitID.getText();
-                if (myIDSet.contains(myID)) {
-                return;
+                if (myIDSet.contains(myID) || (myID.equals(""))) {
+                	return;
                 }
-                myIDSet.add(myID);
+                if (!unitID.isDisabled()) {
+                    myIDSet.add(myID);
+                }
                 myName = unitName.getText();
                 myActions = addSelectedActions(modList.getSelectedActions());
                 myPiece = new Piece(myID, myName, myImageLocation, myMovement, myActions,
