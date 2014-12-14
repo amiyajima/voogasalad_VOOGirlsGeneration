@@ -223,12 +223,10 @@ public class PieceTypeEditor extends Pane {
     private ModulesList initModList () {
         ObservableList<String> availableActions = myAvailableActions.getActionNames();
         ObservableList<String> addedActions = FXCollections.observableArrayList();
-        // TODO : Actions need to be properly implemented before this can work.
-//        for(Action action : myActions){
-//        	System.out.println(myActions.size());
-//        	availableActions.remove(action);
-//        	addedActions.add(action);
-//        }
+        for(Action action : myActions){
+        	availableActions.remove(action.getName());
+        	addedActions.add(action.getName());
+        }
         return new ModulesList(availableActions, addedActions);
     }
 
