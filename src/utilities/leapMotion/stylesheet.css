@@ -1,0 +1,25 @@
+.root {
+	-fx-text-color: #F7F7F7;
+	-fx-base: #343434;
+	-fx-background-color: #343434;
+	-fx-padding: 5;
+}
+
+.vbox { 
+	-fx-spacing: 5;
+}
+
+.hbox {
+	-fx-spacing: 5;
+}
+.button {
+    -fx-padding: 5 22 5 22;   
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}

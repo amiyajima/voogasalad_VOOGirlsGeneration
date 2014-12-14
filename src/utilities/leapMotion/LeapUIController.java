@@ -31,7 +31,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 
-
+/**
+ * GUI controller to configure leap motion setup for key and mouse
+ * and saves the configuration to a properties file to be read in by the LeapMotionListener
+ * listener. 
+ */
 public class LeapUIController extends Application {
 
     public static final String LEAP_UI= "leapUI.fxml";
@@ -78,7 +82,10 @@ public class LeapUIController extends Application {
         stage.show();
 
     }
-
+    /**
+     * method to set up the available gesture types for key binding
+     * checking for the already chosen gestures in the mouse clicking dropdown.
+     */
     protected void setUpGesture(){
         Type t = (Type) ClickDropDown.valueProperty().getValue();
 
@@ -165,7 +172,9 @@ public class LeapUIController extends Application {
         myControls.put(t.toString(), ""+InputEvent.BUTTON1_DOWN_MASK);
     }
 
-
+    /**
+     * opens a file saver; saves the map to a properties file and exits upon clicking the button
+     **/
     @FXML
     private void okayAction() throws IOException{
         
