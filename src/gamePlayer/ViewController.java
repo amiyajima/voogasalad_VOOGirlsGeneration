@@ -1112,9 +1112,10 @@ public class ViewController {
 		if (GameState.getNextLevelID() != null) {
 			System.out.println("NEXT LEVEL");
 			// myController.getGame().changeLevel(currentLevel.getNextLevelID());
-			myModel.changeLevel("Level 2");
+			myModel.changeLevel(GameState.getNextLevelID());
 			// myController.getGame().getCurrentLevel().getGrid().displayPane(myController.getGridPane());
 			initializeGrid();
+			myGrid.repopulateGrid();
 		}
 /*		if (myModel.getCurrentPlayer().getNumMovesPlayed() > 4) {
 			//System.out.println("NEXT PLAYER HARD CODE");

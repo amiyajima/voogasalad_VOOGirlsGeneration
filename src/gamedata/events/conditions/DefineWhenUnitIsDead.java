@@ -19,7 +19,7 @@ public class DefineWhenUnitIsDead extends Condition{
 	public boolean evaluate(List<IHasStats> objects) {
 		for(IHasStats source : objects){
 			if(Piece.class.equals(source.getClass())){
-				if(source.getStats().getValue(myHealthName)<=0){
+				if(source.getStats().contains(myHealthName) && source.getStats().getValue(myHealthName)<=0){
 					((Piece) source).markForRemoval();
 				}
 			}

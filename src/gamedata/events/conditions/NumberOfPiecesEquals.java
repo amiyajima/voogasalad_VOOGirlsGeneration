@@ -24,10 +24,11 @@ public class NumberOfPiecesEquals extends Condition{
 	public boolean evaluate(List<IHasStats> objects) {
 		int count = 0;
 		for(IHasStats source: objects){
-			if(myReference.equals(source.getClass().toString())){
+			if("Boss".equals(source.toString())){
 				count++;
 			}	
 		}
-		return myConstant==count;
+		System.out.println(myReference + ":" + count);
+		return 0==count;
 	}
 }
