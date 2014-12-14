@@ -22,6 +22,7 @@ public class GameGridEffect {
     public static final String ACTION_RANGE_COLOR = "#FFBF00";
     public static final String EFFECT_RANGE_COLOR = "#DF0101";
     private static final String DEFAULT_COLOR = "#0000FF";
+    private static final String GREY_OUT = "#000000";
      
     public GameGridEffect(ViewController vc){
         myViewController = vc;
@@ -107,7 +108,16 @@ public class GameGridEffect {
         myHighlightedPiece.add(toHighlight);
     }
     
-
+    public void greyOutPiece(Point2D.Double loc, Piece p) {
+        clearAllPieceHighlights();
+        clearAllActionHighlights();
+        clearAllEffectHighlights();
+        updateActives();
+        SuperTile toHighlight = myGrid.findTile(loc);
+        toHighlight.selectTile(GREY_OUT);
+        myHighlightedPiece.add(toHighlight);
+    }
+    
     /**
      * Clear all effects in grid, currently only clears highlights
      * @param grid

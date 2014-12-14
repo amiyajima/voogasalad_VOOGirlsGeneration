@@ -161,10 +161,10 @@ public class ViewController {
 
 	public ViewController(Stage s) throws UnsupportedAudioFileException,
 	IOException, LineUnavailableException {
-		myPlayerList=new ArrayList<Player>();
+//		myPlayerList=new ArrayList<Player>();
 		//Test
-		myPlayerList.add(new HumanPlayer(1));
-		myPlayerList.add(new HumanPlayer(3));
+//		myPlayerList.add(new HumanPlayer(1));
+//		myPlayerList.add(new HumanPlayer(3));
 
 		myStage = s;
 		openInitialMenu();
@@ -243,10 +243,11 @@ public class ViewController {
 		}
 		catch (FileNotFoundException fnfe) {
 			System.out.println("Could not find the file at - " + f.getAbsolutePath());
+			loadGame();
 		}
 		catch (Exception e) {
 			System.out.println("Other exception occured.");
-			e.printStackTrace();
+			loadGame();
 		}
 
 	}
@@ -836,7 +837,7 @@ public class ViewController {
 		tempMoveCount++;
 		
 
-		if (myModel.getCurrentLevel().getGameWon() || tempMoveCount % 4 == 0) {
+		if (myModel.getCurrentLevel().getGameWon() || tempMoveCount % 8 == 0) {
 			// TODO this assumes that the most recent player is the one that won
 		        // also chooses a random score
 			String highScorer = "Bob";
@@ -861,6 +862,15 @@ public class ViewController {
 	 */
 	void setPlayerTurnDisplay() {
 		playerTurn.setText("Player " + myCurrentPlayer.getID() + "'s Move");
+		/*
+                for (Player p : myModel.getPlayers()) {
+                    if (!p.equals(myCurrentPlayer)) {
+                        for (Piece piece : myModel.getCurrentLevel().getGrid().getPlayerPieces(p.getID())) {
+                            myGameGridEffect.greyOutPiece(piece.getLoc(), piece);
+                        }
+                    }
+                }	
+                */	
 	}
 
 	/**
@@ -984,6 +994,7 @@ public class ViewController {
 	}
 
 	private void handleClearHighScores() {
+	    System.out.println("VC: Clear high scores");
 		try {
 			File myScores = new File(getClass().getResource(
 					"/resources/highscore/highscore.txt").getPath());

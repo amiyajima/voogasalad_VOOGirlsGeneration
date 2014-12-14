@@ -16,10 +16,6 @@ import gamedata.gamecomponents.Inventory;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
-import gamedata.goals.Goal;
-import gamedata.goals.PlayerPiecesRemovedGoal;
-import gamedata.rules.MoveCountRule;
-import gamedata.rules.Rule;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
 import gameengine.player.HumanPlayer;
@@ -76,7 +72,7 @@ public class TestGameCreator {
 		System.out.println("TCG: Create new game");
 		List<Player> myPlayers = new ArrayList<Player>();
 		Player myPlayer1 = new HumanPlayer(1);
-		Player myPlayer2 = new SimpleAIPlayer(2);
+		Player myPlayer2 = new HumanPlayer(2);
 		myPlayers.add(myPlayer1);
 		myPlayers.add(myPlayer2);
 
@@ -246,14 +242,14 @@ public class TestGameCreator {
 	}
 	
 	public StatsTotalLogic createNewStatsTotalLogic() {
-	   StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "actor", "health");
-	   StatsSingleMultiplier ssm2 = new StatsSingleMultiplier(20, "actor", "health");
+	   StatsSingleMultiplier ssm1 = new StatsSingleMultiplier(0, "receiver", "health");
+	   StatsSingleMultiplier ssm2 = new StatsSingleMultiplier(0, "receiver", "health");
 	   List<StatsSingleMultiplier> ssmList = new ArrayList<StatsSingleMultiplier>();
            ssmList.add(ssm1);
            ssmList.add(ssm2);
            
            List<StatsTotalLogic> stlList = new ArrayList<StatsTotalLogic>();
-           StatsTotalLogic s1 = new StatsTotalLogic("actor", "health", ssmList);
+           StatsTotalLogic s1 = new StatsTotalLogic("receiver", "health", ssmList);
            stlList.add(s1);
 
            return s1;
