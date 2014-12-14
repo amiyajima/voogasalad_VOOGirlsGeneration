@@ -75,7 +75,7 @@ public class ViewController {
 	private static final String HUMAN_PLAYER = "Human Player";
 	public static final String ADD_HIGH_SCORE_FXML = "newHighScore.fxml";
 	public static final String GAMESPACE_FXML = "gameSpace.fxml";
-	public static final String INITIALSCENE_FXML = "initialScene.fxml";
+//	public static final String INITIALSCENE_FXML = "initialScene.fxml";
 	public static final String SCOREBOARD_FXML = "scoreBoard.fxml";
 	public static final String PLAYER_FXML = "playerEditorScene.fxml";
 	public static final String INITIALSCENE_TITLE = "VOOGASALAD!";
@@ -90,7 +90,7 @@ public class ViewController {
 	private BorderPane myGameSpace;
 	private BorderPane myPopup;
 	private VBox mySettings;
-	private VBox myInitialScene;
+//	private VBox myInitialScene;
 	private VBox myScoreBoard;
 	@FXML
 	private BorderPane editPlayerRoot;
@@ -263,7 +263,7 @@ public class ViewController {
 	@FXML
 	protected void openInitialMenu() throws UnsupportedAudioFileException,
 	IOException, LineUnavailableException {
-		myInitialScene = new VBox();
+//		myInitialScene = new VBox();
 		myGameSpace = new BorderPane();
 		myScoreBoard = new VBox();
 		scores = new VBox();
@@ -276,7 +276,7 @@ public class ViewController {
 		myJSONManager = new JSONManager();
 		// myLeapController = new Controller();
 		loadFXML(GAMESPACE_FXML, myGameSpace);
-		loadFXML(INITIALSCENE_FXML, myInitialScene);
+//		loadFXML(INITIALSCENE_FXML, myInitialScene);
 		loadFXML(POPUP_FXML, myPopup);
 		loadFXML(SCOREBOARD_FXML, myScoreBoard);
 		loadFXML(SETTINGS_FXML, mySettings);
@@ -291,7 +291,7 @@ public class ViewController {
 		newHighScoreScene = new Scene(newHighScoreRoot);
 		winLoseScene = new Scene(myWinLoseScreen);
 
-		myStage.setScene(new Scene(myInitialScene));
+//		myStage.setScene(new Scene(myInitialScene));
 
 		myAudio = new Audio();
 		myAudio.playBackground();
@@ -437,12 +437,7 @@ public class ViewController {
 
             @Override
             public void handle (MouseEvent arg0) {
-                if (playerTypeCombo.getValue().equals(HUMAN_PLAYER)) {
-                    myModel.replacePlayer(playerID, new HumanPlayer(playerID));
-                }
-                else {
-                    myModel.replacePlayer(playerID, new SimpleAIPlayer(playerID));
-                }
+                myModel.replacePlayer(playerID, playerTypeCombo.getValue());
             }
 	        
 	    });
@@ -736,7 +731,6 @@ public class ViewController {
 		}
 
 		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(myCurrentLocation));
-
 		while (myCurrentPlayer.getType().equals("AI")) {
 			myCurrentPlayer.play();
 			this.checkEndActions();
