@@ -59,10 +59,8 @@ public class RangeEditor extends PopupWindow {
 	private Button mySelect;
 	private Consumer<List<Point2D.Double>> myConsumer;
 
-	//	public RangeEditor () {
-	//		this(new ArrayList<Point2D.Double>(), DEFAULT_SHAPE);
-	//	}
 
+	
 	public RangeEditor (List<Point2D.Double> range, 
 			Consumer<List<Point2D.Double>> consumer, String shape) {
 		// range.add(new Point2D.Double(1,0));
@@ -149,9 +147,10 @@ public class RangeEditor extends PopupWindow {
 				myGridHeightNumber = Integer.parseInt(VRadius.getText()) * 2 + 1;
 				myTileSize = getPrefTileSize(myGridWidthNumber, myGridHeightNumber);
 				box.getChildren().clear();
-				List<Point2D.Double> newRange = rangeGridView.returnSelectedList();
-				myRange.clear();
-				myRange.addAll(newRange);
+//				List<Point2D.Double> newRange = rangeGridView.returnSelectedList();
+//				myRange.clear();
+//				myRange.addAll(newRange);
+				myRange=rangeGridView.returnSelectedList();
 
 				rangeGridView.update(myGridWidthNumber, myGridHeightNumber,
 						myRange);

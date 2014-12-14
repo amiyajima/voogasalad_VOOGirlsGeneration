@@ -30,7 +30,6 @@ public class RangeGridView extends ScrollPane{
 					myTileSize,shape,range);
 		}else{
 			Point2D minGridSize=cacluateGridSize(range);
-
 			myTileSize=getPrefTileSize((int)minGridSize.getX(),(int)minGridSize.getY(),
 										myTileSize);
 			myGrid = new RangeGrid((int)minGridSize.getX(),(int)minGridSize.getY(),
@@ -64,13 +63,16 @@ public class RangeGridView extends ScrollPane{
         double maxX = 0;
         double maxY = 0;
         for (Point2D point : range) {
-            if (Math.abs(point.getX()) > maxX) {
+            if (Math.abs(point.getX()) >= maxX) {
                 maxX = Math.abs(point.getX())*2+1;
             }
-            if (Math.abs(point.getY()) > maxY) {
+            if (Math.abs(point.getY()) >= maxY) {
                 maxY = Math.abs(point.getY())*2+1;
             }
         }
+        
+        if (maxX==1) maxX=3;
+        if (maxY==1) maxY=3;
         return new Point2D.Double(maxX, maxY);
     }
 
