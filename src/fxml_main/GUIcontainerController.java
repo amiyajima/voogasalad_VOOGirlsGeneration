@@ -82,8 +82,10 @@ public class GUIcontainerController implements Initializable{
             };
             
             GamePropertiesEditor gpEditor = new GamePropertiesEditor(c);
+            //this needs to happen after the click happens
             int numPlayers = gpEditor.getNumPlayer();
-            authorController.initPlayerData(numPlayers);
+            System.out.println("GUIContainer: #players = " + numPlayers);
+            //authorController.initPlayerData(numPlayers);
             
         } catch (IOException e) {
             e.printStackTrace();

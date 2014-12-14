@@ -174,9 +174,10 @@ public class AuthoringController implements Initializable {
         }
     }
 
-    public void initPlayerData (int numPlayers) {
-        myPlayerData = new PlayerData(numPlayers);
-    }
+//    public void initPlayerData (int numPlayers) {
+//        myPlayerData = new PlayerData(numPlayers);
+//        //myLevelController.setPlayerData(myPlayerData);
+//    }
 
     public void initData (GamePropertiesData gamePropertiesData) {
         myGamePropertiesData = gamePropertiesData;
@@ -190,7 +191,7 @@ public class AuthoringController implements Initializable {
         myLevelController =
                 new LevelController(myLevelsVBox, myPropertiesSPane, myGridSPane,
                                     myGridReference, myLevelData, myPieceTypes, myPatchTypes,
-                                    myGamePropertiesData.getGridShape(), myPlayerData);
+                                    myGamePropertiesData.getGridShape());
         myActionController =
                 new ActionController(myActionsVBox, myPropertiesSPane, myGridReference,
                                      myActionData, myGamePropertiesData.getGridShape());

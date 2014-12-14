@@ -4,7 +4,6 @@ import gamedata.action.StatsTotalLogic;
 import gamedata.action.TotalLogicBox;
 import gamedata.events.GameStateGlobalAction;
 import gamedata.events.GlobalAction;
-import gamedata.events.GlobalStatLogicBox;
 import gamedata.events.globalaction.ChangePlayerStats;
 import gamedata.events.globalaction.MakePieceAtLocation;
 import gamedata.events.globalaction.DeletePieceAtLocation;
@@ -65,7 +64,14 @@ public class NewActionController implements Initializable {
     private Consumer<GlobalAction> myDoneLambda;
     private EventsDataWrapper myData;
     private IChangeGameState myState;
-    private PlayerData myPlayerData;
+
+    private int myPlayerID;
+    private String myStatName;
+    private int myConstant;
+
+    private TextField myStatString;
+    private TextField myIDField;
+    private  TextField myConstantField;
 
     @Override
     public void initialize (URL fxmlFileLocation, ResourceBundle resources) {
@@ -93,9 +99,18 @@ public class NewActionController implements Initializable {
         myTypeChoiceBox.getSelectionModel().selectedItemProperty()
                 .addListener(
                              (observable, oldValue, selectedType) -> showActionEditorPane());
-        StatsTotalLogic stl = new StatsTotalLogic();
-        GlobalStatLogicBox statsLogic = new GlobalStatLogicBox(stl, myPlayerData);
-        myStatsHBox.getChildren().add(statsLogic);
+
+        // make statsHBox have 3 text fields
+        myIDField= new TextField();
+        myIDField.setPromptText("Enter player ID");
+        
+        myStatString = new TextField();
+        myStatString.setPromptText("Enter stat string");
+
+        myConstantField = new TextField();
+        myConstantField.setPromptText("Enter constant");
+        
+        myStatsHBox.getChildren().addAll(myIDField, myStatString,myConstantField);
     }
 
     // TODO: Refactor this to be less gross. SO MUCH REPEATED CODE
@@ -125,8 +140,13 @@ public class NewActionController implements Initializable {
             myDoneLambda.accept(action);
         }
         else if (c.equals(ChangePlayerStats.class)) {
-            //need List<StatsTotalLogic> statsLogics, IHasStats actor, Player receiver
-          // GlobalAction action = new ChangePlayersStats();
+            myStatName = myStatString.getText();
+            myPlayerID = Integer.parseInt(myIDField.getText());
+            myConstant = Integer.parseInt(myConstantField.getText());
+            GlobalAction action = new ChangePlayerStats(myStatName, myConstant, myPlayerID);
+            System.out.println("NewActionController: created a ChangePlayerStats object with ID: " +
+                               myPlayerID);
+            myDoneLambda.accept(action);
         }
 
         String classPath = c.toString();
@@ -165,7 +185,6 @@ public class NewActionController implements Initializable {
             myNextLevelField.setVisible(true);
         }
         else if (c.equals(ChangePlayerStats.class)) {
-            //stats box needs 
             myStatsHBox.setVisible(true);
         }
 
@@ -202,8 +221,8 @@ public class NewActionController implements Initializable {
         myState = state;
     }
 
-    public void loadPlayerData (PlayerData playerData) {
-       myPlayerData = playerData;
-        
-    }
+    // public void loadPlayerData (PlayerData playerData) {
+    // myPlayerData = playerData;
+    //
+    // }
 }

@@ -38,14 +38,13 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 	protected LevelController (VBox vbox, ScrollPane propertiesSPane,
 			ScrollPane gridSPane, GUIGridReference gridRef, LevelData levels,
 			PieceTypeData pieceTypes, PatchTypeData patchTypes, 
-			String gridShape, PlayerData playerData) {
+			String gridShape) {
 		super(vbox, propertiesSPane, gridRef);
 		myGridSPane = gridSPane;
 		myLevelData = levels;
 		myPieceTypes = pieceTypes;
 		myPatchTypes = patchTypes;
 		myGridShape = gridShape;
-		myPlayerData = playerData;
 	}
 
 	@Override
@@ -57,6 +56,11 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 			}
 		});
 	}
+	
+//	public void setPlayerData(PlayerData data){
+//	    myPlayerData = data;
+//	    System.out.println("LevelController: player data set to " + myPlayerData.getNumPlayers());
+//	}
 
 	private void globalNewBtnOnClickAction() {
 		//TODO: Need to not hard-code square, have it passed through the constructor

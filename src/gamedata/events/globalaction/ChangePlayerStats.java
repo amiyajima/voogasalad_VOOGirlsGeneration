@@ -12,28 +12,28 @@ import authoring_environment.GUIGrid;
 
 
 /**
- * Global Action that modifies a player's stat based on another stat or constant
+ * Global Action that modifies a player's stat based on a constant
  * 
  * @author annamiyajima
  *
  */
 public class ChangePlayerStats extends GlobalAction {
-    private List<StatsTotalLogic> myStatsLogics;
-    private StatsDataModifier myStatsModifier;
-    private IHasStats myActor;
-    private Player myReceiver;
+    private int myPlayerID;
+    private String myStatName;
+    private int myStatValue;
 
-    public ChangePlayerStats (List<StatsTotalLogic> statsLogics, IHasStats actor, Player receiver) {
+    public ChangePlayerStats (String statName, int value, int ID ) {
         super("Change player stat");
-        myStatsLogics = statsLogics;
-        myStatsModifier = new StatsDataModifier(myStatsLogics);
-        myActor = actor;
-        myReceiver = receiver;
+        myStatValue = value;
+        myStatName = statName;
+        myPlayerID = ID;
     }
 
     @Override
     public void doBehavior (GUIGrid grid) {
-        myStatsModifier.modifyStats(myActor, myReceiver);
+        //check IDs against all existing players
+//        grid.get
+//        myReceiver.changeStat(myStatName, myStatValue);
     }
 
 }
