@@ -54,12 +54,11 @@ public class ApplyState implements IGridState {
 			piece = new Piece(actor, myController.getCurrentClick());
 			piece.setLoc(myController.getCurrentClick());
 		}
-		// System.out.println("ACTION RUNNING:" +
-		// myController.getActiveAction().toString());
-		
+
 		//do action IFF the piece is part of the highlighted action range
 		for (Point2D point:myController.getActiveAction().getAbsoluteActionRange(myController.getActivePiece().getLoc())){
-		    if (piece.getLoc().equals(point)){
+			System.out.println(myController.getActiveAction());
+			if (piece.getLoc().equals(point)){
 		        myController.getActiveAction().doBehavior(myController.getGrid(),actor, piece);
 		    }
 		    else{

@@ -2,7 +2,6 @@ package authoring.eventeditor;
 
 import gamedata.action.StatsTotalLogic;
 import gamedata.action.TotalLogicBox;
-import gamedata.events.globalaction.ChangePlayerStat;
 import gamedata.events.globalaction.GameStateGlobalAction;
 import gamedata.events.globalaction.GlobalAction;
 
