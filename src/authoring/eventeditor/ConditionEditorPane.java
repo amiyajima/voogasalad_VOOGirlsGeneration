@@ -68,7 +68,7 @@ public class ConditionEditorPane extends Pane{
 				String classPath = myClass.toString();
 				classPath = classPath.substring(6);
 
-				if("gamedata.events.conditions.IsDead".equals(classPath)){
+				if("gamedata.events.conditions.DefineWhenUnitIsDead".equals(classPath)){
 					myCondition = new DefineWhenUnitIsDead(val);
 				}
 				else{
@@ -142,7 +142,7 @@ public class ConditionEditorPane extends Pane{
 			String classPath = myClass.toString();
 			classPath = classPath.substring(6);
 						
-			if("gamedata.events.conditions.IsDead".equals(classPath)){
+			if("gamedata.events.conditions.DefineWhenUnitIsDead".equals(classPath)){
 				myRefType.setVisible(false);
 				myRefName.setVisible(false);
 				myStat.setVisible(false);
