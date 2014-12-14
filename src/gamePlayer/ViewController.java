@@ -812,8 +812,9 @@ public class ViewController {
 	 */
 	public void setGridState(IGridState state) {
 		tempMoveCount++;
+		
 
-		if (myModel.getCurrentLevel().getGameWon() || tempMoveCount == 0) {
+		if (myModel.getCurrentLevel().getGameWon() || tempMoveCount >= 0) {
 			// TODO this assumes that the most recent player is the one that won
 		        // also chooses a random score
 			String highScorer = "Bob";
@@ -883,7 +884,7 @@ public class ViewController {
 			File myScores2 = new File(getClass().getResource("/resources/highscore/highscore.txt").getPath());
 			Scanner in = new Scanner(myScores2);
 			String content = "";
-			ArrayList<List<String>> highScores = new ArrayList<List<String>>();
+			List<List<String>> highScores = new ArrayList<List<String>>();
 			while(in.hasNextLine()) {
 				String line = in.nextLine();
 				content += line + "\n";
@@ -901,7 +902,7 @@ public class ViewController {
 			writer.close();
 			List<String> currentScore = new ArrayList<String>();
 			currentScore.add(nickname);
-			//currentScore.add(score);
+			currentScore.add(String.valueOf(score));
 			highScores.add(currentScore);
 			/*
                 Collections.sort(highScores, new Comparator<List<String>> () {
@@ -912,7 +913,7 @@ public class ViewController {
                 });
 			 */
 			for (List<String> each : highScores) {
-				myScoreBoard.getChildren().add(1, new Label(each.get(0) + ": " + each.get(1)));
+			        myScoreBoard.getChildren().add(1, new Label(each.get(0) + ": " + each.get(1)));				
 			}
 			stage.setScene(scoreScene);
 			stage.show();
