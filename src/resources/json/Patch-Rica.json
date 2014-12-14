@@ -1,1 +1,0 @@
-{"myMovement":{"myMoves":[{"x":-1.0,"y":0.0},{"x":1.0,"y":0.0},{"x":0.0,"y":1.0},{"x":0.0,"y":-1.0}],"myPaths":[[{"x":2.0,"y":2.0},{"x":3.0,"y":3.0}]],"myOrientation":0.0},"myActions":[{},{}],"myStats":{"myStats":{"health":20.0}},"myPlayerID":2,"myShouldRemove":false,"myID":"Rica_ID","myName":"Rica","myLoc":{"x":0.0,"y":0.0},"myImageLocation":"/resources/images/Rica.png"}
