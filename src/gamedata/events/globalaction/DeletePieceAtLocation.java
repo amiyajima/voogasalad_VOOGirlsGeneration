@@ -25,7 +25,7 @@ public class DeletePieceAtLocation extends GlobalAction {
      * @param name of type of piece to delete
      */
     public DeletePieceAtLocation(Point2D.Double point) {
-        super(String.format("Delete Piece at position %s"));
+        super(String.format("Delete Piece at position %f %f", point.getX(), point.getY()));
         myLoc = point;
     }
 
