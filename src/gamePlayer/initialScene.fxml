@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="30.0" styleClass="root" stylesheets="@../resources/stylesheets/stylesheet.css" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="myInitialVBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="30.0" styleClass="root" stylesheets="@../resources/stylesheets/stylesheet.css" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuButton fx:id="newGameMenu" alignment="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="163.0" style="-fx-padding: 0;" styleClass="button" stylesheets="@../resources/stylesheets/stylesheet_label.css" text="New Game" textFill="#fcfafa" />
       <Button fx:id="loadGameButton" mnemonicParsing="false" onAction="#loadGame" text="Load Game" />
