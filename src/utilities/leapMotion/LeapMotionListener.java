@@ -1,16 +1,17 @@
+// This entire file is part of my masterpiece.
+// Eric Chen
 package utilities.leapMotion;
 
 import java.awt.AWTException;
 import java.awt.Robot;
-import java.awt.event.InputEvent;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 
 import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Gesture;
 import com.leapmotion.leap.Listener;
-import com.leapmotion.leap.SwipeGesture;
+
+import fxml_main.ErrorPopUp;
 
 /**
  * LeapMotionListener is the class that configures and executes user-defined
@@ -29,13 +30,7 @@ public class LeapMotionListener extends Listener {
     public static final String MOUSE_MOVE_FLAG = "mouse";
     public static final String MOUSE_FOLDER = "mouseControl.";
     public static final String DEFAULT_MOUSE = "TYPE_SCREEN_TAP";
-    public static final String TAP_MIN_V = "Gesture.ScreenTap.MinForwardVelocity";
-    public static final String TAP_HIST_TIME = "Gesture.ScreenTap.HistorySeconds";
-    public static final String TAP_MIN_DIST = "Gesture.ScreenTap.MinDistance";
-
-    public static final double MIN_FORWARD_VELOCITY = 30.0;
-    public static final double HISTORY_SECONDS = .5;
-    public static final double MIN_DISTANCE = 1.0;
+    public static final int MOUSE_INPUT_THRESHOLD = 1;
 
     /*
      * (non-Javadoc)
@@ -47,7 +42,6 @@ public class LeapMotionListener extends Listener {
 
         initializeRobot();
         myGestures = ResourceBundle.getBundle(PACKAGE_FILEPATH + GESTURE_BUNDLE);
-
         enableGestures(controller);
     }
 
@@ -58,48 +52,35 @@ public class LeapMotionListener extends Listener {
      * @param controller
      */
     private void enableGestures (Controller controller) {
-        for (String gestureName : myGestures.keySet()) {
+        myGestures.keySet().forEach(
+                gestureName -> {
+                    if (gestureName.equals(MOUSE_MOVE_FLAG)) {
 
-            if (gestureName.equals(MOUSE_MOVE_FLAG)) {
+                        Class<?> c = null;
+                        try {
+                            c = Class.forName(PACKAGE_FILEPATH + MOUSE_FOLDER
+                                    + myGestures.getString(gestureName));
 
-                Class c = null;
-                try {
-                    c = Class.forName(PACKAGE_FILEPATH + MOUSE_FOLDER
-                            + myGestures.getString(gestureName));
+                            myLeapMouse = (ILeapMouse) c.newInstance();
+                        } catch (ClassNotFoundException | InstantiationException
+                                | IllegalAccessException | IllegalArgumentException
+                                | SecurityException e) {
+                            ErrorPopUp myError = new ErrorPopUp(e.toString());
+                            myError.show();
+                        }
 
-                    myLeapMouse = (ILeapMouse) c.newInstance();
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-                        | IllegalArgumentException | SecurityException e) {
-
-                }
-
-            }
-            for (Gesture.Type type : Gesture.Type.values()) {
-                if (type.toString().equals(gestureName)) {
-
-                    controller.enableGesture(type);
-                    if (gestureName.equals(DEFAULT_MOUSE)) {
-
-                        configScreenTap(controller);
                     }
 
-                }
-            }
+                    for (Gesture.Type type : Gesture.Type.values()) {
+                        if (type.toString().equals(gestureName)) {
 
-        }
-    }
+                            controller.enableGesture(type);
 
-    /**
-     * Set parameters for the screen tap gesture to allow better performance.
-     * 
-     * @param controller
-     */
-    private void configScreenTap (Controller controller) {
-        controller.config().setFloat(TAP_MIN_V, (float) MIN_FORWARD_VELOCITY);
+                        }
+                    }
+                    ;
+                });
 
-        controller.config().setFloat(TAP_HIST_TIME, (float) HISTORY_SECONDS);
-        controller.config().setFloat(TAP_MIN_DIST, (float) MIN_DISTANCE);
-        controller.config().save();
     }
 
     /**
@@ -110,7 +91,8 @@ public class LeapMotionListener extends Listener {
         try {
             myRobot = new Robot();
         } catch (AWTException e) {
-
+            ErrorPopUp myError = new ErrorPopUp(e.toString());
+            myError.show();
         }
 
     }
@@ -123,14 +105,15 @@ public class LeapMotionListener extends Listener {
     public void onFrame (Controller controller) {
         Frame frame = controller.frame();
         myLeapMouse.moveMouse(frame, myRobot);
-        for (Gesture gesture : frame.gestures()) {
-            for (String gestureName : myGestures.keySet()) {
+        frame.gestures().forEach(gesture -> {
+            myGestures.keySet().forEach(gestureName -> {
                 if (gesture.type().toString().equals(gestureName)) {
                     performAction(gestureName);
 
                 }
-            }
-        }
+            });
+
+        });
     }
 
     /**
@@ -140,7 +123,7 @@ public class LeapMotionListener extends Listener {
      */
     private void performAction (String gestureName) {
 
-        if (myGestures.getString(gestureName).length() > 1) {
+        if (myGestures.getString(gestureName).length() > MOUSE_INPUT_THRESHOLD) {
             int mouseInput = Integer.parseInt(myGestures.getString(gestureName));
             myRobot.mousePress(mouseInput);
             myRobot.mouseRelease(mouseInput);
