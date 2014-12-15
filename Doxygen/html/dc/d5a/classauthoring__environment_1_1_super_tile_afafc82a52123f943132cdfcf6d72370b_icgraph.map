@@ -1,0 +1,8 @@
+<map id="authoring_environment.SuperTile.isSelected" name="authoring_environment.SuperTile.isSelected">
+<area shape="rect" id="node2" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a5d631da91234e98b2970a530dc860503" title="authoring_environment.Range\lGrid.selectedRangeList" alt="" coords="267,38,482,79"/>
+<area shape="rect" id="node7" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#ad6be3076da674c7d925b08f21a68b1f2" title="authoring_environment.Range\lGrid.switchHighlight" alt="" coords="267,103,482,145"/>
+<area shape="rect" id="node3" href="$d5/df6/classauthoring__environment_1_1_range_grid_view.html#abb88e480de6be8db723c9a30874e857d" title="authoring_environment.Range\lGridView.returnSelectedList" alt="" coords="531,38,746,79"/>
+<area shape="rect" id="node4" href="$dd/de3/classauthoring_1_1concretefeatures_1_1_range_editor_1_1_select_handler.html#acf2dc5425ba80cff4d5c5b35d1d22ae9" title="authoring.concretefeatures.\lRangeEditor.SelectHandler.handle" alt="" coords="795,5,1034,46"/>
+<area shape="rect" id="node5" href="$d6/d17/classauthoring_1_1concretefeatures_1_1_range_editor.html#a8fce9ab5a871769da6f36c3df0b8991b" title="authoring.concretefeatures.\lRangeEditor.initialize" alt="" coords="815,70,1015,111"/>
+<area shape="rect" id="node6" href="$d6/d17/classauthoring_1_1concretefeatures_1_1_range_editor.html#a7190503f2f2f1733838c08a04a4663a9" title="authoring.concretefeatures.\lRangeEditor.RangeEditor" alt="" coords="1083,70,1283,111"/>
+</map>

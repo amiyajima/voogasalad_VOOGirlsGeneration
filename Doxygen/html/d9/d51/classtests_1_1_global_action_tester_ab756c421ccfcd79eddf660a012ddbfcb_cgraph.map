@@ -1,0 +1,5 @@
+<map id="tests.GlobalActionTester.TestEndTurn" name="tests.GlobalActionTester.TestEndTurn">
+<area shape="rect" id="node2" href="$d6/dc0/classgamedata_1_1events_1_1globalaction_1_1_end_turn.html#addc55601945fb791cb08bf3ca549fa36" title="gamedata.events.globalaction.\lEndTurn.doBehavior" alt="" coords="234,5,454,46"/>
+<area shape="rect" id="node3" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#ac18deb24161cdf0ecc89cf051ace563a" title="gamedata.gamecomponents.\lGame.getCurrentPlayer" alt="" coords="237,70,451,111"/>
+<area shape="rect" id="node4" href="$d0/dfd/classgameengine_1_1player_1_1_player.html#adb3e2795226ff40955d4164d2122b08d" title="gameengine.player.Player.getID" alt="" coords="232,136,456,163"/>
+</map>

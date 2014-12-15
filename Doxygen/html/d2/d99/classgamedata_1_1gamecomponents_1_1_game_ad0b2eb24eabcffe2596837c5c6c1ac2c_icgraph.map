@@ -1,0 +1,7 @@
+<map id="gamedata.gamecomponents.Game.replacePlayer" name="gamedata.gamecomponents.Game.replacePlayer">
+<area shape="rect" id="node2" href="$d7/d84/classgame_player_1_1_player_type_setter.html#a3507144e578e2d14c1f92fe81ae14435" title="gamePlayer.PlayerTypeSetter.edit\lSpecificPlayer" alt="" coords="267,63,501,105"/>
+<area shape="rect" id="node3" href="$d7/d84/classgame_player_1_1_player_type_setter.html#a782ba79987e63fb4c9c47c48284c0212" title="gamePlayer.PlayerTypeSetter.start\lLoadPlayers" alt="" coords="550,63,791,105"/>
+<area shape="rect" id="node4" href="$d7/d84/classgame_player_1_1_player_type_setter.html#a1eb0c9152edf12b5ea5eac8212d10b66" title="gamePlayer.PlayerTypeSetter.\lPlayerTypeSetter" alt="" coords="865,5,1076,46"/>
+<area shape="rect" id="node5" href="$df/dd5/classgame_player_1_1_view_controller.html#a87ee83b9dc170a094457a10bfdff7c20" title="gamePlayer.ViewController.loadGame" alt="" coords="840,71,1101,97"/>
+<area shape="rect" id="node6" href="$df/dd5/classgame_player_1_1_view_controller.html#ac0350fa190876455755b7fb25f567af1" title="gamePlayer.ViewController.testGame" alt="" coords="841,121,1100,148"/>
+</map>

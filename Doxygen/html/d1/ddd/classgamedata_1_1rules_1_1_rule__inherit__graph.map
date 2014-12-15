@@ -1,0 +1,6 @@
+<map id="gamedata.rules.Rule" name="gamedata.rules.Rule">
+<area shape="rect" id="node2" href="$d2/d81/classgamedata_1_1rules_1_1_available_moves_rule.html" title="gamedata.rules.Available\lMovesRule" alt="" coords="230,5,413,46"/>
+<area shape="rect" id="node3" href="$d5/df0/classgamedata_1_1rules_1_1_can_attack_rule.html" title="gamedata.rules.CanAttackRule" alt="" coords="212,71,431,97"/>
+<area shape="rect" id="node4" href="$df/d16/classgamedata_1_1rules_1_1_movable_rule.html" title="gamedata.rules.MovableRule" alt="" coords="218,121,425,148"/>
+<area shape="rect" id="node5" href="$df/db5/classgamedata_1_1rules_1_1_move_count_rule.html" title="gamedata.rules.MoveCountRule" alt="" coords="209,172,434,199"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="gamedata.gamecomponents.GridComponent.getImageLocation" name="gamedata.gamecomponents.GridComponent.getImageLocation">
+<area shape="rect" id="node2" href="$da/dc9/classfxml__main_1_1_patch_type_editor.html#a8415ba9efdc335142c46073dcb2330fb" title="fxml_main.PatchTypeEditor.\lPatchTypeEditor" alt="" coords="304,5,499,46"/>
+<area shape="rect" id="node3" href="$df/d59/classfxml__main_1_1_patch_viewer.html#a621ed91e1508b5f96c0b00bed71073aa" title="fxml_main.PatchViewer.Patch\lViewer" alt="" coords="298,70,505,111"/>
+<area shape="rect" id="node4" href="$df/dbd/classfxml__main_1_1_piece_editor.html#a33603f4cca25fedefefd2108dbe75163" title="fxml_main.PieceEditor.Piece\lEditor" alt="" coords="301,135,501,177"/>
+<area shape="rect" id="node5" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#af2eefe9bd07a346d48960d99fae7511d" title="fxml_main.PieceTypeEditor.\lPieceTypeEditor" alt="" coords="304,201,499,242"/>
+<area shape="rect" id="node6" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html#af4709ab2b1fb90846ae8d56fa277496b" title="authoring.data.PatchInstance\lData.replace" alt="" coords="297,266,506,307"/>
+<area shape="rect" id="node7" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html#aa4da6c694f1ce08740a61884498439b0" title="authoring.data.PatchInstance\lData.replace" alt="" coords="587,233,797,274"/>
+<area shape="rect" id="node8" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#a952391a274a83f5eee0044d7e5be3673" title="authoring_environment.GUIGrid.replace\lPatchType" alt="" coords="555,298,829,339"/>
+<area shape="rect" id="node9" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#a89d8eeee5ec72e145a2c60735013581e" title="authoring_environment.GUIGrid.update" alt="" coords="878,305,1151,332"/>
+</map>

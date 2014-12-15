@@ -1,0 +1,6 @@
+<map id="gamedata.gamecomponents.GridComponent.setLoc" name="gamedata.gamecomponents.GridComponent.setLoc">
+<area shape="rect" id="node2" href="$d1/d4e/classauthoring__environment_1_1_shape_grid.html#aac40787167cbdb19177826ae890ee8e1" title="authoring_environment.Shape\lGrid.addTerrain" alt="" coords="293,5,509,46"/>
+<area shape="rect" id="node3" href="$d1/d4e/classauthoring__environment_1_1_shape_grid.html#aace6e6745e4866e0f7956f0cfe25ca3d" title="authoring_environment.Shape\lGrid.addUnit" alt="" coords="293,70,509,111"/>
+<area shape="rect" id="node4" href="$d0/d47/classgameengine_1_1movement_1_1_movement.html#a8ea733019f1f434af7d41aa4b91bd533" title="gameengine.movement.Movement.do\lBehavior" alt="" coords="267,135,535,177"/>
+<area shape="rect" id="node5" href="$db/d00/classgame_player_1_1_apply_state.html#aed42c1aba25264bc6880036f693a1c9e" title="gamePlayer.ApplyState.on\lClick" alt="" coords="306,201,497,242"/>
+</map>

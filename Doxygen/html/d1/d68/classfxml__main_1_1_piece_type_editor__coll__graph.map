@@ -1,0 +1,18 @@
+<map id="fxml_main.PieceTypeEditor" name="fxml_main.PieceTypeEditor">
+<area shape="rect" id="node10" href="$d9/df3/classauthoring__environment_1_1_super_grid.html" title="authoring_environment.SuperGrid" alt="" coords="379,84,618,111"/>
+<area shape="rect" id="node3" href="$d6/d1d/classgamedata_1_1stats_1_1_stats.html" title="gamedata.stats.Stats" alt="" coords="1216,412,1379,439"/>
+<area shape="rect" id="node28" href="$d4/d63/classgamedata_1_1gamecomponents_1_1_piece.html" title="gamedata.gamecomponents.\lPiece" alt="" coords="1604,314,1817,356"/>
+<area shape="rect" id="node6" href="$d0/d47/classgameengine_1_1movement_1_1_movement.html" title="gameengine.movement.Movement" alt="" coords="1173,251,1421,278"/>
+<area shape="rect" id="node7" href="$d8/d85/interfacegamedata_1_1action_1_1_action.html" title="gamedata.action.Action" alt="" coords="793,295,967,322"/>
+<area shape="rect" id="node9" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html" title="authoring_environment.GUIGrid" alt="" coords="768,143,992,170"/>
+<area shape="rect" id="node13" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html" title="authoring.data.PatchInstanceData" alt="" coords="379,147,619,174"/>
+<area shape="rect" id="node14" href="$d5/d29/interfaceauthoring_1_1data_1_1_authoring_data.html" title="authoring.data.Authoring\lData\&lt; Patch \&gt;" alt="" coords="39,206,222,248"/>
+<area shape="rect" id="node16" href="$d6/dda/classauthoring_1_1data_1_1_piece_instance_data.html" title="authoring.data.PieceInstanceData" alt="" coords="379,340,618,367"/>
+<area shape="rect" id="node17" href="$d5/d29/interfaceauthoring_1_1data_1_1_authoring_data.html" title="authoring.data.Authoring\lData\&lt; Piece \&gt;" alt="" coords="39,333,222,374"/>
+<area shape="rect" id="node27" href="$d3/d8e/classgamedata_1_1gamecomponents_1_1_inventory.html" title="gamedata.gamecomponents.\lInventory" alt="" coords="1191,596,1404,637"/>
+<area shape="rect" id="node19" href="$d1/dac/classgameengine_1_1movement_1_1_orientator.html" title="gameengine.movement.Orientator" alt="" coords="757,194,1003,220"/>
+<area shape="rect" id="node21" href="$d2/da6/classauthoring_1_1data_1_1_action_data.html" title="authoring.data.ActionData" alt="" coords="1615,64,1806,91"/>
+<area shape="rect" id="node22" href="$d5/d29/interfaceauthoring_1_1data_1_1_authoring_data.html" title="authoring.data.Authoring\lData\&lt; Action \&gt;" alt="" coords="1206,57,1389,98"/>
+<area shape="rect" id="node29" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html" title="gamedata.gamecomponents.\lGridComponent" alt="" coords="1191,346,1404,388"/>
+<area shape="rect" id="node30" href="$dc/d5b/interfacegamedata_1_1gamecomponents_1_1_i_has_stats.html" title="gamedata.gamecomponents.\lIHasStats" alt="" coords="773,346,987,388"/>
+</map>

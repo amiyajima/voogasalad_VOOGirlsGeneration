@@ -1,0 +1,11 @@
+<map id="gamedata.gamecomponents.Level.garbageCollectPieces" name="gamedata.gamecomponents.Level.garbageCollectPieces">
+<area shape="rect" id="node2" href="$d3/d8e/classgamedata_1_1gamecomponents_1_1_inventory.html#a95738f17209550e98829ea736d803734" title="gamedata.gamecomponents.\lInventory.getAllInventory" alt="" coords="299,5,512,46"/>
+<area shape="rect" id="node3" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#aa30c60a03c51ae3e23e43b6acd17e3cd" title="authoring_environment.GUIGrid.get\lRemovedPieces" alt="" coords="281,70,530,111"/>
+<area shape="rect" id="node5" href="$d3/d8e/classgamedata_1_1gamecomponents_1_1_inventory.html#a2e7a699fd293cd57e5452b3791362a26" title="gamedata.gamecomponents.\lInventory.removeItem" alt="" coords="299,135,512,177"/>
+<area shape="rect" id="node6" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#a53382a0de9f44f0642c3c9c5b009e613" title="authoring_environment.GUIGrid.remove\lPiece" alt="" coords="267,201,544,242"/>
+<area shape="rect" id="node4" href="$d6/dda/classauthoring_1_1data_1_1_piece_instance_data.html#afb4443eda20595533c28fe05f079fb48" title="authoring.data.PieceInstance\lData.getData" alt="" coords="595,70,803,111"/>
+<area shape="rect" id="node7" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#aa57ca0acf0ef3aab7d5d98cf9cbbd1d7" title="authoring_environment.Super\lGrid.findTile" alt="" coords="592,135,805,177"/>
+<area shape="rect" id="node8" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a97439a493db38860397436079b123e8c" title="gamedata.gamecomponents.\lGridComponent.getLoc" alt="" coords="592,201,805,242"/>
+<area shape="rect" id="node9" href="$d6/dda/classauthoring_1_1data_1_1_piece_instance_data.html#a80a0e534e9cb103879f99230bc05efe7" title="authoring.data.PieceInstance\lData.remove" alt="" coords="595,266,803,307"/>
+<area shape="rect" id="node10" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#aab4ca6a2e399a4f20d41eb9bc038f7aa" title="authoring_environment.Super\lTile.removePieceImage" alt="" coords="592,331,805,373"/>
+</map>

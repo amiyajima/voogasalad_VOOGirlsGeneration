@@ -1,0 +1,8 @@
+<map id="authoring.concretefeatures.IndividualUnitEditor.IndividualUnitEditor" name="authoring.concretefeatures.IndividualUnitEditor.IndividualUnitEditor">
+<area shape="rect" id="node2" href="$dc/dc0/classauthoring_1_1concretefeatures_1_1_individual_unit_editor.html#adacfe00b8401b01ebefda14536286480" title="authoring.concretefeatures.\lIndividualUnitEditor.initialize" alt="" coords="261,135,461,177"/>
+<area shape="rect" id="node3" href="$dc/dc0/classauthoring_1_1concretefeatures_1_1_individual_unit_editor.html#aee45650ca0526e6085413ab81ca9a156" title="authoring.concretefeatures.\lIndividualUnitEditor.initNameField" alt="" coords="510,5,743,46"/>
+<area shape="rect" id="node4" href="$dc/dc0/classauthoring_1_1concretefeatures_1_1_individual_unit_editor.html#a0ba8b10543da32337576ba88c89fc709" title="authoring.concretefeatures.\lIndividualUnitEditor.initImage" alt="" coords="523,70,730,111"/>
+<area shape="rect" id="node5" href="$dc/dc0/classauthoring_1_1concretefeatures_1_1_individual_unit_editor.html#aac5eb4e27079e46110868d88b205c411" title="authoring.concretefeatures.\lIndividualUnitEditor.initPlayerID" alt="" coords="517,135,736,177"/>
+<area shape="rect" id="node6" href="$dc/dc0/classauthoring_1_1concretefeatures_1_1_individual_unit_editor.html#ab27651acf94c4e325d22bab1a90d4442" title="authoring.concretefeatures.\lIndividualUnitEditor.initRot" alt="" coords="527,201,727,242"/>
+<area shape="rect" id="node7" href="$d4/d63/classgamedata_1_1gamecomponents_1_1_piece.html#aff9c4298f1796f022bc82ee138e925a4" title="gamedata.gamecomponents.\lPiece.getStats" alt="" coords="520,266,733,307"/>
+</map>

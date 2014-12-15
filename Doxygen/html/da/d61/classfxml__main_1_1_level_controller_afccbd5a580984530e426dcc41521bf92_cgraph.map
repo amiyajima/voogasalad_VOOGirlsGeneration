@@ -1,0 +1,12 @@
+<map id="fxml_main.LevelController.initEntryEditBtn" name="fxml_main.LevelController.initEntryEditBtn">
+<area shape="rect" id="node2" href="$d5/d98/classauthoring_1_1data_1_1_piece_type_data.html#abc992f9707c3ef6417bf99f60f2693a4" title="authoring.data.PieceType\lData.getData" alt="" coords="309,5,491,46"/>
+<area shape="rect" id="node3" href="$d1/d4f/classauthoring_1_1data_1_1_patch_type_data.html#a2e6df81086dce6ae1f9ea953024a74f3" title="authoring.data.PatchType\lData.getData" alt="" coords="309,70,491,111"/>
+<area shape="rect" id="node4" href="$da/d40/classfxml__main_1_1_grid_component_abst_ctrl.html#a690d85921c1558f7988bb18e895363ef" title="fxml_main.GridComponentAbst\lCtrl\&lt; Level \&gt;::makeCompleteEntryBox" alt="" coords="265,135,535,177"/>
+<area shape="rect" id="node5" href="$d7/d88/classauthoring_1_1data_1_1_level_data.html#ac8b362f5ec6a41804b40ba231c8afe93" title="authoring.data.LevelData.replace" alt="" coords="283,201,517,228"/>
+<area shape="rect" id="node7" href="$da/d61/classfxml__main_1_1_level_controller.html#a2e3171d5138673f8798df865cd7474d6" title="fxml_main.LevelController.set\lAndDisplayGrid" alt="" coords="295,278,505,319"/>
+<area shape="rect" id="node6" href="$d7/d88/classauthoring_1_1data_1_1_level_data.html#aa787c7b16b418f2e13df37800afe1b13" title="authoring.data.LevelData.add" alt="" coords="606,176,818,203"/>
+<area shape="rect" id="node8" href="$d6/d05/classfxml__main_1_1_g_u_i_grid_reference.html#a6a50d6c8429ddb56128b31faed01dd21" title="fxml_main.GUIGridReference.setGrid" alt="" coords="585,227,839,253"/>
+<area shape="rect" id="node9" href="$d8/d01/classgamedata_1_1gamecomponents_1_1_level.html#adef1fc175daf62d54468e35e67413edb" title="gamedata.gamecomponents.\lLevel.getGrid" alt="" coords="605,278,819,319"/>
+<area shape="rect" id="node10" href="$d6/d05/classfxml__main_1_1_g_u_i_grid_reference.html#ab47bae2ec738eb18d99809ec9443a2ae" title="fxml_main.GUIGridReference.getGrid" alt="" coords="585,344,839,371"/>
+<area shape="rect" id="node11" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#aba69dd5b1d04abadf1186c952362a46e" title="authoring_environment.Super\lGrid.displayPane" alt="" coords="605,395,819,437"/>
+</map>
