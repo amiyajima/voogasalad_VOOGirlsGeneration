@@ -105,7 +105,7 @@ public class RangeGridView extends ScrollPane{
 	}
 
 	public List<Point2D.Double> returnSelectedList() {
-		return myGrid.rangeSelectedList();
+		return myGrid.selectedRangeList();
 	}
 
 	public RangeGrid getGrid(){
