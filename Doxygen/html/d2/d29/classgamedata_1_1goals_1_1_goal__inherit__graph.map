@@ -1,5 +1,0 @@
-<map id="gamedata.goals.Goal" name="gamedata.goals.Goal">
-<area shape="rect" id="node2" href="$d7/d7d/classgamedata_1_1goals_1_1_piece_on_patch_goal.html" title="gamedata.goals.PieceOnPatchGoal" alt="" coords="219,5,466,32"/>
-<area shape="rect" id="node3" href="$d8/d81/classgamedata_1_1goals_1_1_pieces_removed_goal.html" title="gamedata.goals.PiecesRemovedGoal" alt="" coords="213,56,472,83"/>
-<area shape="rect" id="node4" href="$db/d5e/classgamedata_1_1goals_1_1_player_pieces_removed_goal.html" title="gamedata.goals.PlayerPieces\lRemovedGoal" alt="" coords="237,107,448,149"/>
-</map>

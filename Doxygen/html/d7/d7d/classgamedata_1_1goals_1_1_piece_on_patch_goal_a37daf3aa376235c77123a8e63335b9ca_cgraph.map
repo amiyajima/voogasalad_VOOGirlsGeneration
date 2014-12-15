@@ -1,5 +1,0 @@
-<map id="gamedata.goals.PieceOnPatchGoal.checkGameState" name="gamedata.goals.PieceOnPatchGoal.checkGameState">
-<area shape="rect" id="node2" href="$d8/d01/classgamedata_1_1gamecomponents_1_1_level.html#adef1fc175daf62d54468e35e67413edb" title="gamedata.gamecomponents.\lLevel.getGrid" alt="" coords="272,5,485,46"/>
-<area shape="rect" id="node3" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a97439a493db38860397436079b123e8c" title="gamedata.gamecomponents.\lGridComponent.getLoc" alt="" coords="272,70,485,111"/>
-<area shape="rect" id="node4" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#afa5c53a692ca298da5e5bcc2dcc6f300" title="gamedata.gamecomponents.\lGridComponent.toString" alt="" coords="272,135,485,177"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="gamePlayer.GameGridEffect.isHoveringOverActionHighlight" name="gamePlayer.GameGridEffect.isHoveringOverActionHighlight">
-<area shape="rect" id="node2" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#a1fb6edb8c7c3cffe52aa25606fe261df" title="authoring_environment.Super\lGrid.findClickedTile" alt="" coords="284,5,497,46"/>
-<area shape="rect" id="node3" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#af9a11e74113f35feeb5142a4927cebbb" title="authoring_environment.Super\lTile.getCoordinates" alt="" coords="284,70,497,111"/>
-<area shape="rect" id="node4" href="$df/dd5/classgame_player_1_1_view_controller.html#a68d6b3645af17eb6fb25133a5827f7fb" title="gamePlayer.ViewController.getGrid" alt="" coords="269,136,512,163"/>
-</map>

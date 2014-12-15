@@ -1,6 +1,0 @@
-<map id="tests.ViewControllerTest.findPositionTest" name="tests.ViewControllerTest.findPositionTest">
-<area shape="rect" id="node2" href="$df/dd5/classgame_player_1_1_view_controller.html#a8df1cc776c0ee37d0a324870b9e37275" title="gamePlayer.ViewController.find\lPosition" alt="" coords="256,38,475,79"/>
-<area shape="rect" id="node3" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#a0f8021e23df3eb8657622455e0a2c70e" title="authoring_environment.Super\lGrid.findClickedCoordinate" alt="" coords="523,38,736,79"/>
-<area shape="rect" id="node4" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#a1fb6edb8c7c3cffe52aa25606fe261df" title="authoring_environment.Super\lGrid.findClickedTile" alt="" coords="784,5,997,46"/>
-<area shape="rect" id="node5" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#af9a11e74113f35feeb5142a4927cebbb" title="authoring_environment.Super\lTile.getCoordinates" alt="" coords="784,70,997,111"/>
-</map>

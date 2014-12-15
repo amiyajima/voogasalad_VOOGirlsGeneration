@@ -1,7 +1,0 @@
-<map id="fxml_main.LevelEditor.LevelEditor" name="fxml_main.LevelEditor.LevelEditor">
-<area shape="rect" id="node2" href="$de/d8c/classfxml__main_1_1_level_editor.html#a38c83793ac0eb37f9881e84db3f793d1" title="fxml_main.LevelEditor.init\lEditor" alt="" coords="253,38,437,79"/>
-<area shape="rect" id="node3" href="$de/d8c/classfxml__main_1_1_level_editor.html#a5a5fddc41488adab8bdc60f5b1603959" title="fxml_main.LevelEditor.initialize" alt="" coords="485,45,701,72"/>
-<area shape="rect" id="node4" href="$de/d8c/classfxml__main_1_1_level_editor.html#a1e403c7da8c864c5c4383bb100e94b1c" title="fxml_main.LevelEditor.show\lEventsEditorWindow" alt="" coords="749,38,947,79"/>
-<area shape="rect" id="node5" href="$d8/d60/classauthoring_1_1eventeditor_1_1_event_editor_controller.html#a6efd80f39b600b582ef955b401fbc545" title="authoring.eventeditor.Event\lEditorController.loadEvents" alt="" coords="995,5,1194,46"/>
-<area shape="rect" id="node6" href="$d8/d60/classauthoring_1_1eventeditor_1_1_event_editor_controller.html#a3d4defec7b726d9adfd19b54c1acf3cb" title="authoring.eventeditor.Event\lEditorController.loadData" alt="" coords="995,70,1194,111"/>
-</map>

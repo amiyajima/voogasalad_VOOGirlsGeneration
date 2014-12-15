@@ -1,6 +1,0 @@
-<map id="authoring.data.LevelData.add" name="authoring.data.LevelData.add">
-<area shape="rect" id="node2" href="$da/d61/classfxml__main_1_1_level_controller.html#afc5b51dbda006fbc6e3f344c4dfadde5" title="fxml_main.LevelController.global\lNewBtnOnClickAction" alt="" coords="270,7,498,49"/>
-<area shape="rect" id="node4" href="$d7/d88/classauthoring_1_1data_1_1_level_data.html#ac8b362f5ec6a41804b40ba231c8afe93" title="authoring.data.LevelData.replace" alt="" coords="267,75,501,101"/>
-<area shape="rect" id="node3" href="$da/d61/classfxml__main_1_1_level_controller.html#a75d5024df2cbcdabc2967c829c3e2f6d" title="fxml_main.LevelController.init\lGlobalNewBtn" alt="" coords="550,5,759,46"/>
-<area shape="rect" id="node5" href="$da/d61/classfxml__main_1_1_level_controller.html#afccbd5a580984530e426dcc41521bf92" title="fxml_main.LevelController.init\lEntryEditBtn" alt="" coords="550,70,759,111"/>
-</map>

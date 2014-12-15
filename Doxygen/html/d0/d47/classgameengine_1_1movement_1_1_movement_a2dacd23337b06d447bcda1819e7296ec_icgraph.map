@@ -1,7 +1,0 @@
-<map id="gameengine.movement.Movement.toString" name="gameengine.movement.Movement.toString">
-<area shape="rect" id="node2" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#a36caa4e38e75916af15c3b336543960f" title="fxml_main.PieceTypeEditor.init\lGoBtn" alt="" coords="320,5,533,46"/>
-<area shape="rect" id="node6" href="$d4/d63/classgamedata_1_1gamecomponents_1_1_piece.html#a8de75c69a5b6509c8b4a7160ec599997" title="gamedata.gamecomponents.\lPiece.printString" alt="" coords="320,70,533,111"/>
-<area shape="rect" id="node3" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#a4d5ecc37717a0f7dee7d88e74792388a" title="fxml_main.PieceTypeEditor.initialize" alt="" coords="581,12,827,39"/>
-<area shape="rect" id="node4" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#ab6e627c5d9474cd4c497ad70eb51a0c6" title="fxml_main.PieceTypeEditor.constructor" alt="" coords="875,12,1141,39"/>
-<area shape="rect" id="node5" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#aba63586973ffa81f331904a44690684c" title="fxml_main.PieceTypeEditor.\lPieceTypeEditor" alt="" coords="1189,5,1384,46"/>
-</map>

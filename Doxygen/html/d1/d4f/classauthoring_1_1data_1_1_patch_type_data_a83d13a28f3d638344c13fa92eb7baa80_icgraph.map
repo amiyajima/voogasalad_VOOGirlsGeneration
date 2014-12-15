@@ -1,6 +1,0 @@
-<map id="authoring.data.PatchTypeData.add" name="authoring.data.PatchTypeData.add">
-<area shape="rect" id="node2" href="$dc/d26/classauthoring__environment_1_1_library_view.html#aece9b0adb5b11a5ca3f87818640364b3" title="authoring_environment.Library\lView.addPatch" alt="" coords="237,5,456,46"/>
-<area shape="rect" id="node3" href="$d4/d3f/classfxml__main_1_1_patch_controller.html#ab1a255d83696d77db455a29da914c93e" title="fxml_main.PatchController.init\lGlobalNewBtn" alt="" coords="241,70,452,111"/>
-<area shape="rect" id="node4" href="$d1/d4f/classauthoring_1_1data_1_1_patch_type_data.html#ac6cb7289b2cb9e32624cc1adb913a8cd" title="authoring.data.PatchType\lData.replace" alt="" coords="255,135,438,177"/>
-<area shape="rect" id="node5" href="$d4/d3f/classfxml__main_1_1_patch_controller.html#a7b1011d19e297584a0b38a2571bdd60f" title="fxml_main.PatchController.init\lEntryEditBtn" alt="" coords="504,135,715,177"/>
-</map>

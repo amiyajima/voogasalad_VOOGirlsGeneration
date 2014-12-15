@@ -1,5 +1,0 @@
-<map id="gamePlayer.ViewController.openInitialGUIMenu" name="gamePlayer.ViewController.openInitialGUIMenu">
-<area shape="rect" id="node2" href="$df/dd5/classgame_player_1_1_view_controller.html#ae2e95acc4bf016abb98130f92f26778e" title="gamePlayer.ViewController.loadFXML" alt="" coords="281,5,535,32"/>
-<area shape="rect" id="node3" href="$da/de7/classgame_player_1_1_audio.html#a7de4eaaf232a7e233eb5ee963f1c6108" title="gamePlayer.Audio.playBackground" alt="" coords="287,56,529,83"/>
-<area shape="rect" id="node4" href="$da/de7/classgame_player_1_1_audio.html#aa1396fe6ab1f026334433de9a24905ef" title="gamePlayer.Audio.playAudio" alt="" coords="584,56,787,83"/>
-</map>

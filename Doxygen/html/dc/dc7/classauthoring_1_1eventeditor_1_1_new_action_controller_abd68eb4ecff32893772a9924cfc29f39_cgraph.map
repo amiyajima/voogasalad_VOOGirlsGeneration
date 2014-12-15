@@ -1,7 +1,0 @@
-<map id="authoring.eventeditor.NewActionController.initialize" name="authoring.eventeditor.NewActionController.initialize">
-<area shape="rect" id="node2" href="$d7/dcc/classutilities_1_1_class_grabber.html#aafd30d1c4beed85d57bce894927acb09" title="utilities.ClassGrabber.get\lClasses" alt="" coords="288,5,469,46"/>
-<area shape="rect" id="node4" href="$dc/dc7/classauthoring_1_1eventeditor_1_1_new_action_controller.html#af07958b57f2d1d4b7b77ec2f56627cf7" title="authoring.eventeditor.New\lActionController.showActionEditorPane" alt="" coords="245,70,512,111"/>
-<area shape="rect" id="node5" href="$dc/dc7/classauthoring_1_1eventeditor_1_1_new_action_controller.html#ad509bdd5c1c03c04098c57cd808d6e04" title="authoring.eventeditor.New\lActionController.trimClassList" alt="" coords="274,135,483,177"/>
-<area shape="rect" id="node3" href="$d7/dcc/classutilities_1_1_class_grabber.html#ad4bda95822ecf4385d69f6ecec3fd545" title="utilities.ClassGrabber.find\lClasses" alt="" coords="581,5,763,46"/>
-<area shape="rect" id="node6" href="$dc/dc7/classauthoring_1_1eventeditor_1_1_new_action_controller.html#a1cf08d1d89da95be308f7d5003644fe0" title="authoring.eventeditor.New\lActionController.trimClassPaths" alt="" coords="561,135,783,177"/>
-</map>

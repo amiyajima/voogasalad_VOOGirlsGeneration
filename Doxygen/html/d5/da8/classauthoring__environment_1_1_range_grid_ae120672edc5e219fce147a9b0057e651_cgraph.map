@@ -1,6 +1,0 @@
-<map id="authoring_environment.RangeGrid.addSelectAction" name="authoring_environment.RangeGrid.addSelectAction">
-<area shape="rect" id="node2" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a8d379fe2032420f63eaf093720af2b28" title="authoring_environment.Range\lGrid.swtichHighlight" alt="" coords="270,70,485,111"/>
-<area shape="rect" id="node3" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#a10aec0aa5a4569449ea350e2d8168b55" title="authoring_environment.Super\lTile.ifSelected" alt="" coords="533,5,747,46"/>
-<area shape="rect" id="node4" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#a2bdd34482002f8adad3de981bbb972b7" title="authoring_environment.Super\lTile.deselectTile" alt="" coords="533,70,747,111"/>
-<area shape="rect" id="node5" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#a2a827578368c687de4550af01702bced" title="authoring_environment.Super\lTile.selectTile" alt="" coords="533,135,747,177"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="gamePlayer.ApplyState.ApplyState" name="gamePlayer.ApplyState.ApplyState">
-<area shape="rect" id="node2" href="$df/dd5/classgame_player_1_1_view_controller.html#ae0a6ec0d8fe5e3caec09f507c9b6321b" title="gamePlayer.ViewController.get\lGameGridEffect" alt="" coords="265,5,481,46"/>
-<area shape="rect" id="node3" href="$df/dd5/classgame_player_1_1_view_controller.html#af38e87743eb81e64e79ff0a7b3477c27" title="gamePlayer.ViewController.get\lGridPane" alt="" coords="265,70,481,111"/>
-<area shape="rect" id="node4" href="$db/d00/classgame_player_1_1_apply_state.html#ab752906e9e7f3d4a5ff3a1114668bc14" title="gamePlayer.ApplyState.handle\lMouseMove" alt="" coords="264,135,483,177"/>
-<area shape="rect" id="node5" href="$df/dd5/classgame_player_1_1_view_controller.html#a68d6b3645af17eb6fb25133a5827f7fb" title="gamePlayer.ViewController.getGrid" alt="" coords="795,84,1037,111"/>
-<area shape="rect" id="node6" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#a1fb6edb8c7c3cffe52aa25606fe261df" title="authoring_environment.Super\lGrid.findClickedTile" alt="" coords="809,201,1023,242"/>
-<area shape="rect" id="node7" href="$d5/dfb/classgame_player_1_1_game_grid_effect.html#a1c7aa054e990a15b89b678d88df45ec1" title="gamePlayer.GameGridEffect.is\lHoveringOverActionHighlight" alt="" coords="531,135,747,177"/>
-<area shape="rect" id="node8" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#af9a11e74113f35feeb5142a4927cebbb" title="authoring_environment.Super\lTile.getCoordinates" alt="" coords="809,135,1023,177"/>
-</map>

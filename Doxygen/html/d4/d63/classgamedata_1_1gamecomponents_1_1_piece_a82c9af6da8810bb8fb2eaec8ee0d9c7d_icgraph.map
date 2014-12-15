@@ -1,8 +1,0 @@
-<map id="gamedata.gamecomponents.Piece.getPlayerID" name="gamedata.gamecomponents.Piece.getPlayerID">
-<area shape="rect" id="node2" href="$d5/df0/classgamedata_1_1rules_1_1_can_attack_rule.html#a6fbc798e9f2b0f882bb6020189cb8c06" title="gamedata.rules.CanAttack\lRule.conditionsMet" alt="" coords="269,5,462,46"/>
-<area shape="rect" id="node3" href="$df/dbd/classfxml__main_1_1_piece_editor.html#a6558cbfa5dc0cc2df4a166449dc8bea1" title="fxml_main.PieceEditor.init\lPlayerChoice" alt="" coords="273,70,458,111"/>
-<area shape="rect" id="node6" href="$d6/d24/classgame_player_1_1_select_state.html#a801827392f0faeee6b96925060d77838" title="gamePlayer.SelectState.on\lClick" alt="" coords="267,135,463,177"/>
-<area shape="rect" id="node7" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#af2eefe9bd07a346d48960d99fae7511d" title="fxml_main.PieceTypeEditor.\lPieceTypeEditor" alt="" coords="268,201,463,242"/>
-<area shape="rect" id="node4" href="$df/dbd/classfxml__main_1_1_piece_editor.html#a96a7fea306b18873f061efeb55833c92" title="fxml_main.PieceEditor.initialize" alt="" coords="513,77,730,104"/>
-<area shape="rect" id="node5" href="$df/dbd/classfxml__main_1_1_piece_editor.html#a33603f4cca25fedefefd2108dbe75163" title="fxml_main.PieceEditor.Piece\lEditor" alt="" coords="779,70,979,111"/>
-</map>
