@@ -7,6 +7,7 @@ import javafx.stage.Stage;
  * Main Method for Game Player
  * @author 
  *
+ *
  */
 
 public class Main extends Application{
@@ -14,7 +15,7 @@ public class Main extends Application{
     @Override
     public void start (Stage arg0) throws Exception {
             
-       new ViewController(arg0);
+       new ViewController();
        
     }
     

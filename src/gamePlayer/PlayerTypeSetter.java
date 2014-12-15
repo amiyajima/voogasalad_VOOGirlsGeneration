@@ -65,12 +65,13 @@ public class PlayerTypeSetter {
             playerTypeCombo.getItems().addAll(HUMAN_PLAYER, SIMPLE_AI_PLAYER);
             playerTypeCombo.setValue(HUMAN_PLAYER);
             
-            startGameButton.setOnMouseClicked(event->myVC.testPlayGame());
+            startGameButton.setOnMouseClicked(event->myVC.testPlayGame(myGame));
             return myScene;
        }
        catch (Exception e) {
            ErrorPopUp myError = new ErrorPopUp(e.toString());
            myError.show();
+           return null;
        }
     }
     

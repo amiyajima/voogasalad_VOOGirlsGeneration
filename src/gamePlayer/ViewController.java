@@ -88,8 +88,10 @@ public class ViewController {
 	private BorderPane myGameSpace;
 	private BorderPane myPopup;
 	private VBox mySettings;
-	private VBox myInitialScene;
+	@FXML
+	private VBox myInitialVBox;
 	private VBox myScoreBoard;
+	private Scene initialScene;
 	private Scene mySettingsScene;
 	private Scene scoreScene;
 	private Scene myPopupScene;
@@ -176,7 +178,7 @@ public class ViewController {
 		openInitialMenu();
 		myStage = new Stage();
 		openInitialMenu();
-		myStage.setScene(new Scene(myInitialScene));
+		myStage.setScene(new Scene(myInitialVBox));
 	        myStage.show();
 	}
 	
@@ -195,7 +197,6 @@ public class ViewController {
         @FXML
         protected void openInitialMenu() throws UnsupportedAudioFileException,
         IOException, LineUnavailableException {
-                myInitialScene = new VBox();
                 myGameSpace = new BorderPane();
                 myScoreBoard = new VBox();
                 scores = new VBox();
@@ -203,21 +204,24 @@ public class ViewController {
                 mySettings = new VBox();
 
                 myJSONManager = new JSONManager();
+                loadFXML(INITIALSCENE_FXML, myInitialVBox);
                 loadFXML(GAMESPACE_FXML, myGameSpace);
-                loadFXML(INITIALSCENE_FXML, myInitialScene);
                 loadFXML(POPUP_FXML, myPopup);
                 loadFXML(SCOREBOARD_FXML, myScoreBoard);
                 loadFXML(SETTINGS_FXML, mySettings);
                 loadFXML(ADD_HIGH_SCORE_FXML, newHighScoreRoot);
                 loadFXML(WIN_SCREEN, myWinLoseScreen);
-
+                
+                initialScene = new Scene(myInitialVBox);
                 scoreScene = new Scene(myScoreBoard);
                 myPopupScene = new Scene(myPopup);
                 mySettingsScene = new Scene(mySettings);
                 newHighScoreScene = new Scene(newHighScoreRoot);
                 winLoseScene = new Scene(myWinLoseScreen);
 
-                myStage.setScene(new Scene(myInitialScene));
+                if (myTab == null) {
+                    myStage.setScene(new Scene(myInitialVBox));
+                }
 
                 myAudio = new Audio();
                 myAudio.playBackground();
@@ -236,6 +240,7 @@ public class ViewController {
 		File f = fc.showOpenDialog(myStage);
 
 		try {
+		        myModel = myJSONManager.readFromJSONFile(f.getAbsolutePath());
 			myPlayerTypeSetter = new PlayerTypeSetter(myModel, this);
 			myStage.setScene(myPlayerTypeSetter.startLoadPlayers());
 		}
@@ -245,6 +250,17 @@ public class ViewController {
 		}
 		
 	}
+	
+	 /**
+         * Initiates a Button for a Test Game
+         */
+        @FXML
+        private void testGame() {
+                TestGameCreator JSBTester = new TestGameCreator();
+                myModel = JSBTester.createNewGame();
+                myPlayerTypeSetter = new PlayerTypeSetter(myModel, this);
+                myStage.setScene(myPlayerTypeSetter.startLoadPlayers());
+        }
 
 	@FXML
 	protected void openSettings() {
@@ -286,19 +302,16 @@ public class ViewController {
 			relativePath = absolutePath.substring(basePath.length() + 1);
 		}
 		myModel.setCurrentPlayer(myCurrentPlayer);
-		myJSONManager.writeToJSON(myModel, f.getPath());
+		try {
+		          myJSONManager.writeToJSON(myModel, f.getPath());
+		}
+		catch (Exception e) {
+		    ErrorPopUp myError = new ErrorPopUp(e.toString());
+                    myError.show();
+		}
 
 	}
 
-	/**
-	 * Initiates a Button for a Test Game
-	 */
-	@FXML
-	private void testGame() {
-		TestGameCreator JSBTester = new TestGameCreator();
-                myPlayerTypeSetter = new PlayerTypeSetter(JSBTester.createNewGame(), this);
-                myStage.setScene(myPlayerTypeSetter.startLoadPlayers());
-	}
 
 	/**
 	 * Updates the current language of the game.
@@ -378,33 +391,20 @@ public class ViewController {
 	    initializeGrid();
 	    myModel.getCurrentLevel().getGrid().repopulateGrid();
 	}
-
-	/**
-         * Loads a Game into gamePlayer GUI
-         * @param gameToLoad
-         */
-        public void testPlayGUIGame(Game gameToLoad) {
-                System.out.println("model found in viewcontroller: " + myModel);
-                initializeGrid();
-//              myScene = new Scene(myGameSpace);
-//              myStage.setScene(myScene);
-                myTab.setContent(myGameSpace);
-
-                myModel.getCurrentLevel().getGrid().repopulateGrid();
-        }
         
-               /**
-         * Loads a Game into gamePlayer GUI
-         * @param gameToLoad
-         */
+         /**
+          * Loads a game into the GUI, calls the loading of the grid
+          * @param gameToLoad
+          */
         public void testPlayGame(Game gameToLoad) {
-//              myModel = gameToLoad;
-                System.out.println("model found in viewcontroller: " + myModel);
                 initializeGrid();
-              myScene = new Scene(myGameSpace);
-              myStage.setScene(myScene);
-//                myTab.setContent(myGameSpace);
-
+                if (myTab != null) {
+                    myTab.setContent(myGameSpace);
+                }
+                else {
+                    myScene = new Scene(myGameSpace);
+                    myStage.setScene(myScene);
+                }
                 myModel.getCurrentLevel().getGrid().repopulateGrid();
         }
 
@@ -412,8 +412,6 @@ public class ViewController {
 	 * Initializes grid and its effects manager (gamegrideffect)
 	 */
 	private void initializeGrid() {
-		System.out.println("initialize grid");
-
 		myAudio.playSelection();
 
 		myGridPane = new ScrollPane();
@@ -436,35 +434,17 @@ public class ViewController {
 	 * Loads the scores from the current game
 	 */
 	protected void loadScores() {
-		List<Integer> scoreList = new ArrayList<Integer>();
+		List<Double> scoreList = new ArrayList<Double>();
 		gameName.setText(myModel.toString());
 		scores.getChildren().clear();
 		for (Player p : myModel.getPlayers()) {
-			int score = 0; // 0 for now. will get from Player later!!!!!
-			scoreList.add(score);
+			scoreList.add(p.getScore());
 			Text playerScore = new Text("Player " + p.getID() + ": "
-					+ String.valueOf(score));
+					+ String.valueOf(p.getScore()));
 			playerScore.setFill(Color.WHITE);
 			scores.getChildren().add(playerScore);
 		}
 		highestScore.setText(String.valueOf(Collections.max(scoreList)));
-	}
-
-	/**
-	 * The method to get all json files from the resources directory that stores
-	 * all the games user has defined from the authoring environment
-	 */
-	private List<File> getResourceGames() {
-
-		List<File> gameList = new ArrayList<File>();
-		File files = new File(System.getProperty("user.dir") + GAME_LOCATION);
-
-		for (File f : files.listFiles()) {
-			if (f.getName().endsWith(".json")) {
-				gameList.add(f);
-			}
-		}
-		return gameList;
 	}
 	
 	protected void updateInventory(Piece piece) {
@@ -497,15 +477,9 @@ public class ViewController {
 	 * @param piece
 	 */
 	protected void updateStats(Piece piece) {
-	    System.out.println("udpate stats");
-
 		statsPane.getChildren().clear();
 		ArrayList<Text> stats = new ArrayList<Text>();
-		
-
-		piece.getStats()
-		.getStatNames()
-		.forEach(
+		piece.getStats().getStatNames().forEach(
 				key -> stats.add(new Text(key + ":  "
 						+ piece.getStats().getValue(key))));
 
@@ -519,7 +493,6 @@ public class ViewController {
 	 * @param piece
 	 */
 	protected void updateActions(Piece piece) {
-		// myAudio.playSelection();
 		controlPane.getChildren().clear();
 		ArrayList<Label> actions = new ArrayList<Label>();
 		piece.getActions().forEach(action -> {
@@ -579,6 +552,9 @@ public class ViewController {
 	}
 
 	private void setOnClick() {
+	           if (clickSoundOn) {
+                       myAudio.playSelection();
+               }
 		myGridPane.getContent().setOnMouseClicked(event -> {
 			Point2D.Double loc = findPosition(event.getX(), event.getY());
 			performAction(loc);
@@ -593,16 +569,10 @@ public class ViewController {
 	 * @param y
 	 */
 	public void performAction(Point2D.Double myCurrentLocation) {
-//		System.out.println("PERFORM ACTION");
-
-		if (clickSoundOn) {
-			myAudio.playSelection();
-		}
-
 		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(myCurrentLocation));
 		while (myCurrentPlayer.getType().equals("AI")) {
 			myCurrentPlayer.play();
-			this.checkEndActions();
+			checkEndActions();
 		}
 
 
