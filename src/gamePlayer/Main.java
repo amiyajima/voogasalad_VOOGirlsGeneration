@@ -1,6 +1,8 @@
 package gamePlayer;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -8,13 +10,14 @@ import javafx.stage.Stage;
  * @author 
  *
  */
-
 public class Main extends Application{
     
     @Override
     public void start (Stage arg0) throws Exception {
             
-       new ViewController(arg0);
+        new ViewController(arg0);
+        
+ 
        
     }
     

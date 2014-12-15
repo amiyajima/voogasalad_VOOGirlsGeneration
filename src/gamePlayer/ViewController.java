@@ -4,7 +4,7 @@ import fxml_main.ErrorPopUp;
 import gamedata.JSON.JSONManager;
 import gamedata.action.Action;
 import gamedata.gamecomponents.Game;
-import gamedata.gamecomponents.GameState;
+import gamedata.gamecomponents.IChangeGameState;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.HumanPlayer;
@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.function.Consumer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,6 +59,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import com.sun.istack.internal.NotNull;
 import tests.TestGameCreator;
 // import com.leapmotion.leap.Controller;
 import authoring_environment.GUIGrid;
@@ -82,7 +84,10 @@ public class ViewController {
 	private static final String HIGH_SCORE_FILE = "/resources/highscore/highscore.txt";
 	private static final String WIN_SCREEN = "winLoseScreen.fxml";
 	private static final String YOU_LOSE = "You Lose :(";
+	public static final String JSON_EXTENSION = ".json";
 	
+	 private enum myRoots{INITIALSCENE_FXML};
+	 
 	private Stage myStage;
 
 	private BorderPane myGameSpace;
@@ -177,6 +182,7 @@ public class ViewController {
 	private Button startGameButton;
 	@FXML
 	private Button setPlayerButton;
+	private ViewConfig myViewConfig;
 
 	private ScrollPane myGridPane;
 	private Point2D.Double currentClick;
@@ -190,6 +196,10 @@ public class ViewController {
 
 	public ViewController(Stage s) throws UnsupportedAudioFileException,
 	IOException, LineUnavailableException {
+	    
+	    myViewConfig = new ViewConfig(this);
+	    
+	   
 //		myPlayerList=new ArrayList<Player>();
 		//Test
 //		myPlayerList.add(new HumanPlayer(1));
@@ -198,7 +208,7 @@ public class ViewController {
 		myStage = s;
 		openInitialMenu();
 		try {
-			newGame();
+			myViewConfig.newGame();
 		} catch (UnsupportedAudioFileException | IOException
 				| LineUnavailableException e) {
 		    ErrorPopUp myError = new ErrorPopUp(e.toString());
@@ -267,14 +277,14 @@ public class ViewController {
 
                 myJSONManager = new JSONManager();
                 // myLeapController = new Controller();
-                loadFXML(GAMESPACE_FXML, myGameSpace);
-                loadFXML(INITIALSCENE_FXML, myInitialScene);
-                loadFXML(POPUP_FXML, myPopup);
-                loadFXML(SCOREBOARD_FXML, myScoreBoard);
-                loadFXML(SETTINGS_FXML, mySettings);
-                loadFXML(PLAYER_FXML,editPlayerRoot);
-                loadFXML(ADD_HIGH_SCORE_FXML, newHighScoreRoot);
-                loadFXML(WIN_SCREEN, myWinLoseScreen);
+                myViewConfig.loadFXML(GAMESPACE_FXML, myGameSpace);
+//                loadFXML(INITIALSCENE_FXML, myInitialScene);
+//                loadFXML(POPUP_FXML, myPopup);
+//                loadFXML(SCOREBOARD_FXML, myScoreBoard);
+//                loadFXML(SETTINGS_FXML, mySettings);
+//                loadFXML(PLAYER_FXML,editPlayerRoot);
+//                loadFXML(ADD_HIGH_SCORE_FXML, newHighScoreRoot);
+//                loadFXML(WIN_SCREEN, myWinLoseScreen);
 
                 scoreScene = new Scene(myScoreBoard);
                 myPopupScene = new Scene(myPopup);
@@ -314,14 +324,14 @@ public class ViewController {
 
 		myJSONManager = new JSONManager();
 		// myLeapController = new Controller();
-		loadFXML(GAMESPACE_FXML, myGameSpace);
-		loadFXML(INITIALSCENE_FXML, myInitialScene);
-		loadFXML(POPUP_FXML, myPopup);
-		loadFXML(SCOREBOARD_FXML, myScoreBoard);
-		loadFXML(SETTINGS_FXML, mySettings);
-		loadFXML(PLAYER_FXML,editPlayerRoot);
-		loadFXML(ADD_HIGH_SCORE_FXML, newHighScoreRoot);
-		loadFXML(WIN_SCREEN, myWinLoseScreen);
+//		loadFXML(GAMESPACE_FXML, myGameSpace);
+//		loadFXML(INITIALSCENE_FXML, myInitialScene);
+//		loadFXML(POPUP_FXML, myPopup);
+//		loadFXML(SCOREBOARD_FXML, myScoreBoard);
+//		loadFXML(SETTINGS_FXML, mySettings);
+//		loadFXML(PLAYER_FXML,editPlayerRoot);
+//		loadFXML(ADD_HIGH_SCORE_FXML, newHighScoreRoot);
+//		loadFXML(WIN_SCREEN, myWinLoseScreen);
 
 		scoreScene = new Scene(myScoreBoard);
 		myPopupScene = new Scene(myPopup);
@@ -457,6 +467,10 @@ public class ViewController {
 	protected void cancelPopup() {
 		System.out.println("cancel popup");
 	}
+	
+	protected void initGameMenu(@NotNull Consumer<MenuButton> function){
+	    function.accept(newGameMenu);
+	}
 
 	/**
 	 * Starts screen to choose the type of players
@@ -545,66 +559,6 @@ public class ViewController {
 
 
 	/**
-	 * Loads an FXML file
-	 * 
-	 * @param url
-	 * @param n
-	 */
-	private void loadFXML(String url, Node n) {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(url));
-		fxmlLoader.setController(this);
-		fxmlLoader.setRoot(n);
-		try {
-			fxmlLoader.load();
-
-		} catch (IOException exception) {
-		    ErrorPopUp myError = new ErrorPopUp(exception.toString());
-                    myError.show();
-			throw new RuntimeException(exception);
-		}
-	}
-
-	/**
-	 * Generates a drop down menu that allow user to choose a new Game to play.
-	 * The Games are generated from the directory that stores all json files
-	 * defined from authoring environment
-	 * 
-	 * @throws LineUnavailableException
-	 * @throws IOException
-	 * @throws UnsupportedAudioFileException
-	 */
-	protected void newGame() throws UnsupportedAudioFileException, IOException,
-	LineUnavailableException {
-
-		List<File> games = getResourceGames();
-
-		games.forEach(file -> {
-			MenuItem l = new MenuItem();
-			l.setText(file.getName().substring(0, file.getName().length() - 5));
-			l.getStyleClass().add("button");
-			newGameMenu.getItems().add(l);
-			l.setOnAction(event -> {
-				try {
-					System.out.println("VC: loading game... ");
-					JSONManager myJM = new JSONManager();
-					mySplashStage.show();
-					String gameLoc = GAME_LOCATION + l.getText() + ".json";
-					testPlayGame(myJM.readFromJSONFile(gameLoc));
-					System.out.println("VC: game loaded... ");
-				}
-				catch (FileNotFoundException e) {
-					String gameLoc = GAME_LOCATION  + "/" + l.getText() + ".json";
-					System.out.println("Could not find file: " + gameLoc);
-					ErrorPopUp myError = new ErrorPopUp("Could not find file: " + gameLoc
-					                                    + "\n\n" + e.toString());
-			                myError.show();
-				}
-			});
-		});
-
-	}
-
-	/**
 	 * Initializes grid and its effects manager (gamegrideffect)
 	 */
 	private void initializeGrid() {
@@ -647,22 +601,7 @@ public class ViewController {
 		highestScore.setText(String.valueOf(Collections.max(scoreList)));
 	}
 
-	/**
-	 * The method to get all json files from the resources directory that stores
-	 * all the games user has defined from the authoring environment
-	 */
-	private List<File> getResourceGames() {
 
-		List<File> gameList = new ArrayList<File>();
-		File files = new File(System.getProperty("user.dir") + GAME_LOCATION);
-
-		for (File f : files.listFiles()) {
-			if (f.getName().endsWith(".json")) {
-				gameList.add(f);
-			}
-		}
-		return gameList;
-	}
 	
 	protected void updateInventory(Piece piece) {
 	    inventoryPane.getChildren().clear();
@@ -695,26 +634,11 @@ public class ViewController {
 	}
 	
 
-	/**
-	 * Update the stats panel with stats from the selected piece
-	 * 
-	 * @param piece
-	 */
-	protected void updateStats(Piece piece) {
-	    System.out.println("udpate stats");
 
-		statsPane.getChildren().clear();
-		ArrayList<Text> stats = new ArrayList<Text>();
-		
-
-		piece.getStats()
-		.getStatNames()
-		.forEach(
-				key -> stats.add(new Text(key + ":  "
-						+ piece.getStats().getValue(key))));
-
-		statsPane.getChildren().addAll(stats);
-
+	
+	
+	protected void updateStats(@NotNull Consumer<VBox> function){
+	   function.accept(statsPane);
 	}
 
 	/**
@@ -806,7 +730,7 @@ public class ViewController {
 		gridState.onClick(myModel.getCurrentLevel().getGrid().getPiece(myCurrentLocation));
 		while (myCurrentPlayer.getType().equals("AI")) {
 			myCurrentPlayer.play();
-			this.checkEndActions();
+			//this.checkEndActions();
 		}
 
 
@@ -1146,63 +1070,63 @@ public class ViewController {
 
 	protected void endAction() {
 //		System.out.println("Ending Action");
-		this.checkEndActions();
+		//this.checkEndActions();
 		//this.getGrid().repopulateGrid();
 	}
 
-	public void checkEndActions() {
-		Level currentLevel = myModel.getCurrentLevel();
-		myModel.getCurrentPlayer().playTurn();
-		GameState.movesMade++;
-		System.out.println(GameState.movesMade);
-		currentLevel.runGameEvents();
-		if (GameState.getGameWon()) {
-			// GAMEWON
-		    winLose.setText("You Win!");
-		    Stage newStage = new Stage();
-		    newStage.setScene(winLoseScene);
-		    newStage.show();
-                    String highScorer = "Bob";
-                    //Random randy = new Random();
-                    //int highScore = randy.nextInt(100000);
-                    int highScore = 0;
-                    for (Player p : myModel.getPlayers()) {
-                        
-                             if (p.getScore() > highScore) { 
-                                 highScorer = "Player" + p.getID();
-                                 highScore = (int) p.getScore(); 
-                             }
-                    }
-                    enterHighScoreInfo(highScorer, highScore);
-		}
-		if (GameState.getGameLost()) {
-		    winLose.setText(YOU_LOSE);
-		    Stage newStage = new Stage();
-                    newStage.setScene(winLoseScene);
-                    newStage.show();
-		}
-		if (GameState.getTurnOver()) {
-			GameState.setTurnFalse();
-			myModel.nextPlayer();
-			myCurrentPlayer = myModel.getCurrentPlayer();
-			setPlayerTurnDisplay();
-		}
-
-		if (GameState.getNextLevelID() != null) {
-			System.out.println("NEXT LEVEL");
-			// myController.getGame().changeLevel(currentLevel.getNextLevelID());
-			myModel.changeLevel(GameState.getNextLevelID());
-			// myController.getGame().getCurrentLevel().getGrid().displayPane(myController.getGridPane());
-			initializeGrid();
-			myGrid.repopulateGrid();
-		}
-/*		if (myModel.getCurrentPlayer().getNumMovesPlayed() > 4) {
-			//System.out.println("NEXT PLAYER HARD CODE");
-			myModel.nextPlayer();
-			myCurrentPlayer = myModel.getCurrentPlayer();
-			setPlayerTurnDisplay();
-		}*/
-	}
+//	public void checkEndActions() {
+//		Level currentLevel = myModel.getCurrentLevel();
+//		myModel.getCurrentPlayer().playTurn();
+//		IChangeGameState.movesMade++;
+//		System.out.println(IChangeGameState.movesMade);
+//		currentLevel.runGameEvents();
+//		if (IChangeGameState.getGameWon()) {
+//			// GAMEWON
+//		    winLose.setText("You Win!");
+//		    Stage newStage = new Stage();
+//		    newStage.setScene(winLoseScene);
+//		    newStage.show();
+//                    String highScorer = "Bob";
+//                    //Random randy = new Random();
+//                    //int highScore = randy.nextInt(100000);
+//                    int highScore = 0;
+//                    for (Player p : myModel.getPlayers()) {
+//                        
+//                             if (p.getScore() > highScore) { 
+//                                 highScorer = "Player" + p.getID();
+//                                 highScore = (int) p.getScore(); 
+//                             }
+//                    }
+//                    enterHighScoreInfo(highScorer, highScore);
+//		}
+//		if (IChangeGameState.getGameLost()) {
+//		    winLose.setText(YOU_LOSE);
+//		    Stage newStage = new Stage();
+//                    newStage.setScene(winLoseScene);
+//                    newStage.show();
+//		}
+//		if (IChangeGameState.getTurnOver()) {
+//			IChangeGameState.setTurnFalse();
+//			myModel.nextPlayer();
+//			myCurrentPlayer = myModel.getCurrentPlayer();
+//			setPlayerTurnDisplay();
+//		}
+//
+//		if (IChangeGameState.getNextLevelID() != null) {
+//			System.out.println("NEXT LEVEL");
+//			// myController.getGame().changeLevel(currentLevel.getNextLevelID());
+//			myModel.changeLevel(IChangeGameState.getNextLevelID());
+//			// myController.getGame().getCurrentLevel().getGrid().displayPane(myController.getGridPane());
+//			initializeGrid();
+//			myGrid.repopulateGrid();
+//		}
+///*		if (myModel.getCurrentPlayer().getNumMovesPlayed() > 4) {
+//			//System.out.println("NEXT PLAYER HARD CODE");
+//			myModel.nextPlayer();
+//			myCurrentPlayer = myModel.getCurrentPlayer();
+//			setPlayerTurnDisplay();
+//		}*/
+//	}
 
 	private void handleClearHighScores() {
 	    System.out.println("VC: Clear high scores");

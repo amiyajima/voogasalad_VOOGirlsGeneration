@@ -1,4 +1,4 @@
-package fxml_main;
+    package fxml_main;
 
 import gamedata.gamecomponents.Piece;
 import java.awt.geom.Point2D;
