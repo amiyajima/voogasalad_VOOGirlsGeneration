@@ -201,21 +201,9 @@ public class RangeEditor extends PopupWindow {
 			}
 
 			boolean toChoose = (button.getText().equals("Choose")) ? true : false;
-			switch (chosen) {
-			case COLUMN:
-				rangeGridView.getGrid().rangeColumn(parameter, toChoose);
-				break;
-			case ROW:
-				rangeGridView.getGrid().rangeRow(parameter, toChoose);
-				break;
-			case RADIUS:
-				rangeGridView.getGrid().rangeRadius(parameter, toChoose);
-				break;
-			case ALL:
-				rangeGridView.getGrid().rangeAll(toChoose);
-				break;
+			
+			rangeGridView.getGrid().processChoice(chosen,parameter,toChoose);
 
-			}
 		}
 
 	}

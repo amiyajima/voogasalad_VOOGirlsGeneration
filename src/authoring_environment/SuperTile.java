@@ -87,24 +87,28 @@ public abstract class SuperTile extends Group {
      *Highlight the tile and pass in a hex color of the highlight.
      * 
      * @param color: The color of the highlight.
+     * @return TODO
      */
-    public void selectTile (String color) {
+    public boolean selectTile (String color) {
         myHighlight.setFill(Color.web(color, 0.3));
         myHighlight.setVisible(true);
+        return true;
     }
 
     /**
      * De-highlight the tile.
+     * @return TODO
      */
-    public void deselectTile () {
+    public boolean deselectTile () {
         myHighlight.setVisible(false);
+        return true;
     }
 
     /**
      * Return a boolean value indicating if the tile is highlighted.
      * @return If the tile is highlighted.
      */
-    public boolean ifSelected () {
+    public boolean isSelected () {
         return myHighlight.isVisible();
     }
 
