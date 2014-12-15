@@ -1,8 +1,13 @@
+// This entire file is part of my masterpiece.
+// Jennie Ju
+
 package gamedata.action;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.awt.geom.Point2D;
 
+import authoring.concretefeatures.RangeEditor;
 import authoring_environment.GUIGrid;
 import gamedata.gamecomponents.Piece;
 
@@ -11,12 +16,14 @@ import gamedata.gamecomponents.Piece;
  * an action on another component in the game.
  * Pieces will contain a list of actions.
  * 
+ * This class was written as an outline to the Action API
+ * 
  * @author Jennie Ju
  */
 public interface Action {
 	
 	/**
-	 * Returns the information about the Action for display
+	 * Returns the name of the Action for display
 	 * @return name of Action
 	 */
 	public String toString();
@@ -42,18 +49,28 @@ public interface Action {
 	public List<Point2D.Double> getAbsoluteEffectRange(Point2D pieceLocation);
 	
 	/**
-	 * Gives back a list of Point2D of relative
-	 * locations for the action range
-	 * @return list of absolute locations in Point2D
+	 * Displays the relative action range on a RangeEditor for editing in
+	 * the ActionEditor
+	 * 
+	 * @param consumer - Consumer lambda stating how data will be manipulated in
+	 * the RangeEditor
+	 * @param gridShape - String stating desired grid shape
+	 * @return RangeEditor populated with highlighed tiles indicating the action range
 	 */
-	public List<Point2D.Double> getActionRange();
-        
+	public RangeEditor getActionRangeEditor(Consumer<List<Point2D.Double>> consumer,
+			String gridShape);
+	
 	/**
-	 * Gives back a list of Point2D of relative locations
-	 * for the effect range of the action (splashzone)
-	 * @return list of relative locations in Point2D
+	 * Displays the relative effect range on a RangeEditor for editing in
+	 * the ActionEditor
+	 * 
+	 * @param consumer - Consumer lambda stating how data will be manipulated in
+	 * the RangeEditor
+	 * @param gridShape - String stating desired grid shape
+	 * @return RangeEditor populated with highlighed tiles indicating myRange
 	 */
-	public List<Point2D.Double> getEffectRange();
+	public RangeEditor getEffectRangeEditor(Consumer<List<Point2D.Double>> consumer,
+			String gridShape);
 	
 	/**
 	 * Executes an action on a component of
