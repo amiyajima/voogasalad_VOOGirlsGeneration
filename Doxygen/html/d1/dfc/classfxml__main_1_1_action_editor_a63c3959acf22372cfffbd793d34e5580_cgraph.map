@@ -1,0 +1,18 @@
+<map id="fxml_main.ActionEditor.ActionEditor" name="fxml_main.ActionEditor.ActionEditor">
+<area shape="rect" id="node2" href="$d1/d6d/classgamedata_1_1action_1_1_concrete_action.html#ac424fd81868d77a0c29927573d75d711" title="gamedata.action.Concrete\lAction.getActionRange" alt="" coords="267,5,461,46"/>
+<area shape="rect" id="node3" href="$d1/d6d/classgamedata_1_1action_1_1_concrete_action.html#a6e4b07f85b1f2c2cc429444a5e35444d" title="gamedata.action.Concrete\lAction.getConclusion" alt="" coords="267,70,461,111"/>
+<area shape="rect" id="node4" href="$d1/d6d/classgamedata_1_1action_1_1_concrete_action.html#a3bfd5ca070359c6c97e6aec787e715fc" title="gamedata.action.Concrete\lAction.getEffectRange" alt="" coords="267,135,461,177"/>
+<area shape="rect" id="node5" href="$d1/d6d/classgamedata_1_1action_1_1_concrete_action.html#afacfc0170606b51812b9a0ae8e65fe2f" title="gamedata.action.Concrete\lAction.getName" alt="" coords="267,201,461,242"/>
+<area shape="rect" id="node6" href="$d1/d6d/classgamedata_1_1action_1_1_concrete_action.html#a29a4a02f3452f526258b0151a3d997eb" title="gamedata.action.Concrete\lAction.getStatsLogics" alt="" coords="267,266,461,307"/>
+<area shape="rect" id="node7" href="$d1/dfc/classfxml__main_1_1_action_editor.html#a3f41408f9918728d0fd74ef22c57ca07" title="fxml_main.ActionEditor.init\lEditor" alt="" coords="269,331,459,373"/>
+<area shape="rect" id="node8" href="$d1/dfc/classfxml__main_1_1_action_editor.html#af0259290d545e9861baa294789d07f6c" title="fxml_main.ActionEditor.init\lNameField" alt="" coords="519,233,710,274"/>
+<area shape="rect" id="node9" href="$d1/dfc/classfxml__main_1_1_action_editor.html#a86fe35802a5dcd5d4f9de4f912fa5a71" title="fxml_main.ActionEditor.init\lSetRangeButton" alt="" coords="519,298,710,339"/>
+<area shape="rect" id="node10" href="$d1/dfc/classfxml__main_1_1_action_editor.html#adf8f00b5c1e13d8de4085c8023874e30" title="fxml_main.ActionEditor.init\lConclusionsBox" alt="" coords="519,363,710,405"/>
+<area shape="rect" id="node17" href="$d9/d59/classgamedata_1_1action_1_1_action_stats_editor.html#a8d61e4c665c2bf5470a63f9b598074ec" title="gamedata.action.ActionStats\lEditor.getStatsTotalLogics" alt="" coords="510,429,719,470"/>
+<area shape="rect" id="node11" href="$d7/dcc/classutilities_1_1_class_grabber.html#a6e528c82ad6e17a13e844e6e12c02c47" title="utilities.ClassGrabber.get\lClassNames" alt="" coords="808,265,989,306"/>
+<area shape="rect" id="node14" href="$d1/dfc/classfxml__main_1_1_action_editor.html#ad35c9c184da7961c964f30195bf8c36f" title="fxml_main.ActionEditor.trim\lClassList" alt="" coords="799,330,998,371"/>
+<area shape="rect" id="node15" href="$d1/df8/classutilities_1_1_reflection.html#afec2bff75d1b94fff36d877379f7f419" title="utilities.Reflection.create\lInstance" alt="" coords="810,395,987,437"/>
+<area shape="rect" id="node16" href="$d8/d47/interfacegamedata_1_1action_1_1_action_conclusion.html#a8a86a1f2ab6c9409b90e35e4389d0a60" title="gamedata.action.ActionConclusion.to\lString" alt="" coords="768,461,1029,502"/>
+<area shape="rect" id="node12" href="$d7/dcc/classutilities_1_1_class_grabber.html#aafd30d1c4beed85d57bce894927acb09" title="utilities.ClassGrabber.get\lClasses" alt="" coords="1077,265,1259,306"/>
+<area shape="rect" id="node13" href="$d7/dcc/classutilities_1_1_class_grabber.html#ad4bda95822ecf4385d69f6ecec3fd545" title="utilities.ClassGrabber.find\lClasses" alt="" coords="1307,265,1490,306"/>
+</map>

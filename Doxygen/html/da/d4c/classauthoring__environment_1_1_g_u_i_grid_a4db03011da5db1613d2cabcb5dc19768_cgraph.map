@@ -1,0 +1,5 @@
+<map id="authoring_environment.GUIGrid.removePieceType" name="authoring_environment.GUIGrid.removePieceType">
+<area shape="rect" id="node2" href="$d5/d98/classauthoring_1_1data_1_1_piece_type_data.html#aa1d0d039a5387306af02e423d0f6e495" title="authoring.data.PieceType\lData.getIdSet" alt="" coords="346,5,529,46"/>
+<area shape="rect" id="node3" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#aab4ca6a2e399a4f20d41eb9bc038f7aa" title="authoring_environment.Super\lTile.removePieceImage" alt="" coords="331,70,544,111"/>
+<area shape="rect" id="node4" href="$d6/dda/classauthoring_1_1data_1_1_piece_instance_data.html#a0a7ad68bf47394a4326f13eadfa83363" title="authoring.data.PieceInstance\lData.removeUnknown" alt="" coords="333,135,541,177"/>
+</map>

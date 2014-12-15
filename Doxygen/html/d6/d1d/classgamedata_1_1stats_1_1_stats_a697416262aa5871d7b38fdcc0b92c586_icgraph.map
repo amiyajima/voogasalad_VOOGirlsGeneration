@@ -1,0 +1,15 @@
+<map id="gamedata.stats.Stats.getStatNames" name="gamedata.stats.Stats.getStatNames">
+<area shape="rect" id="node2" href="$d3/d7c/classauthoring_1_1concretefeatures_1_1_stats_individual_editor.html#a764ff9599a5931fe06a974fe48dfac86" title="authoring.concretefeatures.\lStatsIndividualEditor.initialize" alt="" coords="270,17,477,58"/>
+<area shape="rect" id="node4" href="$de/d18/classauthoring_1_1concretefeatures_1_1_stats_total_editor.html#a79362418822e7a3667b65bb1c150219e" title="authoring.concretefeatures.\lStatsTotalEditor.initStatsCreatorBoxes" alt="" coords="241,85,506,126"/>
+<area shape="rect" id="node8" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a958135e32cc01512c109f4c48a031ee0" title="authoring.eventeditor.Condition\lEditorPane.setupStatsBox" alt="" coords="262,150,485,191"/>
+<area shape="rect" id="node12" href="$df/dd5/classgame_player_1_1_view_controller.html#a0c29875ecb4818334f53b1cdefa6e305" title="gamePlayer.ViewController.update\lStats" alt="" coords="253,215,493,257"/>
+<area shape="rect" id="node3" href="$d3/d7c/classauthoring_1_1concretefeatures_1_1_stats_individual_editor.html#a25a8b4ab6003b44c59da6321f574536e" title="authoring.concretefeatures.\lStatsIndividualEditor.StatsIndividual\lEditor" alt="" coords="555,5,803,61"/>
+<area shape="rect" id="node5" href="$de/d18/classauthoring_1_1concretefeatures_1_1_stats_total_editor.html#a28790263c93a014c304f1a7b6698f808" title="authoring.concretefeatures.\lStatsTotalEditor.initStatsEditorBox" alt="" coords="559,85,798,126"/>
+<area shape="rect" id="node6" href="$de/d18/classauthoring_1_1concretefeatures_1_1_stats_total_editor.html#ae8d331fc6214ee5c0e723f00994e406d" title="authoring.concretefeatures.\lStatsTotalEditor.initialize" alt="" coords="863,85,1063,126"/>
+<area shape="rect" id="node7" href="$de/d18/classauthoring_1_1concretefeatures_1_1_stats_total_editor.html#a59acc1bc3e0468ee318581ae239cb204" title="authoring.concretefeatures.\lStatsTotalEditor.StatsTotalEditor" alt="" coords="1123,85,1349,126"/>
+<area shape="rect" id="node9" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a421ca65a21e0a47b69c3d253020d5d8e" title="authoring.eventeditor.Condition\lEditorPane.setUpComponents" alt="" coords="567,150,790,191"/>
+<area shape="rect" id="node10" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a194c440cd15f0b71cae8f07dd45377e0" title="authoring.eventeditor.Condition\lEditorPane.initialize" alt="" coords="851,150,1074,191"/>
+<area shape="rect" id="node11" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a1ce5d677410533b45754ccaf6464e573" title="authoring.eventeditor.Condition\lEditorPane.ConditionEditorPane" alt="" coords="1125,150,1347,191"/>
+<area shape="rect" id="node13" href="$d6/d24/classgame_player_1_1_select_state.html#a801827392f0faeee6b96925060d77838" title="gamePlayer.SelectState.on\lClick" alt="" coords="581,215,777,257"/>
+<area shape="rect" id="node14" href="$df/df0/classtests_1_1_view_controller_test.html#a9696e815d2ffde2ce4b4317175423ef4" title="tests.ViewControllerTest.update\lStatsTest" alt="" coords="567,281,790,322"/>
+</map>

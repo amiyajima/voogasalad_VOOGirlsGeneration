@@ -1,0 +1,5 @@
+<map id="fxml_main.PatchController.initGlobalNewBtn" name="fxml_main.PatchController.initGlobalNewBtn">
+<area shape="rect" id="node2" href="$d1/d4f/classauthoring_1_1data_1_1_patch_type_data.html#a83d13a28f3d638344c13fa92eb7baa80" title="authoring.data.PatchType\lData.add" alt="" coords="285,5,467,46"/>
+<area shape="rect" id="node3" href="$da/d40/classfxml__main_1_1_grid_component_abst_ctrl.html#a458f6bc495d1bdfc6d3ff39cea40bd84" title="fxml_main.GridComponentAbst\lCtrl\&lt; Patch \&gt;::addEntry" alt="" coords="265,70,487,111"/>
+<area shape="rect" id="node4" href="$da/d40/classfxml__main_1_1_grid_component_abst_ctrl.html#a690d85921c1558f7988bb18e895363ef" title="fxml_main.GridComponentAbst\lCtrl.makeCompleteEntryBox" alt="" coords="537,70,759,111"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="fxml_main.LevelController.initEntryDelBtn" name="fxml_main.LevelController.initEntryDelBtn">
+<area shape="rect" id="node2" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#aba69dd5b1d04abadf1186c952362a46e" title="authoring_environment.Super\lGrid.displayPane" alt="" coords="291,5,504,46"/>
+<area shape="rect" id="node3" href="$d6/d05/classfxml__main_1_1_g_u_i_grid_reference.html#ab47bae2ec738eb18d99809ec9443a2ae" title="fxml_main.GUIGridReference.getGrid" alt="" coords="270,71,525,97"/>
+<area shape="rect" id="node4" href="$d8/d01/classgamedata_1_1gamecomponents_1_1_level.html#adef1fc175daf62d54468e35e67413edb" title="gamedata.gamecomponents.\lLevel.getGrid" alt="" coords="291,122,504,163"/>
+<area shape="rect" id="node5" href="$d7/d88/classauthoring_1_1data_1_1_level_data.html#a43bac5aef73d928f9361517578f467af" title="authoring.data.LevelData.remove" alt="" coords="279,188,516,215"/>
+<area shape="rect" id="node6" href="$d6/d05/classfxml__main_1_1_g_u_i_grid_reference.html#adf8dc33fde668aa70e30772f35be9b96" title="fxml_main.GUIGridReference.resetGrid" alt="" coords="264,239,531,265"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="gamedata.gamecomponents.Game.setCurrentPlayer" name="gamedata.gamecomponents.Game.setCurrentPlayer">
+<area shape="rect" id="node2" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#a90eec8ba0c1d410466f991d4b5421e7d" title="gamedata.gamecomponents.\lGame.changeTurn" alt="" coords="292,5,505,46"/>
+<area shape="rect" id="node3" href="$d9/d10/classgamedata_1_1wrappers_1_1_game_data.html#ab7fc650834149e8edee90a0f3373fb0c" title="gamedata.wrappers.GameData.get\lGameFromData" alt="" coords="274,70,523,111"/>
+<area shape="rect" id="node4" href="$df/dd5/classgame_player_1_1_view_controller.html#a373a9d79a047ab463f62ed817ad382fd" title="gamePlayer.ViewController.saveGame" alt="" coords="267,136,531,163"/>
+</map>

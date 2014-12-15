@@ -1,0 +1,5 @@
+<map id="gamedata.gamecomponents.GridComponent.toString" name="gamedata.gamecomponents.GridComponent.toString">
+<area shape="rect" id="node2" href="$d7/d7d/classgamedata_1_1goals_1_1_piece_on_patch_goal.html#a37daf3aa376235c77123a8e63335b9ca" title="gamedata.goals.PieceOnPatch\lGoal.checkGameState" alt="" coords="267,5,485,46"/>
+<area shape="rect" id="node3" href="$d6/dda/classauthoring_1_1data_1_1_piece_instance_data.html#af05ebbd9921faee7ceb4d34285ba602e" title="authoring.data.PieceInstance\lData.unitAtLoc" alt="" coords="272,70,480,111"/>
+<area shape="rect" id="node4" href="$d1/d4e/classauthoring__environment_1_1_shape_grid.html#af1dae331925114cd9232c33c051c2b28" title="authoring_environment.Shape\lGrid.removePieces" alt="" coords="533,70,749,111"/>
+</map>

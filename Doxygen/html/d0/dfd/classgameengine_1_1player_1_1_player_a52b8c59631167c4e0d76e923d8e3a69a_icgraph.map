@@ -1,0 +1,4 @@
+<map id="gameengine.player.Player.getLoc" name="gameengine.player.Player.getLoc">
+<area shape="rect" id="node2" href="$d8/d4d/classgameengine_1_1player_1_1_simple_a_i_player.html#a4939c006130cc2f30060ccb3abd9d5e5" title="gameengine.player.Simple\lAIPlayer.play" alt="" coords="288,5,480,46"/>
+<area shape="rect" id="node3" href="$d8/d4d/classgameengine_1_1player_1_1_simple_a_i_player.html#a9a241075e35d6039a453f51445e9837c" title="gameengine.player.Simple\lAIPlayer.startTurn" alt="" coords="528,5,720,46"/>
+</map>

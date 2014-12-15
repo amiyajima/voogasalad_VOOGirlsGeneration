@@ -1,0 +1,4 @@
+<map id="fxml_main.PieceController.initGlobalNewBtn" name="fxml_main.PieceController.initGlobalNewBtn">
+<area shape="rect" id="node2" href="$d5/d98/classauthoring_1_1data_1_1_piece_type_data.html#a614e86b80a55cde68e3fbf524f16cb6e" title="authoring.data.PieceType\lData.add" alt="" coords="285,5,467,46"/>
+<area shape="rect" id="node3" href="$da/d40/classfxml__main_1_1_grid_component_abst_ctrl.html#a458f6bc495d1bdfc6d3ff39cea40bd84" title="fxml_main.GridComponentAbst\lCtrl\&lt; Piece \&gt;::addEntry" alt="" coords="265,70,487,111"/>
+</map>

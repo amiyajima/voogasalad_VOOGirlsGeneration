@@ -1,0 +1,6 @@
+<map id="authoring_environment.GUIGrid.removePiece" name="authoring_environment.GUIGrid.removePiece">
+<area shape="rect" id="node2" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#aa57ca0acf0ef3aab7d5d98cf9cbbd1d7" title="authoring_environment.Super\lGrid.findTile" alt="" coords="331,5,544,46"/>
+<area shape="rect" id="node3" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a97439a493db38860397436079b123e8c" title="gamedata.gamecomponents.\lGridComponent.getLoc" alt="" coords="331,70,544,111"/>
+<area shape="rect" id="node4" href="$d6/dda/classauthoring_1_1data_1_1_piece_instance_data.html#a80a0e534e9cb103879f99230bc05efe7" title="authoring.data.PieceInstance\lData.remove" alt="" coords="333,135,541,177"/>
+<area shape="rect" id="node5" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#aab4ca6a2e399a4f20d41eb9bc038f7aa" title="authoring_environment.Super\lTile.removePieceImage" alt="" coords="331,201,544,242"/>
+</map>

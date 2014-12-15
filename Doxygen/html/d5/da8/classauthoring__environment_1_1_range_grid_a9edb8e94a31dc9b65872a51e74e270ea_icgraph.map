@@ -1,0 +1,11 @@
+<map id="authoring_environment.RangeGrid.findTile" name="authoring_environment.RangeGrid.findTile">
+<area shape="rect" id="node2" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#af04008b652f58f0da0a63353f2748eb3" title="authoring_environment.Range\lGrid.findCenterTile" alt="" coords="270,9,485,50"/>
+<area shape="rect" id="node5" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a6952186464d66d8f4cb84ad914acc6ad" title="authoring_environment.Range\lGrid.highlightRange" alt="" coords="534,70,749,111"/>
+<area shape="rect" id="node6" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a01e0c5aeb77c4301820a374b0770483f" title="authoring_environment.Range\lGrid.rangeAll" alt="" coords="270,129,485,170"/>
+<area shape="rect" id="node8" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a1586131f94cc78931c9eb19ce22c9bba" title="authoring_environment.Range\lGrid.rangeRadius" alt="" coords="534,187,749,229"/>
+<area shape="rect" id="node9" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#ac170da90f00d9a8703aaab1cd3657888" title="authoring_environment.Range\lGrid.rangeColumn" alt="" coords="534,253,749,294"/>
+<area shape="rect" id="node10" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a5f6bb1c5cb9fb99ca4a1c45c0e9913bd" title="authoring_environment.Range\lGrid.rangeRow" alt="" coords="270,307,485,349"/>
+<area shape="rect" id="node3" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a7d110ef99cda80cf648f0e01d312ee43" title="authoring_environment.Range\lGrid.addCenterImage" alt="" coords="534,5,749,46"/>
+<area shape="rect" id="node4" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a450be605083bd4836209bae32f834402" title="authoring_environment.Range\lGrid.RangeGrid" alt="" coords="829,38,1043,79"/>
+<area shape="rect" id="node7" href="$d2/d0a/classauthoring_1_1concretefeatures_1_1_range_editor_1_1select_range_handler.html#aeb6a8188897ef8831cb7a9b2ed41cad1" title="authoring.concretefeatures.\lRangeEditor.selectRangeHandler.handle" alt="" coords="798,221,1074,262"/>
+</map>

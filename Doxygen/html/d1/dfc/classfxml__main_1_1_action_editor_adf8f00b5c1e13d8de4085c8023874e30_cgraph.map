@@ -1,0 +1,8 @@
+<map id="fxml_main.ActionEditor.initConclusionsBox" name="fxml_main.ActionEditor.initConclusionsBox">
+<area shape="rect" id="node2" href="$d1/df8/classutilities_1_1_reflection.html#afec2bff75d1b94fff36d877379f7f419" title="utilities.Reflection.create\lInstance" alt="" coords="287,5,465,46"/>
+<area shape="rect" id="node3" href="$d7/dcc/classutilities_1_1_class_grabber.html#a6e528c82ad6e17a13e844e6e12c02c47" title="utilities.ClassGrabber.get\lClassNames" alt="" coords="285,70,467,111"/>
+<area shape="rect" id="node6" href="$d8/d47/interfacegamedata_1_1action_1_1_action_conclusion.html#a8a86a1f2ab6c9409b90e35e4389d0a60" title="gamedata.action.ActionConclusion.to\lString" alt="" coords="245,135,507,177"/>
+<area shape="rect" id="node7" href="$d1/dfc/classfxml__main_1_1_action_editor.html#ad35c9c184da7961c964f30195bf8c36f" title="fxml_main.ActionEditor.trim\lClassList" alt="" coords="277,201,475,242"/>
+<area shape="rect" id="node4" href="$d7/dcc/classutilities_1_1_class_grabber.html#aafd30d1c4beed85d57bce894927acb09" title="utilities.ClassGrabber.get\lClasses" alt="" coords="555,70,736,111"/>
+<area shape="rect" id="node5" href="$d7/dcc/classutilities_1_1_class_grabber.html#ad4bda95822ecf4385d69f6ecec3fd545" title="utilities.ClassGrabber.find\lClasses" alt="" coords="785,70,967,111"/>
+</map>

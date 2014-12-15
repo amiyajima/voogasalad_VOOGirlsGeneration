@@ -1,0 +1,4 @@
+<map id="gamedata.events.globalaction.EndTurn.doBehavior" name="gamedata.events.globalaction.EndTurn.doBehavior">
+<area shape="rect" id="node2" href="$da/d0d/classgamedata_1_1gamecomponents_1_1_game_state.html#a61909df86b8de140c1cbdb681df017f3" title="gamedata.gamecomponents.\lGameState.endTurn" alt="" coords="275,5,488,46"/>
+<area shape="rect" id="node3" href="$da/d0d/classgamedata_1_1gamecomponents_1_1_game_state.html#a8b3d55c38b7b11ad51fd04e6ee32e5f0" title="gamedata.gamecomponents.\lGameState.resetMoves" alt="" coords="275,70,488,111"/>
+</map>

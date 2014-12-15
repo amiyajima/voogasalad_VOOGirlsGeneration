@@ -1,0 +1,5 @@
+<map id="gamedata.gamecomponents.Piece.getMovement" name="gamedata.gamecomponents.Piece.getMovement">
+<area shape="rect" id="node2" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#af2eefe9bd07a346d48960d99fae7511d" title="fxml_main.PieceTypeEditor.\lPieceTypeEditor" alt="" coords="267,5,461,46"/>
+<area shape="rect" id="node3" href="$d7/df4/classtests_1_1_j_s_o_n_tester_main.html#a5f1fa68f3fcb37a473271cdbfeaaa92e" title="tests.JSONTesterMain.test\lJSONwrite" alt="" coords="271,70,457,111"/>
+<area shape="rect" id="node4" href="$d7/df4/classtests_1_1_j_s_o_n_tester_main.html#a931215da47157cbc5157c6a9df31ccd4" title="tests.JSONTesterMain.main" alt="" coords="509,77,704,104"/>
+</map>
