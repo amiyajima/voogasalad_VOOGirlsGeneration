@@ -1,5 +1,0 @@
-<map id="authoring.data.GamePropertiesData.getGridShape" name="authoring.data.GamePropertiesData.getGridShape">
-<area shape="rect" id="node2" href="$dc/dae/classauthoring_1_1createedit_1_1_game_properties_editor.html#ac6acc81a35ab048db212ea9425d53a7a" title="authoring.createedit.Game\lPropertiesEditor.GameProperties\lEditor" alt="" coords="297,5,527,61"/>
-<area shape="rect" id="node3" href="$db/d40/classfxml__main_1_1_authoring_controller.html#af8b9517d799dfcaaa5e359c84bde1c66" title="fxml_main.AuthoringController.initData" alt="" coords="277,85,547,112"/>
-<area shape="rect" id="node4" href="$dc/def/classfxml__main_1_1_g_u_icontainer_controller.html#a218cedd358c2fdeb6328e0d7671bea27" title="fxml_main.GUIcontainerController.\lLoadNewAuthoring" alt="" coords="595,78,835,119"/>
-</map>

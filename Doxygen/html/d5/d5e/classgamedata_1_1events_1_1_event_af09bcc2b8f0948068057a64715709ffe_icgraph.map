@@ -1,7 +1,0 @@
-<map id="gamedata.events.Event.getGlobalActions" name="gamedata.events.Event.getGlobalActions">
-<area shape="rect" id="node2" href="$d3/d12/classtests_1_1_test_game_creator.html#a9d232abfdb7506564874adbb3354c6bc" title="tests.TestGameCreator.create\lNewEvent" alt="" coords="266,5,481,46"/>
-<area shape="rect" id="node3" href="$d8/d60/classauthoring_1_1eventeditor_1_1_event_editor_controller.html#a93fff7a48d4492092faafda67a21acda" title="authoring.eventeditor.Event\lEditorController.showEventInEditor" alt="" coords="253,70,493,111"/>
-<area shape="rect" id="node5" href="$d7/df4/classtests_1_1_j_s_o_n_tester_main.html#a5f1fa68f3fcb37a473271cdbfeaaa92e" title="tests.JSONTesterMain.test\lJSONwrite" alt="" coords="280,135,467,177"/>
-<area shape="rect" id="node4" href="$d8/d60/classauthoring_1_1eventeditor_1_1_event_editor_controller.html#a2dae0a56f5b7831ccb424e86a33de715" title="authoring.eventeditor.Event\lEditorController.initialize" alt="" coords="542,70,741,111"/>
-<area shape="rect" id="node6" href="$d7/df4/classtests_1_1_j_s_o_n_tester_main.html#a931215da47157cbc5157c6a9df31ccd4" title="tests.JSONTesterMain.main" alt="" coords="544,143,739,169"/>
-</map>

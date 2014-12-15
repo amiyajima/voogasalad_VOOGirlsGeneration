@@ -1,4 +1,0 @@
-<map id="fxml_main.PieceEditor.initPlayerChoice" name="fxml_main.PieceEditor.initPlayerChoice">
-<area shape="rect" id="node2" href="$d4/d63/classgamedata_1_1gamecomponents_1_1_piece.html#a82c9af6da8810bb8fb2eaec8ee0d9c7d" title="gamedata.gamecomponents.\lPiece.getPlayerID" alt="" coords="240,5,453,46"/>
-<area shape="rect" id="node3" href="$d4/d63/classgamedata_1_1gamecomponents_1_1_piece.html#a0e99b48e900129c9f2c2c32a44c7705c" title="gamedata.gamecomponents.\lPiece.setPlayerID" alt="" coords="240,70,453,111"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="gamePlayer.ViewController.saveGame" name="gamePlayer.ViewController.saveGame">
-<area shape="rect" id="node2" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#af10a4c1effbe4b034810f9f2e5e7863b" title="gamedata.gamecomponents.\lGame.setCurrentPlayer" alt="" coords="336,5,549,46"/>
-<area shape="rect" id="node4" href="$d0/dbd/classgamedata_1_1_j_s_o_n_1_1_j_s_o_n_manager.html#af9ee30f2c59580f457cb066bf835d481" title="gamedata.JSON.JSONManager.write\lToJSON" alt="" coords="318,70,567,111"/>
-<area shape="rect" id="node3" href="$d0/dfd/classgameengine_1_1player_1_1_player.html#ad132fea87861614c8adba7ed35ec7497" title="gameengine.player.Player.startTurn" alt="" coords="617,12,863,39"/>
-</map>

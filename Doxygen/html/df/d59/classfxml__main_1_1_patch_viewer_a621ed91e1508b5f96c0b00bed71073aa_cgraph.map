@@ -1,8 +1,0 @@
-<map id="fxml_main.PatchViewer.PatchViewer" name="fxml_main.PatchViewer.PatchViewer">
-<area shape="rect" id="node2" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#abbee382ddf73ae02286b64d067b5a78f" title="gamedata.gamecomponents.\lGridComponent.getID" alt="" coords="276,5,489,46"/>
-<area shape="rect" id="node3" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#afb88b190b2f6bc5a77e94b0306839476" title="gamedata.gamecomponents.\lGridComponent.getImageLocation" alt="" coords="261,70,504,111"/>
-<area shape="rect" id="node4" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a36576ab9ef1e03a9b5855f1f05e2190f" title="gamedata.gamecomponents.\lGridComponent.getName" alt="" coords="276,135,489,177"/>
-<area shape="rect" id="node5" href="$df/d59/classfxml__main_1_1_patch_viewer.html#a90737cfda08a68746b00e56099b81642" title="fxml_main.PatchViewer.initialize" alt="" coords="271,201,494,228"/>
-<area shape="rect" id="node6" href="$df/d59/classfxml__main_1_1_patch_viewer.html#a72daf40ca3c3f926ba205aa37e0bb178" title="fxml_main.PatchViewer.init\lImageDisplay" alt="" coords="553,194,743,235"/>
-<area shape="rect" id="node7" href="$df/d59/classfxml__main_1_1_patch_viewer.html#a585758260141a3176b7c2222bf55b3ee" title="fxml_main.PatchViewer.set\lImageView" alt="" coords="792,194,984,235"/>
-</map>

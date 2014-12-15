@@ -1,4 +1,0 @@
-<map id="gamedata.gamecomponents.GameState.endTurn" name="gamedata.gamecomponents.GameState.endTurn">
-<area shape="rect" id="node2" href="$d6/dc0/classgamedata_1_1events_1_1globalaction_1_1_end_turn.html#addc55601945fb791cb08bf3ca549fa36" title="gamedata.events.globalaction.\lEndTurn.doBehavior" alt="" coords="267,5,487,46"/>
-<area shape="rect" id="node3" href="$d9/d51/classtests_1_1_global_action_tester.html#ab756c421ccfcd79eddf660a012ddbfcb" title="tests.GlobalActionTester.\lTestEndTurn" alt="" coords="536,5,715,46"/>
-</map>

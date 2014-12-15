@@ -1,4 +1,0 @@
-<map id="gamePlayer.ViewController.updateInventory" name="gamePlayer.ViewController.updateInventory">
-<area shape="rect" id="node2" href="$d4/d63/classgamedata_1_1gamecomponents_1_1_piece.html#a6c6a29c8f755fc181cbe1118dcf557a1" title="gamedata.gamecomponents.\lPiece.getInventory" alt="" coords="293,5,507,46"/>
-<area shape="rect" id="node3" href="$d3/d8e/classgamedata_1_1gamecomponents_1_1_inventory.html#a0d450d1d116c447446f4ab3350bd3ba5" title="gamedata.gamecomponents.\lInventory.getStringDisplay" alt="" coords="293,70,507,111"/>
-</map>
