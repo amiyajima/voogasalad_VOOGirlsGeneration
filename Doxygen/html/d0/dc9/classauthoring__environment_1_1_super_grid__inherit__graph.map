@@ -1,0 +1,5 @@
+<map id="authoring_environment.SuperGrid" name="authoring_environment.SuperGrid">
+<area shape="rect" id="node2" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html" title="authoring_environment.GUIGrid" alt="" coords="303,5,527,32"/>
+<area shape="rect" id="node3" href="$d3/d80/classauthoring__environment_1_1_player_grid.html" title="authoring_environment.PlayerGrid" alt="" coords="295,56,535,83"/>
+<area shape="rect" id="node4" href="$d5/da8/classauthoring__environment_1_1_range_grid.html" title="authoring_environment.RangeGrid" alt="" coords="294,107,535,133"/>
+</map>

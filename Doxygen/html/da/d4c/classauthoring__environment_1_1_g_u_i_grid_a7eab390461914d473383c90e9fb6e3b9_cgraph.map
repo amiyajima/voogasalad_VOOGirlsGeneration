@@ -1,0 +1,10 @@
+<map id="authoring_environment.GUIGrid.removePatchAtCoordinate" name="authoring_environment.GUIGrid.removePatchAtCoordinate">
+<area shape="rect" id="node2" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#a1a7fab3cd600b3c00a33ed4034ba9851" title="authoring_environment.GUIGrid.get\lPatch" alt="" coords="345,5,594,46"/>
+<area shape="rect" id="node4" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#aae553512b4d34302577601426c0eaa2f" title="authoring_environment.GUIGrid.is\lPatchOccupied" alt="" coords="350,70,589,111"/>
+<area shape="rect" id="node5" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#a2413204cbed4e6aae67dbb5ab1c55505" title="authoring_environment.GUIGrid.remove\lPatch" alt="" coords="331,135,608,177"/>
+<area shape="rect" id="node3" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html#a60ac72e96e7e0da6f3beb20122a8c041" title="authoring.data.PatchInstance\lData.getData" alt="" coords="658,5,867,46"/>
+<area shape="rect" id="node6" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#aa57ca0acf0ef3aab7d5d98cf9cbbd1d7" title="authoring_environment.Super\lGrid.findTile" alt="" coords="656,70,869,111"/>
+<area shape="rect" id="node7" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a97439a493db38860397436079b123e8c" title="gamedata.gamecomponents.\lGridComponent.getLoc" alt="" coords="656,135,869,177"/>
+<area shape="rect" id="node8" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html#a3cc84b2fe9d137219655d95e6b73ad6f" title="authoring.data.PatchInstance\lData.remove" alt="" coords="658,201,867,242"/>
+<area shape="rect" id="node9" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#af629f0c1ad27b8ded911f0461606d056" title="authoring_environment.Super\lTile.removePatchImage" alt="" coords="656,266,869,307"/>
+</map>

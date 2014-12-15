@@ -1,0 +1,9 @@
+<map id="authoring.concretefeatures.RangeEditor.initialize" name="authoring.concretefeatures.RangeEditor.initialize">
+<area shape="rect" id="node2" href="$d6/d17/classauthoring_1_1concretefeatures_1_1_range_editor.html#aba8caab3e2df169dd5bf6cbe70222ae7" title="authoring.concretefeatures.\lRangeEditor.getPrefTileSize" alt="" coords="261,5,461,46"/>
+<area shape="rect" id="node3" href="$d5/df6/classauthoring__environment_1_1_range_grid_view.html#abb88e480de6be8db723c9a30874e857d" title="authoring_environment.Range\lGridView.returnSelectedList" alt="" coords="254,70,469,111"/>
+<area shape="rect" id="node5" href="$d5/df6/classauthoring__environment_1_1_range_grid_view.html#a8d597c01dc8e26e65ec45eea123e59ce" title="authoring_environment.Range\lGridView.update" alt="" coords="254,167,469,209"/>
+<area shape="rect" id="node4" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a093e8be49fb55fa9c517c7fafe991abd" title="authoring_environment.Range\lGrid.rangeSelectedList" alt="" coords="518,53,733,94"/>
+<area shape="rect" id="node6" href="$d5/df6/classauthoring__environment_1_1_range_grid_view.html#aff5aeff14e7d6170b2c11959c4fd73ff" title="authoring_environment.Range\lGridView.cacluateGridSize" alt="" coords="518,118,733,159"/>
+<area shape="rect" id="node7" href="$d5/df6/classauthoring__environment_1_1_range_grid_view.html#afad32c83a08434d1a342f2031eb9b608" title="authoring_environment.Range\lGridView.getPrefTileSize" alt="" coords="518,183,733,225"/>
+<area shape="rect" id="node8" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#aba69dd5b1d04abadf1186c952362a46e" title="authoring_environment.Super\lGrid.displayPane" alt="" coords="519,249,732,290"/>
+</map>

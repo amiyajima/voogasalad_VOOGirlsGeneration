@@ -1,0 +1,5 @@
+<map id="gamedata.gamecomponents.GridComponent" name="gamedata.gamecomponents.GridComponent">
+<area shape="rect" id="node3" href="$dd/dc6/classgamedata_1_1gamecomponents_1_1_patch.html" title="gamedata.gamecomponents.\lPatch" alt="" coords="5,187,219,229"/>
+<area shape="rect" id="node4" href="$d4/d63/classgamedata_1_1gamecomponents_1_1_piece.html" title="gamedata.gamecomponents.\lPiece" alt="" coords="243,187,456,229"/>
+<area shape="rect" id="node2" href="$dc/d5b/interfacegamedata_1_1gamecomponents_1_1_i_has_stats.html" title="gamedata.gamecomponents.\lIHasStats" alt="" coords="124,6,337,47"/>
+</map>

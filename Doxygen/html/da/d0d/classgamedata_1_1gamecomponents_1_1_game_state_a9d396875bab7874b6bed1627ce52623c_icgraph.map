@@ -1,0 +1,4 @@
+<map id="gamedata.gamecomponents.GameState.changeLevel" name="gamedata.gamecomponents.GameState.changeLevel">
+<area shape="rect" id="node2" href="$d1/d9d/classgamedata_1_1events_1_1globalaction_1_1_level_change.html#afa44fe273a1ee6758c8ab546abc26b5c" title="gamedata.events.globalaction.\lLevelChange.doBehavior" alt="" coords="267,5,487,46"/>
+<area shape="rect" id="node3" href="$d9/d51/classtests_1_1_global_action_tester.html#a6f86a4282490e90c8df308939e5a895c" title="tests.GlobalActionTester.\lTestLevelChange" alt="" coords="536,5,715,46"/>
+</map>

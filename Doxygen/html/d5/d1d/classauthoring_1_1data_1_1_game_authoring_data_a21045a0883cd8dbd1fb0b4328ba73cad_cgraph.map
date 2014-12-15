@@ -1,0 +1,6 @@
+<map id="authoring.data.GameAuthoringData.createGame" name="authoring.data.GameAuthoringData.createGame">
+<area shape="rect" id="node2" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#ab77c298a59d70f94282359bb53e8bc29" title="gamedata.gamecomponents.\lGame.addPlayers" alt="" coords="303,5,516,46"/>
+<area shape="rect" id="node3" href="$d7/d88/classauthoring_1_1data_1_1_level_data.html#ac3a2c600f5a4bc914b1f11abff1593a0" title="authoring.data.LevelData.createGame" alt="" coords="275,71,543,97"/>
+<area shape="rect" id="node4" href="$d2/dcf/classauthoring_1_1data_1_1_game_properties_data.html#a7777e71c08ad7a58acccc884a00a95f5" title="authoring.data.GameProperties\lData.getNumPlayers" alt="" coords="297,122,521,163"/>
+<area shape="rect" id="node5" href="$d6/dfb/classauthoring_1_1data_1_1_player_stat_data.html#ae131cfcfa946370bc1c32b6ed17c725f" title="authoring.data.PlayerStat\lData.makePlayers" alt="" coords="316,187,503,229"/>
+</map>

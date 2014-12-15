@@ -1,0 +1,5 @@
+<map id="fxml_main.PieceController.initEntryEditBtn" name="fxml_main.PieceController.initEntryEditBtn">
+<area shape="rect" id="node2" href="$da/d40/classfxml__main_1_1_grid_component_abst_ctrl.html#a690d85921c1558f7988bb18e895363ef" title="fxml_main.GridComponentAbst\lCtrl\&lt; Piece \&gt;::makeCompleteEntryBox" alt="" coords="265,5,535,46"/>
+<area shape="rect" id="node3" href="$d5/d98/classauthoring_1_1data_1_1_piece_type_data.html#a2400f4106003a57e4f82a3e5a7fceb78" title="authoring.data.PieceType\lData.replace" alt="" coords="309,70,491,111"/>
+<area shape="rect" id="node4" href="$d5/d98/classauthoring_1_1data_1_1_piece_type_data.html#a614e86b80a55cde68e3fbf524f16cb6e" title="authoring.data.PieceType\lData.add" alt="" coords="585,70,767,111"/>
+</map>

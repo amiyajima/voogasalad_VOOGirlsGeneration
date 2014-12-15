@@ -1,0 +1,8 @@
+<map id="authoring_environment.SuperTile.makeShapeTile" name="authoring_environment.SuperTile.makeShapeTile">
+<area shape="rect" id="node2" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#aa7c82b59d82b5767cde8f062382047f2" title="authoring_environment.Super\lTile.calculateImageLocation" alt="" coords="267,5,480,46"/>
+<area shape="rect" id="node3" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#ad8541868c0a18b3c3bb70654f1421bad" title="authoring_environment.Super\lTile.calculateImageSize" alt="" coords="267,70,480,111"/>
+<area shape="rect" id="node4" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#a8b70271c53865f3858aad94b1b5cc62b" title="authoring_environment.Super\lTile.calculatePixelLocation" alt="" coords="267,135,480,177"/>
+<area shape="rect" id="node5" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#abe702e0693ee67d84539609f46bc6b81" title="authoring_environment.Super\lTile.makeHighlight" alt="" coords="267,201,480,242"/>
+<area shape="rect" id="node6" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#a1095fe72bf7e64eb84d29bf4716e2fa0" title="authoring_environment.Super\lTile.makeShape" alt="" coords="528,230,741,271"/>
+<area shape="rect" id="node7" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#a6d247481c142498f031223ae47c9c9ee" title="authoring_environment.Super\lTile.setCheckeredColor" alt="" coords="267,318,480,359"/>
+</map>

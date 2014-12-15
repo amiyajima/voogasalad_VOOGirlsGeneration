@@ -1,0 +1,14 @@
+<map id="authoring_environment.RangeGrid.RangeGrid" name="authoring_environment.RangeGrid.RangeGrid">
+<area shape="rect" id="node2" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a7d110ef99cda80cf648f0e01d312ee43" title="authoring_environment.Range\lGrid.addCenterImage" alt="" coords="270,70,485,111"/>
+<area shape="rect" id="node6" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#ae120672edc5e219fce147a9b0057e651" title="authoring_environment.Range\lGrid.addSelectAction" alt="" coords="270,198,485,239"/>
+<area shape="rect" id="node11" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a6952186464d66d8f4cb84ad914acc6ad" title="authoring_environment.Range\lGrid.highlightRange" alt="" coords="534,135,749,177"/>
+<area shape="rect" id="node12" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#a05c3a225e4a4cab14f9cce4921eaef82" title="authoring_environment.Super\lGrid.initGridTiles" alt="" coords="271,265,484,306"/>
+<area shape="rect" id="node3" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#af04008b652f58f0da0a63353f2748eb3" title="authoring_environment.Range\lGrid.findCenterTile" alt="" coords="534,70,749,111"/>
+<area shape="rect" id="node5" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#a7e65040df400ad3d7a62145816f0cca4" title="authoring_environment.Super\lTile.setPatchImage" alt="" coords="535,5,748,46"/>
+<area shape="rect" id="node4" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a9edb8e94a31dc9b65872a51e74e270ea" title="authoring_environment.Range\lGrid.findTile" alt="" coords="798,70,1013,111"/>
+<area shape="rect" id="node7" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a8d379fe2032420f63eaf093720af2b28" title="authoring_environment.Range\lGrid.swtichHighlight" alt="" coords="534,201,749,242"/>
+<area shape="rect" id="node8" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#a10aec0aa5a4569449ea350e2d8168b55" title="authoring_environment.Super\lTile.ifSelected" alt="" coords="799,266,1012,307"/>
+<area shape="rect" id="node9" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#a2bdd34482002f8adad3de981bbb972b7" title="authoring_environment.Super\lTile.deselectTile" alt="" coords="799,201,1012,242"/>
+<area shape="rect" id="node10" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#a2a827578368c687de4550af01702bced" title="authoring_environment.Super\lTile.selectTile" alt="" coords="799,135,1012,177"/>
+<area shape="rect" id="node13" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#a94d725216cfe4f629eafae0d5b526f9d" title="authoring_environment.Super\lGrid.makeShapeTile" alt="" coords="535,266,748,307"/>
+</map>

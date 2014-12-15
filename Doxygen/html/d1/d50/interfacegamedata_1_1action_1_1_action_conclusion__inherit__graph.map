@@ -1,0 +1,6 @@
+<map id="gamedata.action.ActionConclusion" name="gamedata.action.ActionConclusion">
+<area shape="rect" id="node2" href="$dd/d22/classgamedata_1_1action_1_1conclusions_1_1_actor_removal_conclusion.html" title="gamedata.action.conclusions.\lActorRemovalConclusion" alt="" coords="300,5,513,46"/>
+<area shape="rect" id="node3" href="$df/db2/classgamedata_1_1action_1_1conclusions_1_1_do_nothing_conclusion.html" title="gamedata.action.conclusions.\lDoNothingConclusion" alt="" coords="300,70,513,111"/>
+<area shape="rect" id="node4" href="$d9/d71/classgamedata_1_1action_1_1conclusions_1_1_receiver_removal_conclusion.html" title="gamedata.action.conclusions.\lReceiverRemovalConclusion" alt="" coords="300,135,513,177"/>
+<area shape="rect" id="node5" href="$dd/da2/classgamedata_1_1action_1_1conclusions_1_1_receiver_to_inventory_conclusion.html" title="gamedata.action.conclusions.\lReceiverToInventoryConclusion" alt="" coords="299,201,515,242"/>
+</map>
