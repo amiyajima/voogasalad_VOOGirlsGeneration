@@ -1,8 +1,0 @@
-<map id="fxml_main.AuthoringController.saveGame" name="fxml_main.AuthoringController.saveGame">
-<area shape="rect" id="node2" href="$d5/d1d/classauthoring_1_1data_1_1_game_authoring_data.html#a21045a0883cd8dbd1fb0b4328ba73cad" title="authoring.data.GameAuthoring\lData.createGame" alt="" coords="356,93,577,134"/>
-<area shape="rect" id="node7" href="$d0/dbd/classgamedata_1_1_j_s_o_n_1_1_j_s_o_n_manager.html#af9ee30f2c59580f457cb066bf835d481" title="gamedata.JSON.JSONManager.write\lToJSON" alt="" coords="342,158,591,199"/>
-<area shape="rect" id="node3" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#ab77c298a59d70f94282359bb53e8bc29" title="gamedata.gamecomponents.\lGame.addPlayers" alt="" coords="668,5,881,46"/>
-<area shape="rect" id="node4" href="$d7/d88/classauthoring_1_1data_1_1_level_data.html#ac3a2c600f5a4bc914b1f11abff1593a0" title="authoring.data.LevelData.createGame" alt="" coords="641,71,909,97"/>
-<area shape="rect" id="node5" href="$d2/dcf/classauthoring_1_1data_1_1_game_properties_data.html#a7777e71c08ad7a58acccc884a00a95f5" title="authoring.data.GameProperties\lData.getNumPlayers" alt="" coords="663,122,887,163"/>
-<area shape="rect" id="node6" href="$d6/dfb/classauthoring_1_1data_1_1_player_stat_data.html#ae131cfcfa946370bc1c32b6ed17c725f" title="authoring.data.PlayerStat\lData.makePlayers" alt="" coords="681,187,868,229"/>
-</map>

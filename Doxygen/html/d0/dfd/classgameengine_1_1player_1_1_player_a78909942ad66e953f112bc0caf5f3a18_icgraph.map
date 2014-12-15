@@ -1,4 +1,0 @@
-<map id="gameengine.player.Player.resetMovesPlayed" name="gameengine.player.Player.resetMovesPlayed">
-<area shape="rect" id="node2" href="$d8/d4d/classgameengine_1_1player_1_1_simple_a_i_player.html#a9a241075e35d6039a453f51445e9837c" title="gameengine.player.Simple\lAIPlayer.startTurn" alt="" coords="328,5,520,46"/>
-<area shape="rect" id="node3" href="$d5/de0/classgameengine_1_1player_1_1_human_player.html#af95fd739c711dbd990e6e9cbc4ad954d" title="gameengine.player.HumanPlayer.startTurn" alt="" coords="277,71,571,97"/>
-</map>

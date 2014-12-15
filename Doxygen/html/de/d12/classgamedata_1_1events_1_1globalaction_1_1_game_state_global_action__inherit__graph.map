@@ -1,7 +1,0 @@
-<map id="gamedata.events.globalaction.GameStateGlobalAction" name="gamedata.events.globalaction.GameStateGlobalAction">
-<area shape="rect" id="node3" href="$d6/dc0/classgamedata_1_1events_1_1globalaction_1_1_end_turn.html" title="gamedata.events.globalaction.\lEndTurn" alt="" coords="545,5,765,46"/>
-<area shape="rect" id="node4" href="$d1/d9d/classgamedata_1_1events_1_1globalaction_1_1_level_change.html" title="gamedata.events.globalaction.\lLevelChange" alt="" coords="545,70,765,111"/>
-<area shape="rect" id="node5" href="$d4/d28/classgamedata_1_1events_1_1globalaction_1_1_lose_game.html" title="gamedata.events.globalaction.\lLoseGame" alt="" coords="545,135,765,177"/>
-<area shape="rect" id="node6" href="$d7/d30/classgamedata_1_1events_1_1globalaction_1_1_win_game.html" title="gamedata.events.globalaction.\lWinGame" alt="" coords="545,201,765,242"/>
-<area shape="rect" id="node2" href="$d3/d55/classgamedata_1_1events_1_1globalaction_1_1_global_action.html" title="gamedata.events.globalaction.\lGlobalAction" alt="" coords="6,103,226,145"/>
-</map>

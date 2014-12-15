@@ -1,5 +1,0 @@
-<map id="authoring.createedit.GamePropertiesEditor.GamePropertiesEditor" name="authoring.createedit.GamePropertiesEditor.GamePropertiesEditor">
-<area shape="rect" id="node2" href="$d2/dcf/classauthoring_1_1data_1_1_game_properties_data.html#a292b0150f2f9a23830df35381e2b7277" title="authoring.data.GameProperties\lData.getGridShape" alt="" coords="285,5,509,46"/>
-<area shape="rect" id="node3" href="$d2/dcf/classauthoring_1_1data_1_1_game_properties_data.html#a7777e71c08ad7a58acccc884a00a95f5" title="authoring.data.GameProperties\lData.getNumPlayers" alt="" coords="285,70,509,111"/>
-<area shape="rect" id="node4" href="$dc/dae/classauthoring_1_1createedit_1_1_game_properties_editor.html#ac414e036e2a5b5c8eae37aa3ccc99e74" title="authoring.createedit.Game\lPropertiesEditor.initialize" alt="" coords="300,135,495,177"/>
-</map>

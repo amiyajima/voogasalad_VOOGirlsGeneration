@@ -1,7 +1,0 @@
-<map id="gamePlayer.PlayerTypeSetter.PlayerTypeSetter" name="gamePlayer.PlayerTypeSetter.PlayerTypeSetter">
-<area shape="rect" id="node2" href="$d7/d84/classgame_player_1_1_player_type_setter.html#a02600a3fceec808b4bb81f361115b07e" title="gamePlayer.PlayerTypeSetter.loadFXML" alt="" coords="265,5,535,32"/>
-<area shape="rect" id="node3" href="$d7/d84/classgame_player_1_1_player_type_setter.html#a782ba79987e63fb4c9c47c48284c0212" title="gamePlayer.PlayerTypeSetter.start\lLoadPlayers" alt="" coords="279,57,521,98"/>
-<area shape="rect" id="node4" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#a538b22872996297aad3b918c4f567a9f" title="gamedata.gamecomponents.\lGame.getPlayers" alt="" coords="595,23,808,65"/>
-<area shape="rect" id="node5" href="$d7/d84/classgame_player_1_1_player_type_setter.html#a3507144e578e2d14c1f92fe81ae14435" title="gamePlayer.PlayerTypeSetter.edit\lSpecificPlayer" alt="" coords="584,89,819,130"/>
-<area shape="rect" id="node6" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#ad0b2eb24eabcffe2596837c5c6c1ac2c" title="gamedata.gamecomponents.\lGame.replacePlayer" alt="" coords="867,89,1080,130"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="gamedata.action.SingleMultiplierBox.SingleMultiplierBox" name="gamedata.action.SingleMultiplierBox.SingleMultiplierBox">
-<area shape="rect" id="node2" href="$d1/dcf/classgamedata_1_1action_1_1_single_multiplier_box.html#a372edbeeeb8dee04f70e8b501d9db7ef" title="gamedata.action.SingleMultiplier\lBox.initSingleMultiplierBox" alt="" coords="286,5,517,46"/>
-<area shape="rect" id="node3" href="$d1/dcf/classgamedata_1_1action_1_1_single_multiplier_box.html#a17a1754c6ed3a409c394fc321877d154" title="gamedata.action.SingleMultiplier\lBox.setSingleMultiplier" alt="" coords="286,70,517,111"/>
-<area shape="rect" id="node4" href="$de/de7/classgamedata_1_1action_1_1_stats_single_multiplier.html#a55e28b86227e777a652f8a9f044116a7" title="gamedata.action.StatsSingle\lMultiplier.getModifier" alt="" coords="583,5,791,46"/>
-<area shape="rect" id="node5" href="$dd/da3/classgamedata_1_1action_1_1_stats_modifier.html#a5502c1a69d7a60c78a71bf045a96c60d" title="gamedata.action.StatsModifier.get\lStatRef" alt="" coords="565,70,808,111"/>
-<area shape="rect" id="node6" href="$dd/da3/classgamedata_1_1action_1_1_stats_modifier.html#a1c674af3bb9e0b377da5b1be0be5bd08" title="gamedata.action.StatsModifier.get\lStatName" alt="" coords="565,135,808,177"/>
-</map>

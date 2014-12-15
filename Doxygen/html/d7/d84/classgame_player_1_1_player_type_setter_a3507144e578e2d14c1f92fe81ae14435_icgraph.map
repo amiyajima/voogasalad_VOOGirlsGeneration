@@ -1,6 +1,0 @@
-<map id="gamePlayer.PlayerTypeSetter.editSpecificPlayer" name="gamePlayer.PlayerTypeSetter.editSpecificPlayer">
-<area shape="rect" id="node2" href="$d7/d84/classgame_player_1_1_player_type_setter.html#a782ba79987e63fb4c9c47c48284c0212" title="gamePlayer.PlayerTypeSetter.start\lLoadPlayers" alt="" coords="289,63,530,105"/>
-<area shape="rect" id="node3" href="$d7/d84/classgame_player_1_1_player_type_setter.html#a1eb0c9152edf12b5ea5eac8212d10b66" title="gamePlayer.PlayerTypeSetter.\lPlayerTypeSetter" alt="" coords="604,5,815,46"/>
-<area shape="rect" id="node4" href="$df/dd5/classgame_player_1_1_view_controller.html#a87ee83b9dc170a094457a10bfdff7c20" title="gamePlayer.ViewController.loadGame" alt="" coords="579,71,840,97"/>
-<area shape="rect" id="node5" href="$df/dd5/classgame_player_1_1_view_controller.html#ac0350fa190876455755b7fb25f567af1" title="gamePlayer.ViewController.testGame" alt="" coords="580,121,839,148"/>
-</map>

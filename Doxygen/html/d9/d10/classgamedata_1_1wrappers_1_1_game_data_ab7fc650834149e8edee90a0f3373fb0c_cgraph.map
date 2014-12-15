@@ -1,6 +1,0 @@
-<map id="gamedata.wrappers.GameData.getGameFromData" name="gamedata.wrappers.GameData.getGameFromData">
-<area shape="rect" id="node2" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#ab77c298a59d70f94282359bb53e8bc29" title="gamedata.gamecomponents.\lGame.addPlayers" alt="" coords="304,5,517,46"/>
-<area shape="rect" id="node3" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#a538b22872996297aad3b918c4f567a9f" title="gamedata.gamecomponents.\lGame.getPlayers" alt="" coords="304,70,517,111"/>
-<area shape="rect" id="node4" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#af10a4c1effbe4b034810f9f2e5e7863b" title="gamedata.gamecomponents.\lGame.setCurrentPlayer" alt="" coords="304,135,517,177"/>
-<area shape="rect" id="node5" href="$d0/dfd/classgameengine_1_1player_1_1_player.html#ad132fea87861614c8adba7ed35ec7497" title="gameengine.player.Player.startTurn" alt="" coords="566,143,813,169"/>
-</map>

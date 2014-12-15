@@ -1,8 +1,0 @@
-<map id="fxml_main.PatchTypeEditor.PatchTypeEditor" name="fxml_main.PatchTypeEditor.PatchTypeEditor">
-<area shape="rect" id="node2" href="$da/dc9/classfxml__main_1_1_patch_type_editor.html#a5449c10f6ed1a1128947c057dfb56f19" title="fxml_main.PatchTypeEditor.constructor" alt="" coords="249,45,517,72"/>
-<area shape="rect" id="node7" href="$d1/d4f/classauthoring_1_1data_1_1_patch_type_data.html#a0147aa5c3c0fb4c30bb47c98d721c4a9" title="authoring.data.PatchType\lData.getIdSet" alt="" coords="291,97,474,138"/>
-<area shape="rect" id="node3" href="$da/dc9/classfxml__main_1_1_patch_type_editor.html#ae5ea0a569dc268bf06f28b6ace5d1fb9" title="fxml_main.PatchTypeEditor.initialize" alt="" coords="566,45,813,72"/>
-<area shape="rect" id="node4" href="$da/dc9/classfxml__main_1_1_patch_type_editor.html#af1426fefed4c4806c780404691095763" title="fxml_main.PatchTypeEditor.init\lImageLoader" alt="" coords="862,5,1077,46"/>
-<area shape="rect" id="node6" href="$da/dc9/classfxml__main_1_1_patch_type_editor.html#a48fbe8f6014d056439d089c960bff447" title="fxml_main.PatchTypeEditor.init\lGoBtn" alt="" coords="862,70,1077,111"/>
-<area shape="rect" id="node5" href="$da/dc9/classfxml__main_1_1_patch_type_editor.html#a1772afb4c4b8563540cb313562881d9b" title="fxml_main.PatchTypeEditor.set\lImageView" alt="" coords="1126,5,1341,46"/>
-</map>

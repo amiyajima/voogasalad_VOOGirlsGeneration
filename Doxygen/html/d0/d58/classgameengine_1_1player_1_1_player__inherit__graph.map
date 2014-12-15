@@ -1,6 +1,0 @@
-<map id="gameengine.player.Player" name="gameengine.player.Player">
-<area shape="rect" id="node3" href="$d8/d7b/classgameengine_1_1player_1_1_derp_player.html" title="gameengine.player.DerpPlayer" alt="" coords="509,5,728,32"/>
-<area shape="rect" id="node4" href="$d5/de0/classgameengine_1_1player_1_1_human_player.html" title="gameengine.player.HumanPlayer" alt="" coords="501,56,736,83"/>
-<area shape="rect" id="node5" href="$d8/d4d/classgameengine_1_1player_1_1_simple_a_i_player.html" title="gameengine.player.Simple\lAIPlayer" alt="" coords="523,107,715,149"/>
-<area shape="rect" id="node2" href="$dc/d5b/interfacegamedata_1_1gamecomponents_1_1_i_has_stats.html" title="gamedata.gamecomponents.\lIHasStats" alt="" coords="5,49,219,90"/>
-</map>

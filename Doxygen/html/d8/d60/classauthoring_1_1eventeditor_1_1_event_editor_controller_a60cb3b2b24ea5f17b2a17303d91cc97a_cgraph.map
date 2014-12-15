@@ -1,7 +1,0 @@
-<map id="authoring.eventeditor.EventEditorController.handleNewAction" name="authoring.eventeditor.EventEditorController.handleNewAction">
-<area shape="rect" id="node2" href="$d8/d60/classauthoring_1_1eventeditor_1_1_event_editor_controller.html#abf29beae428be3582faafee10e28c91e" title="authoring.eventeditor.Event\lEditorController.showNewActionWindow" alt="" coords="289,70,559,111"/>
-<area shape="rect" id="node3" href="$dc/dc7/classauthoring_1_1eventeditor_1_1_new_action_controller.html#a1570f3c780766e34f552b1f43dded02d" title="authoring.eventeditor.New\lActionController.loadLambda" alt="" coords="609,5,815,46"/>
-<area shape="rect" id="node4" href="$dc/dc7/classauthoring_1_1eventeditor_1_1_new_action_controller.html#aa4c9c74d366adf880aba6513209f566e" title="authoring.eventeditor.New\lActionController.loadState" alt="" coords="617,70,807,111"/>
-<area shape="rect" id="node5" href="$dc/dc7/classauthoring_1_1eventeditor_1_1_new_action_controller.html#a47c21183db250d3493270d1165ea4df8" title="authoring.eventeditor.New\lActionController.loadData" alt="" coords="617,135,807,177"/>
-<area shape="rect" id="node6" href="$d5/d55/classauthoring_1_1data_1_1_events_data_wrapper.html#a89d220fa6146977b51dc14cc64c60678" title="authoring.data.EventsData\lWrapper.getPieceTypes" alt="" coords="864,135,1059,177"/>
-</map>
