@@ -164,8 +164,6 @@ public class ViewController {
 	@FXML
 	private Button highScoreOK;
 	@FXML
-	private ToggleButton soundToggle;
-	@FXML
 	private BorderPane myWinLoseScreen;
 	@FXML
 	private Label winLose;
@@ -628,7 +626,7 @@ public class ViewController {
 		clickSoundOn = true;
 		myGameGridEffect = new GameGridEffect(this);
 		clearHighScores.setOnMouseClicked(event -> handleClearHighScores());
-		soundToggle.setOnMouseClicked(event -> toggleSound());
+//		soundToggle.setOnMouseClicked(event -> toggleSound());
 	}
 
 	/**
@@ -855,19 +853,7 @@ public class ViewController {
 		return currentClick;
 	}
 	
-	/**
-	 * Toggle sound button on main screen turns both sounds on or off
-	 */
-	@FXML
-	private void toggleSound() {
-	    try {
-	        toggleClickSound();
-	        toggleBackgroundMusic();
-	    }
-	    catch (Exception e) {
-	        System.out.println("Audio related exception");
-	    }
-	}
+
 
 	/**
 	 * Toggles clicking sound
@@ -1172,6 +1158,7 @@ public class ViewController {
 		currentLevel.runGameEvents();
 		if (GameState.getGameWon()) {
 			// GAMEWON
+		    winLose.setText("You Win!");
 		    Stage newStage = new Stage();
 		    newStage.setScene(winLoseScene);
 		    newStage.show();
