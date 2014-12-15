@@ -1,0 +1,16 @@
+<map id="fxml_main.PieceTypeEditor.constructor" name="fxml_main.PieceTypeEditor.constructor">
+<area shape="rect" id="node2" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#a4d5ecc37717a0f7dee7d88e74792388a" title="fxml_main.PieceTypeEditor.initialize" alt="" coords="320,143,565,169"/>
+<area shape="rect" id="node3" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#a6705bc85c0a9ca8bd4ca3e4907810c28" title="fxml_main.PieceTypeEditor.init\lRangeEditorButton" alt="" coords="613,5,827,46"/>
+<area shape="rect" id="node5" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#a9fab2fa4df9d195d41c56fbd9c64a3d3" title="fxml_main.PieceTypeEditor.init\lStatButton" alt="" coords="613,70,827,111"/>
+<area shape="rect" id="node7" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#aa56796106446759161e9f02a946b8eff" title="fxml_main.PieceTypeEditor.init\lModList" alt="" coords="613,135,827,177"/>
+<area shape="rect" id="node9" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#a92b778ef0867e94f54920cc32bead3f4" title="fxml_main.PieceTypeEditor.init\lImageLoader" alt="" coords="613,201,827,242"/>
+<area shape="rect" id="node11" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#a36caa4e38e75916af15c3b336543960f" title="fxml_main.PieceTypeEditor.init\lGoBtn" alt="" coords="613,299,827,341"/>
+<area shape="rect" id="node4" href="$d0/d47/classgameengine_1_1movement_1_1_movement.html#ad86bac051f6e073b2f93579f2efa3548" title="gameengine.movement.Movement.get\lRelativeMoves" alt="" coords="875,5,1149,46"/>
+<area shape="rect" id="node6" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#acbff0ae509ae31a399a9f2acc18c4424" title="fxml_main.PieceTypeEditor.show\lStatEditorWindow" alt="" coords="899,70,1125,111"/>
+<area shape="rect" id="node8" href="$d2/da6/classauthoring_1_1data_1_1_action_data.html#a24bc762fba66b9a4c37b81a0cefb288c" title="authoring.data.ActionData.get\lActionNames" alt="" coords="904,135,1120,177"/>
+<area shape="rect" id="node10" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#a6df8ddc0ae51cdb1d6677c876d691316" title="fxml_main.PieceTypeEditor.set\lImageView" alt="" coords="905,201,1119,242"/>
+<area shape="rect" id="node12" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#aa4c7faabdffe53a947c2a64818742318" title="fxml_main.PieceTypeEditor.add\lSelectedActions" alt="" coords="903,266,1121,307"/>
+<area shape="rect" id="node14" href="$df/d26/classauthoring_1_1createedit_1_1_modules_list.html#a9aea540457ac1ee2828e0ede837952ee" title="authoring.createedit.Modules\lList.getSelectedActions" alt="" coords="907,331,1117,373"/>
+<area shape="rect" id="node15" href="$d0/d47/classgameengine_1_1movement_1_1_movement.html#a2dacd23337b06d447bcda1819e7296ec" title="gameengine.movement.Movement.to\lString" alt="" coords="879,397,1145,438"/>
+<area shape="rect" id="node13" href="$d2/da6/classauthoring_1_1data_1_1_action_data.html#af66a8db8f87c010a94eda1b2a734092f" title="authoring.data.ActionData.get\lAction" alt="" coords="1197,266,1413,307"/>
+</map>

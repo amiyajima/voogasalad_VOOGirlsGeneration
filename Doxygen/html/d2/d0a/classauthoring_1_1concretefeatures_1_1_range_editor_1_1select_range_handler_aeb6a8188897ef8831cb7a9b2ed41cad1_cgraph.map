@@ -1,0 +1,10 @@
+<map id="authoring.concretefeatures.RangeEditor.selectRangeHandler.handle" name="authoring.concretefeatures.RangeEditor.selectRangeHandler.handle">
+<area shape="rect" id="node2" href="$d5/df6/classauthoring__environment_1_1_range_grid_view.html#a96157b4b565c185480f508e8c5d416c2" title="authoring_environment.Range\lGridView.getGrid" alt="" coords="331,6,546,47"/>
+<area shape="rect" id="node3" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a01e0c5aeb77c4301820a374b0770483f" title="authoring_environment.Range\lGrid.rangeAll" alt="" coords="595,115,810,157"/>
+<area shape="rect" id="node7" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#ac170da90f00d9a8703aaab1cd3657888" title="authoring_environment.Range\lGrid.rangeColumn" alt="" coords="595,246,810,287"/>
+<area shape="rect" id="node8" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a1586131f94cc78931c9eb19ce22c9bba" title="authoring_environment.Range\lGrid.rangeRadius" alt="" coords="331,71,546,113"/>
+<area shape="rect" id="node9" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a5f6bb1c5cb9fb99ca4a1c45c0e9913bd" title="authoring_environment.Range\lGrid.rangeRow" alt="" coords="595,181,810,222"/>
+<area shape="rect" id="node4" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a9edb8e94a31dc9b65872a51e74e270ea" title="authoring_environment.Range\lGrid.findTile" alt="" coords="859,246,1074,287"/>
+<area shape="rect" id="node5" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#a2a827578368c687de4550af01702bced" title="authoring_environment.Super\lTile.selectTile" alt="" coords="860,115,1073,157"/>
+<area shape="rect" id="node6" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#a2bdd34482002f8adad3de981bbb972b7" title="authoring_environment.Super\lTile.deselectTile" alt="" coords="860,181,1073,222"/>
+</map>

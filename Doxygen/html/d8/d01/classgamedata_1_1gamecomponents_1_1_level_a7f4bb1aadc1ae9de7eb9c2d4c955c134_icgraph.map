@@ -1,0 +1,6 @@
+<map id="gamedata.gamecomponents.Level.getId" name="gamedata.gamecomponents.Level.getId">
+<area shape="rect" id="node2" href="$d7/d88/classauthoring_1_1data_1_1_level_data.html#a15d19464a94874191ceede255de436b0" title="authoring.data.LevelData.canAdd" alt="" coords="267,5,503,32"/>
+<area shape="rect" id="node3" href="$de/d8c/classfxml__main_1_1_level_editor.html#a014e481bcd2183307716f56c746af0bd" title="fxml_main.LevelEditor.Level\lEditor" alt="" coords="286,57,485,98"/>
+<area shape="rect" id="node4" href="$da/d61/classfxml__main_1_1_level_controller.html#a2b46111b25876d30c6d6a2e6a40aba63" title="fxml_main.LevelController.make\lEntryBox" alt="" coords="272,122,499,163"/>
+<area shape="rect" id="node5" href="$d9/d51/classtests_1_1_global_action_tester.html#a6f86a4282490e90c8df308939e5a895c" title="tests.GlobalActionTester.\lTestLevelChange" alt="" coords="296,187,475,229"/>
+</map>

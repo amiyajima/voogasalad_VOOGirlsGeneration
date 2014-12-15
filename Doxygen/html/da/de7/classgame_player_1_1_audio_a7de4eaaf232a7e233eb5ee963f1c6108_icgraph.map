@@ -1,0 +1,5 @@
+<map id="gamePlayer.Audio.playBackground" name="gamePlayer.Audio.playBackground">
+<area shape="rect" id="node2" href="$df/dd5/classgame_player_1_1_view_controller.html#ab9fcbe9d6b0247153208179f926b8d94" title="gamePlayer.ViewController.open\lInitialMenu" alt="" coords="300,5,527,46"/>
+<area shape="rect" id="node4" href="$df/dd5/classgame_player_1_1_view_controller.html#a8dfc8297ce3ba7427105ba25bda56e9a" title="gamePlayer.ViewController.toggle\lBackgroundMusic" alt="" coords="296,70,531,111"/>
+<area shape="rect" id="node3" href="$df/dd5/classgame_player_1_1_view_controller.html#aa97229685b0156b5a6958c6b79dcdff8" title="gamePlayer.ViewController.\lViewController" alt="" coords="579,5,773,46"/>
+</map>

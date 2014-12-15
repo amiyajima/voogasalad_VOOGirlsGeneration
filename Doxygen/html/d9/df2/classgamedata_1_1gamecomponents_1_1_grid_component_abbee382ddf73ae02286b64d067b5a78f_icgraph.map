@@ -1,0 +1,12 @@
+<map id="gamedata.gamecomponents.GridComponent.getID" name="gamedata.gamecomponents.GridComponent.getID">
+<area shape="rect" id="node2" href="$d1/d4f/classauthoring_1_1data_1_1_patch_type_data.html#aad02628cbe52a2fec1a7ee9b88e3b06c" title="authoring.data.PatchType\lData.canAdd" alt="" coords="281,5,463,46"/>
+<area shape="rect" id="node3" href="$d5/d98/classauthoring_1_1data_1_1_piece_type_data.html#ad4583e18c6c2b57f7a546518101c6c5e" title="authoring.data.PieceType\lData.canAdd" alt="" coords="281,70,463,111"/>
+<area shape="rect" id="node4" href="$d6/dda/classauthoring_1_1data_1_1_piece_instance_data.html#a83e1233cd5630f26958b6c222852eafb" title="authoring.data.PieceInstance\lData.canAdd" alt="" coords="268,135,476,177"/>
+<area shape="rect" id="node5" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html#a92a6d518216036dcaa280fa995afec7e" title="authoring.data.PatchInstance\lData.canAdd" alt="" coords="267,201,477,242"/>
+<area shape="rect" id="node6" href="$da/dc9/classfxml__main_1_1_patch_type_editor.html#a8415ba9efdc335142c46073dcb2330fb" title="fxml_main.PatchTypeEditor.\lPatchTypeEditor" alt="" coords="275,266,469,307"/>
+<area shape="rect" id="node7" href="$df/d59/classfxml__main_1_1_patch_viewer.html#a621ed91e1508b5f96c0b00bed71073aa" title="fxml_main.PatchViewer.Patch\lViewer" alt="" coords="269,331,475,373"/>
+<area shape="rect" id="node8" href="$df/dbd/classfxml__main_1_1_piece_editor.html#a33603f4cca25fedefefd2108dbe75163" title="fxml_main.PieceEditor.Piece\lEditor" alt="" coords="272,397,472,438"/>
+<area shape="rect" id="node9" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#af2eefe9bd07a346d48960d99fae7511d" title="fxml_main.PieceTypeEditor.\lPieceTypeEditor" alt="" coords="275,462,469,503"/>
+<area shape="rect" id="node10" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html#aa4da6c694f1ce08740a61884498439b0" title="authoring.data.PatchInstance\lData.replace" alt="" coords="267,527,477,569"/>
+<area shape="rect" id="node11" href="$d6/dda/classauthoring_1_1data_1_1_piece_instance_data.html#a9d452975eccff8ca43eace79417818e5" title="authoring.data.PieceInstance\lData.replace" alt="" coords="268,593,476,634"/>
+</map>

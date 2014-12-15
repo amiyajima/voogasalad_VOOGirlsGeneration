@@ -1,0 +1,5 @@
+<map id="gamedata.gamecomponents.Piece.addToInventory" name="gamedata.gamecomponents.Piece.addToInventory">
+<area shape="rect" id="node2" href="$d3/d8e/classgamedata_1_1gamecomponents_1_1_inventory.html#ada5c79ec79aad62035989018ddae5727" title="gamedata.gamecomponents.\lInventory.addItem" alt="" coords="267,5,480,46"/>
+<area shape="rect" id="node3" href="$d4/d63/classgamedata_1_1gamecomponents_1_1_piece.html#a37d31e6b2958791c3073e23816f3d0b6" title="gamedata.gamecomponents.\lPiece.inventoryValid" alt="" coords="267,70,480,111"/>
+<area shape="rect" id="node4" href="$d4/d63/classgamedata_1_1gamecomponents_1_1_piece.html#a87876ab57300b34bad5206ce5060976b" title="gamedata.gamecomponents.\lPiece.isItem" alt="" coords="528,70,741,111"/>
+</map>

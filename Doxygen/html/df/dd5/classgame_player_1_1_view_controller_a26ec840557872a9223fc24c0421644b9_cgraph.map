@@ -1,0 +1,5 @@
+<map id="gamePlayer.ViewController.showScore" name="gamePlayer.ViewController.showScore">
+<area shape="rect" id="node2" href="$df/dd5/classgame_player_1_1_view_controller.html#a84c11f760ef8b8e4504ea9574680d9b3" title="gamePlayer.ViewController.load\lScores" alt="" coords="281,38,503,79"/>
+<area shape="rect" id="node3" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#a538b22872996297aad3b918c4f567a9f" title="gamedata.gamecomponents.\lGame.getPlayers" alt="" coords="552,5,765,46"/>
+<area shape="rect" id="node4" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#ac2ed212d8fe35a8f94cfb78cd0f2db25" title="gamedata.gamecomponents.\lGame.toString" alt="" coords="552,70,765,111"/>
+</map>

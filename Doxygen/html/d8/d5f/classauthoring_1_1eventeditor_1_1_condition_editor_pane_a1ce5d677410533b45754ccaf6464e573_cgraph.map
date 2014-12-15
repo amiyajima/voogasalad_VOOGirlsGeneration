@@ -1,0 +1,13 @@
+<map id="authoring.eventeditor.ConditionEditorPane.ConditionEditorPane" name="authoring.eventeditor.ConditionEditorPane.ConditionEditorPane">
+<area shape="rect" id="node2" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a194c440cd15f0b71cae8f07dd45377e0" title="authoring.eventeditor.Condition\lEditorPane.initialize" alt="" coords="278,234,501,275"/>
+<area shape="rect" id="node3" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a421ca65a21e0a47b69c3d253020d5d8e" title="authoring.eventeditor.Condition\lEditorPane.setUpComponents" alt="" coords="550,201,773,242"/>
+<area shape="rect" id="node11" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a67c76fb39ad4eed767a1f05ab04bd883" title="authoring.eventeditor.Condition\lEditorPane.initDoneButton" alt="" coords="550,266,773,307"/>
+<area shape="rect" id="node4" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a454b561fde725c091c7d2e77670ca124" title="authoring.eventeditor.Condition\lEditorPane.setupEditor" alt="" coords="830,103,1053,145"/>
+<area shape="rect" id="node8" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a958135e32cc01512c109f4c48a031ee0" title="authoring.eventeditor.Condition\lEditorPane.setupStatsBox" alt="" coords="830,201,1053,242"/>
+<area shape="rect" id="node5" href="$d5/d55/classauthoring_1_1data_1_1_events_data_wrapper.html#a89d220fa6146977b51dc14cc64c60678" title="authoring.data.EventsData\lWrapper.getPieceTypes" alt="" coords="1119,5,1313,46"/>
+<area shape="rect" id="node6" href="$d5/d55/classauthoring_1_1data_1_1_events_data_wrapper.html#a1b62ac05026e5b8402f834458411cc9b" title="authoring.data.EventsData\lWrapper.getPatchTypes" alt="" coords="1119,70,1313,111"/>
+<area shape="rect" id="node7" href="$d5/d55/classauthoring_1_1data_1_1_events_data_wrapper.html#a478b75bff6a987a671e648ec8df851e3" title="authoring.data.EventsData\lWrapper.getPlayers" alt="" coords="1119,135,1313,177"/>
+<area shape="rect" id="node9" href="$dc/d5b/interfacegamedata_1_1gamecomponents_1_1_i_has_stats.html#a9f7badcb30c9fddd00c760c38341a616" title="gamedata.gamecomponents.\lIHasStats.getStats" alt="" coords="1109,201,1323,242"/>
+<area shape="rect" id="node10" href="$d6/d1d/classgamedata_1_1stats_1_1_stats.html#a697416262aa5871d7b38fdcc0b92c586" title="gamedata.stats.Stats.get\lStatNames" alt="" coords="1123,266,1309,307"/>
+<area shape="rect" id="node12" href="$db/d5e/classutilities_1_1reflection_1_1_reflection.html#a8bc52887d77966c001a83c2f585e6100" title="utilities.reflection.Reflection.create\lInstance" alt="" coords="821,266,1061,307"/>
+</map>

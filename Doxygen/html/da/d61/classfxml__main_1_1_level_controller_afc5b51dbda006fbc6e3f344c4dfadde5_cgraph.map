@@ -1,0 +1,12 @@
+<map id="fxml_main.LevelController.globalNewBtnOnClickAction" name="fxml_main.LevelController.globalNewBtnOnClickAction">
+<area shape="rect" id="node2" href="$d7/d88/classauthoring_1_1data_1_1_level_data.html#aa787c7b16b418f2e13df37800afe1b13" title="authoring.data.LevelData.add" alt="" coords="289,5,501,32"/>
+<area shape="rect" id="node3" href="$da/d61/classfxml__main_1_1_level_controller.html#aa6a4d7690fef797c3316e3980e5c8c08" title="fxml_main.LevelController.add\lComponentObservingLevel" alt="" coords="287,57,502,98"/>
+<area shape="rect" id="node5" href="$da/d40/classfxml__main_1_1_grid_component_abst_ctrl.html#a458f6bc495d1bdfc6d3ff39cea40bd84" title="fxml_main.GridComponentAbst\lCtrl\&lt; Level \&gt;::addEntry" alt="" coords="283,122,506,163"/>
+<area shape="rect" id="node6" href="$d5/d98/classauthoring_1_1data_1_1_piece_type_data.html#abc992f9707c3ef6417bf99f60f2693a4" title="authoring.data.PieceType\lData.getData" alt="" coords="303,187,486,229"/>
+<area shape="rect" id="node7" href="$d1/d4f/classauthoring_1_1data_1_1_patch_type_data.html#a2e6df81086dce6ae1f9ea953024a74f3" title="authoring.data.PatchType\lData.getData" alt="" coords="303,253,486,294"/>
+<area shape="rect" id="node8" href="$da/d61/classfxml__main_1_1_level_controller.html#a2e3171d5138673f8798df865cd7474d6" title="fxml_main.LevelController.set\lAndDisplayGrid" alt="" coords="289,318,500,359"/>
+<area shape="rect" id="node4" href="$d8/d01/classgamedata_1_1gamecomponents_1_1_level.html#adef1fc175daf62d54468e35e67413edb" title="gamedata.gamecomponents.\lLevel.getGrid" alt="" coords="576,133,789,174"/>
+<area shape="rect" id="node9" href="$d6/d05/classfxml__main_1_1_g_u_i_grid_reference.html#a6a50d6c8429ddb56128b31faed01dd21" title="fxml_main.GUIGridReference.setGrid" alt="" coords="555,275,810,301"/>
+<area shape="rect" id="node10" href="$d6/d05/classfxml__main_1_1_g_u_i_grid_reference.html#ab47bae2ec738eb18d99809ec9443a2ae" title="fxml_main.GUIGridReference.getGrid" alt="" coords="555,325,810,352"/>
+<area shape="rect" id="node11" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#aba69dd5b1d04abadf1186c952362a46e" title="authoring_environment.Super\lGrid.displayPane" alt="" coords="576,377,789,418"/>
+</map>

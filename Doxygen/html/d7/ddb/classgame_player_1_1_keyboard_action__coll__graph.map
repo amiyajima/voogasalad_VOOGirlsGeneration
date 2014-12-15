@@ -1,0 +1,28 @@
+<map id="gamePlayer.KeyboardAction" name="gamePlayer.KeyboardAction">
+<area shape="rect" id="node4" href="$df/dd5/classgame_player_1_1_view_controller.html" title="gamePlayer.ViewController" alt="" coords="2253,1136,2445,1163"/>
+<area shape="rect" id="node44" href="$da/d55/classgame_player_1_1_keyboard_movement.html" title="gamePlayer.KeyboardMovement" alt="" coords="1802,700,2030,727"/>
+<area shape="rect" id="node3" href="$d5/dfb/classgame_player_1_1_game_grid_effect.html" title="gamePlayer.GameGridEffect" alt="" coords="2648,1928,2851,1955"/>
+<area shape="rect" id="node36" href="$d7/d84/classgame_player_1_1_player_type_setter.html" title="gamePlayer.PlayerTypeSetter" alt="" coords="2645,1091,2853,1117"/>
+<area shape="rect" id="node5" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html" title="gamedata.gamecomponents.Game" alt="" coords="1790,1913,2042,1940"/>
+<area shape="rect" id="node6" href="$d0/dfd/classgameengine_1_1player_1_1_player.html" title="gameengine.player.Player" alt="" coords="1405,1413,1592,1440"/>
+<area shape="rect" id="node7" href="$dc/d5b/interfacegamedata_1_1gamecomponents_1_1_i_has_stats.html" title="gamedata.gamecomponents.\lIHasStats" alt="" coords="907,1443,1120,1485"/>
+<area shape="rect" id="node56" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html" title="gamedata.gamecomponents.\lGridComponent" alt="" coords="1392,1691,1605,1733"/>
+<area shape="rect" id="node8" href="$d6/d1d/classgamedata_1_1stats_1_1_stats.html" title="gamedata.stats.Stats" alt="" coords="932,1360,1095,1387"/>
+<area shape="rect" id="node55" href="$d4/d63/classgamedata_1_1gamecomponents_1_1_piece.html" title="gamedata.gamecomponents.\lPiece" alt="" coords="1809,1717,2023,1758"/>
+<area shape="rect" id="node10" href="$d8/d01/classgamedata_1_1gamecomponents_1_1_level.html" title="gamedata.gamecomponents.\lLevel" alt="" coords="1392,2166,1605,2207"/>
+<area shape="rect" id="node12" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html" title="authoring_environment.GUIGrid" alt="" coords="901,2024,1125,2051"/>
+<area shape="rect" id="node58" href="$d0/d47/classgameengine_1_1movement_1_1_movement.html" title="gameengine.movement.Movement" alt="" coords="1375,1757,1623,1784"/>
+<area shape="rect" id="node13" href="$d9/df3/classauthoring__environment_1_1_super_grid.html" title="authoring_environment.SuperGrid" alt="" coords="390,2120,629,2147"/>
+<area shape="rect" id="node17" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html" title="authoring.data.PatchInstanceData" alt="" coords="389,1944,629,1971"/>
+<area shape="rect" id="node18" href="$d5/d29/interfaceauthoring_1_1data_1_1_authoring_data.html" title="authoring.data.Authoring\lData\&lt; Patch \&gt;" alt="" coords="39,1923,222,1965"/>
+<area shape="rect" id="node20" href="$d6/dda/classauthoring_1_1data_1_1_piece_instance_data.html" title="authoring.data.PieceInstanceData" alt="" coords="390,2057,629,2084"/>
+<area shape="rect" id="node21" href="$d5/d29/interfaceauthoring_1_1data_1_1_authoring_data.html" title="authoring.data.Authoring\lData\&lt; Piece \&gt;" alt="" coords="39,2054,222,2095"/>
+<area shape="rect" id="node62" href="$d3/d8e/classgamedata_1_1gamecomponents_1_1_inventory.html" title="gamedata.gamecomponents.\lInventory" alt="" coords="653,1886,867,1927"/>
+<area shape="rect" id="node64" href="$df/d76/classgame_player_1_1_languages.html" title="gamePlayer.Languages" alt="" coords="1831,864,2001,891"/>
+<area shape="rect" id="node29" href="$d0/dbd/classgamedata_1_1_j_s_o_n_1_1_j_s_o_n_manager.html" title="gamedata.JSON.JSONManager" alt="" coords="1808,485,2024,512"/>
+<area shape="rect" id="node32" href="$da/de7/classgame_player_1_1_audio.html" title="gamePlayer.Audio" alt="" coords="1847,649,1985,676"/>
+<area shape="rect" id="node34" href="$d3/d97/interfacegame_player_1_1_i_grid_state.html" title="gamePlayer.IGridState" alt="" coords="1833,1513,1999,1540"/>
+<area shape="rect" id="node45" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html" title="authoring_environment.SuperTile" alt="" coords="1381,615,1616,641"/>
+<area shape="rect" id="node51" href="$d8/d85/interfacegamedata_1_1action_1_1_action.html" title="gamedata.action.Action" alt="" coords="926,1543,1101,1569"/>
+<area shape="rect" id="node60" href="$d1/dac/classgameengine_1_1movement_1_1_orientator.html" title="gameengine.movement.Orientator" alt="" coords="891,1697,1136,1724"/>
+</map>

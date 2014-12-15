@@ -1,0 +1,6 @@
+<map id="authoring.data.GamePropertiesData.getNumPlayers" name="authoring.data.GamePropertiesData.getNumPlayers">
+<area shape="rect" id="node2" href="$d5/d1d/classauthoring_1_1data_1_1_game_authoring_data.html#a21045a0883cd8dbd1fb0b4328ba73cad" title="authoring.data.GameAuthoring\lData.createGame" alt="" coords="283,34,504,75"/>
+<area shape="rect" id="node5" href="$dc/dae/classauthoring_1_1createedit_1_1_game_properties_editor.html#ac6acc81a35ab048db212ea9425d53a7a" title="authoring.createedit.Game\lPropertiesEditor.GameProperties\lEditor" alt="" coords="278,99,509,155"/>
+<area shape="rect" id="node3" href="$db/d40/classfxml__main_1_1_authoring_controller.html#a2ec133c8edf0a7ab1e84f2e12455233d" title="fxml_main.AuthoringController.save\lAsGame" alt="" coords="577,5,826,46"/>
+<area shape="rect" id="node4" href="$db/d40/classfxml__main_1_1_authoring_controller.html#a0a9b65fb87ba111e2185014364016f95" title="fxml_main.AuthoringController.saveGame" alt="" coords="557,71,845,97"/>
+</map>

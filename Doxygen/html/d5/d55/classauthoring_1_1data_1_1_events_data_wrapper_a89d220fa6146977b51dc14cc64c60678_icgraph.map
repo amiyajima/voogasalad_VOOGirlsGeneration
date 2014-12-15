@@ -1,0 +1,9 @@
+<map id="authoring.data.EventsDataWrapper.getPieceTypes" name="authoring.data.EventsDataWrapper.getPieceTypes">
+<area shape="rect" id="node2" href="$dc/dc7/classauthoring_1_1eventeditor_1_1_new_action_controller.html#a47c21183db250d3493270d1165ea4df8" title="authoring.eventeditor.New\lActionController.loadData" alt="" coords="265,5,455,46"/>
+<area shape="rect" id="node5" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a454b561fde725c091c7d2e77670ca124" title="authoring.eventeditor.Condition\lEditorPane.setupEditor" alt="" coords="249,70,471,111"/>
+<area shape="rect" id="node3" href="$d8/d60/classauthoring_1_1eventeditor_1_1_event_editor_controller.html#abf29beae428be3582faafee10e28c91e" title="authoring.eventeditor.Event\lEditorController.showNewActionWindow" alt="" coords="521,5,791,46"/>
+<area shape="rect" id="node4" href="$d8/d60/classauthoring_1_1eventeditor_1_1_event_editor_controller.html#a60cb3b2b24ea5f17b2a17303d91cc97a" title="authoring.eventeditor.Event\lEditorController.handleNewAction" alt="" coords="840,5,1075,46"/>
+<area shape="rect" id="node6" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a421ca65a21e0a47b69c3d253020d5d8e" title="authoring.eventeditor.Condition\lEditorPane.setUpComponents" alt="" coords="545,70,767,111"/>
+<area shape="rect" id="node7" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a194c440cd15f0b71cae8f07dd45377e0" title="authoring.eventeditor.Condition\lEditorPane.initialize" alt="" coords="846,70,1069,111"/>
+<area shape="rect" id="node8" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a1ce5d677410533b45754ccaf6464e573" title="authoring.eventeditor.Condition\lEditorPane.ConditionEditorPane" alt="" coords="1123,70,1346,111"/>
+</map>

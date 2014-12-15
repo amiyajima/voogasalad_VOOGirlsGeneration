@@ -1,0 +1,6 @@
+<map id="gamePlayer.ViewController.ViewController" name="gamePlayer.ViewController.ViewController">
+<area shape="rect" id="node2" href="$df/dd5/classgame_player_1_1_view_controller.html#ab9fcbe9d6b0247153208179f926b8d94" title="gamePlayer.ViewController.open\lInitialMenu" alt="" coords="248,23,475,65"/>
+<area shape="rect" id="node3" href="$df/dd5/classgame_player_1_1_view_controller.html#ae2e95acc4bf016abb98130f92f26778e" title="gamePlayer.ViewController.loadFXML" alt="" coords="523,5,778,32"/>
+<area shape="rect" id="node4" href="$da/de7/classgame_player_1_1_audio.html#a7de4eaaf232a7e233eb5ee963f1c6108" title="gamePlayer.Audio.playBackground" alt="" coords="529,56,772,83"/>
+<area shape="rect" id="node5" href="$da/de7/classgame_player_1_1_audio.html#aa1396fe6ab1f026334433de9a24905ef" title="gamePlayer.Audio.playAudio" alt="" coords="827,56,1029,83"/>
+</map>
