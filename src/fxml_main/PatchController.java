@@ -1,22 +1,24 @@
+// This entire file is part of my masterpiece.
+// Sandy Lee
+
 package fxml_main;
 
 import gamedata.gamecomponents.Patch;
-import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
 import java.util.function.Consumer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import authoring.data.PatchTypeData;
-import authoring_environment.GUIGrid;
 
 
 /**
+ * Controller which allows the user to create/edit/delete patches in the
+ * authoring environment.
+ * 
  * @author Sandy Lee
  *
  */
@@ -41,104 +43,11 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
         newBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                // Adds patchtype to data and makes an entry box
                 Consumer<Patch> okLambda = (Patch patch) -> {
                     myPatchTypes.add(patch);
                     addEntry(patch);
                 };
                 myPropertiesSPane.setContent(new PatchTypeEditor(okLambda, myPatchTypes));
-            }
-        });
-    }
-
-    @Override
-    protected void initGlobalEditBtn (Button editBtn) {
-        editBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                // Make a MouseEvent for clicking the grid
-                EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle (MouseEvent e) {
-                        GUIGrid grid = myGridReference.getGrid();
-                        Point2D.Double coor = grid.findClickedCoordinate(e.getX(), e.getY());
-                        Patch patch = grid.getPatch(coor);
-                        myPropertiesSPane.setContent(new PatchViewer(patch));
-                    }
-                };
-                myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
-                myGridReference.getGrid().paneSetOnMouseDragged(clickHandler);
-            }
-        });
-    }
-
-    /**
-     * Initalizes the global delete button to remove instances
-     * of patches from the current GUIGrid w/ mouse clicks
-     */
-    @Override
-    protected void initGlobalDelBtn (Button delBtn) {
-        delBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent event) {
-                // Make a MouseEvent for clicking the grid
-                EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle (MouseEvent e) {
-                        GUIGrid grid = myGridReference.getGrid();
-                        Point2D.Double coor = grid.findClickedCoordinate(e.getX(), e.getY());
-                        grid.removePatchAtCoordinate(coor);
-                    }
-                };
-                myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
-                myGridReference.getGrid().paneSetOnMouseDragged(clickHandler);
-            }
-        });
-    }
-
-    @Override
-    protected HBox makeEntryBox (Patch entry) {
-        HBox hb = new HBox();
-        Label name = new Label(entry.getName());
-        name.setTranslateY(7.5);
-        ImageView img = entry.getImageView();
-        img.setFitHeight(40);
-        img.setFitWidth(40);
-        hb.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle (MouseEvent event) {
-                EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle (MouseEvent e) {
-                        GUIGrid grid = myGridReference.getGrid();
-                        Point2D.Double coor = grid.findClickedCoordinate(e.getX(), e.getY());
-                        grid.addPatchAtLoc(entry, coor);
-                    }
-                };
-                myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
-                myGridReference.getGrid().paneSetOnMouseDragged(clickHandler);
-            }
-        });
-        hb.getChildren().addAll(img, name);
-        return hb;
-    }
-
-    @Override
-    protected void initEntryEditBtn (Patch entry, Button editBtn) {
-        editBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle (ActionEvent e) {
-                Consumer<Patch> okLambda = (Patch patch) -> {
-                    HBox entryBox = makeCompleteEntryBox(patch);
-
-                    HBox entryHolderBox = myEntryMap.get(entry);
-                    entryHolderBox.getChildren().clear();
-                    entryHolderBox.getChildren().add(entryBox);
-                    myEntryMap.put(patch, entryHolderBox);
-
-                    myPatchTypes.replace(entry, patch);
-                };
-                myPropertiesSPane.setContent(new PatchTypeEditor(okLambda, entry));
             }
         });
     }
@@ -153,4 +62,36 @@ public class PatchController extends GridComponentAbstCtrl<Patch> {
             }
         });
     }
+
+    @Override
+    protected void placeEntry (Patch entry, Double coor) {
+        myGridReference.getGrid().addPatchAtLoc(entry, coor);  
+    }
+
+    @Override
+    protected HBox initEntryBox (Patch entry) {
+        return setBoxLayout(entry.getName(), entry.getImageView());
+    }
+
+    @Override
+    protected void globalEditPropertiesPane (Double coor) {
+        Patch patch = myGridReference.getGrid().getPatch(coor);
+        myPropertiesSPane.setContent(new PatchViewer(patch));
+    }
+
+    @Override
+    protected void removeEntry (Double coor) {
+        myGridReference.getGrid().removePatchAtCoordinate(coor);
+    }
+
+    @Override
+    protected void replaceEntry (Patch orig, Patch newP) {
+        myPatchTypes.replace(orig, newP);   
+    }
+
+    @Override
+    protected void editPropertiesPane (Consumer<Patch> okLambda, Patch entry) {
+      myPropertiesSPane.setContent(new PatchTypeEditor(okLambda, entry));
+    }
+     
 }
