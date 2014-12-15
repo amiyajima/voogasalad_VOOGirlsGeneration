@@ -1,7 +1,6 @@
 package fxml_main;
 
 import utilities.leapMotion.LeapMotionListener;
-import com.leapmotion.leap.Controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

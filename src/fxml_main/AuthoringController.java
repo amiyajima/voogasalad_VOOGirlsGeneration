@@ -154,25 +154,25 @@ public class AuthoringController implements Initializable {
 	}
 
 
-	@FXML
-
-	private void saveAsGame () {
-		Game game = myTotalData.createGame();
-		Player p1 = new HumanPlayer(1);
-		List<Player> players = new ArrayList<Player>();
-		players.add(p1);
-		game.addPlayers(players);
-
-		Stage s = new Stage();
-		try {
-			ViewController viewCtrl = new ViewController(s);
-			viewCtrl.testPlayGame(game);
-		}
-		catch (UnsupportedAudioFileException | IOException
-				| LineUnavailableException e) {
-			System.out.println("Opening ViewController didn't work!");
-		}
-	}
+//	@FXML
+//
+//	private void saveAsGame () {
+//		Game game = myTotalData.createGame();
+//		Player p1 = new HumanPlayer(1);
+//		List<Player> players = new ArrayList<Player>();
+//		players.add(p1);
+//		game.addPlayers(players);
+//
+//		Stage s = new Stage();
+//		try {
+//			ViewController viewCtrl = new ViewController(s);
+//			viewCtrl.testPlayGame(game);
+//		}
+//		catch (UnsupportedAudioFileException | IOException
+//				| LineUnavailableException e) {
+//			System.out.println("Opening ViewController didn't work!");
+//		}
+//	}
 
 
 

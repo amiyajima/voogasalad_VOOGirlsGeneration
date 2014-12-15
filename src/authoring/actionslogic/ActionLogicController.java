@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Minkwon Lee
+
 package authoring.actionslogic;
 
 import java.net.URL;
@@ -50,14 +53,6 @@ public class ActionLogicController implements Initializable {
                              (observable, oldValue, selectedActor) -> updatePossibleReceivers(selectedActor));
     }
 
-    private void updateLogicMap () {
-        for (String actor : myLogicMap.keySet()) {
-            if (!myPieceTypes.contains(actor)) {
-                myLogicMap.remove(actor);
-            }
-        }
-    }
-
     private void updatePossibleReceivers (String selectedActor) {
         List<String> myPosReceivers = getReceivers(myPieceTypes, selectedActor);
         myCBList.clear();
@@ -96,16 +91,6 @@ public class ActionLogicController implements Initializable {
         }
         actionReceiver.put(currAction, receiverList);
         myLogicMap.put(currActor, actionReceiver);
-        System.out.println(myLogicMap);
-
-    }
-
-    /**
-     * @return a map that contains actors as keys and maps that relates actions and receivers as
-     *         values
-     */
-    public Map<String, Map<String, List<String>>> getActionLogic () {
-        return myLogicMap;
     }
 
     public void getData (ActionData actionData, PieceTypeData ptData) {

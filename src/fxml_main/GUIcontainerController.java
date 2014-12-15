@@ -24,6 +24,7 @@ public class GUIcontainerController implements Initializable{
 	private Scene myScene;
 	private int myAuthorTabCount=0;
 	private int myPlayerTabCount=0;
+	private GamePropertiesData myGP;
 
 
 	@FXML
@@ -92,7 +93,8 @@ public class GUIcontainerController implements Initializable{
 				displayedTabs.getSelectionModel().select(tab);
 			};
 
-			GamePropertiesEditor gpEditor = new GamePropertiesEditor(c);
+			GamePropertiesEditor gpEditor = new GamePropertiesEditor();
+			gpEditor.addDataContainer(myGP);
 
 		} catch (IOException e) {
 		    ErrorPopUp myError = new ErrorPopUp(e.toString());

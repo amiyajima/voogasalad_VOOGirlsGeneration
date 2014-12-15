@@ -18,12 +18,12 @@ public class GamePropertiesData {
 		return myGridShape;
 	}
 	
-//	public void setNumPlayers(int numPlayers){
-//		myNumPlayers = numPlayers;
-//	}
-//	
-//	public void setGridShape(String gridShape){
-//		myGridShape = gridShape;
-//	}
+	public void setNumPlayers(int numPlayers){
+		myNumPlayers = numPlayers;
+	}
+	
+	public void setGridShape(String gridShape){
+		myGridShape = gridShape;
+	}
 	
 }
