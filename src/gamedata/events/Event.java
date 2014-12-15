@@ -81,9 +81,6 @@ public class Event {
 			}
 		}
 
-		System.out.println("THE CONDITION EVALUATES TO: " + allConditionsFulfilled);
-		GameState.printState();
-
 		if (allConditionsFulfilled) {
 			for (GlobalAction a : myGlobalActions) {
 				a.doBehavior(grid);

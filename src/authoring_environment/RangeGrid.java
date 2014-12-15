@@ -122,6 +122,11 @@ public class RangeGrid extends SuperGrid{
 	}
 	
 
+	/**
+	 * Select or deselect the Column of the specified one by highlighting the tile.
+	 * @param column: The number of the column.
+	 * @param toChoose: true to be select, false to be deselect.
+	 */
 	public void rangeColumn(int column,boolean toChoose){
 		if ((centerX+column>=0) && (centerX+column<myWidth)){
 			for (int i=0;i<myHeight;i++) {
@@ -133,6 +138,12 @@ public class RangeGrid extends SuperGrid{
 		}
 	}
 	
+	
+	/**
+	 * Select or deselect the row of the specified one by highlighting the tile.
+	 * @param column: The number of the row.
+	 * @param toChoose: true to be select, false to be deselect.
+	 */
 	public void rangeRow(int row, boolean toChoose){
 		if ((centerY-row>=0) && (centerY-row<myHeight)){
 			for (int i=0;i<myWidth;i++) {
@@ -144,6 +155,11 @@ public class RangeGrid extends SuperGrid{
 		} 
 	}
 
+	/**
+	 * Select or deselect the tiles radius away from the center by highlighting the tile.
+	 * @param column: The radius of the highlighted tiles from the center.
+	 * @param toChoose: true to be select, false to be deselect.
+	 */
 	public void rangeRadius(int radius,boolean toChoose){
 		if (centerX-radius<0) {
 			rangeAll(toChoose);
@@ -161,6 +177,10 @@ public class RangeGrid extends SuperGrid{
 		}
 	}
 	
+	/**
+	 * Select or deselect all the tiles in the range.
+	 * @param toChoose: true to be select, false to be deselect.
+	 */
 	public void rangeAll(boolean toChoose) {
 		for (int i=0;i<myWidth;i++) {
 			for (int j=0;j<myHeight;j++) {
@@ -172,7 +192,7 @@ public class RangeGrid extends SuperGrid{
 		}
 	}
 
-	
+
 	public List<Point2D.Double> getRange(){
 		return myRange;
 	}

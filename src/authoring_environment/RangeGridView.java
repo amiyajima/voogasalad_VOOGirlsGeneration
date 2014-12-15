@@ -38,11 +38,6 @@ public class RangeGridView extends ScrollPane{
 		this.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 
-		//		if ((range==null) || (range.size()==0)){
-		//			myGrid = new RangeGrid((int)Math.round(myViewWidth/myTileSize),
-		//					(int)Math.round(myViewHeight/myTileSize),
-		//					myTileSize,shape,range);
-		//		}else{
 		Point2D minGridSize=cacluateGridSize(range);
 		myTileSize=getPrefTileSize((int)minGridSize.getX(),(int)minGridSize.getY(),
 				myTileSize);
@@ -52,6 +47,12 @@ public class RangeGridView extends ScrollPane{
 		myGrid.displayPane(this);
 	}
 
+	/**
+	 * Update the grid shown on GridView.
+	 * @param width: The grid width 
+	 * @param height: The grid height
+	 * @param range: The range passed in to shown on the grid.
+	 */
 	public void update(int width, int height,List<Point2D.Double> range){
 		this.setContent(null);
 		Point2D minGridSize=cacluateGridSize(range);
@@ -65,6 +66,14 @@ public class RangeGridView extends ScrollPane{
 		myGrid.displayPane(this);
 	}
 
+	/**
+	 * Get the preference tile size by getting the larger size from the tile on horizontal
+	 * or vertical line. 
+	 * @param col: The grid width
+	 * @param row: The grid height
+	 * @param minTileSize: The minimum tile size set by default
+	 * @return
+	 */
 	private double getPrefTileSize (int col,int row,double minTileSize) {
 		int calculatedTileSize = Math.max(myViewWidth
 				/ col, myViewHeight / row);
@@ -73,6 +82,11 @@ public class RangeGridView extends ScrollPane{
 		return tileSize;
 	}
 
+	/**
+	 * Get the largest number on x and y axis in range.
+	 * @param range The range taken in to shown on the grid
+	 * @return The width and height of the grid shown.
+	 */
 	private Point2D cacluateGridSize (List<Point2D.Double> range) {
 		double maxX = 0;
 		double maxY = 0;
