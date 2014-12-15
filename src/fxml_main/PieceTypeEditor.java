@@ -6,18 +6,14 @@ import gamedata.gamecomponents.Piece;
 import gamedata.stats.Stats;
 import gameengine.movement.Movement;
 import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
-import javax.imageio.ImageIO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -38,7 +34,6 @@ import authoring.createedit.ModulesList;
 import authoring.data.ActionData;
 import authoring.data.PieceTypeData;
 import authoring_environment.UIspecs;
-
 
 /**
  * @author Mike Zhu, Jennie Ju, Martin Tamayo

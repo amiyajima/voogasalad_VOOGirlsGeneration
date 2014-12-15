@@ -1,12 +1,15 @@
 package fxml_main;
 
+import gamedata.gamecomponents.GridComponent;
 import gamedata.gamecomponents.Level;
 import gamedata.gamecomponents.Patch;
 import gamedata.gamecomponents.Piece;
 import gameengine.player.Player;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -73,8 +76,8 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 			setAndDisplayGrid(level);
 		};
 
-		List<Piece> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
-		List<Patch> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
+		List<GridComponent> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
+		List<GridComponent> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
 		List<Player> playersRO = null;
 
 		EventsDataWrapper wrapper = new EventsDataWrapper(piecesRO, patchesRO, playersRO);
@@ -130,8 +133,8 @@ public class LevelController extends GridComponentAbstCtrl<Level> {
 					setAndDisplayGrid(level);
 					myPropertiesSPane.setContent(null);
 				};
-				List<Piece> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
-				List<Patch> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
+				List<GridComponent> piecesRO = Collections.unmodifiableList(myPieceTypes.getData());
+				List<GridComponent> patchesRO = Collections.unmodifiableList(myPatchTypes.getData());
 				List<Player> playersRO = null;
 
 				EventsDataWrapper wrapper = new EventsDataWrapper(piecesRO, patchesRO, playersRO);

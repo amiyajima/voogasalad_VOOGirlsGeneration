@@ -12,23 +12,23 @@ import gameengine.player.Player;
  */
 public class EventsDataWrapper {
 
-	private List<Piece> myPieceTypes;
-	private List<Patch> myPatchTypes;
+	private List<GridComponent> myPieceTypes;
+	private List<GridComponent> myPatchTypes;
 
 	private List<Player> myPlayers;
 
-	public EventsDataWrapper(List<Piece> pieceTypes, List<Patch> patchTypes, List<Player> players){
+	public EventsDataWrapper(List<GridComponent> pieceTypes, List<GridComponent> patchTypes, List<Player> players){
 		myPieceTypes = pieceTypes;
 		myPatchTypes = patchTypes;
 		
 		myPlayers = players;
 	}
 
-	public List<Piece> getPieceTypes(){
+	public List<GridComponent> getPieceTypes(){
 		return myPieceTypes;
 	}
 
-	public List<Patch> getPatchTypes(){
+	public List<GridComponent> getPatchTypes(){
 		return myPatchTypes;
 	}
 

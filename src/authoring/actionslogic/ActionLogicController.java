@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+
 import authoring.data.ActionData;
+import authoring.data.GridComponentTypeData;
 import authoring.data.PieceTypeData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
