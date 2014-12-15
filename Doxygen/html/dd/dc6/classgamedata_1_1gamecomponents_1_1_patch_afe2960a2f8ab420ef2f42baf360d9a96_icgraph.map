@@ -1,8 +1,0 @@
-<map id="gamedata.gamecomponents.Patch.toString" name="gamedata.gamecomponents.Patch.toString">
-<area shape="rect" id="node2" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html#af4709ab2b1fb90846ae8d56fa277496b" title="authoring.data.PatchInstance\lData.replace" alt="" coords="267,70,477,111"/>
-<area shape="rect" id="node6" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html#a11093c677748d5c3da9e4aa2ca9acee2" title="authoring.data.PatchInstance\lData.terrainAtLoc" alt="" coords="267,135,477,177"/>
-<area shape="rect" id="node3" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html#aa4da6c694f1ce08740a61884498439b0" title="authoring.data.PatchInstance\lData.replace" alt="" coords="558,5,767,46"/>
-<area shape="rect" id="node4" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#a952391a274a83f5eee0044d7e5be3673" title="authoring_environment.GUIGrid.replace\lPatchType" alt="" coords="525,70,800,111"/>
-<area shape="rect" id="node5" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#a89d8eeee5ec72e145a2c60735013581e" title="authoring_environment.GUIGrid.update" alt="" coords="849,77,1122,104"/>
-<area shape="rect" id="node7" href="$d1/d4e/classauthoring__environment_1_1_shape_grid.html#a2b5e0336c52b04f2964756ed52e7c86a" title="authoring_environment.Shape\lGrid.removePatches" alt="" coords="555,135,771,177"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="gamedata.action.Action.doBehavior" name="gamedata.action.Action.doBehavior">
-<area shape="rect" id="node2" href="$db/d00/classgame_player_1_1_apply_state.html#aed42c1aba25264bc6880036f693a1c9e" title="gamePlayer.ApplyState.on\lClick" alt="" coords="249,5,439,46"/>
-<area shape="rect" id="node3" href="$d8/d4d/classgameengine_1_1player_1_1_simple_a_i_player.html#a4939c006130cc2f30060ccb3abd9d5e5" title="gameengine.player.Simple\lAIPlayer.play" alt="" coords="248,70,440,111"/>
-<area shape="rect" id="node4" href="$d8/d4d/classgameengine_1_1player_1_1_simple_a_i_player.html#a9a241075e35d6039a453f51445e9837c" title="gameengine.player.Simple\lAIPlayer.startTurn" alt="" coords="488,70,680,111"/>
-</map>

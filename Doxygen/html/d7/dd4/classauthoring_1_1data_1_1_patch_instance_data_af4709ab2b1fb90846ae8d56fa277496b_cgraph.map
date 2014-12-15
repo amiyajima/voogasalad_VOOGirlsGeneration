@@ -1,7 +1,0 @@
-<map id="authoring.data.PatchInstanceData.replace" name="authoring.data.PatchInstanceData.replace">
-<area shape="rect" id="node2" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#afb88b190b2f6bc5a77e94b0306839476" title="gamedata.gamecomponents.\lGridComponent.getImageLocation" alt="" coords="264,5,507,46"/>
-<area shape="rect" id="node3" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a919551a7769d8357902ae93decaf2ad1" title="gamedata.gamecomponents.\lGridComponent.setImageLocation" alt="" coords="265,70,506,111"/>
-<area shape="rect" id="node5" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#acd1ac5f1fe1d366ecd6e09b572eaa4fc" title="gamedata.gamecomponents.\lGridComponent.setName" alt="" coords="279,135,492,177"/>
-<area shape="rect" id="node6" href="$dd/dc6/classgamedata_1_1gamecomponents_1_1_patch.html#afe2960a2f8ab420ef2f42baf360d9a96" title="gamedata.gamecomponents.\lPatch.toString" alt="" coords="279,201,492,242"/>
-<area shape="rect" id="node4" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a224e5aae28655f7e26ff73cbde7b0d99" title="gamedata.gamecomponents.\lGridComponent.setImageView" alt="" coords="555,70,771,111"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="authoring.data.PieceTypeData.getIdSet" name="authoring.data.PieceTypeData.getIdSet">
-<area shape="rect" id="node2" href="$d2/d43/classauthoring_1_1actionslogic_1_1_action_logic_controller.html#acc7cd859f687fda3ca5ff0d2b9177c95" title="authoring.actionslogic.Action\lLogicController.getData" alt="" coords="273,5,479,46"/>
-<area shape="rect" id="node4" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#aba63586973ffa81f331904a44690684c" title="fxml_main.PieceTypeEditor.\lPieceTypeEditor" alt="" coords="279,70,473,111"/>
-<area shape="rect" id="node5" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#a4db03011da5db1613d2cabcb5dc19768" title="authoring_environment.GUIGrid.remove\lPieceType" alt="" coords="237,135,515,177"/>
-<area shape="rect" id="node3" href="$db/d40/classfxml__main_1_1_authoring_controller.html#ac5231ed10af844f596cd3a76729a6829" title="fxml_main.AuthoringController.show\lActionslogicChartWindow" alt="" coords="575,5,825,46"/>
-<area shape="rect" id="node6" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#a89d8eeee5ec72e145a2c60735013581e" title="authoring_environment.GUIGrid.update" alt="" coords="563,143,837,169"/>
-</map>

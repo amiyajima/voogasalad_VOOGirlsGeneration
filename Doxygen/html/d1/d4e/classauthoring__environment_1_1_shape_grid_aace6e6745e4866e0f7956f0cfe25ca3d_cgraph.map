@@ -1,7 +1,0 @@
-<map id="authoring_environment.ShapeGrid.addUnit" name="authoring_environment.ShapeGrid.addUnit">
-<area shape="rect" id="node2" href="$d6/dda/classauthoring_1_1data_1_1_piece_instance_data.html#a2517f3bd508a388343c4e5343d6391e8" title="authoring.data.PieceInstance\lData.add" alt="" coords="275,5,483,46"/>
-<area shape="rect" id="node3" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a9a5b2359d22e7d79d5065826a0dc8211" title="gamedata.gamecomponents.\lGridComponent.getImageView" alt="" coords="270,70,487,111"/>
-<area shape="rect" id="node5" href="$db/d80/classauthoring__environment_1_1_sandy_tile.html#a070ed8fcc974896fc65b37565e95b16d" title="authoring_environment.Sandy\lTile.getLocation" alt="" coords="271,135,486,177"/>
-<area shape="rect" id="node6" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a64ad68920a85cfa677b6325fda0191b0" title="gamedata.gamecomponents.\lGridComponent.setLoc" alt="" coords="272,201,485,242"/>
-<area shape="rect" id="node4" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a224e5aae28655f7e26ff73cbde7b0d99" title="gamedata.gamecomponents.\lGridComponent.setImageView" alt="" coords="536,70,752,111"/>
-</map>

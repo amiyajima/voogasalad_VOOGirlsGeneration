@@ -1,7 +1,0 @@
-<map id="gamedata.gamecomponents.Piece.getInventory" name="gamedata.gamecomponents.Piece.getInventory">
-<area shape="rect" id="node2" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#af2eefe9bd07a346d48960d99fae7511d" title="fxml_main.PieceTypeEditor.\lPieceTypeEditor" alt="" coords="289,5,484,46"/>
-<area shape="rect" id="node3" href="$d7/df4/classtests_1_1_j_s_o_n_tester_main.html#a5f1fa68f3fcb37a473271cdbfeaaa92e" title="tests.JSONTesterMain.test\lJSONwrite" alt="" coords="293,70,480,111"/>
-<area shape="rect" id="node5" href="$df/dd5/classgame_player_1_1_view_controller.html#ad13c580a7c6d8cf229ab7c718788d51f" title="gamePlayer.ViewController.update\lInventory" alt="" coords="267,135,507,177"/>
-<area shape="rect" id="node4" href="$d7/df4/classtests_1_1_j_s_o_n_tester_main.html#a931215da47157cbc5157c6a9df31ccd4" title="tests.JSONTesterMain.main" alt="" coords="556,77,751,104"/>
-<area shape="rect" id="node6" href="$d6/d24/classgame_player_1_1_select_state.html#a801827392f0faeee6b96925060d77838" title="gamePlayer.SelectState.on\lClick" alt="" coords="555,135,751,177"/>
-</map>
