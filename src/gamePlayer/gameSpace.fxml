@@ -69,7 +69,6 @@
 		</Button>
 		<Label id="TURN" fx:id="playerTurn" style="-fx-background-color: transparent;;" text="Turn: ">
 		</Label>
-            <ToggleButton fx:id="soundToggle" mnemonicParsing="false" styleClass="button" text="Sound" />
 	  </children>
       </HBox>
    </top>
