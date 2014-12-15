@@ -188,7 +188,7 @@ public class RangeGrid extends SuperGrid{
 	 * Select or deselect all the tiles in the range.
 	 * @param toChoose: true to be select, false to be deselect.
 	 */
-	private void rangeAll(int ii, boolean toChoose) {
+	private void rangeAll(int nullInt, boolean toChoose) {
 		for (int i=0;i<myWidth;i++) {
 			for (int j=0;j<myHeight;j++) {				
 				processHighlight(toChoose,i,j);
