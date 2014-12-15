@@ -23,7 +23,7 @@ public class ConcreteAction implements Action {
 	private String myName;
 	private List<Point2D.Double> myAttackRange;
 	private List<Point2D.Double> myEffectRange;
-	private List<StatsTotalLogic> myStatsLogics;
+	private StatsTotalLogic myStatsLogics;
 	private ActionConclusion myConclusion;
 	private StatsDataModifier myDataModifier;
 
@@ -33,7 +33,7 @@ public class ConcreteAction implements Action {
 	 * its behavior is already defined
 	 */
 	public ConcreteAction (String id, List<Point2D.Double> attackRange,
-			List<Point2D.Double> effectRange, List<StatsTotalLogic> statsLogics,
+			List<Point2D.Double> effectRange, StatsTotalLogic statsLogics,
 			ActionConclusion conclusion) {
 		myName = id;
 		myAttackRange = attackRange;
@@ -81,7 +81,7 @@ public class ConcreteAction implements Action {
 	 * 
 	 * @return
 	 */
-	public List<StatsTotalLogic> getStatsLogics () {
+	public StatsTotalLogic getStatsLogics () {
 		return myStatsLogics;
 	}
 

@@ -2,42 +2,33 @@ package gamedata.events.globalaction;
 
 import gamedata.action.StatsDataModifier;
 import gamedata.action.StatsTotalLogic;
-import gamedata.gamecomponents.GameState;
 import gamedata.gamecomponents.IHasStats;
 import gameengine.player.Player;
-import java.util.ArrayList;
-import java.util.List;
-import authoring_environment.GUIGrid;
 
+//THIS IS A PART OF MY CODE MASTERPIECE
+//ANNA MIYAJIMA (am437)
 
 /**
- * Global Action that modifies a player's stat based on a constant
+ * Global Action that modifies a player's stat. Delegates stats operations to a StatsDataModifier
  * 
  * @author annamiyajima
  *
  */
-public class ChangePlayerStats extends GlobalAction {
-    private int myPlayerID;
-    private String myStatName;
-    private int myStatValue;
+public class ChangePlayerStats extends GlobalAction<Player> {
+    private StatsDataModifier myDataModifier;
 
-    public ChangePlayerStats (String statName, int value, int ID ) {
+    public ChangePlayerStats (StatsTotalLogic statsLogic) {
         super("Change player stat");
-        myStatValue = value;
-        myStatName = statName;
-        myPlayerID = ID;
+        myDataModifier = new StatsDataModifier(statsLogic);
     }
-    
+
     @Override
-    public void doBehavior (GUIGrid grid) {
-        List<Player> playerList = GameState.playersList;
-        for(Player p : playerList){
-            if (p.getID()==myPlayerID){
-                System.out.println("ChangerPlayerStat: before = " + p.getStats().getValue(myStatName));
-                p.changeStat(myStatName, p.getStats().getValue(myStatName)+myStatValue);
-                System.out.println("ChangerPlayerStat: before = " + p.getStats().getValue(myStatName));
-            }
-        }
+    public void doBehavior (Player p) {
+        this.doBehavior(p);
+    }
+
+    public void doBehavior (Player p, IHasStats actor) {
+        myDataModifier.modifyStats(actor, p);
     }
 
 }
