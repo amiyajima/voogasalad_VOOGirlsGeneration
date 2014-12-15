@@ -1,8 +1,10 @@
+//This entire file is part of my masterpiece.
+//MIKE ZHU
+
 package gamedata.events;
 
 import gamedata.events.conditions.Condition;
 import gamedata.events.globalaction.GlobalAction;
-import gamedata.gamecomponents.GameState;
 import gamedata.gamecomponents.IHasStats;
 
 import java.util.ArrayList;
@@ -42,6 +44,9 @@ public class Event {
 		myConditions = new ArrayList<Condition>();
 		myGlobalActions = new ArrayList<GlobalAction>();
 
+		/**
+		 * Handles user error - when name input is null, this default "null" event is made
+		 */
 		if(name.equals("") || name==null){
 			myName = "Nameless Event";
 		}

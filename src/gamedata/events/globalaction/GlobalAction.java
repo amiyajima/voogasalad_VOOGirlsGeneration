@@ -1,3 +1,6 @@
+//This entire file is part of my masterpiece.
+//MIKE ZHU
+
 package gamedata.events.globalaction;
 
 import authoring_environment.GUIGrid;
@@ -18,10 +21,14 @@ public abstract class GlobalAction {
 	
 	protected final String myDescription;
 	
+	/**
+	 * Protected constructor used to set the description
+	 * @param s
+	 */
 	protected GlobalAction(String s){
 		myDescription = s;
 	}
-	
+
 	public abstract void doBehavior(GUIGrid grid);
 	
 	@Override
