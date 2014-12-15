@@ -13,16 +13,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 /**
- * The grid made especially for selecting the range. It will shown inside the 
- * RangeGridView inside RangeEditor. This class deals with the logic of user's select
- * and give back a list of point2D which represents the relative coordinates to the 
- * center tile of the grid.
+ * The grid is made especially for selecting the range. It is shown inside the 
+ * RangeGridView inside RangeEditor. This class deals with the logic of user's 
+ * selection and gives back a list of point2D which represents the relative coordinates
+ * to the center tile of the grid.
  * 
  * @author Mengen Huang
  *
  */
 public class RangeGrid extends SuperGrid{
 
+	private static final String ERROR_INFOMATION = "Ops!";
+	private static final String RANGE = "range";
 	private static final String DEFAULT_CENTRAL_IMAGE="/resources/images/Patrick.jpeg";
 	private static final String DEFAULT_HIGHLIGHT_COLOR = "#0000FF";
 
@@ -38,19 +40,19 @@ public class RangeGrid extends SuperGrid{
 		myRange=range;
 		myWidth=width;
 		myHeight=height;
-		
+
 		centerX=myWidth/2;
 		centerY=myHeight/2;
-		
+
 		initGridTiles(shape);
 		rangeGrid=super.myGrid;
-		
+
 		addCenterImage(width, height);
-		
+
 		highlightRange(range);
-		
+
 		addSelectAction();
-		
+
 	}
 
 	/**
@@ -64,16 +66,16 @@ public class RangeGrid extends SuperGrid{
 			}
 		}
 	}
-	
+
 	/**
 	 * Switch the highlight on or off with a specified color.
 	 * @param tile: The tile to switch the highlight.
 	 */
 	private void switchHighlight(SuperTile tile) {
-		 boolean i = (tile.isSelected()) ? 
+		boolean selected = (tile.isSelected()) ? 
 				tile.deselectTile():tile.selectTile(DEFAULT_HIGHLIGHT_COLOR);
 	}
-	
+
 	/**
 	 * Highlight all the tiles currently in the visible grid.
 	 * The tiles are represented by grid location in range.
@@ -92,7 +94,7 @@ public class RangeGrid extends SuperGrid{
 			}
 		}
 	}
-	
+
 	/**
 	 * Get the tile by its grid location.
 	 * @param row: The y axis grid location.
@@ -116,7 +118,7 @@ public class RangeGrid extends SuperGrid{
 		ImageView centerPatrick=new ImageView(centerImage);
 		centerTile.setPatchImage(centerPatrick);
 	}
- 
+
 
 	/**
 	 * Collect all the coordination of selected tiles relative to the center tile
@@ -129,15 +131,15 @@ public class RangeGrid extends SuperGrid{
 			for (int j=0;j<myHeight;j++) {
 				boolean selected=findTile(i,j).isSelected()? 
 						selectedList.add(new Point2D.Double(i-centerX,centerY-j)):
-						false;
+							false;
 			}
 		}
 		myRange=selectedList;
 		return myRange;
 	}
-	
 
-	
+
+
 	/**
 	 * Select or deselect the Column of the specified one by highlighting the tile.
 	 * @param column: The number of the column.
@@ -150,8 +152,8 @@ public class RangeGrid extends SuperGrid{
 			}
 		}
 	}
-	
-	
+
+
 	/**
 	 * Select or deselect the row of the specified one by highlighting the tile.
 	 * @param column: The number of the row.
@@ -191,10 +193,10 @@ public class RangeGrid extends SuperGrid{
 			for (int j=0;j<myHeight;j++) {				
 				processHighlight(toChoose,i,j);
 			}
-			
+
 		}
 	}
-	
+
 	/**
 	 * Process if the tile at a certain location should be selected or deselected
 	 * accroding to the information passed in.
@@ -205,16 +207,9 @@ public class RangeGrid extends SuperGrid{
 	 */
 	private boolean processHighlight(boolean toChoose, int column, int row){
 		return toChoose? findTile(column, row).selectTile(DEFAULT_HIGHLIGHT_COLOR):
-						 findTile(column, row).deselectTile();
+			findTile(column, row).deselectTile();
 	}
 
-	/**
-	 * Get the range.
-	 * @return list of point2D representing the range coordinates.
-	 */
-	public List<Point2D.Double> getRange(){
-		return myRange;
-	}
 
 	/**
 	 * Reflection method that get the correspondent method according to the String
@@ -227,14 +222,14 @@ public class RangeGrid extends SuperGrid{
 	 */
 	public void processChoice(String chosen, int parameter, boolean toChoose) {
 		Class[] paramTypes = {Integer.TYPE, Boolean.TYPE};	
-	 try{
-		Method m= this.getClass().getDeclaredMethod("range"+chosen, paramTypes);
-		m.invoke(this,parameter,toChoose);
-	 }catch(Exception e){
-		 e.printStackTrace();
-	 }
-		
+		try{
+			Method method= this.getClass().getDeclaredMethod(RANGE+chosen, paramTypes);
+			method.invoke(this,parameter,toChoose);
+		}catch(Exception e){
+			log.error(ERROR_INFOMATION, e);
+		}
+
 	}
 
-	
+
 }
