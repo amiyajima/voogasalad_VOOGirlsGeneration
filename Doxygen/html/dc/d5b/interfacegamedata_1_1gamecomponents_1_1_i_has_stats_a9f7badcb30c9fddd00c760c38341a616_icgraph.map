@@ -1,0 +1,12 @@
+<map id="gamedata.gamecomponents.IHasStats.getStats" name="gamedata.gamecomponents.IHasStats.getStats">
+<area shape="rect" id="node2" href="$d8/d9d/classgamedata_1_1events_1_1conditions_1_1_stat_greater_than.html#a3c6457298160cf4481f78a9c02fa38d8" title="gamedata.events.conditions.\lStatGreaterThan.compare" alt="" coords="275,5,483,46"/>
+<area shape="rect" id="node3" href="$d4/daf/classgamedata_1_1events_1_1conditions_1_1_stat_less_than.html#a2efc10b27cbd2cfa529bf0273ea7443c" title="gamedata.events.conditions.\lStatLessThan.compare" alt="" coords="275,70,483,111"/>
+<area shape="rect" id="node4" href="$de/d0d/classgamedata_1_1events_1_1conditions_1_1_stat_equals.html#af9b90e8762bef91ad549035bb381e7f3" title="gamedata.events.conditions.\lStatEquals.compare" alt="" coords="275,135,483,177"/>
+<area shape="rect" id="node5" href="$d6/dcc/classgamedata_1_1action_1_1_stats_data_modifier.html#a5ebf6f78cddbc8300bf2c0ac096e1246" title="gamedata.action.StatsData\lModifier.modifyStats" alt="" coords="279,201,479,242"/>
+<area shape="rect" id="node8" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a958135e32cc01512c109f4c48a031ee0" title="authoring.eventeditor.Condition\lEditorPane.setupStatsBox" alt="" coords="267,266,490,307"/>
+<area shape="rect" id="node6" href="$d1/d6d/classgamedata_1_1action_1_1_concrete_action.html#abc19207421045aa3b6adc01b29231f25" title="gamedata.action.Concrete\lAction.modifyStats" alt="" coords="554,201,747,242"/>
+<area shape="rect" id="node7" href="$d1/d6d/classgamedata_1_1action_1_1_concrete_action.html#ad9d830d118b159992c27da362fd911b5" title="gamedata.action.Concrete\lAction.doBehavior" alt="" coords="826,201,1019,242"/>
+<area shape="rect" id="node9" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a421ca65a21e0a47b69c3d253020d5d8e" title="authoring.eventeditor.Condition\lEditorPane.setUpComponents" alt="" coords="539,266,762,307"/>
+<area shape="rect" id="node10" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a194c440cd15f0b71cae8f07dd45377e0" title="authoring.eventeditor.Condition\lEditorPane.initialize" alt="" coords="811,266,1034,307"/>
+<area shape="rect" id="node11" href="$d8/d5f/classauthoring_1_1eventeditor_1_1_condition_editor_pane.html#a1ce5d677410533b45754ccaf6464e573" title="authoring.eventeditor.Condition\lEditorPane.ConditionEditorPane" alt="" coords="1083,266,1306,307"/>
+</map>

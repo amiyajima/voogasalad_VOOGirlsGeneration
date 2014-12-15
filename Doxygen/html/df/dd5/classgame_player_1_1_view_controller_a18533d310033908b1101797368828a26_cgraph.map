@@ -1,0 +1,12 @@
+<map id="gamePlayer.ViewController.ViewController" name="gamePlayer.ViewController.ViewController">
+<area shape="rect" id="node2" href="$df/dd5/classgame_player_1_1_view_controller.html#a19c7b5437fe31089198b6aae9c98a382" title="gamePlayer.ViewController.load\lGameInTab" alt="" coords="250,101,473,142"/>
+<area shape="rect" id="node8" href="$df/dd5/classgame_player_1_1_view_controller.html#afcc191634cdb14304828148befdcd228" title="gamePlayer.ViewController.open\lInitialGUIMenu" alt="" coords="248,166,475,207"/>
+<area shape="rect" id="node3" href="$df/dd5/classgame_player_1_1_view_controller.html#aa88b91b279269bee059216dccb13c583" title="gamePlayer.ViewController.edit\lGUIPlayers" alt="" coords="541,37,760,78"/>
+<area shape="rect" id="node7" href="$d0/dbd/classgamedata_1_1_j_s_o_n_1_1_j_s_o_n_manager.html#a5690469e5cd34911a87e3f4c78e500a3" title="gamedata.JSON.JSONManager.read\lFromJSONFile" alt="" coords="527,102,775,143"/>
+<area shape="rect" id="node4" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#a538b22872996297aad3b918c4f567a9f" title="gamedata.gamecomponents.\lGame.getPlayers" alt="" coords="829,5,1043,46"/>
+<area shape="rect" id="node5" href="$df/dd5/classgame_player_1_1_view_controller.html#a27bd012e4b5306525d19c6dd9f3b6ac0" title="gamePlayer.ViewController.edit\lSpecificPlayer" alt="" coords="827,70,1045,111"/>
+<area shape="rect" id="node6" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#ad0b2eb24eabcffe2596837c5c6c1ac2c" title="gamedata.gamecomponents.\lGame.replacePlayer" alt="" coords="1093,70,1307,111"/>
+<area shape="rect" id="node9" href="$df/dd5/classgame_player_1_1_view_controller.html#ae2e95acc4bf016abb98130f92f26778e" title="gamePlayer.ViewController.loadFXML" alt="" coords="523,171,778,197"/>
+<area shape="rect" id="node10" href="$da/de7/classgame_player_1_1_audio.html#a7de4eaaf232a7e233eb5ee963f1c6108" title="gamePlayer.Audio.playBackground" alt="" coords="529,221,772,248"/>
+<area shape="rect" id="node11" href="$da/de7/classgame_player_1_1_audio.html#aa1396fe6ab1f026334433de9a24905ef" title="gamePlayer.Audio.playAudio" alt="" coords="835,221,1037,248"/>
+</map>

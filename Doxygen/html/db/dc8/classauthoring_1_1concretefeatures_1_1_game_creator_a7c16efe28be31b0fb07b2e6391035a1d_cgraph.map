@@ -1,0 +1,6 @@
+<map id="authoring.concretefeatures.GameCreator.GameCreator" name="authoring.concretefeatures.GameCreator.GameCreator">
+<area shape="rect" id="node2" href="$db/dc8/classauthoring_1_1concretefeatures_1_1_game_creator.html#a7c0727c065eff8ba3ca0ea36e8188063" title="authoring.concretefeatures.\lGameCreator.initializeVBoxContent" alt="" coords="254,70,501,111"/>
+<area shape="rect" id="node3" href="$db/dc8/classauthoring_1_1concretefeatures_1_1_game_creator.html#a5059769a41cff3ec23c9962122fda370" title="authoring.concretefeatures.\lGameCreator.initLabel" alt="" coords="549,5,749,46"/>
+<area shape="rect" id="node4" href="$db/dc8/classauthoring_1_1concretefeatures_1_1_game_creator.html#a5459278c7681115e2b3f7336aa599268" title="authoring.concretefeatures.\lGameCreator.initChoiceBox" alt="" coords="549,70,749,111"/>
+<area shape="rect" id="node5" href="$db/dc8/classauthoring_1_1concretefeatures_1_1_game_creator.html#a911340de827e674a6da9053ca3b90256" title="authoring.concretefeatures.\lGameCreator.handleCreate" alt="" coords="549,135,749,177"/>
+</map>

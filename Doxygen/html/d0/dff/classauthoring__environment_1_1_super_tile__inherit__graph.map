@@ -1,0 +1,5 @@
+<map id="authoring_environment.SuperTile" name="authoring_environment.SuperTile">
+<area shape="rect" id="node3" href="$d6/df5/classauthoring__environment_1_1_circle_tile.html" title="authoring_environment.CircleTile" alt="" coords="409,5,639,32"/>
+<area shape="rect" id="node4" href="$dd/d6f/classauthoring__environment_1_1_hexagon_tile.html" title="authoring_environment.HexagonTile" alt="" coords="397,56,651,83"/>
+<area shape="rect" id="node5" href="$d7/d3f/classauthoring__environment_1_1_square_tile.html" title="authoring_environment.SquareTile" alt="" coords="403,107,645,133"/>
+</map>

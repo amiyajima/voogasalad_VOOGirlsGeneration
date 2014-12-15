@@ -1,0 +1,6 @@
+<map id="fxml_main.PieceTypeEditor.initGoBtn" name="fxml_main.PieceTypeEditor.initGoBtn">
+<area shape="rect" id="node2" href="$d9/d15/classfxml__main_1_1_piece_type_editor.html#aa4c7faabdffe53a947c2a64818742318" title="fxml_main.PieceTypeEditor.add\lSelectedActions" alt="" coords="291,5,509,46"/>
+<area shape="rect" id="node4" href="$df/d26/classauthoring_1_1createedit_1_1_modules_list.html#a9aea540457ac1ee2828e0ede837952ee" title="authoring.createedit.Modules\lList.getSelectedActions" alt="" coords="295,70,505,111"/>
+<area shape="rect" id="node5" href="$d0/d47/classgameengine_1_1movement_1_1_movement.html#a2dacd23337b06d447bcda1819e7296ec" title="gameengine.movement.Movement.to\lString" alt="" coords="267,135,533,177"/>
+<area shape="rect" id="node3" href="$d2/da6/classauthoring_1_1data_1_1_action_data.html#af66a8db8f87c010a94eda1b2a734092f" title="authoring.data.ActionData.get\lAction" alt="" coords="581,5,797,46"/>
+</map>

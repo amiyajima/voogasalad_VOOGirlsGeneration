@@ -1,0 +1,9 @@
+<map id="authoring_environment.ShapeGrid.addTerrain" name="authoring_environment.ShapeGrid.addTerrain">
+<area shape="rect" id="node2" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html#a740aeb79225ad2a036656c599f1605ce" title="authoring.data.PatchInstance\lData.add" alt="" coords="274,14,483,55"/>
+<area shape="rect" id="node4" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html#a49b1a96b6897bdba2ab473736a710047" title="authoring.data.PatchInstance\lData.removePatchAtLoc" alt="" coords="539,70,749,111"/>
+<area shape="rect" id="node5" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a9a5b2359d22e7d79d5065826a0dc8211" title="gamedata.gamecomponents.\lGridComponent.getImageView" alt="" coords="270,131,487,173"/>
+<area shape="rect" id="node7" href="$db/d80/classauthoring__environment_1_1_sandy_tile.html#a070ed8fcc974896fc65b37565e95b16d" title="authoring_environment.Sandy\lTile.getLocation" alt="" coords="271,197,486,238"/>
+<area shape="rect" id="node8" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a64ad68920a85cfa677b6325fda0191b0" title="gamedata.gamecomponents.\lGridComponent.setLoc" alt="" coords="272,262,485,303"/>
+<area shape="rect" id="node3" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a97439a493db38860397436079b123e8c" title="gamedata.gamecomponents.\lGridComponent.getLoc" alt="" coords="537,5,751,46"/>
+<area shape="rect" id="node6" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a224e5aae28655f7e26ff73cbde7b0d99" title="gamedata.gamecomponents.\lGridComponent.setImageView" alt="" coords="536,135,752,177"/>
+</map>

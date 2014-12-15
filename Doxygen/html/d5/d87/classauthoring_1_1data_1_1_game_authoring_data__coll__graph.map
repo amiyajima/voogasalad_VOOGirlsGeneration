@@ -1,0 +1,13 @@
+<map id="authoring.data.GameAuthoringData" name="authoring.data.GameAuthoringData">
+<area shape="rect" id="node2" href="$d7/d88/classauthoring_1_1data_1_1_level_data.html" title="authoring.data.LevelData" alt="" coords="692,77,876,104"/>
+<area shape="rect" id="node3" href="$d5/d29/interfaceauthoring_1_1data_1_1_authoring_data.html" title="authoring.data.Authoring\lData\&lt; Level \&gt;" alt="" coords="317,70,499,111"/>
+<area shape="rect" id="node5" href="$d2/da6/classauthoring_1_1data_1_1_action_data.html" title="authoring.data.ActionData" alt="" coords="689,195,879,221"/>
+<area shape="rect" id="node6" href="$d5/d29/interfaceauthoring_1_1data_1_1_authoring_data.html" title="authoring.data.Authoring\lData\&lt; Action \&gt;" alt="" coords="317,187,499,229"/>
+<area shape="rect" id="node8" href="$d1/d4f/classauthoring_1_1data_1_1_patch_type_data.html" title="authoring.data.PatchTypeData" alt="" coords="677,403,891,429"/>
+<area shape="rect" id="node16" href="$d5/d98/classauthoring_1_1data_1_1_piece_type_data.html" title="authoring.data.PieceTypeData" alt="" coords="677,339,891,365"/>
+<area shape="rect" id="node10" href="$d5/d29/interfaceauthoring_1_1data_1_1_authoring_data.html" title="authoring.data.Authoring\lData\&lt; Patch \&gt;" alt="" coords="317,435,499,477"/>
+<area shape="rect" id="node12" href="$d2/dcf/classauthoring_1_1data_1_1_game_properties_data.html" title="authoring.data.GamePropertiesData" alt="" coords="657,453,911,480"/>
+<area shape="rect" id="node13" href="$d6/dfb/classauthoring_1_1data_1_1_player_stat_data.html" title="authoring.data.PlayerStatData" alt="" coords="675,532,893,559"/>
+<area shape="rect" id="node14" href="$d6/d1d/classgamedata_1_1stats_1_1_stats.html" title="gamedata.stats.Stats" alt="" coords="327,567,489,593"/>
+<area shape="rect" id="node17" href="$d5/d29/interfaceauthoring_1_1data_1_1_authoring_data.html" title="authoring.data.Authoring\lData\&lt; Piece \&gt;" alt="" coords="317,253,499,294"/>
+</map>

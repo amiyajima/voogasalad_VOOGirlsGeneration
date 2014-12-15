@@ -1,0 +1,10 @@
+<map id="fxml_main.PatchController.initGlobalEditBtn" name="fxml_main.PatchController.initGlobalEditBtn">
+<area shape="rect" id="node2" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#a0f8021e23df3eb8657622455e0a2c70e" title="authoring_environment.Super\lGrid.findClickedCoordinate" alt="" coords="288,43,501,85"/>
+<area shape="rect" id="node5" href="$d6/d05/classfxml__main_1_1_g_u_i_grid_reference.html#ab47bae2ec738eb18d99809ec9443a2ae" title="fxml_main.GUIGridReference.getGrid" alt="" coords="267,109,522,136"/>
+<area shape="rect" id="node6" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#a1a7fab3cd600b3c00a33ed4034ba9851" title="authoring_environment.GUIGrid.get\lPatch" alt="" coords="270,161,519,202"/>
+<area shape="rect" id="node8" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#aae8bc45627f30916cd4acc2c7af270e6" title="authoring_environment.GUIGrid.pane\lSetOnMouseDragged" alt="" coords="265,226,525,267"/>
+<area shape="rect" id="node9" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#a6c232df2ba3770a08f2551069fdf8a85" title="authoring_environment.GUIGrid.pane\lSetOnMousePressed" alt="" coords="265,291,525,333"/>
+<area shape="rect" id="node3" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#a1fb6edb8c7c3cffe52aa25606fe261df" title="authoring_environment.Super\lGrid.findClickedTile" alt="" coords="573,5,787,46"/>
+<area shape="rect" id="node4" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#af9a11e74113f35feeb5142a4927cebbb" title="authoring_environment.Super\lTile.getCoordinates" alt="" coords="573,70,787,111"/>
+<area shape="rect" id="node7" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html#a60ac72e96e7e0da6f3beb20122a8c041" title="authoring.data.PatchInstance\lData.getData" alt="" coords="575,161,785,202"/>
+</map>

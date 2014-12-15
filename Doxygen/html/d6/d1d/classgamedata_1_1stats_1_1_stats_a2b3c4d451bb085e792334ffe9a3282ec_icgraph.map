@@ -1,0 +1,6 @@
+<map id="gamedata.stats.Stats.setValue" name="gamedata.stats.Stats.setValue">
+<area shape="rect" id="node2" href="$d0/dfd/classgameengine_1_1player_1_1_player.html#abc0c3d9e330e069cc24d34e1bbc85390" title="gameengine.player.Player.changeStat" alt="" coords="240,5,504,32"/>
+<area shape="rect" id="node3" href="$d6/dcc/classgamedata_1_1action_1_1_stats_data_modifier.html#a5ebf6f78cddbc8300bf2c0ac096e1246" title="gamedata.action.StatsData\lModifier.modifyStats" alt="" coords="272,57,472,98"/>
+<area shape="rect" id="node4" href="$d1/d6d/classgamedata_1_1action_1_1_concrete_action.html#abc19207421045aa3b6adc01b29231f25" title="gamedata.action.Concrete\lAction.modifyStats" alt="" coords="553,57,746,98"/>
+<area shape="rect" id="node5" href="$d1/d6d/classgamedata_1_1action_1_1_concrete_action.html#ad9d830d118b159992c27da362fd911b5" title="gamedata.action.Concrete\lAction.doBehavior" alt="" coords="795,57,989,98"/>
+</map>

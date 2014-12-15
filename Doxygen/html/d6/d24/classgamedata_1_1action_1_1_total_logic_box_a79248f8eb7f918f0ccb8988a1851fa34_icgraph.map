@@ -1,0 +1,6 @@
+<map id="gamedata.action.TotalLogicBox.makeDeleteButton" name="gamedata.action.TotalLogicBox.makeDeleteButton">
+<area shape="rect" id="node2" href="$d6/d24/classgamedata_1_1action_1_1_total_logic_box.html#a4fcb11e8f9dbe25afe9d2a599726b577" title="gamedata.action.TotalLogic\lBox.addSingleMultiplierBox" alt="" coords="251,34,448,75"/>
+<area shape="rect" id="node3" href="$d6/d24/classgamedata_1_1action_1_1_total_logic_box.html#a8071a6e0b7c3c1a74c931e0bb7fddc78" title="gamedata.action.TotalLogic\lBox.initNewButton" alt="" coords="496,5,693,46"/>
+<area shape="rect" id="node4" href="$d6/d24/classgamedata_1_1action_1_1_total_logic_box.html#abd6245089411e0004b6dbe03bf2712c8" title="gamedata.action.TotalLogic\lBox.initSingleMultiplierVBox" alt="" coords="742,34,941,75"/>
+<area shape="rect" id="node5" href="$d6/d24/classgamedata_1_1action_1_1_total_logic_box.html#a8253e20e78d09bfda4bf099e726b24cd" title="gamedata.action.TotalLogic\lBox.TotalLogicBox" alt="" coords="989,34,1187,75"/>
+</map>
