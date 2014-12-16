@@ -1,3 +1,5 @@
+// This entire file is part of my masterpiece.
+// YOUR NAME
 package gamePlayer;
 
 import java.io.IOException;
