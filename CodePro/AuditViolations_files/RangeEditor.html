@@ -1,0 +1,3008 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>RangeEditor.java</title>
+
+	<meta name="GENERATOR" content="CodePro Server"/>
+
+	<style type="text/css">
+	span.highSeverity {background-color: #FFAAAA; font: bold}
+span.mediumSeverity {background-color: #FFFF77; font: bold}
+span.lowSeverity {background-color: #AAAAFF; font: bold}
+table.code {border-spacing: 0; border-collapse: collapse; border-width: 1px 0 1px 1px; }
+table.code td {padding-left: 0.25em; padding-right: 0.25em; font-family: courier,monospace; font-size: 10pt; border-style: solid; border-color: black;}
+tr.first td.flags {border-width: 1px 1px 0 1px; text-align: right;}
+tr.first td.lineNumber {border-width: 1px 1px 0 1px; text-align: right;}
+tr.first td.sourceLine {border-width: 1px 1px 0 1px; background-color: #F0F0FF;}
+tr.middle td.flags {border-width: 0 1px 0 1px; text-align: right;}
+tr.middle td.lineNumber {border-width: 0 1px 0 1px; text-align: right;}
+tr.middle td.sourceLine {border-width: 0 1px 0 1px; background-color: #F0F0FF;}
+tr.last td.flags {border-width: 0 1px 1px 1px; text-align: right;}
+tr.last td.lineNumber {border-width: 0 1px 1px 1px; text-align: right;}
+tr.last td.sourceLine {border-width: 0 1px 1px 1px; background-color: #F0F0FF;}
+	</style>
+
+	<style type="text/css">
+	body {font: 70% verdana,arial,helvetica; color: #000000}
+p  {margin-top:  3px; line-height: 1.5em}
+h1 {margin-top:  0px; margin-bottom: 6px; font: bold 150% verdana,arial,helvetica}
+h2 {margin-top: 12px; margin-bottom: 6px; font: bold 125% verdana,arial,helvetica}
+h3 {margin-top: 12px; margin-bottom: 6px; font: bold 100% verdana,arial,helvetica}
+h4 {margin-top: 12px; margin-bottom: 6px; font: bold 100% verdana,arial,helvetica}
+.rounded_page{display:block}
+.rounded_page *{display:block; height:1px; overflow:hidden; font-size:.01em; background:#7799DD}
+.rounded_page1{ margin-left:3px; margin-right:3px; padding-left:1px; padding-right:1px; border-left:1px solid #c4d3ef; border-right:1px solid #c4d3ef; background:#99b2e5}
+.rounded_page2{ margin-left:1px; margin-right:1px; padding-right:1px; padding-left:1px; border-left:1px solid #f1f4fa; border-right:1px solid #f1f4fa; background:#90ace3}
+.rounded_page3{ margin-left:1px; margin-right:1px; border-left:1px solid #90ace3; border-right:1px solid #90ace3;}
+.rounded_page4{ border-left:1px solid #c4d3ef; border-right:1px solid #c4d3ef}
+.rounded_page5{ border-left:1px solid #99b2e5; border-right:1px solid #99b2e5}
+.rounded_pagefg{ background:#7799DD}
+.rounded_section{display:block}
+.rounded_section *{display:block; height:1px; overflow:hidden; font-size:.01em; background:#C3D9FF}
+.rounded_section1{ margin-left:3px; margin-right:3px; padding-left:1px; padding-right:1px; border-left:1px solid #e5eefe; border-right:1px solid #e5eefe; background:#d2e2fe}
+.rounded_section2{ margin-left:1px; margin-right:1px; padding-right:1px; padding-left:1px; border-left:1px solid #f9fbfe; border-right:1px solid #f9fbfe; background:#cee0fe}
+.rounded_section3{ margin-left:1px; margin-right:1px; border-left:1px solid #cee0fe; border-right:1px solid #cee0fe;}
+.rounded_section4{ border-left:1px solid #e5eefe; border-right:1px solid #e5eefe}
+.rounded_section5{ border-left:1px solid #d2e2fe; border-right:1px solid #d2e2fe}
+.rounded_sectionfg{ background:#C3D9FF}
+.page-title { color: #FFFFFE; font-weight: bold; font-size: large; margin: 0px 0px 0px 8px; }
+.page-title-details { color: #FFFFFE; font-weight: bold; margin-right: 8px; margin-left: 8px; }
+.page-footer { color: #FFFFFE; font-weight: bold; margin-left: 8px}
+.page-footer-details { color: #FFFFFE; font-weight: bold; margin-right: 8px; margin-left: 8px; }
+.majorsection-title { color: #FFFFFE; font-weight: bold; margin: 0px 0px 0px 8px; }
+.majorsection-title-details { color: #FFFFFE; font-weight: bold; margin-right: 8px; margin-left: 8px; }
+.majorsection-contents { margin: 0px 0px 15px 16px; }
+.section-title { color: #1F4F8F; font-weight: bold; margin: 0px 0px 0px 6px; }
+.section-title-details { font-weight: bold; margin-left: 6px; margin-right: 6px; }
+.section-contents { margin: 6px 0px 15px 14px; }
+.bodyTable { border: 0px solid #777777; width:100%; border-collapse: collapse; }
+.bodyTable th { border: 1px solid #777777; white-space:nowrap; background-color: #EEEEEE; padding-left: 3px; padding-right: 3px; }
+.bodyTable td { border: 1px solid #777777; vertical-align: top; padding-left: 3px; padding-right: 3px; }
+td[class=emptyborder] { border: 0px solid #777777; padding: 3px 0px 3px 0px; }
+
+	</style>
+
+</head>
+
+<body>
+
+<div>
+		<b class="rounded_page"><b class="rounded_page1"><b></b></b><b class="rounded_page2"><b></b></b><b class="rounded_page3"></b><b class="rounded_page4"></b><b class="rounded_page5"></b></b>
+		<div class="rounded_pagefg">
+			<h3 class="majorsection-title">/TempCodeProProject1/src1/src/authoring/concretefeatures/RangeEditor.java</h3>
+		</div>
+		<b class="rounded_page"><b class="rounded_page5"></b><b class="rounded_page4"></b><b class="rounded_page3"></b><b class="rounded_page2"><b></b></b><b class="rounded_page1"><b></b></b></b>
+	</div>
+	<div class="section-contents">
+		<b>Violations: 10 high, 11 medium, 171 low</b>
+	</div>
+	&nbsp;
+	<div>
+		<b class="rounded_section"><b class="rounded_section1"><b></b></b><b class="rounded_section2"><b></b></b><b class="rounded_section3"></b><b class="rounded_section4"></b><b class="rounded_section5"></b></b>
+		<div class="rounded_sectionfg">
+			<h4 class="section-title">Violations</h4>
+		</div>
+		<b class="rounded_section"><b class="rounded_section5"></b><b class="rounded_section4"></b><b class="rounded_section3"></b><b class="rounded_section2"><b></b></b><b class="rounded_section1"><b></b></b></b>
+	</div>
+	<table>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line29">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line112">Invalid string literal: &quot;Choose&quot;</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line173">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line31">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line113">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line174">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line33">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line113">Invalid string literal: &quot;Delete&quot;</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line174">Code within a block is not indented</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line35">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line114">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line175">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line37">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line115">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line176">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line39">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line115">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line177">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line41">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line116">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line177">Code within a block is not indented</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line43">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line117">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line178">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line45">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line117">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line179">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line47">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line119">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line181">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line49">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line121">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="medium_severity.gif" alt="medium"/>
+	</td><td valign="top"><a href="#line181">Missing Javadoc comment for type selectRangeHandler</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line51">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line122">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="medium_severity.gif" alt="medium"/>
+	</td><td valign="top"><a href="#line181">Invalid class name: &quot;selectRangeHandler&quot; starts with lowercase letters</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line53">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line122">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line182">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line55">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line124">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="medium_severity.gif" alt="medium"/>
+	</td><td valign="top"><a href="#line182">Invalid visibility for field: package</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line56">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line125">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line183">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line57">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line125">Invalid string literal: &quot;Select&quot;</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="medium_severity.gif" alt="medium"/>
+	</td><td valign="top"><a href="#line183">Invalid visibility for field: package</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line58">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line126">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line184">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line60">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line129">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="medium_severity.gif" alt="medium"/>
+	</td><td valign="top"><a href="#line184">Invalid visibility for field: package</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line60">Invalid numeric literal: 100</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line130">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line186">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line61">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line131">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line187">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line62">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line132">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line188">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line63">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line133">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line189">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line63">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="medium_severity.gif" alt="medium"/>
+	</td><td valign="top"><a href="#line133">Invalid local variable name: &quot;HRadiusLabel&quot; starts with uppercase letters</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line190">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line65">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line134">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line192">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line67">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line134">Invalid string literal: &quot;    X     &quot;</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line193">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line68">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line135">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line194">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line69">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="medium_severity.gif" alt="medium"/>
+	</td><td valign="top"><a href="#line135">Invalid local variable name: &quot;VRadiusLabel&quot; starts with uppercase letters</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line195">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line70">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line136">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line196">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line71">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="medium_severity.gif" alt="medium"/>
+	</td><td valign="top"><a href="#line136">Invalid local variable name: &quot;HRadius&quot; starts with uppercase letters</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line197">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line72">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line137">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line198">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line76">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="medium_severity.gif" alt="medium"/>
+	</td><td valign="top"><a href="#line137">Invalid local variable name: &quot;VRadius&quot; starts with uppercase letters</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line199">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line77">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line138">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line200">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line77">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line139">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line201">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line78">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line140">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line203">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line79">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line142">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line203">Invalid string literal: &quot;Choose&quot;</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line81">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line143">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line204">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line82">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line144">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line205">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line83">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line146">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line207">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line84">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line146">Invalid string literal: &quot;Enter&quot;</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line209">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line85">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line147">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line211">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line87">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line148">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="medium_severity.gif" alt="medium"/>
+	</td><td valign="top"><a href="#line211">Missing @author tag for type SelectHandler</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line88">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line149">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line214">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line88">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line150">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line215">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line89">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line151">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="medium_severity.gif" alt="medium"/>
+	</td><td valign="top"><a href="#line215">Invalid visibility for field: package</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line90">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line151">Invalid numeric literal: 2</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line217">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line93">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line152">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line218">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line94">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line152">Invalid numeric literal: 2</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line219">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line95">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line153">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line221">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line96">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line154">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line222">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line97">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line155">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line223">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line99">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line157">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line224">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line100">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line158">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line225">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line101">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line158">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line226">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line102">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line159">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line227">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line103">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line160">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line229">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line105">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line160">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line230">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line107">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line161">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line231">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line107">Invalid string literal: &quot;Select Range&quot;</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line162">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line232">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line108">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line166">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line233">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line109">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line168">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line234">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line110">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line168">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line235">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line110">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line169">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line236">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line111">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line170">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line237">Use of tab character after start of line</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line112">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line172">Use of tab character after start of line</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line238">Use of tab character after start of line</a>
+	</td></tr>
+	</table>
+	&nbsp;
+	<div>
+		<b class="rounded_section"><b class="rounded_section1"><b></b></b><b class="rounded_section2"><b></b></b><b class="rounded_section3"></b><b class="rounded_section4"></b><b class="rounded_section5"></b></b>
+		<div class="rounded_sectionfg">
+			<h4 class="section-title">Source</h4>
+		</div>
+		<b class="rounded_section"><b class="rounded_section5"></b><b class="rounded_section4"></b><b class="rounded_section3"></b><b class="rounded_section2"><b></b></b><b class="rounded_section1"><b></b></b></b>
+	</div>
+	<div class="section-contents">
+		<table width="100%" class="code">
+		<tr class="first">
+		<td class="lineNumber">
+		<a name="line1">1</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		package&nbsp;authoring.concretefeatures;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line2">2</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line3">3</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;java.awt.geom.Point2D;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line4">4</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;java.util.List;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line5">5</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;java.util.function.Consumer;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line6">6</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line7">7</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.event.ActionEvent;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line8">8</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.event.EventHandler;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line9">9</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.scene.Scene;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line10">10</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.scene.control.Button;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line11">11</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.scene.control.ChoiceBox;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line12">12</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.scene.control.Label;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line13">13</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.scene.control.TextField;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line14">14</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.scene.layout.HBox;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line15">15</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.scene.layout.VBox;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line16">16</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;authoring.abstractfeatures.PopupWindow;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line17">17</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;authoring_environment.RangeGridView;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line18">18</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line19">19</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line20">20</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line21">21</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*&nbsp;Popup&nbsp;GUI&nbsp;element&nbsp;that&nbsp;allows&nbsp;the&nbsp;user&nbsp;to&nbsp;specify&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;grid,
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line22">22</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*&nbsp;selects&nbsp;the&nbsp;tiles&nbsp;and&nbsp;returns&nbsp;the&nbsp;list&nbsp;of&nbsp;relative&nbsp;coordination&nbsp;of&nbsp;selected
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line23">23</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*&nbsp;tiles.
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line24">24</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*&nbsp;@author&nbsp;Meng&apos;en&nbsp;Huang,&nbsp;Jesse&nbsp;Ling,&nbsp;Jennie&nbsp;Ju
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line25">25</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line26">26</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line27">27</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line28">28</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		public&nbsp;class&nbsp;RangeEditor&nbsp;extends&nbsp;PopupWindow&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line29"><b>29</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;int&nbsp;ENTER_LAYOUT_X&nbsp;=&nbsp;300;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line30">30</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line31"><b>31</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;int&nbsp;VRADIUS_LAYOUTX&nbsp;=&nbsp;100;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line32">32</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line33"><b>33</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;int&nbsp;VRADIUS_MAX_WIDTH&nbsp;=&nbsp;120;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line34">34</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line35"><b>35</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;int&nbsp;HRADIUS_MAX_WIDTH&nbsp;=&nbsp;120;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line36">36</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line37"><b>37</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;String&nbsp;VERTICAL_RADIUS&nbsp;=&nbsp;&quot;Vertical&nbsp;Radius&quot;;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line38">38</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line39"><b>39</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;String&nbsp;HORIZONTAL_RADIUS&nbsp;=&nbsp;&quot;Horizontal&nbsp;Radius&quot;;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line40">40</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line41"><b>41</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;int&nbsp;SELECT_BUTTON_SIZE&nbsp;=&nbsp;50;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line42">42</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line43"><b>43</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;String&nbsp;CUSTOM&nbsp;=&nbsp;&quot;Custom(default)&quot;;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line44">44</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line45"><b>45</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;String&nbsp;RADIUS&nbsp;=&nbsp;&quot;Radius&quot;;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line46">46</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line47"><b>47</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;String&nbsp;ALL&nbsp;=&nbsp;&quot;All&quot;;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line48">48</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line49"><b>49</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;String&nbsp;ROW&nbsp;=&nbsp;&quot;Row&quot;;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line50">50</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line51"><b>51</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;String&nbsp;COLUMN&nbsp;=&nbsp;&quot;Column&quot;;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line52">52</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line53"><b>53</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;String&nbsp;NAME&nbsp;=&nbsp;&quot;Range&nbsp;Editor&quot;;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line54">54</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line55"><b>55</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;int&nbsp;MIN_TILE_SIZE&nbsp;=&nbsp;30;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line56"><b>56</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;int&nbsp;RANGE_EDITOR_HEIGHT&nbsp;=&nbsp;800;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line57"><b>57</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;int&nbsp;RANGE_EDITOR_WIDTH&nbsp;=&nbsp;600;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line58"><b>58</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;int&nbsp;DEFAULT_TILE_SIZE&nbsp;=&nbsp;40;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line59">59</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line60"><b>60</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Invalid numeric literal: 100"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;myGridLength&nbsp;=&nbsp;RANGE_EDITOR_WIDTH&nbsp;-&nbsp;<span class="highSeverity">100</span>;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line61"><b>61</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;myTileSize&nbsp;=&nbsp;DEFAULT_TILE_SIZE;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line62"><b>62</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;String&nbsp;STYLESHEET&nbsp;=&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line63"><b>63</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&quot;/resources/stylesheets/actioncreator_layout.css&quot;;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line64">64</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line65"><b>65</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;String&nbsp;DEFAULT_SHAPE&nbsp;=&nbsp;&quot;SQUARE_GRID&quot;;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line66">66</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line67"><b>67</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;myGridWidthNumber;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line68"><b>68</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;myGridHeightNumber;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line69"><b>69</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;RangeGridView&nbsp;rangeGridView;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line70"><b>70</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;List&lt;Point2D.Double&gt;&nbsp;myRange;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line71"><b>71</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;Button&nbsp;mySelect;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line72"><b>72</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;Consumer&lt;List&lt;Point2D.Double&gt;&gt;&nbsp;myConsumer;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line73">73</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line74">74</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line75">75</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line76"><b>76</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;public&nbsp;RangeEditor&nbsp;(List&lt;Point2D.Double&gt;&nbsp;range,&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line77"><b>77</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Consumer&lt;List&lt;Point2D.Double&gt;&gt;&nbsp;consumer,&nbsp;String&nbsp;shape){
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line78"><b>78</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;range.add(new&nbsp;Point2D.Double(1,0));
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line79"><b>79</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;range.add(new&nbsp;Point2D.Double(-1,2));
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line80">80</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line81"><b>81</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;myRange&nbsp;=&nbsp;range;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line82"><b>82</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;myConsumer&nbsp;=&nbsp;consumer;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line83"><b>83</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;setHeight(RANGE_EDITOR_HEIGHT);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line84"><b>84</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;setWidth(RANGE_EDITOR_WIDTH);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line85"><b>85</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;setTitle(NAME);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line86">86</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line87"><b>87</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;rangeGridView&nbsp;=&nbsp;new&nbsp;RangeGridView(myGridLength,&nbsp;myGridLength,
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line88"><b>88</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>myTileSize,&nbsp;shape,&nbsp;range);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line89"><b>89</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;initialize();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line90"><b>90</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line91">91</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line92">92</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line93"><b>93</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line94"><b>94</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;protected&nbsp;void&nbsp;initialize&nbsp;(){
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line95"><b>95</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;VBox&nbsp;box&nbsp;=&nbsp;new&nbsp;VBox();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line96"><b>96</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;Scene&nbsp;scene&nbsp;=&nbsp;new&nbsp;Scene(box,&nbsp;RANGE_EDITOR_WIDTH,&nbsp;RANGE_EDITOR_HEIGHT);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line97"><b>97</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;scene.getStylesheets().add(STYLESHEET);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line98">98</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line99"><b>99</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;HBox&nbsp;specifedSelection&nbsp;=&nbsp;new&nbsp;HBox();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line100"><b>100</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;VBox&nbsp;selection&nbsp;=&nbsp;new&nbsp;VBox();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line101"><b>101</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;selection.setMinHeight(SELECT_BUTTON_SIZE);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line102"><b>102</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;HBox&nbsp;sizeChooser&nbsp;=&nbsp;new&nbsp;HBox();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line103"><b>103</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;sizeChooser.setMinHeight(SELECT_BUTTON_SIZE);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line104">104</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line105"><b>105</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;//&nbsp;Range&nbsp;Selections
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line106">106</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line107"><b>107</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Invalid string literal: &quot;Select Range&quot;"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;Label&nbsp;targetLabel&nbsp;=&nbsp;new&nbsp;Label(<span class="highSeverity">&quot;Select&nbsp;Range&quot;</span>);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line108"><b>108</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;ChoiceBox&lt;String&gt;&nbsp;targetChoice&nbsp;=&nbsp;new&nbsp;ChoiceBox&lt;&gt;();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line109"><b>109</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;targetChoice.getItems().addAll(COLUMN,&nbsp;ROW,&nbsp;RADIUS,&nbsp;ALL,
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line110"><b>110</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>CUSTOM);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line111"><b>111</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;TextField&nbsp;specifiedData&nbsp;=&nbsp;new&nbsp;TextField();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line112"><b>112</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Invalid string literal: &quot;Choose&quot;"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;Button&nbsp;choose&nbsp;=&nbsp;new&nbsp;Button(<span class="highSeverity">&quot;Choose&quot;</span>);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line113"><b>113</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Invalid string literal: &quot;Delete&quot;"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;Button&nbsp;delete&nbsp;=&nbsp;new&nbsp;Button(<span class="highSeverity">&quot;Delete&quot;</span>);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line114"><b>114</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;choose.setOnAction(new&nbsp;selectRangeHandler(targetChoice,
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line115"><b>115</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>specifiedData,&nbsp;choose));
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line116"><b>116</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;delete.setOnAction(new&nbsp;selectRangeHandler(targetChoice,&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line117"><b>117</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>specifiedData,&nbsp;delete));
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line118">118</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line119"><b>119</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;selection.getChildren().addAll(targetLabel,&nbsp;targetChoice);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line120">120</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line121"><b>121</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;specifedSelection.getChildren().addAll(selection,&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line122"><b>122</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>specifiedData,&nbsp;choose,&nbsp;delete);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line123">123</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line124"><b>124</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;//&nbsp;Select&nbsp;Button
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line125"><b>125</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Invalid string literal: &quot;Select&quot;"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;mySelect&nbsp;=&nbsp;new&nbsp;Button(<span class="highSeverity">&quot;Select&quot;</span>);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line126"><b>126</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;mySelect.setOnAction(new&nbsp;SelectHandler(this));
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line127">127</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line128">128</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line129"><b>129</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;//&nbsp;Choose&nbsp;the&nbsp;Size
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line130"><b>130</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;VBox&nbsp;horizontal&nbsp;=&nbsp;new&nbsp;VBox();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line131"><b>131</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;VBox&nbsp;times&nbsp;=&nbsp;new&nbsp;VBox();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line132"><b>132</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;VBox&nbsp;vertical&nbsp;=&nbsp;new&nbsp;VBox();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line133"><b>133</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="medium_severity.gif" alt="medium" title="Invalid local variable name: &quot;HRadiusLabel&quot; starts with uppercase letters"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;Label&nbsp;<span class="mediumSeverity">HRadiusLabel</span>&nbsp;=&nbsp;new&nbsp;Label(HORIZONTAL_RADIUS);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line134"><b>134</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Invalid string literal: &quot;    X     &quot;"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;Label&nbsp;multiply&nbsp;=&nbsp;new&nbsp;Label(<span class="highSeverity">&quot;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;</span>);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line135"><b>135</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="medium_severity.gif" alt="medium" title="Invalid local variable name: &quot;VRadiusLabel&quot; starts with uppercase letters"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;Label&nbsp;<span class="mediumSeverity">VRadiusLabel</span>&nbsp;=&nbsp;new&nbsp;Label(VERTICAL_RADIUS);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line136"><b>136</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="medium_severity.gif" alt="medium" title="Invalid local variable name: &quot;HRadius&quot; starts with uppercase letters"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;TextField&nbsp;<span class="mediumSeverity">HRadius</span>&nbsp;=&nbsp;new&nbsp;TextField();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line137"><b>137</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="medium_severity.gif" alt="medium" title="Invalid local variable name: &quot;VRadius&quot; starts with uppercase letters"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;TextField&nbsp;<span class="mediumSeverity">VRadius</span>&nbsp;=&nbsp;new&nbsp;TextField();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line138"><b>138</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;HRadius.setMaxWidth(HRADIUS_MAX_WIDTH);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line139"><b>139</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;VRadius.setMaxWidth(VRADIUS_MAX_WIDTH);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line140"><b>140</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;VRadius.setLayoutX(VRADIUS_LAYOUTX);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line141">141</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line142"><b>142</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;horizontal.getChildren().addAll(HRadiusLabel,&nbsp;HRadius);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line143"><b>143</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;times.getChildren().add(multiply);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line144"><b>144</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;vertical.getChildren().addAll(VRadiusLabel,&nbsp;VRadius);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line145">145</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line146"><b>146</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Invalid string literal: &quot;Enter&quot;"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;Button&nbsp;enter&nbsp;=&nbsp;new&nbsp;Button(<span class="highSeverity">&quot;Enter&quot;</span>);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line147"><b>147</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;enter.setLayoutX(ENTER_LAYOUT_X);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line148"><b>148</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;enter.setOnAction(new&nbsp;EventHandler&lt;ActionEvent&gt;()&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line149"><b>149</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line150"><b>150</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;handle&nbsp;(ActionEvent&nbsp;event)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line151"><b>151</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Invalid numeric literal: 2"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;myGridWidthNumber&nbsp;=&nbsp;Integer.parseInt(HRadius.getText())&nbsp;*&nbsp;<span class="highSeverity">2</span>&nbsp;+&nbsp;1;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line152"><b>152</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Invalid numeric literal: 2"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;myGridHeightNumber&nbsp;=&nbsp;Integer.parseInt(VRadius.getText())&nbsp;*&nbsp;<span class="highSeverity">2</span>&nbsp;+&nbsp;1;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line153"><b>153</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;myTileSize&nbsp;=&nbsp;getPrefTileSize(myGridWidthNumber,&nbsp;myGridHeightNumber);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line154"><b>154</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;box.getChildren().clear();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line155"><b>155</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;myRange=rangeGridView.returnSelectedList();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line156">156</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line157"><b>157</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;rangeGridView.update(myGridWidthNumber,&nbsp;myGridHeightNumber,
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line158"><b>158</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>myRange);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line159"><b>159</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;box.getChildren().addAll(sizeChooser,&nbsp;enter,
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line160"><b>160</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>rangeGridView,&nbsp;specifedSelection,&nbsp;mySelect);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line161"><b>161</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line162"><b>162</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;});
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line163">163</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line164">164</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line165">165</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line166"><b>166</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;sizeChooser.getChildren().addAll(horizontal,&nbsp;times,&nbsp;vertical);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line167">167</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line168"><b>168</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>box.getChildren().addAll(sizeChooser,&nbsp;enter,&nbsp;rangeGridView,mySelect);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line169"><b>169</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;setScene(scene);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line170"><b>170</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line171">171</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line172"><b>172</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;getPrefTileSize&nbsp;(int&nbsp;gridWidthNumber,&nbsp;int&nbsp;gridHeightNumber)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line173"><b>173</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;int&nbsp;calculatedTileSize&nbsp;=&nbsp;Math.max(myGridLength
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line174"><b>174</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>/&nbsp;gridWidthNumber,&nbsp;myGridLength&nbsp;/&nbsp;gridHeightNumber);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line175"><b>175</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line176"><b>176</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;int&nbsp;tileSize&nbsp;=&nbsp;(calculatedTileSize&nbsp;&lt;&nbsp;MIN_TILE_SIZE)&nbsp;?&nbsp;MIN_TILE_SIZE
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line177"><b>177</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>:&nbsp;calculatedTileSize;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line178"><b>178</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;return&nbsp;tileSize;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line179"><b>179</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line180">180</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line181"><b>181</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="medium_severity.gif" alt="medium" title="Missing Javadoc comment for type selectRangeHandler"/><img src="medium_severity.gif" alt="medium" title="Invalid class name: &quot;selectRangeHandler&quot; starts with lowercase letters"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;class&nbsp;<span class="mediumSeverity">selectRangeHandler</span>&nbsp;implements&nbsp;EventHandler&lt;ActionEvent&gt;&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line182"><b>182</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="medium_severity.gif" alt="medium" title="Invalid visibility for field: package"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;<span class="mediumSeverity">ChoiceB</span>ox&lt;String&gt;&nbsp;targetChoice;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line183"><b>183</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="medium_severity.gif" alt="medium" title="Invalid visibility for field: package"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;<span class="mediumSeverity">TextFie</span>ld&nbsp;specifiedData;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line184"><b>184</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="medium_severity.gif" alt="medium" title="Invalid visibility for field: package"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;<span class="mediumSeverity">Button&nbsp;</span>button;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line185">185</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line186"><b>186</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;public&nbsp;selectRangeHandler&nbsp;(ChoiceBox&lt;String&gt;&nbsp;tc,&nbsp;TextField&nbsp;sd,&nbsp;Button&nbsp;b)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line187"><b>187</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;targetChoice&nbsp;=&nbsp;tc;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line188"><b>188</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;specifiedData&nbsp;=&nbsp;sd;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line189"><b>189</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;button&nbsp;=&nbsp;b;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line190"><b>190</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line191">191</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line192"><b>192</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line193"><b>193</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;handle&nbsp;(ActionEvent&nbsp;event)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line194"><b>194</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;String&nbsp;chosen&nbsp;=&nbsp;targetChoice.getValue().toString();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line195"><b>195</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;int&nbsp;parameter;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line196"><b>196</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;try&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line197"><b>197</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;parameter&nbsp;=&nbsp;Integer.parseInt(specifiedData.getText());
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line198"><b>198</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line199"><b>199</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;catch&nbsp;(NumberFormatException&nbsp;e)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line200"><b>200</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;parameter&nbsp;=&nbsp;0;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line201"><b>201</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line202">202</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line203"><b>203</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="high_severity.gif" alt="high" title="Invalid string literal: &quot;Choose&quot;"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;boolean&nbsp;toChoose&nbsp;=&nbsp;(button.getText().equals(<span class="highSeverity">&quot;Choose&quot;</span>))&nbsp;?&nbsp;true&nbsp;:&nbsp;false;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line204"><b>204</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line205"><b>205</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;rangeGridView.getGrid().processChoice(chosen,parameter,toChoose);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line206">206</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line207"><b>207</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line208">208</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line209"><b>209</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line210">210</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line211"><b>211</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="medium_severity.gif" alt="medium" title="Missing @author tag for type SelectHandler"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line212">212</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Event&nbsp;Handler&nbsp;that&nbsp;Sends&nbsp;the&nbsp;Selected&nbsp;and&nbsp;then&nbsp;Closes&nbsp;the&nbsp;Popup
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line213">213</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line214"><b>214</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;class&nbsp;SelectHandler&nbsp;implements&nbsp;EventHandler&lt;ActionEvent&gt;&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line215"><b>215</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/><img src="medium_severity.gif" alt="medium" title="Invalid visibility for field: package"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;<span class="mediumSeverity">RangeEd</span>itor&nbsp;current;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line216">216</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line217"><b>217</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;public&nbsp;SelectHandler&nbsp;(RangeEditor&nbsp;re)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line218"><b>218</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;current&nbsp;=&nbsp;re;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line219"><b>219</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line220">220</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line221"><b>221</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line222"><b>222</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;handle&nbsp;(ActionEvent&nbsp;event)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line223"><b>223</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;myRange&nbsp;=&nbsp;rangeGridView.returnSelectedList();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line224"><b>224</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;myConsumer.accept(myRange);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line225"><b>225</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;current.close();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line226"><b>226</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line227"><b>227</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line228">228</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line229"><b>229</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;//&nbsp;Can&apos;t&nbsp;use&nbsp;this&nbsp;function&nbsp;to&nbsp;create&nbsp;all&nbsp;the&nbsp;vbox&nbsp;containing&nbsp;one&nbsp;label&nbsp;and
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line230"><b>230</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;//&nbsp;a&nbsp;textfiled&nbsp;because&nbsp;it&nbsp;makes&nbsp;impossible&nbsp;to&nbsp;get&nbsp;the&nbsp;content&nbsp;of&nbsp;the&nbsp;textfield.
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line231"><b>231</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;//&nbsp;Should&nbsp;think&nbsp;of&nbsp;other&nbsp;way&nbsp;to&nbsp;do&nbsp;similar&nbsp;things&nbsp;to&nbsp;avoid&nbsp;duplicated&nbsp;code.
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line232"><b>232</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;private&nbsp;VBox&nbsp;makeTextField&nbsp;(String&nbsp;label)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line233"><b>233</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;VBox&nbsp;vbox&nbsp;=&nbsp;new&nbsp;VBox();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line234"><b>234</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;Label&nbsp;labelText&nbsp;=&nbsp;new&nbsp;Label(label);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line235"><b>235</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;TextField&nbsp;textField&nbsp;=&nbsp;new&nbsp;TextField();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line236"><b>236</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;vbox.getChildren().addAll(labelText,&nbsp;textField);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line237"><b>237</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;return&nbsp;vbox;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line238"><b>238</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Use of tab character after start of line"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line239">239</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line240">240</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="last">
+		<td class="lineNumber">
+		<a name="line241">241</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		}
+		</td>
+		</tr>
+		</table>
+	</div>
+	<div>
+		<b class="rounded_page"><b class="rounded_page1"><b></b></b><b class="rounded_page2"><b></b></b><b class="rounded_page3"></b><b class="rounded_page4"></b><b class="rounded_page5"></b></b>
+		<div class="rounded_pagefg">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" ><tr><td valign="middle">
+			<span class="page-footer"></span>
+			</td><td align="right" valign="middle">
+			<span class="page-footer-details">Powered by <span title="0.0.0, UNKNOWN">CodePro Server</span></span></td></tr></table>
+		</div>
+		<b class="rounded_page"><b class="rounded_page5"></b><b class="rounded_page4"></b><b class="rounded_page3"></b><b class="rounded_page2"><b></b></b><b class="rounded_page1"><b></b></b></b>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+<map id="gamePlayer.ViewController.loadGame" name="gamePlayer.ViewController.loadGame">
+<area shape="rect" id="node2" href="$d0/dbd/classgamedata_1_1_j_s_o_n_1_1_j_s_o_n_manager.html#a5690469e5cd34911a87e3f4c78e500a3" title="gamedata.JSON.JSONManager.read\lFromJSONFile" alt="" coords="315,5,563,46"/>
+<area shape="rect" id="node3" href="$d7/d84/classgame_player_1_1_player_type_setter.html#a782ba79987e63fb4c9c47c48284c0212" title="gamePlayer.PlayerTypeSetter.start\lLoadPlayers" alt="" coords="318,70,559,111"/>
+<area shape="rect" id="node4" href="$d7/d84/classgame_player_1_1_player_type_setter.html#a3507144e578e2d14c1f92fe81ae14435" title="gamePlayer.PlayerTypeSetter.edit\lSpecificPlayer" alt="" coords="611,37,845,78"/>
+<area shape="rect" id="node6" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#a538b22872996297aad3b918c4f567a9f" title="gamedata.gamecomponents.\lGame.getPlayers" alt="" coords="621,102,835,143"/>
+<area shape="rect" id="node5" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#ad0b2eb24eabcffe2596837c5c6c1ac2c" title="gamedata.gamecomponents.\lGame.replacePlayer" alt="" coords="893,37,1107,78"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="authoring_environment.GUIGrid.paneSetOnMousePressed" name="authoring_environment.GUIGrid.paneSetOnMousePressed">
+<area shape="rect" id="node2" href="$d4/d3f/classfxml__main_1_1_patch_controller.html#a0a171a684c98c85bae1083e59444eac6" title="fxml_main.PatchController.init\lGlobalDelBtn" alt="" coords="324,5,535,46"/>
+<area shape="rect" id="node3" href="$dc/d77/classfxml__main_1_1_piece_controller.html#a7190534f96aae2433b925ff2ba45ee20" title="fxml_main.PieceController.init\lGlobalDelBtn" alt="" coords="324,70,535,111"/>
+<area shape="rect" id="node4" href="$d4/d3f/classfxml__main_1_1_patch_controller.html#a5157fa914edaba5f23f4fda5951224d2" title="fxml_main.PatchController.init\lGlobalEditBtn" alt="" coords="324,135,535,177"/>
+<area shape="rect" id="node5" href="$dc/d77/classfxml__main_1_1_piece_controller.html#a33f528825344a5932f5820d55f67765e" title="fxml_main.PieceController.init\lGlobalEditBtn" alt="" coords="324,201,535,242"/>
+<area shape="rect" id="node6" href="$d4/d3f/classfxml__main_1_1_patch_controller.html#a806919701c76bb361bf89e0815a76a96" title="fxml_main.PatchController.make\lEntryBox" alt="" coords="315,266,543,307"/>
+<area shape="rect" id="node7" href="$dc/d77/classfxml__main_1_1_piece_controller.html#a57d25cb33125e10494c536f9fbce1434" title="fxml_main.PieceController.make\lEntryBox" alt="" coords="316,331,543,373"/>
+</map>

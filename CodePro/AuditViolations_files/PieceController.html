@@ -1,0 +1,1784 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>PieceController.java</title>
+
+	<meta name="GENERATOR" content="CodePro Server"/>
+
+	<style type="text/css">
+	span.highSeverity {background-color: #FFAAAA; font: bold}
+span.mediumSeverity {background-color: #FFFF77; font: bold}
+span.lowSeverity {background-color: #AAAAFF; font: bold}
+table.code {border-spacing: 0; border-collapse: collapse; border-width: 1px 0 1px 1px; }
+table.code td {padding-left: 0.25em; padding-right: 0.25em; font-family: courier,monospace; font-size: 10pt; border-style: solid; border-color: black;}
+tr.first td.flags {border-width: 1px 1px 0 1px; text-align: right;}
+tr.first td.lineNumber {border-width: 1px 1px 0 1px; text-align: right;}
+tr.first td.sourceLine {border-width: 1px 1px 0 1px; background-color: #F0F0FF;}
+tr.middle td.flags {border-width: 0 1px 0 1px; text-align: right;}
+tr.middle td.lineNumber {border-width: 0 1px 0 1px; text-align: right;}
+tr.middle td.sourceLine {border-width: 0 1px 0 1px; background-color: #F0F0FF;}
+tr.last td.flags {border-width: 0 1px 1px 1px; text-align: right;}
+tr.last td.lineNumber {border-width: 0 1px 1px 1px; text-align: right;}
+tr.last td.sourceLine {border-width: 0 1px 1px 1px; background-color: #F0F0FF;}
+	</style>
+
+	<style type="text/css">
+	body {font: 70% verdana,arial,helvetica; color: #000000}
+p  {margin-top:  3px; line-height: 1.5em}
+h1 {margin-top:  0px; margin-bottom: 6px; font: bold 150% verdana,arial,helvetica}
+h2 {margin-top: 12px; margin-bottom: 6px; font: bold 125% verdana,arial,helvetica}
+h3 {margin-top: 12px; margin-bottom: 6px; font: bold 100% verdana,arial,helvetica}
+h4 {margin-top: 12px; margin-bottom: 6px; font: bold 100% verdana,arial,helvetica}
+.rounded_page{display:block}
+.rounded_page *{display:block; height:1px; overflow:hidden; font-size:.01em; background:#7799DD}
+.rounded_page1{ margin-left:3px; margin-right:3px; padding-left:1px; padding-right:1px; border-left:1px solid #c4d3ef; border-right:1px solid #c4d3ef; background:#99b2e5}
+.rounded_page2{ margin-left:1px; margin-right:1px; padding-right:1px; padding-left:1px; border-left:1px solid #f1f4fa; border-right:1px solid #f1f4fa; background:#90ace3}
+.rounded_page3{ margin-left:1px; margin-right:1px; border-left:1px solid #90ace3; border-right:1px solid #90ace3;}
+.rounded_page4{ border-left:1px solid #c4d3ef; border-right:1px solid #c4d3ef}
+.rounded_page5{ border-left:1px solid #99b2e5; border-right:1px solid #99b2e5}
+.rounded_pagefg{ background:#7799DD}
+.rounded_section{display:block}
+.rounded_section *{display:block; height:1px; overflow:hidden; font-size:.01em; background:#C3D9FF}
+.rounded_section1{ margin-left:3px; margin-right:3px; padding-left:1px; padding-right:1px; border-left:1px solid #e5eefe; border-right:1px solid #e5eefe; background:#d2e2fe}
+.rounded_section2{ margin-left:1px; margin-right:1px; padding-right:1px; padding-left:1px; border-left:1px solid #f9fbfe; border-right:1px solid #f9fbfe; background:#cee0fe}
+.rounded_section3{ margin-left:1px; margin-right:1px; border-left:1px solid #cee0fe; border-right:1px solid #cee0fe;}
+.rounded_section4{ border-left:1px solid #e5eefe; border-right:1px solid #e5eefe}
+.rounded_section5{ border-left:1px solid #d2e2fe; border-right:1px solid #d2e2fe}
+.rounded_sectionfg{ background:#C3D9FF}
+.page-title { color: #FFFFFE; font-weight: bold; font-size: large; margin: 0px 0px 0px 8px; }
+.page-title-details { color: #FFFFFE; font-weight: bold; margin-right: 8px; margin-left: 8px; }
+.page-footer { color: #FFFFFE; font-weight: bold; margin-left: 8px}
+.page-footer-details { color: #FFFFFE; font-weight: bold; margin-right: 8px; margin-left: 8px; }
+.majorsection-title { color: #FFFFFE; font-weight: bold; margin: 0px 0px 0px 8px; }
+.majorsection-title-details { color: #FFFFFE; font-weight: bold; margin-right: 8px; margin-left: 8px; }
+.majorsection-contents { margin: 0px 0px 15px 16px; }
+.section-title { color: #1F4F8F; font-weight: bold; margin: 0px 0px 0px 6px; }
+.section-title-details { font-weight: bold; margin-left: 6px; margin-right: 6px; }
+.section-contents { margin: 6px 0px 15px 14px; }
+.bodyTable { border: 0px solid #777777; width:100%; border-collapse: collapse; }
+.bodyTable th { border: 1px solid #777777; white-space:nowrap; background-color: #EEEEEE; padding-left: 3px; padding-right: 3px; }
+.bodyTable td { border: 1px solid #777777; vertical-align: top; padding-left: 3px; padding-right: 3px; }
+td[class=emptyborder] { border: 0px solid #777777; padding: 3px 0px 3px 0px; }
+
+	</style>
+
+</head>
+
+<body>
+
+<div>
+		<b class="rounded_page"><b class="rounded_page1"><b></b></b><b class="rounded_page2"><b></b></b><b class="rounded_page3"></b><b class="rounded_page4"></b><b class="rounded_page5"></b></b>
+		<div class="rounded_pagefg">
+			<h3 class="majorsection-title">/TempCodeProProject1/src1/src/fxml_main/PieceController.java</h3>
+		</div>
+		<b class="rounded_page"><b class="rounded_page5"></b><b class="rounded_page4"></b><b class="rounded_page3"></b><b class="rounded_page2"><b></b></b><b class="rounded_page1"><b></b></b></b>
+	</div>
+	<div class="section-contents">
+		<b>Violations: 3 high, 1 medium, 29 low</b>
+	</div>
+	&nbsp;
+	<div>
+		<b class="rounded_section"><b class="rounded_section1"><b></b></b><b class="rounded_section2"><b></b></b><b class="rounded_section3"></b><b class="rounded_section4"></b><b class="rounded_section5"></b></b>
+		<div class="rounded_sectionfg">
+			<h4 class="section-title">Violations</h4>
+		</div>
+		<b class="rounded_section"><b class="rounded_section5"></b><b class="rounded_section4"></b><b class="rounded_section3"></b><b class="rounded_section2"><b></b></b><b class="rounded_section1"><b></b></b></b>
+	</div>
+	<table>
+	<tr>
+	<td valign="top"><img src="medium_severity.gif" alt="medium"/>
+	</td><td valign="top"><a href="#line31">Too many parameters: 6</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line51">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line133">Code within a block is not indented</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line32">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line52">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line135">Code within a block is not indented</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line33">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line53">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line136">Code within a block is not indented</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line43">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line70">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line137">Code within a block is not indented</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line44">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line71">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line138">Code within a block is not indented</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line45">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line104">Invalid numeric literal: 7.5</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line140">Code within a block is not indented</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line46">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line106">Invalid numeric literal: 40</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line141">Code within a block is not indented</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line47">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="high_severity.gif" alt="high"/>
+	</td><td valign="top"><a href="#line107">Invalid numeric literal: 40</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line142">Code within a block is not indented</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line48">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line130">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line143">Code within a block is not indented</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line49">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line131">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line144">Code within a block is not indented</a>
+	</td></tr>
+	<tr>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line50">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line132">Code within a block is not indented</a>
+	</td>	<td width="10"/>
+	<td valign="top"><img src="low_severity.gif" alt="low"/>
+	</td><td valign="top"><a href="#line145">Code within a block is not indented</a>
+	</td></tr>
+	</table>
+	&nbsp;
+	<div>
+		<b class="rounded_section"><b class="rounded_section1"><b></b></b><b class="rounded_section2"><b></b></b><b class="rounded_section3"></b><b class="rounded_section4"></b><b class="rounded_section5"></b></b>
+		<div class="rounded_sectionfg">
+			<h4 class="section-title">Source</h4>
+		</div>
+		<b class="rounded_section"><b class="rounded_section5"></b><b class="rounded_section4"></b><b class="rounded_section3"></b><b class="rounded_section2"><b></b></b><b class="rounded_section1"><b></b></b></b>
+	</div>
+	<div class="section-contents">
+		<table width="100%" class="code">
+		<tr class="first">
+		<td class="lineNumber">
+		<a name="line1">1</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		package&nbsp;fxml_main;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line2">2</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line3">3</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;gamedata.gamecomponents.Piece;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line4">4</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;java.awt.geom.Point2D;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line5">5</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;java.util.function.Consumer;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line6">6</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.event.ActionEvent;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line7">7</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.event.EventHandler;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line8">8</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.scene.control.Button;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line9">9</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.scene.control.Label;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line10">10</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.scene.control.ScrollPane;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line11">11</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.scene.image.ImageView;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line12">12</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.scene.input.MouseEvent;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line13">13</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.scene.layout.HBox;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line14">14</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;javafx.scene.layout.VBox;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line15">15</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;authoring.data.ActionData;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line16">16</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;authoring.data.GamePropertiesData;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line17">17</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;authoring.data.PieceTypeData;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line18">18</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		import&nbsp;authoring_environment.GUIGrid;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line19">19</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line20">20</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line21">21</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		/**
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line22">22</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*&nbsp;@author&nbsp;Martin&nbsp;Tamayo
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line23">23</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line24">24</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;*/
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line25">25</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		public&nbsp;class&nbsp;PieceController&nbsp;extends&nbsp;GridComponentAbstCtrl&lt;Piece&gt;&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line26">26</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line27">27</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;PieceTypeData&nbsp;myPieceTypes;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line28">28</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;ActionData&nbsp;myActionData;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line29">29</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;GamePropertiesData&nbsp;myGameProperties;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line30">30</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line31"><b>31</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="medium_severity.gif" alt="medium" title="Too many parameters: 6"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;<span class="mediumSeverity">PieceController</span>&nbsp;(VBox&nbsp;vbox,&nbsp;ScrollPane&nbsp;propertiesSPane,&nbsp;GUIGridReference&nbsp;gridRef,
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line32"><b>32</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>PieceTypeData&nbsp;pieceTypes,&nbsp;ActionData&nbsp;actions,
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line33"><b>33</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>GamePropertiesData&nbsp;gamePropertiesData)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line34">34</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super(vbox,&nbsp;propertiesSPane,&nbsp;gridRef);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line35">35</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myActionData&nbsp;=&nbsp;actions;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line36">36</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myPieceTypes&nbsp;=&nbsp;pieceTypes;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line37">37</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myGameProperties&nbsp;=&nbsp;gamePropertiesData;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line38">38</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line39">39</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line40">40</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line41">41</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;protected&nbsp;void&nbsp;initGlobalNewBtn&nbsp;(Button&nbsp;newBtn)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line42">42</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newBtn.setOnAction(new&nbsp;EventHandler&lt;ActionEvent&gt;()&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line43"><b>43</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line44"><b>44</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>public&nbsp;void&nbsp;handle&nbsp;(ActionEvent&nbsp;event)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line45"><b>45</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>//&nbsp;Adds&nbsp;piecetype&nbsp;to&nbsp;data&nbsp;and&nbsp;makes&nbsp;an&nbsp;entry&nbsp;box
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line46"><b>46</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Consumer&lt;Piece&gt;&nbsp;okLambda&nbsp;=&nbsp;(Piece&nbsp;piece)&nbsp;-&gt;&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line47"><b>47</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>myPieceTypes.add(piece);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line48"><b>48</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>addEntry(piece);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line49"><b>49</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>};
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line50"><b>50</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>myPropertiesSPane.setContent(new&nbsp;PieceTypeEditor(okLambda,&nbsp;myPieceTypes,
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line51"><b>51</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>myActionData,&nbsp;myGameProperties
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line52"><b>52</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.getGridShape()));
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line53"><b>53</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line54">54</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line55">55</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line56">56</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line57">57</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line58">58</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;protected&nbsp;void&nbsp;initGlobalEditBtn&nbsp;(Button&nbsp;editBtn)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line59">59</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;editBtn.setOnAction(new&nbsp;EventHandler&lt;ActionEvent&gt;()&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line60">60</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line61">61</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;handle&nbsp;(ActionEvent&nbsp;event)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line62">62</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Make&nbsp;a&nbsp;MouseEvent&nbsp;for&nbsp;clicking&nbsp;the&nbsp;grid
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line63">63</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EventHandler&lt;MouseEvent&gt;&nbsp;clickHandler&nbsp;=&nbsp;new&nbsp;EventHandler&lt;MouseEvent&gt;()&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line64">64</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line65">65</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;handle&nbsp;(MouseEvent&nbsp;e)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line66">66</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GUIGrid&nbsp;grid&nbsp;=&nbsp;myGridReference.getGrid();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line67">67</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Point2D.Double&nbsp;coor&nbsp;=&nbsp;grid.findClickedCoordinate(e.getX(),&nbsp;e.getY());
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line68">68</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Piece&nbsp;piece&nbsp;=&nbsp;grid.getPiece(coor);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line69">69</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myPropertiesSPane.setContent(new&nbsp;PieceEditor(piece,
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line70"><b>70</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>myGameProperties
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line71"><b>71</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.getNumPlayers()));
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line72">72</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line73">73</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line74">74</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line75">75</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myGridReference.getGrid().paneSetOnMouseDragged(clickHandler);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line76">76</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line77">77</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line78">78</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line79">79</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line80">80</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line81">81</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;protected&nbsp;void&nbsp;initGlobalDelBtn&nbsp;(Button&nbsp;delBtn)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line82">82</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delBtn.setOnAction(new&nbsp;EventHandler&lt;ActionEvent&gt;()&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line83">83</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line84">84</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;handle&nbsp;(ActionEvent&nbsp;event)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line85">85</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Make&nbsp;a&nbsp;MouseEvent&nbsp;for&nbsp;clicking&nbsp;the&nbsp;grid
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line86">86</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EventHandler&lt;MouseEvent&gt;&nbsp;clickHandler&nbsp;=&nbsp;new&nbsp;EventHandler&lt;MouseEvent&gt;()&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line87">87</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line88">88</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;handle&nbsp;(MouseEvent&nbsp;e)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line89">89</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GUIGrid&nbsp;grid&nbsp;=&nbsp;myGridReference.getGrid();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line90">90</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Point2D.Double&nbsp;coor&nbsp;=&nbsp;grid.findClickedCoordinate(e.getX(),&nbsp;e.getY());
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line91">91</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grid.removePieceAtCoordinate(coor);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line92">92</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line93">93</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line94">94</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line95">95</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myGridReference.getGrid().paneSetOnMouseDragged(clickHandler);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line96">96</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line97">97</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line98">98</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line99">99</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line100">100</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line101">101</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;protected&nbsp;HBox&nbsp;makeEntryBox&nbsp;(Piece&nbsp;entry)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line102">102</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HBox&nbsp;hb&nbsp;=&nbsp;new&nbsp;HBox();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line103">103</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Label&nbsp;name&nbsp;=&nbsp;new&nbsp;Label(entry.getName());
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line104"><b>104</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="high_severity.gif" alt="high" title="Invalid numeric literal: 7.5"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name.setTranslateY(<span class="highSeverity">7.5</span>);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line105">105</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ImageView&nbsp;img&nbsp;=&nbsp;entry.getImageView();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line106"><b>106</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="high_severity.gif" alt="high" title="Invalid numeric literal: 40"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;img.setFitHeight(<span class="highSeverity">40</span>);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line107"><b>107</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="high_severity.gif" alt="high" title="Invalid numeric literal: 40"/></td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;img.setFitWidth(<span class="highSeverity">40</span>);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line108">108</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hb.setOnMouseClicked(new&nbsp;EventHandler&lt;MouseEvent&gt;()&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line109">109</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line110">110</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;handle&nbsp;(MouseEvent&nbsp;event)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line111">111</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EventHandler&lt;MouseEvent&gt;&nbsp;clickHandler&nbsp;=&nbsp;new&nbsp;EventHandler&lt;MouseEvent&gt;()&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line112">112</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line113">113</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;handle&nbsp;(MouseEvent&nbsp;e)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line114">114</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GUIGrid&nbsp;grid&nbsp;=&nbsp;myGridReference.getGrid();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line115">115</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Point2D.Double&nbsp;coor&nbsp;=&nbsp;grid.findClickedCoordinate(e.getX(),&nbsp;e.getY());
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line116">116</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grid.addPieceAtLoc(entry,&nbsp;coor);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line117">117</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line118">118</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line119">119</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myGridReference.getGrid().paneSetOnMousePressed(clickHandler);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line120">120</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myGridReference.getGrid().paneSetOnMouseDragged(clickHandler);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line121">121</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line122">122</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line123">123</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hb.getChildren().addAll(img,&nbsp;name);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line124">124</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;hb;
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line125">125</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line126">126</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line127">127</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line128">128</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;protected&nbsp;void&nbsp;initEntryEditBtn&nbsp;(Piece&nbsp;entry,&nbsp;Button&nbsp;editBtn)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line129">129</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;editBtn.setOnAction(new&nbsp;EventHandler&lt;ActionEvent&gt;()&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line130"><b>130</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line131"><b>131</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>public&nbsp;void&nbsp;handle&nbsp;(ActionEvent&nbsp;e)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line132"><b>132</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Consumer&lt;Piece&gt;&nbsp;okLambda&nbsp;=&nbsp;(Piece&nbsp;piece)&nbsp;-&gt;&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line133"><b>133</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>HBox&nbsp;entryBox&nbsp;=&nbsp;makeCompleteEntryBox(piece);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line134">134</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line135"><b>135</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>HBox&nbsp;entryHolderBox&nbsp;=&nbsp;myEntryMap.get(entry);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line136"><b>136</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>entryHolderBox.getChildren().clear();
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line137"><b>137</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>entryHolderBox.getChildren().add(entryBox);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line138"><b>138</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>myEntryMap.put(piece,&nbsp;entryHolderBox);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line139">139</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line140"><b>140</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>myPieceTypes.replace(entry,&nbsp;piece);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line141"><b>141</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>};
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line142"><b>142</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>myPropertiesSPane.setContent(new&nbsp;PieceTypeEditor(okLambda,&nbsp;entry,
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line143"><b>143</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>myActionData,&nbsp;myGameProperties
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line144"><b>144</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.getGridShape()));
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line145"><b>145</b></a>
+		</td>
+		<td class="flags" nowrap="nowrap"><img src="low_severity.gif" alt="low" title="Code within a block is not indented"/></td>
+		<td class="sourceLine" width="100%">
+		<span class="lowSeverity">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line146">146</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line147">147</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line148">148</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line149">149</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line150">150</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;protected&nbsp;void&nbsp;initEntryDelBtn&nbsp;(Piece&nbsp;entry,&nbsp;Button&nbsp;delBtn)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line151">151</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delBtn.setOnAction(new&nbsp;EventHandler&lt;ActionEvent&gt;()&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line152">152</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Override
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line153">153</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;handle&nbsp;(ActionEvent&nbsp;event)&nbsp;{
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line154">154</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myPieceTypes.remove(entry);
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line155">155</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myVBox.getChildren().remove(myEntryMap.get(entry));
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line156">156</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line157">157</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+		</td>
+		</tr>
+		<tr class="middle">
+		<td class="lineNumber">
+		<a name="line158">158</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		&nbsp;&nbsp;&nbsp;&nbsp;}
+		</td>
+		</tr>
+		<tr class="last">
+		<td class="lineNumber">
+		<a name="line159">159</a>
+		</td>
+		<td class="flags">
+		</td>
+		<td class="sourceLine" width="100%">
+		}
+		</td>
+		</tr>
+		</table>
+	</div>
+	<div>
+		<b class="rounded_page"><b class="rounded_page1"><b></b></b><b class="rounded_page2"><b></b></b><b class="rounded_page3"></b><b class="rounded_page4"></b><b class="rounded_page5"></b></b>
+		<div class="rounded_pagefg">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" ><tr><td valign="middle">
+			<span class="page-footer"></span>
+			</td><td align="right" valign="middle">
+			<span class="page-footer-details">Powered by <span title="0.0.0, UNKNOWN">CodePro Server</span></span></td></tr></table>
+		</div>
+		<b class="rounded_page"><b class="rounded_page5"></b><b class="rounded_page4"></b><b class="rounded_page3"></b><b class="rounded_page2"><b></b></b><b class="rounded_page1"><b></b></b></b>
+	</div>
+
+</body>
+
+</html>

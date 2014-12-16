@@ -1,0 +1,4 @@
+<map id="authoring_environment.GUIGrid.getPlayerPieces" name="authoring_environment.GUIGrid.getPlayerPieces">
+<area shape="rect" id="node2" href="$d8/d4d/classgameengine_1_1player_1_1_simple_a_i_player.html#a4939c006130cc2f30060ccb3abd9d5e5" title="gameengine.player.Simple\lAIPlayer.play" alt="" coords="304,5,496,46"/>
+<area shape="rect" id="node3" href="$d8/d4d/classgameengine_1_1player_1_1_simple_a_i_player.html#a9a241075e35d6039a453f51445e9837c" title="gameengine.player.Simple\lAIPlayer.startTurn" alt="" coords="544,5,736,46"/>
+</map>

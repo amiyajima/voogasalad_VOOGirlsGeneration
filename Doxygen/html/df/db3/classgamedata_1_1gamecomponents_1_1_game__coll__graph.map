@@ -1,0 +1,12 @@
+<map id="gamedata.gamecomponents.Game" name="gamedata.gamecomponents.Game">
+<area shape="rect" id="node2" href="$d0/dfd/classgameengine_1_1player_1_1_player.html" title="gameengine.player.Player" alt="" coords="1133,72,1320,99"/>
+<area shape="rect" id="node3" href="$dc/d5b/interfacegamedata_1_1gamecomponents_1_1_i_has_stats.html" title="gamedata.gamecomponents.\lIHasStats" alt="" coords="764,6,977,47"/>
+<area shape="rect" id="node4" href="$d6/d1d/classgamedata_1_1stats_1_1_stats.html" title="gamedata.stats.Stats" alt="" coords="789,72,952,99"/>
+<area shape="rect" id="node6" href="$d8/d01/classgamedata_1_1gamecomponents_1_1_level.html" title="gamedata.gamecomponents.\lLevel" alt="" coords="1120,137,1333,178"/>
+<area shape="rect" id="node8" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html" title="authoring_environment.GUIGrid" alt="" coords="759,173,983,200"/>
+<area shape="rect" id="node9" href="$d9/df3/classauthoring__environment_1_1_super_grid.html" title="authoring_environment.SuperGrid" alt="" coords="379,123,618,149"/>
+<area shape="rect" id="node13" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html" title="authoring.data.PatchInstanceData" alt="" coords="379,224,619,251"/>
+<area shape="rect" id="node14" href="$d5/d29/interfaceauthoring_1_1data_1_1_authoring_data.html" title="authoring.data.Authoring\lData\&lt; Patch \&gt;" alt="" coords="39,174,222,215"/>
+<area shape="rect" id="node16" href="$d6/dda/classauthoring_1_1data_1_1_piece_instance_data.html" title="authoring.data.PieceInstanceData" alt="" coords="379,312,618,339"/>
+<area shape="rect" id="node17" href="$d5/d29/interfaceauthoring_1_1data_1_1_authoring_data.html" title="authoring.data.Authoring\lData\&lt; Piece \&gt;" alt="" coords="39,305,222,346"/>
+</map>

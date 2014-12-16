@@ -1,0 +1,4 @@
+<map id="gamedata.gamecomponents.Game.changeTurn" name="gamedata.gamecomponents.Game.changeTurn">
+<area shape="rect" id="node2" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#af10a4c1effbe4b034810f9f2e5e7863b" title="gamedata.gamecomponents.\lGame.setCurrentPlayer" alt="" coords="267,5,480,46"/>
+<area shape="rect" id="node3" href="$d0/dfd/classgameengine_1_1player_1_1_player.html#ad132fea87861614c8adba7ed35ec7497" title="gameengine.player.Player.startTurn" alt="" coords="529,12,775,39"/>
+</map>

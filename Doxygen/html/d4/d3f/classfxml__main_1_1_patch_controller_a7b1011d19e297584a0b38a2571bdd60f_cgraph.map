@@ -1,0 +1,7 @@
+<map id="fxml_main.PatchController.initEntryEditBtn" name="fxml_main.PatchController.initEntryEditBtn">
+<area shape="rect" id="node2" href="$da/d40/classfxml__main_1_1_grid_component_abst_ctrl.html#a690d85921c1558f7988bb18e895363ef" title="fxml_main.GridComponentAbst\lCtrl\&lt; Patch \&gt;::makeCompleteEntryBox" alt="" coords="264,70,536,111"/>
+<area shape="rect" id="node5" href="$d1/d4f/classauthoring_1_1data_1_1_patch_type_data.html#ac6cb7289b2cb9e32624cc1adb913a8cd" title="authoring.data.PatchType\lData.replace" alt="" coords="309,135,491,177"/>
+<area shape="rect" id="node3" href="$da/d40/classfxml__main_1_1_grid_component_abst_ctrl.html#a3a7a07e8be0f36be9304aba140f2211c" title="fxml_main.GridComponentAbst\lCtrl.makeEntryBox" alt="" coords="585,5,807,46"/>
+<area shape="rect" id="node4" href="$da/d40/classfxml__main_1_1_grid_component_abst_ctrl.html#a2ce80206bf232bf1d6417c2bcd9bd66f" title="fxml_main.GridComponentAbst\lCtrl.initEntryControls" alt="" coords="585,70,807,111"/>
+<area shape="rect" id="node6" href="$d1/d4f/classauthoring_1_1data_1_1_patch_type_data.html#a83d13a28f3d638344c13fa92eb7baa80" title="authoring.data.PatchType\lData.add" alt="" coords="605,135,787,177"/>
+</map>

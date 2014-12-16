@@ -1,0 +1,7 @@
+<map id="gamedata.action.ConcreteAction.modifyStats" name="gamedata.action.ConcreteAction.modifyStats">
+<area shape="rect" id="node2" href="$d6/dcc/classgamedata_1_1action_1_1_stats_data_modifier.html#a5ebf6f78cddbc8300bf2c0ac096e1246" title="gamedata.action.StatsData\lModifier.modifyStats" alt="" coords="248,70,448,111"/>
+<area shape="rect" id="node3" href="$dc/d5b/interfacegamedata_1_1gamecomponents_1_1_i_has_stats.html#a9f7badcb30c9fddd00c760c38341a616" title="gamedata.gamecomponents.\lIHasStats.getStats" alt="" coords="500,5,713,46"/>
+<area shape="rect" id="node4" href="$d6/dcc/classgamedata_1_1action_1_1_stats_data_modifier.html#a270d8b56c5471f0f15a2e97a4ca2b3ee" title="gamedata.action.StatsData\lModifier.evaluateMultiplierLogic" alt="" coords="497,70,717,111"/>
+<area shape="rect" id="node6" href="$d6/d1d/classgamedata_1_1stats_1_1_stats.html#a2b3c4d451bb085e792334ffe9a3282ec" title="gamedata.stats.Stats.set\lValue" alt="" coords="513,135,700,177"/>
+<area shape="rect" id="node5" href="$d6/d1d/classgamedata_1_1stats_1_1_stats.html#af856afc55d980f35020bbeaefeb1777d" title="gamedata.stats.Stats.get\lValue" alt="" coords="765,70,952,111"/>
+</map>

@@ -1,0 +1,20 @@
+<map id="gamePlayer.ViewController.setGridState" name="gamePlayer.ViewController.setGridState">
+<area shape="rect" id="node2" href="$df/dd5/classgame_player_1_1_view_controller.html#a7eb038fd9f20604ade0406f27ef76657" title="gamePlayer.ViewController.bind\lAction" alt="" coords="270,187,493,229"/>
+<area shape="rect" id="node9" href="$df/dd5/classgame_player_1_1_view_controller.html#a10a40967a873f067cf91b024ff85b38e" title="gamePlayer.ViewController.initializeGrid" alt="" coords="1427,259,1699,285"/>
+<area shape="rect" id="node13" href="$db/d00/classgame_player_1_1_apply_state.html#aed42c1aba25264bc6880036f693a1c9e" title="gamePlayer.ApplyState.on\lClick" alt="" coords="2371,262,2562,303"/>
+<area shape="rect" id="node3" href="$df/df0/classtests_1_1_view_controller_test.html#a74e99f9c72cbdcd2d56271b2ad2df1ce" title="tests.ViewControllerTest.bind\lActionTest" alt="" coords="559,187,764,229"/>
+<area shape="rect" id="node4" href="$d1/db7/classgame_player_1_1_keyboard_action.html#a08ace57322b8639020688dd9493c3e1f" title="gamePlayer.KeyboardAction.set\lActionKeyControl" alt="" coords="549,253,773,294"/>
+<area shape="rect" id="node17" href="$df/dd5/classgame_player_1_1_view_controller.html#ab8c14a8c53be9021a62d0107c2f75ef6" title="gamePlayer.ViewController.update\lActions" alt="" coords="541,70,781,111"/>
+<area shape="rect" id="node5" href="$df/dd5/classgame_player_1_1_view_controller.html#a95c2acd43bb39b8606c69971c1cd30f5" title="gamePlayer.ViewController.perform\lAction" alt="" coords="830,189,1077,230"/>
+<area shape="rect" id="node6" href="$da/d55/classgame_player_1_1_keyboard_movement.html#af45fd8d279b1ee2d6be5466d425485ab" title="gamePlayer.KeyboardMovement.set\lMovementKeyControl" alt="" coords="1126,130,1378,171"/>
+<area shape="rect" id="node8" href="$df/dd5/classgame_player_1_1_view_controller.html#a22ee80193bbac79a935ee961a183bfcd" title="gamePlayer.ViewController.set\lOnClick" alt="" coords="1145,250,1359,291"/>
+<area shape="rect" id="node7" href="$df/dd5/classgame_player_1_1_view_controller.html#a27da17c1280cd953a14f6b76b18f9a4b" title="gamePlayer.ViewController.toggle\lKeyboardControl" alt="" coords="1445,130,1680,171"/>
+<area shape="rect" id="node10" href="$df/dd5/classgame_player_1_1_view_controller.html#af1870a0b6786d96d118021fc62b6475d" title="gamePlayer.ViewController.beginGame" alt="" coords="1751,319,2020,345"/>
+<area shape="rect" id="node11" href="$df/dd5/classgame_player_1_1_view_controller.html#a620f8a02d3ac7677cd179fcd812aca55" title="gamePlayer.ViewController.check\lEndActions" alt="" coords="1769,135,2001,177"/>
+<area shape="rect" id="node14" href="$df/dd5/classgame_player_1_1_view_controller.html#a0d1a3d443966f151b070dc751d2faf9a" title="gamePlayer.ViewController.restartGame" alt="" coords="1747,201,2024,228"/>
+<area shape="rect" id="node15" href="$df/dd5/classgame_player_1_1_view_controller.html#a4c1754d129a4eac955390b428eaa448a" title="gamePlayer.ViewController.test\lPlayGame" alt="" coords="1775,253,1995,294"/>
+<area shape="rect" id="node12" href="$df/dd5/classgame_player_1_1_view_controller.html#a13ea7814bde61a8042c5b1a23af41416" title="gamePlayer.ViewController.end\lAction" alt="" coords="2088,162,2307,203"/>
+<area shape="rect" id="node16" href="$db/d40/classfxml__main_1_1_authoring_controller.html#a2ec133c8edf0a7ab1e84f2e12455233d" title="fxml_main.AuthoringController.save\lAsGame" alt="" coords="2073,253,2322,294"/>
+<area shape="rect" id="node18" href="$d6/d24/classgame_player_1_1_select_state.html#a801827392f0faeee6b96925060d77838" title="gamePlayer.SelectState.on\lClick" alt="" coords="855,5,1051,46"/>
+<area shape="rect" id="node19" href="$df/df0/classtests_1_1_view_controller_test.html#a785df2c49a72c183c22163ce927f5df1" title="tests.ViewControllerTest.update\lActionsTest" alt="" coords="842,70,1065,111"/>
+</map>

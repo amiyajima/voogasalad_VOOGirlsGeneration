@@ -1,0 +1,28 @@
+<map id="fxml_main.AuthoringController" name="fxml_main.AuthoringController">
+<area shape="rect" id="node4" href="$d7/d88/classauthoring_1_1data_1_1_level_data.html" title="authoring.data.LevelData" alt="" coords="804,540,988,567"/>
+<area shape="rect" id="node31" href="$d5/d1d/classauthoring_1_1data_1_1_game_authoring_data.html" title="authoring.data.GameAuthoringData" alt="" coords="1233,588,1485,615"/>
+<area shape="rect" id="node36" href="$da/d61/classfxml__main_1_1_level_controller.html" title="fxml_main.LevelController" alt="" coords="1265,983,1452,1010"/>
+<area shape="rect" id="node5" href="$d5/d29/interfaceauthoring_1_1data_1_1_authoring_data.html" title="authoring.data.Authoring\lData\&lt; Level \&gt;" alt="" coords="413,468,595,509"/>
+<area shape="rect" id="node7" href="$d8/d67/classfxml__main_1_1_action_controller.html" title="fxml_main.ActionController" alt="" coords="1261,138,1456,164"/>
+<area shape="rect" id="node8" href="$da/d40/classfxml__main_1_1_grid_component_abst_ctrl.html" title="fxml_main.GridComponentAbst\lCtrl\&lt; ConcreteAction \&gt;" alt="" coords="785,104,1007,145"/>
+<area shape="rect" id="node9" href="$d2/da6/classauthoring_1_1data_1_1_action_data.html" title="authoring.data.ActionData" alt="" coords="801,214,991,240"/>
+<area shape="rect" id="node34" href="$dc/d77/classfxml__main_1_1_piece_controller.html" title="fxml_main.PieceController" alt="" coords="1265,347,1453,374"/>
+<area shape="rect" id="node10" href="$d5/d29/interfaceauthoring_1_1data_1_1_authoring_data.html" title="authoring.data.Authoring\lData\&lt; Action \&gt;" alt="" coords="413,177,595,218"/>
+<area shape="rect" id="node12" href="$d1/d4f/classauthoring_1_1data_1_1_patch_type_data.html" title="authoring.data.PatchTypeData" alt="" coords="789,1131,1003,1158"/>
+<area shape="rect" id="node40" href="$d4/d3f/classfxml__main_1_1_patch_controller.html" title="fxml_main.PatchController" alt="" coords="1264,1212,1453,1239"/>
+<area shape="rect" id="node32" href="$d5/d98/classauthoring_1_1data_1_1_piece_type_data.html" title="authoring.data.PieceTypeData" alt="" coords="789,782,1003,808"/>
+<area shape="rect" id="node14" href="$d5/d29/interfaceauthoring_1_1data_1_1_authoring_data.html" title="authoring.data.Authoring\lData\&lt; Patch \&gt;" alt="" coords="39,1150,222,1192"/>
+<area shape="rect" id="node27" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html" title="authoring.data.PatchInstanceData" alt="" coords="384,939,624,966"/>
+<area shape="rect" id="node16" href="$d2/dcf/classauthoring_1_1data_1_1_game_properties_data.html" title="authoring.data.GamePropertiesData" alt="" coords="769,288,1023,315"/>
+<area shape="rect" id="node18" href="$d6/dfb/classauthoring_1_1data_1_1_player_stat_data.html" title="authoring.data.PlayerStatData" alt="" coords="787,599,1005,626"/>
+<area shape="rect" id="node19" href="$d6/d1d/classgamedata_1_1stats_1_1_stats.html" title="gamedata.stats.Stats" alt="" coords="423,599,585,626"/>
+<area shape="rect" id="node21" href="$d6/d05/classfxml__main_1_1_g_u_i_grid_reference.html" title="fxml_main.GUIGridReference" alt="" coords="1257,715,1461,742"/>
+<area shape="rect" id="node22" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html" title="authoring_environment.GUIGrid" alt="" coords="784,731,1008,758"/>
+<area shape="rect" id="node23" href="$d9/df3/classauthoring__environment_1_1_super_grid.html" title="authoring_environment.SuperGrid" alt="" coords="385,652,623,679"/>
+<area shape="rect" id="node28" href="$d6/dda/classauthoring_1_1data_1_1_piece_instance_data.html" title="authoring.data.PieceInstanceData" alt="" coords="385,816,623,843"/>
+<area shape="rect" id="node29" href="$d5/d29/interfaceauthoring_1_1data_1_1_authoring_data.html" title="authoring.data.Authoring\lData\&lt; Piece \&gt;" alt="" coords="39,777,222,818"/>
+<area shape="rect" id="node35" href="$da/d40/classfxml__main_1_1_grid_component_abst_ctrl.html" title="fxml_main.GridComponentAbst\lCtrl\&lt; Piece \&gt;" alt="" coords="785,340,1007,381"/>
+<area shape="rect" id="node37" href="$da/d40/classfxml__main_1_1_grid_component_abst_ctrl.html" title="fxml_main.GridComponentAbst\lCtrl\&lt; Level \&gt;" alt="" coords="785,1065,1007,1106"/>
+<area shape="rect" id="node38" href="$de/dd8/classauthoring_1_1data_1_1_player_data.html" title="authoring.data.PlayerData" alt="" coords="801,999,991,1026"/>
+<area shape="rect" id="node41" href="$da/d40/classfxml__main_1_1_grid_component_abst_ctrl.html" title="fxml_main.GridComponentAbst\lCtrl\&lt; Patch \&gt;" alt="" coords="785,1222,1007,1264"/>
+</map>

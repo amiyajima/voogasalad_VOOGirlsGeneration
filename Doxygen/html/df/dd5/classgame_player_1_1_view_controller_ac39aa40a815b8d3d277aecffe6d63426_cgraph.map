@@ -1,0 +1,16 @@
+<map id="gamePlayer.ViewController.highlightSelected" name="gamePlayer.ViewController.highlightSelected">
+<area shape="rect" id="node2" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#a4b6fcd24022b5c11ff2a992661259e54" title="gamedata.gamecomponents.\lGame.getCurrentLevel" alt="" coords="328,5,541,46"/>
+<area shape="rect" id="node3" href="$d8/d01/classgamedata_1_1gamecomponents_1_1_level.html#adef1fc175daf62d54468e35e67413edb" title="gamedata.gamecomponents.\lLevel.getGrid" alt="" coords="328,70,541,111"/>
+<area shape="rect" id="node4" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a97439a493db38860397436079b123e8c" title="gamedata.gamecomponents.\lGridComponent.getLoc" alt="" coords="328,135,541,177"/>
+<area shape="rect" id="node5" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#a1ac1af9ff6b3cff9aee00db73948d1c0" title="authoring_environment.GUIGrid.get\lPiece" alt="" coords="310,201,559,242"/>
+<area shape="rect" id="node7" href="$d5/dfb/classgame_player_1_1_game_grid_effect.html#a1c6be8631bc6b597b5ed7dc9cd7e62fe" title="gamePlayer.GameGridEffect.highlight\lCurrent" alt="" coords="305,325,565,366"/>
+<area shape="rect" id="node6" href="$d6/dda/classauthoring_1_1data_1_1_piece_instance_data.html#afb4443eda20595533c28fe05f079fb48" title="authoring.data.PieceInstance\lData.getData" alt="" coords="635,142,843,183"/>
+<area shape="rect" id="node8" href="$d5/dfb/classgame_player_1_1_game_grid_effect.html#a15e8c38e57010ae65b1f98bcca6ca3c1" title="gamePlayer.GameGridEffect.clear\lAllActionHighlights" alt="" coords="620,207,857,249"/>
+<area shape="rect" id="node9" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#aa57ca0acf0ef3aab7d5d98cf9cbbd1d7" title="authoring_environment.Super\lGrid.findTile" alt="" coords="913,295,1127,337"/>
+<area shape="rect" id="node10" href="$d5/dfb/classgame_player_1_1_game_grid_effect.html#a2e61198f82a0f6a14f5a04afd490eda8" title="gamePlayer.GameGridEffect.clear\lAllEffectHighlights" alt="" coords="620,325,857,366"/>
+<area shape="rect" id="node11" href="$d5/dfb/classgame_player_1_1_game_grid_effect.html#a8ec1cee16a259d5d7c3fca0132060049" title="gamePlayer.GameGridEffect.clear\lAllPieceHighlights" alt="" coords="620,390,857,431"/>
+<area shape="rect" id="node12" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#ab5ef68199e1e504d94b443e562cba0b9" title="authoring_environment.Super\lTile.selectTile" alt="" coords="632,455,845,497"/>
+<area shape="rect" id="node13" href="$d5/dfb/classgame_player_1_1_game_grid_effect.html#a5e34f8b7cca52de2db06626494e76457" title="gamePlayer.GameGridEffect.update\lActives" alt="" coords="613,521,864,562"/>
+<area shape="rect" id="node14" href="$df/dd5/classgame_player_1_1_view_controller.html#a7c056f49d735d05a774efccf94893e0e" title="gamePlayer.ViewController.get\lActiveAction" alt="" coords="912,487,1128,529"/>
+<area shape="rect" id="node15" href="$df/dd5/classgame_player_1_1_view_controller.html#a53f6a078b1b2d43b3df91a7acd19121a" title="gamePlayer.ViewController.get\lActivePiece" alt="" coords="912,553,1128,594"/>
+</map>

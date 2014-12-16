@@ -1,0 +1,7 @@
+<map id="fxml_main.PlayerStatEditor.PlayerStatEditor" name="fxml_main.PlayerStatEditor.PlayerStatEditor">
+<area shape="rect" id="node2" href="$d6/dfb/classauthoring_1_1data_1_1_player_stat_data.html#acc7edfaa6c3806d97a35175309743169" title="authoring.data.PlayerStat\lData.getStats" alt="" coords="569,5,756,46"/>
+<area shape="rect" id="node3" href="$d4/d5e/classfxml__main_1_1_player_stat_editor.html#adefbf23f32bcbadbbb2a18887464ff1d" title="fxml_main.PlayerStatEditor.initialize" alt="" coords="254,77,503,104"/>
+<area shape="rect" id="node4" href="$d6/dfb/classauthoring_1_1data_1_1_player_stat_data.html#af61c7e47d5e6526395b54da439a6f4f6" title="authoring.data.PlayerStat\lData.getScoreStat" alt="" coords="569,70,756,111"/>
+<area shape="rect" id="node5" href="$d6/d1d/classgamedata_1_1stats_1_1_stats.html#ab27592e580397a6bfa7b9319358e49e4" title="gamedata.stats.Stats.contains" alt="" coords="553,136,773,163"/>
+<area shape="rect" id="node6" href="$d6/dfb/classauthoring_1_1data_1_1_player_stat_data.html#ac91bcdbe4c6278046c3475318adfcfe1" title="authoring.data.PlayerStat\lData.setScoreStat" alt="" coords="569,187,756,229"/>
+</map>

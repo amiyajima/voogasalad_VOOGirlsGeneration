@@ -1,0 +1,10 @@
+<map id="authoring_environment.GUIGrid.repopulate" name="authoring_environment.GUIGrid.repopulate">
+<area shape="rect" id="node2" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#a12341db20ff77949c83ff8e9db4f2e10" title="authoring_environment.GUIGrid.add\lPatchToTile" alt="" coords="353,37,605,78"/>
+<area shape="rect" id="node6" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#ad9520ccdfc36fd1e2b2cbb9ee68c22f1" title="authoring_environment.GUIGrid.add\lPieceToTile" alt="" coords="353,102,605,143"/>
+<area shape="rect" id="node8" href="$d6/dda/classauthoring_1_1data_1_1_piece_instance_data.html#afb4443eda20595533c28fe05f079fb48" title="authoring.data.PieceInstance\lData.getData" alt="" coords="375,167,583,209"/>
+<area shape="rect" id="node9" href="$d7/dd4/classauthoring_1_1data_1_1_patch_instance_data.html#a60ac72e96e7e0da6f3beb20122a8c041" title="authoring.data.PatchInstance\lData.getData" alt="" coords="374,233,583,274"/>
+<area shape="rect" id="node3" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a9a5b2359d22e7d79d5065826a0dc8211" title="gamedata.gamecomponents.\lGridComponent.getImageView" alt="" coords="654,70,871,111"/>
+<area shape="rect" id="node5" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#a7e65040df400ad3d7a62145816f0cca4" title="authoring_environment.Super\lTile.setPatchImage" alt="" coords="656,5,869,46"/>
+<area shape="rect" id="node4" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a224e5aae28655f7e26ff73cbde7b0d99" title="gamedata.gamecomponents.\lGridComponent.setImageView" alt="" coords="920,70,1136,111"/>
+<area shape="rect" id="node7" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#af7f7917a6fb88cc3145cd6f981a80f79" title="authoring_environment.Super\lTile.setPieceImage" alt="" coords="656,135,869,177"/>
+</map>

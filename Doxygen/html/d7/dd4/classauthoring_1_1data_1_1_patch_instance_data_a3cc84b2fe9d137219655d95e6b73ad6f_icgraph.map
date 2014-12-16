@@ -1,0 +1,16 @@
+<map id="authoring.data.PatchInstanceData.remove" name="authoring.data.PatchInstanceData.remove">
+<area shape="rect" id="node2" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#a2413204cbed4e6aae67dbb5ab1c55505" title="authoring_environment.GUIGrid.remove\lPatch" alt="" coords="264,93,541,134"/>
+<area shape="rect" id="node15" href="$d1/d4e/classauthoring__environment_1_1_shape_grid.html#a346b413d14259b0ba016b9140984b06f" title="authoring_environment.Shape\lGrid.removeTerrain" alt="" coords="295,158,511,199"/>
+<area shape="rect" id="node3" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#a7eab390461914d473383c90e9fb6e3b9" title="authoring_environment.GUIGrid.remove\lPatchAtCoordinate" alt="" coords="589,93,867,134"/>
+<area shape="rect" id="node4" href="$da/d4c/classauthoring__environment_1_1_g_u_i_grid.html#a964e976497a8a32ae8db18c037b8fac1" title="authoring_environment.GUIGrid.add\lPatchAtLoc" alt="" coords="915,59,1167,101"/>
+<area shape="rect" id="node14" href="$d4/d3f/classfxml__main_1_1_patch_controller.html#a0a171a684c98c85bae1083e59444eac6" title="fxml_main.PatchController.init\lGlobalDelBtn" alt="" coords="936,125,1147,166"/>
+<area shape="rect" id="node5" href="$d4/d3f/classfxml__main_1_1_patch_controller.html#a806919701c76bb361bf89e0815a76a96" title="fxml_main.PatchController.make\lEntryBox" alt="" coords="1217,27,1445,69"/>
+<area shape="rect" id="node6" href="$d3/d12/classtests_1_1_test_game_creator.html#a4c85cf768c7e38e9b2f6db858e8764ec" title="tests.TestGameCreator.create\lNewGrid" alt="" coords="1223,93,1438,134"/>
+<area shape="rect" id="node7" href="$d3/d12/classtests_1_1_test_game_creator.html#a6088501ec4cce8d90d4561b695065a0d" title="tests.TestGameCreator.create\lNewGame" alt="" coords="1494,93,1709,134"/>
+<area shape="rect" id="node8" href="$d8/d93/classauthoring_1_1concretefeatures_1_1menus_1_1_file_x.html#a06eadcf7852f723bc5a70d08a1bc5f3f" title="authoring.concretefeatures.menus.\lFileX.handleSave" alt="" coords="1763,5,2011,46"/>
+<area shape="rect" id="node10" href="$df/dd5/classgame_player_1_1_view_controller.html#ac0350fa190876455755b7fb25f567af1" title="gamePlayer.ViewController.testGame" alt="" coords="1757,71,2016,97"/>
+<area shape="rect" id="node11" href="$d9/d51/classtests_1_1_global_action_tester.html#acc8e81a79086b93c043129dba02b3854" title="tests.GlobalActionTester.\lGlobalActionTester" alt="" coords="1797,122,1976,163"/>
+<area shape="rect" id="node12" href="$d7/df4/classtests_1_1_j_s_o_n_tester_main.html#a5f1fa68f3fcb37a473271cdbfeaaa92e" title="tests.JSONTesterMain.test\lJSONwrite" alt="" coords="1793,187,1980,229"/>
+<area shape="rect" id="node9" href="$d8/d93/classauthoring_1_1concretefeatures_1_1menus_1_1_file_x.html#a4b99e0877ab0c9e769217c815f3b99a1" title="authoring.concretefeatures.menus.\lFileX.FileX" alt="" coords="2064,5,2312,46"/>
+<area shape="rect" id="node13" href="$d7/df4/classtests_1_1_j_s_o_n_tester_main.html#a931215da47157cbc5157c6a9df31ccd4" title="tests.JSONTesterMain.main" alt="" coords="2091,195,2285,221"/>
+</map>
