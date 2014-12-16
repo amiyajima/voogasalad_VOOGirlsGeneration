@@ -1,3 +1,5 @@
+// This entire file is part of my masterpiece.
+// YOUR NAME
 package gamePlayer;
 
 import fxml_main.ErrorPopUp;
@@ -175,10 +177,9 @@ public class ViewController {
 
 	public ViewController() throws UnsupportedAudioFileException,
 	IOException, LineUnavailableException {
-		openInitialMenu();
 		myStage = new Stage();
 		openInitialMenu();
-		myStage.setScene(new Scene(myInitialVBox));
+		myStage.setScene(initialScene);
 	        myStage.show();
 	}
 	
