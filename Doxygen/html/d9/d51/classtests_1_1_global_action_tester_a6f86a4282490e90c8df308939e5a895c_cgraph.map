@@ -1,5 +1,0 @@
-<map id="tests.GlobalActionTester.TestLevelChange" name="tests.GlobalActionTester.TestLevelChange">
-<area shape="rect" id="node2" href="$d1/d9d/classgamedata_1_1events_1_1globalaction_1_1_level_change.html#afa44fe273a1ee6758c8ab546abc26b5c" title="gamedata.events.globalaction.\lLevelChange.doBehavior" alt="" coords="233,5,453,46"/>
-<area shape="rect" id="node3" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#a4b6fcd24022b5c11ff2a992661259e54" title="gamedata.gamecomponents.\lGame.getCurrentLevel" alt="" coords="236,70,449,111"/>
-<area shape="rect" id="node4" href="$d8/d01/classgamedata_1_1gamecomponents_1_1_level.html#a7f4bb1aadc1ae9de7eb9c2d4c955c134" title="gamedata.gamecomponents.\lLevel.getId" alt="" coords="236,135,449,177"/>
-</map>

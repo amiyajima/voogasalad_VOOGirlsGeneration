@@ -1,8 +1,0 @@
-<map id="fxml_main.LevelController.makeEntryBox" name="fxml_main.LevelController.makeEntryBox">
-<area shape="rect" id="node2" href="$d8/d01/classgamedata_1_1gamecomponents_1_1_level.html#a7f4bb1aadc1ae9de7eb9c2d4c955c134" title="gamedata.gamecomponents.\lLevel.getId" alt="" coords="280,21,493,62"/>
-<area shape="rect" id="node3" href="$da/d61/classfxml__main_1_1_level_controller.html#a2e3171d5138673f8798df865cd7474d6" title="fxml_main.LevelController.set\lAndDisplayGrid" alt="" coords="281,86,492,127"/>
-<area shape="rect" id="node4" href="$d6/d05/classfxml__main_1_1_g_u_i_grid_reference.html#a6a50d6c8429ddb56128b31faed01dd21" title="fxml_main.GUIGridReference.setGrid" alt="" coords="542,5,797,32"/>
-<area shape="rect" id="node5" href="$d8/d01/classgamedata_1_1gamecomponents_1_1_level.html#adef1fc175daf62d54468e35e67413edb" title="gamedata.gamecomponents.\lLevel.getGrid" alt="" coords="563,57,776,98"/>
-<area shape="rect" id="node6" href="$d6/d05/classfxml__main_1_1_g_u_i_grid_reference.html#ab47bae2ec738eb18d99809ec9443a2ae" title="fxml_main.GUIGridReference.getGrid" alt="" coords="542,123,797,149"/>
-<area shape="rect" id="node7" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#aba69dd5b1d04abadf1186c952362a46e" title="authoring_environment.Super\lGrid.displayPane" alt="" coords="563,174,776,215"/>
-</map>

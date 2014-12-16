@@ -1,6 +1,0 @@
-<map id="gamedata.action.StatsModifier.getStatName" name="gamedata.action.StatsModifier.getStatName">
-<area shape="rect" id="node2" href="$d6/d24/classgamedata_1_1action_1_1_total_logic_box.html#afcae3c3988f11f44939a230b779a57a2" title="gamedata.action.TotalLogic\lBox.initStatsModifier" alt="" coords="313,5,511,46"/>
-<area shape="rect" id="node4" href="$d1/dcf/classgamedata_1_1action_1_1_single_multiplier_box.html#a17a1754c6ed3a409c394fc321877d154" title="gamedata.action.SingleMultiplier\lBox.setSingleMultiplier" alt="" coords="297,70,527,111"/>
-<area shape="rect" id="node3" href="$d6/d24/classgamedata_1_1action_1_1_total_logic_box.html#a8253e20e78d09bfda4bf099e726b24cd" title="gamedata.action.TotalLogic\lBox.TotalLogicBox" alt="" coords="593,5,791,46"/>
-<area shape="rect" id="node5" href="$d1/dcf/classgamedata_1_1action_1_1_single_multiplier_box.html#afefd75895b38408a8c13d9b0daedc484" title="gamedata.action.SingleMultiplier\lBox.SingleMultiplierBox" alt="" coords="577,70,807,111"/>
-</map>

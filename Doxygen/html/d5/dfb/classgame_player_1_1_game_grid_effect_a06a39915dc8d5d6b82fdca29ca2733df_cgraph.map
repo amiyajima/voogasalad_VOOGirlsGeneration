@@ -1,5 +1,0 @@
-<map id="gamePlayer.GameGridEffect.GameGridEffect" name="gamePlayer.GameGridEffect.GameGridEffect">
-<area shape="rect" id="node2" href="$df/dd5/classgame_player_1_1_view_controller.html#a7c056f49d735d05a774efccf94893e0e" title="gamePlayer.ViewController.get\lActiveAction" alt="" coords="275,5,491,46"/>
-<area shape="rect" id="node3" href="$df/dd5/classgame_player_1_1_view_controller.html#a53f6a078b1b2d43b3df91a7acd19121a" title="gamePlayer.ViewController.get\lActivePiece" alt="" coords="275,70,491,111"/>
-<area shape="rect" id="node4" href="$df/dd5/classgame_player_1_1_view_controller.html#a68d6b3645af17eb6fb25133a5827f7fb" title="gamePlayer.ViewController.getGrid" alt="" coords="261,136,504,163"/>
-</map>

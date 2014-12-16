@@ -1,6 +1,0 @@
-<map id="authoring.concretefeatures.RangeEditor.SelectHandler.handle" name="authoring.concretefeatures.RangeEditor.SelectHandler.handle">
-<area shape="rect" id="node2" href="$d5/df6/classauthoring__environment_1_1_range_grid_view.html#abb88e480de6be8db723c9a30874e857d" title="authoring_environment.Range\lGridView.returnSelectedList" alt="" coords="294,38,509,79"/>
-<area shape="rect" id="node3" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#a5d631da91234e98b2970a530dc860503" title="authoring_environment.Range\lGrid.selectedRangeList" alt="" coords="558,38,773,79"/>
-<area shape="rect" id="node4" href="$d5/da8/classauthoring__environment_1_1_range_grid.html#aee0028d314fe7e42143f91d67f9c25c1" title="authoring_environment.Range\lGrid.findTile" alt="" coords="822,5,1037,46"/>
-<area shape="rect" id="node5" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#afafc82a52123f943132cdfcf6d72370b" title="authoring_environment.Super\lTile.isSelected" alt="" coords="823,70,1036,111"/>
-</map>

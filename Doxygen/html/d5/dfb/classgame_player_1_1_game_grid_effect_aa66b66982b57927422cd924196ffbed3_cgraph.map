@@ -1,7 +1,0 @@
-<map id="gamePlayer.GameGridEffect.highlightEffectRange" name="gamePlayer.GameGridEffect.highlightEffectRange">
-<area shape="rect" id="node2" href="$d5/dfb/classgame_player_1_1_game_grid_effect.html#a2e61198f82a0f6a14f5a04afd490eda8" title="gamePlayer.GameGridEffect.clear\lAllEffectHighlights" alt="" coords="315,5,552,46"/>
-<area shape="rect" id="node3" href="$d9/df3/classauthoring__environment_1_1_super_grid.html#aa57ca0acf0ef3aab7d5d98cf9cbbd1d7" title="authoring_environment.Super\lGrid.findTile" alt="" coords="600,34,813,75"/>
-<area shape="rect" id="node4" href="$d8/d85/interfacegamedata_1_1action_1_1_action.html#aa4a672a119f9cebdaf905d414fafe09b" title="gamedata.action.Action.get\lAbsoluteEffectRange" alt="" coords="333,122,533,163"/>
-<area shape="rect" id="node5" href="$df/dd5/classgame_player_1_1_view_controller.html#a7c056f49d735d05a774efccf94893e0e" title="gamePlayer.ViewController.get\lActiveAction" alt="" coords="325,187,541,229"/>
-<area shape="rect" id="node6" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#ab5ef68199e1e504d94b443e562cba0b9" title="authoring_environment.Super\lTile.selectTile" alt="" coords="327,253,540,294"/>
-</map>

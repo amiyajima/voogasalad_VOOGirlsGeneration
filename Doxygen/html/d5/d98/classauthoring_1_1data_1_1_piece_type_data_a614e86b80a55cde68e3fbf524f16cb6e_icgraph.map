@@ -1,6 +1,0 @@
-<map id="authoring.data.PieceTypeData.add" name="authoring.data.PieceTypeData.add">
-<area shape="rect" id="node2" href="$dc/d26/classauthoring__environment_1_1_library_view.html#a19ad3ec15a5d33ae8bba42df76d8d3a2" title="authoring_environment.Library\lView.addPiece" alt="" coords="237,5,456,46"/>
-<area shape="rect" id="node3" href="$dc/d77/classfxml__main_1_1_piece_controller.html#af95d103117e9ede536f066cc58f84fb8" title="fxml_main.PieceController.init\lGlobalNewBtn" alt="" coords="241,70,452,111"/>
-<area shape="rect" id="node4" href="$d5/d98/classauthoring_1_1data_1_1_piece_type_data.html#a2400f4106003a57e4f82a3e5a7fceb78" title="authoring.data.PieceType\lData.replace" alt="" coords="255,135,438,177"/>
-<area shape="rect" id="node5" href="$dc/d77/classfxml__main_1_1_piece_controller.html#a15acf12ee62507112810cade45826f76" title="fxml_main.PieceController.init\lEntryEditBtn" alt="" coords="504,135,715,177"/>
-</map>

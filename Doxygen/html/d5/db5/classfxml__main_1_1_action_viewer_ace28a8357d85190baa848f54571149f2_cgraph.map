@@ -1,7 +1,0 @@
-<map id="fxml_main.ActionViewer.ActionViewer" name="fxml_main.ActionViewer.ActionViewer">
-<area shape="rect" id="node2" href="$d8/d85/interfacegamedata_1_1action_1_1_action.html#ab8978be916a12ab9ec3c0eea6d227ba3" title="gamedata.action.Action.get\lActionRange" alt="" coords="287,5,487,46"/>
-<area shape="rect" id="node3" href="$d8/d85/interfacegamedata_1_1action_1_1_action.html#ad3c6dcdc4b4816df2d687efc880d7469" title="gamedata.action.Action.get\lEffectRange" alt="" coords="287,70,487,111"/>
-<area shape="rect" id="node4" href="$d5/db5/classfxml__main_1_1_action_viewer.html#a0127b504623b1eaa8b7f3a9df707d1c7" title="fxml_main.ActionViewer.initialize" alt="" coords="273,136,501,163"/>
-<area shape="rect" id="node6" href="$d8/d85/interfacegamedata_1_1action_1_1_action.html#a27ec072e7b30283ebd32e1569c30b1af" title="gamedata.action.Action.to\lString" alt="" coords="291,187,483,229"/>
-<area shape="rect" id="node5" href="$d5/db5/classfxml__main_1_1_action_viewer.html#a3105c10965f7d06ea81ed4b566e86a37" title="fxml_main.ActionViewer.createHBox" alt="" coords="550,136,802,163"/>
-</map>

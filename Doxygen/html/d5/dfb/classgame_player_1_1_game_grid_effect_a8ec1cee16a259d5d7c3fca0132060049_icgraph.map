@@ -1,7 +1,0 @@
-<map id="gamePlayer.GameGridEffect.clearAllPieceHighlights" name="gamePlayer.GameGridEffect.clearAllPieceHighlights">
-<area shape="rect" id="node2" href="$d5/dfb/classgame_player_1_1_game_grid_effect.html#a2d475fdcd2837d14f9883d0cbf7a3c74" title="gamePlayer.GameGridEffect.grey\lOutPiece" alt="" coords="304,5,539,46"/>
-<area shape="rect" id="node3" href="$d5/dfb/classgame_player_1_1_game_grid_effect.html#a1c6be8631bc6b597b5ed7dc9cd7e62fe" title="gamePlayer.GameGridEffect.highlight\lCurrent" alt="" coords="291,70,551,111"/>
-<area shape="rect" id="node6" href="$db/d00/classgame_player_1_1_apply_state.html#aed42c1aba25264bc6880036f693a1c9e" title="gamePlayer.ApplyState.on\lClick" alt="" coords="326,135,517,177"/>
-<area shape="rect" id="node4" href="$df/dd5/classgame_player_1_1_view_controller.html#ac39aa40a815b8d3d277aecffe6d63426" title="gamePlayer.ViewController.highlight\lSelected" alt="" coords="601,70,850,111"/>
-<area shape="rect" id="node5" href="$d6/d24/classgame_player_1_1_select_state.html#a801827392f0faeee6b96925060d77838" title="gamePlayer.SelectState.on\lClick" alt="" coords="899,70,1095,111"/>
-</map>

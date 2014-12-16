@@ -1,4 +1,0 @@
-<map id="gameengine.movement.Orientator.turn" name="gameengine.movement.Orientator.turn">
-<area shape="rect" id="node2" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a9a5b2359d22e7d79d5065826a0dc8211" title="gamedata.gamecomponents.\lGridComponent.getImageView" alt="" coords="329,5,546,46"/>
-<area shape="rect" id="node3" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a224e5aae28655f7e26ff73cbde7b0d99" title="gamedata.gamecomponents.\lGridComponent.setImageView" alt="" coords="595,5,811,46"/>
-</map>

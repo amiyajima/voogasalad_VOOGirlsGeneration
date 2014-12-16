@@ -1,5 +1,0 @@
-<map id="authoring_environment.GUIGrid.addPieceToTile" name="authoring_environment.GUIGrid.addPieceToTile">
-<area shape="rect" id="node2" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a9a5b2359d22e7d79d5065826a0dc8211" title="gamedata.gamecomponents.\lGridComponent.getImageView" alt="" coords="307,5,525,46"/>
-<area shape="rect" id="node4" href="$dc/d5a/classauthoring__environment_1_1_super_tile.html#af7f7917a6fb88cc3145cd6f981a80f79" title="authoring_environment.Super\lTile.setPieceImage" alt="" coords="309,70,523,111"/>
-<area shape="rect" id="node3" href="$d9/df2/classgamedata_1_1gamecomponents_1_1_grid_component.html#a224e5aae28655f7e26ff73cbde7b0d99" title="gamedata.gamecomponents.\lGridComponent.setImageView" alt="" coords="573,5,789,46"/>
-</map>

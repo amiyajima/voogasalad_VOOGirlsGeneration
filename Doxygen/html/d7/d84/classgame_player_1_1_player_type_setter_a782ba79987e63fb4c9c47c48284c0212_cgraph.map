@@ -1,5 +1,0 @@
-<map id="gamePlayer.PlayerTypeSetter.startLoadPlayers" name="gamePlayer.PlayerTypeSetter.startLoadPlayers">
-<area shape="rect" id="node2" href="$d7/d84/classgame_player_1_1_player_type_setter.html#a3507144e578e2d14c1f92fe81ae14435" title="gamePlayer.PlayerTypeSetter.edit\lSpecificPlayer" alt="" coords="296,5,531,46"/>
-<area shape="rect" id="node4" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#a538b22872996297aad3b918c4f567a9f" title="gamedata.gamecomponents.\lGame.getPlayers" alt="" coords="307,70,520,111"/>
-<area shape="rect" id="node3" href="$d2/d99/classgamedata_1_1gamecomponents_1_1_game.html#ad0b2eb24eabcffe2596837c5c6c1ac2c" title="gamedata.gamecomponents.\lGame.replacePlayer" alt="" coords="579,5,792,46"/>
-</map>
